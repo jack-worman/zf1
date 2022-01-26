@@ -383,7 +383,7 @@ class Zend_Service_WindowsAzure_BlobStorageTest extends PHPUnit_Framework_TestCa
             $fileName = tempnam('', 'tst');
             $storageClient->getBlob($containerName, 'images/WindowsAzure.gif', $fileName);
 
-            $this->assertTrue(file_exists($fileName));
+            $this->assertTrue(file_exists((string) $fileName));
             $this->assertEquals(
                 file_get_contents(self::$path . 'WindowsAzure.gif'),
                 file_get_contents($fileName)
@@ -433,7 +433,7 @@ class Zend_Service_WindowsAzure_BlobStorageTest extends PHPUnit_Framework_TestCa
             $fileName = tempnam('', 'tst');
             $storageClient->getBlob($containerName, 'images/WindowsAzure.gif', $fileName, $snapshotId);
 
-            $this->assertTrue(file_exists($fileName));
+            $this->assertTrue(file_exists((string) $fileName));
             $this->assertEquals(
                 file_get_contents(self::$path . 'WindowsAzure.gif'),
                 file_get_contents($fileName)
@@ -697,7 +697,7 @@ class Zend_Service_WindowsAzure_BlobStorageTest extends PHPUnit_Framework_TestCa
             $fileName = tempnam('', 'tst');
             $storageClient->getBlob($containerName, 'WindowsAzure.gif', $fileName);
 
-            $this->assertTrue(file_exists($fileName));
+            $this->assertTrue(file_exists((string) $fileName));
             $this->assertEquals(
                 file_get_contents(self::$path . 'WindowsAzure.gif'),
                 file_get_contents($fileName)

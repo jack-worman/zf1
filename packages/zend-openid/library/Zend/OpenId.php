@@ -237,21 +237,21 @@ class Zend_OpenId
                 }
                 ++$i;
                 if ($id[$i] >= '0' && $id[$i] <= '9') {
-                    $c = ord($id[$i]) - ord('0');
+                    $c = ord((string) $id[$i]) - ord((string) '0');
                 } else if ($id[$i] >= 'A' && $id[$i] <= 'F') {
-                    $c = ord($id[$i]) - ord('A') + 10;
+                    $c = ord((string) $id[$i]) - ord((string) 'A') + 10;
                 } else if ($id[$i] >= 'a' && $id[$i] <= 'f') {
-                    $c = ord($id[$i]) - ord('a') + 10;
+                    $c = ord((string) $id[$i]) - ord((string) 'a') + 10;
                 } else {
                     return false;
                 }
                 ++$i;
                 if ($id[$i] >= '0' && $id[$i] <= '9') {
-                    $c = ($c << 4) | (ord($id[$i]) - ord('0'));
+                    $c = ($c << 4) | (ord((string) $id[$i]) - ord((string) '0'));
                 } else if ($id[$i] >= 'A' && $id[$i] <= 'F') {
-                    $c = ($c << 4) | (ord($id[$i]) - ord('A') + 10);
+                    $c = ($c << 4) | (ord((string) $id[$i]) - ord((string) 'A') + 10);
                 } else if ($id[$i] >= 'a' && $id[$i] <= 'f') {
-                    $c = ($c << 4) | (ord($id[$i]) - ord('a') + 10);
+                    $c = ($c << 4) | (ord((string) $id[$i]) - ord((string) 'a') + 10);
                 } else {
                     return false;
                 }
@@ -267,15 +267,15 @@ class Zend_OpenId
                 } else {
                     $res .= '%';
                     if (($c >> 4) < 10) {
-                        $res .= chr(($c >> 4) + ord('0'));
+                        $res .= chr(($c >> 4) + ord((string) '0'));
                     } else {
-                        $res .= chr(($c >> 4) - 10 + ord('A'));
+                        $res .= chr(($c >> 4) - 10 + ord((string) 'A'));
                     }
                     $c = $c & 0xf;
                     if ($c < 10) {
-                        $res .= chr($c + ord('0'));
+                        $res .= chr($c + ord((string) '0'));
                     } else {
-                        $res .= chr($c - 10 + ord('A'));
+                        $res .= chr($c - 10 + ord((string) 'A'));
                     }
                 }
             } else {
@@ -558,7 +558,7 @@ class Zend_OpenId
             $len = Zend_OpenId::strlen((string) $bin);
             for ($i = 0; $i < $len; $i++) {
                 $bn = bcmul($bn, 256);
-                $bn = bcadd($bn, ord($bin[$i]));
+                $bn = bcadd($bn, ord((string) $bin[$i]));
             }
             return $bn;
         }
@@ -601,7 +601,7 @@ class Zend_OpenId
                 $bin = chr(bcmod($bn, 256)) . $bin;
                 $bn = bcdiv($bn, 256);
             }
-            if (ord($bin[0]) > 127) {
+            if (ord((string) $bin[0]) > 127) {
                 $bin = "\0" . $bin;
             }
             return $bin;
@@ -696,7 +696,7 @@ class Zend_OpenId
     {
         if (function_exists('openssl_dh_compute_key')) {
             $ret = openssl_dh_compute_key($pub_key, $dh);
-            if (ord($ret[0]) > 127) {
+            if (ord((string) $ret[0]) > 127) {
                 $ret = "\0" . $ret;
             }
             return $ret;
@@ -732,7 +732,7 @@ class Zend_OpenId
      */
     static public function btwoc($str)
     {
-        if (ord($str[0]) > 127) {
+        if (ord((string) $str[0]) > 127) {
             return "\0" . $str;
         }
         return $str;

@@ -109,7 +109,7 @@ class Zend_Mobile_Push_Apns extends Zend_Mobile_Push_Abstract
         if (!is_string($cert)) {
             throw new Zend_Mobile_Push_Exception('$cert must be a string');
         }
-        if (!file_exists($cert)) {
+        if (!file_exists((string) $cert)) {
             throw new Zend_Mobile_Push_Exception('$cert must be a valid path to the certificate');
         }
         $this->_certificate = $cert;

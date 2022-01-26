@@ -99,7 +99,7 @@ class Zend_Pdf_Filter_RunLength implements Zend_Pdf_Filter_Interface
         $offset = 0;
 
         while($offset < $dataLength) {
-            $length = ord($data[$offset]);
+            $length = ord((string) $data[$offset]);
 
             $offset++;
 

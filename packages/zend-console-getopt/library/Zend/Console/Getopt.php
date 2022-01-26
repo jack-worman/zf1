@@ -763,7 +763,7 @@ class Zend_Console_Getopt
      */
     protected function _parseLongOption(&$argv)
     {
-        $optionWithParam = ltrim(array_shift($argv), '-');
+        $optionWithParam = ltrim((string) array_shift($argv), '-');
         $l = explode('=', $optionWithParam, 2);
         $flag = array_shift($l);
         $param = array_shift($l);
@@ -783,7 +783,7 @@ class Zend_Console_Getopt
      */
     protected function _parseShortOptionCluster(&$argv)
     {
-        $flagCluster = ltrim(array_shift($argv), '-');
+        $flagCluster = ltrim((string) array_shift($argv), '-');
         foreach (str_split($flagCluster) as $flag) {
             $this->_parseSingleOption($flag, $argv);
         }

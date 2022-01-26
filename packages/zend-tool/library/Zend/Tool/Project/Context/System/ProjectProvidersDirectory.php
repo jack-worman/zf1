@@ -69,7 +69,7 @@ class Zend_Tool_Project_Context_System_ProjectProvidersDirectory
 
     public function loadProviders(Zend_Tool_Framework_Registry_Interface $registry)
     {
-        if (file_exists($this->getPath())) {
+        if (file_exists((string) $this->getPath())) {
 
             $providerRepository = $registry->getProviderRepository();
 

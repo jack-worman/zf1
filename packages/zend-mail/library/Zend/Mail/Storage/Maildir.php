@@ -295,10 +295,10 @@ class Zend_Mail_Storage_Maildir extends Zend_Mail_Storage_Abstract
      */
     protected function _isMaildir($dirname)
     {
-        if (file_exists($dirname . '/new') && !is_dir($dirname . '/new')) {
+        if (file_exists((string) $dirname . '/new') && !is_dir($dirname . '/new')) {
             return false;
         }
-        if (file_exists($dirname . '/tmp') && !is_dir($dirname . '/tmp')) {
+        if (file_exists((string) $dirname . '/tmp') && !is_dir($dirname . '/tmp')) {
             return false;
         }
         return is_dir($dirname . '/cur');
@@ -332,7 +332,7 @@ class Zend_Mail_Storage_Maildir extends Zend_Mail_Storage_Abstract
         if ($dh) {
             $this->_getMaildirFiles($dh, $dirname . '/new/', array(Zend_Mail_Storage::FLAG_RECENT));
             closedir($dh);
-        } else if (file_exists($dirname . '/new/')) {
+        } else if (file_exists((string) $dirname . '/new/')) {
             /**
              * @see Zend_Mail_Storage_Exception
              */

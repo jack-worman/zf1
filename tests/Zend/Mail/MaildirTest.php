@@ -59,7 +59,7 @@ class Zend_Mail_MaildirTest extends PHPUnit_Framework_TestCase
             } else {
                 $this->_tmpdir = __DIR__ . '/_files/test.tmp/';
             }
-            if (!file_exists($this->_tmpdir)) {
+            if (!file_exists((string) $this->_tmpdir)) {
                 mkdir($this->_tmpdir);
             }
             $count = 0;
@@ -333,7 +333,7 @@ class Zend_Mail_MaildirTest extends PHPUnit_Framework_TestCase
 
     public function isFileTest($dir)
     {
-        if (file_exists($this->_maildir . '/' . $dir)) {
+        if (file_exists((string) $this->_maildir . '/' . $dir)) {
             rename($this->_maildir . '/' . $dir, $this->_maildir . '/' . $dir . 'bak');
         }
         touch($this->_maildir . '/' . $dir);
@@ -347,7 +347,7 @@ class Zend_Mail_MaildirTest extends PHPUnit_Framework_TestCase
         }
 
         unlink($this->_maildir . '/' . $dir);
-        if (file_exists($this->_maildir . '/' . $dir . 'bak')) {
+        if (file_exists((string) $this->_maildir . '/' . $dir . 'bak')) {
             rename($this->_maildir . '/' . $dir . 'bak', $this->_maildir . '/' . $dir);
         }
 

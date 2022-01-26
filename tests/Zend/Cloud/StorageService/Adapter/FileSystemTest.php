@@ -69,7 +69,7 @@ class Zend_Cloud_StorageService_Adapter_FileSystemTest
         $path = $this->_config->local_directory;
 
         // If the test directory exists, remove it and replace it
-        if (file_exists($path)) {
+        if (file_exists((string) $path)) {
             $this->_rmRecursive($path);
         }
         mkdir($path, 0755);
@@ -111,7 +111,7 @@ class Zend_Cloud_StorageService_Adapter_FileSystemTest
         $path = $this->_config->local_directory;
 
         // If the test directory exists, remove it
-        if(file_exists($path)) {
+        if(file_exists((string) $path)) {
             $this->_rmRecursive($path);
         }
 
@@ -123,7 +123,7 @@ class Zend_Cloud_StorageService_Adapter_FileSystemTest
         // Tidy up the path
         $path = realpath($path);
 
-        if (!file_exists($path)) {
+        if (!file_exists((string) $path)) {
             return true;
         } else if (!is_dir($path)) {
             return unlink($path);

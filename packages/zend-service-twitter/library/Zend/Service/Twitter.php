@@ -986,7 +986,7 @@ class Zend_Service_Twitter
     {
         $this->init();
         $path = 'statuses/update';
-        $len = iconv_strlen(htmlspecialchars($status, ENT_QUOTES, 'UTF-8'), 'UTF-8');
+        $len = iconv_strlen(htmlspecialchars((string) $status, ENT_QUOTES, 'UTF-8'), 'UTF-8');
         if ($len > self::STATUS_MAX_CHARACTERS) {
             // require_once 'Zend/Service/Twitter/Exception.php';
             throw new Zend_Service_Twitter_Exception(
@@ -1187,7 +1187,7 @@ class Zend_Service_Twitter
      */
     protected function validInteger($int)
     {
-        if (preg_match("/(\d+)/", $int)) {
+        if (preg_match("/(\d+)/", (string) $int)) {
             return $int;
         }
         return 0;

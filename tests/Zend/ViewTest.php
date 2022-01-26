@@ -324,7 +324,7 @@ class Zend_ViewTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('', $view->render('testParent.phtml'));
 
         $logFile = __DIR__ . '/View/_templates/view.log';
-        $this->assertTrue(file_exists($logFile));
+        $this->assertTrue(file_exists((string) $logFile));
         $log = file_get_contents($logFile);
         unlink($logFile); // clean up...
         $this->assertContains('This text should not be displayed', $log);

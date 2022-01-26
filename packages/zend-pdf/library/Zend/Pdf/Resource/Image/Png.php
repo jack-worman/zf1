@@ -96,13 +96,13 @@ class Zend_Pdf_Resource_Image_Png extends Zend_Pdf_Resource_Image
         $width = $wtmp['i'];
         $htmp = unpack('Ni',fread($imageFile, 4));
         $height = $htmp['i'];
-        $bits = ord(fread($imageFile, 1)); //Higher than 8 bit depths are only supported in later versions of PDF.
-        $color = ord(fread($imageFile, 1));
+        $bits = ord((string) fread($imageFile, 1)); //Higher than 8 bit depths are only supported in later versions of PDF.
+        $color = ord((string) fread($imageFile, 1));
 
-        $compression = ord(fread($imageFile, 1));
-        $prefilter = ord(fread($imageFile,1));
+        $compression = ord((string) fread($imageFile, 1));
+        $prefilter = ord((string) fread($imageFile,1));
 
-        if (($interlacing = ord(fread($imageFile,1))) != Zend_Pdf_Resource_Image_Png::PNG_INTERLACING_DISABLED) {
+        if (($interlacing = ord((string) fread($imageFile,1))) != Zend_Pdf_Resource_Image_Png::PNG_INTERLACING_DISABLED) {
             // require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception( "Only non-interlaced images are currently supported." );
         }
@@ -154,15 +154,15 @@ class Zend_Pdf_Resource_Image_Png extends Zend_Pdf_Resource_Image
                     $trnsData = fread($imageFile, $chunkLength);
                     switch ($color) {
                         case Zend_Pdf_Resource_Image_Png::PNG_CHANNEL_GRAY:
-                            $baseColor = ord(substr((string) $trnsData, 1, 1));
+                            $baseColor = ord((string) substr((string) $trnsData, 1, 1));
                             $transparencyData = array(new Zend_Pdf_Element_Numeric($baseColor),
                                                       new Zend_Pdf_Element_Numeric($baseColor));
                             break;
 
                         case Zend_Pdf_Resource_Image_Png::PNG_CHANNEL_RGB:
-                            $red = ord(substr((string) $trnsData,1,1));
-                            $green = ord(substr((string) $trnsData,3,1));
-                            $blue = ord(substr((string) $trnsData,5,1));
+                            $red = ord((string) substr((string) $trnsData,1,1));
+                            $green = ord((string) substr((string) $trnsData,3,1));
+                            $blue = ord((string) substr((string) $trnsData,5,1));
                             $transparencyData = array(new Zend_Pdf_Element_Numeric($red),
                                                       new Zend_Pdf_Element_Numeric($red),
                                                       new Zend_Pdf_Element_Numeric($green),

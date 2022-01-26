@@ -81,7 +81,7 @@ class Zend_Crypt_Math extends Zend_Crypt_Math_BigInteger
                 return $bytes;
             }
         }
-        if (file_exists('/dev/urandom') && is_readable('/dev/urandom')) {
+        if (file_exists((string) '/dev/urandom') && is_readable('/dev/urandom')) {
             $frandom = fopen('/dev/urandom', 'r');
             if ($frandom !== false) {
                 return fread($frandom, $length);
@@ -156,7 +156,7 @@ class Zend_Crypt_Math extends Zend_Crypt_Math_BigInteger
      */
     public function btwoc($long)
     {
-        if (ord($long[0]) > 127) {
+        if (ord((string) $long[0]) > 127) {
             return "\x00" . $long;
         }
         return $long;

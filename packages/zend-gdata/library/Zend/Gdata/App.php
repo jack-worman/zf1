@@ -855,7 +855,7 @@ class Zend_Gdata_App
     public static function importFile($filename, $className='Zend_Gdata_App_Feed', $useIncludePath = false)
     {
         error_clear_last();
-        $feed = @file_get_contents($filename, $useIncludePath);
+        $feed = @file_get_contents($filename, (bool) $useIncludePath);
         if ($feed === false) {
             $err = error_get_last();
             $phpErrormsg = isset($err['message'][0]) ? $err['message'] : null;

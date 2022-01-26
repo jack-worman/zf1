@@ -203,7 +203,7 @@ class Zend_Ldap_Ldif_Encoder
 
         $base64 = false;
         for ($i = 0; $i < strlen((string) $string); $i++) {
-            $char = ord(substr((string) $string, $i, 1));
+            $char = ord((string) substr((string) $string, $i, 1));
             if ($char >= 127) {
                 $base64 = true;
                 break;

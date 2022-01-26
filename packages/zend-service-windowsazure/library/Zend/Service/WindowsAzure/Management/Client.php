@@ -1007,7 +1007,7 @@ class Zend_Service_WindowsAzure_Management_Client
     		throw new Zend_Service_WindowsAzure_Management_Exception('Configuration should be specified.');
     	}
 
-    	if (@file_exists($configuration)) {
+    	if (@file_exists((string) $configuration)) {
     		$configuration = utf8_decode(file_get_contents($configuration));
     	}
 
@@ -1478,7 +1478,7 @@ class Zend_Service_WindowsAzure_Management_Client
     		throw new Zend_Service_WindowsAzure_Management_Exception('Configuration name should be specified.');
     	}
 
-        if (@file_exists($configuration)) {
+        if (@file_exists((string) $configuration)) {
     		$configuration = utf8_decode(file_get_contents($configuration));
     	}
 
@@ -1511,7 +1511,7 @@ class Zend_Service_WindowsAzure_Management_Client
     		throw new Zend_Service_WindowsAzure_Management_Exception('Configuration name should be specified.');
     	}
 
-        if (@file_exists($configuration)) {
+        if (@file_exists((string) $configuration)) {
     		$configuration = utf8_decode(file_get_contents($configuration));
     	}
 
@@ -1589,7 +1589,7 @@ class Zend_Service_WindowsAzure_Management_Client
     		throw new Zend_Service_WindowsAzure_Management_Exception('Mode should be auto|manual.');
     	}
 
-    	if (@file_exists($configuration)) {
+    	if (@file_exists((string) $configuration)) {
     		$configuration = utf8_decode(file_get_contents($configuration));
     	}
 
@@ -1641,7 +1641,7 @@ class Zend_Service_WindowsAzure_Management_Client
     		throw new Zend_Service_WindowsAzure_Management_Exception('Mode should be auto|manual.');
     	}
 
-    	if (@file_exists($configuration)) {
+    	if (@file_exists((string) $configuration)) {
     		$configuration = utf8_decode(file_get_contents($configuration));
     	}
 
@@ -1995,7 +1995,7 @@ class Zend_Service_WindowsAzure_Management_Client
     		throw new Zend_Service_WindowsAzure_Management_Exception('Certificate format should be "pfx".');
     	}
 
-    	if (@file_exists($certificateData)) {
+    	if (@file_exists((string) $certificateData)) {
     		$certificateData = file_get_contents($certificateData);
     	}
 

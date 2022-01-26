@@ -55,7 +55,7 @@ class Zend_View_Helper_BaseUrl extends Zend_View_Helper_Abstract
 
         // Remove trailing slashes
         if (null !== $file) {
-            $file = '/' . ltrim($file, '/\\');
+            $file = '/' . ltrim((string) $file, '/\\');
         }
 
         return $baseUrl . $file;

@@ -467,8 +467,8 @@ class Zend_Barcode_Renderer_Image extends Zend_Barcode_Renderer_RendererAbstract
                 $this->_resource,
                 $size,
                 $orientation,
-                $position[0] - ($width * cos(pi() * $orientation / 180)),
-                $position[1] + ($width * sin(pi() * $orientation / 180)),
+                (int) ($position[0] - ($width * cos(pi() * $orientation / 180))),
+                (int) ($position[1] + ($width * sin(pi() * $orientation / 180))),
                 $allocatedColor,
                 $font,
                 $text

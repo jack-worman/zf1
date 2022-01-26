@@ -163,7 +163,7 @@ class Zend_Service_Rackspace_Servers extends Zend_Service_Rackspace_Abstract
         $data['imageId']= (integer) $data['imageId'];
         if (!empty($files)) {
             foreach ($files as $serverPath => $filePath) {
-                if (!file_exists($filePath)) {
+                if (!file_exists((string) $filePath)) {
                     // require_once 'Zend/Service/Rackspace/Exception.php';
                     throw new Zend_Service_Rackspace_Exception(
                             sprintf("The file %s doesn't exist",$filePath));

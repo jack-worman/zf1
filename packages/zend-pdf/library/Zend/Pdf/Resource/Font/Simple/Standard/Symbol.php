@@ -391,7 +391,7 @@ class Zend_Pdf_Resource_Font_Simple_Standard_Symbol extends Zend_Pdf_Resource_Fo
          */
         $encodedString = '';
         for ($i = 0; $i < strlen((string) $string); $i++) {
-            $characterCode = (ord($string[$i++]) << 8) | ord($string[$i]);
+            $characterCode = (ord((string) $string[$i++]) << 8) | ord((string) $string[$i]);
             if (isset($this->_toFontEncoding[$characterCode])) {
                 $encodedString .= $this->_toFontEncoding[$characterCode];
             } else {
@@ -418,7 +418,7 @@ class Zend_Pdf_Resource_Font_Simple_Standard_Symbol extends Zend_Pdf_Resource_Fo
     {
         $decodedString = '';
         for ($i = 0; $i < strlen((string) $string); $i++) {
-            $characterCode = ord($string[$i]);
+            $characterCode = ord((string) $string[$i]);
             if (isset($this->_fromFontEncoding[$characterCode])) {
                 $decodedString .= $this->_fromFontEncoding[$characterCode];
             } else {

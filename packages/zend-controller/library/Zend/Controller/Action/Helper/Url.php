@@ -76,7 +76,7 @@ class Zend_Controller_Action_Helper_Url extends Zend_Controller_Action_Helper_Ab
             $url .= '/' . $paramString;
         }
 
-        $url = '/' . ltrim($url, '/');
+        $url = '/' . ltrim((string) $url, '/');
 
         return $url;
     }

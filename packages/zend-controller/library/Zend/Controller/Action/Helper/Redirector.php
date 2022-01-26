@@ -220,7 +220,7 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
                     $uri .= ':' . $port;
                 }
             }
-            $url = $uri . '/' . ltrim($url, '/');
+            $url = $uri . '/' . ltrim((string) $url, '/');
         }
         $this->_redirectUrl = $url;
         $this->getResponse()->setRedirect($url, $this->getCode());
@@ -249,9 +249,9 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
             if ($request instanceof Zend_Controller_Request_Http) {
                 $base = rtrim((string) $request->getBaseUrl(), '/');
                 if (!empty($base) && ('/' != $base)) {
-                    $url = $base . '/' . ltrim($url, '/');
+                    $url = $base . '/' . ltrim((string) $url, '/');
                 } else {
-                    $url = '/' . ltrim($url, '/');
+                    $url = '/' . ltrim((string) $url, '/');
                 }
             }
         }

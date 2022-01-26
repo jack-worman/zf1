@@ -129,7 +129,7 @@ abstract class Zend_View_Helper_Placeholder_Container_Standalone extends Zend_Vi
             $enc = $this->view->getEncoding();
         }
 
-        return htmlspecialchars((string) $string, ENT_COMPAT, $enc);
+        return htmlspecialchars((string) (string) $string, ENT_COMPAT, $enc);
     }
 
     /**

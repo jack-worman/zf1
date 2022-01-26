@@ -461,7 +461,7 @@ abstract class Zend_Barcode_Object_ObjectAbstract
     public function setForeColor($value)
     {
         if (preg_match('`\#[0-9A-F]{6}`', $value)) {
-            $this->_foreColor = hexdec(ltrim($value, '#'));
+            $this->_foreColor = hexdec(ltrim((string) $value, '#'));
         } elseif (is_numeric($value) && $value >= 0 && $value <= 16777125) {
             $this->_foreColor = (int)$value;
         } else {
@@ -493,7 +493,7 @@ abstract class Zend_Barcode_Object_ObjectAbstract
     public function setBackgroundColor($value)
     {
         if (preg_match('`\#[0-9A-F]{6}`', $value)) {
-            $this->_backgroundColor = hexdec(ltrim($value, '#'));
+            $this->_backgroundColor = hexdec(ltrim((string) $value, '#'));
         } elseif (is_numeric($value) && $value >= 0 && $value <= 16777125) {
             $this->_backgroundColor = (int)$value;
         } else {

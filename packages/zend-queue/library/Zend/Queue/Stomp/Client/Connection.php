@@ -213,7 +213,7 @@ class Zend_Queue_Stomp_Client_Connection
             $response .= $data;
 
             // is this \0 (prev) \n (data)? END_OF_FRAME
-            if (ord($data) == 10 && ord($prev) == 0) {
+            if (ord((string) $data) == 10 && ord((string) $prev) == 0) {
                 break;
             }
             $prev = $data;

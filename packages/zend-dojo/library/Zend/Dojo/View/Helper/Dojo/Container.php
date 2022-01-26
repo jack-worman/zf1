@@ -1106,7 +1106,7 @@ EOJ;
         foreach ($layers as $path) {
             $html[] = sprintf(
                 '<script type="text/javascript" src="%s"></script>',
-                htmlspecialchars($path, ENT_QUOTES, $enc)
+                htmlspecialchars((string) $path, ENT_QUOTES, $enc)
             );
         }
 

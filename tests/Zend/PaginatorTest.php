@@ -176,7 +176,7 @@ class Zend_PaginatorTest extends PHPUnit_Framework_TestCase
     protected function _getTmpDir()
     {
         $tmpDir = rtrim((string) sys_get_temp_dir(), '/\\') . DIRECTORY_SEPARATOR . 'zend_paginator';
-        if (file_exists($tmpDir)) {
+        if (file_exists((string) $tmpDir)) {
             $this->_rmDirRecursive($tmpDir);
         }
         mkdir($tmpDir);

@@ -55,7 +55,7 @@ class Zend_OpenId_Consumer_Storage_FileTest extends PHPUnit_Framework_TestCase
      */
     private static function _rmDir($dirName)
     {
-        if (!file_exists($dirName)) {
+        if (!file_exists((string) $dirName)) {
             return;
         }
 

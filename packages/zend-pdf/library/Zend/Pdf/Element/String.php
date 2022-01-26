@@ -90,7 +90,7 @@ class Zend_Pdf_Element_String extends Zend_Pdf_Element
             $chunkOut = substr((string) $chunk, 0, $offset);
 
             while ($offset < strlen((string) $chunk)) {
-                $nextCode = ord($chunk[$offset++]);
+                $nextCode = ord((string) $chunk[$offset++]);
                 switch ($nextCode) {
                     // "\n" - line feed (LF)
                     case 10:

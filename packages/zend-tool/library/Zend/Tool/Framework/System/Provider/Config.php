@@ -105,7 +105,7 @@ class Zend_Tool_Framework_System_Provider_Config extends Zend_Tool_Framework_Pro
         $envVars = array("ZF_HOME", "HOME", "HOMEPATH");
         foreach($envVars AS $env) {
             $homeDirectory = getenv($env);
-            if ($homeDirectory != false && file_exists($homeDirectory)) {
+            if ($homeDirectory != false && file_exists((string) $homeDirectory)) {
                 return $homeDirectory;
             }
         }

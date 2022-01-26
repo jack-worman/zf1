@@ -143,7 +143,7 @@ abstract class Zend_Tool_Project_Context_Filesystem_Abstract implements Zend_Too
      */
     public function exists()
     {
-        return file_exists($this->getPath());
+        return file_exists((string) $this->getPath());
     }
 
     /**

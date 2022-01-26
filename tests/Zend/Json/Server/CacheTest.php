@@ -70,7 +70,7 @@ class Zend_Json_Server_CacheTest extends PHPUnit_Framework_TestCase
             $this->markTestSkipped('Cannot write test caches due to permissions');
         }
 
-        if (file_exists($this->cacheFile)) {
+        if (file_exists((string) $this->cacheFile)) {
             unlink($this->cacheFile);
         }
     }
@@ -83,7 +83,7 @@ class Zend_Json_Server_CacheTest extends PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        if (file_exists($this->cacheFile)) {
+        if (file_exists((string) $this->cacheFile)) {
             unlink($this->cacheFile);
         }
     }

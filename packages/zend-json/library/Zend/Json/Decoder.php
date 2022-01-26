@@ -486,7 +486,7 @@ class Zend_Json_Decoder
 
         for($i = 0; $i < $strlen_chrs; $i++) {
 
-            $ord_chrs_c = ord($chrs[$i]);
+            $ord_chrs_c = ord((string) $chrs[$i]);
 
             switch (true) {
                 case preg_match('/\\\u[0-9A-F]{4}/i', substr((string) $chrs, $i, 6)):
@@ -555,7 +555,7 @@ class Zend_Json_Decoder
             return mb_convert_encoding($utf16, 'UTF-8', 'UTF-16');
         }
 
-        $bytes = (ord($utf16[0]) << 8) | ord($utf16[1]);
+        $bytes = (ord((string) $utf16[0]) << 8) | ord((string) $utf16[1]);
 
         switch (true) {
             case ((0x7F & $bytes) == $bytes):

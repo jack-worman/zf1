@@ -476,15 +476,15 @@ class Zend_Loader_PluginLoader implements Zend_Loader_PluginLoader_Interface
             return;
         }
 
-        if (!file_exists($file) && !file_exists(dirname($file))) {
+        if (!file_exists((string) $file) && !file_exists((string) dirname($file))) {
             // require_once 'Zend/Loader/PluginLoader/Exception.php';
             throw new Zend_Loader_PluginLoader_Exception('Specified file does not exist and/or directory does not exist (' . $file . ')');
         }
-        if (file_exists($file) && !is_writable($file)) {
+        if (file_exists((string) $file) && !is_writable($file)) {
             // require_once 'Zend/Loader/PluginLoader/Exception.php';
             throw new Zend_Loader_PluginLoader_Exception('Specified file is not writeable (' . $file . ')');
         }
-        if (!file_exists($file) && file_exists(dirname($file)) && !is_writable(dirname($file))) {
+        if (!file_exists((string) $file) && file_exists((string) dirname($file)) && !is_writable(dirname($file))) {
             // require_once 'Zend/Loader/PluginLoader/Exception.php';
             throw new Zend_Loader_PluginLoader_Exception('Specified file is not writeable (' . $file . ')');
         }

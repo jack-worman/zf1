@@ -62,7 +62,7 @@ class Zend_Mail_MaildirFolderTest extends PHPUnit_Framework_TestCase
             } else {
                 $this->_tmpdir = __DIR__ . '/_files/test.tmp/';
             }
-            if (!file_exists($this->_tmpdir)) {
+            if (!file_exists((string) $this->_tmpdir)) {
                 mkdir($this->_tmpdir);
             }
             $count = 0;
@@ -85,7 +85,7 @@ class Zend_Mail_MaildirFolderTest extends PHPUnit_Framework_TestCase
                 mkdir($this->_tmpdir . $dir);
             }
             foreach (array('cur', 'new') as $subdir) {
-                if (!file_exists($this->_originalDir . $dir . '/' . $subdir)) {
+                if (!file_exists((string) $this->_originalDir . $dir . '/' . $subdir)) {
                     continue;
                 }
                 mkdir($this->_tmpdir . $dir . '/' . $subdir);
@@ -106,7 +106,7 @@ class Zend_Mail_MaildirFolderTest extends PHPUnit_Framework_TestCase
     {
         foreach (array_reverse($this->_subdirs) as $dir) {
             foreach (array('cur', 'new') as $subdir) {
-                if (!file_exists($this->_tmpdir . $dir . '/' . $subdir)) {
+                if (!file_exists((string) $this->_tmpdir . $dir . '/' . $subdir)) {
                     continue;
                 }
                 $dh = opendir($this->_tmpdir . $dir . '/' . $subdir);

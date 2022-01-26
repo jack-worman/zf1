@@ -68,7 +68,7 @@ class Zend_Service_Console_Command_ParameterSource_ConfigFile
 		if (is_null($configurationFilePath)) {
 			return null;
 		}
-		if (!file_exists($configurationFilePath)) {
+		if (!file_exists((string) $configurationFilePath)) {
 			// require_once 'Zend/Service/Console/Exception.php';
 			throw new Zend_Service_Console_Exception("Invalid configuration file given. Specify the correct path using the --ConfigFile or -F switch.");
 		}

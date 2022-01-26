@@ -79,7 +79,7 @@ class resources_languages_Zend_ValidateTest extends PHPUnit_Framework_TestCase
 
             // include Zend_Validate translation tables
             $translationFile = $entry->getPathname() . DIRECTORY_SEPARATOR . 'Zend_Validate.php';
-            if (file_exists($translationFile)) {
+            if (file_exists((string) $translationFile)) {
                 $translation = include $translationFile;
                 if (!is_array($translation)) {
                     $this->fail("Invalid or empty translation table found for language '{$fname}'");

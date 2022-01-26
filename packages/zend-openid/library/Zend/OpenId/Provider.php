@@ -796,7 +796,7 @@ class Zend_OpenId_Provider
         }
         $result = 0;
         for ($i = 0; $i < strlen((string) $a); $i++) {
-            $result |= ord($a[$i]) ^ ord($b[$i]);
+            $result |= ord((string) $a[$i]) ^ ord((string) $b[$i]);
         }
         return $result == 0;
     }

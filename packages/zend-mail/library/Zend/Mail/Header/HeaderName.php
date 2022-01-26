@@ -47,7 +47,7 @@ final class Zend_Mail_Header_HeaderName
         $result = '';
         $tot    = strlen((string) $name);
         for ($i = 0; $i < $tot; $i += 1) {
-            $ord = ord($name[$i]);
+            $ord = ord((string) $name[$i]);
             if ($ord > 32 && $ord < 127 && $ord !== 58) {
                 $result .= $name[$i];
             }
@@ -65,7 +65,7 @@ final class Zend_Mail_Header_HeaderName
     {
         $tot = strlen((string) $name);
         for ($i = 0; $i < $tot; $i += 1) {
-            $ord = ord($name[$i]);
+            $ord = ord((string) $name[$i]);
             if ($ord < 33 || $ord > 126 || $ord === 58) {
                 return false;
             }

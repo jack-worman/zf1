@@ -389,7 +389,7 @@ class Zend_Search_Lucene_Index_SegmentInfo implements Zend_Search_Lucene_Index_T
             } else {
                 $deletions = array();
                 for ($count = 0; $count < $byteCount; $count++) {
-                    $byte = ord($delBytes[$count]);
+                    $byte = ord((string) $delBytes[$count]);
                     for ($bit = 0; $bit < 8; $bit++) {
                         if ($byte & (1<<$bit)) {
                             $deletions[$count*8 + $bit] = 1;
@@ -476,7 +476,7 @@ class Zend_Search_Lucene_Index_SegmentInfo implements Zend_Search_Lucene_Index_T
             } else {
                 $deletions = array();
                 for ($count = 0; $count < $byteCount; $count++) {
-                    $byte = ord($delBytes[$count]);
+                    $byte = ord((string) $delBytes[$count]);
                     for ($bit = 0; $bit < 8; $bit++) {
                         if ($byte & (1<<$bit)) {
                             $deletions[$count*8 + $bit] = 1;
@@ -1413,7 +1413,7 @@ class Zend_Search_Lucene_Index_SegmentInfo implements Zend_Search_Lucene_Index_T
             $this->_loadNorm($fieldNum);
         }
 
-        return Zend_Search_Lucene_Search_Similarity::decodeNorm( ord($this->_norms[$fieldNum][$id]) );
+        return Zend_Search_Lucene_Search_Similarity::decodeNorm( ord((string) $this->_norms[$fieldNum][$id]) );
     }
 
     /**

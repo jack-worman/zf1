@@ -219,7 +219,7 @@ class Zend_Service_WindowsAzure_TableStorageTest extends PHPUnit_Framework_TestC
     /**
      * Test insert entity, with XML in content. This should not break the XML sent to Windows Azure.
      */
-    public function testInsertEntity_Security_HtmlSpecialChars()
+    public function testInsertEntity_Security_htmlspecialchars()
     {
         if (TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_RUNTESTS) {
             $tableName = $this->generateName();

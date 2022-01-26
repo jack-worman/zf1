@@ -86,7 +86,7 @@ class Zend_Translate_Adapter_Tmx extends Zend_Translate_Adapter {
                 $e->getMessage()
             );
         }
- 
+
         if (!xml_parse($this->_file, file_get_contents($filename))) {
             $ex = sprintf('XML error: %s at line %d of file %s',
                           xml_error_string(xml_get_error_code($this->_file)),
@@ -227,7 +227,7 @@ class Zend_Translate_Adapter_Tmx extends Zend_Translate_Adapter {
      */
     protected function _findEncoding($filename)
     {
-        $file = file_get_contents($filename, null, null, 0, 100);
+        $file = file_get_contents($filename, false, null, 0, 100);
         if (strpos((string) $file, "encoding") !== false) {
             $encoding = substr((string) $file, strpos((string) $file, "encoding") + 9);
             $encoding = substr((string) $encoding, 1, strpos((string) $encoding, $encoding[0], 1) - 1);

@@ -93,7 +93,7 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
     public function getContents()
     {
         if ($this->_content === null) {
-            if (file_exists($this->getPath())) {
+            if (file_exists((string) $this->getPath())) {
                 $this->_content = file_get_contents($this->getPath());
             } else {
                 $this->_content = $this->_getDefaultContents();

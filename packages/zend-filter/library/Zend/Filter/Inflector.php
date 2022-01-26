@@ -456,7 +456,7 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
     {
         // clean source
         foreach ( (array) $source as $sourceName => $sourceValue) {
-            $source[ltrim($sourceName, ':')] = $sourceValue;
+            $source[ltrim((string) $sourceName, ':')] = $sourceValue;
         }
 
         $pregQuotedTargetReplacementIdentifier = preg_quote($this->_targetReplacementIdentifier, '#');
@@ -498,7 +498,7 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
      */
     protected function _normalizeSpec($spec)
     {
-        return ltrim((string) $spec, ':&');
+        return ltrim((string) (string) $spec, ':&');
     }
 
     /**

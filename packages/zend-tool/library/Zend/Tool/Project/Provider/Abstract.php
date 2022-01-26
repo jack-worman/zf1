@@ -153,7 +153,7 @@ abstract class Zend_Tool_Project_Provider_Abstract
 
         $profile = new Zend_Tool_Project_Profile();
 
-        $parentDirectoriesArray = explode(DIRECTORY_SEPARATOR, ltrim($projectDirectory, DIRECTORY_SEPARATOR));
+        $parentDirectoriesArray = explode(DIRECTORY_SEPARATOR, ltrim((string) $projectDirectory, DIRECTORY_SEPARATOR));
         while ($parentDirectoriesArray) {
             $projectDirectoryAssembled = implode(DIRECTORY_SEPARATOR, $parentDirectoriesArray);
 
@@ -245,7 +245,7 @@ abstract class Zend_Tool_Project_Provider_Abstract
     {
         // do some static analysis of the file so that we can determin whether or not to incure
         // the cost of loading the profile before the system is fully bootstrapped
-        if (!file_exists($pathToProfileFile)) {
+        if (!file_exists((string) $pathToProfileFile)) {
             return false;
         }
 

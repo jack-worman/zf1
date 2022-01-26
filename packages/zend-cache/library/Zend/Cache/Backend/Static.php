@@ -155,7 +155,7 @@ class Zend_Cache_Backend_Static
         }
         $pathName = $this->_options['public_dir'] . dirname($id);
         $file     = rtrim((string) $pathName, '/') . '/' . $fileName . $this->_options['file_extension'];
-        if (file_exists($file)) {
+        if (file_exists((string) $file)) {
             $content = file_get_contents($file);
             return $content;
         }
@@ -194,7 +194,7 @@ class Zend_Cache_Backend_Static
             $extension = $this->_options['file_extension'];
         }
         $file     = $pathName . '/' . $fileName . $extension;
-        if (file_exists($file)) {
+        if (file_exists((string) $file)) {
             return true;
         }
         return false;
@@ -220,7 +220,7 @@ class Zend_Cache_Backend_Static
         $extension = null;
         if ($this->_isSerialized($data)) {
             $data = unserialize($data);
-            $extension = '.' . ltrim($data[1], '.');
+            $extension = '.' . ltrim((string) $data[1], '.');
             $data = $data[0];
         }
 
@@ -327,7 +327,7 @@ class Zend_Cache_Backend_Static
         }
         $pathName = $this->_options['public_dir'] . dirname($id);
         $file     = realpath($pathName) . '/' . $fileName . $extension;
-        if (!file_exists($file)) {
+        if (!file_exists((string) $file)) {
             return false;
         }
         return unlink($file);
@@ -353,7 +353,7 @@ class Zend_Cache_Backend_Static
         $pathName  = $this->_options['public_dir'] . dirname($id);
         $file      = $pathName . '/' . $fileName . $this->_options['file_extension'];
         $directory = $pathName . '/' . $fileName;
-        if (file_exists($directory)) {
+        if (file_exists((string) $directory)) {
             if (!is_writable($directory)) {
                 return false;
             }
@@ -368,7 +368,7 @@ class Zend_Cache_Backend_Static
             }
             rmdir($directory);
         }
-        if (file_exists($file)) {
+        if (file_exists((string) $file)) {
             if (!is_writable($file)) {
                 return false;
             }

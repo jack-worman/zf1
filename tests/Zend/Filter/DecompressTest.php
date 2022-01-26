@@ -59,7 +59,7 @@ class Zend_Filter_DecompressTest extends PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        if (file_exists(__DIR__ . '/../_files/compressed.bz2')) {
+        if (file_exists((string) __DIR__ . '/../_files/compressed.bz2')) {
             unlink(__DIR__ . '/../_files/compressed.bz2');
         }
     }

@@ -64,7 +64,7 @@ abstract class Zend_Feed_AbstractFeedTest extends PHPUnit_Framework_TestCase
         $basePath = __DIR__ . '/_files/';
         foreach ($this->remoteFeedNames as $file) {
             $filename = $basePath . $file;
-            if (!file_exists($filename)) {
+            if (!file_exists((string) $filename)) {
                 continue;
             }
             unlink($filename);

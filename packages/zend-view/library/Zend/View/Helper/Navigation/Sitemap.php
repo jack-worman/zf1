@@ -238,7 +238,7 @@ class Zend_View_Helper_Navigation_Sitemap
         }
 
         // do not encode existing HTML entities
-        return htmlspecialchars($string, ENT_QUOTES, $enc, false);
+        return htmlspecialchars((string) $string, ENT_QUOTES, $enc, false);
     }
 
     // Public methods:

@@ -1200,7 +1200,7 @@ class Zend_Date extends Zend_Date_DateObject
             return "Etc/UTC";
         }
 
-        preg_match('/([+-]\d{2}):{0,1}\d{2}/', $zone, $match);
+        preg_match('/([+-]\d{2}):{0,1}\d{2}/', (string) $zone, $match);
         if (!empty($match) and ($match[count($match) - 1] <= 14) and ($match[count($match) - 1] >= -12)) {
             $zone = "Etc/GMT";
             $zone .= ($match[count($match) - 1] < 0) ? "+" : "-";
@@ -1208,7 +1208,7 @@ class Zend_Date extends Zend_Date_DateObject
             return $zone;
         }
 
-        preg_match('/([[:alpha:]\/_]{3,30})(?!.*([[:alpha:]\/]{3,30}))/', $zone, $match);
+        preg_match('/([[:alpha:]\/_]{3,30})(?!.*([[:alpha:]\/]{3,30}))/', (string) $zone, $match);
         try {
             if (!empty($match) and (!is_int($match[count($match) - 1]))) {
                 $oldzone = $this->getTimezone();

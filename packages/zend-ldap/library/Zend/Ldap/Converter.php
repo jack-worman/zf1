@@ -47,8 +47,8 @@ class Zend_Ldap_Converter
     {
         for ($i = 0, $iMax = strlen((string) $string); $i< $iMax; $i++) {
             $char = substr((string) $string, $i, 1);
-            if (ord($char)<32) {
-                $hex = dechex(ord($char));
+            if (ord((string) $char)<32) {
+                $hex = dechex(ord((string) $char));
                 if (strlen((string) $hex) === 1) {
                     $hex = '0' . $hex;
                 }
@@ -86,7 +86,7 @@ class Zend_Ldap_Converter
      */
     private static function _charHex32ToAsc(array $matches)
     {
-        return chr(hexdec(ltrim($matches[0], '\\')));
+        return chr(hexdec(ltrim((string) $matches[0], '\\')));
     }
 
     /**

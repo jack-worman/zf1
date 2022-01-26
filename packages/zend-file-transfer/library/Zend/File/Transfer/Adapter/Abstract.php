@@ -1201,9 +1201,9 @@ abstract class Zend_File_Transfer_Adapter_Abstract
         $files  = $this->_getFiles($files);
         $result = array();
         foreach($files as $key => $value) {
-            if (file_exists($value['name'])) {
+            if (file_exists((string) $value['name'])) {
                 $result[$key] = hash_file($hash, $value['name']);
-            } else if (file_exists($value['tmp_name'])) {
+            } else if (file_exists((string) $value['tmp_name'])) {
                 $result[$key] = hash_file($hash, $value['tmp_name']);
             } else if (empty($value['options']['ignoreNoFile'])) {
                 // require_once 'Zend/File/Transfer/Exception.php';
@@ -1230,7 +1230,7 @@ abstract class Zend_File_Transfer_Adapter_Abstract
         $files  = $this->_getFiles($files);
         $result = array();
         foreach($files as $key => $value) {
-            if (file_exists($value['name']) || file_exists($value['tmp_name'])) {
+            if (file_exists((string) $value['name']) || file_exists((string) $value['tmp_name'])) {
                 if ($value['options']['useByteString']) {
                     $result[$key] = self::_toByteString($value['size']);
                 } else {
@@ -1259,9 +1259,9 @@ abstract class Zend_File_Transfer_Adapter_Abstract
      */
     protected function _detectFileSize($value)
     {
-        if (file_exists($value['name'])) {
+        if (file_exists((string) $value['name'])) {
             $result = sprintf("%u", @filesize($value['name']));
-        } else if (file_exists($value['tmp_name'])) {
+        } else if (file_exists((string) $value['tmp_name'])) {
             $result = sprintf("%u", @filesize($value['tmp_name']));
         } else {
             return null;
@@ -1283,7 +1283,7 @@ abstract class Zend_File_Transfer_Adapter_Abstract
         $files  = $this->_getFiles($files);
         $result = array();
         foreach($files as $key => $value) {
-            if (file_exists($value['name']) || file_exists($value['tmp_name'])) {
+            if (file_exists((string) $value['name']) || file_exists((string) $value['tmp_name'])) {
                 $result[$key] = $value['type'];
             } else if (empty($value['options']['ignoreNoFile'])) {
                 // require_once 'Zend/File/Transfer/Exception.php';
@@ -1308,9 +1308,9 @@ abstract class Zend_File_Transfer_Adapter_Abstract
      */
     protected function _detectMimeType($value)
     {
-        if (file_exists($value['name'])) {
+        if (file_exists((string) $value['name'])) {
             $file = $value['name'];
-        } else if (file_exists($value['tmp_name'])) {
+        } else if (file_exists((string) $value['tmp_name'])) {
             $file = $value['tmp_name'];
         } else {
             return null;

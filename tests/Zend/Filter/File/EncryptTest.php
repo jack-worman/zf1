@@ -46,14 +46,14 @@ class Zend_Filter_File_EncryptTest extends PHPUnit_Framework_TestCase
             $this->markTestSkipped('mcrypt is deprecated in php 7.1');
         }
 
-        if (file_exists(__DIR__.'/../_files/newencryption.txt')) {
+        if (file_exists((string) __DIR__.'/../_files/newencryption.txt')) {
             unlink(__DIR__.'/../_files/newencryption.txt');
         }
     }
 
     public function tearDown()
     {
-        if (file_exists(__DIR__.'/../_files/newencryption.txt')) {
+        if (file_exists((string) __DIR__.'/../_files/newencryption.txt')) {
             unlink(__DIR__.'/../_files/newencryption.txt');
         }
     }

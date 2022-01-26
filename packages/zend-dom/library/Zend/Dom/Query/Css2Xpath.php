@@ -59,7 +59,7 @@ class Zend_Dom_Query_Css2Xpath
             $pathSegment = self::_tokenize($segment);
             if (0 == $key) {
                 if (0 === strpos((string) $pathSegment, '[contains(')) {
-                    $paths[0] .= '*' . ltrim($pathSegment, '*');
+                    $paths[0] .= '*' . ltrim((string) $pathSegment, '*');
                 } else {
                     $paths[0] .= $pathSegment;
                 }
@@ -67,7 +67,7 @@ class Zend_Dom_Query_Css2Xpath
             }
             if (0 === strpos((string) $pathSegment, '[contains(')) {
                 foreach ($paths as $key => $xpath) {
-                    $paths[$key] .= '//*' . ltrim($pathSegment, '*');
+                    $paths[$key] .= '//*' . ltrim((string) $pathSegment, '*');
                     $paths[]      = $xpath . $pathSegment;
                 }
             } else {

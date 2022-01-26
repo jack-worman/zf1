@@ -1765,7 +1765,7 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
         // require_once 'Zend/Cache.php';
 
         $folder = __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'nofiles';
-        if (!file_exists($folder)) {
+        if (!file_exists((string) $folder)) {
             mkdir($folder, 0777);
         }
 

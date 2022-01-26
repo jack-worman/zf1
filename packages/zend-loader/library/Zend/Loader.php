@@ -329,7 +329,7 @@ class Zend_Loader
      */
     public static function standardiseFile($file)
     {
-        $fileName = ltrim($file, '\\');
+        $fileName = ltrim((string) $file, '\\');
         $file      = '';
         $namespace = '';
         if ($lastNsPos = strripos($fileName, '\\')) {

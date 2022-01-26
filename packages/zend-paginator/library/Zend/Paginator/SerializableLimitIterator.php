@@ -70,12 +70,30 @@ class Zend_Paginator_SerializableLimitIterator extends LimitIterator implements 
         ));
     }
 
+    #[\ReturnTypeWillChange]
+    public function __serialize()
+    {
+        return array(
+            'it'     => $this->getInnerIterator(),
+            'offset' => $this->_offset,
+            'count'  => $this->_count,
+            'pos'    => $this->getPosition(),
+        );
+    }
+
     /**
      * @param string $data representation of the instance
      */
     public function unserialize($data)
     {
         $dataArr = unserialize($data);
+        $this->__construct($dataArr['it'], $dataArr['offset'], $dataArr['count']);
+        $this->seek($dataArr['pos']+$dataArr['offset']);
+    }
+
+    #[\ReturnTypeWillChange]
+    public function __unserialize($dataArr)
+    {
         $this->__construct($dataArr['it'], $dataArr['offset'], $dataArr['count']);
         $this->seek($dataArr['pos']+$dataArr['offset']);
     }
@@ -92,7 +110,7 @@ class Zend_Paginator_SerializableLimitIterator extends LimitIterator implements 
         $currentOffset = $this->key();
         $this->seek($offset);
         $current = $this->current();
-        $this->seek($currentOffset);
+        $this->seek((int) $currentOffset);
         return $current;
     }
 

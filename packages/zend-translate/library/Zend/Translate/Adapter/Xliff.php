@@ -223,7 +223,7 @@ class Zend_Translate_Adapter_Xliff extends Zend_Translate_Adapter {
 
     private function _findEncoding($filename)
     {
-        $file = file_get_contents($filename, null, null, 0, 100);
+        $file = file_get_contents($filename, false, null, 0, 100);
         if (strpos((string) $file, "encoding") !== false) {
             $encoding = substr((string) $file, strpos((string) $file, "encoding") + 9);
             $encoding = substr((string) $encoding, 1, strpos((string) $encoding, $encoding[0], 1) - 1);

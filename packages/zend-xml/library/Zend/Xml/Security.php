@@ -154,7 +154,7 @@ class Zend_Xml_Security
      */
     public static function scanFile($file, DOMDocument $dom = null)
     {
-        if (!file_exists($file)) {
+        if (!file_exists((string) $file)) {
             // require_once 'Exception.php';
             throw new Zend_Xml_Exception(
                 "The file $file specified doesn't exist"

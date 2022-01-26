@@ -356,7 +356,7 @@ abstract class Zend_Pdf_Resource_Font_CidFont extends Zend_Pdf_Resource_Font
             /**
              * @todo Properly handle characters encoded as surrogate pairs.
              */
-            $charCode = (ord($string[$i]) << 8) | ord($string[++$i]);
+            $charCode = (ord((string) $string[$i]) << 8) | ord((string) $string[++$i]);
             /* This could probably be optimized a bit with a binary search...
              */
             if (isset($this->_charWidths[$charCode])) {

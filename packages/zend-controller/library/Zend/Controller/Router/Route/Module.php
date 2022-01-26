@@ -295,7 +295,7 @@ class Zend_Controller_Router_Route_Module extends Zend_Controller_Router_Route_A
             $url = self::URI_DELIMITER . $module . $url;
         }
 
-        return ltrim($url, self::URI_DELIMITER);
+        return ltrim((string) $url, self::URI_DELIMITER);
     }
 
     /**

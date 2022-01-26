@@ -461,7 +461,7 @@ class Zend_Text_Figlet
                     $nextChar = null;
                 }
 
-                $char = (ctype_space($nextChar)) ? "\n" : ' ';
+                $char = (ctype_space((string) $nextChar)) ? "\n" : ' ';
             }
 
             $lastCharWasEol = (ctype_space($char) && $char !== "\t" && $char !== ' ');
@@ -967,7 +967,7 @@ class Zend_Text_Figlet
     protected function _loadFont($fontFile)
     {
         // Check if the font file exists
-        if (!file_exists($fontFile)) {
+        if (!file_exists((string) $fontFile)) {
             // require_once 'Zend/Text/Figlet/Exception.php';
             throw new Zend_Text_Figlet_Exception($fontFile . ': Font file not found');
         }
@@ -1203,26 +1203,26 @@ class Zend_Text_Figlet
     }
 
     /**
-     * Unicode compatible ord() method
+     * Unicode compatible ord((string) ) method
      *
      * @param  string $c The char to get the value from
      * @return integer
      */
     protected function _uniOrd($c)
     {
-        $h = ord($c[0]);
+        $h = ord((string) $c[0]);
 
         if ($h <= 0x7F) {
             $ord = $h;
         } else if ($h < 0xC2) {
             $ord = 0;
         } else if ($h <= 0xDF) {
-            $ord = (($h & 0x1F) << 6 | (ord($c[1]) & 0x3F));
+            $ord = (($h & 0x1F) << 6 | (ord((string) $c[1]) & 0x3F));
         } else if ($h <= 0xEF) {
-            $ord = (($h & 0x0F) << 12 | (ord($c[1]) & 0x3F) << 6 | (ord($c[2]) & 0x3F));
+            $ord = (($h & 0x0F) << 12 | (ord((string) $c[1]) & 0x3F) << 6 | (ord((string) $c[2]) & 0x3F));
         } else if ($h <= 0xF4) {
-            $ord = (($h & 0x0F) << 18 | (ord($c[1]) & 0x3F) << 12 |
-                   (ord($c[2]) & 0x3F) << 6 | (ord($c[3]) & 0x3F));
+            $ord = (($h & 0x0F) << 18 | (ord((string) $c[1]) & 0x3F) << 12 |
+                   (ord((string) $c[2]) & 0x3F) << 6 | (ord((string) $c[3]) & 0x3F));
         } else {
             $ord = 0;
         }

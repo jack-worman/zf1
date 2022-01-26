@@ -61,7 +61,7 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        if (file_exists($this->_includeCache)) {
+        if (file_exists((string) $this->_includeCache)) {
             unlink($this->_includeCache);
         }
         Zend_Loader_PluginLoader::setIncludeFileCache(null);
@@ -80,7 +80,7 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
     {
         $this->clearStaticPaths();
         Zend_Loader_PluginLoader::setIncludeFileCache(null);
-        if (file_exists($this->_includeCache)) {
+        if (file_exists((string) $this->_includeCache)) {
             unlink($this->_includeCache);
         }
     }
@@ -431,7 +431,7 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
             $paths = $loader->getPaths();
             $this->fail(sprintf("Failed loading helper; paths: %s", var_export($paths, 1)));
         }
-        $this->assertTrue(file_exists($cacheFile));
+        $this->assertTrue(file_exists((string) $cacheFile));
         $cache = file_get_contents($cacheFile);
         if (substr((string) PHP_OS, 0, 3) !== 'WIN') {
             // windows reads an empty string, without any error, if a file is flock-ed...

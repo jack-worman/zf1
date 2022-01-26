@@ -529,11 +529,11 @@ abstract class Zend_Search_Lucene_Index_SegmentWriter
             $prefixChars = 0;
             while ($prefixBytes < $matchedBytes) {
                 $charBytes = 1;
-                if ((ord($term->text[$prefixBytes]) & 0xC0) == 0xC0) {
+                if ((ord((string) $term->text[$prefixBytes]) & 0xC0) == 0xC0) {
                     $charBytes++;
-                    if (ord($term->text[$prefixBytes]) & 0x20 ) {
+                    if (ord((string) $term->text[$prefixBytes]) & 0x20 ) {
                         $charBytes++;
-                        if (ord($term->text[$prefixBytes]) & 0x10 ) {
+                        if (ord((string) $term->text[$prefixBytes]) & 0x10 ) {
                             $charBytes++;
                         }
                     }

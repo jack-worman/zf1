@@ -107,7 +107,7 @@ class Zend_Filter_Compress_Zip extends Zend_Filter_Compress_CompressAbstract
      */
     public function setTarget($target)
     {
-        if (!file_exists(dirname($target))) {
+        if (!file_exists((string) dirname($target))) {
             // require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception("The directory '$target' does not exist");
         }
@@ -134,7 +134,7 @@ class Zend_Filter_Compress_Zip extends Zend_Filter_Compress_CompressAbstract
             throw new Zend_Filter_Exception($this->_errorString($res));
         }
 
-        if (file_exists($content)) {
+        if (file_exists((string) $content)) {
             $content  = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, realpath($content));
             $basename = substr((string) $content, strrpos($content, DIRECTORY_SEPARATOR) + 1);
             if (is_dir($content)) {
@@ -207,9 +207,9 @@ class Zend_Filter_Compress_Zip extends Zend_Filter_Compress_CompressAbstract
     public function decompress($content)
     {
         $archive = $this->getArchive();
-        if (file_exists($content)) {
+        if (file_exists((string) $content)) {
             $archive = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, realpath($content));
-        } elseif (empty($archive) || !file_exists($archive)) {
+        } elseif (empty($archive) || !file_exists((string) $archive)) {
             // require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('ZIP Archive not found');
         }

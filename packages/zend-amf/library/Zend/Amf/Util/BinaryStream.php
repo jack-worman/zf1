@@ -141,7 +141,7 @@ class Zend_Amf_Util_BinaryStream
             );
         }
 
-        return ord($this->_stream[$this->_needle++]);
+        return ord((string) $this->_stream[$this->_needle++]);
     }
 
     /**

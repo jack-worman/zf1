@@ -125,7 +125,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag extends Zend_CodeGenerator_Php_Abstrac
      */
     public function setName($name)
     {
-        $this->_name = ltrim($name, '@');
+        $this->_name = ltrim((string) $name, '@');
         return $this;
     }
 

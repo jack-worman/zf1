@@ -63,7 +63,7 @@ class Zend_Search_Lucene_DocumentTest extends PHPUnit_Framework_TestCase
 
     private function _clearDirectory($dirName)
     {
-        if (!file_exists($dirName) || !is_dir($dirName))  {
+        if (!file_exists((string) $dirName) || !is_dir($dirName))  {
             return;
         }
 

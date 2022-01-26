@@ -619,7 +619,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 			// require_once 'Zend/Service/WindowsAzure/Exception.php';
 			throw new Zend_Service_WindowsAzure_Exception('Local file name is not specified.');
 		}
-		if (!file_exists($localFileName)) {
+		if (!file_exists((string) $localFileName)) {
 			// require_once 'Zend/Service/WindowsAzure/Exception.php';
 			throw new Zend_Service_WindowsAzure_Exception('Local file not found.');
 		}
@@ -740,7 +740,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 			// require_once 'Zend/Service/WindowsAzure/Exception.php';
 			throw new Zend_Service_WindowsAzure_Exception('Local file name is not specified.');
 		}
-		if (!file_exists($localFileName)) {
+		if (!file_exists((string) $localFileName)) {
 			// require_once 'Zend/Service/WindowsAzure/Exception.php';
 			throw new Zend_Service_WindowsAzure_Exception('Local file not found.');
 		}

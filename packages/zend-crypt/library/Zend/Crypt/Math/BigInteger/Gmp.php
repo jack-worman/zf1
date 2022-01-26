@@ -179,7 +179,7 @@ class Zend_Crypt_Math_BigInteger_Gmp implements Zend_Crypt_Math_BigInteger_Inter
     {
         $result = '0';
         while (strlen((string) $operand)) {
-            $ord = ord(substr((string) $operand, 0, 1));
+            $ord = ord((string) substr((string) $operand, 0, 1));
             $result = gmp_add(gmp_mul($result, 256), $ord);
             $operand = substr((string) $operand, 1);
         }

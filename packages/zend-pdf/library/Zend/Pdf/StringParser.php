@@ -167,7 +167,7 @@ class Zend_Pdf_StringParser
 //        while ($this->offset < strlen((string) $this->data)) {
 //            if (strpos((string) "\x00\t\n\f\r ", $this->data[$this->offset]) !== false) {
 //                $this->offset++;
-//            } else if (ord($this->data[$this->offset]) == 0x25 && $skipComment) { // '%'
+//            } else if (ord((string) $this->data[$this->offset]) == 0x25 && $skipComment) { // '%'
 //                $this->skipComment();
 //            } else {
 //                return;
@@ -183,8 +183,8 @@ class Zend_Pdf_StringParser
     {
         while ($this->offset < strlen((string) $this->data))
         {
-            if (ord($this->data[$this->offset]) != 0x0A || // Line feed
-                ord($this->data[$this->offset]) != 0x0d    // Carriage return
+            if (ord((string) $this->data[$this->offset]) != 0x0A || // Line feed
+                ord((string) $this->data[$this->offset]) != 0x0d    // Carriage return
                ) {
                 $this->offset++;
             } else {
@@ -211,8 +211,8 @@ class Zend_Pdf_StringParser
         for ($start = $this->offset;
              $this->offset < strlen((string) $this->data);
              $this->offset++) {
-            if (ord($this->data[$this->offset]) == 0x0A || // Line feed
-                ord($this->data[$this->offset]) == 0x0d    // Carriage return
+            if (ord((string) $this->data[$this->offset]) == 0x0A || // Line feed
+                ord((string) $this->data[$this->offset]) == 0x0d    // Carriage return
                ) {
                 break;
             }
@@ -244,7 +244,7 @@ class Zend_Pdf_StringParser
             return '';
         }
 
-        if ( /* self::isDelimiter( ord($this->data[$start]) ) */
+        if ( /* self::isDelimiter( ord((string) $this->data[$start]) ) */
              strpos((string) '()<>[]{}/%', $this->data[$this->offset]) !== false ) {
 
             switch (substr((string) $this->data, $this->offset, 2)) {
@@ -357,7 +357,7 @@ class Zend_Pdf_StringParser
         $this->offset += strcspn($this->data, '()\\', $this->offset);
 
         while ($this->offset < strlen((string) $this->data)) {
-            switch (ord( $this->data[$this->offset] )) {
+            switch (ord((string)  $this->data[$this->offset] )) {
                 case 0x28: // '(' - opened bracket in the string, needs balanced pair.
                     $this->offset++;
                     $openedBrackets++;
@@ -691,7 +691,7 @@ class Zend_Pdf_StringParser
         $value = 0;
         for ($count = 0; $count < $size; $count++) {
             $value *= 256;
-            $value += ord($stream[$offset + $count]);
+            $value += ord((string) $stream[$offset + $count]);
         }
 
         return $value;

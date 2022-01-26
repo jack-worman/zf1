@@ -51,7 +51,7 @@ class Zend_Tool_Project_Provider_Project
             $path = getcwd();
         } else {
             $path = \trim((string) $path);
-            if (!file_exists($path)) {
+            if (!file_exists((string) $path)) {
                 $created = mkdir($path);
                 if (!$created) {
                     // require_once 'Zend/Tool/Framework/Client/Exception.php';
@@ -70,7 +70,7 @@ class Zend_Tool_Project_Provider_Project
 
         $profileData = null;
 
-        if ($fileOfProfile != null && file_exists($fileOfProfile)) {
+        if ($fileOfProfile != null && file_exists((string) $fileOfProfile)) {
             $profileData = file_get_contents($fileOfProfile);
         }
 
@@ -211,7 +211,7 @@ EOS;
     {
         $projectDirResource = $caller->getResource()->getProfile()->search('projectDirectory');
         if ($projectDirResource) {
-            $name = ltrim(strrchr($projectDirResource->getPath(), DIRECTORY_SEPARATOR), DIRECTORY_SEPARATOR);
+            $name = ltrim((string) strrchr($projectDirResource->getPath(), DIRECTORY_SEPARATOR), DIRECTORY_SEPARATOR);
             $path = $projectDirResource->getPath() . '/public';
         } else {
             $path = '/path/to/public';

@@ -75,7 +75,7 @@ class Zend_Filter_Compress_TarTest extends PHPUnit_Framework_TestCase
         );
 
         foreach($files as $file) {
-            if (file_exists($file)) {
+            if (file_exists((string) $file)) {
                 if (is_dir($file)) {
                     rmdir($file);
                 } else {
@@ -84,7 +84,7 @@ class Zend_Filter_Compress_TarTest extends PHPUnit_Framework_TestCase
             }
         }
 
-        /*if (!file_exists(__DIR__ . '/../_files/Compress/First/Second')) {
+        /*if (!file_exists((string) __DIR__ . '/../_files/Compress/First/Second')) {
             mkdir(__DIR__ . '/../_files/Compress/First/Second', 0777, true);
             file_put_contents(__DIR__ . '/../_files/Compress/First/Second/zipextracted.txt', 'compress me');
             file_put_contents(__DIR__ . '/../_files/Compress/First/zipextracted.txt', 'compress me');
@@ -108,7 +108,7 @@ class Zend_Filter_Compress_TarTest extends PHPUnit_Framework_TestCase
         );
 
         foreach($files as $file) {
-            if (file_exists($file)) {
+            if (file_exists((string) $file)) {
                 if (is_dir($file)) {
                     rmdir($file);
                 } else {
@@ -117,7 +117,7 @@ class Zend_Filter_Compress_TarTest extends PHPUnit_Framework_TestCase
             }
         }
 
-        /*if (!file_exists(__DIR__ . '/../_files/Compress/First/Second')) {
+        /*if (!file_exists((string) __DIR__ . '/../_files/Compress/First/Second')) {
             mkdir(__DIR__ . '/../_files/Compress/First/Second', 0777, true);
             file_put_contents(__DIR__ . '/../_files/Compress/First/Second/zipextracted.txt', 'compress me');
             file_put_contents(__DIR__ . '/../_files/Compress/First/zipextracted.txt', 'compress me');

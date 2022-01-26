@@ -753,7 +753,7 @@ class Zend_Cache_Backend_File extends Zend_Cache_Backend implements Zend_Cache_B
 
         // cycle through metadataFiles and delete orphaned ones
         foreach ($metadataFiles as $file) {
-            if (file_exists($file)) {
+            if (file_exists((string) $file)) {
                 $result = $this->_remove($file) && $result;
             }
         }

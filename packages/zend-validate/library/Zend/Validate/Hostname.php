@@ -1913,7 +1913,7 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
         if ($separator > 0) {
             for ($x = 0; $x < $separator; ++$x) {
                 // prepare decoding matrix
-                $decoded[] = ord($encoded[$x]);
+                $decoded[] = ord((string) $encoded[$x]);
             }
         }
 
@@ -1928,7 +1928,7 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
 
         for ($indexe = ($separator) ? ($separator + 1) : 0; $indexe < $lengthe; ++$lengthd) {
             for ($old_index = $index, $pos = 1, $key = 36; 1 ; $key += 36) {
-                $hex   = ord($encoded[$indexe++]);
+                $hex   = ord((string) $encoded[$indexe++]);
                 $digit = ($hex - 48 < 10) ? $hex - 22
                        : (($hex - 65 < 26) ? $hex - 65
                        : (($hex - 97 < 26) ? $hex - 97

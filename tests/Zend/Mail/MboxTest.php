@@ -53,7 +53,7 @@ class Zend_Mail_MboxTest extends PHPUnit_Framework_TestCase
             } else {
                 $this->_tmpdir = __DIR__ . '/_files/test.tmp/';
             }
-            if (!file_exists($this->_tmpdir)) {
+            if (!file_exists((string) $this->_tmpdir)) {
                 mkdir($this->_tmpdir);
             }
             $count = 0;

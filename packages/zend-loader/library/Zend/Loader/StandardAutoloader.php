@@ -339,7 +339,7 @@ class Zend_Loader_StandardAutoloader implements Zend_Loader_SplAutoloader
 
                 // create filename
                 $filename = $this->transformClassNameToFilename($trimmedClass, $path);
-                if (file_exists($filename)) {
+                if (file_exists((string) $filename)) {
                     return include $filename;
                 }
                 return false;

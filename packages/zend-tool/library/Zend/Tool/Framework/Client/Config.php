@@ -65,7 +65,7 @@ class Zend_Tool_Framework_Client_Config
      */
     public function setConfigFilepath($configFilepath)
     {
-        if (!file_exists($configFilepath)) {
+        if (!file_exists((string) $configFilepath)) {
             // require_once 'Zend/Tool/Framework/Client/Exception.php';
             throw new Zend_Tool_Framework_Client_Exception('Provided path to config ' . $configFilepath . ' does not exist');
         }

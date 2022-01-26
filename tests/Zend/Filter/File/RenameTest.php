@@ -115,15 +115,15 @@ class Zend_Filter_File_RenameTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        if (file_exists($this->_origFile)) {
+        if (file_exists((string) $this->_origFile)) {
             unlink($this->_origFile);
         }
 
-        if (file_exists($this->_newFile)) {
+        if (file_exists((string) $this->_newFile)) {
             unlink($this->_newFile);
         }
 
-        if (file_exists($this->_newDirFile)) {
+        if (file_exists((string) $this->_newDirFile)) {
             unlink($this->_newDirFile);
         }
 
@@ -137,19 +137,19 @@ class Zend_Filter_File_RenameTest extends PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        if (!file_exists($this->_oldFile)) {
+        if (!file_exists((string) $this->_oldFile)) {
             copy($this->_origFile, $this->_oldFile);
         }
 
-        if (file_exists($this->_origFile)) {
+        if (file_exists((string) $this->_origFile)) {
             unlink($this->_origFile);
         }
 
-        if (file_exists($this->_newFile)) {
+        if (file_exists((string) $this->_newFile)) {
             unlink($this->_newFile);
         }
 
-        if (file_exists($this->_newDirFile)) {
+        if (file_exists((string) $this->_newDirFile)) {
             unlink($this->_newDirFile);
         }
     }

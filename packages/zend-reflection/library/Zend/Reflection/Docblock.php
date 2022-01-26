@@ -256,7 +256,7 @@ class Zend_Reflection_Docblock implements Reflector
 
         // First remove doc block line starters
         $docComment = preg_replace('#[ \t]*(?:\/\*\*|\*\/|\*)?[ ]{0,1}(.*)?#', '$1', $docComment);
-        $docComment = ltrim($docComment, "\r\n"); // @todo should be changed to remove first and last empty line
+        $docComment = ltrim((string) $docComment, "\r\n"); // @todo should be changed to remove first and last empty line
 
         $this->_cleanDocComment = $docComment;
 

@@ -76,7 +76,7 @@ class Zend_Filter_File_LowerCaseTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        if (!file_exists($this->_newFile)) {
+        if (!file_exists((string) $this->_newFile)) {
             copy($this->_origFile, $this->_newFile);
         }
     }
@@ -88,7 +88,7 @@ class Zend_Filter_File_LowerCaseTest extends PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        if (file_exists($this->_newFile)) {
+        if (file_exists((string) $this->_newFile)) {
             unlink($this->_newFile);
         }
     }

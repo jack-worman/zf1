@@ -347,7 +347,7 @@ class Zend_Service_SlideShare
 
         $filename = $ss->getFilename();
 
-        if (!file_exists($filename) || !is_readable($filename)) {
+        if (!file_exists((string) $filename) || !is_readable($filename)) {
             // require_once 'Zend/Service/SlideShare/Exception.php';
             throw new Zend_Service_SlideShare_Exception(
                 'Specified Slideshow for upload not found or unreadable'

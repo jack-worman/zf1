@@ -536,12 +536,12 @@ class Zend_Http_Response
                         $headers[$h_name] = array($headers[$h_name]);
                     }
 
-                    $headers[$h_name][] = ltrim($h_value);
+                    $headers[$h_name][] = ltrim((string) $h_value);
                     $last_header = $h_name;
                     continue;
                 }
 
-                $headers[$h_name] = ltrim($h_value);
+                $headers[$h_name] = ltrim((string) $h_value);
                 $last_header = $h_name;
                 continue;
             }
@@ -677,7 +677,7 @@ class Zend_Http_Response
          * @link http://framework.zend.com/issues/browse/ZF-6040
          */
         $zlibHeader = unpack('n', substr((string) $body, 0, 2));
-        if ($zlibHeader[1] % 31 == 0 && ord($body[0]) == 0x78 && in_array(ord($body[1]), array(0x01, 0x5e, 0x9c, 0xda))) {
+        if ($zlibHeader[1] % 31 == 0 && ord((string) $body[0]) == 0x78 && in_array(ord((string) $body[1]), array(0x01, 0x5e, 0x9c, 0xda))) {
             return gzuncompress($body);
         } else {
             return gzinflate($body);

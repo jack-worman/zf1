@@ -91,7 +91,7 @@ class Zend_Gdata_MediaMimeStream
     public function __construct($xmlString = null, $filePath = null,
         $fileContentType = null)
     {
-        if (!file_exists($filePath) || !is_readable($filePath)) {
+        if (!file_exists((string) $filePath) || !is_readable($filePath)) {
             // require_once 'Zend/Gdata/App/IOException.php';
             throw new Zend_Gdata_App_IOException('File to be uploaded at ' .
                 $filePath . ' does not exist or is not readable.');

@@ -81,7 +81,7 @@ class Zend_Pdf_Element_Name extends Zend_Pdf_Element
         $outStr = '';
 
         for ($count = 0; $count < strlen((string) $inStr); $count++) {
-            $nextCode = ord($inStr[$count]);
+            $nextCode = ord((string) $inStr[$count]);
 
             switch ($inStr[$count]) {
                 case '(':

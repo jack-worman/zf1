@@ -308,7 +308,7 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
             $url = '/' . $module . $url;
         }
 
-        return ltrim($url, self::URI_DELIMITER);
+        return ltrim((string) $url, self::URI_DELIMITER);
     }
 
     /**

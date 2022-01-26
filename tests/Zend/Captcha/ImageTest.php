@@ -193,7 +193,7 @@ class Zend_Captcha_ImageTest extends PHPUnit_Framework_TestCase
     public function testCaptchaCreatesImage()
     {
         $this->element->render($this->getView());
-        $this->assertTrue(file_exists($this->testDir."/".$this->captcha->getId().".png"));
+        $this->assertTrue(file_exists((string) $this->testDir."/".$this->captcha->getId().".png"));
     }
 
     public function testCaptchaSetExpiration()
@@ -207,13 +207,13 @@ class Zend_Captcha_ImageTest extends PHPUnit_Framework_TestCase
     {
         $this->element->render($this->getView());
         $filename = $this->testDir."/".$this->captcha->getId().".png";
-        $this->assertTrue(file_exists($filename));
+        $this->assertTrue(file_exists((string) $filename));
         $this->captcha->setExpiration(1);
         $this->captcha->setGcFreq(1);
         sleep(2);
         $this->captcha->generate();
         clearstatcache();
-        $this->assertFalse(file_exists($filename), "File $filename was found even after GC");
+        $this->assertFalse(file_exists((string) $filename), "File $filename was found even after GC");
     }
 
     /**
@@ -223,18 +223,18 @@ class Zend_Captcha_ImageTest extends PHPUnit_Framework_TestCase
     {
         $this->element->render($this->getView());
         $filename = $this->testDir."/".$this->captcha->getId().".png";
-        $this->assertTrue(file_exists($filename));
+        $this->assertTrue(file_exists((string) $filename));
         //Create other cache file
         $otherFile = $this->testDir . "/zf10006.cache";
         file_put_contents($otherFile, '');
-        $this->assertTrue(file_exists($otherFile));
+        $this->assertTrue(file_exists((string) $otherFile));
         $this->captcha->setExpiration(1);
         $this->captcha->setGcFreq(1);
         sleep(2);
         $this->captcha->generate();
         clearstatcache();
-        $this->assertFalse(file_exists($filename), "File $filename was found even after GC");
-        $this->assertTrue(file_exists($otherFile), "File $otherFile was not found after GC");
+        $this->assertFalse(file_exists((string) $filename), "File $filename was found even after GC");
+        $this->assertTrue(file_exists((string) $otherFile), "File $otherFile was not found after GC");
     }
 
     public function testGenerateReturnsId()

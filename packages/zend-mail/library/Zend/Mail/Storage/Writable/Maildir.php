@@ -61,7 +61,7 @@ class Zend_Mail_Storage_Writable_Maildir extends    Zend_Mail_Storage_Folder_Mai
      */
     public static function initMaildir($dir)
     {
-        if (file_exists($dir)) {
+        if (file_exists((string) $dir)) {
             if (!is_dir($dir)) {
                 /**
                  * @see Zend_Mail_Storage_Exception
@@ -76,7 +76,7 @@ class Zend_Mail_Storage_Writable_Maildir extends    Zend_Mail_Storage_Folder_Mai
                  */
                 // require_once 'Zend/Mail/Storage/Exception.php';
                 $dir = dirname($dir);
-                if (!file_exists($dir)) {
+                if (!file_exists((string) $dir)) {
                     throw new Zend_Mail_Storage_Exception("parent $dir not found");
                 } else if (!is_dir($dir)) {
                     throw new Zend_Mail_Storage_Exception("parent $dir not a directory");
@@ -89,7 +89,7 @@ class Zend_Mail_Storage_Writable_Maildir extends    Zend_Mail_Storage_Folder_Mai
         foreach (array('cur', 'tmp', 'new') as $subdir) {
             if (!@mkdir($dir . DIRECTORY_SEPARATOR . $subdir)) {
                 // ignore if dir exists (i.e. was already valid maildir or two processes try to create one)
-                if (!file_exists($dir . DIRECTORY_SEPARATOR . $subdir)) {
+                if (!file_exists((string) $dir . DIRECTORY_SEPARATOR . $subdir)) {
                     /**
                      * @see Zend_Mail_Storage_Exception
                      */
@@ -113,7 +113,7 @@ class Zend_Mail_Storage_Writable_Maildir extends    Zend_Mail_Storage_Folder_Mai
             $params = (object)$params;
         }
 
-        if (!empty($params->create) && isset($params->dirname) && !file_exists($params->dirname . DIRECTORY_SEPARATOR . 'cur')) {
+        if (!empty($params->create) && isset($params->dirname) && !file_exists((string) $params->dirname . DIRECTORY_SEPARATOR . 'cur')) {
             self::initMaildir($params->dirname);
         }
 
@@ -263,7 +263,7 @@ class Zend_Mail_Storage_Writable_Maildir extends    Zend_Mail_Storage_Folder_Mai
 
         foreach (array('tmp', 'new', 'cur', '.') as $subdir) {
             $dir = $this->_rootdir . '.' . $name . DIRECTORY_SEPARATOR . $subdir;
-            if (!file_exists($dir)) {
+            if (!file_exists((string) $dir)) {
                 continue;
             }
             $dh = opendir($dir);
@@ -379,7 +379,7 @@ class Zend_Mail_Storage_Writable_Maildir extends    Zend_Mail_Storage_Folder_Mai
         $olddir = $this->_rootdir . '.' . $folder;
         foreach (array('tmp', 'new', 'cur') as $subdir) {
             $subdir = DIRECTORY_SEPARATOR . $subdir;
-            if (!file_exists($olddir . $subdir)) {
+            if (!file_exists((string) $olddir . $subdir)) {
                 continue;
             }
             // using copy or moving files would be even better - but also much slower
@@ -437,7 +437,7 @@ class Zend_Mail_Storage_Writable_Maildir extends    Zend_Mail_Storage_Folder_Mai
         } else {
             $tmpdir = $this->_rootdir . '.' . $folder . DIRECTORY_SEPARATOR . 'tmp' . DIRECTORY_SEPARATOR;
         }
-        if (!file_exists($tmpdir)) {
+        if (!file_exists((string) $tmpdir)) {
             if (!mkdir($tmpdir)) {
                 /**
                  * @see Zend_Mail_Storage_Exception
@@ -455,7 +455,7 @@ class Zend_Mail_Storage_Writable_Maildir extends    Zend_Mail_Storage_Folder_Mai
         $max_tries = 5;
         for ($i = 0; $i < $max_tries; ++$i) {
             $uniq = $this->_createUniqueId();
-            if (!file_exists($tmpdir . $uniq)) {
+            if (!file_exists((string) $tmpdir . $uniq)) {
                 // here is the race condition! - as defined in the standard
                 // to avoid having a long time between stat()ing the file and creating it we're opening it here
                 // to mark the filename as taken
@@ -891,7 +891,7 @@ class Zend_Mail_Storage_Writable_Maildir extends    Zend_Mail_Storage_Folder_Mai
 
             foreach (array('cur', 'new') as $subsubdir) {
                 $dirname = $this->_rootdir . $subdir . DIRECTORY_SEPARATOR . $subsubdir . DIRECTORY_SEPARATOR;
-                if (!file_exists($dirname)) {
+                if (!file_exists((string) $dirname)) {
                     continue;
                 }
                 // NOTE: we are using mtime instead of "the latest timestamp". The latest would be atime
@@ -963,7 +963,7 @@ class Zend_Mail_Storage_Writable_Maildir extends    Zend_Mail_Storage_Folder_Mai
         $total_size = 0;
         $messages   = 0;
         $maildirsize = '';
-        if (!$forceRecalc && file_exists($this->_rootdir . 'maildirsize') && filesize($this->_rootdir . 'maildirsize') < 5120) {
+        if (!$forceRecalc && file_exists((string) $this->_rootdir . 'maildirsize') && filesize($this->_rootdir . 'maildirsize') < 5120) {
             $fh = fopen($this->_rootdir . 'maildirsize', 'r');
         }
         if ($fh) {
@@ -1028,7 +1028,7 @@ class Zend_Mail_Storage_Writable_Maildir extends    Zend_Mail_Storage_Folder_Mai
     }
 
     protected function _addQuotaEntry($size, $count = 1) {
-        if (!file_exists($this->_rootdir . 'maildirsize')) {
+        if (!file_exists((string) $this->_rootdir . 'maildirsize')) {
             // TODO: should get file handler from _calculateQuota
         }
         $size = (int)$size;

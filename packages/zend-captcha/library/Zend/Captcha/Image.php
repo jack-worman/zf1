@@ -438,7 +438,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
         $id = parent::generate();
         $tries = 5;
         // If there's already such file, try creating a new ID
-        while($tries-- && file_exists($this->getImgDir() . $id . $this->getSuffix())) {
+        while($tries-- && file_exists((string) $this->getImgDir() . $id . $this->getSuffix())) {
             $id = $this->_generateRandomId();
             $this->_setId($id);
         }
@@ -504,8 +504,8 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
         $bg_color   = imagecolorallocate($img, 255, 255, 255);
         imagefilledrectangle($img, 0, 0, $w-1, $h-1, $bg_color);
         $textbox = imageftbbox($fsize, 0, $font, $word);
-        $x = ($w - ($textbox[2] - $textbox[0])) / 2;
-        $y = ($h - ($textbox[7] - $textbox[1])) / 2;
+        $x = (int) (($w - ($textbox[2] - $textbox[0])) / 2);
+        $y = (int) (($h - ($textbox[7] - $textbox[1])) / 2);
         imagefttext($img, $fsize, 0, $x, $y, $text_color, $font, $word);
 
        // generate noise
@@ -560,10 +560,10 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
                     $frac_x1 = 1-$frac_x;
                     $frac_y1 = 1-$frac_y;
 
-                    $newcolor = $color    * $frac_x1 * $frac_y1
-                              + $color_x  * $frac_x  * $frac_y1
-                              + $color_y  * $frac_x1 * $frac_y
-                              + $color_xy * $frac_x  * $frac_y;
+                    $newcolor = (int) ($color * $frac_x1 * $frac_y1
+                        + $color_x  * $frac_x  * $frac_y1
+                        + $color_y  * $frac_x1 * $frac_y
+                        + $color_xy * $frac_x  * $frac_y);
                 }
                 imagesetpixel($img2, $x, $y, imagecolorallocate($img2, $newcolor, $newcolor, $newcolor));
             }
@@ -596,7 +596,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
         $suffixLength = strlen((string) $this->_suffix);
         foreach (new DirectoryIterator($imgdir) as $file) {
             if (!$file->isDot() && !$file->isDir()) {
-                if (file_exists($file->getPathname()) && $file->getMTime() < $expire) {
+                if (file_exists((string) $file->getPathname()) && $file->getMTime() < $expire) {
                     // only deletes files ending with $this->_suffix
                     if (substr((string) $file->getFilename(), -($suffixLength)) == $this->_suffix) {
                         unlink($file->getPathname());

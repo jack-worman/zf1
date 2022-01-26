@@ -70,7 +70,7 @@ class Zend_Cloud_Infrastructure_Adapter_Ec2Test extends PHPUnit_Framework_TestCa
         $shortClassName = substr((string) __CLASS__,strlen((string) 'Zend_Cloud_Infrastructure_Adapter_'));
         $filename= __DIR__ . '/_files/' . $shortClassName . '_'. $this->getName().'.response';
 
-        if (file_exists($filename)) {
+        if (file_exists((string) $filename)) {
             $this->httpClientAdapterTest->setResponse($this->loadResponse($filename));
         }
 

@@ -172,7 +172,7 @@ class Zend_Crypt_Math_BigInteger_Bcmath implements Zend_Crypt_Math_BigInteger_In
     {
         $result = '0';
         while (strlen((string) $operand)) {
-            $ord = ord(substr((string) $operand, 0, 1));
+            $ord = ord((string) substr((string) $operand, 0, 1));
             $result = bcadd(bcmul($result, 256), $ord);
             $operand = substr((string) $operand, 1);
         }
@@ -194,7 +194,7 @@ class Zend_Crypt_Math_BigInteger_Bcmath implements Zend_Crypt_Math_BigInteger_In
             $return = chr(bcmod($operand, 256)) . $return;
             $operand = bcdiv($operand, 256);
         }
-        if (ord($return[0]) > 127) {
+        if (ord((string) $return[0]) > 127) {
             $return = "\0" . $return;
         }
         return $return;

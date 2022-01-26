@@ -54,8 +54,8 @@ class Zend_Mail_Pop3Test extends PHPUnit_Framework_TestCase
                                'password' => TESTS_ZEND_MAIL_POP3_PASSWORD);
 
         if (defined('TESTS_ZEND_MAIL_SERVER_TESTDIR') && TESTS_ZEND_MAIL_SERVER_TESTDIR) {
-            if (!file_exists(TESTS_ZEND_MAIL_SERVER_TESTDIR . DIRECTORY_SEPARATOR . 'inbox')
-             && !file_exists(TESTS_ZEND_MAIL_SERVER_TESTDIR . DIRECTORY_SEPARATOR . 'INBOX')) {
+            if (!file_exists((string) TESTS_ZEND_MAIL_SERVER_TESTDIR . DIRECTORY_SEPARATOR . 'inbox')
+             && !file_exists((string) TESTS_ZEND_MAIL_SERVER_TESTDIR . DIRECTORY_SEPARATOR . 'INBOX')) {
                 $this->markTestSkipped('There is no file name "inbox" or "INBOX" in '
                                        . TESTS_ZEND_MAIL_SERVER_TESTDIR . '. I won\'t use it for testing. '
                                        . 'This is you safety net. If you think it is the right directory just '

@@ -59,7 +59,7 @@ class Zend_Filter_Compress_GzTest extends PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        if (file_exists(__DIR__ . '/../_files/compressed.gz')) {
+        if (file_exists((string) __DIR__ . '/../_files/compressed.gz')) {
             unlink(__DIR__ . '/../_files/compressed.gz');
         }
     }

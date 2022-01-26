@@ -172,7 +172,7 @@ class Zend_Loader_ClassMapAutoloader implements Zend_Loader_SplAutoloader
      */
     protected function loadMapFromFile($location)
     {
-        if (!file_exists($location)) {
+        if (!file_exists((string) $location)) {
             // require_once __DIR__ . '/Exception/InvalidArgumentException.php';
             throw new Zend_Loader_Exception_InvalidArgumentException('Map file provided does not exist');
         }
@@ -219,7 +219,7 @@ class Zend_Loader_ClassMapAutoloader implements Zend_Loader_SplAutoloader
         }
         $parts = $out;
 
-        if (file_exists($realPath = 'phar://' . $prependSlash . implode('/', $parts))) {
+        if (file_exists((string) $realPath = 'phar://' . $prependSlash . implode('/', $parts))) {
             return $realPath;
         }
     }

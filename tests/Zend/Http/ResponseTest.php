@@ -50,7 +50,7 @@ class Zend_Http_ResponseTest extends PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        if ($this->tempFile !== null && file_exists($this->tempFile)) {
+        if ($this->tempFile !== null && file_exists((string) $this->tempFile)) {
             unlink($this->tempFile);
         }
     }
