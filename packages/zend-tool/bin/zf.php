@@ -317,8 +317,8 @@ class ZF
         $zfINISettings = parse_ini_file($this->_configFile);
         $phpINISettings = ini_get_all();
         foreach ($zfINISettings as $zfINIKey => $zfINIValue) {
-            if (substr($zfINIKey, 0, 4) === 'php.') {
-                $phpINIKey = substr($zfINIKey, 4);
+            if (substr((string) $zfINIKey, 0, 4) === 'php.') {
+                $phpINIKey = substr((string) $zfINIKey, 4);
                 if (array_key_exists($phpINIKey, $phpINISettings)) {
                     ini_set($phpINIKey, $zfINIValue);
                 }
@@ -358,7 +358,7 @@ class ZF
             return;
         }
 
-        $zfIncludePath['relativePath'] = dirname(__FILE__) . '/../library/';
+        $zfIncludePath['relativePath'] = __DIR__ . '/../library/';
         if (file_exists($zfIncludePath['relativePath'] . 'Zend/Tool/Framework/Client/Console.php')) {
             set_include_path(realpath($zfIncludePath['relativePath']) . PATH_SEPARATOR . get_include_path());
         }

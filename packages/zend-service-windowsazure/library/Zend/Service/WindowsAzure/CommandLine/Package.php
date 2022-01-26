@@ -62,7 +62,7 @@ class Zend_Service_WindowsAzure_CommandLine_Package
 	{
 		// Default parameter value
 		if ($scaffolder == '') {
-			$scaffolder = dirname(__FILE__) . '/Scaffolders/DefaultScaffolder.phar';
+			$scaffolder = __DIR__ . '/Scaffolders/DefaultScaffolder.phar';
 		}
 		$scaffolder = realpath($scaffolder);
 
@@ -84,8 +84,8 @@ class Zend_Service_WindowsAzure_CommandLine_Package
 		$options = array();
 		foreach ($argv as $arg) {
 			list($key, $value) = explode(':', $arg, 2);
-			while (substr($key, 0, 1) == '-') {
-				$key = substr($key, 1);
+			while (substr((string) $key, 0, 1) == '-') {
+				$key = substr((string) $key, 1);
 			}
 			$options[$key] = $value;
 		}

@@ -136,7 +136,7 @@ class Zend_Filter_Compress_Zip extends Zend_Filter_Compress_CompressAbstract
 
         if (file_exists($content)) {
             $content  = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, realpath($content));
-            $basename = substr($content, strrpos($content, DIRECTORY_SEPARATOR) + 1);
+            $basename = substr((string) $content, strrpos($content, DIRECTORY_SEPARATOR) + 1);
             if (is_dir($content)) {
                 $index    = strrpos($content, DIRECTORY_SEPARATOR) + 1;
                 $content .= DIRECTORY_SEPARATOR;
@@ -160,8 +160,8 @@ class Zend_Filter_Compress_Zip extends Zend_Filter_Compress_CompressAbstract
                         }
                     }
 
-                    $local = substr($current, $index);
-                    $zip->addEmptyDir(substr($local, 0, -1));
+                    $local = substr((string) $current, $index);
+                    $zip->addEmptyDir(substr((string) $local, 0, -1));
 
                     foreach ($files as $file) {
                         $zip->addFile($current . $file, $local . $file);
@@ -224,7 +224,7 @@ class Zend_Filter_Compress_Zip extends Zend_Filter_Compress_CompressAbstract
         }
 
         if (!empty($target)) {
-            $target = rtrim($target, '/\\') . DIRECTORY_SEPARATOR;
+            $target = rtrim((string) $target, '/\\') . DIRECTORY_SEPARATOR;
         }
 
         if (empty($target) || !is_dir($target)) {

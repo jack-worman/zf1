@@ -351,7 +351,7 @@ abstract class Zend_Pdf_Resource_Font_CidFont extends Zend_Pdf_Resource_Font
         /* Calculate the score by doing a lookup for each character.
          */
         $score = 0;
-        $maxIndex = strlen($string);
+        $maxIndex = strlen((string) $string);
         for ($i = 0; $i < $maxIndex; $i++) {
             /**
              * @todo Properly handle characters encoded as surrogate pairs.

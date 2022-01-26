@@ -157,20 +157,20 @@ class Zend_Reflection_Method extends ReflectionMethod
         do {
             if (count($lines) == 0) break;
             $firstLine = array_shift($lines);
-        } while (strpos($firstLine, ')') === false);
+        } while (strpos((string) $firstLine, ')') === false);
 
         // If the opening brace isn't on the same line as method
         // signature, then we should pop off more lines until we find it
-        if (strpos($firstLine,'{') === false) {
+        if (strpos((string) $firstLine,'{') === false) {
             do {
                 if (count($lines) == 0) break;
                 $firstLine = array_shift($lines);
-            } while (strpos($firstLine, '{') === false);
+            } while (strpos((string) $firstLine, '{') === false);
         }
 
         // If there are more characters on the line after the opening brace,
         // push them back onto the lines stack as they are part of the body
-        $restOfFirstLine = trim(substr($firstLine, strpos($firstLine, '{')+1));
+        $restOfFirstLine = \trim((string) substr((string) $firstLine, strpos((string) $firstLine, '{')+1));
         if (!empty($restOfFirstLine)) {
             array_unshift($lines, $restOfFirstLine);
         }
@@ -179,7 +179,7 @@ class Zend_Reflection_Method extends ReflectionMethod
 
         // If there are more characters on the line before the closing brace,
         // push them back onto the lines stack as they are part of the body
-        $restOfLastLine = trim(substr($lastLine, 0, strrpos($lastLine, '}')-1));
+        $restOfLastLine = \trim((string) substr((string) $lastLine, 0, strrpos($lastLine, '}')-1));
         if (!empty($restOfLastLine)) {
             array_push($lines, $restOfLastLine);
         }

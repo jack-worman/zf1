@@ -132,7 +132,7 @@ class Zend_Validate_File_Exists extends Zend_Validate_Abstract
                 continue;
             }
 
-            $directories[] = trim($content);
+            $directories[] = \trim((string) $content);
         }
         $directories = array_unique($directories);
 

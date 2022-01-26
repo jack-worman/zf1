@@ -263,15 +263,15 @@ class Zend_Reflection_Docblock implements Reflector
         // Next parse out the tags and descriptions
         $parsedDocComment = $docComment;
         $lineNumber = $firstBlandLineEncountered = 0;
-        while (($newlinePos = strpos($parsedDocComment, "\n")) !== false) {
+        while (($newlinePos = strpos((string) $parsedDocComment, "\n")) !== false) {
             $lineNumber++;
-            $line = substr($parsedDocComment, 0, $newlinePos);
+            $line = substr((string) $parsedDocComment, 0, $newlinePos);
 
             $matches = array();
 
-            if ((strpos($line, '@') === 0) && (preg_match('#^(@\w+.*?)(\n)(?:@|\r?\n|$)#s', $parsedDocComment, $matches))) {
+            if ((strpos((string) $line, '@') === 0) && (preg_match('#^(@\w+.*?)(\n)(?:@|\r?\n|$)#s', $parsedDocComment, $matches))) {
                 $this->_tags[] = Zend_Reflection_Docblock_Tag::factory($matches[1]);
-                $parsedDocComment = str_replace($matches[1] . $matches[2], '', $parsedDocComment);
+                $parsedDocComment = str_replace((string) $matches[1] . $matches[2], '', $parsedDocComment);
             } else {
                 if ($lineNumber < 3 && !$firstBlandLineEncountered) {
                     $this->_shortDescription .= $line . "\n";
@@ -283,12 +283,12 @@ class Zend_Reflection_Docblock implements Reflector
                     $firstBlandLineEncountered = true;
                 }
 
-                $parsedDocComment = substr($parsedDocComment, $newlinePos + 1);
+                $parsedDocComment = substr((string) $parsedDocComment, $newlinePos + 1);
             }
 
         }
 
-        $this->_shortDescription = rtrim($this->_shortDescription);
-        $this->_longDescription  = rtrim($this->_longDescription);
+        $this->_shortDescription = rtrim((string) $this->_shortDescription);
+        $this->_longDescription  = rtrim((string) $this->_longDescription);
     }
 }

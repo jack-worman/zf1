@@ -270,7 +270,7 @@ implements Iterator, Countable
      */
     public function export($type, $ignoreExceptions = false)
     {
-        $this->setType(strtolower($type));
+        $this->setType(strtolower((string) $type));
         $type = ucfirst($this->getType());
         if ($type !== 'Rss' && $type !== 'Atom') {
             // require_once 'Zend/Feed/Exception.php';

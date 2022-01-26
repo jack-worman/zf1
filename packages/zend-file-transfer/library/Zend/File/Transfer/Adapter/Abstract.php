@@ -185,7 +185,7 @@ abstract class Zend_File_Transfer_Adapter_Abstract
      */
     public function setPluginLoader(Zend_Loader_PluginLoader_Interface $loader, $type)
     {
-        $type = strtoupper($type);
+        $type = strtoupper((string) $type);
         switch ($type) {
             case self::FILTER:
             case self::VALIDATE:
@@ -209,11 +209,11 @@ abstract class Zend_File_Transfer_Adapter_Abstract
      */
     public function getPluginLoader($type)
     {
-        $type = strtoupper($type);
+        $type = strtoupper((string) $type);
         switch ($type) {
             case self::FILTER:
             case self::VALIDATE:
-                $prefixSegment = ucfirst(strtolower($type));
+                $prefixSegment = ucfirst(strtolower((string) $type));
                 $pathSegment   = $prefixSegment;
                 if (!isset($this->_loaders[$type])) {
                     $paths         = array(
@@ -227,7 +227,7 @@ abstract class Zend_File_Transfer_Adapter_Abstract
                     $loader = $this->_loaders[$type];
                     $prefix = 'Zend_' . $prefixSegment . '_File_';
                     if (!$loader->getPaths($prefix)) {
-                        $loader->addPrefixPath($prefix, str_replace('_', '/', $prefix));
+                        $loader->addPrefixPath($prefix, str_replace((string) '_', '/', $prefix));
                     }
                 }
                 return $this->_loaders[$type];
@@ -256,7 +256,7 @@ abstract class Zend_File_Transfer_Adapter_Abstract
      */
     public function addPrefixPath($prefix, $path, $type = null)
     {
-        $type = strtoupper($type);
+        $type = strtoupper((string) $type);
         switch ($type) {
             case self::FILTER:
             case self::VALIDATE:
@@ -264,10 +264,10 @@ abstract class Zend_File_Transfer_Adapter_Abstract
                 $loader->addPrefixPath($prefix, $path);
                 return $this;
             case null:
-                $prefix = rtrim($prefix, '_');
-                $path   = rtrim($path, DIRECTORY_SEPARATOR);
+                $prefix = rtrim((string) $prefix, '_');
+                $path   = rtrim((string) $path, DIRECTORY_SEPARATOR);
                 foreach (array(self::FILTER, self::VALIDATE) as $type) {
-                    $cType        = ucfirst(strtolower($type));
+                    $cType        = ucfirst(strtolower((string) $type));
                     $pluginPath   = $path . DIRECTORY_SEPARATOR . $cType . DIRECTORY_SEPARATOR;
                     $pluginPrefix = $prefix . '_' . $cType;
                     $loader       = $this->getPluginLoader($type);
@@ -1051,7 +1051,7 @@ abstract class Zend_File_Transfer_Adapter_Abstract
     public function setDestination($destination, $files = null)
     {
         $orig = $files;
-        $destination = rtrim($destination, "/\\");
+        $destination = rtrim((string) $destination, "/\\");
         if (!is_dir($destination)) {
             // require_once 'Zend/File/Transfer/Exception.php';
             throw new Zend_File_Transfer_Exception(
@@ -1432,7 +1432,7 @@ abstract class Zend_File_Transfer_Adapter_Abstract
 
             if (empty($this->_tmpDir)) {
                 // Attemp to detect by creating a temporary file
-                $tempFile = tempnam(md5(uniqid(rand(), TRUE)), '');
+                $tempFile = tempnam(md5((string) uniqid(rand(), TRUE)), '');
                 if ($tempFile) {
                     $this->_tmpDir = realpath(dirname($tempFile));
                     unlink($tempFile);
@@ -1442,7 +1442,7 @@ abstract class Zend_File_Transfer_Adapter_Abstract
                 }
             }
 
-            $this->_tmpDir = rtrim($this->_tmpDir, "/\\");
+            $this->_tmpDir = rtrim((string) $this->_tmpDir, "/\\");
         }
         return $this->_tmpDir;
     }
@@ -1455,7 +1455,7 @@ abstract class Zend_File_Transfer_Adapter_Abstract
      */
     protected function _isPathWriteable($path)
     {
-        $tempFile = rtrim($path, "/\\");
+        $tempFile = rtrim((string) $path, "/\\");
         $tempFile .= '/' . 'test.1';
 
         $result = @file_put_contents($tempFile, 'TEST');

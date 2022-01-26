@@ -75,7 +75,7 @@ class Zend_Debug
     public static function dump($var, $label=null, $echo=true)
     {
         // format the label
-        $label = ($label===null) ? '' : rtrim($label) . ' ';
+        $label = ($label===null) ? '' : rtrim((string) $label) . ' ';
 
         // var_dump the variable into a buffer and keep the output
         ob_start();

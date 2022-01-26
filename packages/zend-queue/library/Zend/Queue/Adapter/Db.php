@@ -331,7 +331,7 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
             $message = (string) $message;
         }
         if (is_string($message)) {
-            $message = trim($message);
+            $message = \trim((string) $message);
         }
 
         if (!$this->isExists($queue->getName())) {
@@ -343,7 +343,7 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
         $msg->queue_id = $this->getQueueId($queue->getName());
         $msg->created  = time();
         $msg->body     = $message;
-        $msg->md5      = md5((string)$message);
+        $msg->md5      = md5((string) (string)$message);
         // $msg->timeout = ??? @TODO
 
         try {
@@ -409,7 +409,7 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
 
                 foreach ($db->fetchAll($query) as $data) {
                     // setup our changes to the message
-                    $data['handle'] = md5(uniqid(rand(), true));
+                    $data['handle'] = md5((string) uniqid(rand(), true));
 
                     $update = array(
                         'handle'  => $data['handle'],

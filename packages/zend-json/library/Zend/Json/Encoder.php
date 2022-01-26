@@ -73,7 +73,7 @@ class Zend_Json_Encoder
      */
     public static function encode($value, $cycleCheck = false, $options = array())
     {
-        $encoder = new self(($cycleCheck) ? true : false, $options);
+        $encoder = new self((bool) $cycleCheck, $options);
         return $encoder->_encodeValue($value);
     }
 
@@ -92,7 +92,7 @@ class Zend_Json_Encoder
     {
         if (is_object($value)) {
             return $this->_encodeObject($value);
-        } else if (is_array($value)) {
+        } elseif (is_array($value)) {
             return $this->_encodeArray($value);
         }
 
@@ -237,7 +237,7 @@ class Zend_Json_Encoder
 
         if (is_int($value) || is_float($value)) {
             $result = (string) $value;
-            $result = str_replace(',', '.', $result);
+            $result = str_replace((string) ',', '.', $result);
         } elseif (is_string($value)) {
             $result = $this->_encodeString($value);
         } elseif (is_bool($value)) {
@@ -454,7 +454,7 @@ class Zend_Json_Encoder
      */
     public static function encodeUnicodeString($value)
     {
-        $strlen_var = strlen($value);
+        $strlen_var = strlen((string) $value);
         $ascii = "";
 
         /**
@@ -554,7 +554,7 @@ class Zend_Json_Encoder
             return mb_convert_encoding($utf8, 'UTF-16', 'UTF-8');
         }
 
-        switch (strlen($utf8)) {
+        switch (strlen((string) $utf8)) {
             case 1:
                 // this case should never be reached, because we are in ASCII range
                 // see: http://www.cl.cam.ac.uk/~mgk25/unicode.html#utf-8

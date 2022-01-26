@@ -136,12 +136,12 @@ class Zend_Mail_Storage_Writable_Maildir extends    Zend_Mail_Storage_Folder_Mai
         if ($parentFolder instanceof Zend_Mail_Storage_Folder) {
             $folder = $parentFolder->getGlobalName() . $this->_delim . $name;
         } else if ($parentFolder != null) {
-            $folder = rtrim($parentFolder, $this->_delim) . $this->_delim . $name;
+            $folder = rtrim((string) $parentFolder, $this->_delim) . $this->_delim . $name;
         } else {
             $folder = $name;
         }
 
-        $folder = trim($folder, $this->_delim);
+        $folder = \trim((string) $folder, $this->_delim);
 
         // first we check if we try to create a folder that does exist
         $exists = null;
@@ -158,7 +158,7 @@ class Zend_Mail_Storage_Writable_Maildir extends    Zend_Mail_Storage_Folder_Mai
             throw new Zend_Mail_Storage_Exception('folder already exists');
         }
 
-        if (strpos($folder, $this->_delim . $this->_delim) !== false) {
+        if (strpos((string) $folder, $this->_delim . $this->_delim) !== false) {
             /**
              * @see Zend_Mail_Storage_Exception
              */
@@ -166,14 +166,14 @@ class Zend_Mail_Storage_Writable_Maildir extends    Zend_Mail_Storage_Folder_Mai
             throw new Zend_Mail_Storage_Exception('invalid name - folder parts may not be empty');
         }
 
-        if (strpos($folder, 'INBOX' . $this->_delim) === 0) {
-            $folder = substr($folder, 6);
+        if (strpos((string) $folder, 'INBOX' . $this->_delim) === 0) {
+            $folder = substr((string) $folder, 6);
         }
 
         $fulldir = $this->_rootdir . '.' . $folder;
 
         // check if we got tricked and would create a dir outside of the rootdir or not as direct child
-        if (strpos($folder, DIRECTORY_SEPARATOR) !== false || strpos($folder, '/') !== false
+        if (strpos((string) $folder, DIRECTORY_SEPARATOR) !== false || strpos((string) $folder, '/') !== false
             || dirname($fulldir) . DIRECTORY_SEPARATOR != $this->_rootdir) {
             /**
              * @see Zend_Mail_Storage_Exception
@@ -184,9 +184,9 @@ class Zend_Mail_Storage_Writable_Maildir extends    Zend_Mail_Storage_Folder_Mai
 
         // has a parent folder?
         $parent = null;
-        if (strpos($folder, $this->_delim)) {
+        if (strpos((string) $folder, $this->_delim)) {
             // let's see if the parent folder exists
-            $parent = substr($folder, 0, strrpos($folder, $this->_delim));
+            $parent = substr((string) $folder, 0, strrpos($folder, $this->_delim));
             try {
                 $this->getFolders($parent);
             } catch (Zend_Mail_Exception $e) {
@@ -206,7 +206,7 @@ class Zend_Mail_Storage_Writable_Maildir extends    Zend_Mail_Storage_Folder_Mai
         mkdir($fulldir . DIRECTORY_SEPARATOR . 'new');
         mkdir($fulldir . DIRECTORY_SEPARATOR . 'tmp');
 
-        $localName = $parent ? substr($folder, strlen($parent) + 1) : $folder;
+        $localName = $parent ? substr((string) $folder, strlen((string) $parent) + 1) : $folder;
         $this->getFolders($parent)->$localName = new Zend_Mail_Storage_Folder($localName, $folder, true);
 
         return $fulldir;
@@ -231,9 +231,9 @@ class Zend_Mail_Storage_Writable_Maildir extends    Zend_Mail_Storage_Folder_Mai
             $name = $name->getGlobalName();
         }
 
-        $name = trim($name, $this->_delim);
-        if (strpos($name, 'INBOX' . $this->_delim) === 0) {
-            $name = substr($name, 6);
+        $name = \trim((string) $name, $this->_delim);
+        if (strpos((string) $name, 'INBOX' . $this->_delim) === 0) {
+            $name = substr((string) $name, 6);
         }
 
         // check if folder exists and has no children
@@ -308,8 +308,8 @@ class Zend_Mail_Storage_Writable_Maildir extends    Zend_Mail_Storage_Folder_Mai
             throw new Zend_Mail_Storage_Exception("error removing maindir");
         }
 
-        $parent = strpos($name, $this->_delim) ? substr($name, 0, strrpos($name, $this->_delim)) : null;
-        $localName = $parent ? substr($name, strlen($parent) + 1) : $name;
+        $parent = strpos((string) $name, $this->_delim) ? substr((string) $name, 0, strrpos($name, $this->_delim)) : null;
+        $localName = $parent ? substr((string) $name, strlen((string) $parent) + 1) : $name;
         unset($this->getFolders($parent)->$localName);
     }
 
@@ -331,17 +331,17 @@ class Zend_Mail_Storage_Writable_Maildir extends    Zend_Mail_Storage_Folder_Mai
             $oldName = $oldName->getGlobalName();
         }
 
-        $oldName = trim($oldName, $this->_delim);
-        if (strpos($oldName, 'INBOX' . $this->_delim) === 0) {
-            $oldName = substr($oldName, 6);
+        $oldName = \trim((string) $oldName, $this->_delim);
+        if (strpos((string) $oldName, 'INBOX' . $this->_delim) === 0) {
+            $oldName = substr((string) $oldName, 6);
         }
 
-        $newName = trim($newName, $this->_delim);
-        if (strpos($newName, 'INBOX' . $this->_delim) === 0) {
-            $newName = substr($newName, 6);
+        $newName = \trim((string) $newName, $this->_delim);
+        if (strpos((string) $newName, 'INBOX' . $this->_delim) === 0) {
+            $newName = substr((string) $newName, 6);
         }
 
-        if (strpos($newName, $oldName . $this->_delim) === 0) {
+        if (strpos((string) $newName, $oldName . $this->_delim) === 0) {
             /**
              * @see Zend_Mail_Storage_Exception
              */
@@ -844,14 +844,14 @@ class Zend_Mail_Storage_Writable_Maildir extends    Zend_Mail_Storage_Folder_Mai
             }
             $definition = fgets($fh);
             fclose($fh);
-            $definition = explode(',', trim($definition));
+            $definition = explode(',', \trim((string) $definition));
             $quota = array();
             foreach ($definition as $member) {
-                $key = $member[strlen($member) - 1];
+                $key = $member[strlen((string) $member) - 1];
                 if ($key == 'S' || $key == 'C') {
                     $key = $key == 'C' ? 'count' : 'size';
                 }
-                $quota[$key] = substr($member, 0, -1);
+                $quota[$key] = substr((string) $member, 0, -1);
             }
             return $quota;
         }
@@ -911,7 +911,7 @@ class Zend_Mail_Storage_Writable_Maildir extends    Zend_Mail_Storage_Folder_Mai
                         continue;
                     }
 
-                    if (strpos($entry, ',S=')) {
+                    if (strpos((string) $entry, ',S=')) {
                         strtok($entry, '=');
                         $filesize = strtok(':');
                         if (is_numeric($filesize)) {
@@ -968,7 +968,7 @@ class Zend_Mail_Storage_Writable_Maildir extends    Zend_Mail_Storage_Folder_Mai
         }
         if ($fh) {
             $maildirsize = fread($fh, 5120);
-            if (strlen($maildirsize) >= 5120) {
+            if (strlen((string) $maildirsize) >= 5120) {
                 fclose($fh);
                 $fh = null;
                 $maildirsize = '';
@@ -987,16 +987,16 @@ class Zend_Mail_Storage_Writable_Maildir extends    Zend_Mail_Storage_Folder_Mai
                 $definition = explode(',', $maildirsize[0]);
                 $quota = array();
                 foreach ($definition as $member) {
-                    $key = $member[strlen($member) - 1];
+                    $key = $member[strlen((string) $member) - 1];
                     if ($key == 'S' || $key == 'C') {
                         $key = $key == 'C' ? 'count' : 'size';
                     }
-                    $quota[$key] = substr($member, 0, -1);
+                    $quota[$key] = substr((string) $member, 0, -1);
                 }
             }
             unset($maildirsize[0]);
             foreach ($maildirsize as $line) {
-                list($size, $count) = explode(' ', trim($line));
+                list($size, $count) = explode(' ', \trim((string) $line));
                 $total_size += $size;
                 $messages   += $count;
             }

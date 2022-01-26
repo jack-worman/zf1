@@ -270,14 +270,14 @@ abstract class Zend_Feed_Abstract extends Zend_Feed_Element implements Iterator,
      * Import a feed from a string
      *
      * Protects against XXE attack vectors.
-     * 
-     * @param  string $feed 
+     *
+     * @param  string $feed
      * @return string
      * @throws Zend_Feed_Exception on detection of an XXE vector
      */
     protected function _importFeedFromString($feed)
     {
-        if (trim($feed) == '') {
+        if (\trim((string) $feed) == '') {
             // require_once 'Zend/Feed/Exception.php';
             throw new Zend_Feed_Exception('Remote feed being imported'
             . ' is an Empty string or comes from an empty HTTP response');

@@ -174,7 +174,7 @@ class Zend_Tool_Framework_System_Provider_Config extends Zend_Tool_Framework_Pro
                 $tree .= $this->_printTree($k, $v, $level+1, (count($value)==$i));
             }
         } else {
-            $tree .= $prefix.$pointer.$key.": ".trim($value).PHP_EOL;
+            $tree .= $prefix.$pointer.$key.": ".\trim((string) $value).PHP_EOL;
         }
 
         return $tree;

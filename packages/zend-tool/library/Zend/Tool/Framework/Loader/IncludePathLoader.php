@@ -130,7 +130,7 @@ class Zend_Tool_Framework_Loader_IncludePathLoader extends Zend_Tool_Framework_L
         );
 
         foreach($blacklist AS $blacklitedPattern) {
-            if(strpos($file, $blacklitedPattern) !== false) {
+            if(strpos((string) $file, $blacklitedPattern) !== false) {
                 return true;
             }
         }

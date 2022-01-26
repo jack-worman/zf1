@@ -89,7 +89,7 @@ class Zend_Memory_Value implements ArrayAccess {
     #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
-        return $offset >= 0  &&  $offset < strlen($this->_value);
+        return $offset >= 0  &&  $offset < strlen((string) $this->_value);
     }
 
     /**

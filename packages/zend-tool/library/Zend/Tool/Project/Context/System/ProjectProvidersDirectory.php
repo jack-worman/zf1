@@ -74,8 +74,8 @@ class Zend_Tool_Project_Context_System_ProjectProvidersDirectory
             $providerRepository = $registry->getProviderRepository();
 
             foreach (new DirectoryIterator($this->getPath()) as $item) {
-                if ($item->isFile() && (($suffixStart = strpos($item->getFilename(), 'Provider.php')) !== false)) {
-                    $className = substr($item->getFilename(), 0, $suffixStart+8);
+                if ($item->isFile() && (($suffixStart = strpos((string) $item->getFilename(), 'Provider.php')) !== false)) {
+                    $className = substr((string) $item->getFilename(), 0, $suffixStart+8);
                     // $loadableFiles[$className] = $item->getPathname();
                     include_once $item->getPathname();
                     $providerRepository->addProvider(new $className());

@@ -210,10 +210,10 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
 
             switch($this->_attributeNameTreatment) {
                 case self::ATTRIBUTE_TO_LOWER:
-                    $attrName = strtolower($name);
+                    $attrName = strtolower((string) $name);
                     break;
                 case self::ATTRIBUTE_TO_UPPER:
-                    $attrName = strtoupper($name);
+                    $attrName = strtoupper((string) $name);
                     break;
                 case self::ATTRIBUTE_NATIVE:
                     $attrName = $name;

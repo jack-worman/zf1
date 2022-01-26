@@ -93,7 +93,7 @@ class Zend_Captcha_FigletTest extends PHPUnit_Framework_TestCase
     {
         // require_once 'Zend/View.php';
         $view = new Zend_View();
-        $view->addHelperPath(dirname(__FILE__) . '/../../../../library/Zend/View/Helper');
+        $view->addHelperPath(__DIR__ . '/../../../../library/Zend/View/Helper');
         return $view;
     }
 
@@ -156,7 +156,7 @@ class Zend_Captcha_FigletTest extends PHPUnit_Framework_TestCase
         $word = $this->captcha->getWord();
         $this->assertFalse(empty($word));
         $this->assertTrue(is_string($word));
-        $this->assertTrue(strlen($word) == 8);
+        $this->assertTrue(strlen((string) $word) == 8);
         $this->word = $word;
     }
 
@@ -166,7 +166,7 @@ class Zend_Captcha_FigletTest extends PHPUnit_Framework_TestCase
         $this->captcha->generate();
         $word = $this->captcha->getWord();
         $this->assertTrue(is_string($word));
-        $this->assertTrue(strlen($word) == 4);
+        $this->assertTrue(strlen((string) $word) == 4);
         $this->word = $word;
     }
 

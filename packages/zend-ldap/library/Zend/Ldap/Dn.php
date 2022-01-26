@@ -87,7 +87,7 @@ class Zend_Ldap_Dn implements ArrayAccess
      */
     public static function fromString($dn, $caseFold = null)
     {
-        $dn = trim($dn);
+        $dn = \trim((string) $dn);
         if (empty($dn)) {
             $dnArray = array();
         } else {
@@ -527,10 +527,10 @@ class Zend_Ldap_Dn implements ArrayAccess
             // Convert all leading and trailing spaces to sequences of \20.
             if (preg_match('/^(\s*)(.+?)(\s*)$/', $val, $matches)) {
                 $val = $matches[2];
-                for ($i = 0; $i<strlen($matches[1]); $i++) {
+                for ($i = 0; $i<strlen((string) $matches[1]); $i++) {
                     $val = '\20' . $val;
                 }
-                for ($i = 0; $i<strlen($matches[3]); $i++) {
+                for ($i = 0; $i<strlen((string) $matches[3]); $i++) {
                     $val = $val . '\20';
                 }
             }
@@ -638,7 +638,7 @@ class Zend_Ldap_Dn implements ArrayAccess
          */
         $key = null;
         $value = null;
-        $slen = strlen($dn);
+        $slen = strlen((string) $dn);
         $state = 1;
         $ko = $vo = 0;
         $multi = false;
@@ -649,11 +649,11 @@ class Zend_Ldap_Dn implements ArrayAccess
             switch ($state) {
                 case 1: // collect key
                     if ($ch === '=') {
-                        $key = trim(substr($dn, $ko, $di - $ko));
-                        if ($caseFold == self::ATTR_CASEFOLD_LOWER) $key = strtolower($key);
-                        else if ($caseFold == self::ATTR_CASEFOLD_UPPER) $key = strtoupper($key);
+                        $key = \trim((string) substr((string) $dn, $ko, $di - $ko));
+                        if ($caseFold == self::ATTR_CASEFOLD_LOWER) $key = strtolower((string) $key);
+                        else if ($caseFold == self::ATTR_CASEFOLD_UPPER) $key = strtoupper((string) $key);
                         if (is_array($multi)) {
-                            $keyId = strtolower($key);
+                            $keyId = strtolower((string) $key);
                             if (in_array($keyId, $multi)) {
                                 return false;
                             }
@@ -672,7 +672,7 @@ class Zend_Ldap_Dn implements ArrayAccess
                     if ($ch === '\\') {
                         $state = 3;
                     } else if ($ch === ',' || $ch === ';' || $ch === 0 || $ch === '+') {
-                        $value = self::unescapeValue(trim(substr($dn, $vo, $di - $vo)));
+                        $value = self::unescapeValue(\trim((string) substr((string) $dn, $vo, $di - $vo)));
                         if (is_array($multi)) {
                             $va[count($va)-1][] = $value;
                         } else {
@@ -685,7 +685,7 @@ class Zend_Ldap_Dn implements ArrayAccess
                             $lastVal = array_pop($va);
                             $ka[] = array($lastKey);
                             $va[] = array($lastVal);
-                            $multi = array(strtolower($lastKey));
+                            $multi = array(strtolower((string) $lastKey));
                         } else if ($ch === ','|| $ch === ';' || $ch === 0) {
                             $multi = false;
                         }
@@ -727,7 +727,7 @@ class Zend_Ldap_Dn implements ArrayAccess
         $rdnParts = array();
         foreach ($part as $key => $value) {
             $value = self::escapeValue($value);
-            $keyId = strtolower($key);
+            $keyId = strtolower((string) $key);
             $rdnParts[$keyId] =  implode('=', array($key, $value));
         }
         ksort($rdnParts, SORT_STRING);

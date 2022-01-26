@@ -87,8 +87,8 @@ class Zend_Search_Lucene_Analysis_TokenFilter_StopWords extends Zend_Search_Luce
             throw new Zend_Search_Lucene_Exception('Cannot open file ' . $filepath);
         }
         while (!feof ($fd)) {
-            $buffer = trim(fgets($fd));
-            if (strlen($buffer) > 0 && $buffer[0] != '#') {
+            $buffer = \trim((string) fgets($fd));
+            if (strlen((string) $buffer) > 0 && $buffer[0] != '#') {
                 $this->_stopSet[$buffer] = 1;
             }
         }

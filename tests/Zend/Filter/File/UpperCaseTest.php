@@ -63,7 +63,7 @@ class Zend_Filter_File_UpperCaseTest extends PHPUnit_Framework_TestCase
      */
     public function __construct()
     {
-        $this->_filesPath = dirname(__FILE__) . DIRECTORY_SEPARATOR
+        $this->_filesPath = __DIR__ . DIRECTORY_SEPARATOR
                           . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR;
         $this->_origFile  = $this->_filesPath . 'testfile2.txt';
         $this->_newFile   = $this->_filesPath . 'newtestfile2.txt';

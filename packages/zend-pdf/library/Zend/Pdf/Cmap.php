@@ -269,7 +269,7 @@ abstract class Zend_Pdf_Cmap
      */
     protected function _extractInt2(&$data, $index)
     {
-        if (($index < 0) | (($index + 1) > strlen($data))) {
+        if (($index < 0) | (($index + 1) > strlen((string) $data))) {
             // require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception("Index out of range: $index",
                                          Zend_Pdf_Exception::INDEX_OUT_OF_RANGE);
@@ -296,7 +296,7 @@ abstract class Zend_Pdf_Cmap
      */
     protected function _extractUInt2(&$data, $index)
     {
-        if (($index < 0) | (($index + 1) > strlen($data))) {
+        if (($index < 0) | (($index + 1) > strlen((string) $data))) {
             // require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception("Index out of range: $index",
                                          Zend_Pdf_Exception::INDEX_OUT_OF_RANGE);
@@ -323,7 +323,7 @@ abstract class Zend_Pdf_Cmap
      */
     protected function _extractUInt4(&$data, $index)
     {
-        if (($index < 0) | (($index + 3) > strlen($data))) {
+        if (($index < 0) | (($index + 3) > strlen((string) $data))) {
             // require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception("Index out of range: $index",
                                          Zend_Pdf_Exception::INDEX_OUT_OF_RANGE);

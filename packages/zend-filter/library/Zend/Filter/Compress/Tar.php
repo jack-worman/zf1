@@ -137,7 +137,7 @@ class Zend_Filter_Compress_Tar extends Zend_Filter_Compress_CompressAbstract
      */
     public function setMode($mode)
     {
-        $mode = ucfirst(strtolower($mode));
+        $mode = ucfirst(strtolower((string) $mode));
         if (($mode != 'Bz2') && ($mode != 'Gz')) {
             // require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception("The mode '$mode' is unknown");

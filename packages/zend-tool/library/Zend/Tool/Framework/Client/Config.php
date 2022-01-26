@@ -83,7 +83,7 @@ class Zend_Tool_Framework_Client_Config
      */
     protected function loadConfig($configFilepath)
     {
-        $suffix = substr($configFilepath, -4);
+        $suffix = substr((string) $configFilepath, -4);
 
         switch ($suffix) {
             case '.ini':
@@ -218,7 +218,7 @@ class Zend_Tool_Framework_Client_Config
      */
     protected function getConfigWriter()
     {
-        $suffix = substr($this->getConfigFilepath(), -4);
+        $suffix = substr((string) $this->getConfigFilepath(), -4);
         switch($suffix) {
             case '.ini':
                 // require_once "Zend/Config/Writer/Ini.php";

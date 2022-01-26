@@ -807,7 +807,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
      */
     protected function _assertChangeableAttribute($name)
     {
-        $name = strtolower($name);
+        $name = strtolower((string) $name);
         $rdn = $this->getRdnArray(Zend_Ldap_Dn::ATTR_CASEFOLD_LOWER);
         if ($name == 'dn') {
             /**

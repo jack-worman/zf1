@@ -145,12 +145,12 @@ class Zend_Loader_PluginLoader implements Zend_Loader_PluginLoader_Interface
             return $prefix;
         }
 
-        $nsSeparator = (false !== strpos($prefix, '\\'))?'\\':'_';
-        $prefix = rtrim($prefix, $nsSeparator) . $nsSeparator;
+        $nsSeparator = (false !== strpos((string) $prefix, '\\'))?'\\':'_';
+        $prefix = rtrim((string) $prefix, $nsSeparator) . $nsSeparator;
         //if $nsSeprator == "\" and the prefix ends in "_\" remove trailing \
         //https://github.com/zendframework/zf1/issues/152
-        if(($nsSeparator == "\\") && (substr($prefix,-2) == "_\\")) {
-            $prefix = substr($prefix, 0, -1);
+        if(($nsSeparator == "\\") && (substr((string) $prefix,-2) == "_\\")) {
+            $prefix = substr((string) $prefix, 0, -1);
         }
         return $prefix;
     }
@@ -170,7 +170,7 @@ class Zend_Loader_PluginLoader implements Zend_Loader_PluginLoader_Interface
         }
 
         $prefix = $this->_formatPrefix($prefix);
-        $path   = rtrim($path, '/\\') . '/';
+        $path   = rtrim((string) $path, '/\\') . '/';
 
         if ($this->_useStaticRegistry) {
             self::$_staticPrefixToPaths[$this->_useStaticRegistry][$prefix][] = $path;
@@ -392,10 +392,10 @@ class Zend_Loader_PluginLoader implements Zend_Loader_PluginLoader_Interface
 
         $registry  = array_reverse($registry, true);
         $found     = false;
-        if (false !== strpos($name, '\\')) {
-            $classFile = str_replace('\\', DIRECTORY_SEPARATOR, $name) . '.php';
+        if (false !== strpos((string) $name, '\\')) {
+            $classFile = str_replace((string) '\\', DIRECTORY_SEPARATOR, $name) . '.php';
         } else {
-            $classFile = str_replace('_', DIRECTORY_SEPARATOR, $name) . '.php';
+            $classFile = str_replace((string) '_', DIRECTORY_SEPARATOR, $name) . '.php';
         }
         $incFile   = self::getIncludeFileCache();
         foreach ($registry as $prefix => $paths) {
@@ -520,7 +520,7 @@ class Zend_Loader_PluginLoader implements Zend_Loader_PluginLoader_Interface
 
         if (false !== self::$_includeFileCacheHandler) {
             $line = "<?php include_once '$incFile'?>\n";
-            fwrite(self::$_includeFileCacheHandler, $line, strlen($line));
+            fwrite(self::$_includeFileCacheHandler, $line, strlen((string) $line));
         }
     }
 

@@ -382,8 +382,8 @@ abstract class Zend_Search_Lucene_Storage_File
                     if (ord($str_val[$count])   == 0xC0 &&
                         ord($str_val[$count+1]) == 0x80   ) {
                         $str_val[$count] = 0;
-                        $str_val = substr($str_val,0,$count+1)
-                                 . substr($str_val,$count+2);
+                        $str_val = substr((string) $str_val,0,$count+1)
+                                 . substr((string) $str_val,$count+2);
                     }
                     $count += $addBytes;
                 }
@@ -417,7 +417,7 @@ abstract class Zend_Search_Lucene_Storage_File
         // convert input to a string before iterating string characters
         settype($str, 'string');
 
-        $chars = $strlen = strlen($str);
+        $chars = $strlen = strlen((string) $str);
         $containNullChars = false;
 
         for ($count = 0; $count < $strlen; $count++ ) {
@@ -453,7 +453,7 @@ abstract class Zend_Search_Lucene_Storage_File
 
         $this->writeVInt($chars);
         if ($containNullChars) {
-            $this->_fwrite(str_replace($str, "\x00", "\xC0\x80"));
+            $this->_fwrite(str_replace((string) $str, "\x00", "\xC0\x80"));
         } else {
             $this->_fwrite($str);
         }

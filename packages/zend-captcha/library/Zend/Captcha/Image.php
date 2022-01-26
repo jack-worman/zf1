@@ -345,7 +345,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      */
     public function setImgDir($imgDir)
     {
-        $this->_imgDir = rtrim($imgDir, "/\\") . '/';
+        $this->_imgDir = rtrim((string) $imgDir, "/\\") . '/';
         return $this;
     }
 
@@ -357,7 +357,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      */
     public function setImgUrl($imgUrl)
     {
-        $this->_imgUrl = rtrim($imgUrl, "/\\") . '/';
+        $this->_imgUrl = rtrim((string) $imgUrl, "/\\") . '/';
         return $this;
     }
 
@@ -542,10 +542,10 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
                 if ($sx < 0 || $sy < 0 || $sx >= $w - 1 || $sy >= $h - 1) {
                     continue;
                 } else {
-                    $color    = (imagecolorat($img, $sx, $sy) >> 16)         & 0xFF;
-                    $color_x  = (imagecolorat($img, $sx + 1, $sy) >> 16)     & 0xFF;
-                    $color_y  = (imagecolorat($img, $sx, $sy + 1) >> 16)     & 0xFF;
-                    $color_xy = (imagecolorat($img, $sx + 1, $sy + 1) >> 16) & 0xFF;
+                    $color    = (imagecolorat($img, (int) $sx, (int) $sy) >> 16)         & 0xFF;
+                    $color_x  = (imagecolorat($img, (int) $sx + 1, (int) $sy) >> 16)     & 0xFF;
+                    $color_y  = (imagecolorat($img, (int) $sx, (int) $sy + 1) >> 16)     & 0xFF;
+                    $color_xy = (imagecolorat($img, (int) $sx + 1, (int) $sy + 1) >> 16) & 0xFF;
                 }
                 if ($color == 255 && $color_x == 255 && $color_y == 255 && $color_xy == 255) {
                     // ignore background
@@ -589,16 +589,16 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
     {
         $expire = time() - $this->getExpiration();
         $imgdir = $this->getImgDir();
-        if(!$imgdir || strlen($imgdir) < 2) {
+        if(!$imgdir || strlen((string) $imgdir) < 2) {
             // safety guard
             return;
         }
-        $suffixLength = strlen($this->_suffix);
+        $suffixLength = strlen((string) $this->_suffix);
         foreach (new DirectoryIterator($imgdir) as $file) {
             if (!$file->isDot() && !$file->isDir()) {
                 if (file_exists($file->getPathname()) && $file->getMTime() < $expire) {
                     // only deletes files ending with $this->_suffix
-                    if (substr($file->getFilename(), -($suffixLength)) == $this->_suffix) {
+                    if (substr((string) $file->getFilename(), -($suffixLength)) == $this->_suffix) {
                         unlink($file->getPathname());
                     }
                 }

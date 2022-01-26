@@ -99,7 +99,7 @@ class Zend_Filter_File_RenameTest extends PHPUnit_Framework_TestCase
      */
     public function __construct()
     {
-        $this->_filesPath = dirname(__FILE__) . DIRECTORY_SEPARATOR
+        $this->_filesPath = __DIR__ . DIRECTORY_SEPARATOR
                           . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR;
         $this->_origFile  = $this->_filesPath . 'original.file';
         $this->_oldFile   = $this->_filesPath . 'testfile.txt';

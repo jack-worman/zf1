@@ -465,7 +465,7 @@ $production = false;
  *
  * @var string
  */
-define('ABSPATH', dirname(__FILE__) . '/');
+define('ABSPATH', __DIR__ . '/');
 
 /**
  * One directory below docroot. Your config file and library dir should be here.

@@ -129,7 +129,7 @@ class Zend_Search_Lucene_Index_DictionaryLoader
             if ($len == 0) {
                 $termSuffix = '';
             } else {
-                $termSuffix = substr($data, $pos, $len);
+                $termSuffix = substr((string) $data, $pos, $len);
                 $pos += $len;
                 for ($count1 = 0; $count1 < $len; $count1++ ) {
                     if (( ord($termSuffix[$count1]) & 0xC0 ) == 0xC0) {
@@ -143,7 +143,7 @@ class Zend_Search_Lucene_Index_DictionaryLoader
                                 $addBytes++;
                             }
                         }
-                        $termSuffix .= substr($data, $pos, $addBytes);
+                        $termSuffix .= substr((string) $data, $pos, $addBytes);
                         $pos += $addBytes;
                         $len += $addBytes;
 
@@ -152,8 +152,8 @@ class Zend_Search_Lucene_Index_DictionaryLoader
                         if (ord($termSuffix[$count1]) == 0xC0 &&
                             ord($termSuffix[$count1+1]) == 0x80   ) {
                             $termSuffix[$count1] = 0;
-                            $termSuffix = substr($termSuffix,0,$count1+1)
-                                        . substr($termSuffix,$count1+2);
+                            $termSuffix = substr((string) $termSuffix,0,$count1+1)
+                                        . substr((string) $termSuffix,$count1+2);
                         }
                         $count1 += $addBytes;
                     }
@@ -162,7 +162,7 @@ class Zend_Search_Lucene_Index_DictionaryLoader
 
             // $termValue        = Zend_Search_Lucene_Index_Term::getPrefix($prevTerm, $termPrefixLength) . $termSuffix;
             $pb = 0; $pc = 0;
-            while ($pb < strlen($prevTerm)  &&  $pc < $termPrefixLength) {
+            while ($pb < strlen((string) $prevTerm)  &&  $pc < $termPrefixLength) {
                 $charBytes = 1;
                 if ((ord($prevTerm[$pb]) & 0xC0) == 0xC0) {
                     $charBytes++;
@@ -174,7 +174,7 @@ class Zend_Search_Lucene_Index_DictionaryLoader
                     }
                 }
 
-                if ($pb + $charBytes > strlen($data)) {
+                if ($pb + $charBytes > strlen((string) $data)) {
                     // wrong character
                     break;
                 }
@@ -182,7 +182,7 @@ class Zend_Search_Lucene_Index_DictionaryLoader
                 $pc++;
                 $pb += $charBytes;
             }
-            $termValue = substr($prevTerm, 0, $pb) . $termSuffix;
+            $termValue = substr((string) $prevTerm, 0, $pb) . $termSuffix;
 
             // $termFieldNum     = $tiiFile->readVInt();
             $nbyte = ord($data[$pos++]);

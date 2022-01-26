@@ -114,7 +114,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         $testResponse = $this->_response->getResponse();
 
         // Load the expected response.
-        $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/stringAmf3Response.bin');
+        $mockResponse = file_get_contents(__DIR__ .'/Response/mock/stringAmf3Response.bin');
 
         // Check that the response matches the expected serialized value
         $this->assertEquals($mockResponse, $testResponse);
@@ -149,7 +149,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         $testResponse = $this->_response->getResponse();
 
         // Load the expected response.
-        $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/arrayAmf3Response.bin');
+        $mockResponse = file_get_contents(__DIR__ .'/Response/mock/arrayAmf3Response.bin');
 
         // Check that the response matches the expected serialized value
         $this->assertEquals($mockResponse, $testResponse);
@@ -182,7 +182,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         $testResponse = $this->_response->getResponse();
 
         // Load the expected response.
-        $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/numberAmf3Response.bin');
+        $mockResponse = file_get_contents(__DIR__ .'/Response/mock/numberAmf3Response.bin');
 
         // Check that the response matches the expected serialized value
         $this->assertEquals($mockResponse, $testResponse);
@@ -219,7 +219,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         $testResponse = $this->_response->getResponse();
 
         // Load the expected response.
-        $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/dateAmf3Response.bin');
+        $mockResponse = file_get_contents(__DIR__ .'/Response/mock/dateAmf3Response.bin');
 
         // Check that the response matches the expected serialized value
         $this->assertEquals($mockResponse, $testResponse);
@@ -251,7 +251,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         $testResponse = $this->_response->getResponse();
 
         // Load the expected response.
-        $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/dateAmf3Response.bin');
+        $mockResponse = file_get_contents(__DIR__ .'/Response/mock/dateAmf3Response.bin');
 
         // Check that the response matches the expected serialized value
         $this->assertEquals($mockResponse, $testResponse);
@@ -285,7 +285,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         $testResponse = $this->_response->getResponse();
 
         // Load the expected response.
-        $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/largeIntAmf3Response.bin');
+        $mockResponse = file_get_contents(__DIR__ .'/Response/mock/largeIntAmf3Response.bin');
 
         // Check that the response matches the expected serialized value
         $this->assertEquals($mockResponse, $testResponse);
@@ -319,7 +319,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         $testResponse = $this->_response->getResponse();
 
         // Load the expected response.
-        $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/boolTrueAmf3Response.bin');
+        $mockResponse = file_get_contents(__DIR__ .'/Response/mock/boolTrueAmf3Response.bin');
 
         // Check that the response matches the expected serialized value
         $this->assertEquals($mockResponse, $testResponse);
@@ -353,7 +353,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         $testResponse = $this->_response->getResponse();
 
         // Load the expected response.
-        $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/boolFalseAmf3Response.bin');
+        $mockResponse = file_get_contents(__DIR__ .'/Response/mock/boolFalseAmf3Response.bin');
 
         // Check that the response matches the expected serialized value
         $this->assertEquals($mockResponse, $testResponse);
@@ -403,7 +403,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         $testResponse = $this->_response->getResponse();
 
         // Load the expected response.
-        $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/classMapAmf3Response.bin');
+        $mockResponse = file_get_contents(__DIR__ .'/Response/mock/classMapAmf3Response.bin');
 
         // Check that the response matches the expected serialized value
         $this->assertEquals($mockResponse, $testResponse);
@@ -455,7 +455,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         $testResponse = $this->_response->getResponse();
 
         // Load the expected response.
-        $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/classMapAmf3Response.bin');
+        $mockResponse = file_get_contents(__DIR__ .'/Response/mock/classMapAmf3Response.bin');
 
         // Check that the response matches the expected serialized value
         $this->assertEquals($mockResponse, $testResponse);
@@ -506,7 +506,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         $testResponse = $this->_response->getResponse();
 
         // Load the expected response.
-        $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/classMapAmf3Response.bin');
+        $mockResponse = file_get_contents(__DIR__ .'/Response/mock/classMapAmf3Response.bin');
 
         // Check that the response matches the expected serialized value
         $this->assertEquals($mockResponse, $testResponse);
@@ -543,7 +543,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         $testResponse = $this->_response->getResponse();
 
         // Load the expected response.
-        $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/domdocumentAmf3Response.bin');
+        $mockResponse = file_get_contents(__DIR__ .'/Response/mock/domdocumentAmf3Response.bin');
 
         // Check that the response matches the expected serialized value
         $this->assertEquals($mockResponse, $testResponse);
@@ -582,7 +582,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         $testResponse = $this->_response->getResponse();
 
         // Load the expected response.
-        $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/domdocumentAmf3Response.bin');
+        $mockResponse = file_get_contents(__DIR__ .'/Response/mock/domdocumentAmf3Response.bin');
 
         // Check that the response matches the expected serialized value
         $this->assertEquals($mockResponse, $testResponse);
@@ -616,7 +616,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         $testResponse = $this->_response->getResponse();
 
         // Load the expected response.
-        $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/referenceObjectAmf3Response.bin');
+        $mockResponse = file_get_contents(__DIR__ .'/Response/mock/referenceObjectAmf3Response.bin');
 
         // Check that the response matches the expected serialized value
         $this->assertEquals($mockResponse, $testResponse);
@@ -639,7 +639,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         $testResponse = $this->_response->getResponse();
 
         // Load the expected response.
-        $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/stringAmf0Response.bin');
+        $mockResponse = file_get_contents(__DIR__ .'/Response/mock/stringAmf0Response.bin');
 
         // Check that the response matches the expected serialized value
         $this->assertEquals($mockResponse, $testResponse);
@@ -659,7 +659,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         $testResponse = $this->_response->getResponse();
 
         // Load the expected response.
-        $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/arrayAmf0Response.bin');
+        $mockResponse = file_get_contents(__DIR__ .'/Response/mock/arrayAmf0Response.bin');
 
         // Check that the response matches the expected serialized value
         $this->assertEquals($mockResponse, $testResponse);
@@ -679,7 +679,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         $this->_response->finalize();
         $testResponse = $this->_response->getResponse();
         // Load the expected response.
-        $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/nestedArrayAmf0Response.bin');
+        $mockResponse = file_get_contents(__DIR__ .'/Response/mock/nestedArrayAmf0Response.bin');
         // Check that the response matches the expected serialized value
         $this->assertEquals($mockResponse, $testResponse);
 
@@ -699,7 +699,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         $this->_response->finalize();
         $testResponse = $this->_response->getResponse();
         // Load the expected response.
-        $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/sparseArrayAmf0Response.bin');
+        $mockResponse = file_get_contents(__DIR__ .'/Response/mock/sparseArrayAmf0Response.bin');
         // Check that the response matches the expected serialized value
         $this->assertEquals($mockResponse, $testResponse);
 
@@ -720,7 +720,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         $this->_response->finalize();
         $testResponse = $this->_response->getResponse();
         // Load the expected response.
-        $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/stringKeyArrayAmf0Response.bin');
+        $mockResponse = file_get_contents(__DIR__ .'/Response/mock/stringKeyArrayAmf0Response.bin');
         // Check that the response matches the expected serialized value
         $this->assertEquals($mockResponse, $testResponse);
 
@@ -740,7 +740,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         $this->_response->finalize();
         $testResponse = $this->_response->getResponse();
         // Load the expected response.
-        $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/objectAmf0Response.bin');
+        $mockResponse = file_get_contents(__DIR__ .'/Response/mock/objectAmf0Response.bin');
         // Check that the response matches the expected serialized value
         $this->assertEquals($mockResponse, $testResponse);
     }
@@ -774,7 +774,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         $this->_response->finalize();
         $testResponse = $this->_response->getResponse();
         // Load the expected response.
-        $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/typedObjectAmf0Response.bin');
+        $mockResponse = file_get_contents(__DIR__ .'/Response/mock/typedObjectAmf0Response.bin');
         // Check that the response matches the expected serialized value
         $this->assertEquals($mockResponse, $testResponse);
     }
@@ -807,7 +807,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         $testResponse = $this->_response->getResponse();
 
         // Load the expected response.
-        $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/typedObjectAmf0Response.bin');
+        $mockResponse = file_get_contents(__DIR__ .'/Response/mock/typedObjectAmf0Response.bin');
 
         // Check that the response matches the expected serialized value
         $this->assertEquals($mockResponse, $testResponse);
@@ -841,7 +841,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         $this->_response->finalize();
         $testResponse = $this->_response->getResponse();
         // Load the expected response.
-        $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/typedObjectAmf0Response.bin');
+        $mockResponse = file_get_contents(__DIR__ .'/Response/mock/typedObjectAmf0Response.bin');
         // Check that the response matches the expected serialized value
         $this->assertEquals($mockResponse, $testResponse);
     }
@@ -878,7 +878,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         $this->_response->finalize();
         $testResponse = $this->_response->getResponse();
         // Load the expected response.
-        $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/typedObjectAmf0Response.bin');
+        $mockResponse = file_get_contents(__DIR__ .'/Response/mock/typedObjectAmf0Response.bin');
         // Check that the response matches the expected serialized value
         $this->assertEquals($mockResponse, $testResponse);
     }
@@ -897,7 +897,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         $testResponse = $this->_response->getResponse();
 
         // Load the expected response.
-        $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/numberAmf0Response.bin');
+        $mockResponse = file_get_contents(__DIR__ .'/Response/mock/numberAmf0Response.bin');
 
         // Check that the response matches the expected serialized value
         $this->assertEquals($mockResponse, $testResponse);
@@ -920,7 +920,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         $testResponse = $this->_response->getResponse();
 
         // Load the expected response.
-        $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/dateAmf0Response.bin');
+        $mockResponse = file_get_contents(__DIR__ .'/Response/mock/dateAmf0Response.bin');
 
         // Check that the response matches the expected serialized value
         $this->assertEquals($mockResponse, $testResponse);
@@ -938,7 +938,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         $testResponse = $this->_response->getResponse();
 
         // Load the expected response.
-        $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/dateAmf0Response.bin');
+        $mockResponse = file_get_contents(__DIR__ .'/Response/mock/dateAmf0Response.bin');
 
         // Check that the response matches the expected serialized value
         $this->assertEquals($mockResponse, $testResponse);
@@ -958,7 +958,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         $testResponse = $this->_response->getResponse();
 
         // Load the expected response.
-        $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/boolTrueAmf0Response.bin');
+        $mockResponse = file_get_contents(__DIR__ .'/Response/mock/boolTrueAmf0Response.bin');
 
         // Check that the response matches the expected serialized value
         $this->assertEquals($mockResponse, $testResponse);
@@ -978,7 +978,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         $testResponse = $this->_response->getResponse();
 
         // Load the expected response.
-        $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/boolFalseAmf0Response.bin');
+        $mockResponse = file_get_contents(__DIR__ .'/Response/mock/boolFalseAmf0Response.bin');
 
         // Check that the response matches the expected serialized value
         $this->assertEquals($mockResponse, $testResponse);
@@ -994,7 +994,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         $testResponse = $this->_response->getResponse();
 
         // Load the expected response.
-        $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/nullAmf0Response.bin');
+        $mockResponse = file_get_contents(__DIR__ .'/Response/mock/nullAmf0Response.bin');
 
         // Check that the response matches the expected serialized value
         $this->assertEquals($mockResponse, $testResponse);

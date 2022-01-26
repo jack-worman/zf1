@@ -207,7 +207,7 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
 
             if ($insideSection) {
                 // if its blank, or a section heading
-                if ((trim($contentLine) == null) || ($contentLines[$contentLineIndex + 1][0] == '[')) {
+                if ((\trim((string) $contentLine) == null) || ($contentLines[$contentLineIndex + 1][0] == '[')) {
                     $insideSection = null;
                 }
             }

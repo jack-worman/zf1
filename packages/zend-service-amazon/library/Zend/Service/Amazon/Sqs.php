@@ -279,9 +279,9 @@ class Zend_Service_Amazon_Sqs extends Zend_Service_Amazon_Abstract
     public function send($queue_url, $message)
     {
         $params = array();
-        $params['MessageBody'] = urlencode($message);
+        $params['MessageBody'] = urlencode((string) $message);
 
-        $checksum = md5($params['MessageBody']);
+        $checksum = md5((string) $params['MessageBody']);
 
         $result = $this->_makeRequest($queue_url, 'SendMessage', $params);
 
@@ -531,7 +531,7 @@ class Zend_Service_Amazon_Sqs extends Zend_Service_Amazon_Abstract
 
         $arrData = array();
         foreach($paramaters as $key => $value) {
-            $arrData[] = $key . '=' . str_replace('%7E', '~', urlencode($value));
+            $arrData[] = $key . '=' . str_replace((string) '%7E', '~', urlencode((string) $value));
         }
 
         $data .= implode('&', $arrData);

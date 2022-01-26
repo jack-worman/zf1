@@ -297,7 +297,7 @@ abstract class Zend_Ldap_Node_Abstract implements ArrayAccess, Countable
      */
     public function existsAttribute($name, $emptyExists = false)
     {
-        $name = strtolower($name);
+        $name = strtolower((string) $name);
         if (isset($this->_currentData[$name])) {
             if ($emptyExists) return true;
             return count($this->_currentData[$name])>0;

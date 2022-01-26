@@ -247,7 +247,7 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
         if ($this->getPrependBase()) {
             $request = $this->getRequest();
             if ($request instanceof Zend_Controller_Request_Http) {
-                $base = rtrim($request->getBaseUrl(), '/');
+                $base = rtrim((string) $request->getBaseUrl(), '/');
                 if (!empty($base) && ('/' != $base)) {
                     $url = $base . '/' . ltrim($url, '/');
                 } else {
@@ -517,7 +517,7 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
      */
     public function __call($method, $args)
     {
-        $method = strtolower($method);
+        $method = strtolower((string) $method);
         if ('goto' == $method) {
             return call_user_func_array(array($this, 'gotoSimple'), $args);
         }

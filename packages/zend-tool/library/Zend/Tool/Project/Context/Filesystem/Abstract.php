@@ -86,7 +86,7 @@ abstract class Zend_Tool_Project_Context_Filesystem_Abstract implements Zend_Too
      */
     public function setBaseDirectory($baseDirectory)
     {
-        $this->_baseDirectory = rtrim(str_replace('\\', '/', $baseDirectory), '/');
+        $this->_baseDirectory = rtrim((string) str_replace((string) '\\', '/', $baseDirectory), '/');
         return $this;
     }
 

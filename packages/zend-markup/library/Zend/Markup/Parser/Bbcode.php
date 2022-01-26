@@ -174,7 +174,7 @@ class Zend_Markup_Parser_Bbcode implements Zend_Markup_Parser_ParserInterface
         $this->_value = str_replace(array("\r\n", "\r", "\n"), self::NEWLINE, $value);
 
         // variable initialization for tokenizer
-        $this->_valueLen         = strlen($this->_value);
+        $this->_valueLen         = strlen((string) $this->_value);
         $this->_pointer          = 0;
         $this->_buffer           = '';
         $this->_temp             = array();
@@ -217,7 +217,7 @@ class Zend_Markup_Parser_Bbcode implements Zend_Markup_Parser_ParserInterface
                     $regex   = '#\G(?<text>[^\[]*)(?<open>\[(?<name>[' . self::NAME_CHARSET . ']+)?)?#';
                     preg_match($regex, $this->_value, $matches, null, $this->_pointer);
 
-                    $this->_pointer += strlen($matches[0]);
+                    $this->_pointer += strlen((string) $matches[0]);
 
                     if (!empty($matches['text'])) {
                         $this->_buffer .= $matches['text'];
@@ -261,7 +261,7 @@ class Zend_Markup_Parser_Bbcode implements Zend_Markup_Parser_ParserInterface
                         break 2;
                     }
 
-                    $this->_pointer += strlen($matches[0]);
+                    $this->_pointer += strlen((string) $matches[0]);
 
                     if (!empty($matches['end'])) {
                         if (!empty($this->_buffer)) {
@@ -301,7 +301,7 @@ class Zend_Markup_Parser_Bbcode implements Zend_Markup_Parser_ParserInterface
                         break;
                     }
 
-                    $this->_pointer += strlen($matches[0]);
+                    $this->_pointer += strlen((string) $matches[0]);
 
                     if (!empty($matches['quote'])) {
                         $this->_temp['attributes'][$attribute] = $matches['valuequote'];

@@ -84,7 +84,7 @@ class Zend_Search_Lucene_Index_Term
     {
         $prefixBytes = 0;
         $prefixChars = 0;
-        while ($prefixBytes < strlen($str)  &&  $prefixChars < $length) {
+        while ($prefixBytes < strlen((string) $str)  &&  $prefixChars < $length) {
             $charBytes = 1;
             if ((ord($str[$prefixBytes]) & 0xC0) == 0xC0) {
                 $charBytes++;
@@ -96,7 +96,7 @@ class Zend_Search_Lucene_Index_Term
                 }
             }
 
-            if ($prefixBytes + $charBytes > strlen($str)) {
+            if ($prefixBytes + $charBytes > strlen((string) $str)) {
                 // wrong character
                 break;
             }
@@ -105,7 +105,7 @@ class Zend_Search_Lucene_Index_Term
             $prefixBytes += $charBytes;
         }
 
-        return substr($str, 0, $prefixBytes);
+        return substr((string) $str, 0, $prefixBytes);
     }
 
     /**
@@ -118,7 +118,7 @@ class Zend_Search_Lucene_Index_Term
     {
         $bytes = 0;
         $chars = 0;
-        while ($bytes < strlen($str)) {
+        while ($bytes < strlen((string) $str)) {
             $charBytes = 1;
             if ((ord($str[$bytes]) & 0xC0) == 0xC0) {
                 $charBytes++;
@@ -130,7 +130,7 @@ class Zend_Search_Lucene_Index_Term
                 }
             }
 
-            if ($bytes + $charBytes > strlen($str)) {
+            if ($bytes + $charBytes > strlen((string) $str)) {
                 // wrong character
                 break;
             }

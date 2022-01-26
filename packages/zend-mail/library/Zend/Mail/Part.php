@@ -249,7 +249,7 @@ class Zend_Mail_Part implements RecursiveIterator, Zend_Mail_Part_Interface, Cou
      * @return int size
      */
     public function getSize() {
-        return strlen($this->getContent());
+        return strlen((string) $this->getContent());
     }
 
 
@@ -396,10 +396,10 @@ class Zend_Mail_Part implements RecursiveIterator, Zend_Mail_Part_Interface, Cou
             $this->getHeaders();
         }
 
-        $lowerName = strtolower($name);
+        $lowerName = strtolower((string) $name);
 
         if ($this->headerExists($name) == false) {
-            $lowerName = strtolower(preg_replace('%([a-z])([A-Z])%', '\1-\2', $name));
+            $lowerName = strtolower((string) preg_replace('%([a-z])([A-Z])%', '\1-\2', $name));
             if($this->headerExists($lowerName) == false) {
                 /**
                  * @see Zend_Mail_Exception
@@ -435,7 +435,7 @@ class Zend_Mail_Part implements RecursiveIterator, Zend_Mail_Part_Interface, Cou
      */
     public function headerExists($name)
     {
-        $name = strtolower($name);
+        $name = strtolower((string) $name);
         if(isset($this->_headers[$name])) {
             return true;
         } else {

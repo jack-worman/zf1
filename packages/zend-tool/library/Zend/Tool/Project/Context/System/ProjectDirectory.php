@@ -94,7 +94,7 @@ class Zend_Tool_Project_Context_System_ProjectDirectory
             throw new Zend_Tool_Project_Exception('projectDirectory cannot find the directory for this project.');
         }
 
-        $this->_baseDirectory = rtrim($projectDirectory, '\\/');
+        $this->_baseDirectory = rtrim((string) $projectDirectory, '\\/');
         return $this;
     }
 

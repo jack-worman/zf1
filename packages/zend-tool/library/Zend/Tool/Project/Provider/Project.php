@@ -50,7 +50,7 @@ class Zend_Tool_Project_Provider_Project
         if ($path == null) {
             $path = getcwd();
         } else {
-            $path = trim($path);
+            $path = \trim((string) $path);
             if (!file_exists($path)) {
                 $created = mkdir($path);
                 if (!$created) {
@@ -58,7 +58,7 @@ class Zend_Tool_Project_Provider_Project
                     throw new Zend_Tool_Framework_Client_Exception('Could not create requested project directory \'' . $path . '\'');
                 }
             }
-            $path = str_replace('\\', '/', realpath($path));
+            $path = str_replace((string) '\\', '/', realpath($path));
         }
 
         $profile = $this->_loadProfile(self::NO_PROFILE_RETURN_FALSE, $path);
@@ -102,7 +102,7 @@ class Zend_Tool_Project_Provider_Project
             $response->appendContent('Testing Note: ', array('separator' => false, 'color' => 'yellow'));
             $response->appendContent('PHPUnit was not found in your include_path, therefore no testing actions will be created.');
         }
-            
+
         foreach ($newProfile->getIterator() as $resource) {
             $resource->create();
         }
@@ -129,7 +129,7 @@ class Zend_Tool_Project_Provider_Project
         if (Zend_Tool_Project_Provider_Test::isPHPUnitAvailable()) {
             $testAction = '                    	<testApplicationActionMethod forActionName="index" />';
         }
-        
+
         $version = Zend_Version::VERSION;
 
         $data = <<<EOS

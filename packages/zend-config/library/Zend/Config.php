@@ -131,10 +131,10 @@ class Zend_Config implements Countable, Iterator
         if (array_key_exists($name, $this->_data)) {
             return $this->_data[$name];
         }
-        
-        if (false !== ($dotpos = strpos($name, '.'))) {
-            $restName = substr($name, $dotpos + 1);
-            $name = substr($name, 0, $dotpos);
+
+        if (false !== ($dotpos = strpos((string) $name, '.'))) {
+            $restName = substr((string) $name, $dotpos + 1);
+            $name = substr((string) $name, 0, $dotpos);
 
             if (!array_key_exists($name, $this->_data) || !($this->_data[$name] instanceof Zend_Config)) {
                 return $default;
@@ -143,7 +143,7 @@ class Zend_Config implements Countable, Iterator
             if ($restName === '') {
                 return $result;
             }
-            
+
             return $result->get($restName, $default);
         }
 

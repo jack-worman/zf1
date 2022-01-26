@@ -69,7 +69,7 @@ class Zend_View_Helper_BaseUrl extends Zend_View_Helper_Abstract
      */
     public function setBaseUrl($base)
     {
-        $this->_baseUrl = rtrim($base, '/\\');
+        $this->_baseUrl = rtrim((string) $base, '/\\');
         return $this;
     }
 
@@ -108,7 +108,7 @@ class Zend_View_Helper_BaseUrl extends Zend_View_Helper_Abstract
         }
 
         if (($pos = strripos($url, basename($_SERVER['SCRIPT_NAME']))) !== false) {
-            $url = substr($url, 0, $pos);
+            $url = substr((string) $url, 0, $pos);
         }
 
         return $url;

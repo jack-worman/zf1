@@ -320,7 +320,7 @@ class Zend_View_Helper_HeadLink extends Zend_View_Helper_Placeholder_Container_S
             && !empty($attributes['conditionalStylesheet'])
             && is_string($attributes['conditionalStylesheet']))
         {
-            if (str_replace(' ', '', $attributes['conditionalStylesheet']) === '!IE') {
+            if (str_replace((string) ' ', '', $attributes['conditionalStylesheet']) === '!IE') {
                 $link = '<!-->' . $link . '<!--';
             }
             $link = '<!--[if ' . $attributes['conditionalStylesheet'] . ']>' . $link . '<![endif]-->';

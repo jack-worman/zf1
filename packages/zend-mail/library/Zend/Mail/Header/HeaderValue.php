@@ -45,7 +45,7 @@ final class Zend_Mail_Header_HeaderValue
     public static function filter($value)
     {
         $result = '';
-        $tot    = strlen($value);
+        $tot    = strlen((string) $value);
 
         // Filter for CR and LF characters, leaving CRLF + WSP sequences for
         // Long Header Fields (section 2.2.3 of RFC 2822)
@@ -89,7 +89,7 @@ final class Zend_Mail_Header_HeaderValue
      */
     public static function isValid($value)
     {
-        $tot = strlen($value);
+        $tot = strlen((string) $value);
         for ($i = 0; $i < $tot; $i += 1) {
             $ord = ord($value[$i]);
             if (($ord < 32 || $ord > 126)

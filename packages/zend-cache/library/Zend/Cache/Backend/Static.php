@@ -117,7 +117,7 @@ class Zend_Cache_Backend_Static
      */
     public function getOption($name)
     {
-        $name = strtolower($name);
+        $name = strtolower((string) $name);
 
         if ($name == 'tag_cache') {
             return $this->getInnerCache();
@@ -154,7 +154,7 @@ class Zend_Cache_Backend_Static
             $fileName = $this->_options['index_filename'];
         }
         $pathName = $this->_options['public_dir'] . dirname($id);
-        $file     = rtrim($pathName, '/') . '/' . $fileName . $this->_options['file_extension'];
+        $file     = rtrim((string) $pathName, '/') . '/' . $fileName . $this->_options['file_extension'];
         if (file_exists($file)) {
             $content = file_get_contents($file);
             return $content;
@@ -239,13 +239,13 @@ class Zend_Cache_Backend_Static
         $pathName = realpath($this->_options['public_dir']) . dirname($id);
         $this->_createDirectoriesFor($pathName);
 
-        if ($id === null || strlen($id) == 0) {
+        if ($id === null || strlen((string) $id) == 0) {
             $dataUnserialized = unserialize($data);
             $data = $dataUnserialized['data'];
         }
         $ext = $this->_options['file_extension'];
         if ($extension) $ext = $extension;
-        $file = rtrim($pathName, '/') . '/' . $fileName . $ext;
+        $file = rtrim((string) $pathName, '/') . '/' . $fileName . $ext;
         if ($this->_options['file_locking']) {
             $result = file_put_contents($file, $data, LOCK_EX);
         } else {
@@ -507,7 +507,7 @@ class Zend_Cache_Backend_Static
     {
         $path = realpath($path);
         $base = realpath($this->_options['public_dir']);
-        return strncmp($path, $base, strlen($base)) !== 0;
+        return strncmp($path, $base, strlen((string) $base)) !== 0;
     }
 
     /**
@@ -537,7 +537,7 @@ class Zend_Cache_Backend_Static
         }
 
         // Internal only checked in Frontend - not here!
-        if (substr($string, 0, 9) == 'internal-') {
+        if (substr((string) $string, 0, 9) == 'internal-') {
             return;
         }
 

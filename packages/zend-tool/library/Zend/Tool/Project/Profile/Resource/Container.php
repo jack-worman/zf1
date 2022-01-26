@@ -97,7 +97,7 @@ class Zend_Tool_Project_Profile_Resource_Container implements RecursiveIterator,
                 break;
             }
 
-            if (strtolower($currentResource->getName()) == strtolower($currentConstraint->name)) {
+            if (strtolower((string) $currentResource->getName()) == strtolower((string) $currentConstraint->name)) {
 
                 $paramsMatch = true;
 

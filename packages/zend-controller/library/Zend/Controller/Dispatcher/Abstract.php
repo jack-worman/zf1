@@ -117,7 +117,7 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
     public function formatActionName($unformatted)
     {
         $formatted = $this->_formatName($unformatted, true);
-        return strtolower(substr($formatted, 0, 1)) . substr($formatted, 1) . 'Action';
+        return strtolower((string) substr((string) $formatted, 0, 1)) . substr((string) $formatted, 1) . 'Action';
     }
 
     /**
@@ -237,9 +237,9 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
         }
 
         foreach ($segments as $key => $segment) {
-            $segment        = str_replace($this->getWordDelimiter(), ' ', strtolower($segment));
+            $segment        = str_replace($this->getWordDelimiter(), ' ', strtolower((string) $segment));
             $segment        = preg_replace('/[^a-z0-9 ]/', '', $segment);
-            $segments[$key] = str_replace(' ', '', ucwords($segment));
+            $segments[$key] = str_replace((string) ' ', '', ucwords($segment));
         }
 
         return implode('_', $segments);

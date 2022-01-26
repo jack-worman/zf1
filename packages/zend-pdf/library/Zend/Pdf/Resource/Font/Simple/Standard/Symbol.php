@@ -390,7 +390,7 @@ class Zend_Pdf_Resource_Font_Simple_Standard_Symbol extends Zend_Pdf_Resource_Fo
          * @todo Properly handle characters encoded as surrogate pairs.
          */
         $encodedString = '';
-        for ($i = 0; $i < strlen($string); $i++) {
+        for ($i = 0; $i < strlen((string) $string); $i++) {
             $characterCode = (ord($string[$i++]) << 8) | ord($string[$i]);
             if (isset($this->_toFontEncoding[$characterCode])) {
                 $encodedString .= $this->_toFontEncoding[$characterCode];
@@ -417,7 +417,7 @@ class Zend_Pdf_Resource_Font_Simple_Standard_Symbol extends Zend_Pdf_Resource_Fo
     public function decodeString($string, $charEncoding)
     {
         $decodedString = '';
-        for ($i = 0; $i < strlen($string); $i++) {
+        for ($i = 0; $i < strlen((string) $string); $i++) {
             $characterCode = ord($string[$i]);
             if (isset($this->_fromFontEncoding[$characterCode])) {
                 $decodedString .= $this->_fromFontEncoding[$characterCode];
