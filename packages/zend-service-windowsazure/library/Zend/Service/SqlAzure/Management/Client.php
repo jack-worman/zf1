@@ -305,7 +305,7 @@ class Zend_Service_SqlAzure_Management_Client
 	 * @param  string $value Value to encode
 	 * @return string        Encoded value
 	 */
-	public static function urlencode((string) $value)
+	public static function urlencode($value)
 	{
 	    return str_replace((string) ' ', '%20', $value);
 	}
