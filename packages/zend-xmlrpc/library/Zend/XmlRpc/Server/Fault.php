@@ -50,7 +50,7 @@
 class Zend_XmlRpc_Server_Fault extends Zend_XmlRpc_Fault
 {
     /**
-     * @var Exception
+     * @var \Throwable
      */
     protected $_exception;
 
@@ -192,7 +192,7 @@ class Zend_XmlRpc_Server_Fault extends Zend_XmlRpc_Fault
      * Retrieve the exception
      *
      * @access public
-     * @return Exception
+     * @return \Throwable
      */
     public function getException()
     {

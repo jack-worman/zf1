@@ -155,7 +155,7 @@ class Zend_Tool_Framework_Client_Response
     /**
      * getException()
      *
-     * @return Exception
+     * @return \Throwable
      */
     public function getException()
     {
