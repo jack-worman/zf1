@@ -67,10 +67,10 @@ class Zend_XmlRpc_Server_Fault extends Zend_XmlRpc_Fault
     /**
      * Constructor
      *
-     * @param Exception $e
+     * @param \Throwable $e
      * @return void
      */
-    public function __construct(Exception $e)
+    public function __construct(\Throwable $e)
     {
         $this->_exception = $e;
         $code             = 404;
@@ -98,10 +98,10 @@ class Zend_XmlRpc_Server_Fault extends Zend_XmlRpc_Fault
     /**
      * Return Zend_XmlRpc_Server_Fault instance
      *
-     * @param Exception $e
+     * @param \Throwable $e
      * @return Zend_XmlRpc_Server_Fault
      */
-    public static function getInstance(Exception $e)
+    public static function getInstance(\Throwable $e)
     {
         return new self($e);
     }

@@ -591,10 +591,10 @@ abstract class Zend_Controller_Response_Abstract
     /**
      * Register an exception with the response
      *
-     * @param Exception $e
+     * @param \Throwable $e
      * @return Zend_Controller_Response_Abstract
      */
-    public function setException(Exception $e)
+    public function setException(\Throwable $e)
     {
         $this->_exceptions[] = $e;
         return $this;

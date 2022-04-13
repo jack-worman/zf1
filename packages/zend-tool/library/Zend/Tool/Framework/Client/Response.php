@@ -143,10 +143,10 @@ class Zend_Tool_Framework_Client_Response
     /**
      * setException()
      *
-     * @param Exception $exception
+     * @param \Throwable $exception
      * @return Zend_Tool_Framework_Client_Response
      */
-    public function setException(Exception $exception)
+    public function setException(\Throwable $exception)
     {
         $this->_exception = $exception;
         return $this;
