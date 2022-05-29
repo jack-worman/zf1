@@ -479,25 +479,20 @@ abstract class Zend_XmlRpc_Value
     /**
      * Extract XML/RPC type and value from SimpleXMLElement object
      *
-     * @param SimpleXMLElement $xml
-     * @param string &$type Type bind variable
-     * @param string &$value Value bind variable
      * @return void
      */
     protected static function _extractTypeAndValue(SimpleXMLElement $xml, &$type, &$value)
     {
-        // php 7.2 compatibility
-        // list($type, $value) = each($xml);
-        list($type, $value) = array(key($xml), current($xml));
+        $type = $xml->key();
+        $value = $xml->current();
 
-        if ($type === null && $value === false) {
-            $namespaces = array('ex' => 'http://ws.apache.org/xmlrpc/namespaces/extensions');
+        if ($type === false && $value === null) {
+            $namespaces = ['ex' => 'http://ws.apache.org/xmlrpc/namespaces/extensions'];
             foreach ($namespaces as $namespaceName => $namespaceUri) {
                 $namespaceXml = $xml->children($namespaceUri);
-                // php 7.2 compatibility
-                // list($type, $value) = each($namespaceXml);
-                list($type, $value) = array(key($namespaceXml), current($namespaceXml));
-                if ($type !== null) {
+                $type = $namespaceXml->key();
+                $value = $namespaceXml->current();
+                if ($type !== false) {
                     $type = $namespaceName . ':' . $type;
                     break;
                 }
