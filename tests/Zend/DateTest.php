@@ -78,7 +78,7 @@ class Zend_DateTest extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         Zend_Date::setOptions($this->_orig);
-        $this->_cache->clean(Zend_Cache::CLEANING_MODE_ALL);
+        $this->_cache && $this->_cache->clean(Zend_Cache::CLEANING_MODE_ALL);
         date_default_timezone_set($this->originalTimezone);
     }
 
