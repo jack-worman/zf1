@@ -43,7 +43,7 @@
 abstract class Zend_Controller_Action implements Zend_Controller_Action_Interface
 {
     /** Used by {@see Zend_Controller_Action_Helper_ContextSwitch::$_contextKey} */
-    protected $contexts;
+    public $contexts;
 
     /**
      * @var array of existing class methods
