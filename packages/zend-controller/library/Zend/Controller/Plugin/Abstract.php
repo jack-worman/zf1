@@ -99,7 +99,6 @@ abstract class Zend_Controller_Plugin_Abstract
      * Called after Zend_Controller_Front exits from the router.
      *
      * @param  Zend_Controller_Request_Abstract $request
-     * @return void
      */
     public function routeShutdown(Zend_Controller_Request_Abstract $request)
     {}
