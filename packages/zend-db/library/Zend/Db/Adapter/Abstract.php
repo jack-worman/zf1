@@ -923,9 +923,8 @@ abstract class Zend_Db_Adapter_Abstract
      * @param mixed   $value The value to quote.
      * @param string  $type  OPTIONAL SQL datatype
      * @param integer $count OPTIONAL count of placeholders to replace
-     * @return string An SQL-safe quoted value placed into the original text.
      */
-    public function quoteInto($text, $value, $type = null, $count = null)
+    public function quoteInto($text, $value, $type = null, $count = null): string
     {
         if ($count === null) {
             return str_replace((string) '?', $this->quote($value, $type), $text);

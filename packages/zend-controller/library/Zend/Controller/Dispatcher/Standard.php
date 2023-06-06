@@ -89,9 +89,8 @@ class Zend_Controller_Dispatcher_Standard extends Zend_Controller_Dispatcher_Abs
      * Set controller directory
      *
      * @param array|string $directory
-     * @return Zend_Controller_Dispatcher_Standard
      */
-    public function setControllerDirectory($directory, $module = null)
+    public function setControllerDirectory($directory, $module = null): Zend_Controller_Dispatcher_Standard
     {
         $this->_controllerDirectory = array();
 

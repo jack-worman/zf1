@@ -42,6 +42,11 @@
  */
 class Zend_Server_Reflection_Prototype
 {
+    /** @var Zend_Server_Reflection_ReturnValue */
+    private $_return;
+    /** @var array<Zend_Server_Reflection_Parameter>|null */
+    private $_params;
+
     /**
      * Constructor
      *
