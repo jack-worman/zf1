@@ -42,6 +42,8 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  */
 class Zend_LocaleTest extends PHPUnit_Framework_TestCase
 {
+    private $_errorOccurred;
+
     /**
      * Runs the test methods of this class.
      *
