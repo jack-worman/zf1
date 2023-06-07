@@ -41,6 +41,9 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  */
 class Zend_View_Helper_FormTest extends PHPUnit_Framework_TestCase
 {
+    private $view;
+    private $helper;
+
     /**
      * Runs the test methods of this class.
      *
@@ -101,7 +104,7 @@ class Zend_View_Helper_FormTest extends PHPUnit_Framework_TestCase
         $form = $this->helper->form('', array('action' => '/foo', 'method' => 'get', 'id' => null));
         $this->assertNotRegexp('/<form[^>]*(id="")/', $form);
     }
-    
+
     /**
      * @group ZF-10791
      */
@@ -111,7 +114,7 @@ class Zend_View_Helper_FormTest extends PHPUnit_Framework_TestCase
         $this->assertNotRegexp('/<form[^>]*(name="OrigName")/', $form);
         $this->assertRegexp('/<form[^>]*(name="SomeNameAttr")/', $form);
     }
-    
+
     /**
      * @group ZF-10791
      */
@@ -120,7 +123,7 @@ class Zend_View_Helper_FormTest extends PHPUnit_Framework_TestCase
         $form = $this->helper->form('', array('action' => '/foo', 'method' => 'get'));
         $this->assertNotRegexp('/<form[^>]*(name=".*")/', $form);
     }
-    
+
     /**
      * @group ZF-10791
      */
@@ -129,7 +132,7 @@ class Zend_View_Helper_FormTest extends PHPUnit_Framework_TestCase
         $form = $this->helper->form('FormName', array('action' => '/foo', 'method' => 'get'));
         $this->assertRegexp('/<form[^>]*(name="FormName")/', $form);
     }
-    
+
     /**
      * @group ZF-10791
      */
@@ -138,7 +141,7 @@ class Zend_View_Helper_FormTest extends PHPUnit_Framework_TestCase
         $form = $this->helper->form('', array('action' => '/foo', 'method' => 'get', 'name' => NULL));
         $this->assertNotRegexp('/<form[^>]*(name=".*")/', $form);
     }
-    
+
     /**
      * @group ZF-10791
      */
@@ -147,7 +150,7 @@ class Zend_View_Helper_FormTest extends PHPUnit_Framework_TestCase
         $form = $this->helper->form('RealName', array('action' => '/foo', 'method' => 'get', 'name' => NULL));
         $this->assertRegexp('/<form[^>]*(name="RealName")/', $form);
     }
-        
+
     /**
      * @group ZF-10791
      */
@@ -157,7 +160,7 @@ class Zend_View_Helper_FormTest extends PHPUnit_Framework_TestCase
         $form = $this->helper->form('FormName', array('action' => '/foo', 'method' => 'get'));
         $this->assertNotRegexp('/<form[^>]*(name="FormName")/', $form);
     }
-        
+
     /**
      * @group ZF-10791
      */
@@ -166,7 +169,7 @@ class Zend_View_Helper_FormTest extends PHPUnit_Framework_TestCase
         $this->view->doctype('XHTML11');
         $form = $this->helper->form('FormName', array('action' => '/foo', 'method' => 'get'));
         $this->assertNotRegexp('/<form[^>]*(name="FormName")/', $form);
-    }    
+    }
 
     public function testEmptyActionShouldNotRenderActionAttributeInHTML5()
     {

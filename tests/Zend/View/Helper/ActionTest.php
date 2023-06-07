@@ -53,6 +53,12 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  */
 class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
 {
+    private $_origServer;
+    private $request;
+    private $response;
+    private $view;
+    private $helper;
+
     /**
      * Runs the test methods of this class.
      *

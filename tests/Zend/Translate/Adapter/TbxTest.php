@@ -35,6 +35,8 @@
  */
 class Zend_Translate_Adapter_TbxTest extends PHPUnit_Framework_TestCase
 {
+    private $_errorOccurred;
+
     /**
      * Runs the test methods of this class.
      *

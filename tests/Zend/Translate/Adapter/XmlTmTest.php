@@ -35,6 +35,8 @@
  */
 class Zend_Translate_Adapter_XmlTmTest extends PHPUnit_Framework_TestCase
 {
+    private $_errorOccurred;
+
     /**
      * Runs the test methods of this class.
      *

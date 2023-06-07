@@ -49,6 +49,10 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  */
 class Zend_ViewTest extends PHPUnit_Framework_TestCase
 {
+    private $notices;
+    private $errorReporting;
+    private $displayErrors;
+
     public static function main()
     {
         $suite  = new PHPUnit_Framework_TestSuite("Zend_ViewTest");

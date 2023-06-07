@@ -41,6 +41,9 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  */
 class Zend_View_Helper_FormImageTest extends PHPUnit_Framework_TestCase
 {
+    private $view;
+    private $helper;
+
     /**
      * Runs the test methods of this class.
      *
@@ -63,7 +66,7 @@ class Zend_View_Helper_FormImageTest extends PHPUnit_Framework_TestCase
     {
         $this->view = new Zend_View();
         $this->view->doctype('HTML4_LOOSE');  // Reset doctype to default
-        
+
         $this->helper = new Zend_View_Helper_FormImage();
         $this->helper->setView($this->view);
     }
@@ -94,7 +97,7 @@ class Zend_View_Helper_FormImageTest extends PHPUnit_Framework_TestCase
         $this->assertRegexp('/<input[^>]*?name="foo"/', $button);
         $this->assertRegexp('/<input[^>]*?type="image"/', $button);
     }
-    
+
     /**
      * @group ZF-11477
      */

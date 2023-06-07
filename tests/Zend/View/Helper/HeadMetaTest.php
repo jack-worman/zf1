@@ -50,6 +50,9 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  */
 class Zend_View_Helper_HeadMetaTest extends PHPUnit_Framework_TestCase
 {
+    private $view;
+    private $error;
+
     /**
      * @var Zend_View_Helper_HeadMeta
      */

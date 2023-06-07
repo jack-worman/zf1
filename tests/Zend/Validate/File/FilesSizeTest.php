@@ -40,6 +40,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  */
 class Zend_Validate_File_FilesSizeTest extends PHPUnit_Framework_TestCase
 {
+    private $multipleOptionsDetected;
+
     /**
      * Runs the test methods of this class.
      *

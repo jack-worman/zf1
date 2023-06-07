@@ -47,6 +47,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  */
 class Zend_View_Helper_CurrencyTest extends PHPUnit_Framework_TestCase
 {
+    private $_cache;
+
     /**
      * @var Zend_View_Helper_Currency
      */

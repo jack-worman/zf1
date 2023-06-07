@@ -41,6 +41,9 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  */
 class Zend_View_Helper_FieldsetTest extends PHPUnit_Framework_TestCase
 {
+    private $view;
+    private $helper;
+
     /**
      * Runs the test methods of this class.
      *
