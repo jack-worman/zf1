@@ -40,6 +40,12 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  */
 class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
 {
+    private $loaders;
+    private $includePath;
+    private $autoloader;
+    private $application;
+    private $iniOptions;
+
     public static function main()
     {
         $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);

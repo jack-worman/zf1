@@ -38,6 +38,8 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  */
 class Zend_Amf_Value_MessageBodyTest extends PHPUnit_Framework_TestCase
 {
+    private $body;
+
     /**
      * Runs the test methods of this class.
      *

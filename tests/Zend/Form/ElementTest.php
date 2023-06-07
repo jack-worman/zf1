@@ -48,6 +48,8 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  */
 class Zend_Form_ElementTest extends PHPUnit_Framework_TestCase
 {
+    private $error;
+
     /**
      * @var Zend_Form_Element
      */

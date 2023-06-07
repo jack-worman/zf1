@@ -44,6 +44,11 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  */
 class Zend_Application_Resource_FrontcontrollerTest extends PHPUnit_Framework_TestCase
 {
+    private $loaders;
+    private $autoloader;
+    private $application;
+    private $bootstrap;
+
     public static function main()
     {
         $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
@@ -388,7 +393,7 @@ class Zend_Application_Resource_FrontcontrollerTest extends PHPUnit_Framework_Te
         $front = $resource->getFrontController();
         $this->assertTrue($front->returnResponse());
     }
-    
+
     /**
      * @group ZF-9724
      */

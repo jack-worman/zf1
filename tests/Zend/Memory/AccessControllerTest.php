@@ -37,6 +37,8 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  */
 class Zend_Memory_Container_AccessControllerTest extends PHPUnit_Framework_TestCase
 {
+    private $cacheDir;
+
     /**
      * Memory manager, used for tests
      *

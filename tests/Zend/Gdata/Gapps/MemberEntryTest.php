@@ -34,6 +34,8 @@
  */
 class Zend_Gdata_Gapps_MemberEntryTest extends PHPUnit_Framework_TestCase
 {
+    private $entryText;
+    private $entry;
 
     public function setUp() {
         $this->entryText = file_get_contents(

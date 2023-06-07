@@ -40,6 +40,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  */
 class Zend_Amf_Adobe_IntrospectorTest extends PHPUnit_Framework_TestCase
 {
+    private $introspector;
+
     public static function main()
     {
         $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);

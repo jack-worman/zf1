@@ -36,7 +36,7 @@
  */
 class Zend_Validate_CcnumTest extends PHPUnit_Framework_TestCase
 {
-    private $_errorOccurred;
+    private $_errorOccured;
 
     /**
      * Zend_Validate_Ccnum object

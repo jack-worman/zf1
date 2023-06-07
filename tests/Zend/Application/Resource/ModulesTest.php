@@ -39,6 +39,12 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  */
 class Zend_Application_Resource_ModulesTest extends PHPUnit_Framework_TestCase
 {
+    private $loaders;
+    private $autoloader;
+    private $application;
+    private $bootstrap;
+    private $front;
+
     public static function main()
     {
         $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);

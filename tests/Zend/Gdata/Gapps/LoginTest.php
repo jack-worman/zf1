@@ -34,6 +34,8 @@
  */
 class Zend_Gdata_Gapps_LoginTest extends PHPUnit_Framework_TestCase
 {
+    private $loginText;
+    private $login;
 
     public function setUp() {
         $this->loginText = file_get_contents(

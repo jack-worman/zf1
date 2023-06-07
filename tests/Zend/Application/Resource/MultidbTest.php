@@ -47,6 +47,11 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  */
 class Zend_Application_Resource_MultidbTest extends PHPUnit_Framework_TestCase
 {
+    private $loaders;
+    private $autoloader;
+    private $application;
+    private $bootstrap;
+
     protected $_dbOptions = array('db1' => array('adapter' => 'pdo_mysql','dbname' => 'db1','password' => 'XXXX','username' => 'webuser'),
                                 'db2' => array('adapter' => 'pdo_pgsql', 'dbname' => 'db2', 'password' => 'notthatpublic', 'username' => 'dba'));
 

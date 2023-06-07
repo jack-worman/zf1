@@ -39,6 +39,11 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  */
 class Zend_Application_Resource_MailTest extends PHPUnit_Framework_TestCase
 {
+    private $loaders;
+    private $autoloader;
+    private $application;
+    private $bootstrap;
+
     public static function main()
     {
         $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
@@ -211,13 +216,13 @@ class Zend_Application_Resource_MailTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($resource->init() instanceof Zend_Application_Resource_mailTestCAsE);
     }
-    
+
     /**
      * @group ZF-11022
      */
     public function testOptionRegisterIsUnset()
     {
-        $options = array('transport' => 
+        $options = array('transport' =>
                         array('register' => 1,
                               'type' => 'Zend_Mail_Transport_Sendmail'));
 

@@ -52,6 +52,12 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  */
 class Zend_Application_Module_AutoloaderTest extends PHPUnit_Framework_TestCase
 {
+    private $loaders;
+    private $loader;
+    private $autoloader;
+    private $error;
+    private $includePath;
+
     public static function main()
     {
         $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);

@@ -39,6 +39,8 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  */
 class Zend_Application_Resource_TranslateTest extends PHPUnit_Framework_TestCase
 {
+    private $loaders;
+
     /**
      * @var array
      */

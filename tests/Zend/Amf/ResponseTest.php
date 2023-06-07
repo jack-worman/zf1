@@ -46,6 +46,8 @@ require_once 'ContactVO.php';
  */
 class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
 {
+    private $header1;
+
     // The message response status code.
     public $responseURI = "/2/onResult";
 

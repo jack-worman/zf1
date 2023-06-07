@@ -39,6 +39,11 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  */
 class Zend_Application_Resource_DojoTest extends PHPUnit_Framework_TestCase
 {
+    private $loaders;
+    private $autoloader;
+    private $applicaiton;
+    private $bootstrap;
+
     public static function main()
     {
         $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);

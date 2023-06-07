@@ -49,6 +49,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  */
 class Zend_ViewTest extends PHPUnit_Framework_TestCase
 {
+    private $view;
     private $notices;
     private $errorReporting;
     private $displayErrors;
