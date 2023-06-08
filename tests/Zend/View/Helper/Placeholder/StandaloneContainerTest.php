@@ -48,7 +48,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-#[AllowDynamicProperties]
 class Zend_View_Helper_Placeholder_StandaloneContainerTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -113,7 +112,6 @@ class Zend_View_Helper_Placeholder_StandaloneContainerTest extends PHPUnit_Frame
     }
 }
 
-#[AllowDynamicProperties]
 class Zend_View_Helper_Placeholder_StandaloneContainerTest_Foo extends Zend_View_Helper_Placeholder_Container_Standalone
 {
     protected $_regKey = 'foo';

@@ -36,7 +36,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-#[AllowDynamicProperties]
 class Zend_Controller_Plugin_ActionStack extends Zend_Controller_Plugin_Abstract
 {
     /** @var Zend_Registry */

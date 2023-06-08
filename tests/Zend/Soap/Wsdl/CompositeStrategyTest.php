@@ -43,7 +43,6 @@
  * @group      Zend_Soap
  * @group      Zend_Soap_Wsdl
  */
-#[AllowDynamicProperties]
 class Zend_Soap_Wsdl_CompositeStrategyTest extends PHPUnit_Framework_TestCase
 {
     public function testCompositeApiAddingStragiesToTypes()
@@ -128,7 +127,6 @@ class Zend_Soap_Wsdl_CompositeStrategyTest extends PHPUnit_Framework_TestCase
     }
 }
 
-#[AllowDynamicProperties]
 class Zend_Soap_Wsdl_Book
 {
     /**
@@ -136,7 +134,6 @@ class Zend_Soap_Wsdl_Book
      */
     public $somevar;
 }
-#[AllowDynamicProperties]
 class Zend_Soap_Wsdl_Cookie
 {
     /**
@@ -144,7 +141,6 @@ class Zend_Soap_Wsdl_Cookie
      */
     public $othervar;
 }
-#[AllowDynamicProperties]
 class Zend_Soap_Wsdl_Anything
 {
 }

@@ -1,6 +1,5 @@
 <?php
 
-#[AllowDynamicProperties]
 class Zend_CodeGenerator_Php_TestClassWithManyProperties
 {
 

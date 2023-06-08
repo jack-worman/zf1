@@ -26,7 +26,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Loader
  */
-#[AllowDynamicProperties]
 class TestPrefix_FallbackCase
 {
 }

@@ -34,7 +34,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-#[AllowDynamicProperties]
 class Zend_Form_Decorator_Errors extends Zend_Form_Decorator_Abstract
 {
     /**

@@ -26,7 +26,6 @@ require_once 'Zend/Db/Statement/TestCommon.php';
 /**
  * Wrapper class for test protected function _stripQuoted
  */
-#[AllowDynamicProperties]
 class Zend_Db_Statement_Mysqli_Test_Class extends Zend_Db_Statement_Mysqli
 {
     public function stripQuoted($sql)
@@ -44,7 +43,6 @@ class Zend_Db_Statement_Mysqli_Test_Class extends Zend_Db_Statement_Mysqli
  * @group      Zend_Db
  * @group      Zend_Db_Statement
  */
-#[AllowDynamicProperties]
 class Zend_Db_Statement_MysqliTest extends Zend_Db_Statement_TestCommon
 {
     protected $_Zend_Db_Statement_Mysqli_Test_Class = null;
@@ -54,7 +52,7 @@ class Zend_Db_Statement_MysqliTest extends Zend_Db_Statement_TestCommon
     public function testStripQuoted()
     {
         $this->_Zend_Db_Statement_Mysqli_Test_Class = new Zend_Db_Statement_Mysqli_Test_Class($this->_db, "SELECT 1");
-
+        
         $input = <<<INPUT
 in: [SELECT * FROM `strange`table1`]
 out: [SELECT * FROM table1`]
@@ -137,12 +135,12 @@ INPUT;
         // parse the input
         $inputOutputLines = explode('in:', $input);
         $count = 0;
-
+    
         foreach ($inputOutputLines as $ioLine) {
             if (!\trim((string) $ioLine)) {
                 continue;
             }
-
+    
             $count++;
             $io = explode('out:', $ioLine);
             $in = str_replace(array('[', ']'),'', \trim((string) $io[0]));
@@ -151,7 +149,7 @@ INPUT;
             $this->assertSame($out, $actual, $count . ' - unexpected output');
         }
     }
-
+    
     public function testStatementRowCount()
     {
         $products = $this->_db->quoteIdentifier('zfproducts');

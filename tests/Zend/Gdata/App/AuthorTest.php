@@ -32,7 +32,6 @@
  * @group      Zend_Gdata
  * @group      Zend_Gdata_App
  */
-#[AllowDynamicProperties]
 class Zend_Gdata_App_AuthorTest extends PHPUnit_Framework_TestCase
 {
 

@@ -44,7 +44,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Controller_Action
  * @group      Zend_Controller_Action_Helper
  */
-#[AllowDynamicProperties]
 class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -573,7 +572,6 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit_Framework_Tes
 /**
  * Test controller for use with redirector tests
  */
-#[AllowDynamicProperties]
 class Zend_Controller_Action_Helper_Redirector_TestController extends Zend_Controller_Action
 {
 }

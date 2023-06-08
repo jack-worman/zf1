@@ -38,7 +38,6 @@ require_once 'Zend/Cloud/StorageService/FactoryTest.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cloud
  */
-#[AllowDynamicProperties]
 class Zend_Cloud_StorageService_AllTests
 {
     public static function main()

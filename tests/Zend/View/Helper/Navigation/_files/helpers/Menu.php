@@ -1,6 +1,5 @@
 <?php
 
-#[AllowDynamicProperties]
 class My_View_Helper_Navigation_Menu
     extends Zend_View_Helper_Navigation_HelperAbstract
 {
@@ -21,7 +20,7 @@ class My_View_Helper_Navigation_Menu
 
         return $this;
     }
-
+    
     /**
      * Renders menu
      *

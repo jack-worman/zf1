@@ -41,7 +41,6 @@
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_S3
  */
-#[AllowDynamicProperties]
 class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -532,7 +531,6 @@ class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_S3
  */
-#[AllowDynamicProperties]
 class Zend_Service_Amazon_S3_OnlineTest_Skip extends PHPUnit_Framework_TestCase
 {
     public function setUp()

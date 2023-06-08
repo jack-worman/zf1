@@ -41,7 +41,6 @@
  * @todo       Track nonces, nonce-count, opaque for replay protection and stale support
  * @todo       Support Authentication-Info header
  */
-#[AllowDynamicProperties]
 class Zend_Auth_Adapter_Http implements Zend_Auth_Adapter_Interface
 {
     /**

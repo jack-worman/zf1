@@ -33,7 +33,6 @@
  * @package Zend_Controller
  * @subpackage Request
  */
-#[AllowDynamicProperties]
 class Zend_Controller_Request_HttpTestCase extends Zend_Controller_Request_Http
 {
     /**

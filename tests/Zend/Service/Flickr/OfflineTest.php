@@ -35,7 +35,6 @@
  * @group      Zend_Service
  * @group      Zend_Service_Flickr
  */
-#[AllowDynamicProperties]
 class Zend_Service_Flickr_OfflineTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -545,7 +544,6 @@ class Zend_Service_Flickr_OfflineTest extends PHPUnit_Framework_TestCase
 }
 
 
-#[AllowDynamicProperties]
 class Zend_Service_Flickr_OfflineTest_FlickrProtectedMethodProxy extends Zend_Service_Flickr
 {
     public function proxyValidateUserSearch(array $options)

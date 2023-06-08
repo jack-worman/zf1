@@ -37,7 +37,6 @@
  * @group      Zend_Rest
  * @group      Zend_Rest_Client
  */
-#[AllowDynamicProperties]
 class Zend_Rest_ClientTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()

@@ -31,6 +31,5 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-#[AllowDynamicProperties]
 class Zend_Mobile_Push_Exception_InvalidTopic extends Zend_Mobile_Push_Exception
 {}

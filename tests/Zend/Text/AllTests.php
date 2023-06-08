@@ -36,7 +36,6 @@ require_once 'Zend/Text/MultiByteTest.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Text
  */
-#[AllowDynamicProperties]
 class Zend_Text_AllTests
 {
     public static function main()

@@ -42,7 +42,6 @@ require_once "_files/commontypes.php";
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Soap
  */
-#[AllowDynamicProperties]
 class Zend_Soap_AutoDiscoverTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()

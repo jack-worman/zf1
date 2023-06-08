@@ -31,7 +31,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Memory
  */
-#[AllowDynamicProperties]
 class Zend_Memory_Container_LockedTest extends PHPUnit_Framework_TestCase
 {
     /**

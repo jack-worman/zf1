@@ -33,7 +33,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-#[AllowDynamicProperties]
 class Zend_View_Helper_RenderToPlaceholder extends Zend_View_Helper_Abstract
 {
 

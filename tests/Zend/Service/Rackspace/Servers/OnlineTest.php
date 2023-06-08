@@ -30,7 +30,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service_Rackspace_Servers
  */
-#[AllowDynamicProperties]
 class Zend_Service_Rackspace_Servers_OnlineTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -41,43 +40,43 @@ class Zend_Service_Rackspace_Servers_OnlineTest extends PHPUnit_Framework_TestCa
     protected $rackspace;
     /**
      * Check if the resize was successfully done
-     *
-     * @var boolean
+     * 
+     * @var boolean 
      */
     protected $resize;
     /**
      * List of flavors available
-     *
+     * 
      * @var array
      */
     protected static $flavors;
     /**
      * List of images available
-     *
-     * @var Zend_Service_Rackspace_Servers_ImageList
+     * 
+     * @var Zend_Service_Rackspace_Servers_ImageList 
      */
     protected static $images;
     /**
      * Id of the image created
-     *
+     * 
      * @var string
      */
     protected static $imageId;
     /**
      * Server id of testing
-     *
-     * @var integer
+     * 
+     * @var integer 
      */
     protected static $serverId;
     /**
      * Admin password of the server
-     *
-     * @var string
+     * 
+     * @var string 
      */
     protected static $adminPass;
     /**
      * Shared Ip group
-     *
+     * 
      * @var Zend_Service_Rackspace_Servers_SharedIpGroup
      */
     protected static $sharedIpGroup;
@@ -98,7 +97,7 @@ class Zend_Service_Rackspace_Servers_OnlineTest extends PHPUnit_Framework_TestCa
         if (!constant('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_ENABLED')) {
             $this->markTestSkipped('Zend_Service_Rackspace_Servers_OnlineTest tests are not enabled');
         }
-
+        
         if(!defined('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_USER') || !defined('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_KEY')) {
             $this->markTestSkipped('Constants User and Key have to be set.');
         }
@@ -114,11 +113,11 @@ class Zend_Service_Rackspace_Servers_OnlineTest extends PHPUnit_Framework_TestCa
         // terms of use compliance: safe delay between each test
         sleep(2);
     }
-
+    
     /**
      * Wait n seconds for status change
-     *
-     * @param string  $status
+     * 
+     * @param string  $status 
      * @param integer $timeout
      * @return boolean
      */
@@ -154,7 +153,7 @@ class Zend_Service_Rackspace_Servers_OnlineTest extends PHPUnit_Framework_TestCa
      * Test create server
      */
     public function testCreateServer()
-    {
+    {       
         $data = array (
             'name'     => TESTS_ZEND_SERVICE_RACKSPACE_SERVER_NAME,
             'imageId'  => TESTS_ZEND_SERVICE_RACKSPACE_SERVER_IMAGEID,
@@ -384,21 +383,21 @@ class Zend_Service_Rackspace_Servers_OnlineTest extends PHPUnit_Framework_TestCa
         $this->assertTrue($groups!==false);
     }
     /**
-     * Test get shared IP group
+     * Test get shared IP group 
      */
     public function testGetSharedIpGroup()
     {
         $groupId= self::$sharedIpGroup->getId();
         $group= $this->rackspace->getSharedIpGroup($groupId);
         $this->assertTrue($group!==false);
-        $this->assertEquals($group->getId(), $groupId);
+        $this->assertEquals($group->getId(), $groupId);   
     }
     /**
      * Test delete shared ip group
      */
     public function testDeleteSharedIpGroup()
     {
-        $this->assertTrue($this->rackspace->deleteSharedIpGroup(self::$sharedIpGroup->getId()));
+        $this->assertTrue($this->rackspace->deleteSharedIpGroup(self::$sharedIpGroup->getId())); 
     }
     /**
      * Test delete server

@@ -40,7 +40,6 @@
  * @method $this setFile($src, $type = 'text/javascript', array $attrs = array())
  * @method $this setScript($script, $type = 'text/javascript', array $attrs = array())
  */
-#[AllowDynamicProperties]
 class Zend_View_Helper_HeadScript extends Zend_View_Helper_Placeholder_Container_Standalone
 {
     /**#@+

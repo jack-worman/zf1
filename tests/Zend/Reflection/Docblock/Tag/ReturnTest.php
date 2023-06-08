@@ -33,7 +33,6 @@
  * @group      Zend_Reflection_Docblock_Tag
  * @group      Zend_Reflection_Docblock_Tag_Return
  */
-#[AllowDynamicProperties]
 class Zend_Reflection_Docblock_Tag_ReturnTest extends PHPUnit_Framework_TestCase
 {
 

@@ -36,7 +36,6 @@ require_once '_files/TestSampleSingleClass.php';
  * @group Zend_CodeGenerator
  * @group Zend_CodeGenerator_Php
  */
-#[AllowDynamicProperties]
 class Zend_CodeGenerator_Php_ParameterTest extends PHPUnit_Framework_TestCase
 {
 
@@ -191,7 +190,6 @@ class Zend_CodeGenerator_Php_ParameterTest extends PHPUnit_Framework_TestCase
     }
 }
 
-#[AllowDynamicProperties]
 class Zend_CodeGenerator_Php_ParameterExample
 {
     public function name($param)

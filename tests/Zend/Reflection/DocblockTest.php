@@ -32,7 +32,6 @@
  * @group      Zend_Reflection
  * @group      Zend_Reflection_Docblock
  */
-#[AllowDynamicProperties]
 class Zend_Reflection_DocblockTest extends PHPUnit_Framework_TestCase
 {
 

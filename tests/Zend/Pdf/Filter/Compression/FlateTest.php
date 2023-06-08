@@ -1,7 +1,6 @@
 <?php
 
 
-#[AllowDynamicProperties]
 class Zend_Pdf_Filter_Compression_FlateTest extends PHPUnit_Framework_TestCase
 {
     protected function setUp()

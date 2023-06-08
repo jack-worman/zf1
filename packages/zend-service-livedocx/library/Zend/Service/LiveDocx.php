@@ -28,7 +28,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @since      LiveDocx 1.0
  */
-#[AllowDynamicProperties]
 class Zend_Service_LiveDocx
 {
     /**

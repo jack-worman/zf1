@@ -42,7 +42,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Uri
  */
-#[AllowDynamicProperties]
 class Zend_UriTest extends PHPUnit_Framework_TestCase
 {
     public static function main()
@@ -212,7 +211,6 @@ class Zend_UriTest extends PHPUnit_Framework_TestCase
     }
 
 }
-#[AllowDynamicProperties]
 class Zend_Uri_Mock extends Zend_Uri
 {
     protected function __construct($scheme, $schemeSpecific = '') { }
@@ -220,7 +218,6 @@ class Zend_Uri_Mock extends Zend_Uri
     #[\ReturnTypeWillChange]
     public function valid() { }
 }
-#[AllowDynamicProperties]
 class Zend_Uri_ExceptionCausing extends Zend_Uri
 {
     protected function __construct($scheme, $schemeSpecific = '') { }
@@ -231,7 +228,6 @@ class Zend_Uri_ExceptionCausing extends Zend_Uri
         throw new Exception('Exception in getUri()');
     }
 }
-#[AllowDynamicProperties]
 class Fake_Zend_Uri
 {
 }

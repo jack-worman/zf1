@@ -1,6 +1,5 @@
 <?php
 
-#[AllowDynamicProperties]
 class Zend_Acl_MockAssertion implements Zend_Acl_Assert_Interface
 {
     protected $_returnValue;

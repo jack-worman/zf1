@@ -33,7 +33,6 @@
  * @group      Zend_Db_Table
  * @group      Zend_Db_Table_Rowset
  */
-#[AllowDynamicProperties]
 class Zend_Db_Table_Rowset_StaticTest extends PHPUnit_Framework_TestCase
 {
 

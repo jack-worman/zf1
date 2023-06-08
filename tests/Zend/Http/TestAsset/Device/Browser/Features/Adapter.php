@@ -29,7 +29,6 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-#[AllowDynamicProperties]
 class Device_Browser_Features_Adapter implements Zend_Http_UserAgent_Features_Adapter
 {
     public static function getFromRequest($request, array $config)

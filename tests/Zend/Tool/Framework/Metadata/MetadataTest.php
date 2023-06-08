@@ -36,7 +36,6 @@
  * @group Zend_Tool_Framework
  * @group Zend_Tool_Framework_Manifest
  */
-#[AllowDynamicProperties]
 class Zend_Tool_Framework_Manifest_MetadataTest extends PHPUnit_Framework_TestCase
 {
 

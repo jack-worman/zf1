@@ -53,7 +53,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
-#[AllowDynamicProperties]
 class Zend_Log_Writer_FirebugTest extends PHPUnit_Framework_TestCase
 {
     protected $_controller = null;
@@ -347,7 +346,6 @@ class Zend_Log_Writer_FirebugTest extends PHPUnit_Framework_TestCase
     }
 }
 
-#[AllowDynamicProperties]
 class Zend_Log_Writer_FirebugTest_Formatter extends Zend_Log_Formatter_Firebug
 {
     public function format($event)
@@ -357,7 +355,6 @@ class Zend_Log_Writer_FirebugTest_Formatter extends Zend_Log_Formatter_Firebug
 }
 
 
-#[AllowDynamicProperties]
 class Zend_Log_Writer_FirebugTest_Request extends Zend_Controller_Request_Http
 {
     public function getHeader($header)
@@ -369,7 +366,6 @@ class Zend_Log_Writer_FirebugTest_Request extends Zend_Controller_Request_Http
 }
 
 
-#[AllowDynamicProperties]
 class Zend_Log_Writer_FirebugTest_Response extends Zend_Controller_Response_Http
 {
 

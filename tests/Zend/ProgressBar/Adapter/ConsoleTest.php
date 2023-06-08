@@ -40,7 +40,6 @@ require_once 'MockupStream.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_ProgressBar
  */
-#[AllowDynamicProperties]
 class Zend_ProgressBar_Adapter_ConsoleTest extends PHPUnit_Framework_TestCase
 {
 
@@ -340,7 +339,6 @@ class Zend_ProgressBar_Adapter_ConsoleTest extends PHPUnit_Framework_TestCase
 
 }
 
-#[AllowDynamicProperties]
 class Zend_ProgressBar_Adapter_Console_Stub extends Zend_ProgressBar_Adapter_Console
 {
     protected $_lastOutput = null;

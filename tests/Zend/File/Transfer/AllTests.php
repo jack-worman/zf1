@@ -34,7 +34,6 @@ require_once 'Zend/File/Transfer/Adapter/AllTests.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_File
  */
-#[AllowDynamicProperties]
 class Zend_File_Transfer_AllTests
 {
     public static function main()

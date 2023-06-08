@@ -31,7 +31,6 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-#[AllowDynamicProperties]
 class Zend_Controller_Router_Route_Regex extends Zend_Controller_Router_Route_Abstract
 {
 

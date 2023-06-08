@@ -72,7 +72,6 @@ require_once 'Zend/Feed/Pubsubhubbub/AllTests.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Feed
  */
-#[AllowDynamicProperties]
 class Zend_Feed_AllTests
 {
     public static function main()

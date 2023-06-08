@@ -1,6 +1,5 @@
 <?php
 
-#[AllowDynamicProperties]
 class Test_Mycompany2_Dbadapter extends Zend_Db_Adapter_Abstract
 {
     protected function _connect()

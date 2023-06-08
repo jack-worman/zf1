@@ -43,7 +43,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_OpenId
  */
-#[AllowDynamicProperties]
 class Zend_OpenId_ProviderTest extends PHPUnit_Framework_TestCase
 {
     const USER     = "http://test_user.myopenid.com/";
@@ -1637,7 +1636,6 @@ class Zend_OpenId_ProviderTest extends PHPUnit_Framework_TestCase
     }
 }
 
-#[AllowDynamicProperties]
 class Zend_OpenId_ProviderHelper extends Zend_OpenId_Provider
 {
     public function genSecret($func)

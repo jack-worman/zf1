@@ -94,7 +94,6 @@ require_once 'Zend/Filter/Word/AllTests.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-#[AllowDynamicProperties]
 class Zend_Filter_AllTests
 {
     /**

@@ -28,12 +28,11 @@ namespace ZendTest\Loader\TestAsset;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Loader
  */
-#[AllowDynamicProperties]
 class ZendTest_Loader_TestAsset_TestPluginMap implements IteratorAggregate
 {
     /**
      * Plugin map
-     *
+     * 
      * @var array
      */
     public $map = array(
@@ -44,7 +43,7 @@ class ZendTest_Loader_TestAsset_TestPluginMap implements IteratorAggregate
 
     /**
      * Return iterator
-     *
+     * 
      * @return Traversable
      */
     #[\ReturnTypeWillChange]

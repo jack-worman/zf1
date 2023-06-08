@@ -33,6 +33,5 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @uses       Zend_Service_Exception
  */
-#[AllowDynamicProperties]
 class Zend_Service_Ebay_Exception extends Zend_Service_Exception
 {}

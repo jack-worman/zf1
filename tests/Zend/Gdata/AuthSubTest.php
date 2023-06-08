@@ -32,7 +32,6 @@
  * @group      Zend_Gdata
  * @group      Zend_Gdata_AuthSub
  */
-#[AllowDynamicProperties]
 class Zend_Gdata_AuthSubTest extends PHPUnit_Framework_TestCase
 {
     /**

@@ -31,7 +31,6 @@
  * @group      Zend_Oauth
  * @group      Zend_Oauth_Signature
  */
-#[AllowDynamicProperties]
 class Zend_Oauth_Signature_PlaintextTest extends PHPUnit_Framework_TestCase
 {
 

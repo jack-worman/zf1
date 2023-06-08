@@ -32,7 +32,6 @@
  * @group      Zend_Gdata
  * @group      Zend_Gdata_OpenSearch
  */
-#[AllowDynamicProperties]
 class Zend_Gdata_OpenSearchTotalResultsTest extends PHPUnit_Framework_TestCase
 {
 

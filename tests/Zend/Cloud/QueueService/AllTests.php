@@ -38,7 +38,6 @@ require_once 'Zend/Cloud/QueueService/FactoryTest.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cloud
  */
-#[AllowDynamicProperties]
 class Zend_Cloud_QueueService_AllTests
 {
     public static function main()

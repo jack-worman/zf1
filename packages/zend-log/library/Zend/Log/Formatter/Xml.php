@@ -31,7 +31,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-#[AllowDynamicProperties]
 class Zend_Log_Formatter_Xml extends Zend_Log_Formatter_Abstract
 {
     /**
@@ -147,8 +146,8 @@ class Zend_Log_Formatter_Xml extends Zend_Log_Formatter_Abstract
         $elt = $dom->appendChild(new DOMElement($this->_rootElement));
 
         foreach ($dataToInsert as $key => $value) {
-            if (empty($value)
-                || is_scalar($value)
+            if (empty($value) 
+                || is_scalar($value) 
                 || (is_object($value) && method_exists($value,'__toString'))
             ) {
                 if($key == "message") {

@@ -30,7 +30,6 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-#[AllowDynamicProperties]
 class Zend_Feed_Pubsubhubbub_PublisherTest extends PHPUnit_Framework_TestCase
 {
 
@@ -297,7 +296,6 @@ class Zend_Feed_Pubsubhubbub_PublisherTest extends PHPUnit_Framework_TestCase
 
 // Some stubs for what Http_Client would be doing
 
-#[AllowDynamicProperties]
 class Zend_Feed_Pubsubhubbub_PublisherTest_ClientSuccess extends Zend_Http_Client
 {
     public function request($method = null) {
@@ -306,7 +304,6 @@ class Zend_Feed_Pubsubhubbub_PublisherTest_ClientSuccess extends Zend_Http_Clien
     }
     public function getBody(){return $this->_prepareBody();}
 }
-#[AllowDynamicProperties]
 class Zend_Feed_Pubsubhubbub_PublisherTest_ClientFail extends Zend_Http_Client
 {
     public function request($method = null) {
@@ -315,12 +312,10 @@ class Zend_Feed_Pubsubhubbub_PublisherTest_ClientFail extends Zend_Http_Client
     }
     public function getBody(){return $this->_prepareBody();}
 }
-#[AllowDynamicProperties]
 class Zend_Feed_Pubsubhubbub_PublisherTest_ResponseSuccess
 {
     public function getStatus(){return 204;}
 }
-#[AllowDynamicProperties]
 class Zend_Feed_Pubsubhubbub_PublisherTest_ResponseFail
 {
     public function getStatus(){return 404;}

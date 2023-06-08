@@ -38,7 +38,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Translate
  */
-#[AllowDynamicProperties]
 class Zend_TranslateTest extends PHPUnit_Framework_TestCase
 {
     /**

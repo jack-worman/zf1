@@ -42,7 +42,6 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-#[AllowDynamicProperties]
 class Zend_Gdata_Health_Query extends Zend_Gdata_Query
 {
     /**
@@ -61,7 +60,7 @@ class Zend_Gdata_Health_Query extends Zend_Gdata_Query
      * Namespace for an item category
      */
     const ITEM_CATEGORY_NS = 'http://schemas.google.com/health/item';
-
+    
     /**
      * Create Gdata_Query object
      */

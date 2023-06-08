@@ -33,7 +33,6 @@
  * @property string $LastModified  Last modified date of the container
  * @property array  $Metadata      Key/value pairs of meta data
  */
-#[AllowDynamicProperties]
 class Zend_Service_WindowsAzure_Storage_BlobContainer
 {
     /**

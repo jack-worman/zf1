@@ -39,7 +39,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Controller
  * @group      Zend_Controller_Router
  */
-#[AllowDynamicProperties]
 class Zend_Controller_Router_Route_HostnameTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -244,7 +243,6 @@ class Zend_Controller_Router_Route_HostnameTest extends PHPUnit_Framework_TestCa
 /**
  * Zend_Controller_RouterTest_Request_Stub - request object for route testing
  */
-#[AllowDynamicProperties]
 class Zend_Controller_Router_RewriteTest_Request_Stub extends Zend_Controller_Request_Abstract
 {
     protected $_host;

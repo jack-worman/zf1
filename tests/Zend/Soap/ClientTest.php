@@ -40,7 +40,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Soap
  */
-#[AllowDynamicProperties]
 class Zend_Soap_ClientTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -558,7 +557,6 @@ class Zend_Soap_ClientTest extends PHPUnit_Framework_TestCase
 
 
 /** Test Class */
-#[AllowDynamicProperties]
 class Zend_Soap_Client_TestClass {
     /**
      * Test Function 1
@@ -605,7 +603,6 @@ class Zend_Soap_Client_TestClass {
 }
 
 /** Test class 2 */
-#[AllowDynamicProperties]
 class Zend_Soap_Client_TestData1 {
     /**
      * Property1
@@ -623,7 +620,6 @@ class Zend_Soap_Client_TestData1 {
 }
 
 /** Test class 2 */
-#[AllowDynamicProperties]
 class Zend_Soap_Client_TestData2 {
     /**
      * Property1

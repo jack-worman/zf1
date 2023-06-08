@@ -35,7 +35,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Session
  */
-#[AllowDynamicProperties]
 class Zend_Session_Validator_NoticeValidator extends Zend_Session_Validator_Abstract
 {
     /**

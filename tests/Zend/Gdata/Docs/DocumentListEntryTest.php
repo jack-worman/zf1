@@ -33,7 +33,6 @@
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Docsj
  */
-#[AllowDynamicProperties]
 class Zend_Gdata_Docs_DocumentListEntryTest extends PHPUnit_Framework_TestCase
 {
 

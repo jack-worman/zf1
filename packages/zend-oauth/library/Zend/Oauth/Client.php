@@ -37,7 +37,6 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-#[AllowDynamicProperties]
 class Zend_Oauth_Client extends Zend_Http_Client
 {
     /**
@@ -264,7 +263,7 @@ class Zend_Oauth_Client extends Zend_Http_Client
             $this->setRawData($raw, 'application/x-www-form-urlencoded');
             $this->paramsPost = array();
         } elseif ($requestScheme == Zend_Oauth::REQUEST_SCHEME_QUERYSTRING) {
-            $params = $this->paramsGet;
+            $params = $this->paramsGet;            
             $query = $this->getUri()->getQuery();
             if ($query) {
                 $queryParts = explode('&', $this->getUri()->getQuery());

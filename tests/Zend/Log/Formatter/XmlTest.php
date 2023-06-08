@@ -35,7 +35,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
-#[AllowDynamicProperties]
 class Zend_Log_Formatter_XmlTest extends PHPUnit_Framework_TestCase
 {
     public static function main()
@@ -138,7 +137,7 @@ class Zend_Log_Formatter_XmlTest extends PHPUnit_Framework_TestCase
         $formatter = Zend_Log_Formatter_Xml::factory($options);
         $this->assertTrue($formatter instanceof Zend_Log_Formatter_Xml);
     }
-
+    
     /**
      * @group ZF-11161
      */
@@ -159,7 +158,7 @@ class Zend_Log_Formatter_XmlTest extends PHPUnit_Framework_TestCase
         $output = $formatter->format($event);
         $this->assertContains($expected, $output);
     }
-
+    
     /**
      * @group ZF-11161
      */
@@ -182,7 +181,6 @@ class Zend_Log_Formatter_XmlTest extends PHPUnit_Framework_TestCase
     }
 }
 
-#[AllowDynamicProperties]
 class Zend_Log_Formatter_XmlTest_SerializableObject
 {
     public function __toString()

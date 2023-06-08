@@ -35,7 +35,6 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-#[AllowDynamicProperties]
 class Zend_Test_PHPUnit_Db_DataSet_DbTableDataSet extends PHPUnit_Extensions_Database_DataSet_AbstractDataSet
 {
     /**

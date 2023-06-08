@@ -37,7 +37,6 @@
  * @method info(string $message, $extras = null)
  * @method debug(string $message, $extras = null)
  */
-#[AllowDynamicProperties]
 class Zend_Log
 {
     const EMERG   = 0;  // Emergency: system is unusable

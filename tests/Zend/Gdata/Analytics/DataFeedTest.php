@@ -32,7 +32,6 @@
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Analytics
  */
-#[AllowDynamicProperties]
 class Zend_Gdata_Analytics_DataFeedTest extends PHPUnit_Framework_TestCase
 {
     public $testData = array(

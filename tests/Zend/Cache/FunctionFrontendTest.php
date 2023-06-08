@@ -32,7 +32,6 @@ function foobar($param1, $param2) {
     return "foobar_return($param1, $param2)";
 }
 
-#[AllowDynamicProperties]
 class fooclass {
     private static $_instanceCounter = 0;
 
@@ -56,7 +55,6 @@ class fooclass {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-#[AllowDynamicProperties]
 class Zend_Cache_FunctionFrontendTest extends PHPUnit_Framework_TestCase {
 
     private $_instance;

@@ -32,7 +32,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-#[AllowDynamicProperties]
 class Zend_Db_Statement_Mysqli_Exception extends Zend_Db_Statement_Exception
 {
 }

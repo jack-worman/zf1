@@ -32,7 +32,6 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-#[AllowDynamicProperties]
 class Zend_Search_Lucene_FSM_testClass
 {
     public $action1Passed = false;
@@ -61,7 +60,6 @@ class Zend_Search_Lucene_FSM_testClass
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-#[AllowDynamicProperties]
 class Zend_Search_Lucene_FSM_testFSMClass extends Zend_Search_Lucene_FSM
 {
     const OPENED            = 0;
@@ -119,7 +117,6 @@ class Zend_Search_Lucene_FSM_testFSMClass extends Zend_Search_Lucene_FSM
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Search_Lucene
  */
-#[AllowDynamicProperties]
 class Zend_Search_Lucene_FSMTest extends PHPUnit_Framework_TestCase
 {
     public function testCreate()

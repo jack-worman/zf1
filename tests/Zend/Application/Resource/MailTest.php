@@ -37,7 +37,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Application
  */
-#[AllowDynamicProperties]
 class Zend_Application_Resource_MailTest extends PHPUnit_Framework_TestCase
 {
     public static function main()
@@ -212,13 +211,13 @@ class Zend_Application_Resource_MailTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($resource->init() instanceof Zend_Application_Resource_mailTestCAsE);
     }
-
+    
     /**
      * @group ZF-11022
      */
     public function testOptionRegisterIsUnset()
     {
-        $options = array('transport' =>
+        $options = array('transport' => 
                         array('register' => 1,
                               'type' => 'Zend_Mail_Transport_Sendmail'));
 

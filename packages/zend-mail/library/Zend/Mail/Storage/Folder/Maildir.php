@@ -44,7 +44,6 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-#[AllowDynamicProperties]
 class Zend_Mail_Storage_Folder_Maildir extends Zend_Mail_Storage_Maildir implements Zend_Mail_Storage_Folder_Interface
 {
     /**

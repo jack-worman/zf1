@@ -32,7 +32,6 @@
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Spreadsheets
  */
-#[AllowDynamicProperties]
 class Zend_Gdata_Spreadsheets_CellQueryTest extends PHPUnit_Framework_TestCase
 {
 

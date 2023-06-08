@@ -34,7 +34,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-#[AllowDynamicProperties]
 class Zend_Controller_Plugin_ErrorHandler extends Zend_Controller_Plugin_Abstract
 {
     /**

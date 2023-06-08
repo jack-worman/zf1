@@ -35,7 +35,6 @@
  * @group Zend_CodeGenerator
  * @group Zend_CodeGenerator_Php
  */
-#[AllowDynamicProperties]
 class Zend_CodeGenerator_Php_Docblock_Tag_ReturnTest extends PHPUnit_Framework_TestCase
 {
 

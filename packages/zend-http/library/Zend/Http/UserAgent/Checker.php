@@ -30,7 +30,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-#[AllowDynamicProperties]
 class Zend_Http_UserAgent_Checker extends Zend_Http_UserAgent_Desktop
 {
 

@@ -35,6 +35,5 @@
  * @copyright  Copyright (c) 2009 - 2011, RealDolmen (http://www.realdolmen.com)
  * @license    http://phpazure.codeplex.com/license
  */
-#[AllowDynamicProperties]
 class Zend_Service_Console_Exception extends Zend_Service_Exception
 {}

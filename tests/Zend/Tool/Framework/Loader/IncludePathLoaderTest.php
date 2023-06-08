@@ -36,7 +36,6 @@
  * @group Zend_Tool_Framework
  * @group Zend_Tool_Framework_Loader
  */
-#[AllowDynamicProperties]
 class Zend_Tool_Framework_Loader_IncludePathLoaderTest extends PHPUnit_Framework_TestCase
 {
 

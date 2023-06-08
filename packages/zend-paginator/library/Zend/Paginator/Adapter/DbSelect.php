@@ -40,7 +40,6 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-#[AllowDynamicProperties]
 class Zend_Paginator_Adapter_DbSelect implements Zend_Paginator_Adapter_Interface
 {
     /**
@@ -92,14 +91,14 @@ class Zend_Paginator_Adapter_DbSelect implements Zend_Paginator_Adapter_Interfac
 
     /**
      * Returns the cache identifier.
-     *
+     * 
      * @return string
      */
     public function getCacheIdentifier()
     {
         return $this->_cacheIdentifier;
     }
-
+    
     /**
      * Sets the total row count, either directly or through a supplied
      * query.  Without setting this, {@link getPages()} selects the count
@@ -239,7 +238,7 @@ class Zend_Paginator_Adapter_DbSelect implements Zend_Paginator_Adapter_Interfac
              * than one group, or if the query has a HAVING clause, then take
              * the original query and use it as a subquery os the COUNT query.
              */
-            if (($isDistinct && ((count($columnParts) == 1 && $columnParts[0][1] == Zend_Db_Select::SQL_WILDCARD)
+            if (($isDistinct && ((count($columnParts) == 1 && $columnParts[0][1] == Zend_Db_Select::SQL_WILDCARD) 
                  || count($columnParts) > 1)) || count($groupParts) > 1 || !empty($havingParts)) {
                 $rowCount->reset(Zend_Db_Select::ORDER);
                 $rowCount = $db

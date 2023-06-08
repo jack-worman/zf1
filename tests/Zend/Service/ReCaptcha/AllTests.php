@@ -37,7 +37,6 @@ require_once 'Zend/Service/ReCaptcha/MailHideTest.php';
  * @group      Zend_Service
  * @group      Zend_Service_ReCaptcha
  */
-#[AllowDynamicProperties]
 class Zend_Service_ReCaptcha_AllTests
 {
     /**

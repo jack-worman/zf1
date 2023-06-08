@@ -40,7 +40,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://docs.amazonwebservices.com/AmazonS3/2006-03-01/
  */
-#[AllowDynamicProperties]
 class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
 {
     /**

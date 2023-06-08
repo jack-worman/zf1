@@ -38,7 +38,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Feed
  */
-#[AllowDynamicProperties]
 class Zend_Feed_AtomPublishingTest extends PHPUnit_Framework_TestCase
 {
     protected $_uri;
@@ -109,7 +108,6 @@ class Zend_Feed_AtomPublishingTest extends PHPUnit_Framework_TestCase
  * the request.
  *
  */
-#[AllowDynamicProperties]
 class TestClient extends Zend_Http_Client
 {
     public function request($method = null)

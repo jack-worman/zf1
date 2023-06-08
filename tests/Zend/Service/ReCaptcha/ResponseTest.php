@@ -32,7 +32,6 @@
  * @group      Zend_Service
  * @group      Zend_Service_ReCaptcha
  */
-#[AllowDynamicProperties]
 class Zend_Service_ReCaptcha_ResponseTest extends PHPUnit_Framework_TestCase
 {
     protected $_response = null;

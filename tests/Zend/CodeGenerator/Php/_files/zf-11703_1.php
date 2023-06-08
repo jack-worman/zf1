@@ -6,7 +6,6 @@
 /**
  * Class Foo1
  */
-#[AllowDynamicProperties]
 class Foo1
 {
 

@@ -33,7 +33,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @uses       Zend_Service_Ebay_Finding_Abstract
  */
-#[AllowDynamicProperties]
 class Zend_Service_Ebay_Finding_PaginationOutput extends Zend_Service_Ebay_Finding_Abstract
 {
     /**

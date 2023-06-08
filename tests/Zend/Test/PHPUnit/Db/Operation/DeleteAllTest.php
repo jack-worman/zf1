@@ -32,7 +32,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Test
  */
-#[AllowDynamicProperties]
 class Zend_Test_PHPUnit_Db_Operation_DeleteAllTest extends PHPUnit_Framework_TestCase
 {
     private $operation = null;

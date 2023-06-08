@@ -48,7 +48,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Test
  * @group      Zend_Test_PHPUnit
  */
-#[AllowDynamicProperties]
 class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -873,7 +872,6 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
 }
 
 // Concrete test case class for testing purposes
-#[AllowDynamicProperties]
 class Zend_Test_PHPUnit_ControllerTestCaseTest_Concrete extends Zend_Test_PHPUnit_ControllerTestCase
 {
 }

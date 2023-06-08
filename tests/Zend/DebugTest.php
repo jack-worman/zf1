@@ -33,7 +33,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Debug
  */
-#[AllowDynamicProperties]
 class Zend_DebugTest extends PHPUnit_Framework_TestCase
 {
 

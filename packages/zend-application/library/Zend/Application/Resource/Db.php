@@ -35,7 +35,6 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-#[AllowDynamicProperties]
 class Zend_Application_Resource_Db extends Zend_Application_Resource_ResourceAbstract
 {
     /**
@@ -142,7 +141,7 @@ class Zend_Application_Resource_Db extends Zend_Application_Resource_ResourceAbs
         ) {
             $this->_db = Zend_Db::factory($adapter, $this->getParams());
 
-            if ($this->_db instanceof Zend_Db_Adapter_Abstract
+            if ($this->_db instanceof Zend_Db_Adapter_Abstract 
                 && $this->isDefaultTableAdapter()
             ) {
                 Zend_Db_Table::setDefaultAdapter($this->_db);

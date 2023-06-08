@@ -41,7 +41,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Validate
  */
-#[AllowDynamicProperties]
 class Zend_Validate_AbstractTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -293,7 +292,6 @@ class Zend_Validate_AbstractTest extends PHPUnit_Framework_TestCase
     }
 }
 
-#[AllowDynamicProperties]
 class Zend_Validate_AbstractTest_Concrete extends Zend_Validate_Abstract
 {
     const FOO_MESSAGE = 'fooMessage';

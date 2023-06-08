@@ -31,7 +31,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Oauth
  */
-#[AllowDynamicProperties]
 class Zend_Oauth_ConfigTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()

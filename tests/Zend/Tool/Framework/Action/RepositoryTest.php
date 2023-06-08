@@ -39,7 +39,6 @@ require_once '_files/Foo.php';
  * @group Zend_Tool_Framework
  * @group Zend_Tool_Framework_Action
  */
-#[AllowDynamicProperties]
 class Zend_Tool_Framework_Action_RepositoryTest extends PHPUnit_Framework_TestCase
 {
     /**

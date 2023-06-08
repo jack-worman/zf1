@@ -60,7 +60,6 @@ abstract class Zend_Cache_BackendTest_SkipTests extends PHPUnit_Framework_TestCa
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-#[AllowDynamicProperties]
 class Zend_Cache_ApcBackendTest_SkipTests extends Zend_Cache_BackendTest_SkipTests
 {
 }
@@ -73,7 +72,6 @@ class Zend_Cache_ApcBackendTest_SkipTests extends Zend_Cache_BackendTest_SkipTes
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-#[AllowDynamicProperties]
 class Zend_Cache_WinCacheBackendTest_SkipTests extends Zend_Cache_BackendTest_SkipTests
 {
 }
@@ -85,7 +83,6 @@ class Zend_Cache_WinCacheBackendTest_SkipTests extends Zend_Cache_BackendTest_Sk
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-#[AllowDynamicProperties]
 class Zend_Cache_XcacheBackendTest_SkipTests extends Zend_Cache_BackendTest_SkipTests
 {
 }
@@ -98,7 +95,6 @@ class Zend_Cache_XcacheBackendTest_SkipTests extends Zend_Cache_BackendTest_Skip
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-#[AllowDynamicProperties]
 class Zend_Cache_MemcachedBackendTest_SkipTests extends Zend_Cache_BackendTest_SkipTests
 {
 }
@@ -111,7 +107,6 @@ class Zend_Cache_MemcachedBackendTest_SkipTests extends Zend_Cache_BackendTest_S
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-#[AllowDynamicProperties]
 class Zend_Cache_LibmemcachedBackendTest_SkipTests extends Zend_Cache_BackendTest_SkipTests
 {
 }
@@ -125,7 +120,6 @@ class Zend_Cache_LibmemcachedBackendTest_SkipTests extends Zend_Cache_BackendTes
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-#[AllowDynamicProperties]
 class Zend_Cache_SqliteBackendTest_SkipTests extends Zend_Cache_BackendTest_SkipTests
 {
 }
@@ -138,7 +132,6 @@ class Zend_Cache_SqliteBackendTest_SkipTests extends Zend_Cache_BackendTest_Skip
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-#[AllowDynamicProperties]
 class Zend_Cache_ZendPlatformBackendTest_SkipTests extends Zend_Cache_BackendTest_SkipTests
 {
 }
@@ -151,7 +144,6 @@ class Zend_Cache_ZendPlatformBackendTest_SkipTests extends Zend_Cache_BackendTes
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-#[AllowDynamicProperties]
 class Zend_Cache_TwoLevelsBackendTest_SkipTests extends Zend_Cache_BackendTest_SkipTests
 {
 }
@@ -164,7 +156,6 @@ class Zend_Cache_TwoLevelsBackendTest_SkipTests extends Zend_Cache_BackendTest_S
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-#[AllowDynamicProperties]
 class Zend_Cache_ZendServerTest_SkipTests extends Zend_Cache_BackendTest_SkipTests
 {
 }

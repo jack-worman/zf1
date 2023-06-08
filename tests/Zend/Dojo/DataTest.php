@@ -34,7 +34,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Dojo
  */
-#[AllowDynamicProperties]
 class Zend_Dojo_DataTest extends PHPUnit_Framework_TestCase
 {
     public $dojoData;
@@ -527,7 +526,6 @@ class Zend_Dojo_DataTest extends PHPUnit_Framework_TestCase
     }
 }
 
-#[AllowDynamicProperties]
 class Zend_Dojo_DataTest_DataObject
 {
     public $item = array(
@@ -542,7 +540,6 @@ class Zend_Dojo_DataTest_DataObject
     }
 }
 
-#[AllowDynamicProperties]
 class Zend_Dojo_DataTest_DataCollection implements Iterator
 {
     public $items = array();

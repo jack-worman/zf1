@@ -43,7 +43,6 @@ require_once __DIR__ . '/SocketTest.php';
  * @group      Zend_Http
  * @group      Zend_Http_Client
  */
-#[AllowDynamicProperties]
 class Zend_Http_Client_SocketPersistentTest extends Zend_Http_Client_SocketTest
 {
     /**

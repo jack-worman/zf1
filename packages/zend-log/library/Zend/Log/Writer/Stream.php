@@ -34,7 +34,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-#[AllowDynamicProperties]
 class Zend_Log_Writer_Stream extends Zend_Log_Writer_Abstract
 {
     /**

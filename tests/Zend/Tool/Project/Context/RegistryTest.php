@@ -34,7 +34,6 @@
  * @group Zend_Tool
  * @group Zend_Tool_Project
  */
-#[AllowDynamicProperties]
 class Zend_Tool_Project_Context_RepositoryTest extends PHPUnit_Framework_TestCase
 {
 

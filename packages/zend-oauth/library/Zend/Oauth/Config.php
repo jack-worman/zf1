@@ -34,7 +34,6 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-#[AllowDynamicProperties]
 class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
 {
     /**
@@ -147,10 +146,10 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
      * @var Zend_Oauth_Token
      */
     protected $_token = null;
-
+    
     /**
      * Define the OAuth realm
-     *
+     * 
      * @var string
      */
     protected $_realm = null;

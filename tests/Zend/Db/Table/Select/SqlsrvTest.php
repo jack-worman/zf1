@@ -35,7 +35,6 @@ require_once 'Zend/Db/Table/Select/TestCommon.php';
  * @group      Zend_Db_Table
  * @group      Zend_Db_Table_Select
  */
-#[AllowDynamicProperties]
 class Zend_Db_Table_Select_SqlsrvTest extends Zend_Db_Table_Select_TestCommon
 {
     public function testSelectQueryWithBinds()

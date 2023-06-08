@@ -22,7 +22,7 @@
 // require_once 'Zend/Stdlib/SplPriorityQueue.php';
 
 /**
- * Specialized priority queue implementation for use with an intercepting
+ * Specialized priority queue implementation for use with an intercepting 
  * filter chain.
  *
  * Allows removal
@@ -32,13 +32,12 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-#[AllowDynamicProperties]
 class Zend_EventManager_Filter_FilterIterator extends Zend_Stdlib_SplPriorityQueue
 {
     /**
      * Does the queue contain a given value?
-     *
-     * @param  mixed $datum
+     * 
+     * @param  mixed $datum 
      * @return bool
      */
     public function contains($datum)
@@ -57,8 +56,8 @@ class Zend_EventManager_Filter_FilterIterator extends Zend_Stdlib_SplPriorityQue
      *
      * This is an expensive operation. It must first iterate through all values,
      * and then re-populate itself. Use only if absolutely necessary.
-     *
-     * @param  mixed $datum
+     * 
+     * @param  mixed $datum 
      * @return bool
      */
     public function remove($datum)

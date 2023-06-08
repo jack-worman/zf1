@@ -35,7 +35,6 @@ require_once 'Zend/Db/Table/Rowset/TestCommon.php';
  * @group      Zend_Db_Table
  * @group      Zend_Db_Table_Rowset
  */
-#[AllowDynamicProperties]
 class Zend_Db_Table_Rowset_Pdo_MysqlTest extends Zend_Db_Table_Rowset_TestCommon
 {
 

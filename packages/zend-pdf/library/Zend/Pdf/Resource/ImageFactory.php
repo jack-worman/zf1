@@ -30,7 +30,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @todo       Use Zend_Mime not file extension for type determination.
  */
-#[AllowDynamicProperties]
 class Zend_Pdf_Resource_ImageFactory
 {
     public static function factory($filename) {

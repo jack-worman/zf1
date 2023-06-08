@@ -33,7 +33,6 @@
  * @group      Zend_Reflection
  * @group      Zend_Reflection_Class
  */
-#[AllowDynamicProperties]
 class Zend_Reflection_ClassTest extends PHPUnit_Framework_TestCase
 {
 

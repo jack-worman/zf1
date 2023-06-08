@@ -46,7 +46,6 @@
  * @method $this setName($keyValue, $content, $modifiers)
  * @method $this setProperty($property, $content, $modifiers)
  */
-#[AllowDynamicProperties]
 class Zend_View_Helper_HeadMeta extends Zend_View_Helper_Placeholder_Container_Standalone
 {
     /**
@@ -392,7 +391,7 @@ class Zend_View_Helper_HeadMeta extends Zend_View_Helper_Placeholder_Container_S
             $this->_escape($item->content),
             $modifiersString
         );
-
+        
         if (isset($item->modifiers['conditional'])
             && !empty($item->modifiers['conditional'])
             && is_string($item->modifiers['conditional']))
@@ -402,7 +401,7 @@ class Zend_View_Helper_HeadMeta extends Zend_View_Helper_Placeholder_Container_S
             }
             $meta = '<!--[if ' . $this->_escape($item->modifiers['conditional']) . ']>' . $meta . '<![endif]-->';
         }
-
+        
         return $meta;
     }
 

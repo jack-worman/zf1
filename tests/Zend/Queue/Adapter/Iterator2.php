@@ -35,7 +35,6 @@
  */
 // require_once 'Zend/Queue/Message/Iterator.php';
 
-#[AllowDynamicProperties]
 class Zend_Queue_Message_Iterator2 extends Zend_Queue_Message_Iterator
 {
     // This is a really lazy way to test a new iterator.

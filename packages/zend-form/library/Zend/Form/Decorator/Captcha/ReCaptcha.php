@@ -25,7 +25,7 @@
 /**
  * ReCaptcha-based captcha decorator
  *
- * Adds hidden fields for challenge and response input, and JS for populating
+ * Adds hidden fields for challenge and response input, and JS for populating 
  * from known recaptcha IDs
  *
  * @category   Zend
@@ -34,7 +34,6 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-#[AllowDynamicProperties]
 class Zend_Form_Decorator_Captcha_ReCaptcha extends Zend_Form_Decorator_Abstract
 {
     /**
@@ -78,7 +77,7 @@ class Zend_Form_Decorator_Captcha_ReCaptcha extends Zend_Form_Decorator_Abstract
         ));
 
         // Create a window.onload event so that we can bind to the form.
-        // Once bound, add an onsubmit event that will replace the hidden field
+        // Once bound, add an onsubmit event that will replace the hidden field 
         // values with those produced by ReCaptcha
         // zendBindEvent mediates between Mozilla's addEventListener and
         // IE's sole support for addEvent.
@@ -113,7 +112,7 @@ windowOnLoad(function(){
 </script>
 EOJ;
 
-        // Always place the hidden fields before the captcha markup, and follow
+        // Always place the hidden fields before the captcha markup, and follow 
         // with the JS from above
         switch ($placement) {
             case 'PREPEND':

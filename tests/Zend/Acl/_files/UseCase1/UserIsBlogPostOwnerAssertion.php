@@ -1,6 +1,5 @@
 <?php
 
-#[AllowDynamicProperties]
 class Zend_Acl_UseCase1_UserIsBlogPostOwnerAssertion implements Zend_Acl_Assert_Interface
 {
 

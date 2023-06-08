@@ -38,7 +38,6 @@ require_once 'Zend/Queue/Adapter/AdapterTest.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Queue
  */
-#[AllowDynamicProperties]
 class Zend_Queue_Adapter_ActivemqTest extends Zend_Queue_Adapter_AdapterTest
 {
     /**
@@ -99,7 +98,7 @@ class Zend_Queue_Adapter_ActivemqTest extends Zend_Queue_Adapter_AdapterTest
         $this->assertTrue(is_string(Zend_Queue_Adapter_Activemq::DEFAULT_HOST));
         $this->assertTrue(is_integer(Zend_Queue_Adapter_Activemq::DEFAULT_PORT));
     }
-
+    
     /**
      * @group ZF-7650
      */

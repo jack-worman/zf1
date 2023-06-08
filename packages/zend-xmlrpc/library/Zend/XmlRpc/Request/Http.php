@@ -36,7 +36,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version $Id$
  */
-#[AllowDynamicProperties]
 class Zend_XmlRpc_Request_Http extends Zend_XmlRpc_Request
 {
     /**

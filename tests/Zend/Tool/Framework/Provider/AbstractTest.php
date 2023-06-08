@@ -37,7 +37,6 @@ require_once '_files/ProviderFullFeatured.php';
  * @group Zend_Tool_Framework
  * @group Zend_Tool_Framework_Provider
  */
-#[AllowDynamicProperties]
 class Zend_Tool_Framework_Provider_AbstractTest extends PHPUnit_Framework_TestCase
 {
 

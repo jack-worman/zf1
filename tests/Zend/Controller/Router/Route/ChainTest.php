@@ -69,7 +69,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Controller
  * @group      Zend_Controller_Router
  */
-#[AllowDynamicProperties]
 class Zend_Controller_Router_Route_ChainTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -983,7 +982,6 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit_Framework_TestCase
     }
 }
 
-#[AllowDynamicProperties]
 class Zend_Controller_Router_Route_SimpleSubclassTest extends Zend_Controller_Router_Route_Abstract
 {
     /**
@@ -1025,7 +1023,6 @@ class Zend_Controller_Router_Route_SimpleSubclassTest extends Zend_Controller_Ro
 
 }
 
-#[AllowDynamicProperties]
 class Zend_Controller_Router_Route_SubclassTest extends Zend_Controller_Router_Route_Static
 {
     public function match($path, $partial = false)
@@ -1056,7 +1053,6 @@ class Zend_Controller_Router_Route_SubclassTest extends Zend_Controller_Router_R
  *
  * @uses Zend_Controller_Request_Interface
  */
-#[AllowDynamicProperties]
 class Zend_Controller_Router_ChainTest_Request extends Zend_Controller_Request_Http
 {
     protected $_host;
@@ -1085,7 +1081,6 @@ class Zend_Controller_Router_ChainTest_Request extends Zend_Controller_Request_H
 /**
  * Zend_Controller_Router_ChainTest_Dispatcher - dispatcher object for router testing
  */
-#[AllowDynamicProperties]
 class Zend_Controller_Router_ChainTest_Dispatcher extends Zend_Controller_Dispatcher_Standard
 {
     public function getDefaultControllerName()

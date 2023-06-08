@@ -38,7 +38,6 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-#[AllowDynamicProperties]
 class Zend_Amf_Parse_Amf3_Serializer extends Zend_Amf_Parse_Serializer
 {
     /**
@@ -237,8 +236,8 @@ class Zend_Amf_Parse_Amf3_Serializer extends Zend_Amf_Parse_Serializer
             return $this;
         }
 
-        $ref = array_key_exists($string, $this->_referenceStrings)
-             ? $this->_referenceStrings[$string]
+        $ref = array_key_exists($string, $this->_referenceStrings) 
+             ? $this->_referenceStrings[$string] 
              : false;
         if ($ref === false){
             $this->_referenceStrings[$string] = count($this->_referenceStrings);
@@ -390,8 +389,8 @@ class Zend_Amf_Parse_Amf3_Serializer extends Zend_Amf_Parse_Serializer
         }
 
         $hash = spl_object_hash($object);
-        $ref = array_key_exists($hash, $this->_referenceObjects)
-             ? $this->_referenceObjects[$hash]
+        $ref = array_key_exists($hash, $this->_referenceObjects) 
+             ? $this->_referenceObjects[$hash] 
              : false;
 
         // quickly handle object references

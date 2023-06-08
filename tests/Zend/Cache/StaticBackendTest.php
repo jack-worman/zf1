@@ -25,7 +25,6 @@ require_once 'CommonBackendTest.php';
  * @package    Zend_Cache
  * @subpackage UnitTests
  */
-#[AllowDynamicProperties]
 class Zend_Cache_StaticBackendTest extends Zend_Cache_CommonBackendTest {
 
     protected $_instance;

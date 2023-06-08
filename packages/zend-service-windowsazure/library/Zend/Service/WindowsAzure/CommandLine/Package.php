@@ -46,7 +46,6 @@
  * @command-handler-footer value per line. It accepts the same parameters as one can
  * @command-handler-footer use from the command line command.
  */
-#[AllowDynamicProperties]
 class Zend_Service_WindowsAzure_CommandLine_Package
 	extends Zend_Service_Console_Command
 {

@@ -34,7 +34,6 @@ require_once 'RsaTest.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Crypt
  */
-#[AllowDynamicProperties]
 class Zend_Crypt_Rsa_AllTests
 {
     public static function main()

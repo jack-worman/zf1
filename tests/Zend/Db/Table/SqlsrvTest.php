@@ -35,7 +35,6 @@ require_once 'Zend/Db/Table/TestCommon.php';
  * @group      Zend_Db
  * @group      Zend_Db_Table
  */
-#[AllowDynamicProperties]
 class Zend_Db_Table_SqlsrvTest extends Zend_Db_Table_TestCommon
 {
     public function testTableInsertSequence()

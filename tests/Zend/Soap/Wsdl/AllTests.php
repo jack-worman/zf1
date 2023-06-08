@@ -37,7 +37,6 @@ require_once "DefaultComplexTypeTest.php";
  * @group      Zend_Soap
  * @group      Zend_Soap_Wsdl
  */
-#[AllowDynamicProperties]
 class Zend_Soap_Wsdl_AllTests
 {
     public static function suite()

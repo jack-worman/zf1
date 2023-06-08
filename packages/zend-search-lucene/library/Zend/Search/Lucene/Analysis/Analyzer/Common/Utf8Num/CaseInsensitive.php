@@ -37,7 +37,6 @@
  */
 
 
-#[AllowDynamicProperties]
 class Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num_CaseInsensitive extends Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num
 {
     public function __construct()

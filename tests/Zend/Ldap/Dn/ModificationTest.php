@@ -34,7 +34,6 @@
  * @group      Zend_Ldap
  * @group      Zend_Ldap_Dn
  */
-#[AllowDynamicProperties]
 class Zend_Ldap_Dn_ModificationTest extends PHPUnit_Framework_TestCase
 {
     public function testDnManipulationGet()

@@ -50,7 +50,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Auth
  */
-#[AllowDynamicProperties]
 class Zend_AuthTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -108,7 +107,6 @@ class Zend_AuthTest extends PHPUnit_Framework_TestCase
 }
 
 
-#[AllowDynamicProperties]
 class Zend_AuthTest_Success_Adapter implements Zend_Auth_Adapter_Interface
 {
     public function authenticate()

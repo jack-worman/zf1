@@ -1,7 +1,6 @@
 <?php
 // require_once 'Zend/Barcode/Renderer/Image.php';
 
-#[AllowDynamicProperties]
 class My_Namespace_Image extends Zend_Barcode_Renderer_Image
 {
 

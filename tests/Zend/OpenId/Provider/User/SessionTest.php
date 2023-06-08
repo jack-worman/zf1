@@ -34,7 +34,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_OpenId
  */
-#[AllowDynamicProperties]
 class Zend_OpenId_Provider_User_SessionTest extends PHPUnit_Framework_TestCase
 {
     const USER1     = "test_user1";

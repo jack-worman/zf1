@@ -38,7 +38,6 @@ require_once 'Zend/Rest/ResultTest.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Rest
  */
-#[AllowDynamicProperties]
 class Zend_Rest_AllTests
 {
     public static function main()

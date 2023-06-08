@@ -43,7 +43,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Config
  */
-#[AllowDynamicProperties]
 class Zend_Config_Writer_XmlTest extends PHPUnit_Framework_TestCase
 {
     protected $_tempName;

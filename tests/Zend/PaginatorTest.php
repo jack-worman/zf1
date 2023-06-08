@@ -107,7 +107,6 @@ require_once 'Zend/Paginator/_files/TestTable.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Paginator
  */
-#[AllowDynamicProperties]
 class Zend_PaginatorTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -1134,7 +1133,6 @@ class Zend_PaginatorTest extends PHPUnit_Framework_TestCase
     }
 }
 
-#[AllowDynamicProperties]
 class Zend_Paginator_TestArrayAggregate implements Zend_Paginator_AdapterAggregate
 {
     public function getPaginatorAdapter()
@@ -1147,7 +1145,6 @@ class Zend_Paginator_TestArrayAggregate implements Zend_Paginator_AdapterAggrega
  * Wrapper around Zend_Paginator to provide access to cache internal ID method
  * for testing purposes.
  */
-#[AllowDynamicProperties]
 class Zend_Paginator_TestCache extends Zend_Paginator
 {
     /**

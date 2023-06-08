@@ -35,7 +35,6 @@ require_once 'Zend/ProgressBar/Adapter/AllTests.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_ProgressBar
  */
-#[AllowDynamicProperties]
 class Zend_ProgressBar_AllTests
 {
     public static function main()

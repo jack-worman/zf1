@@ -33,7 +33,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Search_Lucene
  */
-#[AllowDynamicProperties]
 class Zend_Search_Lucene_PriorityQueueTest extends PHPUnit_Framework_TestCase
 {
     public function testCreate()
@@ -124,7 +123,6 @@ class Zend_Search_Lucene_PriorityQueueTest extends PHPUnit_Framework_TestCase
 }
 
 
-#[AllowDynamicProperties]
 class Zend_Search_Lucene_PriorityQueue_testClass extends Zend_Search_Lucene_PriorityQueue
 {
     /**

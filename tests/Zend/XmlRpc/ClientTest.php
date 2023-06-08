@@ -42,7 +42,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_XmlRpc
  */
-#[AllowDynamicProperties]
 class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -796,7 +795,6 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
 
 /** related to ZF-8478 */
 // require_once 'Zend/XmlRpc/Client/ServerProxy.php';
-#[AllowDynamicProperties]
 class Python_SimpleXMLRPCServerWithUnsupportedIntrospection extends Zend_XmlRpc_Client_ServerProxy {
     public function __call($method, $args) {
         if ($method == 'methodSignature') {
@@ -808,7 +806,6 @@ class Python_SimpleXMLRPCServerWithUnsupportedIntrospection extends Zend_XmlRpc_
 
 /** related to ZF-8478 */
 // require_once 'Zend/XmlRpc/Client.php';
-#[AllowDynamicProperties]
 class Test_XmlRpc_Client extends Zend_XmlRpc_Client {
     public function getProxy($namespace = '') {
     	if (empty($this->_proxyCache[$namespace])) {

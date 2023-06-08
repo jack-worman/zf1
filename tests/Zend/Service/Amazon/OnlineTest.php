@@ -44,7 +44,6 @@
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
  */
-#[AllowDynamicProperties]
 class Zend_Service_Amazon_OnlineTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -339,7 +338,6 @@ class Zend_Service_Amazon_OnlineTest extends PHPUnit_Framework_TestCase
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
  */
-#[AllowDynamicProperties]
 class Zend_Service_Amazon_OnlineTest_Skip extends PHPUnit_Framework_TestCase
 {
     public function setUp()

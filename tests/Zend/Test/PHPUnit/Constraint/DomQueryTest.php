@@ -34,7 +34,6 @@
  * @group      Zend_Test
  * @group      Zend_Test_PHPUnit
  */
-#[AllowDynamicProperties]
 class Zend_Test_PHPUnit_Constraint_DomQueryTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -64,7 +63,7 @@ class Zend_Test_PHPUnit_Constraint_DomQueryTest extends PHPUnit_Framework_TestCa
             Zend_Test_PHPUnit_Constraint_DomQuery::ASSERT_CONTENT_CONTAINS, 'value1');
         $this->assertTrue($result);
     }
-
+    
     /**
      * @group issue-303
      */

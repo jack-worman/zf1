@@ -43,7 +43,6 @@
  * @group      Zend_Http_Header
  * @group      ZF-4520
  */
-#[AllowDynamicProperties]
 class Zend_Http_Header_SetCookieTest extends PHPUnit_Framework_TestCase
 {
 
@@ -53,7 +52,7 @@ class Zend_Http_Header_SetCookieTest extends PHPUnit_Framework_TestCase
     public function testSetCookieConstructor()
     {
         $setCookieHeader = new Zend_Http_Header_SetCookie(
-            'myname', 'myvalue', 'Wed, 13-Jan-2021 22:23:01 GMT',
+            'myname', 'myvalue', 'Wed, 13-Jan-2021 22:23:01 GMT', 
             '/accounts', 'docs.foo.com', true, true, 99, 9
         );
         $this->assertEquals('myname', $setCookieHeader->getName());
@@ -184,10 +183,10 @@ class Zend_Http_Header_SetCookieTest extends PHPUnit_Framework_TestCase
     }
 
     /** Implmentation specific tests here */
-
+    
     /**
      * ZF2-169
-     *
+     * 
      * @see http://framework.zend.com/issues/browse/ZF2-169
      */
     public function testZF2_169()
@@ -202,7 +201,7 @@ class Zend_Http_Header_SetCookieTest extends PHPUnit_Framework_TestCase
         $c = new Zend_Http_Header_SetCookie();
         $this->assertEquals('Set-Cookie', $c->getFieldName());
     }
-
+    
     /**
      * @dataProvider validCookieWithInfoProvider
      */
@@ -211,11 +210,11 @@ class Zend_Http_Header_SetCookieTest extends PHPUnit_Framework_TestCase
         $cookie = Zend_Http_Header_SetCookie::fromString($cStr);
         if (! $cookie instanceof Zend_Http_Header_SetCookie) {
             $this->fail("Failed creating a cookie object from '$cStr'");
-        }
+        }        
         $this->assertEquals($expected, $cookie->getFieldValue());
         $this->assertEquals($cookie->getFieldName() . ': ' . $expected, (string)$cookie);
     }
-
+    
     /**
      * @dataProvider validCookieWithInfoProvider
      */
@@ -224,7 +223,7 @@ class Zend_Http_Header_SetCookieTest extends PHPUnit_Framework_TestCase
         $cookie = Zend_Http_Header_SetCookie::fromString($cStr);
         if (! $cookie instanceof Zend_Http_Header_SetCookie) {
             $this->fail("Failed creating a cookie object from '$cStr'");
-        }
+        }        
         $this->assertEquals($cookie->getFieldName() . ': ' . $expected, $cookie->toString());
     }
 
@@ -253,7 +252,7 @@ class Zend_Http_Header_SetCookieTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals((array)$headerLine, $response->sendHeaders());
     }
-
+    
     /**
      * Provide valid cookie strings with information about them
      *

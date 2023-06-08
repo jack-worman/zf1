@@ -37,7 +37,6 @@ require_once "AudioscrobblerTestCase.php";
  * @group      Zend_Service
  * @group      Zend_Service_Audioscrobbler
  */
-#[AllowDynamicProperties]
 class Zend_Service_Audioscrobbler_ProfileTest extends Zend_Service_Audioscrobbler_AudioscrobblerTestCase
 {
     public function testConstructValid()

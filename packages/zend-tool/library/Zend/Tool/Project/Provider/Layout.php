@@ -31,7 +31,6 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-#[AllowDynamicProperties]
 class Zend_Tool_Project_Provider_Layout extends Zend_Tool_Project_Provider_Abstract implements Zend_Tool_Framework_Provider_Pretendable
 {
        /**
@@ -87,7 +86,7 @@ class Zend_Tool_Project_Provider_Layout extends Zend_Tool_Project_Provider_Abstr
             $applicationConfigResource->create();
 
             $this->_registry->getResponse()->appendContent('A layout entry has been added to the application config file.');
-
+            
             $layoutScriptFile = self::createResource($profile);
             if (!$layoutScriptFile->exists()) {
                 $layoutScriptFile->create();

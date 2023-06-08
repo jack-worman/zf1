@@ -30,7 +30,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mobile
  */
-#[AllowDynamicProperties]
 class Zend_Mobile_Push_Message_AbstractTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
@@ -100,8 +99,7 @@ class Zend_Mobile_Push_Message_AbstractTest extends PHPUnit_Framework_TestCase
     }
 }
 
-#[AllowDynamicProperties]
 class Zend_Mobile_Push_Message_AbstractProxy extends Zend_Mobile_Push_Message_Abstract
 {
-
+    
 }

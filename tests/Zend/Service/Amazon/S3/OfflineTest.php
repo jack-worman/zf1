@@ -31,7 +31,6 @@
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_S3
  */
-#[AllowDynamicProperties]
 class Zend_Service_Amazon_S3_OfflineTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()

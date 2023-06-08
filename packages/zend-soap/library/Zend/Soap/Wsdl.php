@@ -38,7 +38,6 @@
  * @category   Zend
  * @package    Zend_Soap
  */
-#[AllowDynamicProperties]
 class Zend_Soap_Wsdl
 {
     /**

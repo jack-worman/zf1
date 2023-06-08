@@ -45,7 +45,6 @@
  *
  * @todo methods need more API documentation.
  */
-#[AllowDynamicProperties]
 class Zend_Tool_Framework_Client_Console
     extends Zend_Tool_Framework_Client_Abstract
     implements Zend_Tool_Framework_Client_Interactive_InputInterface,

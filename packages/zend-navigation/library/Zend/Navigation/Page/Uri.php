@@ -34,7 +34,6 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-#[AllowDynamicProperties]
 class Zend_Navigation_Page_Uri extends Zend_Navigation_Page
 {
     /**
@@ -81,16 +80,16 @@ class Zend_Navigation_Page_Uri extends Zend_Navigation_Page
     public function getHref()
     {
         $uri = $this->getUri();
-
-        $fragment = $this->getFragment();
+        
+        $fragment = $this->getFragment();       
         if (null !== $fragment) {
             if ('#' == substr((string) $uri, -1)) {
                 return $uri . $fragment;
-            } else {
+            } else {                
                 return $uri . '#' . $fragment;
             }
         }
-
+        
         return $uri;
     }
 

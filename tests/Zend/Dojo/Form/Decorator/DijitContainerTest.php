@@ -54,7 +54,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Dojo
  * @group      Zend_Dojo_Form
  */
-#[AllowDynamicProperties]
 class Zend_Dojo_Form_Decorator_DijitContainerTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -244,7 +243,6 @@ class Zend_Dojo_Form_Decorator_DijitContainerTest extends PHPUnit_Framework_Test
     }
 }
 
-#[AllowDynamicProperties]
 class Zend_Dojo_Form_Decorator_DijitContainerTest_Example extends Zend_Dojo_Form_Decorator_DijitContainer
 {
 }

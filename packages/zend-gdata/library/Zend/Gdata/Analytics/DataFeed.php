@@ -40,7 +40,6 @@
  * @package    Zend_Gdata
  * @subpackage Analytics
  */
-#[AllowDynamicProperties]
 class Zend_Gdata_Analytics_DataFeed extends Zend_Gdata_Feed
 {
 

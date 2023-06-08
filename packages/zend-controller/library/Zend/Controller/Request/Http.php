@@ -34,7 +34,6 @@
  * @package Zend_Controller
  * @subpackage Request
  */
-#[AllowDynamicProperties]
 class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
 {
     /**

@@ -1,6 +1,5 @@
 <?php
 
-#[AllowDynamicProperties]
 class ZF9018TestClass
 {
     public function doSomething($var)

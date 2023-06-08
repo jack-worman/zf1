@@ -40,7 +40,6 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-#[AllowDynamicProperties]
 class Zend_Gdata_Spreadsheets_Extension_RowCount extends Zend_Gdata_Extension
 {
 

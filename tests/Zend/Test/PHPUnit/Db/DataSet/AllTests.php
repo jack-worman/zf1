@@ -38,7 +38,6 @@ require_once "DbTableDataSetTest.php";
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Test
  */
-#[AllowDynamicProperties]
 class Zend_Test_PHPUnit_Db_DataSet_AllTests
 {
     public static function main()

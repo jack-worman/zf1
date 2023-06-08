@@ -32,7 +32,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-#[AllowDynamicProperties]
 class Zend_Form_Element_Note extends Zend_Form_Element_Xhtml
 {
     /**
@@ -41,14 +40,14 @@ class Zend_Form_Element_Note extends Zend_Form_Element_Xhtml
      * @var string
      */
     public $helper = 'formNote';
-
+    
     /**
      * Ignore flag (used when retrieving values at form level)
      *
      * @var bool
      */
     protected $_ignore = true;
-
+    
     /**
      * Validate element value (pseudo)
      *

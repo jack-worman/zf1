@@ -38,7 +38,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-#[AllowDynamicProperties]
 class Zend_Form_Decorator_CallbackTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -201,7 +200,6 @@ EOH;
     return $html;
 }
 
-#[AllowDynamicProperties]
 class Zend_Form_Decorator_CallbackTest_TestCallbackClass
 {
     public static function direct($content, $element, array $options)

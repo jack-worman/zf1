@@ -35,7 +35,6 @@
  * @group Zend_CodeGenerator
  * @group Zend_CodeGenerator_Php
  */
-#[AllowDynamicProperties]
 class Zend_CodeGenerator_Php_ClassTest extends PHPUnit_Framework_TestCase
 {
 
@@ -276,7 +275,6 @@ EOS;
                      ->setExtendedClass('');
 
         $expected = <<<CODE
-#[AllowDynamicProperties]
 class MyClass
 {
 
@@ -297,7 +295,6 @@ CODE;
                      ->setExtendedClass('ParentClass');
 
         $expected = <<<CODE
-#[AllowDynamicProperties]
 class MyClass extends ParentClass
 {
 
@@ -323,7 +320,6 @@ CODE;
         $codeGenClass->setName('My_Class')->setProperties(array($const, $property));
 
         $expected = <<<CODE
-#[AllowDynamicProperties]
 class My_Class
 {
 

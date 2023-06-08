@@ -38,7 +38,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Amf
  */
-#[AllowDynamicProperties]
 class Zend_Amf_ResourceTest extends PHPUnit_Framework_TestCase
 {
 
@@ -144,7 +143,6 @@ class Zend_Amf_ResourceTest extends PHPUnit_Framework_TestCase
 
 }
 
-#[AllowDynamicProperties]
 class Zend_Amf_Resource_testclass {
     function returnFile()
     {
@@ -164,7 +162,6 @@ class Zend_Amf_Resource_testclass {
     }
 }
 
-#[AllowDynamicProperties]
 class StreamContext2
 {
     public function parse($resource)
@@ -172,7 +169,6 @@ class StreamContext2
         return stream_context_get_options($resource);
     }
 }
-#[AllowDynamicProperties]
 class StreamContext3
 {
     protected function parse($resource)
@@ -180,7 +176,6 @@ class StreamContext3
         return stream_context_get_options($resource);
     }
 }
-#[AllowDynamicProperties]
 class Zend_Amf_TestResourceLoader implements Zend_Loader_PluginLoader_Interface {
     public $suffix;
     public function __construct($suffix) {

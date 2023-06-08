@@ -36,7 +36,6 @@ require_once 'Zend/Db/Profiler/TestCommon.php';
  * @group      Zend_Db
  * @group      Zend_Db_Profiler
  */
-#[AllowDynamicProperties]
 class Zend_Db_Profiler_OracleTest extends Zend_Db_Profiler_TestCommon
 {
 

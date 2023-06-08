@@ -35,7 +35,6 @@ require_once __DIR__ . '/AbstractFeedTest.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Feed
  */
-#[AllowDynamicProperties]
 class Zend_Feed_RssTest extends Zend_Feed_AbstractFeedTest
 {
     public $remoteFeedNames = array('zend_feed_rss_xxe.remote.xml');

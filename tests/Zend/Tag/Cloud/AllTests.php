@@ -36,7 +36,6 @@ require_once 'Zend/Tag/Cloud/Decorator/AllTests.php';
  * @group      Zend_Tag
  * @group      Zend_Tag_Cloud
  */
-#[AllowDynamicProperties]
 class Zend_Tag_Cloud_AllTests
 {
     public static function main()

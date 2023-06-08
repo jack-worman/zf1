@@ -59,7 +59,6 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-#[AllowDynamicProperties]
 class Zend_Mail_Transport_Mock extends Zend_Mail_Transport_Abstract
 {
     /**
@@ -92,7 +91,6 @@ class Zend_Mail_Transport_Mock extends Zend_Mail_Transport_Abstract
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-#[AllowDynamicProperties]
 class Zend_Mail_Transport_Sendmail_Mock extends Zend_Mail_Transport_Sendmail
 {
     /**
@@ -120,7 +118,6 @@ class Zend_Mail_Transport_Sendmail_Mock extends Zend_Mail_Transport_Sendmail
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mail
  */
-#[AllowDynamicProperties]
 class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
 {
     protected $numAssertions;

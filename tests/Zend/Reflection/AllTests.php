@@ -42,7 +42,6 @@ require_once 'Zend/Reflection/PropertyTest.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Reflection
  */
-#[AllowDynamicProperties]
 class Zend_Reflection_AllTests
 {
     public static function main()

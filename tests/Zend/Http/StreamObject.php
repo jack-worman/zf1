@@ -2,7 +2,6 @@
 
 namespace Zend\Http;
 
-#[AllowDynamicProperties]
 class StreamObject
 {
     private $tempFile;

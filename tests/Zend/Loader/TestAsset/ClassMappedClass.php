@@ -28,7 +28,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Loader
  */
-#[AllowDynamicProperties]
 class Zend_UnusualNamespace_ClassMappedClass
 {
     public $options;

@@ -42,7 +42,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Layout
  */
-#[AllowDynamicProperties]
 class Zend_Layout_PluginTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -233,7 +232,6 @@ class Zend_Layout_PluginTest extends PHPUnit_Framework_TestCase
 /**
  * Zend_Layout extension to allow resetting MVC instance
  */
-#[AllowDynamicProperties]
 class Zend_Layout_PluginTest_Layout extends Zend_Layout
 {
     public static function resetMvcInstance()

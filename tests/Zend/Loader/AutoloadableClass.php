@@ -31,7 +31,6 @@
 
 
 
-#[AllowDynamicProperties]
 class Zend_Loader_AutoloadableClass
 {
 }

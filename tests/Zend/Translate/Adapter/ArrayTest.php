@@ -37,7 +37,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Translate
  */
-#[AllowDynamicProperties]
 class Zend_Translate_Adapter_ArrayTest extends PHPUnit_Framework_TestCase
 {
     /**

@@ -36,7 +36,6 @@ require_once 'Zend/Db/Profiler/AllTests.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Db
  */
-#[AllowDynamicProperties]
 class Zend_Db_AllTests
 {
 

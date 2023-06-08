@@ -51,7 +51,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Controller_Action
  * @group      Zend_Controller_Action_Helper
  */
-#[AllowDynamicProperties]
 class Zend_Controller_Action_Helper_ContextSwitchTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -922,7 +921,6 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends PHPUnit_Framework_
     }
 }
 
-#[AllowDynamicProperties]
 class Zend_Controller_Action_Helper_ContextSwitchTestController extends Zend_Controller_Action
 {
     public $contextSwitch;
@@ -958,7 +956,6 @@ class Zend_Controller_Action_Helper_ContextSwitchTestController extends Zend_Con
     }
 }
 
-#[AllowDynamicProperties]
 class Zend_Controller_Action_Helper_ContextSwitchTest_LayoutOverride extends Zend_Layout
 {
     public static function resetMvcInstance()
@@ -967,7 +964,6 @@ class Zend_Controller_Action_Helper_ContextSwitchTest_LayoutOverride extends Zen
     }
 }
 
-#[AllowDynamicProperties]
 class Zend_Controller_Action_Helper_ContextSwitchText_CustomView implements Zend_View_Interface
 {
     public function getEngine()

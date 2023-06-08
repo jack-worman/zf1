@@ -22,7 +22,6 @@
 
 // require_once 'Zend/Service/Rackspace/Files.php';
 
-#[AllowDynamicProperties]
 class Zend_Service_Rackspace_Files_Container
 {
     const ERROR_PARAM_FILE_CONSTRUCT = 'The Zend_Service_Rackspace_Files passed in construction is not valid';

@@ -43,7 +43,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Validate
  */
-#[AllowDynamicProperties]
 class Zend_ValidateTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -253,7 +252,6 @@ class Zend_ValidateTest extends PHPUnit_Framework_TestCase
 /**
  * Validator to return true to any input.
  */
-#[AllowDynamicProperties]
 class Zend_ValidateTest_True extends Zend_Validate_Abstract
 {
     public function isValid($value)
@@ -266,7 +264,6 @@ class Zend_ValidateTest_True extends Zend_Validate_Abstract
 /**
  * Validator to return false to any input.
  */
-#[AllowDynamicProperties]
 class Zend_ValidateTest_False extends Zend_Validate_Abstract
 {
     public function isValid($value)

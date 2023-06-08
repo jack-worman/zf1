@@ -39,7 +39,6 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-#[AllowDynamicProperties]
 class Zend_Mail_Storage_Maildir_OldMessage extends Zend_Mail_Storage_Maildir
 {
     /**
@@ -57,7 +56,6 @@ class Zend_Mail_Storage_Maildir_OldMessage extends Zend_Mail_Storage_Maildir
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mail
  */
-#[AllowDynamicProperties]
 class Zend_Mail_MaildirMessageOldTest extends PHPUnit_Framework_TestCase
 {
     protected $_originalMaildir;

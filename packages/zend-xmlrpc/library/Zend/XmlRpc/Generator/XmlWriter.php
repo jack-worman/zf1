@@ -28,7 +28,6 @@
 /**
  * XML generator adapter based on XMLWriter
  */
-#[AllowDynamicProperties]
 class Zend_XmlRpc_Generator_XmlWriter extends Zend_XmlRpc_Generator_GeneratorAbstract
 {
     /**

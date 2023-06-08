@@ -38,7 +38,6 @@ require_once 'Zend/Dojo/View/AllTests.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Dojo
  */
-#[AllowDynamicProperties]
 class Zend_Dojo_AllTests
 {
     public static function main()

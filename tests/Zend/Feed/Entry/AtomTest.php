@@ -32,7 +32,6 @@
  * @group      Zend_Feed
  */
 
-#[AllowDynamicProperties]
 class AtomTest extends PHPUnit_Framework_TestCase
 {
     public function testConstructorElementException()

@@ -37,7 +37,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Controller
  * @group      Zend_Controller_Response
  */
-#[AllowDynamicProperties]
 class Zend_Controller_Response_HttpTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -646,7 +645,6 @@ class Zend_Controller_Response_HttpTest extends PHPUnit_Framework_TestCase
 }
 
 // require_once 'Zend/Controller/Action.php';
-#[AllowDynamicProperties]
 class Zend_Controller_Response_HttpTest_Action extends Zend_Controller_Action
 {}
 

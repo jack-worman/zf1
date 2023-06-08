@@ -36,7 +36,6 @@ require_once 'Zend/Ldap/Ldif/SimpleDecoderTest.php';
  * @group      Zend_Ldap
  * @group      Zend_Ldap_Ldif
  */
-#[AllowDynamicProperties]
 class Zend_Ldap_Ldif_AllTests
 {
     public static function main()
@@ -62,7 +61,6 @@ class Zend_Ldap_Ldif_AllTests
     }
 }
 
-#[AllowDynamicProperties]
 class Zend_Ldap_Ldif_SkipOnlineTests extends PHPUnit_Framework_TestCase
 {
     public function setUp()

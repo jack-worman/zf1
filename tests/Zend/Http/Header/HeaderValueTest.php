@@ -31,7 +31,6 @@
  * @group      Zend_Http
  * @group      Zend_Http_Header
  */
-#[AllowDynamicProperties]
 class Zend_Http_Header_HeaderValueTest extends PHPUnit_Framework_TestCase
 {
     /**

@@ -39,7 +39,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Xml
  */
-#[AllowDynamicProperties]
 class Zend_Xml_SecurityTest extends PHPUnit_Framework_TestCase
 {
     public static function main()
@@ -47,7 +46,7 @@ class Zend_Xml_SecurityTest extends PHPUnit_Framework_TestCase
         $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
-
+ 
     public function testScanForXEE()
     {
         $xml = <<<XML

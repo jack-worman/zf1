@@ -39,7 +39,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Uri
  */
-#[AllowDynamicProperties]
 class Zend_Uri_HttpTest extends PHPUnit_Framework_TestCase
 {
 

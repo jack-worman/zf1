@@ -38,7 +38,6 @@
  * @group      Zend_Soap
  * @group      Zend_Soap_Wsdl
  */
-#[AllowDynamicProperties]
 class Zend_Soap_Wsdl_ArrayOfTypeSequenceStrategyTest extends PHPUnit_Framework_TestCase
 {
     private $wsdl;
@@ -160,7 +159,6 @@ class Zend_Soap_Wsdl_ArrayOfTypeSequenceStrategyTest extends PHPUnit_Framework_T
     }
 }
 
-#[AllowDynamicProperties]
 class Zend_Soap_Wsdl_SequenceTest
 {
     /**

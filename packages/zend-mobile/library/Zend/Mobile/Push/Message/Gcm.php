@@ -34,7 +34,6 @@
  * @version    $Id$
  * @method     array getToken()
  */
-#[AllowDynamicProperties]
 class Zend_Mobile_Push_Message_Gcm extends Zend_Mobile_Push_Message_Abstract
 {
 

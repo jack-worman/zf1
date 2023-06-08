@@ -35,7 +35,6 @@
  * @group      Zend_Service
  * @group      Zend_Service_Delicious
  */
-#[AllowDynamicProperties]
 class Zend_Service_Delicious_PrivateDataTest extends PHPUnit_Framework_TestCase
 {
     const TEST_UNAME = 'zfTestUser';

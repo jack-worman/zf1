@@ -44,7 +44,6 @@ require_once 'Zend/Service/Delicious/PostTest.php';
  * @group      Zend_Service
  * @group      Zend_Service_Delicious
  */
-#[AllowDynamicProperties]
 class Zend_Service_Delicious_AllTests
 {
     /**

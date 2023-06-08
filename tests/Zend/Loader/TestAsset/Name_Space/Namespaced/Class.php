@@ -28,7 +28,6 @@ namespace ZendTest\UnusualNamespace\Name_Space;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Loader
  */
-#[AllowDynamicProperties]
 class Namespaced_Class
 {
 }

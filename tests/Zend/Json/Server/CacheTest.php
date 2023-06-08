@@ -39,7 +39,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Json
  * @group      Zend_Json_Server
  */
-#[AllowDynamicProperties]
 class Zend_Json_Server_CacheTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -122,7 +121,6 @@ class Zend_Json_Server_CacheTest extends PHPUnit_Framework_TestCase
 /**
  * Class for testing JSON-RPC server caching
  */
-#[AllowDynamicProperties]
 class Zend_Json_Server_CacheTest_Foo
 {
     /**

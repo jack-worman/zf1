@@ -60,7 +60,6 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-#[AllowDynamicProperties]
 class Zend_Gdata_Books extends Zend_Gdata
 {
     const VOLUME_FEED_URI = 'https://books.google.com/books/feeds/volumes';

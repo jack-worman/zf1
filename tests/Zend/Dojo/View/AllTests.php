@@ -35,7 +35,6 @@ require_once 'Zend/Dojo/View/Helper/AllTests.php';
  * @group      Zend_Dojo
  * @group      Zend_Dojo_View
  */
-#[AllowDynamicProperties]
 class Zend_Dojo_View_AllTests
 {
     public static function main()

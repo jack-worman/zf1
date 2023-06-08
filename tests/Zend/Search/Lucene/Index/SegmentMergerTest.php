@@ -44,7 +44,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Search_Lucene
  */
-#[AllowDynamicProperties]
 class Zend_Search_Lucene_Index_SegmentMergerTest extends PHPUnit_Framework_TestCase
 {
     public function testMerge()

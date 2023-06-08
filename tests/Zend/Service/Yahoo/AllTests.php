@@ -36,7 +36,6 @@ require_once 'Zend/Service/Yahoo/OnlineTest.php';
  * @group      Zend_Service
  * @group      Zend_Service_Yahoo
  */
-#[AllowDynamicProperties]
 class Zend_Service_Yahoo_AllTests
 {
     /**

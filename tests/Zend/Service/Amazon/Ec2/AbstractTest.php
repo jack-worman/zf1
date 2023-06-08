@@ -34,7 +34,6 @@
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_Ec2
  */
-#[AllowDynamicProperties]
 class Zend_Service_Amazon_Ec2_AbstractTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -91,7 +90,6 @@ class Zend_Service_Amazon_Ec2_AbstractTest extends PHPUnit_Framework_TestCase
     }
 }
 
-#[AllowDynamicProperties]
 class TestAmamzonEc2Abstract extends Zend_Service_Amazon_Ec2_Abstract
 {
 

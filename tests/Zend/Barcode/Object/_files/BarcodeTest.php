@@ -1,7 +1,6 @@
 <?php
 // require_once 'Zend/Barcode/Object/ObjectAbstract.php';
 
-#[AllowDynamicProperties]
 class Zend_Barcode_Object_Test extends Zend_Barcode_Object_ObjectAbstract
 {
 

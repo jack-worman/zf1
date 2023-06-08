@@ -34,7 +34,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-#[AllowDynamicProperties]
 class Zend_Controller_Router_Route_Module extends Zend_Controller_Router_Route_Abstract
 {
 

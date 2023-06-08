@@ -82,7 +82,6 @@ require_once 'Zend/View/Helper/UserAgentTest.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-#[AllowDynamicProperties]
 class Zend_View_Helper_AllTests
 {
     public static function main()

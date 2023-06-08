@@ -36,7 +36,6 @@ require_once 'Zend/Tool/Project/Context/RegistryTest.php';
  * @group      Zend_Tool
  * @group      Zend_Tool_Project
  */
-#[AllowDynamicProperties]
 class Zend_Tool_Project_AllTests
 {
     public static function main()

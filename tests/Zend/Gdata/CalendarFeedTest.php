@@ -34,7 +34,6 @@
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Calendar
  */
-#[AllowDynamicProperties]
 class Zend_Gdata_CalendarFeedTest extends PHPUnit_Framework_TestCase
 {
     protected $listFeed = null;

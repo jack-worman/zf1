@@ -32,7 +32,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @todo       also implement Countable for PHP 5.1 but not yet to stay 5.0 compatible
  */
-#[AllowDynamicProperties]
 class Zend_Memory_Value implements ArrayAccess {
     /**
      * Value

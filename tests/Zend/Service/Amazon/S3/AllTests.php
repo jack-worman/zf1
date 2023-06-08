@@ -38,7 +38,6 @@ require_once 'Zend/Service/Amazon/S3/StreamTest.php';
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_S3
  */
-#[AllowDynamicProperties]
 class Zend_Service_Amazon_S3_AllTests
 {
     /**

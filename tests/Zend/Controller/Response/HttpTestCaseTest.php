@@ -39,7 +39,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Controller
  * @group      Zend_Controller_Response
  */
-#[AllowDynamicProperties]
 class Zend_Controller_Response_HttpTestCaseTest extends PHPUnit_Framework_TestCase
 {
     /**

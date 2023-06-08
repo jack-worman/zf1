@@ -38,7 +38,6 @@
  * @method Zend_View_Helper_Navigation_Menu menu(Zend_Navigation_Container $container = null)
  * @method Zend_View_Helper_Navigation_Sitemap sitemap(Zend_Navigation_Container $container = null)
  */
-#[AllowDynamicProperties]
 class Zend_View_Helper_Navigation
     extends Zend_View_Helper_Navigation_HelperAbstract
 {
@@ -165,11 +164,11 @@ class Zend_View_Helper_Navigation
             // Add navigation helper path at the beginning
             $paths = $this->view->getHelperPaths();
             $this->view->setHelperPath(null);
-
+            
             $this->view->addHelperPath(
                     str_replace((string) '_', '/', self::NS),
                     self::NS);
-
+            
             foreach ($paths as $ns => $path) {
                 $this->view->addHelperPath($path, $ns);
             }

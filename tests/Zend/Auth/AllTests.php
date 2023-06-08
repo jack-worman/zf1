@@ -34,7 +34,6 @@ require_once 'Zend/Auth/Adapter/AllTests.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Auth
  */
-#[AllowDynamicProperties]
 class Zend_Auth_AllTests
 {
     /**

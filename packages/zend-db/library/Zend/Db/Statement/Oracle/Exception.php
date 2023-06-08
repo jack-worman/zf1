@@ -33,7 +33,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-#[AllowDynamicProperties]
 class Zend_Db_Statement_Oracle_Exception extends Zend_Db_Statement_Exception
 {
    protected $message = 'Unknown exception';

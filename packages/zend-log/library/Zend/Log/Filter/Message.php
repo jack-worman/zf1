@@ -31,7 +31,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-#[AllowDynamicProperties]
 class Zend_Log_Filter_Message extends Zend_Log_Filter_Abstract
 {
     /**

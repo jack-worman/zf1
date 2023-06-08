@@ -31,7 +31,6 @@
  * @group      Zend_Oauth
  * @group      Zend_Oauth_Http
  */
-#[AllowDynamicProperties]
 class Zend_Oauth_Http_RequestTokenTest extends PHPUnit_Framework_TestCase
 {
 
@@ -189,7 +188,6 @@ class Zend_Oauth_Http_RequestTokenTest extends PHPUnit_Framework_TestCase
 
 }
 
-#[AllowDynamicProperties]
 class Test_Consumer_32874 extends Zend_Oauth_Consumer
 {
     public function getConsumerKey(){return '1234567890';}
@@ -199,7 +197,6 @@ class Test_Consumer_32874 extends Zend_Oauth_Consumer
     public function getCallbackUrl(){return 'http://www.example.com/local';}
 }
 
-#[AllowDynamicProperties]
 class Test_Consumer_32874b extends Zend_Oauth_Consumer
 {
     public function getConsumerKey(){return '1234567890';}
@@ -209,7 +206,6 @@ class Test_Consumer_32874b extends Zend_Oauth_Consumer
     public function getCallbackUrl(){return null;}
 }
 
-#[AllowDynamicProperties]
 class Test_Http_Utility_32874 extends Zend_Oauth_Http_Utility
 {
     public function __construct(){}
@@ -222,7 +218,6 @@ class Test_Http_Utility_32874 extends Zend_Oauth_Http_Utility
     }
 }
 
-#[AllowDynamicProperties]
 class Test_Client_32874 extends Zend_Http_Client
 {
     public function getRawData(){return $this->raw_post_data;}

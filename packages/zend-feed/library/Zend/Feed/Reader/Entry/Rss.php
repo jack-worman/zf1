@@ -80,7 +80,6 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-#[AllowDynamicProperties]
 class Zend_Feed_Reader_Entry_Rss extends Zend_Feed_Reader_EntryAbstract implements Zend_Feed_Reader_EntryInterface
 {
 

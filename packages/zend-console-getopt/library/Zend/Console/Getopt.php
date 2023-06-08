@@ -124,7 +124,6 @@
  * @todo  Feature request to implement callbacks.
  *        e.g. if -a is specified, run function 'handleOptionA'().
  */
-#[AllowDynamicProperties]
 class Zend_Console_Getopt
 {
 

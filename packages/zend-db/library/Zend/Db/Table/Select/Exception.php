@@ -33,7 +33,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-#[AllowDynamicProperties]
 class Zend_Db_Table_Select_Exception extends Zend_Db_Select_Exception
 {
 }

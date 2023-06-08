@@ -38,7 +38,6 @@ require_once 'Zend/Http/UserAgent/Features/Adapter/TeraWurflTest.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Http
  */
-#[AllowDynamicProperties]
 class Zend_Http_UserAgent_AllTests
 {
     public static function main()

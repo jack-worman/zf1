@@ -33,7 +33,6 @@
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Books
  */
-#[AllowDynamicProperties]
 class Zend_Gdata_BooksOnlineTest extends PHPUnit_Framework_TestCase
 {
 

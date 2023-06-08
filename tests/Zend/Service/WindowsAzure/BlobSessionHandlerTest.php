@@ -47,7 +47,6 @@ require_once 'Zend/Service/WindowsAzure/TableSessionHandlerTest.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-#[AllowDynamicProperties]
 class Zend_Service_WindowsAzure_BlobSessionHandlerTest extends Zend_Service_WindowsAzure_TableSessionHandlerTest
 {
     public static function main()

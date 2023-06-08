@@ -35,7 +35,6 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-#[AllowDynamicProperties]
 class Zend_Reflection_File implements Reflector
 {
     /**
@@ -87,7 +86,7 @@ class Zend_Reflection_File implements Reflector
     public function __construct($file)
     {
         $fileName = $file;
-
+        
         $fileRealpath = realpath($fileName);
         if ($fileRealpath) {
             // realpath() doesn't return false if Suhosin is included
@@ -96,7 +95,7 @@ class Zend_Reflection_File implements Reflector
                 $fileRealpath = false;
             }
         }
-
+        
         if ($fileRealpath === false) {
             $fileRealpath = self::findRealpathInIncludePath($file);
         }

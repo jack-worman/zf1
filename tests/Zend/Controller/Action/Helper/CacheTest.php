@@ -16,7 +16,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 /**
  * Test class for Zend_Controller_Action_Helper_Cache
  */
-#[AllowDynamicProperties]
 class Zend_Controller_Action_Helper_CacheTest extends PHPUnit_Framework_TestCase
 {
 
@@ -224,7 +223,6 @@ class Zend_Controller_Action_Helper_CacheTest extends PHPUnit_Framework_TestCase
 
 }
 
-#[AllowDynamicProperties]
 class Mock_Zend_Cache_Page_1 extends Zend_Cache_Core
 {
     public function remove($id)
@@ -232,7 +230,6 @@ class Mock_Zend_Cache_Page_1 extends Zend_Cache_Core
         if ($id == bin2hex('/foo')) {return 'verified';}
     }
 }
-#[AllowDynamicProperties]
 class Mock_Zend_Cache_Page_2 extends Zend_Cache_Backend
 {
     public function removeRecursively($id)
@@ -240,7 +237,6 @@ class Mock_Zend_Cache_Page_2 extends Zend_Cache_Backend
         if ($id == bin2hex('/foo')) {return 'verified';}
     }
 }
-#[AllowDynamicProperties]
 class Mock_Zend_Cache_Page_3 extends Zend_Cache_Core
 {
     public function clean($mode = 'all', $tags = array())
@@ -249,7 +245,6 @@ class Mock_Zend_Cache_Page_3 extends Zend_Cache_Core
         {return 'verified';}
     }
 }
-#[AllowDynamicProperties]
 class Mock_Zend_Cache_Page_4 extends Zend_Cache_Core
 {
     public $res;
@@ -262,7 +257,6 @@ class Mock_Zend_Cache_Page_4 extends Zend_Cache_Core
         }
     }
 }
-#[AllowDynamicProperties]
 class Mock_Zend_Cache_Page_6 extends Zend_Cache_Core
 {
     public $res;
@@ -276,7 +270,6 @@ class Mock_Zend_Cache_Page_6 extends Zend_Cache_Core
     }
 }
 
-#[AllowDynamicProperties]
 class Mock_Zend_Cache_Page_TestingEncodedCacheId extends Zend_Cache_Core
 {
     public $items;

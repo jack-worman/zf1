@@ -35,7 +35,6 @@ require_once 'Zend/Db/Profiler/FirebugTest.php';
  * @group      Zend_Db
  * @group      Zend_Db_Profiler
  */
-#[AllowDynamicProperties]
 class Zend_Db_Profiler_AllTests
 {
     public static function main()

@@ -36,7 +36,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-#[AllowDynamicProperties]
 class Zend_Search_Lucene_Analysis_TokenFilter_StopWords extends Zend_Search_Lucene_Analysis_TokenFilter
 {
     /**

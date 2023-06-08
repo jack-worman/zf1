@@ -30,7 +30,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group ZF-6130
  */
-#[AllowDynamicProperties]
 class ContactVO
 {
   public $id = 0;

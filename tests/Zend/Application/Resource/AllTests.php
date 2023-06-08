@@ -51,7 +51,6 @@ require_once 'Zend/Application/Resource/ViewTest.php';
  * @group      Zend_Application
  * @group      Zend_Application_Resource
  */
-#[AllowDynamicProperties]
 class Zend_Application_Resource_AllTests
 {
     public static function main()

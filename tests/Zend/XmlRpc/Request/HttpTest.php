@@ -38,7 +38,6 @@ require_once 'Zend/AllTests/StreamWrapper/PhpInput.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_XmlRpc
  */
-#[AllowDynamicProperties]
 class Zend_XmlRpc_Request_HttpTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -183,7 +182,6 @@ EOT;
     }
 }
 
-#[AllowDynamicProperties]
 class Zend_XmlRpc_Request_HttpTest_Extension extends Zend_XmlRpc_Request_Http
 {
     public function __construct($method = null, $params = null)

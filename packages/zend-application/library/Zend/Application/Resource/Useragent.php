@@ -26,14 +26,13 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-#[AllowDynamicProperties]
 class Zend_Application_Resource_Useragent extends Zend_Application_Resource_ResourceAbstract
 {
     /**
      * @var Zend_Http_UserAgent
      */
     protected $_userAgent;
-
+    
     /**
      * Intialize resource
      *
@@ -55,7 +54,7 @@ class Zend_Application_Resource_Useragent extends Zend_Application_Resource_Reso
 
         return $userAgent;
     }
-
+    
     /**
      * Get UserAgent instance
      *
@@ -67,7 +66,7 @@ class Zend_Application_Resource_Useragent extends Zend_Application_Resource_Reso
             $options = $this->getOptions();
             $this->_userAgent = new Zend_Http_UserAgent($options);
         }
-
+        
         return $this->_userAgent;
     }
 }

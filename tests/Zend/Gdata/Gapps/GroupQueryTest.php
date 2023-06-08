@@ -32,7 +32,6 @@
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Gapps
  */
-#[AllowDynamicProperties]
 class Zend_Gdata_Gapps_GroupQueryTest extends PHPUnit_Framework_TestCase
 {
 
@@ -111,7 +110,7 @@ class Zend_Gdata_Gapps_GroupQueryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("https://apps-apis.google.com/a/feeds/group/2.0/my.domain.com",
                 $this->query->getQueryUrl());
     }
-
+        
     public function testCanSetDirectOnlyProperty()
     {
         $this->query->setDomain("my.domain.com");
@@ -121,7 +120,7 @@ class Zend_Gdata_Gapps_GroupQueryTest extends PHPUnit_Framework_TestCase
         $expected_url  = "https://apps-apis.google.com/a/feeds/group/2.0/my.domain.com/";
         $expected_url .= "?member=bar%40qux.com&directOnly=true";
         $this->assertEquals($expected_url, $this->query->getQueryUrl());
-
+        
         $this->query->setDirectOnly(false);
         $this->assertEquals(false, $this->query->getDirectOnly());
         $expected_url  = "https://apps-apis.google.com/a/feeds/group/2.0/my.domain.com/";
@@ -132,7 +131,7 @@ class Zend_Gdata_Gapps_GroupQueryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $this->query->getDirectOnly());
         $expected_url  = "https://apps-apis.google.com/a/feeds/group/2.0/my.domain.com/";
         $expected_url .= "?member=bar%40qux.com";
-        $this->assertEquals($expected_url, $this->query->getQueryUrl());
+        $this->assertEquals($expected_url, $this->query->getQueryUrl());        
     }
 
     // Test to make sure that all parameters can be set simultaneously with no

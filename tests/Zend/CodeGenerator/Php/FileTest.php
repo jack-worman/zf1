@@ -35,7 +35,6 @@
  * @group Zend_CodeGenerator_Php
  * @group Zend_CodeGenerator_Php_File
  */
-#[AllowDynamicProperties]
 class Zend_CodeGenerator_Php_FileTest extends PHPUnit_Framework_TestCase
 {
 
@@ -137,7 +136,6 @@ EOS;
  *
  * @package Zend_Reflection_TestSampleSingleClass
  */
-#[AllowDynamicProperties]
 class Zend_Reflection_TestSampleSingleClass
 {
 
@@ -193,7 +191,6 @@ EOS;
  *
  * @package Zend_Reflection_TestClassWithCodeInMethod
  */
-#[AllowDynamicProperties]
 class Zend_Reflection_TestClassWithCodeInMethod
 {
 
@@ -244,7 +241,6 @@ EOS;
  *
  * @package Zend_Reflection_TestClassWithCodeInMethod
  */
-#[AllowDynamicProperties]
 class Zend_Reflection_TestClassWithCodeInMethod
 {
 
@@ -305,7 +301,6 @@ EOS;
  * For manipulating files.
  */
 
-#[AllowDynamicProperties]
 class Foo
 {
 
@@ -348,7 +343,6 @@ EOS;
 /**
  * Class Foo1
  */
-#[AllowDynamicProperties]
 class Foo1
 {
 

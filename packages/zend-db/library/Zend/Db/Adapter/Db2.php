@@ -43,7 +43,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-#[AllowDynamicProperties]
 class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
 {
     /**

@@ -36,7 +36,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Tag
  * @group      Zend_Tag_Cloud
  */
-#[AllowDynamicProperties]
 class Zend_Tag_Cloud_Decorator_HtmlCloudTest extends PHPUnit_Framework_TestCase
 {
     public static function main()

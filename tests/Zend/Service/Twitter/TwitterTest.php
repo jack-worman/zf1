@@ -48,7 +48,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Service
  * @group      Zend_Service_Twitter
  */
-#[AllowDynamicProperties]
 class Zend_Service_Twitter_TwitterTest extends PHPUnit_Framework_TestCase
 {
 

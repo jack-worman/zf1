@@ -29,7 +29,6 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-#[AllowDynamicProperties]
 class My_SchemeHelper extends Zend_View_Helper_ServerUrl
 {
     const RETURN_URL = 'spotify:track:2nd6CTjR9zjHGT0QtpfLHe';

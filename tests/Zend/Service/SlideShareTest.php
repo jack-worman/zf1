@@ -34,7 +34,6 @@
  * @group      Zend_Service
  * @group      Zend_Service_SlideShare
  */
-#[AllowDynamicProperties]
 class Zend_Service_SlideShareTest extends PHPUnit_Framework_TestCase
 {
     /**

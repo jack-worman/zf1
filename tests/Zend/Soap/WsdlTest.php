@@ -40,7 +40,6 @@
  * @group      Zend_Soap
  * @group      Zend_Soap_Wsdl
  */
-#[AllowDynamicProperties]
 class Zend_Soap_WsdlTest extends PHPUnit_Framework_TestCase
 {
     protected function sanitizeWsdlXmlOutputForOsCompability($xmlstring)
@@ -691,7 +690,6 @@ class Zend_Soap_WsdlTest extends PHPUnit_Framework_TestCase
 /**
  * Test Class
  */
-#[AllowDynamicProperties]
 class Zend_Soap_Wsdl_Test {
     /**
      * @var integer

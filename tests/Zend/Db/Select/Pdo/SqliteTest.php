@@ -32,7 +32,6 @@ require_once 'Zend/Db/Select/TestCommon.php';
  * @group      Zend_Db
  * @group      Zend_Db_Select
  */
-#[AllowDynamicProperties]
 class Zend_Db_Select_Pdo_SqliteTest extends Zend_Db_Select_TestCommon
 {
 

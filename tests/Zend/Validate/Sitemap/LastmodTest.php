@@ -32,7 +32,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Validate
  */
-#[AllowDynamicProperties]
 class Zend_Validate_Sitemap_LastmodTest extends PHPUnit_Framework_TestCase
 {
     /**

@@ -32,7 +32,6 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-#[AllowDynamicProperties]
 class Zend_Serializer_Adapter_IgbinaryTest extends PHPUnit_Framework_TestCase
 {
 
@@ -155,7 +154,6 @@ class Zend_Serializer_Adapter_IgbinaryTest extends PHPUnit_Framework_TestCase
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-#[AllowDynamicProperties]
 class Zend_Serializer_Adapter_IgbinarySkipTest extends PHPUnit_Framework_TestCase
 {
     public $message = null;

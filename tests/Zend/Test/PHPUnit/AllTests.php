@@ -37,7 +37,6 @@ require_once 'Zend/Test/PHPUnit/Constraint/AllTests.php';
  * @group      Zend_Test
  * @group      Zend_Test_PHPUnit
  */
-#[AllowDynamicProperties]
 class Zend_Test_PHPUnit_AllTests
 {
     public static function main()

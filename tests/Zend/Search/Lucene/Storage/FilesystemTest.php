@@ -28,7 +28,6 @@
  * @group      Zend_Search_Lucene
  */
 
-#[AllowDynamicProperties]
 class FilesystemTest extends PHPUnit_Framework_TestCase
 {
     private $testFile;

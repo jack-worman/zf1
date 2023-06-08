@@ -41,7 +41,6 @@ require_once 'Zend/Service/Audioscrobbler/GroupTest.php';
  * @group      Zend_Service
  * @group      Zend_Service_Audioscrobbler
  */
-#[AllowDynamicProperties]
 class Zend_Service_Audioscrobbler_AllTests
 {
     public static function main()

@@ -46,7 +46,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Controller_Action
  * @group      Zend_Controller_Action_Helper
  */
-#[AllowDynamicProperties]
 class Zend_Controller_Action_Helper_JsonTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -175,7 +174,7 @@ class Zend_Controller_Action_Helper_JsonTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($layout->isEnabled());
         $this->assertFalse($this->viewRenderer->getNoRender());
     }
-
+    
     /**
      * @group ZF-10977
      */
@@ -184,7 +183,7 @@ class Zend_Controller_Action_Helper_JsonTest extends PHPUnit_Framework_TestCase
         $data = $this->helper->encodeJson(Zend_Json::encode(array('f')), false, false);
         $this->assertEquals('["f"]', $data);
     }
-
+    
     /**
      * @group ZF-10977
      */
@@ -193,7 +192,7 @@ class Zend_Controller_Action_Helper_JsonTest extends PHPUnit_Framework_TestCase
         $data = $this->helper->sendJson(Zend_Json::encode(array('f')), false, false);
         $this->assertEquals('["f"]', $data);
     }
-
+    
     /**
      * @group ZF-10977
      */
@@ -202,7 +201,7 @@ class Zend_Controller_Action_Helper_JsonTest extends PHPUnit_Framework_TestCase
         $data = $this->helper->direct(Zend_Json::encode(array('f')), false, false, false);
         $this->assertEquals('["f"]', $data);
     }
-
+    
     /**
      * @group ZF-10977
      */
@@ -211,7 +210,7 @@ class Zend_Controller_Action_Helper_JsonTest extends PHPUnit_Framework_TestCase
         $data = $this->helper->direct(Zend_Json::encode(array('f')), false, false, false);
         $this->verifyJsonHeader();
     }
-
+    
     /**
      * @group ZF-10977
      */
@@ -220,7 +219,7 @@ class Zend_Controller_Action_Helper_JsonTest extends PHPUnit_Framework_TestCase
         $data = $this->helper->sendJson(Zend_Json::encode(array('f')), false, false);
         $this->verifyJsonHeader();
     }
-
+    
     /**
      * @group ZF-10977
      */
@@ -234,7 +233,6 @@ class Zend_Controller_Action_Helper_JsonTest extends PHPUnit_Framework_TestCase
 /**
  * Zend_Layout subclass to allow resetting MVC instance
  */
-#[AllowDynamicProperties]
 class Zend_Controller_Action_Helper_JsonTest_Layout extends Zend_Layout
 {
     public static function resetMvcInstance()

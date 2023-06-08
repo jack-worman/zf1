@@ -36,7 +36,6 @@ require_once 'Zend/Stdlib/SplPriorityQueueTest.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Stdlib
  */
-#[AllowDynamicProperties]
 class Zend_Stdlib_AllTests
 {
     public static function main()

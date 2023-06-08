@@ -46,7 +46,6 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-#[AllowDynamicProperties]
 class Zend_Tool_Project_Provider_Module
     extends Zend_Tool_Project_Provider_Abstract
     implements Zend_Tool_Framework_Provider_Pretendable
@@ -140,7 +139,7 @@ class Zend_Tool_Project_Provider_Module
         // determine if testing is enabled in the project
         // require_once 'Zend/Tool/Project/Provider/Test.php';
         //$testingEnabled = Zend_Tool_Project_Provider_Test::isTestingEnabled($this->_loadedProfile);
-
+        
         $resources = self::createResources($this->_loadedProfile, $name);
 
         $response = $this->_registry->getResponse();
