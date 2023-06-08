@@ -40,6 +40,8 @@
 class Zend_Application_Bootstrap_Bootstrap
     extends Zend_Application_Bootstrap_BootstrapAbstract
 {
+    public $frontController;
+    public $executedAutoloadedResource;
     /**
      * Application resource namespace
      * @var false|string

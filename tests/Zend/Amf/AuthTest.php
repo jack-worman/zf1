@@ -296,6 +296,8 @@ class WrongPassword extends Zend_Amf_Auth_Abstract
 
 class RightPassword extends Zend_Amf_Auth_Abstract
 {
+    private $_name;
+    private $_role;
     public function __construct($name, $role)
     {
         $this->_name = $name;

@@ -38,6 +38,8 @@
  */
 class Zend_Amf_Adobe_Introspector
 {
+    private $_ops;
+
     /**
      * Options used:
      * - server: instance of Zend_Amf_Server to use
