@@ -41,6 +41,7 @@
  * @method $this setAlternate($href, $type, $title, $extras)
  * @method $this setStylesheet($href, $media = 'screen', $conditionalStylesheet = false, array $extras = array())
  */
+#[AllowDynamicProperties]
 class Zend_View_Helper_HeadLink extends Zend_View_Helper_Placeholder_Container_Standalone
 {
     /**

@@ -36,6 +36,7 @@
  * @method $this prependStyle($content, array $attributes = array())
  * @method $this setStyle($content, array $attributes = array())
  */
+#[AllowDynamicProperties]
 class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_Standalone
 {
     /**

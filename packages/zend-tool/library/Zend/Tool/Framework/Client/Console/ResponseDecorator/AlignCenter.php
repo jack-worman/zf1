@@ -31,6 +31,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
+#[AllowDynamicProperties]
 class Zend_Tool_Framework_Client_Console_ResponseDecorator_AlignCenter
     implements Zend_Tool_Framework_Client_Response_ContentDecorator_Interface
 {

@@ -49,6 +49,7 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+#[AllowDynamicProperties]
 class Zend_Http_Client_Adapter_Proxy extends Zend_Http_Client_Adapter_Socket
 {
     /**
@@ -75,10 +76,10 @@ class Zend_Http_Client_Adapter_Proxy extends Zend_Http_Client_Adapter_Socket
      * @var boolean
      */
     protected $negotiated = false;
-    
+
     /**
      * Stores the last CONNECT handshake request
-     * 
+     *
      * @var string
      */
     protected $connectHandshakeRequest;
@@ -261,7 +262,7 @@ class Zend_Http_Client_Adapter_Proxy extends Zend_Http_Client_Adapter_Socket
             }
         }
         $request .= "\r\n";
-        
+
         // @see ZF-3189
         $this->connectHandshakeRequest = $request;
 

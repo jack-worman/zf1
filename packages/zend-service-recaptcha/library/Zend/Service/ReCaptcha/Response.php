@@ -29,6 +29,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
+#[AllowDynamicProperties]
 class Zend_Service_ReCaptcha_Response
 {
     /**

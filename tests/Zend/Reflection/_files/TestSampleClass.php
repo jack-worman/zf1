@@ -22,12 +22,14 @@
  *
  * blah
  */
+#[AllowDynamicProperties]
 class Zend_Reflection_TestSampleClass extends ArrayObject
 {
 
 }
 
 
+#[AllowDynamicProperties]
 class Zend_Reflection_TestSampleClass2 implements IteratorAggregate
 {
 
@@ -68,6 +70,7 @@ interface Zend_Reflection_TestSampleClassInterface
 
 }
 
+#[AllowDynamicProperties]
 class Zend_Reflection_TestSampleClass4 implements Zend_Reflection_TestSampleClassInterface
 {
 
@@ -85,6 +88,7 @@ class Zend_Reflection_TestSampleClass4 implements Zend_Reflection_TestSampleClas
  *
  * @author Ralph Schindler <ralph.schindler@zend.com>
  */
+#[AllowDynamicProperties]
 class Zend_Reflection_TestSampleClass5
 {
 
@@ -135,6 +139,7 @@ class Zend_Reflection_TestSampleClass5
  *
  * @author Carlton Gibson <carlton.gibson@noumenal.co.uk>
  */
+#[AllowDynamicProperties]
 class Zend_Reflection_TestSampleClass6
 {
 
@@ -172,6 +177,7 @@ function zend_reflection_test_sample_function6($one, $two = 2) {
 }
 
 
+#[AllowDynamicProperties]
 class Zend_Reflection_Docblock_Param_WithNamespace
 {
     /**
@@ -184,9 +190,10 @@ class Zend_Reflection_Docblock_Param_WithNamespace
     }
 }
 
+#[AllowDynamicProperties]
 class Zend_Reflection_TestSampleClass7
 {
-    public function bigMethodSignature($arg1, $arg2, $arg3, 
+    public function bigMethodSignature($arg1, $arg2, $arg3,
         $arg4, $arg5, $arg6)
     {
         // FUNKY SIGNATURE

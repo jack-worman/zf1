@@ -28,6 +28,7 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+#[AllowDynamicProperties]
 class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
 {
     const ATTRIBUTE_TO_LOWER  = 1;

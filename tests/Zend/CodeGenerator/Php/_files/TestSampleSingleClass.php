@@ -12,6 +12,7 @@
  *
  * @package Zend_Reflection_TestSampleSingleClass
  */
+#[AllowDynamicProperties]
 class Zend_Reflection_TestSampleSingleClass
 {
 

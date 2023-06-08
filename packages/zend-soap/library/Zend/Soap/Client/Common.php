@@ -28,6 +28,7 @@ if (extension_loaded('soap')) {
  * @package    Zend_Soap
  * @subpackage Client
  */
+#[AllowDynamicProperties]
 class Zend_Soap_Client_Common extends SoapClient
 {
     /**

@@ -35,6 +35,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
+#[AllowDynamicProperties]
 class Zend_Form_Element_Hash extends Zend_Form_Element_Xhtml
 {
     /**
@@ -251,7 +252,7 @@ class Zend_Form_Element_Hash extends Zend_Form_Element_Xhtml
      */
     protected function _generateHash()
     {
-        $this->_hash = md5((string) 
+        $this->_hash = md5((string)
             Zend_Crypt_Math::randBytes(32)
         );
         $this->setValue($this->_hash);

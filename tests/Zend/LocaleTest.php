@@ -40,6 +40,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Locale
  */
+#[AllowDynamicProperties]
 class Zend_LocaleTest extends PHPUnit_Framework_TestCase
 {
     private $_errorOccurred;
@@ -977,6 +978,7 @@ class Zend_LocaleTest extends PHPUnit_Framework_TestCase
     }
 }
 
+#[AllowDynamicProperties]
 class Zend_LocaleTestHelper extends Zend_Locale
 {
     public static function resetObject()

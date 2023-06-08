@@ -34,6 +34,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
 */
+#[AllowDynamicProperties]
 class Zend_Captcha_Dumb extends Zend_Captcha_Word
 {
     /**
@@ -41,7 +42,7 @@ class Zend_Captcha_Dumb extends Zend_Captcha_Word
      * @type string
      */
     protected $_label = 'Please type this word backwards';
-    
+
     /**
      * Set the label for the CAPTCHA
      * @param string $label
@@ -50,7 +51,7 @@ class Zend_Captcha_Dumb extends Zend_Captcha_Word
     {
         $this->_label = $label;
     }
-    
+
     /**
      * Retrieve the label for the CAPTCHA
      * @return string

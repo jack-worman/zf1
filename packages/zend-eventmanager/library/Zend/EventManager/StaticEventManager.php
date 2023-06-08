@@ -30,6 +30,7 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+#[AllowDynamicProperties]
 class Zend_EventManager_StaticEventManager extends Zend_EventManager_SharedEventManager
 {
     /**
@@ -39,7 +40,7 @@ class Zend_EventManager_StaticEventManager extends Zend_EventManager_SharedEvent
 
     /**
      * Singleton
-     * 
+     *
      * @return void
      */
     protected function __construct()
@@ -57,7 +58,7 @@ class Zend_EventManager_StaticEventManager extends Zend_EventManager_SharedEvent
 
     /**
      * Retrieve instance
-     * 
+     *
      * @return Zend_EventManager_StaticEventManager
      */
     public static function getInstance()
@@ -70,7 +71,7 @@ class Zend_EventManager_StaticEventManager extends Zend_EventManager_SharedEvent
 
     /**
      * Reset the singleton instance
-     * 
+     *
      * @return void
      */
     public static function resetInstance()

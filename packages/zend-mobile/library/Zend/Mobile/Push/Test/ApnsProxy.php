@@ -31,6 +31,7 @@
  * @package    Zend_Mobile
  * @subpackage Push
  */
+#[AllowDynamicProperties]
 class Zend_Mobile_Push_Test_ApnsProxy extends Zend_Mobile_Push_Apns
 {
     /**

@@ -38,6 +38,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Amf
  */
+#[AllowDynamicProperties]
 class Zend_Amf_Adobe_IntrospectorTest extends PHPUnit_Framework_TestCase
 {
     private $introspector;
@@ -144,6 +145,7 @@ class Zend_Amf_Adobe_IntrospectorTest extends PHPUnit_Framework_TestCase
     }
 }
 
+#[AllowDynamicProperties]
 class com_zend_framework_IntrospectorTest
 {
     /**
@@ -200,6 +202,7 @@ class com_zend_framework_IntrospectorTest
     }
 }
 
+#[AllowDynamicProperties]
 class com_zend_framework_IntrospectorTestCustomType
 {
     /**
@@ -220,6 +223,7 @@ class com_zend_framework_IntrospectorTestCustomType
     protected $_bar;
 }
 
+#[AllowDynamicProperties]
 class com_zend_framework_IntrospectorTestExplicitType
 {
     public $_explicitType = 'explicit';

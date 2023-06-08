@@ -30,6 +30,7 @@
  * @package    Zend_Gdata
  * @subpackage Analytics
  */
+#[AllowDynamicProperties]
 class Zend_Gdata_Analytics_AccountFeed extends Zend_Gdata_Feed
 {
     /**

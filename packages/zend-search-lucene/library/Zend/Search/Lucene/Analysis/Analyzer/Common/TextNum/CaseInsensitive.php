@@ -37,6 +37,7 @@
  */
 
 
+#[AllowDynamicProperties]
 class Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum_CaseInsensitive extends Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum
 {
     public function __construct()

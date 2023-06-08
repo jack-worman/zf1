@@ -33,6 +33,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
+#[AllowDynamicProperties]
 class Zend_Layout_Controller_Plugin_Layout extends Zend_Controller_Plugin_Abstract
 {
     protected $_layoutActionHelper = null;

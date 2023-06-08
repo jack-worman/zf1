@@ -33,6 +33,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @uses       Zend_Service_Ebay_Finding_Response_Abstract
  */
+#[AllowDynamicProperties]
 class Zend_Service_Ebay_Finding_Response_Histograms extends Zend_Service_Ebay_Finding_Response_Abstract
 {
     /**

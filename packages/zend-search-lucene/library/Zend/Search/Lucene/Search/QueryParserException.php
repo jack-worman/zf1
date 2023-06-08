@@ -36,6 +36,7 @@
  *
  * Special exception type, which may be used to intercept wrong user input
  */
+#[AllowDynamicProperties]
 class Zend_Search_Lucene_Search_QueryParserException extends Zend_Search_Lucene_Exception
 {}
 

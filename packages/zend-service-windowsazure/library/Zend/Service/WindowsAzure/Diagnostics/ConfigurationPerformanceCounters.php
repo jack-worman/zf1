@@ -41,39 +41,40 @@
  * @property	int		ScheduledTransferPeriodInMinutes	Scheduled transfer period in minutes
  * @property	array	Subscriptions						Subscriptions
  */
+#[AllowDynamicProperties]
 class Zend_Service_WindowsAzure_Diagnostics_ConfigurationPerformanceCounters
 	extends Zend_Service_WindowsAzure_Diagnostics_ConfigurationObjectBaseAbstract
 {
     /**
      * Constructor
-     * 
+     *
 	 * @param	int		$bufferQuotaInMB					Buffer quota in MB
 	 * @param	int		$scheduledTransferPeriodInMinutes	Scheduled transfer period in minutes
 	 */
-    public function __construct($bufferQuotaInMB = 0, $scheduledTransferPeriodInMinutes = 0) 
-    {	        
+    public function __construct($bufferQuotaInMB = 0, $scheduledTransferPeriodInMinutes = 0)
+    {
         $this->_data = array(
             'bufferquotainmb'        			=> $bufferQuotaInMB,
             'scheduledtransferperiodinminutes' 	=> $scheduledTransferPeriodInMinutes,
         	'subscriptions'						=> array()
         );
     }
-    
+
 	/**
 	 * Add subscription
-	 * 
+	 *
  	 * @param	string	$counterSpecifier					Counter specifier
  	 * @param	int		$sampleRateInSeconds				Sample rate in seconds
 	 */
     public function addSubscription($counterSpecifier, $sampleRateInSeconds = 1)
     {
-		
+
     	$this->_data['subscriptions'][$counterSpecifier] = new Zend_Service_WindowsAzure_Diagnostics_PerformanceCounterSubscription($counterSpecifier, $sampleRateInSeconds);
     }
-    
+
 	/**
 	 * Remove subscription
-	 * 
+	 *
  	 * @param	string	$counterSpecifier					Counter specifier
 	 */
     public function removeSubscription($counterSpecifier)

@@ -40,6 +40,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://aws.amazon.com/sqs/ Amazon Simple Queue Service
  */
+#[AllowDynamicProperties]
 class Zend_Service_Amazon_Sqs extends Zend_Service_Amazon_Abstract
 {
     /**

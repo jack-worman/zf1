@@ -45,6 +45,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version $Id$
  */
+#[AllowDynamicProperties]
 class Zend_XmlRpc_Response
 {
     /**
@@ -184,7 +185,7 @@ class Zend_XmlRpc_Response
 
         try {
             $xml = Zend_Xml_Security::scan($response);
-        } catch (Zend_Xml_Exception $e) {    
+        } catch (Zend_Xml_Exception $e) {
             // Not valid XML
             $this->_fault = new Zend_XmlRpc_Fault(651);
             $this->_fault->setEncoding($this->getEncoding());

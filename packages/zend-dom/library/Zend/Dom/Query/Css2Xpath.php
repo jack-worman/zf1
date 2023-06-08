@@ -27,6 +27,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
+#[AllowDynamicProperties]
 class Zend_Dom_Query_Css2Xpath
 {
     /**

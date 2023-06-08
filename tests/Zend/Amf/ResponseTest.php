@@ -44,6 +44,7 @@ require_once 'ContactVO.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Amf
  */
+#[AllowDynamicProperties]
 class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
 {
     private $header1;
@@ -1104,6 +1105,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
  * Used to test recursive cyclic references in the serializer.
  *@group ZF-6205
  */
+#[AllowDynamicProperties]
 class ReferenceTest {
     public function getReference() {
         $o = new TestObject();
@@ -1115,6 +1117,7 @@ class ReferenceTest {
 /**
  * @see ReferenceTest
  */
+#[AllowDynamicProperties]
 class TestObject {
     public $recursive;
 }

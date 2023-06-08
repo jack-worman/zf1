@@ -32,6 +32,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @link http://pl.gravatar.com/site/implement/url
  */
+#[AllowDynamicProperties]
 class Zend_View_Helper_Gravatar extends Zend_View_Helper_HtmlElement
 {
 
