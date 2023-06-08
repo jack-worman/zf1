@@ -20,6 +20,7 @@
  * @version    $Id:$
  */
 
+#[AllowDynamicProperties]
 class Zend_Soap_Server_Proxy
 {
     /**
@@ -32,8 +33,8 @@ class Zend_Soap_Server_Proxy
     protected $_className;
     /**
      * Constructor
-     * 
-     * @param object $service 
+     *
+     * @param object $service
      */
     public function  __construct($className, $classArgs = array())
     {
@@ -48,10 +49,10 @@ class Zend_Soap_Server_Proxy
     }
     /**
      * Proxy for the WS-I compliant call
-     * 
+     *
      * @param  string $name
      * @param  string $arguments
-     * @return array 
+     * @return array
      */
     public function __call($name, $arguments)
     {
@@ -60,9 +61,9 @@ class Zend_Soap_Server_Proxy
     }
     /**
      *  Pre process arguments
-     * 
+     *
      * @param  mixed $arguments
-     * @return array 
+     * @return array
      */
     protected function _preProcessArguments($arguments)
     {

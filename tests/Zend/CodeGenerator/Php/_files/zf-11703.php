@@ -3,6 +3,7 @@
  * For manipulating files.
  */
 
+#[AllowDynamicProperties]
 class Foo
 {
 

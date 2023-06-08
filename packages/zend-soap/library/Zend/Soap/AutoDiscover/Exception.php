@@ -29,6 +29,7 @@
  * @package    Zend_Soap
  * @subpackage AutoDiscover
  */
+#[AllowDynamicProperties]
 class Zend_Soap_AutoDiscover_Exception extends Zend_Exception
 {
 }

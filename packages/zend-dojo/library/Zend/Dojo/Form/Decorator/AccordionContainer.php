@@ -33,6 +33,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
+#[AllowDynamicProperties]
 class Zend_Dojo_Form_Decorator_AccordionContainer extends Zend_Dojo_Form_Decorator_DijitContainer
 {
     /**

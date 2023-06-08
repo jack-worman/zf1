@@ -12,6 +12,7 @@
  *
  * @package Zend_Reflection_TestClassWithCodeInMethod
  */
+#[AllowDynamicProperties]
 class Zend_Reflection_TestClassWithCodeInMethod
 {
 

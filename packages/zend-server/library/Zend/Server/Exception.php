@@ -30,6 +30,7 @@
  * @subpackage Reflection
  * @version $Id$
  */
+#[AllowDynamicProperties]
 class Zend_Server_Exception extends Zend_Exception
 {
 }

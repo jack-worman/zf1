@@ -50,6 +50,7 @@
  * @package    Zend_Gdata
  * @subpackage Analytics
  */
+#[AllowDynamicProperties]
 class Zend_Gdata_Analytics_AccountEntry extends Zend_Gdata_Entry
 {
     protected $_accountId;

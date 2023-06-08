@@ -34,6 +34,7 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+#[AllowDynamicProperties]
 class Zend_Measure_Speed extends Zend_Measure_Abstract
 {
     const STANDARD = 'METER_PER_SECOND';

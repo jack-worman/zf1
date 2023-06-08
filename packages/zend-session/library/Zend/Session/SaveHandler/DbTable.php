@@ -49,6 +49,7 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+#[AllowDynamicProperties]
 class Zend_Session_SaveHandler_DbTable
     extends Zend_Db_Table_Abstract
     implements Zend_Session_SaveHandler_Interface

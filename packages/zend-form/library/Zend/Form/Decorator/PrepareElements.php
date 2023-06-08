@@ -39,6 +39,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
+#[AllowDynamicProperties]
 class Zend_Form_Decorator_PrepareElements extends Zend_Form_Decorator_FormElements
 {
     /**

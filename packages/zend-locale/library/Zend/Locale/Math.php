@@ -32,6 +32,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+#[AllowDynamicProperties]
 class Zend_Locale_Math
 {
     // support unit testing without using bcmath functions

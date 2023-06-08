@@ -31,30 +31,31 @@
  * @subpackage Management
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * 
+ *
  * @property string $CertificateUrl          Certificate thumbprint address.
  * @property string $Thumbprint              Certificate thumbprint.
  * @property string $ThumbprintAlgorithm	 Certificate thumbprint algorithm.
  * @property string $Data                    Certificate data.
  */
+#[AllowDynamicProperties]
 class Zend_Service_WindowsAzure_Management_CertificateInstance
 	extends Zend_Service_WindowsAzure_Management_ServiceEntityAbstract
-{    
+{
     /**
      * Constructor
-     * 
+     *
      * @param string $certificateUrl          Certificate thumbprint address.
      * @param string $thumbprint              Certificate thumbprint.
      * @param string $thumbprintAlgorithm	 Certificate thumbprint algorithm.
      * @param string $data                    Certificate data.
 	 */
-    public function __construct($certificateUrl, $thumbprint, $thumbprintAlgorithm, $data) 
-    {	        
+    public function __construct($certificateUrl, $thumbprint, $thumbprintAlgorithm, $data)
+    {
         $this->_data = array(
             'certificateurl'       => $certificateUrl,
             'thumbprint'           => $thumbprint,
             'thumbprintalgorithm'  => $thumbprintAlgorithm,
-            'data'                 => base64_decode($data)        
+            'data'                 => base64_decode($data)
         );
     }
 }

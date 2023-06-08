@@ -48,6 +48,7 @@
  * @package    Zend_Soap
  * @subpackage AutoDiscover
  */
+#[AllowDynamicProperties]
 class Zend_Soap_AutoDiscover implements Zend_Server_Interface
 {
     /**

@@ -41,6 +41,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
+#[AllowDynamicProperties]
 class Zend_Soap_Server implements Zend_Server_Interface
 {
     /**

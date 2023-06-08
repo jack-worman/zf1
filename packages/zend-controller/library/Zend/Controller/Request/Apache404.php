@@ -40,6 +40,7 @@
  * @package    Zend_Controller
  * @subpackage Request
  */
+#[AllowDynamicProperties]
 class Zend_Controller_Request_Apache404 extends Zend_Controller_Request_Http
 {
     public function setRequestUri($requestUri = null)

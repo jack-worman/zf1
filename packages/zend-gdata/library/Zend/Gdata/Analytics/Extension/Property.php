@@ -30,6 +30,7 @@
  * @package    Zend_Gdata
  * @subpackage Analytics
  */
+#[AllowDynamicProperties]
 class Zend_Gdata_Analytics_Extension_Property extends Zend_Gdata_Extension
 {
     protected $_rootNamespace = 'ga';

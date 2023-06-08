@@ -28,6 +28,7 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+#[AllowDynamicProperties]
 class Zend_Cloud_StorageService_Factory extends Zend_Cloud_AbstractFactory
 {
     const STORAGE_ADAPTER_KEY = 'storage_adapter';
@@ -50,7 +51,7 @@ class Zend_Cloud_StorageService_Factory extends Zend_Cloud_AbstractFactory
      * Retrieve StorageService adapter
      *
      * @param  array $options
-     * @return Zend_Cloud_StorageService_Adapter 
+     * @return Zend_Cloud_StorageService_Adapter
      */
     public static function getAdapter($options = array())
     {

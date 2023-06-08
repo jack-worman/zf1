@@ -31,6 +31,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
+#[AllowDynamicProperties]
 class Zend_Log_Formatter_Simple extends Zend_Log_Formatter_Abstract
 {
     /**

@@ -37,6 +37,7 @@
  * @author     Dolf Schimmel
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+#[AllowDynamicProperties]
 class Zend_Application_Resource_Navigation
     extends Zend_Application_Resource_ResourceAbstract
 {

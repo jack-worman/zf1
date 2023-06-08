@@ -28,6 +28,7 @@
 // require_once 'Zend/Service/Rackspace/Servers/SharedIpGroupList.php';
 // require_once 'Zend/Validate/Ip.php';
 
+#[AllowDynamicProperties]
 class Zend_Service_Rackspace_Servers extends Zend_Service_Rackspace_Abstract
 {
     const LIMIT_FILE_SIZE           = 10240;

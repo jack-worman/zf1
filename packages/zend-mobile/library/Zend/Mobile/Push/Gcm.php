@@ -42,6 +42,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
+#[AllowDynamicProperties]
 class Zend_Mobile_Push_Gcm extends Zend_Mobile_Push_Abstract
 {
 

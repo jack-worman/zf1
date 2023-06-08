@@ -29,5 +29,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
+#[AllowDynamicProperties]
 class Zend_Log_Exception extends Zend_Exception
 {}

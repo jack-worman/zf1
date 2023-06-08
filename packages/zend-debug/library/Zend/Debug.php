@@ -28,6 +28,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+#[AllowDynamicProperties]
 class Zend_Debug
 {
 

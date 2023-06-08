@@ -4,6 +4,7 @@
  */
 // require_once 'Zend/Service/Ebay/Abstract.php';
 
+#[AllowDynamicProperties]
 class Zend_Service_Ebay_AbstractConcrete extends Zend_Service_Ebay_Abstract
 {
     /**
