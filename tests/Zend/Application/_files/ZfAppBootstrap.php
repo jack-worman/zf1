@@ -28,7 +28,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
-#[AllowDynamicProperties]
 class ZfAppBootstrap extends Zend_Application_Bootstrap_BootstrapAbstract
 {
     public $frontController;
