@@ -97,7 +97,7 @@ class Zend_Gdata_App_Util
                 if (array_key_exists($foundKey, $collection)) {
                     $found = true;
                 } else {
-                    $foundKey--;
+                    --$foundKey;
                 }
             }
         }

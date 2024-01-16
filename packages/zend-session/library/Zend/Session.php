@@ -631,7 +631,7 @@ class Zend_Session extends Zend_Session_Abstract
      */
     public static function isRegenerated()
     {
-        return  (self::$_regenerateIdState > 0) ? true : false;
+        return (self::$_regenerateIdState > 0) ? true : false;
     }
 
     /**
