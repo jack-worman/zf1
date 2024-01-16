@@ -290,11 +290,8 @@ abstract class Zend_View_Helper_Placeholder_Container_Standalone extends Zend_Vi
 
     /**
      * ArrayAccess: offsetGet.
-     *
-     * @param string|int $offset
      */
-    #[ReturnTypeWillChange]
-    public function offsetGet($offset)
+    public function offsetGet($offset): string|int
     {
         return $this->getContainer()->offsetGet($offset);
     }

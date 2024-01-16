@@ -15,9 +15,7 @@
         "ext-simplexml": "*",
         "ext-spl": "*",
         "ext-xml": "*",
-        "ext-zlib": "*",
-        "jworman/polyfill-php81": "^1.25",
-        "symfony/polyfill-php70": "^1.19"
+        "ext-zlib": "*"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.47",
