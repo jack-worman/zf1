@@ -269,8 +269,7 @@ class Zend_Config implements Countable, Iterator
     /**
      * Defined by Iterator interface.
      */
-    #[ReturnTypeWillChange]
-    public function current()
+    public function current(): mixed
     {
         $this->_skipNextIteration = false;
 
