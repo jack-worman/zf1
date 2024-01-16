@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,11 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ *
  * @version    $Id$
+ *
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -27,21 +28,18 @@
  * Renders a template and stores the rendered output as a placeholder
  * variable for later use.
  *
- * @package    Zend_View
- * @subpackage Helper
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
 class Zend_View_Helper_RenderToPlaceholder extends Zend_View_Helper_Abstract
 {
-
     /**
      * Renders a template and stores the rendered output as a placeholder
      * variable for later use.
      *
-     * @param string $script The template script to render
+     * @param string $script      The template script to render
      * @param string $placeholder The placeholder variable name in which to store the rendered output
+     *
      * @return void
      */
     public function renderToPlaceholder($script, $placeholder)

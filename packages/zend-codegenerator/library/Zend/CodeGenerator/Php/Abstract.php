@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_CodeGenerator
- * @subpackage PHP
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,18 +27,16 @@
 
 /**
  * @category   Zend
- * @package    Zend_CodeGenerator
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_CodeGenerator_Php_Abstract extends Zend_CodeGenerator_Abstract
 {
-
     /**
-     * Line feed to use in place of EOL
-     *
+     * Line feed to use in place of EOL.
      */
-    const LINE_FEED = "\n";
+    public const LINE_FEED = "\n";
 
     /**
      * @var bool
@@ -51,19 +49,21 @@ abstract class Zend_CodeGenerator_Php_Abstract extends Zend_CodeGenerator_Abstra
     protected $_indentation = '    ';
 
     /**
-     * setSourceDirty()
+     * setSourceDirty().
      *
      * @param bool $isSourceDirty
+     *
      * @return Zend_CodeGenerator_Php_Abstract
      */
     public function setSourceDirty($isSourceDirty = true)
     {
         $this->_isSourceDirty = ($isSourceDirty) ? true : false;
+
         return $this;
     }
 
     /**
-     * isSourceDirty()
+     * isSourceDirty().
      *
      * @return bool
      */
@@ -73,19 +73,21 @@ abstract class Zend_CodeGenerator_Php_Abstract extends Zend_CodeGenerator_Abstra
     }
 
     /**
-     * setIndentation()
+     * setIndentation().
      *
      * @param string|int $indentation
+     *
      * @return Zend_CodeGenerator_Php_Abstract
      */
     public function setIndentation($indentation)
     {
         $this->_indentation = $indentation;
+
         return $this;
     }
 
     /**
-     * getIndentation()
+     * getIndentation().
      *
      * @return string|int
      */
@@ -93,5 +95,4 @@ abstract class Zend_CodeGenerator_Php_Abstract extends Zend_CodeGenerator_Abstra
     {
         return $this->_indentation;
     }
-
 }

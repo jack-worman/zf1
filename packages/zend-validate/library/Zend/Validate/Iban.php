@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,43 +26,43 @@
 // require_once 'Zend/Validate/Abstract.php';
 
 /**
- * Validates IBAN Numbers (International Bank Account Numbers)
+ * Validates IBAN Numbers (International Bank Account Numbers).
  *
  * @category   Zend
- * @package    Zend_Validate
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Validate_Iban extends Zend_Validate_Abstract
 {
-    const NOTSUPPORTED = 'ibanNotSupported';
-    const FALSEFORMAT  = 'ibanFalseFormat';
-    const CHECKFAILED  = 'ibanCheckFailed';
+    public const NOTSUPPORTED = 'ibanNotSupported';
+    public const FALSEFORMAT = 'ibanFalseFormat';
+    public const CHECKFAILED = 'ibanCheckFailed';
 
     /**
-     * Validation failure message template definitions
+     * Validation failure message template definitions.
      *
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $_messageTemplates = [
         self::NOTSUPPORTED => "Unknown country within the IBAN '%value%'",
-        self::FALSEFORMAT  => "'%value%' has a false IBAN format",
-        self::CHECKFAILED  => "'%value%' has failed the IBAN check",
-    );
+        self::FALSEFORMAT => "'%value%' has a false IBAN format",
+        self::CHECKFAILED => "'%value%' has failed the IBAN check",
+    ];
 
     /**
-     * Optional locale
+     * Optional locale.
      *
      * @var string|Zend_Locale|null
      */
     protected $_locale;
 
     /**
-     * IBAN regexes by region
+     * IBAN regexes by region.
      *
      * @var array
      */
-    protected $_ibanregex = array(
+    protected $_ibanregex = [
         'AD' => '/^AD[0-9]{2}[0-9]{8}[A-Z0-9]{12}$/',
         'AE' => '/^AE[0-9]{2}[0-9]{3}[0-9]{16}$/',
         'AL' => '/^AL[0-9]{2}[0-9]{8}[A-Z0-9]{16}$/',
@@ -126,11 +127,11 @@ class Zend_Validate_Iban extends Zend_Validate_Abstract
         'SM' => '/^SM[0-9]{2}[A-Z]{1}[0-9]{5}[0-9]{5}[A-Z0-9]{12}$/',
         'TN' => '/^TN[0-9]{2}[0-9]{5}[0-9]{15}$/',
         'TR' => '/^TR[0-9]{2}[0-9]{5}[A-Z0-9]{17}$/',
-        'VG' => '/^VG[0-9]{2}[A-Z]{4}[0-9]{16}$/'
-    );
+        'VG' => '/^VG[0-9]{2}[A-Z]{4}[0-9]{16}$/',
+    ];
 
     /**
-     * Sets validator options
+     * Sets validator options.
      *
      * @param string|Zend_Config|Zend_Locale $locale OPTIONAL
      */
@@ -155,13 +156,13 @@ class Zend_Validate_Iban extends Zend_Validate_Abstract
             }
         }
 
-        if ($locale !== null) {
+        if (null !== $locale) {
             $this->setLocale($locale);
         }
     }
 
     /**
-     * Returns the locale option
+     * Returns the locale option.
      *
      * @return string|Zend_Locale|null
      */
@@ -171,16 +172,18 @@ class Zend_Validate_Iban extends Zend_Validate_Abstract
     }
 
     /**
-     * Sets the locale option
+     * Sets the locale option.
      *
-     * @param  string|Zend_Locale $locale
+     * @param string|Zend_Locale $locale
+     *
+     * @return Zend_Validate_Iban provides a fluent interface
+     *
      * @throws Zend_Locale_Exception
      * @throws Zend_Validate_Exception
-     * @return Zend_Validate_Iban provides a fluent interface
      */
     public function setLocale($locale = null)
     {
-        if ($locale !== false) {
+        if (false !== $locale) {
             // require_once 'Zend/Locale.php';
             $locale = Zend_Locale::findLocale($locale);
             if (strlen((string) $locale) < 4) {
@@ -190,16 +193,18 @@ class Zend_Validate_Iban extends Zend_Validate_Abstract
         }
 
         $this->_locale = $locale;
+
         return $this;
     }
 
     /**
-     * Defined by Zend_Validate_Interface
+     * Defined by Zend_Validate_Interface.
      *
      * Returns true if $value is a valid IBAN
      *
-     * @param  string $value
-     * @return boolean
+     * @param string $value
+     *
+     * @return bool
      */
     public function isValid($value)
     {
@@ -216,32 +221,35 @@ class Zend_Validate_Iban extends Zend_Validate_Abstract
         if (!array_key_exists($region, $this->_ibanregex)) {
             $this->_setValue($region);
             $this->_error(self::NOTSUPPORTED);
+
             return false;
         }
 
         if (!preg_match($this->_ibanregex[$region], $value)) {
             $this->_error(self::FALSEFORMAT);
+
             return false;
         }
 
-        $format = substr((string) $value, 4) . substr((string) $value, 0, 4);
+        $format = substr((string) $value, 4).substr((string) $value, 0, 4);
         $format = str_replace(
-            array('A',  'B',  'C',  'D',  'E',  'F',  'G',  'H',  'I',  'J',  'K',  'L',  'M',
-                  'N',  'O',  'P',  'Q',  'R',  'S',  'T',  'U',  'V',  'W',  'X',  'Y',  'Z'),
-            array('10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22',
-                  '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35'),
+            ['A',  'B',  'C',  'D',  'E',  'F',  'G',  'H',  'I',  'J',  'K',  'L',  'M',
+                  'N',  'O',  'P',  'Q',  'R',  'S',  'T',  'U',  'V',  'W',  'X',  'Y',  'Z'],
+            ['10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22',
+                  '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35'],
             $format);
 
         $temp = intval(substr((string) $format, 0, 1));
-        $len  = strlen((string) $format);
+        $len = strlen((string) $format);
         for ($x = 1; $x < $len; ++$x) {
             $temp *= 10;
             $temp += intval(substr((string) $format, $x, 1));
             $temp %= 97;
         }
 
-        if ($temp != 1) {
+        if (1 != $temp) {
             $this->_error(self::CHECKFAILED);
+
             return false;
         }
 

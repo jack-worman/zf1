@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_CodeGenerator
- * @subpackage PHP
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,27 +27,25 @@
 
 /**
  * @category   Zend
- * @package    Zend_CodeGenerator
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_CodeGenerator_Php_Docblock_Tag_Return extends Zend_CodeGenerator_Php_Docblock_Tag
 {
+    /**
+     * @var string
+     */
+    protected $_datatype;
 
     /**
      * @var string
      */
-    protected $_datatype = null;
+    protected $_description;
 
     /**
-     * @var string
-     */
-    protected $_description = null;
-
-    /**
-     * fromReflection()
+     * fromReflection().
      *
-     * @param Zend_Reflection_Docblock_Tag $reflectionTagReturn
      * @return Zend_CodeGenerator_Php_Docblock_Tag_Return
      */
     public static function fromReflection(Zend_Reflection_Docblock_Tag $reflectionTagReturn)
@@ -62,19 +60,21 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Return extends Zend_CodeGenerator_Php_
     }
 
     /**
-     * setDatatype()
+     * setDatatype().
      *
      * @param string $datatype
+     *
      * @return Zend_CodeGenerator_Php_Docblock_Tag_Return
      */
     public function setDatatype($datatype)
     {
         $this->_datatype = $datatype;
+
         return $this;
     }
 
     /**
-     * getDatatype()
+     * getDatatype().
      *
      * @return string
      */
@@ -83,16 +83,15 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Return extends Zend_CodeGenerator_Php_
         return $this->_datatype;
     }
 
-
     /**
-     * generate()
+     * generate().
      *
      * @return string
      */
     public function generate()
     {
-        $output = '@return ' . $this->_datatype . ' ' . $this->_description;
+        $output = '@return '.$this->_datatype.' '.$this->_description;
+
         return $output;
     }
-
 }

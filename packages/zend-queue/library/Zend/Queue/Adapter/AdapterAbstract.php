@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Queue
- * @subpackage Adapter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -34,44 +34,42 @@
  * Class for connecting to queues performing common operations.
  *
  * @category   Zend
- * @package    Zend_Queue
- * @subpackage Adapter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Queue_Adapter_AdapterAbstract
-    implements Zend_Queue_Adapter_AdapterInterface
+abstract class Zend_Queue_Adapter_AdapterAbstract implements Zend_Queue_Adapter_AdapterInterface
 {
     /**
-     * Default timeout for createQueue() function
+     * Default timeout for createQueue() function.
      */
-    const CREATE_TIMEOUT_DEFAULT = 30;
+    public const CREATE_TIMEOUT_DEFAULT = 30;
 
     /**
-     * Default timeout for recieve() function
+     * Default timeout for recieve() function.
      */
-    const RECEIVE_TIMEOUT_DEFAULT = 30;
+    public const RECEIVE_TIMEOUT_DEFAULT = 30;
 
     /**
-     * User-provided options
+     * User-provided options.
      *
      * @var array
      */
-    protected $_options = array();
+    protected $_options = [];
 
     /**
-     * Internal array of queues to save on lookups
+     * Internal array of queues to save on lookups.
      *
      * @var array
      */
-    protected $_queues = array();
+    protected $_queues = [];
 
     /**
-     * Contains the Zend_Queue that this object
+     * Contains the Zend_Queue that this object.
      *
      * @var Zend_Queue_Adapter_Abstract
      */
-    protected $_queue = null;
+    protected $_queue;
 
     /**
      * Constructor.
@@ -91,9 +89,10 @@ abstract class Zend_Queue_Adapter_AdapterAbstract
      * host           => (string) What host to connect to, defaults to localhost
      * port           => (string) The port of the database
      *
-     * @param  array|Zend_Config $config An array having configuration data
      * @param  Zend_Queue The Zend_Queue object that created this class
+     *
      * @return void
+     *
      * @throws Zend_Queue_Exception
      */
     public function __construct($options, Zend_Queue $queue = null)
@@ -111,12 +110,12 @@ abstract class Zend_Queue_Adapter_AdapterAbstract
         }
 
         // set the queue
-        if ($queue !== null) {
+        if (null !== $queue) {
             $this->setQueue($queue);
         }
 
-        $adapterOptions = array();
-        $driverOptions  = array();
+        $adapterOptions = [];
+        $driverOptions = [];
 
         // Normalize the options and merge with the defaults
         if (array_key_exists('options', $options)) {
@@ -132,12 +131,12 @@ abstract class Zend_Queue_Adapter_AdapterAbstract
         }
         if (array_key_exists('driverOptions', $options)) {
             // can't use array_merge() because keys might be integers
-            foreach ((array)$options['driverOptions'] as $key => $value) {
+            foreach ((array) $options['driverOptions'] as $key => $value) {
                 $driverOptions[$key] = $value;
             }
         }
         $this->_options = array_merge($this->_options, $options);
-        $this->_options['options']       = $adapterOptions;
+        $this->_options['options'] = $adapterOptions;
         $this->_options['driverOptions'] = $driverOptions;
     }
 
@@ -145,7 +144,7 @@ abstract class Zend_Queue_Adapter_AdapterAbstract
     * Queue management functions
      *********************************************************************/
     /**
-     * get the Zend_Queue class that is attached to this object
+     * get the Zend_Queue class that is attached to this object.
      *
      * @return Zend_Queue_Adapter_Abstract|null
      */
@@ -155,14 +154,14 @@ abstract class Zend_Queue_Adapter_AdapterAbstract
     }
 
     /**
-     * set the Zend_Queue class for this object
+     * set the Zend_Queue class for this object.
      *
-     * @param  Zend_Queue $queue
      * @return Zend_Queue_Adapter_AdapterInterface
      */
     public function setQueue(Zend_Queue $queue)
     {
         $this->_queue = $queue;
+
         return $this;
     }
 
@@ -179,13 +178,14 @@ abstract class Zend_Queue_Adapter_AdapterAbstract
     /**
      * Indicates if a function is supported or not.
      *
-     * @param  string $name
-     * @return boolean
+     * @param string $name
+     *
+     * @return bool
      */
     public function isSupported($name)
     {
         $list = $this->getCapabilities();
 
-        return (isset($list[$name]) && $list[$name]);
-     }
+        return isset($list[$name]) && $list[$name];
+    }
 }

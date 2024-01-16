@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,21 +13,20 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Application
- * @subpackage Resource
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // require_once 'Zend/Application/Resource/ResourceAbstract.php';
 
 /**
- * Cache Manager resource
+ * Cache Manager resource.
  *
  * @category   Zend
- * @package    Zend_Application
- * @subpackage Resource
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -36,10 +35,10 @@ class Zend_Application_Resource_Cachemanager extends Zend_Application_Resource_R
     /**
      * @var Zend_Cache_Manager
      */
-    protected $_manager = null;
+    protected $_manager;
 
     /**
-     * Initialize Cache_Manager
+     * Initialize Cache_Manager.
      *
      * @return Zend_Cache_Manager
      */
@@ -49,14 +48,14 @@ class Zend_Application_Resource_Cachemanager extends Zend_Application_Resource_R
     }
 
     /**
-     * Retrieve Zend_Cache_Manager instance
+     * Retrieve Zend_Cache_Manager instance.
      *
      * @return Zend_Cache_Manager
      */
     public function getCacheManager()
     {
         if (null === $this->_manager) {
-            $this->_manager = new Zend_Cache_Manager;
+            $this->_manager = new Zend_Cache_Manager();
 
             $options = $this->getOptions();
             foreach ($options as $key => $value) {

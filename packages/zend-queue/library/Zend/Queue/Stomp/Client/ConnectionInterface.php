@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Queue
- * @subpackage Stomp
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -24,48 +24,49 @@
  * The Stomp client interacts with a Stomp server.
  *
  * @category   Zend
- * @package    Zend_Queue
- * @subpackage Stomp
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface Zend_Queue_Stomp_Client_ConnectionInterface
 {
     /**
-     * @param  string  $scheme ['tcp', 'udp']
+     * @param string $scheme ['tcp', 'udp']
      * @param  string  host
-     * @param  integer port
+     * @param  int port
      * @param  string  class - create a connection with this class; class must support Zend_Queue_Stomp_Client_Connection_Interface
-     * @return boolean
+     *
+     * @return bool
      */
     public function open($scheme, $host, $port);
 
     /**
-     * @param  boolean $destructor
+     * @param bool $destructor
+     *
      * @return void
      */
     public function close($destructor = false);
 
     /**
-     * Check whether we are connected to the server
+     * Check whether we are connected to the server.
      *
      * @return true
+     *
      * @throws Zend_Queue_Exception
      */
     public function ping();
 
     /**
-     * write a frame to the stomp server
+     * write a frame to the stomp server.
      *
      * example: $response = $client->write($frame)->read();
      *
-     * @param  Zend_Queue_Stomp_FrameInterface $frame
      * @return $this
      */
     public function write(Zend_Queue_Stomp_FrameInterface $frame);
 
     /**
-     * tests the socket to see if there is data for us
+     * tests the socket to see if there is data for us.
      */
     public function canRead();
 
@@ -73,29 +74,31 @@ interface Zend_Queue_Stomp_Client_ConnectionInterface
      * reads in a frame from the socket or returns false.
      *
      * @return Zend_Queue_Stomp_Frame|false
+     *
      * @throws Zend_Queue_Exception
      */
     public function read();
 
     /**
-     * Set the frame class to be used
+     * Set the frame class to be used.
      *
      * This must be a Zend_Queue_Stomp_FrameInterface.
      *
-     * @param  string $class
+     * @param string $class
+     *
      * @return Zend_Queue_Stomp_Client_ConnectionInterface;
      */
     public function setFrameClass($class);
 
     /**
-     * Get the frameClass
+     * Get the frameClass.
      *
      * @return string
      */
     public function getFrameClass();
 
     /**
-     * create an empty frame
+     * create an empty frame.
      *
      * @return Zend_Queue_Stomp_FrameInterface class
      */

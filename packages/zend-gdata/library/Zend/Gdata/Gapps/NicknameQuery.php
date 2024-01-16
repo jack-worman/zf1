@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Gapps
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -35,36 +35,34 @@
  * service class, Zend_Gdata_Gapps.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Gapps
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_Gapps_NicknameQuery extends Zend_Gdata_Gapps_Query
 {
-
     /**
      * If not null, indicates the name of the nickname entry which
      * should be returned by this query.
      *
      * @var string
      */
-    protected $_nickname = null;
+    protected $_nickname;
 
     /**
      * Create a new instance.
      *
-     * @param string $domain (optional) The Google Apps-hosted domain to use
-     *          when constructing query URIs.
-     * @param string $nickname (optional) Value for the nickname
-     *          property.
-     * @param string $username (optional) Value for the username
-     *          property.
+     * @param string $domain        (optional) The Google Apps-hosted domain to use
+     *                              when constructing query URIs
+     * @param string $nickname      (optional) Value for the nickname
+     *                              property
+     * @param string $username      (optional) Value for the username
+     *                              property
      * @param string $startNickname (optional) Value for the
-     *          startNickname property.
+     *                              startNickname property
      */
     public function __construct($domain = null, $nickname = null,
-            $username = null, $startNickname = null)
+        $username = null, $startNickname = null)
     {
         parent::__construct($domain);
         $this->setNickname($nickname);
@@ -77,21 +75,22 @@ class Zend_Gdata_Gapps_NicknameQuery extends Zend_Gdata_Gapps_Query
      * matching this value will be returned in search results. Set to
      * null to disable filtering by username.
      *
-     * @param string $value The nickname to filter search results by, or null
-     *          to  disable.
+     * @param string $value the nickname to filter search results by, or null
+     *                      to  disable
      */
-     public function setNickname($value)
-     {
-         $this->_nickname = $value;
-     }
+    public function setNickname($value)
+    {
+        $this->_nickname = $value;
+    }
 
     /**
      * Get the nickname to query for. If no nickname is set, null will be
      * returned.
      *
      * @see setNickname
-     * @return string The nickname to filter search results by, or null if
-     *              disabled.
+     *
+     * @return string the nickname to filter search results by, or null if
+     *                disabled
      */
     public function getNickname()
     {
@@ -103,15 +102,14 @@ class Zend_Gdata_Gapps_NicknameQuery extends Zend_Gdata_Gapps_Query
      * matching this value will be returned in search results. Set to
      * null to disable filtering by username.
      *
-     * @param string $value The username to filter search results by, or null
-     *          to disable.
+     * @param string $value the username to filter search results by, or null
+     *                      to disable
      */
     public function setUsername($value)
     {
-        if ($value !== null) {
+        if (null !== $value) {
             $this->_params['username'] = $value;
-        }
-        else {
+        } else {
             unset($this->_params['username']);
         }
     }
@@ -121,8 +119,9 @@ class Zend_Gdata_Gapps_NicknameQuery extends Zend_Gdata_Gapps_Query
      * returned.
      *
      * @see setUsername
-     * @return string The username to filter search results by, or null if
-     *              disabled.
+     *
+     * @return string the username to filter search results by, or null if
+     *                disabled
      */
     public function getUsername()
     {
@@ -137,12 +136,12 @@ class Zend_Gdata_Gapps_NicknameQuery extends Zend_Gdata_Gapps_Query
      * Set the first nickname which should be displayed when retrieving
      * a list of nicknames.
      *
-     * @param string $value The first nickname to be returned, or null to
-     *              disable.
+     * @param string $value the first nickname to be returned, or null to
+     *                      disable
      */
     public function setStartNickname($value)
     {
-        if ($value !== null) {
+        if (null !== $value) {
             $this->_params['startNickname'] = $value;
         } else {
             unset($this->_params['startNickname']);
@@ -153,8 +152,8 @@ class Zend_Gdata_Gapps_NicknameQuery extends Zend_Gdata_Gapps_Query
      * Get the first nickname which should be displayed when retrieving
      * a list of nicknames.
      *
-     * @return string The first nickname to be returned, or null to
-     *              disable.
+     * @return string the first nickname to be returned, or null to
+     *                disable
      */
     public function getStartNickname()
     {
@@ -169,18 +168,17 @@ class Zend_Gdata_Gapps_NicknameQuery extends Zend_Gdata_Gapps_Query
      * Returns the URL generated for this query, based on it's current
      * parameters.
      *
-     * @return string A URL generated based on the state of this query.
+     * @return string a URL generated based on the state of this query
      */
     public function getQueryUrl()
     {
-
         $uri = $this->getBaseUrl();
         $uri .= Zend_Gdata_Gapps::APPS_NICKNAME_PATH;
-        if ($this->_nickname !== null) {
-            $uri .= '/' . $this->_nickname;
+        if (null !== $this->_nickname) {
+            $uri .= '/'.$this->_nickname;
         }
         $uri .= $this->getQueryString();
+
         return $uri;
     }
-
 }

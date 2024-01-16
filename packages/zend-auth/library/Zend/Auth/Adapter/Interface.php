@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,34 +13,32 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Auth
- * @subpackage Zend_Auth_Adapter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /**
  * @see Zend_Auth_Result
  */
 // require_once 'Zend/Auth/Result.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_Auth
- * @subpackage Zend_Auth_Adapter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface Zend_Auth_Adapter_Interface
 {
     /**
-     * Performs an authentication attempt
+     * Performs an authentication attempt.
+     *
+     * @return Zend_Auth_Result
      *
      * @throws Zend_Auth_Adapter_Exception If authentication cannot be performed
-     * @return Zend_Auth_Result
      */
     public function authenticate();
 }

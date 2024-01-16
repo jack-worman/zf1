@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage Generator
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,19 +26,19 @@
 // require_once 'Zend/XmlRpc/Generator/GeneratorAbstract.php';
 
 /**
- * XML generator adapter based on XMLWriter
+ * XML generator adapter based on XMLWriter.
  */
 class Zend_XmlRpc_Generator_XmlWriter extends Zend_XmlRpc_Generator_GeneratorAbstract
 {
     /**
-     * XMLWriter instance
+     * XMLWriter instance.
      *
      * @var XMLWriter
      */
     protected $_xmlWriter;
 
     /**
-     * Initialized XMLWriter instance
+     * Initialized XMLWriter instance.
      *
      * @return void
      */
@@ -49,11 +49,11 @@ class Zend_XmlRpc_Generator_XmlWriter extends Zend_XmlRpc_Generator_GeneratorAbs
         $this->_xmlWriter->startDocument('1.0', $this->_encoding);
     }
 
-
     /**
-     * Open a new XML element
+     * Open a new XML element.
      *
      * @param string $name XML element name
+     *
      * @return void
      */
     protected function _openElement($name)
@@ -62,9 +62,10 @@ class Zend_XmlRpc_Generator_XmlWriter extends Zend_XmlRpc_Generator_GeneratorAbs
     }
 
     /**
-     * Write XML text data into the currently opened XML element
+     * Write XML text data into the currently opened XML element.
      *
      * @param string $text XML text data
+     *
      * @return void
      */
     protected function _writeTextData($text)
@@ -73,9 +74,10 @@ class Zend_XmlRpc_Generator_XmlWriter extends Zend_XmlRpc_Generator_GeneratorAbs
     }
 
     /**
-     * Close an previously opened XML element
+     * Close an previously opened XML element.
      *
      * @param string $name
+     *
      * @return Zend_XmlRpc_Generator_XmlWriter
      */
     protected function _closeElement($name)
@@ -88,6 +90,7 @@ class Zend_XmlRpc_Generator_XmlWriter extends Zend_XmlRpc_Generator_GeneratorAbs
     public function saveXml()
     {
         $xml = $this->_xmlWriter->flush(false);
+
         return $xml;
     }
 }

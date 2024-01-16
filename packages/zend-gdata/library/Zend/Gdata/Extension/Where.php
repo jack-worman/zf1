@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Gdata
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -32,22 +32,20 @@
 // require_once 'Zend/Gdata/Extension/EntryLink.php';
 
 /**
- * Data model class to represent a location (gd:where element)
+ * Data model class to represent a location (gd:where element).
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Gdata
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_Extension_Where extends Zend_Gdata_Extension
 {
-
     protected $_rootElement = 'where';
-    protected $_label = null;
-    protected $_rel = null;
-    protected $_valueString = null;
-    protected $_entryLink = null;
+    protected $_label;
+    protected $_rel;
+    protected $_valueString;
+    protected $_entryLink;
 
     public function __construct($valueString = null, $label = null, $rel = null, $entryLink = null)
     {
@@ -61,35 +59,36 @@ class Zend_Gdata_Extension_Where extends Zend_Gdata_Extension
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
         $element = parent::getDOM($doc, $majorVersion, $minorVersion);
-        if ($this->_label !== null) {
+        if (null !== $this->_label) {
             $element->setAttribute('label', $this->_label);
         }
-        if ($this->_rel !== null) {
+        if (null !== $this->_rel) {
             $element->setAttribute('rel', $this->_rel);
         }
-        if ($this->_valueString !== null) {
+        if (null !== $this->_valueString) {
             $element->setAttribute('valueString', $this->_valueString);
         }
-        if ($this->entryLink !== null) {
+        if (null !== $this->entryLink) {
             $element->appendChild($this->_entryLink->getDOM($element->ownerDocument));
         }
+
         return $element;
     }
 
     protected function takeAttributeFromDOM($attribute)
     {
         switch ($attribute->localName) {
-        case 'label':
-            $this->_label = $attribute->nodeValue;
-            break;
-        case 'rel':
-            $this->_rel = $attribute->nodeValue;
-            break;
-        case 'valueString':
-            $this->_valueString = $attribute->nodeValue;
-            break;
-        default:
-            parent::takeAttributeFromDOM($attribute);
+            case 'label':
+                $this->_label = $attribute->nodeValue;
+                break;
+            case 'rel':
+                $this->_rel = $attribute->nodeValue;
+                break;
+            case 'valueString':
+                $this->_valueString = $attribute->nodeValue;
+                break;
+            default:
+                parent::takeAttributeFromDOM($attribute);
         }
     }
 
@@ -101,25 +100,24 @@ class Zend_Gdata_Extension_Where extends Zend_Gdata_Extension
      */
     protected function takeChildFromDOM($child)
     {
-        $absoluteNodeName = $child->namespaceURI . ':' . $child->localName;
+        $absoluteNodeName = $child->namespaceURI.':'.$child->localName;
         switch ($absoluteNodeName) {
-        case $this->lookupNamespace('gd') . ':' . 'entryLink':
-            $entryLink = new Zend_Gdata_Extension_EntryLink();
-            $entryLink->transferFromDOM($child);
-            $this->_entryLink = $entryLink;
-            break;
-        default:
-            parent::takeChildFromDOM($child);
-            break;
+            case $this->lookupNamespace('gd').':entryLink':
+                $entryLink = new Zend_Gdata_Extension_EntryLink();
+                $entryLink->transferFromDOM($child);
+                $this->_entryLink = $entryLink;
+                break;
+            default:
+                parent::takeChildFromDOM($child);
+                break;
         }
     }
 
     public function __toString()
     {
-        if ($this->_valueString != null) {
+        if (null != $this->_valueString) {
             return $this->_valueString;
-        }
-        else {
+        } else {
             return parent::__toString();
         }
     }
@@ -132,6 +130,7 @@ class Zend_Gdata_Extension_Where extends Zend_Gdata_Extension
     public function setLabel($value)
     {
         $this->_label = $value;
+
         return $this;
     }
 
@@ -143,6 +142,7 @@ class Zend_Gdata_Extension_Where extends Zend_Gdata_Extension
     public function setRel($value)
     {
         $this->_rel = $value;
+
         return $this;
     }
 
@@ -154,6 +154,7 @@ class Zend_Gdata_Extension_Where extends Zend_Gdata_Extension
     public function setValueString($value)
     {
         $this->_valueString = $value;
+
         return $this;
     }
 
@@ -165,7 +166,7 @@ class Zend_Gdata_Extension_Where extends Zend_Gdata_Extension
     public function setEntryLink($value)
     {
         $this->_entryLink = $value;
+
         return $this;
     }
-
 }

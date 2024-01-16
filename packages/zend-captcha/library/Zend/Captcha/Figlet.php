@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,8 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Captcha
- * @subpackage Adapter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -26,30 +25,30 @@
 // require_once 'Zend/Text/Figlet.php';
 
 /**
- * Captcha based on figlet text rendering service
+ * Captcha based on figlet text rendering service.
  *
  * Note that this engine seems not to like numbers
  *
  * @category   Zend
- * @package    Zend_Captcha
- * @subpackage Adapter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 class Zend_Captcha_Figlet extends Zend_Captcha_Word
 {
     /**
-     * Figlet text renderer
+     * Figlet text renderer.
      *
      * @var Zend_Text_Figlet
      */
     protected $_figlet;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param null|string|array|Zend_Config $options
+     * @param string|array|Zend_Config|null $options
      */
     public function __construct($options = null)
     {
@@ -58,27 +57,26 @@ class Zend_Captcha_Figlet extends Zend_Captcha_Word
     }
 
     /**
-     * Generate new captcha
+     * Generate new captcha.
      *
      * @return string
      */
     public function generate()
     {
         $this->_useNumbers = false;
+
         return parent::generate();
     }
 
     /**
-     * Display the captcha
+     * Display the captcha.
      *
-     * @param Zend_View_Interface $view
-     * @param mixed $element
      * @return string
      */
     public function render(Zend_View_Interface $view = null, $element = null)
     {
         return '<pre>'
-             . $this->_figlet->render($this->getWord())
-             . "</pre>\n";
+             .$this->_figlet->render($this->getWord())
+             ."</pre>\n";
     }
 }

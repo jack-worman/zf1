@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage Router
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -28,20 +28,19 @@
  * with rules-based URI processor.
  *
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage Router
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Controller_Router_Abstract implements Zend_Controller_Router_Interface
 {
     /**
-     * URI delimiter
+     * URI delimiter.
      */
-    const URI_DELIMITER = '/';
+    public const URI_DELIMITER = '/';
 
     /**
-     * Front controller instance
+     * Front controller instance.
      *
      * @var Zend_Controller_Front
      */
@@ -49,41 +48,38 @@ abstract class Zend_Controller_Router_Abstract implements Zend_Controller_Router
 
     /**
      * Array of invocation parameters to use when instantiating action
-     * controllers
+     * controllers.
      *
      * @var array
      */
-    protected $_invokeParams = array();
+    protected $_invokeParams = [];
 
     /**
-     * Constructor
-     *
-     * @param array $params
+     * Constructor.
      */
-    public function __construct(array $params = array())
+    public function __construct(array $params = [])
     {
         $this->setParams($params);
     }
 
     /**
-     * Add or modify a parameter to use when instantiating an action controller
+     * Add or modify a parameter to use when instantiating an action controller.
      *
      * @param string $name
-     * @param mixed  $value
+     *
      * @return Zend_Controller_Router_Abstract
      */
     public function setParam($name, $value)
     {
-        $name                       = (string)$name;
+        $name = (string) $name;
         $this->_invokeParams[$name] = $value;
 
         return $this;
     }
 
     /**
-     * Set parameters to pass to action controller constructors
+     * Set parameters to pass to action controller constructors.
      *
-     * @param array $params
      * @return Zend_Controller_Router_Abstract
      */
     public function setParams(array $params)
@@ -94,10 +90,9 @@ abstract class Zend_Controller_Router_Abstract implements Zend_Controller_Router
     }
 
     /**
-     * Retrieve a single parameter from the controller parameter stack
+     * Retrieve a single parameter from the controller parameter stack.
      *
      * @param string $name
-     * @return mixed
      */
     public function getParam($name)
     {
@@ -109,7 +104,7 @@ abstract class Zend_Controller_Router_Abstract implements Zend_Controller_Router
     }
 
     /**
-     * Retrieve action controller instantiation parameters
+     * Retrieve action controller instantiation parameters.
      *
      * @return array
      */
@@ -119,19 +114,20 @@ abstract class Zend_Controller_Router_Abstract implements Zend_Controller_Router
     }
 
     /**
-     * Clear the controller parameter stack
+     * Clear the controller parameter stack.
      *
      * By default, clears all parameters. If a parameter name is given, clears
      * only that parameter; if an array of parameter names is provided, clears
      * each.
      *
-     * @param null|string|array single key or array of keys for params to clear
+     * @param string|array|null single key or array of keys for params to clear
+     *
      * @return Zend_Controller_Router_Abstract
      */
     public function clearParams($name = null)
     {
         if (null === $name) {
-            $this->_invokeParams = array();
+            $this->_invokeParams = [];
         } elseif (is_string($name) && isset($this->_invokeParams[$name])) {
             unset($this->_invokeParams[$name]);
         } elseif (is_array($name)) {
@@ -146,7 +142,7 @@ abstract class Zend_Controller_Router_Abstract implements Zend_Controller_Router
     }
 
     /**
-     * Retrieve Front Controller
+     * Retrieve Front Controller.
      *
      * @return Zend_Controller_Front
      */
@@ -164,9 +160,8 @@ abstract class Zend_Controller_Router_Abstract implements Zend_Controller_Router
     }
 
     /**
-     * Set Front Controller
+     * Set Front Controller.
      *
-     * @param Zend_Controller_Front $controller
      * @return Zend_Controller_Router_Interface
      */
     public function setFrontController(Zend_Controller_Front $controller)

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Navigation
- * @subpackage Page
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,44 +26,45 @@
 // require_once 'Zend/Navigation/Page.php';
 
 /**
- * Represents a page that is defined by specifying a URI
+ * Represents a page that is defined by specifying a URI.
  *
  * @category   Zend
- * @package    Zend_Navigation
- * @subpackage Page
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Navigation_Page_Uri extends Zend_Navigation_Page
 {
     /**
-     * Page URI
+     * Page URI.
      *
      * @var string|null
      */
-    protected $_uri = null;
+    protected $_uri;
 
     /**
-     * Sets page URI
+     * Sets page URI.
      *
-     * @param  string $uri                page URI, must a string or null
-     * @return Zend_Navigation_Page_Uri   fluent interface, returns self
-     * @throws Zend_Navigation_Exception  if $uri is invalid
+     * @param string $uri page URI, must a string or null
+     *
+     * @return Zend_Navigation_Page_Uri fluent interface, returns self
+     *
+     * @throws Zend_Navigation_Exception if $uri is invalid
      */
     public function setUri($uri)
     {
         if (null !== $uri && !is_string($uri)) {
             // require_once 'Zend/Navigation/Exception.php';
-            throw new Zend_Navigation_Exception(
-                    'Invalid argument: $uri must be a string or null');
+            throw new Zend_Navigation_Exception('Invalid argument: $uri must be a string or null');
         }
 
         $this->_uri = $uri;
+
         return $this;
     }
 
     /**
-     * Returns URI
+     * Returns URI.
      *
      * @return string
      */
@@ -73,30 +74,30 @@ class Zend_Navigation_Page_Uri extends Zend_Navigation_Page
     }
 
     /**
-     * Returns href for this page
+     * Returns href for this page.
      *
      * @return string
      */
     public function getHref()
     {
         $uri = $this->getUri();
-        
-        $fragment = $this->getFragment();       
+
+        $fragment = $this->getFragment();
         if (null !== $fragment) {
             if ('#' == substr((string) $uri, -1)) {
-                return $uri . $fragment;
-            } else {                
-                return $uri . '#' . $fragment;
+                return $uri.$fragment;
+            } else {
+                return $uri.'#'.$fragment;
             }
         }
-        
+
         return $uri;
     }
 
     // Public methods:
 
     /**
-     * Returns an array representation of the page
+     * Returns an array representation of the page.
      *
      * @return array
      */
@@ -104,8 +105,8 @@ class Zend_Navigation_Page_Uri extends Zend_Navigation_Page
     {
         return array_merge(
             parent::toArray(),
-            array(
-                'uri' => $this->getUri()
-            ));
+            [
+                'uri' => $this->getUri(),
+            ]);
     }
 }

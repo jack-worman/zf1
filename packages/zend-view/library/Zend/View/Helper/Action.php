@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,11 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ *
  * @version    $Id$
+ *
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -24,10 +25,8 @@
 // require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * Helper for rendering output of a controller action
+ * Helper for rendering output of a controller action.
  *
- * @package    Zend_View
- * @subpackage Helper
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -54,7 +53,7 @@ class Zend_View_Helper_Action extends Zend_View_Helper_Abstract
     public $response;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * Grab local copies of various MVC objects
      *
@@ -62,7 +61,7 @@ class Zend_View_Helper_Action extends Zend_View_Helper_Abstract
      */
     public function __construct()
     {
-        $front   = Zend_Controller_Front::getInstance();
+        $front = Zend_Controller_Front::getInstance();
         $modules = $front->getControllerDirectory();
         if (empty($modules)) {
             // require_once 'Zend/View/Exception.php';
@@ -71,7 +70,7 @@ class Zend_View_Helper_Action extends Zend_View_Helper_Abstract
             throw $e;
         }
 
-        $request  = $front->getRequest();
+        $request = $front->getRequest();
         $response = $front->getResponse();
 
         if (empty($request) || empty($response)) {
@@ -81,14 +80,14 @@ class Zend_View_Helper_Action extends Zend_View_Helper_Abstract
             throw $e;
         }
 
-        $this->request       = clone $request;
-        $this->response      = clone $response;
-        $this->dispatcher    = clone $front->getDispatcher();
+        $this->request = clone $request;
+        $this->response = clone $response;
+        $this->dispatcher = clone $front->getDispatcher();
         $this->defaultModule = $front->getDefaultModule();
     }
 
     /**
-     * Reset object states
+     * Reset object states.
      *
      * @return void
      */
@@ -105,17 +104,17 @@ class Zend_View_Helper_Action extends Zend_View_Helper_Abstract
     }
 
     /**
-     * Retrieve rendered contents of a controller action
+     * Retrieve rendered contents of a controller action.
      *
      * If the action results in a forward or redirect, returns empty string.
      *
-     * @param  string $action
-     * @param  string $controller
-     * @param  string $module Defaults to default module
-     * @param  array $params
+     * @param string $action
+     * @param string $controller
+     * @param string $module     Defaults to default module
+     *
      * @return string
      */
-    public function action($action, $controller, $module = null, array $params = array())
+    public function action($action, $controller, $module = null, array $params = [])
     {
         $this->resetObjects();
         if (null === $module) {
@@ -137,21 +136,20 @@ class Zend_View_Helper_Action extends Zend_View_Helper_Abstract
         // reset the viewRenderer object to it's original state
         Zend_Controller_Action_HelperBroker::addHelper($viewRendererObj);
 
-
         if (!$this->request->isDispatched()
-            || $this->response->isRedirect())
-        {
+            || $this->response->isRedirect()) {
             // forwards and redirects render nothing
             return '';
         }
 
         $return = $this->response->getBody();
         $this->resetObjects();
+
         return $return;
     }
 
     /**
-     * Clone the current View
+     * Clone the current View.
      *
      * @return Zend_View_Interface
      */
@@ -159,6 +157,7 @@ class Zend_View_Helper_Action extends Zend_View_Helper_Abstract
     {
         $view = clone $this->view;
         $view->clearVars();
+
         return $view;
     }
 }

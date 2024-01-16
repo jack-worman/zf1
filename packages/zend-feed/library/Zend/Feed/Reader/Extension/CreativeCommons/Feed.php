@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed_Reader
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,15 +27,14 @@
 
 /**
  * @category   Zend
- * @package    Zend_Feed_Reader
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Reader_Extension_CreativeCommons_Feed
-    extends Zend_Feed_Reader_Extension_FeedAbstract
+class Zend_Feed_Reader_Extension_CreativeCommons_Feed extends Zend_Feed_Reader_Extension_FeedAbstract
 {
     /**
-     * Get the entry license
+     * Get the entry license.
      *
      * @return string|null
      */
@@ -50,7 +50,7 @@ class Zend_Feed_Reader_Extension_CreativeCommons_Feed
     }
 
     /**
-     * Get the entry licenses
+     * Get the entry licenses.
      *
      * @return array
      */
@@ -61,7 +61,7 @@ class Zend_Feed_Reader_Extension_CreativeCommons_Feed
             return $this->_data[$name];
         }
 
-        $licenses = array();
+        $licenses = [];
         $list = $this->_xpath->evaluate('channel/cc:license');
 
         if ($list->length) {
@@ -78,7 +78,7 @@ class Zend_Feed_Reader_Extension_CreativeCommons_Feed
     }
 
     /**
-     * Register Creative Commons namespaces
+     * Register Creative Commons namespaces.
      *
      * @return void
      */

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed_Writer
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,14 +27,12 @@
 
 /**
  * @category   Zend
- * @package    Zend_Feed_Writer
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Writer_Extension_Atom_Renderer_Feed
-    extends Zend_Feed_Writer_Extension_RendererAbstract
+class Zend_Feed_Writer_Extension_Atom_Renderer_Feed extends Zend_Feed_Writer_Extension_RendererAbstract
 {
-
     /**
      * Set to TRUE if a rendering method actually renders something. This
      * is used to prevent premature appending of a XML namespace declaration
@@ -44,17 +43,17 @@ class Zend_Feed_Writer_Extension_Atom_Renderer_Feed
     protected $_called = false;
 
     /**
-     * Render feed
+     * Render feed.
      *
      * @return void
      */
     public function render()
     {
-        /**
+        /*
          * RSS 2.0 only. Used mainly to include Atom links and
          * Pubsubhubbub Hub endpoint URIs under the Atom namespace
          */
-        if (strtolower((string) $this->getType()) == 'atom') {
+        if ('atom' == strtolower((string) $this->getType())) {
             return;
         }
         $this->_setFeedLinks($this->_dom, $this->_base);
@@ -65,7 +64,7 @@ class Zend_Feed_Writer_Extension_Atom_Renderer_Feed
     }
 
     /**
-     * Append namespaces to root element of feed
+     * Append namespaces to root element of feed.
      *
      * @return void
      */
@@ -76,20 +75,18 @@ class Zend_Feed_Writer_Extension_Atom_Renderer_Feed
     }
 
     /**
-     * Set feed link elements
+     * Set feed link elements.
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
      * @return void
      */
     protected function _setFeedLinks(DOMDocument $dom, DOMElement $root)
     {
         $flinks = $this->getDataContainer()->getFeedLinks();
-        if(!$flinks || empty($flinks)) {
+        if (!$flinks || empty($flinks)) {
             return;
         }
         foreach ($flinks as $type => $href) {
-            $mime  = 'application/' . strtolower((string) $type) . '+xml';
+            $mime = 'application/'.strtolower((string) $type).'+xml';
             $flink = $dom->createElement('atom:link');
             $root->appendChild($flink);
             $flink->setAttribute('rel', 'self');
@@ -100,10 +97,8 @@ class Zend_Feed_Writer_Extension_Atom_Renderer_Feed
     }
 
     /**
-     * Set PuSH hubs
+     * Set PuSH hubs.
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
      * @return void
      */
     protected function _setHubs(DOMDocument $dom, DOMElement $root)

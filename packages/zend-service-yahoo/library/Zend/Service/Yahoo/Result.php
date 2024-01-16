@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,76 +14,72 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service
- * @subpackage Yahoo
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
-
 /**
  * @category   Zend
- * @package    Zend_Service
- * @subpackage Yahoo
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_Yahoo_Result
 {
     /**
-     * The title of the search entry
+     * The title of the search entry.
      *
      * @var string
      */
     public $Title;
 
     /**
-     * The URL of the found object
+     * The URL of the found object.
      *
      * @var string
      */
     public $Url;
 
     /**
-     * The URL for linking to the found object
+     * The URL for linking to the found object.
      *
      * @var string
      */
     public $ClickUrl;
 
     /**
-     * Result fields
+     * Result fields.
      *
      * @var array
      */
     protected $_fields;
 
     /**
-     * REST response fragment for the result
+     * REST response fragment for the result.
      *
      * @var DOMElement
      */
     protected $_result;
 
     /**
-     * Object for XPath queries
+     * Object for XPath queries.
      *
      * @var DOMXPath
      */
     protected $_xpath;
 
-
     /**
-     * Initializes the result
+     * Initializes the result.
      *
-     * @param  DOMElement $result
      * @return void
      */
     public function __construct(DOMElement $result)
     {
         // default fields for all search results:
-        $fields = array('Title', 'Url', 'ClickUrl');
+        $fields = ['Title', 'Url', 'ClickUrl'];
 
         // merge w/ child's fields
         $this->_fields = array_merge($this->_fields, $fields);
@@ -96,7 +92,7 @@ class Zend_Service_Yahoo_Result
         foreach ($this->_fields as $f) {
             $query = "./yh:$f/text()";
             $node = $this->_xpath->query($query, $result);
-            if ($node->length == 1) {
+            if (1 == $node->length) {
                 $this->{$f} = $node->item(0)->data;
             }
         }
@@ -104,17 +100,16 @@ class Zend_Service_Yahoo_Result
         $this->_result = $result;
     }
 
-
     /**
-     * Sets the Thumbnail property
+     * Sets the Thumbnail property.
      *
      * @return void
      */
     protected function _setThumbnail()
     {
         $node = $this->_xpath->query('./yh:Thumbnail', $this->_result);
-        if ($node->length == 1) {
-            /**
+        if (1 == $node->length) {
+            /*
              * @see Zend_Service_Yahoo_Image
              */
             // require_once 'Zend/Service/Yahoo/Image.php';

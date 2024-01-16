@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Filter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,21 +27,21 @@
 
 /**
  * @category   Zend
- * @package    Zend_Filter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Filter_RealPath implements Zend_Filter_Interface
 {
     /**
-     * @var boolean $_pathExists
+     * @var bool
      */
     protected $_exists = true;
 
     /**
-     * Class constructor
+     * Class constructor.
      *
-     * @param boolean|Zend_Config $options Options to set
+     * @param bool|Zend_Config $options Options to set
      */
     public function __construct($options = true)
     {
@@ -48,9 +49,9 @@ class Zend_Filter_RealPath implements Zend_Filter_Interface
     }
 
     /**
-     * Returns true if the filtered path must exist
+     * Returns true if the filtered path must exist.
      *
-     * @return boolean
+     * @return bool
      */
     public function getExists()
     {
@@ -60,9 +61,10 @@ class Zend_Filter_RealPath implements Zend_Filter_Interface
     /**
      * Sets if the path has to exist
      * TRUE when the path must exist
-     * FALSE when not existing paths can be given
+     * FALSE when not existing paths can be given.
      *
-     * @param boolean|Zend_Config $exists Path must exist
+     * @param bool|Zend_Config $exists Path must exist
+     *
      * @return Zend_Filter_RealPath
      */
     public function setExists($exists)
@@ -73,20 +75,22 @@ class Zend_Filter_RealPath implements Zend_Filter_Interface
 
         if (is_array($exists)) {
             if (isset($exists['exists'])) {
-                $exists = (boolean) $exists['exists'];
+                $exists = (bool) $exists['exists'];
             }
         }
 
-        $this->_exists = (boolean) $exists;
+        $this->_exists = (bool) $exists;
+
         return $this;
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend_Filter_Interface.
      *
      * Returns realpath($value)
      *
-     * @param  string $value
+     * @param string $value
+     *
      * @return string
      */
     public function filter($value)
@@ -102,26 +106,26 @@ class Zend_Filter_RealPath implements Zend_Filter_Interface
         }
 
         $drive = '';
-        if (substr((string) PHP_OS, 0, 3) == 'WIN') {
+        if ('WIN' == substr((string) PHP_OS, 0, 3)) {
             $path = preg_replace('/[\\\\\/]/', DIRECTORY_SEPARATOR, $path);
             if (preg_match('/([a-zA-Z]\:)(.*)/', $path, $matches)) {
                 list($fullMatch, $drive, $path) = $matches;
             } else {
-                $cwd   = getcwd();
+                $cwd = getcwd();
                 $drive = substr((string) $cwd, 0, 2);
-                if (substr((string) $path, 0, 1) != DIRECTORY_SEPARATOR) {
-                    $path = substr((string) $cwd, 3) . DIRECTORY_SEPARATOR . $path;
+                if (DIRECTORY_SEPARATOR != substr((string) $path, 0, 1)) {
+                    $path = substr((string) $cwd, 3).DIRECTORY_SEPARATOR.$path;
                 }
             }
-        } elseif (substr((string) $path, 0, 1) != DIRECTORY_SEPARATOR) {
-            $path = getcwd() . DIRECTORY_SEPARATOR . $path;
+        } elseif (DIRECTORY_SEPARATOR != substr((string) $path, 0, 1)) {
+            $path = getcwd().DIRECTORY_SEPARATOR.$path;
         }
 
-        $stack = array();
+        $stack = [];
         $parts = explode(DIRECTORY_SEPARATOR, $path);
         foreach ($parts as $dir) {
-            if (strlen((string) $dir) && $dir !== '.') {
-                if ($dir == '..') {
+            if (strlen((string) $dir) && '.' !== $dir) {
+                if ('..' == $dir) {
                     array_pop($stack);
                 } else {
                     array_push($stack, $dir);
@@ -129,6 +133,6 @@ class Zend_Filter_RealPath implements Zend_Filter_Interface
             }
         }
 
-        return $drive . DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $stack);
+        return $drive.DIRECTORY_SEPARATOR.implode(DIRECTORY_SEPARATOR, $stack);
     }
 }

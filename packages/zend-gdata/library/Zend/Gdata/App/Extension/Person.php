@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage App
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -42,21 +42,19 @@
 // require_once 'Zend/Gdata/App/Extension/Uri.php';
 
 /**
- * Base class for people (currently used by atom:author, atom:contributor)
+ * Base class for people (currently used by atom:author, atom:contributor).
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage App
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Gdata_App_Extension_Person extends Zend_Gdata_App_Extension
 {
-
-    protected $_rootElement = null;
-    protected $_name = null;
-    protected $_email = null;
-    protected $_uri = null;
+    protected $_rootElement;
+    protected $_name;
+    protected $_email;
+    protected $_uri;
 
     public function __construct($name = null, $email = null, $uri = null)
     {
@@ -69,40 +67,41 @@ abstract class Zend_Gdata_App_Extension_Person extends Zend_Gdata_App_Extension
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
         $element = parent::getDOM($doc, $majorVersion, $minorVersion);
-        if ($this->_name != null) {
+        if (null != $this->_name) {
             $element->appendChild($this->_name->getDOM($element->ownerDocument));
         }
-        if ($this->_email != null) {
+        if (null != $this->_email) {
             $element->appendChild($this->_email->getDOM($element->ownerDocument));
         }
-        if ($this->_uri != null) {
+        if (null != $this->_uri) {
             $element->appendChild($this->_uri->getDOM($element->ownerDocument));
         }
+
         return $element;
     }
 
     protected function takeChildFromDOM($child)
     {
-        $absoluteNodeName = $child->namespaceURI . ':' . $child->localName;
+        $absoluteNodeName = $child->namespaceURI.':'.$child->localName;
         switch ($absoluteNodeName) {
-        case $this->lookupNamespace('atom') . ':' . 'name':
-            $name = new Zend_Gdata_App_Extension_Name();
-            $name->transferFromDOM($child);
-            $this->_name = $name;
-            break;
-        case $this->lookupNamespace('atom') . ':' . 'email':
-            $email = new Zend_Gdata_App_Extension_Email();
-            $email->transferFromDOM($child);
-            $this->_email = $email;
-            break;
-        case $this->lookupNamespace('atom') . ':' . 'uri':
-            $uri = new Zend_Gdata_App_Extension_Uri();
-            $uri->transferFromDOM($child);
-            $this->_uri = $uri;
-            break;
-        default:
-            parent::takeChildFromDOM($child);
-            break;
+            case $this->lookupNamespace('atom').':name':
+                $name = new Zend_Gdata_App_Extension_Name();
+                $name->transferFromDOM($child);
+                $this->_name = $name;
+                break;
+            case $this->lookupNamespace('atom').':email':
+                $email = new Zend_Gdata_App_Extension_Email();
+                $email->transferFromDOM($child);
+                $this->_email = $email;
+                break;
+            case $this->lookupNamespace('atom').':uri':
+                $uri = new Zend_Gdata_App_Extension_Uri();
+                $uri->transferFromDOM($child);
+                $this->_uri = $uri;
+                break;
+            default:
+                parent::takeChildFromDOM($child);
+                break;
         }
     }
 
@@ -116,11 +115,13 @@ abstract class Zend_Gdata_App_Extension_Person extends Zend_Gdata_App_Extension
 
     /**
      * @param Zend_Gdata_App_Extension_Name $value
+     *
      * @return Zend_Gdata_App_Extension_Person Provides a fluent interface
      */
     public function setName($value)
     {
         $this->_name = $value;
+
         return $this;
     }
 
@@ -134,11 +135,13 @@ abstract class Zend_Gdata_App_Extension_Person extends Zend_Gdata_App_Extension
 
     /**
      * @param Zend_Gdata_App_Extension_Email $value
+     *
      * @return Zend_Gdata_App_Extension_Person Provides a fluent interface
      */
     public function setEmail($value)
     {
         $this->_email = $value;
+
         return $this;
     }
 
@@ -152,12 +155,13 @@ abstract class Zend_Gdata_App_Extension_Person extends Zend_Gdata_App_Extension
 
     /**
      * @param Zend_Gdata_App_Extension_Uri $value
+     *
      * @return Zend_Gdata_App_Extension_Person Provides a fluent interface
      */
     public function setUri($value)
     {
         $this->_uri = $value;
+
         return $this;
     }
-
 }

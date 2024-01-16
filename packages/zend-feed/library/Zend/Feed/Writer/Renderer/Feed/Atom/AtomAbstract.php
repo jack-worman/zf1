@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed_Writer
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -36,29 +37,27 @@
 
 /**
  * @category   Zend
- * @package    Zend_Feed_Writer
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Writer_Renderer_Feed_Atom_AtomAbstract
-    extends Zend_Feed_Writer_Renderer_RendererAbstract
+class Zend_Feed_Writer_Renderer_Feed_Atom_AtomAbstract extends Zend_Feed_Writer_Renderer_RendererAbstract
 {
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param  Zend_Feed_Writer_Feed $container
+     * @param Zend_Feed_Writer_Feed $container
+     *
      * @return void
      */
-    public function __construct ($container)
+    public function __construct($container)
     {
         parent::__construct($container);
     }
 
     /**
-     * Set feed language
+     * Set feed language.
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
      * @return void
      */
     protected function _setLanguage(DOMDocument $dom, DOMElement $root)
@@ -70,23 +69,22 @@ class Zend_Feed_Writer_Renderer_Feed_Atom_AtomAbstract
     }
 
     /**
-     * Set feed title
+     * Set feed title.
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
      * @return void
      */
     protected function _setTitle(DOMDocument $dom, DOMElement $root)
     {
-        if(!$this->getDataContainer()->getTitle()) {
+        if (!$this->getDataContainer()->getTitle()) {
             // require_once 'Zend/Feed/Exception.php';
             $message = 'Atom 1.0 feed elements MUST contain exactly one'
-            . ' atom:title element but a title has not been set';
+            .' atom:title element but a title has not been set';
             $exception = new Zend_Feed_Exception($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;
             } else {
                 $this->_exceptions[] = $exception;
+
                 return;
             }
         }
@@ -99,15 +97,13 @@ class Zend_Feed_Writer_Renderer_Feed_Atom_AtomAbstract
     }
 
     /**
-     * Set feed description
+     * Set feed description.
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
      * @return void
      */
     protected function _setDescription(DOMDocument $dom, DOMElement $root)
     {
-        if(!$this->getDataContainer()->getDescription()) {
+        if (!$this->getDataContainer()->getDescription()) {
             return;
         }
         $subtitle = $dom->createElement('subtitle');
@@ -118,23 +114,22 @@ class Zend_Feed_Writer_Renderer_Feed_Atom_AtomAbstract
     }
 
     /**
-     * Set date feed was last modified
+     * Set date feed was last modified.
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
      * @return void
      */
     protected function _setDateModified(DOMDocument $dom, DOMElement $root)
     {
-        if(!$this->getDataContainer()->getDateModified()) {
+        if (!$this->getDataContainer()->getDateModified()) {
             // require_once 'Zend/Feed/Exception.php';
             $message = 'Atom 1.0 feed elements MUST contain exactly one'
-            . ' atom:updated element but a modification date has not been set';
+            .' atom:updated element but a modification date has not been set';
             $exception = new Zend_Feed_Exception($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;
             } else {
                 $this->_exceptions[] = $exception;
+
                 return;
             }
         }
@@ -148,15 +143,13 @@ class Zend_Feed_Writer_Renderer_Feed_Atom_AtomAbstract
     }
 
     /**
-     * Set feed generator string
+     * Set feed generator string.
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
      * @return void
      */
     protected function _setGenerator(DOMDocument $dom, DOMElement $root)
     {
-        if(!$this->getDataContainer()->getGenerator()) {
+        if (!$this->getDataContainer()->getGenerator()) {
             $this->getDataContainer()->setGenerator('Zend_Feed_Writer',
                 Zend_Version::VERSION, 'http://framework.zend.com');
         }
@@ -175,15 +168,13 @@ class Zend_Feed_Writer_Renderer_Feed_Atom_AtomAbstract
     }
 
     /**
-     * Set link to feed
+     * Set link to feed.
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
      * @return void
      */
     protected function _setLink(DOMDocument $dom, DOMElement $root)
     {
-        if(!$this->getDataContainer()->getLink()) {
+        if (!$this->getDataContainer()->getLink()) {
             return;
         }
         $link = $dom->createElement('link');
@@ -194,32 +185,31 @@ class Zend_Feed_Writer_Renderer_Feed_Atom_AtomAbstract
     }
 
     /**
-     * Set feed links
+     * Set feed links.
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
      * @return void
      */
     protected function _setFeedLinks(DOMDocument $dom, DOMElement $root)
     {
         $flinks = $this->getDataContainer()->getFeedLinks();
-        if(!$flinks || !array_key_exists('atom', $flinks)) {
+        if (!$flinks || !array_key_exists('atom', $flinks)) {
             // require_once 'Zend/Feed/Exception.php';
             $message = 'Atom 1.0 feed elements SHOULD contain one atom:link '
-            . 'element with a rel attribute value of "self".  This is the '
-            . 'preferred URI for retrieving Atom Feed Documents representing '
-            . 'this Atom feed but a feed link has not been set';
+            .'element with a rel attribute value of "self".  This is the '
+            .'preferred URI for retrieving Atom Feed Documents representing '
+            .'this Atom feed but a feed link has not been set';
             $exception = new Zend_Feed_Exception($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;
             } else {
                 $this->_exceptions[] = $exception;
+
                 return;
             }
         }
 
         foreach ($flinks as $type => $href) {
-            $mime = 'application/' . strtolower((string) $type) . '+xml';
+            $mime = 'application/'.strtolower((string) $type).'+xml';
             $flink = $dom->createElement('link');
             $root->appendChild($flink);
             $flink->setAttribute('rel', 'self');
@@ -229,17 +219,15 @@ class Zend_Feed_Writer_Renderer_Feed_Atom_AtomAbstract
     }
 
     /**
-     * Set feed authors
+     * Set feed authors.
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
      * @return void
      */
     protected function _setAuthors(DOMDocument $dom, DOMElement $root)
     {
         $authors = $this->_container->getAuthors();
         if (!$authors || empty($authors)) {
-            /**
+            /*
              * Technically we should defer an exception until we can check
              * that all entries contain an author. If any entry is missing
              * an author, then a missing feed author element is invalid
@@ -269,26 +257,25 @@ class Zend_Feed_Writer_Renderer_Feed_Atom_AtomAbstract
     }
 
     /**
-     * Set feed identifier
+     * Set feed identifier.
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
      * @return void
      */
     protected function _setId(DOMDocument $dom, DOMElement $root)
     {
-        if(!$this->getDataContainer()->getId()
+        if (!$this->getDataContainer()->getId()
         && !$this->getDataContainer()->getLink()) {
             // require_once 'Zend/Feed/Exception.php';
             $message = 'Atom 1.0 feed elements MUST contain exactly one '
-            . 'atom:id element, or as an alternative, we can use the same '
-            . 'value as atom:link however neither a suitable link nor an '
-            . 'id have been set';
+            .'atom:id element, or as an alternative, we can use the same '
+            .'value as atom:link however neither a suitable link nor an '
+            .'id have been set';
             $exception = new Zend_Feed_Exception($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;
             } else {
                 $this->_exceptions[] = $exception;
+
                 return;
             }
         }
@@ -304,10 +291,8 @@ class Zend_Feed_Writer_Renderer_Feed_Atom_AtomAbstract
     }
 
     /**
-     * Set feed copyright
+     * Set feed copyright.
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
      * @return void
      */
     protected function _setCopyright(DOMDocument $dom, DOMElement $root)
@@ -323,10 +308,8 @@ class Zend_Feed_Writer_Renderer_Feed_Atom_AtomAbstract
     }
 
     /**
-     * Set feed level logo (image)
+     * Set feed level logo (image).
      *
-     * @param DOMDocument $dom
-     * @param DOMElement $root
      * @return void
      */
     protected function _setImage(DOMDocument $dom, DOMElement $root)
@@ -342,10 +325,8 @@ class Zend_Feed_Writer_Renderer_Feed_Atom_AtomAbstract
     }
 
     /**
-     * Set feed level icon (image)
+     * Set feed level icon (image).
      *
-     * @param DOMDocument $dom
-     * @param DOMElement $root
      * @return void
      */
     protected function _setIcon(DOMDocument $dom, DOMElement $root)
@@ -361,18 +342,16 @@ class Zend_Feed_Writer_Renderer_Feed_Atom_AtomAbstract
     }
 
     /**
-     * Set date feed was created
+     * Set date feed was created.
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
      * @return void
      */
     protected function _setDateCreated(DOMDocument $dom, DOMElement $root)
     {
-        if(!$this->getDataContainer()->getDateCreated()) {
+        if (!$this->getDataContainer()->getDateCreated()) {
             return;
         }
-        if(!$this->getDataContainer()->getDateModified()) {
+        if (!$this->getDataContainer()->getDateModified()) {
             $this->getDataContainer()->setDateModified(
                 $this->getDataContainer()->getDateCreated()
             );
@@ -380,10 +359,8 @@ class Zend_Feed_Writer_Renderer_Feed_Atom_AtomAbstract
     }
 
     /**
-     * Set base URL to feed links
+     * Set base URL to feed links.
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
      * @return void
      */
     protected function _setBaseUrl(DOMDocument $dom, DOMElement $root)
@@ -396,10 +373,8 @@ class Zend_Feed_Writer_Renderer_Feed_Atom_AtomAbstract
     }
 
     /**
-     * Set hubs to which this feed pushes
+     * Set hubs to which this feed pushes.
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
      * @return void
      */
     protected function _setHubs(DOMDocument $dom, DOMElement $root)
@@ -417,10 +392,8 @@ class Zend_Feed_Writer_Renderer_Feed_Atom_AtomAbstract
     }
 
     /**
-     * Set feed cateories
+     * Set feed cateories.
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
      * @return void
      */
     protected function _setCategories(DOMDocument $dom, DOMElement $root)

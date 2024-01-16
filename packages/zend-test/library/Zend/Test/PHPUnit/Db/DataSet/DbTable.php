@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Test
- * @subpackage PHPUnit
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -29,9 +29,9 @@
  * Use a Zend_Db_Table for assertions with other PHPUnit Database Extension table types.
  *
  * @uses       PHPUnit_Extensions_Database_DataSet_QueryTable
+ *
  * @category   Zend
- * @package    Zend_Test
- * @subpackage PHPUnit
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -39,47 +39,46 @@
 class Zend_Test_PHPUnit_Db_DataSet_DbTable extends PHPUnit_Extensions_Database_DataSet_QueryTable
 {
     /**
-     * Zend_Db_Table object
+     * Zend_Db_Table object.
      *
      * @var Zend_Db_Table_Abstract
      */
-    protected $_table = null;
+    protected $_table;
 
     /**
      * @var array
      */
-    protected $_columns = array();
+    protected $_columns = [];
 
     /**
      * @var string
      */
-    protected $_where = null;
+    protected $_where;
 
     /**
      * @var string
      */
-    protected $_orderBy = null;
+    protected $_orderBy;
 
     /**
      * @var string
      */
-    protected $_count = null;
+    protected $_count;
 
     /**
      * @var int
      */
-    protected $_offset = null;
+    protected $_offset;
 
     /**
-     * Construct Dataset Table from Zend_Db_Table object
+     * Construct Dataset Table from Zend_Db_Table object.
      *
-     * @param Zend_Db_Table_Abstract        $table
-     * @param string|Zend_Db_Select|null    $where
-     * @param string|null                   $order
-     * @param int                           $count
-     * @param int                           $offset
+     * @param string|Zend_Db_Select|null $where
+     * @param string|null                $order
+     * @param int                        $count
+     * @param int                        $offset
      */
-    public function __construct(Zend_Db_Table_Abstract $table, $where=null, $order=null, $count=null, $offset=null)
+    public function __construct(Zend_Db_Table_Abstract $table, $where = null, $order = null, $count = null, $offset = null)
     {
         $this->tableName = $table->info('name');
         $this->_columns = $table->info('cols');
@@ -98,22 +97,22 @@ class Zend_Test_PHPUnit_Db_DataSet_DbTable extends PHPUnit_Extensions_Database_D
      */
     protected function loadData()
     {
-        if ($this->data === null) {
+        if (null === $this->data) {
             $this->data = $this->_table->fetchAll(
                 $this->_where, $this->_order, $this->_count, $this->_offset
             );
-            if($this->data instanceof Zend_Db_Table_Rowset_Abstract) {
+            if ($this->data instanceof Zend_Db_Table_Rowset_Abstract) {
                 $this->data = $this->data->toArray();
             }
         }
     }
 
     /**
-     * Create Table Metadata object
+     * Create Table Metadata object.
      */
     protected function createTableMetaData()
     {
-        if ($this->tableMetaData === NULL) {
+        if (null === $this->tableMetaData) {
             $this->loadData();
             $this->tableMetaData = new PHPUnit_Extensions_Database_DataSet_DefaultTableMetaData($this->tableName, $this->_columns);
         }

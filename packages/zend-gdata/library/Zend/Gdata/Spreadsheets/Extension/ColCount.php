@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Spreadsheets
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -30,25 +30,23 @@
  */
 // require_once 'Zend/Gdata/Extension.php';
 
-
 /**
  * Concrete class for working with colCount elements.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Spreadsheets
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_Spreadsheets_Extension_ColCount extends Zend_Gdata_Extension
 {
-
     protected $_rootElement = 'colCount';
     protected $_rootNamespace = 'gs';
 
     /**
      * Constructs a new Zend_Gdata_Spreadsheets_Extension_ColCount element.
-     * @param string $text (optional) Text contents of the element.
+     *
+     * @param string $text (optional) Text contents of the element
      */
     public function __construct($text = null)
     {

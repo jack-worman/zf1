@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,63 +14,59 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service
- * @subpackage Flickr
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
-
 /**
  * @category   Zend
- * @package    Zend_Service
- * @subpackage Flickr
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_Flickr_Image
 {
     /**
-     * The URI of the image
+     * The URI of the image.
      *
      * @var string
      */
     public $uri;
 
     /**
-     * The URI for linking to the photo on Flickr
+     * The URI for linking to the photo on Flickr.
      *
      * @var string
      */
     public $clickUri;
 
     /**
-     * The height of the image in pixels
+     * The height of the image in pixels.
      *
      * @var string
      */
     public $height;
 
     /**
-     * The width of the image in pixels
+     * The width of the image in pixels.
      *
      * @var string
      */
     public $width;
 
     /**
-     * Parse given Flickr Image element
+     * Parse given Flickr Image element.
      *
-     * @param  DOMElement $image
      * @return void
      */
     public function __construct(DOMElement $image)
     {
-        $this->uri      = (string) $image->getAttribute('source');
+        $this->uri = (string) $image->getAttribute('source');
         $this->clickUri = (string) $image->getAttribute('url');
-        $this->height   = (int) $image->getAttribute('height');
-        $this->width    = (int) $image->getAttribute('width');
+        $this->height = (int) $image->getAttribute('height');
+        $this->width = (int) $image->getAttribute('width');
     }
 }
-

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,19 +13,19 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Stdlib
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
- * Serializable version of SplPriorityQueue
+ * Serializable version of SplPriorityQueue.
  *
  * Also, provides predictable heap order for datums added with the same priority
  * (i.e., they will be emitted in the same order they are enqueued).
  *
  * @category   Zend
- * @package    Zend_Stdlib
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -37,13 +37,11 @@ class Zend_Stdlib_SplPriorityQueue extends SplPriorityQueue implements Serializa
     protected $serial = PHP_INT_MAX;
 
     /**
-     * Insert a value with a given priority
+     * Insert a value with a given priority.
      *
      * Utilizes {@var $serial} to ensure that values of equal priority are
      * emitted in the same order in which they are inserted.
      *
-     * @param  mixed $datum
-     * @param  mixed $priority
      * @return void
      */
     public function insert($datum, $priority)
@@ -53,13 +51,13 @@ class Zend_Stdlib_SplPriorityQueue extends SplPriorityQueue implements Serializa
         // return in the order registered. In the userland version, this is not
         // necessary.
         if (!is_array($priority)) {
-            $priority = array($priority, $this->serial--);
+            $priority = [$priority, $this->serial--];
         }
         parent::insert($datum, $priority);
     }
 
     /**
-     * Serialize to an array
+     * Serialize to an array.
      *
      * Array will be priority => data pairs
      *
@@ -68,7 +66,7 @@ class Zend_Stdlib_SplPriorityQueue extends SplPriorityQueue implements Serializa
     public function toArray()
     {
         $this->setExtractFlags(self::EXTR_BOTH);
-        $array = array();
+        $array = [];
         while ($this->valid()) {
             $array[] = $this->current();
             $this->next();
@@ -81,7 +79,7 @@ class Zend_Stdlib_SplPriorityQueue extends SplPriorityQueue implements Serializa
         }
 
         // Return only the data
-        $return = array();
+        $return = [];
         foreach ($array as $item) {
             $return[] = $item['data'];
         }
@@ -90,13 +88,13 @@ class Zend_Stdlib_SplPriorityQueue extends SplPriorityQueue implements Serializa
     }
 
     /**
-     * Serialize
+     * Serialize.
      *
      * @return string
      */
     public function serialize()
     {
-        $data = array();
+        $data = [];
         $this->setExtractFlags(self::EXTR_BOTH);
         while ($this->valid()) {
             $data[] = $this->current();
@@ -112,10 +110,10 @@ class Zend_Stdlib_SplPriorityQueue extends SplPriorityQueue implements Serializa
         return serialize($data);
     }
 
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function __serialize()
     {
-        $data = array();
+        $data = [];
         $this->setExtractFlags(self::EXTR_BOTH);
         while ($this->valid()) {
             $data[] = $this->current();
@@ -132,9 +130,10 @@ class Zend_Stdlib_SplPriorityQueue extends SplPriorityQueue implements Serializa
     }
 
     /**
-     * Deserialize
+     * Deserialize.
      *
-     * @param  string $data
+     * @param string $data
+     *
      * @return void
      */
     public function unserialize($data)
@@ -144,7 +143,7 @@ class Zend_Stdlib_SplPriorityQueue extends SplPriorityQueue implements Serializa
         }
     }
 
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function __unserialize($data)
     {
         foreach ($data as $item) {

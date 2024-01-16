@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,11 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ *
  * @version    $Id$
+ *
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -24,10 +25,8 @@
 // require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * View helper for retrieving layout object
+ * View helper for retrieving layout object.
  *
- * @package    Zend_View
- * @subpackage Helper
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -37,7 +36,7 @@ class Zend_View_Helper_Layout extends Zend_View_Helper_Abstract
     protected $_layout;
 
     /**
-     * Get layout object
+     * Get layout object.
      *
      * @return Zend_Layout
      */
@@ -56,19 +55,19 @@ class Zend_View_Helper_Layout extends Zend_View_Helper_Abstract
     }
 
     /**
-     * Set layout object
+     * Set layout object.
      *
-     * @param  Zend_Layout $layout
      * @return Zend_View_Helper_Layout
      */
     public function setLayout(Zend_Layout $layout)
     {
         $this->_layout = $layout;
+
         return $this;
     }
 
     /**
-     * Return layout object
+     * Return layout object.
      *
      * Usage: $this->layout()->setLayout('alternate');
      *

@@ -1,6 +1,6 @@
 <?php
 /**
- * LICENSE
+ * LICENSE.
  *
  * This source file is subject to the new BSD license that is bundled
  * with this package in the file LICENSE.txt.
@@ -11,8 +11,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Cloud
- * @subpackage DocumentService
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -29,21 +28,21 @@
  * access control support in future versions of the interface.
  *
  * @category   Zend
- * @package    Zend_Cloud
- * @subpackage DocumentService
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface Zend_Cloud_DocumentService_Adapter
 {
     // HTTP adapter to use for connections
-    const HTTP_ADAPTER = 'http_adapter';
+    public const HTTP_ADAPTER = 'http_adapter';
 
     /**
      * Create collection.
      *
-     * @param  string $name
-     * @param  array  $options
+     * @param string $name
+     * @param array  $options
+     *
      * @return array
      */
     public function createCollection($name, $options = null);
@@ -51,36 +50,39 @@ interface Zend_Cloud_DocumentService_Adapter
     /**
      * Delete collection.
      *
-     * @param  string $name
-     * @param  array  $options
+     * @param string $name
+     * @param array  $options
+     *
      * @return void
      */
     public function deleteCollection($name, $options = null);
 
-       /**
+    /**
      * List collections.
      *
-     * @param  array  $options
+     * @param array $options
+     *
      * @return array List of collection names
      */
     public function listCollections($options = null);
 
     /**
-     * List all documents in a collection
+     * List all documents in a collection.
      *
-     * @param  string $collectionName
-     * @param  null|array $options
+     * @param string $collectionName
+     *
      * @return Zend_Cloud_DocumentService_DocumentSet
      */
     public function listDocuments($collectionName, array $options = null);
 
     /**
-     * Insert document
+     * Insert document.
      *
-     * @param  string $collectionName Collection name
-     * @param  Zend_Cloud_DocumentService_Document $document Document to insert
-     * @param  array $options
-     * @return boolean
+     * @param string                              $collectionName Collection name
+     * @param Zend_Cloud_DocumentService_Document $document       Document to insert
+     * @param array                               $options
+     *
+     * @return bool
      */
     public function insertDocument($collectionName, $document, $options = null);
 
@@ -88,9 +90,9 @@ interface Zend_Cloud_DocumentService_Adapter
      * Replace document
      * The new document replaces the existing document with the same ID.
      *
-     * @param string $collectionName Collection name
+     * @param string                              $collectionName Collection name
      * @param Zend_Cloud_DocumentService_Document $document
-     * @param array $options
+     * @param array                               $options
      */
     public function replaceDocument($collectionName, $document, $options = null);
 
@@ -99,32 +101,35 @@ interface Zend_Cloud_DocumentService_Adapter
      * The fields of the existing documents will be updated.
      * Fields not specified in the set will be left as-is.
      *
-     * @param  string $collectionName
-     * @param  mixed|Zend_Cloud_DocumentService_Document $documentID Document ID, adapter-dependent, or document containing updates
-     * @param  array|Zend_Cloud_DocumentService_Document $fieldset Set of fields to update
-     * @param  array                   $options
-     * @return boolean
+     * @param string                                    $collectionName
+     * @param mixed|Zend_Cloud_DocumentService_Document $documentID     Document ID, adapter-dependent, or document containing updates
+     * @param array|Zend_Cloud_DocumentService_Document $fieldset       Set of fields to update
+     * @param array                                     $options
+     *
+     * @return bool
      */
     public function updateDocument($collectionName, $documentID, $fieldset = null, $options = null);
 
     /**
-     * Delete document
+     * Delete document.
      *
      * @param string $collectionName Collection name
-     * @param mixed  $documentID Document ID, adapter-dependent
+     * @param mixed  $documentID     Document ID, adapter-dependent
      * @param array  $options
+     *
      * @return void
      */
     public function deleteDocument($collectionName, $documentID, $options = null);
 
     /**
-     * Fetch single document by ID
+     * Fetch single document by ID.
      *
      * Will return false if the document does not exist
      *
      * @param string $collectionName Collection name
-     * @param mixed $documentID Document ID, adapter-dependent
-     * @param array $options
+     * @param mixed  $documentID     Document ID, adapter-dependent
+     * @param array  $options
+     *
      * @return Zend_Cloud_DocumentService_Document
      */
     public function fetchDocument($collectionName, $documentID, $options = null);
@@ -133,23 +138,25 @@ interface Zend_Cloud_DocumentService_Adapter
      * Query for documents stored in the document service. If a string is passed in
      * $query, the query string will be passed directly to the service.
      *
-     * @param  string $collectionName Collection name
-     * @param  string $query
-     * @param  array $options
+     * @param string $collectionName Collection name
+     * @param string $query
+     * @param array  $options
+     *
      * @return array Array of field sets
      */
     public function query($collectionName, $query, $options = null);
 
     /**
-     * Create query statement
+     * Create query statement.
      *
      * @param string $fields
+     *
      * @return Zend_Cloud_DocumentService_Query
      */
     public function select($fields = null);
 
     /**
-     * Get the concrete service client
+     * Get the concrete service client.
      */
     public function getClient();
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,37 +13,39 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Controller
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
- * Zend_XmlRpc_Response
+ * Zend_XmlRpc_Response.
  */
 // require_once 'Zend/XmlRpc/Response.php';
 
 /**
- * HTTP response
+ * HTTP response.
  *
  * @uses Zend_XmlRpc_Response
+ *
  * @category Zend
- * @package  Zend_XmlRpc
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version $Id$
  */
 class Zend_XmlRpc_Response_Http extends Zend_XmlRpc_Response
 {
     /**
-     * Override __toString() to send HTTP Content-Type header
+     * Override __toString() to send HTTP Content-Type header.
      *
      * @return string
      */
     public function __toString()
     {
         if (!headers_sent()) {
-            header('Content-Type: text/xml; charset=' . strtolower((string) $this->getEncoding()));
+            header('Content-Type: text/xml; charset='.strtolower((string) $this->getEncoding()));
         }
 
         return parent::__toString();

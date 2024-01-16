@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Test
- * @subpackage PHPUnit
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -29,9 +29,9 @@
  * Aggregate several Zend_Db_Table instances into a dataset.
  *
  * @uses       Zend_Db_Table
+ *
  * @category   Zend
- * @package    Zend_Test
- * @subpackage PHPUnit
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -40,14 +40,13 @@ class Zend_Test_PHPUnit_Db_DataSet_DbTableDataSet extends PHPUnit_Extensions_Dat
     /**
      * @var array
      */
-    protected $tables = array();
+    protected $tables = [];
 
     /**
      * Add a Table dataset representation by specifiying an arbitrary select query.
      *
      * By default a select * will be done on the given tablename.
      *
-     * @param Zend_Db_Table_Abstract $table
      * @param string $where
      * @param string $order
      * @param string $count
@@ -64,9 +63,10 @@ class Zend_Test_PHPUnit_Db_DataSet_DbTableDataSet extends PHPUnit_Extensions_Dat
      * true a reverse iterator will be returned.
      *
      * @param bool $reverse
+     *
      * @return PHPUnit_Extensions_Database_DataSet_DefaultTableIterator
      */
-    protected function createIterator($reverse = FALSE)
+    protected function createIterator($reverse = false)
     {
         return new PHPUnit_Extensions_Database_DataSet_DefaultTableIterator($this->tables, $reverse);
     }
@@ -75,6 +75,7 @@ class Zend_Test_PHPUnit_Db_DataSet_DbTableDataSet extends PHPUnit_Extensions_Dat
      * Returns a table object for the given table.
      *
      * @param string $tableName
+     *
      * @return PHPUnit_Extensions_Database_DB_Table
      */
     public function getTable($tableName)
@@ -87,9 +88,9 @@ class Zend_Test_PHPUnit_Db_DataSet_DbTableDataSet extends PHPUnit_Extensions_Dat
     }
 
     /**
-     * Returns a list of table names for the database
+     * Returns a list of table names for the database.
      *
-     * @return Array
+     * @return array
      */
     public function getTableNames()
     {

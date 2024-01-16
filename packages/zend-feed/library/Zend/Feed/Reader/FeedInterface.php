@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,110 +13,111 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed_Reader
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
  * @category   Zend
- * @package    Zend_Feed_Reader
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface Zend_Feed_Reader_FeedInterface extends Iterator, Countable
 {
     /**
-     * Get a single author
+     * Get a single author.
      *
-     * @param  int $index
+     * @param int $index
+     *
      * @return string|null
      */
     public function getAuthor($index = 0);
 
     /**
-     * Get an array with feed authors
+     * Get an array with feed authors.
      *
      * @return array
      */
     public function getAuthors();
 
     /**
-     * Get the copyright entry
+     * Get the copyright entry.
      *
      * @return string|null
      */
     public function getCopyright();
 
     /**
-     * Get the feed creation date
+     * Get the feed creation date.
      *
      * @return string|null
      */
     public function getDateCreated();
 
     /**
-     * Get the feed modification date
+     * Get the feed modification date.
      *
      * @return string|null
      */
     public function getDateModified();
 
     /**
-     * Get the feed description
+     * Get the feed description.
      *
      * @return string|null
      */
     public function getDescription();
 
     /**
-     * Get the feed generator entry
+     * Get the feed generator entry.
      *
      * @return string|null
      */
     public function getGenerator();
 
     /**
-     * Get the feed ID
+     * Get the feed ID.
      *
      * @return string|null
      */
     public function getId();
 
     /**
-     * Get the feed language
+     * Get the feed language.
      *
      * @return string|null
      */
     public function getLanguage();
 
     /**
-     * Get a link to the HTML source
+     * Get a link to the HTML source.
      *
      * @return string|null
      */
     public function getLink();
 
     /**
-     * Get a link to the XML feed
+     * Get a link to the XML feed.
      *
      * @return string|null
      */
     public function getFeedLink();
 
     /**
-     * Get the feed title
+     * Get the feed title.
      *
      * @return string|null
      */
     public function getTitle();
 
     /**
-     * Get all categories
+     * Get all categories.
      *
      * @return Zend_Feed_Reader_Collection_Category
      */
     public function getCategories();
-
 }

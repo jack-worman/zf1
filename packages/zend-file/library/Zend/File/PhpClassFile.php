@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,15 +13,14 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_File
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
- * Locate files containing PHP classes, interfaces, abstracts or traits
+ * Locate files containing PHP classes, interfaces, abstracts or traits.
  *
- * @package    Zend_File
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    New BSD {@link http://framework.zend.com/license/new-bsd}
  */
@@ -33,7 +32,7 @@ class Zend_File_PhpClassFile extends SplFileInfo
     protected $classes;
 
     /**
-     * Get classes
+     * Get classes.
      *
      * @return array
      */
@@ -43,14 +42,16 @@ class Zend_File_PhpClassFile extends SplFileInfo
     }
 
     /**
-     * Add class
+     * Add class.
      *
-     * @param  string $class
+     * @param string $class
+     *
      * @return Zend_File_PhpClassFile
      */
     public function addClass($class)
     {
         $this->classes[] = $class;
+
         return $this;
     }
 }

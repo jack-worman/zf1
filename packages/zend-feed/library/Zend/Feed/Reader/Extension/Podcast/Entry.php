@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed_Reader
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -31,14 +32,14 @@
 
 /**
  * @category   Zend
- * @package    Zend_Feed_Reader
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Feed_Reader_Extension_Podcast_Entry extends Zend_Feed_Reader_Extension_EntryAbstract
 {
     /**
-     * Get the entry author
+     * Get the entry author.
      *
      * @return string
      */
@@ -48,7 +49,7 @@ class Zend_Feed_Reader_Extension_Podcast_Entry extends Zend_Feed_Reader_Extensio
             return $this->_data['author'];
         }
 
-        $author = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:author)');
+        $author = $this->_xpath->evaluate('string('.$this->getXpathPrefix().'/itunes:author)');
 
         if (!$author) {
             $author = null;
@@ -60,7 +61,7 @@ class Zend_Feed_Reader_Extension_Podcast_Entry extends Zend_Feed_Reader_Extensio
     }
 
     /**
-     * Get the entry block
+     * Get the entry block.
      *
      * @return string
      */
@@ -70,7 +71,7 @@ class Zend_Feed_Reader_Extension_Podcast_Entry extends Zend_Feed_Reader_Extensio
             return $this->_data['block'];
         }
 
-        $block = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:block)');
+        $block = $this->_xpath->evaluate('string('.$this->getXpathPrefix().'/itunes:block)');
 
         if (!$block) {
             $block = null;
@@ -82,7 +83,7 @@ class Zend_Feed_Reader_Extension_Podcast_Entry extends Zend_Feed_Reader_Extensio
     }
 
     /**
-     * Get the entry duration
+     * Get the entry duration.
      *
      * @return string
      */
@@ -92,7 +93,7 @@ class Zend_Feed_Reader_Extension_Podcast_Entry extends Zend_Feed_Reader_Extensio
             return $this->_data['duration'];
         }
 
-        $duration = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:duration)');
+        $duration = $this->_xpath->evaluate('string('.$this->getXpathPrefix().'/itunes:duration)');
 
         if (!$duration) {
             $duration = null;
@@ -104,7 +105,7 @@ class Zend_Feed_Reader_Extension_Podcast_Entry extends Zend_Feed_Reader_Extensio
     }
 
     /**
-     * Get the entry explicit
+     * Get the entry explicit.
      *
      * @return string
      */
@@ -114,7 +115,7 @@ class Zend_Feed_Reader_Extension_Podcast_Entry extends Zend_Feed_Reader_Extensio
             return $this->_data['explicit'];
         }
 
-        $explicit = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:explicit)');
+        $explicit = $this->_xpath->evaluate('string('.$this->getXpathPrefix().'/itunes:explicit)');
 
         if (!$explicit) {
             $explicit = null;
@@ -126,7 +127,7 @@ class Zend_Feed_Reader_Extension_Podcast_Entry extends Zend_Feed_Reader_Extensio
     }
 
     /**
-     * Get the entry keywords
+     * Get the entry keywords.
      *
      * @return string
      */
@@ -136,7 +137,7 @@ class Zend_Feed_Reader_Extension_Podcast_Entry extends Zend_Feed_Reader_Extensio
             return $this->_data['keywords'];
         }
 
-        $keywords = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:keywords)');
+        $keywords = $this->_xpath->evaluate('string('.$this->getXpathPrefix().'/itunes:keywords)');
 
         if (!$keywords) {
             $keywords = null;
@@ -148,7 +149,7 @@ class Zend_Feed_Reader_Extension_Podcast_Entry extends Zend_Feed_Reader_Extensio
     }
 
     /**
-     * Get the entry subtitle
+     * Get the entry subtitle.
      *
      * @return string
      */
@@ -158,7 +159,7 @@ class Zend_Feed_Reader_Extension_Podcast_Entry extends Zend_Feed_Reader_Extensio
             return $this->_data['subtitle'];
         }
 
-        $subtitle = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:subtitle)');
+        $subtitle = $this->_xpath->evaluate('string('.$this->getXpathPrefix().'/itunes:subtitle)');
 
         if (!$subtitle) {
             $subtitle = null;
@@ -170,7 +171,7 @@ class Zend_Feed_Reader_Extension_Podcast_Entry extends Zend_Feed_Reader_Extensio
     }
 
     /**
-     * Get the entry summary
+     * Get the entry summary.
      *
      * @return string
      */
@@ -180,7 +181,7 @@ class Zend_Feed_Reader_Extension_Podcast_Entry extends Zend_Feed_Reader_Extensio
             return $this->_data['summary'];
         }
 
-        $summary = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:summary)');
+        $summary = $this->_xpath->evaluate('string('.$this->getXpathPrefix().'/itunes:summary)');
 
         if (!$summary) {
             $summary = null;
@@ -192,8 +193,7 @@ class Zend_Feed_Reader_Extension_Podcast_Entry extends Zend_Feed_Reader_Extensio
     }
 
     /**
-     * Register iTunes namespace
-     *
+     * Register iTunes namespace.
      */
     protected function _registerNamespaces()
     {

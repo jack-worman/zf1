@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,38 +13,39 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Loader
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 // require_once __DIR__ . '/SplAutoloader.php';
 
-if (class_exists('Zend_Loader_AutoloaderFactory')) return;
+if (class_exists('Zend_Loader_AutoloaderFactory')) {
+    return;
+}
 
 /**
- * @package    Zend_Loader
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Loader_AutoloaderFactory
 {
-    const STANDARD_AUTOLOADER  = 'Zend_Loader_StandardAutoloader';
-    const CLASS_MAP_AUTOLOADER = 'Zend_Loader_ClassMapAutoloader';
+    public const STANDARD_AUTOLOADER = 'Zend_Loader_StandardAutoloader';
+    public const CLASS_MAP_AUTOLOADER = 'Zend_Loader_ClassMapAutoloader';
 
     /**
      * @var array All autoloaders registered using the factory
      */
-    protected static $loaders = array();
+    protected static $loaders = [];
 
     /**
      * @var Zend_Loader_StandardAutoloader StandardAutoloader instance for resolving
-     * autoloader classes via the include_path
+     *                                     autoloader classes via the include_path
      */
     protected static $standardAutoloader;
 
     /**
-     * Factory for autoloaders
+     * Factory for autoloaders.
      *
      * Options should be an array or Traversable object of the following structure:
      * <code>
@@ -63,8 +64,10 @@ abstract class Zend_Loader_AutoloaderFactory
      * the Zend library, using PSR-0 rules (unless the class has already been
      * loaded).
      *
-     * @param  array|Traversable $options (optional) options to use. Defaults to Zend_Loader_StandardAutoloader
+     * @param array|Traversable $options (optional) options to use. Defaults to Zend_Loader_StandardAutoloader
+     *
      * @return void
+     *
      * @throws Zend_Loader_Exception_InvalidArgumentException for invalid options
      * @throws Zend_Loader_Exception_InvalidArgumentException for unloadable autoloader classes
      */
@@ -83,15 +86,13 @@ abstract class Zend_Loader_AutoloaderFactory
 
         if (!is_array($options) && !($options instanceof Traversable)) {
             // require_once 'Exception/InvalidArgumentException.php';
-            throw new Zend_Loader_Exception_InvalidArgumentException(
-                'Options provided must be an array or Traversable'
-            );
+            throw new Zend_Loader_Exception_InvalidArgumentException('Options provided must be an array or Traversable');
         }
 
         foreach ($options as $class => $options) {
             if (!isset(self::$loaders[$class])) {
                 // Check class map autoloader
-                if ($class == self::CLASS_MAP_AUTOLOADER) {
+                if (self::CLASS_MAP_AUTOLOADER == $class) {
                     if (!class_exists(self::CLASS_MAP_AUTOLOADER)) {
                         // Extract the filename from the classname
                         $classMapLoader = substr((string)
@@ -106,25 +107,19 @@ abstract class Zend_Loader_AutoloaderFactory
                 $autoloader = self::getStandardAutoloader();
                 if (!class_exists($class) && !$autoloader->autoload($class)) {
                     // require_once 'Exception/InvalidArgumentException.php';
-                    throw new Zend_Loader_Exception_InvalidArgumentException(sprintf(
-                        'Autoloader class "%s" not loaded',
-                        $class
-                    ));
+                    throw new Zend_Loader_Exception_InvalidArgumentException(sprintf('Autoloader class "%s" not loaded', $class));
                 }
 
                 // unfortunately is_subclass_of is broken on some 5.3 versions
                 // additionally instanceof is also broken for this use case
                 if (PHP_VERSION_ID >= 50307) {
-                        if (!is_subclass_of($class, 'Zend_Loader_SplAutoloader')) {
+                    if (!is_subclass_of($class, 'Zend_Loader_SplAutoloader')) {
                         // require_once 'Exception/InvalidArgumentException.php';
-                        throw new Zend_Loader_Exception_InvalidArgumentException(sprintf(
-                            'Autoloader class %s must implement Zend\\Loader\\SplAutoloader',
-                            $class
-                        ));
+                        throw new Zend_Loader_Exception_InvalidArgumentException(sprintf('Autoloader class %s must implement Zend\\Loader\\SplAutoloader', $class));
                     }
                 }
 
-                if ($class === self::STANDARD_AUTOLOADER) {
+                if (self::STANDARD_AUTOLOADER === $class) {
                     $autoloader->setOptions($options);
                 } else {
                     $autoloader = new $class($options);
@@ -138,7 +133,7 @@ abstract class Zend_Loader_AutoloaderFactory
     }
 
     /**
-     * Get an list of all autoloaders registered with the factory
+     * Get an list of all autoloaders registered with the factory.
      *
      * Returns an array of autoloader instances.
      *
@@ -150,10 +145,12 @@ abstract class Zend_Loader_AutoloaderFactory
     }
 
     /**
-     * Retrieves an autoloader by class name
+     * Retrieves an autoloader by class name.
      *
      * @param string $class
+     *
      * @return Zend_Loader_SplAutoloader
+     *
      * @throws Zend_Loader_Exception_InvalidArgumentException for non-registered class
      */
     public static function getRegisteredAutoloader($class)
@@ -162,6 +159,7 @@ abstract class Zend_Loader_AutoloaderFactory
             // require_once 'Exception/InvalidArgumentException.php';
             throw new Zend_Loader_Exception_InvalidArgumentException(sprintf('Autoloader class "%s" not loaded', $class));
         }
+
         return self::$loaders[$class];
     }
 
@@ -174,15 +172,16 @@ abstract class Zend_Loader_AutoloaderFactory
     public static function unregisterAutoloaders()
     {
         foreach (self::getRegisteredAutoloaders() as $class => $autoloader) {
-            spl_autoload_unregister(array($autoloader, 'autoload'));
+            spl_autoload_unregister([$autoloader, 'autoload']);
             unset(self::$loaders[$class]);
         }
     }
 
     /**
-     * Unregister a single autoloader by class name
+     * Unregister a single autoloader by class name.
      *
-     * @param  string $autoloaderClass
+     * @param string $autoloaderClass
+     *
      * @return bool
      */
     public static function unregisterAutoloader($autoloaderClass)
@@ -192,13 +191,14 @@ abstract class Zend_Loader_AutoloaderFactory
         }
 
         $autoloader = self::$loaders[$autoloaderClass];
-        spl_autoload_unregister(array($autoloader, 'autoload'));
+        spl_autoload_unregister([$autoloader, 'autoload']);
         unset(self::$loaders[$autoloaderClass]);
+
         return true;
     }
 
     /**
-     * Get an instance of the standard autoloader
+     * Get an instance of the standard autoloader.
      *
      * Used to attempt to resolve autoloader classes, using the
      * StandardAutoloader. The instance is marked as a fallback autoloader, to
@@ -220,6 +220,7 @@ abstract class Zend_Loader_AutoloaderFactory
         }
         $loader = new Zend_Loader_StandardAutoloader();
         self::$standardAutoloader = $loader;
+
         return self::$standardAutoloader;
     }
 }

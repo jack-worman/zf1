@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage Framework
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -32,22 +32,21 @@
 
 /**
  * @category   Zend
- * @package    Zend_Tool
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Tool_Framework_Client_Abstract implements Zend_Tool_Framework_Registry_EnabledInterface
 {
-
     /**
      * @var Zend_Tool_Framework_Registry
      */
-    protected $_registry = null;
+    protected $_registry;
 
     /**
-     * @var callback|null
+     * @var callable|null
      */
-    protected $_interactiveCallback = null;
+    protected $_interactiveCallback;
 
     /**
      * @var bool
@@ -57,9 +56,9 @@ abstract class Zend_Tool_Framework_Client_Abstract implements Zend_Tool_Framewor
     /**
      * @var Zend_Log
      */
-    protected $_debugLogger = null;
+    protected $_debugLogger;
 
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         // require autoloader
         // Zend_Loader_Autoloader::getInstance();
@@ -76,10 +75,10 @@ abstract class Zend_Tool_Framework_Client_Abstract implements Zend_Tool_Framewor
         }
     }
 
-    public function setOptions(Array $options)
+    public function setOptions(array $options)
     {
         foreach ($options as $optionName => $optionValue) {
-            $setMethodName = 'set' . $optionName;
+            $setMethodName = 'set'.$optionName;
             if (method_exists($this, $setMethodName)) {
                 $this->{$setMethodName}($optionValue);
             }
@@ -95,8 +94,7 @@ abstract class Zend_Tool_Framework_Client_Abstract implements Zend_Tool_Framewor
     abstract public function getName();
 
     /**
-     * initialized() - This will initialize the client for use
-     *
+     * initialized() - This will initialize the client for use.
      */
     public function initialize()
     {
@@ -135,11 +133,9 @@ abstract class Zend_Tool_Framework_Client_Abstract implements Zend_Tool_Framewor
         }
 
         if ($this instanceof Zend_Tool_Framework_Client_Interactive_OutputInterface) {
-            $this->_registry->getResponse()->setContentCallback(array($this, 'handleInteractiveOutput'));
+            $this->_registry->getResponse()->setContentCallback([$this, 'handleInteractiveOutput']);
         }
-
     }
-
 
     /**
      * This method should be implemented by the client implementation to
@@ -167,19 +163,19 @@ abstract class Zend_Tool_Framework_Client_Abstract implements Zend_Tool_Framewor
 
     /**
      * setRegistry() - Required by the Zend_Tool_Framework_Registry_EnabledInterface
-     * interface which ensures proper registry dependency resolution
+     * interface which ensures proper registry dependency resolution.
      *
-     * @param Zend_Tool_Framework_Registry_Interface $registry
      * @return Zend_Tool_Framework_Client_Abstract
      */
     public function setRegistry(Zend_Tool_Framework_Registry_Interface $registry)
     {
         $this->_registry = $registry;
+
         return $this;
     }
 
     /**
-     * getRegistry();
+     * getRegistry();.
      *
      * @return Zend_Tool_Framework_Registry_Interface
      */
@@ -191,13 +187,13 @@ abstract class Zend_Tool_Framework_Client_Abstract implements Zend_Tool_Framewor
     /**
      * hasInteractiveInput() - Convienence method for determining if this
      * client can handle interactive input, and thus be able to run the
-     * promptInteractiveInput
+     * promptInteractiveInput.
      *
      * @return bool
      */
     public function hasInteractiveInput()
     {
-        return ($this instanceof Zend_Tool_Framework_Client_Interactive_InputInterface);
+        return $this instanceof Zend_Tool_Framework_Client_Interactive_InputInterface;
     }
 
     public function promptInteractiveInput($inputRequest)
@@ -210,8 +206,8 @@ abstract class Zend_Tool_Framework_Client_Abstract implements Zend_Tool_Framewor
         $inputHandler = new Zend_Tool_Framework_Client_Interactive_InputHandler();
         $inputHandler->setClient($this);
         $inputHandler->setInputRequest($inputRequest);
-        return $inputHandler->handle();
 
+        return $inputHandler->handle();
     }
 
     /**
@@ -223,26 +219,22 @@ abstract class Zend_Tool_Framework_Client_Abstract implements Zend_Tool_Framewor
         $this->initialize();
 
         try {
-
             $this->_preDispatch();
 
             if ($this->_registry->getRequest()->isDispatchable()) {
-
-                if ($this->_registry->getRequest()->getActionName() == null) {
+                if (null == $this->_registry->getRequest()->getActionName()) {
                     // require_once 'Zend/Tool/Framework/Client/Exception.php';
                     throw new Zend_Tool_Framework_Client_Exception('Client failed to setup the action name.');
                 }
 
-                if ($this->_registry->getRequest()->getProviderName() == null) {
+                if (null == $this->_registry->getRequest()->getProviderName()) {
                     // require_once 'Zend/Tool/Framework/Client/Exception.php';
                     throw new Zend_Tool_Framework_Client_Exception('Client failed to setup the provider name.');
                 }
 
                 $this->_handleDispatch();
-
             }
-
-        } catch (\Throwable $exception) {
+        } catch (Throwable $exception) {
             $this->_registry->getResponse()->setException($exception);
         }
 
@@ -288,27 +280,27 @@ abstract class Zend_Tool_Framework_Client_Abstract implements Zend_Tool_Framewor
         }
 
         // get the actual method and param information
-        $methodName       = $actionableMethod['methodName'];
+        $methodName = $actionableMethod['methodName'];
         $methodParameters = $actionableMethod['parameterInfo'];
 
         // get the provider params
         $requestParameters = $this->_registry->getRequest()->getProviderParameters();
 
         // @todo This seems hackish, determine if there is a better way
-        $callParameters = array();
+        $callParameters = [];
         foreach ($methodParameters as $methodParameterName => $methodParameterValue) {
-            if (!array_key_exists($methodParameterName, $requestParameters) && $methodParameterValue['optional'] == false) {
+            if (!array_key_exists($methodParameterName, $requestParameters) && false == $methodParameterValue['optional']) {
                 if ($this instanceof Zend_Tool_Framework_Client_Interactive_InputInterface) {
                     $promptSting = $this->getMissingParameterPromptString($provider, $actionableMethod['action'], $methodParameterValue['name']);
                     $parameterPromptValue = $this->promptInteractiveInput($promptSting)->getContent();
-                    if ($parameterPromptValue == null) {
+                    if (null == $parameterPromptValue) {
                         // require_once 'Zend/Tool/Framework/Client/Exception.php';
-                        throw new Zend_Tool_Framework_Client_Exception('Value supplied for required parameter "' . $methodParameterValue['name'] . '" is empty');
+                        throw new Zend_Tool_Framework_Client_Exception('Value supplied for required parameter "'.$methodParameterValue['name'].'" is empty');
                     }
                     $callParameters[] = $parameterPromptValue;
                 } else {
                     // require_once 'Zend/Tool/Framework/Client/Exception.php';
-                    throw new Zend_Tool_Framework_Client_Exception('A required parameter "' . $methodParameterValue['name'] . '" was not supplied.');
+                    throw new Zend_Tool_Framework_Client_Exception('A required parameter "'.$methodParameterValue['name'].'" was not supplied.');
                 }
             } else {
                 $callParameters[] = (array_key_exists($methodParameterName, $requestParameters)) ? $requestParameters[$methodParameterName] : $methodParameterValue['default'];
@@ -321,13 +313,12 @@ abstract class Zend_Tool_Framework_Client_Abstract implements Zend_Tool_Framewor
     protected function _handleDispatchExecution($class, $methodName, $callParameters)
     {
         if (method_exists($class, $methodName)) {
-            call_user_func_array(array($class, $methodName), $callParameters);
-        } elseif (method_exists($class, $methodName . 'Action')) {
-            call_user_func_array(array($class, $methodName . 'Action'), $callParameters);
+            call_user_func_array([$class, $methodName], $callParameters);
+        } elseif (method_exists($class, $methodName.'Action')) {
+            call_user_func_array([$class, $methodName.'Action'], $callParameters);
         } else {
             // require_once 'Zend/Tool/Framework/Client/Exception.php';
             throw new Zend_Tool_Framework_Client_Exception('Not a supported method.');
         }
     }
-
 }

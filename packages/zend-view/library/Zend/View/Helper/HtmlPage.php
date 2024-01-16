@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,48 +27,46 @@
 
 /**
  * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_View_Helper_HtmlPage extends Zend_View_Helper_HtmlObject
 {
     /**
-     * Default file type for html
-     *
+     * Default file type for html.
      */
-    const TYPE = 'text/html';
+    public const TYPE = 'text/html';
 
     /**
-     * Object classid
-     *
+     * Object classid.
      */
-    const ATTRIB_CLASSID  = 'clsid:25336920-03F9-11CF-8FD0-00AA00686F13';
+    public const ATTRIB_CLASSID = 'clsid:25336920-03F9-11CF-8FD0-00AA00686F13';
 
     /**
-     * Default attributes
+     * Default attributes.
      *
      * @var array
      */
-    protected $_attribs = array('classid' => self::ATTRIB_CLASSID);
+    protected $_attribs = ['classid' => self::ATTRIB_CLASSID];
 
     /**
-     * Output a html object tag
+     * Output a html object tag.
      *
-     * @param string $data The html url
+     * @param string $data    The html url
      * @param array  $attribs Attribs for the object tag
-     * @param array  $params Params for in the object tag
+     * @param array  $params  Params for in the object tag
      * @param string $content Alternative content
+     *
      * @return string
      */
-    public function htmlPage($data, array $attribs = array(), array $params = array(), $content = null)
+    public function htmlPage($data, array $attribs = [], array $params = [], $content = null)
     {
         // Attrs
         $attribs = array_merge($this->_attribs, $attribs);
 
         // Params
-        $params = array_merge(array('data' => $data), $params);
+        $params = array_merge(['data' => $data], $params);
 
         return $this->htmlObject($data, self::TYPE, $attribs, $params, $content);
     }

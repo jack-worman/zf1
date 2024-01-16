@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,81 +13,70 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Auth
- * @subpackage Storage
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /**
  * @see Zend_Auth_Storage_Interface
  */
 // require_once 'Zend/Auth/Storage/Interface.php';
 
-
 /**
  * @see Zend_Session
  */
 // require_once 'Zend/Session.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_Auth
- * @subpackage Storage
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Auth_Storage_Session implements Zend_Auth_Storage_Interface
 {
     /**
-     * Default session namespace
+     * Default session namespace.
      */
-    const NAMESPACE_DEFAULT = 'Zend_Auth';
+    public const NAMESPACE_DEFAULT = 'Zend_Auth';
 
     /**
-     * Default session object member name
+     * Default session object member name.
      */
-    const MEMBER_DEFAULT = 'storage';
+    public const MEMBER_DEFAULT = 'storage';
 
     /**
-     * Object to proxy $_SESSION storage
+     * Object to proxy $_SESSION storage.
      *
      * @var Zend_Session_Namespace
      */
     protected $_session;
 
     /**
-     * Session namespace
-     *
-     * @var mixed
+     * Session namespace.
      */
     protected $_namespace;
 
     /**
-     * Session object member
-     *
-     * @var mixed
+     * Session object member.
      */
     protected $_member;
 
     /**
-     * Sets session storage options and initializes session namespace object
-     *
-     * @param mixed $namespace
-     * @param mixed $member
+     * Sets session storage options and initializes session namespace object.
      */
     public function __construct($namespace = self::NAMESPACE_DEFAULT, $member = self::MEMBER_DEFAULT)
     {
         $this->_namespace = $namespace;
-        $this->_member    = $member;
-        $this->_session   = new Zend_Session_Namespace($this->_namespace);
+        $this->_member = $member;
+        $this->_session = new Zend_Session_Namespace($this->_namespace);
     }
 
     /**
-     * Returns the session namespace
+     * Returns the session namespace.
      *
      * @return string
      */
@@ -97,7 +86,7 @@ class Zend_Auth_Storage_Session implements Zend_Auth_Storage_Interface
     }
 
     /**
-     * Returns the name of the session object member
+     * Returns the name of the session object member.
      *
      * @return string
      */
@@ -107,9 +96,9 @@ class Zend_Auth_Storage_Session implements Zend_Auth_Storage_Interface
     }
 
     /**
-     * Defined by Zend_Auth_Storage_Interface
+     * Defined by Zend_Auth_Storage_Interface.
      *
-     * @return boolean
+     * @return bool
      */
     public function isEmpty()
     {
@@ -117,9 +106,7 @@ class Zend_Auth_Storage_Session implements Zend_Auth_Storage_Interface
     }
 
     /**
-     * Defined by Zend_Auth_Storage_Interface
-     *
-     * @return mixed
+     * Defined by Zend_Auth_Storage_Interface.
      */
     public function read()
     {
@@ -127,9 +114,8 @@ class Zend_Auth_Storage_Session implements Zend_Auth_Storage_Interface
     }
 
     /**
-     * Defined by Zend_Auth_Storage_Interface
+     * Defined by Zend_Auth_Storage_Interface.
      *
-     * @param  mixed $contents
      * @return void
      */
     public function write($contents)
@@ -138,7 +124,7 @@ class Zend_Auth_Storage_Session implements Zend_Auth_Storage_Interface
     }
 
     /**
-     * Defined by Zend_Auth_Storage_Interface
+     * Defined by Zend_Auth_Storage_Interface.
      *
      * @return void
      */

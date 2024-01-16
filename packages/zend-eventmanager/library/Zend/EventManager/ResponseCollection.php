@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_EventManager
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
- * Collection of signal handler return values
+ * Collection of signal handler return values.
  *
  * @category   Zend
- * @package    Zend_EventManager
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -41,14 +41,16 @@ class Zend_EventManager_ResponseCollection extends SplStack
     }
 
     /**
-     * Mark the collection as stopped (or its opposite)
+     * Mark the collection as stopped (or its opposite).
      *
-     * @param  bool $flag
+     * @param bool $flag
+     *
      * @return Zend_EventManager_ResponseCollection
      */
     public function setStopped($flag)
     {
         $this->stopped = (bool) $flag;
+
         return $this;
     }
 
@@ -72,16 +74,17 @@ class Zend_EventManager_ResponseCollection extends SplStack
      */
     public function last()
     {
-        if (count($this) === 0) {
+        if (0 === count($this)) {
             return null;
         }
+
         return parent::top();
     }
 
     /**
      * Check if any of the responses match the given value.
      *
-     * @param  mixed $value The value to look for among responses
+     * @param mixed $value The value to look for among responses
      */
     public function contains($value)
     {
@@ -90,6 +93,7 @@ class Zend_EventManager_ResponseCollection extends SplStack
                 return true;
             }
         }
+
         return false;
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Photos
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -35,27 +35,25 @@
  * class, Zend_Gdata_Photos.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Photos
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_Photos_AlbumQuery extends Zend_Gdata_Photos_UserQuery
 {
-
     /**
      * The name of the album to query for. Mutually exclusive with AlbumId.
      *
      * @var string
      */
-    protected $_albumName = null;
+    protected $_albumName;
 
     /**
      * The ID of the album to query for. Mutually exclusive with AlbumName.
      *
      * @var string
      */
-    protected $_albumId = null;
+    protected $_albumId;
 
     /**
      * Set the album name to query for. When set, this album's photographs
@@ -65,23 +63,25 @@ class Zend_Gdata_Photos_AlbumQuery extends Zend_Gdata_Photos_UserQuery
      * NOTE: AlbumName and AlbumId are mutually exclusive. Setting one will
      *       automatically set the other to null.
      *
-     * @param string $value The name of the album to retrieve, or null to
-     *          clear.
-     * @return Zend_Gdata_Photos_AlbumQuery The query object.
+     * @param string $value the name of the album to retrieve, or null to
+     *                      clear
+     *
+     * @return Zend_Gdata_Photos_AlbumQuery the query object
      */
-     public function setAlbumName($value)
-     {
-         $this->_albumId = null;
-         $this->_albumName = $value;
+    public function setAlbumName($value)
+    {
+        $this->_albumId = null;
+        $this->_albumName = $value;
 
-         return $this;
-     }
+        return $this;
+    }
 
     /**
      * Get the album name which is to be returned.
      *
      * @see setAlbumName
-     * @return string The name of the album to retrieve.
+     *
+     * @return string the name of the album to retrieve
      */
     public function getAlbumName()
     {
@@ -96,23 +96,25 @@ class Zend_Gdata_Photos_AlbumQuery extends Zend_Gdata_Photos_UserQuery
      * NOTE: Album and AlbumId are mutually exclusive. Setting one will
      *       automatically set the other to null.
      *
-     * @param string $value The ID of the album to retrieve, or null to
-     *          clear.
-     * @return Zend_Gdata_Photos_AlbumQuery The query object.
+     * @param string $value the ID of the album to retrieve, or null to
+     *                      clear
+     *
+     * @return Zend_Gdata_Photos_AlbumQuery the query object
      */
-     public function setAlbumId($value)
-     {
-         $this->_albumName = null;
-         $this->_albumId = $value;
+    public function setAlbumId($value)
+    {
+        $this->_albumName = null;
+        $this->_albumId = $value;
 
-         return $this;
-     }
+        return $this;
+    }
 
     /**
      * Get the album ID which is to be returned.
      *
      * @see setAlbum
-     * @return string The ID of the album to retrieve.
+     *
+     * @return string the ID of the album to retrieve
      */
     public function getAlbumId()
     {
@@ -123,27 +125,26 @@ class Zend_Gdata_Photos_AlbumQuery extends Zend_Gdata_Photos_UserQuery
      * Returns the URL generated for this query, based on it's current
      * parameters.
      *
-     * @return string A URL generated based on the state of this query.
+     * @return string a URL generated based on the state of this query
+     *
      * @throws Zend_Gdata_App_InvalidArgumentException
      */
     public function getQueryUrl($incomingUri = '')
     {
         $uri = '';
-        if ($this->getAlbumName() !== null && $this->getAlbumId() === null) {
-            $uri .= '/album/' . $this->getAlbumName();
-        } elseif ($this->getAlbumName() === null && $this->getAlbumId() !== null) {
-            $uri .= '/albumid/' . $this->getAlbumId();
-        } elseif ($this->getAlbumName() !== null && $this->getAlbumId() !== null) {
+        if (null !== $this->getAlbumName() && null === $this->getAlbumId()) {
+            $uri .= '/album/'.$this->getAlbumName();
+        } elseif (null === $this->getAlbumName() && null !== $this->getAlbumId()) {
+            $uri .= '/albumid/'.$this->getAlbumId();
+        } elseif (null !== $this->getAlbumName() && null !== $this->getAlbumId()) {
             // require_once 'Zend/Gdata/App/InvalidArgumentException.php';
-            throw new Zend_Gdata_App_InvalidArgumentException(
-                    'AlbumName and AlbumId cannot both be non-null');
+            throw new Zend_Gdata_App_InvalidArgumentException('AlbumName and AlbumId cannot both be non-null');
         } else {
             // require_once 'Zend/Gdata/App/InvalidArgumentException.php';
-            throw new Zend_Gdata_App_InvalidArgumentException(
-                    'AlbumName and AlbumId cannot both be null');
+            throw new Zend_Gdata_App_InvalidArgumentException('AlbumName and AlbumId cannot both be null');
         }
         $uri .= $incomingUri;
+
         return parent::getQueryUrl($uri);
     }
-
 }

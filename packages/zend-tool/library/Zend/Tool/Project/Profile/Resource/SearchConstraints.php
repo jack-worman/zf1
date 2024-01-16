@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,31 +13,30 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage Framework
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * This class is an iterator that will iterate only over enabled resources
+ * This class is an iterator that will iterate only over enabled resources.
  *
  * @category   Zend
- * @package    Zend_Tool
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Project_Profile_Resource_SearchConstraints
 {
-
     /**
      * @var array
      */
-    protected $_constraints = array();
+    protected $_constraints = [];
 
     /**
-     * __construct()
+     * __construct().
      *
      * @param array|string $options
      */
@@ -51,18 +50,17 @@ class Zend_Tool_Project_Profile_Resource_SearchConstraints
     }
 
     /**
-     * setOptions()
+     * setOptions().
      *
-     * @param array $option
      * @return Zend_Tool_Project_Profile_Resource_SearchConstraints
      */
-    public function setOptions(Array $option)
+    public function setOptions(array $option)
     {
         foreach ($option as $optionName => $optionValue) {
             if (is_int($optionName)) {
                 $this->addConstraint($optionValue);
             } elseif (is_string($optionName)) {
-                $this->addConstraint(array('name' => $optionName, 'params' => $optionValue));
+                $this->addConstraint(['name' => $optionName, 'params' => $optionValue]);
             }
         }
 
@@ -70,29 +68,31 @@ class Zend_Tool_Project_Profile_Resource_SearchConstraints
     }
 
     /**
-     * addConstraint()
+     * addConstraint().
      *
      * @param string|array $constraint
+     *
      * @return Zend_Tool_Project_Profile_Resource_SearchConstraints
      */
     public function addConstraint($constraint)
     {
         if (is_string($constraint)) {
-            $name   = $constraint;
-            $params = array();
+            $name = $constraint;
+            $params = [];
         } elseif (is_array($constraint)) {
-            $name   = $constraint['name'];
+            $name = $constraint['name'];
             $params = $constraint['params'];
         }
 
         $constraint = $this->_makeConstraint($name, $params);
 
         array_push($this->_constraints, $constraint);
+
         return $this;
     }
 
     /**
-     * getConstraint()
+     * getConstraint().
      *
      * @return ArrayObject
      */
@@ -102,16 +102,16 @@ class Zend_Tool_Project_Profile_Resource_SearchConstraints
     }
 
     /**
-     * _makeConstraint
+     * _makeConstraint.
      *
      * @param string $name
-     * @param mixed $params
+     *
      * @return ArrayObject
      */
     protected function _makeConstraint($name, $params)
     {
-        $value = array('name' => $name, 'params' => $params);
+        $value = ['name' => $name, 'params' => $params];
+
         return new ArrayObject($value, ArrayObject::ARRAY_AS_PROPS);
     }
-
 }

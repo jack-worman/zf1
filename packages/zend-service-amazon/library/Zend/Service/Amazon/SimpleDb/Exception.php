@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,8 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage SimpleDb
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -28,8 +27,7 @@
  * The Custom Exception class that allows you to have access to the AWS Error Code.
  *
  * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage SimpleDb
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -41,11 +39,12 @@ class Zend_Service_Amazon_SimpleDb_Exception extends Zend_Service_Amazon_Excepti
     private $_awsErrorCode = '';
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string $message
-     * @param int $code
+     * @param int    $code
      * @param string $awsErrorCode
+     *
      * @return void
      */
     public function __construct($message, $code = 0, $awsErrorCode = '')
@@ -55,7 +54,7 @@ class Zend_Service_Amazon_SimpleDb_Exception extends Zend_Service_Amazon_Excepti
     }
 
     /**
-     * Get AWS error code
+     * Get AWS error code.
      *
      * @return string
      */

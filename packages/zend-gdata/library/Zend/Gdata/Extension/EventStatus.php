@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Gdata
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,19 +27,17 @@
 // require_once 'Zend/Gdata/Extension.php';
 
 /**
- * Represents the gd:eventStatus element
+ * Represents the gd:eventStatus element.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Gdata
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_Extension_EventStatus extends Zend_Gdata_Extension
 {
-
     protected $_rootElement = 'eventStatus';
-    protected $_value = null;
+    protected $_value;
 
     public function __construct($value = null)
     {
@@ -50,27 +48,28 @@ class Zend_Gdata_Extension_EventStatus extends Zend_Gdata_Extension
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
         $element = parent::getDOM($doc, $majorVersion, $minorVersion);
-        if ($this->_value !== null) {
+        if (null !== $this->_value) {
             $element->setAttribute('value', $this->_value);
         }
+
         return $element;
     }
 
     protected function takeAttributeFromDOM($attribute)
     {
         switch ($attribute->localName) {
-        case 'value':
-            $this->_value = $attribute->nodeValue;
-            break;
-        default:
-            parent::takeAttributeFromDOM($attribute);
+            case 'value':
+                $this->_value = $attribute->nodeValue;
+                break;
+            default:
+                parent::takeAttributeFromDOM($attribute);
         }
     }
 
     /**
      * Get the value for this element's Value attribute.
      *
-     * @return string The requested attribute.
+     * @return string the requested attribute
      */
     public function getValue()
     {
@@ -80,22 +79,23 @@ class Zend_Gdata_Extension_EventStatus extends Zend_Gdata_Extension
     /**
      * Set the value for this element's Value attribute.
      *
-     * @param string $value The desired value for this attribute.
-     * @return Zend_Gdata_Extension_EventStatus The element being modified.
+     * @param string $value the desired value for this attribute
+     *
+     * @return Zend_Gdata_Extension_EventStatus the element being modified
      */
     public function setValue($value)
     {
         $this->_value = $value;
+
         return $this;
     }
 
     /**
      * Magic toString method allows using this directly via echo
-     * Works best in PHP >= 4.2.0
+     * Works best in PHP >= 4.2.0.
      */
     public function __toString()
     {
         return $this->getValue();
     }
-
 }

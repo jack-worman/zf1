@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,22 +13,22 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tool
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
  * @category   Zend
- * @package    Zend_Tool
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface Zend_Tool_Framework_Manifest_Interface
 {
-
-    /**
+    /*
      * The following methods are completely optional, and any combination of them
      * can be used as part of a manifest.  The manifest repository will process
      * the return values of these actions as specfied in the following method docblocks.
@@ -37,7 +37,7 @@ interface Zend_Tool_Framework_Manifest_Interface
      *
      */
 
-    /**
+    /*
      * getMetadata()
      *
      * Should either return a single metadata object or an array
@@ -45,14 +45,12 @@ interface Zend_Tool_Framework_Manifest_Interface
      *
      * @return array|Zend_Tool_Framework_Manifest_Metadata
      **
-
-    public function getMetadata();
-
+     *
+     * public function getMetadata();
+     *
      **/
 
-
-
-    /**
+    /*
      * getActions()
      *
      * Should either return a single action, or an array
@@ -60,23 +58,20 @@ interface Zend_Tool_Framework_Manifest_Interface
      *
      * @return array|Zend_Tool_Framework_Action_Interface
      **
-
-    public function getActions();
-
+     *
+     * public function getActions();
+     *
      **/
 
-
-
-    /**
+    /*
      * getProviders()
      *
      * Should either return a single provider or an array
      * of providers
      *
      **
-
-    public function getProviders();
-
+     *
+     * public function getProviders();
+     *
      **/
-
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Pdf
- * @subpackage FileParser
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -33,34 +33,30 @@
  * Subclasses should also override {@link moveToOffset()} and
  * {@link __toString()} as appropriate.
  *
- * @package    Zend_Pdf
- * @subpackage FileParser
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Pdf_FileParserDataSource
 {
-  /**** Instance Variables ****/
-
+    /**** Instance Variables ****/
 
     /**
      * Total size in bytes of the data source.
-     * @var integer
+     *
+     * @var int
      */
     protected $_size = 0;
 
     /**
      * Byte offset of the current read position within the data source.
-     * @var integer
+     *
+     * @var int
      */
     protected $_offset = 0;
 
+    /**** Public Interface ****/
 
-
-  /**** Public Interface ****/
-
-
-  /* Abstract Methods */
+    /* Abstract Methods */
 
     /**
      * Object destructor. Closes the data source.
@@ -79,8 +75,10 @@ abstract class Zend_Pdf_FileParserDataSource
      * Throws an exception if there is insufficient data to completely fulfill
      * the request or if an error occurs.
      *
-     * @param integer $byteCount Number of bytes to read.
+     * @param int $byteCount number of bytes to read
+     *
      * @return string
+     *
      * @throws Zend_Pdf_Exception
      */
     abstract public function readBytes($byteCount);
@@ -97,8 +95,7 @@ abstract class Zend_Pdf_FileParserDataSource
      */
     abstract public function readAllBytes();
 
-
-  /* Object Magic Methods */
+    /* Object Magic Methods */
 
     /**
      * Returns a description of the object for debugging purposes.
@@ -113,14 +110,13 @@ abstract class Zend_Pdf_FileParserDataSource
         return get_class($this);
     }
 
-
-  /* Accessors */
+    /* Accessors */
 
     /**
      * Returns the byte offset of the current read position within the data
      * source.
      *
-     * @return integer
+     * @return int
      */
     public function getOffset()
     {
@@ -130,15 +126,14 @@ abstract class Zend_Pdf_FileParserDataSource
     /**
      * Returns the total size in bytes of the data source.
      *
-     * @return integer
+     * @return int
      */
     public function getSize()
     {
         return $this->_size;
     }
 
-
-  /* Primitive Methods */
+    /* Primitive Methods */
 
     /**
      * Moves the current read position to the specified byte offset.
@@ -150,7 +145,8 @@ abstract class Zend_Pdf_FileParserDataSource
      * fseek() on a filesystem source), it should do so after calling this
      * parent method.
      *
-     * @param integer $offset Destination byte offset.
+     * @param int $offset destination byte offset
+     *
      * @throws Zend_Pdf_Exception
      */
     public function moveToOffset($offset)
@@ -160,13 +156,11 @@ abstract class Zend_Pdf_FileParserDataSource
         }
         if ($offset < 0) {
             // require_once 'Zend/Pdf/Exception.php';
-            throw new Zend_Pdf_Exception('Attempt to move before start of data source',
-                                         Zend_Pdf_Exception::MOVE_BEFORE_START_OF_FILE);
+            throw new Zend_Pdf_Exception('Attempt to move before start of data source', Zend_Pdf_Exception::MOVE_BEFORE_START_OF_FILE);
         }
         if ($offset >= $this->_size) {    // Offsets are zero-based.
             // require_once 'Zend/Pdf/Exception.php';
-            throw new Zend_Pdf_Exception('Attempt to move beyond end of data source',
-                                         Zend_Pdf_Exception::MOVE_BEYOND_END_OF_FILE);
+            throw new Zend_Pdf_Exception('Attempt to move beyond end of data source', Zend_Pdf_Exception::MOVE_BEYOND_END_OF_FILE);
         }
         $this->_offset = $offset;
     }
@@ -179,7 +173,8 @@ abstract class Zend_Pdf_FileParserDataSource
      * Throws an exception you attempt to move before the beginning or beyond
      * the end of the data source.
      *
-     * @param integer $byteCount Number of bytes to skip.
+     * @param int $byteCount number of bytes to skip
+     *
      * @throws Zend_Pdf_Exception
      */
     public function skipBytes($byteCount)

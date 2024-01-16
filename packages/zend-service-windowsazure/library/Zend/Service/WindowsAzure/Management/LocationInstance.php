@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_WindowsAzure
- * @subpackage Management
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,25 +27,23 @@
 
 /**
  * @category   Zend
- * @package    Zend_Service_WindowsAzure
- * @subpackage Management
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * 
- * @property string $Name         The location name.
+ *
+ * @property string $Name The location name.
  */
-class Zend_Service_WindowsAzure_Management_LocationInstance
-	extends Zend_Service_WindowsAzure_Management_ServiceEntityAbstract
-{    
+class Zend_Service_WindowsAzure_Management_LocationInstance extends Zend_Service_WindowsAzure_Management_ServiceEntityAbstract
+{
     /**
-     * Constructor
-     * 
-     * @param string $name         The location name. 
-	 */
-    public function __construct($name) 
-    {	        
-        $this->_data = array(
-            'name'        => $name    
-        );
+     * Constructor.
+     *
+     * @param string $name the location name
+     */
+    public function __construct($name)
+    {
+        $this->_data = [
+            'name' => $name,
+        ];
     }
 }

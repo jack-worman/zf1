@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +13,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Index
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /**
  * A Term represents a word from text.  This is the unit of search.  It is
@@ -30,68 +29,64 @@
  * things like dates, email addresses, urls, etc.
  *
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Index
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Search_Lucene_Index_Term
 {
     /**
-     * Field name or field number (depending from context)
-     *
-     * @var mixed
+     * Field name or field number (depending from context).
      */
     public $field;
 
     /**
-     * Term value
+     * Term value.
      *
      * @var string
      */
     public $text;
 
-
     /**
-     * Object constructor
+     * Object constructor.
      */
     public function __construct($text, $field = null)
     {
-        $this->field = ($field === null)?  Zend_Search_Lucene::getDefaultSearchField() : $field;
-        $this->text  = (string)$text;
+        $this->field = (null === $field) ? Zend_Search_Lucene::getDefaultSearchField() : $field;
+        $this->text = (string) $text;
     }
 
-
     /**
-     * Returns term key
+     * Returns term key.
      *
      * @return string
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function key()
     {
-        return $this->field . chr(0) . $this->text;
+        return $this->field.chr(0).$this->text;
     }
 
     /**
-     * Get term prefix
+     * Get term prefix.
      *
      * @param string $str
-     * @param integer $length
+     * @param int    $length
+     *
      * @return string
      */
     public static function getPrefix($str, $length)
     {
         $prefixBytes = 0;
         $prefixChars = 0;
-        while ($prefixBytes < strlen((string) $str)  &&  $prefixChars < $length) {
+        while ($prefixBytes < strlen((string) $str) && $prefixChars < $length) {
             $charBytes = 1;
             if ((ord((string) $str[$prefixBytes]) & 0xC0) == 0xC0) {
-                $charBytes++;
-                if (ord((string) $str[$prefixBytes]) & 0x20 ) {
-                    $charBytes++;
-                    if (ord((string) $str[$prefixBytes]) & 0x10 ) {
-                        $charBytes++;
+                ++$charBytes;
+                if (ord((string) $str[$prefixBytes]) & 0x20) {
+                    ++$charBytes;
+                    if (ord((string) $str[$prefixBytes]) & 0x10) {
+                        ++$charBytes;
                     }
                 }
             }
@@ -101,7 +96,7 @@ class Zend_Search_Lucene_Index_Term
                 break;
             }
 
-            $prefixChars++;
+            ++$prefixChars;
             $prefixBytes += $charBytes;
         }
 
@@ -109,9 +104,10 @@ class Zend_Search_Lucene_Index_Term
     }
 
     /**
-     * Get UTF-8 string length
+     * Get UTF-8 string length.
      *
      * @param string $str
+     *
      * @return int
      */
     public static function getLength($str)
@@ -121,11 +117,11 @@ class Zend_Search_Lucene_Index_Term
         while ($bytes < strlen((string) $str)) {
             $charBytes = 1;
             if ((ord((string) $str[$bytes]) & 0xC0) == 0xC0) {
-                $charBytes++;
-                if (ord((string) $str[$bytes]) & 0x20 ) {
-                    $charBytes++;
-                    if (ord((string) $str[$bytes]) & 0x10 ) {
-                        $charBytes++;
+                ++$charBytes;
+                if (ord((string) $str[$bytes]) & 0x20) {
+                    ++$charBytes;
+                    if (ord((string) $str[$bytes]) & 0x10) {
+                        ++$charBytes;
                     }
                 }
             }
@@ -135,11 +131,10 @@ class Zend_Search_Lucene_Index_Term
                 break;
             }
 
-            $chars++;
+            ++$chars;
             $bytes += $charBytes;
         }
 
         return $chars;
     }
 }
-

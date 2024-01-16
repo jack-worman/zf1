@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Memory
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -33,23 +34,25 @@
 
 /**
  * @category   Zend
- * @package    Zend_Memory
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Memory
 {
     /**
-     * Factory
+     * Factory.
      *
-     * @param string $backend backend name
-     * @param array $backendOptions associative array of options for the corresponding backend constructor
+     * @param string $backend        backend name
+     * @param array  $backendOptions associative array of options for the corresponding backend constructor
+     *
      * @return Zend_Memory_Manager
+     *
      * @throws Zend_Memory_Exception
      */
-    public static function factory($backend, $backendOptions = array())
+    public static function factory($backend, $backendOptions = [])
     {
-        if (strcasecmp($backend, 'none') == 0) {
+        if (0 == strcasecmp($backend, 'none')) {
             return new Zend_Memory_Manager();
         }
 
@@ -57,7 +60,7 @@ class Zend_Memory
         // (that allows to specify it in any case)
         $backendIsFound = false;
         foreach (Zend_Cache::$standardBackends as $zendCacheBackend) {
-            if (strcasecmp($backend, $zendCacheBackend) == 0) {
+            if (0 == strcasecmp($backend, $zendCacheBackend)) {
                 $backend = $zendCacheBackend;
                 $backendIsFound = true;
                 break;
@@ -69,7 +72,7 @@ class Zend_Memory
             throw new Zend_Memory_Exception("Incorrect backend ($backend)");
         }
 
-        $backendClass = 'Zend_Cache_Backend_' . $backend;
+        $backendClass = 'Zend_Cache_Backend_'.$backend;
 
         // For perfs reasons, we do not use the Zend_Loader::loadClass() method
         // (security controls are explicit)

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,39 +13,41 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Controller
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
- * Zend_XmlRpc_Request
+ * Zend_XmlRpc_Request.
  */
 // require_once 'Zend/XmlRpc/Request.php';
 
 /**
- * XmlRpc Request object -- Request via STDIN
+ * XmlRpc Request object -- Request via STDIN.
  *
  * Extends {@link Zend_XmlRpc_Request} to accept a request via STDIN. Request is
  * built at construction time using data from STDIN; if no data is available, the
  * request is declared a fault.
  *
  * @category Zend
- * @package  Zend_XmlRpc
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version $Id$
  */
 class Zend_XmlRpc_Request_Stdin extends Zend_XmlRpc_Request
 {
     /**
-     * Raw XML as received via request
+     * Raw XML as received via request.
+     *
      * @var string
      */
     protected $_xml;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * Attempts to read from php://stdin to get raw POST request; if an error
      * occurs in doing so, or if the XML is invalid, the request is declared a
@@ -58,6 +60,7 @@ class Zend_XmlRpc_Request_Stdin extends Zend_XmlRpc_Request
         $fh = fopen('php://stdin', 'r');
         if (!$fh) {
             $this->_fault = new Zend_XmlRpc_Server_Exception(630);
+
             return;
         }
 
@@ -73,7 +76,7 @@ class Zend_XmlRpc_Request_Stdin extends Zend_XmlRpc_Request
     }
 
     /**
-     * Retrieve the raw XML request
+     * Retrieve the raw XML request.
      *
      * @return string
      */

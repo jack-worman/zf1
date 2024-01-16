@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,37 +13,35 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tag
- * @subpackage Cloud
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Abstract class for cloud decorators
+ * Abstract class for cloud decorators.
  *
  * @category  Zend
- * @package   Zend_Tag
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Tag_Cloud_Decorator_Cloud
 {
     /**
-     * Option keys to skip when calling setOptions()
+     * Option keys to skip when calling setOptions().
      *
      * @var array
      */
-    protected $_skipOptions = array(
+    protected $_skipOptions = [
         'options',
         'config',
-    );
+    ];
 
     /**
-     * Create a new cloud decorator with options
-     *
-     * @param mixed $options
+     * Create a new cloud decorator with options.
      */
     public function __construct($options = null)
     {
@@ -57,9 +55,10 @@ abstract class Zend_Tag_Cloud_Decorator_Cloud
     }
 
     /**
-     * Set options from array
+     * Set options from array.
      *
-     * @param  array $options Configuration for the decorator
+     * @param array $options Configuration for the decorator
+     *
      * @return Zend_Tag_Cloud_Decorator_Cloud
      */
     public function setOptions(array $options)
@@ -69,7 +68,7 @@ abstract class Zend_Tag_Cloud_Decorator_Cloud
                 continue;
             }
 
-            $method = 'set' . $key;
+            $method = 'set'.$key;
             if (method_exists($this, $method)) {
                 $this->$method($value);
             }
@@ -79,9 +78,8 @@ abstract class Zend_Tag_Cloud_Decorator_Cloud
     }
 
     /**
-     * Render a list of formatted tags
+     * Render a list of formatted tags.
      *
-     * @param  array $tags
      * @return string
      */
     abstract public function render(array $tags);

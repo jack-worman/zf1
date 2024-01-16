@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage App
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -30,20 +30,18 @@
  * Concrete class to use a file handle as an attachment within a MediaEntry.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage App
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Gdata_App_BaseMediaSource implements Zend_Gdata_App_MediaSource
 {
-
     /**
-     * The content type for the attached file (example image/png)
+     * The content type for the attached file (example image/png).
      *
      * @var string
      */
-    protected $_contentType = null;
+    protected $_contentType;
 
     /**
      * The slug header value representing the attached file title, or null if
@@ -52,10 +50,10 @@ abstract class Zend_Gdata_App_BaseMediaSource implements Zend_Gdata_App_MediaSou
      *
      * @var string
      */
-    protected $_slug = null;
+    protected $_slug;
 
     /**
-     * The content type for the attached file (example image/png)
+     * The content type for the attached file (example image/png).
      *
      * @return string The content type
      */
@@ -65,14 +63,16 @@ abstract class Zend_Gdata_App_BaseMediaSource implements Zend_Gdata_App_MediaSou
     }
 
     /**
-     * Set the content type for the file attached (example image/png)
+     * Set the content type for the file attached (example image/png).
      *
      * @param string $value The content type
+     *
      * @return Zend_Gdata_App_MediaFileSource Provides a fluent interface
      */
     public function setContentType($value)
     {
         $this->_contentType = $value;
+
         return $this;
     }
 
@@ -82,7 +82,8 @@ abstract class Zend_Gdata_App_BaseMediaSource implements Zend_Gdata_App_MediaSou
      *
      * @return string
      */
-    public function getSlug(){
+    public function getSlug()
+    {
         return $this->_slug;
     }
 
@@ -91,13 +92,15 @@ abstract class Zend_Gdata_App_BaseMediaSource implements Zend_Gdata_App_MediaSou
      * title for the uploaded file.  A null value indicates no slug header.
      *
      * @var string The slug value
+     *
      * @return Zend_Gdata_App_MediaSource Provides a fluent interface
      */
-    public function setSlug($value){
+    public function setSlug($value)
+    {
         $this->_slug = $value;
+
         return $this;
     }
-
 
     /**
      * Magic getter to allow acces like $source->foo to call $source->getFoo()
@@ -112,13 +115,12 @@ abstract class Zend_Gdata_App_BaseMediaSource implements Zend_Gdata_App_MediaSou
     {
         $method = 'get'.ucfirst($name);
         if (method_exists($this, $method)) {
-            return call_user_func(array(&$this, $method));
-        } else if (property_exists($this, "_{$name}")) {
-            return $this->{'_' . $name};
+            return call_user_func([&$this, $method]);
+        } elseif (property_exists($this, "_{$name}")) {
+            return $this->{'_'.$name};
         } else {
             // require_once 'Zend/Gdata/App/InvalidArgumentException.php';
-            throw new Zend_Gdata_App_InvalidArgumentException(
-                    'Property ' . $name . ' does not exist');
+            throw new Zend_Gdata_App_InvalidArgumentException('Property '.$name.' does not exist');
         }
     }
 
@@ -130,35 +132,32 @@ abstract class Zend_Gdata_App_BaseMediaSource implements Zend_Gdata_App_MediaSou
      * is defined, this is returned.
      *
      * @param string $name
-     * @param string $value
      */
     public function __set($name, $val)
     {
         $method = 'set'.ucfirst($name);
         if (method_exists($this, $method)) {
-            return call_user_func(array(&$this, $method), $val);
-        } else if (isset($this->{'_' . $name}) || ($this->{'_' . $name} === null)) {
-            $this->{'_' . $name} = $val;
+            return call_user_func([&$this, $method], $val);
+        } elseif (isset($this->{'_'.$name}) || (null === $this->{'_'.$name})) {
+            $this->{'_'.$name} = $val;
         } else {
             // require_once 'Zend/Gdata/App/InvalidArgumentException.php';
-            throw new Zend_Gdata_App_InvalidArgumentException(
-                    'Property ' . $name . '  does not exist');
+            throw new Zend_Gdata_App_InvalidArgumentException('Property '.$name.'  does not exist');
         }
     }
 
     /**
-     * Magic __isset method
+     * Magic __isset method.
      *
      * @param string $name
      */
     public function __isset($name)
     {
         $rc = new ReflectionClass(get_class($this));
-        $privName = '_' . $name;
-        if (!($rc->hasProperty($privName))) {
+        $privName = '_'.$name;
+        if (!$rc->hasProperty($privName)) {
             // require_once 'Zend/Gdata/App/InvalidArgumentException.php';
-            throw new Zend_Gdata_App_InvalidArgumentException(
-                    'Property ' . $name . ' does not exist');
+            throw new Zend_Gdata_App_InvalidArgumentException('Property '.$name.' does not exist');
         } else {
             if (isset($this->{$privName})) {
                 if (is_array($this->{$privName})) {
@@ -175,5 +174,4 @@ abstract class Zend_Gdata_App_BaseMediaSource implements Zend_Gdata_App_MediaSou
             }
         }
     }
-
 }

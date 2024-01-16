@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,24 +13,22 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Index
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Dictionary loader
+ * Dictionary loader.
  *
  * It's a dummy class which is created to encapsulate non-good structured code.
  * Manual "method inlining" is performed to increase dictionary index loading operation
  * which is major bottelneck for search performance.
  *
- *
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Index
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -45,48 +43,50 @@ class Zend_Search_Lucene_Index_DictionaryLoader
      * See Zend_Search_Lucene_Index_SegmintInfo class for details
      *
      * @param string $data
+     *
      * @return array
+     *
      * @throws Zend_Search_Lucene_Exception
      */
     public static function load($data)
     {
-        $termDictionary = array();
-        $termInfos      = array();
+        $termDictionary = [];
+        $termInfos = [];
         $pos = 0;
 
         // $tiVersion = $tiiFile->readInt();
-        $tiVersion = ord((string) $data[0]) << 24 | ord((string) $data[1]) << 16 | ord((string) $data[2]) << 8  | ord((string) $data[3]);
+        $tiVersion = ord((string) $data[0]) << 24 | ord((string) $data[1]) << 16 | ord((string) $data[2]) << 8 | ord((string) $data[3]);
         $pos += 4;
-        if ($tiVersion != (int)0xFFFFFFFE /* pre-2.1 format */ &&
-            $tiVersion != (int)0xFFFFFFFD /* 2.1+ format    */) {
-                // require_once 'Zend/Search/Lucene/Exception.php';
-                throw new Zend_Search_Lucene_Exception('Wrong TermInfoIndexFile file format');
+        if ($tiVersion != (int) 0xFFFFFFFE /* pre-2.1 format */
+            && $tiVersion != (int) 0xFFFFFFFD /* 2.1+ format */) {
+            // require_once 'Zend/Search/Lucene/Exception.php';
+            throw new Zend_Search_Lucene_Exception('Wrong TermInfoIndexFile file format');
         }
 
         // $indexTermCount = $tiiFile->readLong();
         if (PHP_INT_SIZE > 4) {
-            $indexTermCount = ord((string) $data[$pos]) << 56  |
-                              ord((string) $data[$pos+1]) << 48  |
-                              ord((string) $data[$pos+2]) << 40  |
-                              ord((string) $data[$pos+3]) << 32  |
-                              ord((string) $data[$pos+4]) << 24  |
-                              ord((string) $data[$pos+5]) << 16  |
-                              ord((string) $data[$pos+6]) << 8   |
-                              ord((string) $data[$pos+7]);
+            $indexTermCount = ord((string) $data[$pos]) << 56 |
+                              ord((string) $data[$pos + 1]) << 48 |
+                              ord((string) $data[$pos + 2]) << 40 |
+                              ord((string) $data[$pos + 3]) << 32 |
+                              ord((string) $data[$pos + 4]) << 24 |
+                              ord((string) $data[$pos + 5]) << 16 |
+                              ord((string) $data[$pos + 6]) << 8 |
+                              ord((string) $data[$pos + 7]);
         } else {
-            if ((ord((string) $data[$pos])            != 0) ||
-                (ord((string) $data[$pos+1])          != 0) ||
-                (ord((string) $data[$pos+2])          != 0) ||
-                (ord((string) $data[$pos+3])          != 0) ||
-                ((ord((string) $data[$pos+4]) & 0x80) != 0)) {
-                    // require_once 'Zend/Search/Lucene/Exception.php';
-                    throw new Zend_Search_Lucene_Exception('Largest supported segment size (for 32-bit mode) is 2Gb');
-                 }
+            if ((0 != ord((string) $data[$pos]))
+                || (0 != ord((string) $data[$pos + 1]))
+                || (0 != ord((string) $data[$pos + 2]))
+                || (0 != ord((string) $data[$pos + 3]))
+                || ((ord((string) $data[$pos + 4]) & 0x80) != 0)) {
+                // require_once 'Zend/Search/Lucene/Exception.php';
+                throw new Zend_Search_Lucene_Exception('Largest supported segment size (for 32-bit mode) is 2Gb');
+            }
 
-            $indexTermCount = ord((string) $data[$pos+4]) << 24  |
-                              ord((string) $data[$pos+5]) << 16  |
-                              ord((string) $data[$pos+6]) << 8   |
-                              ord((string) $data[$pos+7]);
+            $indexTermCount = ord((string) $data[$pos + 4]) << 24 |
+                              ord((string) $data[$pos + 5]) << 16 |
+                              ord((string) $data[$pos + 6]) << 8 |
+                              ord((string) $data[$pos + 7]);
         }
         $pos += 8;
 
@@ -94,27 +94,27 @@ class Zend_Search_Lucene_Index_DictionaryLoader
         $pos += 4;
 
         // $skipInterval   = $tiiFile->readInt();
-        $skipInterval = ord((string) $data[$pos]) << 24 | ord((string) $data[$pos+1]) << 16 | ord((string) $data[$pos+2]) << 8  | ord((string) $data[$pos+3]);
+        $skipInterval = ord((string) $data[$pos]) << 24 | ord((string) $data[$pos + 1]) << 16 | ord((string) $data[$pos + 2]) << 8 | ord((string) $data[$pos + 3]);
         $pos += 4;
         if ($indexTermCount < 1) {
             // require_once 'Zend/Search/Lucene/Exception.php';
             throw new Zend_Search_Lucene_Exception('Wrong number of terms in a term dictionary index');
         }
 
-        if ($tiVersion == (int)0xFFFFFFFD /* 2.1+ format */) {
+        if ($tiVersion == (int) 0xFFFFFFFD /* 2.1+ format */) {
             /* Skip MaxSkipLevels value */
             $pos += 4;
         }
 
-        $prevTerm     = '';
-        $freqPointer  =  0;
-        $proxPointer  =  0;
-        $indexPointer =  0;
-        for ($count = 0; $count < $indexTermCount; $count++) {
-            //$termPrefixLength = $tiiFile->readVInt();
+        $prevTerm = '';
+        $freqPointer = 0;
+        $proxPointer = 0;
+        $indexPointer = 0;
+        for ($count = 0; $count < $indexTermCount; ++$count) {
+            // $termPrefixLength = $tiiFile->readVInt();
             $nbyte = ord((string) $data[$pos++]);
             $termPrefixLength = $nbyte & 0x7F;
-            for ($shift=7; ($nbyte & 0x80) != 0; $shift += 7) {
+            for ($shift = 7; ($nbyte & 0x80) != 0; $shift += 7) {
                 $nbyte = ord((string) $data[$pos++]);
                 $termPrefixLength |= ($nbyte & 0x7F) << $shift;
             }
@@ -122,25 +122,25 @@ class Zend_Search_Lucene_Index_DictionaryLoader
             // $termSuffix       = $tiiFile->readString();
             $nbyte = ord((string) $data[$pos++]);
             $len = $nbyte & 0x7F;
-            for ($shift=7; ($nbyte & 0x80) != 0; $shift += 7) {
+            for ($shift = 7; ($nbyte & 0x80) != 0; $shift += 7) {
                 $nbyte = ord((string) $data[$pos++]);
                 $len |= ($nbyte & 0x7F) << $shift;
             }
-            if ($len == 0) {
+            if (0 == $len) {
                 $termSuffix = '';
             } else {
                 $termSuffix = substr((string) $data, $pos, $len);
                 $pos += $len;
-                for ($count1 = 0; $count1 < $len; $count1++ ) {
-                    if (( ord((string) $termSuffix[$count1]) & 0xC0 ) == 0xC0) {
+                for ($count1 = 0; $count1 < $len; ++$count1) {
+                    if ((ord((string) $termSuffix[$count1]) & 0xC0) == 0xC0) {
                         $addBytes = 1;
-                        if (ord((string) $termSuffix[$count1]) & 0x20 ) {
-                            $addBytes++;
+                        if (ord((string) $termSuffix[$count1]) & 0x20) {
+                            ++$addBytes;
 
                             // Never used for Java Lucene created index.
                             // Java2 doesn't encode strings in four bytes
-                            if (ord((string) $termSuffix[$count1]) & 0x10 ) {
-                                $addBytes++;
+                            if (ord((string) $termSuffix[$count1]) & 0x10) {
+                                ++$addBytes;
                             }
                         }
                         $termSuffix .= substr((string) $data, $pos, $addBytes);
@@ -149,11 +149,11 @@ class Zend_Search_Lucene_Index_DictionaryLoader
 
                         // Check for null character. Java2 encodes null character
                         // in two bytes.
-                        if (ord((string) $termSuffix[$count1]) == 0xC0 &&
-                            ord((string) $termSuffix[$count1+1]) == 0x80   ) {
+                        if (0xC0 == ord((string) $termSuffix[$count1])
+                            && 0x80 == ord((string) $termSuffix[$count1 + 1])) {
                             $termSuffix[$count1] = 0;
-                            $termSuffix = substr((string) $termSuffix,0,$count1+1)
-                                        . substr((string) $termSuffix,$count1+2);
+                            $termSuffix = substr((string) $termSuffix, 0, $count1 + 1)
+                                        .substr((string) $termSuffix, $count1 + 2);
                         }
                         $count1 += $addBytes;
                     }
@@ -161,15 +161,16 @@ class Zend_Search_Lucene_Index_DictionaryLoader
             }
 
             // $termValue        = Zend_Search_Lucene_Index_Term::getPrefix($prevTerm, $termPrefixLength) . $termSuffix;
-            $pb = 0; $pc = 0;
-            while ($pb < strlen((string) $prevTerm)  &&  $pc < $termPrefixLength) {
+            $pb = 0;
+            $pc = 0;
+            while ($pb < strlen((string) $prevTerm) && $pc < $termPrefixLength) {
                 $charBytes = 1;
                 if ((ord((string) $prevTerm[$pb]) & 0xC0) == 0xC0) {
-                    $charBytes++;
-                    if (ord((string) $prevTerm[$pb]) & 0x20 ) {
-                        $charBytes++;
-                        if (ord((string) $prevTerm[$pb]) & 0x10 ) {
-                            $charBytes++;
+                    ++$charBytes;
+                    if (ord((string) $prevTerm[$pb]) & 0x20) {
+                        ++$charBytes;
+                        if (ord((string) $prevTerm[$pb]) & 0x10) {
+                            ++$charBytes;
                         }
                     }
                 }
@@ -179,15 +180,15 @@ class Zend_Search_Lucene_Index_DictionaryLoader
                     break;
                 }
 
-                $pc++;
+                ++$pc;
                 $pb += $charBytes;
             }
-            $termValue = substr((string) $prevTerm, 0, $pb) . $termSuffix;
+            $termValue = substr((string) $prevTerm, 0, $pb).$termSuffix;
 
             // $termFieldNum     = $tiiFile->readVInt();
             $nbyte = ord((string) $data[$pos++]);
             $termFieldNum = $nbyte & 0x7F;
-            for ($shift=7; ($nbyte & 0x80) != 0; $shift += 7) {
+            for ($shift = 7; ($nbyte & 0x80) != 0; $shift += 7) {
                 $nbyte = ord((string) $data[$pos++]);
                 $termFieldNum |= ($nbyte & 0x7F) << $shift;
             }
@@ -195,7 +196,7 @@ class Zend_Search_Lucene_Index_DictionaryLoader
             // $docFreq          = $tiiFile->readVInt();
             $nbyte = ord((string) $data[$pos++]);
             $docFreq = $nbyte & 0x7F;
-            for ($shift=7; ($nbyte & 0x80) != 0; $shift += 7) {
+            for ($shift = 7; ($nbyte & 0x80) != 0; $shift += 7) {
                 $nbyte = ord((string) $data[$pos++]);
                 $docFreq |= ($nbyte & 0x7F) << $shift;
             }
@@ -203,7 +204,7 @@ class Zend_Search_Lucene_Index_DictionaryLoader
             // $freqPointer     += $tiiFile->readVInt();
             $nbyte = ord((string) $data[$pos++]);
             $vint = $nbyte & 0x7F;
-            for ($shift=7; ($nbyte & 0x80) != 0; $shift += 7) {
+            for ($shift = 7; ($nbyte & 0x80) != 0; $shift += 7) {
                 $nbyte = ord((string) $data[$pos++]);
                 $vint |= ($nbyte & 0x7F) << $shift;
             }
@@ -212,17 +213,17 @@ class Zend_Search_Lucene_Index_DictionaryLoader
             // $proxPointer     += $tiiFile->readVInt();
             $nbyte = ord((string) $data[$pos++]);
             $vint = $nbyte & 0x7F;
-            for ($shift=7; ($nbyte & 0x80) != 0; $shift += 7) {
+            for ($shift = 7; ($nbyte & 0x80) != 0; $shift += 7) {
                 $nbyte = ord((string) $data[$pos++]);
                 $vint |= ($nbyte & 0x7F) << $shift;
             }
             $proxPointer += $vint;
 
-            if( $docFreq >= $skipInterval ) {
+            if ($docFreq >= $skipInterval) {
                 // $skipDelta = $tiiFile->readVInt();
                 $nbyte = ord((string) $data[$pos++]);
                 $vint = $nbyte & 0x7F;
-                for ($shift=7; ($nbyte & 0x80) != 0; $shift += 7) {
+                for ($shift = 7; ($nbyte & 0x80) != 0; $shift += 7) {
                     $nbyte = ord((string) $data[$pos++]);
                     $vint |= ($nbyte & 0x7F) << $shift;
                 }
@@ -234,25 +235,24 @@ class Zend_Search_Lucene_Index_DictionaryLoader
             // $indexPointer += $tiiFile->readVInt();
             $nbyte = ord((string) $data[$pos++]);
             $vint = $nbyte & 0x7F;
-            for ($shift=7; ($nbyte & 0x80) != 0; $shift += 7) {
+            for ($shift = 7; ($nbyte & 0x80) != 0; $shift += 7) {
                 $nbyte = ord((string) $data[$pos++]);
                 $vint |= ($nbyte & 0x7F) << $shift;
             }
             $indexPointer += $vint;
 
-
             // $this->_termDictionary[] =  new Zend_Search_Lucene_Index_Term($termValue, $termFieldNum);
-            $termDictionary[] = array($termFieldNum, $termValue);
+            $termDictionary[] = [$termFieldNum, $termValue];
 
             $termInfos[] =
                  // new Zend_Search_Lucene_Index_TermInfo($docFreq, $freqPointer, $proxPointer, $skipDelta, $indexPointer);
-                 array($docFreq, $freqPointer, $proxPointer, $skipDelta, $indexPointer);
+                 [$docFreq, $freqPointer, $proxPointer, $skipDelta, $indexPointer];
 
             $prevTerm = $termValue;
         }
 
         // Check special index entry mark
-        if ($termDictionary[0][0] != (int)0xFFFFFFFF) {
+        if ($termDictionary[0][0] != (int) 0xFFFFFFFF) {
             // require_once 'Zend/Search/Lucene/Exception.php';
             throw new Zend_Search_Lucene_Exception('Wrong TermInfoIndexFile file format');
         }
@@ -262,7 +262,6 @@ class Zend_Search_Lucene_Index_DictionaryLoader
             $termDictionary[0][0] = -1;
         }
 
-        return array($termDictionary, $termInfos);
+        return [$termDictionary, $termInfos];
     }
 }
-

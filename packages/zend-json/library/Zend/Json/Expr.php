@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Json
- * @subpackage Expr
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -43,8 +43,7 @@
  * </code>
  *
  * @category   Zend
- * @package    Zend_Json
- * @subpackage Expr
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -58,9 +57,10 @@ class Zend_Json_Expr
     protected $_expression;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param  string $expression the expression to hold.
+     * @param string $expression the expression to hold
+     *
      * @return void
      */
     public function __construct($expression)
@@ -69,9 +69,9 @@ class Zend_Json_Expr
     }
 
     /**
-     * Cast to string
+     * Cast to string.
      *
-     * @return string holded javascript expression.
+     * @return string holded javascript expression
      */
     public function __toString()
     {

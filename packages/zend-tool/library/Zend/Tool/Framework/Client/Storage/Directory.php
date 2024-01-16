@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage Framework
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,47 +27,44 @@
 
 /**
  * @category   Zend
- * @package    Zend_Tool
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Framework_Client_Storage_Directory
-    implements Zend_Tool_Framework_Client_Storage_AdapterInterface
+class Zend_Tool_Framework_Client_Storage_Directory implements Zend_Tool_Framework_Client_Storage_AdapterInterface
 {
-
-    protected $_directoryPath = null;
+    protected $_directoryPath;
 
     public function __construct($directoryPath)
     {
         if (!file_exists((string) $directoryPath)) {
-            throw new Zend_Tool_Framework_Client_Exception(__CLASS__ . ': the supplied directory does not exist');
+            throw new Zend_Tool_Framework_Client_Exception(__CLASS__.': the supplied directory does not exist');
         }
         $this->_directoryPath = $directoryPath;
     }
 
     public function put($name, $value)
     {
-        return file_put_contents($this->_directoryPath . DIRECTORY_SEPARATOR . $name, $value);
+        return file_put_contents($this->_directoryPath.DIRECTORY_SEPARATOR.$name, $value);
     }
 
     public function get($name)
     {
-        return file_get_contents($this->_directoryPath . DIRECTORY_SEPARATOR . $name);
+        return file_get_contents($this->_directoryPath.DIRECTORY_SEPARATOR.$name);
     }
 
     public function has($name)
     {
-        return file_exists((string) $this->_directoryPath . DIRECTORY_SEPARATOR . $name);
+        return file_exists((string) $this->_directoryPath.DIRECTORY_SEPARATOR.$name);
     }
 
     public function remove($name)
     {
-        return unlink($this->_directoryPath . DIRECTORY_SEPARATOR . $name);
+        return unlink($this->_directoryPath.DIRECTORY_SEPARATOR.$name);
     }
 
     public function getStreamUri($name)
     {
-        return $this->_directoryPath . DIRECTORY_SEPARATOR . $name;
+        return $this->_directoryPath.DIRECTORY_SEPARATOR.$name;
     }
-
 }

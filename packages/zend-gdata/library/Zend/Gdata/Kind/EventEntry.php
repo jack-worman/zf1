@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Gdata
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -90,150 +90,148 @@
  * EventEntry class which extends this.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Gdata
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_Kind_EventEntry extends Zend_Gdata_Entry
 {
-    protected $_who = array();
-    protected $_when = array();
-    protected $_where = array();
-    protected $_recurrence = null;
-    protected $_eventStatus = null;
-    protected $_comments = null;
-    protected $_transparency = null;
-    protected $_visibility = null;
-    protected $_recurrenceException = array();
-    protected $_extendedProperty = array();
-    protected $_originalEvent = null;
-    protected $_entryLink = null;
+    protected $_who = [];
+    protected $_when = [];
+    protected $_where = [];
+    protected $_recurrence;
+    protected $_eventStatus;
+    protected $_comments;
+    protected $_transparency;
+    protected $_visibility;
+    protected $_recurrenceException = [];
+    protected $_extendedProperty = [];
+    protected $_originalEvent;
+    protected $_entryLink;
 
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
         $element = parent::getDOM($doc, $majorVersion, $minorVersion);
-        if ($this->_who != null) {
+        if (null != $this->_who) {
             foreach ($this->_who as $who) {
                 $element->appendChild($who->getDOM($element->ownerDocument));
             }
         }
-        if ($this->_when != null) {
+        if (null != $this->_when) {
             foreach ($this->_when as $when) {
                 $element->appendChild($when->getDOM($element->ownerDocument));
             }
         }
-        if ($this->_where != null) {
+        if (null != $this->_where) {
             foreach ($this->_where as $where) {
                 $element->appendChild($where->getDOM($element->ownerDocument));
             }
         }
-        if ($this->_recurrenceException != null) {
+        if (null != $this->_recurrenceException) {
             foreach ($this->_recurrenceException as $recurrenceException) {
                 $element->appendChild($recurrenceException->getDOM($element->ownerDocument));
             }
         }
-        if ($this->_extendedProperty != null) {
+        if (null != $this->_extendedProperty) {
             foreach ($this->_extendedProperty as $extProp) {
                 $element->appendChild($extProp->getDOM($element->ownerDocument));
             }
         }
 
-        if ($this->_recurrence != null) {
+        if (null != $this->_recurrence) {
             $element->appendChild($this->_recurrence->getDOM($element->ownerDocument));
         }
-        if ($this->_eventStatus != null) {
+        if (null != $this->_eventStatus) {
             $element->appendChild($this->_eventStatus->getDOM($element->ownerDocument));
         }
-        if ($this->_comments != null) {
+        if (null != $this->_comments) {
             $element->appendChild($this->_comments->getDOM($element->ownerDocument));
         }
-        if ($this->_transparency != null) {
+        if (null != $this->_transparency) {
             $element->appendChild($this->_transparency->getDOM($element->ownerDocument));
         }
-        if ($this->_visibility != null) {
+        if (null != $this->_visibility) {
             $element->appendChild($this->_visibility->getDOM($element->ownerDocument));
         }
-        if ($this->_originalEvent != null) {
+        if (null != $this->_originalEvent) {
             $element->appendChild($this->_originalEvent->getDOM($element->ownerDocument));
         }
-        if ($this->_entryLink != null) {
+        if (null != $this->_entryLink) {
             $element->appendChild($this->_entryLink->getDOM($element->ownerDocument));
         }
-
 
         return $element;
     }
 
     protected function takeChildFromDOM($child)
     {
-        $absoluteNodeName = $child->namespaceURI . ':' . $child->localName;
+        $absoluteNodeName = $child->namespaceURI.':'.$child->localName;
         switch ($absoluteNodeName) {
-        case $this->lookupNamespace('gd') . ':' . 'where';
-            $where = new Zend_Gdata_Extension_Where();
-            $where->transferFromDOM($child);
-            $this->_where[] = $where;
-            break;
-        case $this->lookupNamespace('gd') . ':' . 'when';
-            $when = new Zend_Gdata_Extension_When();
-            $when->transferFromDOM($child);
-            $this->_when[] = $when;
-            break;
-        case $this->lookupNamespace('gd') . ':' . 'who';
-            $who = new Zend_Gdata_Extension_Who();
-            $who ->transferFromDOM($child);
-            $this->_who[] = $who;
-            break;
-        case $this->lookupNamespace('gd') . ':' . 'recurrence';
-            $recurrence = new Zend_Gdata_Extension_Recurrence();
-            $recurrence->transferFromDOM($child);
-            $this->_recurrence = $recurrence;
-            break;
-        case $this->lookupNamespace('gd') . ':' . 'eventStatus';
-            $eventStatus = new Zend_Gdata_Extension_EventStatus();
-            $eventStatus->transferFromDOM($child);
-            $this->_eventStatus = $eventStatus;
-            break;
-        case $this->lookupNamespace('gd') . ':' . 'comments';
-            $comments = new Zend_Gdata_Extension_Comments();
-            $comments->transferFromDOM($child);
-            $this->_comments = $comments;
-            break;
-        case $this->lookupNamespace('gd') . ':' . 'transparency';
-            $transparency = new Zend_Gdata_Extension_Transparency();
-            $transparency ->transferFromDOM($child);
-            $this->_transparency = $transparency;
-            break;
-        case $this->lookupNamespace('gd') . ':' . 'visibility';
-            $visiblity = new Zend_Gdata_Extension_Visibility();
-            $visiblity ->transferFromDOM($child);
-            $this->_visibility = $visiblity;
-            break;
-        case $this->lookupNamespace('gd') . ':' . 'recurrenceException';
-            // require_once 'Zend/Gdata/Extension/RecurrenceException.php';
-            $recurrenceException = new Zend_Gdata_Extension_RecurrenceException();
-            $recurrenceException ->transferFromDOM($child);
-            $this->_recurrenceException[] = $recurrenceException;
-            break;
-        case $this->lookupNamespace('gd') . ':' . 'originalEvent';
-            $originalEvent = new Zend_Gdata_Extension_OriginalEvent();
-            $originalEvent ->transferFromDOM($child);
-            $this->_originalEvent = $originalEvent;
-            break;
-        case $this->lookupNamespace('gd') . ':' . 'extendedProperty';
-            $extProp = new Zend_Gdata_Extension_ExtendedProperty();
-            $extProp->transferFromDOM($child);
-            $this->_extendedProperty[] = $extProp;
-            break;
-        case $this->lookupNamespace('gd') . ':' . 'entryLink':
-            $entryLink = new Zend_Gdata_Extension_EntryLink();
-            $entryLink->transferFromDOM($child);
-            $this->_entryLink = $entryLink;
-            break;
+            case $this->lookupNamespace('gd').':where':
+                $where = new Zend_Gdata_Extension_Where();
+                $where->transferFromDOM($child);
+                $this->_where[] = $where;
+                break;
+            case $this->lookupNamespace('gd').':when':
+                $when = new Zend_Gdata_Extension_When();
+                $when->transferFromDOM($child);
+                $this->_when[] = $when;
+                break;
+            case $this->lookupNamespace('gd').':who':
+                $who = new Zend_Gdata_Extension_Who();
+                $who->transferFromDOM($child);
+                $this->_who[] = $who;
+                break;
+            case $this->lookupNamespace('gd').':recurrence':
+                $recurrence = new Zend_Gdata_Extension_Recurrence();
+                $recurrence->transferFromDOM($child);
+                $this->_recurrence = $recurrence;
+                break;
+            case $this->lookupNamespace('gd').':eventStatus':
+                $eventStatus = new Zend_Gdata_Extension_EventStatus();
+                $eventStatus->transferFromDOM($child);
+                $this->_eventStatus = $eventStatus;
+                break;
+            case $this->lookupNamespace('gd').':comments':
+                $comments = new Zend_Gdata_Extension_Comments();
+                $comments->transferFromDOM($child);
+                $this->_comments = $comments;
+                break;
+            case $this->lookupNamespace('gd').':transparency':
+                $transparency = new Zend_Gdata_Extension_Transparency();
+                $transparency->transferFromDOM($child);
+                $this->_transparency = $transparency;
+                break;
+            case $this->lookupNamespace('gd').':visibility':
+                $visiblity = new Zend_Gdata_Extension_Visibility();
+                $visiblity->transferFromDOM($child);
+                $this->_visibility = $visiblity;
+                break;
+            case $this->lookupNamespace('gd').':recurrenceException':
+                // require_once 'Zend/Gdata/Extension/RecurrenceException.php';
+                $recurrenceException = new Zend_Gdata_Extension_RecurrenceException();
+                $recurrenceException->transferFromDOM($child);
+                $this->_recurrenceException[] = $recurrenceException;
+                break;
+            case $this->lookupNamespace('gd').':originalEvent':
+                $originalEvent = new Zend_Gdata_Extension_OriginalEvent();
+                $originalEvent->transferFromDOM($child);
+                $this->_originalEvent = $originalEvent;
+                break;
+            case $this->lookupNamespace('gd').':extendedProperty':
+                $extProp = new Zend_Gdata_Extension_ExtendedProperty();
+                $extProp->transferFromDOM($child);
+                $this->_extendedProperty[] = $extProp;
+                break;
+            case $this->lookupNamespace('gd').':entryLink':
+                $entryLink = new Zend_Gdata_Extension_EntryLink();
+                $entryLink->transferFromDOM($child);
+                $this->_entryLink = $entryLink;
+                break;
 
-        default:
-            parent::takeChildFromDOM($child);
-            break;
+            default:
+                parent::takeChildFromDOM($child);
+                break;
         }
     }
 
@@ -244,11 +242,13 @@ class Zend_Gdata_Kind_EventEntry extends Zend_Gdata_Entry
 
     /**
      * @param array $value
+     *
      * @return Zend_Gdata_Kind_EventEntry Provides a fluent interface
      */
     public function setWhen($value)
     {
         $this->_when = $value;
+
         return $this;
     }
 
@@ -259,11 +259,13 @@ class Zend_Gdata_Kind_EventEntry extends Zend_Gdata_Entry
 
     /**
      * @param array $value
+     *
      * @return Zend_Gdata_Kind_EventEntry Provides a fluent interface
      */
     public function setWhere($value)
     {
         $this->_where = $value;
+
         return $this;
     }
 
@@ -274,11 +276,13 @@ class Zend_Gdata_Kind_EventEntry extends Zend_Gdata_Entry
 
     /**
      * @param array $value
+     *
      * @return Zend_Gdata_Kind_EventEntry Provides a fluent interface
      */
     public function setWho($value)
     {
         $this->_who = $value;
+
         return $this;
     }
 
@@ -289,11 +293,13 @@ class Zend_Gdata_Kind_EventEntry extends Zend_Gdata_Entry
 
     /**
      * @param array $value
+     *
      * @return Zend_Gdata_Kind_EventEntry Provides a fluent interface
      */
     public function setRecurrence($value)
     {
         $this->_recurrence = $value;
+
         return $this;
     }
 
@@ -304,11 +310,13 @@ class Zend_Gdata_Kind_EventEntry extends Zend_Gdata_Entry
 
     /**
      * @param array $value
+     *
      * @return Zend_Gdata_Kind_EventEntry Provides a fluent interface
      */
     public function setEventStatus($value)
     {
         $this->_eventStatus = $value;
+
         return $this;
     }
 
@@ -319,11 +327,13 @@ class Zend_Gdata_Kind_EventEntry extends Zend_Gdata_Entry
 
     /**
      * @param array $value
+     *
      * @return Zend_Gdata_Kind_EventEntry Provides a fluent interface
      */
     public function setComments($value)
     {
         $this->_comments = $value;
+
         return $this;
     }
 
@@ -334,11 +344,13 @@ class Zend_Gdata_Kind_EventEntry extends Zend_Gdata_Entry
 
     /**
      * @param Zend_Gdata_Transparency $value
+     *
      * @return Zend_Gdata_Kind_EventEntry Provides a fluent interface
      */
     public function setTransparency($value)
     {
         $this->_transparency = $value;
+
         return $this;
     }
 
@@ -349,11 +361,13 @@ class Zend_Gdata_Kind_EventEntry extends Zend_Gdata_Entry
 
     /**
      * @param Zend_Gdata_Visibility $value
+     *
      * @return Zend_Gdata_Kind_EventEntry Provides a fluent interface
      */
     public function setVisibility($value)
     {
         $this->_visibility = $value;
+
         return $this;
     }
 
@@ -364,11 +378,13 @@ class Zend_Gdata_Kind_EventEntry extends Zend_Gdata_Entry
 
     /**
      * @param array $value
+     *
      * @return Zend_Gdata_Kind_EventEntry Provides a fluent interface
      */
     public function setRecurrenceException($value)
     {
         $this->_recurrenceException = $value;
+
         return $this;
     }
 
@@ -379,11 +395,13 @@ class Zend_Gdata_Kind_EventEntry extends Zend_Gdata_Entry
 
     /**
      * @param array $value
+     *
      * @return Zend_Gdata_Kind_EventEntry Provides a fluent interface
      */
     public function setExtendedProperty($value)
     {
         $this->_extendedProperty = $value;
+
         return $this;
     }
 
@@ -394,18 +412,20 @@ class Zend_Gdata_Kind_EventEntry extends Zend_Gdata_Entry
 
     /**
      * @param Zend_Gdata_Extension_OriginalEvent $value
+     *
      * @return Zend_Gdata_Kind_EventEntry Provides a fluent interface
      */
     public function setOriginalEvent($value)
     {
         $this->_originalEvent = $value;
+
         return $this;
     }
 
     /**
      * Get this entry's EntryLink element.
      *
-     * @return Zend_Gdata_Extension_EntryLink|null The requested entry.
+     * @return Zend_Gdata_Extension_EntryLink|null the requested entry
      */
     public function getEntryLink()
     {
@@ -415,14 +435,14 @@ class Zend_Gdata_Kind_EventEntry extends Zend_Gdata_Entry
     /**
      * Set the child's EntryLink element.
      *
-     * @param Zend_Gdata_Extension_EntryLink $value The desired value for this attribute.
-     * @return Zend_Gdata_Kind_EventEntry The element being modified.
+     * @param Zend_Gdata_Extension_EntryLink $value the desired value for this attribute
+     *
+     * @return Zend_Gdata_Kind_EventEntry the element being modified
      */
     public function setEntryLink($value)
     {
         $this->_entryLink = $value;
+
         return $this;
     }
-
-
 }

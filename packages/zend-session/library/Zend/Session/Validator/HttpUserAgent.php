@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Session
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
+ *
  * @since      Preview Release 0.2
  */
 
@@ -26,27 +28,25 @@
 // require_once 'Zend/Session/Validator/Abstract.php';
 
 /**
- * Zend_Session_Validator_HttpUserAgent
+ * Zend_Session_Validator_HttpUserAgent.
  *
  * @category   Zend
- * @package    Zend_Session
- * @subpackage Validator
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Session_Validator_HttpUserAgent extends Zend_Session_Validator_Abstract
 {
-
     /**
      * Setup() - this method will get the current user agent and store it in the session
-     * as 'valid data'
+     * as 'valid data'.
      *
      * @return void
      */
     public function setup()
     {
-        $this->setValidData( (isset($_SERVER['HTTP_USER_AGENT'])
-            ? $_SERVER['HTTP_USER_AGENT'] : null) );
+        $this->setValidData(isset($_SERVER['HTTP_USER_AGENT'])
+            ? $_SERVER['HTTP_USER_AGENT'] : null);
     }
 
     /**
@@ -62,5 +62,4 @@ class Zend_Session_Validator_HttpUserAgent extends Zend_Session_Validator_Abstra
 
         return $currentBrowser === $this->getValidData();
     }
-
 }

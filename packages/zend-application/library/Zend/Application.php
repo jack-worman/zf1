@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,22 +13,23 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Application
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
  * @category   Zend
- * @package    Zend_Application
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Application
 {
     /**
-     * Autoloader to use
+     * Autoloader to use.
      *
      * @var Zend_Loader_Autoloader
      */
@@ -40,44 +41,46 @@ class Zend_Application
     protected $_suppressNotFoundWarnings;
 
     /**
-     * Bootstrap
+     * Bootstrap.
      *
      * @var Zend_Application_Bootstrap_BootstrapAbstract
      */
     protected $_bootstrap;
 
     /**
-     * Application environment
+     * Application environment.
      *
      * @var string
      */
     protected $_environment;
 
     /**
-     * Flattened (lowercase) option keys
+     * Flattened (lowercase) option keys.
      *
      * @var array
      */
-    protected $_optionKeys = array();
+    protected $_optionKeys = [];
 
     /**
-     * Options for Zend_Application
+     * Options for Zend_Application.
      *
      * @var array
      */
-    protected $_options = array();
+    protected $_options = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * Initialize application. Potentially initializes include_paths, PHP
      * settings, and bootstrap class.
      *
-     * @param  string                   $environment
-     * @param  string|array|Zend_Config $options String path to configuration file, or array/Zend_Config of configuration options
-     * @param bool $suppressNotFoundWarnings Should warnings be suppressed when a file is not found during autoloading?
-     * @throws Zend_Application_Exception When invalid options are provided
+     * @param string                   $environment
+     * @param string|array|Zend_Config $options                  String path to configuration file, or array/Zend_Config of configuration options
+     * @param bool                     $suppressNotFoundWarnings Should warnings be suppressed when a file is not found during autoloading?
+     *
      * @return void
+     *
+     * @throws Zend_Application_Exception When invalid options are provided
      */
     public function __construct($environment, $options = null, $suppressNotFoundWarnings = null)
     {
@@ -90,10 +93,7 @@ class Zend_Application
             } elseif ($options instanceof Zend_Config) {
                 $options = $options->toArray();
             } elseif (!is_array($options)) {
-                throw new Zend_Application_Exception(
-                    'Invalid options provided; must be location of config file,'
-                    . ' a config object, or an array'
-                );
+                throw new Zend_Application_Exception('Invalid options provided; must be location of config file, a config object, or an array');
             }
 
             $this->setOptions($options);
@@ -101,7 +101,7 @@ class Zend_Application
     }
 
     /**
-     * Retrieve current environment
+     * Retrieve current environment.
      *
      * @return string
      */
@@ -111,7 +111,7 @@ class Zend_Application
     }
 
     /**
-     * Retrieve autoloader instance
+     * Retrieve autoloader instance.
      *
      * @return Zend_Loader_Autoloader
      */
@@ -126,18 +126,18 @@ class Zend_Application
     }
 
     /**
-     * Set application options
+     * Set application options.
      *
-     * @param  array $options
+     * @return Zend_Application
+     *
      * @throws Zend_Application_Exception When no bootstrap path is provided
      * @throws Zend_Application_Exception When invalid bootstrap information are provided
-     * @return Zend_Application
      */
     public function setOptions(array $options)
     {
         if (!empty($options['config'])) {
             if (is_array($options['config'])) {
-                $_options = array();
+                $_options = [];
                 foreach ($options['config'] as $tmp) {
                     $_options = $this->mergeOptions(
                         $_options, $this->_loadConfig($tmp)
@@ -172,7 +172,7 @@ class Zend_Application
         if (!empty($options['autoloaderzfpath'])) {
             $autoloader = $this->getAutoloader();
             if (method_exists($autoloader, 'setZfPath')) {
-                $zfPath    = $options['autoloaderzfpath'];
+                $zfPath = $options['autoloaderzfpath'];
                 $zfVersion = !empty($options['autoloaderzfversion'])
                            ? $options['autoloaderzfversion']
                            : 'latest';
@@ -187,12 +187,10 @@ class Zend_Application
                 $this->setBootstrap($bootstrap);
             } elseif (is_array($bootstrap)) {
                 if (empty($bootstrap['path'])) {
-                    throw new Zend_Application_Exception(
-                        'No bootstrap path provided'
-                    );
+                    throw new Zend_Application_Exception('No bootstrap path provided');
                 }
 
-                $path  = $bootstrap['path'];
+                $path = $bootstrap['path'];
                 $class = null;
 
                 if (!empty($bootstrap['class'])) {
@@ -201,9 +199,7 @@ class Zend_Application
 
                 $this->setBootstrap($path, $class);
             } else {
-                throw new Zend_Application_Exception(
-                    'Invalid bootstrap information provided'
-                );
+                throw new Zend_Application_Exception('Invalid bootstrap information provided');
             }
         }
 
@@ -211,7 +207,7 @@ class Zend_Application
     }
 
     /**
-     * Retrieve application options (for caching)
+     * Retrieve application options (for caching).
      *
      * @return array
      */
@@ -223,7 +219,8 @@ class Zend_Application
     /**
      * Is an option present?
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @return bool
      */
     public function hasOption($key)
@@ -232,26 +229,25 @@ class Zend_Application
     }
 
     /**
-     * Retrieve a single option
+     * Retrieve a single option.
      *
-     * @param  string $key
-     * @return mixed
+     * @param string $key
      */
     public function getOption($key)
     {
         if ($this->hasOption($key)) {
             $options = $this->getOptions();
             $options = array_change_key_case($options, CASE_LOWER);
+
             return $options[strtolower((string) $key)];
         }
+
         return null;
     }
 
     /**
-     * Merge options recursively
+     * Merge options recursively.
      *
-     * @param  array $array1
-     * @param  mixed $array2
      * @return array
      */
     public function mergeOptions(array $array1, $array2 = null)
@@ -267,24 +263,25 @@ class Zend_Application
                 }
             }
         }
+
         return $array1;
     }
 
     /**
-     * Set PHP configuration settings
+     * Set PHP configuration settings.
      *
-     * @param  array $settings
-     * @param  string $prefix Key prefix to prepend to array values (used to map . separated INI values)
+     * @param string $prefix Key prefix to prepend to array values (used to map . separated INI values)
+     *
      * @return Zend_Application
      */
     public function setPhpSettings(array $settings, $prefix = '')
     {
         foreach ($settings as $key => $value) {
-            $key = empty($prefix) ? $key : $prefix . $key;
+            $key = empty($prefix) ? $key : $prefix.$key;
             if (is_scalar($value)) {
                 ini_set($key, $value);
             } elseif (is_array($value)) {
-                $this->setPhpSettings($value, $key . '.');
+                $this->setPhpSettings($value, $key.'.');
             }
         }
 
@@ -292,22 +289,21 @@ class Zend_Application
     }
 
     /**
-     * Set include path
+     * Set include path.
      *
-     * @param  array $paths
      * @return Zend_Application
      */
     public function setIncludePaths(array $paths)
     {
         $path = implode(PATH_SEPARATOR, $paths);
-        set_include_path($path . PATH_SEPARATOR . get_include_path());
+        set_include_path($path.PATH_SEPARATOR.get_include_path());
+
         return $this;
     }
 
     /**
-     * Set autoloader namespaces
+     * Set autoloader namespaces.
      *
-     * @param  array $namespaces
      * @return Zend_Application
      */
     public function setAutoloaderNamespaces(array $namespaces)
@@ -322,10 +318,11 @@ class Zend_Application
     }
 
     /**
-     * Set bootstrap path/class
+     * Set bootstrap path/class.
      *
-     * @param  string $path
-     * @param  string $class
+     * @param string $path
+     * @param string $class
+     *
      * @return Zend_Application
      */
     public function setBootstrap($path, $class = null)
@@ -339,25 +336,20 @@ class Zend_Application
         if (!class_exists($class, false)) {
             require_once $path;
             if (!class_exists($class, false)) {
-                throw new Zend_Application_Exception(
-                    'Bootstrap class not found'
-                );
+                throw new Zend_Application_Exception('Bootstrap class not found');
             }
         }
         $this->_bootstrap = new $class($this);
 
         if (!$this->_bootstrap instanceof Zend_Application_Bootstrap_Bootstrapper) {
-            throw new Zend_Application_Exception(
-                'Bootstrap class does not implement'
-                . ' Zend_Application_Bootstrap_Bootstrapper'
-            );
+            throw new Zend_Application_Exception('Bootstrap class does not implement Zend_Application_Bootstrap_Bootstrapper');
         }
 
         return $this;
     }
 
     /**
-     * Get bootstrap object
+     * Get bootstrap object.
      *
      * @return Zend_Application_Bootstrap_BootstrapAbstract
      */
@@ -366,23 +358,26 @@ class Zend_Application
         if (null === $this->_bootstrap) {
             $this->_bootstrap = new Zend_Application_Bootstrap_Bootstrap($this);
         }
+
         return $this->_bootstrap;
     }
 
     /**
-     * Bootstrap application
+     * Bootstrap application.
      *
-     * @param  null|string|array $resource
+     * @param string|array|null $resource
+     *
      * @return Zend_Application
      */
     public function bootstrap($resource = null)
     {
         $this->getBootstrap()->bootstrap($resource);
+
         return $this;
     }
 
     /**
-     * Run the application
+     * Run the application.
      *
      * @return void
      */
@@ -392,17 +387,19 @@ class Zend_Application
     }
 
     /**
-     * Load configuration file of options
+     * Load configuration file of options.
      *
-     * @param  string $file
-     * @throws Zend_Application_Exception When invalid configuration file is provided
+     * @param string $file
+     *
      * @return array
+     *
+     * @throws Zend_Application_Exception When invalid configuration file is provided
      */
     protected function _loadConfig($file)
     {
         $environment = $this->getEnvironment();
-        $suffix      = pathinfo($file, PATHINFO_EXTENSION);
-        $suffix      = ($suffix === 'dist')
+        $suffix = pathinfo($file, PATHINFO_EXTENSION);
+        $suffix = ('dist' === $suffix)
                      ? pathinfo(basename($file, ".$suffix"), PATHINFO_EXTENSION)
                      : $suffix;
 
@@ -428,18 +425,14 @@ class Zend_Application
             case 'inc':
                 $config = include $file;
                 if (!is_array($config)) {
-                    throw new Zend_Application_Exception(
-                        'Invalid configuration file provided; PHP file does not'
-                        . ' return array value'
-                    );
+                    throw new Zend_Application_Exception('Invalid configuration file provided; PHP file does not return array value');
                 }
+
                 return $config;
                 break;
 
             default:
-                throw new Zend_Application_Exception(
-                    'Invalid configuration file provided; unknown config type'
-                );
+                throw new Zend_Application_Exception('Invalid configuration file provided; unknown config type');
         }
 
         return $config->toArray();

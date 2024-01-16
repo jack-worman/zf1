@@ -1,6 +1,6 @@
 <?php
 /**
- * LICENSE
+ * LICENSE.
  *
  * This source file is subject to the new BSD license that is bundled
  * with this package in the file LICENSE.txt.
@@ -11,8 +11,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Cloud
- * @subpackage DocumentService
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -24,25 +23,23 @@
  * TODO Can fields be large enough to warrant support for streams?
  *
  * @category   Zend
- * @package    Zend_Cloud
- * @subpackage DocumentService
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Cloud_DocumentService_Document
-    implements ArrayAccess, IteratorAggregate, Countable
+class Zend_Cloud_DocumentService_Document implements ArrayAccess, IteratorAggregate, Countable
 {
     /** key in document denoting identifier */
-    const KEY_FIELD = '_id';
+    public const KEY_FIELD = '_id';
 
     /**
      * ID of this document.
-     * @var mixed
      */
     protected $_id;
 
     /**
      * Name/value array of field names to values.
+     *
      * @var array
      */
     protected $_fields;
@@ -53,8 +50,9 @@ class Zend_Cloud_DocumentService_Document
      * If no identifier is provided, but a field matching KEY_FIELD is present,
      * then that field's value will be used as the document identifier.
      *
-     * @param  array $fields
-     * @param  mixed $id Document identifier
+     * @param array $fields
+     * @param mixed $id     Document identifier
+     *
      * @return void
      */
     public function __construct($fields, $id = null)
@@ -74,14 +72,14 @@ class Zend_Cloud_DocumentService_Document
     }
 
     /**
-     * Set document identifier
+     * Set document identifier.
      *
-     * @param  mixed $id
      * @return Zend_Cloud_DocumentService_Document
      */
     public function setId($id)
     {
         $this->_id = $id;
+
         return $this;
     }
 
@@ -108,35 +106,35 @@ class Zend_Cloud_DocumentService_Document
     /**
      * Get field by name.
      *
-     * @param  string $name
-     * @return mixed
+     * @param string $name
      */
     public function getField($name)
     {
         if (isset($this->_fields[$name])) {
             return $this->_fields[$name];
         }
+
         return null;
     }
 
     /**
      * Set field by name.
      *
-     * @param  string $name
-     * @param  mixed $value
+     * @param string $name
+     *
      * @return Zend_Cloud_DocumentService_Document
      */
     public function setField($name, $value)
     {
         $this->_fields[$name] = $value;
+
         return $this;
     }
 
     /**
-     * Overloading: get value
+     * Overloading: get value.
      *
-     * @param  string $name
-     * @return mixed
+     * @param string $name
      */
     public function __get($name)
     {
@@ -144,10 +142,10 @@ class Zend_Cloud_DocumentService_Document
     }
 
     /**
-     * Overloading: set field
+     * Overloading: set field.
      *
-     * @param  string $name
-     * @param  mixed $value
+     * @param string $name
+     *
      * @return void
      */
     public function __set($name, $value)
@@ -158,47 +156,48 @@ class Zend_Cloud_DocumentService_Document
     /**
      * ArrayAccess: does field exist?
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return bool
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetExists($name)
     {
         return isset($this->_fields[$name]);
     }
 
     /**
-     * ArrayAccess: get field by name
+     * ArrayAccess: get field by name.
      *
-     * @param  string $name
-     * @return mixed
+     * @param string $name
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($name)
     {
         return $this->getField($name);
     }
 
     /**
-     * ArrayAccess: set field to value
+     * ArrayAccess: set field to value.
      *
-     * @param  string $name
-     * @param  mixed $value
+     * @param string $name
+     *
      * @return void
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetSet($name, $value)
     {
         $this->setField($name, $value);
     }
 
     /**
-     * ArrayAccess: remove field from document
+     * ArrayAccess: remove field from document.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return void
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetUnset($name)
     {
         if ($this->offsetExists($name)) {
@@ -207,22 +206,22 @@ class Zend_Cloud_DocumentService_Document
     }
 
     /**
-     * Overloading: retrieve and set fields by name
+     * Overloading: retrieve and set fields by name.
      *
-     * @param  string $name
-     * @param  mixed $args
-     * @return mixed
+     * @param string $name
      */
     public function __call($name, $args)
     {
         $prefix = substr((string) $name, 0, 3);
-        if ($prefix == 'get') {
+        if ('get' == $prefix) {
             // Get value
             $option = substr((string) $name, 3);
+
             return $this->getField($option);
-        } elseif ($prefix == 'set') {
+        } elseif ('set' == $prefix) {
             // set value
             $option = substr((string) $name, 3);
+
             return $this->setField($option, $args[0]);
         }
 
@@ -231,22 +230,22 @@ class Zend_Cloud_DocumentService_Document
     }
 
     /**
-     * Countable: return count of fields in document
+     * Countable: return count of fields in document.
      *
      * @return int
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function count()
     {
         return count($this->_fields);
     }
 
     /**
-     * IteratorAggregate: return iterator for iterating over fields
+     * IteratorAggregate: return iterator for iterating over fields.
      *
      * @return Iterator
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function getIterator()
     {
         return new ArrayIterator($this->_fields);

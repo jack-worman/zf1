@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,8 +14,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_Rackspace
- * @subpackage Servers
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -24,61 +23,63 @@
 
 class Zend_Service_Rackspace_Servers_Image
 {
-    const ERROR_PARAM_CONSTRUCT = 'You must pass a Zend_Service_Rackspace_Servers object and an array';
-    const ERROR_PARAM_NO_NAME   = 'You must pass the image\'s name in the array (name)';
-    const ERROR_PARAM_NO_ID     = 'You must pass the image\'s id in the array (id)';
+    public const ERROR_PARAM_CONSTRUCT = 'You must pass a Zend_Service_Rackspace_Servers object and an array';
+    public const ERROR_PARAM_NO_NAME = 'You must pass the image\'s name in the array (name)';
+    public const ERROR_PARAM_NO_ID = 'You must pass the image\'s id in the array (id)';
     /**
-     * Name of the image
-     * 
-     * @var string 
+     * Name of the image.
+     *
+     * @var string
      */
     protected $name;
     /**
-     * Id of the image
-     * 
-     * @var string 
+     * Id of the image.
+     *
+     * @var string
      */
     protected $id;
     /**
-     * Server Id of the image
-     * 
-     * @var string 
+     * Server Id of the image.
+     *
+     * @var string
      */
     protected $serverId;
     /**
-     * Updated data
-     * 
-     * @var string 
+     * Updated data.
+     *
+     * @var string
      */
     protected $updated;
     /**
-     * Created data
-     * 
-     * @var string 
+     * Created data.
+     *
+     * @var string
      */
     protected $created;
     /**
-     * Status
-     * 
-     * @var string 
+     * Status.
+     *
+     * @var string
      */
     protected $status;
     /**
-     * Status progress
-     * 
-     * @var integer 
+     * Status progress.
+     *
+     * @var int
      */
     protected $progress;
     /**
-     * The service that has created the image object
+     * The service that has created the image object.
      *
      * @var Zend_Service_Rackspace_Servers
      */
     protected $service;
+
     /**
-     * Construct
-     * 
+     * Construct.
+     *
      * @param array $data
+     *
      * @return void
      */
     public function __construct($service, $data)
@@ -95,27 +96,28 @@ class Zend_Service_Rackspace_Servers_Image
             // require_once 'Zend/Service/Rackspace/Servers/Exception.php';
             throw new Zend_Service_Rackspace_Servers_Exception(self::ERROR_PARAM_NO_ID);
         }
-        $this->service= $service;
+        $this->service = $service;
         $this->name = $data['name'];
         $this->id = $data['id'];
         if (isset($data['serverId'])) {
-            $this->serverId= $data['serverId'];
+            $this->serverId = $data['serverId'];
         }
         if (isset($data['updated'])) {
-            $this->updated= $data['updated'];
+            $this->updated = $data['updated'];
         }
         if (isset($data['created'])) {
-            $this->created= $data['created'];
+            $this->created = $data['created'];
         }
         if (isset($data['status'])) {
-            $this->status= $data['status'];
+            $this->status = $data['status'];
         }
         if (isset($data['progress'])) {
-            $this->progress= $data['progress'];
+            $this->progress = $data['progress'];
         }
     }
+
     /**
-     * Get the name of the image
+     * Get the name of the image.
      *
      * @return string
      */
@@ -123,87 +125,98 @@ class Zend_Service_Rackspace_Servers_Image
     {
         return $this->name;
     }
+
     /**
-     * Get the image's id
-     * 
-     * @return string 
+     * Get the image's id.
+     *
+     * @return string
      */
     public function getId()
     {
         return $this->id;
     }
+
     /**
-     * Get the server's id of the image
-     * 
-     * @return string 
+     * Get the server's id of the image.
+     *
+     * @return string
      */
     public function getServerId()
     {
         return $this->serverId;
     }
+
     /**
-     * Get the updated data
-     * 
-     * @return string 
+     * Get the updated data.
+     *
+     * @return string
      */
     public function getUpdated()
     {
         return $this->updated;
     }
+
     /**
-     * Get the created data
-     * 
-     * @return string 
+     * Get the created data.
+     *
+     * @return string
      */
     public function getCreated()
     {
         return $this->created;
     }
+
     /**
-     * Get the image's status
-     * 
-     * @return string|boolean
+     * Get the image's status.
+     *
+     * @return string|bool
      */
     public function getStatus()
     {
-        $data= $this->service->getImage($this->id);
-        if ($data!==false) {
-            $data= $data->toArray();
-            $this->status= $data['status'];
+        $data = $this->service->getImage($this->id);
+        if (false !== $data) {
+            $data = $data->toArray();
+            $this->status = $data['status'];
+
             return $this->status;
         }
+
         return false;
     }
+
     /**
-     * Get the progress's status
-     * 
-     * @return integer|boolean
+     * Get the progress's status.
+     *
+     * @return int|bool
      */
     public function getProgress()
     {
-        $data= $this->service->getImage($this->id);
-        if ($data!==false) {
-            $data= $data->toArray();
-            $this->progress= $data['progress'];
+        $data = $this->service->getImage($this->id);
+        if (false !== $data) {
+            $data = $data->toArray();
+            $this->progress = $data['progress'];
+
             return $this->progress;
         }
+
         return false;
     }
+
     /**
-     * To Array
-     * 
-     * @return array 
+     * To Array.
+     *
+     * @return array
      */
     public function toArray()
     {
-        return array (
-            'name'     => $this->name,
-            'id'       => $this->id,
+        return [
+            'name' => $this->name,
+            'id' => $this->id,
             'serverId' => $this->serverId,
-            'updated'  => $this->updated,
-            'created'  => $this->created,
-            'status'   => $this->status,
-            'progress' => $this->progress
-        );
+            'updated' => $this->updated,
+            'created' => $this->created,
+            'status' => $this->status,
+            'progress' => $this->progress,
+        ];
     }
 }

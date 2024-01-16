@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,8 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Http
- * @subpackage UserAgent
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -22,21 +21,21 @@
 // require_once 'Zend/Http/UserAgent/AbstractDevice.php';
 
 /**
- * Desktop browser type matcher
+ * Desktop browser type matcher.
  *
  * @category   Zend
- * @package    Zend_Browser
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Http_UserAgent_Desktop extends Zend_Http_UserAgent_AbstractDevice
 {
-
     /**
-     * Used by default : must be always true
+     * Used by default : must be always true.
      *
      * @param string $userAgent User Agent chain
-     * @param  array $server $_SERVER like param
+     * @param array  $server    $_SERVER like param
+     *
      * @return bool
      */
     public static function match($userAgent, $server)
@@ -45,7 +44,7 @@ class Zend_Http_UserAgent_Desktop extends Zend_Http_UserAgent_AbstractDevice
     }
 
     /**
-     * Gives the current browser type
+     * Gives the current browser type.
      *
      * @return string
      */

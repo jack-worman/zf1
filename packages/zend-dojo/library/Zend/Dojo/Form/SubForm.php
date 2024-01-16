@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,8 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage Form
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -23,27 +22,29 @@
 // require_once 'Zend/Form/SubForm.php';
 
 /**
- * Dijit-enabled SubForm
+ * Dijit-enabled SubForm.
  *
  * @uses       Zend_Form_SubForm
- * @package    Zend_Dojo
- * @subpackage Form
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 class Zend_Dojo_Form_SubForm extends Zend_Form_SubForm
 {
     /**
      * Has the dojo view helper path been registered?
+     *
      * @var bool
      */
     protected $_dojoViewPathRegistered = false;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param  array|Zend_Config|null $options
+     * @param array|Zend_Config|null $options
+     *
      * @return void
      */
     public function __construct($options = null)
@@ -57,7 +58,7 @@ class Zend_Dojo_Form_SubForm extends Zend_Form_SubForm
     }
 
     /**
-     * Load the default decorators
+     * Load the default decorators.
      *
      * @return void
      */
@@ -70,13 +71,13 @@ class Zend_Dojo_Form_SubForm extends Zend_Form_SubForm
         $decorators = $this->getDecorators();
         if (empty($decorators)) {
             $this->addDecorator('FormElements')
-                 ->addDecorator('HtmlTag', array('tag' => 'dl'))
+                 ->addDecorator('HtmlTag', ['tag' => 'dl'])
                  ->addDecorator('ContentPane');
         }
     }
 
     /**
-     * Get view
+     * Get view.
      *
      * @return Zend_View_Interface
      */
@@ -89,6 +90,7 @@ class Zend_Dojo_Form_SubForm extends Zend_Form_SubForm
             }
             $this->_dojoViewPathRegistered = true;
         }
+
         return $view;
     }
 }

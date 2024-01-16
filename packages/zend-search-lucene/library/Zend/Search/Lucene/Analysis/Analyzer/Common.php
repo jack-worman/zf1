@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,20 +13,18 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Analysis
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
-
-/** Define constant used to provide correct file processing order    */
-/** @todo Section should be removed with ZF 2.0 release as obsolete  */
+/* Define constant used to provide correct file processing order */
+/* @todo Section should be removed with ZF 2.0 release as obsolete */
 if (!defined('ZEND_SEARCH_LUCENE_COMMON_ANALYZER_PROCESSED')) {
     define('ZEND_SEARCH_LUCENE_COMMON_ANALYZER_PROCESSED', true);
 }
-
 
 /** Zend_Search_Lucene_Analysis_Analyzer */
 // require_once 'Zend/Search/Lucene/Analysis/Analyzer.php';
@@ -37,7 +35,6 @@ if (!defined('ZEND_SEARCH_LUCENE_COMMON_ANALYZER_PROCESSED')) {
 /** Zend_Search_Lucene_Analysis_TokenFilter */
 // require_once 'Zend/Search/Lucene/Analysis/TokenFilter.php';
 
-
 /**
  * Common implementation of the Zend_Search_Lucene_Analysis_Analyzer interface.
  * There are several standard standard subclasses provided by Zend_Search_Lucene/Analysis
@@ -46,8 +43,7 @@ if (!defined('ZEND_SEARCH_LUCENE_COMMON_ANALYZER_PROCESSED')) {
  * @todo ZSearchHTMLAnalyzer and ZSearchXMLAnalyzer implementation
  *
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Analysis
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -59,12 +55,10 @@ abstract class Zend_Search_Lucene_Analysis_Analyzer_Common extends Zend_Search_L
      *
      * @var array
      */
-    private $_filters = array();
+    private $_filters = [];
 
     /**
-     * Add Token filter to the Analyzer
-     *
-     * @param Zend_Search_Lucene_Analysis_TokenFilter $filter
+     * Add Token filter to the Analyzer.
      */
     public function addFilter(Zend_Search_Lucene_Analysis_TokenFilter $filter)
     {
@@ -74,7 +68,6 @@ abstract class Zend_Search_Lucene_Analysis_Analyzer_Common extends Zend_Search_L
     /**
      * Apply filters to the token. Can return null when the token was removed.
      *
-     * @param Zend_Search_Lucene_Analysis_Token $token
      * @return Zend_Search_Lucene_Analysis_Token
      */
     public function normalize(Zend_Search_Lucene_Analysis_Token $token)
@@ -83,7 +76,7 @@ abstract class Zend_Search_Lucene_Analysis_Analyzer_Common extends Zend_Search_L
             $token = $filter->normalize($token);
 
             // resulting token can be null if the filter removes it
-            if ($token === null) {
+            if (null === $token) {
                 return null;
             }
         }
@@ -91,4 +84,3 @@ abstract class Zend_Search_Lucene_Analysis_Analyzer_Common extends Zend_Search_L
         return $token;
     }
 }
-

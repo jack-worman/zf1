@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,50 +27,47 @@
 
 /**
  * @category   Zend
- * @package    Zend_Validate
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Validate_Callback extends Zend_Validate_Abstract
 {
     /**
-     * Invalid callback
+     * Invalid callback.
      */
-    const INVALID_CALLBACK = 'callbackInvalid';
+    public const INVALID_CALLBACK = 'callbackInvalid';
 
     /**
-     * Invalid value
+     * Invalid value.
      */
-    const INVALID_VALUE = 'callbackValue';
+    public const INVALID_VALUE = 'callbackValue';
 
     /**
-     * Validation failure message template definitions
+     * Validation failure message template definitions.
      *
      * @var array
      */
-    protected $_messageTemplates = array(
-        self::INVALID_VALUE    => "'%value%' is not valid",
-        self::INVALID_CALLBACK => "An exception has been raised within the callback",
-    );
+    protected $_messageTemplates = [
+        self::INVALID_VALUE => "'%value%' is not valid",
+        self::INVALID_CALLBACK => 'An exception has been raised within the callback',
+    ];
 
     /**
-     * Callback in a call_user_func format
+     * Callback in a call_user_func format.
      *
      * @var string|array
      */
-    protected $_callback = null;
+    protected $_callback;
 
     /**
-     * Default options to set for the filter
-     *
-     * @var mixed
+     * Default options to set for the filter.
      */
-    protected $_options = array();
+    protected $_options = [];
 
     /**
-     * Sets validator options
+     * Sets validator options.
      *
-     * @param  mixed $callback
      * @throws Zend_Validate_Exception
      */
     public function __construct($callback = null)
@@ -92,7 +90,7 @@ class Zend_Validate_Callback extends Zend_Validate_Abstract
     }
 
     /**
-     * Returns the set callback
+     * Returns the set callback.
      *
      * @return array|string|null
      */
@@ -102,11 +100,13 @@ class Zend_Validate_Callback extends Zend_Validate_Abstract
     }
 
     /**
-     * Sets the callback
+     * Sets the callback.
      *
-     * @param  string|array $callback
-     * @throws Zend_Validate_Exception
+     * @param string|array $callback
+     *
      * @return Zend_Validate_Callback Provides a fluent interface
+     *
+     * @throws Zend_Validate_Exception
      */
     public function setCallback($callback)
     {
@@ -115,13 +115,12 @@ class Zend_Validate_Callback extends Zend_Validate_Abstract
             throw new Zend_Validate_Exception('Invalid callback given');
         }
         $this->_callback = $callback;
+
         return $this;
     }
 
     /**
-     * Returns the set options for the callback
-     *
-     * @return mixed
+     * Returns the set options for the callback.
      */
     public function getOptions()
     {
@@ -129,42 +128,43 @@ class Zend_Validate_Callback extends Zend_Validate_Abstract
     }
 
     /**
-     * Sets options for the callback
+     * Sets options for the callback.
      *
-     * @param  mixed $options
      * @return Zend_Validate_Callback Provides a fluent interface
      */
     public function setOptions($options)
     {
         $this->_options = (array) $options;
+
         return $this;
     }
 
     /**
-     * Defined by Zend_Validate_Interface
+     * Defined by Zend_Validate_Interface.
      *
      * Returns true if and only if the set callback returns
      * for the provided $value
      *
-     * @param  mixed $value
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {
         $this->_setValue($value);
 
-        $options  = $this->getOptions();
+        $options = $this->getOptions();
         $callback = $this->getCallback();
-        $args     = func_get_args();
-        $options  = array_merge($args, $options);
+        $args = func_get_args();
+        $options = array_merge($args, $options);
 
         try {
             if (!call_user_func_array($callback, $options)) {
                 $this->_error(self::INVALID_VALUE);
+
                 return false;
             }
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->_error(self::INVALID_CALLBACK);
+
             return false;
         }
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,25 +13,26 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Server
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
- * Zend_Server_Reflection_Function_Abstract
+ * Zend_Server_Reflection_Function_Abstract.
  */
 // require_once 'Zend/Server/Reflection/Function/Abstract.php';
 
 /**
- * Function Reflection
+ * Function Reflection.
  *
  * @uses       Zend_Server_Reflection_Function_Abstract
+ *
  * @category   Zend
- * @package    Zend_Server
- * @subpackage Reflection
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version $Id$
  */
 class Zend_Server_Reflection_Function extends Zend_Server_Reflection_Function_Abstract

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,18 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Amf
- * @subpackage Value
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Wrapper class to store an AMF3 flash.utils.ByteArray
+ * Wrapper class to store an AMF3 flash.utils.ByteArray.
  *
- * @package    Zend_Amf
- * @subpackage Value
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -36,9 +34,10 @@ class Zend_Amf_Value_ByteArray
     protected $_data = '';
 
     /**
-     * Create a ByteArray
+     * Create a ByteArray.
      *
-     * @param  string $data
+     * @param string $data
+     *
      * @return void
      */
     public function __construct($data)
@@ -47,7 +46,7 @@ class Zend_Amf_Value_ByteArray
     }
 
     /**
-     * Return the byte stream
+     * Return the byte stream.
      *
      * @return string
      */

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Paginator
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,18 +27,18 @@
 
 /**
  * @category   Zend
- * @package    Zend_Paginator
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Paginator_Adapter_Null implements Zend_Paginator_Adapter_Interface
 {
     /**
-     * Item count
+     * Item count.
      *
-     * @var integer
+     * @var int
      */
-    protected $_count = null;
+    protected $_count;
 
     /**
      * Constructor.
@@ -52,17 +53,18 @@ class Zend_Paginator_Adapter_Null implements Zend_Paginator_Adapter_Interface
     /**
      * Returns an array of items for a page.
      *
-     * @param  integer $offset Page offset
-     * @param  integer $itemCountPerPage Number of items per page
+     * @param int $offset           Page offset
+     * @param int $itemCountPerPage Number of items per page
+     *
      * @return array
      */
     public function getItems($offset, $itemCountPerPage)
     {
         if ($offset >= $this->count()) {
-            return array();
+            return [];
         }
 
-        $remainItemCount  = $this->count() - $offset;
+        $remainItemCount = $this->count() - $offset;
         $currentItemCount = $remainItemCount > $itemCountPerPage ? $itemCountPerPage : $remainItemCount;
 
         return array_fill(0, $currentItemCount, null);
@@ -71,9 +73,9 @@ class Zend_Paginator_Adapter_Null implements Zend_Paginator_Adapter_Interface
     /**
      * Returns the total number of rows in the array.
      *
-     * @return integer
+     * @return int
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function count()
     {
         return $this->_count;

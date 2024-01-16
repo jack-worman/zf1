@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Application
- * @subpackage Resource
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,19 +25,17 @@
  */
 // require_once 'Zend/Application/Resource/ResourceAbstract.php';
 
-
 /**
- * Resource for initializing the locale
+ * Resource for initializing the locale.
  *
  * @uses       Zend_Application_Resource_Base
+ *
  * @category   Zend
- * @package    Zend_Application
- * @subpackage Resource
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Application_Resource_Router
-    extends Zend_Application_Resource_ResourceAbstract
+class Zend_Application_Resource_Router extends Zend_Application_Resource_ResourceAbstract
 {
     /**
      * @var Zend_Controller_Router_Rewrite
@@ -45,7 +43,7 @@ class Zend_Application_Resource_Router
     protected $_router;
 
     /**
-     * Defined by Zend_Application_Resource_Resource
+     * Defined by Zend_Application_Resource_Resource.
      *
      * @return Zend_Controller_Router_Rewrite
      */
@@ -55,7 +53,7 @@ class Zend_Application_Resource_Router
     }
 
     /**
-     * Retrieve router object
+     * Retrieve router object.
      *
      * @return Zend_Controller_Router_Rewrite
      */
@@ -68,7 +66,7 @@ class Zend_Application_Resource_Router
 
             $options = $this->getOptions();
             if (!isset($options['routes'])) {
-                $options['routes'] = array();
+                $options['routes'] = [];
             }
 
             if (isset($options['chainNameSeparator'])) {

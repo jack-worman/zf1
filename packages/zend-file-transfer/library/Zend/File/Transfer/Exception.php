@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,28 +13,29 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category  Zend
- * @package   Zend_File_Transfer
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version   $Id$
  */
 
 /**
- * Zend_Exception
+ * Zend_Exception.
  */
 // require_once 'Zend/Exception.php';
 
 /**
- * Exception class for Zend_File_Transfer
+ * Exception class for Zend_File_Transfer.
  *
  * @category   Zend
- * @package    Zend_File_Transfer
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_File_Transfer_Exception extends Zend_Exception
 {
-    protected $_fileerror = null;
+    protected $_fileerror;
 
     public function __construct($message, $fileerror = 0)
     {
@@ -46,7 +47,7 @@ class Zend_File_Transfer_Exception extends Zend_Exception
      * Returns the transfer error code for the exception
      * This is not the exception code !!!
      *
-     * @return integer
+     * @return int
      */
     public function getFileError()
     {

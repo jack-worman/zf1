@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,11 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage View
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ *
  * @version    $Id$
+ *
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -24,13 +25,11 @@
 // require_once 'Zend/Registry.php';
 
 /**
- * Zend_Dojo_View_Helper_Dojo: Dojo View Helper
+ * Zend_Dojo_View_Helper_Dojo: Dojo View Helper.
  *
  * Allows specifying stylesheets, path to dojo, module paths, and onLoad
  * events.
  *
- * @package    Zend_Dojo
- * @subpackage View
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -39,8 +38,8 @@ class Zend_Dojo_View_Helper_Dojo
     /**#@+
      * Programmatic dijit creation style constants
      */
-    const PROGRAMMATIC_SCRIPT = 1;
-    const PROGRAMMATIC_NOSCRIPT = -1;
+    public const PROGRAMMATIC_SCRIPT = 1;
+    public const PROGRAMMATIC_NOSCRIPT = -1;
     /**#@-*/
 
     /**
@@ -59,7 +58,7 @@ class Zend_Dojo_View_Helper_Dojo
     protected static $_useProgrammatic = true;
 
     /**
-     * Initialize helper
+     * Initialize helper.
      *
      * Retrieve container from registry or create new container and store in
      * registry.
@@ -78,9 +77,10 @@ class Zend_Dojo_View_Helper_Dojo
     }
 
     /**
-     * Set view object
+     * Set view object.
      *
-     * @param  Zend_Dojo_View_Interface $view
+     * @param Zend_Dojo_View_Interface $view
+     *
      * @return void
      */
     public function setView(Zend_View_Interface $view)
@@ -90,7 +90,7 @@ class Zend_Dojo_View_Helper_Dojo
     }
 
     /**
-     * Return dojo container
+     * Return dojo container.
      *
      * @return Zend_Dojo_View_Helper_Dojo_Container
      */
@@ -100,11 +100,11 @@ class Zend_Dojo_View_Helper_Dojo
     }
 
     /**
-     * Proxy to container methods
+     * Proxy to container methods.
      *
-     * @param  string $method
-     * @param  array $args
-     * @return mixed
+     * @param string $method
+     * @param array  $args
+     *
      * @throws Zend_Dojo_View_Exception For invalid method calls
      */
     public function __call($method, $args)
@@ -114,11 +114,11 @@ class Zend_Dojo_View_Helper_Dojo
             throw new Zend_Dojo_View_Exception(sprintf('Invalid method "%s" called on dojo view helper', $method));
         }
 
-        return call_user_func_array(array($this->_container, $method), $args);
+        return call_user_func_array([$this->_container, $method], $args);
     }
 
     /**
-     * Set whether or not dijits should be created declaratively
+     * Set whether or not dijits should be created declaratively.
      *
      * @return void
      */
@@ -128,17 +128,18 @@ class Zend_Dojo_View_Helper_Dojo
     }
 
     /**
-     * Set whether or not dijits should be created programmatically
+     * Set whether or not dijits should be created programmatically.
      *
      * Optionally, specifiy whether or not dijit helpers should generate the
      * programmatic dojo.
      *
-     * @param  int $style
+     * @param int $style
+     *
      * @return void
      */
     public static function setUseProgrammatic($style = self::PROGRAMMATIC_SCRIPT)
     {
-        if (!in_array($style, array(self::PROGRAMMATIC_SCRIPT, self::PROGRAMMATIC_NOSCRIPT))) {
+        if (!in_array($style, [self::PROGRAMMATIC_SCRIPT, self::PROGRAMMATIC_NOSCRIPT])) {
             $style = self::PROGRAMMATIC_SCRIPT;
         }
         self::$_useProgrammatic = $style;
@@ -151,7 +152,7 @@ class Zend_Dojo_View_Helper_Dojo
      */
     public static function useDeclarative()
     {
-        return (false === self::$_useProgrammatic);
+        return false === self::$_useProgrammatic;
     }
 
     /**
@@ -161,7 +162,7 @@ class Zend_Dojo_View_Helper_Dojo
      */
     public static function useProgrammatic()
     {
-        return (false !== self::$_useProgrammatic);
+        return false !== self::$_useProgrammatic;
     }
 
     /**
@@ -171,6 +172,6 @@ class Zend_Dojo_View_Helper_Dojo
      */
     public static function useProgrammaticNoScript()
     {
-        return (self::PROGRAMMATIC_NOSCRIPT === self::$_useProgrammatic);
+        return self::PROGRAMMATIC_NOSCRIPT === self::$_useProgrammatic;
     }
 }

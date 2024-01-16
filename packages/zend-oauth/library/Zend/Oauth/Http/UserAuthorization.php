@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Oauth
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,7 +28,7 @@
 
 /**
  * @category   Zend
- * @package    Zend_Oauth
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -42,7 +43,7 @@ class Zend_Oauth_Http_UserAuthorization extends Zend_Oauth_Http
     public function getUrl()
     {
         $params = $this->assembleParams();
-        $uri    = Zend_Uri_Http::fromString($this->_consumer->getUserAuthorizationUrl());
+        $uri = Zend_Uri_Http::fromString($this->_consumer->getUserAuthorizationUrl());
 
         $uri->setQuery(
             $this->_httpUtility->toEncodedQueryString($params)
@@ -58,9 +59,9 @@ class Zend_Oauth_Http_UserAuthorization extends Zend_Oauth_Http
      */
     public function assembleParams()
     {
-        $params = array(
+        $params = [
             'oauth_token' => $this->_consumer->getLastRequestToken()->getToken(),
-        );
+        ];
 
         if (!Zend_Oauth_Client::$supportsRevisionA) {
             $callback = $this->_consumer->getCallbackUrl();

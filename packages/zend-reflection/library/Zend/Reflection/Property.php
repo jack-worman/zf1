@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,46 +13,50 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Reflection
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
  * @todo       implement line numbers
+ *
  * @category   Zend
- * @package    Zend_Reflection
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Reflection_Property extends ReflectionProperty
 {
     /**
-     * Get declaring class reflection object
+     * Get declaring class reflection object.
      *
      * @return Zend_Reflection_Class
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function getDeclaringClass($reflectionClass = 'Zend_Reflection_Class')
     {
-        $phpReflection  = parent::getDeclaringClass();
+        $phpReflection = parent::getDeclaringClass();
         $zendReflection = new $reflectionClass($phpReflection->getName());
         if (!$zendReflection instanceof Zend_Reflection_Class) {
             // require_once 'Zend/Reflection/Exception.php';
             throw new Zend_Reflection_Exception('Invalid reflection class provided; must extend Zend_Reflection_Class');
         }
         unset($phpReflection);
+
         return $zendReflection;
     }
 
     /**
-     * Get docblock comment
+     * Get docblock comment.
      *
-     * @param  string $reflectionClass
+     * @param string $reflectionClass
+     *
      * @return Zend_Reflection_Docblock|false False if no docblock defined
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function getDocComment($reflectionClass = 'Zend_Reflection_Docblock')
     {
         $docblock = parent::getDocComment();
@@ -65,6 +69,7 @@ class Zend_Reflection_Property extends ReflectionProperty
             // require_once 'Zend/Reflection/Exception.php';
             throw new Zend_Reflection_Exception('Invalid reflection class provided; must extend Zend_Reflection_Docblock');
         }
+
         return $r;
     }
 }

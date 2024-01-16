@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Form
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -22,24 +22,26 @@
 // require_once 'Zend/Form.php';
 
 /**
- * Zend_Form_SubForm
+ * Zend_Form_SubForm.
  *
  * @category   Zend
- * @package    Zend_Form
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 class Zend_Form_SubForm extends Zend_Form
 {
     /**
-     * Whether or not form elements are members of an array
+     * Whether or not form elements are members of an array.
+     *
      * @var bool
      */
     protected $_isArray = true;
 
     /**
-     * Load the default decorators
+     * Load the default decorators.
      *
      * @return Zend_Form_SubForm
      */
@@ -52,10 +54,11 @@ class Zend_Form_SubForm extends Zend_Form
         $decorators = $this->getDecorators();
         if (empty($decorators)) {
             $this->addDecorator('FormElements')
-                 ->addDecorator('HtmlTag', array('tag' => 'dl'))
+                 ->addDecorator('HtmlTag', ['tag' => 'dl'])
                  ->addDecorator('Fieldset')
                  ->addDecorator('DtDdWrapper');
         }
+
         return $this;
     }
 }

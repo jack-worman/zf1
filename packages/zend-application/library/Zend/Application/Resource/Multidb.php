@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Application
- * @subpackage Resource
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,10 +25,7 @@
 // require_once 'Zend/Db/Table.php';
 
 /**
- */
-
-/**
- * Cache Manager resource
+ * Cache Manager resource.
  *
  * Example configuration:
  * <pre>
@@ -49,29 +46,28 @@
  * </pre>
  *
  * @category   Zend
- * @package    Zend_Application
- * @subpackage Resource
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Application_Resource_Multidb extends Zend_Application_Resource_ResourceAbstract
 {
     /**
-     * Associative array containing all configured db's
+     * Associative array containing all configured db's.
      *
      * @var array
      */
-    protected $_dbs = array();
+    protected $_dbs = [];
 
     /**
-     * An instance of the default db, if set
+     * An instance of the default db, if set.
      *
-     * @var null|Zend_Db_Adapter_Abstract
+     * @var Zend_Db_Adapter_Abstract|null
      */
     protected $_defaultDb;
 
     /**
-     * Initialize the Database Connections (instances of Zend_Db_Table_Abstract)
+     * Initialize the Database Connections (instances of Zend_Db_Table_Abstract).
      *
      * @return Zend_Application_Resource_Multidb
      */
@@ -109,8 +105,9 @@ class Zend_Application_Resource_Multidb extends Zend_Application_Resource_Resour
     /**
      * Determine if the given db(identifier) is the default db.
      *
-     * @param  string|Zend_Db_Adapter_Abstract $db The db to determine whether it's set as default
-     * @return boolean True if the given parameter is configured as default. False otherwise
+     * @param string|Zend_Db_Adapter_Abstract $db The db to determine whether it's set as default
+     *
+     * @return bool True if the given parameter is configured as default. False otherwise
      */
     public function isDefault($db)
     {
@@ -122,16 +119,18 @@ class Zend_Application_Resource_Multidb extends Zend_Application_Resource_Resour
     }
 
     /**
-     * Retrieve the specified database connection
+     * Retrieve the specified database connection.
      *
-     * @param  null|string|Zend_Db_Adapter_Abstract $db The adapter to retrieve.
-     *                                               Null to retrieve the default connection
+     * @param string|Zend_Db_Adapter_Abstract|null $db The adapter to retrieve.
+     *                                                 Null to retrieve the default connection
+     *
      * @return Zend_Db_Adapter_Abstract
+     *
      * @throws Zend_Application_Resource_Exception if the given parameter could not be found
      */
     public function getDb($db = null)
     {
-        if ($db === null) {
+        if (null === $db) {
             return $this->getDefaultDb();
         }
 
@@ -139,22 +138,21 @@ class Zend_Application_Resource_Multidb extends Zend_Application_Resource_Resour
             return $this->_dbs[$db];
         }
 
-        throw new Zend_Application_Resource_Exception(
-            'A DB adapter was tried to retrieve, but was not configured'
-        );
+        throw new Zend_Application_Resource_Exception('A DB adapter was tried to retrieve, but was not configured');
     }
 
     /**
-     * Get the default db connection
+     * Get the default db connection.
      *
-     * @param  boolean $justPickOne If true, a random (the first one in the stack)
-     *                           connection is returned if no default was set.
-     *                           If false, null is returned if no default was set.
-     * @return null|Zend_Db_Adapter_Abstract
+     * @param bool $justPickOne If true, a random (the first one in the stack)
+     *                          connection is returned if no default was set.
+     *                          If false, null is returned if no default was set.
+     *
+     * @return Zend_Db_Adapter_Abstract|null
      */
     public function getDefaultDb($justPickOne = true)
     {
-        if ($this->_defaultDb !== null) {
+        if (null !== $this->_defaultDb) {
             return $this->_defaultDb;
         }
 
@@ -166,9 +164,9 @@ class Zend_Application_Resource_Multidb extends Zend_Application_Resource_Resour
     }
 
     /**
-     * Set the default db adapter
+     * Set the default db adapter.
      *
-     * @var Zend_Db_Adapter_Abstract $adapter Adapter to set as default
+     * @var Zend_Db_Adapter_Abstract Adapter to set as default
      */
     protected function _setDefault(Zend_Db_Adapter_Abstract $adapter)
     {
@@ -176,10 +174,11 @@ class Zend_Application_Resource_Multidb extends Zend_Application_Resource_Resour
         $this->_defaultDb = $adapter;
     }
 
-   /**
-     * Set the default metadata cache
+    /**
+     * Set the default metadata cache.
      *
      * @param string|Zend_Cache_Core $cache
+     *
      * @return Zend_Application_Resource_Multidb
      */
     protected function _setDefaultMetadataCache($cache)
@@ -188,8 +187,8 @@ class Zend_Application_Resource_Multidb extends Zend_Application_Resource_Resour
 
         if (is_string($cache)) {
             $bootstrap = $this->getBootstrap();
-            if ($bootstrap instanceof Zend_Application_Bootstrap_ResourceBootstrapper &&
-                $bootstrap->hasPluginResource('CacheManager')
+            if ($bootstrap instanceof Zend_Application_Bootstrap_ResourceBootstrapper
+                && $bootstrap->hasPluginResource('CacheManager')
             ) {
                 $cacheManager = $bootstrap->bootstrap('CacheManager')
                     ->getResource('CacheManager');
@@ -197,7 +196,7 @@ class Zend_Application_Resource_Multidb extends Zend_Application_Resource_Resour
                     $metadataCache = $cacheManager->getCache($cache);
                 }
             }
-        } else if ($cache instanceof Zend_Cache_Core) {
+        } elseif ($cache instanceof Zend_Cache_Core) {
             $metadataCache = $cache;
         }
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage View
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -24,14 +24,13 @@
 // require_once 'Zend/Dojo/View/Helper/Button.php';
 
 /**
- * Dojo Button dijit tied to submit input
+ * Dojo Button dijit tied to submit input.
  *
  * @uses       Zend_Dojo_View_Helper_Button
- * @package    Zend_Dojo
- * @subpackage View
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
-  */
+ */
 class Zend_Dojo_View_Helper_SubmitButton extends Zend_Dojo_View_Helper_Button
 {
     /**
@@ -40,15 +39,16 @@ class Zend_Dojo_View_Helper_SubmitButton extends Zend_Dojo_View_Helper_Button
     protected $_elementType = 'submit';
 
     /**
-     * dijit.form.Button tied to submit input
+     * dijit.form.Button tied to submit input.
      *
-     * @param  string $id
-     * @param  string $value
-     * @param  array $params  Parameters to use for dijit creation
-     * @param  array $attribs HTML attributes
+     * @param string $id
+     * @param string $value
+     * @param array  $params  Parameters to use for dijit creation
+     * @param array  $attribs HTML attributes
+     *
      * @return string
      */
-    public function submitButton($id, $value = null, array $params = array(), array $attribs = array())
+    public function submitButton($id, $value = null, array $params = [], array $attribs = [])
     {
         if (!array_key_exists('label', $params)) {
             $params['label'] = $value;
@@ -62,6 +62,7 @@ class Zend_Dojo_View_Helper_SubmitButton extends Zend_Dojo_View_Helper_Button
             $value = $attribs['content'];
             unset($attribs['content']);
         }
+
         return $this->_createFormElement($id, $value, $params, $attribs);
     }
 }

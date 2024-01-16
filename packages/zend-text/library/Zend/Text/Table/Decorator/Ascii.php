@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category  Zend
- * @package   Zend_Text_Table
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version   $Id$
  */
 
@@ -25,18 +26,19 @@
 // require_once 'Zend/Text/Table/Decorator/Interface.php';
 
 /**
- * ASCII Decorator for Zend_Text_Table
+ * ASCII Decorator for Zend_Text_Table.
  *
  * @category  Zend
- * @package   Zend_Text_Table
+ *
  * @uses      Zend_Text_Table_Decorator_Interface
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Text_Table_Decorator_Ascii implements Zend_Text_Table_Decorator_Interface
 {
     /**
-     * Defined by Zend_Text_Table_Decorator_Interface
+     * Defined by Zend_Text_Table_Decorator_Interface.
      *
      * @return string
      */
@@ -46,7 +48,7 @@ class Zend_Text_Table_Decorator_Ascii implements Zend_Text_Table_Decorator_Inter
     }
 
     /**
-     * Defined by Zend_Text_Table_Decorator_Interface
+     * Defined by Zend_Text_Table_Decorator_Interface.
      *
      * @return string
      */
@@ -56,7 +58,7 @@ class Zend_Text_Table_Decorator_Ascii implements Zend_Text_Table_Decorator_Inter
     }
 
     /**
-     * Defined by Zend_Text_Table_Decorator_Interface
+     * Defined by Zend_Text_Table_Decorator_Interface.
      *
      * @return string
      */
@@ -66,7 +68,7 @@ class Zend_Text_Table_Decorator_Ascii implements Zend_Text_Table_Decorator_Inter
     }
 
     /**
-     * Defined by Zend_Text_Table_Decorator_Interface
+     * Defined by Zend_Text_Table_Decorator_Interface.
      *
      * @return string
      */
@@ -76,7 +78,7 @@ class Zend_Text_Table_Decorator_Ascii implements Zend_Text_Table_Decorator_Inter
     }
 
     /**
-     * Defined by Zend_Text_Table_Decorator_Interface
+     * Defined by Zend_Text_Table_Decorator_Interface.
      *
      * @return string
      */
@@ -86,7 +88,7 @@ class Zend_Text_Table_Decorator_Ascii implements Zend_Text_Table_Decorator_Inter
     }
 
     /**
-     * Defined by Zend_Text_Table_Decorator_Interface
+     * Defined by Zend_Text_Table_Decorator_Interface.
      *
      * @return string
      */
@@ -96,7 +98,7 @@ class Zend_Text_Table_Decorator_Ascii implements Zend_Text_Table_Decorator_Inter
     }
 
     /**
-     * Defined by Zend_Text_Table_Decorator_Interface
+     * Defined by Zend_Text_Table_Decorator_Interface.
      *
      * @return string
      */
@@ -106,7 +108,7 @@ class Zend_Text_Table_Decorator_Ascii implements Zend_Text_Table_Decorator_Inter
     }
 
     /**
-     * Defined by Zend_Text_Table_Decorator_Interface
+     * Defined by Zend_Text_Table_Decorator_Interface.
      *
      * @return string
      */
@@ -116,7 +118,7 @@ class Zend_Text_Table_Decorator_Ascii implements Zend_Text_Table_Decorator_Inter
     }
 
     /**
-     * Defined by Zend_Text_Table_Decorator_Interface
+     * Defined by Zend_Text_Table_Decorator_Interface.
      *
      * @return string
      */
@@ -126,7 +128,7 @@ class Zend_Text_Table_Decorator_Ascii implements Zend_Text_Table_Decorator_Inter
     }
 
     /**
-     * Defined by Zend_Text_Table_Decorator_Interface
+     * Defined by Zend_Text_Table_Decorator_Interface.
      *
      * @return string
      */
@@ -136,7 +138,7 @@ class Zend_Text_Table_Decorator_Ascii implements Zend_Text_Table_Decorator_Inter
     }
 
     /**
-     * Defined by Zend_Text_Table_Decorator_Interface
+     * Defined by Zend_Text_Table_Decorator_Interface.
      *
      * @return string
      */

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,11 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ *
  * @version    $Id$
+ *
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -24,28 +25,27 @@
 // require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * Helper for retrieving the BaseUrl
+ * Helper for retrieving the BaseUrl.
  *
- * @package    Zend_View
- * @subpackage Helper
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_View_Helper_BaseUrl extends Zend_View_Helper_Abstract
 {
     /**
-     * BaseUrl
+     * BaseUrl.
      *
      * @var string
      */
     protected $_baseUrl;
 
     /**
-     * Returns site's base url, or file with base url prepended
+     * Returns site's base url, or file with base url prepended.
      *
      * $file is appended to the base url for simplicity
      *
-     * @param  string|null $file
+     * @param string|null $file
+     *
      * @return string
      */
     public function baseUrl($file = null)
@@ -55,32 +55,34 @@ class Zend_View_Helper_BaseUrl extends Zend_View_Helper_Abstract
 
         // Remove trailing slashes
         if (null !== $file) {
-            $file = '/' . ltrim((string) $file, '/\\');
+            $file = '/'.ltrim((string) $file, '/\\');
         }
 
-        return $baseUrl . $file;
+        return $baseUrl.$file;
     }
 
     /**
-     * Set BaseUrl
+     * Set BaseUrl.
      *
-     * @param  string $base
+     * @param string $base
+     *
      * @return Zend_View_Helper_BaseUrl
      */
     public function setBaseUrl($base)
     {
         $this->_baseUrl = rtrim((string) $base, '/\\');
+
         return $this;
     }
 
     /**
-     * Get BaseUrl
+     * Get BaseUrl.
      *
      * @return string
      */
     public function getBaseUrl()
     {
-        if ($this->_baseUrl === null) {
+        if (null === $this->_baseUrl) {
             /** @see Zend_Controller_Front */
             // require_once 'Zend/Controller/Front.php';
             $baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
@@ -95,9 +97,10 @@ class Zend_View_Helper_BaseUrl extends Zend_View_Helper_Abstract
     }
 
     /**
-     * Remove Script filename from baseurl
+     * Remove Script filename from baseurl.
      *
-     * @param  string $url
+     * @param string $url
+     *
      * @return string
      */
     protected function _removeScriptName($url)

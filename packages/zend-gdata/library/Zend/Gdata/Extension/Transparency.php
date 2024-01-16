@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Gdata
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,22 +27,21 @@
 // require_once 'Zend/Gdata/Extension.php';
 
 /**
- * Data model class to represent an entry's transparency
+ * Data model class to represent an entry's transparency.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Gdata
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_Extension_Transparency extends Zend_Gdata_Extension
 {
-
     protected $_rootElement = 'transparency';
-    protected $_value = null;
+    protected $_value;
 
     /**
      * Constructs a new Zend_Gdata_Extension_Transparency object.
+     *
      * @param bool $value (optional) Transparency value as URI
      */
     public function __construct($value = null)
@@ -58,15 +57,17 @@ class Zend_Gdata_Extension_Transparency extends Zend_Gdata_Extension
      * for application storage/persistence.
      *
      * @param DOMDocument $doc The DOMDocument used to construct DOMElements
-     * @return DOMElement The DOMElement representing this element and all
-     * child properties.
+     *
+     * @return DOMElement the DOMElement representing this element and all
+     *                    child properties
      */
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
         $element = parent::getDOM($doc, $majorVersion, $minorVersion);
-        if ($this->_value !== null) {
+        if (null !== $this->_value) {
             $element->setAttribute('value', $this->_value);
         }
+
         return $element;
     }
 
@@ -80,18 +81,18 @@ class Zend_Gdata_Extension_Transparency extends Zend_Gdata_Extension
     protected function takeAttributeFromDOM($attribute)
     {
         switch ($attribute->localName) {
-        case 'value':
-            $this->_value = $attribute->nodeValue;
-            break;
-        default:
-            parent::takeAttributeFromDOM($attribute);
+            case 'value':
+                $this->_value = $attribute->nodeValue;
+                break;
+            default:
+                parent::takeAttributeFromDOM($attribute);
         }
     }
 
     /**
      * Get the value for this element's Value attribute.
      *
-     * @return bool The requested attribute.
+     * @return bool the requested attribute
      */
     public function getValue()
     {
@@ -101,23 +102,23 @@ class Zend_Gdata_Extension_Transparency extends Zend_Gdata_Extension
     /**
      * Set the value for this element's Value attribute.
      *
-     * @param bool $value The desired value for this attribute.
-     * @return Zend_Gdata_Extension_Transparency The element being modified.
+     * @param bool $value the desired value for this attribute
+     *
+     * @return Zend_Gdata_Extension_Transparency the element being modified
      */
     public function setValue($value)
     {
         $this->_value = $value;
+
         return $this;
     }
 
     /**
      * Magic toString method allows using this directly via echo
-     * Works best in PHP >= 4.2.0
+     * Works best in PHP >= 4.2.0.
      */
     public function __toString()
     {
         return $this->getValue();
     }
-
 }
-

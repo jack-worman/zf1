@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,9 +14,9 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Http
- * @subpackage Response
+ *
  * @version    $Id$
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -26,22 +26,20 @@
  * includes easy access to all the response's different elemts, as well as some
  * convenience methods for parsing and validating HTTP responses.
  *
- * @package    Zend_Http
- * @subpackage Response
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Http_Response_Stream extends Zend_Http_Response
 {
     /**
-     * Response as stream
+     * Response as stream.
      *
      * @var resource
      */
     protected $stream;
 
     /**
-     * The name of the file containing the stream
+     * The name of the file containing the stream.
      *
      * Will be empty if stream is not file-based.
      *
@@ -52,12 +50,12 @@ class Zend_Http_Response_Stream extends Zend_Http_Response
     /**
      * Should we clean up the stream file when this response is closed?
      *
-     * @var boolean
+     * @var bool
      */
     protected $_cleanup;
 
     /**
-     * Get the response as stream
+     * Get the response as stream.
      *
      * @return resource
      */
@@ -67,58 +65,65 @@ class Zend_Http_Response_Stream extends Zend_Http_Response
     }
 
     /**
-     * Set the response stream
+     * Set the response stream.
      *
      * @param resourse $stream
+     *
      * @return Zend_Http_Response_Stream
      */
     public function setStream($stream)
     {
         $this->stream = $stream;
+
         return $this;
     }
 
     /**
-     * Get the cleanup trigger
+     * Get the cleanup trigger.
      *
-     * @return boolean
+     * @return bool
      */
-    public function getCleanup() {
+    public function getCleanup()
+    {
         return $this->_cleanup;
     }
 
     /**
-     * Set the cleanup trigger
+     * Set the cleanup trigger.
      *
      * @param bool $cleanup Set cleanup trigger
      */
-    public function setCleanup($cleanup = true) {
+    public function setCleanup($cleanup = true)
+    {
         $this->_cleanup = $cleanup;
     }
 
     /**
-     * Get file name associated with the stream
+     * Get file name associated with the stream.
      *
      * @return string
      */
-    public function getStreamName() {
+    public function getStreamName()
+    {
         return $this->stream_name;
     }
 
     /**
-     * Set file name associated with the stream
+     * Set file name associated with the stream.
      *
      * @param string $stream_name Name to set
+     *
      * @return Zend_Http_Response_Stream
      */
-    public function setStreamName($stream_name) {
+    public function setStreamName($stream_name)
+    {
         $this->stream_name = $stream_name;
+
         return $this;
     }
 
-
     /**
-     * HTTP response constructor
+     * HTTP response constructor.
      *
      * In most cases, you would use Zend_Http_Response::fromString to parse an HTTP
      * response string and create a new Zend_Http_Response object.
@@ -129,17 +134,17 @@ class Zend_Http_Response_Stream extends Zend_Http_Response
      *
      * If no message is passed, the message will be guessed according to the response code.
      *
-     * @param int $code Response code (200, 404, ...)
-     * @param array $headers Headers array
-     * @param string $body Response body
+     * @param int    $code    Response code (200, 404, ...)
+     * @param array  $headers Headers array
+     * @param string $body    Response body
      * @param string $version HTTP version
      * @param string $message Response code as text
+     *
      * @throws Zend_Http_Exception
      */
     public function __construct($code, $headers, $body = null, $version = '1.1', $message = null)
     {
-
-        if(is_resource($body)) {
+        if (is_resource($body)) {
             $this->setStream($body);
             $body = '';
         }
@@ -147,15 +152,16 @@ class Zend_Http_Response_Stream extends Zend_Http_Response
     }
 
     /**
-     * Create a new Zend_Http_Response_Stream object from a string
+     * Create a new Zend_Http_Response_Stream object from a string.
      *
-     * @param string $response_str
+     * @param string   $response_str
      * @param resource $stream
+     *
      * @return Zend_Http_Response_Stream
      */
     public static function fromStream($response_str, $stream)
     {
-        $code    = self::extractCode($response_str);
+        $code = self::extractCode($response_str);
         $headers = self::extractHeaders($response_str);
         $version = self::extractVersion($response_str);
         $message = self::extractMessage($response_str);
@@ -164,7 +170,7 @@ class Zend_Http_Response_Stream extends Zend_Http_Response
     }
 
     /**
-     * Get the response body as string
+     * Get the response body as string.
      *
      * This method returns the body of the HTTP response (the content), as it
      * should be in it's readable version - that is, after decoding it (if it
@@ -177,14 +183,15 @@ class Zend_Http_Response_Stream extends Zend_Http_Response
      */
     public function getBody()
     {
-        if($this->stream != null) {
+        if (null != $this->stream) {
             $this->readStream();
         }
+
         return parent::getBody();
     }
 
     /**
-     * Get the raw response body (as transfered "on wire") as string
+     * Get the raw response body (as transfered "on wire") as string.
      *
      * If the body is encoded (with Transfer-Encoding, not content-encoding -
      * IE "chunked" body), gzip compressed, etc. it will not be decoded.
@@ -193,14 +200,15 @@ class Zend_Http_Response_Stream extends Zend_Http_Response
      */
     public function getRawBody()
     {
-        if($this->stream) {
+        if ($this->stream) {
             $this->readStream();
         }
+
         return $this->body;
     }
 
     /**
-     * Read stream content and return it as string
+     * Read stream content and return it as string.
      *
      * Function reads the remainder of the body from the stream and closes the stream.
      *
@@ -208,11 +216,11 @@ class Zend_Http_Response_Stream extends Zend_Http_Response
      */
     protected function readStream()
     {
-        if(!is_resource($this->stream)) {
+        if (!is_resource($this->stream)) {
             return '';
         }
 
-        if(isset($headers['content-length'])) {
+        if (isset($headers['content-length'])) {
             $this->body = stream_get_contents($this->stream, $headers['content-length']);
         } else {
             $this->body = stream_get_contents($this->stream);
@@ -223,13 +231,12 @@ class Zend_Http_Response_Stream extends Zend_Http_Response
 
     public function __destruct()
     {
-        if(is_resource($this->stream)) {
+        if (is_resource($this->stream)) {
             fclose($this->stream);
             $this->stream = null;
         }
-        if($this->_cleanup && is_string($this->stream_name) && file_exists((string) $this->stream_name)) {
+        if ($this->_cleanup && is_string($this->stream_name) && file_exists((string) $this->stream_name)) {
             @unlink($this->stream_name);
         }
     }
-
 }

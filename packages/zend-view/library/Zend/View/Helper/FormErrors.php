@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,25 +13,23 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Abstract class for extension
+ * Abstract class for extension.
  */
 // require_once 'Zend/View/Helper/FormElement.php';
 
-
 /**
- * Helper to render errors for a form element
+ * Helper to render errors for a form element.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -45,16 +43,16 @@ class Zend_View_Helper_FormErrors extends Zend_View_Helper_FormElement
     /**#@+
      * @var string Element block start/end tags and separator
      */
-    protected $_htmlElementEnd       = '</li></ul>';
-    protected $_htmlElementStart     = '<ul%s><li>';
+    protected $_htmlElementEnd = '</li></ul>';
+    protected $_htmlElementStart = '<ul%s><li>';
     protected $_htmlElementSeparator = '</li><li>';
     /**#@-*/
 
     /**
-     * Render form errors
+     * Render form errors.
      *
-     * @param  string|array $errors Error(s) to render
-     * @param  array $options
+     * @param string|array $errors Error(s) to render
+     *
      * @return string
      */
     public function formErrors($errors, array $options = null)
@@ -82,7 +80,7 @@ class Zend_View_Helper_FormErrors extends Zend_View_Helper_FormElement
         $start = $this->getElementStart();
         if (strstr((string) $start, '%s')) {
             $attribs = $this->_htmlAttribs($options);
-            $start   = sprintf($start, $attribs);
+            $start = sprintf($start, $attribs);
         }
 
         if ($escape) {
@@ -91,27 +89,29 @@ class Zend_View_Helper_FormErrors extends Zend_View_Helper_FormElement
             }
         }
 
-        $html  = $start
-               . implode($this->getElementSeparator(), (array) $errors)
-               . $this->getElementEnd();
+        $html = $start
+               .implode($this->getElementSeparator(), (array) $errors)
+               .$this->getElementEnd();
 
         return $html;
     }
 
     /**
-     * Set end string for displaying errors
+     * Set end string for displaying errors.
      *
-     * @param  string $string
+     * @param string $string
+     *
      * @return Zend_View_Helper_FormErrors
      */
     public function setElementEnd($string)
     {
         $this->_htmlElementEnd = (string) $string;
+
         return $this;
     }
 
     /**
-     * Retrieve end string for displaying errors
+     * Retrieve end string for displaying errors.
      *
      * @return string
      */
@@ -121,19 +121,21 @@ class Zend_View_Helper_FormErrors extends Zend_View_Helper_FormElement
     }
 
     /**
-     * Set separator string for displaying errors
+     * Set separator string for displaying errors.
      *
-     * @param  string $string
+     * @param string $string
+     *
      * @return Zend_View_Helper_FormErrors
      */
     public function setElementSeparator($string)
     {
         $this->_htmlElementSeparator = (string) $string;
+
         return $this;
     }
 
     /**
-     * Retrieve separator string for displaying errors
+     * Retrieve separator string for displaying errors.
      *
      * @return string
      */
@@ -143,19 +145,21 @@ class Zend_View_Helper_FormErrors extends Zend_View_Helper_FormElement
     }
 
     /**
-     * Set start string for displaying errors
+     * Set start string for displaying errors.
      *
-     * @param  string $string
+     * @param string $string
+     *
      * @return Zend_View_Helper_FormErrors
      */
     public function setElementStart($string)
     {
         $this->_htmlElementStart = (string) $string;
+
         return $this;
     }
 
     /**
-     * Retrieve start string for displaying errors
+     * Retrieve start string for displaying errors.
      *
      * @return string
      */
@@ -163,5 +167,4 @@ class Zend_View_Helper_FormErrors extends Zend_View_Helper_FormElement
     {
         return $this->_htmlElementStart;
     }
-
 }

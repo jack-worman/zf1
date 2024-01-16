@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,11 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ *
  * @version    $Id$
+ *
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -24,10 +25,8 @@
 // require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * Helper for declaring default values of template variables
+ * Helper for declaring default values of template variables.
  *
- * @package    Zend_View
- * @subpackage Helper
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -35,12 +34,13 @@ class Zend_View_Helper_DeclareVars extends Zend_View_Helper_Abstract
 {
     /**
      * The view object that created this helper object.
+     *
      * @var Zend_View
      */
     public $view;
 
     /**
-     * Declare template vars to set default values and avoid notices when using strictVars
+     * Declare template vars to set default values and avoid notices when using strictVars.
      *
      * Primarily for use when using {@link Zend_View_Abstract::strictVars() Zend_View strictVars()},
      * this helper can be used to declare template variables that may or may
@@ -61,29 +61,31 @@ class Zend_View_Helper_DeclareVars extends Zend_View_Helper_Abstract
      * </code>
      *
      * @param string|array variable number of arguments, all string names of variables to test
+     *
      * @return void
      */
     public function declareVars()
     {
         $args = func_get_args();
-        foreach($args as $key) {
+        foreach ($args as $key) {
             if (is_array($key)) {
                 foreach ($key as $name => $value) {
                     $this->_declareVar($name, $value);
                 }
-            } else if (!isset($view->$key)) {
+            } elseif (!isset($view->$key)) {
                 $this->_declareVar($key);
             }
         }
     }
 
     /**
-     * Set a view variable
+     * Set a view variable.
      *
      * Checks to see if a $key is set in the view object; if not, sets it to $value.
      *
-     * @param  string $key
-     * @param  string $value Defaults to an empty string
+     * @param string $key
+     * @param string $value Defaults to an empty string
+     *
      * @return void
      */
     protected function _declareVar($key, $value = '')

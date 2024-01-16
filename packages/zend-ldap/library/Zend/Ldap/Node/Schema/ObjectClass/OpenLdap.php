@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Ldap
- * @subpackage Schema
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -34,30 +34,27 @@
  * schema information on an OpenLDAP server.
  *
  * @category   Zend
- * @package    Zend_Ldap
- * @subpackage Schema
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Ldap_Node_Schema_ObjectClass_OpenLdap extends Zend_Ldap_Node_Schema_Item
-    implements Zend_Ldap_Node_Schema_ObjectClass_Interface
+class Zend_Ldap_Node_Schema_ObjectClass_OpenLdap extends Zend_Ldap_Node_Schema_Item implements Zend_Ldap_Node_Schema_ObjectClass_Interface
 {
     /**
-     * All inherited "MUST" attributes
+     * All inherited "MUST" attributes.
      *
      * @var array
      */
-    protected $_inheritedMust = null;
+    protected $_inheritedMust;
     /**
-     * All inherited "MAY" attributes
+     * All inherited "MAY" attributes.
      *
      * @var array
      */
-    protected $_inheritedMay = null;
-
+    protected $_inheritedMay;
 
     /**
-     * Gets the objectClass name
+     * Gets the objectClass name.
      *
      * @return string
      */
@@ -67,7 +64,7 @@ class Zend_Ldap_Node_Schema_ObjectClass_OpenLdap extends Zend_Ldap_Node_Schema_I
     }
 
     /**
-     * Gets the objectClass OID
+     * Gets the objectClass OID.
      *
      * @return string
      */
@@ -77,33 +74,35 @@ class Zend_Ldap_Node_Schema_ObjectClass_OpenLdap extends Zend_Ldap_Node_Schema_I
     }
 
     /**
-     * Gets the attributes that this objectClass must contain
+     * Gets the attributes that this objectClass must contain.
      *
      * @return array
      */
     public function getMustContain()
     {
-        if ($this->_inheritedMust === null) {
+        if (null === $this->_inheritedMust) {
             $this->_resolveInheritance();
         }
+
         return $this->_inheritedMust;
     }
 
     /**
-     * Gets the attributes that this objectClass may contain
+     * Gets the attributes that this objectClass may contain.
      *
      * @return array
      */
     public function getMayContain()
     {
-        if ($this->_inheritedMay === null) {
+        if (null === $this->_inheritedMay) {
             $this->_resolveInheritance();
         }
+
         return $this->_inheritedMay;
     }
 
     /**
-     * Resolves the inheritance tree
+     * Resolves the inheritance tree.
      *
      * @return void
      */
@@ -125,7 +124,7 @@ class Zend_Ldap_Node_Schema_ObjectClass_OpenLdap extends Zend_Ldap_Node_Schema_I
     }
 
     /**
-     * Gets the objectClass description
+     * Gets the objectClass description.
      *
      * @return string
      */
@@ -135,17 +134,17 @@ class Zend_Ldap_Node_Schema_ObjectClass_OpenLdap extends Zend_Ldap_Node_Schema_I
     }
 
     /**
-     * Gets the objectClass type
+     * Gets the objectClass type.
      *
-     * @return integer
+     * @return int
      */
     public function getType()
     {
         if ($this->structural) {
             return Zend_Ldap_Node_Schema::OBJECTCLASS_TYPE_STRUCTURAL;
-        } else if ($this->abstract) {
+        } elseif ($this->abstract) {
             return Zend_Ldap_Node_Schema::OBJECTCLASS_TYPE_ABSTRACT;
-        } else if ($this->auxiliary) {
+        } elseif ($this->auxiliary) {
             return Zend_Ldap_Node_Schema::OBJECTCLASS_TYPE_AUXILIARY;
         } else {
             return Zend_Ldap_Node_Schema::OBJECTCLASS_TYPE_UNKNOWN;
@@ -154,7 +153,7 @@ class Zend_Ldap_Node_Schema_ObjectClass_OpenLdap extends Zend_Ldap_Node_Schema_I
 
     /**
      * Returns the parent objectClasses of this class.
-     * This includes structural, abstract and auxiliary objectClasses
+     * This includes structural, abstract and auxiliary objectClasses.
      *
      * @return array
      */
@@ -164,7 +163,7 @@ class Zend_Ldap_Node_Schema_ObjectClass_OpenLdap extends Zend_Ldap_Node_Schema_I
     }
 
     /**
-     * Returns the parent object classes in the inhertitance tree if one exists
+     * Returns the parent object classes in the inhertitance tree if one exists.
      *
      * @return array of Zend_Ldap_Node_Schema_ObjectClass_OpenLdap
      */

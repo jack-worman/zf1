@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Filter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,21 +27,21 @@
 
 /**
  * @category   Zend
- * @package    Zend_Filter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Filter_StringToLower implements Zend_Filter_Interface
 {
     /**
-     * Encoding for the input string
+     * Encoding for the input string.
      *
      * @var string
      */
-    protected $_encoding = null;
+    protected $_encoding;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string|array|Zend_Config $options OPTIONAL
      */
@@ -48,9 +49,9 @@ class Zend_Filter_StringToLower implements Zend_Filter_Interface
     {
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
-        } else if (!is_array($options)) {
+        } elseif (!is_array($options)) {
             $options = func_get_args();
-            $temp    = array();
+            $temp = [];
             if (!empty($options)) {
                 $temp['encoding'] = array_shift($options);
             }
@@ -67,7 +68,7 @@ class Zend_Filter_StringToLower implements Zend_Filter_Interface
     }
 
     /**
-     * Returns the set encoding
+     * Returns the set encoding.
      *
      * @return string
      */
@@ -77,15 +78,17 @@ class Zend_Filter_StringToLower implements Zend_Filter_Interface
     }
 
     /**
-     * Set the input encoding for the given string
+     * Set the input encoding for the given string.
      *
-     * @param  string $encoding
+     * @param string $encoding
+     *
      * @return Zend_Filter_StringToLower Provides a fluent interface
+     *
      * @throws Zend_Filter_Exception
      */
     public function setEncoding($encoding = null)
     {
-        if ($encoding !== null) {
+        if (null !== $encoding) {
             if (!function_exists('mb_strtolower')) {
                 // require_once 'Zend/Filter/Exception.php';
                 throw new Zend_Filter_Exception('mbstring is required for this feature');
@@ -99,20 +102,22 @@ class Zend_Filter_StringToLower implements Zend_Filter_Interface
         }
 
         $this->_encoding = $encoding;
+
         return $this;
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend_Filter_Interface.
      *
      * Returns the string $value, converting characters to lowercase as necessary
      *
-     * @param  string $value
+     * @param string $value
+     *
      * @return string
      */
     public function filter($value)
     {
-        if ($this->_encoding !== null) {
+        if (null !== $this->_encoding) {
             return mb_strtolower((string) $value, $this->_encoding);
         }
 

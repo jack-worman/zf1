@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,67 +13,65 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Auth
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
-
 /**
  * @category   Zend
- * @package    Zend_Auth
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Auth_Result
 {
     /**
-     * General Failure
+     * General Failure.
      */
-    const FAILURE                        =  0;
+    public const FAILURE = 0;
 
     /**
      * Failure due to identity not being found.
      */
-    const FAILURE_IDENTITY_NOT_FOUND     = -1;
+    public const FAILURE_IDENTITY_NOT_FOUND = -1;
 
     /**
      * Failure due to identity being ambiguous.
      */
-    const FAILURE_IDENTITY_AMBIGUOUS     = -2;
+    public const FAILURE_IDENTITY_AMBIGUOUS = -2;
 
     /**
      * Failure due to invalid credential being supplied.
      */
-    const FAILURE_CREDENTIAL_INVALID     = -3;
+    public const FAILURE_CREDENTIAL_INVALID = -3;
 
     /**
      * Failure due to uncategorized reasons.
      */
-    const FAILURE_UNCATEGORIZED          = -4;
+    public const FAILURE_UNCATEGORIZED = -4;
 
     /**
      * Authentication success.
      */
-    const SUCCESS                        =  1;
+    public const SUCCESS = 1;
 
     /**
-     * Authentication result code
+     * Authentication result code.
      *
      * @var int
      */
     protected $_code;
 
     /**
-     * The identity used in the authentication attempt
-     *
-     * @var mixed
+     * The identity used in the authentication attempt.
      */
     protected $_identity;
 
     /**
-     * An array of string reasons why the authentication attempt was unsuccessful
+     * An array of string reasons why the authentication attempt was unsuccessful.
      *
      * If authentication was successful, this should be an empty array.
      *
@@ -82,31 +80,29 @@ class Zend_Auth_Result
     protected $_messages;
 
     /**
-     * Sets the result code, identity, and failure messages
+     * Sets the result code, identity, and failure messages.
      *
-     * @param int   $code
-     * @param mixed $identity
-     * @param array $messages
+     * @param int $code
      */
-    public function __construct($code, $identity, array $messages = array())
+    public function __construct($code, $identity, array $messages = [])
     {
         $code = (int) $code;
 
         if ($code < self::FAILURE_UNCATEGORIZED) {
             $code = self::FAILURE;
-        } elseif ($code > self::SUCCESS ) {
+        } elseif ($code > self::SUCCESS) {
             $code = 1;
         }
 
-        $this->_code     = $code;
+        $this->_code = $code;
         $this->_identity = $identity;
         $this->_messages = $messages;
     }
 
     /**
-     * Returns whether the result represents a successful authentication attempt
+     * Returns whether the result represents a successful authentication attempt.
      *
-     * @return boolean
+     * @return bool
      */
     public function isValid()
     {
@@ -114,7 +110,7 @@ class Zend_Auth_Result
     }
 
     /**
-     * getCode() - Get the result code for this authentication attempt
+     * getCode() - Get the result code for this authentication attempt.
      *
      * @return int
      */
@@ -124,9 +120,7 @@ class Zend_Auth_Result
     }
 
     /**
-     * Returns the identity used in the authentication attempt
-     *
-     * @return mixed
+     * Returns the identity used in the authentication attempt.
      */
     public function getIdentity()
     {
@@ -134,7 +128,7 @@ class Zend_Auth_Result
     }
 
     /**
-     * Returns an array of string reasons why the authentication attempt was unsuccessful
+     * Returns an array of string reasons why the authentication attempt was unsuccessful.
      *
      * If authentication was successful, this method returns an empty array.
      *

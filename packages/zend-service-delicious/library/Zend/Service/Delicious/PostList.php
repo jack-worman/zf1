@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,20 +14,18 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service
- * @subpackage Delicious
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
-
 /**
- * List of posts retrived from the del.icio.us web service
+ * List of posts retrived from the del.icio.us web service.
  *
  * @category   Zend
- * @package    Zend_Service
- * @subpackage Delicious
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -36,7 +34,7 @@ class Zend_Service_Delicious_PostList implements Countable, Iterator, ArrayAcces
     /**
      * @var array Array of Zend_Service_Delicious_Post
      */
-    protected $_posts = array();
+    protected $_posts = [];
 
     /**
      * @var Zend_Service_Delicious Service that has downloaded the post list
@@ -49,8 +47,9 @@ class Zend_Service_Delicious_PostList implements Countable, Iterator, ArrayAcces
     protected $_iteratorKey = 0;
 
     /**
-     * @param  Zend_Service_Delicious $service Service that has downloaded the post
-     * @param  DOMNodeList|array      $posts
+     * @param Zend_Service_Delicious $service Service that has downloaded the post
+     * @param DOMNodeList|array      $posts
+     *
      * @return void
      */
     public function __construct(Zend_Service_Delicious $service, $posts = null)
@@ -58,31 +57,29 @@ class Zend_Service_Delicious_PostList implements Countable, Iterator, ArrayAcces
         $this->_service = $service;
         if ($posts instanceof DOMNodeList) {
             $this->_constructFromNodeList($posts);
-        } else if (is_array($posts)) {
+        } elseif (is_array($posts)) {
             $this->_constructFromArray($posts);
         }
     }
 
     /**
-     * Transforms DOMNodeList to array of posts
+     * Transforms DOMNodeList to array of posts.
      *
-     * @param  DOMNodeList $nodeList
      * @return void
      */
     private function _constructFromNodeList(DOMNodeList $nodeList)
     {
-        for ($i = 0; $i < $nodeList->length; $i++) {
+        for ($i = 0; $i < $nodeList->length; ++$i) {
             $curentNode = $nodeList->item($i);
-            if($curentNode->nodeName == 'post') {
+            if ('post' == $curentNode->nodeName) {
                 $this->_addPost(new Zend_Service_Delicious_Post($this->_service, $curentNode));
             }
         }
     }
 
     /**
-     * Transforms the Array to array of posts
+     * Transforms the Array to array of posts.
      *
-     * @param  array $postList
      * @return void
      */
     private function _constructFromArray(array $postList)
@@ -93,9 +90,8 @@ class Zend_Service_Delicious_PostList implements Countable, Iterator, ArrayAcces
     }
 
     /**
-     * Add a post
+     * Add a post.
      *
-     * @param  Zend_Service_Delicious_SimplePost $post
      * @return Zend_Service_Delicious_PostList
      */
     protected function _addPost(Zend_Service_Delicious_SimplePost $post)
@@ -106,9 +102,8 @@ class Zend_Service_Delicious_PostList implements Countable, Iterator, ArrayAcces
     }
 
     /**
-     * Filter list by list of tags
+     * Filter list by list of tags.
      *
-     * @param  array $tags
      * @return Zend_Service_Delicious_PostList
      */
     public function withTags(array $tags)
@@ -116,7 +111,7 @@ class Zend_Service_Delicious_PostList implements Countable, Iterator, ArrayAcces
         $postList = new self($this->_service);
 
         foreach ($this->_posts as $post) {
-            if (count(array_diff($tags, $post->getTags())) == 0) {
+            if (0 == count(array_diff($tags, $post->getTags()))) {
                 $postList->_addPost($post);
             }
         }
@@ -125,9 +120,10 @@ class Zend_Service_Delicious_PostList implements Countable, Iterator, ArrayAcces
     }
 
     /**
-     * Filter list by tag
+     * Filter list by tag.
      *
-     * @param  string $tag
+     * @param string $tag
+     *
      * @return Zend_Service_Delicious_PostList
      */
     public function withTag($tag)
@@ -136,9 +132,10 @@ class Zend_Service_Delicious_PostList implements Countable, Iterator, ArrayAcces
     }
 
     /**
-     * Filter list by urls matching a regular expression
+     * Filter list by urls matching a regular expression.
      *
-     * @param  string $regexp
+     * @param string $regexp
+     *
      * @return Zend_Service_Delicious_PostList
      */
     public function withUrl($regexp)
@@ -155,78 +152,78 @@ class Zend_Service_Delicious_PostList implements Countable, Iterator, ArrayAcces
     }
 
     /**
-     * Return number of posts
+     * Return number of posts.
      *
      * Implement Countable::count()
      *
      * @return int
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function count()
     {
         return count($this->_posts);
     }
 
     /**
-     * Return the current element
+     * Return the current element.
      *
      * Implement Iterator::current()
      *
      * @return Zend_Service_Delicious_SimplePost
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function current()
     {
         return $this->_posts[$this->_iteratorKey];
     }
 
     /**
-     * Return the key of the current element
+     * Return the key of the current element.
      *
      * Implement Iterator::key()
      *
      * @return int
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function key()
     {
         return $this->_iteratorKey;
     }
 
     /**
-     * Move forward to next element
+     * Move forward to next element.
      *
      * Implement Iterator::next()
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function next()
     {
-        $this->_iteratorKey += 1;
+        ++$this->_iteratorKey;
     }
 
     /**
-     * Rewind the Iterator to the first element
+     * Rewind the Iterator to the first element.
      *
      * Implement Iterator::rewind()
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function rewind()
     {
         $this->_iteratorKey = 0;
     }
 
     /**
-     * Check if there is a current element after calls to rewind() or next()
+     * Check if there is a current element after calls to rewind() or next().
      *
      * Implement Iterator::valid()
      *
      * @return bool
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function valid()
     {
         $numItems = $this->count();
@@ -239,29 +236,32 @@ class Zend_Service_Delicious_PostList implements Countable, Iterator, ArrayAcces
     }
 
     /**
-     * Whether the offset exists
+     * Whether the offset exists.
      *
      * Implement ArrayAccess::offsetExists()
      *
-     * @param   int     $offset
-     * @return  bool
+     * @param int $offset
+     *
+     * @return bool
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetExists($offset)
     {
-        return ($offset < $this->count());
+        return $offset < $this->count();
     }
 
     /**
-     * Return value at given offset
+     * Return value at given offset.
      *
      * Implement ArrayAccess::offsetGet()
      *
-     * @param   int     $offset
-     * @throws  OutOfBoundsException
-     * @return  Zend_Service_Delicious_SimplePost
+     * @param int $offset
+     *
+     * @return Zend_Service_Delicious_SimplePost
+     *
+     * @throws OutOfBoundsException
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         if ($this->offsetExists($offset)) {
@@ -272,18 +272,19 @@ class Zend_Service_Delicious_PostList implements Countable, Iterator, ArrayAcces
     }
 
     /**
-     * Throws exception because all values are read-only
+     * Throws exception because all values are read-only.
      *
      * Implement ArrayAccess::offsetSet()
      *
-     * @param   int     $offset
-     * @param   string  $value
-     * @throws  Zend_Service_Delicious_Exception
+     * @param int    $offset
+     * @param string $value
+     *
+     * @throws Zend_Service_Delicious_Exception
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
-        /**
+        /*
          * @see Zend_Service_Delicious_Exception
          */
         // require_once 'Zend/Service/Delicious/Exception.php';
@@ -291,17 +292,18 @@ class Zend_Service_Delicious_PostList implements Countable, Iterator, ArrayAcces
     }
 
     /**
-     * Throws exception because all values are read-only
+     * Throws exception because all values are read-only.
      *
      * Implement ArrayAccess::offsetUnset()
      *
-     * @param   int     $offset
-     * @throws  Zend_Service_Delicious_Exception
+     * @param int $offset
+     *
+     * @throws Zend_Service_Delicious_Exception
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
-        /**
+        /*
          * @see Zend_Service_Delicious_Exception
          */
         // require_once 'Zend/Service/Delicious/Exception.php';

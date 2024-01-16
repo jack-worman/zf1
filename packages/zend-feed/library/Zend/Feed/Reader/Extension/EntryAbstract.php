@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,97 +13,99 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed_Reader
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
  * @category   Zend
- * @package    Zend_Feed_Reader
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Feed_Reader_Extension_EntryAbstract
 {
     /**
-     * Feed entry data
+     * Feed entry data.
      *
      * @var array
      */
-    protected $_data = array();
+    protected $_data = [];
 
     /**
-     * DOM document object
+     * DOM document object.
      *
      * @var DOMDocument
      */
-    protected $_domDocument = null;
+    protected $_domDocument;
 
     /**
-     * Entry instance
+     * Entry instance.
      *
      * @var Zend_Feed_Entry_Abstract
      */
-    protected $_entry = null;
+    protected $_entry;
 
     /**
-     * Pointer to the current entry
+     * Pointer to the current entry.
      *
      * @var int
      */
     protected $_entryKey = 0;
 
     /**
-     * XPath object
+     * XPath object.
      *
      * @var DOMXPath
      */
-    protected $_xpath = null;
+    protected $_xpath;
 
     /**
-     * XPath query
+     * XPath query.
      *
      * @var string
      */
     protected $_xpathPrefix = '';
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param  Zend_Feed_Entry_Abstract $entry
-     * @param  int $entryKey
-     * @param  string $type
+     * @param Zend_Feed_Entry_Abstract $entry
+     * @param int                      $entryKey
+     * @param string                   $type
+     *
      * @return void
      */
     public function __construct(DOMElement $entry, $entryKey, $type = null)
     {
-        $this->_entry       = $entry;
-        $this->_entryKey    = $entryKey;
+        $this->_entry = $entry;
+        $this->_entryKey = $entryKey;
         $this->_domDocument = $entry->ownerDocument;
 
-        if ($type !== null) {
+        if (null !== $type) {
             $this->_data['type'] = $type;
         } else {
             $this->_data['type'] = Zend_Feed_Reader::detectType($entry->ownerDocument, true);
         }
         // set the XPath query prefix for the entry being queried
-        if ($this->getType() == Zend_Feed_Reader::TYPE_RSS_10
-            || $this->getType() == Zend_Feed_Reader::TYPE_RSS_090
+        if (Zend_Feed_Reader::TYPE_RSS_10 == $this->getType()
+            || Zend_Feed_Reader::TYPE_RSS_090 == $this->getType()
         ) {
-            $this->setXpathPrefix('//rss:item[' . ($this->_entryKey+1) . ']');
-        } elseif ($this->getType() == Zend_Feed_Reader::TYPE_ATOM_10
-                  || $this->getType() == Zend_Feed_Reader::TYPE_ATOM_03
+            $this->setXpathPrefix('//rss:item['.($this->_entryKey + 1).']');
+        } elseif (Zend_Feed_Reader::TYPE_ATOM_10 == $this->getType()
+                  || Zend_Feed_Reader::TYPE_ATOM_03 == $this->getType()
         ) {
-            $this->setXpathPrefix('//atom:entry[' . ($this->_entryKey+1) . ']');
+            $this->setXpathPrefix('//atom:entry['.($this->_entryKey + 1).']');
         } else {
-            $this->setXpathPrefix('//item[' . ($this->_entryKey+1) . ']');
+            $this->setXpathPrefix('//item['.($this->_entryKey + 1).']');
         }
     }
 
     /**
-     * Get the DOM
+     * Get the DOM.
      *
      * @return DOMDocument
      */
@@ -113,18 +115,19 @@ abstract class Zend_Feed_Reader_Extension_EntryAbstract
     }
 
     /**
-     * Get the Entry's encoding
+     * Get the Entry's encoding.
      *
      * @return string
      */
     public function getEncoding()
     {
         $assumed = $this->getDomDocument()->encoding;
+
         return $assumed;
     }
 
     /**
-     * Get the entry type
+     * Get the entry type.
      *
      * @return string
      */
@@ -134,20 +137,20 @@ abstract class Zend_Feed_Reader_Extension_EntryAbstract
     }
 
     /**
-     * Set the XPath query
+     * Set the XPath query.
      *
-     * @param  DOMXPath $xpath
      * @return Zend_Feed_Reader_Extension_EntryAbstract
      */
     public function setXpath(DOMXPath $xpath)
     {
         $this->_xpath = $xpath;
         $this->_registerNamespaces();
+
         return $this;
     }
 
     /**
-     * Get the XPath query object
+     * Get the XPath query object.
      *
      * @return DOMXPath
      */
@@ -156,11 +159,12 @@ abstract class Zend_Feed_Reader_Extension_EntryAbstract
         if (!$this->_xpath) {
             $this->setXpath(new DOMXPath($this->getDomDocument()));
         }
+
         return $this->_xpath;
     }
 
     /**
-     * Serialize the entry to an array
+     * Serialize the entry to an array.
      *
      * @return array
      */
@@ -170,7 +174,7 @@ abstract class Zend_Feed_Reader_Extension_EntryAbstract
     }
 
     /**
-     * Get the XPath prefix
+     * Get the XPath prefix.
      *
      * @return string
      */
@@ -180,21 +184,23 @@ abstract class Zend_Feed_Reader_Extension_EntryAbstract
     }
 
     /**
-     * Set the XPath prefix
+     * Set the XPath prefix.
      *
-     * @param  string $prefix
+     * @param string $prefix
+     *
      * @return Zend_Feed_Reader_Extension_EntryAbstract
      */
     public function setXpathPrefix($prefix)
     {
         $this->_xpathPrefix = $prefix;
+
         return $this;
     }
 
     /**
-     * Register XML namespaces
+     * Register XML namespaces.
      *
      * @return void
      */
-    protected abstract function _registerNamespaces();
+    abstract protected function _registerNamespaces();
 }

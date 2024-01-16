@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage Framework
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,28 +27,24 @@
 
 /**
  * @category   Zend
- * @package    Zend_Tool
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Framework_Action_Repository
-    implements Zend_Tool_Framework_Registry_EnabledInterface, IteratorAggregate, Countable
+class Zend_Tool_Framework_Action_Repository implements Zend_Tool_Framework_Registry_EnabledInterface, IteratorAggregate, Countable
 {
-
     /**
      * @var Zend_Tool_Framework_Registry_Interface
      */
-    protected $_registry = null;
+    protected $_registry;
 
     /**
      * @var array
      */
-    protected $_actions = array();
+    protected $_actions = [];
 
     /**
-     * setRegistry()
-     *
-     * @param Zend_Tool_Framework_Registry_Interface $registry
+     * setRegistry().
      */
     public function setRegistry(Zend_Tool_Framework_Registry_Interface $registry)
     {
@@ -56,32 +52,31 @@ class Zend_Tool_Framework_Action_Repository
     }
 
     /**
-     * addAction()
+     * addAction().
      *
-     * @param Zend_Tool_Framework_Action_Interface $action
      * @return Zend_Tool_Framework_Action_Repository
      */
     public function addAction(Zend_Tool_Framework_Action_Interface $action, $overrideExistingAction = false)
     {
         $actionName = $action->getName();
 
-        if ($actionName == '' || $actionName == 'Base') {
+        if ('' == $actionName || 'Base' == $actionName) {
             // require_once 'Zend/Tool/Framework/Action/Exception.php';
             throw new Zend_Tool_Framework_Action_Exception('An action name for the provided action could not be determined.');
         }
 
         if (!$overrideExistingAction && array_key_exists(strtolower((string) $actionName), $this->_actions)) {
             // require_once 'Zend/Tool/Framework/Action/Exception.php';
-            throw new Zend_Tool_Framework_Action_Exception('An action by the name ' . $actionName
-                . ' is already registered and $overrideExistingAction is set to false.');
+            throw new Zend_Tool_Framework_Action_Exception('An action by the name '.$actionName.' is already registered and $overrideExistingAction is set to false.');
         }
 
         $this->_actions[strtolower((string) $actionName)] = $action;
+
         return $this;
     }
 
     /**
-     * process() - this is called when the client is done constructing (after init())
+     * process() - this is called when the client is done constructing (after init()).
      *
      * @return unknown|null
      */
@@ -91,7 +86,7 @@ class Zend_Tool_Framework_Action_Repository
     }
 
     /**
-     * getActions() - get all actions in the repository
+     * getActions() - get all actions in the repository.
      *
      * @return array
      */
@@ -101,9 +96,10 @@ class Zend_Tool_Framework_Action_Repository
     }
 
     /**
-     * getAction() - get an action by a specific name
+     * getAction() - get an action by a specific name.
      *
      * @param string $actionName
+     *
      * @return Zend_Tool_Framework_Action_Interface
      */
     public function getAction($actionName)
@@ -116,25 +112,24 @@ class Zend_Tool_Framework_Action_Repository
     }
 
     /**
-     * count() required by the Countable interface
+     * count() required by the Countable interface.
      *
      * @return int
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function count()
     {
         return count($this->_actions);
     }
 
     /**
-     * getIterator() - get all actions, this supports the IteratorAggregate interface
+     * getIterator() - get all actions, this supports the IteratorAggregate interface.
      *
      * @return ArrayIterator
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function getIterator()
     {
         return new ArrayIterator($this->_actions);
     }
-
 }

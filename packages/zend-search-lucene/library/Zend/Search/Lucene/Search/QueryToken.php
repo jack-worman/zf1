@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,17 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Search
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Search
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -32,36 +31,35 @@ class Zend_Search_Lucene_Search_QueryToken
     /**
      * Token types.
      */
-    const TT_WORD                 = 0;  // Word
-    const TT_PHRASE               = 1;  // Phrase (one or several quoted words)
-    const TT_FIELD                = 2;  // Field name in 'field:word', field:<phrase> or field:(<subquery>) pairs
-    const TT_FIELD_INDICATOR      = 3;  // ':'
-    const TT_REQUIRED             = 4;  // '+'
-    const TT_PROHIBITED           = 5;  // '-'
-    const TT_FUZZY_PROX_MARK      = 6;  // '~'
-    const TT_BOOSTING_MARK        = 7;  // '^'
-    const TT_RANGE_INCL_START     = 8;  // '['
-    const TT_RANGE_INCL_END       = 9;  // ']'
-    const TT_RANGE_EXCL_START     = 10; // '{'
-    const TT_RANGE_EXCL_END       = 11; // '}'
-    const TT_SUBQUERY_START       = 12; // '('
-    const TT_SUBQUERY_END         = 13; // ')'
-    const TT_AND_LEXEME           = 14; // 'AND' or 'and'
-    const TT_OR_LEXEME            = 15; // 'OR'  or 'or'
-    const TT_NOT_LEXEME           = 16; // 'NOT' or 'not'
-    const TT_TO_LEXEME            = 17; // 'TO'  or 'to'
-    const TT_NUMBER               = 18; // Number, like: 10, 0.8, .64, ....
-
+    public const TT_WORD = 0;  // Word
+    public const TT_PHRASE = 1;  // Phrase (one or several quoted words)
+    public const TT_FIELD = 2;  // Field name in 'field:word', field:<phrase> or field:(<subquery>) pairs
+    public const TT_FIELD_INDICATOR = 3;  // ':'
+    public const TT_REQUIRED = 4;  // '+'
+    public const TT_PROHIBITED = 5;  // '-'
+    public const TT_FUZZY_PROX_MARK = 6;  // '~'
+    public const TT_BOOSTING_MARK = 7;  // '^'
+    public const TT_RANGE_INCL_START = 8;  // '['
+    public const TT_RANGE_INCL_END = 9;  // ']'
+    public const TT_RANGE_EXCL_START = 10; // '{'
+    public const TT_RANGE_EXCL_END = 11; // '}'
+    public const TT_SUBQUERY_START = 12; // '('
+    public const TT_SUBQUERY_END = 13; // ')'
+    public const TT_AND_LEXEME = 14; // 'AND' or 'and'
+    public const TT_OR_LEXEME = 15; // 'OR'  or 'or'
+    public const TT_NOT_LEXEME = 16; // 'NOT' or 'not'
+    public const TT_TO_LEXEME = 17; // 'TO'  or 'to'
+    public const TT_NUMBER = 18; // Number, like: 10, 0.8, .64, ....
 
     /**
      * Returns all possible lexeme types.
-     * It's used for syntax analyzer state machine initialization
+     * It's used for syntax analyzer state machine initialization.
      *
      * @return array
      */
     public static function getTypes()
     {
-        return array(   self::TT_WORD,
+        return [self::TT_WORD,
                         self::TT_PHRASE,
                         self::TT_FIELD,
                         self::TT_FIELD_INDICATOR,
@@ -79,63 +77,59 @@ class Zend_Search_Lucene_Search_QueryToken
                         self::TT_OR_LEXEME,
                         self::TT_NOT_LEXEME,
                         self::TT_TO_LEXEME,
-                        self::TT_NUMBER
-                     );
+                        self::TT_NUMBER,
+                     ];
     }
 
-
     /**
-     * TokenCategories
+     * TokenCategories.
      */
-    const TC_WORD           = 0;   // Word
-    const TC_PHRASE         = 1;   // Phrase (one or several quoted words)
-    const TC_NUMBER         = 2;   // Nubers, which are used with syntax elements. Ex. roam~0.8
-    const TC_SYNTAX_ELEMENT = 3;   // +  -  ( )  [ ]  { }  !  ||  && ~ ^
-
+    public const TC_WORD = 0;   // Word
+    public const TC_PHRASE = 1;   // Phrase (one or several quoted words)
+    public const TC_NUMBER = 2;   // Nubers, which are used with syntax elements. Ex. roam~0.8
+    public const TC_SYNTAX_ELEMENT = 3;   // +  -  ( )  [ ]  { }  !  ||  && ~ ^
 
     /**
      * Token type.
      *
-     * @var integer
+     * @var int
      */
     public $type;
 
     /**
      * Token text.
      *
-     * @var integer
+     * @var int
      */
     public $text;
 
     /**
      * Token position within query.
      *
-     * @var integer
+     * @var int
      */
     public $position;
-
 
     /**
      * IndexReader constructor needs token type and token text as a parameters.
      *
-     * @param integer $tokenCategory
-     * @param string  $tokText
-     * @param integer $position
+     * @param int $tokenCategory
+     * @param int $position
      */
     public function __construct($tokenCategory, $tokenText, $position)
     {
-        $this->text     = $tokenText;
+        $this->text = $tokenText;
         $this->position = $position + 1; // Start from 1
 
         switch ($tokenCategory) {
             case self::TC_WORD:
-                if (  strtolower((string) $tokenText) == 'and') {
+                if ('and' == strtolower((string) $tokenText)) {
                     $this->type = self::TT_AND_LEXEME;
-                } else if (strtolower((string) $tokenText) == 'or') {
+                } elseif ('or' == strtolower((string) $tokenText)) {
                     $this->type = self::TT_OR_LEXEME;
-                } else if (strtolower((string) $tokenText) == 'not') {
+                } elseif ('not' == strtolower((string) $tokenText)) {
                     $this->type = self::TT_NOT_LEXEME;
-                } else if (strtolower((string) $tokenText) == 'to') {
+                } elseif ('to' == strtolower((string) $tokenText)) {
                     $this->type = self::TT_TO_LEXEME;
                 } else {
                     $this->type = self::TT_WORD;
@@ -210,16 +204,17 @@ class Zend_Search_Lucene_Search_QueryToken
 
                     default:
                         // require_once 'Zend/Search/Lucene/Exception.php';
-                        throw new Zend_Search_Lucene_Exception('Unrecognized query syntax lexeme: \'' . $tokenText . '\'');
+                        throw new Zend_Search_Lucene_Exception('Unrecognized query syntax lexeme: \''.$tokenText.'\'');
                 }
                 break;
 
             case self::TC_NUMBER:
                 $this->type = self::TT_NUMBER;
 
+                // no break
             default:
                 // require_once 'Zend/Search/Lucene/Exception.php';
-                throw new Zend_Search_Lucene_Exception('Unrecognized lexeme type: \'' . $tokenCategory . '\'');
+                throw new Zend_Search_Lucene_Exception('Unrecognized lexeme type: \''.$tokenCategory.'\'');
         }
     }
 }

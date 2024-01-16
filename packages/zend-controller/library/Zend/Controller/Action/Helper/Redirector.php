@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage Zend_Controller_Action_Helper
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,52 +27,57 @@
 
 /**
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage Zend_Controller_Action_Helper
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_Helper_Abstract
 {
     /**
-     * HTTP status code for redirects
+     * HTTP status code for redirects.
+     *
      * @var int
      */
     protected $_code = 302;
 
     /**
-     * Whether or not calls to _redirect() should exit script execution
-     * @var boolean
+     * Whether or not calls to _redirect() should exit script execution.
+     *
+     * @var bool
      */
     protected $_exit = true;
 
     /**
      * Whether or not _redirect() should attempt to prepend the base URL to the
-     * passed URL (if it's a relative URL)
-     * @var boolean
+     * passed URL (if it's a relative URL).
+     *
+     * @var bool
      */
     protected $_prependBase = true;
 
     /**
-     * Url to which to redirect
+     * Url to which to redirect.
+     *
      * @var string
      */
-    protected $_redirectUrl = null;
+    protected $_redirectUrl;
 
     /**
-     * Whether or not to use an absolute URI when redirecting
-     * @var boolean
+     * Whether or not to use an absolute URI when redirecting.
+     *
+     * @var bool
      */
     protected $_useAbsoluteUri = false;
 
     /**
-     * Whether or not to close the session before exiting
-     * @var boolean
+     * Whether or not to close the session before exiting.
+     *
+     * @var bool
      */
     protected $_closeSessionOnExit = true;
 
     /**
-     * Retrieve HTTP status code to emit on {@link _redirect()} call
+     * Retrieve HTTP status code to emit on {@link _redirect()} call.
      *
      * @return int
      */
@@ -82,40 +87,44 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
     }
 
     /**
-     * Validate HTTP status redirect code
+     * Validate HTTP status redirect code.
      *
-     * @param  int $code
-     * @throws Zend_Controller_Action_Exception on invalid HTTP status code
+     * @param int $code
+     *
      * @return true
+     *
+     * @throws Zend_Controller_Action_Exception on invalid HTTP status code
      */
     protected function _checkCode($code)
     {
-        $code = (int)$code;
+        $code = (int) $code;
         if ((300 > $code) || (307 < $code) || (304 == $code) || (306 == $code)) {
             // require_once 'Zend/Controller/Action/Exception.php';
-            throw new Zend_Controller_Action_Exception('Invalid redirect HTTP status code (' . $code  . ')');
+            throw new Zend_Controller_Action_Exception('Invalid redirect HTTP status code ('.$code.')');
         }
 
         return true;
     }
 
     /**
-     * Set HTTP status code for {@link _redirect()} behaviour
+     * Set HTTP status code for {@link _redirect()} behaviour.
      *
-     * @param  int $code
+     * @param int $code
+     *
      * @return Zend_Controller_Action_Helper_Redirector Provides a fluent interface
      */
     public function setCode($code)
     {
         $this->_checkCode($code);
         $this->_code = $code;
+
         return $this;
     }
 
     /**
      * Retrieve flag for whether or not {@link _redirect()} will exit when finished.
      *
-     * @return boolean
+     * @return bool
      */
     public function getExit()
     {
@@ -123,22 +132,24 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
     }
 
     /**
-     * Set exit flag for {@link _redirect()} behaviour
+     * Set exit flag for {@link _redirect()} behaviour.
      *
-     * @param  boolean $flag
+     * @param bool $flag
+     *
      * @return Zend_Controller_Action_Helper_Redirector Provides a fluent interface
      */
     public function setExit($flag)
     {
         $this->_exit = ($flag) ? true : false;
+
         return $this;
     }
 
     /**
      * Retrieve flag for whether or not {@link _redirect()} will prepend the
-     * base URL on relative URLs
+     * base URL on relative URLs.
      *
-     * @return boolean
+     * @return bool
      */
     public function getPrependBase()
     {
@@ -146,14 +157,16 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
     }
 
     /**
-     * Set 'prepend base' flag for {@link _redirect()} behaviour
+     * Set 'prepend base' flag for {@link _redirect()} behaviour.
      *
-     * @param  boolean $flag
+     * @param bool $flag
+     *
      * @return Zend_Controller_Action_Helper_Redirector Provides a fluent interface
      */
     public function setPrependBase($flag)
     {
         $this->_prependBase = ($flag) ? true : false;
+
         return $this;
     }
 
@@ -161,7 +174,7 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
      * Retrieve flag for whether or not {@link redirectAndExit()} shall close the session before
      * exiting.
      *
-     * @return boolean
+     * @return bool
      */
     public function getCloseSessionOnExit()
     {
@@ -171,19 +184,21 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
     /**
      * Set flag for whether or not {@link redirectAndExit()} shall close the session before exiting.
      *
-     * @param  boolean $flag
+     * @param bool $flag
+     *
      * @return Zend_Controller_Action_Helper_Redirector Provides a fluent interface
      */
     public function setCloseSessionOnExit($flag)
     {
         $this->_closeSessionOnExit = ($flag) ? true : false;
+
         return $this;
     }
 
     /**
-     * Return use absolute URI flag
+     * Return use absolute URI flag.
      *
-     * @return boolean
+     * @return bool
      */
     public function getUseAbsoluteUri()
     {
@@ -191,43 +206,45 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
     }
 
     /**
-     * Set use absolute URI flag
+     * Set use absolute URI flag.
      *
-     * @param  boolean $flag
+     * @param bool $flag
+     *
      * @return Zend_Controller_Action_Helper_Redirector Provides a fluent interface
      */
     public function setUseAbsoluteUri($flag = true)
     {
         $this->_useAbsoluteUri = ($flag) ? true : false;
+
         return $this;
     }
 
     /**
-     * Set redirect in response object
+     * Set redirect in response object.
      *
      * @return void
      */
     protected function _redirect($url)
     {
         if ($this->getUseAbsoluteUri() && !preg_match('#^(https?|ftp)://#', $url)) {
-            $host  = (isset($_SERVER['HTTP_HOST'])?$_SERVER['HTTP_HOST']:'');
-            $proto = (isset($_SERVER['HTTPS'])&&$_SERVER['HTTPS']!=="off") ? 'https' : 'http';
-            $port  = (isset($_SERVER['SERVER_PORT'])?$_SERVER['SERVER_PORT']:80);
-            $uri   = $proto . '://' . $host;
+            $host = (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '');
+            $proto = (isset($_SERVER['HTTPS']) && 'off' !== $_SERVER['HTTPS']) ? 'https' : 'http';
+            $port = (isset($_SERVER['SERVER_PORT']) ? $_SERVER['SERVER_PORT'] : 80);
+            $uri = $proto.'://'.$host;
             if ((('http' == $proto) && (80 != $port)) || (('https' == $proto) && (443 != $port))) {
                 // do not append if HTTP_HOST already contains port
-                if (strrchr($host, ':') === false) {
-                    $uri .= ':' . $port;
+                if (false === strrchr($host, ':')) {
+                    $uri .= ':'.$port;
                 }
             }
-            $url = $uri . '/' . ltrim((string) $url, '/');
+            $url = $uri.'/'.ltrim((string) $url, '/');
         }
         $this->_redirectUrl = $url;
         $this->getResponse()->setRedirect($url, $this->getCode());
     }
 
     /**
-     * Retrieve currently set URL for redirect
+     * Retrieve currently set URL for redirect.
      *
      * @return string
      */
@@ -237,9 +254,10 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
     }
 
     /**
-     * Determine if the baseUrl should be prepended, and prepend if necessary
+     * Determine if the baseUrl should be prepended, and prepend if necessary.
      *
-     * @param  string $url
+     * @param string $url
+     *
      * @return string
      */
     protected function _prependBase($url)
@@ -249,9 +267,9 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
             if ($request instanceof Zend_Controller_Request_Http) {
                 $base = rtrim((string) $request->getBaseUrl(), '/');
                 if (!empty($base) && ('/' != $base)) {
-                    $url = $base . '/' . ltrim((string) $url, '/');
+                    $url = $base.'/'.ltrim((string) $url, '/');
                 } else {
-                    $url = '/' . ltrim((string) $url, '/');
+                    $url = '/'.ltrim((string) $url, '/');
                 }
             }
         }
@@ -260,19 +278,19 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
     }
 
     /**
-     * Set a redirect URL of the form /module/controller/action/params
+     * Set a redirect URL of the form /module/controller/action/params.
      *
-     * @param  string $action
-     * @param  string $controller
-     * @param  string $module
-     * @param  array  $params
+     * @param string $action
+     * @param string $controller
+     * @param string $module
+     *
      * @return void
      */
-    public function setGotoSimple($action, $controller = null, $module = null, array $params = array())
+    public function setGotoSimple($action, $controller = null, $module = null, array $params = [])
     {
         $dispatcher = $this->getFrontController()->getDispatcher();
-        $request    = $this->getRequest();
-        $curModule  = $request->getModuleName();
+        $request = $this->getRequest();
+        $curModule = $request->getModuleName();
         $useDefaultController = false;
 
         if (null === $controller && null !== $module) {
@@ -294,35 +312,35 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
             }
         }
 
-        $params[$request->getModuleKey()]     = $module;
+        $params[$request->getModuleKey()] = $module;
         $params[$request->getControllerKey()] = $controller;
-        $params[$request->getActionKey()]     = $action;
+        $params[$request->getActionKey()] = $action;
 
         $router = $this->getFrontController()->getRouter();
-        $url    = $router->assemble($params, 'default', true);
+        $url = $router->assemble($params, 'default', true);
 
         $this->_redirect($url);
     }
 
     /**
-     * Build a URL based on a route
+     * Build a URL based on a route.
      *
-     * @param  array   $urlOptions
-     * @param  string  $name Route name
-     * @param  boolean $reset
-     * @param  boolean $encode
+     * @param string $name   Route name
+     * @param bool   $reset
+     * @param bool   $encode
+     *
      * @return void
      */
-    public function setGotoRoute(array $urlOptions = array(), $name = null, $reset = false, $encode = true)
+    public function setGotoRoute(array $urlOptions = [], $name = null, $reset = false, $encode = true)
     {
         $router = $this->getFrontController()->getRouter();
-        $url    = $router->assemble($urlOptions, $name, $reset, $encode);
+        $url = $router->assemble($urlOptions, $name, $reset, $encode);
 
         $this->_redirect($url);
     }
 
     /**
-     * Set a redirect URL string
+     * Set a redirect URL string.
      *
      * By default, emits a 302 HTTP status header, prepends base URL as defined
      * in request object if url is relative, and halts script execution by
@@ -341,14 +359,14 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
      * If the exit flag is true (true by default), _redirect() will write and
      * close the current session, if any.
      *
-     * @param  string $url
-     * @param  array  $options
+     * @param string $url
+     *
      * @return void
      */
-    public function setGotoUrl($url, array $options = array())
+    public function setGotoUrl($url, array $options = [])
     {
         // prevent header injections
-        $url = str_replace(array("\n", "\r"), '', $url);
+        $url = str_replace(["\n", "\r"], '', $url);
 
         if (null !== $options) {
             if (isset($options['exit'])) {
@@ -371,15 +389,15 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
     }
 
     /**
-     * Perform a redirect to an action/controller/module with params
+     * Perform a redirect to an action/controller/module with params.
      *
-     * @param  string $action
-     * @param  string $controller
-     * @param  string $module
-     * @param  array  $params
+     * @param string $action
+     * @param string $controller
+     * @param string $module
+     *
      * @return void
      */
-    public function gotoSimple($action, $controller = null, $module = null, array $params = array())
+    public function gotoSimple($action, $controller = null, $module = null, array $params = [])
     {
         $this->setGotoSimple($action, $controller, $module, $params);
 
@@ -389,33 +407,30 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
     }
 
     /**
-     * Perform a redirect to an action/controller/module with params, forcing an immdiate exit
+     * Perform a redirect to an action/controller/module with params, forcing an immdiate exit.
      *
-     * @param  mixed $action
-     * @param  mixed $controller
-     * @param  mixed $module
-     * @param  array $params
      * @return void
      */
-    public function gotoSimpleAndExit($action, $controller = null, $module = null, array $params = array())
+    public function gotoSimpleAndExit($action, $controller = null, $module = null, array $params = [])
     {
         $this->setGotoSimple($action, $controller, $module, $params);
         $this->redirectAndExit();
     }
 
     /**
-     * Redirect to a route-based URL
+     * Redirect to a route-based URL.
      *
      * Uses route's assemble method to build the URL; route is specified by $name;
      * default route is used if none provided.
      *
-     * @param  array   $urlOptions Array of key/value pairs used to assemble URL
-     * @param  string  $name
-     * @param  boolean $reset
-     * @param  boolean $encode
+     * @param array  $urlOptions Array of key/value pairs used to assemble URL
+     * @param string $name
+     * @param bool   $reset
+     * @param bool   $encode
+     *
      * @return void
      */
-    public function gotoRoute(array $urlOptions = array(), $name = null, $reset = false, $encode = true)
+    public function gotoRoute(array $urlOptions = [], $name = null, $reset = false, $encode = true)
     {
         $this->setGotoRoute($urlOptions, $name, $reset, $encode);
 
@@ -425,30 +440,31 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
     }
 
     /**
-     * Redirect to a route-based URL, and immediately exit
+     * Redirect to a route-based URL, and immediately exit.
      *
      * Uses route's assemble method to build the URL; route is specified by $name;
      * default route is used if none provided.
      *
-     * @param  array   $urlOptions Array of key/value pairs used to assemble URL
-     * @param  string  $name
-     * @param  boolean $reset
+     * @param array  $urlOptions Array of key/value pairs used to assemble URL
+     * @param string $name
+     * @param bool   $reset
+     *
      * @return void
      */
-    public function gotoRouteAndExit(array $urlOptions = array(), $name = null, $reset = false)
+    public function gotoRouteAndExit(array $urlOptions = [], $name = null, $reset = false)
     {
         $this->setGotoRoute($urlOptions, $name, $reset);
         $this->redirectAndExit();
     }
 
     /**
-     * Perform a redirect to a url
+     * Perform a redirect to a url.
      *
-     * @param  string $url
-     * @param  array  $options
+     * @param string $url
+     *
      * @return void
      */
-    public function gotoUrl($url, array $options = array())
+    public function gotoUrl($url, array $options = [])
     {
         $this->setGotoUrl($url, $options);
 
@@ -458,20 +474,20 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
     }
 
     /**
-     * Set a URL string for a redirect, perform redirect, and immediately exit
+     * Set a URL string for a redirect, perform redirect, and immediately exit.
      *
-     * @param  string $url
-     * @param  array  $options
+     * @param string $url
+     *
      * @return void
      */
-    public function gotoUrlAndExit($url, array $options = array())
+    public function gotoUrlAndExit($url, array $options = [])
     {
         $this->setGotoUrl($url, $options);
         $this->redirectAndExit();
     }
 
     /**
-     * exit(): Perform exit for redirector
+     * exit(): Perform exit for redirector.
      *
      * @return void
      */
@@ -487,45 +503,45 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
         }
 
         $this->getResponse()->sendHeaders();
-        exit();
+        exit;
     }
 
     /**
      * direct(): Perform helper when called as
-     * $this->_helper->redirector($action, $controller, $module, $params)
+     * $this->_helper->redirector($action, $controller, $module, $params).
      *
-     * @param  string $action
-     * @param  string $controller
-     * @param  string $module
-     * @param  array  $params
+     * @param string $action
+     * @param string $controller
+     * @param string $module
+     *
      * @return void
      */
-    public function direct($action, $controller = null, $module = null, array $params = array())
+    public function direct($action, $controller = null, $module = null, array $params = [])
     {
         $this->gotoSimple($action, $controller, $module, $params);
     }
 
     /**
-     * Overloading
+     * Overloading.
      *
      * Overloading for old 'goto', 'setGoto', and 'gotoAndExit' methods
      *
-     * @param  string $method
-     * @param  array $args
-     * @return mixed
+     * @param string $method
+     * @param array  $args
+     *
      * @throws Zend_Controller_Action_Exception for invalid methods
      */
     public function __call($method, $args)
     {
         $method = strtolower((string) $method);
         if ('goto' == $method) {
-            return call_user_func_array(array($this, 'gotoSimple'), $args);
+            return call_user_func_array([$this, 'gotoSimple'], $args);
         }
         if ('setgoto' == $method) {
-            return call_user_func_array(array($this, 'setGotoSimple'), $args);
+            return call_user_func_array([$this, 'setGotoSimple'], $args);
         }
         if ('gotoandexit' == $method) {
-            return call_user_func_array(array($this, 'gotoSimpleAndExit'), $args);
+            return call_user_func_array([$this, 'gotoSimpleAndExit'], $args);
         }
 
         // require_once 'Zend/Controller/Action/Exception.php';

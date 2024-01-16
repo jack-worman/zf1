@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Queue
- * @subpackage Stomp
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,67 +26,65 @@
 // require_once 'Zend/Queue/Stomp/FrameInterface.php';
 
 /**
- * This class represents a Stomp Frame
+ * This class represents a Stomp Frame.
  *
  * @category   Zend
- * @package    Zend_Queue
- * @subpackage Stomp
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Queue_Stomp_Frame
-    implements Zend_Queue_Stomp_FrameInterface
+class Zend_Queue_Stomp_Frame implements Zend_Queue_Stomp_FrameInterface
 {
-    const END_OF_FRAME   = "\x00\n";
-    const CONTENT_LENGTH = 'content-length';
-    const EOL            = "\n";
+    public const END_OF_FRAME = "\x00\n";
+    public const CONTENT_LENGTH = 'content-length';
+    public const EOL = "\n";
 
     /**
-     * Headers for the frame
+     * Headers for the frame.
      *
      * @var array
      */
-    protected $_headers = array();
+    protected $_headers = [];
 
     /**
-     * The command for the frame
+     * The command for the frame.
      *
      * @var string
      */
-    protected $_command = null;
+    protected $_command;
 
     /**
-     * The body of the frame
+     * The body of the frame.
      *
      * @var string
      */
-    protected $_body = null;
+    protected $_body;
 
     /**
      * Do the content-length automatically?
      */
-    protected $_autoContentLength = null;
+    protected $_autoContentLength;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
-        $this->setHeaders(array());
+        $this->setHeaders([]);
         $this->setBody(null);
         $this->setCommand(null);
         $this->setAutoContentLength(true);
     }
 
     /**
-     * get the status of the auto content length
+     * get the status of the auto content length.
      *
      * If AutoContentLength is true this code will automatically put the
      * content-length header in, even if it is already set by the user.
      *
      * This is done to make the message sending more reliable.
      *
-     * @return boolean|null
+     * @return bool|null
      */
     public function getAutoContentLength()
     {
@@ -94,12 +92,14 @@ class Zend_Queue_Stomp_Frame
     }
 
     /**
-     * setAutoContentLength()
+     * setAutoContentLength().
      *
      * Set the value on or off.
      *
-     * @param boolean $auto
+     * @param bool $auto
+     *
      * @return $this;
+     *
      * @throws Zend_Queue_Exception
      */
     public function setAutoContentLength($auto)
@@ -110,11 +110,12 @@ class Zend_Queue_Stomp_Frame
         }
 
         $this->_autoContentLength = $auto;
+
         return $this;
     }
 
     /**
-     * Get the headers
+     * Get the headers.
      *
      * @return array
      */
@@ -124,12 +125,12 @@ class Zend_Queue_Stomp_Frame
     }
 
     /**
-     * Set the headers
+     * Set the headers.
      *
      * Throws an exception if the array values are not strings.
      *
-     * @param array $headers
      * @return $this
+     *
      * @throws Zend_Queue_Exception
      */
     public function setHeaders(array $headers)
@@ -142,36 +143,41 @@ class Zend_Queue_Stomp_Frame
     }
 
     /**
-     * Sets a value for a header
+     * Sets a value for a header.
      *
-     * @param  string $header
-     * @param  string $value
+     * @param string $header
+     * @param string $value
+     *
      * @return Zend_Queue_Stomp_Frame
+     *
      * @throws Zend_Queue_Exception
      */
-    public function setHeader($header, $value) {
+    public function setHeader($header, $value)
+    {
         if (!is_string($header)) {
             // require_once 'Zend/Queue/Exception.php';
-            throw new Zend_Queue_Exception('$header is not a string: ' . print_r($header, true));
+            throw new Zend_Queue_Exception('$header is not a string: '.print_r($header, true));
         }
 
         if (!is_scalar($value)) {
             // require_once 'Zend/Queue/Exception.php';
-            throw new Zend_Queue_Exception('$value is not a string: ' . print_r($value, true));
+            throw new Zend_Queue_Exception('$value is not a string: '.print_r($value, true));
         }
 
         $this->_headers[$header] = $value;
+
         return $this;
     }
 
-
     /**
-     * Returns a value for a header
+     * Returns a value for a header.
      *
      * Returns false if the header does not exist.
      *
-     * @param  string $header
+     * @param string $header
+     *
      * @return string|false
+     *
      * @throws Zend_Queue_Exception
      */
     public function getHeader($header)
@@ -187,7 +193,7 @@ class Zend_Queue_Stomp_Frame
     }
 
     /**
-     * Return the body for this frame
+     * Return the body for this frame.
      *
      * Returns false if the body does not exist
      *
@@ -195,33 +201,36 @@ class Zend_Queue_Stomp_Frame
      */
     public function getBody()
     {
-        return $this->_body === null
+        return null === $this->_body
             ? false
             : $this->_body;
     }
 
     /**
-     * Set the body for this frame
+     * Set the body for this frame.
      *
      * Set to null for no body.
      *
-     * @param  string|null $body
+     * @param string|null $body
+     *
      * @return Zend_Queue_Stomp_Frame
+     *
      * @throws Zend_Queue_Exception
      */
     public function setBody($body)
     {
-        if (!is_string($body) && $body !== null) {
+        if (!is_string($body) && null !== $body) {
             // require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('$body is not a string or null');
         }
 
         $this->_body = $body;
+
         return $this;
     }
 
     /**
-     * Return the command for this frame
+     * Return the command for this frame.
      *
      * Return false if the command does not exist
      *
@@ -229,46 +238,50 @@ class Zend_Queue_Stomp_Frame
      */
     public function getCommand()
     {
-        return $this->_command === null
+        return null === $this->_command
             ? false
             : $this->_command;
     }
 
     /**
-     * Set the body for this frame
+     * Set the body for this frame.
      *
      * @param  string|null
+     *
      * @return Zend_Queue_Stomp_Frame
+     *
      * @throws Zend_Queue_Exception
      */
     public function setCommand($command)
     {
-        if (!is_string($command) && $command !== null) {
+        if (!is_string($command) && null !== $command) {
             // require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('$command is not a string or null');
         }
 
         $this->_command = $command;
+
         return $this;
     }
 
     /**
-     * Takes the current parameters and returns a Stomp Frame
+     * Takes the current parameters and returns a Stomp Frame.
      *
      * @return string
+     *
      * @throws Zend_Queue_Exception
      */
     public function toFrame()
     {
-        if ($this->getCommand() === false) {
+        if (false === $this->getCommand()) {
             // require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('You must set the command');
         }
 
         $command = $this->getCommand();
         $headers = $this->getHeaders();
-        $body    = $this->getBody();
-        $frame   = '';
+        $body = $this->getBody();
+        $frame = '';
 
         // add a content-length to the SEND command.
         // @see http://stomp.codehaus.org/Protocol
@@ -277,18 +290,18 @@ class Zend_Queue_Stomp_Frame
         }
 
         // Command
-        $frame = $command . self::EOL;
+        $frame = $command.self::EOL;
 
         // Headers
-        foreach ($headers as $key=>$value) {
-            $frame .= $key . ': ' . $value . self::EOL;
+        foreach ($headers as $key => $value) {
+            $frame .= $key.': '.$value.self::EOL;
         }
 
         // Seperator
         $frame .= self::EOL; // blank line required by protocol
 
         // add the body if any
-        if ($body !== false) {
+        if (false !== $body) {
             $frame .= $body;
         }
         $frame .= self::END_OF_FRAME;
@@ -298,6 +311,7 @@ class Zend_Queue_Stomp_Frame
 
     /**
      * @see toFrame()
+     *
      * @return string
      */
     public function __toString()
@@ -307,13 +321,15 @@ class Zend_Queue_Stomp_Frame
         } catch (Zend_Queue_Exception $e) {
             $return = '';
         }
+
         return $return;
     }
 
     /**
-     * Accepts a frame and deconstructs the frame into its component parts
+     * Accepts a frame and deconstructs the frame into its component parts.
      *
-     * @param  string $frame - a stomp frame
+     * @param string $frame - a stomp frame
+     *
      * @return $this
      */
     public function fromFrame($frame)
@@ -323,15 +339,15 @@ class Zend_Queue_Stomp_Frame
             throw new Zend_Queue_Exception('$frame is not a string');
         }
 
-        $headers = array();
-        $body    = null;
+        $headers = [];
+        $body = null;
         $command = false;
-        $header  = '';
+        $header = '';
 
         // separate the headers and the body
-        $match = self::EOL . self::EOL;
-        if (preg_match('/' . $match . '/', $frame)) {
-            list ($header, $body) = explode($match, $frame, 2);
+        $match = self::EOL.self::EOL;
+        if (preg_match('/'.$match.'/', $frame)) {
+            list($header, $body) = explode($match, $frame, 2);
         } else {
             $header = $frame;
         }
@@ -352,12 +368,13 @@ class Zend_Queue_Stomp_Frame
         }
 
         // crop the body if content-length is present
-        if ($this->getHeader(self::CONTENT_LENGTH) !== false ) {
+        if (false !== $this->getHeader(self::CONTENT_LENGTH)) {
             $length = (int) $this->getHeader(self::CONTENT_LENGTH);
-            $body   = substr((string) $body, 0, $length);
+            $body = substr((string) $body, 0, $length);
         }
 
         $this->setBody($body);
+
         return $this;
     }
 }

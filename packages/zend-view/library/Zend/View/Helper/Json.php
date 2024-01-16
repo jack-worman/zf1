@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,11 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ *
  * @version    $Id$
+ *
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,33 +31,31 @@
 // require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * Helper for simplifying JSON responses
+ * Helper for simplifying JSON responses.
  *
- * @package    Zend_View
- * @subpackage Helper
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_View_Helper_Json extends Zend_View_Helper_Abstract
 {
     /**
-     * Encode data as JSON, disable layouts, and set response header
+     * Encode data as JSON, disable layouts, and set response header.
      *
      * If $keepLayouts is true, does not disable layouts.
      * If $encodeJson is false, does not JSON-encode $data
      *
-     * @param  mixed $data
-     * @param  bool $keepLayouts
-     * NOTE:   if boolean, establish $keepLayouts to true|false
-     *         if array, admit params for Zend_Json::encode as enableJsonExprFinder=>true|false
-     *         this array can contains a 'keepLayout'=>true|false and/or 'encodeData'=>true|false
-     *         that will not be passed to Zend_Json::encode method but will be used here
-     * @param  bool $encodeData
+     * @param bool $keepLayouts
+     *                          NOTE:   if boolean, establish $keepLayouts to true|false
+     *                          if array, admit params for Zend_Json::encode as enableJsonExprFinder=>true|false
+     *                          this array can contains a 'keepLayout'=>true|false and/or 'encodeData'=>true|false
+     *                          that will not be passed to Zend_Json::encode method but will be used here
+     * @param bool $encodeData
+     *
      * @return string|void
      */
     public function json($data, $keepLayouts = false, $encodeData = true)
     {
-        $options = array();
+        $options = [];
         if (is_array($keepLayouts)) {
             $options = $keepLayouts;
 
@@ -85,6 +84,7 @@ class Zend_View_Helper_Json extends Zend_View_Helper_Abstract
 
         $response = Zend_Controller_Front::getInstance()->getResponse();
         $response->setHeader('Content-Type', 'application/json', true);
+
         return $data;
     }
 }

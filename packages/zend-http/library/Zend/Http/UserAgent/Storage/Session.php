@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,8 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Http
- * @subpackage UserAgent
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -30,53 +29,49 @@
 // require_once 'Zend/Session/Namespace.php';
 
 /**
- * @package    Zend_Http
- * @subpackage UserAgent
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Http_UserAgent_Storage_Session implements Zend_Http_UserAgent_Storage
 {
     /**
-     * Default session namespace
+     * Default session namespace.
      */
-    const NAMESPACE_DEFAULT = 'Zend_Http_UserAgent';
+    public const NAMESPACE_DEFAULT = 'Zend_Http_UserAgent';
 
     /**
-     * Default session object member name
+     * Default session object member name.
      */
-    const MEMBER_DEFAULT = 'storage';
+    public const MEMBER_DEFAULT = 'storage';
 
     /**
-     * Object to proxy $_SESSION storage
+     * Object to proxy $_SESSION storage.
      *
      * @var Zend_Session_Namespace
      */
     protected $_session;
 
     /**
-     * Session namespace
-     *
-     * @var mixed
+     * Session namespace.
      */
     protected $_namespace;
 
     /**
-     * Session object member
-     *
-     * @var mixed
+     * Session object member.
      */
     protected $_member;
 
     /**
-     * Sets session storage options and initializes session namespace object
+     * Sets session storage options and initializes session namespace object.
      *
      * Expects options to contain 0 or more of the following keys:
      * - browser_type -- maps to "namespace" internally
      * - member
      *
-     * @param  null|array|object $options
+     * @param array|object|null $options
+     *
      * @return void
+     *
      * @throws Zend_Http_UserAgent_Storage_Exception on invalid $options argument
      */
     public function __construct($options = null)
@@ -88,23 +83,20 @@ class Zend_Http_UserAgent_Storage_Session implements Zend_Http_UserAgent_Storage
         }
         if (null !== $options && !is_array($options)) {
             // require_once 'Zend/Http/UserAgent/Storage/Exception.php';
-            throw new Zend_Http_UserAgent_Storage_Exception(sprintf(
-                'Expected array or object options; "%s" provided',
-                gettype($options)
-            ));
+            throw new Zend_Http_UserAgent_Storage_Exception(sprintf('Expected array or object options; "%s" provided', gettype($options)));
         }
 
         // add '.' to prevent the message ''Session namespace must not start with a number'
         $this->_namespace = '.'
-                          . (isset($options['browser_type'])
+                          .(isset($options['browser_type'])
                              ? $options['browser_type']
                              : self::NAMESPACE_DEFAULT);
-        $this->_member    = isset($options['member']) ? $options['member'] : self::MEMBER_DEFAULT;
-        $this->_session   = new Zend_Session_Namespace($this->_namespace);
+        $this->_member = isset($options['member']) ? $options['member'] : self::MEMBER_DEFAULT;
+        $this->_session = new Zend_Session_Namespace($this->_namespace);
     }
 
     /**
-     * Returns the session namespace name
+     * Returns the session namespace name.
      *
      * @return string
      */
@@ -114,7 +106,7 @@ class Zend_Http_UserAgent_Storage_Session implements Zend_Http_UserAgent_Storage
     }
 
     /**
-     * Returns the name of the session object member
+     * Returns the name of the session object member.
      *
      * @return string
      */
@@ -124,9 +116,9 @@ class Zend_Http_UserAgent_Storage_Session implements Zend_Http_UserAgent_Storage
     }
 
     /**
-     * Defined by Zend_Http_UserAgent_Storage
+     * Defined by Zend_Http_UserAgent_Storage.
      *
-     * @return boolean
+     * @return bool
      */
     public function isEmpty()
     {
@@ -134,9 +126,7 @@ class Zend_Http_UserAgent_Storage_Session implements Zend_Http_UserAgent_Storage
     }
 
     /**
-     * Defined by Zend_Http_UserAgent_Storage
-     *
-     * @return mixed
+     * Defined by Zend_Http_UserAgent_Storage.
      */
     public function read()
     {
@@ -144,9 +134,8 @@ class Zend_Http_UserAgent_Storage_Session implements Zend_Http_UserAgent_Storage
     }
 
     /**
-     * Defined by Zend_Http_UserAgent_Storage
+     * Defined by Zend_Http_UserAgent_Storage.
      *
-     * @param  mixed $contents
      * @return void
      */
     public function write($content)
@@ -155,7 +144,7 @@ class Zend_Http_UserAgent_Storage_Session implements Zend_Http_UserAgent_Storage
     }
 
     /**
-     * Defined by Zend_Http_UserAgent_Storage
+     * Defined by Zend_Http_UserAgent_Storage.
      *
      * @return void
      */

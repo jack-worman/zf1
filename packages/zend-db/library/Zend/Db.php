@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,60 +14,59 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /**
  * Class for connecting to SQL databases and performing common operations.
  *
  * @category   Zend
- * @package    Zend_Db
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Db
 {
-
     /**
      * Use the PROFILER constant in the config of a Zend_Db_Adapter.
      */
-    const PROFILER = 'profiler';
+    public const PROFILER = 'profiler';
 
     /**
      * Use the CASE_FOLDING constant in the config of a Zend_Db_Adapter.
      */
-    const CASE_FOLDING = 'caseFolding';
+    public const CASE_FOLDING = 'caseFolding';
 
     /**
      * Use the FETCH_MODE constant in the config of a Zend_Db_Adapter.
      */
-    const FETCH_MODE = 'fetchMode';
+    public const FETCH_MODE = 'fetchMode';
 
     /**
      * Use the AUTO_QUOTE_IDENTIFIERS constant in the config of a Zend_Db_Adapter.
      */
-    const AUTO_QUOTE_IDENTIFIERS = 'autoQuoteIdentifiers';
+    public const AUTO_QUOTE_IDENTIFIERS = 'autoQuoteIdentifiers';
 
     /**
      * Use the ALLOW_SERIALIZATION constant in the config of a Zend_Db_Adapter.
      */
-    const ALLOW_SERIALIZATION = 'allowSerialization';
+    public const ALLOW_SERIALIZATION = 'allowSerialization';
 
     /**
      * Use the AUTO_RECONNECT_ON_UNSERIALIZE constant in the config of a Zend_Db_Adapter.
      */
-    const AUTO_RECONNECT_ON_UNSERIALIZE = 'autoReconnectOnUnserialize';
+    public const AUTO_RECONNECT_ON_UNSERIALIZE = 'autoReconnectOnUnserialize';
 
     /**
      * Use the INT_TYPE, BIGINT_TYPE, and FLOAT_TYPE with the quote() method.
      */
-    const INT_TYPE    = 0;
-    const BIGINT_TYPE = 1;
-    const FLOAT_TYPE  = 2;
+    public const INT_TYPE = 0;
+    public const BIGINT_TYPE = 1;
+    public const FLOAT_TYPE = 2;
 
     /**
      * PDO constant values discovered by this script result:
@@ -101,75 +100,75 @@ class Zend_Db
      * }
      * var_export($const);
      */
-    const ATTR_AUTOCOMMIT = 0;
-    const ATTR_CASE = 8;
-    const ATTR_CLIENT_VERSION = 5;
-    const ATTR_CONNECTION_STATUS = 7;
-    const ATTR_CURSOR = 10;
-    const ATTR_CURSOR_NAME = 9;
-    const ATTR_DRIVER_NAME = 16;
-    const ATTR_ERRMODE = 3;
-    const ATTR_FETCH_CATALOG_NAMES = 15;
-    const ATTR_FETCH_TABLE_NAMES = 14;
-    const ATTR_MAX_COLUMN_LEN = 18;
-    const ATTR_ORACLE_NULLS = 11;
-    const ATTR_PERSISTENT = 12;
-    const ATTR_PREFETCH = 1;
-    const ATTR_SERVER_INFO = 6;
-    const ATTR_SERVER_VERSION = 4;
-    const ATTR_STATEMENT_CLASS = 13;
-    const ATTR_STRINGIFY_FETCHES = 17;
-    const ATTR_TIMEOUT = 2;
-    const CASE_LOWER = 2;
-    const CASE_NATURAL = 0;
-    const CASE_UPPER = 1;
-    const CURSOR_FWDONLY = 0;
-    const CURSOR_SCROLL = 1;
-    const ERR_ALREADY_EXISTS = NULL;
-    const ERR_CANT_MAP = NULL;
-    const ERR_CONSTRAINT = NULL;
-    const ERR_DISCONNECTED = NULL;
-    const ERR_MISMATCH = NULL;
-    const ERR_NO_PERM = NULL;
-    const ERR_NONE = '00000';
-    const ERR_NOT_FOUND = NULL;
-    const ERR_NOT_IMPLEMENTED = NULL;
-    const ERR_SYNTAX = NULL;
-    const ERR_TRUNCATED = NULL;
-    const ERRMODE_EXCEPTION = 2;
-    const ERRMODE_SILENT = 0;
-    const ERRMODE_WARNING = 1;
-    const FETCH_ASSOC = 2;
-    const FETCH_BOTH = 4;
-    const FETCH_BOUND = 6;
-    const FETCH_CLASS = 8;
-    const FETCH_CLASSTYPE = 262144;
-    const FETCH_COLUMN = 7;
-    const FETCH_FUNC = 10;
-    const FETCH_GROUP = 65536;
-    const FETCH_INTO = 9;
-    const FETCH_LAZY = 1;
-    const FETCH_NAMED = 11;
-    const FETCH_NUM = 3;
-    const FETCH_OBJ = 5;
-    const FETCH_ORI_ABS = 4;
-    const FETCH_ORI_FIRST = 2;
-    const FETCH_ORI_LAST = 3;
-    const FETCH_ORI_NEXT = 0;
-    const FETCH_ORI_PRIOR = 1;
-    const FETCH_ORI_REL = 5;
-    const FETCH_SERIALIZE = 524288;
-    const FETCH_UNIQUE = 196608;
-    const NULL_EMPTY_STRING = 1;
-    const NULL_NATURAL = 0;
-    const NULL_TO_STRING = NULL;
-    const PARAM_BOOL = 5;
-    const PARAM_INPUT_OUTPUT = -2147483648;
-    const PARAM_INT = 1;
-    const PARAM_LOB = 3;
-    const PARAM_NULL = 0;
-    const PARAM_STMT = 4;
-    const PARAM_STR = 2;
+    public const ATTR_AUTOCOMMIT = 0;
+    public const ATTR_CASE = 8;
+    public const ATTR_CLIENT_VERSION = 5;
+    public const ATTR_CONNECTION_STATUS = 7;
+    public const ATTR_CURSOR = 10;
+    public const ATTR_CURSOR_NAME = 9;
+    public const ATTR_DRIVER_NAME = 16;
+    public const ATTR_ERRMODE = 3;
+    public const ATTR_FETCH_CATALOG_NAMES = 15;
+    public const ATTR_FETCH_TABLE_NAMES = 14;
+    public const ATTR_MAX_COLUMN_LEN = 18;
+    public const ATTR_ORACLE_NULLS = 11;
+    public const ATTR_PERSISTENT = 12;
+    public const ATTR_PREFETCH = 1;
+    public const ATTR_SERVER_INFO = 6;
+    public const ATTR_SERVER_VERSION = 4;
+    public const ATTR_STATEMENT_CLASS = 13;
+    public const ATTR_STRINGIFY_FETCHES = 17;
+    public const ATTR_TIMEOUT = 2;
+    public const CASE_LOWER = 2;
+    public const CASE_NATURAL = 0;
+    public const CASE_UPPER = 1;
+    public const CURSOR_FWDONLY = 0;
+    public const CURSOR_SCROLL = 1;
+    public const ERR_ALREADY_EXISTS = null;
+    public const ERR_CANT_MAP = null;
+    public const ERR_CONSTRAINT = null;
+    public const ERR_DISCONNECTED = null;
+    public const ERR_MISMATCH = null;
+    public const ERR_NO_PERM = null;
+    public const ERR_NONE = '00000';
+    public const ERR_NOT_FOUND = null;
+    public const ERR_NOT_IMPLEMENTED = null;
+    public const ERR_SYNTAX = null;
+    public const ERR_TRUNCATED = null;
+    public const ERRMODE_EXCEPTION = 2;
+    public const ERRMODE_SILENT = 0;
+    public const ERRMODE_WARNING = 1;
+    public const FETCH_ASSOC = 2;
+    public const FETCH_BOTH = 4;
+    public const FETCH_BOUND = 6;
+    public const FETCH_CLASS = 8;
+    public const FETCH_CLASSTYPE = 262144;
+    public const FETCH_COLUMN = 7;
+    public const FETCH_FUNC = 10;
+    public const FETCH_GROUP = 65536;
+    public const FETCH_INTO = 9;
+    public const FETCH_LAZY = 1;
+    public const FETCH_NAMED = 11;
+    public const FETCH_NUM = 3;
+    public const FETCH_OBJ = 5;
+    public const FETCH_ORI_ABS = 4;
+    public const FETCH_ORI_FIRST = 2;
+    public const FETCH_ORI_LAST = 3;
+    public const FETCH_ORI_NEXT = 0;
+    public const FETCH_ORI_PRIOR = 1;
+    public const FETCH_ORI_REL = 5;
+    public const FETCH_SERIALIZE = 524288;
+    public const FETCH_UNIQUE = 196608;
+    public const NULL_EMPTY_STRING = 1;
+    public const NULL_NATURAL = 0;
+    public const NULL_TO_STRING = null;
+    public const PARAM_BOOL = 5;
+    public const PARAM_INPUT_OUTPUT = -2147483648;
+    public const PARAM_INT = 1;
+    public const PARAM_LOB = 3;
+    public const PARAM_NULL = 0;
+    public const PARAM_STMT = 4;
+    public const PARAM_STR = 2;
 
     /**
      * Factory for Zend_Db_Adapter_Abstract classes.
@@ -191,12 +190,14 @@ class Zend_Db
      * If the first argument is of type Zend_Config, it is assumed to contain
      * all parameters, and the second argument is ignored.
      *
-     * @param  mixed $adapter String name of base adapter class, or Zend_Config object.
-     * @param  mixed $config  OPTIONAL; an array or Zend_Config object with adapter parameters.
+     * @param mixed $adapter string name of base adapter class, or Zend_Config object
+     * @param mixed $config  OPTIONAL; an array or Zend_Config object with adapter parameters
+     *
      * @return Zend_Db_Adapter_Abstract
+     *
      * @throws Zend_Db_Exception
      */
-    public static function factory($adapter, $config = array())
+    public static function factory($adapter, $config = [])
     {
         if ($config instanceof Zend_Config) {
             $config = $config->toArray();
@@ -221,7 +222,7 @@ class Zend_Db
          * Verify that adapter parameters are in an array.
          */
         if (!is_array($config)) {
-            /**
+            /*
              * @see Zend_Db_Exception
              */
             // require_once 'Zend/Db/Exception.php';
@@ -232,7 +233,7 @@ class Zend_Db
          * Verify that an adapter name has been specified.
          */
         if (!is_string($adapter) || empty($adapter)) {
-            /**
+            /*
              * @see Zend_Db_Exception
              */
             // require_once 'Zend/Db/Exception.php';
@@ -244,14 +245,14 @@ class Zend_Db
          */
         $adapterNamespace = 'Zend_Db_Adapter';
         if (isset($config['adapterNamespace'])) {
-            if ($config['adapterNamespace'] != '') {
+            if ('' != $config['adapterNamespace']) {
                 $adapterNamespace = $config['adapterNamespace'];
             }
             unset($config['adapterNamespace']);
         }
 
         // Adapter no longer normalized- see http://framework.zend.com/issues/browse/ZF-5606
-        $adapterName = $adapterNamespace . '_';
+        $adapterName = $adapterNamespace.'_';
         $adapterName .= str_replace((string) ' ', '_', ucwords(str_replace((string) '_', ' ', strtolower((string) $adapter))));
 
         /*
@@ -272,8 +273,8 @@ class Zend_Db
         /*
          * Verify that the object created is a descendent of the abstract adapter type.
          */
-        if (! $dbAdapter instanceof Zend_Db_Adapter_Abstract) {
-            /**
+        if (!$dbAdapter instanceof Zend_Db_Adapter_Abstract) {
+            /*
              * @see Zend_Db_Exception
              */
             // require_once 'Zend/Db/Exception.php';
@@ -282,5 +283,4 @@ class Zend_Db
 
         return $dbAdapter;
     }
-
 }

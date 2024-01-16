@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Oauth
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -42,7 +43,7 @@
 
 /**
  * @category   Zend
- * @package    Zend_Oauth
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -51,35 +52,36 @@ class Zend_Oauth_Consumer extends Zend_Oauth
     public $switcheroo = false; // replace later when this works
 
     /**
-     * Request Token retrieved from OAuth Provider
+     * Request Token retrieved from OAuth Provider.
      *
      * @var Zend_Oauth_Token_Request
      */
-    protected $_requestToken = null;
+    protected $_requestToken;
 
     /**
-     * Access token retrieved from OAuth Provider
+     * Access token retrieved from OAuth Provider.
      *
      * @var Zend_Oauth_Token_Access
      */
-    protected $_accessToken = null;
+    protected $_accessToken;
 
     /**
      * @var Zend_Oauth_Config
      */
-    protected $_config = null;
+    protected $_config;
 
     /**
      * Constructor; create a new object with an optional array|Zend_Config
      * instance containing initialising options.
      *
-     * @param  array|Zend_Config $options
+     * @param array|Zend_Config $options
+     *
      * @return void
      */
     public function __construct($options = null)
     {
-        $this->_config = new Zend_Oauth_Config;
-        if ($options !== null) {
+        $this->_config = new Zend_Oauth_Config();
+        if (null !== $options) {
             if ($options instanceof Zend_Config) {
                 $options = $options->toArray();
             }
@@ -92,9 +94,9 @@ class Zend_Oauth_Consumer extends Zend_Oauth
      * later exchanged for an authorized Access Token used to access the
      * protected resources exposed by a web service API.
      *
-     * @param  null|array $customServiceParameters Non-OAuth Provider-specified parameters
-     * @param  null|string $httpMethod
-     * @param  null|Zend_Oauth_Http_RequestToken $request
+     * @param array|null  $customServiceParameters Non-OAuth Provider-specified parameters
+     * @param string|null $httpMethod
+     *
      * @return Zend_Oauth_Token_Request
      */
     public function getRequestToken(
@@ -102,17 +104,18 @@ class Zend_Oauth_Consumer extends Zend_Oauth
         $httpMethod = null,
         Zend_Oauth_Http_RequestToken $request = null
     ) {
-        if ($request === null) {
+        if (null === $request) {
             $request = new Zend_Oauth_Http_RequestToken($this, $customServiceParameters);
-        } elseif($customServiceParameters !== null) {
+        } elseif (null !== $customServiceParameters) {
             $request->setParameters($customServiceParameters);
         }
-        if ($httpMethod !== null) {
+        if (null !== $httpMethod) {
             $request->setMethod($httpMethod);
         } else {
             $request->setMethod($this->getRequestMethod());
         }
         $this->_requestToken = $request->execute();
+
         return $this->_requestToken;
     }
 
@@ -124,9 +127,6 @@ class Zend_Oauth_Consumer extends Zend_Oauth
      * redirected back to the application which can now exchange the previous
      * Request Token for a fully authorized Access Token.
      *
-     * @param  null|array $customServiceParameters
-     * @param  null|Zend_Oauth_Token_Request $token
-     * @param  null|Zend_OAuth_Http_UserAuthorization $redirect
      * @return string
      */
     public function getRedirectUrl(
@@ -134,14 +134,15 @@ class Zend_Oauth_Consumer extends Zend_Oauth
         Zend_Oauth_Token_Request $token = null,
         Zend_Oauth_Http_UserAuthorization $redirect = null
     ) {
-        if ($redirect === null) {
+        if (null === $redirect) {
             $redirect = new Zend_Oauth_Http_UserAuthorization($this, $customServiceParameters);
-        } elseif($customServiceParameters !== null) {
+        } elseif (null !== $customServiceParameters) {
             $redirect->setParameters($customServiceParameters);
         }
-        if ($token !== null) {
+        if (null !== $token) {
             $this->_requestToken = $token;
         }
+
         return $redirect->getUrl();
     }
 
@@ -151,9 +152,6 @@ class Zend_Oauth_Consumer extends Zend_Oauth
      *
      * Sends headers and exit()s on completion.
      *
-     * @param  null|array $customServiceParameters
-     * @param  null|Zend_Oauth_Token_Request $token
-     * @param  null|Zend_Oauth_Http_UserAuthorization $request
      * @return void
      */
     public function redirect(
@@ -166,7 +164,7 @@ class Zend_Oauth_Consumer extends Zend_Oauth
             $token = null;
         }
         $redirectUrl = $this->getRedirectUrl($customServiceParameters, $token, $request);
-        header('Location: ' . $redirectUrl);
+        header('Location: '.$redirectUrl);
         exit(1);
     }
 
@@ -174,11 +172,12 @@ class Zend_Oauth_Consumer extends Zend_Oauth
      * Retrieve an Access Token in exchange for a previously received/authorized
      * Request Token.
      *
-     * @param  array $queryData GET data returned in user's redirect from Provider
+     * @param array $queryData GET data returned in user's redirect from Provider
      * @param  Zend_Oauth_Token_Request Request Token information
-     * @param  string $httpMethod
-     * @param  Zend_Oauth_Http_AccessToken $request
+     * @param string $httpMethod
+     *
      * @return Zend_Oauth_Token_Access
+     *
      * @throws Zend_Oauth_Exception on invalid authorization token, non-matching response authorization token, or unprovided authorization token
      */
     public function getAccessToken(
@@ -190,21 +189,20 @@ class Zend_Oauth_Consumer extends Zend_Oauth
         $authorizedToken = new Zend_Oauth_Token_AuthorizedRequest($queryData);
         if (!$authorizedToken->isValid()) {
             // require_once 'Zend/Oauth/Exception.php';
-            throw new Zend_Oauth_Exception(
-                'Response from Service Provider is not a valid authorized request token');
+            throw new Zend_Oauth_Exception('Response from Service Provider is not a valid authorized request token');
         }
-        if ($request === null) {
+        if (null === $request) {
             $request = new Zend_Oauth_Http_AccessToken($this);
         }
 
         // OAuth 1.0a Verifier
-        if ($authorizedToken->getParam('oauth_verifier') !== null) {
-            $params = array_merge($request->getParameters(), array(
-                'oauth_verifier' => $authorizedToken->getParam('oauth_verifier')
-            ));
+        if (null !== $authorizedToken->getParam('oauth_verifier')) {
+            $params = array_merge($request->getParameters(), [
+                'oauth_verifier' => $authorizedToken->getParam('oauth_verifier'),
+            ]);
             $request->setParameters($params);
         }
-        if ($httpMethod !== null) {
+        if (null !== $httpMethod) {
             $request->setMethod($httpMethod);
         } else {
             $request->setMethod($this->getRequestMethod());
@@ -212,10 +210,7 @@ class Zend_Oauth_Consumer extends Zend_Oauth
         if (isset($token)) {
             if ($authorizedToken->getToken() !== $token->getToken()) {
                 // require_once 'Zend/Oauth/Exception.php';
-                throw new Zend_Oauth_Exception(
-                    'Authorized token from Service Provider does not match'
-                    . ' supplied Request Token details'
-                );
+                throw new Zend_Oauth_Exception('Authorized token from Service Provider does not match supplied Request Token details');
             }
         } else {
             // require_once 'Zend/Oauth/Exception.php';
@@ -223,6 +218,7 @@ class Zend_Oauth_Consumer extends Zend_Oauth
         }
         $this->_requestToken = $token;
         $this->_accessToken = $request->execute();
+
         return $this->_accessToken;
     }
 
@@ -249,7 +245,7 @@ class Zend_Oauth_Consumer extends Zend_Oauth
     }
 
     /**
-     * Alias to self::getLastAccessToken()
+     * Alias to self::getLastAccessToken().
      *
      * @return Zend_Oauth_Token_Access
      */
@@ -263,9 +259,8 @@ class Zend_Oauth_Consumer extends Zend_Oauth
      * which holds all configuration methods and values this object also presents
      * as it's API.
      *
-     * @param  string $method
-     * @param  array $args
-     * @return mixed
+     * @param string $method
+     *
      * @throws Zend_Oauth_Exception if method does not exist in config object
      */
     public function __call($method, array $args)
@@ -274,6 +269,7 @@ class Zend_Oauth_Consumer extends Zend_Oauth
             // require_once 'Zend/Oauth/Exception.php';
             throw new Zend_Oauth_Exception('Method does not exist: '.$method);
         }
-        return call_user_func_array(array($this->_config,$method), $args);
+
+        return call_user_func_array([$this->_config, $method], $args);
     }
 }

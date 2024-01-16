@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,43 +13,39 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Analysis
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /** Zend_Search_Lucene_Analysis_Analyzer_Common */
 // require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Analysis
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
 class Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum extends Zend_Search_Lucene_Analysis_Analyzer_Common
 {
     /**
-     * Current position in a stream
+     * Current position in a stream.
      *
-     * @var integer
+     * @var int
      */
     private $_position;
 
     /**
-     * Reset token stream
+     * Reset token stream.
      */
     public function reset()
     {
         $this->_position = 0;
 
-        if ($this->_input === null) {
+        if (null === $this->_input) {
             return;
         }
 
@@ -63,18 +59,18 @@ class Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum extends Zend_Search_Lu
     /**
      * Tokenization stream API
      * Get next token
-     * Returns null at the end of stream
+     * Returns null at the end of stream.
      *
      * @return Zend_Search_Lucene_Analysis_Token|null
      */
     public function nextToken()
     {
-        if ($this->_input === null) {
+        if (null === $this->_input) {
             return null;
         }
 
         do {
-            if (! preg_match('/[a-zA-Z0-9]+/', $this->_input, $match, PREG_OFFSET_CAPTURE, $this->_position)) {
+            if (!preg_match('/[a-zA-Z0-9]+/', $this->_input, $match, PREG_OFFSET_CAPTURE, $this->_position)) {
                 // It covers both cases a) there are no matches (preg_match(...) === 0)
                 // b) error occured (preg_match(...) === FALSE)
                 return null;
@@ -87,9 +83,8 @@ class Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum extends Zend_Search_Lu
             $this->_position = $endpos;
 
             $token = $this->normalize(new Zend_Search_Lucene_Analysis_Token($str, $pos, $endpos));
-        } while ($token === null); // try again if token is skipped
+        } while (null === $token); // try again if token is skipped
 
         return $token;
     }
 }
-

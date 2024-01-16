@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage Framework
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -32,15 +32,14 @@
 
 /**
  * @category   Zend
- * @package    Zend_Tool
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Framework_Loader_IncludePathLoader extends Zend_Tool_Framework_Loader_Abstract
 {
-
     /**
-     * _getFiles()
+     * _getFiles().
      *
      * @return array Array of files to load
      */
@@ -50,29 +49,28 @@ class Zend_Tool_Framework_Loader_IncludePathLoader extends Zend_Tool_Framework_L
         $paths = Zend_Loader::explodeIncludePath();
 
         // used for checking similarly named files
-        $relativeItems   = array();
-        $files           = array();
+        $relativeItems = [];
+        $files = [];
         $isZendTraversed = false;
 
         foreach ($paths as $path) {
-
             // default patterns to use
             $filterDenyDirectoryPattern = '.*(/|\\\\).svn';
-            $filterAcceptFilePattern    = '.*(?:Manifest|Provider)\.php$';
+            $filterAcceptFilePattern = '.*(?:Manifest|Provider)\.php$';
 
-            if (!file_exists((string) $path) || $path[0] == '.') {
+            if (!file_exists((string) $path) || '.' == $path[0]) {
                 continue;
             }
 
             $realIncludePath = realpath($path);
 
             // ensure that we only traverse a single version of Zend Framework on all include paths
-            if (file_exists((string) $realIncludePath . '/Zend/Tool/Framework/Loader/IncludePathLoader.php')) {
-                if ($isZendTraversed === false) {
+            if (file_exists((string) $realIncludePath.'/Zend/Tool/Framework/Loader/IncludePathLoader.php')) {
+                if (false === $isZendTraversed) {
                     $isZendTraversed = true;
                 } else {
                     // use the deny directory pattern that includes the path to 'Zend', it will not be accepted
-                    $filterDenyDirectoryPattern = '.*((/|\\\\).svn|' . preg_quote($realIncludePath . DIRECTORY_SEPARATOR) . 'Zend)';
+                    $filterDenyDirectoryPattern = '.*((/|\\\\).svn|'.preg_quote($realIncludePath.DIRECTORY_SEPARATOR).'Zend)';
                 }
             }
 
@@ -84,20 +82,20 @@ class Zend_Tool_Framework_Loader_IncludePathLoader extends Zend_Tool_Framework_L
                 $rdi,
                 $filterDenyDirectoryPattern,
                 $filterAcceptFilePattern
-                );
+            );
 
             // build the rii with the filter
             $iterator = new RecursiveIteratorIterator($filter);
 
             // iterate over the accepted items
             foreach ($iterator as $item) {
-                $file = (string)$item;
-                if($this->_fileIsBlacklisted($file)) {
+                $file = (string) $item;
+                if ($this->_fileIsBlacklisted($file)) {
                     continue;
                 }
 
                 // ensure that the same named file from separate include_paths is not loaded
-                $relativeItem = preg_replace('#^' . preg_quote($realIncludePath . DIRECTORY_SEPARATOR, '#') . '#', '', $item->getRealPath());
+                $relativeItem = preg_replace('#^'.preg_quote($realIncludePath.DIRECTORY_SEPARATOR, '#').'#', '', $item->getRealPath());
 
                 // no links allowed here for now
                 if ($item->isLink()) {
@@ -118,22 +116,23 @@ class Zend_Tool_Framework_Loader_IncludePathLoader extends Zend_Tool_Framework_L
     }
 
     /**
+     * @param string $file
      *
-     * @param  string $file
      * @return bool
      */
     protected function _fileIsBlacklisted($file)
     {
-        $blacklist = array(
-            "PHPUnit".DIRECTORY_SEPARATOR."Framework",
-            "Zend".DIRECTORY_SEPARATOR."OpenId".DIRECTORY_SEPARATOR."Provider"
-        );
+        $blacklist = [
+            'PHPUnit'.DIRECTORY_SEPARATOR.'Framework',
+            'Zend'.DIRECTORY_SEPARATOR.'OpenId'.DIRECTORY_SEPARATOR.'Provider',
+        ];
 
-        foreach($blacklist AS $blacklitedPattern) {
-            if(strpos((string) $file, $blacklitedPattern) !== false) {
+        foreach ($blacklist as $blacklitedPattern) {
+            if (false !== strpos((string) $file, $blacklitedPattern)) {
                 return true;
             }
         }
+
         return false;
     }
 }

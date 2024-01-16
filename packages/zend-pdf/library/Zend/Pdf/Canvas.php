@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Pdf
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id: Style.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
 
@@ -25,7 +26,6 @@
  * Canvas is an abstract rectangle drawing area which can be dropped into
  * page object at specified place.
  *
- * @package    Zend_Pdf
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -38,40 +38,40 @@ class Zend_Pdf_Canvas extends Zend_Pdf_Canvas_Abstract
      *
      * @var array
      */
-    protected $_procSet = array();
+    protected $_procSet = [];
 
     /**
-     * Canvas width expressed in default user space units (1/72 inch)
+     * Canvas width expressed in default user space units (1/72 inch).
      *
      * @var float
      */
     protected $_width;
 
     /**
-     * Canvas height expressed in default user space units (1/72 inch)
+     * Canvas height expressed in default user space units (1/72 inch).
      *
      * @var float
      */
     protected $_height;
 
-    protected $_resources = array('Font'      => array(),
-                                  'XObject'   => array(),
-                                  'ExtGState' => array());
+    protected $_resources = ['Font' => [],
+                                  'XObject' => [],
+                                  'ExtGState' => []];
 
     /**
-     * Object constructor
+     * Object constructor.
      *
      * @param float $width
      * @param float $height
      */
     public function __construct($width, $height)
     {
-        $this->_width  = $width;
+        $this->_width = $width;
         $this->_height = $height;
     }
 
     /**
-     * Add procedure set to the canvas description
+     * Add procedure set to the canvas description.
      *
      * @param string $procSetName
      */
@@ -81,7 +81,7 @@ class Zend_Pdf_Canvas extends Zend_Pdf_Canvas_Abstract
     }
 
     /**
-     * Attach resource to the canvas
+     * Attach resource to the canvas.
      *
      * Method returns a name of the resource which can be used
      * as a resource reference within drawing instructions stream
@@ -89,7 +89,7 @@ class Zend_Pdf_Canvas extends Zend_Pdf_Canvas_Abstract
      * 'XObject', 'Font', 'Properties'
      *
      * @param string $type
-     * @param Zend_Pdf_Resource $resource
+     *
      * @return string
      */
     protected function _attachResource($type, Zend_Pdf_Resource $resource)
@@ -104,7 +104,7 @@ class Zend_Pdf_Canvas extends Zend_Pdf_Canvas_Abstract
 
         $idCounter = 1;
         do {
-            $newResName = $type[0] . $idCounter++;
+            $newResName = $type[0].$idCounter++;
         } while (isset($this->_resources[$type][$newResName]));
 
         $this->_resources[$type][$newResName] = $resObject;
@@ -139,25 +139,28 @@ class Zend_Pdf_Canvas extends Zend_Pdf_Canvas_Abstract
      * Allowed procedure set names: 'PDF', 'Text', 'ImageB', 'ImageC', 'ImageI'
      *
      * @internal
+     *
      * @return array
      */
     public function getResources()
     {
         $this->_resources['ProcSet'] = array_keys($this->_procSet);
+
         return $this->_resources;
     }
 
     /**
-     * Get drawing instructions stream
+     * Get drawing instructions stream.
      *
      * It has to be returned as a PDF stream object to make it reusable.
      *
      * @internal
+     *
      * @returns Zend_Pdf_Resource_ContentStream
      */
     public function getContents()
     {
-        /** @todo implementation */
+        /* @todo implementation */
     }
 
     /**

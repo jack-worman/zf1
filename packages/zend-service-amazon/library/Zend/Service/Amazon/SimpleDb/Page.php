@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,8 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage SimpleDb
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -28,29 +27,28 @@
  * The Custom Exception class that allows you to have access to the AWS Error Code.
  *
  * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage SimpleDb
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_Amazon_SimpleDb_Page
 {
     /**
-     * Page data
+     * Page data.
      *
      * @var string
      */
     protected $_data;
 
     /**
-     * Token identifying page
+     * Token identifying page.
      *
      * @var string|null
      */
     protected $_token;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string      $data
      * @param string|null $token
@@ -62,7 +60,7 @@ class Zend_Service_Amazon_SimpleDb_Page
     }
 
     /**
-     * Set page data
+     * Set page data.
      *
      * @param string $data
      */
@@ -72,7 +70,7 @@ class Zend_Service_Amazon_SimpleDb_Page
     }
 
     /**
-     * Retrieve page data
+     * Retrieve page data.
      *
      * @return string
      */
@@ -82,17 +80,17 @@ class Zend_Service_Amazon_SimpleDb_Page
     }
 
     /**
-     * Set token
+     * Set token.
      *
      * @param string|null $token
      */
     public function setToken($token)
     {
-        $this->_token = (\trim((string) $token) === '') ? null : $token;
+        $this->_token = ('' === \trim((string) $token)) ? null : $token;
     }
 
     /**
-     * Retrieve token
+     * Retrieve token.
      *
      * @return string|null
      */
@@ -102,23 +100,23 @@ class Zend_Service_Amazon_SimpleDb_Page
     }
 
     /**
-     * Determine whether this is the last page of data
+     * Determine whether this is the last page of data.
      *
      * @return bool
      */
     public function isLast()
     {
-        return (null === $this->_token);
+        return null === $this->_token;
     }
 
     /**
-     * Cast to string
+     * Cast to string.
      *
      * @return string
      */
     public function __toString()
     {
-        return "Page with token: " . $this->_token
-             . "\n and data: " . $this->_data;
+        return 'Page with token: '.$this->_token
+             ."\n and data: ".$this->_data;
     }
 }

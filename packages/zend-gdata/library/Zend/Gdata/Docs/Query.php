@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,41 +14,39 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Docs
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Gdata_Query
+ * Zend_Gdata_Query.
  */
 // require_once('Zend/Gdata/Query.php');
 
 /**
- * Assists in constructing queries for Google Document List documents
+ * Assists in constructing queries for Google Document List documents.
  *
- * @link http://code.google.com/apis/gdata/spreadsheets/
+ * @see http://code.google.com/apis/gdata/spreadsheets/
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Docs
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_Docs_Query extends Zend_Gdata_Query
 {
-
     /**
-     * The base URL for retrieving a document list
+     * The base URL for retrieving a document list.
      *
      * @var string
      */
-    const DOCUMENTS_LIST_FEED_URI = 'https://docs.google.com/feeds/documents';
+    public const DOCUMENTS_LIST_FEED_URI = 'https://docs.google.com/feeds/documents';
 
     /**
-     * The generic base URL used by some inherited methods
+     * The generic base URL used by some inherited methods.
      *
      * @var string
      */
@@ -85,11 +83,13 @@ class Zend_Gdata_Docs_Query extends Zend_Gdata_Query
      * include 'full'.
      *
      * @param string $value
+     *
      * @return Zend_Gdata_Docs_Query Provides a fluent interface
      */
     public function setProjection($value)
     {
         $this->_projection = $value;
+
         return $this;
     }
 
@@ -102,6 +102,7 @@ class Zend_Gdata_Docs_Query extends Zend_Gdata_Query
     public function setVisibility($value)
     {
         $this->_visibility = $value;
+
         return $this;
     }
 
@@ -131,15 +132,17 @@ class Zend_Gdata_Docs_Query extends Zend_Gdata_Query
      * completely match the title.
      *
      * @param string $value
+     *
      * @return Zend_Gdata_Docs_Query Provides a fluent interface
      */
     public function setTitle($value)
     {
-        if ($value !== null) {
+        if (null !== $value) {
             $this->_params['title'] = $value;
         } else {
             unset($this->_params['title']);
         }
+
         return $this;
     }
 
@@ -163,7 +166,8 @@ class Zend_Gdata_Docs_Query extends Zend_Gdata_Query
      * in an exact match. Only documents with a title identical to the
      * title parameter will be returned.
      *
-     * @param boolean $value Use either true or false
+     * @param bool $value Use either true or false
+     *
      * @return Zend_Gdata_Docs_Query Provides a fluent interface
      */
     public function setTitleExact($value)
@@ -173,6 +177,7 @@ class Zend_Gdata_Docs_Query extends Zend_Gdata_Query
         } else {
             unset($this->_params['title-exact']);
         }
+
         return $this;
     }
 
@@ -199,24 +204,22 @@ class Zend_Gdata_Docs_Query extends Zend_Gdata_Query
     {
         $uri = $this->_defaultFeedUri;
 
-        if ($this->_visibility !== null) {
-            $uri .= '/' . $this->_visibility;
+        if (null !== $this->_visibility) {
+            $uri .= '/'.$this->_visibility;
         } else {
             // require_once 'Zend/Gdata/App/Exception.php';
-            throw new Zend_Gdata_App_Exception(
-                'A visibility must be provided for cell queries.');
+            throw new Zend_Gdata_App_Exception('A visibility must be provided for cell queries.');
         }
 
-        if ($this->_projection !== null) {
-            $uri .= '/' . $this->_projection;
+        if (null !== $this->_projection) {
+            $uri .= '/'.$this->_projection;
         } else {
             // require_once 'Zend/Gdata/App/Exception.php';
-            throw new Zend_Gdata_App_Exception(
-                'A projection must be provided for cell queries.');
+            throw new Zend_Gdata_App_Exception('A projection must be provided for cell queries.');
         }
 
         $uri .= $this->getQueryString();
+
         return $uri;
     }
-
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage Framework
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,19 +27,18 @@
 
 /**
  * @category   Zend
- * @package    Zend_Tool
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Framework_Client_Storage
 {
-
     /**
      * @var Zend_Tool_Framework_Client_Storage_AdapterInterface
      */
-    protected $_adapter = null;
+    protected $_adapter;
 
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         if (isset($options['adapter'])) {
             $this->setAdapter($options['adapter']);
@@ -49,7 +48,7 @@ class Zend_Tool_Framework_Client_Storage
     public function setAdapter($adapter)
     {
         if (is_string($adapter)) {
-            $storageAdapterClass = 'Zend_Tool_Framework_Client_Storage_' . ucfirst($adapter);
+            $storageAdapterClass = 'Zend_Tool_Framework_Client_Storage_'.ucfirst($adapter);
             if (!class_exists($storageAdapterClass)) {
                 Zend_Loader::loadClass($storageAdapterClass);
             }
@@ -60,7 +59,7 @@ class Zend_Tool_Framework_Client_Storage
 
     public function isEnabled()
     {
-        return ($this->_adapter instanceof Zend_Tool_Framework_Client_Storage_AdapterInterface);
+        return $this->_adapter instanceof Zend_Tool_Framework_Client_Storage_AdapterInterface;
     }
 
     public function put($name, $value)
@@ -85,7 +84,6 @@ class Zend_Tool_Framework_Client_Storage
         } else {
             return $defaultValue;
         }
-
     }
 
     public function has($name)

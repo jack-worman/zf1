@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Media
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,41 +27,39 @@
 // require_once 'Zend/Gdata/App/Extension.php';
 
 /**
- * Represents the media:player element
+ * Represents the media:player element.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Media
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_Media_Extension_MediaPlayer extends Zend_Gdata_Extension
 {
-
     protected $_rootElement = 'player';
     protected $_rootNamespace = 'media';
 
     /**
      * @var string
      */
-    protected $_url = null;
+    protected $_url;
 
     /**
      * @var int
      */
-    protected $_width = null;
+    protected $_width;
 
     /**
      * @var int
      */
-    protected $_height = null;
+    protected $_height;
 
     /**
-     * Constructs a new MediaPlayer element
+     * Constructs a new MediaPlayer element.
      *
      * @param string $url
-     * @param int $width
-     * @param int $height
+     * @param int    $width
+     * @param int    $height
      */
     public function __construct($url = null, $width = null, $height = null)
     {
@@ -79,21 +77,23 @@ class Zend_Gdata_Media_Extension_MediaPlayer extends Zend_Gdata_Extension
      * for application storage/persistence.
      *
      * @param DOMDocument $doc The DOMDocument used to construct DOMElements
-     * @return DOMElement The DOMElement representing this element and all
-     * child properties.
+     *
+     * @return DOMElement the DOMElement representing this element and all
+     *                    child properties
      */
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
         $element = parent::getDOM($doc, $majorVersion, $minorVersion);
-        if ($this->_url !== null) {
+        if (null !== $this->_url) {
             $element->setAttribute('url', $this->_url);
         }
-        if ($this->_width !== null) {
+        if (null !== $this->_width) {
             $element->setAttribute('width', $this->_width);
         }
-        if ($this->_height !== null) {
+        if (null !== $this->_height) {
             $element->setAttribute('height', $this->_height);
         }
+
         return $element;
     }
 
@@ -107,17 +107,17 @@ class Zend_Gdata_Media_Extension_MediaPlayer extends Zend_Gdata_Extension
     protected function takeAttributeFromDOM($attribute)
     {
         switch ($attribute->localName) {
-        case 'url':
-            $this->_url = $attribute->nodeValue;
-            break;
-        case 'width':
-            $this->_width = $attribute->nodeValue;
-            break;
-        case 'height':
-            $this->_height = $attribute->nodeValue;
-            break;
-        default:
-            parent::takeAttributeFromDOM($attribute);
+            case 'url':
+                $this->_url = $attribute->nodeValue;
+                break;
+            case 'width':
+                $this->_width = $attribute->nodeValue;
+                break;
+            case 'height':
+                $this->_height = $attribute->nodeValue;
+                break;
+            default:
+                parent::takeAttributeFromDOM($attribute);
         }
     }
 
@@ -131,11 +131,13 @@ class Zend_Gdata_Media_Extension_MediaPlayer extends Zend_Gdata_Extension
 
     /**
      * @param string $value
+     *
      * @return Zend_Gdata_Media_Extension_MediaPlayer Provides a fluent interface
      */
     public function setUrl($value)
     {
         $this->_url = $value;
+
         return $this;
     }
 
@@ -149,11 +151,13 @@ class Zend_Gdata_Media_Extension_MediaPlayer extends Zend_Gdata_Extension
 
     /**
      * @param int $value
+     *
      * @return Zend_Gdata_Media_Extension_MediaPlayer Provides a fluent interface
      */
     public function setWidth($value)
     {
         $this->_width = $value;
+
         return $this;
     }
 
@@ -167,12 +171,13 @@ class Zend_Gdata_Media_Extension_MediaPlayer extends Zend_Gdata_Extension
 
     /**
      * @param int $value
+     *
      * @return Zend_Gdata_Media_Extension_MediaPlayer Provides a fluent interface
      */
     public function setHeight($value)
     {
         $this->_height = $value;
+
         return $this;
     }
-
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Reflection
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -24,7 +25,7 @@
 
 /**
  * @category   Zend
- * @package    Zend_Reflection
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -33,30 +34,31 @@ class Zend_Reflection_Docblock_Tag implements Reflector
     /**
      * @var array Array of Class names
      */
-    protected static $_tagClasses = array(
-        'param'  => 'Zend_Reflection_Docblock_Tag_Param',
+    protected static $_tagClasses = [
+        'param' => 'Zend_Reflection_Docblock_Tag_Param',
         'return' => 'Zend_Reflection_Docblock_Tag_Return',
-        );
+        ];
 
     /**
      * @var string
      */
-    protected $_name = null;
+    protected $_name;
 
     /**
      * @var string
      */
-    protected $_description = null;
+    protected $_description;
 
     /**
-     * Factory: Create the appropriate annotation tag object
+     * Factory: Create the appropriate annotation tag object.
      *
-     * @param  string $tagDocblockLine
+     * @param string $tagDocblockLine
+     *
      * @return Zend_Reflection_Docblock_Tag
      */
     public static function factory($tagDocblockLine)
     {
-        $matches = array();
+        $matches = [];
 
         if (!preg_match('#^@(\w+)(\s|$)#', $tagDocblockLine, $matches)) {
             // require_once 'Zend/Reflection/Exception.php';
@@ -69,17 +71,20 @@ class Zend_Reflection_Docblock_Tag implements Reflector
             if (!class_exists($tagClass)) {
                 Zend_Loader::loadClass($tagClass);
             }
+
             return new $tagClass($tagDocblockLine);
         }
+
         return new self($tagDocblockLine);
     }
 
     /**
-     * Export reflection
+     * Export reflection.
      *
      * Required by Reflector
      *
      * @todo   What should this do?
+     *
      * @return void
      */
     public static function export()
@@ -87,29 +92,31 @@ class Zend_Reflection_Docblock_Tag implements Reflector
     }
 
     /**
-     * Serialize to string
+     * Serialize to string.
      *
      * Required by Reflector
      *
      * @todo   What should this do?
+     *
      * @return string
      */
     public function __toString()
     {
-        $str = "Docblock Tag [ * @".$this->_name." ]".PHP_EOL;
+        $str = 'Docblock Tag [ * @'.$this->_name.' ]'.PHP_EOL;
 
         return $str;
     }
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param  string $tagDocblockLine
+     * @param string $tagDocblockLine
+     *
      * @return void
      */
     public function __construct($tagDocblockLine)
     {
-        $matches = array();
+        $matches = [];
 
         // find the line
         if (!preg_match('#^@(\w+)(?:\s+([^\s].*)|$)?#', $tagDocblockLine, $matches)) {
@@ -124,7 +131,7 @@ class Zend_Reflection_Docblock_Tag implements Reflector
     }
 
     /**
-     * Get annotation tag name
+     * Get annotation tag name.
      *
      * @return string
      */
@@ -134,7 +141,7 @@ class Zend_Reflection_Docblock_Tag implements Reflector
     }
 
     /**
-     * Get annotation tag description
+     * Get annotation tag description.
      *
      * @return string
      */

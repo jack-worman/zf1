@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed_Writer
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -41,27 +42,24 @@
 
 /**
  * @category   Zend
- * @package    Zend_Feed_Writer
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Writer_Renderer_Feed_Atom
-    extends Zend_Feed_Writer_Renderer_Feed_Atom_AtomAbstract
-    implements Zend_Feed_Writer_Renderer_RendererInterface
+class Zend_Feed_Writer_Renderer_Feed_Atom extends Zend_Feed_Writer_Renderer_Feed_Atom_AtomAbstract implements Zend_Feed_Writer_Renderer_RendererInterface
 {
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param  Zend_Feed_Writer_Feed $container
      * @return void
      */
-    public function __construct (Zend_Feed_Writer_Feed $container)
+    public function __construct(Zend_Feed_Writer_Feed $container)
     {
         parent::__construct($container);
     }
 
     /**
-     * Render Atom feed
+     * Render Atom feed.
      *
      * @return Zend_Feed_Writer_Renderer_Feed_Atom
      */
@@ -115,7 +113,7 @@ class Zend_Feed_Writer_Renderer_Feed_Atom
                 }
                 $renderer = new Zend_Feed_Writer_Renderer_Entry_Atom_Deleted($entry);
             }
-            if ($this->_ignoreExceptions === true) {
+            if (true === $this->_ignoreExceptions) {
                 $renderer->ignoreExceptions();
             }
             $renderer->setType($this->getType());
@@ -125,7 +123,7 @@ class Zend_Feed_Writer_Renderer_Feed_Atom
             $imported = $this->_dom->importNode($element, true);
             $root->appendChild($imported);
         }
+
         return $this;
     }
-
 }

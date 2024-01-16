@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Json
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,14 +27,14 @@
 
 /**
  * @category   Zend
- * @package    Zend_Json
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Json_Server_Response_Http extends Zend_Json_Server_Response
 {
     /**
-     * Emit JSON
+     * Emit JSON.
      *
      * Send appropriate HTTP headers. If no Id, then return an empty string.
      *
@@ -50,7 +51,7 @@ class Zend_Json_Server_Response_Http extends Zend_Json_Server_Response
     }
 
     /**
-     * Send headers
+     * Send headers.
      *
      * If headers are already sent, do nothing. If null ID, send HTTP 204
      * header. Otherwise, send content type header based on content type of
@@ -66,6 +67,7 @@ class Zend_Json_Server_Response_Http extends Zend_Json_Server_Response
 
         if (!$this->isError() && (null === $this->getId())) {
             header('HTTP/1.1 204 No Content');
+
             return;
         }
 
@@ -75,7 +77,7 @@ class Zend_Json_Server_Response_Http extends Zend_Json_Server_Response
 
         $contentType = $smd->getContentType();
         if (!empty($contentType)) {
-            header('Content-Type: ' . $contentType);
+            header('Content-Type: '.$contentType);
         }
     }
 }

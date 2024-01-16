@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage Framework
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,16 +27,14 @@
 
 /**
  * @category   Zend
- * @package    Zend_Tool
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Provider_Manifest implements
-    Zend_Tool_Framework_Manifest_ProviderManifestable
+class Zend_Tool_Project_Provider_Manifest implements Zend_Tool_Framework_Manifest_ProviderManifestable
 {
-
     /**
-     * getProviders()
+     * getProviders().
      *
      * @return array Array of Providers
      */
@@ -44,7 +42,7 @@ class Zend_Tool_Project_Provider_Manifest implements
     {
         // the order here will represent what the output will look like when iterating a manifest
 
-        return array(
+        return [
             // top level project & profile providers
             'Zend_Tool_Project_Provider_Profile',
             'Zend_Tool_Project_Provider_Project',
@@ -69,7 +67,6 @@ class Zend_Tool_Project_Provider_Manifest implements
 
             // provider within project provider
             'Zend_Tool_Project_Provider_ProjectProvider',
-
-        );
+        ];
     }
 }

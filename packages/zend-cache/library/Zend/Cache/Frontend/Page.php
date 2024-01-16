@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,30 +13,26 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Cache
- * @subpackage Zend_Cache_Frontend
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /**
  * @see Zend_Cache_Core
  */
 // require_once 'Zend/Cache/Core.php';
 
-
 /**
- * @package    Zend_Cache
- * @subpackage Zend_Cache_Frontend
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Cache_Frontend_Page extends Zend_Cache_Core
 {
     /**
-     * This frontend specific options
+     * This frontend specific options.
      *
      * ====> (boolean) http_conditional :
      * - if true, http conditional mode is on
@@ -81,12 +77,12 @@ class Zend_Cache_Frontend_Page extends Zend_Cache_Core
      *
      * @var array options
      */
-    protected $_specificOptions = array(
+    protected $_specificOptions = [
         'http_conditional' => false,
         'debug_header' => false,
         'content_type_memorization' => false,
-        'memorize_headers' => array(),
-        'default_options' => array(
+        'memorize_headers' => [],
+        'default_options' => [
             'cache_with_get_variables' => false,
             'cache_with_post_variables' => false,
             'cache_with_session_variables' => false,
@@ -99,35 +95,36 @@ class Zend_Cache_Frontend_Page extends Zend_Cache_Core
             'make_id_with_cookie_variables' => true,
             'cache' => true,
             'specific_lifetime' => false,
-            'tags' => array(),
-            'priority' => null
-        ),
-        'regexps' => array()
-    );
+            'tags' => [],
+            'priority' => null,
+        ],
+        'regexps' => [],
+    ];
 
     /**
-     * Internal array to store some options
+     * Internal array to store some options.
      *
      * @var array associative array of options
      */
-    protected $_activeOptions = array();
+    protected $_activeOptions = [];
 
     /**
-     * If true, the page won't be cached
+     * If true, the page won't be cached.
      *
-     * @var boolean
+     * @var bool
      */
     protected $_cancel = false;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param  array   $options                Associative array of options
-     * @param  boolean $doNotTestCacheValidity If set to true, the cache validity won't be tested
-     * @throws Zend_Cache_Exception
+     * @param array $options Associative array of options
+     *
      * @return void
+     *
+     * @throws Zend_Cache_Exception
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         foreach ($options as $name => $value) {
             $name = strtolower((string) $name);
@@ -154,18 +151,20 @@ class Zend_Cache_Frontend_Page extends Zend_Cache_Core
     }
 
     /**
-     * Specific setter for the 'default_options' option (with some additional tests)
+     * Specific setter for the 'default_options' option (with some additional tests).
      *
-     * @param  array $options Associative array
-     * @throws Zend_Cache_Exception
+     * @param array $options Associative array
+     *
      * @return void
+     *
+     * @throws Zend_Cache_Exception
      */
     protected function _setDefaultOptions($options)
     {
         if (!is_array($options)) {
             Zend_Cache::throwException('default_options must be an array !');
         }
-        foreach ($options as $key=>$value) {
+        foreach ($options as $key => $value) {
             if (!is_string($key)) {
                 Zend_Cache::throwException("invalid option [$key] !");
             }
@@ -177,17 +176,19 @@ class Zend_Cache_Frontend_Page extends Zend_Cache_Core
     }
 
     /**
-     * Set the deprecated contentTypeMemorization option
+     * Set the deprecated contentTypeMemorization option.
      *
-     * @param boolean $value value
+     * @param bool $value value
+     *
      * @return void
+     *
      * @deprecated
      */
     protected function _setContentTypeMemorization($value)
     {
         $found = null;
         foreach ($this->_specificOptions['memorize_headers'] as $key => $value) {
-            if (strtolower((string) $value) == 'content-type') {
+            if ('content-type' == strtolower((string) $value)) {
                 $found = $key;
             }
         }
@@ -203,23 +204,23 @@ class Zend_Cache_Frontend_Page extends Zend_Cache_Core
     }
 
     /**
-     * Specific setter for the 'regexps' option (with some additional tests)
+     * Specific setter for the 'regexps' option (with some additional tests).
      *
-     * @param  array $options Associative array
-     * @throws Zend_Cache_Exception
      * @return void
+     *
+     * @throws Zend_Cache_Exception
      */
     protected function _setRegexps($regexps)
     {
         if (!is_array($regexps)) {
             Zend_Cache::throwException('regexps option must be an array !');
         }
-        foreach ($regexps as $regexp=>$conf) {
+        foreach ($regexps as $regexp => $conf) {
             if (!is_array($conf)) {
                 Zend_Cache::throwException('regexps option must be an array of arrays !');
             }
             $validKeys = array_keys($this->_specificOptions['default_options']);
-            foreach ($conf as $key=>$value) {
+            foreach ($conf as $key => $value) {
                 if (!is_string($key)) {
                     Zend_Cache::throwException("unknown option [$key] !");
                 }
@@ -233,11 +234,12 @@ class Zend_Cache_Frontend_Page extends Zend_Cache_Core
     }
 
     /**
-     * Start the cache
+     * Start the cache.
      *
-     * @param  string  $id       (optional) A cache id (if you set a value here, maybe you have to use Output frontend instead)
-     * @param  boolean $doNotDie For unit testing only !
-     * @return boolean True if the cache is hit (false else)
+     * @param string $id       (optional) A cache id (if you set a value here, maybe you have to use Output frontend instead)
+     * @param bool   $doNotDie For unit testing only !
+     *
+     * @return bool True if the cache is hit (false else)
      */
     public function start($id = false, $doNotDie = false)
     {
@@ -251,13 +253,13 @@ class Zend_Cache_Frontend_Page extends Zend_Cache_Core
             }
         }
         $this->_activeOptions = $this->_specificOptions['default_options'];
-        if ($lastMatchingRegexp !== null) {
+        if (null !== $lastMatchingRegexp) {
             $conf = $this->_specificOptions['regexps'][$lastMatchingRegexp];
-            foreach ($conf as $key=>$value) {
+            foreach ($conf as $key => $value) {
                 $this->_activeOptions[$key] = $value;
             }
         }
-        if (!($this->_activeOptions['cache'])) {
+        if (!$this->_activeOptions['cache']) {
             return false;
         }
         if (!$id) {
@@ -267,11 +269,11 @@ class Zend_Cache_Frontend_Page extends Zend_Cache_Core
             }
         }
         $array = $this->load($id);
-        if ($array !== false) {
+        if (false !== $array) {
             $data = $array['data'];
             $headers = $array['headers'];
             if (!headers_sent()) {
-                foreach ($headers as $key=>$headerCouple) {
+                foreach ($headers as $key => $headerCouple) {
                     $name = $headerCouple[0];
                     $value = $headerCouple[1];
                     header("$name: $value");
@@ -284,15 +286,16 @@ class Zend_Cache_Frontend_Page extends Zend_Cache_Core
             if ($doNotDie) {
                 return true;
             }
-            die();
+            exit;
         }
-        ob_start(array($this, '_flush'));
+        ob_start([$this, '_flush']);
         ob_implicit_flush(false);
+
         return false;
     }
 
     /**
-     * Cancel the current caching process
+     * Cancel the current caching process.
      */
     public function cancel()
     {
@@ -301,9 +304,10 @@ class Zend_Cache_Frontend_Page extends Zend_Cache_Core
 
     /**
      * callback for output buffering
-     * (shouldn't really be called manually)
+     * (shouldn't really be called manually).
      *
-     * @param  string $data Buffered output
+     * @param string $data Buffered output
+     *
      * @return string Data to send to browser
      */
     public function _flush($data)
@@ -312,28 +316,29 @@ class Zend_Cache_Frontend_Page extends Zend_Cache_Core
             return $data;
         }
         $contentType = null;
-        $storedHeaders = array();
+        $storedHeaders = [];
         $headersList = headers_list();
-        foreach($this->_specificOptions['memorize_headers'] as $key=>$headerName) {
+        foreach ($this->_specificOptions['memorize_headers'] as $key => $headerName) {
             foreach ($headersList as $headerSent) {
                 $tmp = explode(':', $headerSent);
                 $headerSentName = \trim((string) array_shift($tmp));
                 if (strtolower((string) $headerName) == strtolower((string) $headerSentName)) {
                     $headerSentValue = \trim((string) implode(':', $tmp));
-                    $storedHeaders[] = array($headerSentName, $headerSentValue);
+                    $storedHeaders[] = [$headerSentName, $headerSentValue];
                 }
             }
         }
-        $array = array(
+        $array = [
             'data' => $data,
-            'headers' => $storedHeaders
-        );
+            'headers' => $storedHeaders,
+        ];
         $this->save($array, null, $this->_activeOptions['tags'], $this->_activeOptions['specific_lifetime'], $this->_activeOptions['priority']);
+
         return $data;
     }
 
     /**
-     * Make an id depending on REQUEST_URI and superglobal arrays (depending on options)
+     * Make an id depending on REQUEST_URI and superglobal arrays (depending on options).
      *
      * @return false|string a cache id (string), false if the cache should have not to be used
      */
@@ -341,64 +346,67 @@ class Zend_Cache_Frontend_Page extends Zend_Cache_Core
     {
         $tmp = $_SERVER['REQUEST_URI'];
         $array = explode('?', $tmp, 2);
-          $tmp = $array[0];
-        foreach (array('Get', 'Post', 'Session', 'Files', 'Cookie') as $arrayName) {
-            $tmp2 = $this->_makePartialId($arrayName, $this->_activeOptions['cache_with_' . strtolower((string) $arrayName) . '_variables'], $this->_activeOptions['make_id_with_' . strtolower((string) $arrayName) . '_variables']);
-            if ($tmp2===false) {
+        $tmp = $array[0];
+        foreach (['Get', 'Post', 'Session', 'Files', 'Cookie'] as $arrayName) {
+            $tmp2 = $this->_makePartialId($arrayName, $this->_activeOptions['cache_with_'.strtolower((string) $arrayName).'_variables'], $this->_activeOptions['make_id_with_'.strtolower((string) $arrayName).'_variables']);
+            if (false === $tmp2) {
                 return false;
             }
-            $tmp = $tmp . $tmp2;
+            $tmp = $tmp.$tmp2;
         }
+
         return md5((string) $tmp);
     }
 
     /**
-     * Make a partial id depending on options
+     * Make a partial id depending on options.
      *
-     * @param  string $arrayName Superglobal array name
-     * @param  bool   $bool1     If true, cache is still on even if there are some variables in the superglobal array
-     * @param  bool   $bool2     If true, we have to use the content of the superglobal array to make a partial id
+     * @param string $arrayName Superglobal array name
+     * @param bool   $bool1     If true, cache is still on even if there are some variables in the superglobal array
+     * @param bool   $bool2     If true, we have to use the content of the superglobal array to make a partial id
+     *
      * @return false|string Partial id (string) or false if the cache should have not to be used
      */
     protected function _makePartialId($arrayName, $bool1, $bool2)
     {
         switch ($arrayName) {
-        case 'Get':
-            $var = $_GET;
-            break;
-        case 'Post':
-            $var = $_POST;
-            break;
-        case 'Session':
-            if (isset($_SESSION)) {
-                $var = $_SESSION;
-            } else {
-                $var = null;
-            }
-            break;
-        case 'Cookie':
-            if (isset($_COOKIE)) {
-                $var = $_COOKIE;
-            } else {
-                $var = null;
-            }
-            break;
-        case 'Files':
-            $var = $_FILES;
-            break;
-        default:
-            return false;
+            case 'Get':
+                $var = $_GET;
+                break;
+            case 'Post':
+                $var = $_POST;
+                break;
+            case 'Session':
+                if (isset($_SESSION)) {
+                    $var = $_SESSION;
+                } else {
+                    $var = null;
+                }
+                break;
+            case 'Cookie':
+                if (isset($_COOKIE)) {
+                    $var = $_COOKIE;
+                } else {
+                    $var = null;
+                }
+                break;
+            case 'Files':
+                $var = $_FILES;
+                break;
+            default:
+                return false;
         }
         if ($bool1) {
             if ($bool2) {
                 return serialize($var);
             }
+
             return '';
         }
         if (count($var) > 0) {
             return false;
         }
+
         return '';
     }
-
 }

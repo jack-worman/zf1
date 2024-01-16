@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,77 +14,75 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service
- * @subpackage Yahoo
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
-
 /**
  * @category   Zend
- * @package    Zend_Service
- * @subpackage Yahoo
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_Yahoo_ResultSet implements SeekableIterator
 {
     /**
-     * Total number of results available
+     * Total number of results available.
      *
      * @var int
      */
     public $totalResultsAvailable;
 
     /**
-     * The number of results in this result set
+     * The number of results in this result set.
      *
      * @var int
      */
     public $totalResultsReturned;
 
     /**
-     * The offset in the total result set of this search set
+     * The offset in the total result set of this search set.
      *
      * @var int
      */
     public $firstResultPosition;
 
     /**
-     * A DOMNodeList of results
+     * A DOMNodeList of results.
      *
      * @var DOMNodeList
      */
     protected $_results;
 
     /**
-     * Yahoo Web Service Return Document
+     * Yahoo Web Service Return Document.
      *
      * @var DOMDocument
      */
     protected $_dom;
 
     /**
-     * Xpath Object for $this->_dom
+     * Xpath Object for $this->_dom.
      *
      * @var DOMXPath
      */
     protected $_xpath;
 
     /**
-     * Current Index for SeekableIterator
+     * Current Index for SeekableIterator.
      *
      * @var int
      */
     protected $_currentIndex = 0;
 
-
     /**
-     * Parse the search response and retrieve the results for iteration
+     * Parse the search response and retrieve the results for iteration.
      *
-     * @param  DOMDocument $dom the REST fragment for this object
+     * @param DOMDocument $dom the REST fragment for this object
+     *
      * @return void
      */
     public function __construct(DOMDocument $dom)
@@ -101,9 +99,8 @@ class Zend_Service_Yahoo_ResultSet implements SeekableIterator
         $this->_results = $this->_xpath->query('//yh:Result');
     }
 
-
     /**
-     * Total Number of results returned
+     * Total Number of results returned.
      *
      * @return int Total number of results returned
      */
@@ -112,71 +109,68 @@ class Zend_Service_Yahoo_ResultSet implements SeekableIterator
         return $this->totalResultsReturned;
     }
 
-
     /**
-     * Implement SeekableIterator::current()
+     * Implement SeekableIterator::current().
      *
      * Must be implemented by child classes
      *
-     * @throws Zend_Service_Exception
      * @return Zend_Service_Yahoo_Result
+     *
+     * @throws Zend_Service_Exception
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function current()
     {
-        /**
+        /*
          * @see Zend_Service_Exception
          */
         // require_once 'Zend/Service/Exception.php';
-        throw new Zend_Service_Exception('Zend_Service_Yahoo_ResultSet::current() must be implemented by child '
-                                       . 'classes');
+        throw new Zend_Service_Exception('Zend_Service_Yahoo_ResultSet::current() must be implemented by child classes');
     }
 
-
     /**
-     * Implement SeekableIterator::key()
+     * Implement SeekableIterator::key().
      *
      * @return int
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function key()
     {
         return $this->_currentIndex;
     }
 
-
     /**
-     * Implement SeekableIterator::next()
+     * Implement SeekableIterator::next().
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function next()
     {
-        $this->_currentIndex += 1;
+        ++$this->_currentIndex;
     }
 
-
     /**
-     * Implement SeekableIterator::rewind()
+     * Implement SeekableIterator::rewind().
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function rewind()
     {
         $this->_currentIndex = 0;
     }
 
-
     /**
-     * Implement SeekableIterator::seek()
+     * Implement SeekableIterator::seek().
      *
-     * @param  int $index
+     * @param int $index
+     *
      * @return void
+     *
      * @throws OutOfBoundsException
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function seek($index)
     {
         $indexInt = (int) $index;
@@ -187,13 +181,12 @@ class Zend_Service_Yahoo_ResultSet implements SeekableIterator
         }
     }
 
-
     /**
-     * Implement SeekableIterator::valid()
+     * Implement SeekableIterator::valid().
      *
-     * @return boolean
+     * @return bool
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function valid()
     {
         return $this->_currentIndex < $this->_results->length;

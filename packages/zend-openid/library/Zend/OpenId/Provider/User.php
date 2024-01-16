@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,37 +14,34 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_OpenId
- * @subpackage Zend_OpenId_Provider
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Abstract class to get/store information about logged in user in Web Browser
+ * Abstract class to get/store information about logged in user in Web Browser.
  *
  * @category   Zend
- * @package    Zend_OpenId
- * @subpackage Zend_OpenId_Provider
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_OpenId_Provider_User
 {
-
     /**
-     * Stores information about logged in user
+     * Stores information about logged in user.
      *
      * @param string $id user identity URL
+     *
      * @return bool
      */
     abstract public function setLoggedInUser($id);
 
     /**
-     * Returns identity URL of logged in user or false
-     *
-     * @return mixed
+     * Returns identity URL of logged in user or false.
      */
     abstract public function getLoggedInUser();
 

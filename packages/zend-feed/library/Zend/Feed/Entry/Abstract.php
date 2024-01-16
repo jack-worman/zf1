@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,12 +14,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /**
  * @see Zend_Feed
@@ -39,7 +39,7 @@
  * feed.
  *
  * @category   Zend
- * @package    Zend_Feed
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -59,20 +59,21 @@ abstract class Zend_Feed_Entry_Abstract extends Zend_Feed_Element
      *
      * @var string
      */
-    protected $_rootNamespace = null;
-
+    protected $_rootNamespace;
 
     /**
-     * Zend_Feed_Entry_Abstract constructor
+     * Zend_Feed_Entry_Abstract constructor.
      *
      * The Zend_Feed_Entry_Abstract constructor takes the URI of the feed the entry
      * is part of, and optionally an XML construct (usually a
      * SimpleXMLElement, but it can be an XML string or a DOMNode as
      * well) that contains the contents of the entry.
      *
-     * @param  string $uri
-     * @param  SimpleXMLElement|DOMNode|string  $element
+     * @param string                          $uri
+     * @param SimpleXMLElement|DOMNode|string $element
+     *
      * @return void
+     *
      * @throws Zend_Feed_Exception
      */
     public function __construct($uri = null, $element = null)
@@ -96,7 +97,7 @@ abstract class Zend_Feed_Entry_Abstract extends Zend_Feed_Element
                         }
                     }
 
-                    /**
+                    /*
                      * @see Zend_Feed_Exception
                      */
                     // require_once 'Zend/Feed/Exception.php';
@@ -105,15 +106,15 @@ abstract class Zend_Feed_Entry_Abstract extends Zend_Feed_Element
 
                 $element = $doc->getElementsByTagName($this->_rootElement)->item(0);
                 if (!$element) {
-                    /**
+                    /*
                      * @see Zend_Feed_Exception
                      */
                     // require_once 'Zend/Feed/Exception.php';
-                    throw new Zend_Feed_Exception('No root <' . $this->_rootElement . '> element found, cannot parse feed.');
+                    throw new Zend_Feed_Exception('No root <'.$this->_rootElement.'> element found, cannot parse feed.');
                 }
             } else {
                 $doc = new DOMDocument('1.0', 'utf-8');
-                if ($this->_rootNamespace !== null) {
+                if (null !== $this->_rootNamespace) {
                     $element = $doc->createElementNS(Zend_Feed::lookupNamespace($this->_rootNamespace), $this->_rootElement);
                 } else {
                     $element = $doc->createElement($this->_rootElement);
@@ -123,5 +124,4 @@ abstract class Zend_Feed_Entry_Abstract extends Zend_Feed_Element
 
         parent::__construct($element);
     }
-
 }

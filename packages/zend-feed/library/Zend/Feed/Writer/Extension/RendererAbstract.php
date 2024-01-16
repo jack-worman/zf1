@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to padraic dot brady at yahoo dot com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed_Writer
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -24,56 +25,48 @@
  */
 // require_once 'Zend/Feed/Writer/Extension/RendererInterface.php';
 
- /**
+/**
  * @category   Zend
- * @package    Zend_Feed_Writer
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Feed_Writer_Extension_RendererAbstract
-    implements Zend_Feed_Writer_Extension_RendererInterface
+abstract class Zend_Feed_Writer_Extension_RendererAbstract implements Zend_Feed_Writer_Extension_RendererInterface
 {
     /**
      * @var DOMDocument
      */
-    protected $_dom = null;
+    protected $_dom;
 
-    /**
-     * @var mixed
-     */
-    protected $_entry = null;
+    protected $_entry;
 
     /**
      * @var DOMElement
      */
-    protected $_base = null;
+    protected $_base;
 
-    /**
-     * @var mixed
-     */
-    protected $_container = null;
+    protected $_container;
 
     /**
      * @var string
      */
-    protected $_type = null;
+    protected $_type;
 
     /**
      * @var DOMElement
      */
-    protected $_rootElement = null;
+    protected $_rootElement;
 
     /**
-     * Encoding of all text values
+     * Encoding of all text values.
      *
      * @var string
      */
     protected $_encoding = 'UTF-8';
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param  mixed $container
      * @return void
      */
     public function __construct($container)
@@ -82,19 +75,21 @@ abstract class Zend_Feed_Writer_Extension_RendererAbstract
     }
 
     /**
-     * Set feed encoding
+     * Set feed encoding.
      *
-     * @param  string $enc
+     * @param string $enc
+     *
      * @return Zend_Feed_Writer_Extension_RendererAbstract
      */
     public function setEncoding($enc)
     {
         $this->_encoding = $enc;
+
         return $this;
     }
 
     /**
-     * Get feed encoding
+     * Get feed encoding.
      *
      * @return string
      */
@@ -104,23 +99,20 @@ abstract class Zend_Feed_Writer_Extension_RendererAbstract
     }
 
     /**
-     * Set DOMDocument and DOMElement on which to operate
+     * Set DOMDocument and DOMElement on which to operate.
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $base
      * @return Zend_Feed_Writer_Extension_RendererAbstract
      */
     public function setDomDocument(DOMDocument $dom, DOMElement $base)
     {
-        $this->_dom  = $dom;
+        $this->_dom = $dom;
         $this->_base = $base;
+
         return $this;
     }
 
     /**
-     * Get data container being rendered
-     *
-     * @return mixed
+     * Get data container being rendered.
      */
     public function getDataContainer()
     {
@@ -128,19 +120,21 @@ abstract class Zend_Feed_Writer_Extension_RendererAbstract
     }
 
     /**
-     * Set feed type
+     * Set feed type.
      *
-     * @param  string $type
+     * @param string $type
+     *
      * @return Zend_Feed_Writer_Extension_RendererAbstract
      */
     public function setType($type)
     {
         $this->_type = $type;
+
         return $this;
     }
 
     /**
-     * Get feedtype
+     * Get feedtype.
      *
      * @return string
      */
@@ -150,19 +144,19 @@ abstract class Zend_Feed_Writer_Extension_RendererAbstract
     }
 
     /**
-     * Set root element of document
+     * Set root element of document.
      *
-     * @param  DOMElement $root
      * @return Zend_Feed_Writer_Extension_RendererAbstract
      */
     public function setRootElement(DOMElement $root)
     {
         $this->_rootElement = $root;
+
         return $this;
     }
 
     /**
-     * Get root element
+     * Get root element.
      *
      * @return DOMElement
      */
@@ -172,7 +166,7 @@ abstract class Zend_Feed_Writer_Extension_RendererAbstract
     }
 
     /**
-     * Append namespaces to feed
+     * Append namespaces to feed.
      *
      * @return void
      */

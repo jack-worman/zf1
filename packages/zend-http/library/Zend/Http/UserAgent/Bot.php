@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,32 +13,28 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Http
- * @subpackage UserAgent
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 // require_once 'Zend/Http/UserAgent/AbstractDevice.php';
 
 /**
- * Bot browser type matcher
+ * Bot browser type matcher.
  *
  * @category   Zend
- * @package    Zend_Http
- * @subpackage UserAgent
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
 class Zend_Http_UserAgent_Bot extends Zend_Http_UserAgent_AbstractDevice
 {
-
     /**
-     * User Agent Signatures
+     * User Agent Signatures.
      *
      * @var array
      */
-    protected static $_uaSignatures = array(
+    protected static $_uaSignatures = [
         // The most common ones.
         'googlebot',
         'msnbot',
@@ -103,13 +99,14 @@ class Zend_Http_UserAgent_Bot extends Zend_Http_UserAgent_AbstractDevice
         'yahoo! slurp',
         'yandex',
         'zyborg',
-    );
+    ];
 
     /**
-     * Comparison of the UserAgent chain and browser signatures
+     * Comparison of the UserAgent chain and browser signatures.
      *
-     * @param  string $userAgent User Agent chain
-     * @param  array $server $_SERVER like param
+     * @param string $userAgent User Agent chain
+     * @param array  $server    $_SERVER like param
+     *
      * @return bool
      */
     public static function match($userAgent, $server)
@@ -118,7 +115,7 @@ class Zend_Http_UserAgent_Bot extends Zend_Http_UserAgent_AbstractDevice
     }
 
     /**
-     * Gives the current browser type
+     * Gives the current browser type.
      *
      * @return string
      */

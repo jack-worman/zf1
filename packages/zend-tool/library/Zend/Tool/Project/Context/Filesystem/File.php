@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage Framework
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,27 +26,26 @@
 // require_once 'Zend/Tool/Project/Context/Filesystem/Abstract.php';
 
 /**
- * This class is the front most class for utilizing Zend_Tool_Project
+ * This class is the front most class for utilizing Zend_Tool_Project.
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
  * @category   Zend
- * @package    Zend_Tool
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Project_Context_Filesystem_File extends Zend_Tool_Project_Context_Filesystem_Abstract
 {
+    protected $_fileOnlyContext;
 
-    protected $_fileOnlyContext = null;
+    protected $_filesystemName;
 
-    protected $_filesystemName = null;
-
-    protected $_content = null;
+    protected $_content;
 
     /**
-     * getName()
+     * getName().
      *
      * @return string
      */
@@ -56,7 +55,7 @@ class Zend_Tool_Project_Context_Filesystem_File extends Zend_Tool_Project_Contex
     }
 
     /**
-     * init()
+     * init().
      *
      * @return Zend_Tool_Project_Context_Filesystem_File
      */
@@ -67,31 +66,33 @@ class Zend_Tool_Project_Context_Filesystem_File extends Zend_Tool_Project_Contex
         }
 
         // check to see if this file is
-        if ($this->getName() == 'file') {
+        if ('file' == $this->getName()) {
             $this->_initFileOnlyContext();
         }
 
         // @potential-todo check to ensure that this 'file' resource has no children
         parent::init();
+
         return $this;
     }
 
     /**
-     * getPersistentAttributes()
+     * getPersistentAttributes().
      *
      * @return array
      */
     public function getPersistentAttributes()
     {
-        $returnAttrs = array();
-        if ($this->_filesystemName !== null) {
+        $returnAttrs = [];
+        if (null !== $this->_filesystemName) {
             $returnAttrs['filesystemName'] = $this->_filesystemName;
         }
+
         return $returnAttrs;
     }
 
     /**
-     * setResource()
+     * setResource().
      *
      * @param unknown_type $resource
      */
@@ -99,11 +100,12 @@ class Zend_Tool_Project_Context_Filesystem_File extends Zend_Tool_Project_Contex
     {
         $this->_resource = $resource;
         $this->_resource->setAppendable(false);
+
         return $this;
     }
 
     /**
-     * getResource()
+     * getResource().
      *
      * @return Zend_Tool_Project_Profile_Resource
      */
@@ -113,7 +115,7 @@ class Zend_Tool_Project_Context_Filesystem_File extends Zend_Tool_Project_Contex
     }
 
     /**
-     * create()
+     * create().
      *
      * @return Zend_Tool_Project_Context_Filesystem_File
      */
@@ -127,17 +129,17 @@ class Zend_Tool_Project_Context_Filesystem_File extends Zend_Tool_Project_Contex
             }
         }
 
-
         if (file_exists((string) $this->getPath())) {
             // @todo propt user to determine if its ok to overwrite file
         }
 
         file_put_contents($this->getPath(), $this->getContents());
+
         return $this;
     }
 
     /**
-     * delete()
+     * delete().
      *
      * @return Zend_Tool_Project_Context_Filesystem_File
      */
@@ -145,11 +147,12 @@ class Zend_Tool_Project_Context_Filesystem_File extends Zend_Tool_Project_Contex
     {
         unlink($this->getPath());
         $this->_resource->setDeleted(true);
+
         return $this;
     }
 
     /**
-     * getContents()
+     * getContents().
      *
      * @return null
      */
@@ -163,12 +166,11 @@ class Zend_Tool_Project_Context_Filesystem_File extends Zend_Tool_Project_Contex
         if ($this->_resource->hasAttribute('defaultContentCallback')) {
             $contentFunc = $this->_resource->getAttribute('defaultContentCallback');
             if (is_callable($contentFunc)) {
-                $this->_content = call_user_func_array($contentFunc, array($this));
+                $this->_content = call_user_func_array($contentFunc, [$this]);
             }
         }
-        if ($this->_filesystemName == null) {
+        if (null == $this->_filesystemName) {
             $this->_filesystemName = 'file.txt';
         }
     }
-
 }

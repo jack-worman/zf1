@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,21 +13,20 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage Server
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_XmlRpc_Fault
+ * Zend_XmlRpc_Fault.
  */
 // require_once 'Zend/XmlRpc/Fault.php';
 
-
 /**
- * XMLRPC Server Faults
+ * XMLRPC Server Faults.
  *
  * Encapsulates an exception for use as an XMLRPC fault response. Valid
  * exception classes that may be used for generating the fault code and fault
@@ -42,44 +41,42 @@
  * to instantiate a Zend_XmlRpc_Server_Fault.
  *
  * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage Server
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_XmlRpc_Server_Fault extends Zend_XmlRpc_Fault
 {
     /**
-     * @var \Throwable
+     * @var Throwable
      */
     protected $_exception;
 
     /**
      * @var array Array of exception classes that may define xmlrpc faults
      */
-    protected static $_faultExceptionClasses = array('Zend_XmlRpc_Server_Exception' => true);
+    protected static $_faultExceptionClasses = ['Zend_XmlRpc_Server_Exception' => true];
 
     /**
      * @var array Array of fault observers
      */
-    protected static $_observers = array();
+    protected static $_observers = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param \Throwable $e
      * @return void
      */
-    public function __construct(\Throwable $e)
+    public function __construct(Throwable $e)
     {
         $this->_exception = $e;
-        $code             = 404;
-        $message          = 'Unknown error';
-        $exceptionClass   = get_class($e);
+        $code = 404;
+        $message = 'Unknown error';
+        $exceptionClass = get_class($e);
 
         foreach (array_keys(self::$_faultExceptionClasses) as $class) {
             if ($e instanceof $class) {
-                $code    = $e->getCode();
+                $code = $e->getCode();
                 $message = $e->getMessage();
                 break;
             }
@@ -90,26 +87,26 @@ class Zend_XmlRpc_Server_Fault extends Zend_XmlRpc_Fault
         // Notify exception observers, if present
         if (!empty(self::$_observers)) {
             foreach (array_keys(self::$_observers) as $observer) {
-                call_user_func(array($observer, 'observe'), $this);
+                call_user_func([$observer, 'observe'], $this);
             }
         }
     }
 
     /**
-     * Return Zend_XmlRpc_Server_Fault instance
+     * Return Zend_XmlRpc_Server_Fault instance.
      *
-     * @param \Throwable $e
      * @return Zend_XmlRpc_Server_Fault
      */
-    public static function getInstance(\Throwable $e)
+    public static function getInstance(Throwable $e)
     {
         return new self($e);
     }
 
     /**
-     * Attach valid exceptions that can be used to define xmlrpc faults
+     * Attach valid exceptions that can be used to define xmlrpc faults.
      *
      * @param string|array $classes Class name or array of class names
+     *
      * @return void
      */
     public static function attachFaultException($classes)
@@ -126,9 +123,10 @@ class Zend_XmlRpc_Server_Fault extends Zend_XmlRpc_Fault
     }
 
     /**
-     * Detach fault exception classes
+     * Detach fault exception classes.
      *
      * @param string|array $classes Class name or array of class names
+     *
      * @return void
      */
     public static function detachFaultException($classes)
@@ -145,7 +143,7 @@ class Zend_XmlRpc_Server_Fault extends Zend_XmlRpc_Fault
     }
 
     /**
-     * Attach an observer class
+     * Attach an observer class.
      *
      * Allows observation of xmlrpc server faults, thus allowing logging or mail
      * notification of fault responses on the xmlrpc server.
@@ -154,14 +152,14 @@ class Zend_XmlRpc_Server_Fault extends Zend_XmlRpc_Fault
      * 'observe' that accepts an exception as its sole argument.
      *
      * @param string $class
-     * @return boolean
+     *
+     * @return bool
      */
     public static function attachObserver($class)
     {
         if (!is_string($class)
             || !class_exists($class)
-            || !is_callable(array($class, 'observe')))
-        {
+            || !is_callable([$class, 'observe'])) {
             return false;
         }
 
@@ -173,10 +171,11 @@ class Zend_XmlRpc_Server_Fault extends Zend_XmlRpc_Fault
     }
 
     /**
-     * Detach an observer
+     * Detach an observer.
      *
      * @param string $class
-     * @return boolean
+     *
+     * @return bool
      */
     public static function detachObserver($class)
     {
@@ -185,14 +184,14 @@ class Zend_XmlRpc_Server_Fault extends Zend_XmlRpc_Fault
         }
 
         unset(self::$_observers[$class]);
+
         return true;
     }
 
     /**
-     * Retrieve the exception
+     * Retrieve the exception.
      *
-     * @access public
-     * @return \Throwable
+     * @return Throwable
      */
     public function getException()
     {

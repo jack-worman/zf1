@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,8 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage Decorator
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -29,41 +28,41 @@
 // require_once 'Zend/File/Transfer/Adapter/Http.php';
 
 /**
- * Zend_Form_Decorator_File
+ * Zend_Form_Decorator_File.
  *
  * Fixes the rendering for all subform and multi file elements
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage Decorator
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-class Zend_Form_Decorator_File
-    extends Zend_Form_Decorator_Abstract
-    implements Zend_Form_Decorator_Marker_File_Interface
+class Zend_Form_Decorator_File extends Zend_Form_Decorator_Abstract implements Zend_Form_Decorator_Marker_File_Interface
 {
     /**
-     * Attributes that should not be passed to helper
+     * Attributes that should not be passed to helper.
+     *
      * @var array
      */
-    protected $_attribBlacklist = array('helper', 'placement', 'separator', 'value');
+    protected $_attribBlacklist = ['helper', 'placement', 'separator', 'value'];
 
     /**
-     * Default placement: append
+     * Default placement: append.
+     *
      * @var string
      */
     protected $_placement = 'APPEND';
 
     /**
-     * Get attributes to pass to file helper
+     * Get attributes to pass to file helper.
      *
      * @return array
      */
     public function getAttribs()
     {
-        $attribs   = $this->getOptions();
+        $attribs = $this->getOptions();
 
         if (null !== ($element = $this->getElement())) {
             $attribs = array_merge($attribs, $element->getAttribs());
@@ -79,9 +78,10 @@ class Zend_Form_Decorator_File
     }
 
     /**
-     * Render a form file
+     * Render a form file.
      *
-     * @param  string $content
+     * @param string $content
+     *
      * @return string
      */
     public function render($content)
@@ -96,34 +96,34 @@ class Zend_Form_Decorator_File
             return $content;
         }
 
-        $name      = $element->getName();
-        $attribs   = $this->getAttribs();
+        $name = $element->getName();
+        $attribs = $this->getAttribs();
         if (!array_key_exists('id', $attribs)) {
             $attribs['id'] = $name;
         }
 
         $separator = $this->getSeparator();
         $placement = $this->getPlacement();
-        $markup    = array();
-        $size      = $element->getMaxFileSize();
+        $markup = [];
+        $size = $element->getMaxFileSize();
         if ($size > 0) {
             $element->setMaxFileSize(0);
             $markup[] = $view->formHidden('MAX_FILE_SIZE', $size);
         }
 
         if (Zend_File_Transfer_Adapter_Http::isApcAvailable()) {
-            $markup[] = $view->formHidden(ini_get('apc.rfc1867_name'), uniqid(), array('id' => 'progress_key'));
-        } else if (Zend_File_Transfer_Adapter_Http::isUploadProgressAvailable()) {
-            $markup[] = $view->formHidden('UPLOAD_IDENTIFIER', uniqid(), array('id' => 'progress_key'));
+            $markup[] = $view->formHidden(ini_get('apc.rfc1867_name'), uniqid(), ['id' => 'progress_key']);
+        } elseif (Zend_File_Transfer_Adapter_Http::isUploadProgressAvailable()) {
+            $markup[] = $view->formHidden('UPLOAD_IDENTIFIER', uniqid(), ['id' => 'progress_key']);
         }
 
         $helper = $element->helper;
         if ($element->isArray()) {
-            $name .= "[]";
+            $name .= '[]';
             $count = $element->getMultiFile();
             for ($i = 0; $i < $count; ++$i) {
-                $htmlAttribs        = $attribs;
-                $htmlAttribs['id'] .= '-' . $i;
+                $htmlAttribs = $attribs;
+                $htmlAttribs['id'] .= '-'.$i;
                 $markup[] = $view->$helper($name, $htmlAttribs);
             }
         } else {
@@ -134,10 +134,10 @@ class Zend_Form_Decorator_File
 
         switch ($placement) {
             case self::PREPEND:
-                return $markup . $separator . $content;
+                return $markup.$separator.$content;
             case self::APPEND:
             default:
-                return $content . $separator . $markup;
+                return $content.$separator.$markup;
         }
     }
 }

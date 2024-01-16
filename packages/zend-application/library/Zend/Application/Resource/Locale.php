@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Application
- * @subpackage Resource
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,21 +25,19 @@
  */
 // require_once 'Zend/Application/Resource/ResourceAbstract.php';
 
-
 /**
- * Resource for initializing the locale
+ * Resource for initializing the locale.
  *
  * @uses       Zend_Application_Resource_Base
+ *
  * @category   Zend
- * @package    Zend_Application
- * @subpackage Resource
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Application_Resource_Locale
-    extends Zend_Application_Resource_ResourceAbstract
+class Zend_Application_Resource_Locale extends Zend_Application_Resource_ResourceAbstract
 {
-    const DEFAULT_REGISTRY_KEY = 'Zend_Locale';
+    public const DEFAULT_REGISTRY_KEY = 'Zend_Locale';
 
     /**
      * @var Zend_Locale
@@ -47,7 +45,7 @@ class Zend_Application_Resource_Locale
     protected $_locale;
 
     /**
-     * Defined by Zend_Application_Resource_Resource
+     * Defined by Zend_Application_Resource_Resource.
      *
      * @return Zend_Locale
      */
@@ -57,7 +55,7 @@ class Zend_Application_Resource_Locale
     }
 
     /**
-     * Retrieve locale object
+     * Retrieve locale object.
      *
      * @return Zend_Locale
      */
@@ -69,7 +67,7 @@ class Zend_Application_Resource_Locale
             if (!isset($options['default'])) {
                 $this->_locale = new Zend_Locale();
             } elseif (!isset($options['force'])
-                      || (bool)$options['force'] == false
+                      || false == (bool) $options['force']
             ) {
                 // Don't force any locale, just go for auto detection
                 Zend_Locale::setDefault($options['default']);
@@ -88,9 +86,10 @@ class Zend_Application_Resource_Locale
     }
 
     /**
-     * Set the cache
+     * Set the cache.
      *
      * @param string|Zend_Cache_Core $cache
+     *
      * @return Zend_Application_Resource_Locale
      */
     public function setCache($cache)

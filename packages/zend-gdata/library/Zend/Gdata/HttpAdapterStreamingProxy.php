@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Gdata
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -31,8 +31,7 @@
  * strings.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Gdata
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -41,33 +40,33 @@ class Zend_Gdata_HttpAdapterStreamingProxy extends Zend_Http_Client_Adapter_Prox
     /**
      * The amount read from a stream source at a time.
      *
-     * @var integer
+     * @var int
      */
-    const CHUNK_SIZE = 1024;
+    public const CHUNK_SIZE = 1024;
 
     /**
-     * Send request to the proxy server with streaming support
+     * Send request to the proxy server with streaming support.
      *
      * @param string        $method
      * @param Zend_Uri_Http $uri
      * @param string        $http_ver
      * @param array         $headers
      * @param string        $body
+     *
      * @return string Request as string
      */
-    public function write($method, $uri, $http_ver = '1.1', $headers = array(), $body = '')
+    public function write($method, $uri, $http_ver = '1.1', $headers = [], $body = '')
     {
         // If no proxy is set, throw an error
-        if (! $this->config['proxy_host']) {
+        if (!$this->config['proxy_host']) {
             // require_once 'Zend/Http/Client/Adapter/Exception.php';
             throw new Zend_Http_Client_Adapter_Exception('No proxy host set!');
         }
 
         // Make sure we're properly connected
-        if (! $this->socket) {
+        if (!$this->socket) {
             // require_once 'Zend/Http/Client/Adapter/Exception.php';
-            throw new Zend_Http_Client_Adapter_Exception(
-                'Trying to write but we are not connected');
+            throw new Zend_Http_Client_Adapter_Exception('Trying to write but we are not connected');
         }
 
         $host = $this->config['proxy_host'];
@@ -75,20 +74,18 @@ class Zend_Gdata_HttpAdapterStreamingProxy extends Zend_Http_Client_Adapter_Prox
 
         if ($this->connected_to[0] != $host || $this->connected_to[1] != $port) {
             // require_once 'Zend/Http/Client/Adapter/Exception.php';
-            throw new Zend_Http_Client_Adapter_Exception(
-                'Trying to write but we are connected to the wrong proxy ' .
-                'server');
+            throw new Zend_Http_Client_Adapter_Exception('Trying to write but we are connected to the wrong proxy server');
         }
 
         // Add Proxy-Authorization header
-        if ($this->config['proxy_user'] && ! isset($headers['proxy-authorization'])) {
+        if ($this->config['proxy_user'] && !isset($headers['proxy-authorization'])) {
             $headers['proxy-authorization'] = Zend_Http_Client::encodeAuthHeader(
                 $this->config['proxy_user'], $this->config['proxy_pass'], $this->config['proxy_auth']
             );
         }
 
         // if we are proxying HTTPS, preform CONNECT handshake with the proxy
-        if ($uri->getScheme() == 'https' && (! $this->negotiated)) {
+        if ('https' == $uri->getScheme() && (!$this->negotiated)) {
             $this->connectHandshake($uri->getHost(), $uri->getPort(), $http_ver, $headers);
             $this->negotiated = true;
         }
@@ -101,27 +98,26 @@ class Zend_Gdata_HttpAdapterStreamingProxy extends Zend_Http_Client_Adapter_Prox
 
         // Add all headers to the request string
         foreach ($headers as $k => $v) {
-            if (is_string($k)) $v = "$k: $v";
+            if (is_string($k)) {
+                $v = "$k: $v";
+            }
             $request .= "$v\r\n";
         }
 
         $request .= "\r\n";
 
         // Send the request headers
-        if (! @fwrite($this->socket, $request)) {
+        if (!@fwrite($this->socket, $request)) {
             // require_once 'Zend/Http/Client/Adapter/Exception.php';
-            throw new Zend_Http_Client_Adapter_Exception(
-                'Error writing request to proxy server');
+            throw new Zend_Http_Client_Adapter_Exception('Error writing request to proxy server');
         }
 
         // Read from $body, write to socket
         $chunk = $body->read(self::CHUNK_SIZE);
-        while ($chunk !== false) {
+        while (false !== $chunk) {
             if (!@fwrite($this->socket, $chunk)) {
                 // require_once 'Zend/Http/Client/Adapter/Exception.php';
-                throw new Zend_Http_Client_Adapter_Exception(
-                    'Error writing request to server'
-                );
+                throw new Zend_Http_Client_Adapter_Exception('Error writing request to server');
             }
             $chunk = $body->read(self::CHUNK_SIZE);
         }

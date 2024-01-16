@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed_Writer
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -23,28 +24,26 @@
 
 /**
  * @category   Zend
- * @package    Zend_Feed_Writer
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Writer_Renderer_Feed_Atom_Source
-    extends Zend_Feed_Writer_Renderer_Feed_Atom_AtomAbstract
-    implements Zend_Feed_Writer_Renderer_RendererInterface
+class Zend_Feed_Writer_Renderer_Feed_Atom_Source extends Zend_Feed_Writer_Renderer_Feed_Atom_AtomAbstract implements Zend_Feed_Writer_Renderer_RendererInterface
 {
-
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param  Zend_Feed_Writer_Feed_Source $container
+     * @param Zend_Feed_Writer_Feed_Source $container
+     *
      * @return void
      */
-    public function __construct (Zend_Feed_Writer_Source $container)
+    public function __construct(Zend_Feed_Writer_Source $container)
     {
         parent::__construct($container);
     }
 
     /**
-     * Render Atom Feed Metadata (Source element)
+     * Render Atom Feed Metadata (Source element).
      *
      * @return Zend_Feed_Writer_Renderer_Feed_Atom_Source
      */
@@ -78,19 +77,18 @@ class Zend_Feed_Writer_Renderer_Feed_Atom_Source
             $ext->setDomDocument($this->getDomDocument(), $root);
             $ext->render();
         }
+
         return $this;
     }
 
     /**
-     * Set feed generator string
+     * Set feed generator string.
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
      * @return void
      */
     protected function _setGenerator(DOMDocument $dom, DOMElement $root)
     {
-        if(!$this->getDataContainer()->getGenerator()) {
+        if (!$this->getDataContainer()->getGenerator()) {
             return;
         }
 
@@ -106,5 +104,4 @@ class Zend_Feed_Writer_Renderer_Feed_Atom_Source
             $generator->setAttribute('version', $gdata['version']);
         }
     }
-
 }

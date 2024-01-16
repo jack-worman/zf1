@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed_Reader
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -31,14 +32,14 @@
 
 /**
  * @category   Zend
- * @package    Zend_Feed_Reader
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Feed_Reader_Extension_CreativeCommons_Entry extends Zend_Feed_Reader_Extension_EntryAbstract
 {
     /**
-     * Get the entry license
+     * Get the entry license.
      *
      * @return string|null
      */
@@ -54,7 +55,7 @@ class Zend_Feed_Reader_Extension_CreativeCommons_Entry extends Zend_Feed_Reader_
     }
 
     /**
-     * Get the entry licenses
+     * Get the entry licenses.
      *
      * @return array
      */
@@ -65,12 +66,12 @@ class Zend_Feed_Reader_Extension_CreativeCommons_Entry extends Zend_Feed_Reader_
             return $this->_data[$name];
         }
 
-        $licenses = array();
-        $list = $this->_xpath->evaluate($this->getXpathPrefix() . '//cc:license');
+        $licenses = [];
+        $list = $this->_xpath->evaluate($this->getXpathPrefix().'//cc:license');
 
         if ($list->length) {
             foreach ($list as $license) {
-                    $licenses[] = $license->nodeValue;
+                $licenses[] = $license->nodeValue;
             }
 
             $licenses = array_unique($licenses);
@@ -87,8 +88,7 @@ class Zend_Feed_Reader_Extension_CreativeCommons_Entry extends Zend_Feed_Reader_
     }
 
     /**
-     * Register Creative Commons namespaces
-     *
+     * Register Creative Commons namespaces.
      */
     protected function _registerNamespaces()
     {

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,26 +13,25 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_CodeGenerator
- * @subpackage PHP
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
  * @category   Zend
- * @package    Zend_CodeGenerator
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_CodeGenerator_Abstract
 {
-
     /**
      * @var string
      */
-    protected $_sourceContent = null;
+    protected $_sourceContent;
 
     /**
      * @var bool
@@ -40,14 +39,14 @@ abstract class Zend_CodeGenerator_Abstract
     protected $_isSourceDirty = true;
 
     /**
-     * __construct()
+     * __construct().
      *
      * @param array $options
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         $this->_init();
-        if ($options != null) {
+        if (null != $options) {
             // use Zend_Config objects if provided
             if ($options instanceof Zend_Config) {
                 $options = $options->toArray();
@@ -61,47 +60,48 @@ abstract class Zend_CodeGenerator_Abstract
     }
 
     /**
-     * setConfig()
+     * setConfig().
      *
-     * @param Zend_Config $config
      * @return Zend_CodeGenerator_Abstract
      */
     public function setConfig(Zend_Config $config)
     {
         $this->setOptions($config->toArray());
+
         return $this;
     }
 
     /**
-     * setOptions()
+     * setOptions().
      *
-     * @param array $options
      * @return Zend_CodeGenerator_Abstract
      */
-    public function setOptions(Array $options)
+    public function setOptions(array $options)
     {
         foreach ($options as $optionName => $optionValue) {
-            $methodName = 'set' . $optionName;
+            $methodName = 'set'.$optionName;
             if (method_exists($this, $methodName)) {
                 $this->{$methodName}($optionValue);
             }
         }
+
         return $this;
     }
 
     /**
-     * setSourceContent()
+     * setSourceContent().
      *
      * @param string $sourceContent
      */
     public function setSourceContent($sourceContent)
     {
         $this->_sourceContent = $sourceContent;
+
         return;
     }
 
     /**
-     * getSourceContent()
+     * getSourceContent().
      *
      * @return string
      */
@@ -111,31 +111,26 @@ abstract class Zend_CodeGenerator_Abstract
     }
 
     /**
-     * _init() - this is called before the constuctor
-     *
+     * _init() - this is called before the constuctor.
      */
     protected function _init()
     {
-
     }
 
     /**
-     * _prepare() - this is called at construction completion
-     *
+     * _prepare() - this is called at construction completion.
      */
     protected function _prepare()
     {
-
     }
 
     /**
-     * generate() - must be implemented by the child
-     *
+     * generate() - must be implemented by the child.
      */
     abstract public function generate();
 
     /**
-     * __toString() - casting to a string will in turn call generate()
+     * __toString() - casting to a string will in turn call generate().
      *
      * @return string
      */
@@ -143,5 +138,4 @@ abstract class Zend_CodeGenerator_Abstract
     {
         return $this->generate();
     }
-
 }

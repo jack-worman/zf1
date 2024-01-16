@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Gdata
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,17 +27,15 @@
 // require_once 'Zend/Gdata/Extension.php';
 
 /**
- * Represents the openSearch:totalResults element
+ * Represents the openSearch:totalResults element.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Gdata
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_Extension_OpenSearchTotalResults extends Zend_Gdata_Extension
 {
-
     protected $_rootElement = 'totalResults';
     protected $_rootNamespace = 'openSearch';
 
@@ -46,5 +44,4 @@ class Zend_Gdata_Extension_OpenSearchTotalResults extends Zend_Gdata_Extension
         parent::__construct();
         $this->_text = $text;
     }
-
 }

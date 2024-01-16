@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage Framework
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -36,59 +36,54 @@
 // require_once 'Zend/Tool/Framework/Client/Interactive/OutputInterface.php';
 
 /**
- * Zend_Tool_Framework_Client_Console - the CLI Client implementation for Zend_Tool_Framework
+ * Zend_Tool_Framework_Client_Console - the CLI Client implementation for Zend_Tool_Framework.
  *
  * @category   Zend
- * @package    Zend_Tool
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
  * @todo methods need more API documentation.
  */
-class Zend_Tool_Framework_Client_Console
-    extends Zend_Tool_Framework_Client_Abstract
-    implements Zend_Tool_Framework_Client_Interactive_InputInterface,
-               Zend_Tool_Framework_Client_Interactive_OutputInterface
+class Zend_Tool_Framework_Client_Console extends Zend_Tool_Framework_Client_Abstract implements Zend_Tool_Framework_Client_Interactive_InputInterface, Zend_Tool_Framework_Client_Interactive_OutputInterface
 {
+    /**
+     * @var array
+     */
+    protected $_configOptions;
 
     /**
      * @var array
      */
-    protected $_configOptions = null;
-
-    /**
-     * @var array
-     */
-    protected $_storageOptions = null;
+    protected $_storageOptions;
 
     /**
      * @var Zend_Filter_Word_CamelCaseToDash
      */
-    protected $_filterToClientNaming = null;
+    protected $_filterToClientNaming;
 
     /**
      * @var Zend_Filter_Word_DashToCamelCase
      */
-    protected $_filterFromClientNaming = null;
+    protected $_filterFromClientNaming;
 
     /**
      * @var array
      */
-    protected $_classesToLoad = array();
+    protected $_classesToLoad = [];
 
     /**
      * main() - This is typically called from zf.php. This method is a
      * self contained main() function.
-     *
      */
-    public static function main($options = array())
+    public static function main($options = [])
     {
         $cliClient = new self($options);
         $cliClient->dispatch();
     }
 
     /**
-     * getName() - return the name of the client, in this case 'console'
+     * getName() - return the name of the client, in this case 'console'.
      *
      * @return string
      */
@@ -98,61 +93,63 @@ class Zend_Tool_Framework_Client_Console
     }
 
     /**
-     * setConfigOptions()
+     * setConfigOptions().
      *
      * @param array $configOptions
      */
     public function setConfigOptions($configOptions)
     {
         $this->_configOptions = $configOptions;
+
         return $this;
     }
 
     /**
-     * setStorageOptions()
+     * setStorageOptions().
      *
      * @param array $storageOptions
      */
     public function setStorageOptions($storageOptions)
     {
         $this->_storageOptions = $storageOptions;
+
         return $this;
     }
 
     /**
-		 * @param array $classesToLoad
-		 */
+     * @param array $classesToLoad
+     */
     public function setClassesToLoad($classesToLoad)
     {
         $this->_classesToLoad = $classesToLoad;
+
         return $this;
     }
 
     /**
-     * _init() - Tasks processed before the constructor, generally setting up objects to use
-     *
+     * _init() - Tasks processed before the constructor, generally setting up objects to use.
      */
     protected function _preInit()
     {
         $config = $this->_registry->getConfig();
 
-        if ($this->_configOptions != null) {
+        if (null != $this->_configOptions) {
             $config->setOptions($this->_configOptions);
         }
 
         $storage = $this->_registry->getStorage();
 
-        if ($this->_storageOptions != null && isset($this->_storageOptions['directory'])) {
+        if (null != $this->_storageOptions && isset($this->_storageOptions['directory'])) {
             $storage->setAdapter(
                 new Zend_Tool_Framework_Client_Storage_Directory($this->_storageOptions['directory'])
-                );
+            );
         }
 
         // which classes are essential to initializing Zend_Tool_Framework_Client_Console
-        $classesToLoad = array(
+        $classesToLoad = [
             'Zend_Tool_Framework_Client_Console_Manifest',
-            'Zend_Tool_Framework_System_Manifest'
-            );
+            'Zend_Tool_Framework_System_Manifest',
+            ];
 
         if ($this->_classesToLoad) {
             if (is_string($this->_classesToLoad)) {
@@ -170,15 +167,14 @@ class Zend_Tool_Framework_Client_Console
         }
 
         $this->_registry->setLoader(
-            new Zend_Tool_Framework_Loader_BasicLoader(array('classesToLoad' => $classesToLoad))
-            );
+            new Zend_Tool_Framework_Loader_BasicLoader(['classesToLoad' => $classesToLoad])
+        );
 
         return;
     }
 
     /**
-     * _preDispatch() - Tasks handed after initialization but before dispatching
-     *
+     * _preDispatch() - Tasks handed after initialization but before dispatching.
      */
     protected function _preDispatch()
     {
@@ -193,7 +189,7 @@ class Zend_Tool_Framework_Client_Console
         }
 
         $response->addContentDecorator(new Zend_Tool_Framework_Client_Response_ContentDecorator_Separator())
-            ->setDefaultDecoratorOptions(array('separator' => true));
+            ->setDefaultDecoratorOptions(['separator' => true]);
 
         $optParser = new Zend_Tool_Framework_Client_Console_ArgumentParser();
         $optParser->setArguments($_SERVER['argv'])
@@ -204,8 +200,7 @@ class Zend_Tool_Framework_Client_Console
     }
 
     /**
-     * _postDispatch() - Tasks handled after dispatching
-     *
+     * _postDispatch() - Tasks handled after dispatching.
      */
     protected function _postDispatch()
     {
@@ -219,29 +214,29 @@ class Zend_Tool_Framework_Client_Console
                 ->respondWithSpecialtyAndParamHelp(
                     $request->getProviderName(),
                     $request->getActionName()
-                    );
+                );
         }
 
         echo PHP_EOL;
+
         return;
     }
 
     /**
-     * handleInteractiveInputRequest() is required by the Interactive InputInterface
+     * handleInteractiveInputRequest() is required by the Interactive InputInterface.
      *
-     *
-     * @param Zend_Tool_Framework_Client_Interactive_InputRequest $inputRequest
      * @return string
      */
     public function handleInteractiveInputRequest(Zend_Tool_Framework_Client_Interactive_InputRequest $inputRequest)
     {
-        fwrite(STDOUT, $inputRequest->getContent() . PHP_EOL . 'zf> ');
+        fwrite(STDOUT, $inputRequest->getContent().PHP_EOL.'zf> ');
         $inputContent = fgets(STDIN);
+
         return rtrim((string) $inputContent); // remove the return from the end of the string
     }
 
     /**
-     * handleInteractiveOutput() is required by the Interactive OutputInterface
+     * handleInteractiveOutput() is required by the Interactive OutputInterface.
      *
      * This allows us to display output immediately from providers, rather
      * than displaying it after the provider is done.
@@ -254,27 +249,26 @@ class Zend_Tool_Framework_Client_Console
     }
 
     /**
-     * getMissingParameterPromptString()
+     * getMissingParameterPromptString().
      *
-     * @param Zend_Tool_Framework_Provider_Interface $provider
-     * @param Zend_Tool_Framework_Action_Interface $actionInterface
      * @param string $missingParameterName
+     *
      * @return string
      */
     public function getMissingParameterPromptString(Zend_Tool_Framework_Provider_Interface $provider, Zend_Tool_Framework_Action_Interface $actionInterface, $missingParameterName)
     {
-        return 'Please provide a value for $' . $missingParameterName;
+        return 'Please provide a value for $'.$missingParameterName;
     }
 
-
     /**
-     * convertToClientNaming()
+     * convertToClientNaming().
      *
      * Convert words to client specific naming, in this case is lower, dash separated
      *
      * Filters are lazy-loaded.
      *
      * @param string $string
+     *
      * @return string
      */
     public function convertToClientNaming($string)
@@ -291,13 +285,14 @@ class Zend_Tool_Framework_Client_Console
     }
 
     /**
-     * convertFromClientNaming()
+     * convertFromClientNaming().
      *
      * Convert words from client specific naming to code naming - camelcased
      *
      * Filters are lazy-loaded.
      *
      * @param string $string
+     *
      * @return string
      */
     public function convertFromClientNaming($string)
@@ -308,5 +303,4 @@ class Zend_Tool_Framework_Client_Console
 
         return $this->_filterFromClientNaming->filter($string);
     }
-
 }

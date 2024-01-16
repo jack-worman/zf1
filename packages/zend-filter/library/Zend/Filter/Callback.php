@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Filter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,38 +27,35 @@
 
 /**
  * @category   Zend
- * @package    Zend_Filter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Filter_Callback implements Zend_Filter_Interface
 {
     /**
-     * Callback in a call_user_func format
+     * Callback in a call_user_func format.
      *
      * @var string|array
      */
-    protected $_callback = null;
+    protected $_callback;
 
     /**
-     * Default options to set for the filter
-     *
-     * @var mixed
+     * Default options to set for the filter.
      */
-    protected $_options = null;
+    protected $_options;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param string|array $callback Callback in a call_user_func format
-     * @param mixed        $options  (Optional) Default options for this filter
+     * @param mixed $options (Optional) Default options for this filter
      */
     public function __construct($options)
     {
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
-        } else if (!is_array($options) || !array_key_exists('callback', $options)) {
-            $options          = func_get_args();
+        } elseif (!is_array($options) || !array_key_exists('callback', $options)) {
+            $options = func_get_args();
             $temp['callback'] = array_shift($options);
             if (!empty($options)) {
                 $temp['options'] = array_shift($options);
@@ -78,7 +76,7 @@ class Zend_Filter_Callback implements Zend_Filter_Interface
     }
 
     /**
-     * Returns the set callback
+     * Returns the set callback.
      *
      * @return string|array Set callback
      */
@@ -88,9 +86,10 @@ class Zend_Filter_Callback implements Zend_Filter_Interface
     }
 
     /**
-     * Sets a new callback for this filter
+     * Sets a new callback for this filter.
      *
      * @param unknown_type $callback
+     *
      * @return Zend_Filter_Callback
      */
     public function setCallback($callback, $options = null)
@@ -102,13 +101,12 @@ class Zend_Filter_Callback implements Zend_Filter_Interface
 
         $this->_callback = $callback;
         $this->setOptions($options);
+
         return $this;
     }
 
     /**
-     * Returns the set default options
-     *
-     * @return mixed
+     * Returns the set default options.
      */
     public function getOptions()
     {
@@ -116,30 +114,33 @@ class Zend_Filter_Callback implements Zend_Filter_Interface
     }
 
     /**
-     * Sets new default options to the callback filter
+     * Sets new default options to the callback filter.
      *
      * @param mixed $options Default options to set
+     *
      * @return Zend_Filter_Callback
      */
     public function setOptions($options)
     {
         $this->_options = $options;
+
         return $this;
     }
 
     /**
-     * Calls the filter per callback
+     * Calls the filter per callback.
      *
      * @param mixed $value Options for the set callback
-     * @return mixed       Result from the filter which was callbacked
+     *
+     * @return mixed Result from the filter which was callbacked
      */
     public function filter($value)
     {
-        $options = array();
+        $options = [];
 
-        if ($this->_options !== null) {
+        if (null !== $this->_options) {
             if (!is_array($this->_options)) {
-                $options = array($this->_options);
+                $options = [$this->_options];
             } else {
                 $options = $this->_options;
             }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,8 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Http
- * @subpackage UserAgent
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -23,148 +22,148 @@
  * Interface defining a browser device type.
  *
  * @category   Zend
- * @package    Zend_Http
- * @subpackage UserAgent
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface Zend_Http_UserAgent_Device extends Serializable
 {
     /**
-     * Constructor
+     * Constructor.
      *
      * Allows injecting user agent, server array, and/or config array. If an
      * array is provided for the first argument, the assumption should be that
      * the device object is being seeded with cached values from serialization.
      *
-     * @param  null|string|array $userAgent
-     * @param  array $server
-     * @param  array $config
+     * @param string|array|null $userAgent
+     *
      * @return void
      */
-    public function __construct($userAgent = null, array $server = array(), array $config = array());
+    public function __construct($userAgent = null, array $server = [], array $config = []);
 
     /**
-     * Attempt to match the user agent
+     * Attempt to match the user agent.
      *
      * Return either an array of browser signature strings, or a boolean.
      *
-     * @param  string $userAgent
-     * @param  array $server
+     * @param string $userAgent
+     * @param array  $server
+     *
      * @return bool|array
      */
     public static function match($userAgent, $server);
 
     /**
-     * Get all browser/device features
+     * Get all browser/device features.
      *
      * @return array
      */
     public function getAllFeatures();
 
     /**
-     * Get all of the browser/device's features' groups
+     * Get all of the browser/device's features' groups.
      *
      * @return void
      */
     public function getAllGroups();
 
     /**
-     * Whether or not the device has a given feature
+     * Whether or not the device has a given feature.
      *
-     * @param  string $feature
+     * @param string $feature
+     *
      * @return bool
      */
     public function hasFeature($feature);
 
     /**
-     * Get the value of a specific device feature
+     * Get the value of a specific device feature.
      *
-     * @param  string $feature
-     * @return mixed
+     * @param string $feature
      */
     public function getFeature($feature);
 
     /**
-     * Get the browser type
+     * Get the browser type.
      *
      * @return string
      */
     public function getBrowser();
 
     /**
-     * Retrurn the browser version
+     * Retrurn the browser version.
      *
      * @return string
      */
     public function getBrowserVersion();
 
     /**
-     * Get an array of features associated with a group
+     * Get an array of features associated with a group.
      *
-     * @param  string $group
+     * @param string $group
+     *
      * @return array
      */
     public function getGroup($group);
 
     /**
-     * Retrieve image format support
+     * Retrieve image format support.
      *
      * @return array
      */
     public function getImageFormatSupport();
 
     /**
-     * Get image types
+     * Get image types.
      *
      * @return array
      */
     public function getImages();
 
     /**
-     * Get the maximum image height supported by this device
+     * Get the maximum image height supported by this device.
      *
      * @return int
      */
     public function getMaxImageHeight();
 
     /**
-     * Get the maximum image width supported by this device
+     * Get the maximum image width supported by this device.
      *
      * @return int
      */
     public function getMaxImageWidth();
 
     /**
-     * Get the physical screen height of this device
+     * Get the physical screen height of this device.
      *
      * @return int
      */
     public function getPhysicalScreenHeight();
 
     /**
-     * Get the physical screen width of this device
+     * Get the physical screen width of this device.
      *
      * @return int
      */
     public function getPhysicalScreenWidth();
 
     /**
-     * Get the preferred markup type
+     * Get the preferred markup type.
      *
      * @return string
      */
     public function getPreferredMarkup();
 
     /**
-     * Get the user agent string
+     * Get the user agent string.
      *
      * @return string
      */
     public function getUserAgent();
 
     /**
-     * Get supported X/HTML version
+     * Get supported X/HTML version.
      *
      * @return int
      */

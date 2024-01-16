@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Filter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,20 +27,21 @@
 
 /**
  * @category   Zend
- * @package    Zend_Filter
+ *
  * @uses       Zend_Filter_PregReplace
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Filter_Word_Separator_Abstract extends Zend_Filter_PregReplace
 {
-
-    protected $_separator = null;
+    protected $_separator;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param  string $separator Space by default
+     * @param string $separator Space by default
+     *
      * @return void
      */
     public function __construct($separator = ' ')
@@ -48,29 +50,30 @@ abstract class Zend_Filter_Word_Separator_Abstract extends Zend_Filter_PregRepla
     }
 
     /**
-     * Sets a new seperator
+     * Sets a new seperator.
      *
-     * @param  string  $separator  Seperator
+     * @param string $separator Seperator
+     *
      * @return $this
      */
     public function setSeparator($separator)
     {
-        if ($separator == null) {
+        if (null == $separator) {
             // require_once 'Zend/Filter/Exception.php';
-            throw new Zend_Filter_Exception('"' . $separator . '" is not a valid separator.');
+            throw new Zend_Filter_Exception('"'.$separator.'" is not a valid separator.');
         }
         $this->_separator = $separator;
+
         return $this;
     }
 
     /**
-     * Returns the actual set seperator
+     * Returns the actual set seperator.
      *
-     * @return  string|null
+     * @return string|null
      */
     public function getSeparator()
     {
         return $this->_separator;
     }
-
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_CodeGenerator
- * @subpackage PHP
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -32,25 +32,24 @@
 
 /**
  * @category   Zend
- * @package    Zend_CodeGenerator
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_CodeGenerator_Php_Member_Abstract extends Zend_CodeGenerator_Php_Abstract
 {
-
     /**#@+
      * @param const string
      */
-    const VISIBILITY_PUBLIC    = 'public';
-    const VISIBILITY_PROTECTED = 'protected';
-    const VISIBILITY_PRIVATE   = 'private';
+    public const VISIBILITY_PUBLIC = 'public';
+    public const VISIBILITY_PROTECTED = 'protected';
+    public const VISIBILITY_PRIVATE = 'private';
     /**#@-*/
 
     /**
      * @var Zend_CodeGenerator_Php_Docblock
      */
-    protected $_docblock   = null;
+    protected $_docblock;
 
     /**
      * @var bool
@@ -60,12 +59,12 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract extends Zend_CodeGenerator
     /**
      * @var bool
      */
-    protected $_isFinal    = false;
+    protected $_isFinal = false;
 
     /**
      * @var bool
      */
-    protected $_isStatic   = false;
+    protected $_isStatic = false;
 
     /**
      * @var const
@@ -75,18 +74,19 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract extends Zend_CodeGenerator
     /**
      * @var string
      */
-    protected $_name = null;
+    protected $_name;
 
     /**
-     * setDocblock() Set the docblock
+     * setDocblock() Set the docblock.
      *
      * @param Zend_CodeGenerator_Php_Docblock|array|string $docblock
+     *
      * @return Zend_CodeGenerator_Php_Member_Abstract
      */
     public function setDocblock($docblock)
     {
         if (is_string($docblock)) {
-            $docblock = array('shortDescription' => $docblock);
+            $docblock = ['shortDescription' => $docblock];
         }
 
         if (is_array($docblock)) {
@@ -97,11 +97,12 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract extends Zend_CodeGenerator
         }
 
         $this->_docblock = $docblock;
+
         return $this;
     }
 
     /**
-     * getDocblock()
+     * getDocblock().
      *
      * @return Zend_CodeGenerator_Php_Docblock
      */
@@ -111,19 +112,21 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract extends Zend_CodeGenerator
     }
 
     /**
-     * setAbstract()
+     * setAbstract().
      *
      * @param bool $isAbstract
+     *
      * @return Zend_CodeGenerator_Php_Member_Abstract
      */
     public function setAbstract($isAbstract)
     {
         $this->_isAbstract = ($isAbstract) ? true : false;
+
         return $this;
     }
 
     /**
-     * isAbstract()
+     * isAbstract().
      *
      * @return bool
      */
@@ -133,19 +136,21 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract extends Zend_CodeGenerator
     }
 
     /**
-     * setFinal()
+     * setFinal().
      *
      * @param bool $isFinal
+     *
      * @return Zend_CodeGenerator_Php_Member_Abstract
      */
     public function setFinal($isFinal)
     {
         $this->_isFinal = ($isFinal) ? true : false;
+
         return $this;
     }
 
     /**
-     * isFinal()
+     * isFinal().
      *
      * @return bool
      */
@@ -155,19 +160,21 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract extends Zend_CodeGenerator
     }
 
     /**
-     * setStatic()
+     * setStatic().
      *
      * @param bool $isStatic
+     *
      * @return Zend_CodeGenerator_Php_Member_Abstract
      */
     public function setStatic($isStatic)
     {
         $this->_isStatic = ($isStatic) ? true : false;
+
         return $this;
     }
 
     /**
-     * isStatic()
+     * isStatic().
      *
      * @return bool
      */
@@ -177,19 +184,21 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract extends Zend_CodeGenerator
     }
 
     /**
-     * setVisitibility()
+     * setVisitibility().
      *
      * @param const $visibility
+     *
      * @return Zend_CodeGenerator_Php_Member_Abstract
      */
     public function setVisibility($visibility)
     {
         $this->_visibility = $visibility;
+
         return $this;
     }
 
     /**
-     * getVisibility()
+     * getVisibility().
      *
      * @return const
      */
@@ -199,19 +208,21 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract extends Zend_CodeGenerator
     }
 
     /**
-     * setName()
+     * setName().
      *
      * @param string $name
+     *
      * @return Zend_CodeGenerator_Php_Member_Abstract
      */
     public function setName($name)
     {
         $this->_name = $name;
+
         return $this;
     }
 
     /**
-     * getName()
+     * getName().
      *
      * @return string
      */

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,48 +13,43 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Pdf
- * @subpackage Destination
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /** Internally used classes */
 // require_once 'Zend/Pdf/Element.php';
 
-
 /** Zend_Pdf_Target */
 // require_once 'Zend/Pdf/Target.php';
 
-
 /**
- * Abstract PDF destination representation class
+ * Abstract PDF destination representation class.
  *
- * @package    Zend_Pdf
- * @subpackage Destination
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Pdf_Destination extends Zend_Pdf_Target
 {
     /**
-     * Load Destination object from a specified resource
+     * Load Destination object from a specified resource.
      *
      * @internal
-     * @param Zend_Pdf_Element $resource
+     *
      * @return Zend_Pdf_Destination
      */
     public static function load(Zend_Pdf_Element $resource)
     {
         // require_once 'Zend/Pdf/Element.php';
-        if ($resource->getType() == Zend_Pdf_Element::TYPE_NAME  ||  $resource->getType() == Zend_Pdf_Element::TYPE_STRING) {
+        if (Zend_Pdf_Element::TYPE_NAME == $resource->getType() || Zend_Pdf_Element::TYPE_STRING == $resource->getType()) {
             // require_once 'Zend/Pdf/Destination/Named.php';
             return new Zend_Pdf_Destination_Named($resource);
         }
 
-        if ($resource->getType() != Zend_Pdf_Element::TYPE_ARRAY) {
+        if (Zend_Pdf_Element::TYPE_ARRAY != $resource->getType()) {
             // require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('An explicit destination must be a direct or an indirect array object.');
         }

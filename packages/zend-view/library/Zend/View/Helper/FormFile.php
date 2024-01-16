@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,26 +13,23 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
-
 /**
- * Abstract class for extension
+ * Abstract class for extension.
  */
 // require_once 'Zend/View/Helper/FormElement.php';
 
-
 /**
- * Helper to generate a "file" element
+ * Helper to generate a "file" element.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -41,15 +38,12 @@ class Zend_View_Helper_FormFile extends Zend_View_Helper_FormElement
     /**
      * Generates a 'file' element.
      *
-     * @access public
+     * @param string|array $name    If a string, the element name.  If an
+     *                              array, all other parameters are ignored, and the array elements
+     *                              are extracted in place of added parameters.
+     * @param array        $attribs attributes for the element tag
      *
-     * @param string|array $name If a string, the element name.  If an
-     * array, all other parameters are ignored, and the array elements
-     * are extracted in place of added parameters.
-     *
-     * @param array $attribs Attributes for the element tag.
-     *
-     * @return string The element XHTML.
+     * @return string the element XHTML
      */
     public function formFile($name, $attribs = null)
     {
@@ -64,11 +58,11 @@ class Zend_View_Helper_FormFile extends Zend_View_Helper_FormElement
 
         // build the element
         $xhtml = '<input type="file"'
-                . ' name="' . $this->view->escape($name) . '"'
-                . ' id="' . $this->view->escape($id) . '"'
-                . $disabled
-                . $this->_htmlAttribs($attribs)
-                . $this->getClosingBracket();
+                .' name="'.$this->view->escape($name).'"'
+                .' id="'.$this->view->escape($id).'"'
+                .$disabled
+                .$this->_htmlAttribs($attribs)
+                .$this->getClosingBracket();
 
         return $xhtml;
     }

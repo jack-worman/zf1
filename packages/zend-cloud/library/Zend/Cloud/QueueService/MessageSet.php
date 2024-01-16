@@ -1,6 +1,6 @@
 <?php
 /**
- * LICENSE
+ * LICENSE.
  *
  * This source file is subject to the new BSD license that is bundled
  * with this package in the file LICENSE.txt.
@@ -11,18 +11,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Cloud
- * @subpackage QueueService
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
- * Collection of message objects
+ * Collection of message objects.
  *
  * @category   Zend
- * @package    Zend_Cloud
- * @subpackage QueueService
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -35,34 +33,33 @@ class Zend_Cloud_QueueService_MessageSet implements Countable, IteratorAggregate
     protected $_messages;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param  array $messages
      * @return void
      */
     public function __construct(array $messages)
     {
         $this->_messageCount = count($messages);
-        $this->_messages     = new ArrayIterator($messages);
+        $this->_messages = new ArrayIterator($messages);
     }
 
     /**
-     * Countable: number of messages in collection
+     * Countable: number of messages in collection.
      *
      * @return int
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function count()
     {
         return $this->_messageCount;
     }
 
     /**
-     * IteratorAggregate: return iterable object
+     * IteratorAggregate: return iterable object.
      *
      * @return Traversable
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function getIterator()
     {
         return $this->_messages;

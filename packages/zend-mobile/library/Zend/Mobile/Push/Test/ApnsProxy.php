@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Mobile
- * @subpackage Push
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -25,41 +25,37 @@
 
 /**
  * Apns Test Proxy
- * This class is utilized for unit testing purposes
+ * This class is utilized for unit testing purposes.
  *
  * @category   Zend
- * @package    Zend_Mobile
- * @subpackage Push
  */
 class Zend_Mobile_Push_Test_ApnsProxy extends Zend_Mobile_Push_Apns
 {
     /**
-     * Read Response
+     * Read Response.
      *
      * @var string
      */
     protected $_readResponse;
 
     /**
-     * Write Response
-     *
-     * @var mixed
+     * Write Response.
      */
     protected $_writeResponse;
 
     /**
-     * Set the Response
+     * Set the Response.
      *
      * @param string $str
      */
-    public function setReadResponse($str) {
+    public function setReadResponse($str)
+    {
         $this->_readResponse = $str;
     }
 
     /**
-     * Set the write response
+     * Set the write response.
      *
-     * @param mixed $resp
      * @return void
      */
     public function setWriteResponse($resp)
@@ -68,35 +64,42 @@ class Zend_Mobile_Push_Test_ApnsProxy extends Zend_Mobile_Push_Apns
     }
 
     /**
-     * Connect
+     * Connect.
      *
      * @return true
      */
-    protected function _connect($uri) {
+    protected function _connect($uri)
+    {
         return true;
     }
 
     /**
-     * Return Response
+     * Return Response.
      *
      * @param string $length
+     *
      * @return string
      */
-    protected function _read($length) {
+    protected function _read($length)
+    {
         $ret = substr((string) $this->_readResponse, 0, $length);
         $this->_readResponse = null;
+
         return $ret;
     }
 
     /**
-     * Write and Return Length
+     * Write and Return Length.
      *
      * @param string $payload
+     *
      * @return int
      */
-    protected function _write($payload) {
+    protected function _write($payload)
+    {
         $ret = $this->_writeResponse;
         $this->_writeResponse = null;
+
         return (null === $ret) ? strlen((string) $payload) : $ret;
     }
 }

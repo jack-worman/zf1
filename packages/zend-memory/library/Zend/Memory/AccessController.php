@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,14 +13,15 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Memory
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Memory_Container_Interface
+ * Zend_Memory_Container_Interface.
  */
 // require_once 'Zend/Memory/Container/Interface.php';
 
@@ -37,24 +38,21 @@
  * Class also provides Zend_Memory_Container_Interface interface and works as proxy for such cases.
  *
  * @category   Zend
- * @package    Zend_Memory
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Memory_AccessController implements Zend_Memory_Container_Interface
 {
     /**
-     * Memory container object
+     * Memory container object.
      *
      * @var Zend_Memory_Container
      */
     private $_memContainer;
 
-
     /**
-     * Object constructor
-     *
-     * @param Zend_Memory_Container_Movable $memoryManager
+     * Object constructor.
      */
     public function __construct(Zend_Memory_Container_Movable $memContainer)
     {
@@ -62,16 +60,15 @@ class Zend_Memory_AccessController implements Zend_Memory_Container_Interface
     }
 
     /**
-     * Object destructor
+     * Object destructor.
      */
     public function __destruct()
     {
         $this->_memContainer->destroy();
     }
 
-
     /**
-     * Get string value reference
+     * Get string value reference.
      *
      * _Must_ be used for value access before PHP v 5.2
      * or _may_ be used for performance considerations
@@ -101,9 +98,8 @@ class Zend_Memory_AccessController implements Zend_Memory_Container_Interface
         $this->_memContainer->lock();
     }
 
-
     /**
-     * Unlock object
+     * Unlock object.
      */
     public function unlock()
     {
@@ -111,9 +107,9 @@ class Zend_Memory_AccessController implements Zend_Memory_Container_Interface
     }
 
     /**
-     * Return true if object is locked
+     * Return true if object is locked.
      *
-     * @return boolean
+     * @return bool
      */
     public function isLocked()
     {
@@ -121,13 +117,15 @@ class Zend_Memory_AccessController implements Zend_Memory_Container_Interface
     }
 
     /**
-     * Get handler
+     * Get handler.
      *
      * Loads object if necessary and moves it to the top of loaded objects list.
      * Swaps objects from the bottom of loaded objects list, if necessary.
      *
      * @param string $property
+     *
      * @return string
+     *
      * @throws Zend_Memory_Exception
      */
     public function __get($property)
@@ -136,10 +134,11 @@ class Zend_Memory_AccessController implements Zend_Memory_Container_Interface
     }
 
     /**
-     * Set handler
+     * Set handler.
      *
      * @param string $property
-     * @param  string $value
+     * @param string $value
+     *
      * @throws Zend_Exception
      */
     public function __set($property, $value)

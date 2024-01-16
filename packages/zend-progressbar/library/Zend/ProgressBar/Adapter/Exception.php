@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category  Zend
- * @package   Zend_ProgressBar
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version   $Id$
  */
 
@@ -25,11 +26,12 @@
 // require_once 'Zend/ProgressBar/Exception.php';
 
 /**
- * Exception class for Zend_ProgressBar_Adapter
+ * Exception class for Zend_ProgressBar_Adapter.
  *
  * @category  Zend
- * @package   Zend_ProgressBar
+ *
  * @uses      Zend_ProgressBar_Exception
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */

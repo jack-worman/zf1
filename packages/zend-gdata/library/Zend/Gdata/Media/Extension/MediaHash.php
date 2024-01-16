@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Media
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,23 +27,21 @@
 // require_once 'Zend/Gdata/App/Extension.php';
 
 /**
- * Represents the media:hash element
+ * Represents the media:hash element.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Media
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_Media_Extension_MediaHash extends Zend_Gdata_Extension
 {
-
     protected $_rootElement = 'hash';
     protected $_rootNamespace = 'media';
-    protected $_algo = null;
+    protected $_algo;
 
     /**
-     * Constructs a new MediaHash element
+     * Constructs a new MediaHash element.
      *
      * @param string $text
      * @param string $algo
@@ -63,15 +61,17 @@ class Zend_Gdata_Media_Extension_MediaHash extends Zend_Gdata_Extension
      * for application storage/persistence.
      *
      * @param DOMDocument $doc The DOMDocument used to construct DOMElements
-     * @return DOMElement The DOMElement representing this element and all
-     * child properties.
+     *
+     * @return DOMElement the DOMElement representing this element and all
+     *                    child properties
      */
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
         $element = parent::getDOM($doc, $majorVersion, $minorVersion);
-        if ($this->_algo !== null) {
+        if (null !== $this->_algo) {
             $element->setAttribute('algo', $this->_algo);
         }
+
         return $element;
     }
 
@@ -81,16 +81,17 @@ class Zend_Gdata_Media_Extension_MediaHash extends Zend_Gdata_Extension
      * stored in an array.
      *
      * @param DOMNode $attribute The DOMNode attribute needed to be handled
+     *
      * @throws Zend_Gdata_App_InvalidArgumentException
      */
     protected function takeAttributeFromDOM($attribute)
     {
         switch ($attribute->localName) {
-        case 'algo':
-            $this->_algo = $attribute->nodeValue;
-            break;
-        default:
-            parent::takeAttributeFromDOM($attribute);
+            case 'algo':
+                $this->_algo = $attribute->nodeValue;
+                break;
+            default:
+                parent::takeAttributeFromDOM($attribute);
         }
     }
 
@@ -104,12 +105,13 @@ class Zend_Gdata_Media_Extension_MediaHash extends Zend_Gdata_Extension
 
     /**
      * @param string $value
+     *
      * @return Zend_Gdata_Media_Extension_MediaHash Provides a fluent interface
      */
     public function setAlgo($value)
     {
         $this->_algo = $value;
+
         return $this;
     }
-
 }

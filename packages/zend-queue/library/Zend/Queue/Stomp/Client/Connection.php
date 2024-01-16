@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Queue
- * @subpackage Stomp
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -29,47 +29,48 @@
  * The Stomp client interacts with a Stomp server.
  *
  * @category   Zend
- * @package    Zend_Queue
- * @subpackage Stomp
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Queue_Stomp_Client_Connection
-    implements Zend_Queue_Stomp_Client_ConnectionInterface
+class Zend_Queue_Stomp_Client_Connection implements Zend_Queue_Stomp_Client_ConnectionInterface
 {
-    const READ_TIMEOUT_DEFAULT_USEC = 0; // 0 microseconds
-    const READ_TIMEOUT_DEFAULT_SEC = 5; // 5 seconds
+    public const READ_TIMEOUT_DEFAULT_USEC = 0; // 0 microseconds
+    public const READ_TIMEOUT_DEFAULT_SEC = 5; // 5 seconds
 
     /**
-     * Connection options
+     * Connection options.
+     *
      * @var array
      */
     protected $_options;
 
     /**
-     * tcp/udp socket
+     * tcp/udp socket.
      *
      * @var resource
      */
     protected $_socket = false;
 
     /**
-     * open() opens a socket to the Stomp server
+     * open() opens a socket to the Stomp server.
      *
-     * @param  array $options ('scheme', 'host', 'port')
-     * @param  string $scheme
-     * @param  string $host
-     * @param  int $port
-     * @param  array $options Accepts "timeout_sec" and "timeout_usec" keys
+     * @param array  $options ('scheme', 'host', 'port')
+     * @param string $scheme
+     * @param string $host
+     * @param int    $port
+     * @param array  $options Accepts "timeout_sec" and "timeout_usec" keys
+     *
      * @return true;
+     *
      * @throws Zend_Queue_Exception
      */
-    public function open($scheme, $host, $port, array $options = array())
+    public function open($scheme, $host, $port, array $options = [])
     {
-        $str = $scheme . '://' . $host;
+        $str = $scheme.'://'.$host;
         $this->_socket = fsockopen($str, $port, $errno, $errstr);
 
-        if ($this->_socket === false) {
+        if (false === $this->_socket) {
             // aparently there is some reason that fsockopen will return false
             // but it normally throws an error.
             // require_once 'Zend/Queue/Exception.php';
@@ -81,7 +82,7 @@ class Zend_Queue_Stomp_Client_Connection
         if (!isset($options['timeout_sec'])) {
             $options['timeout_sec'] = self::READ_TIMEOUT_DEFAULT_SEC;
         }
-        if (! isset($options['timeout_usec'])) {
+        if (!isset($options['timeout_usec'])) {
             $options['timeout_usec'] = self::READ_TIMEOUT_DEFAULT_USEC;
         }
 
@@ -91,7 +92,7 @@ class Zend_Queue_Stomp_Client_Connection
     }
 
     /**
-     * Close the socket explicitly when destructed
+     * Close the socket explicitly when destructed.
      *
      * @return void
      */
@@ -100,9 +101,10 @@ class Zend_Queue_Stomp_Client_Connection
     }
 
     /**
-     * Close connection
+     * Close connection.
      *
-     * @param  boolean $destructor
+     * @param bool $destructor
+     *
      * @return void
      */
     public function close($destructor = false)
@@ -128,9 +130,10 @@ class Zend_Queue_Stomp_Client_Connection
     }
 
     /**
-     * Check whether we are connected to the server
+     * Check whether we are connected to the server.
      *
      * @return true
+     *
      * @throws Zend_Queue_Exception
      */
     public function ping()
@@ -139,15 +142,17 @@ class Zend_Queue_Stomp_Client_Connection
             // require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('Not connected to Stomp server');
         }
+
         return true;
     }
 
     /**
-     * Write a frame to the stomp server
+     * Write a frame to the stomp server.
      *
      * example: $response = $client->write($frame)->read();
      *
      * @param Zend_Queue_Stom_FrameInterface $frame
+     *
      * @return $this
      */
     public function write(Zend_Queue_Stomp_FrameInterface $frame)
@@ -156,7 +161,7 @@ class Zend_Queue_Stomp_Client_Connection
         $output = $frame->toFrame();
 
         $bytes = fwrite($this->_socket, $output, strlen((string) $output));
-        if ($bytes === false || $bytes == 0) {
+        if (false === $bytes || 0 == $bytes) {
             // require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('No bytes written');
         }
@@ -165,23 +170,23 @@ class Zend_Queue_Stomp_Client_Connection
     }
 
     /**
-     * Tests the socket to see if there is data for us
+     * Tests the socket to see if there is data for us.
      *
-     * @return boolean
+     * @return bool
      */
     public function canRead()
     {
-        $read   = array($this->_socket);
-        $write  = null;
+        $read = [$this->_socket];
+        $write = null;
         $except = null;
 
-        return stream_select(
+        return 1 == stream_select(
             $read,
             $write,
             $except,
             $this->_options['timeout_sec'],
             $this->_options['timeout_usec']
-        ) == 1;
+        );
         // see http://us.php.net/manual/en/function.stream-select.php
     }
 
@@ -189,6 +194,7 @@ class Zend_Queue_Stomp_Client_Connection
      * Reads in a frame from the socket or returns false.
      *
      * @return Zend_Queue_Stomp_FrameInterface|false
+     *
      * @throws Zend_Queue_Exception
      */
     public function read()
@@ -196,7 +202,7 @@ class Zend_Queue_Stomp_Client_Connection
         $this->ping();
 
         $response = '';
-        $prev     = '';
+        $prev = '';
 
         // while not end of file.
         while (!feof($this->_socket)) {
@@ -204,7 +210,7 @@ class Zend_Queue_Stomp_Client_Connection
             $data = fread($this->_socket, 1);
 
             // check to make sure that the connection is not lost.
-            if ($data === false) {
+            if (false === $data) {
                 // require_once 'Zend/Queue/Exception.php';
                 throw new Zend_Queue_Exception('Connection lost');
             }
@@ -213,37 +219,40 @@ class Zend_Queue_Stomp_Client_Connection
             $response .= $data;
 
             // is this \0 (prev) \n (data)? END_OF_FRAME
-            if (ord((string) $data) == 10 && ord((string) $prev) == 0) {
+            if (10 == ord((string) $data) && 0 == ord((string) $prev)) {
                 break;
             }
             $prev = $data;
         }
 
-        if ($response === '') {
+        if ('' === $response) {
             return false;
         }
 
         $frame = $this->createFrame();
         $frame->fromFrame($response);
+
         return $frame;
     }
 
     /**
-     * Set the frameClass to be used
+     * Set the frameClass to be used.
      *
      * This must be a Zend_Queue_Stomp_FrameInterface.
      *
-     * @param  string $classname - class is an instance of Zend_Queue_Stomp_FrameInterface
+     * @param string $classname - class is an instance of Zend_Queue_Stomp_FrameInterface
+     *
      * @return $this;
      */
     public function setFrameClass($classname)
     {
         $this->_options['frameClass'] = $classname;
+
         return $this;
     }
 
     /**
-     * Get the frameClass
+     * Get the frameClass.
      *
      * @return string
      */
@@ -255,7 +264,7 @@ class Zend_Queue_Stomp_Client_Connection
     }
 
     /**
-     * Create an empty frame
+     * Create an empty frame.
      *
      * @return Zend_Queue_Stomp_FrameInterface
      */

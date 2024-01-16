@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Amf
- * @subpackage Value
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -31,8 +31,6 @@
  * invoke a method/operation on a remote server. Additionally,
  * the response from the Server is structured identically.
  *
- * @package    Zend_Amf
- * @subpackage Value
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -41,9 +39,10 @@ class Zend_Amf_Value_MessageBody
     /**
      * A string describing which operation, function, or method
      * is to be remotley invoked.
+     *
      * @var string
      */
-    protected $_targetUri = "";
+    protected $_targetUri = '';
 
     /**
      * Universal Resource Identifier that uniquely targets the originator's
@@ -61,7 +60,7 @@ class Zend_Amf_Value_MessageBody
      *
      * @var string
      */
-    protected $_responseUri = "";
+    protected $_responseUri = '';
 
     /**
      * Contains the actual data associated with the operation. It contains
@@ -79,11 +78,12 @@ class Zend_Amf_Value_MessageBody
     protected $_data;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param  string $targetUri
-     * @param  string $responseUri
-     * @param  string $data
+     * @param string $targetUri
+     * @param string $responseUri
+     * @param string $data
+     *
      * @return void
      */
     public function __construct($targetUri, $responseUri, $data)
@@ -94,7 +94,7 @@ class Zend_Amf_Value_MessageBody
     }
 
     /**
-     * Retrieve target Uri
+     * Retrieve target Uri.
      *
      * @return string
      */
@@ -104,9 +104,10 @@ class Zend_Amf_Value_MessageBody
     }
 
     /**
-     * Set target Uri
+     * Set target Uri.
      *
-     * @param  string $targetUri
+     * @param string $targetUri
+     *
      * @return Zend_Amf_Value_MessageBody
      */
     public function setTargetUri($targetUri)
@@ -115,11 +116,12 @@ class Zend_Amf_Value_MessageBody
             $targetUri = '';
         }
         $this->_targetUri = (string) $targetUri;
+
         return $this;
     }
 
     /**
-     * Get target Uri
+     * Get target Uri.
      *
      * @return string
      */
@@ -129,9 +131,10 @@ class Zend_Amf_Value_MessageBody
     }
 
     /**
-     * Set response Uri
+     * Set response Uri.
      *
-     * @param  string $responseUri
+     * @param string $responseUri
+     *
      * @return Zend_Amf_Value_MessageBody
      */
     public function setResponseUri($responseUri)
@@ -140,11 +143,12 @@ class Zend_Amf_Value_MessageBody
             $responseUri = '';
         }
         $this->_responseUri = $responseUri;
+
         return $this;
     }
 
     /**
-     * Retrieve response data
+     * Retrieve response data.
      *
      * @return string
      */
@@ -154,29 +158,31 @@ class Zend_Amf_Value_MessageBody
     }
 
     /**
-     * Set response data
+     * Set response data.
      *
-     * @param  mixed $data
      * @return Zend_Amf_Value_MessageBody
      */
     public function setData($data)
     {
         $this->_data = $data;
+
         return $this;
     }
 
     /**
-     * Set reply method
+     * Set reply method.
      *
-     * @param  string $methodName
+     * @param string $methodName
+     *
      * @return Zend_Amf_Value_MessageBody
      */
     public function setReplyMethod($methodName)
     {
         if (!preg_match('#^[/?]#', $methodName)) {
-            $this->_targetUri = rtrim((string) $this->_targetUri, '/') . '/';
+            $this->_targetUri = rtrim((string) $this->_targetUri, '/').'/';
         }
-        $this->_targetUri = $this->_targetUri . $methodName;
+        $this->_targetUri = $this->_targetUri.$methodName;
+
         return $this;
     }
 }

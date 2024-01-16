@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Ldap
- * @subpackage Filter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -33,15 +33,14 @@
  * Zend_Ldap_Filter_Logical provides a base implementation for a grouping filter.
  *
  * @category   Zend
- * @package    Zend_Ldap
- * @subpackage Filter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Ldap_Filter_Logical extends Zend_Ldap_Filter_Abstract
 {
-    const TYPE_AND = '&';
-    const TYPE_OR  = '|';
+    public const TYPE_AND = '&';
+    public const TYPE_OR = '|';
 
     /**
      * All the sub-filters for this grouping filter.
@@ -60,15 +59,15 @@ abstract class Zend_Ldap_Filter_Logical extends Zend_Ldap_Filter_Abstract
     /**
      * Creates a new grouping filter.
      *
-     * @param array  $subfilters
      * @param string $symbol
      */
     protected function __construct(array $subfilters, $symbol)
     {
         foreach ($subfilters as $key => $s) {
-            if (is_string($s)) $subfilters[$key] = new Zend_Ldap_Filter_String($s);
-            else if (!($s instanceof Zend_Ldap_Filter_Abstract)) {
-                /**
+            if (is_string($s)) {
+                $subfilters[$key] = new Zend_Ldap_Filter_String($s);
+            } elseif (!($s instanceof Zend_Ldap_Filter_Abstract)) {
+                /*
                  * @see Zend_Ldap_Filter_Exception
                  */
                 // require_once 'Zend/Ldap/Filter/Exception.php';
@@ -82,13 +81,13 @@ abstract class Zend_Ldap_Filter_Logical extends Zend_Ldap_Filter_Abstract
     /**
      * Adds a filter to this grouping filter.
      *
-     * @param  Zend_Ldap_Filter_Abstract $filter
      * @return Zend_Ldap_Filter_Logical
      */
     public function addFilter(Zend_Ldap_Filter_Abstract $filter)
     {
         $new = clone $this;
         $new->_subfilters[] = $filter;
+
         return $new;
     }
 
@@ -99,9 +98,12 @@ abstract class Zend_Ldap_Filter_Logical extends Zend_Ldap_Filter_Abstract
      */
     public function toString()
     {
-        $return = '(' . $this->_symbol;
-        foreach ($this->_subfilters as $sub) $return .= $sub->toString();
+        $return = '('.$this->_symbol;
+        foreach ($this->_subfilters as $sub) {
+            $return .= $sub->toString();
+        }
         $return .= ')';
+
         return $return;
     }
 }

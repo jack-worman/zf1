@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,8 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Mobile
- * @subpackage Zend_Mobile_Push
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -26,34 +25,33 @@
 // require_once 'Zend/Xml/Security.php';
 
 /**
- * Mpns Raw Message
+ * Mpns Raw Message.
  *
  * @category   Zend
- * @package    Zend_Mobile
- * @subpackage Zend_Mobile_Push
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Mobile_Push_Message_Mpns_Raw extends Zend_Mobile_Push_Message_Mpns
 {
     /**
-     * Mpns delays
+     * Mpns delays.
      *
      * @var int
      */
-    const DELAY_IMMEDIATE = 3;
-    const DELAY_450S = 13;
-    const DELAY_900S = 23;
+    public const DELAY_IMMEDIATE = 3;
+    public const DELAY_450S = 13;
+    public const DELAY_900S = 23;
 
     /**
-     * Message
+     * Message.
      *
      * @var string
      */
     protected $_msg;
 
     /**
-     * Get Delay
+     * Get Delay.
      *
      * @return int
      */
@@ -62,34 +60,40 @@ class Zend_Mobile_Push_Message_Mpns_Raw extends Zend_Mobile_Push_Message_Mpns
         if (!$this->_delay) {
             return self::DELAY_IMMEDIATE;
         }
+
         return $this->_delay;
     }
 
     /**
-     * Set Delay
+     * Set Delay.
      *
      * @param int $delay
+     *
      * @return Zend_Mobile_Push_Message_Mpns_Raw
+     *
      * @throws Zend_Mobile_Push_Message_Exception
      */
     public function setDelay($delay)
     {
-        if (!in_array($delay, array(
+        if (!in_array($delay, [
             self::DELAY_IMMEDIATE,
             self::DELAY_450S,
-            self::DELAY_900S
-        ))) {
+            self::DELAY_900S,
+        ])) {
             throw new Zend_Mobile_Push_Message_Exception('$delay must be one of the DELAY_* constants');
         }
         $this->_delay = $delay;
+
         return $this;
     }
 
     /**
-     * Set Message
+     * Set Message.
      *
      * @param string $msg XML string
+     *
      * @return Zend_Mobile_Push_Message_Mpns_Raw
+     *
      * @throws Zend_Mobile_Push_Message_Exception
      */
     public function setMessage($msg)
@@ -101,11 +105,12 @@ class Zend_Mobile_Push_Message_Mpns_Raw extends Zend_Mobile_Push_Message_Mpns
             throw new Zend_Mobile_Push_Message_Exception('$msg is not valid xml');
         }
         $this->_msg = $msg;
+
         return $this;
     }
 
     /**
-     * Get Message
+     * Get Message.
      *
      * @return string
      */
@@ -115,7 +120,7 @@ class Zend_Mobile_Push_Message_Mpns_Raw extends Zend_Mobile_Push_Message_Mpns
     }
 
     /**
-     * Get Notification Type
+     * Get Notification Type.
      *
      * @return string
      */
@@ -125,7 +130,7 @@ class Zend_Mobile_Push_Message_Mpns_Raw extends Zend_Mobile_Push_Message_Mpns
     }
 
     /**
-     * Get XML Payload
+     * Get XML Payload.
      *
      * @return string
      */
@@ -135,18 +140,19 @@ class Zend_Mobile_Push_Message_Mpns_Raw extends Zend_Mobile_Push_Message_Mpns
     }
 
     /**
-     * Validate proper mpns message
+     * Validate proper mpns message.
      *
-     * @return boolean
+     * @return bool
      */
     public function validate()
     {
-        if (!isset($this->_token) || strlen((string) $this->_token) === 0) {
+        if (!isset($this->_token) || 0 === strlen((string) $this->_token)) {
             return false;
         }
         if (empty($this->_msg)) {
             return false;
         }
+
         return parent::validate();
     }
 }

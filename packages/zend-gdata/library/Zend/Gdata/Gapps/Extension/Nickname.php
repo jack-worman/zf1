@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Gapps
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -37,14 +37,12 @@
  * within instances of Zend_Gdata_Gapps_NicknameEntry.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Gapps
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_Gapps_Extension_Nickname extends Zend_Gdata_Extension
 {
-
     protected $_rootNamespace = 'apps';
     protected $_rootElement = 'nickname';
 
@@ -54,11 +52,12 @@ class Zend_Gdata_Gapps_Extension_Nickname extends Zend_Gdata_Extension
      *
      * @var string
      */
-    protected $_name = null;
+    protected $_name;
 
     /**
      * Constructs a new Zend_Gdata_Gapps_Extension_Nickname object.
-     * @param string $name (optional) The nickname being represented.
+     *
+     * @param string $name (optional) The nickname being represented
      */
     public function __construct($name = null)
     {
@@ -74,15 +73,17 @@ class Zend_Gdata_Gapps_Extension_Nickname extends Zend_Gdata_Extension
      * for application storage/persistence.
      *
      * @param DOMDocument $doc The DOMDocument used to construct DOMElements
-     * @return DOMElement The DOMElement representing this element and all
-     * child properties.
+     *
+     * @return DOMElement the DOMElement representing this element and all
+     *                    child properties
      */
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
         $element = parent::getDOM($doc, $majorVersion, $minorVersion);
-        if ($this->_name !== null) {
+        if (null !== $this->_name) {
             $element->setAttribute('name', $this->_name);
         }
+
         return $element;
     }
 
@@ -96,11 +97,11 @@ class Zend_Gdata_Gapps_Extension_Nickname extends Zend_Gdata_Extension
     protected function takeAttributeFromDOM($attribute)
     {
         switch ($attribute->localName) {
-        case 'name':
-            $this->_name = $attribute->nodeValue;
-            break;
-        default:
-            parent::takeAttributeFromDOM($attribute);
+            case 'name':
+                $this->_name = $attribute->nodeValue;
+                break;
+            default:
+                parent::takeAttributeFromDOM($attribute);
         }
     }
 
@@ -108,7 +109,8 @@ class Zend_Gdata_Gapps_Extension_Nickname extends Zend_Gdata_Extension
      * Get the value for this element's name attribute.
      *
      * @see setName
-     * @return string The requested attribute.
+     *
+     * @return string the requested attribute
      */
     public function getName()
     {
@@ -120,23 +122,24 @@ class Zend_Gdata_Gapps_Extension_Nickname extends Zend_Gdata_Extension
      * describes this nickname within the domain. Emails addressed to this
      * name will be delivered to the user who owns this nickname.
      *
-     * @param string $value The desired value for this attribute.
-     * @return Zend_Gdata_Gapps_Extension_Nickname Provides a fluent
-     *          interface.
+     * @param string $value the desired value for this attribute
+     *
+     * @return Zend_Gdata_Gapps_Extension_Nickname provides a fluent
+     *                                             interface
      */
     public function setName($value)
     {
         $this->_name = $value;
+
         return $this;
     }
 
     /**
      * Magic toString method allows using this directly via echo
-     * Works best in PHP >= 4.2.0
+     * Works best in PHP >= 4.2.0.
      */
     public function __toString()
     {
         return $this->getName();
     }
-
 }

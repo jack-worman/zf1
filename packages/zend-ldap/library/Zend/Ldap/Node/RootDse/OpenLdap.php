@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Ldap
- * @subpackage RootDSE
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -30,8 +30,7 @@
  * an OpenLDAP server.
  *
  * @category   Zend
- * @package    Zend_Ldap
- * @subpackage RootDSE
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -58,10 +57,11 @@ class Zend_Ldap_Node_RootDse_OpenLdap extends Zend_Ldap_Node_RootDse
     }
 
     /**
-     * Determines if the control is supported
+     * Determines if the control is supported.
      *
-     * @param  string|array $oids control oid(s) to check
-     * @return boolean
+     * @param string|array $oids control oid(s) to check
+     *
+     * @return bool
      */
     public function supportsControl($oids)
     {
@@ -69,10 +69,11 @@ class Zend_Ldap_Node_RootDse_OpenLdap extends Zend_Ldap_Node_RootDse
     }
 
     /**
-     * Determines if the extension is supported
+     * Determines if the extension is supported.
      *
-     * @param  string|array $oids oid(s) to check
-     * @return boolean
+     * @param string|array $oids oid(s) to check
+     *
+     * @return bool
      */
     public function supportsExtension($oids)
     {
@@ -80,10 +81,11 @@ class Zend_Ldap_Node_RootDse_OpenLdap extends Zend_Ldap_Node_RootDse
     }
 
     /**
-     * Determines if the feature is supported
+     * Determines if the feature is supported.
      *
-     * @param  string|array $oids feature oid(s) to check
-     * @return boolean
+     * @param string|array $oids feature oid(s) to check
+     *
+     * @return bool
      */
     public function supportsFeature($oids)
     {
@@ -91,7 +93,7 @@ class Zend_Ldap_Node_RootDse_OpenLdap extends Zend_Ldap_Node_RootDse
     }
 
     /**
-     * Gets the server type
+     * Gets the server type.
      *
      * @return int
      */

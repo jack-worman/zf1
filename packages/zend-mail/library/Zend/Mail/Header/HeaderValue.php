@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Mail
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
-
 /**
  * @category   Zend
- * @package    Zend_Mail
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -36,28 +36,30 @@ final class Zend_Mail_Header_HeaderValue
     }
 
     /**
-     * Filter the header value according to RFC 2822
+     * Filter the header value according to RFC 2822.
      *
      * @see    http://www.rfc-base.org/txt/rfc-2822.txt (section 2.2)
-     * @param  string $value
+     *
+     * @param string $value
+     *
      * @return string
      */
     public static function filter($value)
     {
         $result = '';
-        $tot    = strlen((string) $value);
+        $tot = strlen((string) $value);
 
         // Filter for CR and LF characters, leaving CRLF + WSP sequences for
         // Long Header Fields (section 2.2.3 of RFC 2822)
-        for ($i = 0; $i < $tot; $i += 1) {
+        for ($i = 0; $i < $tot; ++$i) {
             $ord = ord((string) $value[$i]);
             if (($ord < 32 || $ord > 126)
-                && $ord !== 13
+                && 13 !== $ord
             ) {
                 continue;
             }
 
-            if ($ord === 13) {
+            if (13 === $ord) {
                 if ($i + 2 >= $tot) {
                     continue;
                 }
@@ -65,7 +67,7 @@ final class Zend_Mail_Header_HeaderValue
                 $lf = ord((string) $value[$i + 1]);
                 $sp = ord((string) $value[$i + 2]);
 
-                if ($lf !== 10 || $sp !== 32) {
+                if (10 !== $lf || 32 !== $sp) {
                     continue;
                 }
 
@@ -84,21 +86,23 @@ final class Zend_Mail_Header_HeaderValue
      * Determine if the header value contains any invalid characters.
      *
      * @see    http://www.rfc-base.org/txt/rfc-2822.txt (section 2.2)
+     *
      * @param string $value
+     *
      * @return bool
      */
     public static function isValid($value)
     {
         $tot = strlen((string) $value);
-        for ($i = 0; $i < $tot; $i += 1) {
+        for ($i = 0; $i < $tot; ++$i) {
             $ord = ord((string) $value[$i]);
             if (($ord < 32 || $ord > 126)
-                && $ord !== 13
+                && 13 !== $ord
             ) {
                 return false;
             }
 
-            if ($ord === 13) {
+            if (13 === $ord) {
                 if ($i + 2 >= $tot) {
                     return false;
                 }
@@ -106,7 +110,7 @@ final class Zend_Mail_Header_HeaderValue
                 $lf = ord((string) $value[$i + 1]);
                 $sp = ord((string) $value[$i + 2]);
 
-                if ($lf !== 10 || $sp !== 32) {
+                if (10 !== $lf || 32 !== $sp) {
                     return false;
                 }
 
@@ -123,12 +127,14 @@ final class Zend_Mail_Header_HeaderValue
      * Raises an exception if invalid.
      *
      * @param string $value
-     * @throws Exception\RuntimeException
+     *
      * @return void
+     *
+     * @throws Exception\RuntimeException
      */
     public static function assertValid($value)
     {
-        if (! self::isValid($value)) {
+        if (!self::isValid($value)) {
             // require_once 'Zend/Mail/Exception.php';
             throw new Zend_Mail_Exception('Invalid header value detected');
         }

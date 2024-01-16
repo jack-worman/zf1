@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage Zend_Controller_Plugin
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -31,19 +31,15 @@
 // require_once 'Zend/Controller/Request/Http.php';
 
 /**
- * Plugin to digest PUT request body and make params available just like POST
+ * Plugin to digest PUT request body and make params available just like POST.
  *
- * @package    Zend_Controller
- * @subpackage Zend_Controller_Plugin
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Controller_Plugin_PutHandler extends Zend_Controller_Plugin_Abstract
 {
     /**
-     * Before dispatching, digest PUT request body and set params
-     *
-     * @param Zend_Controller_Request_Abstract $request
+     * Before dispatching, digest PUT request body and set params.
      */
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
@@ -52,7 +48,7 @@ class Zend_Controller_Plugin_PutHandler extends Zend_Controller_Plugin_Abstract
         }
 
         if ($this->_request->isPut()) {
-            $putParams = array();
+            $putParams = [];
             parse_str($this->_request->getRawBody(), $putParams);
             $request->setParams($putParams);
         }

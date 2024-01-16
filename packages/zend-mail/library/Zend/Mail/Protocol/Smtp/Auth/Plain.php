@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,53 +13,49 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Mail
- * @subpackage Protocol
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /**
  * @see Zend_Mail_Protocol_Smtp
  */
 // require_once 'Zend/Mail/Protocol/Smtp.php';
 
-
 /**
- * Performs PLAIN authentication
+ * Performs PLAIN authentication.
  *
  * @category   Zend
- * @package    Zend_Mail
- * @subpackage Protocol
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Mail_Protocol_Smtp_Auth_Plain extends Zend_Mail_Protocol_Smtp
 {
     /**
-     * PLAIN username
+     * PLAIN username.
      *
      * @var string
      */
     protected $_username;
 
-
     /**
-     * PLAIN password
+     * PLAIN password.
      *
      * @var string
      */
     protected $_password;
 
-
     /**
      * Constructor.
      *
-     * @param  string $host   (Default: 127.0.0.1)
-     * @param  int    $port   (Default: null)
-     * @param  array  $config Auth-specific parameters
+     * @param string $host   (Default: 127.0.0.1)
+     * @param int    $port   (Default: null)
+     * @param array  $config Auth-specific parameters
+     *
      * @return void
      */
     public function __construct($host = '127.0.0.1', $port = null, $config = null)
@@ -76,9 +72,8 @@ class Zend_Mail_Protocol_Smtp_Auth_Plain extends Zend_Mail_Protocol_Smtp
         parent::__construct($host, $port, $config);
     }
 
-
     /**
-     * Perform PLAIN authentication with supplied credentials
+     * Perform PLAIN authentication with supplied credentials.
      *
      * @return void
      */
@@ -89,7 +84,7 @@ class Zend_Mail_Protocol_Smtp_Auth_Plain extends Zend_Mail_Protocol_Smtp
 
         $this->_send('AUTH PLAIN');
         $this->_expect(334);
-        $this->_send(base64_encode("\0" . $this->_username . "\0" . $this->_password));
+        $this->_send(base64_encode("\0".$this->_username."\0".$this->_password));
         $this->_expect(235);
         $this->_auth = true;
     }

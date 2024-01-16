@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Media
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,29 +27,27 @@
 // require_once 'Zend/Gdata/App/Extension.php';
 
 /**
- * Represents the media:credit element
+ * Represents the media:credit element.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Media
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_Media_Extension_MediaCredit extends Zend_Gdata_Extension
 {
-
     protected $_rootElement = 'credit';
     protected $_rootNamespace = 'media';
 
     /**
      * @var string
      */
-    protected $_role = null;
+    protected $_role;
 
     /**
      * @var string
      */
-    protected $_scheme = null;
+    protected $_scheme;
 
     /**
      * Creates an individual MediaCredit object.
@@ -58,7 +56,7 @@ class Zend_Gdata_Media_Extension_MediaCredit extends Zend_Gdata_Extension
      * @param string $role
      * @param string $scheme
      */
-    public function __construct($text = null, $role = null,  $scheme = null)
+    public function __construct($text = null, $role = null, $scheme = null)
     {
         $this->registerAllNamespaces(Zend_Gdata_Media::$namespaces);
         parent::__construct();
@@ -74,18 +72,20 @@ class Zend_Gdata_Media_Extension_MediaCredit extends Zend_Gdata_Extension
      * for application storage/persistence.
      *
      * @param DOMDocument $doc The DOMDocument used to construct DOMElements
-     * @return DOMElement The DOMElement representing this element and all
-     * child properties.
+     *
+     * @return DOMElement the DOMElement representing this element and all
+     *                    child properties
      */
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
         $element = parent::getDOM($doc, $majorVersion, $minorVersion);
-        if ($this->_role !== null) {
+        if (null !== $this->_role) {
             $element->setAttribute('role', $this->_role);
         }
-        if ($this->_scheme !== null) {
+        if (null !== $this->_scheme) {
             $element->setAttribute('scheme', $this->_scheme);
         }
+
         return $element;
     }
 
@@ -99,14 +99,14 @@ class Zend_Gdata_Media_Extension_MediaCredit extends Zend_Gdata_Extension
     protected function takeAttributeFromDOM($attribute)
     {
         switch ($attribute->localName) {
-        case 'role':
-            $this->_role = $attribute->nodeValue;
-            break;
-        case 'scheme':
-            $this->_scheme = $attribute->nodeValue;
-            break;
-        default:
-            parent::takeAttributeFromDOM($attribute);
+            case 'role':
+                $this->_role = $attribute->nodeValue;
+                break;
+            case 'scheme':
+                $this->_scheme = $attribute->nodeValue;
+                break;
+            default:
+                parent::takeAttributeFromDOM($attribute);
         }
     }
 
@@ -120,11 +120,13 @@ class Zend_Gdata_Media_Extension_MediaCredit extends Zend_Gdata_Extension
 
     /**
      * @param string $value
+     *
      * @return Zend_Gdata_Media_Extension_MediaCredit Provides a fluent interface
      */
     public function setRole($value)
     {
         $this->_role = $value;
+
         return $this;
     }
 
@@ -138,12 +140,13 @@ class Zend_Gdata_Media_Extension_MediaCredit extends Zend_Gdata_Extension
 
     /**
      * @param string $value
+     *
      * @return Zend_Gdata_Media_Extension_MediaCredit Provides a fluent interface
      */
     public function setScheme($value)
     {
         $this->_scheme = $value;
+
         return $this;
     }
-
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Filter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,37 +27,37 @@
 
 /**
  * @category   Zend
- * @package    Zend_Filter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Filter_Null implements Zend_Filter_Interface
 {
-    const BOOLEAN      = 1;
-    const INTEGER      = 2;
-    const EMPTY_ARRAY  = 4;
-    const STRING       = 8;
-    const ZERO         = 16;
-    const ALL          = 31;
+    public const BOOLEAN = 1;
+    public const INTEGER = 2;
+    public const EMPTY_ARRAY = 4;
+    public const STRING = 8;
+    public const ZERO = 16;
+    public const ALL = 31;
 
-    protected $_constants = array(
-        self::BOOLEAN     => 'boolean',
-        self::INTEGER     => 'integer',
+    protected $_constants = [
+        self::BOOLEAN => 'boolean',
+        self::INTEGER => 'integer',
         self::EMPTY_ARRAY => 'array',
-        self::STRING      => 'string',
-        self::ZERO        => 'zero',
-        self::ALL         => 'all'
-    );
+        self::STRING => 'string',
+        self::ZERO => 'zero',
+        self::ALL => 'all',
+    ];
 
     /**
-     * Internal type to detect
+     * Internal type to detect.
      *
-     * @var integer
+     * @var int
      */
     protected $_type = self::ALL;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string|array|Zend_Config $options OPTIONAL
      */
@@ -64,14 +65,14 @@ class Zend_Filter_Null implements Zend_Filter_Interface
     {
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
-        } else if (!is_array($options)) {
+        } elseif (!is_array($options)) {
             $options = func_get_args();
-            $temp    = array();
+            $temp = [];
             if (!empty($options)) {
                 $temp = array_shift($options);
             }
             $options = $temp;
-        } else if (is_array($options) && array_key_exists('type', $options)) {
+        } elseif (is_array($options) && array_key_exists('type', $options)) {
             $options = $options['type'];
         }
 
@@ -81,7 +82,7 @@ class Zend_Filter_Null implements Zend_Filter_Interface
     }
 
     /**
-     * Returns the set null types
+     * Returns the set null types.
      *
      * @return int
      */
@@ -91,26 +92,28 @@ class Zend_Filter_Null implements Zend_Filter_Interface
     }
 
     /**
-     * Set the null types
+     * Set the null types.
      *
-     * @param  integer|array $type
-     * @throws Zend_Filter_Exception
+     * @param int|array $type
+     *
      * @return Zend_Filter_Null
+     *
+     * @throws Zend_Filter_Exception
      */
     public function setType($type = null)
     {
         if (is_array($type)) {
             $detected = 0;
-            foreach($type as $value) {
+            foreach ($type as $value) {
                 if (is_int($value)) {
                     $detected += $value;
-                } else if (in_array($value, $this->_constants)) {
+                } elseif (in_array($value, $this->_constants)) {
                     $detected += array_search($value, $this->_constants);
                 }
             }
 
             $type = $detected;
-        } else if (is_string($type)) {
+        } elseif (is_string($type)) {
             if (in_array($type, $this->_constants)) {
                 $type = array_search($type, $this->_constants);
             }
@@ -122,16 +125,18 @@ class Zend_Filter_Null implements Zend_Filter_Interface
         }
 
         $this->_type = $type;
+
         return $this;
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend_Filter_Interface.
      *
      * Returns null representation of $value, if value is empty and matches
      * types that should be considered null.
      *
-     * @param  string $value
+     * @param string $value
+     *
      * @return string
      */
     public function filter($value)
@@ -141,7 +146,7 @@ class Zend_Filter_Null implements Zend_Filter_Interface
         // STRING ZERO ('0')
         if ($type >= self::ZERO) {
             $type -= self::ZERO;
-            if (is_string($value) && ($value == '0')) {
+            if (is_string($value) && ('0' == $value)) {
                 return null;
             }
         }
@@ -149,7 +154,7 @@ class Zend_Filter_Null implements Zend_Filter_Interface
         // STRING ('')
         if ($type >= self::STRING) {
             $type -= self::STRING;
-            if (is_string($value) && ($value == '')) {
+            if (is_string($value) && ('' == $value)) {
                 return null;
             }
         }
@@ -157,7 +162,7 @@ class Zend_Filter_Null implements Zend_Filter_Interface
         // EMPTY_ARRAY (array())
         if ($type >= self::EMPTY_ARRAY) {
             $type -= self::EMPTY_ARRAY;
-            if (is_array($value) && ($value == array())) {
+            if (is_array($value) && ([] == $value)) {
                 return null;
             }
         }
@@ -165,7 +170,7 @@ class Zend_Filter_Null implements Zend_Filter_Interface
         // INTEGER (0)
         if ($type >= self::INTEGER) {
             $type -= self::INTEGER;
-            if (is_int($value) && ($value == 0)) {
+            if (is_int($value) && (0 == $value)) {
                 return null;
             }
         }
@@ -173,7 +178,7 @@ class Zend_Filter_Null implements Zend_Filter_Interface
         // BOOLEAN (false)
         if ($type >= self::BOOLEAN) {
             $type -= self::BOOLEAN;
-            if (is_bool($value) && ($value == false)) {
+            if (is_bool($value) && (false == $value)) {
                 return null;
             }
         }

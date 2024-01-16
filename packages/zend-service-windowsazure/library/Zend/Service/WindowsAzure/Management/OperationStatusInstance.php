@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_WindowsAzure
- * @subpackage Management
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,34 +27,32 @@
 
 /**
  * @category   Zend
- * @package    Zend_Service_WindowsAzure
- * @subpackage Management
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * 
- * @property string $Id              The request ID of the asynchronous request.
- * @property string $Status          The status of the asynchronous request. Possible values include InProgress, Succeeded, or Failed.
- * @property string $ErrorCode	     The management service error code returned if the asynchronous request failed. 
- * @property string $ErrorMessage    The management service error message returned if the asynchronous request failed. 
+ *
+ * @property string $Id           The request ID of the asynchronous request.
+ * @property string $Status       The status of the asynchronous request. Possible values include InProgress, Succeeded, or Failed.
+ * @property string $ErrorCode    The management service error code returned if the asynchronous request failed.
+ * @property string $ErrorMessage The management service error message returned if the asynchronous request failed.
  */
-class Zend_Service_WindowsAzure_Management_OperationStatusInstance
-	extends Zend_Service_WindowsAzure_Management_ServiceEntityAbstract
-{    
+class Zend_Service_WindowsAzure_Management_OperationStatusInstance extends Zend_Service_WindowsAzure_Management_ServiceEntityAbstract
+{
     /**
-     * Constructor
-     * 
-     * @param string $id              The request ID of the asynchronous request.
-     * @param string $status          The status of the asynchronous request. Possible values include InProgress, Succeeded, or Failed.
-     * @param string $errorCode	      The management service error code returned if the asynchronous request failed. 
-     * @param string $errorMessage    The management service error message returned if the asynchronous request failed.
-	 */
-    public function __construct($id, $status, $errorCode, $errorMessage) 
-    {	        
-        $this->_data = array(
-            'id'              => $id,
-            'status'          => $status,
-            'errorcode'       => $errorCode,
-            'errormessage'    => $errorMessage     
-        );
+     * Constructor.
+     *
+     * @param string $id           the request ID of the asynchronous request
+     * @param string $status       The status of the asynchronous request. Possible values include InProgress, Succeeded, or Failed.
+     * @param string $errorCode    the management service error code returned if the asynchronous request failed
+     * @param string $errorMessage the management service error message returned if the asynchronous request failed
+     */
+    public function __construct($id, $status, $errorCode, $errorMessage)
+    {
+        $this->_data = [
+            'id' => $id,
+            'status' => $status,
+            'errorcode' => $errorCode,
+            'errormessage' => $errorMessage,
+        ];
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,40 +13,39 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Search_Lucene
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
-
 /**
- * Abstract Finite State Machine
- *
+ * Abstract Finite State Machine.
  *
  * @category   Zend
- * @package    Zend_Search_Lucene
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Search_Lucene_FSMAction
 {
     /**
-     * Object reference
+     * Object reference.
      *
      * @var object
      */
     private $_object;
 
     /**
-     * Method name
+     * Method name.
      *
      * @var string
      */
     private $_method;
 
     /**
-     * Object constructor
+     * Object constructor.
      *
      * @param object $object
      * @param string $method
@@ -63,4 +62,3 @@ class Zend_Search_Lucene_FSMAction
         $this->_object->$methodName();
     }
 }
-

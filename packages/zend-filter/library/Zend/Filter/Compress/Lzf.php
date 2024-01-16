@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Filter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,17 +26,17 @@
 // require_once 'Zend/Filter/Compress/CompressInterface.php';
 
 /**
- * Compression adapter for Lzf
+ * Compression adapter for Lzf.
  *
  * @category   Zend
- * @package    Zend_Filter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Filter_Compress_Lzf implements Zend_Filter_Compress_CompressInterface
 {
     /**
-     * Class constructor
+     * Class constructor.
      */
     public function __construct()
     {
@@ -46,9 +47,10 @@ class Zend_Filter_Compress_Lzf implements Zend_Filter_Compress_CompressInterface
     }
 
     /**
-     * Compresses the given content
+     * Compresses the given content.
      *
-     * @param  string $content
+     * @param string $content
+     *
      * @return string
      */
     public function compress($content)
@@ -63,9 +65,10 @@ class Zend_Filter_Compress_Lzf implements Zend_Filter_Compress_CompressInterface
     }
 
     /**
-     * Decompresses the given content
+     * Decompresses the given content.
      *
-     * @param  string $content
+     * @param string $content
+     *
      * @return string
      */
     public function decompress($content)
@@ -80,7 +83,7 @@ class Zend_Filter_Compress_Lzf implements Zend_Filter_Compress_CompressInterface
     }
 
     /**
-     * Returns the adapter name
+     * Returns the adapter name.
      *
      * @return string
      */

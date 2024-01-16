@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Calendar
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,24 +27,23 @@
 // require_once 'Zend/Gdata/Extension.php';
 
 /**
- * Represents the gCal:accessLevel element used by the Calendar data API
+ * Represents the gCal:accessLevel element used by the Calendar data API.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Calendar
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_Calendar_Extension_AccessLevel extends Zend_Gdata_Extension
 {
-
     protected $_rootNamespace = 'gCal';
     protected $_rootElement = 'accesslevel';
-    protected $_value = null;
+    protected $_value;
 
     /**
      * Constructs a new Zend_Gdata_Calendar_Extension_AccessLevel object.
-     * @param string $value (optional) The text content of the element.
+     *
+     * @param string $value (optional) The text content of the element
      */
     public function __construct($value = null)
     {
@@ -60,15 +59,17 @@ class Zend_Gdata_Calendar_Extension_AccessLevel extends Zend_Gdata_Extension
      * for application storage/persistence.
      *
      * @param DOMDocument $doc The DOMDocument used to construct DOMElements
-     * @return DOMElement The DOMElement representing this element and all
-     * child properties.
+     *
+     * @return DOMElement the DOMElement representing this element and all
+     *                    child properties
      */
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
         $element = parent::getDOM($doc, $majorVersion, $minorVersion);
-        if ($this->_value != null) {
+        if (null != $this->_value) {
             $element->setAttribute('value', $this->_value);
         }
+
         return $element;
     }
 
@@ -82,44 +83,44 @@ class Zend_Gdata_Calendar_Extension_AccessLevel extends Zend_Gdata_Extension
     protected function takeAttributeFromDOM($attribute)
     {
         switch ($attribute->localName) {
-        case 'value':
-            $this->_value = $attribute->nodeValue;
-            break;
-        default:
-            parent::takeAttributeFromDOM($attribute);
+            case 'value':
+                $this->_value = $attribute->nodeValue;
+                break;
+            default:
+                parent::takeAttributeFromDOM($attribute);
         }
     }
 
     /**
      * Get the value for this element's value attribute.
      *
-     * @return string The attribute being modified.
+     * @return string the attribute being modified
      */
     public function getValue()
     {
         return $this->_value;
     }
 
-
     /**
      * Set the value for this element's value attribute.
      *
-     * @param string $value The desired value for this attribute.
-     * @return Zend_Gdata_Calendar_Extension_AccessLevel The element being modified.
+     * @param string $value the desired value for this attribute
+     *
+     * @return Zend_Gdata_Calendar_Extension_AccessLevel the element being modified
      */
     public function setValue($value)
     {
         $this->_value = $value;
+
         return $this;
     }
 
     /**
      * Magic toString method allows using this directly via echo
-     * Works best in PHP >= 4.2.0
+     * Works best in PHP >= 4.2.0.
      */
     public function __toString()
     {
         return $this->getValue();
     }
-
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,24 +13,23 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage Zend_Controller_Action
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage Zend_Controller_Action
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface Zend_Controller_Action_Interface
 {
     /**
-     * Class constructor
+     * Class constructor.
      *
      * The request and response objects should be registered with the
      * controller, as should be any additional optional arguments; these will be
@@ -50,19 +49,19 @@ interface Zend_Controller_Action_Interface
      * tasks; as a general rule, override {@link init()} instead of the
      * constructor to customize an action controller's instantiation.
      *
-     * @param Zend_Controller_Request_Abstract $request
-     * @param Zend_Controller_Response_Abstract $response
      * @param array $invokeArgs Any additional invocation arguments
+     *
      * @return void
      */
     public function __construct(Zend_Controller_Request_Abstract $request,
-                                Zend_Controller_Response_Abstract $response,
-                                array $invokeArgs = array());
+        Zend_Controller_Response_Abstract $response,
+        array $invokeArgs = []);
 
     /**
-     * Dispatch the requested action
+     * Dispatch the requested action.
      *
      * @param string $action Method name of action
+     *
      * @return void
      */
     public function dispatch($action);

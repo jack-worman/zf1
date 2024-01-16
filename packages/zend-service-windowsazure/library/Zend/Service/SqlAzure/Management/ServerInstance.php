@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_WindowsAzure
- * @subpackage Management
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,33 +27,31 @@
 
 /**
  * @category   Zend
- * @package    Zend_Service_SqlAzure
- * @subpackage Management
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * 
+ *
  * @property string $Name               The name of the server.
  * @property string $DnsName            The DNS name of the server.
  * @property string $AdministratorLogin The administrator login.
  * @property string $Location           The location of the server in Windows Azure.
  */
-class Zend_Service_SqlAzure_Management_ServerInstance
-	extends Zend_Service_SqlAzure_Management_ServiceEntityAbstract
-{    
+class Zend_Service_SqlAzure_Management_ServerInstance extends Zend_Service_SqlAzure_Management_ServiceEntityAbstract
+{
     /**
-     * Constructor
-     * 
-     * @param string $name               The name of the server.
-     * @param string $administratorLogin The administrator login.
-     * @param string $location           The location of the server in Windows Azure.
-	 */
-    public function __construct($name, $administratorLogin, $location) 
-    {	        
-        $this->_data = array(
-            'name'               => $name,
-            'dnsname'            => $name . '.database.windows.net',
+     * Constructor.
+     *
+     * @param string $name               the name of the server
+     * @param string $administratorLogin the administrator login
+     * @param string $location           the location of the server in Windows Azure
+     */
+    public function __construct($name, $administratorLogin, $location)
+    {
+        $this->_data = [
+            'name' => $name,
+            'dnsname' => $name.'.database.windows.net',
             'administratorlogin' => $administratorLogin,
-            'location'           => $location       
-        );
+            'location' => $location,
+        ];
     }
 }

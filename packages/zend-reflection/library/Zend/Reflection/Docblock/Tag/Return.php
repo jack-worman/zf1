@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Reflection
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -24,7 +25,7 @@
 
 /**
  * @category   Zend
- * @package    Zend_Reflection
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -33,12 +34,13 @@ class Zend_Reflection_Docblock_Tag_Return extends Zend_Reflection_Docblock_Tag
     /**
      * @var string
      */
-    protected $_type = null;
+    protected $_type;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param  string $tagDocblockLine
+     * @param string $tagDocblockLine
+     *
      * @return void
      */
     public function __construct($tagDocblockLine)
@@ -48,7 +50,7 @@ class Zend_Reflection_Docblock_Tag_Return extends Zend_Reflection_Docblock_Tag
             throw new Zend_Reflection_Exception('Provided docblock line is does not contain a valid tag');
         }
 
-        if ($matches[1] != 'return') {
+        if ('return' != $matches[1]) {
             // require_once 'Zend/Reflection/Exception.php';
             throw new Zend_Reflection_Exception('Provided docblock line is does not contain a valid @return tag');
         }
@@ -61,7 +63,7 @@ class Zend_Reflection_Docblock_Tag_Return extends Zend_Reflection_Docblock_Tag
     }
 
     /**
-     * Get return variable type
+     * Get return variable type.
      *
      * @return string
      */
