@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Json_Server
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Json_Server_Smd_ServiceTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Json_Server_Smd_ServiceTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Json_Server_Smd_ServiceTest::main');
 }
 
 // require_once 'Zend/Json/Server/Smd/Service.php';
@@ -30,13 +30,13 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 // require_once 'Zend/Json.php';
 
 /**
- * Test class for Zend_Json_Server_Smd_Service
+ * Test class for Zend_Json_Server_Smd_Service.
  *
  * @category   Zend
- * @package    Zend_Json_Server
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Json
  * @group      Zend_Json_Server
  */
@@ -50,8 +50,7 @@ class Zend_Json_Server_Smd_ServiceTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Json_Server_Smd_ServiceTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Json_Server_Smd_ServiceTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -86,7 +85,7 @@ class Zend_Json_Server_Smd_ServiceTest extends PHPUnit_Framework_TestCase
         }
 
         try {
-            $service = new Zend_Json_Server_Smd_Service(array());
+            $service = new Zend_Json_Server_Smd_Service([]);
             $this->fail('Should throw exception when no name set');
         } catch (Zend_Json_Server_Exception $e) {
             $this->assertContains('requires a name', $e->getMessage());
@@ -201,11 +200,11 @@ class Zend_Json_Server_Smd_ServiceTest extends PHPUnit_Framework_TestCase
 
     public function testParamsShouldAcceptArrayOfTypes()
     {
-        $type   = array('integer', 'string');
+        $type = ['integer', 'string'];
         $this->service->addParam($type);
         $params = $this->service->getParams();
-        $param  = array_shift($params);
-        $test   = $param['type'];
+        $param = array_shift($params);
+        $test = $param['type'];
         $this->assertTrue(is_array($test));
         $this->assertEquals($type, $test);
     }
@@ -213,7 +212,7 @@ class Zend_Json_Server_Smd_ServiceTest extends PHPUnit_Framework_TestCase
     public function testInvalidParamTypeShouldThrowException()
     {
         try {
-            $this->service->addParam(new stdClass);
+            $this->service->addParam(new stdClass());
             $this->fail('Invalid param type should throw exception');
         } catch (Zend_Json_Server_Exception $e) {
             $this->assertContains('Invalid param type', $e->getMessage());
@@ -222,9 +221,9 @@ class Zend_Json_Server_Smd_ServiceTest extends PHPUnit_Framework_TestCase
 
     public function testShouldBeAbleToOrderParams()
     {
-        $this->service->addParam('integer', array(), 4)
+        $this->service->addParam('integer', [], 4)
                       ->addParam('string')
-                      ->addParam('boolean', array(), 3);
+                      ->addParam('boolean', [], 3);
         $params = $this->service->getParams();
 
         $this->assertEquals(3, count($params));
@@ -241,15 +240,15 @@ class Zend_Json_Server_Smd_ServiceTest extends PHPUnit_Framework_TestCase
     {
         $this->service->addParam(
             'integer',
-            array(
-                'name'        => 'foo',
-                'optional'    => false,
-                'default'     => 1,
+            [
+                'name' => 'foo',
+                'optional' => false,
+                'default' => 1,
                 'description' => 'Foo parameter',
-            )
+            ]
         );
         $params = $this->service->getParams();
-        $param  = array_shift($params);
+        $param = array_shift($params);
         $this->assertEquals('foo', $param['name']);
         $this->assertFalse($param['optional']);
         $this->assertEquals(1, $param['default']);
@@ -258,11 +257,11 @@ class Zend_Json_Server_Smd_ServiceTest extends PHPUnit_Framework_TestCase
 
     public function testShouldBeAbleToAddMultipleParamsAtOnce()
     {
-        $this->service->addParams(array(
-            array('type' => 'integer', 'order' => 4),
-            array('type' => 'string', 'name' => 'foo'),
-            array('type' => 'boolean', 'order' => 3),
-        ));
+        $this->service->addParams([
+            ['type' => 'integer', 'order' => 4],
+            ['type' => 'string', 'name' => 'foo'],
+            ['type' => 'boolean', 'order' => 3],
+        ]);
         $params = $this->service->getParams();
 
         $this->assertEquals(3, count($params));
@@ -283,10 +282,10 @@ class Zend_Json_Server_Smd_ServiceTest extends PHPUnit_Framework_TestCase
         $params = $this->service->getParams();
         $this->assertEquals(3, count($params));
 
-        $this->service->setParams(array(
-            array('type' => 'string'),
-            array('type' => 'integer'),
-        ));
+        $this->service->setParams([
+            ['type' => 'string'],
+            ['type' => 'integer'],
+        ]);
         $test = $this->service->getParams();
         $this->assertNotEquals($params, $test);
         $this->assertEquals(2, count($test));
@@ -307,7 +306,7 @@ class Zend_Json_Server_Smd_ServiceTest extends PHPUnit_Framework_TestCase
     public function testReturnAccessorsShouldAllowArrayOfTypes()
     {
         $this->testReturnShouldBeNullByDefault();
-        $type = array('integer', 'string');
+        $type = ['integer', 'string'];
         $this->service->setReturn($type);
         $this->assertEquals($type, $this->service->getReturn());
     }
@@ -315,7 +314,7 @@ class Zend_Json_Server_Smd_ServiceTest extends PHPUnit_Framework_TestCase
     public function testInvalidReturnTypeShouldThrowException()
     {
         try {
-            $this->service->setReturn(new stdClass);
+            $this->service->setReturn(new stdClass());
             $this->fail('Invalid return type should throw exception');
         } catch (Zend_Json_Server_Exception $e) {
             $this->assertContains('Invalid param type', $e->getMessage());
@@ -333,7 +332,7 @@ class Zend_Json_Server_Smd_ServiceTest extends PHPUnit_Framework_TestCase
     {
         $this->setupSmdValidationObject();
         $json = $this->service->toJson();
-        $smd  = Zend_Json::decode($json);
+        $smd = Zend_Json::decode($json);
 
         $this->assertTrue(array_key_exists('foo', $smd));
         $this->assertTrue(is_array($smd['foo']));
@@ -377,6 +376,6 @@ class Zend_Json_Server_Smd_ServiceTest extends PHPUnit_Framework_TestCase
 }
 
 // Call Zend_Json_Server_Smd_ServiceTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Json_Server_Smd_ServiceTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Json_Server_Smd_ServiceTest::main') {
     Zend_Json_Server_Smd_ServiceTest::main();
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage Framework
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -40,21 +40,19 @@
  */
 // require_once 'Zend/Filter/StringToLower.php';
 
-
 /**
- * This class is the front most class for utilizing Zend_Tool_Project
+ * This class is the front most class for utilizing Zend_Tool_Project.
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
  * @category   Zend
- * @package    Zend_Tool
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Project_Context_Zf_ViewControllerScriptsDirectory extends Zend_Tool_Project_Context_Filesystem_Directory
 {
-
     /**
      * @var string
      */
@@ -63,10 +61,10 @@ class Zend_Tool_Project_Context_Zf_ViewControllerScriptsDirectory extends Zend_T
     /**
      * @var name
      */
-    protected $_forControllerName = null;
+    protected $_forControllerName;
 
     /**
-     * init()
+     * init().
      *
      * @return Zend_Tool_Project_Context_Zf_ViewControllerScriptsDirectory
      */
@@ -75,23 +73,24 @@ class Zend_Tool_Project_Context_Zf_ViewControllerScriptsDirectory extends Zend_T
         $this->_forControllerName = $this->_resource->getAttribute('forControllerName');
         $this->_filesystemName = $this->_convertControllerNameToFilesystemName($this->_forControllerName);
         parent::init();
+
         return $this;
     }
 
     /**
-     * getPersistentAttributes()
+     * getPersistentAttributes().
      *
      * @return array
      */
     public function getPersistentAttributes()
     {
-        return array(
-            'forControllerName' => $this->_forControllerName
-            );
+        return [
+            'forControllerName' => $this->_forControllerName,
+            ];
     }
 
     /**
-     * getName()
+     * getName().
      *
      * @return string
      */
@@ -105,7 +104,7 @@ class Zend_Tool_Project_Context_Zf_ViewControllerScriptsDirectory extends Zend_T
         $filter = new Zend_Filter();
         $filter->addFilter(new Zend_Filter_Word_CamelCaseToDash())
             ->addFilter(new Zend_Filter_StringToLower());
+
         return $filter->filter($controllerName);
     }
-
 }

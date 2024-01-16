@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,24 +13,21 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
 require_once 'Zend/Db/Table/Select/TestCommon.php';
 
-
-
-
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Db
  * @group      Zend_Db_Table
  * @group      Zend_Db_Table_Select
@@ -38,31 +35,31 @@ require_once 'Zend/Db/Table/Select/TestCommon.php';
 #[AllowDynamicProperties]
 class Zend_Db_Table_Select_Pdo_OciTest extends Zend_Db_Table_Select_TestCommon
 {
-
     /**
-     * ZF-4330: this test must be done on string field
+     * ZF-4330: this test must be done on string field.
      */
-    protected function _selectColumnWithColonQuotedParameter ()
+    protected function _selectColumnWithColonQuotedParameter()
     {
         $product_name = $this->_db->quoteIdentifier('product_name');
 
         $select = $this->_db->select()
                             ->from('zfproducts')
-                            ->where($product_name . ' = ?', "as'as:x");
+                            ->where($product_name.' = ?', "as'as:x");
+
         return $select;
     }
 
     /**
-     * ZF-4330 : Oracle doesn't use 'AS' to identify table alias
+     * ZF-4330 : Oracle doesn't use 'AS' to identify table alias.
      */
-    public function testSelectFromSelectObject ()
+    public function testSelectFromSelectObject()
     {
         $select = $this->_selectFromSelectObject();
         $query = $select->assemble();
-        $cmp = 'SELECT ' . $this->_db->quoteIdentifier('t') . '.* FROM (SELECT '
-                         . $this->_db->quoteIdentifier('subqueryTable') . '.* FROM '
-                         . $this->_db->quoteIdentifier('subqueryTable') . ') '
-                         . $this->_db->quoteIdentifier('t');
+        $cmp = 'SELECT '.$this->_db->quoteIdentifier('t').'.* FROM (SELECT '
+                         .$this->_db->quoteIdentifier('subqueryTable').'.* FROM '
+                         .$this->_db->quoteIdentifier('subqueryTable').') '
+                         .$this->_db->quoteIdentifier('t');
         $this->assertEquals($query, $cmp);
     }
 
@@ -70,5 +67,4 @@ class Zend_Db_Table_Select_Pdo_OciTest extends Zend_Db_Table_Select_TestCommon
     {
         return 'Pdo_Oci';
     }
-
 }

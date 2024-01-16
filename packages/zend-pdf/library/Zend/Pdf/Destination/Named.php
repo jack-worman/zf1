@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Pdf
- * @subpackage Destination
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -24,12 +24,11 @@
 // require_once 'Zend/Pdf/Element.php';
 // require_once 'Zend/Pdf/Element/String.php';
 
-
 /** Zend_Pdf_Destination */
 // require_once 'Zend/Pdf/Destination.php';
 
 /**
- * Destination array: [page /Fit]
+ * Destination array: [page /Fit].
  *
  * Display the page designated by page, with its contents magnified just enough
  * to fit the entire page within the window both horizontally and vertically. If
@@ -37,29 +36,26 @@
  * the smaller of the two, centering the page within the window in the other
  * dimension.
  *
- * @package    Zend_Pdf
- * @subpackage Destination
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Pdf_Destination_Named extends Zend_Pdf_Destination
 {
     /**
-     * Destination name
+     * Destination name.
      *
      * @var Zend_Pdf_Element_Name|Zend_Pdf_Element_String
      */
     protected $_nameElement;
 
     /**
-     * Named destination object constructor
+     * Named destination object constructor.
      *
-     * @param Zend_Pdf_Element $resource
      * @throws Zend_Pdf_Exception
      */
     public function __construct(Zend_Pdf_Element $resource)
     {
-        if ($resource->getType() != Zend_Pdf_Element::TYPE_NAME  &&  $resource->getType() != Zend_Pdf_Element::TYPE_STRING) {
+        if (Zend_Pdf_Element::TYPE_NAME != $resource->getType() && Zend_Pdf_Element::TYPE_STRING != $resource->getType()) {
             // require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Named destination resource must be a PDF name or a PDF string.');
         }
@@ -68,9 +64,10 @@ class Zend_Pdf_Destination_Named extends Zend_Pdf_Destination
     }
 
     /**
-     * Create named destination object
+     * Create named destination object.
      *
      * @param string $name
+     *
      * @return Zend_Pdf_Destination_Named
      */
     public static function create($name)
@@ -79,7 +76,7 @@ class Zend_Pdf_Destination_Named extends Zend_Pdf_Destination
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return Zend_Pdf_Element
      */
@@ -89,9 +86,10 @@ class Zend_Pdf_Destination_Named extends Zend_Pdf_Destination
     }
 
     /**
-     * Get resource
+     * Get resource.
      *
      * @internal
+     *
      * @return Zend_Pdf_Element
      */
     public function getResource()

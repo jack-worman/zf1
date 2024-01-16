@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,30 +13,31 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Pdf
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /** Zend_Pdf_Filter_Compression */
 // require_once 'Zend/Pdf/Filter/Compression.php';
 
 /**
- * LZW stream filter
+ * LZW stream filter.
  *
- * @package    Zend_Pdf
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Pdf_Filter_Compression_Lzw extends Zend_Pdf_Filter_Compression
 {
     /**
-     * Get EarlyChange decode param value
+     * Get EarlyChange decode param value.
      *
      * @param array $params
-     * @return integer
+     *
+     * @return int
+     *
      * @throws Zend_Pdf_Exception
      */
     private static function _getEarlyChangeValue($params)
@@ -44,28 +45,30 @@ class Zend_Pdf_Filter_Compression_Lzw extends Zend_Pdf_Filter_Compression
         if (isset($params['EarlyChange'])) {
             $earlyChange = $params['EarlyChange'];
 
-            if ($earlyChange != 0  &&  $earlyChange != 1) {
+            if (0 != $earlyChange && 1 != $earlyChange) {
                 // require_once 'Zend/Pdf/Exception.php';
-                throw new Zend_Pdf_Exception('Invalid value of \'EarlyChange\' decode param - ' . $earlyChange . '.' );
+                throw new Zend_Pdf_Exception('Invalid value of \'EarlyChange\' decode param - '.$earlyChange.'.');
             }
+
             return $earlyChange;
         } else {
             return 1;
         }
     }
 
-
     /**
-     * Encode data
+     * Encode data.
      *
      * @param string $data
-     * @param array $params
+     * @param array  $params
+     *
      * @return string
+     *
      * @throws Zend_Pdf_Exception
      */
     public static function encode($data, $params = null)
     {
-        if ($params != null) {
+        if (null != $params) {
             $data = self::_applyEncodeParams($data, $params);
         }
 
@@ -74,19 +77,20 @@ class Zend_Pdf_Filter_Compression_Lzw extends Zend_Pdf_Filter_Compression
     }
 
     /**
-     * Decode data
+     * Decode data.
      *
      * @param string $data
-     * @param array $params
+     * @param array  $params
+     *
      * @return string
+     *
      * @throws Zend_Pdf_Exception
      */
     public static function decode($data, $params = null)
     {
         // require_once 'Zend/Pdf/Exception.php';
         throw new Zend_Pdf_Exception('Not implemented yet');
-
-        if ($params !== null) {
+        if (null !== $params) {
             return self::_applyDecodeParams($data, $params);
         } else {
             return $data;

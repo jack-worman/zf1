@@ -1,8 +1,7 @@
 <?php
 /**
  * @category   Zend
- * @package    Zend_Cloud
- * @subpackage Infrastructure
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -10,10 +9,8 @@
 // require_once 'Zend/Cloud/Infrastructure/Instance.php';
 
 /**
- * List of instances
+ * List of instances.
  *
- * @package    Zend_Cloud
- * @subpackage Infrastructure
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -22,7 +19,7 @@ class Zend_Cloud_Infrastructure_InstanceList implements Countable, Iterator, Arr
     /**
      * @var array Array of Zend_Cloud_Infrastructure_Instance
      */
-    protected $instances = array();
+    protected $instances = [];
 
     /**
      * @var int Iterator key
@@ -35,10 +32,10 @@ class Zend_Cloud_Infrastructure_InstanceList implements Countable, Iterator, Arr
     protected $adapter;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param  Adapter $adapter
-     * @param  array $instances
+     * @param Adapter $adapter
+     *
      * @return void
      */
     public function __construct($adapter, array $instances = null)
@@ -57,155 +54,162 @@ class Zend_Cloud_Infrastructure_InstanceList implements Countable, Iterator, Arr
     }
 
     /**
-     * Transforms the Array to array of Instances
+     * Transforms the Array to array of Instances.
      *
-     * @param  array $list
      * @return void
      */
     protected function constructFromArray(array $list)
     {
         foreach ($list as $instance) {
-            $this->addInstance(new Zend_Cloud_Infrastructure_Instance($this->adapter,$instance));
+            $this->addInstance(new Zend_Cloud_Infrastructure_Instance($this->adapter, $instance));
         }
     }
 
     /**
-     * Add an instance
+     * Add an instance.
      *
      * @param  Instance
+     *
      * @return Zend_Cloud_Infrastructure_InstanceList
      */
     protected function addInstance(Zend_Cloud_Infrastructure_Instance $instance)
     {
         $this->instances[] = $instance;
+
         return $this;
     }
 
     /**
-     * Return number of instances
+     * Return number of instances.
      *
      * Implement Countable::count()
      *
      * @return int
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function count()
     {
         return count($this->instances);
     }
 
     /**
-     * Return the current element
+     * Return the current element.
      *
      * Implement Iterator::current()
      *
      * @return Instance
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function current()
     {
         return $this->instances[$this->iteratorKey];
     }
 
     /**
-     * Return the key of the current element
+     * Return the key of the current element.
      *
      * Implement Iterator::key()
      *
      * @return int
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function key()
     {
         return $this->iteratorKey;
     }
 
     /**
-     * Move forward to next element
+     * Move forward to next element.
      *
      * Implement Iterator::next()
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function next()
     {
-        $this->iteratorKey++;
+        ++$this->iteratorKey;
     }
 
     /**
-     * Rewind the Iterator to the first element
+     * Rewind the Iterator to the first element.
      *
      * Implement Iterator::rewind()
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function rewind()
     {
         $this->iteratorKey = 0;
     }
 
     /**
-     * Check if there is a current element after calls to rewind() or next()
+     * Check if there is a current element after calls to rewind() or next().
      *
      * Implement Iterator::valid()
      *
      * @return bool
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function valid()
     {
         $numItems = $this->count();
         if ($numItems > 0 && $this->iteratorKey < $numItems) {
             return true;
         }
+
         return false;
     }
 
     /**
-     * Whether the offset exists
+     * Whether the offset exists.
      *
      * Implement ArrayAccess::offsetExists()
      *
-     * @param  int $offset
+     * @param int $offset
+     *
      * @return bool
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetExists($offset)
     {
-        return ($offset < $this->count());
+        return $offset < $this->count();
     }
 
     /**
-     * Return value at given offset
+     * Return value at given offset.
      *
      * Implement ArrayAccess::offsetGet()
      *
-     * @param  int $offset
+     * @param int $offset
+     *
      * @return Instance
+     *
      * @throws Zend_Cloud_Infrastructure_Exception
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         if (!$this->offsetExists($offset)) {
             // require_once 'Zend/Cloud/Infrastructure/Exception.php';
             throw new Zend_Cloud_Infrastructure_Exception('Illegal index');
         }
+
         return $this->instances[$offset];
     }
 
     /**
-     * Throws exception because all values are read-only
+     * Throws exception because all values are read-only.
      *
      * Implement ArrayAccess::offsetSet()
      *
-     * @param   int     $offset
-     * @param   string  $value
-     * @throws  Zend_Cloud_Infrastructure_Exception
+     * @param int    $offset
+     * @param string $value
+     *
+     * @throws Zend_Cloud_Infrastructure_Exception
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         // require_once 'Zend/Cloud/Infrastructure/Exception.php';
@@ -213,14 +217,15 @@ class Zend_Cloud_Infrastructure_InstanceList implements Countable, Iterator, Arr
     }
 
     /**
-     * Throws exception because all values are read-only
+     * Throws exception because all values are read-only.
      *
      * Implement ArrayAccess::offsetUnset()
      *
-     * @param   int     $offset
-     * @throws  Zend_Cloud_Infrastructure_Exception
+     * @param int $offset
+     *
+     * @throws Zend_Cloud_Infrastructure_Exception
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         // require_once 'Zend/Cloud/Infrastructure/Exception.php';

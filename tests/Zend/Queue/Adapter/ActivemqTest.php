@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Queue
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -32,17 +32,17 @@ require_once 'Zend/Queue/Adapter/AdapterTest.php';
 
 /**
  * @category   Zend
- * @package    Zend_Queue
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Queue
  */
 #[AllowDynamicProperties]
 class Zend_Queue_Adapter_ActivemqTest extends Zend_Queue_Adapter_AdapterTest
 {
     /**
-     * Test setup
+     * Test setup.
      */
     public function setUp()
     {
@@ -52,10 +52,9 @@ class Zend_Queue_Adapter_ActivemqTest extends Zend_Queue_Adapter_AdapterTest
         parent::setUp();
     }
 
-
     /**
      * getAdapterName() is an method to help make AdapterTest work with any
-     * new adapters
+     * new adapters.
      *
      * You must overload this method
      *
@@ -68,7 +67,7 @@ class Zend_Queue_Adapter_ActivemqTest extends Zend_Queue_Adapter_AdapterTest
 
     public function getTestConfig()
     {
-        $driverOptions = array();
+        $driverOptions = [];
         if (defined('TESTS_ZEND_QUEUE_ACTIVEMQ_HOST')) {
             $driverOptions['host'] = TESTS_ZEND_QUEUE_ACTIVEMQ_HOST;
         }
@@ -78,20 +77,21 @@ class Zend_Queue_Adapter_ActivemqTest extends Zend_Queue_Adapter_AdapterTest
         if (defined('TESTS_ZEND_QUEUE_ACTIVEMQ_SCHEME')) {
             $driverOptions['scheme'] = TESTS_ZEND_QUEUE_ACTIVEMQ_SCHEME;
         }
-        return array('driverOptions' => $driverOptions);
+
+        return ['driverOptions' => $driverOptions];
     }
 
     /**
-     * Stomped requires specific name types
+     * Stomped requires specific name types.
      */
     public function createQueueName($name)
     {
-        return '/temp-queue/' . $name;
+        return '/temp-queue/'.$name;
     }
 
     public function testConst()
     {
-        /**
+        /*
          * @see Zend_Queue_Adapter_Activemq
          */
         // require_once 'Zend/Queue/Adapter/Activemq.php';
@@ -105,7 +105,7 @@ class Zend_Queue_Adapter_ActivemqTest extends Zend_Queue_Adapter_AdapterTest
      */
     public function testReceiveWillRetrieveZeroItems()
     {
-        $options = array('driverOptions' => $this->getTestConfig());
+        $options = ['driverOptions' => $this->getTestConfig()];
 
         $queue = new Zend_Queue('Activemq', $options);
         $queue2 = $queue->createQueue('queue');

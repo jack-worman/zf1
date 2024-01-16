@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,15 +13,14 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Cloud
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 // Call Zend_Cloud_Infrastructure_FactoryTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Cloud_Infrastructure_FactoryTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Cloud_Infrastructure_FactoryTest::main');
 }
 
 /**
@@ -40,13 +39,13 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 // require_once 'Zend/Cloud/Infrastructure/Adapter/Ec2.php';
 
 /**
- * Test class for Zend_Cloud_Infrastructure_Factory
+ * Test class for Zend_Cloud_Infrastructure_Factory.
  *
  * @category   Zend
- * @package    Zend_Cloud
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Cloud
  */
 #[AllowDynamicProperties]
@@ -59,7 +58,7 @@ class Zend_Cloud_Infrastructure_FactoryTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
+        $suite = new PHPUnit_Framework_TestSuite(__CLASS__);
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -68,24 +67,25 @@ class Zend_Cloud_Infrastructure_FactoryTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(is_string(Zend_Cloud_Infrastructure_Factory::INFRASTRUCTURE_ADAPTER_KEY));
     }
 
-    public function testGetAdapterWithConfig() {
+    public function testGetAdapterWithConfig()
+    {
         // EC2 adapter
         $Ec2Adapter = Zend_Cloud_Infrastructure_Factory::getAdapter(
-                                    new Zend_Config(Zend_Cloud_Infrastructure_Adapter_Ec2Test::getConfigArray())
-                                );
+            new Zend_Config(Zend_Cloud_Infrastructure_Adapter_Ec2Test::getConfigArray())
+        );
 
         $this->assertEquals('Zend_Cloud_Infrastructure_Adapter_Ec2', get_class($Ec2Adapter));
 
         // Rackspace adapter
         $rackspaceAdapter = Zend_Cloud_Infrastructure_Factory::getAdapter(
-                                    new Zend_Config(Zend_Cloud_Infrastructure_Adapter_RackspaceTest::getConfigArray())
-                                );
+            new Zend_Config(Zend_Cloud_Infrastructure_Adapter_RackspaceTest::getConfigArray())
+        );
 
         $this->assertEquals('Zend_Cloud_Infrastructure_Adapter_Rackspace', get_class($rackspaceAdapter));
     }
 }
 
 // Call Zend_Cloud_Infrastructure_FactoryTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Cloud_Infrastructure_FactoryTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Cloud_Infrastructure_FactoryTest::main') {
     Zend_Cloud_Infrastructure_FactoryTest::main();
 }

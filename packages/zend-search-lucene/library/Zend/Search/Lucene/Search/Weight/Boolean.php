@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,22 +13,19 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Search
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /** Zend_Search_Lucene_Search_Weight */
 // require_once 'Zend/Search/Lucene/Search/Weight.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Search
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -50,41 +47,36 @@ class Zend_Search_Lucene_Search_Weight_Boolean extends Zend_Search_Lucene_Search
 
     /**
      * Queries weights
-     * Array of Zend_Search_Lucene_Search_Weight
+     * Array of Zend_Search_Lucene_Search_Weight.
      *
      * @var array
      */
     private $_weights;
 
-
     /**
      * Zend_Search_Lucene_Search_Weight_Boolean constructor
      * query - the query that this concerns.
-     * reader - index reader
-     *
-     * @param Zend_Search_Lucene_Search_Query $query
-     * @param Zend_Search_Lucene_Interface    $reader
+     * reader - index reader.
      */
     public function __construct(Zend_Search_Lucene_Search_Query $query,
-                                Zend_Search_Lucene_Interface    $reader)
+        Zend_Search_Lucene_Interface $reader)
     {
-        $this->_query   = $query;
-        $this->_reader  = $reader;
-        $this->_weights = array();
+        $this->_query = $query;
+        $this->_reader = $reader;
+        $this->_weights = [];
 
         $signs = $query->getSigns();
 
         foreach ($query->getSubqueries() as $num => $subquery) {
-            if ($signs === null || $signs[$num] === null || $signs[$num]) {
+            if (null === $signs || null === $signs[$num] || $signs[$num]) {
                 $this->_weights[$num] = $subquery->createWeight($reader);
             }
         }
     }
 
-
     /**
      * The weight for this query
-     * Standard Weight::$_value is not used for boolean queries
+     * Standard Weight::$_value is not used for boolean queries.
      *
      * @return float
      */
@@ -92,7 +84,6 @@ class Zend_Search_Lucene_Search_Weight_Boolean extends Zend_Search_Lucene_Search
     {
         return $this->_query->getBoost();
     }
-
 
     /**
      * The sum of squared weights of contained query clauses.
@@ -111,12 +102,12 @@ class Zend_Search_Lucene_Search_Weight_Boolean extends Zend_Search_Lucene_Search
         $sum *= $this->_query->getBoost() * $this->_query->getBoost();
 
         // check for empty query (like '-something -another')
-        if ($sum == 0) {
+        if (0 == $sum) {
             $sum = 1.0;
         }
+
         return $sum;
     }
-
 
     /**
      * Assigns the query normalization factor to this.
@@ -133,5 +124,3 @@ class Zend_Search_Lucene_Search_Weight_Boolean extends Zend_Search_Lucene_Search
         }
     }
 }
-
-

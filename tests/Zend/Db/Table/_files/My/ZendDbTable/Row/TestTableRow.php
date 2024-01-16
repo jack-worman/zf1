@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,26 +13,21 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /**
  * @see Zend_Db_Table_Row_Abstract
  */
 // require_once 'Zend/Db/Table/Row/Abstract.php';
 
-
-
-
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -43,7 +38,7 @@ class My_ZendDbTable_Row_TestTableRow extends Zend_Db_Table_Row_Abstract
 
     public function setInvalidColumn()
     {
-        $this->_transformColumn(array('bug_id'));
+        $this->_transformColumn(['bug_id']);
     }
 
     public function setTableToFail()
@@ -53,7 +48,7 @@ class My_ZendDbTable_Row_TestTableRow extends Zend_Db_Table_Row_Abstract
 
     public function setTableColsToFail()
     {
-        $this->_data = array();
+        $this->_data = [];
     }
 
     public function setPrimaryKeyToFail1()
@@ -63,7 +58,7 @@ class My_ZendDbTable_Row_TestTableRow extends Zend_Db_Table_Row_Abstract
 
     public function setPrimaryKeyToFail2()
     {
-        $this->_primary = array();
+        $this->_primary = [];
     }
 
     protected function _postUpdate()

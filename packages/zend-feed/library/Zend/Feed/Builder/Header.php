@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,9 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -30,26 +31,26 @@
  */
 // require_once 'Zend/Uri.php';
 
-
 /**
- * Header of a custom build feed
+ * Header of a custom build feed.
  *
  * Classes implementing the Zend_Feed_Builder_Interface interface
  * uses this class to describe the header of a feed
  *
  * @category   Zend
- * @package    Zend_Feed
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Feed_Builder_Header extends ArrayObject
 {
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param  string $title title of the feed
-     * @param  string $link canonical url of the feed
-     * @param  string $charset charset of the textual data
+     * @param string $title   title of the feed
+     * @param string $link    canonical url of the feed
+     * @param string $charset charset of the textual data
+     *
      * @return void
      */
     public function __construct($title, $link, $charset = 'utf-8')
@@ -62,25 +63,25 @@ class Zend_Feed_Builder_Header extends ArrayObject
     }
 
     /**
-     * Read only properties accessor
+     * Read only properties accessor.
      *
-     * @param  string $name property to read
-     * @return mixed
+     * @param string $name property to read
      */
     public function __get($name)
     {
         if (!$this->offsetExists($name)) {
-            return NULL;
+            return null;
         }
 
         return $this->offsetGet($name);
     }
 
     /**
-     * Write properties accessor
+     * Write properties accessor.
      *
      * @param string $name  name of the property to set
      * @param mixed  $value value to set
+     *
      * @return void
      */
     public function __set($name, $value)
@@ -89,10 +90,11 @@ class Zend_Feed_Builder_Header extends ArrayObject
     }
 
     /**
-     * Isset accessor
+     * Isset accessor.
      *
-     * @param  string $key
-     * @return boolean
+     * @param string $key
+     *
+     * @return bool
      */
     public function __isset($key)
     {
@@ -100,9 +102,10 @@ class Zend_Feed_Builder_Header extends ArrayObject
     }
 
     /**
-     * Unset accessor
+     * Unset accessor.
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @return void
      */
     public function __unset($key)
@@ -113,58 +116,68 @@ class Zend_Feed_Builder_Header extends ArrayObject
     }
 
     /**
-     * Timestamp of the update date
+     * Timestamp of the update date.
      *
-     * @param  int $lastUpdate
+     * @param int $lastUpdate
+     *
      * @return Zend_Feed_Builder_Header
      */
     public function setLastUpdate($lastUpdate)
     {
         $this->offsetSet('lastUpdate', $lastUpdate);
+
         return $this;
     }
 
     /**
-     * Timestamp of the publication date
+     * Timestamp of the publication date.
      *
-     * @param  int $published
+     * @param int $published
+     *
      * @return Zend_Feed_Builder_Header
      */
     public function setPublishedDate($published)
     {
         $this->offsetSet('published', $published);
+
         return $this;
     }
 
     /**
-     * Short description of the feed
+     * Short description of the feed.
      *
-     * @param  string $description
+     * @param string $description
+     *
      * @return Zend_Feed_Builder_Header
      */
     public function setDescription($description)
     {
         $this->offsetSet('description', $description);
+
         return $this;
     }
 
     /**
-     * Sets the author of the feed
+     * Sets the author of the feed.
      *
-     * @param  string $author
+     * @param string $author
+     *
      * @return Zend_Feed_Builder_Header
      */
     public function setAuthor($author)
     {
         $this->offsetSet('author', $author);
+
         return $this;
     }
 
     /**
-     * Sets the author's email
+     * Sets the author's email.
      *
-     * @param  string $email
+     * @param string $email
+     *
      * @return Zend_Feed_Builder_Header
+     *
      * @throws Zend_Feed_Builder_Exception
      */
     public function setEmail($email)
@@ -175,70 +188,81 @@ class Zend_Feed_Builder_Header extends ArrayObject
         // require_once 'Zend/Validate/EmailAddress.php';
         $validate = new Zend_Validate_EmailAddress();
         if (!$validate->isValid($email)) {
-            /**
+            /*
              * @see Zend_Feed_Builder_Exception
              */
             // require_once 'Zend/Feed/Builder/Exception.php';
-            throw new Zend_Feed_Builder_Exception("you have to set a valid email address into the email property");
+            throw new Zend_Feed_Builder_Exception('you have to set a valid email address into the email property');
         }
         $this->offsetSet('email', $email);
+
         return $this;
     }
 
     /**
-     * Sets the copyright notice
+     * Sets the copyright notice.
      *
-     * @param  string $copyright
+     * @param string $copyright
+     *
      * @return Zend_Feed_Builder_Header
      */
     public function setCopyright($copyright)
     {
         $this->offsetSet('copyright', $copyright);
+
         return $this;
     }
 
     /**
-     * Sets the image of the feed
+     * Sets the image of the feed.
      *
-     * @param  string $image
+     * @param string $image
+     *
      * @return Zend_Feed_Builder_Header
      */
     public function setImage($image)
     {
         $this->offsetSet('image', $image);
+
         return $this;
     }
 
     /**
-     * Sets the generator of the feed
+     * Sets the generator of the feed.
      *
-     * @param  string $generator
+     * @param string $generator
+     *
      * @return Zend_Feed_Builder_Header
      */
     public function setGenerator($generator)
     {
         $this->offsetSet('generator', $generator);
+
         return $this;
     }
 
     /**
-     * Sets the language of the feed
+     * Sets the language of the feed.
      *
-     * @param  string $language
+     * @param string $language
+     *
      * @return Zend_Feed_Builder_Header
      */
     public function setLanguage($language)
     {
         $this->offsetSet('language', $language);
+
         return $this;
     }
 
     /**
      * Email address for person responsible for technical issues
-     * Ignored if atom is used
+     * Ignored if atom is used.
      *
-     * @param  string $webmaster
+     * @param string $webmaster
+     *
      * @return Zend_Feed_Builder_Header
+     *
      * @throws Zend_Feed_Builder_Exception
      */
     public function setWebmaster($webmaster)
@@ -249,22 +273,25 @@ class Zend_Feed_Builder_Header extends ArrayObject
         // require_once 'Zend/Validate/EmailAddress.php';
         $validate = new Zend_Validate_EmailAddress();
         if (!$validate->isValid($webmaster)) {
-            /**
+            /*
              * @see Zend_Feed_Builder_Exception
              */
             // require_once 'Zend/Feed/Builder/Exception.php';
-            throw new Zend_Feed_Builder_Exception("you have to set a valid email address into the webmaster property");
+            throw new Zend_Feed_Builder_Exception('you have to set a valid email address into the webmaster property');
         }
         $this->offsetSet('webmaster', $webmaster);
+
         return $this;
     }
 
     /**
      * How long in minutes a feed can be cached before refreshing
-     * Ignored if atom is used
+     * Ignored if atom is used.
      *
-     * @param  int $ttl
+     * @param int $ttl
+     *
      * @return Zend_Feed_Builder_Header
+     *
      * @throws Zend_Feed_Builder_Exception
      */
     public function setTtl($ttl)
@@ -275,37 +302,42 @@ class Zend_Feed_Builder_Header extends ArrayObject
         // require_once 'Zend/Validate/Int.php';
         $validate = new Zend_Validate_Int();
         if (!$validate->isValid($ttl)) {
-            /**
+            /*
              * @see Zend_Feed_Builder_Exception
              */
             // require_once 'Zend/Feed/Builder/Exception.php';
-            throw new Zend_Feed_Builder_Exception("you have to set an integer value to the ttl property");
+            throw new Zend_Feed_Builder_Exception('you have to set an integer value to the ttl property');
         }
         $this->offsetSet('ttl', $ttl);
+
         return $this;
     }
 
     /**
      * PICS rating for the feed
-     * Ignored if atom is used
+     * Ignored if atom is used.
      *
-     * @param  string $rating
+     * @param string $rating
+     *
      * @return Zend_Feed_Builder_Header
      */
     public function setRating($rating)
     {
         $this->offsetSet('rating', $rating);
+
         return $this;
     }
 
     /**
      * Cloud to be notified of updates of the feed
-     * Ignored if atom is used
+     * Ignored if atom is used.
      *
-     * @param  string|Zend_Uri_Http $uri
-     * @param  string               $procedure procedure to call, e.g. myCloud.rssPleaseNotify
-     * @param  string               $protocol  protocol to use, e.g. soap or xml-rpc
+     * @param string|Zend_Uri_Http $uri
+     * @param string               $procedure procedure to call, e.g. myCloud.rssPleaseNotify
+     * @param string               $protocol  protocol to use, e.g. soap or xml-rpc
+     *
      * @return Zend_Feed_Builder_Header
+     *
      * @throws Zend_Feed_Builder_Exception
      */
     public function setCloud($uri, $procedure, $protocol)
@@ -314,7 +346,7 @@ class Zend_Feed_Builder_Header extends ArrayObject
             $uri = Zend_Uri::factory($uri);
         }
         if (!$uri instanceof Zend_Uri_Http) {
-            /**
+            /*
              * @see Zend_Feed_Builder_Exception
              */
             // require_once 'Zend/Feed/Builder/Exception.php';
@@ -323,51 +355,56 @@ class Zend_Feed_Builder_Header extends ArrayObject
         if (!$uri->getPort()) {
             $uri->setPort(80);
         }
-        $this->offsetSet('cloud', array('uri' => $uri,
+        $this->offsetSet('cloud', ['uri' => $uri,
                                         'procedure' => $procedure,
-                                        'protocol' => $protocol));
+                                        'protocol' => $protocol]);
+
         return $this;
     }
 
     /**
      * A text input box that can be displayed with the feed
-     * Ignored if atom is used
+     * Ignored if atom is used.
      *
-     * @param  string $title       the label of the Submit button in the text input area
-     * @param  string $description explains the text input area
-     * @param  string $name        the name of the text object in the text input area
-     * @param  string $link        the URL of the CGI script that processes text input requests
+     * @param string $title       the label of the Submit button in the text input area
+     * @param string $description explains the text input area
+     * @param string $name        the name of the text object in the text input area
+     * @param string $link        the URL of the CGI script that processes text input requests
+     *
      * @return Zend_Feed_Builder_Header
      */
     public function setTextInput($title, $description, $name, $link)
     {
-        $this->offsetSet('textInput', array('title' => $title,
+        $this->offsetSet('textInput', ['title' => $title,
                                             'description' => $description,
                                             'name' => $name,
-                                            'link' => $link));
+                                            'link' => $link]);
+
         return $this;
     }
 
     /**
      * Hint telling aggregators which hours they can skip
-     * Ignored if atom is used
+     * Ignored if atom is used.
      *
-     * @param  array $hours list of hours in 24 format
+     * @param array $hours list of hours in 24 format
+     *
      * @return Zend_Feed_Builder_Header
+     *
      * @throws Zend_Feed_Builder_Exception
      */
     public function setSkipHours(array $hours)
     {
         if (count($hours) > 24) {
-            /**
+            /*
              * @see Zend_Feed_Builder_Exception
              */
             // require_once 'Zend/Feed/Builder/Exception.php';
-            throw new Zend_Feed_Builder_Exception("you can not have more than 24 rows in the skipHours property");
+            throw new Zend_Feed_Builder_Exception('you can not have more than 24 rows in the skipHours property');
         }
         foreach ($hours as $hour) {
             if ($hour < 0 || $hour > 23) {
-                /**
+                /*
                  * @see Zend_Feed_Builder_Exception
                  */
                 // require_once 'Zend/Feed/Builder/Exception.php';
@@ -375,30 +412,33 @@ class Zend_Feed_Builder_Header extends ArrayObject
             }
         }
         $this->offsetSet('skipHours', $hours);
+
         return $this;
     }
 
     /**
      * Hint telling aggregators which days they can skip
-     * Ignored if atom is used
+     * Ignored if atom is used.
      *
-     * @param  array $days list of days to skip, e.g. Monday
+     * @param array $days list of days to skip, e.g. Monday
+     *
      * @return Zend_Feed_Builder_Header
+     *
      * @throws Zend_Feed_Builder_Exception
      */
     public function setSkipDays(array $days)
     {
         if (count($days) > 7) {
-            /**
+            /*
              * @see Zend_Feed_Builder_Exception
              */
             // require_once 'Zend/Feed/Builder/Exception.php';
-            throw new Zend_Feed_Builder_Exception("you can not have more than 7 days in the skipDays property");
+            throw new Zend_Feed_Builder_Exception('you can not have more than 7 days in the skipDays property');
         }
-        $valid = array('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday');
+        $valid = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
         foreach ($days as $day) {
             if (!in_array(strtolower((string) $day), $valid)) {
-                /**
+                /*
                  * @see Zend_Feed_Builder_Exception
                  */
                 // require_once 'Zend/Feed/Builder/Exception.php';
@@ -406,18 +446,19 @@ class Zend_Feed_Builder_Header extends ArrayObject
             }
         }
         $this->offsetSet('skipDays', $days);
+
         return $this;
     }
 
     /**
-     * Sets the iTunes rss extension
+     * Sets the iTunes rss extension.
      *
-     * @param  Zend_Feed_Builder_Header_Itunes $itunes
      * @return Zend_Feed_Builder_Header
      */
     public function setITunes(Zend_Feed_Builder_Header_Itunes $itunes)
     {
         $this->offsetSet('itunes', $itunes);
+
         return $this;
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage App
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,20 +27,18 @@
 // require_once 'Zend/Gdata/App/Extension.php';
 
 /**
- * Represents the atom:generator element
+ * Represents the atom:generator element.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage App
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_App_Extension_Generator extends Zend_Gdata_App_Extension
 {
-
     protected $_rootElement = 'generator';
-    protected $_uri = null;
-    protected $_version = null;
+    protected $_uri;
+    protected $_version;
 
     public function __construct($text = null, $uri = null, $version = null)
     {
@@ -53,26 +51,27 @@ class Zend_Gdata_App_Extension_Generator extends Zend_Gdata_App_Extension
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
         $element = parent::getDOM($doc, $majorVersion, $minorVersion);
-        if ($this->_uri !== null) {
+        if (null !== $this->_uri) {
             $element->setAttribute('uri', $this->_uri);
         }
-        if ($this->_version !== null) {
+        if (null !== $this->_version) {
             $element->setAttribute('version', $this->_version);
         }
+
         return $element;
     }
 
     protected function takeAttributeFromDOM($attribute)
     {
         switch ($attribute->localName) {
-        case 'uri':
-            $this->_uri = $attribute->nodeValue;
-            break;
-        case 'version':
-            $this->_version= $attribute->nodeValue;
-            break;
-        default:
-            parent::takeAttributeFromDOM($attribute);
+            case 'uri':
+                $this->_uri = $attribute->nodeValue;
+                break;
+            case 'version':
+                $this->_version = $attribute->nodeValue;
+                break;
+            default:
+                parent::takeAttributeFromDOM($attribute);
         }
     }
 
@@ -86,11 +85,13 @@ class Zend_Gdata_App_Extension_Generator extends Zend_Gdata_App_Extension
 
     /**
      * @param Zend_Gdata_App_Extension_Uri $value
+     *
      * @return Zend_Gdata_App_Extension_Generator Provides a fluent interface
      */
     public function setUri($value)
     {
         $this->_uri = $value;
+
         return $this;
     }
 
@@ -104,12 +105,13 @@ class Zend_Gdata_App_Extension_Generator extends Zend_Gdata_App_Extension
 
     /**
      * @param Zend_Gdata_App_Extension_Version $value
+     *
      * @return Zend_Gdata_App_Extension_Generator Provides a fluent interface
      */
     public function setVersion($value)
     {
         $this->_version = $value;
+
         return $this;
     }
-
 }

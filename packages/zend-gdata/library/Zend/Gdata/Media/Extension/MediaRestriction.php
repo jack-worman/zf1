@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Media
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,38 +27,36 @@
 // require_once 'Zend/Gdata/App/Extension.php';
 
 /**
- * Represents the media:restriction element
+ * Represents the media:restriction element.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Media
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_Media_Extension_MediaRestriction extends Zend_Gdata_Extension
 {
-
     protected $_rootElement = 'restriction';
     protected $_rootNamespace = 'media';
 
     /**
      * @var string
      */
-    protected $_relationship = null;
+    protected $_relationship;
 
     /**
      * @var string
      */
-    protected $_type = null;
+    protected $_type;
 
     /**
-     * Constructs a new MediaRestriction element
+     * Constructs a new MediaRestriction element.
      *
      * @param string $text
      * @param string $relationship
      * @param string $type
      */
-    public function __construct($text = null, $relationship = null,  $type = null)
+    public function __construct($text = null, $relationship = null, $type = null)
     {
         $this->registerAllNamespaces(Zend_Gdata_Media::$namespaces);
         parent::__construct();
@@ -74,18 +72,20 @@ class Zend_Gdata_Media_Extension_MediaRestriction extends Zend_Gdata_Extension
      * for application storage/persistence.
      *
      * @param DOMDocument $doc The DOMDocument used to construct DOMElements
-     * @return DOMElement The DOMElement representing this element and all
-     * child properties.
+     *
+     * @return DOMElement the DOMElement representing this element and all
+     *                    child properties
      */
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
         $element = parent::getDOM($doc, $majorVersion, $minorVersion);
-        if ($this->_relationship !== null) {
+        if (null !== $this->_relationship) {
             $element->setAttribute('relationship', $this->_relationship);
         }
-        if ($this->_type !== null) {
+        if (null !== $this->_type) {
             $element->setAttribute('type', $this->_type);
         }
+
         return $element;
     }
 
@@ -99,14 +99,14 @@ class Zend_Gdata_Media_Extension_MediaRestriction extends Zend_Gdata_Extension
     protected function takeAttributeFromDOM($attribute)
     {
         switch ($attribute->localName) {
-        case 'relationship':
-            $this->_relationship = $attribute->nodeValue;
-            break;
-        case 'type':
-            $this->_type = $attribute->nodeValue;
-            break;
-        default:
-            parent::takeAttributeFromDOM($attribute);
+            case 'relationship':
+                $this->_relationship = $attribute->nodeValue;
+                break;
+            case 'type':
+                $this->_type = $attribute->nodeValue;
+                break;
+            default:
+                parent::takeAttributeFromDOM($attribute);
         }
     }
 
@@ -120,11 +120,13 @@ class Zend_Gdata_Media_Extension_MediaRestriction extends Zend_Gdata_Extension
 
     /**
      * @param string $value
+     *
      * @return Zend_Gdata_Media_Extension_MediaRestriction Provides a fluent interface
      */
     public function setRelationship($value)
     {
         $this->_relationship = $value;
+
         return $this;
     }
 
@@ -138,12 +140,13 @@ class Zend_Gdata_Media_Extension_MediaRestriction extends Zend_Gdata_Extension
 
     /**
      * @param string $value
+     *
      * @return Zend_Gdata_Media_Extension_MediaRestriction Provides a fluent interface
      */
     public function setType($value)
     {
         $this->_type = $value;
+
         return $this;
     }
-
 }

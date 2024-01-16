@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Reflection
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -25,8 +25,7 @@
 
 /**
  * @category   Zend
- * @package    Zend_Reflection
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
@@ -36,14 +35,13 @@
 #[AllowDynamicProperties]
 class Zend_Reflection_ClassTest extends PHPUnit_Framework_TestCase
 {
-
-    static protected $_sampleClassFileRequired = false;
+    protected static $_sampleClassFileRequired = false;
 
     public function setup()
     {
         // ensure we are only required this file once per runtime
-        if (self::$_sampleClassFileRequired === false) {
-            $fileToRequire = __DIR__ . '/_files/TestSampleClass.php';
+        if (false === self::$_sampleClassFileRequired) {
+            $fileToRequire = __DIR__.'/_files/TestSampleClass.php';
             require_once $fileToRequire;
             self::$_sampleClassFileRequired = true;
         }
@@ -51,7 +49,6 @@ class Zend_Reflection_ClassTest extends PHPUnit_Framework_TestCase
 
     public function testMethodReturns()
     {
-
         $reflectionClass = new Zend_Reflection_Class('Zend_Reflection_TestSampleClass2');
 
         $methodByName = $reflectionClass->getMethod('getProp1');
@@ -85,7 +82,6 @@ class Zend_Reflection_ClassTest extends PHPUnit_Framework_TestCase
         $parent = $reflectionClass->getParentClass();
         $this->assertEquals('Zend_Reflection_Class', get_class($parent));
         $this->assertEquals('ArrayObject', $parent->getName());
-
     }
 
     public function testInterfaceReturn()
@@ -97,7 +93,6 @@ class Zend_Reflection_ClassTest extends PHPUnit_Framework_TestCase
 
         $interface = array_shift($interfaces);
         $this->assertEquals('Zend_Reflection_TestSampleClassInterface', $interface->getName());
-
     }
 
     public function testGetContentsReturnsContents()
@@ -139,11 +134,9 @@ EOS;
         $this->assertEquals(77, $reflectionClass->getStartLine(true));
     }
 
-
     public function testGetDeclaringFileReturnsFilename()
     {
         $reflectionClass = new Zend_Reflection_Class('Zend_Reflection_TestSampleClass2');
-        $this->assertContains('TestSampleClass.php', $reflectionClass->getDeclaringFile()->getFileName()); //ns(, $reflectionClass->getDeclaringFile());
+        $this->assertContains('TestSampleClass.php', $reflectionClass->getDeclaringFile()->getFileName()); // ns(, $reflectionClass->getDeclaringFile());
     }
-
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Spreadsheets
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -30,26 +30,25 @@
  */
 // require_once 'Zend/Gdata/Extension.php';
 
-
 /**
  * Concrete class for working with custom gsx elements.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Spreadsheets
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_Spreadsheets_Extension_Custom extends Zend_Gdata_Extension
 {
     // custom elements have custom names.
-    protected $_rootElement = null; // The name of the column
+    protected $_rootElement; // The name of the column
     protected $_rootNamespace = 'gsx';
 
     /**
      * Constructs a new Zend_Gdata_Spreadsheets_Extension_Custom object.
-     * @param string $column (optional) The column/tag name of the element.
-     * @param string $value (optional) The text content of the element.
+     *
+     * @param string $column (optional) The column/tag name of the element
+     * @param string $value  (optional) The text content of the element
      */
     public function __construct($column = null, $value = null)
     {
@@ -62,6 +61,7 @@ class Zend_Gdata_Spreadsheets_Extension_Custom extends Zend_Gdata_Extension
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
         $element = parent::getDOM($doc, $majorVersion, $minorVersion);
+
         return $element;
     }
 
@@ -80,21 +80,23 @@ class Zend_Gdata_Spreadsheets_Extension_Custom extends Zend_Gdata_Extension
 
     /**
      * Sets the column/tag name of the element.
-     * @param string $column The new column name.
+     *
+     * @param string $column the new column name
      */
     public function setColumnName($column)
     {
         $this->_rootElement = $column;
+
         return $this;
     }
 
     /**
-     * Gets the column name of the element
-     * @return string The column name.
+     * Gets the column name of the element.
+     *
+     * @return string the column name
      */
     public function getColumnName()
     {
         return $this->_rootElement;
     }
-
 }

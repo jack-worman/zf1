@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Ldap
- * @subpackage Schema
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -34,16 +34,14 @@
  * schema information on an Active Directory server.
  *
  * @category   Zend
- * @package    Zend_Ldap
- * @subpackage Schema
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Ldap_Node_Schema_AttributeType_ActiveDirectory extends Zend_Ldap_Node_Schema_Item
-    implements Zend_Ldap_Node_Schema_AttributeType_Interface
+class Zend_Ldap_Node_Schema_AttributeType_ActiveDirectory extends Zend_Ldap_Node_Schema_Item implements Zend_Ldap_Node_Schema_AttributeType_Interface
 {
     /**
-     * Gets the attribute name
+     * Gets the attribute name.
      *
      * @return string
      */
@@ -53,33 +51,30 @@ class Zend_Ldap_Node_Schema_AttributeType_ActiveDirectory extends Zend_Ldap_Node
     }
 
     /**
-     * Gets the attribute OID
+     * Gets the attribute OID.
      *
      * @return void
      */
     public function getOid()
     {
-
     }
 
     /**
-     * Gets the attribute syntax
+     * Gets the attribute syntax.
      *
      * @return void
      */
     public function getSyntax()
     {
-
     }
 
     /**
-     * Gets the attribute maximum length
+     * Gets the attribute maximum length.
      *
      * @return void
      */
     public function getMaxLength()
     {
-
     }
 
     /**
@@ -89,16 +84,14 @@ class Zend_Ldap_Node_Schema_AttributeType_ActiveDirectory extends Zend_Ldap_Node
      */
     public function isSingleValued()
     {
-
     }
 
     /**
-     * Gets the attribute description
+     * Gets the attribute description.
      *
      * @return void
      */
     public function getDescription()
     {
-
     }
 }

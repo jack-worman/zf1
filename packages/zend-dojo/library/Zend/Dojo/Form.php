@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,8 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage Form
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -23,21 +22,22 @@
 // require_once 'Zend/Form.php';
 
 /**
- * Dijit-enabled Form
+ * Dijit-enabled Form.
  *
  * @uses       Zend_Form
- * @package    Zend_Dojo
- * @subpackage Form
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 class Zend_Dojo_Form extends Zend_Form
 {
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param  array|Zend_Config|null $options
+     * @param array|Zend_Config|null $options
+     *
      * @return void
      */
     public function __construct($options = null)
@@ -51,7 +51,7 @@ class Zend_Dojo_Form extends Zend_Form
     }
 
     /**
-     * Load the default decorators
+     * Load the default decorators.
      *
      * @return void
      */
@@ -64,17 +64,16 @@ class Zend_Dojo_Form extends Zend_Form
         $decorators = $this->getDecorators();
         if (empty($decorators)) {
             $this->addDecorator('FormElements')
-                 ->addDecorator('HtmlTag', array('tag' => 'dl', 'class' => 'zend_form_dojo'))
+                 ->addDecorator('HtmlTag', ['tag' => 'dl', 'class' => 'zend_form_dojo'])
                  ->addDecorator('DijitForm');
         }
     }
 
     /**
-     * Set the view object
+     * Set the view object.
      *
      * Ensures that the view object has the dojo view helper path set.
      *
-     * @param  Zend_View_Interface $view
      * @return Zend_Dojo_Form
      */
     public function setView(Zend_View_Interface $view = null)
@@ -84,6 +83,7 @@ class Zend_Dojo_Form extends Zend_Form
                 $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
             }
         }
+
         return parent::setView($view);
     }
 }

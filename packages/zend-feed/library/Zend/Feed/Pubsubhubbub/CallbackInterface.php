@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,17 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed_Pubsubhubbub
- * @subpackage Callback
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
  * @category   Zend
- * @package    Zend_Feed_Pubsubhubbub
- * @subpackage Callback
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -34,8 +33,8 @@ interface Zend_Feed_Pubsubhubbub_CallbackInterface
      * unsubscription request. This should be the Hub Server confirming the
      * the request prior to taking action on it.
      *
-     * @param array $httpData GET/POST data if available and not in $_GET/POST
-     * @param bool $sendResponseNow Whether to send response now or when asked
+     * @param array $httpData        GET/POST data if available and not in $_GET/POST
+     * @param bool  $sendResponseNow Whether to send response now or when asked
      */
     public function handle(array $httpData = null, $sendResponseNow = false);
 

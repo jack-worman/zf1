@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,56 +13,53 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Auth
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
-
 /**
- * PHPUnit_Framework_TestCase
+ * PHPUnit_Framework_TestCase.
  */
 
-
 /**
- * Zend_Auth_Adapter_Digest
+ * Zend_Auth_Adapter_Digest.
  */
 // require_once 'Zend/Auth/Adapter/Digest.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_Auth
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Auth
  */
 #[AllowDynamicProperties]
 class Zend_Auth_Adapter_DigestTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Path to test files
+     * Path to test files.
      *
      * @var string
      */
     protected $_filesPath;
 
     /**
-     * Sets the path to test files
+     * Sets the path to test files.
      *
      * @return void
      */
     public function __construct()
     {
-        $this->_filesPath = __DIR__ . '/Digest/_files';
+        $this->_filesPath = __DIR__.'/Digest/_files';
     }
 
     /**
      * Ensures that the adapter throws an exception when authentication is attempted before
-     * setting a required option
+     * setting a required option.
      *
      * @return void
      */
@@ -72,14 +69,14 @@ class Zend_Auth_Adapter_DigestTest extends PHPUnit_Framework_TestCase
         try {
             $adapter->authenticate();
             $this->fail('Expected Zend_Auth_Adapter_Exception not thrown upon authentication attempt before setting '
-                      . 'a required option');
+                      .'a required option');
         } catch (Zend_Auth_Adapter_Exception $e) {
             $this->assertContains('must be set before authentication', $e->getMessage());
         }
     }
 
     /**
-     * Ensures that an exception is thrown upon authenticating against a nonexistent file
+     * Ensures that an exception is thrown upon authenticating against a nonexistent file.
      *
      * @return void
      */
@@ -89,21 +86,21 @@ class Zend_Auth_Adapter_DigestTest extends PHPUnit_Framework_TestCase
         try {
             $adapter->authenticate();
             $this->fail('Expected Zend_Auth_Adapter_Exception not thrown upon authenticating against nonexistent '
-                      . 'file');
+                      .'file');
         } catch (Zend_Auth_Adapter_Exception $e) {
             $this->assertContains('Cannot open', $e->getMessage());
         }
     }
 
     /**
-     * Ensures expected behavior upon realm not found for existing user
+     * Ensures expected behavior upon realm not found for existing user.
      *
      * @return void
      */
     public function testUserExistsRealmNonexistent()
     {
         $filename = "$this->_filesPath/.htdigest.1";
-        $realm    = 'Nonexistent Realm';
+        $realm = 'Nonexistent Realm';
         $username = 'someUser';
         $password = 'somePassword';
 
@@ -124,14 +121,14 @@ class Zend_Auth_Adapter_DigestTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures expected behavior upon user not found in existing realm
+     * Ensures expected behavior upon user not found in existing realm.
      *
      * @return void
      */
     public function testUserNonexistentRealmExists()
     {
         $filename = "$this->_filesPath/.htdigest.1";
-        $realm    = 'Some Realm';
+        $realm = 'Some Realm';
         $username = 'nonexistentUser';
         $password = 'somePassword';
 
@@ -152,14 +149,14 @@ class Zend_Auth_Adapter_DigestTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures expected behavior upon incorrect password
+     * Ensures expected behavior upon incorrect password.
      *
      * @return void
      */
     public function testIncorrectPassword()
     {
         $filename = "$this->_filesPath/.htdigest.1";
-        $realm    = 'Some Realm';
+        $realm = 'Some Realm';
         $username = 'someUser';
         $password = 'incorrectPassword';
 
@@ -180,14 +177,14 @@ class Zend_Auth_Adapter_DigestTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that successful authentication works as expected
+     * Ensures that successful authentication works as expected.
      *
      * @return void
      */
     public function testAuthenticationSuccess()
     {
         $filename = "$this->_filesPath/.htdigest.1";
-        $realm    = 'Some Realm';
+        $realm = 'Some Realm';
         $username = 'someUser';
         $password = 'somePassword';
 
@@ -198,7 +195,7 @@ class Zend_Auth_Adapter_DigestTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($result->isValid());
         $this->assertEquals($result->getCode(), Zend_Auth_Result::SUCCESS);
 
-        $this->assertEquals(array(), $result->getMessages());
+        $this->assertEquals([], $result->getMessages());
 
         $identity = $result->getIdentity();
         $this->assertEquals($identity['realm'], $realm);
@@ -206,7 +203,7 @@ class Zend_Auth_Adapter_DigestTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that getFilename() returns expected default value
+     * Ensures that getFilename() returns expected default value.
      *
      * @return void
      */
@@ -217,7 +214,7 @@ class Zend_Auth_Adapter_DigestTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that getRealm() returns expected default value
+     * Ensures that getRealm() returns expected default value.
      *
      * @return void
      */
@@ -228,7 +225,7 @@ class Zend_Auth_Adapter_DigestTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that getUsername() returns expected default value
+     * Ensures that getUsername() returns expected default value.
      *
      * @return void
      */
@@ -239,7 +236,7 @@ class Zend_Auth_Adapter_DigestTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that getPassword() returns expected default value
+     * Ensures that getPassword() returns expected default value.
      *
      * @return void
      */

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage Framework
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,36 +27,36 @@
 
 /**
  * @category   Zend
- * @package    Zend_Tool
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Project_Provider_Layout extends Zend_Tool_Project_Provider_Abstract implements Zend_Tool_Framework_Provider_Pretendable
 {
-       /**
-        * @var string Layout path
-        */
-       protected $_layoutPath = 'APPLICATION_PATH "/layouts/scripts/"';
+    /**
+     * @var string Layout path
+     */
+    protected $_layoutPath = 'APPLICATION_PATH "/layouts/scripts/"';
 
     public static function createResource(Zend_Tool_Project_Profile $profile, $layoutName = 'layout')
     {
         $applicationDirectory = $profile->search('applicationDirectory');
         $layoutDirectory = $applicationDirectory->search('layoutsDirectory');
 
-        if ($layoutDirectory == false) {
+        if (false == $layoutDirectory) {
             $layoutDirectory = $applicationDirectory->createResource('layoutsDirectory');
         }
 
         $layoutScriptsDirectory = $layoutDirectory->search('layoutScriptsDirectory');
 
-        if ($layoutScriptsDirectory == false) {
+        if (false == $layoutScriptsDirectory) {
             $layoutScriptsDirectory = $layoutDirectory->createResource('layoutScriptsDirectory');
         }
 
-        $layoutScriptFile = $layoutScriptsDirectory->search('layoutScriptFile', array('layoutName' => 'layout'));
+        $layoutScriptFile = $layoutScriptsDirectory->search('layoutScriptFile', ['layoutName' => 'layout']);
 
-        if ($layoutScriptFile == false) {
-            $layoutScriptFile = $layoutScriptsDirectory->createResource('layoutScriptFile', array('layoutName' => 'layout'));
+        if (false == $layoutScriptFile) {
+            $layoutScriptFile = $layoutScriptsDirectory->createResource('layoutScriptFile', ['layoutName' => 'layout']);
         }
 
         return $layoutScriptFile;
@@ -76,6 +76,7 @@ class Zend_Tool_Project_Provider_Layout extends Zend_Tool_Project_Provider_Abstr
 
         if (isset($zc->resources) && isset($zc->resources->layout)) {
             $this->_registry->getResponse()->appendContent('A layout resource already exists in this project\'s application configuration file.');
+
             return;
         }
 
@@ -86,15 +87,14 @@ class Zend_Tool_Project_Provider_Layout extends Zend_Tool_Project_Provider_Abstr
             $applicationConfigResource->create();
 
             $this->_registry->getResponse()->appendContent('A layout entry has been added to the application config file.');
-            
+
             $layoutScriptFile = self::createResource($profile);
             if (!$layoutScriptFile->exists()) {
                 $layoutScriptFile->create();
                 $this->_registry->getResponse()->appendContent(
                     'A default layout has been created at '
-                    . $layoutScriptFile->getPath()
-                    );
-
+                    .$layoutScriptFile->getPath()
+                );
             }
 
             $this->_storeProfile();
@@ -110,13 +110,13 @@ class Zend_Tool_Project_Provider_Layout extends Zend_Tool_Project_Provider_Abstr
 
         if (isset($zc->resources) && !isset($zc->resources->layout)) {
             $this->_registry->getResponse()->appendContent('No layout configuration exists in application config file.');
+
             return;
         }
 
         if ($this->_registry->getRequest()->isPretend()) {
             $this->_registry->getResponse()->appendContent('Would remove "resources.layout.layoutPath" key from the application config file.');
         } else {
-
             // Remove the resources.layout.layoutPath directive from application config
             $applicationConfigResource->removeStringItem('resources.layout.layoutPath', $this->_layoutPath, 'production', false);
             $applicationConfigResource->create();
@@ -126,7 +126,7 @@ class Zend_Tool_Project_Provider_Layout extends Zend_Tool_Project_Provider_Abstr
 
             $this->_storeProfile();
         }
-     }
+    }
 
     protected function _getApplicationConfigResource(Zend_Tool_Project_Profile $profile)
     {

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata_Photos
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -27,28 +27,27 @@
 
 /**
  * @category   Zend
- * @package    Zend_Gdata_Photos
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Photos
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_Photos_PhotosPhotoQueryTest extends PHPUnit_Framework_TestCase
 {
-
     /**
-      * Check the consistency of a user feed request
-      */
+     * Check the consistency of a user feed request.
+     */
     public function testSimplePhotoQuery()
     {
-        $queryString = "https://picasaweb.google.com/data/feed/api/user/sample.user/albumid/1/photoid/1";
+        $queryString = 'https://picasaweb.google.com/data/feed/api/user/sample.user/albumid/1/photoid/1';
 
         $query = new Zend_Gdata_Photos_PhotoQuery();
-        $query->setUser("sample.user");
-        $query->setAlbumId("1");
-        $query->setPhotoId("1");
+        $query->setUser('sample.user');
+        $query->setAlbumId('1');
+        $query->setPhotoId('1');
 
         $generatedString = $query->getQueryUrl();
 
@@ -57,18 +56,18 @@ class Zend_Gdata_Photos_PhotosPhotoQueryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-      * Check the consistency of a user feed request
-      * Projection is set to base
-      */
+     * Check the consistency of a user feed request
+     * Projection is set to base.
+     */
     public function testBasePhotoQuery()
     {
-        $queryString = "https://picasaweb.google.com/data/feed/base/user/sample.user/albumid/1/photoid/1";
+        $queryString = 'https://picasaweb.google.com/data/feed/base/user/sample.user/albumid/1/photoid/1';
 
         $query = new Zend_Gdata_Photos_PhotoQuery();
-        $query->setUser("sample.user");
-        $query->setAlbumId("1");
-        $query->setPhotoId("1");
-        $query->setProjection("base");
+        $query->setUser('sample.user');
+        $query->setAlbumId('1');
+        $query->setPhotoId('1');
+        $query->setProjection('base');
 
         $generatedString = $query->getQueryUrl();
 
@@ -77,34 +76,34 @@ class Zend_Gdata_Photos_PhotosPhotoQueryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-      * Check for thrown exceptions upon improper photoid setting
-      */
+     * Check for thrown exceptions upon improper photoid setting.
+     */
     public function testPhotoQueryExceptions()
-      {
+    {
         $query = new Zend_Gdata_Photos_PhotoQuery();
-        $query->setUser("sample.user");
-        $query->setAlbumId("1");
+        $query->setUser('sample.user');
+        $query->setAlbumId('1');
 
         try {
             $generatedString = $query->getQueryUrl();
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->assertTrue($e instanceof Zend_Gdata_App_InvalidArgumentException);
         }
-      }
+    }
 
     /**
-      * Check the consistency of a user feed request filtered
-      * for a specific tag
-      */
+     * Check the consistency of a user feed request filtered
+     * for a specific tag.
+     */
     public function testTagFilterPhotoQuery()
     {
-        $queryString = "https://picasaweb.google.com/data/feed/api/user/sample.user/albumid/1/photoid/1?tag=test";
+        $queryString = 'https://picasaweb.google.com/data/feed/api/user/sample.user/albumid/1/photoid/1?tag=test';
 
         $query = new Zend_Gdata_Photos_PhotoQuery();
-        $query->setUser("sample.user");
-        $query->setAlbumId("1");
-        $query->setPhotoId("1");
-        $query->setTag("test");
+        $query->setUser('sample.user');
+        $query->setAlbumId('1');
+        $query->setPhotoId('1');
+        $query->setTag('test');
 
         $generatedString = $query->getQueryUrl();
 
@@ -113,22 +112,21 @@ class Zend_Gdata_Photos_PhotosPhotoQueryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-      * Check the consistency of a user feed request for private data
-      */
+     * Check the consistency of a user feed request for private data.
+     */
     public function testPrivatePhotoQuery()
     {
-        $queryString = "https://picasaweb.google.com/data/feed/api/user/sample.user/albumid/1/photoid/1?access=private";
+        $queryString = 'https://picasaweb.google.com/data/feed/api/user/sample.user/albumid/1/photoid/1?access=private';
 
         $query = new Zend_Gdata_Photos_PhotoQuery();
-        $query->setUser("sample.user");
-        $query->setAlbumId("1");
-        $query->setPhotoId("1");
-        $query->setAccess("private");
+        $query->setUser('sample.user');
+        $query->setAlbumId('1');
+        $query->setPhotoId('1');
+        $query->setAccess('private');
 
         $generatedString = $query->getQueryUrl();
 
         // Assert that the generated query matches the correct one
         $this->assertEquals($queryString, $generatedString);
     }
-
 }

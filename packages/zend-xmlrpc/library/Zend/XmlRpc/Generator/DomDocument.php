@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage Generator
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,7 +26,7 @@
 // require_once 'Zend/XmlRpc/Generator/GeneratorAbstract.php';
 
 /**
- * DOMDocument based implementation of a XML/RPC generator
+ * DOMDocument based implementation of a XML/RPC generator.
  */
 class Zend_XmlRpc_Generator_DomDocument extends Zend_XmlRpc_Generator_GeneratorAbstract
 {
@@ -41,9 +41,10 @@ class Zend_XmlRpc_Generator_DomDocument extends Zend_XmlRpc_Generator_GeneratorA
     protected $_currentElement;
 
     /**
-     * Start XML element
+     * Start XML element.
      *
      * @param string $name
+     *
      * @return void
      */
     protected function _openElement($name)
@@ -54,7 +55,7 @@ class Zend_XmlRpc_Generator_DomDocument extends Zend_XmlRpc_Generator_GeneratorA
     }
 
     /**
-     * Write XML text data into the currently opened XML element
+     * Write XML text data into the currently opened XML element.
      *
      * @param string $text
      */
@@ -64,11 +65,12 @@ class Zend_XmlRpc_Generator_DomDocument extends Zend_XmlRpc_Generator_GeneratorA
     }
 
     /**
-     * Close an previously opened XML element
+     * Close an previously opened XML element.
      *
      * Resets $_currentElement to the next parent node in the hierarchy
      *
      * @param string $name
+     *
      * @return void
      */
     protected function _closeElement($name)
@@ -79,7 +81,7 @@ class Zend_XmlRpc_Generator_DomDocument extends Zend_XmlRpc_Generator_GeneratorA
     }
 
     /**
-     * Save XML as a string
+     * Save XML as a string.
      *
      * @return string
      */
@@ -89,7 +91,7 @@ class Zend_XmlRpc_Generator_DomDocument extends Zend_XmlRpc_Generator_GeneratorA
     }
 
     /**
-     * Initializes internal objects
+     * Initializes internal objects.
      *
      * @return void
      */

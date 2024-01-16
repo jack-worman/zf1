@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage Framework
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,26 +26,25 @@
 // require_once 'Zend/Tool/Project/Context/Filesystem/Directory.php';
 
 /**
- * This class is the front most class for utilizing Zend_Tool_Project
+ * This class is the front most class for utilizing Zend_Tool_Project.
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
  * @category   Zend
- * @package    Zend_Tool
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Project_Context_Zf_ZfStandardLibraryDirectory extends Zend_Tool_Project_Context_Filesystem_Directory
 {
-
     /**
      * @var string
      */
     protected $_filesystemName = 'Zend';
 
     /**
-     * getName()
+     * getName().
      *
      * @return string
      */
@@ -55,33 +54,31 @@ class Zend_Tool_Project_Context_Zf_ZfStandardLibraryDirectory extends Zend_Tool_
     }
 
     /**
-     * create()
-     *
+     * create().
      */
     public function create()
     {
         parent::create();
         $zfPath = $this->_getZfPath();
-        if ($zfPath != false) {
+        if (false != $zfPath) {
             $zfIterator = new RecursiveDirectoryIterator($zfPath);
             foreach ($rii = new RecursiveIteratorIterator($zfIterator, RecursiveIteratorIterator::SELF_FIRST) as $file) {
-                $relativePath = preg_replace('#^'.preg_quote(realpath($zfPath), '#').'#', '', realpath($file->getPath())) . DIRECTORY_SEPARATOR . $file->getFilename();
-                if (strpos((string) $relativePath, DIRECTORY_SEPARATOR . '.') !== false) {
+                $relativePath = preg_replace('#^'.preg_quote(realpath($zfPath), '#').'#', '', realpath($file->getPath())).DIRECTORY_SEPARATOR.$file->getFilename();
+                if (false !== strpos((string) $relativePath, DIRECTORY_SEPARATOR.'.')) {
                     continue;
                 }
 
                 if ($file->isDir()) {
-                    mkdir($this->getBaseDirectory() . DIRECTORY_SEPARATOR . $this->getFilesystemName() . $relativePath);
+                    mkdir($this->getBaseDirectory().DIRECTORY_SEPARATOR.$this->getFilesystemName().$relativePath);
                 } else {
-                    copy($file->getPathname(), $this->getBaseDirectory() . DIRECTORY_SEPARATOR . $this->getFilesystemName() . $relativePath);
+                    copy($file->getPathname(), $this->getBaseDirectory().DIRECTORY_SEPARATOR.$this->getFilesystemName().$relativePath);
                 }
-
             }
         }
     }
 
     /**
-     * _getZfPath()
+     * _getZfPath().
      *
      * @return string|false
      */
@@ -89,16 +86,15 @@ class Zend_Tool_Project_Context_Zf_ZfStandardLibraryDirectory extends Zend_Tool_
     {
         // require_once 'Zend/Loader.php';
         foreach (Zend_Loader::explodeIncludePath() as $includePath) {
-            if (!file_exists((string) $includePath) || $includePath[0] == '.') {
+            if (!file_exists((string) $includePath) || '.' == $includePath[0]) {
                 continue;
             }
 
-            if (realpath($checkedPath = rtrim((string) $includePath, '\\/') . '/Zend/Loader.php') !== false && file_exists((string) $checkedPath)) {
+            if (false !== realpath($checkedPath = rtrim((string) $includePath, '\\/').'/Zend/Loader.php') && file_exists((string) $checkedPath)) {
                 return dirname($checkedPath);
             }
         }
 
         return false;
     }
-
 }

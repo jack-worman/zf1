@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage View
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -24,38 +24,40 @@
 // require_once 'Zend/Dojo/View/Helper/DijitContainer.php';
 
 /**
- * Dojo AccordionPane dijit
+ * Dojo AccordionPane dijit.
  *
  * @uses       Zend_Dojo_View_Helper_DijitContainer
- * @package    Zend_Dojo
- * @subpackage View
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
-  */
+ */
 class Zend_Dojo_View_Helper_AccordionPane extends Zend_Dojo_View_Helper_DijitContainer
 {
     /**
-     * Dijit being used
+     * Dijit being used.
+     *
      * @var string
      */
-    protected $_dijit  = 'dijit.layout.AccordionPane';
+    protected $_dijit = 'dijit.layout.AccordionPane';
 
     /**
-     * Module being used
+     * Module being used.
+     *
      * @var string
      */
     protected $_module = 'dijit.layout.AccordionContainer';
 
     /**
-     * dijit.layout.AccordionPane
+     * dijit.layout.AccordionPane.
      *
-     * @param  int $id
-     * @param  string $content
-     * @param  array $params  Parameters to use for dijit creation
-     * @param  array $attribs HTML attributes
+     * @param int    $id
+     * @param string $content
+     * @param array  $params  Parameters to use for dijit creation
+     * @param array  $attribs HTML attributes
+     *
      * @return string
      */
-    public function accordionPane($id = null, $content = '', array $params = array(), array $attribs = array())
+    public function accordionPane($id = null, $content = '', array $params = [], array $attribs = [])
     {
         if (0 === func_num_args()) {
             return $this;

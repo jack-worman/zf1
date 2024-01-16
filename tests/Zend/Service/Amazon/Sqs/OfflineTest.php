@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,10 +26,10 @@
 
 /**
  * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_Sqs
@@ -38,14 +38,14 @@
 class Zend_Service_Amazon_Sqs_OfflineTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Reference to Amazon service consumer object
+     * Reference to Amazon service consumer object.
      *
      * @var Zend_Service_Amazon_Sqs
      */
     protected $_amazon;
 
     /**
-     * Test based HTTP client adapter
+     * Test based HTTP client adapter.
      *
      * @var Zend_Http_Client_Adapter_Test
      */
@@ -53,9 +53,9 @@ class Zend_Service_Amazon_Sqs_OfflineTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        //$this->markTestSkipped('No offline tests for Zend_Service_Amazon_Sqs');
+        // $this->markTestSkipped('No offline tests for Zend_Service_Amazon_Sqs');
 
-        $this->_amazon= new Zend_Service_Amazon_Sqs('test','test');
+        $this->_amazon = new Zend_Service_Amazon_Sqs('test', 'test');
 
         $this->_httpClientAdapterTest = new Zend_Http_Client_Adapter_Test();
 
@@ -66,19 +66,19 @@ class Zend_Service_Amazon_Sqs_OfflineTest extends PHPUnit_Framework_TestCase
     public function testSetRegion()
     {
         $this->_amazon->setEndpoint('eu-west-1');
-        $endPoints= $this->_amazon->getEndpoints();
-        $this->assertEquals($this->_amazon->getEndpoint(),$endPoints['eu-west-1']);
+        $endPoints = $this->_amazon->getEndpoints();
+        $this->assertEquals($this->_amazon->getEndpoint(), $endPoints['eu-west-1']);
     }
 
     public function testSetNewRegion()
     {
         $this->_amazon->setEndpoint('foo');
-        $this->assertEquals($this->_amazon->getEndpoint(),'sqs.foo.amazonaws.com');
+        $this->assertEquals($this->_amazon->getEndpoint(), 'sqs.foo.amazonaws.com');
     }
 
     public function testSetEmptyRegion()
     {
-         $this->setExpectedException(
+        $this->setExpectedException(
             'Zend_Service_Amazon_Sqs_Exception',
             'Empty region specified.'
         );
@@ -87,11 +87,11 @@ class Zend_Service_Amazon_Sqs_OfflineTest extends PHPUnit_Framework_TestCase
 
     public function testGetRegions()
     {
-        $endPoints= array('us-east-1' => 'sqs.us-east-1.amazonaws.com',
+        $endPoints = ['us-east-1' => 'sqs.us-east-1.amazonaws.com',
                                      'us-west-1' => 'sqs.us-west-1.amazonaws.com',
                                      'eu-west-1' => 'sqs.eu-west-1.amazonaws.com',
                                      'ap-southeast-1' => 'sqs.ap-southeast-1.amazonaws.com',
-                                     'ap-northeast-1' => 'sqs.ap-northeast-1.amazonaws.com');
-        $this->assertEquals($this->_amazon->getEndpoints(),$endPoints);
+                                     'ap-northeast-1' => 'sqs.ap-northeast-1.amazonaws.com'];
+        $this->assertEquals($this->_amazon->getEndpoints(), $endPoints);
     }
 }

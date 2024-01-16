@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,58 +13,61 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Cache
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Cache
+ * Zend_Cache.
  */
 // require_once 'Zend/Cache.php';
 // require_once 'Zend/Cache/Frontend/Function.php';
 // require_once 'Zend/Cache/Backend/Test.php';
 
-function foobar($param1, $param2) {
+function foobar($param1, $param2)
+{
     echo "foobar_output($param1, $param2)";
+
     return "foobar_return($param1, $param2)";
 }
 
 #[AllowDynamicProperties]
-class fooclass {
+class fooclass
+{
     private static $_instanceCounter = 0;
 
     public function __construct()
     {
-        self::$_instanceCounter++;
+        ++self::$_instanceCounter;
     }
 
     public function foobar($param1, $param2)
     {
         return foobar($param1, $param2)
-               . ':' . self::$_instanceCounter;
+               .':'.self::$_instanceCounter;
     }
 }
 
 /**
  * @category   Zend
- * @package    Zend_Cache
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Cache
  */
 #[AllowDynamicProperties]
-class Zend_Cache_FunctionFrontendTest extends PHPUnit_Framework_TestCase {
-
+class Zend_Cache_FunctionFrontendTest extends PHPUnit_Framework_TestCase
+{
     private $_instance;
 
     public function setUp()
     {
         if (!$this->_instance) {
-            $this->_instance = new Zend_Cache_Frontend_Function(array());
+            $this->_instance = new Zend_Cache_Frontend_Function([]);
             $this->_backend = new Zend_Cache_Backend_Test();
             $this->_instance->setBackend($this->_backend);
         }
@@ -77,19 +80,19 @@ class Zend_Cache_FunctionFrontendTest extends PHPUnit_Framework_TestCase {
 
     public function testConstructorCorrectCall()
     {
-        $options = array(
+        $options = [
             'cache_by_default' => false,
-            'cached_functions' => array('foo', 'bar')
-        );
+            'cached_functions' => ['foo', 'bar'],
+        ];
         $test = new Zend_Cache_Frontend_Function($options);
     }
 
     public function testConstructorBadCall()
     {
-        $options = array(
+        $options = [
             'cache_by_default' => false,
-            0 => array('foo', 'bar')
-        );
+            0 => ['foo', 'bar'],
+        ];
         try {
             $test = new Zend_Cache_Frontend_Function($options);
         } catch (Zend_Cache_Exception $e) {
@@ -102,7 +105,7 @@ class Zend_Cache_FunctionFrontendTest extends PHPUnit_Framework_TestCase {
     {
         ob_start();
         ob_implicit_flush(false);
-        $return = $this->_instance->call('foobar', array('param1', 'param2'));
+        $return = $this->_instance->call('foobar', ['param1', 'param2']);
         $data = ob_get_clean();
         ob_implicit_flush(true);
         $this->assertEquals('bar', $return);
@@ -113,7 +116,7 @@ class Zend_Cache_FunctionFrontendTest extends PHPUnit_Framework_TestCase {
     {
         ob_start();
         ob_implicit_flush(false);
-        $return = $this->_instance->call('foobar', array('param3', 'param4'));
+        $return = $this->_instance->call('foobar', ['param3', 'param4']);
         $data = ob_get_clean();
         ob_implicit_flush(true);
         $this->assertEquals('foobar_return(param3, param4)', $return);
@@ -126,7 +129,7 @@ class Zend_Cache_FunctionFrontendTest extends PHPUnit_Framework_TestCase {
         $this->_instance->setOption('cache_by_default', false);
         ob_start();
         ob_implicit_flush(false);
-        $return = $this->_instance->call('foobar', array('param1', 'param2'));
+        $return = $this->_instance->call('foobar', ['param1', 'param2']);
         $data = ob_get_clean();
         ob_implicit_flush(true);
         $this->assertEquals('foobar_return(param1, param2)', $return);
@@ -138,10 +141,10 @@ class Zend_Cache_FunctionFrontendTest extends PHPUnit_Framework_TestCase {
         // cacheByDefault = false
         // cachedFunctions = array('foobar')
         $this->_instance->setOption('cache_by_default', false);
-        $this->_instance->setOption('cached_functions', array('foobar'));
+        $this->_instance->setOption('cached_functions', ['foobar']);
         ob_start();
         ob_implicit_flush(false);
-        $return = $this->_instance->call('foobar', array('param1', 'param2'));
+        $return = $this->_instance->call('foobar', ['param1', 'param2']);
         $data = ob_get_clean();
         ob_implicit_flush(true);
         $this->assertEquals('bar', $return);
@@ -153,10 +156,10 @@ class Zend_Cache_FunctionFrontendTest extends PHPUnit_Framework_TestCase {
         // cacheByDefault = true
         // nonCachedFunctions = array('foobar')
         $this->_instance->setOption('cache_by_default', true);
-        $this->_instance->setOption('non_cached_functions', array('foobar'));
+        $this->_instance->setOption('non_cached_functions', ['foobar']);
         ob_start();
         ob_implicit_flush(false);
-        $return = $this->_instance->call('foobar', array('param1', 'param2'));
+        $return = $this->_instance->call('foobar', ['param1', 'param2']);
         $data = ob_get_clean();
         ob_implicit_flush(true);
         $this->assertEquals('foobar_return(param1, param2)', $return);
@@ -168,11 +171,11 @@ class Zend_Cache_FunctionFrontendTest extends PHPUnit_Framework_TestCase {
         // cacheByDefault = true
         // nonCachedFunctions = array('foobar')
         $this->_instance->setOption('cache_by_default', true);
-        $this->_instance->setOption('non_cached_functions', array('foobar'));
+        $this->_instance->setOption('non_cached_functions', ['foobar']);
         ob_start();
         ob_implicit_flush(false);
         $object = new fooclass();
-        $return = $this->_instance->call(array($object, 'foobar'), array('param1', 'param2'));
+        $return = $this->_instance->call([$object, 'foobar'], ['param1', 'param2']);
         $data = ob_get_clean();
         ob_implicit_flush(true);
         $this->assertEquals('foobar_return(param1, param2):1', $return);
@@ -184,11 +187,11 @@ class Zend_Cache_FunctionFrontendTest extends PHPUnit_Framework_TestCase {
         // cacheByDefault = true
         // nonCachedFunctions = array('foobar')
         $this->_instance->setOption('cache_by_default', true);
-        $this->_instance->setOption('non_cached_functions', array('foobar'));
+        $this->_instance->setOption('non_cached_functions', ['foobar']);
         ob_start();
         ob_implicit_flush(false);
         $object = new fooclass();
-        $return = $this->_instance->call(array($object, 'foobar'), array('param1', 'param2'));
+        $return = $this->_instance->call([$object, 'foobar'], ['param1', 'param2']);
         $data = ob_get_clean();
         ob_implicit_flush(true);
         $this->assertEquals('foobar_return(param1, param2):2', $return);
@@ -205,12 +208,10 @@ class Zend_Cache_FunctionFrontendTest extends PHPUnit_Framework_TestCase {
     public function testCallWithABadSyntax1()
     {
         try {
-            $this->_instance->call(1, array());
+            $this->_instance->call(1, []);
         } catch (Zend_Cache_Exception $e) {
             return;
         }
         $this->fail('Zend_Cache_Exception was expected but not thrown');
     }
-
 }
-

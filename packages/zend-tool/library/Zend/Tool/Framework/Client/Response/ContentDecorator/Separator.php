@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage Framework
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,21 +27,19 @@
 
 /**
  * @category   Zend
- * @package    Zend_Tool
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Framework_Client_Response_ContentDecorator_Separator
-    implements Zend_Tool_Framework_Client_Response_ContentDecorator_Interface
+class Zend_Tool_Framework_Client_Response_ContentDecorator_Separator implements Zend_Tool_Framework_Client_Response_ContentDecorator_Interface
 {
-
     /**
      * @var string
      */
     protected $_separator = PHP_EOL;
 
     /**
-     * getName() - name of the decorator
+     * getName() - name of the decorator.
      *
      * @return string
      */
@@ -51,19 +49,21 @@ class Zend_Tool_Framework_Client_Response_ContentDecorator_Separator
     }
 
     /**
-     * setSeparator()
+     * setSeparator().
      *
      * @param string $separator
+     *
      * @return Zend_Tool_Framework_Client_Response_ContentDecorator_Separator
      */
     public function setSeparator($separator)
     {
         $this->_separator = $separator;
+
         return $this;
     }
 
     /**
-     * getSeparator()
+     * getSeparator().
      *
      * @return string
      */
@@ -75,7 +75,7 @@ class Zend_Tool_Framework_Client_Response_ContentDecorator_Separator
     public function decorate($content, $decoratorValue)
     {
         $run = 1;
-        if (is_bool($decoratorValue) && $decoratorValue === false) {
+        if (is_bool($decoratorValue) && false === $decoratorValue) {
             return $content;
         }
 
@@ -83,11 +83,10 @@ class Zend_Tool_Framework_Client_Response_ContentDecorator_Separator
             $run = $decoratorValue;
         }
 
-        for ($i = 0; $i < $run; $i++) {
+        for ($i = 0; $i < $run; ++$i) {
             $content .= $this->_separator;
         }
 
         return $content;
     }
-
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,76 +13,73 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Pdf
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
  * PDF element factory interface.
- * Responsibility is to log PDF changes
+ * Responsibility is to log PDF changes.
  *
- * @package    Zend_Pdf
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface Zend_Pdf_ElementFactory_Interface
 {
     /**
-     * Get factory
+     * Get factory.
      *
      * @return Zend_Pdf_ElementFactory_Interface
      */
     public function getFactory();
 
     /**
-     * Close factory and clean-up resources
+     * Close factory and clean-up resources.
      *
      * @internal
      */
     public function close();
 
     /**
-     * Get source factory object
+     * Get source factory object.
      *
      * @return Zend_Pdf_ElementFactory
      */
     public function resolve();
 
     /**
-     * Get factory ID
+     * Get factory ID.
      *
-     * @return integer
+     * @return int
      */
     public function getId();
 
     /**
-     * Set object counter
+     * Set object counter.
      *
-     * @param integer $objCount
+     * @param int $objCount
      */
     public function setObjectCount($objCount);
 
     /**
-     * Get object counter
+     * Get object counter.
      *
-     * @return integer
+     * @return int
      */
     public function getObjectCount();
 
     /**
-     * Attach factory to the current;
-     *
-     * @param Zend_Pdf_ElementFactory_Interface $factory
+     * Attach factory to the current;.
      */
     public function attach(Zend_Pdf_ElementFactory_Interface $factory);
 
     /**
      * Calculate object enumeration shift.
      *
-     * @param Zend_Pdf_ElementFactory_Interface $factory
-     * @return integer
+     * @return int
      */
     public function calculateShift(Zend_Pdf_ElementFactory_Interface $factory);
 
@@ -90,16 +87,15 @@ interface Zend_Pdf_ElementFactory_Interface
      * Clean enumeration shift cache.
      * Has to be used after PDF render operation to let followed updates be correct.
      *
-     * @param Zend_Pdf_ElementFactory_Interface $factory
-     * @return integer
+     * @return int
      */
     public function cleanEnumerationShiftCache();
 
     /**
      * Retrive object enumeration shift.
      *
-     * @param Zend_Pdf_ElementFactory_Interface $factory
-     * @return integer
+     * @return int
+     *
      * @throws Zend_Pdf_Exception
      */
     public function getEnumerationShift(Zend_Pdf_ElementFactory_Interface $factory);
@@ -107,7 +103,6 @@ interface Zend_Pdf_ElementFactory_Interface
     /**
      * Mark object as modified in context of current factory.
      *
-     * @param Zend_Pdf_Element_Object $obj
      * @throws Zend_Pdf_Exception
      */
     public function markAsModified(Zend_Pdf_Element_Object $obj);
@@ -115,44 +110,42 @@ interface Zend_Pdf_ElementFactory_Interface
     /**
      * Remove object in context of current factory.
      *
-     * @param Zend_Pdf_Element_Object $obj
      * @throws Zend_Pdf_Exception
      */
     public function remove(Zend_Pdf_Element_Object $obj);
 
     /**
-     * Generate new Zend_Pdf_Element_Object
+     * Generate new Zend_Pdf_Element_Object.
      *
      * @todo Reusage of the freed object. It's not a support of new feature, but only improvement.
      *
-     * @param Zend_Pdf_Element $objectValue
      * @return Zend_Pdf_Element_Object
      */
     public function newObject(Zend_Pdf_Element $objectValue);
 
     /**
-     * Generate new Zend_Pdf_Element_Object_Stream
+     * Generate new Zend_Pdf_Element_Object_Stream.
      *
      * @todo Reusage of the freed object. It's not a support of new feature, but only improvement.
      *
-     * @param mixed $objectValue
      * @return Zend_Pdf_Element_Object_Stream
      */
     public function newStreamObject($streamValue);
 
     /**
      * Enumerate modified objects.
-     * Returns array of Zend_Pdf_UpdateInfoContainer
+     * Returns array of Zend_Pdf_UpdateInfoContainer.
      *
      * @param Zend_Pdf_ElementFactory $rootFactory
+     *
      * @return array
      */
     public function listModifiedObjects($rootFactory = null);
 
     /**
-     * Check if PDF file was modified
+     * Check if PDF file was modified.
      *
-     * @return boolean
+     * @return bool
      */
     public function isModified();
 }

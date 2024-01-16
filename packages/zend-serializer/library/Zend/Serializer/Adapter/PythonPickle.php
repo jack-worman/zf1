@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Serializer
- * @subpackage Adapter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -24,13 +24,13 @@
 // require_once 'Zend/Serializer/Adapter/AdapterAbstract.php';
 
 /**
- * @link       http://www.python.org
+ * @see       http://www.python.org
  * @see        Phython3.1/Lib/pickle.py
  * @see        Phython3.1/Modules/_pickle.c
- * @link       http://pickle-js.googlecode.com
+ * @see       http://pickle-js.googlecode.com
+ *
  * @category   Zend
- * @package    Zend_Serializer
- * @subpackage Adapter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -39,75 +39,75 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     /* Pickle opcodes. See pickletools.py for extensive docs.  The listing
        here is in kind-of alphabetical order of 1-character pickle code.
        pickletools groups them by purpose. */
-    const OP_MARK            = '(';     // push special markobject on stack
-    const OP_STOP            = '.';     // every pickle ends with STOP
-    const OP_POP             = '0';     // discard topmost stack item
-    const OP_POP_MARK        = '1';     // discard stack top through topmost markobject
-    const OP_DUP             = '2';     // duplicate top stack item
-    const OP_FLOAT           = 'F';     // push float object; decimal string argument
-    const OP_INT             = 'I';     // push integer or bool; decimal string argument
-    const OP_BININT          = 'J';     // push four-byte signed int
-    const OP_BININT1         = 'K';     // push 1-byte unsigned int
-    const OP_LONG            = 'L';     // push long; decimal string argument
-    const OP_BININT2         = 'M';     // push 2-byte unsigned int
-    const OP_NONE            = 'N';     // push None
-    const OP_PERSID          = 'P';     // push persistent object; id is taken from string arg
-    const OP_BINPERSID       = 'Q';     //  "       "         "  ;  "  "   "     "  stack
-    const OP_REDUCE          = 'R';     // apply callable to argtuple, both on stack
-    const OP_STRING          = 'S';     // push string; NL-terminated string argument
-    const OP_BINSTRING       = 'T';     // push string; counted binary string argument
-    const OP_SHORT_BINSTRING = 'U';     //  "     "   ;    "      "       "      " < 256 bytes
-    const OP_UNICODE         = 'V';     // push Unicode string; raw-unicode-escaped'd argument
-    const OP_BINUNICODE      = 'X';     //   "     "       "  ; counted UTF-8 string argument
-    const OP_APPEND          = 'a';     // append stack top to list below it
-    const OP_BUILD           = 'b';     // call __setstate__ or __dict__.update()
-    const OP_GLOBAL          = 'c';     // push self.find_class(modname, name); 2 string args
-    const OP_DICT            = 'd';     // build a dict from stack items
-    const OP_EMPTY_DICT      = '}';     // push empty dict
-    const OP_APPENDS         = 'e';     // extend list on stack by topmost stack slice
-    const OP_GET             = 'g';     // push item from memo on stack; index is string arg
-    const OP_BINGET          = 'h';     //   "    "    "    "   "   "  ;   "    " 1-byte arg
-    const OP_INST            = 'i';     // build & push class instance
-    const OP_LONG_BINGET     = 'j';     // push item from memo on stack; index is 4-byte arg
-    const OP_LIST            = 'l';     // build list from topmost stack items
-    const OP_EMPTY_LIST      = ']';     // push empty list
-    const OP_OBJ             = 'o';     // build & push class instance
-    const OP_PUT             = 'p';     // store stack top in memo; index is string arg
-    const OP_BINPUT          = 'q';     //   "     "    "   "   " ;   "    " 1-byte arg
-    const OP_LONG_BINPUT     = 'r';     //   "     "    "   "   " ;   "    " 4-byte arg
-    const OP_SETITEM         = 's';     // add key+value pair to dict
-    const OP_TUPLE           = 't';     // build tuple from topmost stack items
-    const OP_EMPTY_TUPLE     = ')';     // push empty tuple
-    const OP_SETITEMS        = 'u';     // modify dict by adding topmost key+value pairs
-    const OP_BINFLOAT        = 'G';     // push float; arg is 8-byte float encoding
+    public const OP_MARK = '(';     // push special markobject on stack
+    public const OP_STOP = '.';     // every pickle ends with STOP
+    public const OP_POP = '0';     // discard topmost stack item
+    public const OP_POP_MARK = '1';     // discard stack top through topmost markobject
+    public const OP_DUP = '2';     // duplicate top stack item
+    public const OP_FLOAT = 'F';     // push float object; decimal string argument
+    public const OP_INT = 'I';     // push integer or bool; decimal string argument
+    public const OP_BININT = 'J';     // push four-byte signed int
+    public const OP_BININT1 = 'K';     // push 1-byte unsigned int
+    public const OP_LONG = 'L';     // push long; decimal string argument
+    public const OP_BININT2 = 'M';     // push 2-byte unsigned int
+    public const OP_NONE = 'N';     // push None
+    public const OP_PERSID = 'P';     // push persistent object; id is taken from string arg
+    public const OP_BINPERSID = 'Q';     //  "       "         "  ;  "  "   "     "  stack
+    public const OP_REDUCE = 'R';     // apply callable to argtuple, both on stack
+    public const OP_STRING = 'S';     // push string; NL-terminated string argument
+    public const OP_BINSTRING = 'T';     // push string; counted binary string argument
+    public const OP_SHORT_BINSTRING = 'U';     //  "     "   ;    "      "       "      " < 256 bytes
+    public const OP_UNICODE = 'V';     // push Unicode string; raw-unicode-escaped'd argument
+    public const OP_BINUNICODE = 'X';     //   "     "       "  ; counted UTF-8 string argument
+    public const OP_APPEND = 'a';     // append stack top to list below it
+    public const OP_BUILD = 'b';     // call __setstate__ or __dict__.update()
+    public const OP_GLOBAL = 'c';     // push self.find_class(modname, name); 2 string args
+    public const OP_DICT = 'd';     // build a dict from stack items
+    public const OP_EMPTY_DICT = '}';     // push empty dict
+    public const OP_APPENDS = 'e';     // extend list on stack by topmost stack slice
+    public const OP_GET = 'g';     // push item from memo on stack; index is string arg
+    public const OP_BINGET = 'h';     //   "    "    "    "   "   "  ;   "    " 1-byte arg
+    public const OP_INST = 'i';     // build & push class instance
+    public const OP_LONG_BINGET = 'j';     // push item from memo on stack; index is 4-byte arg
+    public const OP_LIST = 'l';     // build list from topmost stack items
+    public const OP_EMPTY_LIST = ']';     // push empty list
+    public const OP_OBJ = 'o';     // build & push class instance
+    public const OP_PUT = 'p';     // store stack top in memo; index is string arg
+    public const OP_BINPUT = 'q';     //   "     "    "   "   " ;   "    " 1-byte arg
+    public const OP_LONG_BINPUT = 'r';     //   "     "    "   "   " ;   "    " 4-byte arg
+    public const OP_SETITEM = 's';     // add key+value pair to dict
+    public const OP_TUPLE = 't';     // build tuple from topmost stack items
+    public const OP_EMPTY_TUPLE = ')';     // push empty tuple
+    public const OP_SETITEMS = 'u';     // modify dict by adding topmost key+value pairs
+    public const OP_BINFLOAT = 'G';     // push float; arg is 8-byte float encoding
 
     /* Protocol 2 */
-    const OP_PROTO           = "\x80";  // identify pickle protocol
-    const OP_NEWOBJ          = "\x81";  // build object by applying cls.__new__ to argtuple
-    const OP_EXT1            = "\x82";  // push object from extension registry; 1-byte index
-    const OP_EXT2            = "\x83";  // ditto, but 2-byte index
-    const OP_EXT4            = "\x84";  // ditto, but 4-byte index
-    const OP_TUPLE1          = "\x85";  // build 1-tuple from stack top
-    const OP_TUPLE2          = "\x86";  // build 2-tuple from two topmost stack items
-    const OP_TUPLE3          = "\x87";  // build 3-tuple from three topmost stack items
-    const OP_NEWTRUE         = "\x88";  // push True
-    const OP_NEWFALSE        = "\x89";  // push False
-    const OP_LONG1           = "\x8a";  // push long from < 256 bytes
-    const OP_LONG4           = "\x8b";  // push really big long
+    public const OP_PROTO = "\x80";  // identify pickle protocol
+    public const OP_NEWOBJ = "\x81";  // build object by applying cls.__new__ to argtuple
+    public const OP_EXT1 = "\x82";  // push object from extension registry; 1-byte index
+    public const OP_EXT2 = "\x83";  // ditto, but 2-byte index
+    public const OP_EXT4 = "\x84";  // ditto, but 4-byte index
+    public const OP_TUPLE1 = "\x85";  // build 1-tuple from stack top
+    public const OP_TUPLE2 = "\x86";  // build 2-tuple from two topmost stack items
+    public const OP_TUPLE3 = "\x87";  // build 3-tuple from three topmost stack items
+    public const OP_NEWTRUE = "\x88";  // push True
+    public const OP_NEWFALSE = "\x89";  // push False
+    public const OP_LONG1 = "\x8a";  // push long from < 256 bytes
+    public const OP_LONG4 = "\x8b";  // push really big long
 
     /* Protocol 3 (Python 3.x) */
-    const OP_BINBYTES        = 'B';     // push bytes; counted binary string argument
-    const OP_SHORT_BINBYTES  = 'C';     //  "     "   ;    "      "       "      " < 256 bytes
+    public const OP_BINBYTES = 'B';     // push bytes; counted binary string argument
+    public const OP_SHORT_BINBYTES = 'C';     //  "     "   ;    "      "       "      " < 256 bytes
 
     /**
      * @var bool Whether or not the system is little-endian
      */
-    protected static $_isLittleEndian = null;
+    protected static $_isLittleEndian;
 
     /**
      * @var array Strings representing quotes
      */
-    protected static $_quoteString = array(
+    protected static $_quoteString = [
         '\\' => '\\\\',
         "\x00" => '\\x00', "\x01" => '\\x01', "\x02" => '\\x02', "\x03" => '\\x03',
         "\x04" => '\\x04', "\x05" => '\\x05', "\x06" => '\\x06', "\x07" => '\\x07',
@@ -117,49 +117,50 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
         "\x14" => '\\x14', "\x15" => '\\x15', "\x16" => '\\x16', "\x17" => '\\x17',
         "\x18" => '\\x18', "\x19" => '\\x19', "\x1a" => '\\x1a', "\x1b" => '\\x1b',
         "\x1c" => '\\x1c', "\x1d" => '\\x1d', "\x1e" => '\\x1e', "\x1f" => '\\x1f',
-        "\xff" => '\\xff'
-    );
+        "\xff" => '\\xff',
+    ];
 
     /**
      * @var array Default options
      */
-    protected $_options = array(
-        'protocol'           => 0,
-    );
+    protected $_options = [
+        'protocol' => 0,
+    ];
 
     // process vars
-    protected $_protocol           = 0;
-    protected $_binary             = false;
-    protected $_memo               = array();
-    protected $_pickle             = '';
-    protected $_pickleLen          = 0;
-    protected $_pos                = 0;
-    protected $_stack              = array();
-    protected $_marker             = null;
+    protected $_protocol = 0;
+    protected $_binary = false;
+    protected $_memo = [];
+    protected $_pickle = '';
+    protected $_pickleLen = 0;
+    protected $_pos = 0;
+    protected $_stack = [];
+    protected $_marker;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @link Zend_Serializer_Adapter_AdapterAbstract::__construct()
+     * @see Zend_Serializer_Adapter_AdapterAbstract::__construct()
      */
-    public function __construct($opts=array())
+    public function __construct($opts = [])
     {
         parent::__construct($opts);
 
         // init
-        if (self::$_isLittleEndian === null) {
-            self::$_isLittleEndian = (pack('l', 1) === "\x01\x00\x00\x00");
+        if (null === self::$_isLittleEndian) {
+            self::$_isLittleEndian = ("\x01\x00\x00\x00" === pack('l', 1));
         }
 
         $this->_marker = new stdClass();
     }
 
     /**
-     * Set an option
+     * Set an option.
      *
-     * @link   Zend_Serializer_Adapter_AdapterAbstract::setOption()
-     * @param  string $name
-     * @param  mixed $value
+     * @see   Zend_Serializer_Adapter_AdapterAbstract::setOption()
+     *
+     * @param string $name
+     *
      * @return Zend_Serializer_Adapter_PythonPickle
      */
     public function setOption($name, $value)
@@ -174,10 +175,12 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     }
 
     /**
-     * Check and normalize pickle protocol number
+     * Check and normalize pickle protocol number.
      *
-     * @param  int $number
+     * @param int $number
+     *
      * @return int
+     *
      * @throws Zend_Serializer_Exception
      */
     protected function _checkProtocolNumber($number)
@@ -187,27 +190,26 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
             // require_once 'Zend/Serializer/Exception.php';
             throw new Zend_Serializer_Exception('Invalid or unknown protocol version "'.$number.'"');
         }
+
         return $int;
     }
 
     /* serialize */
 
     /**
-     * Serialize PHP to PythonPickle format
+     * Serialize PHP to PythonPickle format.
      *
-     * @param  mixed $value
-     * @param  array $opts
      * @return string
      */
-    public function serialize($value, array $opts = array())
+    public function serialize($value, array $opts = [])
     {
         $opts = $opts + $this->_options;
 
         $this->_protocol = $this->_checkProtocolNumber($opts['protocol']);
-        $this->_binary   = $this->_protocol != 0;
+        $this->_binary = 0 != $this->_protocol;
 
         // clear process vars before serializing
-        $this->_memo   = array();
+        $this->_memo = [];
         $this->_pickle = '';
 
         // write
@@ -218,7 +220,7 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
         $this->_writeStop();
 
         // clear process vars after serializing
-        $this->_memo = array();
+        $this->_memo = [];
         $pickle = $this->_pickle;
         $this->_pickle = '';
 
@@ -226,19 +228,19 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     }
 
     /**
-     * Write a value
+     * Write a value.
      *
-     * @param  mixed $value
      * @return void
+     *
      * @throws Zend_Serializer_Exception on invalid or unrecognized value type
      */
     protected function _write($value)
     {
-        if ($value === null) {
+        if (null === $value) {
             $this->_writeNull();
-        } elseif ($value === true) {
+        } elseif (true === $value) {
             $this->_writeTrue();
-        } elseif ($value === false) {
+        } elseif (false === $value) {
             $this->_writeFalse();
         } elseif (is_int($value)) {
             $this->_writeInt($value);
@@ -257,75 +259,76 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
             $this->_writeObject($value);
         } else {
             // require_once 'Zend/Serializer/Exception.php';
-            throw new Zend_Serializer_Exception(
-                'PHP-Type "'.gettype($value).'" isn\'t serializable with '.get_class($this)
-            );
+            throw new Zend_Serializer_Exception('PHP-Type "'.gettype($value).'" isn\'t serializable with '.get_class($this));
         }
     }
 
     /**
-     * Write pickle protocol
+     * Write pickle protocol.
      *
-     * @param  int $protocol
+     * @param int $protocol
+     *
      * @return void
      */
     protected function _writeProto($protocol)
     {
-        $this->_pickle .= self::OP_PROTO . $protocol;
+        $this->_pickle .= self::OP_PROTO.$protocol;
     }
 
     /**
-     * Write a get
+     * Write a get.
      *
-     * @param  int $id Id of memo
+     * @param int $id Id of memo
+     *
      * @return void
      */
     protected function _writeGet($id)
     {
         if ($this->_binary) {
-            if ($id <= 0xff) {
+            if ($id <= 0xFF) {
                 // BINGET + chr(i)
-                $this->_pickle .= self::OP_BINGET . chr($id);
+                $this->_pickle .= self::OP_BINGET.chr($id);
             } else {
                 // LONG_BINGET + pack("<i", i)
                 $bin = pack('l', $id);
-                if (self::$_isLittleEndian === false) {
+                if (false === self::$_isLittleEndian) {
                     $bin = strrev($bin);
                 }
-                $this->_pickle .= self::OP_LONG_BINGET . $bin;
+                $this->_pickle .= self::OP_LONG_BINGET.$bin;
             }
         } else {
-            $this->_pickle .= self::OP_GET . $id . "\r\n";
+            $this->_pickle .= self::OP_GET.$id."\r\n";
         }
     }
 
     /**
-     * Write a put
+     * Write a put.
      *
-     * @param  int $id Id of memo
+     * @param int $id Id of memo
+     *
      * @return void
      */
     protected function _writePut($id)
     {
         if ($this->_binary) {
-            if ($id <= 0xff) {
+            if ($id <= 0xFF) {
                 // BINPUT + chr(i)
-                $this->_pickle .= self::OP_BINPUT . chr($id);
+                $this->_pickle .= self::OP_BINPUT.chr($id);
             } else {
                 // LONG_BINPUT + pack("<i", i)
                 $bin = pack('l', $id);
-                if (self::$_isLittleEndian === false) {
+                if (false === self::$_isLittleEndian) {
                     $bin = strrev($bin);
                 }
-                $this->_pickle .= self::OP_LONG_BINPUT . $bin;
+                $this->_pickle .= self::OP_LONG_BINPUT.$bin;
             }
         } else {
-            $this->_pickle .= self::OP_PUT . $id . "\r\n";
+            $this->_pickle .= self::OP_PUT.$id."\r\n";
         }
     }
 
     /**
-     * Write a null as None
+     * Write a null as None.
      *
      * @return void
      */
@@ -335,7 +338,7 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     }
 
     /**
-     * Write a boolean true
+     * Write a boolean true.
      *
      * @return void
      */
@@ -344,12 +347,12 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
         if ($this->_protocol >= 2) {
             $this->_pickle .= self::OP_NEWTRUE;
         } else {
-            $this->_pickle .= self::OP_INT . "01\r\n";
+            $this->_pickle .= self::OP_INT."01\r\n";
         }
     }
 
     /**
-     * Write a boolean false
+     * Write a boolean false.
      *
      * @return void
      */
@@ -358,52 +361,56 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
         if ($this->_protocol >= 2) {
             $this->_pickle .= self::OP_NEWFALSE;
         } else {
-            $this->_pickle .= self::OP_INT . "00\r\n";
+            $this->_pickle .= self::OP_INT."00\r\n";
         }
     }
 
     /**
-     * Write an integer value
+     * Write an integer value.
      *
-     * @param  int $value
+     * @param int $value
+     *
      * @return void
      */
     protected function _writeInt($value)
     {
         if ($this->_binary) {
             if ($value >= 0) {
-                if ($value <= 0xff) {
+                if ($value <= 0xFF) {
                     // self.write(BININT1 + chr(obj))
-                    $this->_pickle .= self::OP_BININT1 . chr($value);
-                } elseif ($value <= 0xffff) {
+                    $this->_pickle .= self::OP_BININT1.chr($value);
+                } elseif ($value <= 0xFFFF) {
                     // self.write("%c%c%c" % (BININT2, obj&0xff, obj>>8))
-                    $this->_pickle .= self::OP_BININT2 . pack('v', $value);
+                    $this->_pickle .= self::OP_BININT2.pack('v', $value);
                 }
+
                 return;
             }
 
             // Next check for 4-byte signed ints:
             $highBits = $value >> 31;  // note that Python shift sign-extends
-            if ($highBits == 0 || $highBits == -1) {
+            if (0 == $highBits || -1 == $highBits) {
                 // All high bits are copies of bit 2**31, so the value
                 // fits in a 4-byte signed int.
                 // self.write(BININT + pack("<i", obj))
                 $bin = pack('l', $value);
-                if (self::$_isLittleEndian === false) {
+                if (false === self::$_isLittleEndian) {
                     $bin = strrev($bin);
                 }
-                $this->_pickle .= self::OP_BININT . $bin;
+                $this->_pickle .= self::OP_BININT.$bin;
+
                 return;
             }
         }
 
-        $this->_pickle .= self::OP_INT . $value . "\r\n";
+        $this->_pickle .= self::OP_INT.$value."\r\n";
     }
 
     /**
-     * Write a float value
+     * Write a float value.
      *
-     * @param  float $value
+     * @param float $value
+     *
      * @return void
      */
     protected function _writeFloat($value)
@@ -411,96 +418,99 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
         if ($this->_binary) {
             // self.write(BINFLOAT + pack('>d', obj))
             $bin = pack('d', $value);
-            if (self::$_isLittleEndian === true) {
+            if (true === self::$_isLittleEndian) {
                 $bin = strrev($bin);
             }
-            $this->_pickle .= self::OP_BINFLOAT . $bin;
+            $this->_pickle .= self::OP_BINFLOAT.$bin;
         } else {
-            $this->_pickle .= self::OP_FLOAT . $value . "\r\n";
+            $this->_pickle .= self::OP_FLOAT.$value."\r\n";
         }
     }
 
     /**
-     * Write a string value
+     * Write a string value.
      *
-     * @param  string $value
+     * @param string $value
+     *
      * @return void
      */
     protected function _writeString($value)
     {
-        if ( ($id=$this->_searchMomo($value)) !== false ) {
+        if (($id = $this->_searchMomo($value)) !== false) {
             $this->_writeGet($id);
+
             return;
         }
 
         if ($this->_binary) {
             $n = strlen((string) $value);
-            if ($n <= 0xff) {
+            if ($n <= 0xFF) {
                 // self.write(SHORT_BINSTRING + chr(n) + obj)
-                $this->_pickle .= self::OP_SHORT_BINSTRING . chr($n) . $value;
+                $this->_pickle .= self::OP_SHORT_BINSTRING.chr($n).$value;
             } else {
                 // self.write(BINSTRING + pack("<i", n) + obj)
                 $binLen = pack('l', $n);
-                if (self::$_isLittleEndian === false) {
+                if (false === self::$_isLittleEndian) {
                     $binLen = strrev($binLen);
                 }
-                $this->_pickle .= self::OP_BINSTRING . $binLen . $value;
+                $this->_pickle .= self::OP_BINSTRING.$binLen.$value;
             }
         } else {
-            $this->_pickle .= self::OP_STRING . $this->_quoteString($value) . "\r\n";
+            $this->_pickle .= self::OP_STRING.$this->_quoteString($value)."\r\n";
         }
 
         $this->_momorize($value);
     }
 
     /**
-     * Write an associative array value as dictionary
+     * Write an associative array value as dictionary.
      *
-     * @param  array $value
      * @return void
      */
     protected function _writeArrayDict(array $value)
     {
-        if (($id=$this->_searchMomo($value)) !== false) {
-            $this->_writeGet($id);;
+        if (($id = $this->_searchMomo($value)) !== false) {
+            $this->_writeGet($id);
+
             return;
         }
 
-        $this->_pickle .= self::OP_MARK . self::OP_DICT;
+        $this->_pickle .= self::OP_MARK.self::OP_DICT;
         $this->_momorize($value);
 
         foreach ($value as $k => $v) {
             $this->_pickle .= $this->_write($k)
-                            . $this->_write($v)
-                            . self::OP_SETITEM;
+                            .$this->_write($v)
+                            .self::OP_SETITEM;
         }
     }
 
     /**
-     * Write a simple array value as list
+     * Write a simple array value as list.
      *
-     * @param  array $value
      * @return void
      */
     protected function _writeArrayList(array $value)
     {
         if (($id = $this->_searchMomo($value)) !== false) {
             $this->_writeGet($id);
+
             return;
         }
 
-        $this->_pickle .= self::OP_MARK . self::OP_LIST;
+        $this->_pickle .= self::OP_MARK.self::OP_LIST;
         $this->_momorize($value);
 
         foreach ($value as $k => $v) {
-            $this->_pickle .= $this->_write($v) . self::OP_APPEND;
+            $this->_pickle .= $this->_write($v).self::OP_APPEND;
         }
     }
 
     /**
-     * Write an object as an dictionary
+     * Write an object as an dictionary.
      *
-     * @param  object $value
+     * @param object $value
+     *
      * @return void
      */
     protected function _writeObject($value)
@@ -510,7 +520,7 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     }
 
     /**
-     * Write stop
+     * Write stop.
      *
      * @return void
      */
@@ -522,9 +532,8 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     /* serialize helper */
 
     /**
-     * Add a value to the memo and write the id
+     * Add a value to the memo and write the id.
      *
-     * @param mixed $value
      * @return void
      */
     protected function _momorize($value)
@@ -535,9 +544,8 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     }
 
     /**
-     * Search a value in the meno and return  the id
+     * Search a value in the meno and return  the id.
      *
-     * @param  mixed $value
      * @return int|false The id or false
      */
     protected function _searchMomo($value)
@@ -548,7 +556,6 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     /**
      * Is an array associative?
      *
-     * @param  array $value
      * @return array
      */
     protected function _isArrayAssoc(array $value)
@@ -557,9 +564,10 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     }
 
     /**
-     * Quote/Escape a string
+     * Quote/Escape a string.
      *
-     * @param  string $str
+     * @param string $str
+     *
      * @return string quoted string
      */
     protected function _quoteString($str)
@@ -571,36 +579,35 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
             && ($cntSingleQuote < $cntDoubleQuote)
         ) {
             $quoteArr['"'] = '\\"';
-            $enclosure     = '"';
+            $enclosure = '"';
         } else {
             $quoteArr["'"] = "\\'";
-            $enclosure     = "'";
+            $enclosure = "'";
         }
 
-        return $enclosure . strtr((string) $str, $quoteArr) . $enclosure;
+        return $enclosure.strtr((string) $str, $quoteArr).$enclosure;
     }
 
     /* unserialize */
 
     /**
-     * Unserialize from Python Pickle format to PHP
+     * Unserialize from Python Pickle format to PHP.
      *
-     * @param  string $pickle
-     * @param  array $opts
-     * @return mixed
+     * @param string $pickle
+     *
      * @throws Zend_Serializer_Exception on invalid Pickle string
      */
-    public function unserialize($pickle, array $opts = array())
+    public function unserialize($pickle, array $opts = [])
     {
         // init process vars
-        $this->_pos       = 0;
-        $this->_pickle    = $pickle;
+        $this->_pos = 0;
+        $this->_pickle = $pickle;
         $this->_pickleLen = strlen((string) $this->_pickle);
-        $this->_memo      = array();
-        $this->_stack     = array();
+        $this->_memo = [];
+        $this->_stack = [];
 
         // read pickle string
-        while (($op=$this->_read(1)) !== self::OP_STOP) {
+        while (($op = $this->_read(1)) !== self::OP_STOP) {
             $this->_load($op);
         }
 
@@ -612,20 +619,22 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
         $ret = array_pop($this->_stack);
 
         // clear process vars
-        $this->_pos       = 0;
-        $this->_pickle    = '';
+        $this->_pos = 0;
+        $this->_pickle = '';
         $this->_pickleLen = 0;
-        $this->_memo      = array();
-        $this->_stack     = array();
+        $this->_memo = [];
+        $this->_stack = [];
 
         return $ret;
     }
 
     /**
-     * Load a pickle opcode
+     * Load a pickle opcode.
      *
-     * @param  string $op
+     * @param string $op
+     *
      * @return void
+     *
      * @throws Zend_Serializer_Exception on invalid opcode
      */
     protected function _load($op)
@@ -755,84 +764,89 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     }
 
     /**
-     * Load a PUT opcode
+     * Load a PUT opcode.
      *
      * @return void
+     *
      * @throws Zend_Serializer_Exception on missing stack
      */
     protected function _loadPut()
     {
-        $id = (int)$this->_readline();
+        $id = (int) $this->_readline();
 
-        $lastStack = count($this->_stack)-1;
+        $lastStack = count($this->_stack) - 1;
         if (!isset($this->_stack[$lastStack])) {
             // require_once 'Zend/Serializer/Exception.php';
             throw new Zend_Serializer_Exception('No stack exist');
         }
-        $this->_memo[$id] = & $this->_stack[$lastStack];
+        $this->_memo[$id] = &$this->_stack[$lastStack];
     }
 
     /**
-     * Load a binary PUT
+     * Load a binary PUT.
      *
      * @return void
+     *
      * @throws Zend_Serializer_Exception on missing stack
      */
     protected function _loadBinPut()
     {
         $id = ord((string) $this->_read(1));
 
-        $lastStack = count($this->_stack)-1;
+        $lastStack = count($this->_stack) - 1;
         if (!isset($this->_stack[$lastStack])) {
             // require_once 'Zend/Serializer/Exception.php';
             throw new Zend_Serializer_Exception('No stack exist');
         }
-        $this->_memo[$id] = & $this->_stack[$lastStack];
+        $this->_memo[$id] = &$this->_stack[$lastStack];
     }
 
     /**
-     * Load a long binary PUT
+     * Load a long binary PUT.
      *
      * @return void
+     *
      * @throws Zend_Serializer_Exception on missing stack
      */
     protected function _loadLongBinPut()
     {
         $bin = $this->_read(4);
-        if (self::$_isLittleEndian === false) {
+        if (false === self::$_isLittleEndian) {
             $bin = strrev($bin);
         }
         list(, $id) = unpack('l', $bin);
 
-        $lastStack = count($this->_stack)-1;
+        $lastStack = count($this->_stack) - 1;
         if (!isset($this->_stack[$lastStack])) {
             // require_once 'Zend/Serializer/Exception.php';
             throw new Zend_Serializer_Exception('No stack exist');
         }
-        $this->_memo[$id] = & $this->_stack[$lastStack];
+        $this->_memo[$id] = &$this->_stack[$lastStack];
     }
 
     /**
-     * Load a GET operation
+     * Load a GET operation.
      *
      * @return void
+     *
      * @throws Zend_Serializer_Exception on missing GET identifier
      */
     protected function _loadGet()
     {
-        $id = (int)$this->_readline();
+        $id = (int) $this->_readline();
 
         if (!array_key_exists($id, $this->_memo)) {
             // require_once 'Zend/Serializer/Exception.php';
-            throw new Zend_Serializer_Exception('Get id "' . $id . '" not found in momo');
+            throw new Zend_Serializer_Exception('Get id "'.$id.'" not found in momo');
         }
-        $this->_stack[] = & $this->_memo[$id];
+        $this->_stack[] = &$this->_memo[$id];
     }
 
     /**
-     * Load a binary GET operation
+     * Load a binary GET operation.
      *
      * @return void
+     *
      * @throws Zend_Serializer_Exception on missing GET identifier
      */
     protected function _loadBinGet()
@@ -841,34 +855,35 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
 
         if (!array_key_exists($id, $this->_memo)) {
             // require_once 'Zend/Serializer/Exception.php';
-            throw new Zend_Serializer_Exception('Get id "' . $id . '" not found in momo');
+            throw new Zend_Serializer_Exception('Get id "'.$id.'" not found in momo');
         }
-        $this->_stack[] = & $this->_memo[$id];
+        $this->_stack[] = &$this->_memo[$id];
     }
 
     /**
-     * Load a long binary GET operation
+     * Load a long binary GET operation.
      *
      * @return void
+     *
      * @throws Zend_Serializer_Exception on missing GET identifier
      */
     protected function _loadLongBinGet()
     {
         $bin = $this->_read(4);
-        if (self::$_isLittleEndian === false) {
+        if (false === self::$_isLittleEndian) {
             $bin = strrev($bin);
         }
         list(, $id) = unpack('l', $bin);
 
         if (!array_key_exists($id, $this->_memo)) {
             // require_once 'Zend/Serializer/Exception.php';
-            throw new Zend_Serializer_Exception('Get id "' . $id . '" not found in momo');
+            throw new Zend_Serializer_Exception('Get id "'.$id.'" not found in momo');
         }
-        $this->_stack[] = & $this->_memo[$id];
+        $this->_stack[] = &$this->_memo[$id];
     }
 
     /**
-     * Load a NONE operator
+     * Load a NONE operator.
      *
      * @return void
      */
@@ -878,7 +893,7 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     }
 
     /**
-     * Load a boolean TRUE operator
+     * Load a boolean TRUE operator.
      *
      * @return void
      */
@@ -888,7 +903,7 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     }
 
     /**
-     * Load a boolean FALSE operator
+     * Load a boolean FALSE operator.
      *
      * @return void
      */
@@ -898,39 +913,39 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     }
 
     /**
-     * Load an integer operator
+     * Load an integer operator.
      *
      * @return void
      */
     protected function _loadInt()
     {
         $line = $this->_readline();
-        if ($line === '01') {
+        if ('01' === $line) {
             $this->_stack[] = true;
-        } elseif ($line === '00') {
+        } elseif ('00' === $line) {
             $this->_stack[] = false;
         } else {
-            $this->_stack[] = (int)$line;
+            $this->_stack[] = (int) $line;
         }
     }
 
     /**
-     * Load a binary integer operator
+     * Load a binary integer operator.
      *
      * @return void
      */
     protected function _loadBinInt()
     {
         $bin = $this->_read(4);
-        if (self::$_isLittleEndian === false) {
+        if (false === self::$_isLittleEndian) {
             $bin = strrev($bin);
         }
-        list(, $int)    = unpack('l', $bin);
+        list(, $int) = unpack('l', $bin);
         $this->_stack[] = $int;
     }
 
     /**
-     * Load the first byte of a binary integer
+     * Load the first byte of a binary integer.
      *
      * @return void
      */
@@ -940,26 +955,26 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     }
 
     /**
-     * Load the second byte of a binary integer
+     * Load the second byte of a binary integer.
      *
      * @return void
      */
     protected function _loadBinInt2()
     {
         $bin = $this->_read(2);
-        list(, $int)    = unpack('v', $bin);
+        list(, $int) = unpack('v', $bin);
         $this->_stack[] = $int;
     }
 
     /**
-     * Load a long (float) operator
+     * Load a long (float) operator.
      *
      * @return void
      */
     protected function _loadLong()
     {
         $data = rtrim((string) $this->_readline(), 'L');
-        if ($data === '') {
+        if ('' === $data) {
             $this->_stack[] = 0;
         } else {
             $this->_stack[] = $data;
@@ -967,26 +982,26 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     }
 
     /**
-     * Load a one byte long integer
+     * Load a one byte long integer.
      *
      * @return void
      */
     protected function _loadLong1()
     {
-        $n    = ord((string) $this->_read(1));
+        $n = ord((string) $this->_read(1));
         $data = $this->_read($n);
         $this->_stack[] = $this->_decodeBinLong($data);
     }
 
     /**
-     * Load a 4 byte long integer
+     * Load a 4 byte long integer.
      *
      * @return void
      */
     protected function _loadLong4()
     {
         $nBin = $this->_read(4);
-        if (self::$_isLittleEndian === false) {
+        if (false === self::$_isLittleEndian) {
             $nBin = strrev($$nBin);
         }
         list(, $n) = unpack('l', $nBin);
@@ -996,43 +1011,43 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     }
 
     /**
-     * Load a float value
+     * Load a float value.
      *
      * @return void
      */
     protected function _loadFloat()
     {
-        $float = (float)$this->_readline();
+        $float = (float) $this->_readline();
         $this->_stack[] = $float;
     }
 
     /**
-     * Load a binary float value
+     * Load a binary float value.
      *
      * @return void
      */
     protected function _loadBinFloat()
     {
         $bin = $this->_read(8);
-        if (self::$_isLittleEndian === true) {
+        if (true === self::$_isLittleEndian) {
             $bin = strrev($bin);
         }
-        list(, $float)  = unpack('d', $bin);
+        list(, $float) = unpack('d', $bin);
         $this->_stack[] = $float;
     }
 
     /**
-     * Load a string
+     * Load a string.
      *
      * @return void
      */
     protected function _loadString()
     {
-        $this->_stack[] = $this->_unquoteString((string)$this->_readline());
+        $this->_stack[] = $this->_unquoteString((string) $this->_readline());
     }
 
     /**
-     * Load a binary string
+     * Load a binary string.
      *
      * @return void
      */
@@ -1042,23 +1057,23 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
         if (!self::$_isLittleEndian) {
             $bin = strrev($bin);
         }
-        list(, $len)    = unpack('l', $bin);
-        $this->_stack[] = (string)$this->_read($len);
+        list(, $len) = unpack('l', $bin);
+        $this->_stack[] = (string) $this->_read($len);
     }
 
     /**
-     * Load a short binary string
+     * Load a short binary string.
      *
      * @return void
      */
     protected function _loadShortBinString()
     {
-        $len            = ord((string) $this->_read(1));
-        $this->_stack[] = (string)$this->_read($len);
+        $len = ord((string) $this->_read(1));
+        $this->_stack[] = (string) $this->_read($len);
     }
 
     /**
-     * Load arbitrary binary bytes
+     * Load arbitrary binary bytes.
      *
      * @return void
      */
@@ -1066,42 +1081,41 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     {
         // read byte length
         $nBin = $this->_read(4);
-        if (self::$_isLittleEndian === false) {
+        if (false === self::$_isLittleEndian) {
             $nBin = strrev($$nBin);
         }
-        list(, $n)      = unpack('l', $nBin);
+        list(, $n) = unpack('l', $nBin);
         $this->_stack[] = $this->_read($n);
     }
 
     /**
-     * Load a single binary byte
+     * Load a single binary byte.
      *
      * @return void
      */
     protected function _loadShortBinBytes()
     {
-        $n              = ord((string) $this->_read(1));
+        $n = ord((string) $this->_read(1));
         $this->_stack[] = $this->_read($n);
     }
 
     /**
-     * Load a unicode string
+     * Load a unicode string.
      *
      * @return void
      */
     protected function _loadUnicode()
     {
-        $data    = $this->_readline();
+        $data = $this->_readline();
         $pattern = '/\\\\u([a-fA-F0-9]{4})/u'; // \uXXXX
-        $data    = preg_replace_callback($pattern, array($this, '_convertMatchingUnicodeSequence2Utf8'), $data);
+        $data = preg_replace_callback($pattern, [$this, '_convertMatchingUnicodeSequence2Utf8'], $data);
 
         $this->_stack[] = $data;
     }
 
     /**
-     * Convert a unicode sequence to UTF-8
+     * Convert a unicode sequence to UTF-8.
      *
-     * @param  array $match
      * @return string
      */
     protected function _convertMatchingUnicodeSequence2Utf8(array $match)
@@ -1110,10 +1124,10 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     }
 
     /**
-     * Convert a hex string to a UTF-8 string
+     * Convert a hex string to a UTF-8 string.
      *
-     * @param  string $sequence
      * @return string
+     *
      * @throws Zend_Serializer_Exception on unmatched unicode sequence
      */
     protected function _hex2Utf8($hex)
@@ -1122,31 +1136,28 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
 
         if ($uniCode < 0x80) { // 1Byte
             $utf8Char = chr($uniCode);
-
         } elseif ($uniCode < 0x800) { // 2Byte
             $utf8Char = chr(0xC0 | $uniCode >> 6)
-                      . chr(0x80 | $uniCode & 0x3F);
-
+                      .chr(0x80 | $uniCode & 0x3F);
         } elseif ($uniCode < 0x10000) { // 3Byte
             $utf8Char = chr(0xE0 | $uniCode >> 12)
-                      . chr(0x80 | $uniCode >> 6 & 0x3F)
-                      . chr(0x80 | $uniCode & 0x3F);
-
+                      .chr(0x80 | $uniCode >> 6 & 0x3F)
+                      .chr(0x80 | $uniCode & 0x3F);
         } elseif ($uniCode < 0x110000) { // 4Byte
-            $utf8Char  = chr(0xF0 | $uniCode >> 18)
-                       . chr(0x80 | $uniCode >> 12 & 0x3F)
-                       . chr(0x80 | $uniCode >> 6 & 0x3F)
-                       . chr(0x80 | $uniCode & 0x3F);
+            $utf8Char = chr(0xF0 | $uniCode >> 18)
+                       .chr(0x80 | $uniCode >> 12 & 0x3F)
+                       .chr(0x80 | $uniCode >> 6 & 0x3F)
+                       .chr(0x80 | $uniCode & 0x3F);
         } else {
             // require_once 'Zend/Serializer/Exception.php';
-            throw new Zend_Serializer_Exception('Unsupported unicode character found "' . dechex($uniCode) . '"');
+            throw new Zend_Serializer_Exception('Unsupported unicode character found "'.dechex($uniCode).'"');
         }
 
         return $utf8Char;
     }
 
     /**
-     * Load binary unicode sequence
+     * Load binary unicode sequence.
      *
      * @return void
      */
@@ -1154,17 +1165,17 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     {
         // read byte length
         $n = $this->_read(4);
-        if (self::$_isLittleEndian === false) {
+        if (false === self::$_isLittleEndian) {
             $n = strrev($n);
         }
         list(, $n) = unpack('l', $n);
-        $data      = $this->_read($n);
+        $data = $this->_read($n);
 
         $this->_stack[] = $data;
     }
 
     /**
-     * Load a marker sequence
+     * Load a marker sequence.
      *
      * @return void
      */
@@ -1174,55 +1185,55 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     }
 
     /**
-     * Load an array (list)
+     * Load an array (list).
      *
      * @return void
      */
     protected function _loadList()
     {
         $k = $this->_lastMarker();
-        $this->_stack[$k] = array();
+        $this->_stack[$k] = [];
 
         // remove all elements after marker
         $max = count($this->_stack);
-        for ($i = $k+1, $max; $i < $max; $i++) {
+        for ($i = $k + 1, $max; $i < $max; ++$i) {
             unset($this->_stack[$i]);
         }
     }
 
     /**
-     * Load an append (to list) sequence
+     * Load an append (to list) sequence.
      *
      * @return void
      */
     protected function _loadAppend()
     {
-        $value  =  array_pop($this->_stack);
-        $list   =& $this->_stack[count($this->_stack)-1];
-        $list[] =  $value;
+        $value = array_pop($this->_stack);
+        $list = &$this->_stack[count($this->_stack) - 1];
+        $list[] = $value;
     }
 
     /**
-     * Load an empty list sequence
+     * Load an empty list sequence.
      *
      * @return void
      */
     protected function _loadEmptyList()
     {
-        $this->_stack[] = array();
+        $this->_stack[] = [];
     }
 
     /**
-     * Load multiple append (to list) sequences at once
+     * Load multiple append (to list) sequences at once.
      *
      * @return void
      */
     protected function _loadAppends()
     {
-        $k    =  $this->_lastMarker();
-        $list =& $this->_stack[$k - 1];
-        $max  =  count($this->_stack);
-        for ($i = $k + 1; $i < $max; $i++) {
+        $k = $this->_lastMarker();
+        $list = &$this->_stack[$k - 1];
+        $max = count($this->_stack);
+        for ($i = $k + 1; $i < $max; ++$i) {
             $list[] = $this->_stack[$i];
             unset($this->_stack[$i]);
         }
@@ -1230,94 +1241,94 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     }
 
     /**
-     * Load an associative array (Python dictionary)
+     * Load an associative array (Python dictionary).
      *
      * @return void
      */
     protected function _loadDict()
     {
         $k = $this->_lastMarker();
-        $this->_stack[$k] = array();
+        $this->_stack[$k] = [];
 
         // remove all elements after marker
         $max = count($this->_stack);
-        for($i = $k + 1; $i < $max; $i++) {
+        for ($i = $k + 1; $i < $max; ++$i) {
             unset($this->_stack[$i]);
         }
     }
 
     /**
-     * Load an item from a set
+     * Load an item from a set.
      *
      * @return void
      */
     protected function _loadSetItem()
     {
-        $value =  array_pop($this->_stack);
-        $key   =  array_pop($this->_stack);
-        $dict  =& $this->_stack[count($this->_stack) - 1];
+        $value = array_pop($this->_stack);
+        $key = array_pop($this->_stack);
+        $dict = &$this->_stack[count($this->_stack) - 1];
         $dict[$key] = $value;
     }
 
     /**
-     * Load an empty dictionary
+     * Load an empty dictionary.
      *
      * @return void
      */
     protected function _loadEmptyDict()
     {
-        $this->_stack[] = array();
+        $this->_stack[] = [];
     }
 
     /**
-     * Load set items
+     * Load set items.
      *
      * @return void
      */
     protected function _loadSetItems()
     {
-        $k    =  $this->_lastMarker();
-        $dict =& $this->_stack[$k - 1];
-        $max  =  count($this->_stack);
+        $k = $this->_lastMarker();
+        $dict = &$this->_stack[$k - 1];
+        $max = count($this->_stack);
         for ($i = $k + 1; $i < $max; $i += 2) {
-            $key        = $this->_stack[$i];
-            $value      = $this->_stack[$i + 1];
+            $key = $this->_stack[$i];
+            $value = $this->_stack[$i + 1];
             $dict[$key] = $value;
-            unset($this->_stack[$i], $this->_stack[$i+1]);
+            unset($this->_stack[$i], $this->_stack[$i + 1]);
         }
         unset($this->_stack[$k]);
     }
 
     /**
-     * Load a tuple
+     * Load a tuple.
      *
      * @return void
      */
     protected function _loadTuple()
     {
-        $k                =  $this->_lastMarker();
-        $this->_stack[$k] =  array();
-        $tuple            =& $this->_stack[$k];
-        $max              =  count($this->_stack);
-        for($i = $k + 1; $i < $max; $i++) {
+        $k = $this->_lastMarker();
+        $this->_stack[$k] = [];
+        $tuple = &$this->_stack[$k];
+        $max = count($this->_stack);
+        for ($i = $k + 1; $i < $max; ++$i) {
             $tuple[] = $this->_stack[$i];
             unset($this->_stack[$i]);
         }
     }
 
     /**
-     * Load single item tuple
+     * Load single item tuple.
      *
      * @return void
      */
     protected function _loadTuple1()
     {
         $value1 = array_pop($this->_stack);
-        $this->_stack[] = array($value1);
+        $this->_stack[] = [$value1];
     }
 
     /**
-     * Load two item tuple
+     * Load two item tuple.
      *
      * @return void
      */
@@ -1325,25 +1336,27 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     {
         $value2 = array_pop($this->_stack);
         $value1 = array_pop($this->_stack);
-        $this->_stack[] = array($value1, $value2);
+        $this->_stack[] = [$value1, $value2];
     }
 
     /**
-     * Load three item tuple
+     * Load three item tuple.
      *
      * @return void
      */
-    protected function _loadTuple3() {
+    protected function _loadTuple3()
+    {
         $value3 = array_pop($this->_stack);
         $value2 = array_pop($this->_stack);
         $value1 = array_pop($this->_stack);
-        $this->_stack[] = array($value1, $value2, $value3);
+        $this->_stack[] = [$value1, $value2, $value3];
     }
 
     /**
-     * Load a proto value
+     * Load a proto value.
      *
      * @return void
+     *
      * @throws Zend_Serializer_Exception if Pickle version does not support this feature
      */
     protected function _loadProto()
@@ -1359,10 +1372,10 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     /* unserialize helper */
 
     /**
-     * Read a segment of the pickle
+     * Read a segment of the pickle.
      *
-     * @param  mixed $len
      * @return string
+     *
      * @throws Zend_Serializer_Exception if position matches end of data
      */
     protected function _read($len)
@@ -1372,46 +1385,49 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
             throw new Zend_Serializer_Exception('End of data');
         }
 
-        $this->_pos+= $len;
-        return substr((string) $this->_pickle, ($this->_pos - $len), $len);
+        $this->_pos += $len;
+
+        return substr((string) $this->_pickle, $this->_pos - $len, $len);
     }
 
     /**
-     * Read a line of the pickle at once
+     * Read a line of the pickle at once.
      *
      * @return string
+     *
      * @throws Zend_Serializer_Exception if no EOL character found
      */
     protected function _readline()
     {
         $eolLen = 2;
         $eolPos = strpos((string) $this->_pickle, "\r\n", $this->_pos);
-        if ($eolPos === false) {
+        if (false === $eolPos) {
             $eolPos = strpos((string) $this->_pickle, "\n", $this->_pos);
             $eolLen = 1;
         }
 
-        if ($eolPos === false) {
+        if (false === $eolPos) {
             // require_once 'Zend/Serializer/Exception.php';
             throw new Zend_Serializer_Exception('No new line found');
         }
-        $ret        = substr((string) $this->_pickle, $this->_pos, $eolPos-$this->_pos);
+        $ret = substr((string) $this->_pickle, $this->_pos, $eolPos - $this->_pos);
         $this->_pos = $eolPos + $eolLen;
 
         return $ret;
     }
 
     /**
-     * Unquote/Unescape a quoted string
+     * Unquote/Unescape a quoted string.
      *
-     * @param  string $str quoted string
+     * @param string $str quoted string
+     *
      * @return string unquoted string
      */
     protected function _unquoteString($str)
     {
         $quoteArr = array_flip(self::$_quoteString);
 
-        if ($str[0] == '"') {
+        if ('"' == $str[0]) {
             $quoteArr['\\"'] = '"';
         } else {
             $quoteArr["\\'"] = "'";
@@ -1421,31 +1437,33 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     }
 
     /**
-     * Return last marker position in stack
+     * Return last marker position in stack.
      *
      * @return int
      */
     protected function _lastMarker()
     {
-        for ($k = count($this->_stack)-1; $k >= 0; $k -= 1) {
+        for ($k = count($this->_stack) - 1; $k >= 0; --$k) {
             if ($this->_stack[$k] === $this->_marker) {
                 break;
             }
         }
+
         return $k;
     }
 
     /**
-     * Decode a binary long sequence
+     * Decode a binary long sequence.
      *
-     * @param  string $data
+     * @param string $data
+     *
      * @return int|float|string
      */
     protected function _decodeBinLong($data)
     {
         $nbytes = strlen((string) $data);
 
-        if ($nbytes == 0) {
+        if (0 == $nbytes) {
             return 0;
         }
 
@@ -1456,19 +1474,18 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
                 return INF;
             }
 
-            for ($i=0; $i<$nbytes; $i++) {
+            for ($i = 0; $i < $nbytes; ++$i) {
                 $long = bcadd($long, bcmul(ord((string) $data[$i]), bcpow(256, $i, 0)));
             }
-            if (0x80 <= ord((string) $data[$nbytes-1])) {
+            if (0x80 <= ord((string) $data[$nbytes - 1])) {
                 $long = bcsub($long, bcpow(2, $nbytes * 8));
             }
-
         } else {
-            for ($i=0; $i<$nbytes; $i++) {
-                $long+= ord((string) $data[$i]) * pow(256, $i);
+            for ($i = 0; $i < $nbytes; ++$i) {
+                $long += ord((string) $data[$i]) * pow(256, $i);
             }
-            if (0x80 <= ord((string) $data[$nbytes-1])) {
-                $long-= pow(2, $nbytes * 8);
+            if (0x80 <= ord((string) $data[$nbytes - 1])) {
+                $long -= pow(2, $nbytes * 8);
                 // $long-= 1 << ($nbytes * 8);
             }
         }

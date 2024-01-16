@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_WindowsAzure
- * @subpackage Storage
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -32,18 +32,16 @@
 
 /**
  * @category   Zend
- * @package    Zend_Service_WindowsAzure
- * @subpackage Log
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_WindowsAzure_Log_Formatter_WindowsAzure
-    implements Zend_Log_Formatter_Interface
+class Zend_Service_WindowsAzure_Log_Formatter_WindowsAzure implements Zend_Log_Formatter_Interface
 {
     /**
-     * Write a message to the table storage
+     * Write a message to the table storage.
      *
-     * @param  array $event
+     * @param array $event
      *
      * @return Zend_Service_WindowsAzure_Storage_DynamicTableEntity
      */

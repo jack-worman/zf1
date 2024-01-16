@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,25 +13,22 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Controller
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /** Zend_Controller_Response_Abstract */
 // require_once 'Zend/Controller/Response/Abstract.php';
 
-
 /**
- * Zend_Controller_Response_Http
+ * Zend_Controller_Response_Http.
  *
  * HTTP response for controllers
  *
  * @uses Zend_Controller_Response_Abstract
- * @package Zend_Controller
- * @subpackage Response
  */
 class Zend_Controller_Response_Http extends Zend_Controller_Response_Abstract
 {

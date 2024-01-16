@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage View
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -24,38 +24,40 @@
 // require_once 'Zend/Dojo/View/Helper/DijitContainer.php';
 
 /**
- * Dojo SplitContainer dijit
+ * Dojo SplitContainer dijit.
  *
  * @uses       Zend_Dojo_View_Helper_DijitContainer
- * @package    Zend_Dojo
- * @subpackage View
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
-  */
+ */
 class Zend_Dojo_View_Helper_SplitContainer extends Zend_Dojo_View_Helper_DijitContainer
 {
     /**
-     * Dijit being used
+     * Dijit being used.
+     *
      * @var string
      */
-    protected $_dijit  = 'dijit.layout.SplitContainer';
+    protected $_dijit = 'dijit.layout.SplitContainer';
 
     /**
-     * Dojo module to use
+     * Dojo module to use.
+     *
      * @var string
      */
     protected $_module = 'dijit.layout.SplitContainer';
 
     /**
-     * dijit.layout.SplitContainer
+     * dijit.layout.SplitContainer.
      *
-     * @param  string $id
-     * @param  string $content
-     * @param  array $params  Parameters to use for dijit creation
-     * @param  array $attribs HTML attributes
+     * @param string $id
+     * @param string $content
+     * @param array  $params  Parameters to use for dijit creation
+     * @param array  $attribs HTML attributes
+     *
      * @return string
      */
-    public function splitContainer($id = null, $content = '', array $params = array(), array $attribs = array())
+    public function splitContainer($id = null, $content = '', array $params = [], array $attribs = [])
     {
         if (0 === func_num_args()) {
             return $this;

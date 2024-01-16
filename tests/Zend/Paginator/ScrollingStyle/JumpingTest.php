@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Paginator
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -36,10 +36,10 @@
 
 /**
  * @category   Zend
- * @package    Zend_Paginator
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Paginator
  */
 #[AllowDynamicProperties]
@@ -68,6 +68,7 @@ class Zend_Paginator_ScrollingStyle_JumpingTest extends PHPUnit_Framework_TestCa
         $this->_paginator->setPageRange(10);
         $this->_expectedRange = array_combine(range(1, 10), range(1, 10));
     }
+
     /**
      * Cleans up the environment after running a test.
      */
@@ -103,7 +104,7 @@ class Zend_Paginator_ScrollingStyle_JumpingTest extends PHPUnit_Framework_TestCa
     {
         $this->_paginator->setCurrentPageNumber(11);
         $actual = $this->_scrollingStyle->getPages($this->_paginator);
-        $expected = array(11 => 11);
+        $expected = [11 => 11];
         $this->assertEquals($expected, $actual);
     }
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,39 +13,38 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Ldap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Ldap_OnlineTestCase
+ * Zend_Ldap_OnlineTestCase.
  */
-require_once __DIR__ . DIRECTORY_SEPARATOR . 'OnlineTestCase.php';
+require_once __DIR__.DIRECTORY_SEPARATOR.'OnlineTestCase.php';
 
 /**
  * @category   Zend
- * @package    Zend_Ldap
- * @subpackage UnitTests
+ *
  * @group      Zend_Ldap
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
 #[AllowDynamicProperties]
 class Zend_Ldap_ChangePasswordTest extends Zend_Ldap_OnlineTestCase
 {
     public function testAddNewUserWithPasswordOpenLdap()
     {
-        if ($this->_getLdap()->getRootDse()->getServerType() !==
-                Zend_Ldap_Node_RootDse::SERVER_TYPE_OPENLDAP) {
+        if (Zend_Ldap_Node_RootDse::SERVER_TYPE_OPENLDAP !==
+                $this->_getLdap()->getRootDse()->getServerType()) {
             $this->markTestSkipped('Test can only be run on an OpenLDAP server');
         }
 
         $dn = $this->_createDn('uid=newuser,');
-        $data = array();
+        $data = [];
         $password = 'pa$$w0rd';
         Zend_Ldap_Attribute::setAttribute($data, 'uid', 'newuser', false);
         Zend_Ldap_Attribute::setAttribute($data, 'objectClass', 'account', true);
@@ -73,13 +72,13 @@ class Zend_Ldap_ChangePasswordTest extends Zend_Ldap_OnlineTestCase
 
     public function testChangePasswordWithUserAccountOpenLdap()
     {
-        if ($this->_getLdap()->getRootDse()->getServerType() !==
-                Zend_Ldap_Node_RootDse::SERVER_TYPE_OPENLDAP) {
+        if (Zend_Ldap_Node_RootDse::SERVER_TYPE_OPENLDAP !==
+                $this->_getLdap()->getRootDse()->getServerType()) {
             $this->markTestSkipped('Test can only be run on an OpenLDAP server');
         }
 
         $dn = $this->_createDn('uid=newuser,');
-        $data = array();
+        $data = [];
         $password = 'pa$$w0rd';
         Zend_Ldap_Attribute::setAttribute($data, 'uid', 'newuser', false);
         Zend_Ldap_Attribute::setAttribute($data, 'objectClass', 'account', true);
@@ -93,7 +92,7 @@ class Zend_Ldap_ChangePasswordTest extends Zend_Ldap_OnlineTestCase
             $this->_getLdap()->bind($dn, $password);
 
             $newPasswd = 'newpasswd';
-            $newData = array();
+            $newData = [];
             Zend_Ldap_Attribute::setPassword($newData, $newPasswd,
                 Zend_Ldap_Attribute::PASSWORD_HASH_SHA, 'userPassword');
             $this->_getLdap()->update($dn, $newData);
@@ -103,8 +102,8 @@ class Zend_Ldap_ChangePasswordTest extends Zend_Ldap_OnlineTestCase
                 $this->fail('Expected exception not thrown');
             } catch (Zend_Ldap_Exception $zle) {
                 $message = $zle->getMessage();
-                $this->assertTrue(strstr((string) $message, 'Invalid credentials') ||
-                    strstr((string) $message, 'Server is unwilling to perform'));
+                $this->assertTrue(strstr((string) $message, 'Invalid credentials')
+                    || strstr((string) $message, 'Server is unwilling to perform'));
             }
 
             $this->assertTrue(
@@ -124,17 +123,17 @@ class Zend_Ldap_ChangePasswordTest extends Zend_Ldap_OnlineTestCase
 
     public function testAddNewUserWithPasswordActiveDirectory()
     {
-        if ($this->_getLdap()->getRootDse()->getServerType() !==
-                Zend_Ldap_Node_RootDse::SERVER_TYPE_ACTIVEDIRECTORY) {
+        if (Zend_Ldap_Node_RootDse::SERVER_TYPE_ACTIVEDIRECTORY !==
+                $this->_getLdap()->getRootDse()->getServerType()) {
             $this->markTestSkipped('Test can only be run on an ActiveDirectory server');
         }
         $options = $this->_getLdap()->getOptions();
-        if ($options['useSsl'] !== true && $options['useStartTls'] !== true) {
+        if (true !== $options['useSsl'] && true !== $options['useStartTls']) {
             $this->markTestSkipped('Test can only be run on an SSL or TLS secured connection');
         }
 
         $dn = $this->_createDn('cn=New User,');
-        $data = array();
+        $data = [];
         $password = 'pa$$w0rd';
         Zend_Ldap_Attribute::setAttribute($data, 'cn', 'New User', false);
         Zend_Ldap_Attribute::setAttribute($data, 'displayName', 'New User', false);
@@ -166,17 +165,17 @@ class Zend_Ldap_ChangePasswordTest extends Zend_Ldap_OnlineTestCase
 
     public function testChangePasswordWithUserAccountActiveDirectory()
     {
-        if ($this->_getLdap()->getRootDse()->getServerType() !==
-                Zend_Ldap_Node_RootDse::SERVER_TYPE_ACTIVEDIRECTORY) {
+        if (Zend_Ldap_Node_RootDse::SERVER_TYPE_ACTIVEDIRECTORY !==
+                $this->_getLdap()->getRootDse()->getServerType()) {
             $this->markTestSkipped('Test can only be run on an ActiveDirectory server');
         }
         $options = $this->_getLdap()->getOptions();
-        if ($options['useSsl'] !== true && $options['useStartTls'] !== true) {
+        if (true !== $options['useSsl'] && true !== $options['useStartTls']) {
             $this->markTestSkipped('Test can only be run on an SSL or TLS secured connection');
         }
 
         $dn = $this->_createDn('cn=New User,');
-        $data = array();
+        $data = [];
         $password = 'pa$$w0rd';
         Zend_Ldap_Attribute::setAttribute($data, 'cn', 'New User', false);
         Zend_Ldap_Attribute::setAttribute($data, 'displayName', 'New User', false);
@@ -194,7 +193,7 @@ class Zend_Ldap_ChangePasswordTest extends Zend_Ldap_OnlineTestCase
             $this->_getLdap()->bind($dn, $password);
 
             $newPasswd = 'newpasswd';
-            $newData = array();
+            $newData = [];
             Zend_Ldap_Attribute::setPassword($newData, $newPasswd, Zend_Ldap_Attribute::PASSWORD_UNICODEPWD);
             $this->_getLdap()->update($dn, $newData);
 
@@ -203,8 +202,8 @@ class Zend_Ldap_ChangePasswordTest extends Zend_Ldap_OnlineTestCase
                 $this->fail('Expected exception not thrown');
             } catch (Zend_Ldap_Exception $zle) {
                 $message = $zle->getMessage();
-                $this->assertTrue(strstr((string) $message, 'Invalid credentials') ||
-                    strstr((string) $message, 'Server is unwilling to perform'));
+                $this->assertTrue(strstr((string) $message, 'Invalid credentials')
+                    || strstr((string) $message, 'Server is unwilling to perform'));
             }
 
             $this->assertTrue(

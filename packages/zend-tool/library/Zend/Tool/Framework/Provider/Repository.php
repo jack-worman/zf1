@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage Framework
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -32,18 +32,16 @@
 
 /**
  * @category   Zend
- * @package    Zend_Tool
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Framework_Provider_Repository
-    implements Zend_Tool_Framework_Registry_EnabledInterface, IteratorAggregate, Countable
+class Zend_Tool_Framework_Provider_Repository implements Zend_Tool_Framework_Registry_EnabledInterface, IteratorAggregate, Countable
 {
-
     /**
      * @var Zend_Tool_Framework_Registry
      */
-    protected $_registry = null;
+    protected $_registry;
 
     /**
      * @var bool
@@ -53,46 +51,47 @@ class Zend_Tool_Framework_Provider_Repository
     /**
      * @var Zend_Tool_Framework_Provider_Interface[]
      */
-    protected $_unprocessedProviders = array();
+    protected $_unprocessedProviders = [];
 
     /**
      * @var Zend_Tool_Framework_Provider_Signature[]
      */
-    protected $_providerSignatures = array();
+    protected $_providerSignatures = [];
 
     /**
      * @var array Array of Zend_Tool_Framework_Provider_Inteface
      */
-    protected $_providers = array();
+    protected $_providers = [];
 
     /**
-     * setRegistry()
+     * setRegistry().
      *
-     * @param Zend_Tool_Framework_Registry_Interface $registry
      * @return Zend_Tool_Framework_Provider_Repository
      */
     public function setRegistry(Zend_Tool_Framework_Registry_Interface $registry)
     {
         $this->_registry = $registry;
+
         return $this;
     }
 
     /**
-     * Set the ProcessOnAdd flag
+     * Set the ProcessOnAdd flag.
      *
      * @param unknown_type $processOnAdd
+     *
      * @return Zend_Tool_Framework_Provider_Repository
      */
     public function setProcessOnAdd($processOnAdd = true)
     {
         $this->_processOnAdd = (bool) $processOnAdd;
+
         return $this;
     }
 
     /**
-     * Add a provider to the repository for processing
+     * Add a provider to the repository for processing.
      *
-     * @param Zend_Tool_Framework_Provider_Interface $provider
      * @return Zend_Tool_Framework_Provider_Repository
      */
     public function addProvider(Zend_Tool_Framework_Provider_Interface $provider, $overwriteExistingProvider = false)
@@ -108,13 +107,11 @@ class Zend_Tool_Framework_Provider_Repository
         }
 
         // if a provider by the given name already exist, and its not set as overwritable, throw exception
-        if (!$overwriteExistingProvider &&
-            (array_key_exists($providerName, $this->_unprocessedProviders)
-                || array_key_exists($providerName, $this->_providers)))
-        {
+        if (!$overwriteExistingProvider
+            && (array_key_exists($providerName, $this->_unprocessedProviders)
+                || array_key_exists($providerName, $this->_providers))) {
             // require_once 'Zend/Tool/Framework/Provider/Exception.php';
-            throw new Zend_Tool_Framework_Provider_Exception('A provider by the name ' . $providerName
-                . ' is already registered and $overrideExistingProvider is set to false.');
+            throw new Zend_Tool_Framework_Provider_Exception('A provider by the name '.$providerName.' is already registered and $overrideExistingProvider is set to false.');
         }
 
         $this->_unprocessedProviders[$providerName] = $provider;
@@ -153,17 +150,14 @@ class Zend_Tool_Framework_Provider_Repository
     }
 
     /**
-     * Process all of the unprocessed providers
-     *
+     * Process all of the unprocessed providers.
      */
     public function process()
     {
-
         // process all providers in the unprocessedProviders array
-        //foreach ($this->_unprocessedProviders as $providerName => $provider) {
+        // foreach ($this->_unprocessedProviders as $providerName => $provider) {
         reset($this->_unprocessedProviders);
         while ($this->_unprocessedProviders) {
-
             $providerName = key($this->_unprocessedProviders);
             $provider = array_shift($this->_unprocessedProviders);
 
@@ -181,18 +175,16 @@ class Zend_Tool_Framework_Provider_Repository
 
             // add to the appropraite place
             $this->_providerSignatures[$providerName] = $providerSignature;
-            $this->_providers[$providerName]          = $providerSignature->getProvider();
+            $this->_providers[$providerName] = $providerSignature->getProvider();
 
             if ($provider instanceof Zend_Tool_Framework_Provider_Initializable) {
                 $provider->initialize();
             }
-
         }
-
     }
 
     /**
-     * getProviders() Get all the providers in the repository
+     * getProviders() Get all the providers in the repository.
      *
      * @return array
      */
@@ -202,7 +194,7 @@ class Zend_Tool_Framework_Provider_Repository
     }
 
     /**
-     * getProviderSignatures() Get all the provider signatures
+     * getProviderSignatures() Get all the provider signatures.
      *
      * @return array
      */
@@ -212,9 +204,10 @@ class Zend_Tool_Framework_Provider_Repository
     }
 
     /**
-     * getProvider()
+     * getProvider().
      *
      * @param string $providerName
+     *
      * @return Zend_Tool_Framework_Provider_Interface
      */
     public function getProvider($providerName)
@@ -223,9 +216,10 @@ class Zend_Tool_Framework_Provider_Repository
     }
 
     /**
-     * getProviderSignature()
+     * getProviderSignature().
      *
      * @param string $providerName
+     *
      * @return Zend_Tool_Framework_Provider_Signature
      */
     public function getProviderSignature($providerName)
@@ -234,22 +228,22 @@ class Zend_Tool_Framework_Provider_Repository
     }
 
     /**
-     * count() - return the number of providers
+     * count() - return the number of providers.
      *
      * @return int
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function count()
     {
         return count($this->_providers);
     }
 
     /**
-     * getIterator() - Required by the IteratorAggregate Interface
+     * getIterator() - Required by the IteratorAggregate Interface.
      *
      * @return ArrayIterator
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function getIterator()
     {
         return new ArrayIterator($this->getProviders());
@@ -258,20 +252,19 @@ class Zend_Tool_Framework_Provider_Repository
     /**
      * _parseName - internal method to determine the name of an action when one is not explicity provided.
      *
-     * @param Zend_Tool_Framework_Action_Interface $action
      * @return string
      */
     protected function _parseName(Zend_Tool_Framework_Provider_Interface $provider)
     {
         $className = get_class($provider);
         $providerName = $className;
-        if (strpos((string) $providerName, '_') !== false) {
-            $providerName = substr((string) $providerName, strrpos($providerName, '_')+1);
+        if (false !== strpos((string) $providerName, '_')) {
+            $providerName = substr((string) $providerName, strrpos($providerName, '_') + 1);
         }
-        if (substr((string) $providerName, -8) == 'Provider') {
-            $providerName = substr((string) $providerName, 0, strlen((string) $providerName)-8);
+        if ('Provider' == substr((string) $providerName, -8)) {
+            $providerName = substr((string) $providerName, 0, strlen((string) $providerName) - 8);
         }
+
         return $providerName;
     }
-
 }

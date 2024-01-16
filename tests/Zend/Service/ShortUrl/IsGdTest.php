@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,8 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -22,26 +21,22 @@
 /** Zend_Service_ShortUrl_IsGd */
 // require_once 'Zend/Service/ShortUrl/IsGd.php';
 
-/**
- * @package  Zend_Service
- * @subpackage  UnitTests
- */
 #[AllowDynamicProperties]
 class Zend_Service_ShortUrl_IsGdTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_Service_ShortUrl_IsGd object
+     * Zend_Service_ShortUrl_IsGd object.
      *
      * @var Zend_Service_ShortUrl_IsGd
      */
     protected $_s;
 
     /**
-     * Creates a new Zend_Service_ShortUrl_IsGd object for each test method
+     * Creates a new Zend_Service_ShortUrl_IsGd object for each test method.
      *
      * @return void
      */
-    public function setUp ()
+    public function setUp()
     {
         if (!defined('TESTS_ZEND_SERVICE_SHORTURL_ISGD_ENABLED')
             || !constant('TESTS_ZEND_SERVICE_SHORTURL_ISGD_ENABLED')
@@ -69,10 +64,10 @@ class Zend_Service_ShortUrl_IsGdTest extends PHPUnit_Framework_TestCase
 
     public function testShorten()
     {
-        $urls = array(
+        $urls = [
             'http://framework.zend.com/',
             'http://framework.zend.com/manual/en/',
-        );
+        ];
 
         foreach ($urls as $url) {
             $shortenedUrl = $this->_s->shorten($url);
@@ -84,10 +79,10 @@ class Zend_Service_ShortUrl_IsGdTest extends PHPUnit_Framework_TestCase
 
     public function testUnshorten()
     {
-        $urls = array(
-            'http://framework.zend.com/'           => 'http://is.gd/g3ASn',
-            'http://framework.zend.com/manual/en/' => 'http://is.gd/g3AVm'
-        );
+        $urls = [
+            'http://framework.zend.com/' => 'http://is.gd/g3ASn',
+            'http://framework.zend.com/manual/en/' => 'http://is.gd/g3AVm',
+        ];
 
         foreach ($urls as $url => $shortenedUrl) {
             $this->assertEquals($url, $this->_s->unshorten($shortenedUrl));

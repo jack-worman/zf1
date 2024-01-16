@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata_Calendar
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -26,21 +26,21 @@
 
 /**
  * @category   Zend
- * @package    Zend_Gdata_Calendar
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Calendar
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_Calendar_EventQueryTest extends PHPUnit_Framework_TestCase
 {
+    public const GOOGLE_DEVELOPER_CALENDAR = 'developer-calendar@google.com';
+    public const ZEND_CONFERENCE_EVENT = 'bn2h4o4mc3a03ci4t48j3m56pg';
+    public const ZEND_CONFERENCE_EVENT_COMMENT = 'i9q87onko1uphfs7i21elnnb4g';
+    public const SAMPLE_RFC3339 = '2007-06-05T18:38:00';
 
-    const GOOGLE_DEVELOPER_CALENDAR = 'developer-calendar@google.com';
-    const ZEND_CONFERENCE_EVENT = 'bn2h4o4mc3a03ci4t48j3m56pg';
-    const ZEND_CONFERENCE_EVENT_COMMENT = 'i9q87onko1uphfs7i21elnnb4g';
-    const SAMPLE_RFC3339 = "2007-06-05T18:38:00";
     public function setUp()
     {
         $this->query = new Zend_Gdata_Calendar_EventQuery();
@@ -50,7 +50,7 @@ class Zend_Gdata_Calendar_EventQueryTest extends PHPUnit_Framework_TestCase
     {
         $queryUrl = $this->query->getQueryUrl();
         $this->assertEquals('https://www.google.com/calendar/feeds/default/public/full',
-                $queryUrl);
+            $queryUrl);
     }
 
     public function testAlternateBaseUrlForQuery()
@@ -70,19 +70,19 @@ class Zend_Gdata_Calendar_EventQueryTest extends PHPUnit_Framework_TestCase
         $this->query->setUser(self::GOOGLE_DEVELOPER_CALENDAR);
         $this->query->setUpdatedMin($updatedMin);
         $this->query->setUpdatedMax($updatedMax);
-        $this->assertTrue($this->query->updatedMin != null);
-        $this->assertTrue($this->query->updatedMax != null);
-        $this->assertTrue($this->query->user != null);
+        $this->assertTrue(null != $this->query->updatedMin);
+        $this->assertTrue(null != $this->query->updatedMax);
+        $this->assertTrue(null != $this->query->user);
         $this->assertEquals(Zend_Gdata_App_Util::formatTimestamp($updatedMin), $this->query->getUpdatedMin());
         $this->assertEquals(Zend_Gdata_App_Util::formatTimestamp($updatedMax), $this->query->getUpdatedMax());
         $this->assertEquals(self::GOOGLE_DEVELOPER_CALENDAR, $this->query->getUser());
 
         $this->query->updatedMin = null;
-        $this->assertFalse($this->query->updatedMin != null);
+        $this->assertFalse(null != $this->query->updatedMin);
         $this->query->updatedMax = null;
-        $this->assertFalse($this->query->updatedMax != null);
+        $this->assertFalse(null != $this->query->updatedMax);
         $this->query->user = null;
-        $this->assertFalse($this->query->user != null);
+        $this->assertFalse(null != $this->query->user);
     }
 
     public function testStartMinMaxParam()
@@ -93,17 +93,17 @@ class Zend_Gdata_Calendar_EventQueryTest extends PHPUnit_Framework_TestCase
         $this->query->setUser(self::GOOGLE_DEVELOPER_CALENDAR);
         $this->query->setStartMin($startMin);
         $this->query->setStartMax($startMax);
-        $this->assertTrue($this->query->startMin != null);
-        $this->assertTrue($this->query->startMax != null);
+        $this->assertTrue(null != $this->query->startMin);
+        $this->assertTrue(null != $this->query->startMax);
         $this->assertEquals(Zend_Gdata_App_Util::formatTimestamp($startMin), $this->query->getStartMin());
         $this->assertEquals(Zend_Gdata_App_Util::formatTimestamp($startMax), $this->query->getStartMax());
 
         $this->query->startMin = null;
-        $this->assertFalse($this->query->startMin != null);
+        $this->assertFalse(null != $this->query->startMin);
         $this->query->startMax = null;
-        $this->assertFalse($this->query->startMax != null);
+        $this->assertFalse(null != $this->query->startMax);
         $this->query->user = null;
-        $this->assertFalse($this->query->user != null);
+        $this->assertFalse(null != $this->query->user);
     }
 
     public function testVisibilityParam()
@@ -112,10 +112,10 @@ class Zend_Gdata_Calendar_EventQueryTest extends PHPUnit_Framework_TestCase
         $visibility = 'private';
         $this->query->setUser(self::GOOGLE_DEVELOPER_CALENDAR);
         $this->query->setVisibility($visibility);
-        $this->assertTrue($this->query->visibility != null);
+        $this->assertTrue(null != $this->query->visibility);
         $this->assertEquals($visibility, $this->query->getVisibility());
         $this->query->visibility = null;
-        $this->assertFalse($this->query->visibility != null);
+        $this->assertFalse(null != $this->query->visibility);
     }
 
     public function testProjectionParam()
@@ -124,10 +124,10 @@ class Zend_Gdata_Calendar_EventQueryTest extends PHPUnit_Framework_TestCase
         $projection = 'composite';
         $this->query->setUser(self::GOOGLE_DEVELOPER_CALENDAR);
         $this->query->setProjection($projection);
-        $this->assertTrue($this->query->projection != null);
+        $this->assertTrue(null != $this->query->projection);
         $this->assertEquals($projection, $this->query->getProjection());
         $this->query->projection = null;
-        $this->assertFalse($this->query->projection != null);
+        $this->assertFalse(null != $this->query->projection);
     }
 
     public function testOrderbyParam()
@@ -136,10 +136,10 @@ class Zend_Gdata_Calendar_EventQueryTest extends PHPUnit_Framework_TestCase
         $orderby = 'starttime';
         $this->query->setUser(self::GOOGLE_DEVELOPER_CALENDAR);
         $this->query->setOrderby($orderby);
-        $this->assertTrue($this->query->orderby != null);
+        $this->assertTrue(null != $this->query->orderby);
         $this->assertEquals($orderby, $this->query->getOrderby());
         $this->query->orderby = null;
-        $this->assertFalse($this->query->orderby != null);
+        $this->assertFalse(null != $this->query->orderby);
     }
 
     public function testEventParam()
@@ -147,10 +147,10 @@ class Zend_Gdata_Calendar_EventQueryTest extends PHPUnit_Framework_TestCase
         $this->query->resetParameters();
         $this->query->setUser(self::GOOGLE_DEVELOPER_CALENDAR);
         $this->query->setEvent(self::ZEND_CONFERENCE_EVENT);
-        $this->assertTrue($this->query->event != null);
+        $this->assertTrue(null != $this->query->event);
         $this->assertEquals(self::ZEND_CONFERENCE_EVENT, $this->query->getEvent());
         $this->query->event = null;
-        $this->assertFalse($this->query->event != null);
+        $this->assertFalse(null != $this->query->event);
     }
 
     public function testCommentsParam()
@@ -158,7 +158,7 @@ class Zend_Gdata_Calendar_EventQueryTest extends PHPUnit_Framework_TestCase
         $this->query->resetParameters();
         $comment = 'we need to reschedule';
         $this->query->setComments($comment);
-        $this->assertTrue($this->query->comments != null);
+        $this->assertTrue(null != $this->query->comments);
         $this->assertEquals($comment, $this->query->getComments());
         $this->query->comments = null;
         $this->assertFalse(isset($this->query->comments));
@@ -170,10 +170,10 @@ class Zend_Gdata_Calendar_EventQueryTest extends PHPUnit_Framework_TestCase
         $sortOrder = 'ascending';
         $this->query->setUser(self::GOOGLE_DEVELOPER_CALENDAR);
         $this->query->setSortOrder($sortOrder);
-        $this->assertTrue($this->query->sortOrder != null);
+        $this->assertTrue(null != $this->query->sortOrder);
         $this->assertEquals($sortOrder, $this->query->getSortOrder());
         $this->query->sortOrder = null;
-        $this->assertFalse($this->query->sortOrder != null);
+        $this->assertFalse(null != $this->query->sortOrder);
     }
 
     public function testRecurrenceExpansionStart()
@@ -182,10 +182,10 @@ class Zend_Gdata_Calendar_EventQueryTest extends PHPUnit_Framework_TestCase
         $res = self::SAMPLE_RFC3339;
         $this->query->setUser(self::GOOGLE_DEVELOPER_CALENDAR);
         $this->query->setRecurrenceExpansionStart($res);
-        $this->assertTrue($this->query->recurrenceExpansionStart != null);
+        $this->assertTrue(null != $this->query->recurrenceExpansionStart);
         $this->assertEquals($res, $this->query->getRecurrenceExpansionStart());
         $this->query->recurrenceExpansionStart = null;
-        $this->assertFalse($this->query->recurrenceExpansionStart != null);
+        $this->assertFalse(null != $this->query->recurrenceExpansionStart);
     }
 
     public function testRecurrenceExpansionEnd()
@@ -194,10 +194,10 @@ class Zend_Gdata_Calendar_EventQueryTest extends PHPUnit_Framework_TestCase
         $ree = self::SAMPLE_RFC3339;
         $this->query->setUser(self::GOOGLE_DEVELOPER_CALENDAR);
         $this->query->setRecurrenceExpansionEnd($ree);
-        $this->assertTrue($this->query->recurrenceExpansionEnd != null);
+        $this->assertTrue(null != $this->query->recurrenceExpansionEnd);
         $this->assertEquals($ree, $this->query->getRecurrenceExpansionEnd());
         $this->query->recurrenceExpansionEnd = null;
-        $this->assertFalse($this->query->recurrenceExpansionEnd != null);
+        $this->assertFalse(null != $this->query->recurrenceExpansionEnd);
     }
 
     public function testSingleEvents()
@@ -207,16 +207,16 @@ class Zend_Gdata_Calendar_EventQueryTest extends PHPUnit_Framework_TestCase
         $singleEvents = 'true';
         $this->query->setUser(self::GOOGLE_DEVELOPER_CALENDAR);
         $this->query->setSingleEvents($singleEvents);
-        $this->assertTrue($this->query->singleEvents === true);
+        $this->assertTrue(true === $this->query->singleEvents);
         // Test bool handling
         $singleEvents = false;
         $this->query->setUser(self::GOOGLE_DEVELOPER_CALENDAR);
         $this->query->setSingleEvents($singleEvents);
-        $this->assertTrue($this->query->singleEvents === false);
+        $this->assertTrue(false === $this->query->singleEvents);
         // Test unsetting
         $this->assertEquals($singleEvents, $this->query->getSingleEvents());
         $this->query->setSingleEvents(null);
-        $this->assertFalse($this->query->singleEvents != null);
+        $this->assertFalse(null != $this->query->singleEvents);
     }
 
     public function testFutureEvents()
@@ -226,46 +226,45 @@ class Zend_Gdata_Calendar_EventQueryTest extends PHPUnit_Framework_TestCase
         $singleEvents = 'true';
         $this->query->setUser(self::GOOGLE_DEVELOPER_CALENDAR);
         $this->query->setFutureEvents($singleEvents);
-        $this->assertTrue($this->query->futureEvents === true);
+        $this->assertTrue(true === $this->query->futureEvents);
         // Test bool handling
         $singleEvents = false;
         $this->query->setUser(self::GOOGLE_DEVELOPER_CALENDAR);
         $this->query->setFutureEvents($singleEvents);
-        $this->assertTrue($this->query->futureEvents === false);
+        $this->assertTrue(false === $this->query->futureEvents);
         // Test unsetting
         $this->query->futureEvents = null;
-        $this->assertFalse($this->query->futureEvents != null);
-
+        $this->assertFalse(null != $this->query->futureEvents);
     }
 
     public function testCustomQueryURIGeneration()
     {
         $this->query->resetParameters();
         $this->query->setUser(self::GOOGLE_DEVELOPER_CALENDAR);
-        $this->query->setVisibility("private");
-        $this->query->setProjection("composite");
+        $this->query->setVisibility('private');
+        $this->query->setProjection('composite');
         $this->query->setEvent(self::ZEND_CONFERENCE_EVENT);
         $this->query->setComments(self::ZEND_CONFERENCE_EVENT_COMMENT);
-        $this->assertEquals("https://www.google.com/calendar/feeds/developer-calendar@google.com/private/composite/" .
-                self::ZEND_CONFERENCE_EVENT . "/comments/" . self::ZEND_CONFERENCE_EVENT_COMMENT,
-                $this->query->getQueryUrl());
+        $this->assertEquals('https://www.google.com/calendar/feeds/developer-calendar@google.com/private/composite/'.
+                self::ZEND_CONFERENCE_EVENT.'/comments/'.self::ZEND_CONFERENCE_EVENT_COMMENT,
+            $this->query->getQueryUrl());
     }
 
     public function testDefaultQueryURIGeneration()
     {
         $this->query->resetParameters();
-        $this->assertEquals("https://www.google.com/calendar/feeds/default/public/full",
-                $this->query->getQueryUrl());
+        $this->assertEquals('https://www.google.com/calendar/feeds/default/public/full',
+            $this->query->getQueryUrl());
     }
 
     public function testCanNullifyParameters()
     {
-       $testURI = "http://www.google.com/calendar/feeds/foo%40group.calendar.google.com/private/full";
-       $this->query = new Zend_Gdata_Calendar_EventQuery($testURI);
-       $this->query->setUser(null);
-       $this->query->setVisibility(null);
-       $this->query->setProjection(null);
-       $result = $this->query->getQueryUrl();
-       $this->assertEquals($testURI, $result);
+        $testURI = 'http://www.google.com/calendar/feeds/foo%40group.calendar.google.com/private/full';
+        $this->query = new Zend_Gdata_Calendar_EventQuery($testURI);
+        $this->query->setUser(null);
+        $this->query->setVisibility(null);
+        $this->query->setProjection(null);
+        $result = $this->query->getQueryUrl();
+        $this->assertEquals($testURI, $result);
     }
 }

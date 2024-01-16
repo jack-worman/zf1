@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_OpenId
- * @subpackage Zend_OpenId_Provider
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -33,60 +33,58 @@
 
 /**
  * Class to get/store information about logged in user in Web Browser using
- * PHP session
+ * PHP session.
  *
  * @category   Zend
- * @package    Zend_OpenId
- * @subpackage Zend_OpenId_Provider
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_OpenId_Provider_User_Session extends Zend_OpenId_Provider_User
 {
     /**
-     * Reference to an implementation of Zend_Session_Namespace object
+     * Reference to an implementation of Zend_Session_Namespace object.
      *
-     * @var Zend_Session_Namespace $_session
+     * @var Zend_Session_Namespace
      */
-    private $_session = null;
+    private $_session;
 
     /**
      * Creates Zend_OpenId_Provider_User_Session object with given session
-     * namespace or creates new session namespace named "openid"
-     *
-     * @param Zend_Session_Namespace $session
+     * namespace or creates new session namespace named "openid".
      */
     public function __construct(Zend_Session_Namespace $session = null)
     {
-        if ($session === null) {
-            $this->_session = new Zend_Session_Namespace("openid");
+        if (null === $session) {
+            $this->_session = new Zend_Session_Namespace('openid');
         } else {
             $this->_session = $session;
         }
     }
 
     /**
-     * Stores information about logged in user in session data
+     * Stores information about logged in user in session data.
      *
      * @param string $id user identity URL
+     *
      * @return bool
      */
     public function setLoggedInUser($id)
     {
         $this->_session->logged_in = $id;
+
         return true;
     }
 
     /**
-     * Returns identity URL of logged in user or false
-     *
-     * @return mixed
+     * Returns identity URL of logged in user or false.
      */
     public function getLoggedInUser()
     {
         if (isset($this->_session->logged_in)) {
             return $this->_session->logged_in;
         }
+
         return false;
     }
 
@@ -98,7 +96,7 @@ class Zend_OpenId_Provider_User_Session extends Zend_OpenId_Provider_User
     public function delLoggedInUser()
     {
         unset($this->_session->logged_in);
+
         return true;
     }
-
 }

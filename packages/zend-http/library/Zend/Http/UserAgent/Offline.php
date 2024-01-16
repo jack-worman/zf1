@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,8 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Http
- * @subpackage UserAgent
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -22,35 +21,35 @@
 // require_once 'Zend/Http/UserAgent/Desktop.php';
 
 /**
- * Offline browser type matcher
+ * Offline browser type matcher.
  *
  * @category   Zend
- * @package    Zend_Http
- * @subpackage UserAgent
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Http_UserAgent_Offline extends Zend_Http_UserAgent_Desktop
 {
     /**
-     * User Agent Signatures
+     * User Agent Signatures.
      *
      * @var array
      */
-    protected static $_uaSignatures = array(
+    protected static $_uaSignatures = [
         'wget',
         'webzip',
         'webcopier',
         'downloader',
         'superbot',
         'offline',
-    );
+    ];
 
     /**
-     * Comparison of the UserAgent chain and User Agent signatures
+     * Comparison of the UserAgent chain and User Agent signatures.
      *
-     * @param  string $userAgent User Agent chain
-     * @param  array $server $_SERVER like param
+     * @param string $userAgent User Agent chain
+     * @param array  $server    $_SERVER like param
+     *
      * @return bool
      */
     public static function match($userAgent, $server)
@@ -59,7 +58,7 @@ class Zend_Http_UserAgent_Offline extends Zend_Http_UserAgent_Desktop
     }
 
     /**
-     * Gives the current browser type
+     * Gives the current browser type.
      *
      * @return string
      */

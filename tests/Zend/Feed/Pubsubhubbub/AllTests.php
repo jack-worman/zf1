@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,12 +13,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Feed_Pubsubhubbub_AllTests::main');
 }
@@ -30,13 +30,12 @@ require_once 'Zend/Feed/Pubsubhubbub/SubscriberHttpTest.php';
 require_once 'Zend/Feed/Pubsubhubbub/Model/AllTests.php';
 require_once 'Zend/Feed/Pubsubhubbub/Subscriber/CallbackTest.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
+ *
  * @group      Zend_Feed
  * @group      Zend_Feed_Subsubhubbub
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */

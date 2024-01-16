@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Search
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,24 +25,21 @@
 
 /**
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Search
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Search_Lucene_Search_QueryEntry_Subquery extends Zend_Search_Lucene_Search_QueryEntry
 {
     /**
-     * Query
+     * Query.
      *
      * @var Zend_Search_Lucene_Search_Query
      */
     private $_query;
 
     /**
-     * Object constractor
-     *
-     * @param Zend_Search_Lucene_Search_Query $query
+     * Object constractor.
      */
     public function __construct(Zend_Search_Lucene_Search_Query $query)
     {
@@ -50,9 +47,8 @@ class Zend_Search_Lucene_Search_QueryEntry_Subquery extends Zend_Search_Lucene_S
     }
 
     /**
-     * Process modifier ('~')
+     * Process modifier ('~').
      *
-     * @param mixed $parameter
      * @throws Zend_Search_Lucene_Search_QueryParserException
      */
     public function processFuzzyProximityModifier($parameter = null)
@@ -61,11 +57,11 @@ class Zend_Search_Lucene_Search_QueryEntry_Subquery extends Zend_Search_Lucene_S
         throw new Zend_Search_Lucene_Search_QueryParserException('\'~\' sign must follow term or phrase');
     }
 
-
     /**
-     * Transform entry to a subquery
+     * Transform entry to a subquery.
      *
      * @param string $encoding
+     *
      * @return Zend_Search_Lucene_Search_Query
      */
     public function getQuery($encoding)

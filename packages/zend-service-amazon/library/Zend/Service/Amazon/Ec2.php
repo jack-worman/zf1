@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,19 +13,18 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service
- * @subpackage Amazon
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Amazon Ec2 Interface to allow easy creation of the Ec2 Components
+ * Amazon Ec2 Interface to allow easy creation of the Ec2 Components.
  *
  * @category   Zend
- * @package    Zend_Service
- * @subpackage Amazon
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -34,15 +33,17 @@ class Zend_Service_Amazon_Ec2
     /**
      * Factory method to fetch what you want to work with.
      *
-     * @param string $section           Create the method that you want to work with
-     * @param string $key               Override the default aws key
-     * @param string $secret_key        Override the default aws secretkey
-     * @throws Zend_Service_Amazon_Ec2_Exception
+     * @param string $section    Create the method that you want to work with
+     * @param string $key        Override the default aws key
+     * @param string $secret_key Override the default aws secretkey
+     *
      * @return object
+     *
+     * @throws Zend_Service_Amazon_Ec2_Exception
      */
     public static function factory($section, $key = null, $secret_key = null)
     {
-        switch(strtolower((string) $section)) {
+        switch (strtolower((string) $section)) {
             case 'keypair':
                 $class = 'Zend_Service_Amazon_Ec2_Keypair';
                 break;
@@ -73,7 +74,7 @@ class Zend_Service_Amazon_Ec2
                 $class = 'Zend_Service_Amazon_Ec2_Securitygroups';
                 break;
             default:
-                throw new Zend_Service_Amazon_Ec2_Exception('Invalid Section: ' . $section);
+                throw new Zend_Service_Amazon_Ec2_Exception('Invalid Section: '.$section);
                 break;
         }
 
@@ -81,7 +82,7 @@ class Zend_Service_Amazon_Ec2
             // require_once 'Zend/Loader.php';
             Zend_Loader::loadClass($class);
         }
+
         return new $class($key, $secret_key);
     }
 }
-

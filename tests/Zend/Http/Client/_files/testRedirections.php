@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,20 +13,21 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Http
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
-if (! isset($_GET['redirection'])) $_GET['redirection'] = 0;
-$_GET['redirection']++;
-$https = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off';
+if (!isset($_GET['redirection'])) {
+    $_GET['redirection'] = 0;
+}
+++$_GET['redirection'];
+$https = isset($_SERVER['HTTPS']) && 'off' != $_SERVER['HTTPS'];
 
 if (!isset($_GET['redirection']) || $_GET['redirection'] < 4) {
-    $target = 'http' . ($https ? 's://' : '://')  . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
-    header('Location: ' . $target . '?redirection=' . $_GET['redirection']);
+    $target = 'http'.($https ? 's://' : '://').$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
+    header('Location: '.$target.'?redirection='.$_GET['redirection']);
 } else {
     var_dump($_GET);
     var_dump($_POST);

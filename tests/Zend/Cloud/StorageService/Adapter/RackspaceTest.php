@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,15 +13,14 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Cloud\StorageService\Adapter
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 // Call Zend_Cloud_StorageService_Adapter_RackspaceTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Cloud_StorageService_Adapter_RackspaceTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Cloud_StorageService_Adapter_RackspaceTest::main');
 }
 
 // require_once 'Zend/Service/Rackspace/Files.php';
@@ -30,8 +29,7 @@ require_once 'Zend/Cloud/StorageService/TestCase.php';
 
 /**
  * @category   Zend
- * @package    Zend\Cloud\StorageService\Adapter
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -53,7 +51,7 @@ class Zend_Cloud_StorageService_Adapter_RackspaceTest extends Zend_Cloud_Storage
     }
 
     /**
-     * Sets up this test case
+     * Sets up this test case.
      *
      * @return void
      */
@@ -67,18 +65,17 @@ class Zend_Cloud_StorageService_Adapter_RackspaceTest extends Zend_Cloud_Storage
         $this->_waitPeriod = 5;
 
         // Create the container here
-        $rackspace= new Zend_Service_Rackspace_Files(
+        $rackspace = new Zend_Service_Rackspace_Files(
             $this->_config->get(Zend_Cloud_StorageService_Adapter_Rackspace::USER),
             $this->_config->get(Zend_Cloud_StorageService_Adapter_Rackspace::API_KEY)
         );
         $rackspace->createContainer(
             $this->_config->get(Zend_Cloud_StorageService_Adapter_Rackspace::REMOTE_CONTAINER)
         );
-
     }
 
     /**
-     * Tears down this test case
+     * Tears down this test case.
      *
      * @return void
      */
@@ -96,7 +93,7 @@ class Zend_Cloud_StorageService_Adapter_RackspaceTest extends Zend_Cloud_Storage
         $files = $rackspace->getObjects(
             $this->_config->get(Zend_Cloud_StorageService_Adapter_Rackspace::REMOTE_CONTAINER)
         );
-        if ($files==!false) {
+        if ($files == !false) {
             foreach ($files as $file) {
                 $rackspace->deleteObject(
                     $this->_config->get(Zend_Cloud_StorageService_Adapter_Rackspace::REMOTE_CONTAINER),
@@ -118,15 +115,15 @@ class Zend_Cloud_StorageService_Adapter_RackspaceTest extends Zend_Cloud_Storage
             || !defined('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_KEY')
             || !defined('TESTS_ZEND_SERVICE_RACKSPACE_CONTAINER_NAME')
         ) {
-            $this->markTestSkipped("Rackspace access not configured, skipping test");
+            $this->markTestSkipped('Rackspace access not configured, skipping test');
         }
 
-        $config = new Zend_Config(array(
-            Zend_Cloud_StorageService_Factory::STORAGE_ADAPTER_KEY        => 'Zend_Cloud_StorageService_Adapter_Rackspace',
-            Zend_Cloud_StorageService_Adapter_Rackspace::USER             => constant('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_USER'),
-            Zend_Cloud_StorageService_Adapter_Rackspace::API_KEY          => constant('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_KEY'),
-            Zend_Cloud_StorageService_Adapter_Rackspace::REMOTE_CONTAINER => constant('TESTS_ZEND_SERVICE_RACKSPACE_CONTAINER_NAME')
-        ));
+        $config = new Zend_Config([
+            Zend_Cloud_StorageService_Factory::STORAGE_ADAPTER_KEY => 'Zend_Cloud_StorageService_Adapter_Rackspace',
+            Zend_Cloud_StorageService_Adapter_Rackspace::USER => constant('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_USER'),
+            Zend_Cloud_StorageService_Adapter_Rackspace::API_KEY => constant('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_KEY'),
+            Zend_Cloud_StorageService_Adapter_Rackspace::REMOTE_CONTAINER => constant('TESTS_ZEND_SERVICE_RACKSPACE_CONTAINER_NAME'),
+        ]);
 
         return $config;
     }

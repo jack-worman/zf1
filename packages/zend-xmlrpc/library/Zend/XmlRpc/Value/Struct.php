@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,31 +13,28 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage Value
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
-
 /**
- * Zend_XmlRpc_Value_Collection
+ * Zend_XmlRpc_Value_Collection.
  */
 // require_once 'Zend/XmlRpc/Value/Collection.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage Value
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_XmlRpc_Value_Struct extends Zend_XmlRpc_Value_Collection
 {
     /**
-     * Set the value of an struct native type
+     * Set the value of an struct native type.
      *
      * @param array $value
      */
@@ -47,9 +44,8 @@ class Zend_XmlRpc_Value_Struct extends Zend_XmlRpc_Value_Collection
         parent::__construct($value);
     }
 
-
     /**
-     * Generate the XML code that represent struct native MXL-RPC value
+     * Generate the XML code that represent struct native MXL-RPC value.
      *
      * @return void
      */

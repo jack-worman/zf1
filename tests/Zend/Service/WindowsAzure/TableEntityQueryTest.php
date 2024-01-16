@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,31 +13,30 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_WindowsAzure
- * @subpackage UnitTests
+ *
  * @version    $Id$
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Service_WindowsAzure_TableEntityQueryTest::main');
 }
 
 /**
- * Test helpers
+ * Test helpers.
  */
 // require_once __DIR__ . '/../../../TestHelper.php';
-require_once __DIR__ . '/../../../TestConfiguration.dist.php';
+require_once __DIR__.'/../../../TestConfiguration.dist.php';
 
 /** Zend_Service_WindowsAzure_Storage_TableEntityQuery */
 // require_once 'Zend/Service/WindowsAzure/Storage/TableEntityQuery.php';
 
 /**
  * @category   Zend
- * @package    Zend_Service_WindowsAzure
- * @subpackage UnitTests
+ *
  * @version    $Id$
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -46,12 +45,12 @@ class Zend_Service_WindowsAzure_TableEntityQueryTest extends PHPUnit_Framework_T
 {
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Service_WindowsAzure_TableEntityQueryTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Service_WindowsAzure_TableEntityQueryTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     /**
-     * Test all records query
+     * Test all records query.
      */
     public function testAllRecordsQuery()
     {
@@ -63,7 +62,7 @@ class Zend_Service_WindowsAzure_TableEntityQueryTest extends PHPUnit_Framework_T
     }
 
     /**
-     * Test partition key query
+     * Test partition key query.
      */
     public function testPartitionKeyQuery()
     {
@@ -76,7 +75,7 @@ class Zend_Service_WindowsAzure_TableEntityQueryTest extends PHPUnit_Framework_T
     }
 
     /**
-     * Test row key query
+     * Test row key query.
      */
     public function testRowKeyQuery()
     {
@@ -89,7 +88,7 @@ class Zend_Service_WindowsAzure_TableEntityQueryTest extends PHPUnit_Framework_T
     }
 
     /**
-     * Test identifier query
+     * Test identifier query.
      */
     public function testIdentifierQuery()
     {
@@ -103,7 +102,7 @@ class Zend_Service_WindowsAzure_TableEntityQueryTest extends PHPUnit_Framework_T
     }
 
     /**
-     * Test top records query
+     * Test top records query.
      */
     public function testTopQuery()
     {
@@ -116,7 +115,7 @@ class Zend_Service_WindowsAzure_TableEntityQueryTest extends PHPUnit_Framework_T
     }
 
     /**
-     * Test order by query
+     * Test order by query.
      */
     public function testOrderByQuery()
     {
@@ -129,7 +128,7 @@ class Zend_Service_WindowsAzure_TableEntityQueryTest extends PHPUnit_Framework_T
     }
 
     /**
-     * Test order by multiple query
+     * Test order by multiple query.
      */
     public function testOrderByMultipleQuery()
     {
@@ -143,7 +142,7 @@ class Zend_Service_WindowsAzure_TableEntityQueryTest extends PHPUnit_Framework_T
     }
 
     /**
-     * Test where query
+     * Test where query.
      */
     public function testWhereQuery()
     {
@@ -156,20 +155,20 @@ class Zend_Service_WindowsAzure_TableEntityQueryTest extends PHPUnit_Framework_T
     }
 
     /**
-     * Test where array query
+     * Test where array query.
      */
     public function testWhereArrayQuery()
     {
         $target = new Zend_Service_WindowsAzure_Storage_TableEntityQuery();
         $target->select()
                ->from('MyTable')
-               ->where('Name eq ? or Name eq ?', array('Maarten', 'Vijay'));
+               ->where('Name eq ? or Name eq ?', ['Maarten', 'Vijay']);
 
         $this->assertEquals('MyTable()?$filter=Name eq \'Maarten\' or Name eq \'Vijay\'', $target->__toString());
     }
 
     /**
-     * Test where multiple query
+     * Test where multiple query.
      */
     public function testWhereMultipleQuery()
     {
@@ -184,6 +183,6 @@ class Zend_Service_WindowsAzure_TableEntityQueryTest extends PHPUnit_Framework_T
 }
 
 // Call Zend_Service_WindowsAzure_TableEntityQueryTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Service_WindowsAzure_TableEntityQueryTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Service_WindowsAzure_TableEntityQueryTest::main') {
     Zend_Service_WindowsAzure_TableEntityQueryTest::main();
 }

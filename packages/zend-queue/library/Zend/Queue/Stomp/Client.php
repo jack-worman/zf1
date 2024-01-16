@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Queue
- * @subpackage Stomp
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -24,35 +24,34 @@
  * The Stomp client interacts with a Stomp server.
  *
  * @category   Zend
- * @package    Zend_Queue
- * @subpackage Stomp
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Queue_Stomp_Client
 {
     /**
-     * Array of $client Zend_Queue_Stomp_Client_Interface
+     * Array of $client Zend_Queue_Stomp_Client_Interface.
      *
      * @var array
      */
     protected $_connection;
 
     /**
-     * Add a server to connections
+     * Add a server to connections.
      *
      * @param string scheme
      * @param string host
-     * @param integer port
+     * @param int port
      */
     public function __construct(
         $scheme = null, $host = null, $port = null,
         $connectionClass = 'Zend_Queue_Stomp_Client_Connection',
         $frameClass = 'Zend_Queue_Stomp_Frame'
     ) {
-        if (($scheme !== null)
-            && ($host !== null)
-            && ($port !== null)
+        if ((null !== $scheme)
+            && (null !== $host)
+            && (null !== $port)
         ) {
             $this->addConnection($scheme, $host, $port, $connectionClass);
             $this->getConnection()->setFrameClass($frameClass);
@@ -60,7 +59,7 @@ class Zend_Queue_Stomp_Client
     }
 
     /**
-     * Shutdown
+     * Shutdown.
      *
      * @return void
      */
@@ -79,11 +78,12 @@ class Zend_Queue_Stomp_Client
      *
      * You cannot add more than 1 connection to the client at this time.
      *
-     * @param string  $scheme ['tcp', 'udp']
+     * @param string $scheme ['tcp', 'udp']
      * @param string  host
-     * @param integer port
+     * @param int port
      * @param string  class - create a connection with this class; class must support Zend_Queue_Stomp_Client_ConnectionInterface
-     * @return boolean
+     *
+     * @return bool
      */
     public function addConnection($scheme, $host, $port, $class = 'Zend_Queue_Stomp_Client_Connection')
     {
@@ -96,27 +96,29 @@ class Zend_Queue_Stomp_Client
 
         if ($connection->open($scheme, $host, $port)) {
             $this->setConnection($connection);
+
             return true;
         }
 
         $connection->close();
+
         return false;
     }
 
     /**
-     * Set client connection
+     * Set client connection.
      *
-     * @param Zend_Queue_Stomp_Client_ConnectionInterface $connection
      * @return Zend_Queue_Stomp_Client
      */
     public function setConnection(Zend_Queue_Stomp_Client_ConnectionInterface $connection)
     {
         $this->_connection = $connection;
+
         return $this;
     }
 
     /**
-     * Get client connection
+     * Get client connection.
      *
      * @return array
      */
@@ -126,25 +128,25 @@ class Zend_Queue_Stomp_Client
     }
 
     /**
-     * Send a stomp frame
+     * Send a stomp frame.
      *
      * Returns true if the frame was successfully sent.
      *
-     * @param Zend_Queue_Stomp_FrameInterface $frame
      * @return StompClientMock|Zend_Queue_Stomp_Client
      */
     public function send(Zend_Queue_Stomp_FrameInterface $frame)
     {
         $this->getConnection()->write($frame);
+
         return $this;
     }
 
     /**
-     * Receive a frame
+     * Receive a frame.
      *
      * Returns a frame or false if none were to be read.
      *
-     * @return Zend_Queue_Stomp_FrameInterface|boolean
+     * @return Zend_Queue_Stomp_FrameInterface|bool
      */
     public function receive()
     {
@@ -152,9 +154,9 @@ class Zend_Queue_Stomp_Client
     }
 
     /**
-     * canRead()
+     * canRead().
      *
-     * @return boolean
+     * @return bool
      */
     public function canRead()
     {
@@ -162,7 +164,7 @@ class Zend_Queue_Stomp_Client
     }
 
     /**
-     * creates a frame class
+     * creates a frame class.
      *
      * @return Zend_Queue_Stomp_FrameInterface
      */

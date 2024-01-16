@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,18 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service
- * @subpackage Amazon
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
-
 /**
  * @category   Zend
- * @package    Zend_Service
- * @subpackage Amazon
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -85,37 +83,38 @@ class Zend_Service_Amazon_Item
     /**
      * @var Zend_Service_Amazon_CustomerReview[]
      */
-    public $CustomerReviews = array();
+    public $CustomerReviews = [];
 
     /**
      * @var Zend_Service_Amazon_SimilarProducts[]
      */
-    public $SimilarProducts = array();
+    public $SimilarProducts = [];
 
     /**
      * @var Zend_Service_Amazon_Accessories[]
      */
-    public $Accessories = array();
+    public $Accessories = [];
 
     /**
      * @var array
      */
-    public $Tracks = array();
+    public $Tracks = [];
 
     /**
      * @var Zend_Service_Amazon_ListmaniaLists[]
      */
-    public $ListmaniaLists = array();
+    public $ListmaniaLists = [];
 
     protected $_dom;
 
-
     /**
-     * Parse the given <Item> element
+     * Parse the given <Item> element.
      *
-     * @param  null|DOMElement $dom
+     * @param DOMElement|null $dom
+     *
      * @return void
-     * @throws    Zend_Service_Amazon_Exception
+     *
+     * @throws Zend_Service_Amazon_Exception
      *
      * @group ZF-9547
      */
@@ -134,7 +133,7 @@ class Zend_Service_Amazon_Item
         $this->ASIN = $xpath->query('./az:ASIN/text()', $dom)->item(0)->data;
 
         $result = $xpath->query('./az:DetailPageURL/text()', $dom);
-        if ($result->length == 1) {
+        if (1 == $result->length) {
             $this->DetailPageURL = $result->item(0)->data;
         }
 
@@ -151,7 +150,7 @@ class Zend_Service_Amazon_Item
                     if (is_array($this->{$v->parentNode->tagName})) {
                         array_push($this->{$v->parentNode->tagName}, (string) $v->data);
                     } else {
-                        $this->{$v->parentNode->tagName} = array($this->{$v->parentNode->tagName}, (string) $v->data);
+                        $this->{$v->parentNode->tagName} = [$this->{$v->parentNode->tagName}, (string) $v->data];
                     }
                 } else {
                     $this->{$v->parentNode->tagName} = (string) $v->data;
@@ -159,10 +158,10 @@ class Zend_Service_Amazon_Item
             }
         }
 
-        foreach (array('SmallImage', 'MediumImage', 'LargeImage') as $im) {
+        foreach (['SmallImage', 'MediumImage', 'LargeImage'] as $im) {
             $result = $xpath->query("./az:ImageSets/az:ImageSet[position() = 1]/az:$im", $dom);
-            if ($result->length == 1) {
-                /**
+            if (1 == $result->length) {
+                /*
                  * @see Zend_Service_Amazon_Image
                  */
                 // require_once 'Zend/Service/Amazon/Image.php';
@@ -171,13 +170,13 @@ class Zend_Service_Amazon_Item
         }
 
         $result = $xpath->query('./az:SalesRank/text()', $dom);
-        if ($result->length == 1) {
+        if (1 == $result->length) {
             $this->SalesRank = (int) $result->item(0)->data;
         }
 
         $result = $xpath->query('./az:CustomerReviews/az:Review', $dom);
         if ($result->length >= 1) {
-            /**
+            /*
              * @see Zend_Service_Amazon_CustomerReview
              */
             // require_once 'Zend/Service/Amazon/CustomerReview.php';
@@ -190,7 +189,7 @@ class Zend_Service_Amazon_Item
 
         $result = $xpath->query('./az:EditorialReviews/az:*', $dom);
         if ($result->length >= 1) {
-            /**
+            /*
              * @see Zend_Service_Amazon_EditorialReview
              */
             // require_once 'Zend/Service/Amazon/EditorialReview.php';
@@ -201,7 +200,7 @@ class Zend_Service_Amazon_Item
 
         $result = $xpath->query('./az:SimilarProducts/az:*', $dom);
         if ($result->length >= 1) {
-            /**
+            /*
              * @see Zend_Service_Amazon_SimilarProduct
              */
             // require_once 'Zend/Service/Amazon/SimilarProduct.php';
@@ -212,7 +211,7 @@ class Zend_Service_Amazon_Item
 
         $result = $xpath->query('./az:ListmaniaLists/*', $dom);
         if ($result->length >= 1) {
-            /**
+            /*
              * @see Zend_Service_Amazon_ListmaniaList
              */
             // require_once 'Zend/Service/Amazon/ListmaniaList.php';
@@ -230,7 +229,7 @@ class Zend_Service_Amazon_Item
                     $this->Tracks[] = (string) $t->data;
                 }
             }
-        } else if ($result->length == 1) {
+        } elseif (1 == $result->length) {
             foreach ($xpath->query('./*/text()', $result->item(0)) as $t) {
                 $this->Tracks[] = (string) $t->data;
             }
@@ -238,8 +237,8 @@ class Zend_Service_Amazon_Item
 
         $result = $xpath->query('./az:Offers', $dom);
         $resultSummary = $xpath->query('./az:OfferSummary', $dom);
-        if ($result->length > 1 || $resultSummary->length == 1) {
-            /**
+        if ($result->length > 1 || 1 == $resultSummary->length) {
+            /*
              * @see Zend_Service_Amazon_OfferSet
              */
             // require_once 'Zend/Service/Amazon/OfferSet.php';
@@ -248,7 +247,7 @@ class Zend_Service_Amazon_Item
 
         $result = $xpath->query('./az:Accessories/*', $dom);
         if ($result->length > 1) {
-            /**
+            /*
              * @see Zend_Service_Amazon_Accessories
              */
             // require_once 'Zend/Service/Amazon/Accessories.php';
@@ -260,9 +259,8 @@ class Zend_Service_Amazon_Item
         $this->_dom = $dom;
     }
 
-
     /**
-     * Returns the item's original XML
+     * Returns the item's original XML.
      *
      * @return string
      */

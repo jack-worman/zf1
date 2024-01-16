@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata_Books
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -25,25 +25,26 @@
 
 /**
  * @category   Zend
- * @package    Zend_Gdata_Books
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Books
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_Books_VolumeEntryTest extends PHPUnit_Framework_TestCase
 {
-
-    public function setUp() {
+    public function setUp()
+    {
         $this->entryText = file_get_contents(
-                'Zend/Gdata/Books/_files/VolumeEntryDataSample1.xml',
-                true);
+            'Zend/Gdata/Books/_files/VolumeEntryDataSample1.xml',
+            true);
         $this->entry = new Zend_Gdata_Books_VolumeEntry();
     }
 
-    private function verifySamplePropertiesAreCorrect ($volumeEntry) {
+    private function verifySamplePropertiesAreCorrect($volumeEntry)
+    {
         $this->assertEquals('http://www.google.com/books/feeds/volumes/Mfer_MFwQrkC',
             $volumeEntry->id->text);
         $this->assertEquals('2008-10-07T15:28:15.000Z', $volumeEntry->updated->text);
@@ -78,29 +79,34 @@ class Zend_Gdata_Books_VolumeEntryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Mfer_MFwQrkC', $volumeEntry->getVolumeId());
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionElements() {
+    public function testEmptyEntryShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->entry->extensionElements));
         $this->assertEquals(0, count($this->entry->extensionElements));
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionAttributes() {
+    public function testEmptyEntryShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->entry->extensionAttributes));
         $this->assertEquals(0, count($this->entry->extensionAttributes));
     }
 
-    public function testSampleEntryShouldHaveNoExtensionElements() {
+    public function testSampleEntryShouldHaveNoExtensionElements()
+    {
         $this->entry->transferFromXML($this->entryText);
         $this->assertTrue(is_array($this->entry->extensionElements));
         $this->assertEquals(0, count($this->entry->extensionElements));
     }
 
-    public function testSampleEntryShouldHaveNoExtensionAttributes() {
+    public function testSampleEntryShouldHaveNoExtensionAttributes()
+    {
         $this->entry->transferFromXML($this->entryText);
         $this->assertTrue(is_array($this->entry->extensionAttributes));
         $this->assertEquals(0, count($this->entry->extensionAttributes));
     }
 
-    public function testEmptyVolumeEntryToAndFromStringShouldMatch() {
+    public function testEmptyVolumeEntryToAndFromStringShouldMatch()
+    {
         $entryXml = $this->entry->saveXML();
         $newVolumeEntry = new Zend_Gdata_Books_VolumeEntry();
         $newVolumeEntry->transferFromXML($entryXml);
@@ -108,12 +114,14 @@ class Zend_Gdata_Books_VolumeEntryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($entryXml, $newVolumeEntryXml);
     }
 
-    public function testSamplePropertiesAreCorrect () {
+    public function testSamplePropertiesAreCorrect()
+    {
         $this->entry->transferFromXML($this->entryText);
         $this->verifySamplePropertiesAreCorrect($this->entry);
     }
 
-    public function testConvertVolumeEntryToAndFromString() {
+    public function testConvertVolumeEntryToAndFromString()
+    {
         $this->entry->transferFromXML($this->entryText);
         $entryXml = $this->entry->saveXML();
         $newVolumeEntry = new Zend_Gdata_Books_VolumeEntry();
@@ -122,5 +130,4 @@ class Zend_Gdata_Books_VolumeEntryTest extends PHPUnit_Framework_TestCase
         $newVolumeEntryXml = $newVolumeEntry->saveXML();
         $this->assertEquals($entryXml, $newVolumeEntryXml);
     }
-
 }

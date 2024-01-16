@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Ldap
- * @subpackage Schema
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -34,16 +34,14 @@
  * schema information on an Active Directory server.
  *
  * @category   Zend
- * @package    Zend_Ldap
- * @subpackage Schema
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Ldap_Node_Schema_ObjectClass_ActiveDirectory extends Zend_Ldap_Node_Schema_Item
-    implements Zend_Ldap_Node_Schema_ObjectClass_Interface
+class Zend_Ldap_Node_Schema_ObjectClass_ActiveDirectory extends Zend_Ldap_Node_Schema_Item implements Zend_Ldap_Node_Schema_ObjectClass_Interface
 {
     /**
-     * Gets the objectClass name
+     * Gets the objectClass name.
      *
      * @return string
      */
@@ -53,63 +51,57 @@ class Zend_Ldap_Node_Schema_ObjectClass_ActiveDirectory extends Zend_Ldap_Node_S
     }
 
     /**
-     * Gets the objectClass OID
+     * Gets the objectClass OID.
      *
      * @return void
      */
     public function getOid()
     {
-
     }
 
     /**
-     * Gets the attributes that this objectClass must contain
+     * Gets the attributes that this objectClass must contain.
      *
      * @return void
      */
     public function getMustContain()
     {
-
     }
 
     /**
-     * Gets the attributes that this objectClass may contain
+     * Gets the attributes that this objectClass may contain.
      *
      * @return void
      */
     public function getMayContain()
     {
-
     }
 
     /**
-     * Gets the objectClass description
+     * Gets the objectClass description.
      *
      * @return void
      */
     public function getDescription()
     {
-
     }
 
     /**
-     * Gets the objectClass type
+     * Gets the objectClass type.
      *
      * @return void
      */
     public function getType()
     {
-
     }
 
     /**
      * Returns the parent objectClasses of this class.
-     * This includes structural, abstract and auxiliary objectClasses
+     * This includes structural, abstract and auxiliary objectClasses.
      *
      * @return void
      */
     public function getParentClasses()
     {
-
     }
 }

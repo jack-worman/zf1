@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id: Abstract.php 24807 2012-05-15 12:10:42Z adamlundrigan $
  */
 
@@ -26,40 +27,41 @@
 
 /**
  * @category   Zend
- * @package    Zend_Validate
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Validate_Ldap_Dn extends Zend_Validate_Abstract
 {
+    public const MALFORMED = 'malformed';
 
-    const MALFORMED = 'malformed';
-    
     /**
      * Validation failure message template definitions.
      *
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $_messageTemplates = [
         self::MALFORMED => 'DN is malformed',
-    );
-    
+    ];
+
     /**
      * Defined by Zend_Validate_Interface.
      *
      * Returns true if and only if $value is a valid DN.
      *
-     * @param string $value The value to be validated.
-     * 
-     * @return boolean
+     * @param string $value the value to be validated
+     *
+     * @return bool
      */
-    public function isValid($value) 
+    public function isValid($value)
     {
         $valid = Zend_Ldap_Dn::checkDn($value);
-        if ($valid === false) {
+        if (false === $valid) {
             $this->_error(self::MALFORMED);
+
             return false;
         }
+
         return true;
     }
 }

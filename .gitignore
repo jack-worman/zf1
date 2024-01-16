@@ -1,8 +1,4 @@
-.buildpath
-.DS_Store
-.idea
-.project
-composer.lock
-vendor
-phpunit.xml
-tests/TestConfiguration.php
+/vendor/
+/.php-cs-fixer.cache
+/composer.lock
+/tests/TestConfiguration.php

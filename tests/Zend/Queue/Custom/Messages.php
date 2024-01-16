@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Queue
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,25 +25,22 @@
 
 /**
  * This class uses the SLP_ArrayIterator
- * We are interested in overriding unset() to auto delete the message
+ * We are interested in overriding unset() to auto delete the message.
  *
  * @category   Zend
- * @package    Zend_Queue
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
-class Custom_Messages
-extends Zend_Queue_Message_Iterator
-implements ArrayAccess
+class Custom_Messages extends Zend_Queue_Message_Iterator implements ArrayAccess
 {
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $config ('queue', 'messageClass', 'data'=>array());
      */
-    public function __construct(array $config=array())
+    public function __construct(array $config = [])
     {
         if (isset($config['queue'])) {
             $this->_queue = $config['queue'];
@@ -57,8 +54,8 @@ implements ArrayAccess
             $this->_messageClass = $config['messageClass'];
         }
 
-        if (isset($config['data']) && ! is_array($config['data'])) {
-            /**
+        if (isset($config['data']) && !is_array($config['data'])) {
+            /*
              * @see Zend_Queue_Exception
              */
             // require_once 'Zend/Queue/Exception.php';
@@ -71,9 +68,9 @@ implements ArrayAccess
 
         if (isset($config['data'])) {
             // for each of the messages
-            foreach($config['data'] as $i => $data) {
+            foreach ($config['data'] as $i => $data) {
                 // construct the message parameters
-                $message = array('data' => $data);
+                $message = ['data' => $data];
 
                 // If queue has not been set, then use the default.
                 if (empty($message['queue'])) {
@@ -87,7 +84,7 @@ implements ArrayAccess
     }
 
     /**
-     * Our destruct will delete all the messages in the queue
+     * Our destruct will delete all the messages in the queue.
      *
      * Notice: if anything throws a message we are doomed.
      * You cannot throw an error in an destructor
@@ -110,7 +107,8 @@ implements ArrayAccess
     /**
      * @see SPL ArrayIterator::append
      */
-    public function append($value) {
+    public function append($value)
+    {
         $this->_data[] = $value;
     }
 
@@ -121,11 +119,12 @@ implements ArrayAccess
     /**
      * @see SPL ArrayAccess::offsetSet
      */
-    #[\ReturnTypeWillChange]
-    public function offsetSet($offset, $value) {
-        if (! $value instanceof Custom_Message) {
+    #[ReturnTypeWillChange]
+    public function offsetSet($offset, $value)
+    {
+        if (!$value instanceof Custom_Message) {
             $msg = '$value must be a child or an instance of Custom_Messag';
-            /**
+            /*
              * @see Zend_Queue_Exception
              */
             // require_once 'Zend/Queue/Exception.php';
@@ -133,24 +132,27 @@ implements ArrayAccess
         }
 
         $this->_data[$offset] = $value;
+
         return $value;
     }
 
     /**
      * @see SPL ArrayAccess::offsetGet
      */
-    public function offsetGet($offset) {
+    public function offsetGet($offset)
+    {
         return $this->_data[$offset];
     }
 
     /**
      * @see SPL ArrayAccess::offsetUnset
      */
-    #[\ReturnTypeWillChange]
-    public function offsetUnset($offset) {
-        if (! $this->_connected) {
+    #[ReturnTypeWillChange]
+    public function offsetUnset($offset)
+    {
+        if (!$this->_connected) {
             $msg = 'Cannot delete message after serialization';
-            /**
+            /*
              * @see Zend_Queue_Exception
              */
             // require_once 'Zend/Queue/Exception.php';
@@ -164,9 +166,10 @@ implements ArrayAccess
     /**
      * @see SPL ArrayAccess::offsetExists
      */
-    #[\ReturnTypeWillChange]
-    public function offsetExists($offset) {
-        return isSet($this->_data[$offset]);
+    #[ReturnTypeWillChange]
+    public function offsetExists($offset)
+    {
+        return isset($this->_data[$offset]);
     }
 
     /*
@@ -176,7 +179,8 @@ implements ArrayAccess
     /**
      * @see SPL SeekableIterator::seek
      */
-    public function seek($index) {
+    public function seek($index)
+    {
         $this->_pointer = $index;
     }
 }

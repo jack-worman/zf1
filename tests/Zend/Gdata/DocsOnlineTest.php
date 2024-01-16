@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata_Docs
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -26,17 +26,16 @@
 
 /**
  * @category   Zend
- * @package    Zend_Gdata_Docs
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Docs
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_DocsOnlineTest extends PHPUnit_Framework_TestCase
 {
-
     public function setUp()
     {
         $user = constant('TESTS_ZEND_GDATA_CLIENTLOGIN_EMAIL');
@@ -78,7 +77,7 @@ class Zend_Gdata_DocsOnlineTest extends PHPUnit_Framework_TestCase
         $query = new Zend_Gdata_Docs_Query();
         $query->title = $this->docTitle;
         $feed = $this->gdata->getDocumentListFeed($query);
-        $this->assertTrue(strpos((string) strtolower((string) $feed->entries[0]->title), strtolower((string) $this->docTitle)) !== FALSE);
+        $this->assertTrue(false !== strpos((string) strtolower((string) $feed->entries[0]->title), strtolower((string) $this->docTitle)));
     }
 
     public function testGetDocumentListEntry()
@@ -105,18 +104,18 @@ class Zend_Gdata_DocsOnlineTest extends PHPUnit_Framework_TestCase
         $keyParts = explode('%3A', end($idParts));
         $documentFromGetDoc = $this->gdata->getDoc($keyParts[1], $keyParts[0]);
         $this->assertTrue($documentFromGetDoc->title->text === $documentTitle);
-        if ($keyParts[0] == 'document') {
+        if ('document' == $keyParts[0]) {
             $documentFromGetDocument = $this->gdata->getDocument($keyParts[1]);
             $this->assertTrue(
                 $documentFromGetDocument->title->text === $documentTitle);
         }
-        if ($keyParts[0] == 'spreadsheet') {
+        if ('spreadsheet' == $keyParts[0]) {
             $documentFromGetSpreadsheet = $this->gdata->getSpreadsheet(
                 $keyParts[1]);
             $this->assertTrue(
                 $documentFromGetSpreadsheet->title->text === $documentTitle);
         }
-        if ($keyParts[0] == 'presentation') {
+        if ('presentation' == $keyParts[0]) {
             $documentFromGetPresentation = $this->gdata->getPresentation(
                 $keyParts[1]);
             $this->assertTrue(
@@ -126,5 +125,4 @@ class Zend_Gdata_DocsOnlineTest extends PHPUnit_Framework_TestCase
         // Cleanup and remove the new document.
         $newDocumentEntry->delete();
     }
-
 }

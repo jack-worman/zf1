@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,8 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage Form_Element
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -23,31 +22,31 @@
 // require_once 'Zend/Dojo/Form/Element/Dijit.php';
 
 /**
- * Abstract Slider dijit
+ * Abstract Slider dijit.
  *
  * @uses       Zend_Dojo_Form_Element_Dijit
- * @package    Zend_Dojo
- * @subpackage Form_Element
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 abstract class Zend_Dojo_Form_Element_Slider extends Zend_Dojo_Form_Element_Dijit
 {
     /**
-     * Set clickSelect flag
+     * Set clickSelect flag.
      *
-     * @param  bool $clickSelect
      * @return Zend_Dojo_Form_Element_Slider
      */
     public function setClickSelect($flag)
     {
         $this->setDijitParam('clickSelect', (bool) $flag);
+
         return $this;
     }
 
     /**
-     * Retrieve clickSelect flag
+     * Retrieve clickSelect flag.
      *
      * @return bool
      */
@@ -56,23 +55,24 @@ abstract class Zend_Dojo_Form_Element_Slider extends Zend_Dojo_Form_Element_Diji
         if (!$this->hasDijitParam('clickSelect')) {
             return false;
         }
+
         return $this->getDijitParam('clickSelect');
     }
 
     /**
-     * Set intermediateChanges flag
+     * Set intermediateChanges flag.
      *
-     * @param  bool $intermediateChanges
      * @return Zend_Dojo_Form_Element_Slider
      */
     public function setIntermediateChanges($flag)
     {
         $this->setDijitParam('intermediateChanges', (bool) $flag);
+
         return $this;
     }
 
     /**
-     * Retrieve intermediateChanges flag
+     * Retrieve intermediateChanges flag.
      *
      * @return bool
      */
@@ -81,23 +81,24 @@ abstract class Zend_Dojo_Form_Element_Slider extends Zend_Dojo_Form_Element_Diji
         if (!$this->hasDijitParam('intermediateChanges')) {
             return false;
         }
+
         return $this->getDijitParam('intermediateChanges');
     }
 
     /**
-     * Set showButtons flag
+     * Set showButtons flag.
      *
-     * @param  bool $showButtons
      * @return Zend_Dojo_Form_Element_Slider
      */
     public function setShowButtons($flag)
     {
         $this->setDijitParam('showButtons', (bool) $flag);
+
         return $this;
     }
 
     /**
-     * Retrieve showButtons flag
+     * Retrieve showButtons flag.
      *
      * @return bool
      */
@@ -106,23 +107,26 @@ abstract class Zend_Dojo_Form_Element_Slider extends Zend_Dojo_Form_Element_Diji
         if (!$this->hasDijitParam('showButtons')) {
             return false;
         }
+
         return $this->getDijitParam('showButtons');
     }
 
     /**
-     * Set discreteValues
+     * Set discreteValues.
      *
-     * @param  int $value
+     * @param int $value
+     *
      * @return Zend_Dojo_Form_Element_Slider
      */
     public function setDiscreteValues($value)
     {
         $this->setDijitParam('discreteValues', (int) $value);
+
         return $this;
     }
 
     /**
-     * Retrieve discreteValues
+     * Retrieve discreteValues.
      *
      * @return int|null
      */
@@ -132,19 +136,21 @@ abstract class Zend_Dojo_Form_Element_Slider extends Zend_Dojo_Form_Element_Diji
     }
 
     /**
-     * Set maximum
+     * Set maximum.
      *
-     * @param  int $value
+     * @param int $value
+     *
      * @return Zend_Dojo_Form_Element_Slider
      */
     public function setMaximum($value)
     {
         $this->setDijitParam('maximum', (int) $value);
+
         return $this;
     }
 
     /**
-     * Retrieve maximum
+     * Retrieve maximum.
      *
      * @return int|null
      */
@@ -154,19 +160,21 @@ abstract class Zend_Dojo_Form_Element_Slider extends Zend_Dojo_Form_Element_Diji
     }
 
     /**
-     * Set minimum
+     * Set minimum.
      *
-     * @param  int $value
+     * @param int $value
+     *
      * @return Zend_Dojo_Form_Element_Slider
      */
     public function setMinimum($value)
     {
         $this->setDijitParam('minimum', (int) $value);
+
         return $this;
     }
 
     /**
-     * Retrieve minimum
+     * Retrieve minimum.
      *
      * @return int|null
      */
@@ -176,19 +184,21 @@ abstract class Zend_Dojo_Form_Element_Slider extends Zend_Dojo_Form_Element_Diji
     }
 
     /**
-     * Set pageIncrement
+     * Set pageIncrement.
      *
-     * @param  int $value
+     * @param int $value
+     *
      * @return Zend_Dojo_Form_Element_Slider
      */
     public function setPageIncrement($value)
     {
         $this->setDijitParam('pageIncrement', (int) $value);
+
         return $this;
     }
 
     /**
-     * Retrieve pageIncrement
+     * Retrieve pageIncrement.
      *
      * @return int|null
      */

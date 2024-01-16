@@ -7,19 +7,19 @@ error_reporting(E_ALL | E_STRICT);
 $rootDir = dirname(__DIR__);
 
 /**
- * Setup autoloading
+ * Setup autoloading.
  */
 // composer autoloader is loaded automatically by phpunit when called through composer bin
 
-$zfTests = $rootDir . '/tests';
+$zfTests = $rootDir.'/tests';
 /*
  * Prepend the tests/ directory to the include_path.
  * This allows the tests to run without additional autoloader
  */
-$path = array(
+$path = [
     $zfTests,
-    get_include_path()
-);
+    get_include_path(),
+];
 set_include_path(implode(PATH_SEPARATOR, $path));
 
 /*
@@ -40,17 +40,17 @@ if (PHP_VERSION_ID >= 70300 && PCRE_VERSION_MAJOR === 10 && PCRE_VERSION_MINOR <
 // workaround for Microsoft WSL
 if (!defined('PHP_OS_WSL')) {
     $uname = php_uname();
-    define('PHP_OS_WSL', strpos((string) $uname, 'Linux') === 0 && strpos((string) $uname, 'Microsoft'));
+    define('PHP_OS_WSL', 0 === strpos((string) $uname, 'Linux') && strpos((string) $uname, 'Microsoft'));
 }
 
 /*
  * Load the user-defined test configuration file, if it exists; otherwise, load
  * the default configuration.
  */
-if (is_readable($zfTests . '/TestConfiguration.php')) {
-    require_once $zfTests . '/TestConfiguration.php';
+if (is_readable($zfTests.'/TestConfiguration.php')) {
+    require_once $zfTests.'/TestConfiguration.php';
 } else {
-    require_once $zfTests . '/TestConfiguration.dist.php';
+    require_once $zfTests.'/TestConfiguration.dist.php';
 }
 
 /*
@@ -58,7 +58,7 @@ if (is_readable($zfTests . '/TestConfiguration.php')) {
  */
 unset($zfTests, $path);
 
-/**
+/*
  * Start output buffering, if enabled
  */
 if (defined('TESTS_ZEND_OB_ENABLED') && constant('TESTS_ZEND_OB_ENABLED')) {

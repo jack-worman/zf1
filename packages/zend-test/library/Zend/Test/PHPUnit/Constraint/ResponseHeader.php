@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,26 +13,28 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Test
- * @subpackage PHPUnit
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 if (version_compare(PHPUnit_Runner_Version::id(), '4.1', '>=')) {
-    include(__DIR__ . DIRECTORY_SEPARATOR . 'ResponseHeader41.php');
+    include __DIR__.DIRECTORY_SEPARATOR.'ResponseHeader41.php';
 
     class Zend_Test_PHPUnit_Constraint_ResponseHeader extends Zend_Test_PHPUnit_Constraint_ResponseHeader41
-    {}
+    {
+    }
 } elseif (version_compare(PHPUnit_Runner_Version::id(), '3.5', '>=')) {
-    include(__DIR__ . DIRECTORY_SEPARATOR . 'ResponseHeader37.php');
+    include __DIR__.DIRECTORY_SEPARATOR.'ResponseHeader37.php';
 
     class Zend_Test_PHPUnit_Constraint_ResponseHeader extends Zend_Test_PHPUnit_Constraint_ResponseHeader37
-    {}
+    {
+    }
 } else {
-    include(__DIR__ . DIRECTORY_SEPARATOR . 'ResponseHeader34.php');
+    include __DIR__.DIRECTORY_SEPARATOR.'ResponseHeader34.php';
 
     class Zend_Test_PHPUnit_Constraint_ResponseHeader extends Zend_Test_PHPUnit_Constraint_ResponseHeader34
-    {}
+    {
+    }
 }

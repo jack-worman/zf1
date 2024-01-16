@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage Framework
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,45 +27,42 @@
 
 /**
  * @category   Zend
- * @package    Zend_Tool
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Framework_Manifest_Repository
-    implements Zend_Tool_Framework_Registry_EnabledInterface, IteratorAggregate, Countable
+class Zend_Tool_Framework_Manifest_Repository implements Zend_Tool_Framework_Registry_EnabledInterface, IteratorAggregate, Countable
 {
-
     /**
      * @var Zend_Tool_Framework_Provider_Registry_Interface
      */
-    protected $_registry = null;
+    protected $_registry;
 
     /**
      * @var array
      */
-    protected $_manifests = array();
+    protected $_manifests = [];
 
     /**
      * @var array Array of Zend_Tool_Framework_Metadata_Interface
      */
-    protected $_metadatas = array();
+    protected $_metadatas = [];
 
     /**
-     * setRegistry()
+     * setRegistry().
      *
-     * @param Zend_Tool_Framework_Registry_Interface $registry
      * @return Zend_Tool_Framework_Manifest_Repository
      */
     public function setRegistry(Zend_Tool_Framework_Registry_Interface $registry)
     {
         $this->_registry = $registry;
+
         return $this;
     }
 
     /**
-     * addManifest() - Add a manifest for later processing
+     * addManifest() - Add a manifest for later processing.
      *
-     * @param Zend_Tool_Framework_Manifest_Interface $manifest
      * @return Zend_Tool_Framework_Manifest_Repository
      */
     public function addManifest(Zend_Tool_Framework_Manifest_Interface $manifest)
@@ -84,18 +81,17 @@ class Zend_Tool_Framework_Manifest_Repository
         }
 
         // get the required objects from the framework registry
-        $actionRepository   = $this->_registry->getActionRepository();
+        $actionRepository = $this->_registry->getActionRepository();
         $providerRepository = $this->_registry->getProviderRepository();
 
         // load providers if interface supports that method
         if ($manifest instanceof Zend_Tool_Framework_Manifest_ProviderManifestable) {
             $providers = $manifest->getProviders();
             if (!is_array($providers)) {
-                $providers = array($providers);
+                $providers = [$providers];
             }
 
             foreach ($providers as $provider) {
-
                 // if provider is a string, try and load it as an object
                 if (is_string($provider)) {
                     $provider = new $provider();
@@ -103,23 +99,19 @@ class Zend_Tool_Framework_Manifest_Repository
 
                 if (!$provider instanceof Zend_Tool_Framework_Provider_Interface) {
                     // require_once 'Zend/Tool/Framework/Manifest/Exception.php';
-                    throw new Zend_Tool_Framework_Manifest_Exception(
-                        'A provider provided by the ' . get_class($manifest)
-                        . ' does not implement Zend_Tool_Framework_Provider_Interface'
-                        );
+                    throw new Zend_Tool_Framework_Manifest_Exception('A provider provided by the '.get_class($manifest).' does not implement Zend_Tool_Framework_Provider_Interface');
                 }
                 if (!$providerRepository->hasProvider($provider, false)) {
                     $providerRepository->addProvider($provider);
                 }
             }
-
         }
 
         // load actions if interface supports that method
         if ($manifest instanceof Zend_Tool_Framework_Manifest_ActionManifestable) {
             $actions = $manifest->getActions();
             if (!is_array($actions)) {
-                $actions = array($actions);
+                $actions = [$actions];
             }
 
             foreach ($actions as $action) {
@@ -138,7 +130,7 @@ class Zend_Tool_Framework_Manifest_Repository
     }
 
     /**
-     * getManifests()
+     * getManifests().
      *
      * @return Zend_Tool_Framework_Manifest_Interface[]
      */
@@ -148,32 +140,33 @@ class Zend_Tool_Framework_Manifest_Repository
     }
 
     /**
-     * addMetadata() - add a metadata peice by peice
+     * addMetadata() - add a metadata peice by peice.
      *
      * @param Zend_Tool_Framework_Manifest_Metadata $metadata
+     *
      * @return Zend_Tool_Framework_Manifest_Repository
      */
     public function addMetadata(Zend_Tool_Framework_Metadata_Interface $metadata)
     {
         $this->_metadatas[] = $metadata;
+
         return $this;
     }
 
     /**
      * process() - Process is expected to be called at the end of client construction time.
      * By this time, the loader has run and loaded any found manifests into the repository
-     * for loading
+     * for loading.
      *
      * @return Zend_Tool_Framework_Manifest_Repository
      */
     public function process()
     {
-
         foreach ($this->_manifests as $manifest) {
             if ($manifest instanceof Zend_Tool_Framework_Manifest_MetadataManifestable) {
                 $metadatas = $manifest->getMetadata();
                 if (!is_array($metadatas)) {
-                    $metadatas = array($metadatas);
+                    $metadatas = [$metadatas];
                 }
 
                 foreach ($metadatas as $metadata) {
@@ -186,14 +179,11 @@ class Zend_Tool_Framework_Manifest_Repository
 
                     if (!$metadata instanceof Zend_Tool_Framework_Metadata_Interface) {
                         // require_once 'Zend/Tool/Framework/Manifest/Exception.php';
-                        throw new Zend_Tool_Framework_Manifest_Exception(
-                            'A Zend_Tool_Framework_Metadata_Interface object was not found in manifest ' . get_class($manifest)
-                            );
+                        throw new Zend_Tool_Framework_Manifest_Exception('A Zend_Tool_Framework_Metadata_Interface object was not found in manifest '.get_class($manifest));
                     }
 
                     $this->addMetadata($metadata);
                 }
-
             }
         }
 
@@ -209,23 +199,21 @@ class Zend_Tool_Framework_Manifest_Repository
      *          'actionName' => 'show'
      *          ));
      *
-     * @param array $searchProperties
      * @param bool $includeNonExistentProperties
+     *
      * @return Zend_Tool_Framework_Manifest_Metadata[]
      */
-    public function getMetadatas(Array $searchProperties = array(), $includeNonExistentProperties = true)
+    public function getMetadatas(array $searchProperties = [], $includeNonExistentProperties = true)
     {
-
-        $returnMetadatas = array();
+        $returnMetadatas = [];
 
         // loop through the metadatas so that we can search each individual one
         foreach ($this->_metadatas as $metadata) {
-
             // each value will be retrieved from the metadata, each metadata should
             // implement a getter method to retrieve the value
             foreach ($searchProperties as $searchPropertyName => $searchPropertyValue) {
-                if (method_exists($metadata, 'get' . $searchPropertyName)) {
-                    if ($metadata->{'get' . $searchPropertyName}() != $searchPropertyValue) {
+                if (method_exists($metadata, 'get'.$searchPropertyName)) {
+                    if ($metadata->{'get'.$searchPropertyName}() != $searchPropertyValue) {
                         // if the metadata supports a specific property but the value does not
                         // match, move on
                         continue 2;
@@ -241,7 +229,6 @@ class Zend_Tool_Framework_Manifest_Repository
             // all searching has been accounted for, if we reach this point, then the metadata
             // is good and we can return it
             $returnMetadatas[] = $metadata;
-
         }
 
         return $returnMetadatas;
@@ -249,40 +236,41 @@ class Zend_Tool_Framework_Manifest_Repository
 
     /**
      * getMetadata() - This will proxy to getMetadatas(), but will only return a single metadata.  This method
-     * should be used in situations where the search criteria is known to only find a single metadata object
+     * should be used in situations where the search criteria is known to only find a single metadata object.
      *
-     * @param array $searchProperties
      * @param bool $includeNonExistentProperties
+     *
      * @return Zend_Tool_Framework_Manifest_Metadata
      */
-    public function getMetadata(Array $searchProperties = array(), $includeNonExistentProperties = true)
+    public function getMetadata(array $searchProperties = [], $includeNonExistentProperties = true)
     {
         $metadatas = $this->getMetadatas($searchProperties, $includeNonExistentProperties);
+
         return array_shift($metadatas);
     }
 
     /**
-     * __toString() - cast to string
+     * __toString() - cast to string.
      *
      * @return string
      */
     public function __toString()
     {
-        $metadatasByType = array();
+        $metadatasByType = [];
 
         foreach ($this->_metadatas as $metadata) {
             if (!array_key_exists($metadata->getType(), $metadatasByType)) {
-                $metadatasByType[$metadata->getType()] = array();
+                $metadatasByType[$metadata->getType()] = [];
             }
             $metadatasByType[$metadata->getType()][] = $metadata;
         }
 
         $string = '';
         foreach ($metadatasByType as $type => $metadatas) {
-            $string .= $type . PHP_EOL;
+            $string .= $type.PHP_EOL;
             foreach ($metadatas as $metadata) {
-                $metadataString = '    ' . $metadata->__toString() . PHP_EOL;
-                //$metadataString = str_replace((string) PHP_EOL, PHP_EOL . '    ', $metadataString);
+                $metadataString = '    '.$metadata->__toString().PHP_EOL;
+                // $metadataString = str_replace((string) PHP_EOL, PHP_EOL . '    ', $metadataString);
                 $string .= $metadataString;
             }
         }
@@ -291,25 +279,24 @@ class Zend_Tool_Framework_Manifest_Repository
     }
 
     /**
-     * count() - required by the Countable Interface
+     * count() - required by the Countable Interface.
      *
      * @return int
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function count()
     {
         return count($this->_metadatas);
     }
 
     /**
-     * getIterator() - required by the IteratorAggregate interface
+     * getIterator() - required by the IteratorAggregate interface.
      *
      * @return ArrayIterator
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function getIterator()
     {
         return new ArrayIterator($this->_metadatas);
     }
-
 }

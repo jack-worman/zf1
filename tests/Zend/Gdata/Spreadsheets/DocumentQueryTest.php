@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata_Spreadsheets
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -25,17 +25,16 @@
 
 /**
  * @category   Zend
- * @package    Zend_Gdata_Spreadsheets
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Spreadsheets
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_Spreadsheets_DocumentQueryTest extends PHPUnit_Framework_TestCase
 {
-
     public function setUp()
     {
         $this->docQuery = new Zend_Gdata_Spreadsheets_DocumentQuery();
@@ -43,50 +42,49 @@ class Zend_Gdata_Spreadsheets_DocumentQueryTest extends PHPUnit_Framework_TestCa
 
     public function testTitle()
     {
-        $this->assertTrue($this->docQuery->getTitle() == null);
+        $this->assertTrue(null == $this->docQuery->getTitle());
         $this->docQuery->setTitle('test title');
-        $this->assertTrue($this->docQuery->getTitle() == 'test title');
-        $this->assertTrue($this->docQuery->getQueryString() == '?title=test+title');
+        $this->assertTrue('test title' == $this->docQuery->getTitle());
+        $this->assertTrue('?title=test+title' == $this->docQuery->getQueryString());
         $this->docQuery->setTitle(null);
-        $this->assertTrue($this->docQuery->getTitle() == null);
+        $this->assertTrue(null == $this->docQuery->getTitle());
     }
 
     public function testTitleExact()
     {
-        $this->assertTrue($this->docQuery->getTitleExact() == null);
+        $this->assertTrue(null == $this->docQuery->getTitleExact());
         $this->docQuery->setTitleExact('test title');
-        $this->assertTrue($this->docQuery->getTitleExact() == 'test title');
-        $this->assertTrue($this->docQuery->getQueryString() == '?title-exact=test+title');
+        $this->assertTrue('test title' == $this->docQuery->getTitleExact());
+        $this->assertTrue('?title-exact=test+title' == $this->docQuery->getQueryString());
         $this->docQuery->setTitleExact(null);
-        $this->assertTrue($this->docQuery->getTitleExact() == null);
+        $this->assertTrue(null == $this->docQuery->getTitleExact());
     }
 
     public function testWorksheetId()
     {
-        $this->assertTrue($this->docQuery->getWorksheetId() == null);
+        $this->assertTrue(null == $this->docQuery->getWorksheetId());
         $this->docQuery->setWorksheetId('123');
-        $this->assertTrue($this->docQuery->getWorksheetId() == '123');
+        $this->assertTrue('123' == $this->docQuery->getWorksheetId());
     }
 
     public function testSpreadsheetKey()
     {
-        $this->assertTrue($this->docQuery->getSpreadsheetKey() == null);
+        $this->assertTrue(null == $this->docQuery->getSpreadsheetKey());
         $this->docQuery->setSpreadsheetKey('abc');
-        $this->assertTrue($this->docQuery->getSpreadsheetKey() == 'abc');
+        $this->assertTrue('abc' == $this->docQuery->getSpreadsheetKey());
     }
 
     public function testProjection()
     {
-        $this->assertTrue($this->docQuery->getProjection() == 'full');
+        $this->assertTrue('full' == $this->docQuery->getProjection());
         $this->docQuery->setProjection('abc');
-        $this->assertTrue($this->docQuery->getProjection() == 'abc');
+        $this->assertTrue('abc' == $this->docQuery->getProjection());
     }
 
     public function testVisibility()
     {
-        $this->assertTrue($this->docQuery->getVisibility() == 'private');
+        $this->assertTrue('private' == $this->docQuery->getVisibility());
         $this->docQuery->setVisibility('xyz');
-        $this->assertTrue($this->docQuery->getVisibility() == 'xyz');
+        $this->assertTrue('xyz' == $this->docQuery->getVisibility());
     }
-
 }

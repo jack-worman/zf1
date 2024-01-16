@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +13,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Analysis
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /** Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum */
 // require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common/TextNum.php';
@@ -27,16 +26,12 @@
 /** Zend_Search_Lucene_Analysis_TokenFilter_LowerCase */
 // require_once 'Zend/Search/Lucene/Analysis/TokenFilter/LowerCase.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Analysis
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
-
 class Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum_CaseInsensitive extends Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum
 {
     public function __construct()
@@ -44,4 +39,3 @@ class Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum_CaseInsensitive extend
         $this->addFilter(new Zend_Search_Lucene_Analysis_TokenFilter_LowerCase());
     }
 }
-

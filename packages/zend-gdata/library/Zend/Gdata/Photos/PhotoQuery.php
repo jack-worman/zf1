@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Photos
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -35,39 +35,38 @@
  * service class, Zend_Gdata_Photos.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Photos
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_Photos_PhotoQuery extends Zend_Gdata_Photos_AlbumQuery
 {
-
     /**
      * The ID of the photo to query for.
      *
      * @var string
      */
-    protected $_photoId = null;
+    protected $_photoId;
 
     /**
      * Set the photo ID to query for. When set, this photo's comments/tags
      * will be returned. If not set or null, the default user's feed will be
      * returned instead.
      *
-     * @param string $value The ID of the photo to retrieve, or null to
-     *          clear.
+     * @param string $value the ID of the photo to retrieve, or null to
+     *                      clear
      */
-     public function setPhotoId($value)
-     {
-         $this->_photoId = $value;
-     }
+    public function setPhotoId($value)
+    {
+        $this->_photoId = $value;
+    }
 
     /**
      * Get the photo ID which is to be returned.
      *
      * @see setPhoto
-     * @return string The ID of the photo to retrieve.
+     *
+     * @return string the ID of the photo to retrieve
      */
     public function getPhotoId()
     {
@@ -78,21 +77,21 @@ class Zend_Gdata_Photos_PhotoQuery extends Zend_Gdata_Photos_AlbumQuery
      * Returns the URL generated for this query, based on it's current
      * parameters.
      *
-     * @return string A URL generated based on the state of this query.
+     * @return string a URL generated based on the state of this query
+     *
      * @throws Zend_Gdata_App_InvalidArgumentException
      */
     public function getQueryUrl($incomingUri = '')
     {
         $uri = '';
-        if ($this->getPhotoId() !== null) {
-            $uri .= '/photoid/' . $this->getPhotoId();
+        if (null !== $this->getPhotoId()) {
+            $uri .= '/photoid/'.$this->getPhotoId();
         } else {
             // require_once 'Zend/Gdata/App/InvalidArgumentException.php';
-            throw new Zend_Gdata_App_InvalidArgumentException(
-                    'PhotoId cannot be null');
+            throw new Zend_Gdata_App_InvalidArgumentException('PhotoId cannot be null');
         }
         $uri .= $incomingUri;
+
         return parent::getQueryUrl($uri);
     }
-
 }

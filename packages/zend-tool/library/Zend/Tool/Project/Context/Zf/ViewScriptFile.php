@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage Framework
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -40,21 +40,19 @@
  */
 // require_once 'Zend/Filter/StringToLower.php';
 
-
 /**
- * This class is the front most class for utilizing Zend_Tool_Project
+ * This class is the front most class for utilizing Zend_Tool_Project.
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
  * @category   Zend
- * @package    Zend_Tool
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Project_Context_Zf_ViewScriptFile extends Zend_Tool_Project_Context_Filesystem_File
 {
-
     /**
      * @var string
      */
@@ -63,15 +61,15 @@ class Zend_Tool_Project_Context_Zf_ViewScriptFile extends Zend_Tool_Project_Cont
     /**
      * @var string
      */
-    protected $_forActionName = null;
+    protected $_forActionName;
 
     /**
      * @var string
      */
-    protected $_scriptName = null;
+    protected $_scriptName;
 
     /**
-     * getName()
+     * getName().
      *
      * @return string
      */
@@ -81,7 +79,7 @@ class Zend_Tool_Project_Context_Zf_ViewScriptFile extends Zend_Tool_Project_Cont
     }
 
     /**
-     * init()
+     * init().
      *
      * @return Zend_Tool_Project_Context_Zf_ViewScriptFile
      */
@@ -89,26 +87,27 @@ class Zend_Tool_Project_Context_Zf_ViewScriptFile extends Zend_Tool_Project_Cont
     {
         if ($forActionName = $this->_resource->getAttribute('forActionName')) {
             $this->_forActionName = $forActionName;
-            $this->_filesystemName = $this->_convertActionNameToFilesystemName($forActionName) . '.phtml';
+            $this->_filesystemName = $this->_convertActionNameToFilesystemName($forActionName).'.phtml';
         } elseif ($scriptName = $this->_resource->getAttribute('scriptName')) {
             $this->_scriptName = $scriptName;
-            $this->_filesystemName = $scriptName . '.phtml';
+            $this->_filesystemName = $scriptName.'.phtml';
         } else {
             throw new Exception('Either a forActionName or scriptName is required.');
         }
 
         parent::init();
+
         return $this;
     }
 
     /**
-     * getPersistentAttributes()
+     * getPersistentAttributes().
      *
      * @return array
      */
     public function getPersistentAttributes()
     {
-        $attributes = array();
+        $attributes = [];
 
         if ($this->_forActionName) {
             $attributes['forActionName'] = $this->_forActionName;
@@ -122,7 +121,7 @@ class Zend_Tool_Project_Context_Zf_ViewScriptFile extends Zend_Tool_Project_Cont
     }
 
     /**
-     * getContents()
+     * getContents().
      *
      * @return string
      */
@@ -136,13 +135,13 @@ class Zend_Tool_Project_Context_Zf_ViewScriptFile extends Zend_Tool_Project_Cont
             ->getParentResource() // view script
             ->getParentResource() // view controller dir
             ->getParentResource(); // views dir
-        if ($viewsDirectoryResource->getParentResource()->getName() == 'ModuleDirectory') {
+        if ('ModuleDirectory' == $viewsDirectoryResource->getParentResource()->getName()) {
             $moduleName = $viewsDirectoryResource->getParentResource()->getModuleName();
         } else {
             $moduleName = 'default';
         }
 
-        if ($this->_filesystemName == 'error.phtml') {  // should also check that the above directory is forController=error
+        if ('error.phtml' == $this->_filesystemName) {  // should also check that the above directory is forController=error
             $contents .= <<<EOS
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -175,9 +174,8 @@ class Zend_Tool_Project_Context_Zf_ViewScriptFile extends Zend_Tool_Project_Cont
 </html>
 
 EOS;
-        } elseif ($this->_forActionName == 'index' && $controllerName == 'Index' && $moduleName == 'default') {
-
-            $contents =<<<EOS
+        } elseif ('index' == $this->_forActionName && 'Index' == $controllerName && 'default' == $moduleName) {
+            $contents = <<<EOS
 <style>
     a:link,
     a:visited
@@ -222,7 +220,6 @@ EOS;
     </div>
 </div>
 EOS;
-
         } else {
             $controllerName = $this->_resource->getParentResource()->getAttribute('forControllerName');
             $actionName = $this->_forActionName;
@@ -233,6 +230,7 @@ EOS;
 </div>
 EOS;
         }
+
         return $contents;
     }
 
@@ -241,7 +239,7 @@ EOS;
         $filter = new Zend_Filter();
         $filter->addFilter(new Zend_Filter_Word_CamelCaseToDash())
             ->addFilter(new Zend_Filter_StringToLower());
+
         return $filter->filter($actionName);
     }
-
 }

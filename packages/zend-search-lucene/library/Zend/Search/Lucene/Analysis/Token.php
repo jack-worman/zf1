@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,18 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Analysis
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
-
 /**
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Analysis
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -40,14 +38,14 @@ class Zend_Search_Lucene_Analysis_Token
     /**
      * Start in source text.
      *
-     * @var integer
+     * @var int
      */
     private $_startOffset;
 
     /**
-     * End in source text
+     * End in source text.
      *
-     * @var integer
+     * @var int
      */
     private $_endOffset;
 
@@ -71,33 +69,30 @@ class Zend_Search_Lucene_Analysis_Token
      * non-stop word.  Then exact phrase queries will only match when the terms
      * occur with no intervening stop words.
      *
-     * @var integer
+     * @var int
      */
     private $_positionIncrement;
 
-
     /**
-     * Object constructor
+     * Object constructor.
      *
-     * @param string  $text
-     * @param integer $start
-     * @param integer $end
-     * @param string  $type
+     * @param string $text
+     * @param int    $start
+     * @param int    $end
      */
     public function __construct($text, $start, $end)
     {
-        $this->_termText    = $text;
+        $this->_termText = $text;
         $this->_startOffset = $start;
-        $this->_endOffset   = $end;
+        $this->_endOffset = $end;
 
         $this->_positionIncrement = 1;
     }
 
-
     /**
-     * positionIncrement setter
+     * positionIncrement setter.
      *
-     * @param integer $positionIncrement
+     * @param int $positionIncrement
      */
     public function setPositionIncrement($positionIncrement)
     {
@@ -107,7 +102,7 @@ class Zend_Search_Lucene_Analysis_Token
     /**
      * Returns the position increment of this Token.
      *
-     * @return integer
+     * @return int
      */
     public function getPositionIncrement()
     {
@@ -128,11 +123,13 @@ class Zend_Search_Lucene_Analysis_Token
      * Sets the Token's term text.
      *
      * @param string $text
+     *
      * @return Zend_Search_Lucene_Analysis_Token
      */
     public function setTermText($text)
     {
         $this->_termText = $text;
+
         return $this;
     }
 
@@ -145,7 +142,7 @@ class Zend_Search_Lucene_Analysis_Token
      * to strlen((string) Zend_Search_Lucene_Analysis_Token::getTermText()), as the term text may have been altered
      * by a stemmer or some other filter.
      *
-     * @return integer
+     * @return int
      */
     public function getStartOffset()
     {
@@ -156,11 +153,10 @@ class Zend_Search_Lucene_Analysis_Token
      * Returns this Token's ending offset, one greater than the position of the
      * last character corresponding to this token in the source text.
      *
-     * @return integer
+     * @return int
      */
     public function getEndOffset()
     {
         return $this->_endOffset;
     }
 }
-

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Oauth
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -24,38 +24,37 @@
 
 /**
  * @category   Zend
- * @package    Zend_Oauth
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Oauth
  * @group      Zend_Oauth_Token
  */
 #[AllowDynamicProperties]
 class Zend_Oauth_Token_AuthorizedRequestTest extends PHPUnit_Framework_TestCase
 {
-
     public function testConstructorSetsInputData()
     {
-        $data = array('foo'=>'bar');
+        $data = ['foo' => 'bar'];
         $token = new Zend_Oauth_Token_AuthorizedRequest($data);
         $this->assertEquals($data, $token->getData());
     }
 
     public function testConstructorParsesAccessTokenFromInputData()
     {
-        $data = array(
-            'oauth_token'=>'jZaee4GF52O3lUb9'
-        );
+        $data = [
+            'oauth_token' => 'jZaee4GF52O3lUb9',
+        ];
         $token = new Zend_Oauth_Token_AuthorizedRequest($data);
         $this->assertEquals('jZaee4GF52O3lUb9', $token->getToken());
     }
 
     public function testPropertyAccessWorks()
     {
-        $data = array(
-            'oauth_token'=>'jZaee4GF52O3lUb9'
-        );
+        $data = [
+            'oauth_token' => 'jZaee4GF52O3lUb9',
+        ];
         $token = new Zend_Oauth_Token_AuthorizedRequest($data);
         $this->assertEquals('jZaee4GF52O3lUb9', $token->oauth_token);
     }
@@ -79,21 +78,20 @@ class Zend_Oauth_Token_AuthorizedRequestTest extends PHPUnit_Framework_TestCase
 
     public function testIsValidDetectsBadResponse()
     {
-        $data = array(
-            'missing_oauth_token'=>'jZaee4GF52O3lUb9'
-        );
+        $data = [
+            'missing_oauth_token' => 'jZaee4GF52O3lUb9',
+        ];
         $token = new Zend_Oauth_Token_AuthorizedRequest($data);
         $this->assertFalse($token->isValid());
     }
 
     public function testIsValidDetectsGoodResponse()
     {
-        $data = array(
-            'oauth_token'=>'jZaee4GF52O3lUb9',
-            'foo'=>'bar'
-        );
+        $data = [
+            'oauth_token' => 'jZaee4GF52O3lUb9',
+            'foo' => 'bar',
+        ];
         $token = new Zend_Oauth_Token_AuthorizedRequest($data);
         $this->assertTrue($token->isValid());
     }
-
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,8 +26,7 @@
 
 /**
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
@@ -37,7 +36,6 @@
 #[AllowDynamicProperties]
 class Zend_Tool_Project_Context_RepositoryTest extends PHPUnit_Framework_TestCase
 {
-
     public function setUp()
     {
         Zend_Tool_Project_Context_Repository::resetInstance();
@@ -67,26 +65,24 @@ class Zend_Tool_Project_Context_RepositoryTest extends PHPUnit_Framework_TestCas
     }
 
     /**
-     * @expectedException Zend_Tool_Project_Context_Exception
+     * @expectedException \Zend_Tool_Project_Context_Exception
      */
     public function testRegistryThrowsExceptionOnUnallowedContextOverwrite()
     {
-
         Zend_Tool_Project_Context_Repository::getInstance()->addContextClass('Zend_Tool_Project_Context_System_ProjectDirectory');
     }
 
     /**
-     * @expectedException Zend_Tool_Project_Context_Exception
+     * @expectedException \Zend_Tool_Project_Context_Exception
      */
     public function testRegistryThrowsExceptionOnUnknownContextRequest()
     {
         Zend_Tool_Project_Context_Repository::getInstance()->getContext('somethingUnknown');
     }
 
-
     protected function _loadZfSystem()
     {
         $conextRegistry = Zend_Tool_Project_Context_Repository::getInstance();
-        $conextRegistry->addContextsFromDirectory(__DIR__ . '/../../../../../packages/zend-tool/library/Zend/Tool/Project/Context/Zf/', 'Zend_Tool_Project_Context_Zf_');
+        $conextRegistry->addContextsFromDirectory(__DIR__.'/../../../../../packages/zend-tool/library/Zend/Tool/Project/Context/Zf/', 'Zend_Tool_Project_Context_Zf_');
     }
 }

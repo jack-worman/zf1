@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Ldap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,10 +27,10 @@
 
 /**
  * @category   Zend
- * @package    Zend_Ldap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Ldap
  */
 abstract class Zend_Ldap_TestCase extends PHPUnit_Framework_TestCase
@@ -40,14 +40,15 @@ abstract class Zend_Ldap_TestCase extends PHPUnit_Framework_TestCase
      */
     protected function _createTestArrayData()
     {
-        $data=array(
-            'dn'          => 'cn=name,dc=example,dc=org',
-            'cn'          => array('name'),
-            'host'        => array('a', 'b', 'c'),
-            'empty'       => array(),
-            'boolean'     => array('TRUE', 'FALSE'),
-            'objectclass' => array('account', 'top'),
-        );
+        $data = [
+            'dn' => 'cn=name,dc=example,dc=org',
+            'cn' => ['name'],
+            'host' => ['a', 'b', 'c'],
+            'empty' => [],
+            'boolean' => ['TRUE', 'FALSE'],
+            'objectclass' => ['account', 'top'],
+        ];
+
         return $data;
     }
 

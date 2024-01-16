@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,27 +13,27 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage Generator
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Abstract XML generator adapter
+ * Abstract XML generator adapter.
  */
 abstract class Zend_XmlRpc_Generator_GeneratorAbstract
 {
     /**
-     * XML encoding string
+     * XML encoding string.
      *
      * @var string
      */
     protected $_encoding;
 
     /**
-     * Construct new instance of the generator
+     * Construct new instance of the generator.
      *
      * @param string $encoding XML encoding, default UTF-8
      */
@@ -44,18 +44,19 @@ abstract class Zend_XmlRpc_Generator_GeneratorAbstract
     }
 
     /**
-     * Start XML element
+     * Start XML element.
      *
      * Method opens a new XML element with an element name and an optional value
      *
-     * @param string $name XML tag name
+     * @param string $name  XML tag name
      * @param string $value Optional value of the XML tag
+     *
      * @return Zend_XmlRpc_Generator_GeneratorAbstract Fluent interface
      */
     public function openElement($name, $value = null)
     {
         $this->_openElement($name);
-        if ($value !== null) {
+        if (null !== $value) {
             $this->_writeTextData($value);
         }
 
@@ -63,11 +64,12 @@ abstract class Zend_XmlRpc_Generator_GeneratorAbstract
     }
 
     /**
-     * End of an XML element
+     * End of an XML element.
      *
      * Method marks the end of an XML element
      *
      * @param string $name XML tag name
+     *
      * @return Zend_XmlRpc_Generator_GeneratorAbstract Fluent interface
      */
     public function closeElement($name)
@@ -78,14 +80,14 @@ abstract class Zend_XmlRpc_Generator_GeneratorAbstract
     }
 
     /**
-     * Return XML as a string
+     * Return XML as a string.
      *
      * @return string
      */
     abstract public function saveXml();
 
     /**
-     * Return encoding
+     * Return encoding.
      *
      * @return string
      */
@@ -95,7 +97,7 @@ abstract class Zend_XmlRpc_Generator_GeneratorAbstract
     }
 
     /**
-     * Returns the XML as a string and flushes all internal buffers
+     * Returns the XML as a string and flushes all internal buffers.
      *
      * @return string
      */
@@ -103,11 +105,12 @@ abstract class Zend_XmlRpc_Generator_GeneratorAbstract
     {
         $xml = $this->saveXml();
         $this->_init();
+
         return $xml;
     }
 
     /**
-     * Returns XML without document declaration
+     * Returns XML without document declaration.
      *
      * @return string
      */
@@ -117,9 +120,10 @@ abstract class Zend_XmlRpc_Generator_GeneratorAbstract
     }
 
     /**
-     * Removes XML declaration from a string
+     * Removes XML declaration from a string.
      *
      * @param string $xml
+     *
      * @return string
      */
     public function stripDeclaration($xml)
@@ -128,21 +132,21 @@ abstract class Zend_XmlRpc_Generator_GeneratorAbstract
     }
 
     /**
-     * Start XML element
+     * Start XML element.
      *
      * @param string $name XML element name
      */
     abstract protected function _openElement($name);
 
     /**
-     * Write XML text data into the currently opened XML element
+     * Write XML text data into the currently opened XML element.
      *
      * @param string $text
      */
     abstract protected function _writeTextData($text);
 
     /**
-     * End XML element
+     * End XML element.
      *
      * @param string $name
      */

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Log
- * @subpackage Filter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,16 +25,16 @@
 
 /**
  * @category   Zend
- * @package    Zend_Log
- * @subpackage Filter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 class Zend_Log_Filter_Priority extends Zend_Log_Filter_Abstract
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $_priority;
 
@@ -47,35 +47,38 @@ class Zend_Log_Filter_Priority extends Zend_Log_Filter_Abstract
      * Filter logging by $priority.  By default, it will accept any log
      * event whose priority value is less than or equal to $priority.
      *
-     * @param  integer  $priority  Priority
-     * @param  string   $operator  Comparison operator
+     * @param int    $priority Priority
+     * @param string $operator Comparison operator
+     *
      * @return void
+     *
      * @throws Zend_Log_Exception
      */
     public function __construct($priority, $operator = null)
     {
-        if (! is_int($priority)) {
+        if (!is_int($priority)) {
             // require_once 'Zend/Log/Exception.php';
             throw new Zend_Log_Exception('Priority must be an integer');
         }
 
         $this->_priority = $priority;
-        $this->_operator = $operator === null ? '<=' : $operator;
+        $this->_operator = null === $operator ? '<=' : $operator;
     }
 
     /**
-     * Create a new instance of Zend_Log_Filter_Priority
+     * Create a new instance of Zend_Log_Filter_Priority.
      *
-     * @param  array|Zend_Config $config
+     * @param array|Zend_Config $config
+     *
      * @return Zend_Log_Filter_Priority
      */
-    static public function factory($config)
+    public static function factory($config)
     {
         $config = self::_parseConfig($config);
-        $config = array_merge(array(
+        $config = array_merge([
             'priority' => null,
             'operator' => null,
-        ), $config);
+        ], $config);
 
         // Add support for constants
         if (!is_numeric($config['priority']) && isset($config['priority']) && defined($config['priority'])) {
@@ -91,8 +94,9 @@ class Zend_Log_Filter_Priority extends Zend_Log_Filter_Abstract
     /**
      * Returns TRUE to accept the message, FALSE to block it.
      *
-     * @param  array    $event    event data
-     * @return boolean            accepted?
+     * @param array $event event data
+     *
+     * @return bool accepted?
      */
     public function accept($event)
     {

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Xml_Security
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -29,7 +29,8 @@ class Zend_Xml_TestAsset_Security extends Zend_Xml_Security
      * Override heuristic scan to make it public for testing.
      *
      * @param string $xml
-     * @throws Zend_Xml_Exception If entity expansion or external entity declaration was discovered.
+     *
+     * @throws Zend_Xml_Exception if entity expansion or external entity declaration was discovered
      */
     public static function heuristicScan($xml)
     {

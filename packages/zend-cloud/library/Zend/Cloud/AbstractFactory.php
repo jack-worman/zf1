@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,23 +13,23 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Cloud
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
- * Abstract factory for Zend_Cloud resources
+ * Abstract factory for Zend_Cloud resources.
  *
  * @category   Zend
- * @package    Zend_Cloud
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Cloud_AbstractFactory
 {
     /**
-     * Constructor
+     * Constructor.
      */
     private function __construct()
     {
@@ -37,11 +37,12 @@ class Zend_Cloud_AbstractFactory
     }
 
     /**
-     * Get an individual adapter instance
+     * Get an individual adapter instance.
      *
-     * @param  string $adapterOption
-     * @param  array|Zend_Config $options
-     * @return null|Zend_Cloud_DocumentService_Adapter|Zend_Cloud_QueueService_Adapter|Zend_Cloud_StorageService_Adapter
+     * @param string            $adapterOption
+     * @param array|Zend_Config $options
+     *
+     * @return Zend_Cloud_DocumentService_Adapter|Zend_Cloud_QueueService_Adapter|Zend_Cloud_StorageService_Adapter|null
      */
     protected static function _getAdapter($adapterOption, $options)
     {

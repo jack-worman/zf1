@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,29 +13,29 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Server
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Server_Method_CallbackTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Server_Method_CallbackTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Server_Method_CallbackTest::main');
 }
 
 /** Zend_Server_Method_Callback */
 // require_once 'Zend/Server/Method/Callback.php';
 
 /**
- * Test class for Zend_Server_Method_Callback
+ * Test class for Zend_Server_Method_Callback.
  *
  * @category   Zend
- * @package    Zend_Server
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Server
  */
 #[AllowDynamicProperties]
@@ -48,7 +48,7 @@ class Zend_Server_Method_CallbackTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Server_Method_CallbackTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Server_Method_CallbackTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -122,7 +122,7 @@ class Zend_Server_Method_CallbackTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Server_Exception
+     * @expectedException \Zend_Server_Exception
      */
     public function testSettingTypeShouldThrowExceptionWhenInvalidTypeProvided()
     {
@@ -143,11 +143,11 @@ class Zend_Server_Method_CallbackTest extends PHPUnit_Framework_TestCase
 
     public function testConstructorShouldSetStateFromOptions()
     {
-        $options = array(
-            'type'   => 'static',
-            'class'  => 'Foo',
+        $options = [
+            'type' => 'static',
+            'class' => 'Foo',
             'method' => 'bar',
-        );
+        ];
         $callback = new Zend_Server_Method_Callback($options);
         $test = $callback->toArray();
         $this->assertSame($options, $test);
@@ -162,6 +162,6 @@ class Zend_Server_Method_CallbackTest extends PHPUnit_Framework_TestCase
 }
 
 // Call Zend_Server_Method_CallbackTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Server_Method_CallbackTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Server_Method_CallbackTest::main') {
     Zend_Server_Method_CallbackTest::main();
 }

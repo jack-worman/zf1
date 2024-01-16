@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Geo
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -36,34 +36,31 @@
  */
 // require_once 'Zend/Gdata/Geo/Extension/GmlPoint.php';
 
-
 /**
  * Represents the georss:where element used by the Gdata Geo extensions.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Geo
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_Geo_Extension_GeoRssWhere extends Zend_Gdata_Extension
 {
-
     protected $_rootNamespace = 'georss';
     protected $_rootElement = 'where';
 
     /**
-     * The point location for this geo element
+     * The point location for this geo element.
      *
      * @var Zend_Gdata_Geo_Extension_GmlPoint
      */
-    protected $_point = null;
+    protected $_point;
 
     /**
      * Create a new instance.
      *
-     * @param Zend_Gdata_Geo_Extension_GmlPoint $point (optional) Point to which
-     *          object should be initialized.
+     * @param zend_Gdata_Geo_Extension_GmlPoint $point (optional) Point to which
+     *                                                 object should be initialized
      */
     public function __construct($point = null)
     {
@@ -78,15 +75,17 @@ class Zend_Gdata_Geo_Extension_GeoRssWhere extends Zend_Gdata_Extension
      * and eventually XML text for application storage/persistence.
      *
      * @param DOMDocument $doc The DOMDocument used to construct DOMElements
-     * @return DOMElement The DOMElement representing this element and all
-     *          child properties.
+     *
+     * @return DOMElement the DOMElement representing this element and all
+     *                    child properties
      */
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
         $element = parent::getDOM($doc, $majorVersion, $minorVersion);
-        if ($this->_point !== null) {
+        if (null !== $this->_point) {
             $element->appendChild($this->_point->getDOM($element->ownerDocument));
         }
+
         return $element;
     }
 
@@ -98,10 +97,10 @@ class Zend_Gdata_Geo_Extension_GeoRssWhere extends Zend_Gdata_Extension
      */
     protected function takeChildFromDOM($child)
     {
-        $absoluteNodeName = $child->namespaceURI . ':' . $child->localName;
+        $absoluteNodeName = $child->namespaceURI.':'.$child->localName;
 
         switch ($absoluteNodeName) {
-            case $this->lookupNamespace('gml') . ':' . 'Point';
+            case $this->lookupNamespace('gml').':Point':
                 $point = new Zend_Gdata_Geo_Extension_GmlPoint();
                 $point->transferFromDOM($child);
                 $this->_point = $point;
@@ -113,7 +112,8 @@ class Zend_Gdata_Geo_Extension_GeoRssWhere extends Zend_Gdata_Extension
      * Get the value for this element's point attribute.
      *
      * @see setPoint
-     * @return Zend_Gdata_Geo_Extension_GmlPoint The requested attribute.
+     *
+     * @return Zend_Gdata_Geo_Extension_GmlPoint the requested attribute
      */
     public function getPoint()
     {
@@ -123,13 +123,14 @@ class Zend_Gdata_Geo_Extension_GeoRssWhere extends Zend_Gdata_Extension
     /**
      * Set the value for this element's point attribute.
      *
-     * @param Zend_Gdata_Geo_Extension_GmlPoint $value The desired value for this attribute.
+     * @param Zend_Gdata_Geo_Extension_GmlPoint $value the desired value for this attribute
+     *
      * @return Zend_Gdata_Geo_Extension_GeoRssWhere Provides a fluent interface
      */
     public function setPoint($value)
     {
         $this->_point = $value;
+
         return $this;
     }
-
 }

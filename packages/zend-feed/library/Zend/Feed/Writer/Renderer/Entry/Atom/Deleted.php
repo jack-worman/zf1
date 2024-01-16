@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed_Writer
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,27 +27,24 @@
 
 /**
  * @category   Zend
- * @package    Zend_Feed_Writer
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Writer_Renderer_Entry_Atom_Deleted
-    extends Zend_Feed_Writer_Renderer_RendererAbstract
-    implements Zend_Feed_Writer_Renderer_RendererInterface
+class Zend_Feed_Writer_Renderer_Entry_Atom_Deleted extends Zend_Feed_Writer_Renderer_RendererAbstract implements Zend_Feed_Writer_Renderer_RendererInterface
 {
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param  Zend_Feed_Writer_Deleted $container
      * @return void
      */
-    public function __construct (Zend_Feed_Writer_Deleted $container)
+    public function __construct(Zend_Feed_Writer_Deleted $container)
     {
         parent::__construct($container);
     }
 
     /**
-     * Render atom entry
+     * Render atom entry.
      *
      * @return Zend_Feed_Writer_Renderer_Entry_Atom_Deleted
      */
@@ -67,15 +65,13 @@ class Zend_Feed_Writer_Renderer_Entry_Atom_Deleted
     }
 
     /**
-     * Set tombstone comment
+     * Set tombstone comment.
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
      * @return void
      */
     protected function _setComment(DOMDocument $dom, DOMElement $root)
     {
-        if(!$this->getDataContainer()->getComment()) {
+        if (!$this->getDataContainer()->getComment()) {
             return;
         }
         $c = $dom->createElement('at:comment');
@@ -86,16 +82,14 @@ class Zend_Feed_Writer_Renderer_Entry_Atom_Deleted
     }
 
     /**
-     * Set entry authors
+     * Set entry authors.
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
      * @return void
      */
     protected function _setBy(DOMDocument $dom, DOMElement $root)
     {
         $data = $this->_container->getBy();
-        if ((!$data || empty($data))) {
+        if (!$data || empty($data)) {
             return;
         }
         $author = $this->_dom->createElement('at:by');
@@ -117,5 +111,4 @@ class Zend_Feed_Writer_Renderer_Entry_Atom_Deleted
             $uri->appendChild($text);
         }
     }
-
 }

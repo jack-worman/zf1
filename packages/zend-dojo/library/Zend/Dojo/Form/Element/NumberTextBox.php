@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,8 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage Form_Element
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -23,48 +22,52 @@
 // require_once 'Zend/Dojo/Form/Element/ValidationTextBox.php';
 
 /**
- * NumberTextBox dijit
+ * NumberTextBox dijit.
  *
  * @uses       Zend_Dojo_Form_Element_ValidationTextBox
- * @package    Zend_Dojo
- * @subpackage Form_Element
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 class Zend_Dojo_Form_Element_NumberTextBox extends Zend_Dojo_Form_Element_ValidationTextBox
 {
     /**
-     * Use NumberTextBox dijit view helper
+     * Use NumberTextBox dijit view helper.
+     *
      * @var string
      */
     public $helper = 'NumberTextBox';
 
     /**
-     * Allowed numeric type formats
+     * Allowed numeric type formats.
+     *
      * @var array
      */
-    protected $_allowedTypes = array(
+    protected $_allowedTypes = [
         'decimal',
         'scientific',
         'percent',
         'currency',
-    );
+    ];
 
     /**
-     * Set locale
+     * Set locale.
      *
-     * @param  string $locale
+     * @param string $locale
+     *
      * @return Zend_Dojo_Form_Element_NumberTextBox
      */
     public function setLocale($locale)
     {
         $this->setConstraint('locale', (string) $locale);
+
         return $this;
     }
 
     /**
-     * Retrieve locale
+     * Retrieve locale.
      *
      * @return string|null
      */
@@ -74,19 +77,21 @@ class Zend_Dojo_Form_Element_NumberTextBox extends Zend_Dojo_Form_Element_Valida
     }
 
     /**
-     * Set numeric format pattern
+     * Set numeric format pattern.
      *
-     * @param  string $pattern
+     * @param string $pattern
+     *
      * @return Zend_Dojo_Form_Element_NumberTextBox
      */
     public function setPattern($pattern)
     {
         $this->setConstraint('pattern', (string) $pattern);
+
         return $this;
     }
 
     /**
-     * Retrieve numeric format pattern
+     * Retrieve numeric format pattern.
      *
      * @return string|null
      */
@@ -96,10 +101,12 @@ class Zend_Dojo_Form_Element_NumberTextBox extends Zend_Dojo_Form_Element_Valida
     }
 
     /**
-     * Set numeric format type
+     * Set numeric format type.
      *
      * @see    $_allowedTypes
-     * @param  string $type
+     *
+     * @param string $type
+     *
      * @return Zend_Dojo_Form_Element_NumberTextBox
      */
     public function setType($type)
@@ -111,11 +118,12 @@ class Zend_Dojo_Form_Element_NumberTextBox extends Zend_Dojo_Form_Element_Valida
         }
 
         $this->setConstraint('type', $type);
+
         return $this;
     }
 
     /**
-     * Retrieve type
+     * Retrieve type.
      *
      * @return string|null
      */
@@ -125,19 +133,21 @@ class Zend_Dojo_Form_Element_NumberTextBox extends Zend_Dojo_Form_Element_Valida
     }
 
     /**
-     * Set decimal places
+     * Set decimal places.
      *
-     * @param  int $places
+     * @param int $places
+     *
      * @return Zend_Dojo_Form_Element_NumberTextBox
      */
     public function setPlaces($places)
     {
         $this->setConstraint('places', (int) $places);
+
         return $this;
     }
 
     /**
-     * Retrieve decimal places
+     * Retrieve decimal places.
      *
      * @return int|null
      */
@@ -147,19 +157,19 @@ class Zend_Dojo_Form_Element_NumberTextBox extends Zend_Dojo_Form_Element_Valida
     }
 
     /**
-     * Set strict flag
+     * Set strict flag.
      *
-     * @param  bool $strict
      * @return Zend_Dojo_Form_Element_NumberTextBox
      */
     public function setStrict($flag)
     {
         $this->setConstraint('strict', (bool) $flag);
+
         return $this;
     }
 
     /**
-     * Retrieve strict flag
+     * Retrieve strict flag.
      *
      * @return bool
      */
@@ -168,6 +178,7 @@ class Zend_Dojo_Form_Element_NumberTextBox extends Zend_Dojo_Form_Element_Valida
         if (!$this->hasConstraint('strict')) {
             return false;
         }
-        return ('true' == $this->getConstraint('strict'));
+
+        return 'true' == $this->getConstraint('strict');
     }
 }

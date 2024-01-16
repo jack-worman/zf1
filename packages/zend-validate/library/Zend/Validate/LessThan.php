@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,39 +27,38 @@
 
 /**
  * @category   Zend
- * @package    Zend_Validate
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Validate_LessThan extends Zend_Validate_Abstract
 {
-    const NOT_LESS = 'notLessThan';
+    public const NOT_LESS = 'notLessThan';
 
     /**
      * @var array
      */
-    protected $_messageTemplates = array(
-        self::NOT_LESS => "'%value%' is not less than '%max%'"
-    );
+    protected $_messageTemplates = [
+        self::NOT_LESS => "'%value%' is not less than '%max%'",
+    ];
 
     /**
      * @var array
      */
-    protected $_messageVariables = array(
-        'max' => '_max'
-    );
+    protected $_messageVariables = [
+        'max' => '_max',
+    ];
 
     /**
-     * Maximum value
-     *
-     * @var mixed
+     * Maximum value.
      */
     protected $_max;
 
     /**
-     * Sets validator options
+     * Sets validator options.
      *
-     * @param  mixed|Zend_Config $max
+     * @param mixed|Zend_Config $max
+     *
      * @throws Zend_Validate_Exception
      */
     public function __construct($max)
@@ -80,9 +80,7 @@ class Zend_Validate_LessThan extends Zend_Validate_Abstract
     }
 
     /**
-     * Returns the max option
-     *
-     * @return mixed
+     * Returns the max option.
      */
     public function getMax()
     {
@@ -90,33 +88,33 @@ class Zend_Validate_LessThan extends Zend_Validate_Abstract
     }
 
     /**
-     * Sets the max option
+     * Sets the max option.
      *
-     * @param  mixed $max
      * @return Zend_Validate_LessThan Provides a fluent interface
      */
     public function setMax($max)
     {
         $this->_max = $max;
+
         return $this;
     }
 
     /**
-     * Defined by Zend_Validate_Interface
+     * Defined by Zend_Validate_Interface.
      *
      * Returns true if and only if $value is less than max option
      *
-     * @param  mixed $value
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {
         $this->_setValue($value);
         if ($this->_max <= $value) {
             $this->_error(self::NOT_LESS);
+
             return false;
         }
+
         return true;
     }
-
 }

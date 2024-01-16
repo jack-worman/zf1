@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,32 +13,27 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
 require_once 'Zend/Db/Select/TestCommon.php';
 
-
-
-
-
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Db
  * @group      Zend_Db_Select
  */
 #[AllowDynamicProperties]
 class Zend_Db_Select_MysqliTest extends Zend_Db_Select_TestCommon
 {
-
     public function getDriver()
     {
         return 'Mysqli';
@@ -47,12 +42,13 @@ class Zend_Db_Select_MysqliTest extends Zend_Db_Select_TestCommon
     /**
      * Mysqli does not support named binds
      * ZF-2017: Test bind use of the Zend_Db_Select class.
+     *
      * @group ZF-2017
-     * @expectedException Zend_Db_Statement_Exception
+     *
+     * @expectedException \Zend_Db_Statement_Exception
      */
     public function testSelectQueryWithBinds()
     {
         parent::testSelectQueryWithBinds();
     }
-
 }

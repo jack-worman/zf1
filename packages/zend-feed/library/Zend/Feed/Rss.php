@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,12 +14,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /**
  * @see Zend_Feed_Abstract
@@ -31,9 +31,8 @@
  */
 // require_once 'Zend/Feed/Entry/Rss.php';
 
-
 /**
- * RSS channel class
+ * RSS channel class.
  *
  * The Zend_Feed_Rss class is a concrete subclass of
  * Zend_Feed_Abstract meant for representing RSS channels. It does not
@@ -42,7 +41,7 @@
  * RSS-formatted data instead of Atom.
  *
  * @category   Zend
- * @package    Zend_Feed
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -73,6 +72,7 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
      * Override Zend_Feed_Abstract to set up the $_element and $_entries aliases.
      *
      * @return void
+     *
      * @throws Zend_Feed_Exception
      */
     public function __wakeup()
@@ -81,13 +81,13 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
 
         // Find the base channel element and create an alias to it.
         $rdfTags = $this->_element->getElementsByTagNameNS('http://www.w3.org/1999/02/22-rdf-syntax-ns#', 'RDF');
-        if ($rdfTags->length != 0) {
+        if (0 != $rdfTags->length) {
             $this->_element = $rdfTags->item(0);
-        } else  {
+        } else {
             $this->_element = $this->_element->getElementsByTagName('channel')->item(0);
         }
         if (!$this->_element) {
-            /**
+            /*
              * @see Zend_Feed_Exception
              */
             // require_once 'Zend/Feed/Exception.php';
@@ -99,7 +99,6 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
         $this->_buildEntryCache();
     }
 
-
     /**
      * Make accessing some individual elements of the channel easier.
      *
@@ -108,8 +107,7 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
      * using foreach ($channel->items as $item) or foreach
      * ($channel->item as $item).
      *
-     * @param  string $var The property to access.
-     * @return mixed
+     * @param string $var the property to access
      */
     public function __get($var)
     {
@@ -125,9 +123,10 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
     }
 
     /**
-     * Generate the header of the feed when working in write mode
+     * Generate the header of the feed when working in write mode.
      *
-     * @param  array $array the data to use
+     * @param array $array the data to use
+     *
      * @return DOMElement root node
      */
     protected function _mapFeedHeaders($array)
@@ -160,7 +159,7 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
             $editor .= $array->email;
         }
         if (!empty($array->author)) {
-            $editor .= ' (' . $array->author . ')';
+            $editor .= ' ('.$array->author.')';
         }
         if (!empty($editor)) {
             $author = $this->_element->createElement('managingEditor', ltrim((string) $editor));
@@ -258,10 +257,10 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
     }
 
     /**
-     * Adds the iTunes extensions to a root node
+     * Adds the iTunes extensions to a root node.
      *
-     * @param  DOMElement $root
-     * @param  array $array
+     * @param array $array
+     *
      * @return void
      */
     private function _buildiTunes(DOMElement $root, $array)
@@ -375,7 +374,7 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
     }
 
     /**
-     * Generate the entries of the feed when working in write mode
+     * Generate the entries of the feed when working in write mode.
      *
      * The following nodes are constructed for each feed entry
      * <item>
@@ -386,8 +385,9 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
      *    <content:encoded>long version, can contain html</content:encoded>
      * </item>
      *
-     * @param  DOMElement $root the root node to use
-     * @param  array $array the data to use
+     * @param DOMElement $root  the root node to use
+     * @param array      $array the data to use
+     *
      * @return void
      */
     protected function _mapFeedEntries(DOMElement $root, $array)
@@ -454,11 +454,10 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
             }
             if (isset($dataentry->commentRss)) {
                 $comments = $this->_element->createElementNS('http://wellformedweb.org/CommentAPI/',
-                                                             'wfw:commentRss',
-                                                             $dataentry->commentRss);
+                    'wfw:commentRss',
+                    $dataentry->commentRss);
                 $item->appendChild($comments);
             }
-
 
             if (isset($dataentry->enclosure)) {
                 foreach ($dataentry->enclosure as $enclosure) {
@@ -479,7 +478,7 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
     }
 
     /**
-     * Override Zend_Feed_Element to include <rss> root node
+     * Override Zend_Feed_Element to include <rss> root node.
      *
      * @return string
      */
@@ -487,7 +486,7 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
     {
         // Return a complete document including XML prologue.
         $doc = new DOMDocument($this->_element->ownerDocument->version,
-                               $this->_element->ownerDocument->actualEncoding);
+            $this->_element->ownerDocument->actualEncoding);
         $root = $doc->createElement('rss');
 
         // Use rss version 2.0
@@ -507,24 +506,24 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
     }
 
     /**
-     * Send feed to a http client with the correct header
+     * Send feed to a http client with the correct header.
      *
      * @return void
+     *
      * @throws Zend_Feed_Exception if headers have already been sent
      */
     public function send()
     {
         if (headers_sent()) {
-            /**
+            /*
              * @see Zend_Feed_Exception
              */
             // require_once 'Zend/Feed/Exception.php';
             throw new Zend_Feed_Exception('Cannot send RSS because headers have already been sent.');
         }
 
-        header('Content-Type: application/rss+xml; charset=' . $this->_element->ownerDocument->actualEncoding);
+        header('Content-Type: application/rss+xml; charset='.$this->_element->ownerDocument->actualEncoding);
 
         echo $this->saveXml();
     }
-
 }

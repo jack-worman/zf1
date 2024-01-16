@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Dojo_Form_Element_EditorTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_Form_Element_EditorTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Dojo_Form_Element_EditorTest::main');
 }
 
 /** Zend_Dojo_Form_Element_Editor */
@@ -41,10 +41,10 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * Test class for Zend_Dojo_Form_Element_Editor.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Dojo
  * @group      Zend_Dojo_Form
  */
@@ -58,7 +58,7 @@ class Zend_Dojo_Form_Element_EditorTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_Form_Element_EditorTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Dojo_Form_Element_EditorTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -73,7 +73,7 @@ class Zend_Dojo_Form_Element_EditorTest extends PHPUnit_Framework_TestCase
         Zend_Registry::_unsetInstance();
         Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
 
-        $this->view    = $this->getView();
+        $this->view = $this->getView();
         $this->element = $this->getElement();
         $this->element->setView($this->view);
     }
@@ -93,6 +93,7 @@ class Zend_Dojo_Form_Element_EditorTest extends PHPUnit_Framework_TestCase
         // require_once 'Zend/View.php';
         $view = new Zend_View();
         $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
+
         return $view;
     }
 
@@ -100,13 +101,14 @@ class Zend_Dojo_Form_Element_EditorTest extends PHPUnit_Framework_TestCase
     {
         $element = new Zend_Dojo_Form_Element_Editor(
             'foo',
-            array(
+            [
                 'value' => 'some text',
                 'label' => 'Editor',
                 'class' => 'someclass',
                 'style' => 'width: 100px;',
-            )
+            ]
         );
+
         return $element;
     }
 
@@ -124,7 +126,7 @@ class Zend_Dojo_Form_Element_EditorTest extends PHPUnit_Framework_TestCase
 
     public function testCaptureEventAccessorsShouldProxyToDijitParams()
     {
-        $this->element->setCaptureEvents(array('foo.bar', 'bar.baz', 'baz.bat'));
+        $this->element->setCaptureEvents(['foo.bar', 'bar.baz', 'baz.bat']);
         $this->assertTrue($this->element->hasDijitParam('captureEvents'));
         $this->assertTrue($this->element->hasCaptureEvent('bar.baz'));
         $this->assertEquals($this->element->getDijitParam('captureEvents'), $this->element->getCaptureEvents());
@@ -143,7 +145,7 @@ class Zend_Dojo_Form_Element_EditorTest extends PHPUnit_Framework_TestCase
 
     public function testEventAccessorsShouldProxyToDijitParams()
     {
-        $this->element->setEvents(array('onClick', 'onKeyUp', 'onKeyDown'));
+        $this->element->setEvents(['onClick', 'onKeyUp', 'onKeyDown']);
         $this->assertTrue($this->element->hasDijitParam('events'));
         $this->assertTrue($this->element->hasEvent('onKeyUp'));
         $this->assertEquals($this->element->getDijitParam('events'), $this->element->getEvents());
@@ -162,7 +164,7 @@ class Zend_Dojo_Form_Element_EditorTest extends PHPUnit_Framework_TestCase
 
     public function testPluginAccessorsShouldProxyToDijitParams()
     {
-        $this->element->setPlugins(array('undo', 'bold', 'italic'));
+        $this->element->setPlugins(['undo', 'bold', 'italic']);
         $this->assertTrue($this->element->hasDijitParam('plugins'));
         $this->assertTrue($this->element->hasPlugin('bold'));
         $this->assertEquals($this->element->getDijitParam('plugins'), $this->element->getPlugins());
@@ -241,7 +243,7 @@ class Zend_Dojo_Form_Element_EditorTest extends PHPUnit_Framework_TestCase
 
     public function testStyleSheetAccessorsShouldProxyToDijitParams()
     {
-        $this->element->setStyleSheets(array('/js/dojo/resources/dojo.css', '/js/custom/styles.css', '/js/dijit/themes/tundra/tundra.css'));
+        $this->element->setStyleSheets(['/js/dojo/resources/dojo.css', '/js/custom/styles.css', '/js/dijit/themes/tundra/tundra.css']);
         $this->assertTrue($this->element->hasDijitParam('styleSheets'));
         $this->assertTrue($this->element->hasStyleSheet('/js/custom/styles.css'));
         $this->assertEquals($this->element->getDijitParam('styleSheets'), $this->element->getStyleSheets());
@@ -266,7 +268,7 @@ class Zend_Dojo_Form_Element_EditorTest extends PHPUnit_Framework_TestCase
 
     public function testCanAddMultipleSeparatorsToEditor()
     {
-        $this->element->setPlugins(array('undo', '|', 'bold', '|', 'italic'));
+        $this->element->setPlugins(['undo', '|', 'bold', '|', 'italic']);
 
         $plugins = $this->element->getPlugins();
         $this->assertEquals(5, count($plugins));
@@ -303,7 +305,7 @@ class Zend_Dojo_Form_Element_EditorTest extends PHPUnit_Framework_TestCase
     /** @group ZF-11511 */
     public function testExtraPluginAccessorsShouldProxyToDijitParams()
     {
-        $this->element->setExtraPlugins(array('undo', 'bold', 'italic'));
+        $this->element->setExtraPlugins(['undo', 'bold', 'italic']);
         $this->assertTrue($this->element->hasDijitParam('extraPlugins'));
         $this->assertTrue($this->element->hasExtraPlugin('bold'));
         $this->assertEquals($this->element->getDijitParam('extraPlugins'), $this->element->getExtraPlugins());
@@ -316,6 +318,6 @@ class Zend_Dojo_Form_Element_EditorTest extends PHPUnit_Framework_TestCase
 }
 
 // Call Zend_Dojo_Form_Element_EditorTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dojo_Form_Element_EditorTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Dojo_Form_Element_EditorTest::main') {
     Zend_Dojo_Form_Element_EditorTest::main();
 }

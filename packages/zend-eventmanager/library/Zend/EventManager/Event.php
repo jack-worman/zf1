@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_EventManager
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -21,13 +21,13 @@
 // require_once 'Zend/EventManager/EventDescription.php';
 
 /**
- * Representation of an event
+ * Representation of an event.
  *
  * Encapsulates the target context and parameters passed, and provides some
  * behavior for interacting with the event manager.
  *
  * @category   Zend
- * @package    Zend_EventManager
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -46,7 +46,7 @@ class Zend_EventManager_Event implements Zend_EventManager_EventDescription
     /**
      * @var array|ArrayAccess|object The event parameters
      */
-    protected $params = array();
+    protected $params = [];
 
     /**
      * @var bool Whether or not to stop propagation
@@ -54,13 +54,14 @@ class Zend_EventManager_Event implements Zend_EventManager_EventDescription
     protected $stopPropagation = false;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * Accept a target and its parameters.
      *
-     * @param  string $name Event name
-     * @param  string|object $target
-     * @param  array|ArrayAccess $params
+     * @param string            $name   Event name
+     * @param string|object     $target
+     * @param array|ArrayAccess $params
+     *
      * @return void
      */
     public function __construct($name = null, $target = null, $params = null)
@@ -79,7 +80,7 @@ class Zend_EventManager_Event implements Zend_EventManager_EventDescription
     }
 
     /**
-     * Get event name
+     * Get event name.
      *
      * @return string
      */
@@ -89,7 +90,7 @@ class Zend_EventManager_Event implements Zend_EventManager_EventDescription
     }
 
     /**
-     * Get the event target
+     * Get the event target.
      *
      * This may be either an object, or the name of a static method.
      *
@@ -101,29 +102,28 @@ class Zend_EventManager_Event implements Zend_EventManager_EventDescription
     }
 
     /**
-     * Set parameters
+     * Set parameters.
      *
      * Overwrites parameters
      *
-     * @param  array|ArrayAccess|object $params
+     * @param array|ArrayAccess|object $params
+     *
      * @return Zend_EventManager_Event
      */
     public function setParams($params)
     {
         if (!is_array($params) && !is_object($params)) {
             // require_once 'Zend/EventManager/Exception/InvalidArgumentException.php';
-            throw new Zend_EventManager_Exception_InvalidArgumentException(sprintf(
-                'Event parameters must be an array or object; received "%s"',
-                (is_object($params) ? get_class($params) : gettype($params))
-            ));
+            throw new Zend_EventManager_Exception_InvalidArgumentException(sprintf('Event parameters must be an array or object; received "%s"', is_object($params) ? get_class($params) : gettype($params)));
         }
 
         $this->params = $params;
+
         return $this;
     }
 
     /**
-     * Get all parameters
+     * Get all parameters.
      *
      * @return array|object|ArrayAccess
      */
@@ -133,13 +133,11 @@ class Zend_EventManager_Event implements Zend_EventManager_EventDescription
     }
 
     /**
-     * Get an individual parameter
+     * Get an individual parameter.
      *
      * If the parameter does not exist, the $default value will be returned.
      *
-     * @param  string|int $name
-     * @param  mixed $default
-     * @return mixed
+     * @param string|int $name
      */
     public function getParam($name, $default = null)
     {
@@ -156,38 +154,43 @@ class Zend_EventManager_Event implements Zend_EventManager_EventDescription
         if (!isset($this->params->{$name})) {
             return $default;
         }
+
         return $this->params->{$name};
     }
 
     /**
-     * Set the event name
+     * Set the event name.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return Zend_EventManager_Event
      */
     public function setName($name)
     {
         $this->name = (string) $name;
+
         return $this;
     }
 
     /**
-     * Set the event target/context
+     * Set the event target/context.
      *
-     * @param  null|string|object $target
+     * @param string|object|null $target
+     *
      * @return Zend_EventManager_Event
      */
     public function setTarget($target)
     {
         $this->target = $target;
+
         return $this;
     }
 
     /**
-     * Set an individual parameter to a value
+     * Set an individual parameter to a value.
      *
-     * @param  string|int $name
-     * @param  mixed $value
+     * @param string|int $name
+     *
      * @return Zend_EventManager_Event
      */
     public function setParam($name, $value)
@@ -199,13 +202,15 @@ class Zend_EventManager_Event implements Zend_EventManager_EventDescription
             // Objects
             $this->params->{$name} = $value;
         }
+
         return $this;
     }
 
     /**
-     * Stop further event propagation
+     * Stop further event propagation.
      *
-     * @param  bool $flag
+     * @param bool $flag
+     *
      * @return void
      */
     public function stopPropagation($flag = true)

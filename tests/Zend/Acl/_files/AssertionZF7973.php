@@ -1,14 +1,16 @@
 <?php
+
 // require_once 'Zend/Acl/Assert/Interface.php';
 
 #[AllowDynamicProperties]
-class Zend_Acl_AclTest_AssertionZF7973 implements Zend_Acl_Assert_Interface {
+class Zend_Acl_AclTest_AssertionZF7973 implements Zend_Acl_Assert_Interface
+{
     public function assert(Zend_Acl $acl,
-                Zend_Acl_Role_Interface $role = null,
-                Zend_Acl_Resource_Interface $resource = null,
-                $privilege = null)
+        Zend_Acl_Role_Interface $role = null,
+        Zend_Acl_Resource_Interface $resource = null,
+        $privilege = null)
     {
-        if($privilege != 'privilege') {
+        if ('privilege' != $privilege) {
             return false;
         }
 

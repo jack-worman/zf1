@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage Framework
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,19 +27,17 @@
 
 /**
  * @category   Zend
- * @package    Zend_Tool
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Provider_Project
-    extends Zend_Tool_Project_Provider_Abstract
-    //implements Zend_Tool_Framework_Provider_DocblockManifestInterface
+class Zend_Tool_Project_Provider_Project extends Zend_Tool_Project_Provider_Abstract
+    // implements Zend_Tool_Framework_Provider_DocblockManifestInterface
 {
-
-    protected $_specialties = array('Info');
+    protected $_specialties = ['Info'];
 
     /**
-     * create()
+     * create().
      *
      * @param string $path
      * @param string $nameOfProfile shortName=n
@@ -47,7 +45,7 @@ class Zend_Tool_Project_Provider_Project
      */
     public function create($path, $nameOfProfile = null, $fileOfProfile = null)
     {
-        if ($path == null) {
+        if (null == $path) {
             $path = getcwd();
         } else {
             $path = \trim((string) $path);
@@ -55,7 +53,7 @@ class Zend_Tool_Project_Provider_Project
                 $created = mkdir($path);
                 if (!$created) {
                     // require_once 'Zend/Tool/Framework/Client/Exception.php';
-                    throw new Zend_Tool_Framework_Client_Exception('Could not create requested project directory \'' . $path . '\'');
+                    throw new Zend_Tool_Framework_Client_Exception('Could not create requested project directory \''.$path.'\'');
                 }
             }
             $path = str_replace((string) '\\', '/', realpath($path));
@@ -63,43 +61,43 @@ class Zend_Tool_Project_Provider_Project
 
         $profile = $this->_loadProfile(self::NO_PROFILE_RETURN_FALSE, $path);
 
-        if ($profile !== false) {
+        if (false !== $profile) {
             // require_once 'Zend/Tool/Framework/Client/Exception.php';
             throw new Zend_Tool_Framework_Client_Exception('A project already exists here');
         }
 
         $profileData = null;
 
-        if ($fileOfProfile != null && file_exists((string) $fileOfProfile)) {
+        if (null != $fileOfProfile && file_exists((string) $fileOfProfile)) {
             $profileData = file_get_contents($fileOfProfile);
         }
 
         $storage = $this->_registry->getStorage();
-        if ($profileData == '' && $nameOfProfile != null && $storage->isEnabled()) {
-            $profileData = $storage->get('project/profiles/' . $nameOfProfile . '.xml');
+        if ('' == $profileData && null != $nameOfProfile && $storage->isEnabled()) {
+            $profileData = $storage->get('project/profiles/'.$nameOfProfile.'.xml');
         }
 
-        if ($profileData == '') {
+        if ('' == $profileData) {
             $profileData = $this->_getDefaultProfile();
         }
 
-        $newProfile = new Zend_Tool_Project_Profile(array(
+        $newProfile = new Zend_Tool_Project_Profile([
             'projectDirectory' => $path,
-            'profileData' => $profileData
-            ));
+            'profileData' => $profileData,
+            ]);
 
         $newProfile->loadFromData();
 
         $response = $this->_registry->getResponse();
 
-        $response->appendContent('Creating project at ' . $path);
-        $response->appendContent('Note: ', array('separator' => false, 'color' => 'yellow'));
+        $response->appendContent('Creating project at '.$path);
+        $response->appendContent('Note: ', ['separator' => false, 'color' => 'yellow']);
         $response->appendContent(
             'This command created a web project, '
-            . 'for more information setting up your VHOST, please see docs/README');
+            .'for more information setting up your VHOST, please see docs/README');
 
         if (!Zend_Tool_Project_Provider_Test::isPHPUnitAvailable()) {
-            $response->appendContent('Testing Note: ', array('separator' => false, 'color' => 'yellow'));
+            $response->appendContent('Testing Note: ', ['separator' => false, 'color' => 'yellow']);
             $response->appendContent('PHPUnit was not found in your include_path, therefore no testing actions will be created.');
         }
 
@@ -110,7 +108,7 @@ class Zend_Tool_Project_Provider_Project
 
     public function show()
     {
-        $this->_registry->getResponse()->appendContent('You probably meant to run "show project.info".', array('color' => 'yellow'));
+        $this->_registry->getResponse()->appendContent('You probably meant to run "show project.info".', ['color' => 'yellow']);
     }
 
     public function showInfo()
@@ -119,7 +117,7 @@ class Zend_Tool_Project_Provider_Project
         if (!$profile) {
             $this->_registry->getResponse()->appendContent('No project found.');
         } else {
-            $this->_registry->getResponse()->appendContent('Working with project located at: ' . $profile->getAttribute('projectDirectory'));
+            $this->_registry->getResponse()->appendContent('Working with project located at: '.$profile->getAttribute('projectDirectory'));
         }
     }
 
@@ -204,6 +202,7 @@ $testAction
     </projectDirectory>
 </projectProfile>
 EOS;
+
         return $data;
     }
 
@@ -212,7 +211,7 @@ EOS;
         $projectDirResource = $caller->getResource()->getProfile()->search('projectDirectory');
         if ($projectDirResource) {
             $name = ltrim((string) strrchr($projectDirResource->getPath(), DIRECTORY_SEPARATOR), DIRECTORY_SEPARATOR);
-            $path = $projectDirResource->getPath() . '/public';
+            $path = $projectDirResource->getPath().'/public';
         } else {
             $path = '/path/to/public';
         }

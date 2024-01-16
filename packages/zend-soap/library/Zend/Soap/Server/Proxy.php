@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +13,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage AutoDiscover
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id:$
  */
-
 class Zend_Soap_Server_Proxy
 {
     /**
@@ -30,46 +29,48 @@ class Zend_Soap_Server_Proxy
      * @var string
      */
     protected $_className;
+
     /**
-     * Constructor
-     * 
-     * @param object $service 
+     * Constructor.
      */
-    public function  __construct($className, $classArgs = array())
+    public function __construct($className, $classArgs = [])
     {
         $class = new ReflectionClass($className);
         $constructor = $class->getConstructor();
-	if ($constructor === null) {
+        if (null === $constructor) {
             $this->_classInstance = $class->newInstance();
-	} else {
+        } else {
             $this->_classInstance = $class->newInstanceArgs($classArgs);
-	}
-	$this->_className = $className;
+        }
+        $this->_className = $className;
     }
+
     /**
-     * Proxy for the WS-I compliant call
-     * 
-     * @param  string $name
-     * @param  string $arguments
-     * @return array 
+     * Proxy for the WS-I compliant call.
+     *
+     * @param string $name
+     * @param string $arguments
+     *
+     * @return array
      */
     public function __call($name, $arguments)
     {
-        $result = call_user_func_array(array($this->_classInstance, $name), $this->_preProcessArguments($arguments));
-        return array("{$name}Result"=>$result);
+        $result = call_user_func_array([$this->_classInstance, $name], $this->_preProcessArguments($arguments));
+
+        return ["{$name}Result" => $result];
     }
+
     /**
-     *  Pre process arguments
-     * 
-     * @param  mixed $arguments
-     * @return array 
+     *  Pre process arguments.
+     *
+     * @return array
      */
     protected function _preProcessArguments($arguments)
     {
-        if (count($arguments) == 1 && is_object($arguments[0])) {
+        if (1 == count($arguments) && is_object($arguments[0])) {
             return get_object_vars($arguments[0]);
-	} else {
+        } else {
             return $arguments;
-	}
+        }
     }
 }

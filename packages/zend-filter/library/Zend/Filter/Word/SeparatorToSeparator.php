@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Filter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,21 +27,20 @@
 
 /**
  * @category   Zend
- * @package    Zend_Filter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Filter_Word_SeparatorToSeparator extends Zend_Filter_PregReplace
 {
-
-    protected $_searchSeparator = null;
-    protected $_replacementSeparator = null;
+    protected $_searchSeparator;
+    protected $_replacementSeparator;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param  string  $searchSeparator      Seperator to search for
-     * @param  string  $replacementSeperator Seperator to replace with
+     * @param string $searchSeparator Seperator to search for
+     *
      * @return void
      */
     public function __construct($searchSeparator = ' ', $replacementSeparator = '-')
@@ -50,21 +50,23 @@ class Zend_Filter_Word_SeparatorToSeparator extends Zend_Filter_PregReplace
     }
 
     /**
-     * Sets a new seperator to search for
+     * Sets a new seperator to search for.
      *
-     * @param  string  $separator  Seperator to search for
+     * @param string $separator Seperator to search for
+     *
      * @return $this
      */
     public function setSearchSeparator($separator)
     {
         $this->_searchSeparator = $separator;
+
         return $this;
     }
 
     /**
-     * Returns the actual set seperator to search for
+     * Returns the actual set seperator to search for.
      *
-     * @return  string|null
+     * @return string|null
      */
     public function getSearchSeparator()
     {
@@ -72,21 +74,23 @@ class Zend_Filter_Word_SeparatorToSeparator extends Zend_Filter_PregReplace
     }
 
     /**
-     * Sets a new seperator which replaces the searched one
+     * Sets a new seperator which replaces the searched one.
      *
-     * @param  string  $separator  Seperator which replaces the searched one
+     * @param string $separator Seperator which replaces the searched one
+     *
      * @return $this
      */
     public function setReplacementSeparator($separator)
     {
         $this->_replacementSeparator = $separator;
+
         return $this;
     }
 
     /**
-     * Returns the actual set seperator which replaces the searched one
+     * Returns the actual set seperator which replaces the searched one.
      *
-     * @return  string|null
+     * @return string|null
      */
     public function getReplacementSeparator()
     {
@@ -94,11 +98,12 @@ class Zend_Filter_Word_SeparatorToSeparator extends Zend_Filter_PregReplace
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend_Filter_Interface.
      *
      * Returns the string $value, replacing the searched seperators with the defined ones
      *
-     * @param  string $value
+     * @param string $value
+     *
      * @return string
      */
     public function filter($value)
@@ -107,23 +112,24 @@ class Zend_Filter_Word_SeparatorToSeparator extends Zend_Filter_PregReplace
     }
 
     /**
-     * Do the real work, replaces the seperator to search for with the replacement seperator
+     * Do the real work, replaces the seperator to search for with the replacement seperator.
      *
      * Returns the replaced string
      *
-     * @param  string $value
+     * @param string $value
+     *
      * @return string
      */
     protected function _separatorToSeparatorFilter($value)
     {
-        if ($this->_searchSeparator == null) {
+        if (null == $this->_searchSeparator) {
             // require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('You must provide a search separator for this filter to work.');
         }
 
-        $this->setMatchPattern('#' . preg_quote($this->_searchSeparator, '#') . '#');
+        $this->setMatchPattern('#'.preg_quote($this->_searchSeparator, '#').'#');
         $this->setReplacement($this->_replacementSeparator);
+
         return parent::filter($value);
     }
-
 }

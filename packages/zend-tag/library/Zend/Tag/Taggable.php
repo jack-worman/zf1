@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,37 +13,37 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tag
- * @subpackage Item
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
  * @category   Zend
- * @package    Zend_Tag
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface Zend_Tag_Taggable
 {
     /**
-     * Get the title of the tag
+     * Get the title of the tag.
      *
      * @return string
      */
     public function getTitle();
 
     /**
-     * Get the weight of the tag
+     * Get the weight of the tag.
      *
      * @return float
      */
     public function getWeight();
 
     /**
-     * Set a parameter
+     * Set a parameter.
      *
      * @param string $name
      * @param string $value
@@ -51,10 +51,9 @@ interface Zend_Tag_Taggable
     public function setParam($name, $value);
 
     /**
-     * Get a parameter
+     * Get a parameter.
      *
-     * @param  string $name
-     * @return mixed
+     * @param string $name
      */
     public function getParam($name);
 }

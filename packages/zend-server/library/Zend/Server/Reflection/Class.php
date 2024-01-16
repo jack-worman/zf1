@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,65 +13,68 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Server
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
- * Zend_Server_Reflection_Method
+ * Zend_Server_Reflection_Method.
  */
 // require_once 'Zend/Server/Reflection/Method.php';
 
 /**
- * Class/Object reflection
+ * Class/Object reflection.
  *
  * Proxies calls to a ReflectionClass object, and decorates getMethods() by
  * creating its own list of {@link Zend_Server_Reflection_Method}s.
  *
  * @category   Zend
- * @package    Zend_Server
- * @subpackage Reflection
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version $Id$
  */
 class Zend_Server_Reflection_Class
 {
     /**
      * Optional configuration parameters; accessible via {@link __get} and
-     * {@link __set()}
+     * {@link __set()}.
+     *
      * @var array
      */
-    protected $_config = array();
+    protected $_config = [];
 
     /**
-     * Array of {@link Zend_Server_Reflection_Method}s
+     * Array of {@link Zend_Server_Reflection_Method}s.
+     *
      * @var array
      */
-    protected $_methods = array();
+    protected $_methods = [];
 
     /**
-     * Namespace
+     * Namespace.
+     *
      * @var string
      */
-    protected $_namespace = null;
+    protected $_namespace;
 
     /**
-     * ReflectionClass object
+     * ReflectionClass object.
+     *
      * @var ReflectionClass
      */
     protected $_reflection;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * Create array of dispatchable methods, each a
      * {@link Zend_Server_Reflection_Method}. Sets reflection object property.
      *
-     * @param ReflectionClass $reflection
      * @param string $namespace
-     * @param mixed $argv
+     *
      * @return void
      */
     public function __construct(ReflectionClass $reflection, $namespace = null, $argv = false)
@@ -93,16 +96,15 @@ class Zend_Server_Reflection_Class
     }
 
     /**
-     * Proxy reflection calls
+     * Proxy reflection calls.
      *
      * @param string $method
-     * @param array $args
-     * @return mixed
+     * @param array  $args
      */
     public function __call($method, $args)
     {
         if (method_exists($this->_reflection, $method)) {
-            return call_user_func_array(array($this->_reflection, $method), $args);
+            return call_user_func_array([$this->_reflection, $method], $args);
         }
 
         // require_once 'Zend/Server/Reflection/Exception.php';
@@ -110,13 +112,12 @@ class Zend_Server_Reflection_Class
     }
 
     /**
-     * Retrieve configuration parameters
+     * Retrieve configuration parameters.
      *
      * Values are retrieved by key from {@link $_config}. Returns null if no
      * value found.
      *
      * @param string $key
-     * @return mixed
      */
     public function __get($key)
     {
@@ -128,12 +129,12 @@ class Zend_Server_Reflection_Class
     }
 
     /**
-     * Set configuration parameters
+     * Set configuration parameters.
      *
      * Values are stored by $key in {@link $_config}.
      *
      * @param string $key
-     * @param mixed $value
+     *
      * @return void
      */
     public function __set($key, $value)
@@ -144,7 +145,6 @@ class Zend_Server_Reflection_Class
     /**
      * Return array of dispatchable {@link Zend_Server_Reflection_Method}s.
      *
-     * @access public
      * @return array
      */
     public function getMethods()
@@ -153,7 +153,7 @@ class Zend_Server_Reflection_Class
     }
 
     /**
-     * Get namespace for this class
+     * Get namespace for this class.
      *
      * @return string
      */
@@ -163,15 +163,17 @@ class Zend_Server_Reflection_Class
     }
 
     /**
-     * Set namespace for this class
+     * Set namespace for this class.
      *
      * @param string $namespace
+     *
      * @return void
      */
     public function setNamespace($namespace)
     {
         if (empty($namespace)) {
             $this->_namespace = '';
+
             return;
         }
 
@@ -184,7 +186,7 @@ class Zend_Server_Reflection_Class
     }
 
     /**
-     * Wakeup from serialization
+     * Wakeup from serialization.
      *
      * Reflection needs explicit instantiation to work correctly. Re-instantiate
      * reflection object on wakeup.

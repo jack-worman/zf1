@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,24 +13,24 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Pdf
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Pdf_Element_Dictionary
+ * Zend_Pdf_Element_Dictionary.
  */
 // require_once 'Zend/Pdf/Element/Dictionary.php';
 
 /**
  * @category   Zend
- * @package    Zend_Pdf
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Pdf
  */
 #[AllowDynamicProperties]
@@ -44,7 +44,7 @@ class Zend_Pdf_Element_DictionaryTest extends PHPUnit_Framework_TestCase
 
     public function testPDFDictionary2()
     {
-        $srcArray = array();
+        $srcArray = [];
         $srcArray['Bool'] = new Zend_Pdf_Element_Boolean(false);
         $srcArray['Number'] = new Zend_Pdf_Element_Numeric(100.426);
         $srcArray['Name'] = new Zend_Pdf_Element_Name('MyName');
@@ -61,6 +61,7 @@ class Zend_Pdf_Element_DictionaryTest extends PHPUnit_Framework_TestCase
             $arrayObj = new Zend_Pdf_Element_Dictionary(346);
         } catch (Zend_Pdf_Exception $e) {
             $this->assertRegExp('/must be an array/i', $e->getMessage());
+
             return;
         }
         $this->fail('Expected Zend_Pdf_Exception to be thrown');
@@ -69,7 +70,7 @@ class Zend_Pdf_Element_DictionaryTest extends PHPUnit_Framework_TestCase
     public function testPDFDictionaryBadInput2()
     {
         try {
-            $srcArray = array();
+            $srcArray = [];
             $srcArray['Bool'] = new Zend_Pdf_Element_Boolean(false);
             $srcArray['Number'] = new Zend_Pdf_Element_Numeric(100.426);
             $srcArray['Name'] = new Zend_Pdf_Element_Name('MyName');
@@ -79,6 +80,7 @@ class Zend_Pdf_Element_DictionaryTest extends PHPUnit_Framework_TestCase
             $dictionaryObj = new Zend_Pdf_Element_Dictionary($srcArray);
         } catch (Zend_Pdf_Exception $e) {
             $this->assertRegExp('/must be Zend_Pdf_Element/i', $e->getMessage());
+
             return;
         }
         $this->fail('Expected Zend_Pdf_Exception to be thrown');
@@ -87,7 +89,7 @@ class Zend_Pdf_Element_DictionaryTest extends PHPUnit_Framework_TestCase
     public function testPDFDictionaryBadInput3()
     {
         try {
-            $srcArray = array();
+            $srcArray = [];
             $srcArray['Bool'] = new Zend_Pdf_Element_Boolean(false);
             $srcArray['Number'] = new Zend_Pdf_Element_Numeric(100.426);
             $srcArray['Name'] = new Zend_Pdf_Element_Name('MyName');
@@ -97,6 +99,7 @@ class Zend_Pdf_Element_DictionaryTest extends PHPUnit_Framework_TestCase
             $dictionaryObj = new Zend_Pdf_Element_Dictionary($srcArray);
         } catch (Zend_Pdf_Exception $e) {
             $this->assertRegExp('/keys must be strings/i', $e->getMessage());
+
             return;
         }
         $this->fail('Expected Zend_Pdf_Exception to be thrown');
@@ -110,7 +113,7 @@ class Zend_Pdf_Element_DictionaryTest extends PHPUnit_Framework_TestCase
 
     public function testToString()
     {
-        $srcArray = array();
+        $srcArray = [];
         $srcArray['Bool'] = new Zend_Pdf_Element_Boolean(false);
         $srcArray['Number'] = new Zend_Pdf_Element_Numeric(100.426);
         $srcArray['Name'] = new Zend_Pdf_Element_Name('MyName');
@@ -118,7 +121,7 @@ class Zend_Pdf_Element_DictionaryTest extends PHPUnit_Framework_TestCase
         $srcArray['BinaryText'] = new Zend_Pdf_Element_String_Binary("\x01\x02\x00\xff");
         $dictionaryObj = new Zend_Pdf_Element_Dictionary($srcArray);
         $this->assertEquals($dictionaryObj->toString(),
-                            '<</Bool false /Number 100.426 /Name /MyName /Text (some text) /BinaryText <010200FF> >>');
+            '<</Bool false /Number 100.426 /Name /MyName /Text (some text) /BinaryText <010200FF> >>');
     }
 
     public function testAdd()
@@ -129,7 +132,6 @@ class Zend_Pdf_Element_DictionaryTest extends PHPUnit_Framework_TestCase
         $dictionaryObj->add(new Zend_Pdf_Element_Name('Var3'), new Zend_Pdf_Element_Name('MyName'));
         $dictionaryObj->add(new Zend_Pdf_Element_Name('Var4'), new Zend_Pdf_Element_String('some text'));
         $this->assertEquals($dictionaryObj->toString(),
-                            '<</Var1 false /Var2 100.426 /Var3 /MyName /Var4 (some text) >>');
+            '<</Var1 false /Var2 100.426 /Var3 /MyName /Var4 (some text) >>');
     }
-
 }

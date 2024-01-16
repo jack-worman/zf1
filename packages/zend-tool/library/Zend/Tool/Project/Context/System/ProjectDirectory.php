@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage Framework
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -41,30 +41,25 @@
 // require_once 'Zend/Tool/Project/Context/System/NotOverwritable.php';
 
 /**
- * This class is the front most class for utilizing Zend_Tool_Project
+ * This class is the front most class for utilizing Zend_Tool_Project.
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
  * @category   Zend
- * @package    Zend_Tool
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Context_System_ProjectDirectory
-    extends Zend_Tool_Project_Context_Filesystem_Directory
-    implements Zend_Tool_Project_Context_System_Interface,
-               Zend_Tool_Project_Context_System_NotOverwritable,
-               Zend_Tool_Project_Context_System_TopLevelRestrictable
+class Zend_Tool_Project_Context_System_ProjectDirectory extends Zend_Tool_Project_Context_Filesystem_Directory implements Zend_Tool_Project_Context_System_Interface, Zend_Tool_Project_Context_System_NotOverwritable, Zend_Tool_Project_Context_System_TopLevelRestrictable
 {
-
     /**
      * @var string
      */
-    protected $_filesystemName = null;
+    protected $_filesystemName;
 
     /**
-     * getName()
+     * getName().
      *
      * @return string
      */
@@ -74,7 +69,7 @@ class Zend_Tool_Project_Context_System_ProjectDirectory
     }
 
     /**
-     * init()
+     * init().
      *
      * @return Zend_Tool_Project_Context_System_ProjectDirectory
      */
@@ -84,22 +79,23 @@ class Zend_Tool_Project_Context_System_ProjectDirectory
         $projectDirectory = $this->_resource->getAttribute('path');
 
         // if not, get from profile
-        if ($projectDirectory == null) {
+        if (null == $projectDirectory) {
             $projectDirectory = $this->_resource->getProfile()->getAttribute('projectDirectory');
         }
 
         // if not, exception.
-        if ($projectDirectory == null) {
+        if (null == $projectDirectory) {
             // require_once 'Zend/Tool/Project/Exception.php';
             throw new Zend_Tool_Project_Exception('projectDirectory cannot find the directory for this project.');
         }
 
         $this->_baseDirectory = rtrim((string) $projectDirectory, '\\/');
+
         return $this;
     }
 
     /**
-     * create()
+     * create().
      *
      * @return Zend_Tool_Project_Context_System_ProjectDirectory
      */
@@ -122,7 +118,7 @@ class Zend_Tool_Project_Context_System_ProjectDirectory
         }
 
         parent::create();
+
         return $this;
     }
-
 }

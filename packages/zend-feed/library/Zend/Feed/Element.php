@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,24 +14,23 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /**
  * Wraps a DOMElement allowing for SimpleXML-like access to attributes.
  *
  * @category   Zend
- * @package    Zend_Feed
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Feed_Element implements ArrayAccess
 {
-
     /**
      * @var DOMElement
      */
@@ -48,15 +47,15 @@ class Zend_Feed_Element implements ArrayAccess
     protected $_parentElement;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $_appended = true;
-
 
     /**
      * Zend_Feed_Element constructor.
      *
-     * @param  DOMElement $element The DOM element we're encapsulating.
+     * @param DOMElement $element the DOM element we're encapsulating
+     *
      * @return void
      */
     public function __construct($element = null)
@@ -64,9 +63,8 @@ class Zend_Feed_Element implements ArrayAccess
         $this->_element = $element;
     }
 
-
     /**
-     * Get a DOM representation of the element
+     * Get a DOM representation of the element.
      *
      * Returns the underlying DOM object, which can then be
      * manipulated with full DOM methods.
@@ -78,15 +76,13 @@ class Zend_Feed_Element implements ArrayAccess
         return $this->_element;
     }
 
-
     /**
-     * Update the object from a DOM element
+     * Update the object from a DOM element.
      *
      * Take a DOMElement object, which may be originally from a call
      * to getDOM() or may be custom created, and use it as the
      * DOM tree for this Zend_Feed_Element.
      *
-     * @param  DOMElement $element
      * @return void
      */
     public function setDOM(DOMElement $element)
@@ -98,7 +94,6 @@ class Zend_Feed_Element implements ArrayAccess
      * Set the parent element of this object to another
      * Zend_Feed_Element.
      *
-     * @param  Zend_Feed_Element $element
      * @return void
      */
     public function setParent(Zend_Feed_Element $element)
@@ -106,7 +101,6 @@ class Zend_Feed_Element implements ArrayAccess
         $this->_parentElement = $element;
         $this->_appended = false;
     }
-
 
     /**
      * Appends this element to its parent if necessary.
@@ -122,9 +116,8 @@ class Zend_Feed_Element implements ArrayAccess
         }
     }
 
-
     /**
-     * Get an XML string representation of this element
+     * Get an XML string representation of this element.
      *
      * Returns a string of this element's XML, including the XML
      * prologue.
@@ -137,12 +130,12 @@ class Zend_Feed_Element implements ArrayAccess
         $doc = new DOMDocument($this->_element->ownerDocument->version,
             (string) $this->_element->ownerDocument->actualEncoding);
         $doc->appendChild($doc->importNode($this->_element, true));
+
         return $doc->saveXML();
     }
 
-
     /**
-     * Get the XML for only this element
+     * Get the XML for only this element.
      *
      * Returns a string of this element's XML without prologue.
      *
@@ -154,7 +147,7 @@ class Zend_Feed_Element implements ArrayAccess
     }
 
     /**
-     * Get encoding
+     * Get encoding.
      *
      * @return string
      */
@@ -164,14 +157,16 @@ class Zend_Feed_Element implements ArrayAccess
     }
 
     /**
-     * Set encoding
+     * Set encoding.
      *
-     * @param  string $value Encoding to use
+     * @param string $value Encoding to use
+     *
      * @return Zend_Feed_Element
      */
     public function setEncoding($value)
     {
         $this->_encoding = (string) $value;
+
         return $this;
     }
 
@@ -182,18 +177,17 @@ class Zend_Feed_Element implements ArrayAccess
      * child element accessed. To get string values, use method syntax
      * with the __call() overriding.
      *
-     * @param  string $var The property to access.
-     * @return mixed
+     * @param string $var the property to access
      */
     public function __get($var)
     {
         $nodes = $this->_children($var);
         $length = count($nodes);
 
-        if ($length == 1) {
+        if (1 == $length) {
             return new Zend_Feed_Element($nodes[0]);
         } elseif ($length > 1) {
-             return array_map(function ($e) { return new Zend_Feed_Element($e); }, $nodes);
+            return array_map(function ($e) { return new Zend_Feed_Element($e); }, $nodes);
         } else {
             // When creating anonymous nodes for __set chaining, don't
             // call appendChild() on them. Instead we pass the current
@@ -201,7 +195,7 @@ class Zend_Feed_Element implements ArrayAccess
             // then responsible for appending itself when it is
             // actually set. This way "if ($foo->bar)" doesn't create
             // a phantom "bar" element in our tree.
-            if (strpos((string) $var, ':') !== false) {
+            if (false !== strpos((string) $var, ':')) {
                 list($ns, $elt) = explode(':', $var, 2);
                 $node = $this->_element->ownerDocument->createElementNS(Zend_Feed::lookupNamespace($ns), $elt);
             } else {
@@ -209,17 +203,19 @@ class Zend_Feed_Element implements ArrayAccess
             }
             $node = new self($node);
             $node->setParent($this);
+
             return $node;
         }
     }
 
-
     /**
      * Map variable sets onto the underlying entry representation.
      *
-     * @param  string $var The property to change.
-     * @param  string $val The property's new value.
+     * @param string $var the property to change
+     * @param string $val the property's new value
+     *
      * @return void
+     *
      * @throws Zend_Feed_Exception
      */
     public function __set($var, $val)
@@ -228,7 +224,7 @@ class Zend_Feed_Element implements ArrayAccess
 
         $nodes = $this->_children($var);
         if (!$nodes) {
-            if (strpos((string) $var, ':') !== false) {
+            if (false !== strpos((string) $var, ':')) {
                 list($ns, $elt) = explode(':', $var, 2);
                 $node = $this->_element->ownerDocument->createElementNS(Zend_Feed::lookupNamespace($ns),
                     $var, htmlspecialchars((string) $val, ENT_NOQUOTES, $this->getEncoding()));
@@ -239,7 +235,7 @@ class Zend_Feed_Element implements ArrayAccess
                 $this->_element->appendChild($node);
             }
         } elseif (count($nodes) > 1) {
-            /**
+            /*
              * @see Zend_Feed_Exception
              */
             // require_once 'Zend/Feed/Exception.php';
@@ -249,19 +245,19 @@ class Zend_Feed_Element implements ArrayAccess
         }
     }
 
-
     /**
      * Map isset calls onto the underlying entry representation.
      *
-     * @param  string $var
-     * @return boolean
+     * @param string $var
+     *
+     * @return bool
      */
     public function __isset($var)
     {
         // Look for access of the form {ns:var}. We don't use
         // _children() here because we can break out of the loop
         // immediately once we find something.
-        if (strpos((string) $var, ':') !== false) {
+        if (false !== strpos((string) $var, ':')) {
             list($ns, $elt) = explode(':', $var, 2);
             foreach ($this->_element->childNodes as $child) {
                 if ($child->localName == $elt && $child->prefix == $ns) {
@@ -277,7 +273,6 @@ class Zend_Feed_Element implements ArrayAccess
         }
     }
 
-
     /**
      * Get the value of an element with method syntax.
      *
@@ -285,9 +280,10 @@ class Zend_Feed_Element implements ArrayAccess
      * element. If there are multiple elements that match, this will
      * return an array of those objects.
      *
-     * @param  string $var    The element to get the string value of.
-     * @param  mixed  $unused This parameter is not used.
-     * @return mixed The node's value, null, or an array of nodes.
+     * @param string $var    the element to get the string value of
+     * @param mixed  $unused this parameter is not used
+     *
+     * @return mixed the node's value, null, or an array of nodes
      */
     public function __call($var, $unused)
     {
@@ -302,11 +298,11 @@ class Zend_Feed_Element implements ArrayAccess
         }
     }
 
-
     /**
      * Remove all children matching $var.
      *
-     * @param  string $var
+     * @param string $var
+     *
      * @return void
      */
     public function __unset($var)
@@ -317,7 +313,6 @@ class Zend_Feed_Element implements ArrayAccess
             $parent->removeChild($node);
         }
     }
-
 
     /**
      * Returns the nodeValue of this element when this object is used
@@ -330,21 +325,21 @@ class Zend_Feed_Element implements ArrayAccess
         return $this->_element->nodeValue;
     }
 
-
     /**
-     * Finds children with tagnames matching $var
+     * Finds children with tagnames matching $var.
      *
      * Similar to SimpleXML's children() method.
      *
-     * @param  string $var Tagname to match, can be either namespace:tagName or just tagName.
+     * @param string $var tagname to match, can be either namespace:tagName or just tagName
+     *
      * @return array
      */
     protected function _children($var)
     {
-        $found = array();
+        $found = [];
 
         // Look for access of the form {ns:var}.
-        if (strpos((string) $var, ':') !== false) {
+        if (false !== strpos((string) $var, ':')) {
             list($ns, $elt) = explode(':', $var, 2);
             foreach ($this->_element->childNodes as $child) {
                 if ($child->localName == $elt && $child->prefix == $ns) {
@@ -362,57 +357,60 @@ class Zend_Feed_Element implements ArrayAccess
         return $found;
     }
 
-
     /**
      * Required by the ArrayAccess interface.
      *
-     * @param  string $offset
-     * @return boolean
+     * @param string $offset
+     *
+     * @return bool
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetExists($offset)
     {
-        if (strpos((string) $offset, ':') !== false) {
+        if (false !== strpos((string) $offset, ':')) {
             list($ns, $attr) = explode(':', $offset, 2);
+
             return $this->_element->hasAttributeNS(Zend_Feed::lookupNamespace($ns), $attr);
         } else {
             return $this->_element->hasAttribute($offset);
         }
     }
 
-
     /**
      * Required by the ArrayAccess interface.
      *
-     * @param  string $offset
+     * @param string $offset
+     *
      * @return string
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
-        if (strpos((string) $offset, ':') !== false) {
+        if (false !== strpos((string) $offset, ':')) {
             list($ns, $attr) = explode(':', $offset, 2);
+
             return $this->_element->getAttributeNS(Zend_Feed::lookupNamespace($ns), $attr);
         } else {
             return $this->_element->getAttribute($offset);
         }
     }
 
-
     /**
      * Required by the ArrayAccess interface.
      *
-     * @param  string $offset
-     * @param  string $value
+     * @param string $offset
+     * @param string $value
+     *
      * @return DOMAttr|false|void
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         $this->ensureAppended();
 
-        if (strpos((string) $offset, ':') !== false) {
+        if (false !== strpos((string) $offset, ':')) {
             list($ns, $attr) = explode(':', $offset, 2);
+
             // DOMElement::setAttributeNS() requires $qualifiedName to have a prefix
             return $this->_element->setAttributeNS(Zend_Feed::lookupNamespace($ns), $offset, $value);
         } else {
@@ -420,22 +418,22 @@ class Zend_Feed_Element implements ArrayAccess
         }
     }
 
-
     /**
      * Required by the ArrayAccess interface.
      *
-     * @param  string $offset
-     * @return boolean
+     * @param string $offset
+     *
+     * @return bool
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
-        if (strpos((string) $offset, ':') !== false) {
+        if (false !== strpos((string) $offset, ':')) {
             list($ns, $attr) = explode(':', $offset, 2);
+
             return $this->_element->removeAttributeNS(Zend_Feed::lookupNamespace($ns), $attr);
         } else {
             return $this->_element->removeAttribute($offset);
         }
     }
-
 }

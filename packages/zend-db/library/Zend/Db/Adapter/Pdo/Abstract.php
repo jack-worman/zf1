@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,38 +13,33 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage Adapter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /**
  * @see Zend_Db_Adapter_Abstract
  */
 // require_once 'Zend/Db/Adapter/Abstract.php';
 
-
 /**
  * @see Zend_Db_Statement_Pdo
  */
 // require_once 'Zend/Db/Statement/Pdo.php';
 
-
 /**
  * Class for connecting to SQL databases and performing common operations using PDO.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage Adapter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
 {
-
     /**
      * Default class name for a DB statement.
      *
@@ -75,13 +70,14 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
             $dsn[$key] = "$key=$val";
         }
 
-        return $this->_pdoType . ':' . implode(';', $dsn);
+        return $this->_pdoType.':'.implode(';', $dsn);
     }
 
     /**
      * Creates a PDO object and connects to the database.
      *
      * @return void
+     *
      * @throws Zend_Db_Adapter_Exception
      */
     protected function _connect()
@@ -96,7 +92,7 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
 
         // check for PDO extension
         if (!extension_loaded('pdo')) {
-            /**
+            /*
              * @see Zend_Db_Adapter_Exception
              */
             // require_once 'Zend/Db/Adapter/Exception.php';
@@ -105,18 +101,18 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
 
         // check the PDO driver is available
         if (!in_array($this->_pdoType, PDO::getAvailableDrivers())) {
-            /**
+            /*
              * @see Zend_Db_Adapter_Exception
              */
             // require_once 'Zend/Db/Adapter/Exception.php';
-            throw new Zend_Db_Adapter_Exception('The ' . $this->_pdoType . ' driver is not currently installed');
+            throw new Zend_Db_Adapter_Exception('The '.$this->_pdoType.' driver is not currently installed');
         }
 
         // create PDO connection
         $q = $this->_profiler->queryStart('connect', Zend_Db_Profiler::CONNECT);
 
         // add the persistence flag if we find it in our config array
-        if (isset($this->_config['persistent']) && ($this->_config['persistent'] == true)) {
+        if (isset($this->_config['persistent']) && (true == $this->_config['persistent'])) {
             $this->_config['driver_options'][PDO::ATTR_PERSISTENT] = true;
         }
 
@@ -135,25 +131,23 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
 
             // always use exceptions.
             $this->_connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
         } catch (PDOException $e) {
-            /**
+            /*
              * @see Zend_Db_Adapter_Exception
              */
             // require_once 'Zend/Db/Adapter/Exception.php';
             throw new Zend_Db_Adapter_Exception($e->getMessage(), $e->getCode(), $e);
         }
-
     }
 
     /**
-     * Test if a connection is active
+     * Test if a connection is active.
      *
-     * @return boolean
+     * @return bool
      */
     public function isConnected()
     {
-        return ((bool) ($this->_connection instanceof PDO));
+        return (bool) ($this->_connection instanceof PDO);
     }
 
     /**
@@ -169,8 +163,8 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
     /**
      * Prepares an SQL statement.
      *
-     * @param string $sql The SQL statement with placeholders.
-     * @param array $bind An array of data to bind to the placeholders.
+     * @param string $sql the SQL statement with placeholders
+     *
      * @return PDOStatement
      */
     public function prepare($sql)
@@ -183,6 +177,7 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
         }
         $stmt = new $stmtClass($this, $sql);
         $stmt->setFetchMode($this->_fetchMode);
+
         return $stmt;
     }
 
@@ -199,26 +194,30 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
      * On RDBMS brands that don't support sequences, $tableName and $primaryKey
      * are ignored.
      *
-     * @param string $tableName   OPTIONAL Name of table.
-     * @param string $primaryKey  OPTIONAL Name of primary key column.
+     * @param string $tableName  OPTIONAL Name of table
+     * @param string $primaryKey OPTIONAL Name of primary key column
+     *
      * @return string
      */
     public function lastInsertId($tableName = null, $primaryKey = null)
     {
         $this->_connect();
+
         return $this->_connection->lastInsertId();
     }
 
     /**
      * Special handling for PDO query().
-     * All bind parameter names must begin with ':'
+     * All bind parameter names must begin with ':'.
      *
-     * @param string|Zend_Db_Select $sql The SQL statement with placeholders.
-     * @param array $bind An array of data to bind to the placeholders.
+     * @param string|Zend_Db_Select $sql  the SQL statement with placeholders
+     * @param array                 $bind an array of data to bind to the placeholders
+     *
      * @return PDOStatement|Zend_Db_Statement|Zend_Db_Statement_Interface
-     * @throws Zend_Db_Adapter_Exception To re-throw PDOException.
+     *
+     * @throws Zend_Db_Adapter_Exception to re-throw PDOException
      */
-    public function query($sql, $bind = array())
+    public function query($sql, $bind = [])
     {
         if (empty($bind) && $sql instanceof Zend_Db_Select) {
             $bind = $sql->getBind();
@@ -237,7 +236,7 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
         try {
             return parent::query($sql, $bind);
         } catch (PDOException $e) {
-            /**
+            /*
              * @see Zend_Db_Statement_Exception
              */
             // require_once 'Zend/Db/Statement/Exception.php';
@@ -246,12 +245,13 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
     }
 
     /**
-     * Executes an SQL statement and return the number of affected rows
+     * Executes an SQL statement and return the number of affected rows.
      *
-     * @param  mixed  $sql  The SQL statement with placeholders.
-     *                      May be a string or Zend_Db_Select.
-     * @return integer      Number of rows that were modified
-     *                      or deleted by the SQL statement
+     * @param mixed $sql The SQL statement with placeholders.
+     *                   May be a string or Zend_Db_Select.
+     *
+     * @return int Number of rows that were modified
+     *             or deleted by the SQL statement
      */
     public function exec($sql)
     {
@@ -262,9 +262,9 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
         try {
             $affected = $this->getConnection()->exec($sql);
 
-            if ($affected === false) {
+            if (false === $affected) {
                 $errorInfo = $this->getConnection()->errorInfo();
-                /**
+                /*
                  * @see Zend_Db_Adapter_Exception
                  */
                 // require_once 'Zend/Db/Adapter/Exception.php';
@@ -273,7 +273,7 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
 
             return $affected;
         } catch (PDOException $e) {
-            /**
+            /*
              * @see Zend_Db_Adapter_Exception
              */
             // require_once 'Zend/Db/Adapter/Exception.php';
@@ -285,6 +285,7 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
      * Quote a raw string.
      *
      * @param string|int|float|null $value
+     *
      * @return string|int|float
      */
     protected function _quote($value)
@@ -293,6 +294,7 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
             return $value;
         }
         $this->_connect();
+
         return $this->_connection->quote((string) $value);
     }
 
@@ -317,7 +319,8 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
     /**
      * Roll-back a transaction.
      */
-    protected function _rollBack() {
+    protected function _rollBack()
+    {
         $this->_connect();
         $this->_connection->rollBack();
     }
@@ -327,15 +330,17 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
      *
      * @todo Support FETCH_CLASS and FETCH_INTO.
      *
-     * @param int $mode A PDO fetch mode.
+     * @param int $mode a PDO fetch mode
+     *
      * @return void
+     *
      * @throws Zend_Db_Adapter_Exception
      */
     public function setFetchMode($mode)
     {
-        //check for PDO extension
+        // check for PDO extension
         if (!extension_loaded('pdo')) {
-            /**
+            /*
              * @see Zend_Db_Adapter_Exception
              */
             // require_once 'Zend/Db/Adapter/Exception.php';
@@ -351,7 +356,7 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
                 $this->_fetchMode = $mode;
                 break;
             default:
-                /**
+                /*
                  * @see Zend_Db_Adapter_Exception
                  */
                 // require_once 'Zend/Db/Adapter/Exception.php';
@@ -364,6 +369,7 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
      * Check if the adapter supports real SQL parameters.
      *
      * @param string $type 'positional' or 'named'
+     *
      * @return bool
      */
     public function supportsParameters($type)
@@ -377,7 +383,7 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
     }
 
     /**
-     * Retrieve server version in PHP style
+     * Retrieve server version in PHP style.
      *
      * @return string
      */

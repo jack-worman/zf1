@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Form_Element_ImageTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Form_Element_ImageTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Form_Element_ImageTest::main');
 }
 
 // require_once 'Zend/Form/Element/Image.php';
@@ -30,13 +30,13 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 // require_once 'Zend/Translate/Adapter/Array.php';
 
 /**
- * Test class for Zend_Form_Element_Image
+ * Test class for Zend_Form_Element_Image.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Form
  */
 #[AllowDynamicProperties]
@@ -49,7 +49,7 @@ class Zend_Form_Element_ImageTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Element_ImageTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Form_Element_ImageTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -91,7 +91,7 @@ class Zend_Form_Element_ImageTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * ZF-2717
+     * ZF-2717.
      */
     public function testImageShouldSetHelperPropertyToFormImageByDefault()
     {
@@ -169,7 +169,7 @@ class Zend_Form_Element_ImageTest extends PHPUnit_Framework_TestCase
     public function testTitleAttributeGetsTranslated()
     {
         $this->element->setAttrib('title', 'bar');
-        $translator = new Zend_Translate_Adapter_Array(array("bar" => "baz"), 'de');
+        $translator = new Zend_Translate_Adapter_Array(['bar' => 'baz'], 'de');
         $this->element->setTranslator($translator);
         $html = $this->element->render(new Zend_View());
         $this->assertContains('title', $html);
@@ -180,7 +180,7 @@ class Zend_Form_Element_ImageTest extends PHPUnit_Framework_TestCase
     public function testTitleAttributeDoesNotGetTranslatedIfTranslatorIsDisabled()
     {
         $this->element->setAttrib('title', 'bar');
-        $translator = new Zend_Translate_Adapter_Array(array("bar" => "baz"), 'de');
+        $translator = new Zend_Translate_Adapter_Array(['bar' => 'baz'], 'de');
         $this->element->setTranslator($translator);
         // now disable translator and see if that works
         $this->element->setDisableTranslator(true);
@@ -191,9 +191,10 @@ class Zend_Form_Element_ImageTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Prove the fluent interface on Zend_Form_Element_Image::loadDefaultDecorators
+     * Prove the fluent interface on Zend_Form_Element_Image::loadDefaultDecorators.
      *
-     * @link http://framework.zend.com/issues/browse/ZF-9913
+     * @see http://framework.zend.com/issues/browse/ZF-9913
+     *
      * @return void
      */
     public function testFluentInterfaceOnLoadDefaultDecorators()
@@ -203,6 +204,6 @@ class Zend_Form_Element_ImageTest extends PHPUnit_Framework_TestCase
 }
 
 // Call Zend_Form_Element_ImageTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Form_Element_ImageTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Form_Element_ImageTest::main') {
     Zend_Form_Element_ImageTest::main();
 }

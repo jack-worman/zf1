@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,28 +13,27 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Application
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Application_Resource_ResourceAbstractTest::main');
 }
 
 /**
- * Zend_Loader_Autoloader
+ * Zend_Loader_Autoloader.
  */
 // require_once 'Zend/Loader/Autoloader.php';
 
 /**
  * @category   Zend
- * @package    Zend_Application
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Application
  */
 #[AllowDynamicProperties]
@@ -42,7 +41,7 @@ class Zend_Application_Resource_ResourceAbstractTest extends PHPUnit_Framework_T
 {
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
+        $suite = new PHPUnit_Framework_TestSuite(__CLASS__);
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -53,7 +52,7 @@ class Zend_Application_Resource_ResourceAbstractTest extends PHPUnit_Framework_T
         if (!is_array($this->loaders)) {
             // spl_autoload_functions does not return empty array when no
             // autoloaders registered...
-            $this->loaders = array();
+            $this->loaders = [];
         }
 
         Zend_Loader_Autoloader::resetInstance();
@@ -61,7 +60,7 @@ class Zend_Application_Resource_ResourceAbstractTest extends PHPUnit_Framework_T
 
         $this->application = new Zend_Application('testing');
 
-        require_once __DIR__ . '/../_files/ZfAppBootstrap.php';
+        require_once __DIR__.'/../_files/ZfAppBootstrap.php';
         $this->bootstrap = new ZfAppBootstrap($this->application);
     }
 
@@ -83,14 +82,14 @@ class Zend_Application_Resource_ResourceAbstractTest extends PHPUnit_Framework_T
 
     public function testBootstrapIsNullByDefault()
     {
-        require_once __DIR__ . '/../_files/resources/Foo.php';
+        require_once __DIR__.'/../_files/resources/Foo.php';
         $resource = new Zend_Application_BootstrapTest_Resource_Foo();
         $this->assertNull($resource->getBootstrap());
     }
 
     public function testResourceShouldAllowSettingParentBootstrap()
     {
-        require_once __DIR__ . '/../_files/resources/Foo.php';
+        require_once __DIR__.'/../_files/resources/Foo.php';
         $resource = new Zend_Application_BootstrapTest_Resource_Foo();
         $resource->setBootstrap($this->bootstrap);
         $this->assertSame($this->bootstrap, $resource->getBootstrap());
@@ -98,28 +97,28 @@ class Zend_Application_Resource_ResourceAbstractTest extends PHPUnit_Framework_T
 
     public function testOptionsAreStoredVerbatim()
     {
-        require_once __DIR__ . '/../_files/resources/Foo.php';
+        require_once __DIR__.'/../_files/resources/Foo.php';
         $resource = new Zend_Application_BootstrapTest_Resource_Foo();
-        $options  = array(
+        $options = [
             'foo' => 'bar',
-        );
+        ];
         $resource->setOptions($options);
         $this->assertEquals($options, $resource->getOptions());
     }
 
     public function testCallingSetOptionsMultipleTimesMergesOptions()
     {
-        require_once __DIR__ . '/../_files/resources/Foo.php';
+        require_once __DIR__.'/../_files/resources/Foo.php';
         $resource = new Zend_Application_BootstrapTest_Resource_Foo();
-        $options1  = array(
+        $options1 = [
             'foo' => 'bar',
-        );
-        $options2  = array(
+        ];
+        $options2 = [
             'bar' => 'baz',
-        );
-        $options3  = array(
+        ];
+        $options3 = [
             'foo' => 'BAR',
-        );
+        ];
         $expected = $resource->mergeOptions($options1, $options2);
         $expected = $resource->mergeOptions($expected, $options3);
         $resource->setOptions($options1)
@@ -130,31 +129,31 @@ class Zend_Application_Resource_ResourceAbstractTest extends PHPUnit_Framework_T
 
     public function testSetOptionsProxiesToLocalSetters()
     {
-        require_once __DIR__ . '/../_files/resources/Foo.php';
+        require_once __DIR__.'/../_files/resources/Foo.php';
         $resource = new Zend_Application_BootstrapTest_Resource_Foo();
-        $options  = array(
+        $options = [
             'someArbitraryKey' => 'test',
-        );
+        ];
         $resource->setOptions($options);
         $this->assertEquals('test', $resource->someArbitraryKey);
     }
 
     public function testConstructorAcceptsArrayConfiguration()
     {
-        require_once __DIR__ . '/../_files/resources/Foo.php';
-        $options  = array(
+        require_once __DIR__.'/../_files/resources/Foo.php';
+        $options = [
             'foo' => 'bar',
-        );
+        ];
         $resource = new Zend_Application_BootstrapTest_Resource_Foo($options);
         $this->assertEquals($options, $resource->getOptions());
     }
 
     public function testConstructorAcceptsZendConfigObject()
     {
-        require_once __DIR__ . '/../_files/resources/Foo.php';
-        $options  = array(
+        require_once __DIR__.'/../_files/resources/Foo.php';
+        $options = [
             'foo' => 'bar',
-        );
+        ];
         $config = new Zend_Config($options);
         $resource = new Zend_Application_BootstrapTest_Resource_Foo($config);
         $this->assertEquals($options, $resource->getOptions());
@@ -165,11 +164,11 @@ class Zend_Application_Resource_ResourceAbstractTest extends PHPUnit_Framework_T
      */
     public function testSetOptionsShouldRemoveBootstrapOptionWhenPassed()
     {
-        require_once __DIR__ . '/../_files/resources/Foo.php';
+        require_once __DIR__.'/../_files/resources/Foo.php';
         $resource = new Zend_Application_BootstrapTest_Resource_Foo();
-        $resource->setOptions(array(
+        $resource->setOptions([
             'bootstrap' => $this->bootstrap,
-        ));
+        ]);
         $this->assertSame($this->bootstrap, $resource->getBootstrap());
         $options = $resource->getOptions();
         $this->assertNotContains('bootstrap', array_keys($options));
@@ -180,14 +179,14 @@ class Zend_Application_Resource_ResourceAbstractTest extends PHPUnit_Framework_T
      */
     public function testFirstResourceOptionShouldNotBeDropped()
     {
-        require_once __DIR__ . '/../_files/resources/Foo.php';
-        $options = array(
-            array('someData'),
-            array('someMoreData'),
-        );
+        require_once __DIR__.'/../_files/resources/Foo.php';
+        $options = [
+            ['someData'],
+            ['someMoreData'],
+        ];
 
         $resource = new Zend_Application_BootstrapTest_Resource_Foo($options);
-        $stored   = $resource->getOptions();
+        $stored = $resource->getOptions();
         $this->assertSame($options, $stored);
     }
 }

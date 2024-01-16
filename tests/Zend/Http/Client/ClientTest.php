@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Http
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -24,10 +24,10 @@
 
 /**
  * @category   Zend
- * @package    Zend_Http_Client
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Http
  * @group      Zend_Http_Client
  */
@@ -35,8 +35,7 @@
 class Zend_Http_Client_ClientTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Set up the test case
-     *
+     * Set up the test case.
      */
     protected function setUp()
     {
@@ -45,28 +44,29 @@ class Zend_Http_Client_ClientTest extends PHPUnit_Framework_TestCase
 
     public function invalidHeaders()
     {
-        return array(
-            'invalid-name-cr'                      => array("X-Foo-\rBar", 'value'),
-            'invalid-name-lf'                      => array("X-Foo-\nBar", 'value'),
-            'invalid-name-crlf'                    => array("X-Foo-\r\nBar", 'value'),
-            'invalid-value-cr'                     => array('X-Foo-Bar', "value\risEvil"),
-            'invalid-value-lf'                     => array('X-Foo-Bar', "value\nisEvil"),
-            'invalid-value-bad-continuation'       => array('X-Foo-Bar', "value\r\nisEvil"),
-            'invalid-array-value-cr'               => array('X-Foo-Bar', array("value\risEvil")),
-            'invalid-array-value-lf'               => array('X-Foo-Bar', array("value\nisEvil")),
-            'invalid-array-value-bad-continuation' => array('X-Foo-Bar', array("value\r\nisEvil")),
-        );
+        return [
+            'invalid-name-cr' => ["X-Foo-\rBar", 'value'],
+            'invalid-name-lf' => ["X-Foo-\nBar", 'value'],
+            'invalid-name-crlf' => ["X-Foo-\r\nBar", 'value'],
+            'invalid-value-cr' => ['X-Foo-Bar', "value\risEvil"],
+            'invalid-value-lf' => ['X-Foo-Bar', "value\nisEvil"],
+            'invalid-value-bad-continuation' => ['X-Foo-Bar', "value\r\nisEvil"],
+            'invalid-array-value-cr' => ['X-Foo-Bar', ["value\risEvil"]],
+            'invalid-array-value-lf' => ['X-Foo-Bar', ["value\nisEvil"]],
+            'invalid-array-value-bad-continuation' => ['X-Foo-Bar', ["value\r\nisEvil"]],
+        ];
     }
 
     /**
      * @dataProvider invalidHeaders
+     *
      * @group ZF2015-04
      */
     public function testHeadersContainingCRLFInjectionRaiseAnException($name, $value)
     {
         $this->setExpectedException('Zend_Http_Exception');
-        $this->client->setHeaders(array(
+        $this->client->setHeaders([
             $name => $value,
-        ));
+        ]);
     }
 }

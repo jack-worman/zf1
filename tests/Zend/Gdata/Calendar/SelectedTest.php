@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata_Calendar
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -25,55 +25,60 @@
 
 /**
  * @category   Zend
- * @package    Zend_Gdata_Calendar
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Calendar
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_Calendar_SelectedTest extends PHPUnit_Framework_TestCase
 {
-
-    public function setUp() {
+    public function setUp()
+    {
         $this->selectedText = file_get_contents(
-                'Zend/Gdata/Calendar/_files/SelectedElementSample1.xml',
-                true);
+            'Zend/Gdata/Calendar/_files/SelectedElementSample1.xml',
+            true);
         $this->selected = new Zend_Gdata_Calendar_Extension_Selected();
     }
 
-    public function testEmptySelectedShouldHaveNoExtensionElements() {
+    public function testEmptySelectedShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->selected->extensionElements));
-        $this->assertTrue(count($this->selected->extensionElements) == 0);
+        $this->assertTrue(0 == count($this->selected->extensionElements));
     }
 
-    public function testEmptySelectedShouldHaveNoExtensionAttributes() {
+    public function testEmptySelectedShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->selected->extensionAttributes));
-        $this->assertTrue(count($this->selected->extensionAttributes) == 0);
+        $this->assertTrue(0 == count($this->selected->extensionAttributes));
     }
 
-    public function testSampleSelectedShouldHaveNoExtensionElements() {
+    public function testSampleSelectedShouldHaveNoExtensionElements()
+    {
         $this->selected->transferFromXML($this->selectedText);
         $this->assertTrue(is_array($this->selected->extensionElements));
-        $this->assertTrue(count($this->selected->extensionElements) == 0);
+        $this->assertTrue(0 == count($this->selected->extensionElements));
     }
 
-    public function testSampleSelectedShouldHaveNoExtensionAttributes() {
+    public function testSampleSelectedShouldHaveNoExtensionAttributes()
+    {
         $this->selected->transferFromXML($this->selectedText);
         $this->assertTrue(is_array($this->selected->extensionAttributes));
-        $this->assertTrue(count($this->selected->extensionAttributes) == 0);
+        $this->assertTrue(0 == count($this->selected->extensionAttributes));
     }
 
-    public function testNormalSelectedShouldHaveNoExtensionElements() {
+    public function testNormalSelectedShouldHaveNoExtensionElements()
+    {
         $this->selected->value = true;
         $this->assertEquals($this->selected->value, true);
         $this->assertEquals(count($this->selected->extensionElements), 0);
         $newSelected = new Zend_Gdata_Calendar_Extension_Selected();
         $newSelected->transferFromXML($this->selected->saveXML());
         $this->assertEquals(count($newSelected->extensionElements), 0);
-        $newSelected->extensionElements = array(
-                new Zend_Gdata_App_Extension_Element('foo', 'atom', null, 'bar'));
+        $newSelected->extensionElements = [
+                new Zend_Gdata_App_Extension_Element('foo', 'atom', null, 'bar')];
         $this->assertEquals(count($newSelected->extensionElements), 1);
         $this->assertEquals($newSelected->value, true);
 
@@ -85,7 +90,8 @@ class Zend_Gdata_Calendar_SelectedTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($newSelected2->value, true);
     }
 
-    public function testEmptySelectedToAndFromStringShouldMatch() {
+    public function testEmptySelectedToAndFromStringShouldMatch()
+    {
         $selectedXml = $this->selected->saveXML();
         $newSelected = new Zend_Gdata_Calendar_Extension_Selected();
         $newSelected->transferFromXML($selectedXml);
@@ -93,7 +99,8 @@ class Zend_Gdata_Calendar_SelectedTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($selectedXml == $newSelectedXml);
     }
 
-    public function testSelectedWithValueToAndFromStringShouldMatch() {
+    public function testSelectedWithValueToAndFromStringShouldMatch()
+    {
         $this->selected->value = true;
         $selectedXml = $this->selected->saveXML();
         $newSelected = new Zend_Gdata_Calendar_Extension_Selected();
@@ -103,10 +110,11 @@ class Zend_Gdata_Calendar_SelectedTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(true, $newSelected->value);
     }
 
-    public function testExtensionAttributes() {
+    public function testExtensionAttributes()
+    {
         $extensionAttributes = $this->selected->extensionAttributes;
-        $extensionAttributes['foo1'] = array('name'=>'foo1', 'value'=>'bar');
-        $extensionAttributes['foo2'] = array('name'=>'foo2', 'value'=>'rab');
+        $extensionAttributes['foo1'] = ['name' => 'foo1', 'value' => 'bar'];
+        $extensionAttributes['foo2'] = ['name' => 'foo2', 'value' => 'rab'];
         $this->selected->extensionAttributes = $extensionAttributes;
         $this->assertEquals('bar', $this->selected->extensionAttributes['foo1']['value']);
         $this->assertEquals('rab', $this->selected->extensionAttributes['foo2']['value']);
@@ -117,9 +125,9 @@ class Zend_Gdata_Calendar_SelectedTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('rab', $newSelected->extensionAttributes['foo2']['value']);
     }
 
-    public function testConvertFullSelectedToAndFromString() {
+    public function testConvertFullSelectedToAndFromString()
+    {
         $this->selected->transferFromXML($this->selectedText);
         $this->assertEquals($this->selected->value, false);
     }
-
 }

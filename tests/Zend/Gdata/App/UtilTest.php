@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata_App
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -26,17 +26,16 @@
 
 /**
  * @category   Zend
- * @package    Zend_Gdata_App
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_App
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_App_UtilTest extends PHPUnit_Framework_TestCase
 {
-
     public function testFormatTimestampFromString()
     {
         // assert that a correctly formatted timestamp is not modified
@@ -93,10 +92,11 @@ class Zend_Gdata_App_UtilTest extends PHPUnit_Framework_TestCase
             $ts = Zend_Gdata_App_Util::formatTimestamp('nonsense string');
         } catch (Zend_Gdata_App_Exception $e) {
             $this->assertEquals('Invalid timestamp: nonsense string.', $e->getMessage());
+
             return;
         }
         // Excetion not thrown, this is bad.
-        $this->fail("Exception not thrown.");
+        $this->fail('Exception not thrown.');
     }
 
     public function testExceptionFormatTimestampSemiInvalid()
@@ -106,10 +106,11 @@ class Zend_Gdata_App_UtilTest extends PHPUnit_Framework_TestCase
             $ts = Zend_Gdata_App_Util::formatTimestamp('2007-06-05adslfkja');
         } catch (Zend_Gdata_App_Exception $e) {
             $this->assertEquals('Invalid timestamp: 2007-06-05adslfkja.', $e->getMessage());
+
             return;
         }
         // Excetion not thrown, this is bad.
-        $this->fail("Exception not thrown.");
+        $this->fail('Exception not thrown.');
     }
 
     public function testExceptionFormatTimestampInvalidTime()
@@ -119,10 +120,11 @@ class Zend_Gdata_App_UtilTest extends PHPUnit_Framework_TestCase
             $ts = Zend_Gdata_App_Util::formatTimestamp('2007-06-05Tadslfkja');
         } catch (Zend_Gdata_App_Exception $e) {
             $this->assertEquals('Invalid timestamp: 2007-06-05Tadslfkja.', $e->getMessage());
+
             return;
         }
         // Excetion not thrown, this is bad.
-        $this->fail("Exception not thrown.");
+        $this->fail('Exception not thrown.');
     }
 
     public function testExceptionFormatTimestampInvalidOffset()
@@ -132,10 +134,11 @@ class Zend_Gdata_App_UtilTest extends PHPUnit_Framework_TestCase
             $ts = Zend_Gdata_App_Util::formatTimestamp('2007-06-05T02:51:12+egg');
         } catch (Zend_Gdata_App_Exception $e) {
             $this->assertEquals('Invalid timestamp: 2007-06-05T02:51:12+egg.', $e->getMessage());
+
             return;
         }
         // Excetion not thrown, this is bad.
-        $this->fail("Exception not thrown.");
+        $this->fail('Exception not thrown.');
     }
 
     public function testExceptionFormatTimestampInvalidOffsetHours()
@@ -145,10 +148,11 @@ class Zend_Gdata_App_UtilTest extends PHPUnit_Framework_TestCase
             $ts = Zend_Gdata_App_Util::formatTimestamp('2007-06-05T02:51:12-ab:00');
         } catch (Zend_Gdata_App_Exception $e) {
             $this->assertEquals('Invalid timestamp: 2007-06-05T02:51:12-ab:00.', $e->getMessage());
+
             return;
         }
         // Excetion not thrown, this is bad.
-        $this->fail("Exception not thrown.");
+        $this->fail('Exception not thrown.');
     }
 
     /**
@@ -162,62 +166,67 @@ class Zend_Gdata_App_UtilTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testFindGreatestBoundedValueReturnsMax() {
-        $data = array(-1 => null,
+    public function testFindGreatestBoundedValueReturnsMax()
+    {
+        $data = [-1 => null,
                       0 => null,
                       1 => null,
                       2 => null,
                       3 => null,
                       5 => null,
-                      -2 => null);
+                      -2 => null];
         $result = Zend_Gdata_App_Util::findGreatestBoundedValue(99, $data);
         $this->assertEquals(5, $result);
     }
 
-    public function testFindGreatestBoundedValueReturnsMaxWhenBounded() {
-        $data = array(-1 => null,
+    public function testFindGreatestBoundedValueReturnsMaxWhenBounded()
+    {
+        $data = [-1 => null,
                       0 => null,
                       1 => null,
                       2 => null,
                       3 => null,
                       5 => null,
-                      -2 => null);
+                      -2 => null];
         $result = Zend_Gdata_App_Util::findGreatestBoundedValue(4, $data);
         $this->assertEquals(3, $result);
     }
 
-    public function testFindGreatestBoundedValueReturnsMaxWhenUnbounded() {
-        $data = array(-1 => null,
+    public function testFindGreatestBoundedValueReturnsMaxWhenUnbounded()
+    {
+        $data = [-1 => null,
                       0 => null,
                       1 => null,
                       2 => null,
                       3 => null,
                       5 => null,
-                      -2 => null);
+                      -2 => null];
         $result = Zend_Gdata_App_Util::findGreatestBoundedValue(null, $data);
         $this->assertEquals(5, $result);
     }
 
-    public function testFindGreatestBoundedValueReturnsZeroWhenZeroBounded() {
-        $data = array(-1 => null,
+    public function testFindGreatestBoundedValueReturnsZeroWhenZeroBounded()
+    {
+        $data = [-1 => null,
                       0 => null,
                       1 => null,
                       2 => null,
                       3 => null,
                       5 => null,
-                      -2 => null);
+                      -2 => null];
         $result = Zend_Gdata_App_Util::findGreatestBoundedValue(0, $data);
         $this->assertEquals(0, $result);
     }
 
-    public function testFindGreatestBoundedValueFailsWhenNegativelyBounded() {
-        $data = array(-1 => null,
+    public function testFindGreatestBoundedValueFailsWhenNegativelyBounded()
+    {
+        $data = [-1 => null,
                       0 => null,
                       1 => null,
                       2 => null,
                       3 => null,
                       5 => null,
-                      -2 => null);
+                      -2 => null];
         try {
             $result = Zend_Gdata_App_Util::findGreatestBoundedValue(-1, $data);
             $failed = true;
@@ -226,5 +235,4 @@ class Zend_Gdata_App_UtilTest extends PHPUnit_Framework_TestCase
         }
         $this->assertFalse($failed, 'Exception not raised.');
     }
-
 }

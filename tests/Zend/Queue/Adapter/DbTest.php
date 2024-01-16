@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Queue
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -38,7 +38,7 @@
 require_once 'MessageTestClass.php';
 
 /** Base Adapter test class */
-require_once __DIR__ . '/AdapterTest.php';
+require_once __DIR__.'/AdapterTest.php';
 
 /**
  * @see Zend_Db_Select
@@ -47,17 +47,17 @@ require_once __DIR__ . '/AdapterTest.php';
 
 /**
  * @category   Zend
- * @package    Zend_Queue
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Queue
  */
 #[AllowDynamicProperties]
 class Zend_Queue_Adapter_DbTest extends Zend_Queue_Adapter_AdapterTest
 {
     /**
-     * Test setup
+     * Test setup.
      */
     public function setUp()
     {
@@ -70,7 +70,7 @@ class Zend_Queue_Adapter_DbTest extends Zend_Queue_Adapter_AdapterTest
 
     /**
      * getAdapterName() is an method to help make AdapterTest work with any
-     * new adapters
+     * new adapters.
      *
      * You must overload this method
      *
@@ -83,7 +83,7 @@ class Zend_Queue_Adapter_DbTest extends Zend_Queue_Adapter_AdapterTest
 
     /**
      * getAdapterName() is an method to help make AdapterTest work with any
-     * new adapters
+     * new adapters.
      *
      * You may overload this method.  The default return is
      * 'Zend_Queue_Adapter_' . $this->getAdapterName()
@@ -92,21 +92,21 @@ class Zend_Queue_Adapter_DbTest extends Zend_Queue_Adapter_AdapterTest
      */
     public function getAdapterFullName()
     {
-        return 'Zend_Queue_Adapter_' . $this->getAdapterName();
+        return 'Zend_Queue_Adapter_'.$this->getAdapterName();
     }
 
     public function getTestConfig()
     {
-        $driverOptions = array();
+        $driverOptions = [];
         if (defined('TESTS_ZEND_QUEUE_DB')) {
             // require_once 'Zend/Json.php';
             $driverOptions = Zend_Json::decode(TESTS_ZEND_QUEUE_DB);
         }
 
-        return array(
-            'options'       => array(Zend_Db_Select::FOR_UPDATE => true),
+        return [
+            'options' => [Zend_Db_Select::FOR_UPDATE => true],
             'driverOptions' => $driverOptions,
-        );
+        ];
     }
 
     // test the constants
@@ -117,29 +117,29 @@ class Zend_Queue_Adapter_DbTest extends Zend_Queue_Adapter_AdapterTest
 
     // additional non-standard tests
 
-    public function test_constructor2()
+    public function testConstructor2()
     {
         try {
             $config = $this->getTestConfig();
-            /**
+            /*
              * @see Zend_Db_Select
              */
             // require_once 'Zend/Db/Select.php';
-            $config['options'][Zend_Db_Select::FOR_UPDATE] = array();
+            $config['options'][Zend_Db_Select::FOR_UPDATE] = [];
             $queue = $this->createQueue(__FUNCTION__, $config);
             $this->fail('FOR_UPDATE accepted an array');
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->assertTrue(true, 'FOR_UPDATE cannot be an array');
         }
 
-        foreach (array('host', 'username', 'password', 'dbname') as $i => $arg) {
+        foreach (['host', 'username', 'password', 'dbname'] as $i => $arg) {
             try {
                 $config = $this->getTestConfig();
                 unset($config['driverOptions'][$arg]);
                 $queue = $this->createQueue(__FUNCTION__, $config);
                 $this->fail("$arg is required but was missing.");
-            } catch (\Throwable $e) {
-                $this->assertTrue(true, $arg . ' is required.');
+            } catch (Throwable $e) {
+                $this->assertTrue(true, $arg.' is required.');
             }
         }
     }
@@ -162,4 +162,3 @@ class Zend_Queue_Adapter_DbTest extends Zend_Queue_Adapter_AdapterTest
         $this->assertEquals(0, count($messages));
     }
 }
-

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,55 +13,60 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
  * @category   Zend
- * @package    Zend_Validate
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface Zend_Validate_Barcode_AdapterInterface
 {
     /**
-     * Checks the length of a barcode
+     * Checks the length of a barcode.
      *
-     * @param  string $value  The barcode to check for proper length
-     * @return boolean
+     * @param string $value The barcode to check for proper length
+     *
+     * @return bool
      */
     public function checkLength($value);
 
     /**
-     * Checks for allowed characters within the barcode
+     * Checks for allowed characters within the barcode.
      *
-     * @param  string $value The barcode to check for allowed characters
-     * @return boolean
+     * @param string $value The barcode to check for allowed characters
+     *
+     * @return bool
      */
     public function checkChars($value);
 
     /**
-     * Validates the checksum
+     * Validates the checksum.
      *
      * @param string $value The barcode to check the checksum for
-     * @return boolean
+     *
+     * @return bool
      */
     public function checksum($value);
 
     /**
-     * Returns if barcode uses a checksum
+     * Returns if barcode uses a checksum.
      *
-     * @return boolean
+     * @return bool
      */
     public function getCheck();
 
     /**
-     * Sets the checksum validation
+     * Sets the checksum validation.
      *
-     * @param  boolean $check
+     * @param bool $check
+     *
      * @return Zend_Validate_Barcode_Adapter Provides a fluent interface
      */
     public function setCheck($check);

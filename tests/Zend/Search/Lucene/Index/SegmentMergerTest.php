@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,35 +13,34 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Search_Lucene_Storage_Directory_Filesystem
+ * Zend_Search_Lucene_Storage_Directory_Filesystem.
  */
 // require_once 'Zend/Search/Lucene/Storage/Directory/Filesystem.php';
 
 /**
- * Zend_Search_Lucene_Index_SegmentInfo
+ * Zend_Search_Lucene_Index_SegmentInfo.
  */
 // require_once 'Zend/Search/Lucene/Index/SegmentInfo.php';
 
-
 /**
- * Zend_Search_Lucene_Index_SegmentMerger
+ * Zend_Search_Lucene_Index_SegmentMerger.
  */
 // require_once 'Zend/Search/Lucene/Index/SegmentMerger.php';
 
 /**
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Search_Lucene
  */
 #[AllowDynamicProperties]
@@ -49,9 +48,9 @@ class Zend_Search_Lucene_Index_SegmentMergerTest extends PHPUnit_Framework_TestC
 {
     public function testMerge()
     {
-        $segmentsDirectory = new Zend_Search_Lucene_Storage_Directory_Filesystem(__DIR__ . '/_source/_files');
-        $outputDirectory   = new Zend_Search_Lucene_Storage_Directory_Filesystem(__DIR__ . '/_files');
-        $segmentsList = array('_0', '_1', '_2', '_3', '_4');
+        $segmentsDirectory = new Zend_Search_Lucene_Storage_Directory_Filesystem(__DIR__.'/_source/_files');
+        $outputDirectory = new Zend_Search_Lucene_Storage_Directory_Filesystem(__DIR__.'/_files');
+        $segmentsList = ['_0', '_1', '_2', '_3', '_4'];
 
         $segmentMerger = new Zend_Search_Lucene_Index_SegmentMerger($outputDirectory, 'mergedSegment');
 
@@ -74,4 +73,3 @@ class Zend_Search_Lucene_Index_SegmentMergerTest extends PHPUnit_Framework_TestC
         $outputDirectory->deleteFile('mergedSegment.cfs');
     }
 }
-

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Amf
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -24,8 +24,7 @@
  * Test Class for class mapping tests.
  *
  * @category   Zend
- * @package    Zend_Amf
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -34,14 +33,13 @@ class Contact
 {
     public $_explicitType = 'ContactVO';
     public $id = 0;
-    public $firstname = "";
-    public $lastname = "";
-    public $email = "";
-    public $mobile = "";
+    public $firstname = '';
+    public $lastname = '';
+    public $email = '';
+    public $mobile = '';
 
     public function getASClassName()
     {
         return 'ContactVO';
     }
 }
-

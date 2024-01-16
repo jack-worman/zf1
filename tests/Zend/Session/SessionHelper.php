@@ -1,11 +1,13 @@
 <?php
+
 #[AllowDynamicProperties]
 class Zend_Session_SessionHelper
 {
     /**
-     * Destroy session and reset all internal changes
+     * Destroy session and reset all internal changes.
      */
-    public static function reset() {
+    public static function reset()
+    {
         if (Zend_Session::isStarted()) {
             Zend_Session::destroy();
         }
@@ -16,10 +18,10 @@ class Zend_Session_SessionHelper
         Zend_Session_Namespace::unlockAll();
         Zend_Session_Namespace::resetSingleInstance();
 
-        foreach(array(
+        foreach ([
                     'Zend_Session_Abstract::_writable' => false,
                     'Zend_Session_Abstract::_readable' => false,
-                    'Zend_Session_Abstract::_expiringData' => array(),
+                    'Zend_Session_Abstract::_expiringData' => [],
                     'Zend_Session::_sessionStarted' => false,
                     'Zend_Session::_regenerateIdState' => 0,
                     'Zend_Session::_writeClosed' => false,
@@ -27,7 +29,7 @@ class Zend_Session_SessionHelper
                     'Zend_Session::_destroyed' => false,
                     'Zend_Session::_strict' => false,
                     'Zend_Session::_defaultOptionsSet' => false,
-                ) as $prop => $value) {
+                ] as $prop => $value) {
             list($class, $property) = explode('::', $prop);
             $reflection = new ReflectionProperty($class, $property);
             $reflection->setAccessible(true);

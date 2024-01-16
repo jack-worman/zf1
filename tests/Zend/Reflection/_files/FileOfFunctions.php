@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,29 +13,28 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Reflection
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
-function zend_reflection_function1() {
+function zend_reflection_function1()
+{
     return 'foo';
 }
 
-
 /**
- * Zend Function Two
+ * Zend Function Two.
  *
  * This is the long description for funciton two
  *
  * @param unknown_type $one
  * @param unknown_type $two
+ *
  * @return string
  */
-function zend_reflection_function2($one, $two = 'two') {
-
+function zend_reflection_function2($one, $two = 'two')
+{
     return 'blah';
 }
-

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,25 +13,23 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata_App
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
 // require_once 'Zend/Gdata/App/Base.php';
 
 /**
- * Minimal implementation of Zend_Gdata_App_Base
+ * Minimal implementation of Zend_Gdata_App_Base.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Unittests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
 #[AllowDynamicProperties]
 class Zend_Gdata_App_MockBase extends Zend_Gdata_App_Base
 {

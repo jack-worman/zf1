@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,8 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Config
- * @package    Writer
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -22,34 +21,36 @@
 // require_once "Zend/Config/Writer.php";
 
 /**
- * Abstract File Writer
+ * Abstract File Writer.
  *
  * @category   Zend
- * @package    Zend_package
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 class Zend_Config_Writer_FileAbstract extends Zend_Config_Writer
 {
     /**
-     * Filename to write to
+     * Filename to write to.
      *
      * @var string
      */
-    protected $_filename = null;
+    protected $_filename;
 
     /**
-     * Wether to exclusively lock the file or not
+     * Wether to exclusively lock the file or not.
      *
-     * @var boolean
+     * @var bool
      */
     protected $_exclusiveLock = false;
 
     /**
-     * Set the target filename
+     * Set the target filename.
      *
-     * @param  string $filename
+     * @param string $filename
+     *
      * @return Zend_Config_Writer_FileAbstract
      */
     public function setFilename($filename)
@@ -60,9 +61,10 @@ class Zend_Config_Writer_FileAbstract extends Zend_Config_Writer
     }
 
     /**
-     * Set wether to exclusively lock the file or not
+     * Set wether to exclusively lock the file or not.
      *
-     * @param  boolean     $exclusiveLock
+     * @param bool $exclusiveLock
+     *
      * @return Zend_Config_Writer_FileAbstract
      */
     public function setExclusiveLock($exclusiveLock)
@@ -76,30 +78,30 @@ class Zend_Config_Writer_FileAbstract extends Zend_Config_Writer
      * Write configuration to file.
      *
      * @param string $filename
-     * @param Zend_Config $config
-     * @param bool $exclusiveLock
+     * @param bool   $exclusiveLock
+     *
      * @return void
      */
     public function write($filename = null, Zend_Config $config = null, $exclusiveLock = null)
     {
-        if ($filename !== null) {
+        if (null !== $filename) {
             $this->setFilename($filename);
         }
 
-        if ($config !== null) {
+        if (null !== $config) {
             $this->setConfig($config);
         }
 
-        if ($exclusiveLock !== null) {
+        if (null !== $exclusiveLock) {
             $this->setExclusiveLock($exclusiveLock);
         }
 
-        if ($this->_filename === null) {
+        if (null === $this->_filename) {
             // require_once 'Zend/Config/Exception.php';
             throw new Zend_Config_Exception('No filename was set');
         }
 
-        if ($this->_config === null) {
+        if (null === $this->_config) {
             // require_once 'Zend/Config/Exception.php';
             throw new Zend_Config_Exception('No config was set');
         }
@@ -114,9 +116,9 @@ class Zend_Config_Writer_FileAbstract extends Zend_Config_Writer
 
         $result = @file_put_contents($this->_filename, $configString, $flags);
 
-        if ($result === false) {
+        if (false === $result) {
             // require_once 'Zend/Config/Exception.php';
-            throw new Zend_Config_Exception('Could not write to file "' . $this->_filename . '"');
+            throw new Zend_Config_Exception('Could not write to file "'.$this->_filename.'"');
         }
     }
 
@@ -124,11 +126,13 @@ class Zend_Config_Writer_FileAbstract extends Zend_Config_Writer
      * Render a Zend_Config into a config file string.
      *
      * @since 1.10
+     *
      * @todo For 2.0 this should be redone into an abstract method.
+     *
      * @return string
      */
     public function render()
     {
-        return "";
+        return '';
     }
 }

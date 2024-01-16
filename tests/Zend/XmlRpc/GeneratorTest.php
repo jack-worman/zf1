@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,23 +13,23 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version $Id: ValueTest.php 18442 2009-09-30 13:17:48Z lars $
  */
 
 require_once 'Zend/XmlRpc/TestProvider.php';
 
 /**
- * Test case for Zend_XmlRpc_Generator_*
+ * Test case for Zend_XmlRpc_Generator_*.
  *
  * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_XmlRpc
  */
 #[AllowDynamicProperties]
@@ -80,7 +80,7 @@ class Zend_XmlRpc_GeneratorTest extends PHPUnit_Framework_TestCase
         $generator->openElement('test')->closeElement('test');
         $this->assertXml('<test/>', $generator);
         $this->assertContains('<test/>', $generator->flush());
-        $this->assertSame('', (string)$generator);
+        $this->assertSame('', (string) $generator);
     }
 
     /**
@@ -120,7 +120,7 @@ class Zend_XmlRpc_GeneratorTest extends PHPUnit_Framework_TestCase
     {
         $expected = \trim((string) $expected);
         $this->assertSame($expected, \trim((string) $actual));
-        $xmlDecl = '<?xml version="1.0" encoding="' . $actual->getEncoding() . '"?>' . "\n";
-        $this->assertSame($xmlDecl . $expected, \trim((string) $actual->saveXml()));
+        $xmlDecl = '<?xml version="1.0" encoding="'.$actual->getEncoding().'"?>'."\n";
+        $this->assertSame($xmlDecl.$expected, \trim((string) $actual->saveXml()));
     }
 }

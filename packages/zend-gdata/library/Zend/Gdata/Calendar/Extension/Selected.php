@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Calendar
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,24 +27,23 @@
 // require_once 'Zend/Gdata/Extension.php';
 
 /**
- * Represents the gCal:selected element used by the Calendar data API
+ * Represents the gCal:selected element used by the Calendar data API.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Calendar
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_Calendar_Extension_Selected extends Zend_Gdata_Extension
 {
-
     protected $_rootNamespace = 'gCal';
     protected $_rootElement = 'selected';
-    protected $_value = null;
+    protected $_value;
 
     /**
      * Constructs a new Zend_Gdata_Calendar_Extension_Selected object.
-     * @param bool $value (optional) The value of the element.
+     *
+     * @param bool $value (optional) The value of the element
      */
     public function __construct($value = null)
     {
@@ -60,15 +59,17 @@ class Zend_Gdata_Calendar_Extension_Selected extends Zend_Gdata_Extension
      * for application storage/persistence.
      *
      * @param DOMDocument $doc The DOMDocument used to construct DOMElements
-     * @return DOMElement The DOMElement representing this element and all
-     * child properties.
+     *
+     * @return DOMElement the DOMElement representing this element and all
+     *                    child properties
      */
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
         $element = parent::getDOM($doc, $majorVersion, $minorVersion);
-        if ($this->_value !== null) {
-            $element->setAttribute('value', ($this->_value ? "true" : "false"));
+        if (null !== $this->_value) {
+            $element->setAttribute('value', $this->_value ? 'true' : 'false');
         }
+
         return $element;
     }
 
@@ -82,27 +83,25 @@ class Zend_Gdata_Calendar_Extension_Selected extends Zend_Gdata_Extension
     protected function takeAttributeFromDOM($attribute)
     {
         switch ($attribute->localName) {
-        case 'value':
-            if ($attribute->nodeValue == "true") {
-                $this->_value = true;
-            }
-            else if ($attribute->nodeValue == "false") {
-                $this->_value = false;
-            }
-            else {
-                // require_once 'Zend/Gdata/App/InvalidArgumentException.php';
-                throw new Zend_Gdata_App_InvalidArgumentException("Expected 'true' or 'false' for gCal:selected#value.");
-            }
-            break;
-        default:
-            parent::takeAttributeFromDOM($attribute);
+            case 'value':
+                if ('true' == $attribute->nodeValue) {
+                    $this->_value = true;
+                } elseif ('false' == $attribute->nodeValue) {
+                    $this->_value = false;
+                } else {
+                    // require_once 'Zend/Gdata/App/InvalidArgumentException.php';
+                    throw new Zend_Gdata_App_InvalidArgumentException("Expected 'true' or 'false' for gCal:selected#value.");
+                }
+                break;
+            default:
+                parent::takeAttributeFromDOM($attribute);
         }
     }
 
     /**
      * Get the value for this element's value attribute.
      *
-     * @return bool The value associated with this attribute.
+     * @return bool the value associated with this attribute
      */
     public function getValue()
     {
@@ -112,22 +111,23 @@ class Zend_Gdata_Calendar_Extension_Selected extends Zend_Gdata_Extension
     /**
      * Set the value for this element's value attribute.
      *
-     * @param bool $value The desired value for this attribute.
-     * @return Zend_Gdata_Calendar_Extension_Selected The element being modified.
+     * @param bool $value the desired value for this attribute
+     *
+     * @return Zend_Gdata_Calendar_Extension_Selected the element being modified
      */
     public function setValue($value)
     {
         $this->_value = $value;
+
         return $this;
     }
 
     /**
      * Magic toString method allows using this directly via echo
-     * Works best in PHP >= 4.2.0
+     * Works best in PHP >= 4.2.0.
      */
     public function __toString()
     {
         return $this->_value;
     }
-
 }

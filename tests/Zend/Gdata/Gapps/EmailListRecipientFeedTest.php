@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata_Gapps
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -25,86 +25,89 @@
 
 /**
  * @category   Zend
- * @package    Zend_Gdata_Gapps
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Gapps
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_Gapps_EmailListRecipientFeedTest extends PHPUnit_Framework_TestCase
 {
-    protected $emailListRecipientFeed = null;
+    protected $emailListRecipientFeed;
 
     /**
-      * Called before each test to setup any fixtures.
-      */
+     * Called before each test to setup any fixtures.
+     */
     public function setUp()
     {
         $emailListRecipientFeedText = file_get_contents(
-                'Zend/Gdata/Gapps/_files/EmailListRecipientFeedDataSample1.xml',
-                true);
+            'Zend/Gdata/Gapps/_files/EmailListRecipientFeedDataSample1.xml',
+            true);
         $this->emailListRecipientFeed = new Zend_Gdata_Gapps_EmailListRecipientFeed($emailListRecipientFeedText);
         $this->emptyEmailListRecipientFeed = new Zend_Gdata_Gapps_EmailListRecipientFeed();
     }
 
-    public function testEmptyFeedShouldHaveNoExtensionElements() {
+    public function testEmptyFeedShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->emptyEmailListRecipientFeed->extensionElements));
-        $this->assertTrue(count($this->emptyEmailListRecipientFeed->extensionElements) == 0);
+        $this->assertTrue(0 == count($this->emptyEmailListRecipientFeed->extensionElements));
     }
 
-    public function testEmptyFeedShouldHaveNoExtensionAttributes() {
+    public function testEmptyFeedShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->emptyEmailListRecipientFeed->extensionAttributes));
-        $this->assertTrue(count($this->emptyEmailListRecipientFeed->extensionAttributes) == 0);
+        $this->assertTrue(0 == count($this->emptyEmailListRecipientFeed->extensionAttributes));
     }
 
-    public function testSampleFeedShouldHaveNoExtensionElements() {
+    public function testSampleFeedShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->emailListRecipientFeed->extensionElements));
-        $this->assertTrue(count($this->emailListRecipientFeed->extensionElements) == 0);
+        $this->assertTrue(0 == count($this->emailListRecipientFeed->extensionElements));
     }
 
-    public function testSampleFeedShouldHaveNoExtensionAttributes() {
+    public function testSampleFeedShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->emailListRecipientFeed->extensionAttributes));
-        $this->assertTrue(count($this->emailListRecipientFeed->extensionAttributes) == 0);
+        $this->assertTrue(0 == count($this->emailListRecipientFeed->extensionAttributes));
     }
 
     /**
-      * Convert sample feed to XML then back to objects. Ensure that
-      * all objects are instances of EventEntry and object count matches.
-      */
+     * Convert sample feed to XML then back to objects. Ensure that
+     * all objects are instances of EventEntry and object count matches.
+     */
     public function testXmlImportAndOutputAreNonDestructive()
     {
         $entryCount = 0;
         foreach ($this->emailListRecipientFeed as $entry) {
-            $entryCount++;
+            ++$entryCount;
             $this->assertTrue($entry instanceof Zend_Gdata_Gapps_EmailListRecipientEntry);
         }
         $this->assertTrue($entryCount > 0);
 
         /* Grab XML from $this->emailListRecipientFeed and convert back to objects */
         $newEmailListRecipientFeed = new Zend_Gdata_Gapps_EmailListRecipientFeed(
-                $this->emailListRecipientFeed->saveXML());
+            $this->emailListRecipientFeed->saveXML());
         $newEntryCount = 0;
         foreach ($newEmailListRecipientFeed as $entry) {
-            $newEntryCount++;
+            ++$newEntryCount;
             $this->assertTrue($entry instanceof Zend_Gdata_Gapps_EmailListRecipientEntry);
         }
         $this->assertEquals($entryCount, $newEntryCount);
     }
 
     /**
-      * Ensure that there number of lsit feeds equals the number
-      * of calendars defined in the sample file.
-      */
+     * Ensure that there number of lsit feeds equals the number
+     * of calendars defined in the sample file.
+     */
     public function testAllEntriesInFeedAreInstantiated()
     {
-        //TODO feeds implementing ArrayAccess would be helpful here
+        // TODO feeds implementing ArrayAccess would be helpful here
         $entryCount = 0;
         foreach ($this->emailListRecipientFeed as $entry) {
-            $entryCount++;
+            ++$entryCount;
         }
         $this->assertEquals(2, $entryCount);
     }
-
 }

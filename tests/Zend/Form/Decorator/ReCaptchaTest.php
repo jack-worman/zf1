@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Form_Decorator_ReCaptchaTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Form_Decorator_ReCaptchaTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Form_Decorator_ReCaptchaTest::main');
 }
 
 // require_once 'Zend/Form/Decorator/Captcha/ReCaptcha.php';
@@ -30,13 +30,13 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 // require_once 'Zend/View.php';
 
 /**
- * Test class for Zend_Form_Decorator_Captcha_ReCaptcha
+ * Test class for Zend_Form_Decorator_Captcha_ReCaptcha.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Form
  */
 #[AllowDynamicProperties]
@@ -49,8 +49,7 @@ class Zend_Form_Decorator_ReCaptchaTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Decorator_ReCaptchaTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Form_Decorator_ReCaptchaTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -63,13 +62,13 @@ class Zend_Form_Decorator_ReCaptchaTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $view = new Zend_View();
-        $this->element   = new Zend_Form_Element_Captcha('captcha', array(
-            'captcha' => array(
+        $this->element = new Zend_Form_Element_Captcha('captcha', [
+            'captcha' => [
                 'captcha' => 'ReCaptcha',
                 'privKey' => 'private',
-                'pubKey'  => 'public',
-            ),
-        ));
+                'pubKey' => 'public',
+            ],
+        ]);
         $this->element->setView($view);
         $this->decorator = new Zend_Form_Decorator_Captcha_ReCaptcha();
         $this->decorator->setElement($this->element);
@@ -96,7 +95,7 @@ class Zend_Form_Decorator_ReCaptchaTest extends PHPUnit_Framework_TestCase
         $this->assertContains('old = window.onload', $html);
         $this->assertContains('if (old)', $html);
 
-        //Test that we create IE/Mozilla zendBindEvent mediator
+        // Test that we create IE/Mozilla zendBindEvent mediator
         $this->assertContains('function zendBindEvent', $html);
 
         // Test that we add an event listener for the form submit event
@@ -128,7 +127,6 @@ class Zend_Form_Decorator_ReCaptchaTest extends PHPUnit_Framework_TestCase
 }
 
 // Call Zend_Form_Decorator_ReCaptchaTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Form_Decorator_ReCaptchaTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Form_Decorator_ReCaptchaTest::main') {
     Zend_Form_Decorator_ReCaptchaTest::main();
 }
-

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,30 +13,29 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Barcode
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
-require_once __DIR__ . '/TestCommon.php';
+require_once __DIR__.'/TestCommon.php';
 
 // require_once 'Zend/Barcode/Renderer/Image.php';
 // require_once 'Zend/Barcode/Object/Code39.php';
 
 /**
  * @category   Zend
- * @package    Zend_Barcode
- * @subpackage UnitTests
+ *
  * @group      Zend_Barcode
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Zend_Barcode_Renderer_ImageTest extends Zend_Barcode_Renderer_TestCommon
 {
-
     public function setUp()
     {
         if (!extension_loaded('gd')) {
@@ -62,11 +61,11 @@ class Zend_Barcode_Renderer_ImageTest extends Zend_Barcode_Renderer_TestCommon
     }
 
     /**
-     * @expectedException Zend_Barcode_Renderer_Exception
+     * @expectedException \Zend_Barcode_Renderer_Exception
      */
     public function testObjectImageResource()
     {
-        $imageResource = new StdClass();
+        $imageResource = new stdClass();
         $this->_renderer->setResource($imageResource);
     }
 
@@ -80,11 +79,11 @@ class Zend_Barcode_Renderer_ImageTest extends Zend_Barcode_Renderer_TestCommon
     }
 
     /**
-     * @expectedException Zend_Barcode_Renderer_Exception
+     * @expectedException \Zend_Barcode_Renderer_Exception
      */
     public function testBadHeight()
     {
-        $this->_renderer->setHeight(- 1);
+        $this->_renderer->setHeight(-1);
     }
 
     public function testGoodWidth()
@@ -97,26 +96,26 @@ class Zend_Barcode_Renderer_ImageTest extends Zend_Barcode_Renderer_TestCommon
     }
 
     /**
-     * @expectedException Zend_Barcode_Renderer_Exception
+     * @expectedException \Zend_Barcode_Renderer_Exception
      */
     public function testBadWidth()
     {
-        $this->_renderer->setWidth(- 1);
+        $this->_renderer->setWidth(-1);
     }
 
     public function testAllowedImageType()
     {
-        $types = array('gif' => 'gif' , 'jpg' => 'jpeg' , 'jpeg' => 'jpeg' ,
-                'png' => 'png');
+        $types = ['gif' => 'gif', 'jpg' => 'jpeg', 'jpeg' => 'jpeg',
+                'png' => 'png'];
         foreach ($types as $type => $expectedType) {
             $this->_renderer->setImageType($type);
             $this->assertSame($expectedType,
-                    $this->_renderer->getImageType());
+                $this->_renderer->getImageType());
         }
     }
 
     /**
-     * @expectedException Zend_Barcode_Renderer_Exception
+     * @expectedException \Zend_Barcode_Renderer_Exception
      */
     public function testNonAllowedImageType()
     {
@@ -127,15 +126,15 @@ class Zend_Barcode_Renderer_ImageTest extends Zend_Barcode_Renderer_TestCommon
     {
         $this->_checkTTFRequirement();
 
-        $barcode = new Zend_Barcode_Object_Code39(array('text' => '0123456789'));
+        $barcode = new Zend_Barcode_Object_Code39(['text' => '0123456789']);
         $this->_renderer->setBarcode($barcode);
         $resource = $this->_renderer->draw();
         if (PHP_VERSION_ID < 80000) {
-            $this->assertTrue(gettype($resource) == 'resource', 'Image must be a resource');
-            $this->assertTrue(get_resource_type($resource) == 'gd',
+            $this->assertTrue('resource' == gettype($resource), 'Image must be a resource');
+            $this->assertTrue('gd' == get_resource_type($resource),
                 'Image must be a GD resource');
         } else {
-            $this->assertTrue(get_class($resource) === 'GdImage');
+            $this->assertTrue('GdImage' === get_class($resource));
         }
     }
 
@@ -143,24 +142,24 @@ class Zend_Barcode_Renderer_ImageTest extends Zend_Barcode_Renderer_TestCommon
     {
         $this->_checkTTFRequirement();
 
-        $barcode = new Zend_Barcode_Object_Code39(array('text' => '0123456789'));
+        $barcode = new Zend_Barcode_Object_Code39(['text' => '0123456789']);
         $this->_renderer->setBarcode($barcode);
         $imageResource = imagecreatetruecolor(500, 500);
         $this->_renderer->setResource($imageResource);
         $resource = $this->_renderer->draw();
         if (PHP_VERSION_ID < 80000) {
-            $this->assertTrue(gettype($resource) == 'resource', 'Image must be a resource');
-            $this->assertTrue(get_resource_type($resource) == 'gd',
+            $this->assertTrue('resource' == gettype($resource), 'Image must be a resource');
+            $this->assertTrue('gd' == get_resource_type($resource),
                 'Image must be a GD resource');
         } else {
-            $this->assertTrue(get_class($resource) === 'GdImage');
+            $this->assertTrue('GdImage' === get_class($resource));
         }
         $this->assertSame($resource, $imageResource);
     }
 
     public function testGoodUserHeight()
     {
-        $barcode = new Zend_Barcode_Object_Code39(array('text' => '0123456789'));
+        $barcode = new Zend_Barcode_Object_Code39(['text' => '0123456789']);
         $this->assertEquals(62, $barcode->getHeight());
         $this->_renderer->setBarcode($barcode);
         $this->_renderer->setHeight(62);
@@ -168,11 +167,11 @@ class Zend_Barcode_Renderer_ImageTest extends Zend_Barcode_Renderer_TestCommon
     }
 
     /**
-     * @expectedException Zend_Barcode_Renderer_Exception
+     * @expectedException \Zend_Barcode_Renderer_Exception
      */
     public function testBadUserHeightLessThanBarcodeHeight()
     {
-        $barcode = new Zend_Barcode_Object_Code39(array('text' => '0123456789'));
+        $barcode = new Zend_Barcode_Object_Code39(['text' => '0123456789']);
         $this->assertEquals(62, $barcode->getHeight());
         $this->_renderer->setBarcode($barcode);
         $this->_renderer->setHeight(61);
@@ -181,7 +180,7 @@ class Zend_Barcode_Renderer_ImageTest extends Zend_Barcode_Renderer_TestCommon
 
     public function testGoodUserWidth()
     {
-        $barcode = new Zend_Barcode_Object_Code39(array('text' => '0123456789'));
+        $barcode = new Zend_Barcode_Object_Code39(['text' => '0123456789']);
         $this->assertEquals(211, $barcode->getWidth());
         $this->_renderer->setBarcode($barcode);
         $this->_renderer->setWidth(211);
@@ -189,11 +188,11 @@ class Zend_Barcode_Renderer_ImageTest extends Zend_Barcode_Renderer_TestCommon
     }
 
     /**
-     * @expectedException Zend_Barcode_Renderer_Exception
+     * @expectedException \Zend_Barcode_Renderer_Exception
      */
     public function testBadUserWidthLessThanBarcodeWidth()
     {
-        $barcode = new Zend_Barcode_Object_Code39(array('text' => '0123456789'));
+        $barcode = new Zend_Barcode_Object_Code39(['text' => '0123456789']);
         $this->assertEquals(211, $barcode->getWidth());
         $this->_renderer->setBarcode($barcode);
         $this->_renderer->setWidth(210);
@@ -202,7 +201,7 @@ class Zend_Barcode_Renderer_ImageTest extends Zend_Barcode_Renderer_TestCommon
 
     public function testGoodHeightOfUserResource()
     {
-        $barcode = new Zend_Barcode_Object_Code39(array('text' => '0123456789'));
+        $barcode = new Zend_Barcode_Object_Code39(['text' => '0123456789']);
         $this->assertEquals(62, $barcode->getHeight());
         $imageResource = imagecreatetruecolor(500, 62);
         $this->_renderer->setResource($imageResource);
@@ -211,11 +210,11 @@ class Zend_Barcode_Renderer_ImageTest extends Zend_Barcode_Renderer_TestCommon
     }
 
     /**
-     * @expectedException Zend_Barcode_Renderer_Exception
+     * @expectedException \Zend_Barcode_Renderer_Exception
      */
     public function testBadHeightOfUserResource()
     {
-        $barcode = new Zend_Barcode_Object_Code39(array('text' => '0123456789'));
+        $barcode = new Zend_Barcode_Object_Code39(['text' => '0123456789']);
         $this->assertEquals(62, $barcode->getHeight());
         $this->_renderer->setBarcode($barcode);
         $imageResource = imagecreatetruecolor(500, 61);
@@ -225,7 +224,7 @@ class Zend_Barcode_Renderer_ImageTest extends Zend_Barcode_Renderer_TestCommon
 
     public function testGoodWidthOfUserResource()
     {
-        $barcode = new Zend_Barcode_Object_Code39(array('text' => '0123456789'));
+        $barcode = new Zend_Barcode_Object_Code39(['text' => '0123456789']);
         $this->assertEquals(211, $barcode->getWidth());
         $imageResource = imagecreatetruecolor(211, 500);
         $this->_renderer->setResource($imageResource);
@@ -234,11 +233,11 @@ class Zend_Barcode_Renderer_ImageTest extends Zend_Barcode_Renderer_TestCommon
     }
 
     /**
-     * @expectedException Zend_Barcode_Renderer_Exception
+     * @expectedException \Zend_Barcode_Renderer_Exception
      */
     public function testBadWidthOfUserResource()
     {
-        $barcode = new Zend_Barcode_Object_Code39(array('text' => '0123456789'));
+        $barcode = new Zend_Barcode_Object_Code39(['text' => '0123456789']);
         $this->assertEquals(211, $barcode->getWidth());
         $this->_renderer->setBarcode($barcode);
         $imageResource = imagecreatetruecolor(210, 500);
@@ -247,12 +246,12 @@ class Zend_Barcode_Renderer_ImageTest extends Zend_Barcode_Renderer_TestCommon
     }
 
     /**
-     * @expectedException Zend_Barcode_Renderer_Exception
+     * @expectedException \Zend_Barcode_Renderer_Exception
      */
     public function testNoFontWithOrientation()
     {
         Zend_Barcode::setBarcodeFont('');
-        $barcode = new Zend_Barcode_Object_Code39(array('text' => '0123456789'));
+        $barcode = new Zend_Barcode_Object_Code39(['text' => '0123456789']);
         $barcode->setOrientation(1);
         $this->_renderer->setBarcode($barcode);
         $this->_renderer->draw();
@@ -264,7 +263,7 @@ class Zend_Barcode_Renderer_ImageTest extends Zend_Barcode_Renderer_TestCommon
     }
 
     /**
-     * @expectedException Zend_Barcode_Renderer_Exception
+     * @expectedException \Zend_Barcode_Renderer_Exception
      */
     public function testRendererWithUnknownInstructionProvideByObject()
     {

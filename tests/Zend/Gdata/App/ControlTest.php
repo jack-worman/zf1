@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata_App
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -26,30 +26,32 @@
 
 /**
  * @category   Zend
- * @package    Zend_Gdata_App
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_App
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_App_ControlTest extends PHPUnit_Framework_TestCase
 {
-
-    public function setUp() {
+    public function setUp()
+    {
         $this->controlText = file_get_contents(
-                'Zend/Gdata/App/_files/ControlElementSample1.xml',
-                true);
+            'Zend/Gdata/App/_files/ControlElementSample1.xml',
+            true);
         $this->control = new Zend_Gdata_App_Extension_Control();
     }
 
-    public function testEmptyControlShouldHaveEmptyExtensionsList() {
+    public function testEmptyControlShouldHaveEmptyExtensionsList()
+    {
         $this->assertTrue(is_array($this->control->extensionElements));
-        $this->assertTrue(count($this->control->extensionElements) == 0);
+        $this->assertTrue(0 == count($this->control->extensionElements));
     }
 
-    public function testEmptyControlToAndFromStringShouldMatch() {
+    public function testEmptyControlToAndFromStringShouldMatch()
+    {
         $controlXml = $this->control->saveXML();
         $newControl = new Zend_Gdata_App_Extension_Control();
         $newControl->transferFromXML($controlXml);
@@ -57,7 +59,8 @@ class Zend_Gdata_App_ControlTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($controlXml == $newControlXml);
     }
 
-    public function testControlWithDraftToAndFromStringShouldMatch() {
+    public function testControlWithDraftToAndFromStringShouldMatch()
+    {
         $draft = new Zend_Gdata_App_Extension_Draft('yes');
         $this->control->draft = $draft;
         $controlXml = $this->control->saveXML();
@@ -68,9 +71,9 @@ class Zend_Gdata_App_ControlTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('yes', $newControl->draft->text);
     }
 
-    public function testConvertControlWithDraftToAndFromString() {
+    public function testConvertControlWithDraftToAndFromString()
+    {
         $this->control->transferFromXML($this->controlText);
         $this->assertEquals('yes', $this->control->draft->text);
     }
-
 }

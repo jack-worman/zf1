@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,64 +13,61 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed_Writer
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
  * @category   Zend
- * @package    Zend_Feed_Writer
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface Zend_Feed_Writer_Renderer_RendererInterface
 {
     /**
-     * Render feed/entry
+     * Render feed/entry.
      *
      * @return void
      */
     public function render();
 
     /**
-     * Save feed and/or entry to XML and return string
+     * Save feed and/or entry to XML and return string.
      *
      * @return string
      */
     public function saveXml();
 
     /**
-     * Get DOM document
+     * Get DOM document.
      *
      * @return DOMDocument
      */
     public function getDomDocument();
 
     /**
-     * Get document element from DOM
+     * Get document element from DOM.
      *
      * @return DOMElement
      */
     public function getElement();
 
     /**
-     * Get data container containing feed items
-     *
-     * @return mixed
+     * Get data container containing feed items.
      */
     public function getDataContainer();
 
     /**
      * Should exceptions be ignored?
-     *
-     * @return mixed
      */
     public function ignoreExceptions();
 
     /**
-     * Get list of thrown exceptions
+     * Get list of thrown exceptions.
      *
      * @return array
      */
@@ -97,8 +94,6 @@ interface Zend_Feed_Writer_Renderer_RendererInterface
      * helps simplify the appending of namespace declarations, but also ensures
      * namespaces are added to the root element - not scattered across the entire
      * XML file - may assist namespace unsafe parsers and looks pretty ;).
-     *
-     * @param DOMElement $root
      */
     public function setRootElement(DOMElement $root);
 

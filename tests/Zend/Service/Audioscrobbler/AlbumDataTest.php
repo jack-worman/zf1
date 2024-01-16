@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_Audioscrobbler
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,15 +25,14 @@
  */
 // require_once 'Zend/Service/Audioscrobbler.php';
 
-
-require_once "AudioscrobblerTestCase.php";
+require_once 'AudioscrobblerTestCase.php';
 
 /**
  * @category   Zend
- * @package    Zend_Service_Audioscrobbler
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Service
  * @group      Zend_Service_Audioscrobbler
  */
@@ -115,12 +114,12 @@ class Zend_Service_Audioscrobbler_AlbumDataTest extends Zend_Service_Audioscrobb
             $as->set('artist', 'Metallica');
             $response = $as->albumGetInfo();
             $track = $response->tracks->track[0];
-            $this->assertEquals((string)$response['artist'], 'Metallica');
-            $this->assertEquals((string)$response['title'], 'Metallica');
-            $this->assertEquals((string)$track->url, 'http://www.last.fm/music/Metallica/_/Enter+Sandman+%28LP+Version%29');
+            $this->assertEquals((string) $response['artist'], 'Metallica');
+            $this->assertEquals((string) $response['title'], 'Metallica');
+            $this->assertEquals((string) $track->url, 'http://www.last.fm/music/Metallica/_/Enter+Sandman+%28LP+Version%29');
             $this->assertEquals(count($response->tracks->track), 12);
-        } catch (\Throwable $e ) {
-            $this->fail("Exception: [" . $e->__toString() . "] thrown by test");
+        } catch (Throwable $e) {
+            $this->fail('Exception: ['.$e->__toString().'] thrown by test');
         }
     }
 }

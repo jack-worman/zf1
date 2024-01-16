@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,30 +13,23 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
-
-
-
-
 
 /**
  * @see Zend_Db_Statement_Interface
  */
 // require_once 'Zend/Db/Statement/Interface.php';
 
-
 /**
  * Emulates a PDOStatement for native database adapters.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -44,119 +37,119 @@
 class Zend_Db_Statement_Static implements Zend_Db_Statement_Interface
 {
     /**
-     * binds a PHP variable to an output column in a result set
+     * binds a PHP variable to an output column in a result set.
      */
     public function bindColumn($column, &$param, $type = null)
     {
     }
 
     /**
-     * binds a PHP variable to a parameter in the prepared statement
+     * binds a PHP variable to a parameter in the prepared statement.
      */
     public function bindParam($parameter, &$variable, $type = null, $length = null, $options = null)
     {
     }
 
     /**
-     * binds a value to a parameter in the prepared statement
+     * binds a value to a parameter in the prepared statement.
      */
     public function bindValue($parameter, $value, $type = null)
     {
     }
 
     /**
-     * closes the cursor, allowing the statement to be executed again
+     * closes the cursor, allowing the statement to be executed again.
      */
     public function closeCursor()
     {
     }
 
     /**
-     * returns the number of columns in the result set
+     * returns the number of columns in the result set.
      */
     public function columnCount()
     {
     }
 
     /**
-     * retrieves an error code, if any, from the statement
+     * retrieves an error code, if any, from the statement.
      */
     public function errorCode()
     {
     }
 
     /**
-     * retrieves an array of error information, if any, from the statement
+     * retrieves an array of error information, if any, from the statement.
      */
     public function errorInfo()
     {
     }
 
     /**
-     * executes a prepared statement
+     * executes a prepared statement.
      */
-    public function execute(array $params = array())
+    public function execute(array $params = [])
     {
     }
 
     /**
-     * fetches a row from a result set
+     * fetches a row from a result set.
      */
     public function fetch($style = null, $cursor = null, $offset = null)
     {
     }
 
     /**
-     * fetches an array containing all of the rows from a result set
+     * fetches an array containing all of the rows from a result set.
      */
     public function fetchAll($style = null, $col = null)
     {
     }
 
     /**
-     * returns the data from a single column in a result set
+     * returns the data from a single column in a result set.
      */
     public function fetchColumn($col = 0)
     {
     }
 
     /**
-     * fetches the next row and returns it as an object
+     * fetches the next row and returns it as an object.
      */
-    public function fetchObject($class = 'stdClass', array $config = array())
+    public function fetchObject($class = 'stdClass', array $config = [])
     {
     }
 
     /**
-     * retrieves a Zend_Db_Statement attribute
+     * retrieves a Zend_Db_Statement attribute.
      */
     public function getAttribute($key)
     {
     }
 
     /**
-     * retrieves the next rowset (result set)
+     * retrieves the next rowset (result set).
      */
     public function nextRowset()
     {
     }
 
     /**
-     * returns the number of rows that were affected by the execution of an SQL statement
+     * returns the number of rows that were affected by the execution of an SQL statement.
      */
     public function rowCount()
     {
     }
 
     /**
-     * sets a Zend_Db_Statement attribute
+     * sets a Zend_Db_Statement attribute.
      */
     public function setAttribute($key, $val)
     {
     }
 
     /**
-     * sets the fetch mode for a Zend_Db_Statement
+     * sets the fetch mode for a Zend_Db_Statement.
      */
     public function setFetchMode($mode)
     {

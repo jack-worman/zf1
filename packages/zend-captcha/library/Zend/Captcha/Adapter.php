@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,8 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Captcha
- * @subpackage Adapter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -23,52 +22,51 @@
 // require_once 'Zend/Validate/Interface.php';
 
 /**
- * Generic Captcha adapter interface
+ * Generic Captcha adapter interface.
  *
  * Each specific captcha implementation should implement this interface
  *
  * @category   Zend
- * @package    Zend_Captcha
- * @subpackage Adapter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 interface Zend_Captcha_Adapter extends Zend_Validate_Interface
 {
     /**
-     * Generate a new captcha
+     * Generate a new captcha.
      *
      * @return string new captcha ID
      */
     public function generate();
 
     /**
-     * Display the captcha
+     * Display the captcha.
      *
-     * @param  Zend_View_Interface $view
-     * @param  mixed $element
      * @return string
      */
     public function render(Zend_View_Interface $view = null, $element = null);
 
     /**
-     * Set captcha name
+     * Set captcha name.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return Zend_Captcha_Adapter
      */
     public function setName($name);
 
     /**
-     * Get captcha name
+     * Get captcha name.
      *
      * @return string
      */
     public function getName();
 
     /**
-     * Get optional private decorator for this captcha type
+     * Get optional private decorator for this captcha type.
      *
      * @return Zend_Form_Decorator_Interface|string
      */

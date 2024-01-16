@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,9 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_Console
- * @subpackage Exception
+ *
  * @version    $Id$
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @copyright  Copyright (c) 2009 - 2011, RealDolmen (http://www.realdolmen.com)
@@ -23,53 +23,53 @@
  */
 
 /**
-* @see Zend_Service_Console_Command_ParameterSource_ParameterSourceInterface
-*/
+ * @see Zend_Service_Console_Command_ParameterSource_ParameterSourceInterface
+ */
 // require_once 'Zend/Service/Console/Command/ParameterSource/ParameterSourceInterface.php';
 
 /**
  * @category   Zend
- * @package    Zend_Service_Console
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @copyright  Copyright (c) 2009 - 2011, RealDolmen (http://www.realdolmen.com)
  * @license    http://phpazure.codeplex.com/license
  */
-class Zend_Service_Console_Command_ParameterSource_Env
-	implements Zend_Service_Console_Command_ParameterSource_ParameterSourceInterface
+class Zend_Service_Console_Command_ParameterSource_Env implements Zend_Service_Console_Command_ParameterSource_ParameterSourceInterface
 {
-	/**
-	 * Get value for a named parameter.
-	 *
-	 * @param mixed $parameter Parameter to get a value for
-	 * @param array $argv Argument values passed to the script when run in console.
-	 * @return array|bool|string|null
+    /**
+     * Get value for a named parameter.
+     *
+     * @param mixed $parameter Parameter to get a value for
+     * @param array $argv      argument values passed to the script when run in console
+     *
+     * @return array|bool|string|null
      */
-	public function getValueForParameter($parameter, $argv = array())
-	{
-		// Default value
-		$parameterValue = null;
+    public function getValueForParameter($parameter, $argv = [])
+    {
+        // Default value
+        $parameterValue = null;
 
-		// Fetch value for parameter
-		foreach ($parameter->aliases as $alias) {
-			while (strpos((string) $alias, '-') !== false) {
-				$alias = substr((string) $alias, 1);
-			}
-			$value = getenv($alias);
+        // Fetch value for parameter
+        foreach ($parameter->aliases as $alias) {
+            while (false !== strpos((string) $alias, '-')) {
+                $alias = substr((string) $alias, 1);
+            }
+            $value = getenv($alias);
 
-			if (!is_null($value) && $value !== false) {
-				$parameterValue = $value;
-				break;
-			}
-		}
+            if (!is_null($value) && false !== $value) {
+                $parameterValue = $value;
+                break;
+            }
+        }
 
-		if (strtolower((string) $parameterValue) == 'true') {
-			$parameterValue = true;
-		} else if (strtolower((string) $parameterValue) == 'false') {
-			$parameterValue = false;
-		}
+        if ('true' == strtolower((string) $parameterValue)) {
+            $parameterValue = true;
+        } elseif ('false' == strtolower((string) $parameterValue)) {
+            $parameterValue = false;
+        }
 
-		// Done!
-		return $parameterValue;
-	}
+        // Done!
+        return $parameterValue;
+    }
 }

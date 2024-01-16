@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Gapps
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -51,14 +51,12 @@
  * This class represents <atom:entry> in the Google Data protocol.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Gapps
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_Gapps_NicknameEntry extends Zend_Gdata_Entry
 {
-
     protected $_entryClassName = 'Zend_Gdata_Gapps_NicknameEntry';
 
     /**
@@ -67,20 +65,20 @@ class Zend_Gdata_Gapps_NicknameEntry extends Zend_Gdata_Entry
      *
      * @var Zend_Gdata_Gapps_Extension_Login
      */
-    protected $_login = null;
+    protected $_login;
 
     /**
      * <apps:nickname> element used to hold the name of this nickname.
      *
      * @var Zend_Gdata_Gapps_Extension_Nickname
      */
-    protected $_nickname = null;
+    protected $_nickname;
 
     /**
      * Create a new instance.
      *
      * @param DOMElement $element (optional) DOMElement from which this
-     *          object should be constructed.
+     *                            object should be constructed
      */
     public function __construct($element = null)
     {
@@ -94,18 +92,20 @@ class Zend_Gdata_Gapps_NicknameEntry extends Zend_Gdata_Entry
      * and eventually XML text for application storage/persistence.
      *
      * @param DOMDocument $doc The DOMDocument used to construct DOMElements
-     * @return DOMElement The DOMElement representing this element and all
-     *          child properties.
+     *
+     * @return DOMElement the DOMElement representing this element and all
+     *                    child properties
      */
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
         $element = parent::getDOM($doc, $majorVersion, $minorVersion);
-        if ($this->_login !== null) {
+        if (null !== $this->_login) {
             $element->appendChild($this->_login->getDOM($element->ownerDocument));
         }
-        if ($this->_nickname !== null) {
+        if (null !== $this->_nickname) {
             $element->appendChild($this->_nickname->getDOM($element->ownerDocument));
         }
+
         return $element;
     }
 
@@ -117,15 +117,15 @@ class Zend_Gdata_Gapps_NicknameEntry extends Zend_Gdata_Entry
      */
     protected function takeChildFromDOM($child)
     {
-        $absoluteNodeName = $child->namespaceURI . ':' . $child->localName;
+        $absoluteNodeName = $child->namespaceURI.':'.$child->localName;
 
         switch ($absoluteNodeName) {
-            case $this->lookupNamespace('apps') . ':' . 'login';
+            case $this->lookupNamespace('apps').':login':
                 $login = new Zend_Gdata_Gapps_Extension_Login();
                 $login->transferFromDOM($child);
                 $this->_login = $login;
                 break;
-            case $this->lookupNamespace('apps') . ':' . 'nickname';
+            case $this->lookupNamespace('apps').':nickname':
                 $nickname = new Zend_Gdata_Gapps_Extension_Nickname();
                 $nickname->transferFromDOM($child);
                 $this->_nickname = $nickname;
@@ -140,7 +140,8 @@ class Zend_Gdata_Gapps_NicknameEntry extends Zend_Gdata_Entry
      * Get the value of the login property for this object.
      *
      * @see setLogin
-     * @return Zend_Gdata_Gapps_Extension_Login The requested object.
+     *
+     * @return Zend_Gdata_Gapps_Extension_Login the requested object
      */
     public function getLogin()
     {
@@ -151,13 +152,15 @@ class Zend_Gdata_Gapps_NicknameEntry extends Zend_Gdata_Entry
      * Set the value of the login property for this object. This property
      * is used to store the username address of the current user.
      *
-     * @param Zend_Gdata_Gapps_Extension_Login $value The desired value for
-     *          this instance's login property.
-     * @return Zend_Gdata_Gapps_NicknameEntry Provides a fluent interface.
+     * @param Zend_Gdata_Gapps_Extension_Login $value the desired value for
+     *                                                this instance's login property
+     *
+     * @return Zend_Gdata_Gapps_NicknameEntry provides a fluent interface
      */
     public function setLogin($value)
     {
         $this->_login = $value;
+
         return $this;
     }
 
@@ -165,7 +168,8 @@ class Zend_Gdata_Gapps_NicknameEntry extends Zend_Gdata_Entry
      * Get the value of the nickname property for this object.
      *
      * @see setNickname
-     * @return Zend_Gdata_Gapps_Extension_Nickname The requested object.
+     *
+     * @return Zend_Gdata_Gapps_Extension_Nickname the requested object
      */
     public function getNickname()
     {
@@ -176,14 +180,15 @@ class Zend_Gdata_Gapps_NicknameEntry extends Zend_Gdata_Entry
      * Set the value of the nickname property for this object. This property
      * is used to store the the name of the current nickname.
      *
-     * @param Zend_Gdata_Gapps_Extension_Nickname $value The desired value for
-     *          this instance's nickname property.
-     * @return Zend_Gdata_Gapps_NicknameEntry Provides a fluent interface.
+     * @param Zend_Gdata_Gapps_Extension_Nickname $value the desired value for
+     *                                                   this instance's nickname property
+     *
+     * @return Zend_Gdata_Gapps_NicknameEntry provides a fluent interface
      */
     public function setNickname($value)
     {
         $this->_nickname = $value;
+
         return $this;
     }
-
 }

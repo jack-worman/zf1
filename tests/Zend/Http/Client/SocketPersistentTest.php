@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,14 +13,14 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Http_Client
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
-require_once __DIR__ . '/SocketTest.php';
+require_once __DIR__.'/SocketTest.php';
 
 /**
  * This Testsuite includes all Zend_Http_Client that require a working web
@@ -36,10 +36,10 @@ require_once __DIR__ . '/SocketTest.php';
  * point to the right place.
  *
  * @category   Zend
- * @package    Zend_Http_Client
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Http
  * @group      Zend_Http_Client
  */
@@ -47,13 +47,13 @@ require_once __DIR__ . '/SocketTest.php';
 class Zend_Http_Client_SocketPersistentTest extends Zend_Http_Client_SocketTest
 {
     /**
-     * Configuration array
+     * Configuration array.
      *
      * @var array
      */
-    protected $config = array(
-        'adapter'    => 'Zend_Http_Client_Adapter_Socket',
+    protected $config = [
+        'adapter' => 'Zend_Http_Client_Adapter_Socket',
         'persistent' => true,
-        'keepalive'  => true
-    );
+        'keepalive' => true,
+    ];
 }

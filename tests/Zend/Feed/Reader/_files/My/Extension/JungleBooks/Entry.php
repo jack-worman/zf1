@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,25 +26,24 @@
 
 /**
  * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class My_FeedReader_Extension_JungleBooks_Entry extends Zend_Feed_Reader_Extension_EntryAbstract
 {
-
     public function getIsbn()
     {
         if (isset($this->_data['isbn'])) {
             return $this->_data['isbn'];
         }
-        $isbn = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/jungle:isbn)');
+        $isbn = $this->_xpath->evaluate('string('.$this->getXpathPrefix().'/jungle:isbn)');
         if (!$isbn) {
             $isbn = null;
         }
         $this->_data['isbn'] = $title;
+
         return $this->_data['isbn'];
     }
 

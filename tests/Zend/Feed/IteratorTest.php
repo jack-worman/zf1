@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,10 +27,10 @@
 
 /**
  * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Feed
  */
 #[AllowDynamicProperties]
@@ -41,8 +41,8 @@ class Zend_Feed_IteratorTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_feed = Zend_Feed::importFile(__DIR__ . '/_files/TestAtomFeed.xml');
-        $this->_nsfeed = Zend_Feed::importFile(__DIR__ . '/_files/TestAtomFeedNamespaced.xml');
+        $this->_feed = Zend_Feed::importFile(__DIR__.'/_files/TestAtomFeed.xml');
+        $this->_nsfeed = Zend_Feed::importFile(__DIR__.'/_files/TestAtomFeedNamespaced.xml');
     }
 
     public function testRewind()
@@ -93,17 +93,17 @@ class Zend_Feed_IteratorTest extends PHPUnit_Framework_TestCase
 
     public function testKey()
     {
-        $keys = array();
+        $keys = [];
         foreach ($this->_feed as $k => $f) {
             $keys[] = $k;
         }
-        $this->assertEquals($keys, array(0, 1), 'Feed should have keys 0 and 1');
+        $this->assertEquals($keys, [0, 1], 'Feed should have keys 0 and 1');
 
-        $keys = array();
+        $keys = [];
         foreach ($this->_nsfeed as $k => $f) {
             $keys[] = $k;
         }
-        $this->assertEquals($keys, array(0, 1), 'Feed should have keys 0 and 1');
+        $this->assertEquals($keys, [0, 1], 'Feed should have keys 0 and 1');
     }
 
     public function testNext()
@@ -120,5 +120,4 @@ class Zend_Feed_IteratorTest extends PHPUnit_Framework_TestCase
             $last = $current;
         }
     }
-
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,17 +13,17 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Ldap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Ldap_TestCase
+ * Zend_Ldap_TestCase.
  */
-require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'TestCase.php';
+require_once dirname(__DIR__).DIRECTORY_SEPARATOR.'TestCase.php';
 /**
  * @see Zend_Ldap_Node
  */
@@ -31,10 +31,10 @@ require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'TestCase.php';
 
 /**
  * @category   Zend
- * @package    Zend_Ldap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Ldap
  * @group      Zend_Ldap_Node
  */
@@ -43,23 +43,23 @@ class Zend_Ldap_Node_AttributeIterationTest extends Zend_Ldap_TestCase
 {
     public function testSimpleIteration()
     {
-        $node=$this->_createTestNode();
-        $i=0;
-        $data=array();
+        $node = $this->_createTestNode();
+        $i = 0;
+        $data = [];
         foreach ($node->getAttributes() as $k => $v) {
             $this->assertNotNull($k);
             $this->assertNotNull($v);
             $this->assertEquals($node->$k, $v);
-            $data[$k]=$v;
-            $i++;
+            $data[$k] = $v;
+            ++$i;
         }
         $this->assertEquals(5, $i);
         $this->assertEquals($i, count($node));
-        $this->assertEquals(array(
-            'boolean'     => array(true, false),
-            'cn'          => array('name'),
-            'empty'       => array(),
-            'host'        => array('a', 'b', 'c'),
-            'objectclass' => array('account', 'top')), $data);
+        $this->assertEquals([
+            'boolean' => [true, false],
+            'cn' => ['name'],
+            'empty' => [],
+            'host' => ['a', 'b', 'c'],
+            'objectclass' => ['account', 'top']], $data);
     }
 }

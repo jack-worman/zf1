@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,27 +13,24 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Pdf
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /** Internally used classes */
 
 /** Zend_Pdf_Element_Name */
 // require_once 'Zend/Pdf/Element/Name.php';
 
-
 /** Zend_Pdf_Resource */
 // require_once 'Zend/Pdf/Resource.php';
-
 
 /**
  * Image abstraction.
  *
- * @package    Zend_Pdf
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -46,28 +43,28 @@ abstract class Zend_Pdf_Resource_Image extends Zend_Pdf_Resource
     {
         parent::__construct('');
 
-        $this->_resource->dictionary->Type    = new Zend_Pdf_Element_Name('XObject');
+        $this->_resource->dictionary->Type = new Zend_Pdf_Element_Name('XObject');
         $this->_resource->dictionary->Subtype = new Zend_Pdf_Element_Name('Image');
     }
+
     /**
-     * get the height in pixels of the image
+     * get the height in pixels of the image.
      *
-     * @return integer
+     * @return int
      */
     abstract public function getPixelHeight();
 
     /**
-     * get the width in pixels of the image
+     * get the width in pixels of the image.
      *
-     * @return integer
+     * @return int
      */
     abstract public function getPixelWidth();
 
     /**
-     * gets an associative array of information about an image
+     * gets an associative array of information about an image.
      *
      * @return array
      */
     abstract public function getProperties();
 }
-

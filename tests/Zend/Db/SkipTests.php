@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,37 +13,33 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
-
-
-
-
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Db
  */
 abstract class Zend_Db_Skip_CommonTest extends PHPUnit_Framework_TestCase
 {
-    public $message = null;
+    public $message;
 
     abstract public function getDriver();
 
     public function setUp()
     {
         $driver = $this->getDriver();
-        $message = 'Skipping ' . $this->getDriver();
+        $message = 'Skipping '.$this->getDriver();
         if ($this->message) {
-            $message .= ': ' . $this->message;
+            $message .= ': '.$this->message;
         }
         $this->markTestSkipped($message);
     }
@@ -56,10 +52,10 @@ abstract class Zend_Db_Skip_CommonTest extends PHPUnit_Framework_TestCase
 
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Db
  */
 #[AllowDynamicProperties]
@@ -73,10 +69,10 @@ class Zend_Db_Skip_StaticTest extends Zend_Db_Skip_CommonTest
 
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Db
  */
 #[AllowDynamicProperties]
@@ -90,10 +86,10 @@ class Zend_Db_Skip_Db2Test extends Zend_Db_Skip_CommonTest
 
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Db
  */
 #[AllowDynamicProperties]
@@ -107,10 +103,10 @@ class Zend_Db_Skip_MysqliTest extends Zend_Db_Skip_CommonTest
 
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Db
  */
 #[AllowDynamicProperties]
@@ -124,10 +120,10 @@ class Zend_Db_Skip_OdbcTest extends Zend_Db_Skip_CommonTest
 
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Db
  */
 #[AllowDynamicProperties]
@@ -141,10 +137,10 @@ class Zend_Db_Skip_OracleTest extends Zend_Db_Skip_CommonTest
 
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Db
  */
 #[AllowDynamicProperties]
@@ -158,10 +154,10 @@ class Zend_Db_Skip_SqlsrvTest extends Zend_Db_Skip_CommonTest
 
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Db
  */
 #[AllowDynamicProperties]
@@ -175,16 +171,16 @@ class Zend_Db_Skip_FirebirdTest extends Zend_Db_Skip_CommonTest
 
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Db
  */
 #[AllowDynamicProperties]
 class Zend_Db_Skip_Pdo_IbmTest extends Zend_Db_Skip_CommonTest
 {
-    function getDriver()
+    public function getDriver()
     {
         return 'Pdo_Ibm';
     }
@@ -192,16 +188,16 @@ class Zend_Db_Skip_Pdo_IbmTest extends Zend_Db_Skip_CommonTest
 
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Db
  */
 #[AllowDynamicProperties]
 class Zend_Db_Skip_Pdo_MssqlTest extends Zend_Db_Skip_CommonTest
 {
-    function getDriver()
+    public function getDriver()
     {
         return 'Pdo_Mssql';
     }
@@ -209,10 +205,10 @@ class Zend_Db_Skip_Pdo_MssqlTest extends Zend_Db_Skip_CommonTest
 
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Db
  */
 #[AllowDynamicProperties]
@@ -226,10 +222,10 @@ class Zend_Db_Skip_Pdo_MysqlTest extends Zend_Db_Skip_CommonTest
 
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Db
  */
 #[AllowDynamicProperties]
@@ -243,10 +239,10 @@ class Zend_Db_Skip_Pdo_OciTest extends Zend_Db_Skip_CommonTest
 
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Db
  */
 #[AllowDynamicProperties]
@@ -260,10 +256,10 @@ class Zend_Db_Skip_Pdo_FirebirdTest extends Zend_Db_Skip_CommonTest
 
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Db
  */
 #[AllowDynamicProperties]
@@ -277,10 +273,10 @@ class Zend_Db_Skip_Pdo_PgsqlTest extends Zend_Db_Skip_CommonTest
 
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Db
  */
 #[AllowDynamicProperties]

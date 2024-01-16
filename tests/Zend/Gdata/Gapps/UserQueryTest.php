@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata_Gapps
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -25,17 +25,16 @@
 
 /**
  * @category   Zend
- * @package    Zend_Gdata_Gapps
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Gapps
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_Gapps_UserQueryTest extends PHPUnit_Framework_TestCase
 {
-
     public function setUp()
     {
         $this->query = new Zend_Gdata_Gapps_UserQuery();
@@ -44,56 +43,55 @@ class Zend_Gdata_Gapps_UserQueryTest extends PHPUnit_Framework_TestCase
     // Test to make sure that URI generation works
     public function testDefaultQueryURIGeneration()
     {
-        $this->query->setDomain("foo.bar.invalid");
-        $this->assertEquals("https://apps-apis.google.com/a/feeds/foo.bar.invalid/user/2.0",
-                $this->query->getQueryUrl());
+        $this->query->setDomain('foo.bar.invalid');
+        $this->assertEquals('https://apps-apis.google.com/a/feeds/foo.bar.invalid/user/2.0',
+            $this->query->getQueryUrl());
     }
 
     // Test to make sure that the domain accessor methods work and propagate
     // to the query URI.
     public function testCanSetQueryDomain()
     {
-        $this->query->setDomain("my.domain.com");
-        $this->assertEquals("my.domain.com", $this->query->getDomain());
-        $this->assertEquals("https://apps-apis.google.com/a/feeds/my.domain.com/user/2.0",
-                $this->query->getQueryUrl());
+        $this->query->setDomain('my.domain.com');
+        $this->assertEquals('my.domain.com', $this->query->getDomain());
+        $this->assertEquals('https://apps-apis.google.com/a/feeds/my.domain.com/user/2.0',
+            $this->query->getQueryUrl());
 
-        $this->query->setDomain("hello.world.baz");
-        $this->assertEquals("hello.world.baz", $this->query->getDomain());
-        $this->assertEquals("https://apps-apis.google.com/a/feeds/hello.world.baz/user/2.0",
-                $this->query->getQueryUrl());
+        $this->query->setDomain('hello.world.baz');
+        $this->assertEquals('hello.world.baz', $this->query->getDomain());
+        $this->assertEquals('https://apps-apis.google.com/a/feeds/hello.world.baz/user/2.0',
+            $this->query->getQueryUrl());
     }
 
     // Test to make sure that the username accessor methods work and propagate
     // to the query URI.
     public function testCanSetUsernameProperty()
     {
-        $this->query->setDomain("my.domain.com");
-        $this->query->setUsername("foo");
-        $this->assertEquals("foo", $this->query->getUsername());
-        $this->assertEquals("https://apps-apis.google.com/a/feeds/my.domain.com/user/2.0/foo",
-                $this->query->getQueryUrl());
+        $this->query->setDomain('my.domain.com');
+        $this->query->setUsername('foo');
+        $this->assertEquals('foo', $this->query->getUsername());
+        $this->assertEquals('https://apps-apis.google.com/a/feeds/my.domain.com/user/2.0/foo',
+            $this->query->getQueryUrl());
 
-        $this->query->setUsername("bar");
-        $this->assertEquals("bar", $this->query->getUsername());
-        $this->assertEquals("https://apps-apis.google.com/a/feeds/my.domain.com/user/2.0/bar",
-                $this->query->getQueryUrl());
+        $this->query->setUsername('bar');
+        $this->assertEquals('bar', $this->query->getUsername());
+        $this->assertEquals('https://apps-apis.google.com/a/feeds/my.domain.com/user/2.0/bar',
+            $this->query->getQueryUrl());
     }
 
     // Test to make sure that the startUsername accessor methods work and
     // propagate to the query URI.
     public function testCanSetStartUsernameProperty()
     {
-        $this->query->setDomain("my.domain.com");
-        $this->query->setStartUsername("foo");
-        $this->assertEquals("foo", $this->query->getStartUsername());
-        $this->assertEquals("https://apps-apis.google.com/a/feeds/my.domain.com/user/2.0?startUsername=foo",
-                $this->query->getQueryUrl());
+        $this->query->setDomain('my.domain.com');
+        $this->query->setStartUsername('foo');
+        $this->assertEquals('foo', $this->query->getStartUsername());
+        $this->assertEquals('https://apps-apis.google.com/a/feeds/my.domain.com/user/2.0?startUsername=foo',
+            $this->query->getQueryUrl());
 
         $this->query->setStartUsername(null);
         $this->assertEquals(null, $this->query->getStartUsername());
-        $this->assertEquals("https://apps-apis.google.com/a/feeds/my.domain.com/user/2.0",
-                $this->query->getQueryUrl());
+        $this->assertEquals('https://apps-apis.google.com/a/feeds/my.domain.com/user/2.0',
+            $this->query->getQueryUrl());
     }
-
 }

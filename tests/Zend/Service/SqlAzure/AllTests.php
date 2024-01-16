@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,14 +13,14 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_WindowsAzure
- * @subpackage UnitTests
+ *
  * @version    $Id$
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
+/*
  * Test helpers
  */
 // require_once __DIR__ . '/../../../TestHelper.php';
@@ -33,9 +33,9 @@ require_once 'Zend/Service/SqlAzure/Management/AllTests.php';
 
 /**
  * @category   Zend
- * @package    Zend_Service_SqlAzure
- * @subpackage UnitTests
+ *
  * @version    $Id$
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -52,7 +52,7 @@ class Zend_Service_SqlAzure_AllTests
         $suite = new PHPUnit_Framework_TestSuite(__CLASS__);
 
         if (TESTS_ZEND_SERVICE_WINDOWSAZURE_SQLMANAGEMENT_RUNTESTS) {
-        	$suite->addTest(Zend_Service_SqlAzure_Management_AllTests::suite());
+            $suite->addTest(Zend_Service_SqlAzure_Management_AllTests::suite());
         }
 
         return $suite;

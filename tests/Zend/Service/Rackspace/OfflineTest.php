@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,8 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_Rackspace
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -22,64 +21,67 @@
 // require_once 'Zend/Service/Rackspace/Files.php';
 // require_once 'Zend/Http/Client/Adapter/Test.php';
 
-
 /**
- * Test helper
+ * Test helper.
  */
 
 /**
  * @category   Zend
- * @package    Zend\Service\Rackspace\Files
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend\Service
  * @group      Zend\Service\Rackspace
  * @group      Zend\Service\Rackspace\Files
  */
- class Zend_Service_Rackspace_OfflineTest extends PHPUnit_Framework_TestCase
+class Zend_Service_Rackspace_OfflineTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Reference to RackspaceFiles
+     * Reference to RackspaceFiles.
      *
      * @var Zend_Service_Rackspace_Files
      */
     protected $_files;
     /**
-     * HTTP client adapter for testing
+     * HTTP client adapter for testing.
      *
      * @var Zend_Http_Client_Adapter_Test
      */
     protected $_httpClientAdapterTest;
     /**
-     * Path to test data files
+     * Path to test data files.
      *
      * @var string
      */
     protected $_filesPath;
+
     /**
-     * Sets up this test case
+     * Sets up this test case.
      *
      * @return void
      */
     public function setUp()
     {
-        $this->_files = new Zend_Service_Rackspace_Files('foo','bar');
-        $this->_filesPath   = __DIR__ . '/_files';
+        $this->_files = new Zend_Service_Rackspace_Files('foo', 'bar');
+        $this->_filesPath = __DIR__.'/_files';
         $this->_httpClientAdapterTest = new Zend_Http_Client_Adapter_Test();
     }
+
     /**
-     * Utility method for returning a string HTTP response, which is loaded from a file
+     * Utility method for returning a string HTTP response, which is loaded from a file.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return string
      */
     protected function _loadResponse($name)
     {
         return file_get_contents("$this->_filesPath/$name.response");
     }
+
     /**
-     * Ensures that __construct() throws an exception when given an empty key attribute
+     * Ensures that __construct() throws an exception when given an empty key attribute.
      *
      * @return void
      */
@@ -89,10 +91,11 @@
             'Zend_Service_Rackspace_Exception',
             'The user cannot be empty'
         );
-        $file= new Zend_Service_Rackspace_Files(null,'bar');
+        $file = new Zend_Service_Rackspace_Files(null, 'bar');
     }
+
     /**
-     * Ensures that __construct() throws an exception when given an empty secret attribute
+     * Ensures that __construct() throws an exception when given an empty secret attribute.
      *
      * @return void
      */
@@ -102,41 +105,45 @@
             'Zend_Service_Rackspace_Exception',
             'The key cannot be empty'
         );
-        $file= new Zend_Service_Rackspace_Files('foo',null);
+        $file = new Zend_Service_Rackspace_Files('foo', null);
     }
+
     /**
-     * Test the default authentication URL
+     * Test the default authentication URL.
      *
      * @return void
      */
     public function testDefaultAuthUrl()
     {
-        $this->assertEquals($this->_files->getAuthUrl(),Zend_Service_Rackspace_Files::US_AUTH_URL,'The default Authentication URL is changed');
+        $this->assertEquals($this->_files->getAuthUrl(), Zend_Service_Rackspace_Files::US_AUTH_URL, 'The default Authentication URL is changed');
     }
+
     /**
-     * Test the set of the key
-     * 
+     * Test the set of the key.
+     *
      * @return void
      */
     public function testSetKey()
     {
-        $key= '1234567890';
+        $key = '1234567890';
         $this->_files->setKey($key);
-        $this->assertEquals($this->_files->getKey(),$key);
+        $this->assertEquals($this->_files->getKey(), $key);
     }
+
     /**
-     * Test the set of the user
+     * Test the set of the user.
      *
      * @return void
      */
     public function testSetUser()
     {
-        $user= 'test';
+        $user = 'test';
         $this->_files->setUser($user);
-        $this->assertEquals($this->_files->getUser(),$user);
+        $this->assertEquals($this->_files->getUser(), $user);
     }
+
     /**
-     * Test the set of an invalid authentication URL
+     * Test the set of an invalid authentication URL.
      *
      * @return void
      */
@@ -148,8 +155,9 @@
         );
         $this->_files->setAuthUrl('http://test');
     }
+
     /**
-     * Check the authentication and the results (token, storage_url, cdn_url)
+     * Check the authentication and the results (token, storage_url, cdn_url).
      *
      * @return void
      */
@@ -160,14 +168,15 @@
 
         $this->_httpClientAdapterTest->setResponse($this->_loadResponse(__FUNCTION__));
 
-        $this->assertTrue($this->_files->authenticate(),'Authentication failed');
-        $this->assertTrue($this->_files->isSuccessful(),'Authentication call failed');
-        $this->assertEquals($this->_files->getToken(),'0f0223cd-f157-4d04-bb2d-ccda1a5643af','The token is not valid');
-        $this->assertEquals($this->_files->getStorageUrl(),'https://storage101.ord1.clouddrive.com/v1/test','The storage URL is not valid');
-        $this->assertEquals($this->_files->getCdnUrl(),'https://cdn2.clouddrive.com/v1/test','The CDN URL is not valid');
+        $this->assertTrue($this->_files->authenticate(), 'Authentication failed');
+        $this->assertTrue($this->_files->isSuccessful(), 'Authentication call failed');
+        $this->assertEquals($this->_files->getToken(), '0f0223cd-f157-4d04-bb2d-ccda1a5643af', 'The token is not valid');
+        $this->assertEquals($this->_files->getStorageUrl(), 'https://storage101.ord1.clouddrive.com/v1/test', 'The storage URL is not valid');
+        $this->assertEquals($this->_files->getCdnUrl(), 'https://cdn2.clouddrive.com/v1/test', 'The CDN URL is not valid');
     }
+
     /**
-     * Test the authentication error (401 Unauthorized - Bad username or password)
+     * Test the authentication error (401 Unauthorized - Bad username or password).
      *
      * @return void
      */
@@ -180,8 +189,7 @@
 
         $this->assertFalse($this->_files->authenticate());
         $this->assertFalse($this->_files->isSuccessful());
-        $this->assertEquals($this->_files->getErrorCode(),'401');
-        $this->assertEquals($this->_files->getErrorMsg(),'Bad username or password');
-
+        $this->assertEquals($this->_files->getErrorCode(), '401');
+        $this->assertEquals($this->_files->getErrorMsg(), 'Bad username or password');
     }
 }

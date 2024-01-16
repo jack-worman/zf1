@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_CodeGenerator
- * @subpackage PHP
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -32,7 +32,7 @@
 
 /**
  * @category   Zend
- * @package    Zend_CodeGenerator
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -41,17 +41,17 @@ class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
     /**
      * @var string
      */
-    protected $_shortDescription = null;
+    protected $_shortDescription;
 
     /**
      * @var string
      */
-    protected $_longDescription = null;
+    protected $_longDescription;
 
     /**
      * @var array
      */
-    protected $_tags = array();
+    protected $_tags = [];
 
     /**
      * @var string
@@ -59,9 +59,8 @@ class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
     protected $_indentation = '';
 
     /**
-     * fromReflection() - Build a docblock generator object from a reflection object
+     * fromReflection() - Build a docblock generator object from a reflection object.
      *
-     * @param Zend_Reflection_Docblock $reflectionDocblock
      * @return Zend_CodeGenerator_Php_Docblock
      */
     public static function fromReflection(Zend_Reflection_Docblock $reflectionDocblock)
@@ -82,19 +81,21 @@ class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
     }
 
     /**
-     * setShortDescription()
+     * setShortDescription().
      *
      * @param string $shortDescription
+     *
      * @return Zend_CodeGenerator_Php_Docblock
      */
     public function setShortDescription($shortDescription)
     {
         $this->_shortDescription = $shortDescription;
+
         return $this;
     }
 
     /**
-     * getShortDescription()
+     * getShortDescription().
      *
      * @return string
      */
@@ -104,19 +105,21 @@ class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
     }
 
     /**
-     * setLongDescription()
+     * setLongDescription().
      *
      * @param string $longDescription
+     *
      * @return Zend_CodeGenerator_Php_Docblock
      */
     public function setLongDescription($longDescription)
     {
         $this->_longDescription = $longDescription;
+
         return $this;
     }
 
     /**
-     * getLongDescription()
+     * getLongDescription().
      *
      * @return string
      */
@@ -126,12 +129,11 @@ class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
     }
 
     /**
-     * setTags()
+     * setTags().
      *
-     * @param array $tags
      * @return Zend_CodeGenerator_Php_Docblock
      */
-    public function setTags(Array $tags)
+    public function setTags(array $tags)
     {
         foreach ($tags as $tag) {
             $this->setTag($tag);
@@ -141,9 +143,10 @@ class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
     }
 
     /**
-     * setTag()
+     * setTag().
      *
      * @param array|Zend_CodeGenerator_Php_Docblock_Tag $tag
+     *
      * @return Zend_CodeGenerator_Php_Docblock
      */
     public function setTag($tag)
@@ -152,18 +155,16 @@ class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
             $tag = new Zend_CodeGenerator_Php_Docblock_Tag($tag);
         } elseif (!$tag instanceof Zend_CodeGenerator_Php_Docblock_Tag) {
             // require_once 'Zend/CodeGenerator/Php/Exception.php';
-            throw new Zend_CodeGenerator_Php_Exception(
-                'setTag() expects either an array of method options or an '
-                . 'instance of Zend_CodeGenerator_Php_Docblock_Tag'
-                );
+            throw new Zend_CodeGenerator_Php_Exception('setTag() expects either an array of method options or an instance of Zend_CodeGenerator_Php_Docblock_Tag');
         }
 
         $this->_tags[] = $tag;
+
         return $this;
     }
 
     /**
-     * getTags
+     * getTags.
      *
      * @return array Array of Zend_CodeGenerator_Php_Docblock_Tag
      */
@@ -173,7 +174,7 @@ class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
     }
 
     /**
-     * generate()
+     * generate().
      *
      * @return string
      */
@@ -183,45 +184,47 @@ class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
             return $this->_docCommentize($this->getSourceContent());
         }
 
-        $output  = '';
+        $output = '';
         if (null !== ($sd = $this->getShortDescription())) {
-            $output .= $sd . self::LINE_FEED . self::LINE_FEED;
+            $output .= $sd.self::LINE_FEED.self::LINE_FEED;
         }
         if (null !== ($ld = $this->getLongDescription())) {
-            $output .= $ld . self::LINE_FEED . self::LINE_FEED;
+            $output .= $ld.self::LINE_FEED.self::LINE_FEED;
         }
 
         foreach ($this->getTags() as $tag) {
-            $output .= $tag->generate() . self::LINE_FEED;
+            $output .= $tag->generate().self::LINE_FEED;
         }
 
         return $this->_docCommentize(\trim((string) $output));
     }
 
     /**
-     * _docCommentize()
+     * _docCommentize().
      *
      * @param string $content
+     *
      * @return string
      */
     protected function _docCommentize($content)
     {
-        $indent  = $this->getIndentation();
-        $output  = $indent . '/**' . self::LINE_FEED;
+        $indent = $this->getIndentation();
+        $output = $indent.'/**'.self::LINE_FEED;
         $content = wordwrap($content, 80, self::LINE_FEED);
-        $lines   = explode(self::LINE_FEED, $content);
+        $lines = explode(self::LINE_FEED, $content);
 
         foreach ($lines as $line) {
-            $output .= $indent . ' *';
+            $output .= $indent.' *';
             if ($line) {
                 $output .= " $line";
             }
             $output .= self::LINE_FEED;
         }
 
-        $output = rtrim((string) $output, ' *' . self::LINE_FEED) . self::LINE_FEED;
+        $output = rtrim((string) $output, ' *'.self::LINE_FEED).self::LINE_FEED;
 
-        $output .= $indent . ' */' . self::LINE_FEED;
+        $output .= $indent.' */'.self::LINE_FEED;
+
         return $output;
     }
 }

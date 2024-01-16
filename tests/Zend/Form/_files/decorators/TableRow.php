@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,41 +13,37 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
-
-
 
 // require_once 'Zend/Form/Decorator/Abstract.php';
 
 /**
- * Mock file for testbed
+ * Mock file for testbed.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class My_Decorator_TableRow extends Zend_Form_Decorator_Abstract
 {
-
     /**
-     * Test Function for render
+     * Test Function for render.
      *
-     * @param  string $content Content to display
+     * @param string $content Content to display
+     *
      * @return string
      */
     public function render($content)
     {
         $e = $this->getElement();
+
         return "<tr><td>{$e->getLabel()}</td><td>{$content}</td><td>{$e->getDescription()}</td></tr>";
     }
-
 }

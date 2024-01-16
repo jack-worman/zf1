@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -25,10 +25,10 @@
 
 /**
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Gdata
  */
 #[AllowDynamicProperties]
@@ -77,7 +77,7 @@ class Zend_Gdata_QueryTest extends PHPUnit_Framework_TestCase
         $query->setPublishedMin('2007-01-01');
         $this->assertEquals('2007-01-01', $query->getPublishedMin());
         $this->assertContains('published-min=2007-01-01',
-                $query->getQueryUrl());
+            $query->getQueryUrl());
     }
 
     public function testSetAndGetAuthor()
@@ -119,5 +119,4 @@ class Zend_Gdata_QueryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(12, $query->getStartIndex());
         $this->assertContains('start-index=12', $query->getQueryUrl());
     }
-
 }

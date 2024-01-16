@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Form
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -22,7 +22,7 @@
 // require_once 'Zend/Form/Decorator/Abstract.php';
 
 /**
- * Zend_Dojo_Form_Decorator_DijitContainer
+ * Zend_Dojo_Form_Decorator_DijitContainer.
  *
  * Render a dojo dijit layout container via a view helper
  *
@@ -33,40 +33,44 @@
  * parameters, and (X)HTML attributes; these will be provided by the element.
  *
  * @uses       Zend_Form_Decorator_Abstract
- * @package    Zend_Dojo
- * @subpackage Form_Decorator
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 abstract class Zend_Dojo_Form_Decorator_DijitContainer extends Zend_Form_Decorator_Abstract
 {
     /**
-     * View helper
+     * View helper.
+     *
      * @var string
      */
     protected $_helper;
 
     /**
-     * Element attributes
+     * Element attributes.
+     *
      * @var array
      */
     protected $_attribs;
 
     /**
-     * Dijit option parameters
+     * Dijit option parameters.
+     *
      * @var array
      */
     protected $_dijitParams;
 
     /**
-     * Container title
+     * Container title.
+     *
      * @var string
      */
     protected $_title;
 
     /**
-     * Get view helper for rendering container
+     * Get view helper for rendering container.
      *
      * @return string
      */
@@ -76,11 +80,12 @@ abstract class Zend_Dojo_Form_Decorator_DijitContainer extends Zend_Form_Decorat
             // require_once 'Zend/Form/Decorator/Exception.php';
             throw new Zend_Form_Decorator_Exception('No view helper specified fo DijitContainer decorator');
         }
+
         return $this->_helper;
     }
 
     /**
-     * Get element attributes
+     * Get element attributes.
      *
      * @return array
      */
@@ -93,11 +98,12 @@ abstract class Zend_Dojo_Form_Decorator_DijitContainer extends Zend_Form_Decorat
             }
             $this->_attribs = $attribs;
         }
+
         return $this->_attribs;
     }
 
     /**
-     * Get dijit option parameters
+     * Get dijit option parameters.
      *
      * @return array
      */
@@ -108,7 +114,7 @@ abstract class Zend_Dojo_Form_Decorator_DijitContainer extends Zend_Form_Decorat
             if (array_key_exists('dijitParams', $attribs)) {
                 $this->_dijitParams = $attribs['dijitParams'];
             } else {
-                $this->_dijitParams = array();
+                $this->_dijitParams = [];
             }
 
             $options = $this->getOptions();
@@ -127,7 +133,7 @@ abstract class Zend_Dojo_Form_Decorator_DijitContainer extends Zend_Form_Decorat
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -155,27 +161,28 @@ abstract class Zend_Dojo_Form_Decorator_DijitContainer extends Zend_Form_Decorat
             }
         }
 
-        return (empty($this->_title) ? '' : $this->_title);
+        return empty($this->_title) ? '' : $this->_title;
     }
 
     /**
-     * Render a dijit layout container
+     * Render a dijit layout container.
      *
      * Replaces $content entirely from currently set element.
      *
-     * @param  string $content
+     * @param string $content
+     *
      * @return string
      */
     public function render($content)
     {
         $element = $this->getElement();
-        $view    = $element->getView();
+        $view = $element->getView();
         if (null === $view) {
             return $content;
         }
 
         $dijitParams = $this->getDijitParams();
-        $attribs     = array_merge($this->getAttribs(), $this->getOptions());
+        $attribs = array_merge($this->getAttribs(), $this->getOptions());
 
         if (array_key_exists('legend', $attribs)) {
             if (!array_key_exists('title', $dijitParams) || empty($dijitParams['title'])) {
@@ -184,14 +191,14 @@ abstract class Zend_Dojo_Form_Decorator_DijitContainer extends Zend_Form_Decorat
             unset($attribs['legend']);
         }
 
-        $helper      = $this->getHelper();
-        $id          = $element->getId() . '-' . $helper;
+        $helper = $this->getHelper();
+        $id = $element->getId().'-'.$helper;
 
         if ($view->dojo()->hasDijit($id)) {
             trigger_error(sprintf('Duplicate dijit ID detected for id "%s; temporarily generating uniqid"', $id), E_USER_WARNING);
             $base = $id;
             do {
-                $id = $base . '-' . uniqid();
+                $id = $base.'-'.uniqid();
             } while ($view->dojo()->hasDijit($id));
         }
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,12 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_File
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_File_ClassFileLocatorTest::main');
 }
@@ -26,19 +24,18 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 // require_once 'Zend/File/ClassFileLocator.php';
 
 /**
- * Test class for Zend_File_ClassFileLocator
+ * Test class for Zend_File_ClassFileLocator.
  *
  * @category   Zend
- * @package    Zend_File
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_File
  */
 #[AllowDynamicProperties]
 class Zend_File_ClassFileLocatorTest extends PHPUnit_Framework_TestCase
 {
-
     public function testConstructorThrowsInvalidArgumentExceptionForInvalidStringDirectory()
     {
         $this->setExpectedException('InvalidArgumentException');
@@ -47,7 +44,7 @@ class Zend_File_ClassFileLocatorTest extends PHPUnit_Framework_TestCase
 
     public function testConstructorThrowsInvalidArgumentExceptionForNonDirectoryIteratorArgument()
     {
-        $iterator = new ArrayIterator(array());
+        $iterator = new ArrayIterator([]);
         $this->setExpectedException('InvalidArgumentException');
         $locator = new Zend_File_ClassFileLocator($iterator);
     }
@@ -69,7 +66,7 @@ class Zend_File_ClassFileLocatorTest extends PHPUnit_Framework_TestCase
                 $found = true;
             }
         }
-        $this->assertFalse($found, "Found PHP file not containing a class?");
+        $this->assertFalse($found, 'Found PHP file not containing a class?');
     }
 
     public function testIterationShouldReturnInterfaces()
@@ -81,7 +78,7 @@ class Zend_File_ClassFileLocatorTest extends PHPUnit_Framework_TestCase
                 $found = true;
             }
         }
-        $this->assertTrue($found, "Locator skipped an interface?");
+        $this->assertTrue($found, 'Locator skipped an interface?');
     }
 
     public function testIterationShouldInjectNamespaceInFoundItems()
@@ -124,16 +121,16 @@ class Zend_File_ClassFileLocatorTest extends PHPUnit_Framework_TestCase
             if (preg_match('/MultipleClassesInMultipleNamespaces\.php$/', $file->getFilename())) {
                 $classes = $file->getClasses();
                 foreach ($classes as $class) {
-                    if ($class === 'ZendTest\File\TestAsset\LocatorShouldFindFirstClass') {
+                    if ('ZendTest\File\TestAsset\LocatorShouldFindFirstClass' === $class) {
                         $foundFirst = true;
                     }
-                    if ($class === 'ZendTest\File\TestAsset\LocatorShouldFindSecondClass') {
+                    if ('ZendTest\File\TestAsset\LocatorShouldFindSecondClass' === $class) {
                         $foundSecond = true;
                     }
-                    if ($class === 'ZendTest\File\TestAsset\SecondTestNamespace\LocatorShouldFindThirdClass') {
+                    if ('ZendTest\File\TestAsset\SecondTestNamespace\LocatorShouldFindThirdClass' === $class) {
                         $foundThird = true;
                     }
-                    if ($class === 'ZendTest\File\TestAsset\SecondTestNamespace\LocatorShouldFindFourthClass') {
+                    if ('ZendTest\File\TestAsset\SecondTestNamespace\LocatorShouldFindFourthClass' === $class) {
                         $foundFourth = true;
                     }
                 }

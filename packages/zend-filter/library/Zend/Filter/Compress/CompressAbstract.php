@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Filter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,17 +26,17 @@
 // require_once 'Zend/Filter/Compress/CompressInterface.php';
 
 /**
- * Abstract compression adapter
+ * Abstract compression adapter.
  *
  * @category   Zend
- * @package    Zend_Filter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Filter_Compress_CompressAbstract implements Zend_Filter_Compress_CompressInterface
 {
     /**
-     * Class constructor
+     * Class constructor.
      *
      * @param array|Zend_Config $options (Optional) Options to set
      */
@@ -51,14 +52,13 @@ abstract class Zend_Filter_Compress_CompressAbstract implements Zend_Filter_Comp
     }
 
     /**
-     * Returns one or all set options
+     * Returns one or all set options.
      *
      * @param string $option (Optional) Option to return
-     * @return mixed
      */
     public function getOptions($option = null)
     {
-        if ($option === null) {
+        if (null === $option) {
             return $this->_options;
         }
 
@@ -70,15 +70,14 @@ abstract class Zend_Filter_Compress_CompressAbstract implements Zend_Filter_Comp
     }
 
     /**
-     * Sets all or one option
+     * Sets all or one option.
      *
-     * @param  array $options
      * @return Zend_Filter_Compress_CompressAbstract
      */
     public function setOptions(array $options)
     {
         foreach ($options as $key => $option) {
-            $method = 'set' . $key;
+            $method = 'set'.$key;
             if (method_exists($this, $method)) {
                 $this->$method($option);
             }

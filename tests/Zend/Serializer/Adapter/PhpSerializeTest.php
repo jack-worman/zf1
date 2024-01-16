@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Serializer
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,15 +27,13 @@
 
 /**
  * @category   Zend
- * @package    Zend_Serializer
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Zend_Serializer_Adapter_PhpSerializeTest extends PHPUnit_Framework_TestCase
 {
-
     private $_adapter;
 
     public function setUp()
@@ -50,8 +48,8 @@ class Zend_Serializer_Adapter_PhpSerializeTest extends PHPUnit_Framework_TestCas
 
     public function testSerializeString()
     {
-        $value      = 'test';
-        $expected   = 's:4:"test";';
+        $value = 'test';
+        $expected = 's:4:"test";';
 
         $data = $this->_adapter->serialize($value);
         $this->assertEquals($expected, $data);
@@ -59,7 +57,7 @@ class Zend_Serializer_Adapter_PhpSerializeTest extends PHPUnit_Framework_TestCas
 
     public function testSerializeFalse()
     {
-        $value    = false;
+        $value = false;
         $expected = 'b:0;';
 
         $data = $this->_adapter->serialize($value);
@@ -68,7 +66,7 @@ class Zend_Serializer_Adapter_PhpSerializeTest extends PHPUnit_Framework_TestCas
 
     public function testSerializeNull()
     {
-        $value    = null;
+        $value = null;
         $expected = 'N;';
 
         $data = $this->_adapter->serialize($value);
@@ -77,7 +75,7 @@ class Zend_Serializer_Adapter_PhpSerializeTest extends PHPUnit_Framework_TestCas
 
     public function testSerializeNumeric()
     {
-        $value    = 100;
+        $value = 100;
         $expected = 'i:100;';
 
         $data = $this->_adapter->serialize($value);
@@ -86,7 +84,7 @@ class Zend_Serializer_Adapter_PhpSerializeTest extends PHPUnit_Framework_TestCas
 
     public function testSerializeObject()
     {
-        $value    = new stdClass();
+        $value = new stdClass();
         $expected = 'O:8:"stdClass":0:{}';
 
         $data = $this->_adapter->serialize($value);
@@ -95,7 +93,7 @@ class Zend_Serializer_Adapter_PhpSerializeTest extends PHPUnit_Framework_TestCas
 
     public function testUnserializeString()
     {
-        $value    = 's:4:"test";';
+        $value = 's:4:"test";';
         $expected = 'test';
 
         $data = $this->_adapter->unserialize($value);
@@ -104,7 +102,7 @@ class Zend_Serializer_Adapter_PhpSerializeTest extends PHPUnit_Framework_TestCas
 
     public function testUnserializeFalse()
     {
-        $value    = 'b:0;';
+        $value = 'b:0;';
         $expected = false;
 
         $data = $this->_adapter->unserialize($value);
@@ -113,7 +111,7 @@ class Zend_Serializer_Adapter_PhpSerializeTest extends PHPUnit_Framework_TestCas
 
     public function testUnserializeNull()
     {
-        $value    = 'N;';
+        $value = 'N;';
         $expected = null;
 
         $data = $this->_adapter->unserialize($value);
@@ -122,7 +120,7 @@ class Zend_Serializer_Adapter_PhpSerializeTest extends PHPUnit_Framework_TestCas
 
     public function testUnserializeNumeric()
     {
-        $value    = 'i:100;';
+        $value = 'i:100;';
         $expected = 100;
 
         $data = $this->_adapter->unserialize($value);
@@ -131,7 +129,7 @@ class Zend_Serializer_Adapter_PhpSerializeTest extends PHPUnit_Framework_TestCas
 
     public function testUnserializeObject()
     {
-        $value    = 'O:8:"stdClass":0:{}';
+        $value = 'O:8:"stdClass":0:{}';
         $expected = new stdClass();
 
         $data = $this->_adapter->unserialize($value);
@@ -144,5 +142,4 @@ class Zend_Serializer_Adapter_PhpSerializeTest extends PHPUnit_Framework_TestCas
         $this->setExpectedException('Zend_Serializer_Exception');
         $this->_adapter->unserialize($value);
     }
-
 }

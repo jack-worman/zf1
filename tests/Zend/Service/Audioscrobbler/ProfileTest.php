@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_Audioscrobbler
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,15 +25,14 @@
  */
 // require_once 'Zend/Service/Audioscrobbler.php';
 
-require_once "AudioscrobblerTestCase.php";
-
+require_once 'AudioscrobblerTestCase.php';
 
 /**
  * @category   Zend
- * @package    Zend_Service_Audioscrobbler
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Service
  * @group      Zend_Service_Audioscrobbler
  */
@@ -48,9 +47,9 @@ class Zend_Service_Audioscrobbler_ProfileTest extends Zend_Service_Audioscrobble
 
     public function testGetProfileInfo()
     {
-        $test_response = "HTTP/1.1 200 OK\r\n" .
-                        "Content-type: text/xml\r\n" .
-                        "\r\n" .
+        $test_response = "HTTP/1.1 200 OK\r\n".
+                        "Content-type: text/xml\r\n".
+                        "\r\n".
                         '<?xml version="1.0" encoding="UTF-8"?>
                         <profile id="1000002" cluster="2" username="RJ">
                         <url>http://www.last.fm/user/RJ/</url>
@@ -82,19 +81,18 @@ class Zend_Service_Audioscrobbler_ProfileTest extends Zend_Service_Audioscrobble
         try {
             $response = $as->userGetProfileInformation();
             $this->assertNull($response);
-
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return;
         }
 
         $this->fail('Exception was not thrown when submitting bad user info');
     }
 
-    public function testUserGetTopArtists( )
+    public function testUserGetTopArtists()
     {
-        $test_response = "HTTP/1.1 200 OK\r\n" .
-                        "Content-type: text/xml\r\n" .
-                        "\r\n" .
+        $test_response = "HTTP/1.1 200 OK\r\n".
+                        "Content-type: text/xml\r\n".
+                        "\r\n".
                         '<?xml version="1.0" encoding="UTF-8"?>
                         <topartists user="RJ">
                         <artist>
@@ -108,22 +106,23 @@ class Zend_Service_Audioscrobbler_ProfileTest extends Zend_Service_Audioscrobble
                         </artist>
                         </topartists>';
 
-        $this->setAudioscrobblerResponse($test_response); $as = $this->getAudioscrobblerService();
+        $this->setAudioscrobblerResponse($test_response);
+        $as = $this->getAudioscrobblerService();
 
         $as->set('user', 'RJ');
         $response = $as->userGetTopArtists();
         $artist = $response->artist[0];
 
-        $this->assertEquals((string)$response['user'], 'RJ');
-        $this->assertEquals((string)$artist->name, 'Dream Theater');
+        $this->assertEquals((string) $response['user'], 'RJ');
+        $this->assertEquals((string) $artist->name, 'Dream Theater');
         $this->assertNotNull($artist->rank, 1);
     }
 
-    public function testUserGetTopAlbums( )
+    public function testUserGetTopAlbums()
     {
-        $testing_response = "HTTP/1.1 200 OK\r\n" .
-                        "Content-type: text/xml\r\n" .
-                        "\r\n" .
+        $testing_response = "HTTP/1.1 200 OK\r\n".
+                        "Content-type: text/xml\r\n".
+                        "\r\n".
                         '<?xml version="1.0" encoding="UTF-8"?>
                         <topalbums user="Frith">
                         <album>
@@ -140,20 +139,21 @@ class Zend_Service_Audioscrobbler_ProfileTest extends Zend_Service_Audioscrobble
                             </image>
                         </album>
                         </topalbums>';
-        $this->setAudioscrobblerResponse($testing_response); $as = $this->getAudioscrobblerService();
+        $this->setAudioscrobblerResponse($testing_response);
+        $as = $this->getAudioscrobblerService();
         $as->set('user', 'Frith');
         $response = $as->userGetTopAlbums();
         $album = $response->album[0];
-        $this->assertEquals((string)$response['user'], 'Frith');
+        $this->assertEquals((string) $response['user'], 'Frith');
         $this->assertNotNull($album);
-        $this->assertEquals((string)$album->name, 'The Warning');
+        $this->assertEquals((string) $album->name, 'The Warning');
     }
 
-    public function testUserGetTopTracks( )
+    public function testUserGetTopTracks()
     {
-        $testing_response = "HTTP/1.1 200 OK\r\n" .
-                        "Content-type: text/xml\r\n" .
-                        "\r\n" .
+        $testing_response = "HTTP/1.1 200 OK\r\n".
+                        "Content-type: text/xml\r\n".
+                        "\r\n".
                         '<?xml version="1.0" encoding="UTF-8"?>
                         <toptracks user="RJ">
                         <track>
@@ -173,21 +173,22 @@ class Zend_Service_Audioscrobbler_ProfileTest extends Zend_Service_Audioscrobble
                             <url>http://www.last.fm/music/Portishead/_/Cowboys</url>
                         </track>
                         </toptracks>';
-        $this->setAudioscrobblerResponse($testing_response); $as = $this->getAudioscrobblerService();
+        $this->setAudioscrobblerResponse($testing_response);
+        $as = $this->getAudioscrobblerService();
         $as->set('user', 'RJ');
         $response = $as->userGetTopTracks();
         $track = $response->track[0];
-        $this->assertEquals((string)$response['user'], 'RJ');
+        $this->assertEquals((string) $response['user'], 'RJ');
         $this->assertNotNull($track);
-        $this->assertEquals((string)$track->artist, 'Steppenwolf');
-        $this->assertEquals((int)$track->playcount, 31);
+        $this->assertEquals((string) $track->artist, 'Steppenwolf');
+        $this->assertEquals((int) $track->playcount, 31);
     }
 
-    public function testUserGetTopTags( )
+    public function testUserGetTopTags()
     {
-        $testing_response = "HTTP/1.1 200 OK\r\n" .
-                        "Content-type: text/xml\r\n" .
-                        "\r\n" .
+        $testing_response = "HTTP/1.1 200 OK\r\n".
+                        "Content-type: text/xml\r\n".
+                        "\r\n".
                         '<?xml version="1.0" encoding="UTF-8"?>
                         <toptags user="RJ">
                         <tag>
@@ -206,21 +207,22 @@ class Zend_Service_Audioscrobbler_ProfileTest extends Zend_Service_Audioscrobble
                             <url>http://www.last.fm/tag/mellow</url>
                         </tag>
                         </toptags>';
-        $this->setAudioscrobblerResponse($testing_response); $as = $this->getAudioscrobblerService();
+        $this->setAudioscrobblerResponse($testing_response);
+        $as = $this->getAudioscrobblerService();
         $as->set('user', 'RJ');
         $response = $as->userGetTopTags();
         $tag = $response->tag[1];
-        $this->assertEquals((string)$response['user'], 'RJ');
+        $this->assertEquals((string) $response['user'], 'RJ');
         $this->assertNotNull($tag);
-        $this->assertEquals((string)$tag->name, 'metal');
-        $this->assertEquals((int)$tag->count, 8);
+        $this->assertEquals((string) $tag->name, 'metal');
+        $this->assertEquals((int) $tag->count, 8);
     }
 
     public function testUserGetTopTagsForArtist()
     {
-        $testing_response = "HTTP/1.1 200 OK\r\n" .
-                        "Content-type: text/xml\r\n" .
-                        "\r\n" .
+        $testing_response = "HTTP/1.1 200 OK\r\n".
+                        "Content-type: text/xml\r\n".
+                        "\r\n".
                         '<?xml version="1.0" encoding="UTF-8"?>
                         <artisttags user="RJ" artist="Metallica">
                         <tag>
@@ -234,27 +236,28 @@ class Zend_Service_Audioscrobbler_ProfileTest extends Zend_Service_Audioscrobble
                             <url>http://www.last.fm/tag/80s</url>
                         </tag>
                         </artisttags>';
-        $this->setAudioscrobblerResponse($testing_response); $as = $this->getAudioscrobblerService();
+        $this->setAudioscrobblerResponse($testing_response);
+        $as = $this->getAudioscrobblerService();
         $as->set('user', 'RJ');
         $as->set('artist', 'Metallica');
         $response = $as->userGetTopTagsForArtist();
         $tag = $response->tag[0];
-        $this->assertEquals((string)$response['user'], 'RJ');
-        $this->assertEquals((string)$response['artist'], 'Metallica');
+        $this->assertEquals((string) $response['user'], 'RJ');
+        $this->assertEquals((string) $response['artist'], 'Metallica');
         $this->assertNotNull($tag);
     }
 
     /**
-     * Ensures that userGetTopTagsForArtist() throws an exception when based on bad parameters
+     * Ensures that userGetTopTagsForArtist() throws an exception when based on bad parameters.
      *
      * @return void
      */
     public function testBadUserGetTopTagsForArtist()
     {
         $testingResponse = "HTTP/1.1 200 OK\r\n"
-                         . "Content-type: text/xml\r\n"
-                         . "\r\n"
-                         . "ERROR: Missing 'subject' parameter in querystring";
+                         ."Content-type: text/xml\r\n"
+                         ."\r\n"
+                         ."ERROR: Missing 'subject' parameter in querystring";
         $this->setAudioscrobblerResponse($testingResponse);
         $as = $this->getAudioscrobblerService();
 
@@ -268,45 +271,47 @@ class Zend_Service_Audioscrobbler_ProfileTest extends Zend_Service_Audioscrobble
 
     public function testUserGetTopTagsForAlbum()
     {
-        $testing_response = "HTTP/1.1 200 OK\r\n" .
-                        "Content-type: text/xml\r\n" .
-                        "\r\n" .
+        $testing_response = "HTTP/1.1 200 OK\r\n".
+                        "Content-type: text/xml\r\n".
+                        "\r\n".
                         '<?xml version="1.0" encoding="UTF-8"?>
                         <albumtags user="RJ" album="Ride the Lightning" artist="Metallica">
                         </albumtags>';
-        $this->setAudioscrobblerResponse($testing_response); $as = $this->getAudioscrobblerService();
+        $this->setAudioscrobblerResponse($testing_response);
+        $as = $this->getAudioscrobblerService();
         $as->set('user', 'RJ');
         $as->set('artist', 'Metallica');
         $as->set('album', 'Ride The Lightning');
         $response = $as->userGetTopTagsForAlbum();
-        $this->assertEquals((string)$response['user'], 'RJ');
-        $this->assertEquals((string)strtolower((string) $response['artist']), strtolower((string) 'Metallica'));
-        $this->assertEquals((string)strtolower((string) $response['album']), strtolower((string) 'Ride The Lightning'));
+        $this->assertEquals((string) $response['user'], 'RJ');
+        $this->assertEquals((string) strtolower((string) $response['artist']), strtolower((string) 'Metallica'));
+        $this->assertEquals((string) strtolower((string) $response['album']), strtolower((string) 'Ride The Lightning'));
     }
 
     public function testUserGetTopTagsForTrack()
     {
-        $testing_response = "HTTP/1.1 200 OK\r\n" .
-                        "Content-type: text/xml\r\n" .
-                        "\r\n" .
+        $testing_response = "HTTP/1.1 200 OK\r\n".
+                        "Content-type: text/xml\r\n".
+                        "\r\n".
                         '<?xml version="1.0" encoding="UTF-8"?>
                         <tracktags user="RJ" artist="Metallica" track="Nothing Else Matters">
                         </tracktags>';
-        $this->setAudioscrobblerResponse($testing_response); $as = $this->getAudioscrobblerService();
+        $this->setAudioscrobblerResponse($testing_response);
+        $as = $this->getAudioscrobblerService();
         $as->set('user', 'RJ');
         $as->set('artist', 'Metallica');
         $as->set('track', 'Nothing Else Matters');
         $response = $as->userGetTopTagsForTrack();
-        $this->assertEquals((string)$response['user'], 'RJ');
-        $this->assertEquals((string)$response['artist'], 'Metallica');
-        $this->assertEquals((string)$response['track'], 'Nothing Else Matters');
+        $this->assertEquals((string) $response['user'], 'RJ');
+        $this->assertEquals((string) $response['artist'], 'Metallica');
+        $this->assertEquals((string) $response['track'], 'Nothing Else Matters');
     }
 
     public function testUserGetFriends()
     {
-        $testing_response = "HTTP/1.1 200 OK\r\n" .
-                        "Content-type: text/xml\r\n" .
-                        "\r\n" .
+        $testing_response = "HTTP/1.1 200 OK\r\n".
+                        "Content-type: text/xml\r\n".
+                        "\r\n".
                         '<?xml version="1.0" encoding="UTF-8"?>
                         <friends user="RJ">
                         <user username="julians">
@@ -324,18 +329,19 @@ class Zend_Service_Audioscrobbler_ProfileTest extends Zend_Service_Audioscrobble
 
                             </user>
                         </friends>';
-        $this->setAudioscrobblerResponse($testing_response); $as = $this->getAudioscrobblerService();
+        $this->setAudioscrobblerResponse($testing_response);
+        $as = $this->getAudioscrobblerService();
         $as->set('user', 'RJ');
         $response = $as->userGetFriends();
-        $this->assertEquals((string)$response['user'], 'RJ');
+        $this->assertEquals((string) $response['user'], 'RJ');
         $this->assertEquals(count($response->user), 2);
     }
 
     public function testUserGetNeighbours()
     {
-        $testing_response = "HTTP/1.1 200 OK\r\n" .
-                        "Content-type: text/xml\r\n" .
-                        "\r\n" .
+        $testing_response = "HTTP/1.1 200 OK\r\n".
+                        "Content-type: text/xml\r\n".
+                        "\r\n".
                         '<?xml version="1.0" encoding="UTF-8"?>
                         <neighbours user="RJ">
                         <user username="count-bassy">
@@ -349,20 +355,21 @@ class Zend_Service_Audioscrobbler_ProfileTest extends Zend_Service_Audioscrobble
                             <match>93.12</match>
                         </user>
                         </neighbours>';
-        $this->setAudioscrobblerResponse($testing_response); $as = $this->getAudioscrobblerService();
+        $this->setAudioscrobblerResponse($testing_response);
+        $as = $this->getAudioscrobblerService();
         $as->set('user', 'RJ');
         $response = $as->userGetNeighbours();
-        $this->assertEquals((string)$response['user'], 'RJ');
+        $this->assertEquals((string) $response['user'], 'RJ');
         $this->assertEquals(count($response->user), 2);
         $user = $response->user[1];
-        $this->assertEquals((string)$user['username'], 'arcymarcy');
+        $this->assertEquals((string) $user['username'], 'arcymarcy');
     }
 
     public function testUserRecentTracks()
     {
-        $testing_response = "HTTP/1.1 200 OK\r\n" .
-                        "Content-type: text/xml\r\n" .
-                        "\r\n" .
+        $testing_response = "HTTP/1.1 200 OK\r\n".
+                        "Content-type: text/xml\r\n".
+                        "\r\n".
                         '<?xml version="1.0" encoding="UTF-8"?>
                         <recenttracks user="RJ">
                         <track>
@@ -380,18 +387,19 @@ class Zend_Service_Audioscrobbler_ProfileTest extends Zend_Service_Audioscrobble
                                     <date uts="1173202787">6 Mar 2007, 17:39</date>
                         </track>
                         </recenttracks>';
-        $this->setAudioscrobblerResponse($testing_response); $as = $this->getAudioscrobblerService();
+        $this->setAudioscrobblerResponse($testing_response);
+        $as = $this->getAudioscrobblerService();
         $as->set('user', 'RJ');
         $response = $as->userGetRecentTracks();
         $track = $response->track[0];
-        $this->assertEquals((string)$response['user'], 'RJ');
+        $this->assertEquals((string) $response['user'], 'RJ');
         $this->assertEquals(count($response->track), 2);
-        $this->assertEquals((string)$track->name, 'Always An Excuse');
+        $this->assertEquals((string) $track->name, 'Always An Excuse');
     }
 
     public function testUserRecentBannedTracks()
     {
-        $testing_response = "HTTP/1.1 200 OK\r\nContent-type: text/xml\r\n\r\n" .
+        $testing_response = "HTTP/1.1 200 OK\r\nContent-type: text/xml\r\n\r\n".
                             '<?xml version="1.0" encoding="UTF-8"?>
                             <recentbannedtracks user="RJ">
                             <track>
@@ -409,19 +417,20 @@ class Zend_Service_Audioscrobbler_ProfileTest extends Zend_Service_Audioscrobble
                                 <date uts="1161129235">17 Oct 2006, 23:53</date>
                             </track>
                             </recentbannedtracks>';
-        $this->setAudioscrobblerResponse($testing_response); $as = $this->getAudioscrobblerService();
+        $this->setAudioscrobblerResponse($testing_response);
+        $as = $this->getAudioscrobblerService();
         $as->set('user', 'RJ');
         $response = $as->userGetRecentBannedTracks();
         $track = $response->track[0];
-        $this->assertEquals((string)$response['user'], 'RJ');
+        $this->assertEquals((string) $response['user'], 'RJ');
         $this->assertEquals(count($response->track), 2);
-        $this->assertEquals((string)$track->artist, 'Herbie Hancock');
-        $this->assertEquals((string)$track->name, 'Rockit');
+        $this->assertEquals((string) $track->artist, 'Herbie Hancock');
+        $this->assertEquals((string) $track->name, 'Rockit');
     }
 
     public function testUserRecentLovedTracks()
     {
-        $testing_response = "HTTP/1.1 200 OK\r\nContent-type: text/xml\r\n\r\n" .
+        $testing_response = "HTTP/1.1 200 OK\r\nContent-type: text/xml\r\n\r\n".
                             '<?xml version="1.0" encoding="UTF-8"?>
                             <recentlovedtracks user="RJ">
                             <track>
@@ -439,19 +448,20 @@ class Zend_Service_Audioscrobbler_ProfileTest extends Zend_Service_Audioscrobble
                                 <date uts="1162310037">31 Oct 2006, 15:53</date>
                             </track>
                             </recentlovedtracks>';
-        $this->setAudioscrobblerResponse($testing_response); $as = $this->getAudioscrobblerService();
+        $this->setAudioscrobblerResponse($testing_response);
+        $as = $this->getAudioscrobblerService();
         $as->set('user', 'RJ');
         $response = $as->userGetRecentLovedTracks();
         $track = $response->track[1];
-        $this->assertEquals((string)$response['user'], 'RJ');
-        $this->assertNotNull((string)$track->name, 'Morning Dance');
-        $this->assertNotNull((string)$track->date, '31 Oct 2006, 15:53');
+        $this->assertEquals((string) $response['user'], 'RJ');
+        $this->assertNotNull((string) $track->name, 'Morning Dance');
+        $this->assertNotNull((string) $track->date, '31 Oct 2006, 15:53');
         $this->assertNotNull($response->track);
     }
 
     public function testUserGetWeeklyChartList()
     {
-        $testing_response = "HTTP/1.1 200 OK\r\nContent-type: text/xml\r\n\r\n" .
+        $testing_response = "HTTP/1.1 200 OK\r\nContent-type: text/xml\r\n\r\n".
                             '<?xml version="1.0" encoding="UTF-8"?>
                             <weeklychartlist user="RJ">
                                 <chart from="1108296002" to="1108900802"/>
@@ -462,19 +472,20 @@ class Zend_Service_Audioscrobbler_ProfileTest extends Zend_Service_Audioscrobble
                                 <chart from="1111924801" to="1112529601"/>
                                 <chart from="1112529601" to="1113134401"/>
                             </weeklychartlist>';
-        $this->setAudioscrobblerResponse($testing_response); $as = $this->getAudioscrobblerService();
+        $this->setAudioscrobblerResponse($testing_response);
+        $as = $this->getAudioscrobblerService();
         $as->set('user', 'RJ');
         $response = $as->userGetWeeklyChartList();
         $chart = $response->chart[0];
-        $this->assertEquals((string)$response['user'], 'RJ');
+        $this->assertEquals((string) $response['user'], 'RJ');
         $this->assertEquals(count($response->chart), 7);
-        $this->assertEquals((string)$chart['from'], '1108296002');
-        $this->assertEquals((string)$chart['to'], '1108900802');
+        $this->assertEquals((string) $chart['from'], '1108296002');
+        $this->assertEquals((string) $chart['to'], '1108900802');
     }
 
     public function testUserGetRecentWeeklyArtistChart()
     {
-        $testing_response = "HTTP/1.1 200 OK\r\nContent-type: text/xml\r\n\r\n" .
+        $testing_response = "HTTP/1.1 200 OK\r\nContent-type: text/xml\r\n\r\n".
                             '<?xml version="1.0" encoding="UTF-8"?>
                             <weeklyartistchart user="RJ" from="1172404800" to="1173009600">
                             <artist>
@@ -492,17 +503,18 @@ class Zend_Service_Audioscrobbler_ProfileTest extends Zend_Service_Audioscrobble
                                     <url>http://www.last.fm/music/Guano+Apes</url>
                             </artist>
                             </weeklyartistchart>';
-        $this->setAudioscrobblerResponse($testing_response); $as = $this->getAudioscrobblerService();
+        $this->setAudioscrobblerResponse($testing_response);
+        $as = $this->getAudioscrobblerService();
         $as->set('user', 'RJ');
         $response = $as->userGetWeeklyArtistChart();
-        $this->assertEquals((string)$response['user'], 'RJ');
+        $this->assertEquals((string) $response['user'], 'RJ');
         $this->assertNotNull($response->weeklyartistchart);
         $this->assertNotNull($response->artist);
     }
 
     public function testUserGetWeeklyAlbumChart()
     {
-        $testing_response = "HTTP/1.1 200 OK\r\nContent-type: text/xml\r\n\r\n" .
+        $testing_response = "HTTP/1.1 200 OK\r\nContent-type: text/xml\r\n\r\n".
                             '<?xml version="1.0" encoding="UTF-8"?>
                             <weeklyalbumchart user="RJ" from="1172404800" to="1173009600">
                             <album>
@@ -522,19 +534,20 @@ class Zend_Service_Audioscrobbler_ProfileTest extends Zend_Service_Audioscrobble
                                 <url>http://www.last.fm/music/Guano+Apes/Walking+on+a+Thin+Line</url>
                             </album>
                             </weeklyalbumchart>';
-        $this->setAudioscrobblerResponse($testing_response); $as = $this->getAudioscrobblerService();
+        $this->setAudioscrobblerResponse($testing_response);
+        $as = $this->getAudioscrobblerService();
         $as->set('user', 'RJ');
         $response = $as->userGetWeeklyAlbumChart();
         $album = $response->album[0];
-        $this->assertEquals((string)$response['user'], 'RJ');
+        $this->assertEquals((string) $response['user'], 'RJ');
         $this->assertEquals(count($response->album), 2);
-        $this->assertEquals((string)$album->artist, 'Skid Row');
-        $this->assertEquals((string)$album->name, 'Slave To The Grid');
+        $this->assertEquals((string) $album->artist, 'Skid Row');
+        $this->assertEquals((string) $album->name, 'Slave To The Grid');
     }
 
     public function testUserGetPreviousWeeklyArtistChart()
     {
-        $testing_response = "HTTP/1.1 200 OK\r\nContent-type: text/xml\r\n\r\n" .
+        $testing_response = "HTTP/1.1 200 OK\r\nContent-type: text/xml\r\n\r\n".
                             '<?xml version="1.0" encoding="UTF-8"?>
                             <weeklyartistchart user="RJ" from="1114965332" to="1115570132">
                             <artist>
@@ -552,22 +565,23 @@ class Zend_Service_Audioscrobbler_ProfileTest extends Zend_Service_Audioscrobble
                                     <url>http://www.last.fm/music/The+Doors</url>
                             </artist>
                             </weeklyartistchart>';
-        $this->setAudioscrobblerResponse($testing_response); $as = $this->getAudioscrobblerService();
+        $this->setAudioscrobblerResponse($testing_response);
+        $as = $this->getAudioscrobblerService();
         $as->set('user', 'RJ');
         $from = 1114965332;
         $to = 1115570132;
         $response = $as->userGetWeeklyArtistChart($from, $to);
         $artist = $response->artist[0];
-        $this->assertEquals((string)$response['user'], 'RJ');
-        $this->assertEquals((int)$response['from'], $from);
-        $this->assertEquals((int)$response['to'], $to);
-        $this->assertEquals((string)$artist->name, 'Nine Inch Nails');
+        $this->assertEquals((string) $response['user'], 'RJ');
+        $this->assertEquals((int) $response['from'], $from);
+        $this->assertEquals((int) $response['to'], $to);
+        $this->assertEquals((string) $artist->name, 'Nine Inch Nails');
         $this->assertEquals(count($response->artist), 2);
     }
 
     public function testUserGetPreviousWeeklyAlbumChart()
     {
-        $testing_response = "HTTP/1.1 200 OK\r\nContent-type: text/xml\r\n\r\n" .
+        $testing_response = "HTTP/1.1 200 OK\r\nContent-type: text/xml\r\n\r\n".
                             '<?xml version="1.0" encoding="UTF-8"?>
                             <weeklyalbumchart user="RJ" from="1114965332" to="1115570132">
                             <album>
@@ -587,21 +601,22 @@ class Zend_Service_Audioscrobbler_ProfileTest extends Zend_Service_Audioscrobble
                                 <url>http://www.last.fm/music/Nirvana/Nirvana</url>
                             </album>
                             </weeklyalbumchart>';
-        $this->setAudioscrobblerResponse($testing_response); $as = $this->getAudioscrobblerService();
+        $this->setAudioscrobblerResponse($testing_response);
+        $as = $this->getAudioscrobblerService();
         $as->set('user', 'RJ');
         $from = 1114965332;
         $to = 1115570132;
         $response = $as->userGetWeeklyAlbumChart($from, $to);
         $album = $response->album[0];
-        $this->assertEquals((string)$response['user'], 'RJ');
-        $this->assertEquals((int)$response['from'], 1114965332);
-        $this->assertEquals((int)$response['to'], 1115570132);
+        $this->assertEquals((string) $response['user'], 'RJ');
+        $this->assertEquals((int) $response['from'], 1114965332);
+        $this->assertEquals((int) $response['to'], 1115570132);
         $this->assertEquals(count($response->album), 2);
     }
 
     public function testUserGetPreviousWeeklyTrackChart()
     {
-        $testing_response = "HTTP/1.1 200 OK\r\nContent-type: text/xml\r\n\r\n" .
+        $testing_response = "HTTP/1.1 200 OK\r\nContent-type: text/xml\r\n\r\n".
                             '<?xml version="1.0" encoding="UTF-8"?>
                             <weeklytrackchart user="RJ" from="1114965332" to="1115570132">
                                 <track>
@@ -621,16 +636,17 @@ class Zend_Service_Audioscrobbler_ProfileTest extends Zend_Service_Audioscrobble
                                             <url>http://www.last.fm/music/Nine+Inch+Nails/_/All+the+Love+in+the+World</url>
                                 </track>
                             </weeklytrackchart>';
-        $this->setAudioscrobblerResponse($testing_response); $as = $this->getAudioscrobblerService();
+        $this->setAudioscrobblerResponse($testing_response);
+        $as = $this->getAudioscrobblerService();
         $as->set('user', 'RJ');
         $from = 1114965332;
         $to = 1115570132;
         $response = $as->userGetWeeklyTrackChart($from, $to);
         $track = $response->track[0];
-        $this->assertEquals((string)$response['user'], 'RJ');
-        $this->assertEquals((int)$response['from'], $from);
-        $this->assertEquals((int)$response['to'], $to);
-        $this->assertEquals((string)$track->artist, 'The Kleptones');
+        $this->assertEquals((string) $response['user'], 'RJ');
+        $this->assertEquals((int) $response['from'], $from);
+        $this->assertEquals((int) $response['to'], $to);
+        $this->assertEquals((string) $track->artist, 'The Kleptones');
         $this->assertEquals(count($response->track), 2);
     }
 }

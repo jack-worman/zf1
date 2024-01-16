@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,19 +13,17 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Pdf
- * @subpackage FileParser
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /** Internally used classes */
 
 /** Zend_Pdf_Image */
 // require_once 'Zend/Pdf/Image.php';
-
 
 /** Zend_Pdf_FileParser */
 // require_once 'Zend/Pdf/FileParser.php';
@@ -33,17 +31,15 @@
 /**
  * FileParser for Zend_Pdf_Image subclasses.
  *
- * @package    Zend_Pdf
- * @subpackage FileParser
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Pdf_FileParser_Image extends Zend_Pdf_FileParser
 {
     /**
-     * Image Type
+     * Image Type.
      *
-     * @var integer
+     * @var int
      */
     protected $imageType;
 
@@ -52,7 +48,6 @@ abstract class Zend_Pdf_FileParser_Image extends Zend_Pdf_FileParser
      *
      * Validates the data source and enables debug logging if so configured.
      *
-     * @param Zend_Pdf_FileParserDataSource $dataSource
      * @throws Zend_Pdf_Exception
      */
     public function __construct(Zend_Pdf_FileParserDataSource $dataSource)

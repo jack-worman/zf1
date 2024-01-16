@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata_Docs
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -26,17 +26,16 @@ require_once 'Zend/Gdata/TestUtility/MockHttpClient.php';
 
 /**
  * @category   Zend
- * @package    Zend_Gdata_Docs
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Docs
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_DocsTest extends PHPUnit_Framework_TestCase
 {
-
     public function setUp()
     {
         $this->adapter = new Test_Zend_Gdata_MockHttpClient();
@@ -47,50 +46,48 @@ class Zend_Gdata_DocsTest extends PHPUnit_Framework_TestCase
 
     public function testCreateFolder()
     {
-        $this->adapter->setResponse(array('HTTP/1.1 200 OK\r\n\r\n'));
-        $this->gdata->createFolder("Test Folder");
+        $this->adapter->setResponse(['HTTP/1.1 200 OK\r\n\r\n']);
+        $this->gdata->createFolder('Test Folder');
         $request = $this->adapter->popRequest();
 
         // Check to make sure the correct URI is in use
         $this->assertEquals(
-                "docs.google.com",
-                $request->uri->getHost());
+            'docs.google.com',
+            $request->uri->getHost());
         $this->assertEquals(
-                "/feeds/documents/private/full",
-                $request->uri->getPath());
+            '/feeds/documents/private/full',
+            $request->uri->getPath());
 
         // Check to make sure that this is a folder
-        $this->assertNotEquals( false, strpos((string) $request->body,
-                "<atom:category term=\"http://schemas.google.com/docs/2007#folder\" scheme=\"http://schemas.google.com/g/2005#kind\""));
+        $this->assertNotEquals(false, strpos((string) $request->body,
+            '<atom:category term="http://schemas.google.com/docs/2007#folder" scheme="http://schemas.google.com/g/2005#kind"'));
 
         // Check to make sure the title is set
         $this->assertNotEquals(false, strpos((string) $request->body,
-                "<atom:title type=\"text\">Test Folder</atom:title>"));
+            '<atom:title type="text">Test Folder</atom:title>'));
     }
 
     public function testCreateSubfolder()
     {
-        $subfolderName = "MySubfolder";
-        $this->adapter->setResponse(array('HTTP/1.1 200 OK\r\n\r\n'));
-        $this->gdata->createFolder("Test Folder", $subfolderName);
+        $subfolderName = 'MySubfolder';
+        $this->adapter->setResponse(['HTTP/1.1 200 OK\r\n\r\n']);
+        $this->gdata->createFolder('Test Folder', $subfolderName);
         $request = $this->adapter->popRequest();
 
         // Check to make sure the correct URI is in use
         $this->assertEquals(
-                "docs.google.com",
-                $request->uri->getHost());
+            'docs.google.com',
+            $request->uri->getHost());
         $this->assertEquals(
-                "/feeds/folders/private/full/" . $subfolderName,
-                $request->uri->getPath());
+            '/feeds/folders/private/full/'.$subfolderName,
+            $request->uri->getPath());
 
         // Check to make sure that this is a folder
-        $this->assertNotEquals( false, strpos((string) $request->body,
-                "<atom:category term=\"http://schemas.google.com/docs/2007#folder\" scheme=\"http://schemas.google.com/g/2005#kind\""));
+        $this->assertNotEquals(false, strpos((string) $request->body,
+            '<atom:category term="http://schemas.google.com/docs/2007#folder" scheme="http://schemas.google.com/g/2005#kind"'));
 
         // Check to make sure the title is set
         $this->assertNotEquals(false, strpos((string) $request->body,
-                "<atom:title type=\"text\">Test Folder</atom:title>"));
+            '<atom:title type="text">Test Folder</atom:title>'));
     }
-
-
 }

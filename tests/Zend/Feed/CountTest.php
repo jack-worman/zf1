@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,29 +27,27 @@
 
 /**
  * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Feed
  */
 #[AllowDynamicProperties]
 class Zend_Feed_CountTest extends PHPUnit_Framework_TestCase
 {
-
     public function testCount()
     {
-        $f = Zend_Feed::importFile(__DIR__ . '/_files/TestAtomFeed.xml');
+        $f = Zend_Feed::importFile(__DIR__.'/_files/TestAtomFeed.xml');
         $this->assertEquals($f->count(), 2, 'Feed count should be 2');
     }
 
     /**
-    * ZF-3848
-    */
+     * ZF-3848.
+     */
     public function testCountableInterface()
     {
-        $f = Zend_Feed::importFile(__DIR__ . '/_files/TestAtomFeed.xml');
+        $f = Zend_Feed::importFile(__DIR__.'/_files/TestAtomFeed.xml');
         $this->assertEquals(count($f), 2, 'Feed count should be 2');
     }
-
 }

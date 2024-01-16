@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Mobile
- * @subpackage Push
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -24,10 +24,10 @@
 
 /**
  * @category   Zend
- * @package    Zend_Mobile
- * @subpackage Push
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Mobile
  * @group      Zend_Mobile_Push
  * @group      Zend_Mobile_Push_Mpns
@@ -50,16 +50,16 @@ class Zend_Mobile_Push_Message_Mpns_RawTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Mobile_Push_Message_Exception
+     * @expectedException \Zend_Mobile_Push_Message_Exception
      */
     public function testSetTokenNonStringThrowsException()
     {
-        $token = array('foo' => 'bar');
+        $token = ['foo' => 'bar'];
         $this->_msg->setToken($token);
     }
 
     /**
-     * @expectedException Zend_Mobile_Push_Message_Exception
+     * @expectedException \Zend_Mobile_Push_Message_Exception
      */
     public function testSetTokenInvalidUrlThrowsException()
     {
@@ -80,16 +80,16 @@ class Zend_Mobile_Push_Message_Mpns_RawTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Mobile_Push_Message_Exception
+     * @expectedException \Zend_Mobile_Push_Message_Exception
      */
     public function testSetMessageThrowsExceptionOnNonString()
     {
-        $msg = array('foo' => 'bar');
+        $msg = ['foo' => 'bar'];
         $this->_msg->setMessage($msg);
     }
 
     /**
-     * @expectedException Zend_Mobile_Push_Message_Exception
+     * @expectedException \Zend_Mobile_Push_Message_Exception
      */
     public function testSetMessageThrowsExceptionOnNonXml()
     {
@@ -113,7 +113,7 @@ class Zend_Mobile_Push_Message_Mpns_RawTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Mobile_Push_Message_Exception
+     * @expectedException \Zend_Mobile_Push_Message_Exception
      */
     public function testSetDelayThrowsExceptionOnInvalidDelay()
     {

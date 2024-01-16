@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,15 +13,15 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Queue
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Class for custom messages
+ * Class for custom messages.
  *
  * We want be able to delete messages and we to serialize objects
  * via a getBody() and setBody()
@@ -35,8 +35,7 @@
  * good example that overloaded near everything except for the adapter.
  *
  * @category   Zend
- * @package    Zend_Queue
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -46,7 +45,8 @@ class Custom_Message extends Zend_Queue_Message
     /**
      * We adjusted the constructor to accept both an array and an object.
      */
-    public function __construct($mixed) {
+    public function __construct($mixed)
+    {
         // we still have to support the code in Zend_Queue::receive that
         // passes in an array
         if (is_array($mixed)) {
@@ -58,16 +58,17 @@ class Custom_Message extends Zend_Queue_Message
     }
 
     /**
-     * We need to get the underlying body as a string
+     * We need to get the underlying body as a string.
      *
      * @return string
      */
-    public function __toString() {
+    public function __toString()
+    {
         return $this->_data['body'];
     }
 
     /**
-     * Sets the message body
+     * Sets the message body.
      *
      * @param serializable $mixed
      */
@@ -77,7 +78,7 @@ class Custom_Message extends Zend_Queue_Message
     }
 
     /**
-     * Gets the message body
+     * Gets the message body.
      *
      * @return $mixed
      */
@@ -99,7 +100,7 @@ class Custom_Message extends Zend_Queue_Message
      * asks the queue service to delete the message, the message located here
      * is NOT deleted.
      *
-     * @param boolean $throw defaults to true.  Throw a message if there is an error
+     * @param bool $throw defaults to true.  Throw a message if there is an error
      *
      * @throws Zend_Queue_Exception if not connected
      */
@@ -110,7 +111,7 @@ class Custom_Message extends Zend_Queue_Message
                 $this->getQueue()->deleteMessage($this);
             }
         } elseif ($throw) {
-            /**
+            /*
              * @see Zend_Queue_Exception
              */
             // require_once 'Zend/Queue/Exception.php';

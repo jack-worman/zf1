@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,15 +13,14 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Cloud_StorageService
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 // Call Zend_Cloud_StorageService_Adapter_S3Test::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Cloud_StorageService_Adapter_S3Test::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Cloud_StorageService_Adapter_S3Test::main');
 }
 
 /**
@@ -35,31 +34,28 @@ require_once 'Zend/Cloud/StorageService/TestCase.php';
 
 /**
  * @category   Zend
- * @package    Zend_Cloud
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
-class Zend_Cloud_StorageService_Adapter_S3Test
-    extends Zend_Cloud_StorageService_TestCase
+class Zend_Cloud_StorageService_Adapter_S3Test extends Zend_Cloud_StorageService_TestCase
 {
-	protected $_clientType = 'Zend_Service_Amazon_S3';
+    protected $_clientType = 'Zend_Service_Amazon_S3';
 
-	/**
+    /**
      * Runs the test methods of this class.
      *
-     * @access public
      * @static
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
+        $suite = new PHPUnit_Framework_TestSuite(__CLASS__);
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     /**
-     * Sets up this test case
+     * Sets up this test case.
      *
      * @return void
      */
@@ -94,9 +90,8 @@ class Zend_Cloud_StorageService_Adapter_S3Test
         $this->markTestSkipped('S3 doesn\'t support storing metadata after an item is created.');
     }
 
-
-	/**
-     * Tears down this test case
+    /**
+     * Tears down this test case.
      *
      * @return void
      */
@@ -125,15 +120,15 @@ class Zend_Cloud_StorageService_Adapter_S3Test
             || !defined('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY')
             || !defined('TESTS_ZEND_SERVICE_AMAZON_S3_BUCKET')
         ) {
-            $this->markTestSkipped("Amazon S3 access not configured, skipping test");
+            $this->markTestSkipped('Amazon S3 access not configured, skipping test');
         }
 
-        $config = new Zend_Config(array(
+        $config = new Zend_Config([
             Zend_Cloud_StorageService_Factory::STORAGE_ADAPTER_KEY => 'Zend_Cloud_StorageService_Adapter_S3',
-            Zend_Cloud_StorageService_Adapter_S3::AWS_ACCESS_KEY   => constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'),
-            Zend_Cloud_StorageService_Adapter_S3::AWS_SECRET_KEY   => constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY'),
-            Zend_Cloud_StorageService_Adapter_S3::BUCKET_NAME      => constant('TESTS_ZEND_SERVICE_AMAZON_S3_BUCKET'),
-        ));
+            Zend_Cloud_StorageService_Adapter_S3::AWS_ACCESS_KEY => constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'),
+            Zend_Cloud_StorageService_Adapter_S3::AWS_SECRET_KEY => constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY'),
+            Zend_Cloud_StorageService_Adapter_S3::BUCKET_NAME => constant('TESTS_ZEND_SERVICE_AMAZON_S3_BUCKET'),
+        ]);
 
         return $config;
     }

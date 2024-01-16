@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,24 +13,21 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Cache
- * @subpackage Zend_Cache_Backend
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
-
 /**
- * @package    Zend_Cache
- * @subpackage Zend_Cache_Backend
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Cache_Backend
 {
     /**
-     * Frontend or Core directives
+     * Frontend or Core directives.
      *
      * =====> (int) lifetime :
      * - Cache lifetime (in seconds)
@@ -41,25 +38,25 @@ class Zend_Cache_Backend
      *
      * @var array directives
      */
-    protected $_directives = array(
+    protected $_directives = [
         'lifetime' => 3600,
-        'logging'  => false,
-        'logger'   => null
-    );
+        'logging' => false,
+        'logger' => null,
+    ];
 
     /**
-     * Available options
+     * Available options.
      *
      * @var array available options
      */
-    protected $_options = array();
+    protected $_options = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param  array $options Associative array of options
+     * @param array $options Associative array of options
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         foreach ($options as $name => $value) {
             $this->setOption($name, $value);
@@ -67,15 +64,19 @@ class Zend_Cache_Backend
     }
 
     /**
-     * Set the frontend directives
+     * Set the frontend directives.
      *
-     * @param  array $directives Assoc of directives
-     * @throws Zend_Cache_Exception
+     * @param array $directives Assoc of directives
+     *
      * @return void
+     *
+     * @throws Zend_Cache_Exception
      */
     public function setDirectives($directives)
     {
-        if (!is_array($directives)) Zend_Cache::throwException('Directives parameter must be an array');
+        if (!is_array($directives)) {
+            Zend_Cache::throwException('Directives parameter must be an array');
+        }
         foreach ($directives as $name => $value) {
             if (!is_string($name)) {
                 Zend_Cache::throwException("Incorrect option name : $name");
@@ -84,19 +85,19 @@ class Zend_Cache_Backend
             if (array_key_exists($name, $this->_directives)) {
                 $this->_directives[$name] = $value;
             }
-
         }
 
         $this->_loggerSanity();
     }
 
     /**
-     * Set an option
+     * Set an option.
      *
-     * @param  string $name
-     * @param  mixed  $value
-     * @throws Zend_Cache_Exception
+     * @param string $name
+     *
      * @return void
+     *
+     * @throws Zend_Cache_Exception
      */
     public function setOption($name, $value)
     {
@@ -110,11 +111,11 @@ class Zend_Cache_Backend
     }
 
     /**
-     * Returns an option
+     * Returns an option.
      *
      * @param string $name Optional, the options name to return
+     *
      * @throws Zend_Cache_Exceptions
-     * @return mixed
      */
     public function getOption($name)
     {
@@ -132,29 +133,32 @@ class Zend_Cache_Backend
     }
 
     /**
-     * Get the life time
+     * Get the life time.
      *
      * if $specificLifetime is not false, the given specific life time is used
      * else, the global lifetime is used
      *
-     * @param  int $specificLifetime
+     * @param int $specificLifetime
+     *
      * @return int Cache life time
      */
     public function getLifetime($specificLifetime)
     {
-        if ($specificLifetime === false) {
+        if (false === $specificLifetime) {
             return $this->_directives['lifetime'];
         }
+
         return $specificLifetime;
     }
 
     /**
-     * Return true if the automatic cleaning is available for the backend
+     * Return true if the automatic cleaning is available for the backend.
      *
      * DEPRECATED : use getCapabilities() instead
      *
      * @deprecated
-     * @return boolean
+     *
+     * @return bool
      */
     public function isAutomaticCleaningAvailable()
     {
@@ -162,21 +166,22 @@ class Zend_Cache_Backend
     }
 
     /**
-     * Determine system TMP directory and detect if we have read access
+     * Determine system TMP directory and detect if we have read access.
      *
      * inspired from Zend_File_Transfer_Adapter_Abstract
      *
      * @return string
+     *
      * @throws Zend_Cache_Exception if unable to determine directory
      */
     public function getTmpDir()
     {
-        $tmpdir = array();
-        foreach (array($_ENV, $_SERVER) as $tab) {
-            foreach (array('TMPDIR', 'TEMP', 'TMP', 'windir', 'SystemRoot') as $key) {
+        $tmpdir = [];
+        foreach ([$_ENV, $_SERVER] as $tab) {
+            foreach (['TMPDIR', 'TEMP', 'TMP', 'windir', 'SystemRoot'] as $key) {
                 if (isset($tab[$key]) && is_string($tab[$key])) {
-                    if (($key == 'windir') or ($key == 'SystemRoot')) {
-                        $dir = realpath($tab[$key] . '\\temp');
+                    if (('windir' == $key) or ('SystemRoot' == $key)) {
+                        $dir = realpath($tab[$key].'\\temp');
                     } else {
                         $dir = realpath($tab[$key]);
                     }
@@ -200,7 +205,7 @@ class Zend_Cache_Backend
             }
         }
         // Attemp to detect by creating a temporary file
-        $tempFile = tempnam(md5((string) uniqid(rand(), TRUE)), '');
+        $tempFile = tempnam(md5((string) uniqid(rand(), true)), '');
         if ($tempFile) {
             $dir = realpath(dirname($tempFile));
             unlink($tempFile);
@@ -218,10 +223,11 @@ class Zend_Cache_Backend
     }
 
     /**
-     * Verify if the given temporary directory is readable and writable
+     * Verify if the given temporary directory is readable and writable.
      *
      * @param string $dir temporary directory
-     * @return boolean true if the directory is ok
+     *
+     * @return bool true if the directory is ok
      */
     protected function _isGoodTmpDir($dir)
     {
@@ -230,6 +236,7 @@ class Zend_Cache_Backend
                 return true;
             }
         }
+
         return false;
     }
 
@@ -238,8 +245,9 @@ class Zend_Cache_Backend
      * is available.
      * Create a default log object if none is set.
      *
-     * @throws Zend_Cache_Exception
      * @return void
+     *
+     * @throws Zend_Cache_Exception
      */
     protected function _loggerSanity()
     {
@@ -266,8 +274,9 @@ class Zend_Cache_Backend
     /**
      * Log a message at the WARN (4) priority.
      *
-     * @param  string $message
-     * @param  int    $priority
+     * @param string $message
+     * @param int    $priority
+     *
      * @return void
      */
     protected function _log($message, $priority = 4)

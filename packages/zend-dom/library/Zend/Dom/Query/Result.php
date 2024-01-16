@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,31 +13,33 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Dom
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
- * Results for DOM XPath query
+ * Results for DOM XPath query.
  *
- * @package    Zend_Dom
- * @subpackage Query
  * @uses       Iterator
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-class Zend_Dom_Query_Result implements Iterator,Countable
+class Zend_Dom_Query_Result implements Iterator, Countable
 {
     /**
-     * Number of results
+     * Number of results.
+     *
      * @var int
      */
     protected $_count;
 
     /**
-     * CSS Selector query
+     * CSS Selector query.
+     *
      * @var string
      */
     protected $_cssQuery;
@@ -53,7 +55,8 @@ class Zend_Dom_Query_Result implements Iterator,Countable
     protected $_nodeList;
 
     /**
-     * Current iterator position
+     * Current iterator position.
+     *
      * @var int
      */
     protected $_position = 0;
@@ -64,29 +67,28 @@ class Zend_Dom_Query_Result implements Iterator,Countable
     protected $_xpath;
 
     /**
-     * XPath query
+     * XPath query.
+     *
      * @var string
      */
     protected $_xpathQuery;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param  string $cssQuery
-     * @param  string|array $xpathQuery
-     * @param  DOMDocument $document
-     * @param  DOMNodeList $nodeList
+     * @param string       $cssQuery
+     * @param string|array $xpathQuery
      */
-    public function  __construct($cssQuery, $xpathQuery, DOMDocument $document, DOMNodeList $nodeList)
+    public function __construct($cssQuery, $xpathQuery, DOMDocument $document, DOMNodeList $nodeList)
     {
-        $this->_cssQuery   = $cssQuery;
+        $this->_cssQuery = $cssQuery;
         $this->_xpathQuery = $xpathQuery;
-        $this->_document   = $document;
-        $this->_nodeList   = $nodeList;
+        $this->_document = $document;
+        $this->_nodeList = $nodeList;
     }
 
     /**
-     * Retrieve CSS Query
+     * Retrieve CSS Query.
      *
      * @return string
      */
@@ -96,7 +98,7 @@ class Zend_Dom_Query_Result implements Iterator,Countable
     }
 
     /**
-     * Retrieve XPath query
+     * Retrieve XPath query.
      *
      * @return string
      */
@@ -106,7 +108,7 @@ class Zend_Dom_Query_Result implements Iterator,Countable
     }
 
     /**
-     * Retrieve DOMDocument
+     * Retrieve DOMDocument.
      *
      * @return DOMDocument
      */
@@ -116,14 +118,15 @@ class Zend_Dom_Query_Result implements Iterator,Countable
     }
 
     /**
-     * Iterator: rewind to first element
+     * Iterator: rewind to first element.
      *
      * @return DOMNode|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function rewind()
     {
         $this->_position = 0;
+
         return $this->_nodeList->item(0);
     }
 
@@ -132,55 +135,57 @@ class Zend_Dom_Query_Result implements Iterator,Countable
      *
      * @return bool
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function valid()
     {
         if (in_array($this->_position, range(0, $this->_nodeList->length - 1)) && $this->_nodeList->length > 0) {
             return true;
         }
+
         return false;
     }
 
     /**
-     * Iterator: return current element
+     * Iterator: return current element.
      *
      * @return DOMNode|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function current()
     {
         return $this->_nodeList->item($this->_position);
     }
 
     /**
-     * Iterator: return key of current element
+     * Iterator: return key of current element.
      *
      * @return int
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function key()
     {
         return $this->_position;
     }
 
     /**
-     * Iterator: move to next element
+     * Iterator: move to next element.
      *
      * @return DOMNode|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function next()
     {
         ++$this->_position;
+
         return $this->_nodeList->item($this->_position);
     }
 
     /**
-     * Countable: get count
+     * Countable: get count.
      *
      * @return int
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function count()
     {
         return $this->_nodeList->length;

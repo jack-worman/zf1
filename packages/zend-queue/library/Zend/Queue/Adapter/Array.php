@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Queue
- * @subpackage Adapter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,11 +26,10 @@
 // require_once 'Zend/Queue/Adapter/AdapterAbstract.php';
 
 /**
- * Class for using a standard PHP array as a queue
+ * Class for using a standard PHP array as a queue.
  *
  * @category   Zend
- * @package    Zend_Queue
- * @subpackage Adapter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -39,13 +38,13 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
     /**
      * @var array
      */
-    protected $_data = array();
+    protected $_data = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param  array|Zend_Config $options
-     * @param  Zend_Queue|null $queue
+     * @param array|Zend_Config $options
+     *
      * @return void
      */
     public function __construct($options, Zend_Queue $queue = null)
@@ -64,8 +63,9 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
      * use isSupported('isExists') to determine if an adapter can test for
      * queue existance.
      *
-     * @param  string $name
-     * @return boolean
+     * @param string $name
+     *
+     * @return bool
      */
     public function isExists($name)
     {
@@ -73,37 +73,39 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
     }
 
     /**
-     * Create a new queue
+     * Create a new queue.
      *
      * Visibility timeout is how long a message is left in the queue "invisible"
      * to other readers.  If the message is acknowleged (deleted) before the
      * timeout, then the message is deleted.  However, if the timeout expires
      * then the message will be made available to other queue readers.
      *
-     * @param  string  $name    queue name
-     * @param  integer $timeout default visibility timeout
-     * @return boolean
+     * @param string $name    queue name
+     * @param int    $timeout default visibility timeout
+     *
+     * @return bool
      */
-    public function create($name, $timeout=null)
+    public function create($name, $timeout = null)
     {
         if ($this->isExists($name)) {
             return false;
         }
-        if ($timeout === null) {
+        if (null === $timeout) {
             $timeout = self::CREATE_TIMEOUT_DEFAULT;
         }
-        $this->_data[$name] = array();
+        $this->_data[$name] = [];
 
         return true;
     }
 
     /**
-     * Delete a queue and all of it's messages
+     * Delete a queue and all of it's messages.
      *
      * Returns false if the queue is not found, true if the queue exists
      *
-     * @param  string  $name queue name
-     * @return boolean
+     * @param string $name queue name
+     *
+     * @return bool
      */
     public function delete($name)
     {
@@ -117,7 +119,7 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
     }
 
     /**
-     * Get an array of all available queues
+     * Get an array of all available queues.
      *
      * Not all adapters support getQueues(), use isSupported('getQueues')
      * to determine if the adapter supports this feature.
@@ -130,21 +132,21 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
     }
 
     /**
-     * Return the approximate number of messages in the queue
+     * Return the approximate number of messages in the queue.
      *
-     * @param  Zend_Queue $queue
-     * @return integer
+     * @return int
+     *
      * @throws Zend_Queue_Exception
      */
-    #[\ReturnTypeWillChange]
-    public function count(Zend_Queue $queue=null)
+    #[ReturnTypeWillChange]
+    public function count(Zend_Queue $queue = null)
     {
-        if ($queue === null) {
+        if (null === $queue) {
             $queue = $this->_queue;
         }
 
         if (!isset($this->_data[$queue->getName()])) {
-            /**
+            /*
              * @see Zend_Queue_Exception
              */
             // require_once 'Zend/Queue/Exception.php';
@@ -159,22 +161,23 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
      *********************************************************************/
 
     /**
-     * Send a message to the queue
+     * Send a message to the queue.
      *
-     * @param  string     $message Message to send to the active queue
-     * @param  Zend_Queue $queue
+     * @param string $message Message to send to the active queue
+     *
      * @return Zend_Queue_Message
+     *
      * @throws Zend_Queue_Exception
      */
-    public function send($message, Zend_Queue $queue=null)
+    public function send($message, Zend_Queue $queue = null)
     {
-        if ($queue === null) {
+        if (null === $queue) {
             $queue = $this->_queue;
         }
 
         if (!$this->isExists($queue->getName())) {
             // require_once 'Zend/Queue/Exception.php';
-            throw new Zend_Queue_Exception('Queue does not exist:' . $queue->getName());
+            throw new Zend_Queue_Exception('Queue does not exist:'.$queue->getName());
         }
 
         if (!is_string($message)) {
@@ -182,98 +185,99 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
         }
 
         // create the message
-        $data = array(
+        $data = [
             'message_id' => md5((string) uniqid(rand(), true)),
-            'body'       => $message,
-            'md5'        => md5((string) $message),
-            'handle'     => null,
-            'created'    => time(),
+            'body' => $message,
+            'md5' => md5((string) $message),
+            'handle' => null,
+            'created' => time(),
             'queue_name' => $queue->getName(),
-        );
+        ];
 
         // add $data to the "queue"
         $this->_data[$queue->getName()][] = $data;
 
-        $options = array(
+        $options = [
             'queue' => $queue,
-            'data'  => $data,
-        );
+            'data' => $data,
+        ];
 
         $classname = $queue->getMessageClass();
         if (!class_exists($classname)) {
             // require_once 'Zend/Loader.php';
             Zend_Loader::loadClass($classname);
         }
+
         return new $classname($options);
     }
 
     /**
-     * Get messages in the queue
+     * Get messages in the queue.
      *
-     * @param  integer    $maxMessages  Maximum number of messages to return
-     * @param  integer    $timeout      Visibility timeout for these messages
-     * @param  Zend_Queue $queue
+     * @param int $maxMessages Maximum number of messages to return
+     * @param int $timeout     Visibility timeout for these messages
+     *
      * @return Zend_Queue_Message_Iterator
      */
     public function receive($maxMessages = null, $timeout = null, Zend_Queue $queue = null)
     {
-        if ($maxMessages === null) {
+        if (null === $maxMessages) {
             $maxMessages = 1;
         }
-        if ($timeout === null) {
+        if (null === $timeout) {
             $timeout = self::RECEIVE_TIMEOUT_DEFAULT;
         }
-        if ($queue === null) {
+        if (null === $queue) {
             $queue = $this->_queue;
         }
 
-        $data       = array();
+        $data = [];
         if ($maxMessages > 0) {
             $start_time = microtime(true);
 
             $count = 0;
             $temp = &$this->_data[$queue->getName()];
-            foreach ($temp as $key=>&$msg) {
+            foreach ($temp as $key => &$msg) {
                 // count check has to be first, as someone can ask for 0 messages
                 // ZF-7650
                 if ($count >= $maxMessages) {
                     break;
                 }
 
-                if (($msg['handle'] === null)
+                if ((null === $msg['handle'])
                     || ($msg['timeout'] + $timeout < $start_time)
                 ) {
-                    $msg['handle']  = md5((string) uniqid(rand(), true));
+                    $msg['handle'] = md5((string) uniqid(rand(), true));
                     $msg['timeout'] = microtime(true);
                     $data[] = $msg;
-                    $count++;
+                    ++$count;
                 }
-
             }
         }
 
-        $options = array(
-            'queue'        => $queue,
-            'data'         => $data,
+        $options = [
+            'queue' => $queue,
+            'data' => $data,
             'messageClass' => $queue->getMessageClass(),
-        );
+        ];
 
         $classname = $queue->getMessageSetClass();
         if (!class_exists($classname)) {
             // require_once 'Zend/Loader.php';
             Zend_Loader::loadClass($classname);
         }
+
         return new $classname($options);
     }
 
     /**
-     * Delete a message from the queue
+     * Delete a message from the queue.
      *
      * Returns true if the message is deleted, false if the deletion is
      * unsuccessful.
      *
-     * @param  Zend_Queue_Message $message
-     * @return boolean
+     * @return bool
+     *
      * @throws Zend_Queue_Exception
      */
     public function deleteMessage(Zend_Queue_Message $message)
@@ -284,6 +288,7 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
         foreach ($queue as $key => &$msg) {
             if ($msg['handle'] == $message->handle) {
                 unset($queue[$key]);
+
                 return true;
             }
         }
@@ -296,26 +301,25 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
      *********************************************************************/
 
     /**
-     * Return a list of queue capabilities functions
+     * Return a list of queue capabilities functions.
      *
      * $array['function name'] = true or false
      * true is supported, false is not supported.
      *
-     * @param  string $name
      * @return array
      */
     public function getCapabilities()
     {
-        return array(
-            'create'        => true,
-            'delete'        => true,
-            'send'          => true,
-            'receive'       => true,
+        return [
+            'create' => true,
+            'delete' => true,
+            'send' => true,
+            'receive' => true,
             'deleteMessage' => true,
-            'getQueues'     => true,
-            'count'         => true,
-            'isExists'      => true,
-        );
+            'getQueues' => true,
+            'count' => true,
+            'isExists' => true,
+        ];
     }
 
     /********************************************************************
@@ -323,11 +327,11 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
      *********************************************************************/
 
     /**
-     * serialize
+     * serialize.
      */
     public function __sleep()
     {
-        return array('_data');
+        return ['_data'];
     }
 
     /*
@@ -336,7 +340,7 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
 
     /**
      * returns underlying _data array
-     * $queue->getAdapter()->getData();
+     * $queue->getAdapter()->getData();.
      *
      * @return array;
      */
@@ -347,14 +351,16 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
 
     /**
      * sets the underlying _data array
-     * $queue->getAdapter()->setData($data);
+     * $queue->getAdapter()->setData($data);.
      *
      * @param array $data
+     *
      * @return $this;
      */
     public function setData($data)
     {
         $this->_data = $data;
+
         return $this;
     }
 }

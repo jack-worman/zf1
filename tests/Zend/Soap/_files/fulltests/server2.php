@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,8 +26,7 @@
 
 /**
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -46,8 +45,7 @@ class Zend_Soap_Wsdl_ComplexTypeB
 
 /**
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -55,8 +53,9 @@ class Zend_Soap_Wsdl_ComplexTypeB
 class Zend_Soap_Service_Server2
 {
     /**
-     * @param  string $foo
-     * @param  string $bar
+     * @param string $foo
+     * @param string $bar
+     *
      * @return Zend_Soap_Wsdl_ComplexTypeB
      */
     public function request($foo, $bar)
@@ -64,14 +63,15 @@ class Zend_Soap_Service_Server2
         $b = new Zend_Soap_Wsdl_ComplexTypeB();
         $b->bar = $bar;
         $b->foo = $foo;
+
         return $b;
     }
 }
 
-if(isset($_GET['wsdl'])) {
+if (isset($_GET['wsdl'])) {
     $server = new Zend_Soap_AutoDiscover(new Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex());
 } else {
-    $uri = "http://".$_SERVER['HTTP_HOST']."/".$_SERVER['PHP_SELF']."?wsdl";
+    $uri = 'http://'.$_SERVER['HTTP_HOST'].'/'.$_SERVER['PHP_SELF'].'?wsdl';
     $server = new Zend_Soap_Server($uri);
 }
 $server->setClass('Zend_Soap_Service_Server2');

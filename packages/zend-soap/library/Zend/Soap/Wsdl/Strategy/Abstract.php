@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage Wsdl
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -29,15 +29,14 @@
  * Abstract class for Zend_Soap_Wsdl_Strategy.
  *
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage Wsdl
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Soap_Wsdl_Strategy_Abstract implements Zend_Soap_Wsdl_Strategy_Interface
 {
     /**
-     * Context object
+     * Context object.
      *
      * @var Zend_Soap_Wsdl
      */
@@ -46,7 +45,6 @@ abstract class Zend_Soap_Wsdl_Strategy_Abstract implements Zend_Soap_Wsdl_Strate
     /**
      * Set the Zend_Soap_Wsdl Context object this strategy resides in.
      *
-     * @param Zend_Soap_Wsdl $context
      * @return void
      */
     public function setContext(Zend_Soap_Wsdl $context)
@@ -55,7 +53,7 @@ abstract class Zend_Soap_Wsdl_Strategy_Abstract implements Zend_Soap_Wsdl_Strate
     }
 
     /**
-     * Return the current Zend_Soap_Wsdl context object
+     * Return the current Zend_Soap_Wsdl context object.
      *
      * @return Zend_Soap_Wsdl
      */

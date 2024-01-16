@@ -1,5 +1,5 @@
 <?php
-/**
+/*
  * Zend Framework
  *
  * LICENSE
@@ -19,8 +19,5 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-
-
-
 
 // used to test when helper file is loaded but class is not within

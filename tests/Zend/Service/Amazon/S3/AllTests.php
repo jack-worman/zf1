@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +13,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_Amazon_S3
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Service_Amazon_S3_AllTests::main');
 }
@@ -30,10 +29,10 @@ require_once 'Zend/Service/Amazon/S3/StreamTest.php';
 
 /**
  * @category   Zend
- * @package    Zend_Service_Amazon_S3
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_S3
@@ -42,7 +41,7 @@ require_once 'Zend/Service/Amazon/S3/StreamTest.php';
 class Zend_Service_Amazon_S3_AllTests
 {
     /**
-     * Runs this test suite
+     * Runs this test suite.
      *
      * @return void
      */
@@ -52,7 +51,7 @@ class Zend_Service_Amazon_S3_AllTests
     }
 
     /**
-     * Creates and returns this test suite
+     * Creates and returns this test suite.
      *
      * @return PHPUnit_Framework_TestSuite
      */
@@ -61,10 +60,10 @@ class Zend_Service_Amazon_S3_AllTests
         $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Service_Amazon_S3');
 
         $suite->addTestSuite('Zend_Service_Amazon_S3_OfflineTest');
-        if (defined('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ENABLED') &&
-            constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ENABLED') &&
-            defined('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID') &&
-            defined('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY')) {
+        if (defined('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ENABLED')
+            && constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ENABLED')
+            && defined('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID')
+            && defined('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY')) {
             $suite->addTestSuite('Zend_Service_Amazon_S3_OnlineTest');
             $suite->addTestSuite('Zend_Service_Amazon_S3_StreamTest');
         } else {

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,23 +13,21 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Http
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 // Read local configuration
-if (! defined('TESTS_ZEND_HTTP_CLIENT_BASEURI') &&
-    is_readable('TestConfiguration.php')) {
-
+if (!defined('TESTS_ZEND_HTTP_CLIENT_BASEURI')
+    && is_readable('TestConfiguration.php')) {
     require_once 'TestConfiguration.php';
 }
 
 // require_once 'Zend/Http/Client.php';
 
 // require_once 'Zend/Uri/Http.php';
-
 
 /**
  * This Testsuite includes all Zend_Http_Client that require a working web
@@ -45,10 +43,10 @@ if (! defined('TESTS_ZEND_HTTP_CLIENT_BASEURI') &&
  * point to the right place.
  *
  * @category   Zend
- * @package    Zend_Http_Client
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Http
  * @group      Zend_Http_Client
  */
@@ -56,67 +54,65 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
 {
     /**
      * The bast URI for this test, containing all files in the _files directory
-     * Should be set in TestConfiguration.php or TestConfiguration.dist.php
+     * Should be set in TestConfiguration.php or TestConfiguration.dist.php.
      *
      * @var string
      */
     protected $baseuri;
 
     /**
-     * Common HTTP client
+     * Common HTTP client.
      *
      * @var Zend_Http_Client
      */
-    protected $client = null;
+    protected $client;
 
     /**
-     * Common HTTP client adapter
+     * Common HTTP client adapter.
      *
      * @var Zend_Http_Client_Adapter_Interface
      */
-    protected $_adapter = null;
+    protected $_adapter;
 
     /**
-     * Configuration array
+     * Configuration array.
      *
      * @var array
      */
-    protected $config = array(
-        'adapter'     => 'Zend_Http_Client_Adapter_Socket'
-    );
+    protected $config = [
+        'adapter' => 'Zend_Http_Client_Adapter_Socket',
+    ];
 
     /**
-     * Set up the test case
-     *
+     * Set up the test case.
      */
     protected function setUp()
     {
-        if (defined('TESTS_ZEND_HTTP_CLIENT_BASEURI') &&
-            Zend_Uri_Http::check(TESTS_ZEND_HTTP_CLIENT_BASEURI)) {
-
+        if (defined('TESTS_ZEND_HTTP_CLIENT_BASEURI')
+            && Zend_Uri_Http::check(TESTS_ZEND_HTTP_CLIENT_BASEURI)) {
             $this->baseuri = TESTS_ZEND_HTTP_CLIENT_BASEURI;
-            if (substr((string) $this->baseuri, -1) != '/') $this->baseuri .= '/';
+            if ('/' != substr((string) $this->baseuri, -1)) {
+                $this->baseuri .= '/';
+            }
 
             $name = $this->getName();
             if (($pos = strpos((string) $name, ' ')) !== false) {
                 $name = substr((string) $name, 0, $pos);
             }
 
-            $uri = $this->baseuri . $name . '.php';
+            $uri = $this->baseuri.$name.'.php';
 
-            $this->_adapter = new $this->config['adapter'];
+            $this->_adapter = new $this->config['adapter']();
             $this->client = new Zend_Http_Client($uri, $this->config);
             $this->client->setAdapter($this->_adapter);
-
         } else {
             // Skip tests
-            $this->markTestSkipped("Zend_Http_Client dynamic tests are not enabled in TestConfiguration.php");
+            $this->markTestSkipped('Zend_Http_Client dynamic tests are not enabled in TestConfiguration.php');
         }
     }
 
     /**
-     * Clean up the test environment
-     *
+     * Clean up the test environment.
      */
     protected function tearDown()
     {
@@ -125,16 +121,15 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * Simple request tests
+     * Simple request tests.
      */
 
     /**
-     * Test simple requests
-     *
+     * Test simple requests.
      */
     public function testSimpleRequests()
     {
-        $methods = array('GET', 'POST', 'OPTIONS', 'PUT', 'PATCH', 'DELETE');
+        $methods = ['GET', 'POST', 'OPTIONS', 'PUT', 'PATCH', 'DELETE'];
 
         foreach ($methods as $method) {
             $res = $this->client->request($method);
@@ -143,187 +138,186 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * Test we can get the last request as string
-     *
+     * Test we can get the last request as string.
      */
     public function testGetLastRequest()
     {
-        $this->client->setUri($this->baseuri . 'testHeaders.php');
+        $this->client->setUri($this->baseuri.'testHeaders.php');
         $this->client->setParameterGet('someinput', 'somevalue');
-        $this->client->setHeaders(array(
+        $this->client->setHeaders([
             'X-Powered-By' => 'My Glorious Golden Ass',
-        ));
+        ]);
 
         $res = $this->client->request(Zend_Http_Client::TRACE);
-        if ($res->getStatus() == 405 || $res->getStatus() == 501) {
-            $this->markTestSkipped("Server does not allow the TRACE method");
+        if (405 == $res->getStatus() || 501 == $res->getStatus()) {
+            $this->markTestSkipped('Server does not allow the TRACE method');
         }
 
         $this->assertEquals($this->client->getLastRequest(), $res->getBody(), 'Response body should be exactly like the last request');
     }
 
     /**
-     * GET and POST parameters tests
+     * GET and POST parameters tests.
      */
 
     /**
-     * Test we can properly send GET parameters
+     * Test we can properly send GET parameters.
      *
      * @dataProvider parameterArrayProvider
      */
     public function testGetData($params)
     {
-        $this->client->setUri($this->client->getUri(true) . '?name=Arthur');
+        $this->client->setUri($this->client->getUri(true).'?name=Arthur');
 
         $this->client->setParameterGet($params);
         $res = $this->client->request('GET');
-        $this->assertEquals(serialize(array_merge(array('name' => 'Arthur'), $params)), $res->getBody());
+        $this->assertEquals(serialize(array_merge(['name' => 'Arthur'], $params)), $res->getBody());
     }
 
     /**
      * Test we can properly send POST parameters with
-     * application/x-www-form-urlencoded content type
+     * application/x-www-form-urlencoded content type.
      *
      * @dataProvider parameterArrayProvider
      */
     public function testPostDataUrlEncoded($params)
     {
-        $this->client->setUri($this->baseuri . 'testPostData.php');
+        $this->client->setUri($this->baseuri.'testPostData.php');
         $this->client->setEncType(Zend_Http_Client::ENC_URLENCODED);
         $this->client->setParameterPost($params);
         $res = $this->client->request('POST');
-        $this->assertEquals(serialize($params), $res->getBody(), "POST data integrity test failed");
+        $this->assertEquals(serialize($params), $res->getBody(), 'POST data integrity test failed');
     }
 
     /**
      * Test we can properly send PUT parameters with
-     * application/x-www-form-urlencoded content type
+     * application/x-www-form-urlencoded content type.
      *
      * @dataProvider parameterArrayProvider
      */
     public function testPutDataUrlEncoded($params)
     {
-        $this->client->setUri($this->baseuri . 'testPutData.php');
+        $this->client->setUri($this->baseuri.'testPutData.php');
         $this->client->setEncType(Zend_Http_Client::ENC_URLENCODED);
         $this->client->setParameterPost($params);
         $res = $this->client->request('PUT');
-        $this->assertEquals(serialize($params), $res->getBody(), "PUT data integrity test failed");
+        $this->assertEquals(serialize($params), $res->getBody(), 'PUT data integrity test failed');
     }
 
     /**
      * Test we can properly send PUT parameters without
-     * content type, relying on default content type (urlencoded)
+     * content type, relying on default content type (urlencoded).
      *
      * @dataProvider parameterArrayProvider
      */
     public function testPutDataDefault($params)
     {
-        $this->client->setUri($this->baseuri . 'testPutData.php');
+        $this->client->setUri($this->baseuri.'testPutData.php');
         // note that no content type is set
         $this->client->setParameterPost($params);
         $res = $this->client->request('PUT');
-        $this->assertEquals(serialize($params), $res->getBody(), "PUT data integrity test failed for default content-type");
+        $this->assertEquals(serialize($params), $res->getBody(), 'PUT data integrity test failed for default content-type');
     }
 
     /**
      * Test we can properly send PATCH parameters with
-     * application/x-www-form-urlencoded content type
+     * application/x-www-form-urlencoded content type.
      *
      * @dataProvider parameterArrayProvider
      */
     public function testPatchDataUrlEncoded($params)
     {
-        $this->client->setUri($this->baseuri . 'testPatchData.php');
+        $this->client->setUri($this->baseuri.'testPatchData.php');
         $this->client->setEncType(Zend_Http_Client::ENC_URLENCODED);
         $this->client->setParameterPost($params);
         $res = $this->client->request('PATCH');
-        $this->assertEquals(serialize($params), $res->getBody(), "PATCH data integrity test failed");
+        $this->assertEquals(serialize($params), $res->getBody(), 'PATCH data integrity test failed');
     }
 
     /**
      * Test we can properly send PATCH parameters without
-     * content type, relying on default content type (urlencoded)
+     * content type, relying on default content type (urlencoded).
      *
      * @dataProvider parameterArrayProvider
      */
     public function testPatchDataDefault($params)
     {
-        $this->client->setUri($this->baseuri . 'testPatchData.php');
+        $this->client->setUri($this->baseuri.'testPatchData.php');
         // note that no content type is set
         $this->client->setParameterPost($params);
         $res = $this->client->request('PATCH');
-        $this->assertEquals(serialize($params), $res->getBody(), "PATCH data integrity test failed for default content-type");
+        $this->assertEquals(serialize($params), $res->getBody(), 'PATCH data integrity test failed for default content-type');
     }
 
     /**
      * Test we can properly send OPTIONS parameters with
-     * application/x-www-form-urlencoded content type
+     * application/x-www-form-urlencoded content type.
      *
      * @dataProvider parameterArrayProvider
      */
     public function testOptionsDataUrlEncoded($params)
     {
-        $this->client->setUri($this->baseuri . 'testOptionsData.php');
+        $this->client->setUri($this->baseuri.'testOptionsData.php');
         $this->client->setEncType(Zend_Http_Client::ENC_URLENCODED);
         $this->client->setParameterPost($params);
         $res = $this->client->request('OPTIONS');
-        $this->assertEquals(serialize($params), $res->getBody(), "OPTIONS data integrity test failed");
+        $this->assertEquals(serialize($params), $res->getBody(), 'OPTIONS data integrity test failed');
     }
 
     /**
      * Test we can properly send OPTIONS parameters without
-     * content type, relying on default content type (urlencoded)
+     * content type, relying on default content type (urlencoded).
      *
      * @dataProvider parameterArrayProvider
      */
     public function testOptionsDataDefault($params)
     {
-        $this->client->setUri($this->baseuri . 'testOptionsData.php');
+        $this->client->setUri($this->baseuri.'testOptionsData.php');
         // note that no content type is set
         $this->client->setParameterPost($params);
         $res = $this->client->request('OPTIONS');
-        $this->assertEquals(serialize($params), $res->getBody(), "OPTIONS data integrity test failed for default content-type");
+        $this->assertEquals(serialize($params), $res->getBody(), 'OPTIONS data integrity test failed for default content-type');
     }
 
     /**
      * Test we can properly send parameters with
-     * application/x-www-form-urlencoded content type
+     * application/x-www-form-urlencoded content type.
      *
      * @dataProvider parameterArrayProvider
      */
     public function testDeleteDataUrlEncoded($params)
     {
-        $this->client->setUri($this->baseuri . 'testDeleteData.php');
+        $this->client->setUri($this->baseuri.'testDeleteData.php');
         $this->client->setEncType(Zend_Http_Client::ENC_URLENCODED);
         $this->client->setParameterPost($params);
         $res = $this->client->request('DELETE');
-        $this->assertEquals(serialize($params), $res->getBody(), "DELETE data integrity test failed");
+        $this->assertEquals(serialize($params), $res->getBody(), 'DELETE data integrity test failed');
     }
 
     /**
      * Test we can properly send POST parameters with
-     * multipart/form-data content type
+     * multipart/form-data content type.
      *
      * @dataProvider parameterArrayProvider
      */
     public function testPostDataMultipart($params)
     {
-        $this->client->setUri($this->baseuri . 'testPostData.php');
+        $this->client->setUri($this->baseuri.'testPostData.php');
         $this->client->setEncType(Zend_Http_Client::ENC_FORMDATA);
         $this->client->setParameterPost($params);
         $res = $this->client->request('POST');
-        $this->assertEquals(serialize($params), $res->getBody(), "POST data integrity test failed");
+        $this->assertEquals(serialize($params), $res->getBody(), 'POST data integrity test failed');
     }
 
     /**
      * Test we can properly send PUT parameters with
-     * multipart/form-data content type
+     * multipart/form-data content type.
      *
      * @dataProvider parameterArrayProvider
      */
     public function testPutDataMultipart($params)
     {
-        $this->client->setUri($this->baseuri . 'testRawPutData.php');
+        $this->client->setUri($this->baseuri.'testRawPutData.php');
         $this->client->setParameterPost($params);
         $this->client->setMethod(Zend_Http_Client::PUT);
         $this->client->setEncType(Zend_Http_Client::ENC_FORMDATA);
@@ -334,13 +328,13 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
 
     /**
      * Test we can properly send PATCH parameters with
-     * multipart/form-data content type
+     * multipart/form-data content type.
      *
      * @dataProvider parameterArrayProvider
      */
     public function testPatchDataMultipart($params)
     {
-        $this->client->setUri($this->baseuri . 'testRawPatchData.php');
+        $this->client->setUri($this->baseuri.'testRawPatchData.php');
         $this->client->setParameterPost($params);
         $this->client->setMethod(Zend_Http_Client::PATCH);
         $this->client->setEncType(Zend_Http_Client::ENC_FORMDATA);
@@ -351,13 +345,13 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
 
     /**
      * Test we can properly send OPTIONS parameters with
-     * multipart/form-data content type
+     * multipart/form-data content type.
      *
      * @dataProvider parameterArrayProvider
      */
     public function testOptionsDataMultipart($params)
     {
-        $this->client->setUri($this->baseuri . 'testRawOptionsData.php');
+        $this->client->setUri($this->baseuri.'testRawOptionsData.php');
         $this->client->setParameterPost($params);
         $this->client->setMethod(Zend_Http_Client::OPTIONS);
         $this->client->setEncType(Zend_Http_Client::ENC_FORMDATA);
@@ -368,7 +362,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
 
     /**
      * Checks the presence of keys (non-numeric only) and values
-     * in the raw form data reponse for a PUT or DELETE request recursively
+     * in the raw form data reponse for a PUT or DELETE request recursively.
      *
      * An example response (I do not know of a better way to check it):
      * -----ZENDHTTPCLIENT-c63973519a6bb3ec45495876f5e15828
@@ -396,8 +390,9 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
      *
      * 3rdItem
      * -----ZENDHTTPCLIENT-c63973519a6bb3ec45495876f5e15828--
-     * @param string $responseText
-     * @param string|integer|array $needle
+     *
+     * @param string           $responseText
+     * @param string|int|array $needle
      */
     protected function _checkPresence($responseText, $needle)
     {
@@ -428,13 +423,13 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
 
     /**
      * Test we can properly send DELETE parameters with
-     * multipart/form-data content type
+     * multipart/form-data content type.
      *
      * @dataProvider parameterArrayProvider
      */
     public function testDeleteDataMultipart($params)
     {
-        $this->client->setUri($this->baseuri . 'testRawDeleteData.php');
+        $this->client->setUri($this->baseuri.'testRawDeleteData.php');
         $this->client->setParameterPost($params);
         $this->client->setMethod(Zend_Http_Client::DELETE);
         $this->client->setEncType(Zend_Http_Client::ENC_FORMDATA);
@@ -444,27 +439,25 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * Test using raw HTTP POST data
-     *
+     * Test using raw HTTP POST data.
      */
     public function testRawPostData()
     {
-        $data = "Chuck Norris never wet his bed as a child. The bed wet itself out of fear.";
+        $data = 'Chuck Norris never wet his bed as a child. The bed wet itself out of fear.';
 
         $res = $this->client->setRawData($data, 'text/html')->request('POST');
         $this->assertEquals($data, $res->getBody(), 'Response body does not contain the expected data');
     }
 
     /**
-     * Test using raw HTTP PUT data
+     * Test using raw HTTP PUT data.
      *
      * @group ZF-11030
-     *
      */
     public function testRawPutData()
     {
-        $data = "Chuck Norris never wet his bed as a child. The bed wet itself out of fear.";
-        $this->client->setUri($this->baseuri . 'testRawPutData.php');
+        $data = 'Chuck Norris never wet his bed as a child. The bed wet itself out of fear.';
+        $this->client->setUri($this->baseuri.'testRawPutData.php');
         $this->client->setRawData($data, 'text/plain');
         $this->client->setMethod(Zend_Http_Client::PUT);
         $response = $this->client->request();
@@ -472,15 +465,14 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * Test using raw HTTP DELETE data
+     * Test using raw HTTP DELETE data.
      *
      * @group ZF-11030
-     *
      */
     public function testRawDeleteData()
     {
-        $data = "Chuck Norris never wet his bed as a child. The bed wet itself out of fear.";
-        $this->client->setUri($this->baseuri . 'testRawDeleteData.php');
+        $data = 'Chuck Norris never wet his bed as a child. The bed wet itself out of fear.';
+        $this->client->setUri($this->baseuri.'testRawDeleteData.php');
         $this->client->setRawData($data, 'text/plain');
         $this->client->setMethod(Zend_Http_Client::DELETE);
         $response = $this->client->request();
@@ -488,19 +480,18 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * Make sure we can reset the parameters between consecutive requests
-     *
+     * Make sure we can reset the parameters between consecutive requests.
      */
     public function testResetParameters()
     {
-        $params = array(
+        $params = [
             'quest' => 'To seek the holy grail',
             'YourMother' => 'Was a hamster',
             'specialChars' => '<>$+ &?=[]^%',
-            'array' => array('firstItem', 'secondItem', '3rdItem')
-        );
+            'array' => ['firstItem', 'secondItem', '3rdItem'],
+        ];
 
-        $headers = array("X-Foo" => "bar");
+        $headers = ['X-Foo' => 'bar'];
 
         $this->client->setParameterPost($params);
         $this->client->setParameterGet($params);
@@ -508,37 +499,36 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
 
         $res = $this->client->request('POST');
 
-        $this->assertContains(serialize($params) . "\n" . serialize($params),
-            $res->getBody(), "returned body does not contain all GET and POST parameters (it should!)");
+        $this->assertContains(serialize($params)."\n".serialize($params),
+            $res->getBody(), 'returned body does not contain all GET and POST parameters (it should!)');
 
         $this->client->resetParameters();
         $res = $this->client->request('POST');
 
         $this->assertNotContains(serialize($params), $res->getBody(),
             "returned body contains GET or POST parameters (it shouldn't!)");
-        $this->assertContains($headers["X-Foo"], $this->client->getHeader("X-Foo"), "Header not preserved by reset");
+        $this->assertContains($headers['X-Foo'], $this->client->getHeader('X-Foo'), 'Header not preserved by reset');
 
         $this->client->resetParameters(true);
-        $this->assertNull($this->client->getHeader("X-Foo"), "Header preserved by reset(true)");
+        $this->assertNull($this->client->getHeader('X-Foo'), 'Header preserved by reset(true)');
     }
 
     /**
-     * Test parameters get reset when we unset them
-     *
+     * Test parameters get reset when we unset them.
      */
     public function testParameterUnset()
     {
-        $this->client->setUri($this->baseuri . 'testResetParameters.php');
+        $this->client->setUri($this->baseuri.'testResetParameters.php');
 
-        $gparams = array (
+        $gparams = [
             'cheese' => 'camambert',
-            'beer'   => 'jever pilnsen',
-        );
+            'beer' => 'jever pilnsen',
+        ];
 
-        $pparams = array (
+        $pparams = [
             'from' => 'bob',
-            'to'   => 'alice'
-        );
+            'to' => 'alice',
+        ];
 
         $this->client->setParameterGet($gparams)->setParameterPost($pparams);
 
@@ -551,63 +541,62 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * Header Tests
+     * Header Tests.
      */
 
     /**
-     * Make sure we can set a single header
-     *
+     * Make sure we can set a single header.
      */
     public function testHeadersSingle()
     {
-        $this->client->setUri($this->baseuri . 'testHeaders.php');
+        $this->client->setUri($this->baseuri.'testHeaders.php');
 
-        $headers = array(
+        $headers = [
             'Accept-encoding' => 'gzip,deflate',
             'X-baz' => 'Foo',
-            'X-powered-by' => 'A large wooden badger'
-        );
+            'X-powered-by' => 'A large wooden badger',
+        ];
 
         foreach ($headers as $key => $val) {
             $this->client->setHeaders($key, $val);
         }
 
-        $acceptHeader = "Accept: text/xml,text/html,*/*";
+        $acceptHeader = 'Accept: text/xml,text/html,*/*';
         $this->client->setHeaders($acceptHeader);
 
         $res = $this->client->request('TRACE');
-        if ($res->getStatus() == 405 || $res->getStatus() == 501) {
-            $this->markTestSkipped("Server does not allow the TRACE method");
+        if (405 == $res->getStatus() || 501 == $res->getStatus()) {
+            $this->markTestSkipped('Server does not allow the TRACE method');
         }
 
         $body = strtolower((string) $res->getBody());
 
-        foreach ($headers as $key => $val)
+        foreach ($headers as $key => $val) {
             $this->assertContains(strtolower((string) "$key: $val"), $body);
+        }
 
         $this->assertContains(strtolower((string) $acceptHeader), $body);
     }
 
     /**
-     * Test we can set an array of headers
-     *
+     * Test we can set an array of headers.
      */
     public function testHeadersArray()
     {
-        $this->client->setUri($this->baseuri . 'testHeaders.php');
+        $this->client->setUri($this->baseuri.'testHeaders.php');
 
-        $headers = array(
+        $headers = [
             'Accept-encoding' => 'gzip,deflate',
             'X-baz' => 'Foo',
             'X-powered-by' => 'A large wooden badger',
-            'Accept: text/xml,text/html,*/*'
-        );
+            'Accept: text/xml,text/html,*/*',
+        ];
 
         $this->client->setHeaders($headers);
 
         $res = $this->client->request('TRACE');
-        if ($res->getStatus() == 405 || $res->getStatus() == 501) {
-            $this->markTestSkipped("Server does not allow the TRACE method");
+        if (405 == $res->getStatus() || 501 == $res->getStatus()) {
+            $this->markTestSkipped('Server does not allow the TRACE method');
         }
 
         $body = strtolower((string) $res->getBody());
@@ -619,55 +608,54 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
                 $this->assertContains(strtolower((string) $val), $body);
             }
         }
-     }
+    }
 
-     /**
-      * Test we can set a set of values for one header
-      *
-      */
-     public function testMultipleHeader()
-     {
-         $this->client->setUri($this->baseuri . 'testHeaders.php');
-        $headers = array(
+    /**
+     * Test we can set a set of values for one header.
+     */
+    public function testMultipleHeader()
+    {
+        $this->client->setUri($this->baseuri.'testHeaders.php');
+        $headers = [
             'Accept-encoding' => 'gzip,deflate',
             'X-baz' => 'Foo',
-            'X-powered-by' => array(
+            'X-powered-by' => [
                 'A large wooden badger',
                 'My Shiny Metal Ass',
-                'Dark Matter'
-            ),
-            'Cookie' => array(
+                'Dark Matter',
+            ],
+            'Cookie' => [
                 'foo=bar',
-                'baz=waka'
-            )
-        );
+                'baz=waka',
+            ],
+        ];
 
         $this->client->setHeaders($headers);
         $res = $this->client->request('TRACE');
-        if ($res->getStatus() == 405 || $res->getStatus() == 501) {
-            $this->markTestSkipped("Server does not allow the TRACE method");
+        if (405 == $res->getStatus() || 501 == $res->getStatus()) {
+            $this->markTestSkipped('Server does not allow the TRACE method');
         }
         $body = strtolower((string) $res->getBody());
 
         foreach ($headers as $key => $val) {
-            if (is_array($val))
+            if (is_array($val)) {
                 $val = implode(', ', $val);
+            }
 
             $this->assertContains(strtolower((string) "$key: $val"), $body);
         }
-     }
+    }
 
-     /**
-      * Redirection tests
-      */
+    /**
+     * Redirection tests.
+     */
 
-     /**
-      * Test the client properly redirects in default mode
-      *
-      */
+    /**
+     * Test the client properly redirects in default mode.
+     */
     public function testRedirectDefault()
     {
-        $this->client->setUri($this->baseuri . 'testRedirections.php');
+        $this->client->setUri($this->baseuri.'testRedirections.php');
 
         // Set some parameters
         $this->client->setParameterGet('swallow', 'african');
@@ -684,19 +672,18 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * Make sure the client properly redirects in strict mode
-     *
+     * Make sure the client properly redirects in strict mode.
      */
     public function testRedirectStrict()
     {
-        $this->client->setUri($this->baseuri . 'testRedirections.php');
+        $this->client->setUri($this->baseuri.'testRedirections.php');
 
         // Set some parameters
         $this->client->setParameterGet('swallow', 'african');
         $this->client->setParameterPost('Camelot', 'A silly place');
 
         // Set strict redirections
-        $this->client->setConfig(array('strictredirects' => true));
+        $this->client->setConfig(['strictredirects' => true]);
 
         // Request
         $res = $this->client->request('POST');
@@ -709,12 +696,11 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * Make sure redirections stop when limit is exceeded
-     *
+     * Make sure redirections stop when limit is exceeded.
      */
     public function testMaxRedirectsExceeded()
     {
-        $this->client->setUri($this->baseuri . 'testRedirections.php');
+        $this->client->setUri($this->baseuri.'testRedirections.php');
 
         // Set some parameters
         $this->client->setParameterGet('swallow', 'african');
@@ -722,7 +708,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
 
         // Set lower max redirections
         // Try with strict redirections first
-        $this->client->setConfig(array('strictredirects' => true, 'maxredirects' => 2));
+        $this->client->setConfig(['strictredirects' => true, 'maxredirects' => 2]);
 
         $res = $this->client->request('POST');
         $this->assertTrue($res->isRedirect(),
@@ -730,24 +716,23 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
 
         // Then try with normal redirections
         $this->client->setParameterGet('redirection', '0');
-        $this->client->setConfig(array('strictredirects' => false));
+        $this->client->setConfig(['strictredirects' => false]);
         $res = $this->client->request('POST');
         $this->assertTrue($res->isRedirect(),
             "Last response was not a redirection as expected. Response code: {$res->getStatus()}. Redirections counter: {$this->client->getRedirectionsCount()} (when strict redirects are off)");
     }
 
     /**
-     * Test we can properly redirect to an absolute path (not full URI)
-     *
+     * Test we can properly redirect to an absolute path (not full URI).
      */
     public function testAbsolutePathRedirect()
     {
-        $this->client->setUri($this->baseuri . 'testRelativeRedirections.php');
+        $this->client->setUri($this->baseuri.'testRelativeRedirections.php');
         $this->client->setParameterGet('redirect', 'abpath');
-        $this->client->setConfig(array('maxredirects' => 1));
+        $this->client->setConfig(['maxredirects' => 1]);
 
         // Get the host and port part of our baseuri
-        $uri = $this->client->getUri()->getScheme() . '://' . $this->client->getUri()->getHost() . ':' .
+        $uri = $this->client->getUri()->getScheme().'://'.$this->client->getUri()->getHost().':'.
             $this->client->getUri()->getPort();
 
         $res = $this->client->request('GET');
@@ -757,18 +742,17 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * Test we can properly redirect to a relative path
-     *
+     * Test we can properly redirect to a relative path.
      */
     public function testRelativePathRedirect()
     {
-        $this->client->setUri($this->baseuri . 'testRelativeRedirections.php');
+        $this->client->setUri($this->baseuri.'testRelativeRedirections.php');
         $this->client->setParameterGet('redirect', 'relpath');
-        $this->client->setConfig(array('maxredirects' => 1));
+        $this->client->setConfig(['maxredirects' => 1]);
 
         // Set the new expected URI
         $uri = clone $this->client->getUri();
-        $uri->setPath(rtrim((string) dirname($uri->getPath()), '/') . '/path/to/fake/file.ext');
+        $uri->setPath(rtrim((string) dirname($uri->getPath()), '/').'/path/to/fake/file.ext');
         $uri = $uri->__toString();
 
         $res = $this->client->request('GET');
@@ -778,22 +762,20 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * HTTP Authentication Tests
-     *
+     * HTTP Authentication Tests.
      */
 
     /**
-     * Test we can properly use Basic HTTP authentication
-     *
+     * Test we can properly use Basic HTTP authentication.
      */
     public function testHttpAuthBasic()
     {
-        $this->client->setUri($this->baseuri. 'testHttpAuth.php');
-        $this->client->setParameterGet(array(
-            'user'   => 'alice',
-            'pass'   => 'secret',
-            'method' => 'Basic'
-        ));
+        $this->client->setUri($this->baseuri.'testHttpAuth.php');
+        $this->client->setParameterGet([
+            'user' => 'alice',
+            'pass' => 'secret',
+            'method' => 'Basic',
+        ]);
 
         // First - fail password
         $this->client->setAuth('alice', 'wrong');
@@ -808,18 +790,17 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
 
     /**
      * Test that we can properly use Basic HTTP authentication by specifying username and password
-     * in the URI
-     *
+     * in the URI.
      */
     public function testHttpAuthBasicWithCredentialsInUri()
     {
-        $uri = str_replace((string) 'http://', 'http://%s:%s@', $this->baseuri) . 'testHttpAuth.php';
+        $uri = str_replace((string) 'http://', 'http://%s:%s@', $this->baseuri).'testHttpAuth.php';
 
-        $this->client->setParameterGet(array(
-            'user'   => 'alice',
-            'pass'   => 'secret',
-            'method' => 'Basic'
-        ));
+        $this->client->setParameterGet([
+            'user' => 'alice',
+            'pass' => 'secret',
+            'method' => 'Basic',
+        ]);
 
         // First - fail password
         $this->client->setUri(sprintf($uri, 'alice', 'wrong'));
@@ -833,12 +814,11 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * Test we can unset HTTP authentication
-     *
+     * Test we can unset HTTP authentication.
      */
     public function testCancelAuth()
     {
-        $this->client->setUri($this->baseuri. 'testHttpAuth.php');
+        $this->client->setUri($this->baseuri.'testHttpAuth.php');
 
         // Set auth and cancel it
         $this->client->setAuth('alice', 'secret');
@@ -851,12 +831,11 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * Test that we can unset HTTP authentication when credentials is specified in the URI
-     *
+     * Test that we can unset HTTP authentication when credentials is specified in the URI.
      */
     public function testCancelAuthWithCredentialsInUri()
     {
-        $uri = str_replace((string) 'http://', 'http://%s:%s@', $this->baseuri) . 'testHttpAuth.php';
+        $uri = str_replace((string) 'http://', 'http://%s:%s@', $this->baseuri).'testHttpAuth.php';
 
         // Set auth and cancel it
         $this->client->setUri(sprintf($uri, 'alice', 'secret'));
@@ -869,22 +848,20 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * Cookie and CookieJar Tests
-     *
+     * Cookie and CookieJar Tests.
      */
 
     /**
-     * Test we can set string cookies with no jar
-     *
+     * Test we can set string cookies with no jar.
      */
     public function testCookiesStringNoJar()
     {
-        $this->client->setUri($this->baseuri. 'testCookies.php');
+        $this->client->setUri($this->baseuri.'testCookies.php');
 
-        $cookies = array(
-            'name'   => 'value',
-            'cookie' => 'crumble'
-        );
+        $cookies = [
+            'name' => 'value',
+            'cookie' => 'crumble',
+        ];
 
         foreach ($cookies as $k => $v) {
             $this->client->setCookie($k, $v);
@@ -896,20 +873,19 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * Make sure we can set object cookies with no jar
-     *
+     * Make sure we can set object cookies with no jar.
      */
     public function testSetCookieObjectNoJar()
     {
-        $this->client->setUri($this->baseuri. 'testCookies.php');
+        $this->client->setUri($this->baseuri.'testCookies.php');
         $refuri = $this->client->getUri();
 
-        $cookies = array(
+        $cookies = [
             Zend_Http_Cookie::fromString('chocolate=chips', $refuri),
-            Zend_Http_Cookie::fromString('crumble=apple', $refuri)
-        );
+            Zend_Http_Cookie::fromString('crumble=apple', $refuri),
+        ];
 
-        $strcookies = array();
+        $strcookies = [];
         foreach ($cookies as $c) {
             $this->client->setCookie($c);
             $strcookies[$c->getName()] = $c->getValue();
@@ -920,23 +896,22 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * Make sure we can set an array of object cookies
-     *
+     * Make sure we can set an array of object cookies.
      */
     public function testSetCookieObjectArray()
     {
-        $this->client->setUri($this->baseuri. 'testCookies.php');
+        $this->client->setUri($this->baseuri.'testCookies.php');
         $refuri = $this->client->getUri();
 
-        $cookies = array(
+        $cookies = [
             Zend_Http_Cookie::fromString('chocolate=chips', $refuri),
             Zend_Http_Cookie::fromString('crumble=apple', $refuri),
-            Zend_Http_Cookie::fromString('another=cookie', $refuri)
-        );
+            Zend_Http_Cookie::fromString('another=cookie', $refuri),
+        ];
 
         $this->client->setCookie($cookies);
 
-        $strcookies = array();
+        $strcookies = [];
         foreach ($cookies as $c) {
             $strcookies[$c->getName()] = $c->getValue();
         }
@@ -946,18 +921,17 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * Make sure we can set an array of string cookies
-     *
+     * Make sure we can set an array of string cookies.
      */
     public function testSetCookieStringArray()
     {
-        $this->client->setUri($this->baseuri. 'testCookies.php');
+        $this->client->setUri($this->baseuri.'testCookies.php');
 
-        $cookies = array(
+        $cookies = [
             'chocolate' => 'chips',
-            'crumble'   => 'apple',
-            'another'   => 'cookie'
-        );
+            'crumble' => 'apple',
+            'another' => 'cookie',
+        ];
 
         $this->client->setCookie($cookies);
 
@@ -966,21 +940,20 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * Make sure we can set cookie objects with a jar
-     *
+     * Make sure we can set cookie objects with a jar.
      */
     public function testSetCookieObjectJar()
     {
-        $this->client->setUri($this->baseuri. 'testCookies.php');
+        $this->client->setUri($this->baseuri.'testCookies.php');
         $this->client->setCookieJar();
         $refuri = $this->client->getUri();
 
-        $cookies = array(
+        $cookies = [
             Zend_Http_Cookie::fromString('chocolate=chips', $refuri),
-            Zend_Http_Cookie::fromString('crumble=apple', $refuri)
-        );
+            Zend_Http_Cookie::fromString('crumble=apple', $refuri),
+        ];
 
-        $strcookies = array();
+        $strcookies = [];
         foreach ($cookies as $c) {
             $this->client->setCookie($c);
             $strcookies[$c->getName()] = $c->getValue();
@@ -991,13 +964,11 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * File Upload Tests
-     *
+     * File Upload Tests.
      */
 
     /**
-     * Test we can upload raw data as a file
-     *
+     * Test we can upload raw data as a file.
      */
     public function testUploadRawData()
     {
@@ -1005,19 +976,18 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
             $this->markTestSkipped('File uploads disabled.');
         }
 
-        $this->client->setUri($this->baseuri. 'testUploads.php');
+        $this->client->setUri($this->baseuri.'testUploads.php');
 
         $rawdata = file_get_contents(__FILE__);
         $this->client->setFileUpload('myfile.txt', 'uploadfile', $rawdata, 'text/plain');
         $res = $this->client->request('POST');
 
-        $body = 'uploadfile myfile.txt text/plain ' . strlen((string) $rawdata) . "\n";
+        $body = 'uploadfile myfile.txt text/plain '.strlen((string) $rawdata)."\n";
         $this->assertEquals($body, $res->getBody(), 'Response body does not include expected upload parameters');
     }
 
     /**
-     * Test we can upload an existing file
-     *
+     * Test we can upload an existing file.
      */
     public function testUploadLocalFile()
     {
@@ -1025,13 +995,13 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
             $this->markTestSkipped('File uploads disabled.');
         }
 
-        $this->client->setUri($this->baseuri. 'testUploads.php');
+        $this->client->setUri($this->baseuri.'testUploads.php');
         $this->client->setFileUpload(__FILE__, 'uploadfile', null, 'text/x-foo-bar');
         $res = $this->client->request('POST');
 
         $size = filesize(__FILE__);
 
-        $body = "uploadfile " . basename(__FILE__) . " text/x-foo-bar $size\n";
+        $body = 'uploadfile '.basename(__FILE__)." text/x-foo-bar $size\n";
         $this->assertEquals($body, $res->getBody(), 'Response body does not include expected upload parameters');
     }
 
@@ -1044,27 +1014,28 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
         $detect = null;
         if (function_exists('finfo_file')) {
             $f = @finfo_open(FILEINFO_MIME);
-            if ($f) $detect = 'finfo';
-
+            if ($f) {
+                $detect = 'finfo';
+            }
         } elseif (function_exists('mime_content_type')) {
             if (mime_content_type(__FILE__)) {
                 $detect = 'mime_magic';
             }
         }
 
-        if (! $detect) {
+        if (!$detect) {
             $this->markTestSkipped('No MIME type detection capability (fileinfo or mime_magic extensions) is available');
         }
 
-        $file = dirname(realpath(__FILE__)) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'staticFile.jpg';
+        $file = dirname(realpath(__FILE__)).DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'staticFile.jpg';
 
-        $this->client->setUri($this->baseuri. 'testUploads.php');
+        $this->client->setUri($this->baseuri.'testUploads.php');
         $this->client->setFileUpload($file, 'uploadfile');
         $res = $this->client->request('POST');
 
         $size = filesize($file);
-        $body = "uploadfile " . basename($file) . " image/jpeg $size\n";
-        $this->assertEquals($body, $res->getBody(), 'Response body does not include expected upload parameters (detect: ' . $detect . ')');
+        $body = 'uploadfile '.basename($file)." image/jpeg $size\n";
+        $this->assertEquals($body, $res->getBody(), 'Response body does not include expected upload parameters (detect: '.$detect.')');
     }
 
     public function testUploadNameWithSpecialChars()
@@ -1073,19 +1044,19 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
             $this->markTestSkipped('File uploads disabled.');
         }
 
-        $this->client->setUri($this->baseuri. 'testUploads.php');
+        $this->client->setUri($this->baseuri.'testUploads.php');
 
         $rawdata = file_get_contents(__FILE__);
         $this->client->setFileUpload('/some strage/path%/with[!@#$&]/myfile.txt', 'uploadfile', $rawdata, 'text/plain');
         $res = $this->client->request('POST');
 
-        $body = 'uploadfile myfile.txt text/plain ' . strlen((string) $rawdata) . "\n";
+        $body = 'uploadfile myfile.txt text/plain '.strlen((string) $rawdata)."\n";
         $this->assertEquals($body, $res->getBody(), 'Response body does not include expected upload parameters');
     }
 
     public function testStaticLargeFileDownload()
     {
-        $this->client->setUri($this->baseuri . 'staticFile.jpg');
+        $this->client->setUri($this->baseuri.'staticFile.jpg');
 
         $got = $this->client->request()->getBody();
         $expected = $this->_getTestFileContents('staticFile.jpg');
@@ -1095,9 +1066,9 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
 
     /**
      * Test that one can upload multiple files with the same form name, as an
-     * array
+     * array.
      *
-     * @link http://framework.zend.com/issues/browse/ZF-5744
+     * @see http://framework.zend.com/issues/browse/ZF-5744
      */
     public function testMutipleFilesWithSameFormNameZF5744()
     {
@@ -1107,14 +1078,14 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
 
         $rawData = 'Some test raw data here...';
 
-        $this->client->setUri($this->baseuri . 'testUploads.php');
+        $this->client->setUri($this->baseuri.'testUploads.php');
 
-        $files = array('file1.txt', 'file2.txt', 'someotherfile.foo');
+        $files = ['file1.txt', 'file2.txt', 'someotherfile.foo'];
 
         $expectedBody = '';
-        foreach($files as $filename) {
+        foreach ($files as $filename) {
             $this->client->setFileUpload($filename, 'uploadfile[]', $rawData, 'text/plain');
-            $expectedBody .= "uploadfile $filename text/plain " . strlen((string) $rawData) . "\n";
+            $expectedBody .= "uploadfile $filename text/plain ".strlen((string) $rawData)."\n";
         }
 
         $res = $this->client->request('POST');
@@ -1125,11 +1096,11 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
      * Test that lines that might be evaluated as boolean false do not break
      * the reading prematurely.
      *
-     * @link http://framework.zend.com/issues/browse/ZF-4238
+     * @see http://framework.zend.com/issues/browse/ZF-4238
      */
     public function testZF4238FalseLinesInResponse()
     {
-        $this->client->setUri($this->baseuri . 'ZF4238-zerolineresponse.txt');
+        $this->client->setUri($this->baseuri.'ZF4238-zerolineresponse.txt');
 
         $got = $this->client->request()->getBody();
         $expected = $this->_getTestFileContents('ZF4238-zerolineresponse.txt');
@@ -1138,11 +1109,12 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
 
     public function testStreamResponse()
     {
-        if(!($this->client->getAdapter() instanceof Zend_Http_Client_Adapter_Stream)) {
-              $this->markTestSkipped('Current adapter does not support streaming');
-              return;
+        if (!($this->client->getAdapter() instanceof Zend_Http_Client_Adapter_Stream)) {
+            $this->markTestSkipped('Current adapter does not support streaming');
+
+            return;
         }
-        $this->client->setUri($this->baseuri . 'staticFile.jpg');
+        $this->client->setUri($this->baseuri.'staticFile.jpg');
         $this->client->setStream();
 
         $response = $this->client->request();
@@ -1163,11 +1135,12 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
 
     public function testStreamResponseBody()
     {
-        if(!($this->client->getAdapter() instanceof Zend_Http_Client_Adapter_Stream)) {
-              $this->markTestSkipped('Current adapter does not support streaming');
-              return;
+        if (!($this->client->getAdapter() instanceof Zend_Http_Client_Adapter_Stream)) {
+            $this->markTestSkipped('Current adapter does not support streaming');
+
+            return;
         }
-        $this->client->setUri($this->baseuri . 'staticFile.jpg');
+        $this->client->setUri($this->baseuri.'staticFile.jpg');
         $this->client->setStream();
 
         $response = $this->client->request();
@@ -1183,12 +1156,13 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
 
     public function testStreamResponseNamed()
     {
-        if(!($this->client->getAdapter() instanceof Zend_Http_Client_Adapter_Stream)) {
-              $this->markTestSkipped('Current adapter does not support streaming');
-              return;
+        if (!($this->client->getAdapter() instanceof Zend_Http_Client_Adapter_Stream)) {
+            $this->markTestSkipped('Current adapter does not support streaming');
+
+            return;
         }
-        $this->client->setUri($this->baseuri . 'staticFile.jpg');
-        $outfile = tempnam(sys_get_temp_dir(), "outstream");
+        $this->client->setUri($this->baseuri.'staticFile.jpg');
+        $outfile = tempnam(sys_get_temp_dir(), 'outstream');
         $this->client->setStream($outfile);
 
         $response = $this->client->request();
@@ -1209,33 +1183,34 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
 
     public function testStreamRequest()
     {
-        if(!($this->client->getAdapter() instanceof Zend_Http_Client_Adapter_Stream)) {
-              $this->markTestSkipped('Current adapter does not support streaming');
-              return;
+        if (!($this->client->getAdapter() instanceof Zend_Http_Client_Adapter_Stream)) {
+            $this->markTestSkipped('Current adapter does not support streaming');
+
+            return;
         }
-        $data = fopen(dirname(realpath(__FILE__)) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'staticFile.jpg', "r");
+        $data = fopen(dirname(realpath(__FILE__)).DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'staticFile.jpg', 'r');
         $res = $this->client->setRawData($data, 'image/jpeg')->request('PUT');
         $expected = $this->_getTestFileContents('staticFile.jpg');
         $this->assertEquals($expected, $res->getBody(), 'Response body does not contain the expected data');
     }
 
     /**
-     * Test that we can deal with double Content-Length headers
+     * Test that we can deal with double Content-Length headers.
      *
-     * @link http://framework.zend.com/issues/browse/ZF-9404
+     * @see http://framework.zend.com/issues/browse/ZF-9404
      */
     public function testZF9404DoubleContentLengthHeader()
     {
-        $this->client->setUri($this->baseuri . 'ZF9404-doubleContentLength.php');
-        $expect = filesize(dirname(realpath(__FILE__)) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'ZF9404-doubleContentLength.php');
+        $this->client->setUri($this->baseuri.'ZF9404-doubleContentLength.php');
+        $expect = filesize(dirname(realpath(__FILE__)).DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'ZF9404-doubleContentLength.php');
 
         $response = $this->client->request();
-        if (! $response->isSuccessful()) {
-            throw new ErrorException("Error requesting test URL");
+        if (!$response->isSuccessful()) {
+            throw new ErrorException('Error requesting test URL');
         }
 
         $clen = $response->getHeader('content-length');
-        if (! (is_array($clen))) {
+        if (!is_array($clen)) {
             $this->markTestSkipped("Didn't get multiple Content-length headers");
         }
 
@@ -1247,38 +1222,36 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
      */
     public function testPutRequestsHonorSpecifiedContentType()
     {
-        $this->client->setUri($this->baseuri . 'ZF10645-PutContentType.php');
+        $this->client->setUri($this->baseuri.'ZF10645-PutContentType.php');
         $this->client->setMethod(Zend_Http_Client::PUT);
-        $data = array('foo' => 'bar');
+        $data = ['foo' => 'bar'];
         $this->client->setRawData(http_build_query($data), 'text/html; charset=ISO-8859-1');
 
         $response = $this->client->request();
-        $request  = $this->client->getLastRequest();
+        $request = $this->client->getLastRequest();
 
         $this->assertContains('text/html; charset=ISO-8859-1', $request, $request);
         $this->assertContains('REQUEST_METHOD: PUT', $response->getBody(), $response->getBody());
     }
-
 
     /**
      * @group ZF-11418
      */
     public function testMultiplePuts()
     {
-        $this->client->setUri($this->baseuri . 'ZF10645-PutContentType.php');
-        $data= 'test';
+        $this->client->setUri($this->baseuri.'ZF10645-PutContentType.php');
+        $data = 'test';
         $this->client->setRawData($data, 'text/plain');
         $this->client->setMethod(Zend_Http_Client::PUT);
         $response = $this->client->request();
         $this->assertContains('REQUEST_METHOD: PUT', $response->getBody(), $response->getBody());
 
         $this->client->resetParameters(true);
-        $this->client->setUri($this->baseuri . 'ZF10645-PutContentType.php');
+        $this->client->setUri($this->baseuri.'ZF10645-PutContentType.php');
         $this->client->setMethod(Zend_Http_Client::PUT);
         $response = $this->client->request();
-        $request= $this->client->getLastRequest();
+        $request = $this->client->getLastRequest();
         $this->assertNotContains('Content-Type: text/plain', $request);
-
     }
 
     /**
@@ -1286,77 +1259,78 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
      */
     public function testGetAdapterWithoutSet()
     {
-        $client  = new Zend_Http_Client(null, $this->config);
+        $client = new Zend_Http_Client(null, $this->config);
         $adapter = $client->getAdapter();
         $this->assertTrue(!empty($adapter));
     }
 
     /**
-     * Internal helpder function to get the contents of test files
+     * Internal helpder function to get the contents of test files.
      *
-     * @param  string $file
+     * @param string $file
+     *
      * @return string
      */
     protected function _getTestFileContents($file)
     {
-        return file_get_contents(dirname(realpath(__FILE__)) . DIRECTORY_SEPARATOR .
-           '_files' . DIRECTORY_SEPARATOR . $file);
+        return file_get_contents(dirname(realpath(__FILE__)).DIRECTORY_SEPARATOR.
+           '_files'.DIRECTORY_SEPARATOR.$file);
     }
 
     /**
-     * Data provider for complex, nesting parameter arrays
+     * Data provider for complex, nesting parameter arrays.
      *
      * @return array
      */
     public static function parameterArrayProvider()
     {
-        return array(
-            array(
-                array(
+        return [
+            [
+                [
                     'quest' => 'To seek the holy grail',
                     'YourMother' => 'Was a hamster',
                     'specialChars' => '<>$+ &?=[]^%',
-                    'array' => array('firstItem', 'secondItem', '3rdItem')
-                )
-            ),
+                    'array' => ['firstItem', 'secondItem', '3rdItem'],
+                ],
+            ],
 
-            array(
-                array(
-                    'someData' => array(
-                        "1",
-                        "2",
+            [
+                [
+                    'someData' => [
+                        '1',
+                        '2',
                         'key' => 'value',
-                        'nesting' => array(
+                        'nesting' => [
                             'a' => 'AAA',
-                            'b' => 'BBB'
-                        )
-                    ),
-                    'someOtherData' => array('foo', 'bar')
-                )
-            ),
+                            'b' => 'BBB',
+                        ],
+                    ],
+                    'someOtherData' => ['foo', 'bar'],
+                ],
+            ],
 
-            array(
-                array(
+            [
+                [
                     'foo1' => 'bar',
-                    'foo2' => array('baz', 'w00t')
-                )
-            )
-        );
+                    'foo2' => ['baz', 'w00t'],
+                ],
+            ],
+        ];
     }
 
     /**
-     * Data provider for invalid configuration containers
+     * Data provider for invalid configuration containers.
      *
      * @return array
      */
     public static function invalidConfigProvider()
     {
-        return array(
-            array(false),
-            array('foo => bar'),
-            array(null),
-            array(new stdClass),
-            array(55)
-        );
+        return [
+            [false],
+            ['foo => bar'],
+            [null],
+            [new stdClass()],
+            [55],
+        ];
     }
 }

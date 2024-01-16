@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata_App
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -25,39 +25,40 @@
 
 /**
  * @category   Zend
- * @package    Zend_Gdata_App
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_App
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_App_CategoryTest extends PHPUnit_Framework_TestCase
 {
-
-    public function setUp() {
+    public function setUp()
+    {
         $this->categoryText = file_get_contents(
-                'Zend/Gdata/App/_files/CategoryElementSample1.xml',
-                true);
+            'Zend/Gdata/App/_files/CategoryElementSample1.xml',
+            true);
         $this->category = new Zend_Gdata_App_Extension_Category();
     }
 
-    public function testEmptyCategoryShouldHaveEmptyExtensionsList() {
+    public function testEmptyCategoryShouldHaveEmptyExtensionsList()
+    {
         $this->assertTrue(is_array($this->category->extensionElements));
-        $this->assertTrue(count($this->category->extensionElements) == 0);
+        $this->assertTrue(0 == count($this->category->extensionElements));
     }
 
-    public function testNormalCategoryShouldHaveNoExtensionElements() {
-
+    public function testNormalCategoryShouldHaveNoExtensionElements()
+    {
         $this->category->scheme = 'http://schemas.google.com/g/2005#kind';
         $this->assertEquals($this->category->scheme, 'http://schemas.google.com/g/2005#kind');
         $this->assertEquals(count($this->category->extensionElements), 0);
         $newCategory = new Zend_Gdata_App_Extension_Category();
         $newCategory->transferFromXML($this->category->saveXML());
         $this->assertEquals(0, count($newCategory->extensionElements));
-        $newCategory->extensionElements = array(
-                new Zend_Gdata_App_Extension_Element('foo', 'atom', null, 'bar'));
+        $newCategory->extensionElements = [
+                new Zend_Gdata_App_Extension_Element('foo', 'atom', null, 'bar')];
         $this->assertEquals(count($newCategory->extensionElements), 1);
         $this->assertEquals($newCategory->scheme, 'http://schemas.google.com/g/2005#kind');
 
@@ -69,7 +70,8 @@ class Zend_Gdata_App_CategoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($newCategory2->scheme, 'http://schemas.google.com/g/2005#kind');
     }
 
-    public function testEmptyCategoryToAndFromStringShouldMatch() {
+    public function testEmptyCategoryToAndFromStringShouldMatch()
+    {
         $categoryXml = $this->category->saveXML();
         $newCategory = new Zend_Gdata_App_Extension_Category();
         $newCategory->transferFromXML($categoryXml);
@@ -77,7 +79,8 @@ class Zend_Gdata_App_CategoryTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($categoryXml == $newCategoryXml);
     }
 
-    public function testCategoryWithSchemeAndTermToAndFromStringShouldMatch() {
+    public function testCategoryWithSchemeAndTermToAndFromStringShouldMatch()
+    {
         $this->category->scheme = 'http://schemas.google.com/g/2005#kind';
         $this->category->term = 'http://schemas.google.com/g/2005#event';
         $this->category->label = 'event kind';
@@ -91,10 +94,11 @@ class Zend_Gdata_App_CategoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('event kind', $newCategory->label);
     }
 
-    public function testExtensionAttributes() {
+    public function testExtensionAttributes()
+    {
         $extensionAttributes = $this->category->extensionAttributes;
-        $extensionAttributes['foo1'] = array('name'=>'foo1', 'value'=>'bar');
-        $extensionAttributes['foo2'] = array('name'=>'foo2', 'value'=>'rab');
+        $extensionAttributes['foo1'] = ['name' => 'foo1', 'value' => 'bar'];
+        $extensionAttributes['foo2'] = ['name' => 'foo2', 'value' => 'rab'];
         $this->category->extensionAttributes = $extensionAttributes;
         $this->assertEquals('bar', $this->category->extensionAttributes['foo1']['value']);
         $this->assertEquals('rab', $this->category->extensionAttributes['foo2']['value']);
@@ -105,11 +109,11 @@ class Zend_Gdata_App_CategoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('rab', $newCategory->extensionAttributes['foo2']['value']);
     }
 
-    public function testConvertFullCategoryToAndFromString() {
+    public function testConvertFullCategoryToAndFromString()
+    {
         $this->category->transferFromXML($this->categoryText);
         $this->assertEquals('http://schemas.google.com/g/2005#kind', $this->category->scheme);
         $this->assertEquals('http://schemas.google.com/g/2005#event', $this->category->term);
         $this->assertEquals('event kind', $this->category->label);
     }
-
 }

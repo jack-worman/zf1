@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Pdf
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id:
  */
 
@@ -30,7 +31,6 @@
 // require_once 'Zend/Pdf/Element/Numeric.php';
 // require_once 'Zend/Pdf/Element/String.php';
 
-
 /**
  * Resource extractor class is used to detach resources from original PDF document.
  *
@@ -43,7 +43,6 @@
  * extractors may be used for constracting one target document, but extractor
  * must not be shared between target documents.
  *
- * @package    Zend_Pdf
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -57,7 +56,7 @@ class Zend_Pdf_Resource_Extractor
     protected $_factory;
 
     /**
-     * Reusable list of already processed objects
+     * Reusable list of already processed objects.
      *
      * @var array
      */
@@ -68,13 +67,13 @@ class Zend_Pdf_Resource_Extractor
      */
     public function __construct()
     {
-        $this->_factory   = Zend_Pdf_ElementFactory::createFactory(1);
-        $this->_processed = array();
+        $this->_factory = Zend_Pdf_ElementFactory::createFactory(1);
+        $this->_processed = [];
     }
 
     /**
      * Clone page, extract it and dependent objects from the current document,
-     * so it can be used within other docs
+     * so it can be used within other docs.
      *
      * return Zend_Pdf_Page
      */
@@ -83,4 +82,3 @@ class Zend_Pdf_Resource_Extractor
         return $page->clonePage($this->_factory, $this->_processed);
     }
 }
-

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +13,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service
- * @subpackage StrikeIron
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /**
  * This class allows StrikeIron authentication credentials to be specified
@@ -27,25 +26,25 @@
  * StrikeIron service classes.
  *
  * @category   Zend
- * @package    Zend_Service
- * @subpackage StrikeIron
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_StrikeIron
 {
     /**
-     * Options to pass to Zend_Service_StrikeIron_Base constructor
+     * Options to pass to Zend_Service_StrikeIron_Base constructor.
+     *
      * @param array
      */
     protected $_options;
 
     /**
-     * Class constructor
+     * Class constructor.
      *
-     * @param array  $options  Options to pass to Zend_Service_StrikeIron_Base constructor
+     * @param array $options Options to pass to Zend_Service_StrikeIron_Base constructor
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         $this->_options = $options;
     }
@@ -54,16 +53,18 @@ class Zend_Service_StrikeIron
      * Factory method to return a preconfigured Zend_Service_StrikeIron_*
      * instance.
      *
-     * @param  null|string  $options  Service options
-     * @return object       Zend_Service_StrikeIron_* instance
+     * @param string|null $options Service options
+     *
+     * @return object Zend_Service_StrikeIron_* instance
+     *
      * @throws Zend_Service_StrikeIron_Exception
      */
-    public function getService($options = array())
+    public function getService($options = [])
     {
         $class = isset($options['class']) ? $options['class'] : 'Base';
         unset($options['class']);
 
-        if (strpos((string) $class, '_') === false) {
+        if (false === strpos((string) $class, '_')) {
             $class = "Zend_Service_StrikeIron_{$class}";
         }
 
@@ -75,9 +76,9 @@ class Zend_Service_StrikeIron
             if (!class_exists($class, false)) {
                 throw new Exception('Class file not found');
             }
-        } catch (\Throwable $e) {
-            $msg = "Service '$class' could not be loaded: " . $e->getMessage();
-            /**
+        } catch (Throwable $e) {
+            $msg = "Service '$class' could not be loaded: ".$e->getMessage();
+            /*
              * @see Zend_Service_StrikeIron_Exception
              */
             // require_once 'Zend/Service/StrikeIron/Exception.php';
@@ -86,7 +87,7 @@ class Zend_Service_StrikeIron
 
         // instantiate and return the service
         $service = new $class(array_merge($this->_options, $options));
+
         return $service;
     }
-
 }

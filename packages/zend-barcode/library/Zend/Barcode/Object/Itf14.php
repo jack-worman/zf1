@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Barcode
- * @subpackage Object
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,18 +27,18 @@
 // require_once 'Zend/Validate/Barcode.php';
 
 /**
- * Class for generate Itf14 barcode
+ * Class for generate Itf14 barcode.
  *
  * @category   Zend
- * @package    Zend_Barcode
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Barcode_Object_Itf14 extends Zend_Barcode_Object_Code25interleaved
 {
-
     /**
-     * Default options for Identcode barcode
+     * Default options for Identcode barcode.
+     *
      * @return void
      */
     protected function _getDefaultOptions()

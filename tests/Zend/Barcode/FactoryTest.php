@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Barcode
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,16 +25,15 @@
 
 /**
  * @category   Zend
- * @package    Zend_Barcode
- * @subpackage UnitTests
+ *
  * @group      Zend_Barcode
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Zend_Barcode_FactoryTest extends PHPUnit_Framework_TestCase
 {
-
     public function testMinimalFactory()
     {
         $this->_checkGDRequirement();
@@ -55,7 +54,7 @@ class Zend_Barcode_FactoryTest extends PHPUnit_Framework_TestCase
     {
         $this->_checkGDRequirement();
 
-        $options = array('barHeight' => 123);
+        $options = ['barHeight' => 123];
         $renderer = Zend_Barcode::factory('code39', 'image', $options);
         $this->assertEquals(123, $renderer->getBarcode()->getBarHeight());
     }
@@ -64,30 +63,30 @@ class Zend_Barcode_FactoryTest extends PHPUnit_Framework_TestCase
     {
         $this->_checkGDRequirement();
 
-        $options = array('barHeight' => - 1);
+        $options = ['barHeight' => -1];
         $renderer = Zend_Barcode::factory('code39', 'image', $options);
         $this->assertTrue($renderer instanceof Zend_Barcode_Renderer_Image);
         $this->assertTrue($renderer->getBarcode() instanceof Zend_Barcode_Object_Error);
     }
 
     /**
-     * @expectedException Zend_Barcode_Object_Exception
+     * @expectedException \Zend_Barcode_Object_Exception
      */
     public function testFactoryWithoutAutomaticObjectExceptionRendering()
     {
-        $options = array('barHeight' => - 1);
-        $renderer = Zend_Barcode::factory('code39', 'image', $options, array(), false);
+        $options = ['barHeight' => -1];
+        $renderer = Zend_Barcode::factory('code39', 'image', $options, [], false);
     }
 
     /**
-     * @expectedException Zend_Barcode_Renderer_Exception
+     * @expectedException \Zend_Barcode_Renderer_Exception
      */
     public function testFactoryWithoutAutomaticRendererExceptionRendering()
     {
         $this->_checkGDRequirement();
 
-        $options = array('imageType' => 'my');
-        $renderer = Zend_Barcode::factory('code39', 'image', array(), $options, false);
+        $options = ['imageType' => 'my'];
+        $renderer = Zend_Barcode::factory('code39', 'image', [], $options, false);
         $this->markTestIncomplete('Need to throw a configuration exception in renderer');
     }
 
@@ -96,12 +95,11 @@ class Zend_Barcode_FactoryTest extends PHPUnit_Framework_TestCase
         $this->_checkGDRequirement();
 
         $config = new Zend_Config(
-                array('barcode' => 'code39' ,
-                        'renderer' => 'image'));
+            ['barcode' => 'code39',
+                    'renderer' => 'image']);
         $renderer = Zend_Barcode::factory($config);
         $this->assertTrue($renderer instanceof Zend_Barcode_Renderer_Image);
         $this->assertTrue($renderer->getBarcode() instanceof Zend_Barcode_Object_Code39);
-
     }
 
     public function testFactoryWithZendConfigAndObjectOptions()
@@ -109,9 +107,9 @@ class Zend_Barcode_FactoryTest extends PHPUnit_Framework_TestCase
         $this->_checkGDRequirement();
 
         $config = new Zend_Config(
-                array('barcode' => 'code25' ,
-                        'barcodeParams' => array(
-                                'barHeight' => 123)));
+            ['barcode' => 'code25',
+                    'barcodeParams' => [
+                            'barHeight' => 123]]);
         $renderer = Zend_Barcode::factory($config);
         $this->assertTrue($renderer instanceof Zend_Barcode_Renderer_Image);
         $this->assertTrue($renderer->getBarcode() instanceof Zend_Barcode_Object_Code25);
@@ -123,9 +121,9 @@ class Zend_Barcode_FactoryTest extends PHPUnit_Framework_TestCase
         $this->_checkGDRequirement();
 
         $config = new Zend_Config(
-                array('barcode' => 'code25' ,
-                        'rendererParams' => array(
-                                'imageType' => 'gif')));
+            ['barcode' => 'code25',
+                    'rendererParams' => [
+                            'imageType' => 'gif']]);
         $renderer = Zend_Barcode::factory($config);
         $this->assertTrue($renderer instanceof Zend_Barcode_Renderer_Image);
         $this->assertTrue($renderer->getBarcode() instanceof Zend_Barcode_Object_Code25);
@@ -145,7 +143,7 @@ class Zend_Barcode_FactoryTest extends PHPUnit_Framework_TestCase
     {
         $this->_checkGDRequirement();
 
-        $config = new Zend_Config(array('barcode' => null));
+        $config = new Zend_Config(['barcode' => null]);
         $renderer = Zend_Barcode::factory($config);
         $this->assertTrue($renderer instanceof Zend_Barcode_Renderer_Image);
         $this->assertTrue($renderer->getBarcode() instanceof Zend_Barcode_Object_Error);
@@ -175,14 +173,14 @@ class Zend_Barcode_FactoryTest extends PHPUnit_Framework_TestCase
 
     public function testBarcodeObjectFactoryWithBarcodeAsStringAndConfigAsArray()
     {
-        $barcode = Zend_Barcode::makeBarcode('code25', array('barHeight' => 123));
+        $barcode = Zend_Barcode::makeBarcode('code25', ['barHeight' => 123]);
         $this->assertTrue($barcode instanceof Zend_Barcode_Object_Code25);
         $this->assertSame(123, $barcode->getBarHeight());
     }
 
     public function testBarcodeObjectFactoryWithBarcodeAsStringAndConfigAsZendConfig()
     {
-        $config = new Zend_Config(array('barHeight' => 123));
+        $config = new Zend_Config(['barHeight' => 123]);
         $barcode = Zend_Barcode::makeBarcode('code25', $config);
         $this->assertTrue($barcode instanceof Zend_Barcode_Object_Code25);
         $this->assertSame(123, $barcode->getBarHeight());
@@ -191,28 +189,28 @@ class Zend_Barcode_FactoryTest extends PHPUnit_Framework_TestCase
     public function testBarcodeObjectFactoryWithBarcodeAsZendConfig()
     {
         $config = new Zend_Config(
-                array('barcode' => 'code25' ,
-                        'barcodeParams' => array(
-                                'barHeight' => 123)));
+            ['barcode' => 'code25',
+                    'barcodeParams' => [
+                            'barHeight' => 123]]);
         $barcode = Zend_Barcode::makeBarcode($config);
         $this->assertTrue($barcode instanceof Zend_Barcode_Object_Code25);
         $this->assertSame(123, $barcode->getBarHeight());
     }
 
     /**
-     * @expectedException Zend_Barcode_Exception
+     * @expectedException \Zend_Barcode_Exception
      */
     public function testBarcodeObjectFactoryWithBarcodeAsZendConfigButNoBarcodeParameter()
     {
         $config = new Zend_Config(
-                array(
-                        'barcodeParams' => array(
-                                'barHeight' => 123)));
+            [
+                    'barcodeParams' => [
+                            'barHeight' => 123]]);
         $barcode = Zend_Barcode::makeBarcode($config);
     }
 
     /**
-     * @expectedException Zend_Barcode_Exception
+     * @expectedException \Zend_Barcode_Exception
      */
     public function testBarcodeObjectFactoryWithBarcodeAsZendConfigAndBadBarcodeParameters()
     {
@@ -221,30 +219,30 @@ class Zend_Barcode_FactoryTest extends PHPUnit_Framework_TestCase
 
     public function testBarcodeObjectFactoryWithNamespace()
     {
-        require_once __DIR__ . '/Object/_files/BarcodeNamespace.php';
+        require_once __DIR__.'/Object/_files/BarcodeNamespace.php';
         $barcode = Zend_Barcode::makeBarcode('error',
-                array(
-                        'barcodeNamespace' => 'My_Namespace'));
+            [
+                    'barcodeNamespace' => 'My_Namespace']);
         $this->assertTrue($barcode instanceof My_Namespace_Error);
     }
 
     /**
-     * @expectedException Zend_Barcode_Exception
+     * @expectedException \Zend_Barcode_Exception
      */
     public function testBarcodeObjectFactoryWithNamespaceButWithoutExtendingObjectAbstract()
     {
-        require_once __DIR__ . '/Object/_files/BarcodeNamespaceWithoutExtendingObjectAbstract.php';
+        require_once __DIR__.'/Object/_files/BarcodeNamespaceWithoutExtendingObjectAbstract.php';
         $barcode = Zend_Barcode::makeBarcode('error',
-                array(
-                        'barcodeNamespace' => 'My_Namespace_Other'));
+            [
+                    'barcodeNamespace' => 'My_Namespace_Other']);
     }
 
     /**
-     * @expectedException PHPUnit_Framework_Error
+     * @expectedException \PHPUnit_Framework_Error
      */
     public function testBarcodeObjectFactoryWithUnexistantBarcode()
     {
-        $barcode = Zend_Barcode::makeBarcode('zf123', array());
+        $barcode = Zend_Barcode::makeBarcode('zf123', []);
     }
 
     public function testBarcodeRendererFactoryWithExistingBarcodeRenderer()
@@ -268,7 +266,7 @@ class Zend_Barcode_FactoryTest extends PHPUnit_Framework_TestCase
     {
         $this->_checkGDRequirement();
 
-        $renderer = Zend_Barcode::makeRenderer('image', array('imageType' => 'gif'));
+        $renderer = Zend_Barcode::makeRenderer('image', ['imageType' => 'gif']);
         $this->assertTrue($renderer instanceof Zend_Barcode_Renderer_Image);
         $this->assertSame('gif', $renderer->getImageType());
     }
@@ -277,7 +275,7 @@ class Zend_Barcode_FactoryTest extends PHPUnit_Framework_TestCase
     {
         $this->_checkGDRequirement();
 
-        $config = new Zend_Config(array('imageType' => 'gif'));
+        $config = new Zend_Config(['imageType' => 'gif']);
         $renderer = Zend_Barcode::makeRenderer('image', $config);
         $this->assertTrue($renderer instanceof Zend_Barcode_Renderer_Image);
         $this->assertSame('gif', $renderer->getimageType());
@@ -288,28 +286,28 @@ class Zend_Barcode_FactoryTest extends PHPUnit_Framework_TestCase
         $this->_checkGDRequirement();
 
         $config = new Zend_Config(
-                array('renderer' => 'image' ,
-                        'rendererParams' => array(
-                                'imageType' => 'gif')));
+            ['renderer' => 'image',
+                    'rendererParams' => [
+                            'imageType' => 'gif']]);
         $renderer = Zend_Barcode::makeRenderer($config);
         $this->assertTrue($renderer instanceof Zend_Barcode_Renderer_Image);
         $this->assertSame('gif', $renderer->getimageType());
     }
 
     /**
-     * @expectedException Zend_Barcode_Exception
+     * @expectedException \Zend_Barcode_Exception
      */
     public function testBarcodeRendererFactoryWithBarcodeAsZendConfigButNoBarcodeParameter()
     {
         $config = new Zend_Config(
-                array(
-                        'rendererParams' => array(
-                                'imageType' => 'gif')));
+            [
+                    'rendererParams' => [
+                            'imageType' => 'gif']]);
         $renderer = Zend_Barcode::makeRenderer($config);
     }
 
     /**
-     * @expectedException Zend_Barcode_Exception
+     * @expectedException \Zend_Barcode_Exception
      */
     public function testBarcodeRendererFactoryWithBarcodeAsZendConfigAndBadBarcodeParameters()
     {
@@ -320,50 +318,50 @@ class Zend_Barcode_FactoryTest extends PHPUnit_Framework_TestCase
     {
         $this->_checkGDRequirement();
 
-        require_once __DIR__ . '/Renderer/_files/RendererNamespace.php';
+        require_once __DIR__.'/Renderer/_files/RendererNamespace.php';
         $renderer = Zend_Barcode::makeRenderer('image',
-                array(
-                        'rendererNamespace' => 'My_Namespace'));
+            [
+                    'rendererNamespace' => 'My_Namespace']);
         $this->assertTrue($renderer instanceof My_Namespace_Image);
     }
 
     /**
-     * @expectedException Zend_Barcode_Exception
+     * @expectedException \Zend_Barcode_Exception
      */
     public function testBarcodeFactoryWithNamespaceButWithoutExtendingRendererAbstract()
     {
-        require_once __DIR__ . '/Renderer/_files/RendererNamespaceWithoutExtendingRendererAbstract.php';
+        require_once __DIR__.'/Renderer/_files/RendererNamespaceWithoutExtendingRendererAbstract.php';
         $renderer = Zend_Barcode::makeRenderer('image',
-                array(
-                        'rendererNamespace' => 'My_Namespace_Other'));
+            [
+                    'rendererNamespace' => 'My_Namespace_Other']);
     }
 
     /**
-     * @expectedException PHPUnit_Framework_Error
+     * @expectedException \PHPUnit_Framework_Error
      */
     public function testBarcodeRendererFactoryWithUnexistantRenderer()
     {
-        $renderer = Zend_Barcode::makeRenderer('zend', array());
+        $renderer = Zend_Barcode::makeRenderer('zend', []);
     }
 
     public function testProxyBarcodeRendererDrawAsImage()
     {
-        if (! extension_loaded('gd')) {
+        if (!extension_loaded('gd')) {
             $this->markTestSkipped(
-                    'GD extension is required to run this test');
+                'GD extension is required to run this test');
         }
         $resource = Zend_Barcode::draw('code25', 'image');
         if (PHP_VERSION_ID < 80000) {
-            $this->assertTrue(gettype($resource) == 'resource', 'Image must be a resource');
-            $this->assertTrue(get_resource_type($resource) == 'gd', 'Image must be a GD resource');
+            $this->assertTrue('resource' == gettype($resource), 'Image must be a resource');
+            $this->assertTrue('gd' == get_resource_type($resource), 'Image must be a GD resource');
         } else {
-            $this->assertTrue(get_class($resource) === 'GdImage');
+            $this->assertTrue('GdImage' === get_class($resource));
         }
     }
 
     public function testProxyBarcodeRendererDrawAsPdf()
     {
-        Zend_Barcode::setBarcodeFont(__DIR__ . '/Object/_fonts/Vera.ttf');
+        Zend_Barcode::setBarcodeFont(__DIR__.'/Object/_fonts/Vera.ttf');
         $resource = Zend_Barcode::draw('code25', 'pdf');
         $this->assertTrue($resource instanceof Zend_Pdf);
         Zend_Barcode::setBarcodeFont('');

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +13,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Serializer
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Serializer_AllTests::main');
 }
@@ -27,17 +26,16 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 /**
  * @see Zend_Serializer_Adapter_AllTests
  */
-require_once __DIR__ . '/Adapter/AllTests.php';
+require_once __DIR__.'/Adapter/AllTests.php';
 
 /**
  * @see Zend_Serializer_SerializerTest
  */
-require_once __DIR__ . '/SerializerTest.php';
+require_once __DIR__.'/SerializerTest.php';
 
 /**
  * @category   Zend
- * @package    Zend_Serializer
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -53,19 +51,18 @@ class Zend_Serializer_AllTests
     {
         $suite = new PHPUnit_Framework_TestSuite('Zend');
 
-        /**
+        /*
          * Performe Zend_Serializer_Adapter tests
          */
         $suite->addTest(Zend_Serializer_Adapter_AllTests::suite());
 
-        /**
+        /*
          * Performe Zend_Serializer tests
          */
         $suite->addTestSuite('Zend_Serializer_SerializerTest');
 
         return $suite;
     }
-
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Serializer_AllTests::main') {

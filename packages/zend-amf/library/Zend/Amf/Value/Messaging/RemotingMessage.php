@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Amf
- * @subpackage Value
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -29,45 +29,45 @@
  *
  * Corresponds to flex.messaging.messages.RemotingMessage
  *
- * @package    Zend_Amf
- * @subpackage Value
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Amf_Value_Messaging_RemotingMessage extends Zend_Amf_Value_Messaging_AbstractMessage
 {
-
     /**
-     * The name of the service to be called including package name
-     * @var String
+     * The name of the service to be called including package name.
+     *
+     * @var string
      */
     public $source;
 
     /**
-     * The name of the method to be called
+     * The name of the method to be called.
+     *
      * @var string
      */
     public $operation;
 
     /**
-     * The arguments to call the mathod with
+     * The arguments to call the mathod with.
+     *
      * @var array
      */
     public $parameters;
 
     /**
-     * Create a new Remoting Message
+     * Create a new Remoting Message.
      *
      * @return void
      */
     public function __construct()
     {
-        $this->clientId    = $this->generateId();
+        $this->clientId = $this->generateId();
         $this->destination = null;
-        $this->messageId   = $this->generateId();
-        $this->timestamp   = time().'00';
-        $this->timeToLive  = 0;
-        $this->headers     = new stdClass();
-        $this->body        = null;
+        $this->messageId = $this->generateId();
+        $this->timestamp = time().'00';
+        $this->timeToLive = 0;
+        $this->headers = new stdClass();
+        $this->body = null;
     }
 }

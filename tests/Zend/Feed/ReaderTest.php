@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,22 +25,21 @@
 
 /**
  * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Feed
  * @group      Zend_Feed_Reader
  */
 #[AllowDynamicProperties]
 class Zend_Feed_ReaderTest extends PHPUnit_Framework_TestCase
 {
-
-    protected $_feedSamplePath = null;
+    protected $_feedSamplePath;
 
     public function setup()
     {
-        $this->_feedSamplePath = __DIR__ . '/Reader/_files';
+        $this->_feedSamplePath = __DIR__.'/Reader/_files';
     }
 
     public function tearDown()
@@ -133,7 +132,7 @@ class Zend_Feed_ReaderTest extends PHPUnit_Framework_TestCase
     public function testGetEncoding()
     {
         $feed = Zend_Feed_Reader::importString(
-            file_get_contents(__DIR__ . '/Reader/Entry/_files/Atom/title/plain/atom10.xml')
+            file_get_contents(__DIR__.'/Reader/Entry/_files/Atom/title/plain/atom10.xml')
         );
 
         $this->assertEquals('utf-8', $feed->getEncoding());
@@ -144,9 +143,9 @@ class Zend_Feed_ReaderTest extends PHPUnit_Framework_TestCase
     {
         try {
             $feed = Zend_Feed_Reader::importFile(
-                __DIR__ . '/Reader/Entry/_files/Atom/title/plain/atom10.xml'
+                __DIR__.'/Reader/Entry/_files/Atom/title/plain/atom10.xml'
             );
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->fail($e->getMessage());
         }
     }
@@ -157,19 +156,21 @@ class Zend_Feed_ReaderTest extends PHPUnit_Framework_TestCase
             || !constant('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')
         ) {
             $this->markTestSkipped('testImportsUri() requires a network connection');
+
             return;
         }
 
         try {
             $feed = Zend_Feed_Reader::import('http://www.planet-php.net/rdf/');
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->fail($e->getMessage());
         }
     }
 
     /**
      * @group ZF-8328
-     * @expectedException Zend_Feed_Exception
+     *
+     * @expectedException \Zend_Feed_Exception
      */
     public function testImportsUriAndThrowsExceptionIfNotAFeed()
     {
@@ -177,6 +178,7 @@ class Zend_Feed_ReaderTest extends PHPUnit_Framework_TestCase
             || !constant('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')
         ) {
             $this->markTestSkipped('testImportsUri() requires a network connection');
+
             return;
         }
 
@@ -189,12 +191,13 @@ class Zend_Feed_ReaderTest extends PHPUnit_Framework_TestCase
             || !constant('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')
         ) {
             $this->markTestSkipped('testGetsFeedLinksAsValueObject() requires a network connection');
+
             return;
         }
 
         try {
             $links = Zend_Feed_Reader::findFeedLinks('http://www.planet-php.net');
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->fail($e->getMessage());
         }
         $this->assertEquals('http://www.planet-php.org/rss/', $links->rss);
@@ -206,13 +209,14 @@ class Zend_Feed_ReaderTest extends PHPUnit_Framework_TestCase
             || !constant('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')
         ) {
             $this->markTestSkipped('testGetsFeedLinksAsValueObject() requires a network connection');
+
             return;
         }
         $links = Zend_Feed_Reader::findFeedLinks('http://www.planet-php.net');
         $this->assertTrue($links instanceof Zend_Feed_Reader_FeedSet);
-        $this->assertEquals(array(
-            'rel' => 'alternate', 'type' => 'application/rss+xml', 'href' => 'http://www.planet-php.org/rss/'
-        ), (array) $links->getIterator()->current());
+        $this->assertEquals([
+            'rel' => 'alternate', 'type' => 'application/rss+xml', 'href' => 'http://www.planet-php.org/rss/',
+        ], (array) $links->getIterator()->current());
     }
 
     public function testFeedSetLoadsFeedObjectWhenFeedArrayKeyAccessed()
@@ -221,6 +225,7 @@ class Zend_Feed_ReaderTest extends PHPUnit_Framework_TestCase
             || !constant('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')
         ) {
             $this->markTestSkipped('testGetsFeedLinksAsValueObject() requires a network connection');
+
             return;
         }
         $links = Zend_Feed_Reader::findFeedLinks('http://www.planet-php.net');
@@ -234,6 +239,7 @@ class Zend_Feed_ReaderTest extends PHPUnit_Framework_TestCase
             || !constant('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')
         ) {
             $this->markTestSkipped('testGetsFeedLinksAsValueObject() requires a network connection');
+
             return;
         }
         $links = Zend_Feed_Reader::findFeedLinks('http://www.example.com');
@@ -249,12 +255,13 @@ class Zend_Feed_ReaderTest extends PHPUnit_Framework_TestCase
             || !constant('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')
         ) {
             $this->markTestSkipped('testGetsFeedLinksAsValueObject() requires a network connection');
+
             return;
         }
 
         try {
             $links = Zend_Feed_Reader::findFeedLinks('http://www.infopod.com.br');
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->fail($e->getMessage());
         }
         $this->assertEquals('http://feeds.feedburner.com/jonnyken/infoblog', $links->rss);
@@ -269,12 +276,13 @@ class Zend_Feed_ReaderTest extends PHPUnit_Framework_TestCase
             || !constant('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')
         ) {
             $this->markTestSkipped('testGetsFeedLinksAsValueObject() requires a network connection');
+
             return;
         }
 
         try {
             $links = Zend_Feed_Reader::findFeedLinks('http://meiobit.com');
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->fail($e->getMessage());
         }
         $this->assertEquals('http://meiobit.com/rss.xml', $links->rss);
@@ -289,13 +297,13 @@ class Zend_Feed_ReaderTest extends PHPUnit_Framework_TestCase
             $currClient = Zend_Feed_Reader::getHttpClient();
 
             $testAdapter = new Zend_Http_Client_Adapter_Test();
-            $testAdapter->setResponse(new Zend_Http_Response(200, array(), '<!DOCTYPE html><html><head><link rel="alternate" type="application/rss+xml" href="../test.rss"><link rel="alternate" type="application/atom+xml" href="/test.atom"></head><body></body></html>'));
-            Zend_Feed_Reader::setHttpClient(new Zend_Http_Client(null, array('adapter' => $testAdapter)));
+            $testAdapter->setResponse(new Zend_Http_Response(200, [], '<!DOCTYPE html><html><head><link rel="alternate" type="application/rss+xml" href="../test.rss"><link rel="alternate" type="application/atom+xml" href="/test.atom"></head><body></body></html>'));
+            Zend_Feed_Reader::setHttpClient(new Zend_Http_Client(null, ['adapter' => $testAdapter]));
 
             $links = Zend_Feed_Reader::findFeedLinks('http://foo/bar');
 
             Zend_Feed_Reader::setHttpClient($currClient);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->fail($e->getMessage());
         }
 
@@ -313,9 +321,9 @@ class Zend_Feed_ReaderTest extends PHPUnit_Framework_TestCase
     public function testRegistersUserExtension()
     {
         try {
-            Zend_Feed_Reader::addPrefixPath('My_FeedReader_Extension',__DIR__ . '/Reader/_files/My/Extension');
+            Zend_Feed_Reader::addPrefixPath('My_FeedReader_Extension', __DIR__.'/Reader/_files/My/Extension');
             Zend_Feed_Reader::registerExtension('JungleBooks');
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->fail($e->getMessage());
         }
         $this->assertTrue(Zend_Feed_Reader::isRegistered('JungleBooks'));
@@ -328,44 +336,44 @@ class Zend_Feed_ReaderTest extends PHPUnit_Framework_TestCase
     {
         $currClient = Zend_Feed_Reader::getHttpClient();
         $testAdapter = new Zend_Http_Client_Adapter_Test();
-        $testAdapter->setResponse(new Zend_Http_Response(200,array(),''));
-        Zend_Feed_Reader::setHttpClient(new Zend_Http_Client(null, array(
-            'adapter'=>$testAdapter
-        )));
+        $testAdapter->setResponse(new Zend_Http_Response(200, [], ''));
+        Zend_Feed_Reader::setHttpClient(new Zend_Http_Client(null, [
+            'adapter' => $testAdapter,
+        ]));
 
         $this->setExpectedException('Zend_Feed_Exception', 'Feed failed to load');
         $result = Zend_Feed_Reader::import('http://www.example.com');
     }
 
-     public function testXxePreventionOnFeedParsing()
-     {
-         $string = file_get_contents($this->_feedSamplePath.'/Reader/xxe-atom10.xml');
-         $string = str_replace((string) 'XXE_URI', $this->_feedSamplePath.'/Reader/xxe-info.txt', $string);
-         $this->setExpectedException('Zend_Feed_Exception');
-         $feed = Zend_Feed_Reader::importString($string);
-     }
+    public function testXxePreventionOnFeedParsing()
+    {
+        $string = file_get_contents($this->_feedSamplePath.'/Reader/xxe-atom10.xml');
+        $string = str_replace((string) 'XXE_URI', $this->_feedSamplePath.'/Reader/xxe-info.txt', $string);
+        $this->setExpectedException('Zend_Feed_Exception');
+        $feed = Zend_Feed_Reader::importString($string);
+    }
 
-     public function testDetectTypeException()
-     {
-         try {
-             Zend_Feed_Reader::detectType('foo');
-         } catch (Zend_Feed_Exception $e) {
-             self::assertInstanceOf('Zend_Feed_Exception', $e);
+    public function testDetectTypeException()
+    {
+        try {
+            Zend_Feed_Reader::detectType('foo');
+        } catch (Zend_Feed_Exception $e) {
+            self::assertInstanceOf('Zend_Feed_Exception', $e);
 
-             return;
-         }
+            return;
+        }
 
-         self::fail('Illegal string should create an exception');
-     }
+        self::fail('Illegal string should create an exception');
+    }
 
     protected function _getTempDirectory()
     {
-        $tmpdir = array();
-        foreach (array($_ENV, $_SERVER) as $tab) {
-            foreach (array('TMPDIR', 'TEMP', 'TMP', 'windir', 'SystemRoot') as $key) {
+        $tmpdir = [];
+        foreach ([$_ENV, $_SERVER] as $tab) {
+            foreach (['TMPDIR', 'TEMP', 'TMP', 'windir', 'SystemRoot'] as $key) {
                 if (isset($tab[$key])) {
-                    if (($key == 'windir') or ($key == 'SystemRoot')) {
-                        $dir = realpath($tab[$key] . '\\temp');
+                    if (('windir' == $key) or ('SystemRoot' == $key)) {
+                        $dir = realpath($tab[$key].'\\temp');
                     } else {
                         $dir = realpath($tab[$key]);
                     }
@@ -381,7 +389,7 @@ class Zend_Feed_ReaderTest extends PHPUnit_Framework_TestCase
                 return $dir;
             }
         }
-        $tempFile = tempnam(md5((string) uniqid(rand(), TRUE)), '');
+        $tempFile = tempnam(md5((string) uniqid(rand(), true)), '');
         if ($tempFile) {
             $dir = realpath(dirname($tempFile));
             unlink($tempFile);
@@ -402,7 +410,7 @@ class Zend_Feed_ReaderTest extends PHPUnit_Framework_TestCase
         if (is_readable($dir) && is_writable($dir)) {
             return true;
         }
+
         return false;
     }
-
 }

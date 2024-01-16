@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,24 +13,24 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Config
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id: IniTest.php 18950 2009-11-12 15:37:56Z alexander $
  */
 
 /**
- * Zend_Config_Ini
+ * Zend_Config_Ini.
  */
 // require_once 'Zend/Config/Yaml.php';
 
 /**
  * @category   Zend
- * @package    Zend_Config
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Config
  */
 #[AllowDynamicProperties]
@@ -38,20 +38,20 @@ class Zend_Config_YamlTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->_iniFileConfig             = __DIR__ . '/_files/config.yaml';
-        $this->_iniFileAllSectionsConfig  = __DIR__ . '/_files/allsections.yaml';
-        $this->_iniFileCircularConfig     = __DIR__ . '/_files/circular.yaml';
-        $this->_nonReadableConfig         = __DIR__ . '/_files/nonreadable.yaml';
-        $this->_iniFileInvalid            = __DIR__ . '/_files/invalid.yaml';
-        $this->_iniFileSameNameKeysConfig = __DIR__ . '/_files/array.yaml';
-        $this->_badIndentationConfig      = __DIR__ . '/_files/badindentation.yaml';
-        $this->_booleansConfig            = __DIR__ . '/_files/booleans.yaml';
-        $this->_constantsConfig           = __DIR__ . '/_files/constants.yaml';
-        $this->_yamlInlineCommentsConfig  = __DIR__ . '/_files/inlinecomments.yaml';
-        $this->_yamlIndentedCommentsConfig  = __DIR__ . '/_files/indentedcomments.yaml';
-        $this->_yamlListConstantsConfig     = __DIR__ . '/_files/listconstants.yaml';
-        $this->_listBooleansConfig          = __DIR__ . '/_files/listbooleans.yaml';
-        $this->_yamlSingleQuotedString    = __DIR__ . '/_files/zf11934.yaml';
+        $this->_iniFileConfig = __DIR__.'/_files/config.yaml';
+        $this->_iniFileAllSectionsConfig = __DIR__.'/_files/allsections.yaml';
+        $this->_iniFileCircularConfig = __DIR__.'/_files/circular.yaml';
+        $this->_nonReadableConfig = __DIR__.'/_files/nonreadable.yaml';
+        $this->_iniFileInvalid = __DIR__.'/_files/invalid.yaml';
+        $this->_iniFileSameNameKeysConfig = __DIR__.'/_files/array.yaml';
+        $this->_badIndentationConfig = __DIR__.'/_files/badindentation.yaml';
+        $this->_booleansConfig = __DIR__.'/_files/booleans.yaml';
+        $this->_constantsConfig = __DIR__.'/_files/constants.yaml';
+        $this->_yamlInlineCommentsConfig = __DIR__.'/_files/inlinecomments.yaml';
+        $this->_yamlIndentedCommentsConfig = __DIR__.'/_files/indentedcomments.yaml';
+        $this->_yamlListConstantsConfig = __DIR__.'/_files/listconstants.yaml';
+        $this->_listBooleansConfig = __DIR__.'/_files/listbooleans.yaml';
+        $this->_yamlSingleQuotedString = __DIR__.'/_files/zf11934.yaml';
     }
 
     public function testLoadSingleSection()
@@ -122,16 +122,15 @@ class Zend_Config_YamlTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function testZF413_MultiSections()
+    public function testZF413MultiSections()
     {
-        $config = new Zend_Config_Yaml($this->_iniFileAllSectionsConfig, array('staging','other_staging'));
+        $config = new Zend_Config_Yaml($this->_iniFileAllSectionsConfig, ['staging', 'other_staging']);
 
         $this->assertEquals('otherStaging', $config->only_in);
         $this->assertEquals('staging', $config->hostname);
-
     }
 
-    public function testZF413_AllSections()
+    public function testZF413AllSections()
     {
         $config = new Zend_Config_Yaml($this->_iniFileAllSectionsConfig, null);
         $this->assertEquals('otherStaging', $config->other_staging->only_in);
@@ -148,8 +147,8 @@ class Zend_Config_YamlTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('all', $config->getSectionName());
         $this->assertEquals(false, $config->areAllSectionsLoaded());
 
-        $config = new Zend_Config_Yaml($this->_iniFileAllSectionsConfig, array('staging','other_staging'));
-        $this->assertEquals(array('staging','other_staging'), $config->getSectionName());
+        $config = new Zend_Config_Yaml($this->_iniFileAllSectionsConfig, ['staging', 'other_staging']);
+        $this->assertEquals(['staging', 'other_staging'], $config->getSectionName());
         $this->assertEquals(false, $config->areAllSectionsLoaded());
     }
 
@@ -166,7 +165,7 @@ class Zend_Config_YamlTest extends PHPUnit_Framework_TestCase
     public function testErrorNoFile()
     {
         try {
-            $config = new Zend_Config_Yaml('','');
+            $config = new Zend_Config_Yaml('', '');
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
             $this->assertContains('Filename is not set', $expected->getMessage());
@@ -176,22 +175,21 @@ class Zend_Config_YamlTest extends PHPUnit_Framework_TestCase
     public function testErrorNoSectionFound()
     {
         try {
-            $config = new Zend_Config_Yaml($this->_iniFileConfig,array('all', 'notthere'));
+            $config = new Zend_Config_Yaml($this->_iniFileConfig, ['all', 'notthere']);
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
             $this->assertContains('cannot be found', $expected->getMessage());
         }
 
         try {
-            $config = new Zend_Config_Yaml($this->_iniFileConfig,'notthere');
+            $config = new Zend_Config_Yaml($this->_iniFileConfig, 'notthere');
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
             $this->assertContains('cannot be found', $expected->getMessage());
         }
-
     }
 
-    public function testZF3196_InvalidIniFile()
+    public function testZF3196InvalidIniFile()
     {
         try {
             $config = new Zend_Config_Yaml($this->_iniFileInvalid);
@@ -199,10 +197,9 @@ class Zend_Config_YamlTest extends PHPUnit_Framework_TestCase
         } catch (Zend_Config_Exception $expected) {
             $this->assertRegexp('/(Error parsing|syntax error, unexpected)/', $expected->getMessage());
         }
-
     }
 
-    public function testZF2285_MultipleKeysOfTheSameName()
+    public function testZF2285MultipleKeysOfTheSameName()
     {
         $config = new Zend_Config_Yaml($this->_iniFileSameNameKeysConfig, null);
         $this->assertEquals('2a', $config->one->two->{0});
@@ -211,7 +208,7 @@ class Zend_Config_YamlTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('5', $config->three->four->{0}->five);
     }
 
-    public function testZF2437_ArraysWithMultipleChildren()
+    public function testZF2437ArraysWithMultipleChildren()
     {
         $config = new Zend_Config_Yaml($this->_iniFileSameNameKeysConfig, null);
         $this->assertEquals('1', $config->six->seven->{0}->eight);
@@ -229,16 +226,16 @@ class Zend_Config_YamlTest extends PHPUnit_Framework_TestCase
 
     public function testHonorsOptionsProvidedToConstructor()
     {
-        $config = new Zend_Config_Yaml($this->_iniFileAllSectionsConfig, 'debug', array(
+        $config = new Zend_Config_Yaml($this->_iniFileAllSectionsConfig, 'debug', [
             'allow_modifications' => true,
-            'skip_extends'        => true,
-            'yaml_decoder'        => array($this, 'yamlDecoder'),
-            'foo'                 => 'bar', // ignored
-        ));
+            'skip_extends' => true,
+            'yaml_decoder' => [$this, 'yamlDecoder'],
+            'foo' => 'bar', // ignored
+        ]);
         $this->assertNull($config->name); // verifies extends were skipped
         $config->foo = 'bar';
         $this->assertEquals('bar', $config->foo); // verifies allows modifications
-        $this->assertEquals(array($this, 'yamlDecoder'), $config->getYamlDecoder());
+        $this->assertEquals([$this, 'yamlDecoder'], $config->getYamlDecoder());
     }
 
     public function testConstructorRaisesExceptionWhenUnableToLoadFile()
@@ -256,9 +253,9 @@ class Zend_Config_YamlTest extends PHPUnit_Framework_TestCase
     public function testPassingBadYamlDecoderRaisesException()
     {
         $this->setExpectedException('Zend_Config_Exception', 'must be callable');
-        $config = new Zend_Config_Yaml($this->_iniFileAllSectionsConfig, 'debug', array(
+        $config = new Zend_Config_Yaml($this->_iniFileAllSectionsConfig, 'debug', [
             'yaml_decoder' => '__foo__',
-        ));
+        ]);
     }
 
     public function testParsesBooleansAccordingToOneDotOneSpecification()
@@ -315,7 +312,7 @@ class Zend_Config_YamlTest extends PHPUnit_Framework_TestCase
         }
         $config = new Zend_Config_Yaml($this->_constantsConfig, 'production');
         $this->assertEquals(ZEND_CONFIG_YAML_ENV, $config->env);
-        $this->assertEquals(ZEND_CONFIG_YAML_ENV_PATH . '/test/this', $config->path);
+        $this->assertEquals(ZEND_CONFIG_YAML_ENV_PATH.'/test/this', $config->path);
     }
 
     public function testAllowsIgnoringConstantStrings()
@@ -327,7 +324,7 @@ class Zend_Config_YamlTest extends PHPUnit_Framework_TestCase
             define('ZEND_CONFIG_YAML_ENV_PATH', __DIR__);
         }
         $config = new Zend_Config_Yaml(
-            $this->_constantsConfig, 'production', array('ignore_constants' => true)
+            $this->_constantsConfig, 'production', ['ignore_constants' => true]
         );
         $this->assertEquals('ZEND_CONFIG_YAML_ENV', $config->env);
         $this->assertEquals('ZEND_CONFIG_YAML_ENV_PATH/test/this', $config->path);
@@ -378,7 +375,7 @@ class Zend_Config_YamlTest extends PHPUnit_Framework_TestCase
         $config = new Zend_Config_Yaml($this->_yamlListConstantsConfig, 'production');
 
         $this->assertEquals(ZEND_CONFIG_YAML_TEST_PATH, $config->paths->{0});
-        $this->assertEquals(ZEND_CONFIG_YAML_TEST_PATH . '/library/test', $config->paths->{1});
+        $this->assertEquals(ZEND_CONFIG_YAML_TEST_PATH.'/library/test', $config->paths->{1});
     }
 
     /**
@@ -427,8 +424,8 @@ class Zend_Config_YamlTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-    * @group ZF-11363
-    */
+     * @group ZF-11363
+     */
     public function testAllowsDashesInLists()
     {
         $config = new Zend_Config_Yaml($this->_iniFileSameNameKeysConfig, null);

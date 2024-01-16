@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -38,36 +38,32 @@
 /** Zend_Controller_Response_Http */
 // require_once 'Zend/Controller/Response/Http.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Db
  * @group      Zend_Db_Profiler
  */
 #[AllowDynamicProperties]
 class Zend_Db_Profiler_FirebugTest extends PHPUnit_Framework_TestCase
 {
-
-    protected $_controller = null;
-    protected $_request = null;
-    protected $_response = null;
-    protected $_profiler = null;
-    protected $_db = null;
+    protected $_controller;
+    protected $_request;
+    protected $_response;
+    protected $_profiler;
+    protected $_db;
 
     /**
      * Runs the test methods of this class.
      *
-     * @access public
      * @static
      */
     public static function main()
     {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Db_Profiler_FirebugTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Db_Profiler_FirebugTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -88,8 +84,8 @@ class Zend_Db_Profiler_FirebugTest extends PHPUnit_Framework_TestCase
 
         $this->_profiler = new Zend_Db_Profiler_Firebug();
         $this->_db = Zend_Db::factory('PDO_SQLITE',
-                               array('dbname' => ':memory:',
-                                     'profiler' => $this->_profiler));
+            ['dbname' => ':memory:',
+                  'profiler' => $this->_profiler]);
         $this->_db->getConnection()->exec('CREATE TABLE foo (
                                               id      INTEGNER NOT NULL,
                                               col1    VARCHAR(10) NOT NULL
@@ -111,7 +107,7 @@ class Zend_Db_Profiler_FirebugTest extends PHPUnit_Framework_TestCase
         $channel = Zend_Wildfire_Channel_HttpHeaders::getInstance();
         $protocol = $channel->getProtocol(Zend_Wildfire_Plugin_FirePhp::PROTOCOL_URI);
 
-        $this->_db->insert('foo', array('id'=>1,'col1'=>'original'));
+        $this->_db->insert('foo', ['id' => 1, 'col1' => 'original']);
 
         Zend_Wildfire_Channel_HttpHeaders::getInstance()->flush();
 
@@ -119,15 +115,14 @@ class Zend_Db_Profiler_FirebugTest extends PHPUnit_Framework_TestCase
 
         $this->_profiler->setEnabled(true);
 
-        $this->_db->insert('foo', array('id'=>1,'col1'=>'original'));
+        $this->_db->insert('foo', ['id' => 1, 'col1' => 'original']);
 
         Zend_Wildfire_Channel_HttpHeaders::getInstance()->flush();
 
         $messages = $protocol->getMessages();
 
-        $this->assertEquals(substr((string) $messages[Zend_Wildfire_Plugin_FirePhp::STRUCTURE_URI_FIREBUGCONSOLE]
-                                            [Zend_Wildfire_Plugin_FirePhp::PLUGIN_URI][0],0,55),
-                            '[{"Type":"TABLE","Label":"Zend_Db_Profiler_Firebug (1 @');
+        $this->assertEquals(substr((string) $messages[Zend_Wildfire_Plugin_FirePhp::STRUCTURE_URI_FIREBUGCONSOLE][Zend_Wildfire_Plugin_FirePhp::PLUGIN_URI][0], 0, 55),
+            '[{"Type":"TABLE","Label":"Zend_Db_Profiler_Firebug (1 @');
     }
 
     public function testDisable()
@@ -137,7 +132,7 @@ class Zend_Db_Profiler_FirebugTest extends PHPUnit_Framework_TestCase
 
         $this->_profiler->setEnabled(true);
 
-        $this->_db->insert('foo', array('id'=>1,'col1'=>'original'));
+        $this->_db->insert('foo', ['id' => 1, 'col1' => 'original']);
 
         $this->_profiler->setEnabled(false);
 
@@ -154,15 +149,14 @@ class Zend_Db_Profiler_FirebugTest extends PHPUnit_Framework_TestCase
         $this->_profiler = new Zend_Db_Profiler_Firebug('Label 1');
         $this->_profiler->setEnabled(true);
         $this->_db->setProfiler($this->_profiler);
-        $this->_db->insert('foo', array('id'=>1,'col1'=>'original'));
+        $this->_db->insert('foo', ['id' => 1, 'col1' => 'original']);
 
         Zend_Wildfire_Channel_HttpHeaders::getInstance()->flush();
 
         $messages = $protocol->getMessages();
 
-        $this->assertEquals(substr((string) $messages[Zend_Wildfire_Plugin_FirePhp::STRUCTURE_URI_FIREBUGCONSOLE]
-                                            [Zend_Wildfire_Plugin_FirePhp::PLUGIN_URI][0],0,38),
-                            '[{"Type":"TABLE","Label":"Label 1 (1 @');
+        $this->assertEquals(substr((string) $messages[Zend_Wildfire_Plugin_FirePhp::STRUCTURE_URI_FIREBUGCONSOLE][Zend_Wildfire_Plugin_FirePhp::PLUGIN_URI][0], 0, 38),
+            '[{"Type":"TABLE","Label":"Label 1 (1 @');
     }
 
     public function testNoQueries()
@@ -197,16 +191,14 @@ class Zend_Db_Profiler_FirebugTest extends PHPUnit_Framework_TestCase
 
         $this->assertFalse($messages);
     }
-
 }
-
 
 #[AllowDynamicProperties]
 class Zend_Db_Profiler_FirebugTest_Request extends Zend_Controller_Request_Http
 {
     public function getHeader($header)
     {
-        if ($header == 'User-Agent') {
+        if ('User-Agent' == $header) {
             return 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X; en-US; rv:1.8.1.14) Gecko/20080404 Firefox/2.0.0.14 FirePHP/0.1.0';
         }
     }

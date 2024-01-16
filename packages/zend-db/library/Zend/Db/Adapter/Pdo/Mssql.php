@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,26 +13,23 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage Adapter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /**
  * @see Zend_Db_Adapter_Pdo_Abstract
  */
 // require_once 'Zend/Db/Adapter/Pdo/Abstract.php';
 
-
 /**
  * Class for connecting to Microsoft SQL Server databases and performing common operations.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage Adapter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -54,23 +51,23 @@ class Zend_Db_Adapter_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Abstract
      * 1 = 64-bit integer
      * 2 = float or decimal
      *
-     * @var array Associative array of datatypes to values 0, 1, or 2.
+     * @var array associative array of datatypes to values 0, 1, or 2
      */
-    protected $_numericDataTypes = array(
-        Zend_Db::INT_TYPE    => Zend_Db::INT_TYPE,
+    protected $_numericDataTypes = [
+        Zend_Db::INT_TYPE => Zend_Db::INT_TYPE,
         Zend_Db::BIGINT_TYPE => Zend_Db::BIGINT_TYPE,
-        Zend_Db::FLOAT_TYPE  => Zend_Db::FLOAT_TYPE,
-        'INT'                => Zend_Db::INT_TYPE,
-        'SMALLINT'           => Zend_Db::INT_TYPE,
-        'TINYINT'            => Zend_Db::INT_TYPE,
-        'BIGINT'             => Zend_Db::BIGINT_TYPE,
-        'DECIMAL'            => Zend_Db::FLOAT_TYPE,
-        'FLOAT'              => Zend_Db::FLOAT_TYPE,
-        'MONEY'              => Zend_Db::FLOAT_TYPE,
-        'NUMERIC'            => Zend_Db::FLOAT_TYPE,
-        'REAL'               => Zend_Db::FLOAT_TYPE,
-        'SMALLMONEY'         => Zend_Db::FLOAT_TYPE
-    );
+        Zend_Db::FLOAT_TYPE => Zend_Db::FLOAT_TYPE,
+        'INT' => Zend_Db::INT_TYPE,
+        'SMALLINT' => Zend_Db::INT_TYPE,
+        'TINYINT' => Zend_Db::INT_TYPE,
+        'BIGINT' => Zend_Db::BIGINT_TYPE,
+        'DECIMAL' => Zend_Db::FLOAT_TYPE,
+        'FLOAT' => Zend_Db::FLOAT_TYPE,
+        'MONEY' => Zend_Db::FLOAT_TYPE,
+        'NUMERIC' => Zend_Db::FLOAT_TYPE,
+        'REAL' => Zend_Db::FLOAT_TYPE,
+        'SMALLMONEY' => Zend_Db::FLOAT_TYPE,
+    ];
 
     /**
      * Creates a PDO DSN for the adapter from $this->_config settings.
@@ -91,10 +88,10 @@ class Zend_Db_Adapter_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Abstract
 
         if (isset($dsn['port'])) {
             $seperator = ':';
-            if (strtoupper((string) substr((string) PHP_OS, 0, 3)) === 'WIN') {
+            if ('WIN' === strtoupper((string) substr((string) PHP_OS, 0, 3))) {
                 $seperator = ',';
             }
-            $dsn['host'] .= $seperator . $dsn['port'];
+            $dsn['host'] .= $seperator.$dsn['port'];
             unset($dsn['port']);
         }
 
@@ -122,7 +119,8 @@ class Zend_Db_Adapter_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Abstract
             $dsn[$key] = "$key=$val";
         }
 
-        $dsn = $this->_pdoType . ':' . implode(';', $dsn);
+        $dsn = $this->_pdoType.':'.implode(';', $dsn);
+
         return $dsn;
     }
 
@@ -148,6 +146,7 @@ class Zend_Db_Adapter_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Abstract
     {
         $this->_connect();
         $this->_connection->exec('BEGIN TRANSACTION');
+
         return true;
     }
 
@@ -161,6 +160,7 @@ class Zend_Db_Adapter_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Abstract
     {
         $this->_connect();
         $this->_connection->exec('COMMIT TRANSACTION');
+
         return true;
     }
 
@@ -170,9 +170,11 @@ class Zend_Db_Adapter_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Abstract
      * It is necessary to override the abstract PDO transaction functions here, as
      * the PDO driver for MSSQL does not support transactions.
      */
-    protected function _rollBack() {
+    protected function _rollBack()
+    {
         $this->_connect();
         $this->_connection->exec('ROLLBACK TRANSACTION');
+
         return true;
     }
 
@@ -184,6 +186,7 @@ class Zend_Db_Adapter_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Abstract
     public function listTables()
     {
         $sql = "SELECT name FROM sysobjects WHERE type = 'U' ORDER BY name";
+
         return $this->fetchCol($sql);
     }
 
@@ -216,12 +219,13 @@ class Zend_Db_Adapter_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Abstract
      *
      * @param string $tableName
      * @param string $schemaName OPTIONAL
+     *
      * @return array
      */
     public function describeTable($tableName, $schemaName = null)
     {
-        if ($schemaName != null) {
-            if (strpos((string) $schemaName, '.') !== false) {
+        if (null != $schemaName) {
+            if (false !== strpos((string) $schemaName, '.')) {
                 $result = explode('.', $schemaName);
                 $schemaName = $result[1];
             }
@@ -229,42 +233,42 @@ class Zend_Db_Adapter_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Abstract
         /**
          * Discover metadata information about this table.
          */
-        $sql = "exec sp_columns @table_name = " . $this->quoteIdentifier($tableName, true);
-        if ($schemaName != null) {
-            $sql .= ", @table_owner = " . $this->quoteIdentifier($schemaName, true);
+        $sql = 'exec sp_columns @table_name = '.$this->quoteIdentifier($tableName, true);
+        if (null != $schemaName) {
+            $sql .= ', @table_owner = '.$this->quoteIdentifier($schemaName, true);
         }
 
         $stmt = $this->query($sql);
         $result = $stmt->fetchAll(Zend_Db::FETCH_NUM);
 
-        $table_name  = 2;
+        $table_name = 2;
         $column_name = 3;
-        $type_name   = 5;
-        $precision   = 6;
-        $length      = 7;
-        $scale       = 8;
-        $nullable    = 10;
-        $column_def  = 12;
+        $type_name = 5;
+        $precision = 6;
+        $length = 7;
+        $scale = 8;
+        $nullable = 10;
+        $column_def = 12;
         $column_position = 16;
 
         /**
          * Discover primary key column(s) for this table.
          */
-        $sql = "exec sp_pkeys @table_name = " . $this->quoteIdentifier($tableName, true);
-        if ($schemaName != null) {
-            $sql .= ", @table_owner = " . $this->quoteIdentifier($schemaName, true);
+        $sql = 'exec sp_pkeys @table_name = '.$this->quoteIdentifier($tableName, true);
+        if (null != $schemaName) {
+            $sql .= ', @table_owner = '.$this->quoteIdentifier($schemaName, true);
         }
 
         $stmt = $this->query($sql);
         $primaryKeysResult = $stmt->fetchAll(Zend_Db::FETCH_NUM);
-        $primaryKeyColumn = array();
+        $primaryKeyColumn = [];
         $pkey_column_name = 3;
         $pkey_key_seq = 4;
         foreach ($primaryKeysResult as $pkeysRow) {
             $primaryKeyColumn[$pkeysRow[$pkey_column_name]] = $pkeysRow[$pkey_key_seq];
         }
 
-        $desc = array();
+        $desc = [];
         $p = 1;
         foreach ($result as $key => $row) {
             $identity = false;
@@ -283,66 +287,69 @@ class Zend_Db_Adapter_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Abstract
                 $primaryPosition = null;
             }
 
-            $desc[$this->foldCase($row[$column_name])] = array(
-                'SCHEMA_NAME'      => null, // @todo
-                'TABLE_NAME'       => $this->foldCase($row[$table_name]),
-                'COLUMN_NAME'      => $this->foldCase($row[$column_name]),
-                'COLUMN_POSITION'  => (int) $row[$column_position],
-                'DATA_TYPE'        => $type,
-                'DEFAULT'          => $row[$column_def],
-                'NULLABLE'         => (bool) $row[$nullable],
-                'LENGTH'           => $row[$length],
-                'SCALE'            => $row[$scale],
-                'PRECISION'        => $row[$precision],
-                'UNSIGNED'         => null, // @todo
-                'PRIMARY'          => $isPrimary,
+            $desc[$this->foldCase($row[$column_name])] = [
+                'SCHEMA_NAME' => null, // @todo
+                'TABLE_NAME' => $this->foldCase($row[$table_name]),
+                'COLUMN_NAME' => $this->foldCase($row[$column_name]),
+                'COLUMN_POSITION' => (int) $row[$column_position],
+                'DATA_TYPE' => $type,
+                'DEFAULT' => $row[$column_def],
+                'NULLABLE' => (bool) $row[$nullable],
+                'LENGTH' => $row[$length],
+                'SCALE' => $row[$scale],
+                'PRECISION' => $row[$precision],
+                'UNSIGNED' => null, // @todo
+                'PRIMARY' => $isPrimary,
                 'PRIMARY_POSITION' => $primaryPosition,
-                'IDENTITY'         => $identity
-            );
+                'IDENTITY' => $identity,
+            ];
         }
+
         return $desc;
     }
 
     /**
      * Adds an adapter-specific LIMIT clause to the SELECT statement.
      *
-     * @link http://lists.bestpractical.com/pipermail/rt-devel/2005-June/007339.html
+     * @see http://lists.bestpractical.com/pipermail/rt-devel/2005-June/007339.html
      *
      * @param string $sql
-     * @param integer $count
-     * @param integer $offset OPTIONAL
-     * @throws Zend_Db_Adapter_Exception
+     * @param int    $count
+     * @param int    $offset OPTIONAL
+     *
      * @return string
+     *
+     * @throws Zend_Db_Adapter_Exception
      */
-     public function limit($sql, $count, $offset = 0)
-     {
+    public function limit($sql, $count, $offset = 0)
+    {
         $count = intval($count);
         if ($count <= 0) {
-            /** @see Zend_Db_Adapter_Exception */
+            /* @see Zend_Db_Adapter_Exception */
             // require_once 'Zend/Db/Adapter/Exception.php';
             throw new Zend_Db_Adapter_Exception("LIMIT argument count=$count is not valid");
         }
 
         $offset = intval($offset);
         if ($offset < 0) {
-            /** @see Zend_Db_Adapter_Exception */
+            /* @see Zend_Db_Adapter_Exception */
             // require_once 'Zend/Db/Adapter/Exception.php';
             throw new Zend_Db_Adapter_Exception("LIMIT argument offset=$offset is not valid");
         }
 
         $sql = preg_replace(
             '/^SELECT\s+(DISTINCT\s)?/i',
-            'SELECT $1TOP ' . ($count+$offset) . ' ',
+            'SELECT $1TOP '.($count + $offset).' ',
             $sql
-            );
+        );
 
         if ($offset > 0) {
             $orderby = stristr($sql, 'ORDER BY');
 
-            if ($orderby !== false) {
+            if (false !== $orderby) {
                 $orderParts = explode(',', substr((string) $orderby, 8));
                 $pregReplaceCount = null;
-                $orderbyInverseParts = array();
+                $orderbyInverseParts = [];
                 foreach ($orderParts as $orderPart) {
                     $orderPart = rtrim((string) $orderPart);
                     $inv = preg_replace('/\s+desc$/i', ' ASC', $orderPart, 1, $pregReplaceCount);
@@ -355,23 +362,20 @@ class Zend_Db_Adapter_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Abstract
                         $orderbyInverseParts[] = $inv;
                         continue;
                     } else {
-                        $orderbyInverseParts[] = $orderPart . ' DESC';
+                        $orderbyInverseParts[] = $orderPart.' DESC';
                     }
                 }
 
-                $orderbyInverse = 'ORDER BY ' . implode(', ', $orderbyInverseParts);
+                $orderbyInverse = 'ORDER BY '.implode(', ', $orderbyInverseParts);
             }
 
-
-
-
-            $sql = 'SELECT * FROM (SELECT TOP ' . $count . ' * FROM (' . $sql . ') AS inner_tbl';
-            if ($orderby !== false) {
-                $sql .= ' ' . $orderbyInverse . ' ';
+            $sql = 'SELECT * FROM (SELECT TOP '.$count.' * FROM ('.$sql.') AS inner_tbl';
+            if (false !== $orderby) {
+                $sql .= ' '.$orderbyInverse.' ';
             }
             $sql .= ') AS outer_tbl';
-            if ($orderby !== false) {
-                $sql .= ' ' . $orderby;
+            if (false !== $orderby) {
+                $sql .= ' '.$orderby;
             }
         }
 
@@ -391,20 +395,24 @@ class Zend_Db_Adapter_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Abstract
      * Microsoft SQL Server does not support sequences, so the arguments to
      * this method are ignored.
      *
-     * @param string $tableName   OPTIONAL Name of table.
-     * @param string $primaryKey  OPTIONAL Name of primary key column.
+     * @param string $tableName  OPTIONAL Name of table
+     * @param string $primaryKey OPTIONAL Name of primary key column
+     *
      * @return int
+     *
      * @throws Zend_Db_Adapter_Exception
      */
     public function lastInsertId($tableName = null, $primaryKey = null)
     {
         $sql = 'SELECT SCOPE_IDENTITY()';
-        return (int)$this->fetchOne($sql);
+
+        return (int) $this->fetchOne($sql);
     }
 
     /**
      * Retrieve server version in PHP style
-     * Pdo_Mssql doesn't support getAttribute(PDO::ATTR_SERVER_VERSION)
+     * Pdo_Mssql doesn't support getAttribute(PDO::ATTR_SERVER_VERSION).
+     *
      * @return string
      */
     public function getServerVersion()
@@ -415,6 +423,7 @@ class Zend_Db_Adapter_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Abstract
             if (count($result)) {
                 return $result[0][0];
             }
+
             return null;
         } catch (PDOException $e) {
             return null;
@@ -424,8 +433,9 @@ class Zend_Db_Adapter_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Abstract
     /**
      * Quote a raw string.
      *
-     * @param string $value     Raw string
-     * @return string           Quoted string
+     * @param string $value Raw string
+     *
+     * @return string Quoted string
      */
     protected function _quote($value)
     {
@@ -433,6 +443,7 @@ class Zend_Db_Adapter_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Abstract
             // Fix for null-byte injection
             $value = addcslashes($value, "\000\032");
         }
+
         return parent::_quote($value);
     }
 }

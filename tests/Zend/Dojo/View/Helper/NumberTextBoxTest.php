@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Dojo_View_Helper_NumberTextBoxTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_View_Helper_NumberTextBoxTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Dojo_View_Helper_NumberTextBoxTest::main');
 }
 
 /** Zend_Dojo_View_Helper_NumberTextBox */
@@ -41,10 +41,10 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * Test class for Zend_Dojo_View_Helper_NumberTextBox.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Dojo
  * @group      Zend_Dojo_View
  */
@@ -58,7 +58,7 @@ class Zend_Dojo_View_Helper_NumberTextBoxTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_View_Helper_NumberTextBoxTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Dojo_View_Helper_NumberTextBoxTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -73,7 +73,7 @@ class Zend_Dojo_View_Helper_NumberTextBoxTest extends PHPUnit_Framework_TestCase
         Zend_Registry::_unsetInstance();
         Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
 
-        $this->view   = $this->getView();
+        $this->view = $this->getView();
         $this->helper = new Zend_Dojo_View_Helper_NumberTextBox();
         $this->helper->setView($this->view);
     }
@@ -93,6 +93,7 @@ class Zend_Dojo_View_Helper_NumberTextBoxTest extends PHPUnit_Framework_TestCase
         // require_once 'Zend/View.php';
         $view = new Zend_View();
         $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
+
         return $view;
     }
 
@@ -101,11 +102,11 @@ class Zend_Dojo_View_Helper_NumberTextBoxTest extends PHPUnit_Framework_TestCase
         return $this->helper->numberTextBox(
             'elementId',
             '2008-07-07',
-            array(
-                'required'    => true,
+            [
+                'required' => true,
                 'constraints' => '{min:-20000,max:20000,places:0}',
-            ),
-            array()
+            ],
+            []
         );
     }
 
@@ -131,6 +132,6 @@ class Zend_Dojo_View_Helper_NumberTextBoxTest extends PHPUnit_Framework_TestCase
 }
 
 // Call Zend_Dojo_View_Helper_NumberTextBoxTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dojo_View_Helper_NumberTextBoxTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Dojo_View_Helper_NumberTextBoxTest::main') {
     Zend_Dojo_View_Helper_NumberTextBoxTest::main();
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,10 +25,10 @@
 
 /**
  * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_Sqs
@@ -37,21 +37,21 @@
 class Zend_Service_Amazon_Sqs_OnlineTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Reference to Amazon service consumer object
+     * Reference to Amazon service consumer object.
      *
      * @var Zend_Service_Amazon_Sqs
      */
     protected $_amazon;
 
     /**
-     * Socket based HTTP client adapter
+     * Socket based HTTP client adapter.
      *
      * @var Zend_Http_Client_Adapter_Socket
      */
     protected $_httpClientAdapterSocket;
 
     /**
-     * Sets up this test case
+     * Sets up this test case.
      *
      * @return void
      */
@@ -71,7 +71,7 @@ class Zend_Service_Amazon_Sqs_OnlineTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test SQS methods
+     * Test SQS methods.
      *
      * @return void
      */
@@ -100,13 +100,13 @@ class Zend_Service_Amazon_Sqs_OnlineTest extends PHPUnit_Framework_TestCase
             $this->assertEquals(0, $count);
 
             $this->_amazon->delete($queue_url);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->fail($e->getMessage());
         }
     }
 
     /**
-     * Tear down the test case
+     * Tear down the test case.
      *
      * @return void
      */
@@ -116,7 +116,6 @@ class Zend_Service_Amazon_Sqs_OnlineTest extends PHPUnit_Framework_TestCase
     }
 }
 
-
 #[AllowDynamicProperties]
 class Zend_Service_Amazon_Sqs_OnlineTest_Skip extends PHPUnit_Framework_TestCase
 {
@@ -124,7 +123,7 @@ class Zend_Service_Amazon_Sqs_OnlineTest_Skip extends PHPUnit_Framework_TestCase
     {
         $this->markTestSkipped(
             'Zend_Service_Amazon_Sqs online tests not enabled with an access key ID in '
-            . 'TestConfiguration.php'
+            .'TestConfiguration.php'
         );
     }
 

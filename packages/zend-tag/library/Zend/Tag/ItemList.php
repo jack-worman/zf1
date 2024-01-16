@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tag
- * @subpackage ItemList
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,41 +27,41 @@
 
 /**
  * @category   Zend
- * @package    Zend_Tag
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
 {
     /**
-     * Items in this list
+     * Items in this list.
      *
      * @var array
      */
-    protected $_items = array();
+    protected $_items = [];
 
     /**
-     * Count all items
+     * Count all items.
      *
-     * @return integer
+     * @return int
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function count()
     {
         return count($this->_items);
     }
 
     /**
-     * Spread values in the items relative to their weight
+     * Spread values in the items relative to their weight.
      *
-     * @param  array $values
-     * @throws Zend_Tag_Exception When value list is empty
      * @return void
+     *
+     * @throws Zend_Tag_Exception When value list is empty
      */
     public function spreadWeightValues(array $values)
     {
         // Don't allow an empty value list
-        if (count($values) === 0) {
+        if (0 === count($values)) {
             // require_once 'Zend/Tag/Exception.php';
             throw new Zend_Tag_Exception('Value list may not be empty');
         }
@@ -70,7 +70,7 @@ class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
         $values = array_values($values);
 
         // If just a single value is supplied simply assign it to to all tags
-        if (count($values) === 1) {
+        if (1 === count($values)) {
             foreach ($this->_items as $item) {
                 $item->setParam('weightValue', $values[0]);
             }
@@ -80,7 +80,7 @@ class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
             $maxWeight = null;
 
             foreach ($this->_items as $item) {
-                if ($minWeight === null && $maxWeight === null) {
+                if (null === $minWeight && null === $maxWeight) {
                     $minWeight = $item->getWeight();
                     $maxWeight = $item->getWeight();
                 } else {
@@ -90,11 +90,11 @@ class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
             }
 
             // Calculate the thresholds
-            $steps      = count($values);
-            $delta      = ($maxWeight - $minWeight) / ($steps - 1);
-            $thresholds = array();
+            $steps = count($values);
+            $delta = ($maxWeight - $minWeight) / ($steps - 1);
+            $thresholds = [];
 
-            for ($i = 0; $i < $steps; $i++) {
+            for ($i = 0; $i < $steps; ++$i) {
                 $thresholds[$i] = floor(100 * log(($minWeight + $i * $delta) + 2));
             }
 
@@ -102,7 +102,7 @@ class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
             foreach ($this->_items as $item) {
                 $threshold = floor(100 * log($item->getWeight() + 2));
 
-                for ($i = 0; $i < $steps; $i++) {
+                for ($i = 0; $i < $steps; ++$i) {
                     if ($threshold <= $thresholds[$i]) {
                         $item->setParam('weightValue', $values[$i]);
                         break;
@@ -113,13 +113,15 @@ class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
     }
 
     /**
-     * Seek to an absolute positio
+     * Seek to an absolute positio.
      *
-     * @param  integer $index
-     * @throws OutOfBoundsException When the seek position is invalid
+     * @param int $index
+     *
      * @return void
+     *
+     * @throws OutOfBoundsException When the seek position is invalid
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function seek($index)
     {
         $this->rewind();
@@ -127,7 +129,7 @@ class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
 
         while ($position < $index && $this->valid()) {
             $this->next();
-            $position++;
+            ++$position;
         }
 
         if (!$this->valid()) {
@@ -136,92 +138,90 @@ class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
     }
 
     /**
-     * Return the current element
-     *
-     * @return mixed
+     * Return the current element.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function current()
     {
         return current($this->_items);
     }
 
     /**
-     * Move forward to next element
-     *
-     * @return mixed
+     * Move forward to next element.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function next()
     {
         return next($this->_items);
     }
 
     /**
-     * Return the key of the current element
+     * Return the key of the current element.
      *
      * @return int|string|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function key()
     {
         return key($this->_items);
     }
 
     /**
-     * Check if there is a current element after calls to rewind() or next()
+     * Check if there is a current element after calls to rewind() or next().
      *
-     * @return boolean
+     * @return bool
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function valid()
     {
-        return ($this->current() !== false);
+        return false !== $this->current();
     }
 
     /**
-     * Rewind the Iterator to the first element
+     * Rewind the Iterator to the first element.
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function rewind()
     {
         reset($this->_items);
     }
 
     /**
-     * Check if an offset exists
+     * Check if an offset exists.
      *
-     * @param  mixed $offset
-     * @return boolean
+     * @return bool
      */
-    #[\ReturnTypeWillChange]
-    public function offsetExists($offset) {
+    #[ReturnTypeWillChange]
+    public function offsetExists($offset)
+    {
         return array_key_exists($offset, $this->_items);
     }
 
     /**
-     * Get the value of an offset
+     * Get the value of an offset.
      *
-     * @param  mixed $offset
      * @return Zend_Tag_Taggable
      */
-    #[\ReturnTypeWillChange]
-    public function offsetGet($offset) {
+    #[ReturnTypeWillChange]
+    public function offsetGet($offset)
+    {
         return $this->_items[$offset];
     }
 
     /**
-     * Append a new item
+     * Append a new item.
      *
-     * @param  mixed          $offset
-     * @param  Zend_Tag_Taggable $item
-     * @throws OutOfBoundsException When item does not implement Zend_Tag_Taggable
+     * @param Zend_Tag_Taggable $item
+     *
      * @return void
+     *
+     * @throws OutOfBoundsException When item does not implement Zend_Tag_Taggable
      */
-    #[\ReturnTypeWillChange]
-    public function offsetSet($offset, $item) {
+    #[ReturnTypeWillChange]
+    public function offsetSet($offset, $item)
+    {
         // We need to make that check here, as the method signature must be
         // compatible with ArrayAccess::offsetSet()
         if (!($item instanceof Zend_Tag_Taggable)) {
@@ -229,7 +229,7 @@ class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
             throw new Zend_Tag_Exception('Item must implement Zend_Tag_Taggable');
         }
 
-        if ($offset === null) {
+        if (null === $offset) {
             $this->_items[] = $item;
         } else {
             $this->_items[$offset] = $item;
@@ -237,13 +237,13 @@ class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
     }
 
     /**
-     * Unset an item
+     * Unset an item.
      *
-     * @param  mixed $offset
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetUnset($offset) {
+    #[ReturnTypeWillChange]
+    public function offsetUnset($offset)
+    {
         unset($this->_items[$offset]);
     }
 }

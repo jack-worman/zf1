@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +13,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Ldap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Ldap_Node_AllTests::main');
 }
@@ -28,7 +27,7 @@ require_once 'Zend/Ldap/Node/OfflineTest.php';
 require_once 'Zend/Ldap/Node/AttributeIterationTest.php';
 
 if (defined('TESTS_ZEND_LDAP_ONLINE_ENABLED')
-	&& constant('TESTS_ZEND_LDAP_ONLINE_ENABLED')) {
+    && constant('TESTS_ZEND_LDAP_ONLINE_ENABLED')) {
     require_once 'Zend/Ldap/Node/OnlineTest.php';
     require_once 'Zend/Ldap/Node/ChildrenTest.php';
     require_once 'Zend/Ldap/Node/ChildrenIterationTest.php';
@@ -39,10 +38,10 @@ if (defined('TESTS_ZEND_LDAP_ONLINE_ENABLED')
 
 /**
  * @category   Zend
- * @package    Zend_Ldap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Ldap
  * @group      Zend_Ldap_Node
  */

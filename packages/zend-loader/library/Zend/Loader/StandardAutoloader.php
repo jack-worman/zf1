@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Loader
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -22,34 +22,33 @@
 // require_once __DIR__ . '/SplAutoloader.php';
 
 /**
- * PSR-0 compliant autoloader
+ * PSR-0 compliant autoloader.
  *
  * Allows autoloading both namespaced and vendor-prefixed classes. Class
  * lookups are performed on the filesystem. If a class file for the referenced
  * class is not found, a PHP warning will be raised by include().
  *
- * @package    Zend_Loader
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    New BSD {@link http://framework.zend.com/license/new-bsd}
  */
 class Zend_Loader_StandardAutoloader implements Zend_Loader_SplAutoloader
 {
-    const NS_SEPARATOR     = '\\';
-    const PREFIX_SEPARATOR = '_';
-    const LOAD_NS          = 'namespaces';
-    const LOAD_PREFIX      = 'prefixes';
-    const ACT_AS_FALLBACK  = 'fallback_autoloader';
-    const AUTOREGISTER_ZF  = 'autoregister_zf';
+    public const NS_SEPARATOR = '\\';
+    public const PREFIX_SEPARATOR = '_';
+    public const LOAD_NS = 'namespaces';
+    public const LOAD_PREFIX = 'prefixes';
+    public const ACT_AS_FALLBACK = 'fallback_autoloader';
+    public const AUTOREGISTER_ZF = 'autoregister_zf';
 
     /**
      * @var array Namespace/directory pairs to search; ZF library added by default
      */
-    protected $namespaces = array();
+    protected $namespaces = [];
 
     /**
      * @var array Prefix/directory pairs to search
      */
-    protected $prefixes = array();
+    protected $prefixes = [];
 
     /**
      * @var bool Whether or not the autoloader should also act as a fallback autoloader
@@ -62,9 +61,10 @@ class Zend_Loader_StandardAutoloader implements Zend_Loader_SplAutoloader
     protected $error;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param  null|array|Traversable $options
+     * @param array|Traversable|null $options
+     *
      * @return void
      */
     public function __construct($options = null)
@@ -75,7 +75,7 @@ class Zend_Loader_StandardAutoloader implements Zend_Loader_SplAutoloader
     }
 
     /**
-     * Configure autoloader
+     * Configure autoloader.
      *
      * Allows specifying both "namespace" and "prefix" pairs, using the
      * following structure:
@@ -92,7 +92,8 @@ class Zend_Loader_StandardAutoloader implements Zend_Loader_SplAutoloader
      * )
      * </code>
      *
-     * @param  array|Traversable $options
+     * @param array|Traversable $options
+     *
      * @return Zend_Loader_StandardAutoloader
      */
     public function setOptions($options)
@@ -126,18 +127,21 @@ class Zend_Loader_StandardAutoloader implements Zend_Loader_SplAutoloader
                     // ignore
             }
         }
+
         return $this;
     }
 
     /**
-     * Set flag indicating fallback autoloader status
+     * Set flag indicating fallback autoloader status.
      *
-     * @param  bool $flag
+     * @param bool $flag
+     *
      * @return Zend_Loader_StandardAutoloader
      */
     public function setFallbackAutoloader($flag)
     {
         $this->fallbackAutoloaderFlag = (bool) $flag;
+
         return $this;
     }
 
@@ -152,23 +156,26 @@ class Zend_Loader_StandardAutoloader implements Zend_Loader_SplAutoloader
     }
 
     /**
-     * Register a namespace/directory pair
+     * Register a namespace/directory pair.
      *
-     * @param  string $namespace
-     * @param  string $directory
+     * @param string $namespace
+     * @param string $directory
+     *
      * @return Zend_Loader_StandardAutoloader
      */
     public function registerNamespace($namespace, $directory)
     {
-        $namespace = rtrim((string) $namespace, self::NS_SEPARATOR). self::NS_SEPARATOR;
+        $namespace = rtrim((string) $namespace, self::NS_SEPARATOR).self::NS_SEPARATOR;
         $this->namespaces[$namespace] = $this->normalizeDirectory($directory);
+
         return $this;
     }
 
     /**
-     * Register many namespace/directory pairs at once
+     * Register many namespace/directory pairs at once.
      *
-     * @param  array $namespaces
+     * @param array $namespaces
+     *
      * @return Zend_Loader_StandardAutoloader
      */
     public function registerNamespaces($namespaces)
@@ -181,27 +188,31 @@ class Zend_Loader_StandardAutoloader implements Zend_Loader_SplAutoloader
         foreach ($namespaces as $namespace => $directory) {
             $this->registerNamespace($namespace, $directory);
         }
+
         return $this;
     }
 
     /**
-     * Register a prefix/directory pair
+     * Register a prefix/directory pair.
      *
-     * @param  string $prefix
-     * @param  string $directory
+     * @param string $prefix
+     * @param string $directory
+     *
      * @return Zend_Loader_StandardAutoloader
      */
     public function registerPrefix($prefix, $directory)
     {
-        $prefix = rtrim((string) $prefix, self::PREFIX_SEPARATOR). self::PREFIX_SEPARATOR;
+        $prefix = rtrim((string) $prefix, self::PREFIX_SEPARATOR).self::PREFIX_SEPARATOR;
         $this->prefixes[$prefix] = $this->normalizeDirectory($directory);
+
         return $this;
     }
 
     /**
-     * Register many namespace/directory pairs at once
+     * Register many namespace/directory pairs at once.
      *
-     * @param  array $prefixes
+     * @param array $prefixes
+     *
      * @return Zend_Loader_StandardAutoloader
      */
     public function registerPrefixes($prefixes)
@@ -214,13 +225,15 @@ class Zend_Loader_StandardAutoloader implements Zend_Loader_SplAutoloader
         foreach ($prefixes as $prefix => $directory) {
             $this->registerPrefix($prefix, $directory);
         }
+
         return $this;
     }
 
     /**
-     * Defined by Autoloadable; autoload a class
+     * Defined by Autoloadable; autoload a class.
      *
-     * @param  string $class
+     * @param string $class
+     *
      * @return false|string
      */
     public function autoload($class)
@@ -232,6 +245,7 @@ class Zend_Loader_StandardAutoloader implements Zend_Loader_SplAutoloader
             } elseif ($isFallback) {
                 return $this->loadClass($class, self::ACT_AS_FALLBACK);
             }
+
             return false;
         }
         if (false !== strpos((string) $class, self::PREFIX_SEPARATOR)) {
@@ -240,32 +254,32 @@ class Zend_Loader_StandardAutoloader implements Zend_Loader_SplAutoloader
             } elseif ($isFallback) {
                 return $this->loadClass($class, self::ACT_AS_FALLBACK);
             }
+
             return false;
         }
         if ($isFallback) {
             return $this->loadClass($class, self::ACT_AS_FALLBACK);
         }
+
         return false;
     }
 
     /**
-     * Register the autoloader with spl_autoload
+     * Register the autoloader with spl_autoload.
      *
      * @return void
      */
     public function register()
     {
-        spl_autoload_register(array($this, 'autoload'));
+        spl_autoload_register([$this, 'autoload']);
     }
 
     /**
-     * Error handler
+     * Error handler.
      *
      * Used by {@link loadClass} during fallback autoloading in PHP versions
      * prior to 5.3.0.
      *
-     * @param mixed $errno
-     * @param mixed $errstr
      * @return void
      */
     public function handleError($errno, $errstr)
@@ -274,60 +288,64 @@ class Zend_Loader_StandardAutoloader implements Zend_Loader_SplAutoloader
     }
 
     /**
-     * Transform the class name to a filename
+     * Transform the class name to a filename.
      *
-     * @param  string $class
-     * @param  string $directory
+     * @param string $class
+     * @param string $directory
+     *
      * @return string
      */
     protected function transformClassNameToFilename($class, $directory)
     {
         // $class may contain a namespace portion, in  which case we need
         // to preserve any underscores in that portion.
-        $matches = array();
+        $matches = [];
         preg_match('/(?P<namespace>.+\\\)?(?P<class>[^\\\]+$)/', $class, $matches);
 
-        $class     = (isset($matches['class'])) ? $matches['class'] : '';
+        $class = (isset($matches['class'])) ? $matches['class'] : '';
         $namespace = (isset($matches['namespace'])) ? $matches['namespace'] : '';
 
         return $directory
-             . str_replace((string) self::NS_SEPARATOR, '/', $namespace)
-             . str_replace((string) self::PREFIX_SEPARATOR, '/', $class)
-             . '.php';
+             .str_replace((string) self::NS_SEPARATOR, '/', $namespace)
+             .str_replace((string) self::PREFIX_SEPARATOR, '/', $class)
+             .'.php';
     }
 
     /**
-     * Load a class, based on its type (namespaced or prefixed)
+     * Load a class, based on its type (namespaced or prefixed).
      *
-     * @param  string $class
-     * @param  string $type
+     * @param string $class
+     * @param string $type
+     *
      * @return void
      */
     protected function loadClass($class, $type)
     {
-        if (!in_array($type, array(self::LOAD_NS, self::LOAD_PREFIX, self::ACT_AS_FALLBACK))) {
+        if (!in_array($type, [self::LOAD_NS, self::LOAD_PREFIX, self::ACT_AS_FALLBACK])) {
             // require_once __DIR__ . '/Exception/InvalidArgumentException.php';
             throw new Zend_Loader_Exception_InvalidArgumentException();
         }
 
         // Fallback autoloading
-        if ($type === self::ACT_AS_FALLBACK) {
+        if (self::ACT_AS_FALLBACK === $type) {
             // create filename
             $filename = $this->transformClassNameToFilename($class, '');
             if (PHP_VERSION_ID >= 50302) {
                 $resolvedName = stream_resolve_include_path($filename);
-                if ($resolvedName !== false) {
+                if (false !== $resolvedName) {
                     return include $resolvedName;
                 }
+
                 return false;
             }
             $this->error = false;
-            set_error_handler(array($this, 'handleError'), E_WARNING);
+            set_error_handler([$this, 'handleError'], E_WARNING);
             include $filename;
             restore_error_handler();
             if ($this->error) {
                 return false;
             }
+
             return class_exists($class, false);
         }
 
@@ -342,27 +360,31 @@ class Zend_Loader_StandardAutoloader implements Zend_Loader_SplAutoloader
                 if (file_exists((string) $filename)) {
                     return include $filename;
                 }
+
                 return false;
             }
         }
+
         return false;
     }
 
     /**
-     * Normalize the directory to include a trailing directory separator
+     * Normalize the directory to include a trailing directory separator.
      *
-     * @param  string $directory
+     * @param string $directory
+     *
      * @return string
      */
     protected function normalizeDirectory($directory)
     {
         $last = $directory[strlen((string) $directory) - 1];
-        if (in_array($last, array('/', '\\'))) {
+        if (in_array($last, ['/', '\\'])) {
             $directory[strlen((string) $directory) - 1] = DIRECTORY_SEPARATOR;
+
             return $directory;
         }
         $directory .= DIRECTORY_SEPARATOR;
+
         return $directory;
     }
-
 }

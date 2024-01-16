@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata_Analytics
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,29 +25,29 @@
 
 /**
  * @category   Zend
- * @package    Zend_Gdata_Analytics
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Analytics
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_Analytics_DataFeedTest extends PHPUnit_Framework_TestCase
 {
-    public $testData = array(
+    public $testData = [
         'foobarbaz.de' => 12,
         'foobar.de' => 3,
         'foobarbaz.ch' => 1,
         'baz.ch' => 1,
-    );
+    ];
     /** @var DataFeed */
     public $dataFeed;
 
     public function setUp()
     {
         $this->dataFeed = new Zend_Gdata_Analytics_DataFeed(
-            file_get_contents(__DIR__ . '/_files/TestDataFeed.xml')
+            file_get_contents(__DIR__.'/_files/TestDataFeed.xml')
         );
     }
 

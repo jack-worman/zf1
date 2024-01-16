@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Server
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version $Id$
  */
 
@@ -27,38 +27,41 @@
 // require_once 'Zend/Server/Reflection/ReturnValue.php';
 
 /**
- * Test case for Zend_Server_Reflection_Prototype
+ * Test case for Zend_Server_Reflection_Prototype.
  *
  * @category   Zend
- * @package    Zend_Server
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Server
  */
 #[AllowDynamicProperties]
 class Zend_Server_Reflection_PrototypeTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_Server_Reflection_Prototype object
+     * Zend_Server_Reflection_Prototype object.
+     *
      * @var Zend_Server_Reflection_Prototype
      */
     protected $_r;
 
     /**
-     * Array of ReflectionParameters
+     * Array of ReflectionParameters.
+     *
      * @var array
      */
     protected $_parametersRaw;
 
     /**
-     * Array of Zend_Server_Reflection_Parameters
+     * Array of Zend_Server_Reflection_Parameters.
+     *
      * @var array
      */
     protected $_parameters;
 
     /**
-     * Setup environment
+     * Setup environment.
      */
     public function setUp()
     {
@@ -67,7 +70,7 @@ class Zend_Server_Reflection_PrototypeTest extends PHPUnit_Framework_TestCase
         $parameters = $method->getParameters();
         $this->_parametersRaw = $parameters;
 
-        $fParameters = array();
+        $fParameters = [];
         foreach ($parameters as $p) {
             $fParameters[] = new Zend_Server_Reflection_Parameter($p);
         }
@@ -77,7 +80,7 @@ class Zend_Server_Reflection_PrototypeTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Teardown environment
+     * Teardown environment.
      */
     public function tearDown()
     {
@@ -87,7 +90,7 @@ class Zend_Server_Reflection_PrototypeTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * __construct() test
+     * __construct() test.
      *
      * Call as method call
      *
@@ -97,27 +100,27 @@ class Zend_Server_Reflection_PrototypeTest extends PHPUnit_Framework_TestCase
      *
      * Returns: void
      */
-    public function test__construct()
+    public function testConstruct()
     {
         $this->assertTrue($this->_r instanceof Zend_Server_Reflection_Prototype);
 
         try {
             $r1 = new Zend_Server_Reflection_Prototype($this->_r->getReturnValue(), $this->_parametersRaw);
             $this->fail('Construction should only accept Z_S_R_Parameters');
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             // do nothing
         }
 
         try {
             $r1 = new Zend_Server_Reflection_Prototype($this->_r->getReturnValue(), 'string');
             $this->fail('Construction requires an array of parameters');
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             // do nothing
         }
     }
 
     /**
-     * getReturnType() test
+     * getReturnType() test.
      *
      * Call as method call
      *
@@ -129,7 +132,7 @@ class Zend_Server_Reflection_PrototypeTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * getReturnValue() test
+     * getReturnValue() test.
      *
      * Call as method call
      *
@@ -141,7 +144,7 @@ class Zend_Server_Reflection_PrototypeTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * getParameters() test
+     * getParameters() test.
      *
      * Call as method call
      *

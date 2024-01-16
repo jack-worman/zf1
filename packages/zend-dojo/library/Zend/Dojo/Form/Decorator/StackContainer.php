@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Form
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -22,23 +22,23 @@
 // require_once 'Zend/Dojo/Form/Decorator/DijitContainer.php';
 
 /**
- * StackContainer
+ * StackContainer.
  *
  * Render a dijit StackContainer
  *
  * @uses       Zend_Dojo_Form_Decorator_DijitContainer
- * @package    Zend_Dojo
- * @subpackage Form_Decorator
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 class Zend_Dojo_Form_Decorator_StackContainer extends Zend_Dojo_Form_Decorator_DijitContainer
 {
     /**
-     * View helper
+     * View helper.
+     *
      * @var string
      */
     protected $_helper = 'StackContainer';
 }
-

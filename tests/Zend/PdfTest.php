@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Pdf
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 /**
@@ -31,10 +31,10 @@
 
 /**
  * @category   Zend
- * @package    Zend_Pdf
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Pdf
  */
 #[AllowDynamicProperties]
@@ -47,26 +47,26 @@ class Zend_PdfTest extends PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->_pdf = Zend_Pdf::load(__DIR__ . '/Pdf/_files/PdfWithFields.pdf');
+        $this->_pdf = Zend_Pdf::load(__DIR__.'/Pdf/_files/PdfWithFields.pdf');
     }
 
     /**
-     * PDF with text fields must return array of text field names
+     * PDF with text fields must return array of text field names.
      */
     public function testGetTextFieldNames()
     {
         $fieldNames = $this->_pdf->getTextFieldNames();
-        $this->assertEquals(array('Field1', 'Field2'), $fieldNames);
+        $this->assertEquals(['Field1', 'Field2'], $fieldNames);
     }
 
     /**
-     * PDF with no text fields must return empty array
+     * PDF with no text fields must return empty array.
      */
     public function testGetTextFieldNamesNoFieldsEmptyArray()
     {
-        $pdf        = new Zend_Pdf();
+        $pdf = new Zend_Pdf();
         $fieldNames = $pdf->getTextFieldNames();
-        $this->assertEquals(array(), $fieldNames);
+        $this->assertEquals([], $fieldNames);
     }
 
     public function testSetTextField()
@@ -74,15 +74,16 @@ class Zend_PdfTest extends PHPUnit_Framework_TestCase
         try {
             $this->_pdf->setTextField('Field1', 'Value1');
             $this->assertTrue(true); // in case of --strict
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->fail('Failed to set an existing text field');
         }
     }
 
     /**
-     * Asserts: Setting a non-existent field shouls throw an exception
+     * Asserts: Setting a non-existent field shouls throw an exception.
      *
-     * @expectedException Zend_Pdf_Exception
+     * @expectedException \Zend_Pdf_Exception
+     *
      * @expectedExceptionMessage Field 'FieldNotExists' does not exist or is not
      *                           a textfield
      */
@@ -95,29 +96,30 @@ class Zend_PdfTest extends PHPUnit_Framework_TestCase
     {
         try {
             $this->_pdf->setTextFieldProperties(
-                    'Field1', Zend_Pdf::PDF_FORM_FIELD_READONLY
+                'Field1', Zend_Pdf::PDF_FORM_FIELD_READONLY
             );
             $this->_pdf->setTextFieldProperties(
-                    'Field1', Zend_Pdf::PDF_FORM_FIELD_REQUIRED
+                'Field1', Zend_Pdf::PDF_FORM_FIELD_REQUIRED
             );
             $this->_pdf->setTextFieldProperties(
-                    'Field1', Zend_Pdf::PDF_FORM_FIELD_NOEXPORT
+                'Field1', Zend_Pdf::PDF_FORM_FIELD_NOEXPORT
             );
             $this->_pdf->setTextFieldProperties(
-                    'Field1', Zend_Pdf::PDF_FORM_FIELD_READONLY
-                    | Zend_Pdf::PDF_FORM_FIELD_REQUIRED
-                    | Zend_Pdf::PDF_FORM_FIELD_NOEXPORT
+                'Field1', Zend_Pdf::PDF_FORM_FIELD_READONLY
+                | Zend_Pdf::PDF_FORM_FIELD_REQUIRED
+                | Zend_Pdf::PDF_FORM_FIELD_NOEXPORT
             );
             $this->assertTrue(true); // in case of --strict
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->fail('Failed to set property of an existing text field');
         }
     }
 
     /**
-     * Asserts setting property of non-existent field shouls throw an exception
+     * Asserts setting property of non-existent field shouls throw an exception.
      *
-     * @expectedException Zend_Pdf_Exception
+     * @expectedException \Zend_Pdf_Exception
+     *
      * @expectedExceptionMessage Field 'FieldNotExists' does not exist or is not
      *                           a textfield
      */
@@ -134,15 +136,16 @@ class Zend_PdfTest extends PHPUnit_Framework_TestCase
             $this->_pdf->markTextFieldAsReadOnly('Field1');
             $this->_pdf->markTextFieldAsReadOnly('Field2');
             $this->assertTrue(true); // in case of --strict
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->fail('Failed to set an existing text field as read-only');
         }
     }
 
     /**
-     * Asserts setting property of non-existent field shouls throw an exception
+     * Asserts setting property of non-existent field shouls throw an exception.
      *
-     * @expectedException Zend_Pdf_Exception
+     * @expectedException \Zend_Pdf_Exception
+     *
      * @expectedExceptionMessage Field 'FieldNotExists' does not exist or is not
      *                           a textfield
      */
@@ -180,7 +183,7 @@ class Zend_PdfTest extends PHPUnit_Framework_TestCase
     {
         // setting string value is possible
         $pdf = new Zend_Pdf();
-        $javaScriptArray = array('print();', 'alert();');
+        $javaScriptArray = ['print();', 'alert();'];
         $pdf->setJavaScript($javaScriptArray);
         $this->assertEquals($javaScriptArray, $pdf->getJavaScript());
     }
@@ -198,16 +201,17 @@ class Zend_PdfTest extends PHPUnit_Framework_TestCase
     {
         // adding JavaScript appends previously added JavaScript
         $pdf = new Zend_Pdf();
-        $javaScriptArray = array('print();', 'alert();');
+        $javaScriptArray = ['print();', 'alert();'];
         $pdf->addJavaScript($javaScriptArray[0]);
         $pdf->addJavaScript($javaScriptArray[1]);
         $this->assertEquals($javaScriptArray, $pdf->getJavaScript());
     }
 
     /**
-     * Asserts setting empty JavaScript string throws exception
+     * Asserts setting empty JavaScript string throws exception.
      *
-     * @expectedException Zend_Pdf_Exception
+     * @expectedException \Zend_Pdf_Exception
+     *
      * @expectedExceptionMessage JavaScript must be a non empty string or array
      *                           of strings
      */
@@ -218,22 +222,23 @@ class Zend_PdfTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Asserts setting empty JavaScript array throws exception
+     * Asserts setting empty JavaScript array throws exception.
      *
-     * @expectedException Zend_Pdf_Exception
+     * @expectedException \Zend_Pdf_Exception
+     *
      * @expectedExceptionMessage JavaScript must be a non empty string or array
      *                           of strings
      */
     public function testSetJavaScriptEmptyArray()
     {
         $pdf = new Zend_Pdf();
-        $pdf->setJavaScript(array());
+        $pdf->setJavaScript([]);
     }
 
     public function testSetAndSaveLoadAndGetJavaScript()
     {
         $tempFile = tempnam(sys_get_temp_dir(), 'PdfUnitFile');
-        $javaScript = array('print();', 'alert();');
+        $javaScript = ['print();', 'alert();'];
 
         $pdf = new Zend_Pdf();
         $pdf->setJavaScript($javaScript);
@@ -249,7 +254,7 @@ class Zend_PdfTest extends PHPUnit_Framework_TestCase
     public function testSetAndSaveLoadAndResetAndSaveLoadAndGetJavaScript()
     {
         $tempFile = tempnam(sys_get_temp_dir(), 'PdfUnitFile');
-        $javaScript = array('print();', 'alert();');
+        $javaScript = ['print();', 'alert();'];
 
         $pdf = new Zend_Pdf();
         $pdf->setJavaScript($javaScript);

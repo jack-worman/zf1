@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,24 +13,24 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Ldap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Ldap_OnlineTestCase
+ * Zend_Ldap_OnlineTestCase.
  */
-require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'OnlineTestCase.php';
+require_once dirname(__DIR__).DIRECTORY_SEPARATOR.'OnlineTestCase.php';
 
 /**
  * @category   Zend
- * @package    Zend_Ldap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Ldap
  * @group      Zend_Ldap_Node
  */
@@ -39,8 +39,8 @@ class Zend_Ldap_Node_RootDseTest extends Zend_Ldap_OnlineTestCase
 {
     public function testLoadRootDseNode()
     {
-        $root1=$this->_getLdap()->getRootDse();
-        $root2=$this->_getLdap()->getRootDse();
+        $root1 = $this->_getLdap()->getRootDse();
+        $root2 = $this->_getLdap()->getRootDse();
 
         $this->assertEquals($root1, $root2);
         $this->assertSame($root1, $root2);
@@ -48,48 +48,48 @@ class Zend_Ldap_Node_RootDseTest extends Zend_Ldap_OnlineTestCase
 
     public function testSupportCheckMethods()
     {
-        $root=$this->_getLdap()->getRootDse();
+        $root = $this->_getLdap()->getRootDse();
 
         $this->assertTrue(is_bool($root->supportsSaslMechanism('GSSAPI')));
-        $this->assertTrue(is_bool($root->supportsSaslMechanism(array('GSSAPI', 'DIGEST-MD5'))));
+        $this->assertTrue(is_bool($root->supportsSaslMechanism(['GSSAPI', 'DIGEST-MD5'])));
         $this->assertTrue(is_bool($root->supportsVersion('3')));
         $this->assertTrue(is_bool($root->supportsVersion(3)));
-        $this->assertTrue(is_bool($root->supportsVersion(array('3', '2'))));
-        $this->assertTrue(is_bool($root->supportsVersion(array(3, 2))));
+        $this->assertTrue(is_bool($root->supportsVersion(['3', '2'])));
+        $this->assertTrue(is_bool($root->supportsVersion([3, 2])));
 
         switch ($root->getServerType()) {
             case Zend_Ldap_Node_RootDse::SERVER_TYPE_ACTIVEDIRECTORY:
                 $this->assertTrue(is_bool($root->supportsControl('1.2.840.113556.1.4.319')));
-                $this->assertTrue(is_bool($root->supportsControl(array('1.2.840.113556.1.4.319',
-                    '1.2.840.113556.1.4.473'))));
+                $this->assertTrue(is_bool($root->supportsControl(['1.2.840.113556.1.4.319',
+                    '1.2.840.113556.1.4.473'])));
                 $this->assertTrue(is_bool($root->supportsCapability('1.3.6.1.4.1.4203.1.9.1.1')));
-                $this->assertTrue(is_bool($root->supportsCapability(array('1.3.6.1.4.1.4203.1.9.1.1',
-                    '2.16.840.1.113730.3.4.18'))));
+                $this->assertTrue(is_bool($root->supportsCapability(['1.3.6.1.4.1.4203.1.9.1.1',
+                    '2.16.840.1.113730.3.4.18'])));
                 $this->assertTrue(is_bool($root->supportsPolicy('unknown')));
-                $this->assertTrue(is_bool($root->supportsPolicy(array('unknown', 'unknown'))));
+                $this->assertTrue(is_bool($root->supportsPolicy(['unknown', 'unknown'])));
                 break;
             case Zend_Ldap_Node_RootDse::SERVER_TYPE_EDIRECTORY:
                 $this->assertTrue(is_bool($root->supportsExtension('1.3.6.1.4.1.1466.20037')));
-                $this->assertTrue(is_bool($root->supportsExtension(array('1.3.6.1.4.1.1466.20037',
-                    '1.3.6.1.4.1.4203.1.11.1'))));
+                $this->assertTrue(is_bool($root->supportsExtension(['1.3.6.1.4.1.1466.20037',
+                    '1.3.6.1.4.1.4203.1.11.1'])));
                 break;
             case Zend_Ldap_Node_RootDse::SERVER_TYPE_OPENLDAP:
                 $this->assertTrue(is_bool($root->supportsControl('1.3.6.1.4.1.4203.1.9.1.1')));
-                $this->assertTrue(is_bool($root->supportsControl(array('1.3.6.1.4.1.4203.1.9.1.1',
-                    '2.16.840.1.113730.3.4.18'))));
+                $this->assertTrue(is_bool($root->supportsControl(['1.3.6.1.4.1.4203.1.9.1.1',
+                    '2.16.840.1.113730.3.4.18'])));
                 $this->assertTrue(is_bool($root->supportsExtension('1.3.6.1.4.1.1466.20037')));
-                $this->assertTrue(is_bool($root->supportsExtension(array('1.3.6.1.4.1.1466.20037',
-                    '1.3.6.1.4.1.4203.1.11.1'))));
+                $this->assertTrue(is_bool($root->supportsExtension(['1.3.6.1.4.1.1466.20037',
+                    '1.3.6.1.4.1.4203.1.11.1'])));
                 $this->assertTrue(is_bool($root->supportsFeature('1.3.6.1.1.14')));
-                $this->assertTrue(is_bool($root->supportsFeature(array('1.3.6.1.1.14',
-                    '1.3.6.1.4.1.4203.1.5.1'))));
+                $this->assertTrue(is_bool($root->supportsFeature(['1.3.6.1.1.14',
+                    '1.3.6.1.4.1.4203.1.5.1'])));
                 break;
         }
     }
 
     public function testGetters()
     {
-        $root=$this->_getLdap()->getRootDse();
+        $root = $this->_getLdap()->getRootDse();
 
         $this->assertTrue(is_array($root->getNamingContexts()));
         $this->assertTrue(is_array($root->getSubschemaSubentry()));
@@ -133,7 +133,7 @@ class Zend_Ldap_Node_RootDseTest extends Zend_Ldap_OnlineTestCase
 
     protected function _assertNullOrString($value)
     {
-        if ($value===null) {
+        if (null === $value) {
             $this->assertNull($value);
         } else {
             $this->assertTrue(is_string($value));
@@ -141,38 +141,38 @@ class Zend_Ldap_Node_RootDseTest extends Zend_Ldap_OnlineTestCase
     }
 
     /**
-     * @expectedException BadMethodCallException
+     * @expectedException \BadMethodCallException
      */
     public function testSetterWillThrowException()
     {
-          $root=$this->_getLdap()->getRootDse();
-          $root->objectClass='illegal';
+        $root = $this->_getLdap()->getRootDse();
+        $root->objectClass = 'illegal';
     }
 
     /**
-     * @expectedException BadMethodCallException
+     * @expectedException \BadMethodCallException
      */
     public function testOffsetSetWillThrowException()
     {
-          $root=$this->_getLdap()->getRootDse();
-          $root['objectClass']='illegal';
+        $root = $this->_getLdap()->getRootDse();
+        $root['objectClass'] = 'illegal';
     }
 
     /**
-     * @expectedException BadMethodCallException
+     * @expectedException \BadMethodCallException
      */
     public function testUnsetterWillThrowException()
     {
-          $root=$this->_getLdap()->getRootDse();
-          unset($root->objectClass);
+        $root = $this->_getLdap()->getRootDse();
+        unset($root->objectClass);
     }
 
     /**
-     * @expectedException BadMethodCallException
+     * @expectedException \BadMethodCallException
      */
     public function testOffsetUnsetWillThrowException()
     {
-          $root=$this->_getLdap()->getRootDse();
-          unset($root['objectClass']);
+        $root = $this->_getLdap()->getRootDse();
+        unset($root['objectClass']);
     }
 }

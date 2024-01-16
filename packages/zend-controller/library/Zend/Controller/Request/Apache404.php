@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Controller
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,7 +27,7 @@
 // require_once 'Zend/Uri.php';
 
 /**
- * Zend_Controller_Request_Apache404
+ * Zend_Controller_Request_Apache404.
  *
  * HTTP request object for use with Zend_Controller family. Extends basic HTTP
  * request object to allow for two edge cases when using Apache:
@@ -37,15 +38,13 @@
  * REQUEST_URI.
  *
  * @uses       Zend_Controller_Request_Http
- * @package    Zend_Controller
- * @subpackage Request
  */
 class Zend_Controller_Request_Apache404 extends Zend_Controller_Request_Http
 {
     public function setRequestUri($requestUri = null)
     {
         $parseUriGetVars = false;
-        if ($requestUri === null) {
+        if (null === $requestUri) {
             if (isset($_SERVER['HTTP_X_REWRITE_URL'])) { // check this first so IIS will catch
                 $requestUri = $_SERVER['HTTP_X_REWRITE_URL'];
             } elseif (isset($_SERVER['REDIRECT_URL'])) {  // Check if using mod_rewrite
@@ -58,7 +57,7 @@ class Zend_Controller_Request_Apache404 extends Zend_Controller_Request_Http
             } elseif (isset($_SERVER['ORIG_PATH_INFO'])) { // IIS 5.0, PHP as CGI
                 $requestUri = $_SERVER['ORIG_PATH_INFO'];
                 if (!empty($_SERVER['QUERY_STRING'])) {
-                    $requestUri .= '?' . $_SERVER['QUERY_STRING'];
+                    $requestUri .= '?'.$_SERVER['QUERY_STRING'];
                 }
             } else {
                 return $this;
@@ -77,6 +76,7 @@ class Zend_Controller_Request_Apache404 extends Zend_Controller_Request_Http
         }
 
         $this->_requestUri = $requestUri;
+
         return $this;
     }
 }

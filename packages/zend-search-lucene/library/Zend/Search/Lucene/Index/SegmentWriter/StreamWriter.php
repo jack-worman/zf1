@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Index
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,8 +25,7 @@
 
 /**
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Index
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -35,7 +34,6 @@ class Zend_Search_Lucene_Index_SegmentWriter_StreamWriter extends Zend_Search_Lu
     /**
      * Object constructor.
      *
-     * @param Zend_Search_Lucene_Storage_Directory $directory
      * @param string $name
      */
     public function __construct(Zend_Search_Lucene_Storage_Directory $directory, $name)
@@ -43,17 +41,16 @@ class Zend_Search_Lucene_Index_SegmentWriter_StreamWriter extends Zend_Search_Lu
         parent::__construct($directory, $name);
     }
 
-
     /**
-     * Create stored fields files and open them for write
+     * Create stored fields files and open them for write.
      */
     public function createStoredFieldsFiles()
     {
-        $this->_fdxFile = $this->_directory->createFile($this->_name . '.fdx');
-        $this->_fdtFile = $this->_directory->createFile($this->_name . '.fdt');
+        $this->_fdxFile = $this->_directory->createFile($this->_name.'.fdx');
+        $this->_fdtFile = $this->_directory->createFile($this->_name.'.fdt');
 
-        $this->_files[] = $this->_name . '.fdx';
-        $this->_files[] = $this->_name . '.fdt';
+        $this->_files[] = $this->_name.'.fdx';
+        $this->_files[] = $this->_name.'.fdt';
     }
 
     public function addNorm($fieldName, $normVector)
@@ -66,29 +63,28 @@ class Zend_Search_Lucene_Index_SegmentWriter_StreamWriter extends Zend_Search_Lu
     }
 
     /**
-     * Close segment, write it to disk and return segment info
+     * Close segment, write it to disk and return segment info.
      *
      * @return Zend_Search_Lucene_Index_SegmentInfo
      */
     public function close()
     {
-        if ($this->_docCount == 0) {
+        if (0 == $this->_docCount) {
             return null;
         }
 
         $this->_dumpFNM();
         $this->_generateCFS();
 
-        /** Zend_Search_Lucene_Index_SegmentInfo */
+        /* Zend_Search_Lucene_Index_SegmentInfo */
         // require_once 'Zend/Search/Lucene/Index/SegmentInfo.php';
 
         return new Zend_Search_Lucene_Index_SegmentInfo($this->_directory,
-                                                        $this->_name,
-                                                        $this->_docCount,
-                                                        -1,
-                                                        null,
-                                                        true,
-                                                        true);
+            $this->_name,
+            $this->_docCount,
+            -1,
+            null,
+            true,
+            true);
     }
 }
-

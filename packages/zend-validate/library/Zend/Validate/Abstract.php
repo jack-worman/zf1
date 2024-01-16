@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,7 +27,7 @@
 
 /**
  * @category   Zend
- * @package    Zend_Validate
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -34,75 +35,78 @@
 abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
 {
     /**
-     * The value to be validated
-     *
-     * @var mixed
+     * The value to be validated.
      */
     protected $_value;
 
     /**
-     * Additional variables available for validation failure messages
+     * Additional variables available for validation failure messages.
      *
      * @var array
      */
-    protected $_messageVariables = array();
+    protected $_messageVariables = [];
 
     /**
-     * Validation failure message template definitions
+     * Validation failure message template definitions.
      *
      * @var array
      */
-    protected $_messageTemplates = array();
+    protected $_messageTemplates = [];
 
     /**
-     * Array of validation failure messages
+     * Array of validation failure messages.
      *
      * @var array
      */
-    protected $_messages = array();
+    protected $_messages = [];
 
     /**
      * Flag indidcating whether or not value should be obfuscated in error
-     * messages
+     * messages.
+     *
      * @var bool
      */
     protected $_obscureValue = false;
 
     /**
-     * Array of validation failure message codes
+     * Array of validation failure message codes.
      *
      * @var array
+     *
      * @deprecated Since 1.5.0
      */
-    protected $_errors = array();
+    protected $_errors = [];
 
     /**
-     * Translation object
+     * Translation object.
+     *
      * @var Zend_Translate
      */
     protected $_translator;
 
     /**
-     * Default translation object for all validate objects
+     * Default translation object for all validate objects.
+     *
      * @var Zend_Translate
      */
     protected static $_defaultTranslator;
 
     /**
      * Is translation disabled?
-     * @var Boolean
+     *
+     * @var bool
      */
     protected $_translatorDisabled = false;
 
     /**
-     * Limits the maximum returned length of a error message
+     * Limits the maximum returned length of a error message.
      *
-     * @var Integer
+     * @var int
      */
     protected static $_messageLength = -1;
 
     /**
-     * Returns array of validation failure messages
+     * Returns array of validation failure messages.
      *
      * @return array
      */
@@ -112,7 +116,7 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
     }
 
     /**
-     * Returns an array of the names of variables that are used in constructing validation failure messages
+     * Returns an array of the names of variables that are used in constructing validation failure messages.
      *
      * @return array
      */
@@ -122,7 +126,7 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
     }
 
     /**
-     * Returns the message templates from the validator
+     * Returns the message templates from the validator.
      *
      * @return array
      */
@@ -132,20 +136,23 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
     }
 
     /**
-     * Sets the validation failure message template for a particular key
+     * Sets the validation failure message template for a particular key.
      *
-     * @param  string $messageString
-     * @param  string $messageKey     OPTIONAL
+     * @param string $messageString
+     * @param string $messageKey    OPTIONAL
+     *
      * @return Zend_Validate_Abstract Provides a fluent interface
+     *
      * @throws Zend_Validate_Exception
      */
     public function setMessage($messageString, $messageKey = null)
     {
-        if ($messageKey === null) {
+        if (null === $messageKey) {
             $keys = array_keys($this->_messageTemplates);
-            foreach($keys as $key) {
+            foreach ($keys as $key) {
                 $this->setMessage($messageString, $key);
             }
+
             return $this;
         }
 
@@ -155,6 +162,7 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
         }
 
         $this->_messageTemplates[$messageKey] = $messageString;
+
         return $this;
     }
 
@@ -162,7 +170,6 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
      * Sets validation failure message templates given as an array, where the array keys are the message keys,
      * and the array values are the message template strings.
      *
-     * @param  array $messages
      * @return Zend_Validate_Abstract
      */
     public function setMessages(array $messages)
@@ -170,6 +177,7 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
         foreach ($messages as $key => $message) {
             $this->setMessage($message, $key);
         }
+
         return $this;
     }
 
@@ -177,19 +185,19 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
      * Magic function returns the value of the requested property, if and only if it is the value or a
      * message variable.
      *
-     * @param  string $property
-     * @return mixed
+     * @param string $property
+     *
      * @throws Zend_Validate_Exception
      */
     public function __get($property)
     {
-        if ($property == 'value') {
+        if ('value' == $property) {
             return $this->_value;
         }
         if (array_key_exists($property, $this->_messageVariables)) {
             return $this->{$this->_messageVariables[$property]};
         }
-        /**
+        /*
          * @see Zend_Validate_Exception
          */
         // require_once 'Zend/Validate/Exception.php';
@@ -204,8 +212,9 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
      * If a translator is available and a translation exists for $messageKey,
      * the translation will be used.
      *
-     * @param  string $messageKey
-     * @param  string $value
+     * @param string $messageKey
+     * @param string $value
+     *
      * @return string
      */
     protected function _createMessage($messageKey, $value)
@@ -226,7 +235,7 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
 
         if (is_object($value)) {
             if (!in_array('__toString', get_class_methods($value))) {
-                $value = get_class($value) . ' object';
+                $value = get_class($value).' object';
             } else {
                 $value = $value->__toString();
             }
@@ -251,21 +260,20 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
 
         $length = self::getMessageLength();
         if (($length > -1) && (strlen((string) $message) > $length)) {
-            $message = substr((string) $message, 0, (self::getMessageLength() - 3)) . '...';
+            $message = substr((string) $message, 0, self::getMessageLength() - 3).'...';
         }
 
         return $message;
     }
 
     /**
-     * Joins elements of a multidimensional array
+     * Joins elements of a multidimensional array.
      *
-     * @param array $pieces
      * @return string
      */
     protected function _implodeRecursive(array $pieces)
     {
-        $values = array();
+        $values = [];
         foreach ($pieces as $item) {
             if (is_array($item)) {
                 $values[] = $this->_implodeRecursive($item);
@@ -278,40 +286,41 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
     }
 
     /**
-     * @param  string $messageKey
-     * @param  string $value      OPTIONAL
+     * @param string $messageKey
+     * @param string $value      OPTIONAL
+     *
      * @return void
      */
     protected function _error($messageKey, $value = null)
     {
-        if ($messageKey === null) {
+        if (null === $messageKey) {
             $keys = array_keys($this->_messageTemplates);
             $messageKey = current($keys);
         }
-        if ($value === null) {
+        if (null === $value) {
             $value = $this->_value;
         }
-        $this->_errors[]              = $messageKey;
+        $this->_errors[] = $messageKey;
         $this->_messages[$messageKey] = $this->_createMessage($messageKey, $value);
     }
 
     /**
-     * Sets the value to be validated and clears the messages and errors arrays
+     * Sets the value to be validated and clears the messages and errors arrays.
      *
-     * @param  mixed $value
      * @return void
      */
     protected function _setValue($value)
     {
-        $this->_value    = $value;
-        $this->_messages = array();
-        $this->_errors   = array();
+        $this->_value = $value;
+        $this->_messages = [];
+        $this->_errors = [];
     }
 
     /**
-     * Returns array of validation failure message codes
+     * Returns array of validation failure message codes.
      *
      * @return array
+     *
      * @deprecated Since 1.5.0
      */
     public function getErrors()
@@ -320,20 +329,22 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
     }
 
     /**
-     * Set flag indicating whether or not value should be obfuscated in messages
+     * Set flag indicating whether or not value should be obfuscated in messages.
      *
-     * @param  bool $flag
+     * @param bool $flag
+     *
      * @return Zend_Validate_Abstract
      */
     public function setObscureValue($flag)
     {
         $this->_obscureValue = (bool) $flag;
+
         return $this;
     }
 
     /**
      * Retrieve flag indicating whether or not value should be obfuscated in
-     * messages
+     * messages.
      *
      * @return bool
      */
@@ -343,11 +354,13 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
     }
 
     /**
-     * Set translation object
+     * Set translation object.
      *
-     * @param  Zend_Translate|Zend_Translate_Adapter|null $translator
-     * @throws Zend_Validate_Exception
+     * @param Zend_Translate|Zend_Translate_Adapter|null $translator
+     *
      * @return Zend_Validate_Abstract
+     *
+     * @throws Zend_Validate_Exception
      */
     public function setTranslator($translator = null)
     {
@@ -359,11 +372,12 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
             // require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception('Invalid translator specified');
         }
+
         return $this;
     }
 
     /**
-     * Return translation object
+     * Return translation object.
      *
      * @return Zend_Translate_Adapter|null
      */
@@ -387,13 +401,14 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
      */
     public function hasTranslator()
     {
-        return (bool)$this->_translator;
+        return (bool) $this->_translator;
     }
 
     /**
-     * Set default translation object for all validate objects
+     * Set default translation object for all validate objects.
      *
-     * @param  Zend_Translate|Zend_Translate_Adapter|null $translator
+     * @param Zend_Translate|Zend_Translate_Adapter|null $translator
+     *
      * @throws Zend_Validate_Exception
      */
     public static function setDefaultTranslator($translator = null)
@@ -409,7 +424,7 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
     }
 
     /**
-     * Get default translation object for all validate objects
+     * Get default translation object for all validate objects.
      *
      * @return Zend_Translate_Adapter|null
      */
@@ -433,22 +448,24 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
     /**
      * Is there a default translation object set?
      *
-     * @return boolean
+     * @return bool
      */
     public static function hasDefaultTranslator()
     {
-        return (bool)self::$_defaultTranslator;
+        return (bool) self::$_defaultTranslator;
     }
 
     /**
-     * Indicate whether or not translation should be disabled
+     * Indicate whether or not translation should be disabled.
      *
-     * @param  bool $flag
+     * @param bool $flag
+     *
      * @return Zend_Validate_Abstract
      */
     public function setDisableTranslator($flag)
     {
         $this->_translatorDisabled = (bool) $flag;
+
         return $this;
     }
 
@@ -463,9 +480,9 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
     }
 
     /**
-     * Returns the maximum allowed message length
+     * Returns the maximum allowed message length.
      *
-     * @return integer
+     * @return int
      */
     public static function getMessageLength()
     {
@@ -473,9 +490,9 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
     }
 
     /**
-     * Sets the maximum allowed message length
+     * Sets the maximum allowed message length.
      *
-     * @param integer $length
+     * @param int $length
      */
     public static function setMessageLength($length = -1)
     {

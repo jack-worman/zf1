@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,8 +27,7 @@
 
 /**
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
@@ -39,11 +38,10 @@
 #[AllowDynamicProperties]
 class Zend_Tool_Framework_Manifest_ActionMetadataTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * @var Zend_Tool_Framework_Manifest_ActionMetadata
      */
-    protected $_metadata = null;
+    protected $_metadata;
 
     public function setup()
     {
@@ -64,16 +62,16 @@ class Zend_Tool_Framework_Manifest_ActionMetadataTest extends PHPUnit_Framework_
     {
         $obj1 = new ArrayObject();
 
-        $metadata = new Zend_Tool_Framework_Manifest_ActionMetadata(array(
+        $metadata = new Zend_Tool_Framework_Manifest_ActionMetadata([
             'name' => 'Foo',
             'actionName' => 'BarBaz',
             'value' => 'Bar',
-            'reference' => $obj1
-            ));
+            'reference' => $obj1,
+            ]);
 
-        $this->assertEquals('Foo',       $metadata->getName());
-        $this->assertEquals('BarBaz',    $metadata->getActionName());
-        $this->assertEquals('Bar',       $metadata->getValue());
+        $this->assertEquals('Foo', $metadata->getName());
+        $this->assertEquals('BarBaz', $metadata->getActionName());
+        $this->assertEquals('Bar', $metadata->getValue());
         $this->assertTrue($obj1 === $metadata->getReference());
     }
 
@@ -81,16 +79,16 @@ class Zend_Tool_Framework_Manifest_ActionMetadataTest extends PHPUnit_Framework_
     {
         $obj1 = new ArrayObject();
 
-        $this->_metadata->setOptions(array(
+        $this->_metadata->setOptions([
             'name' => 'Foo',
             'actionName' => 'BarBaz',
             'value' => 'Bar',
-            'reference' => $obj1
-            ));
+            'reference' => $obj1,
+            ]);
 
-        $this->assertEquals('Foo',       $this->_metadata->getName());
-        $this->assertEquals('BarBaz',    $this->_metadata->getActionName());
-        $this->assertEquals('Bar',       $this->_metadata->getValue());
+        $this->assertEquals('Foo', $this->_metadata->getName());
+        $this->assertEquals('BarBaz', $this->_metadata->getActionName());
+        $this->assertEquals('Bar', $this->_metadata->getValue());
         $this->assertTrue($obj1 === $this->_metadata->getReference());
     }
 
@@ -104,14 +102,13 @@ class Zend_Tool_Framework_Manifest_ActionMetadataTest extends PHPUnit_Framework_
     {
         $obj1 = new ArrayObject();
 
-        $this->_metadata->setOptions(array(
+        $this->_metadata->setOptions([
             'name' => 'Foo',
             'actionName' => 'BarBaz',
             'value' => 'Bar',
-            'reference' => $obj1
-            ));
+            'reference' => $obj1,
+            ]);
 
         $this->assertEquals('Type: Action, Name: Foo, Value: Bar (ActionName: BarBaz)', (string) $this->_metadata);
     }
-
 }

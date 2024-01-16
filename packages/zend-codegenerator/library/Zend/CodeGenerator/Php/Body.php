@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_CodeGenerator
- * @subpackage PHP
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,32 +27,33 @@
 
 /**
  * @category   Zend
- * @package    Zend_CodeGenerator
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_CodeGenerator_Php_Body extends Zend_CodeGenerator_Abstract
 {
-
     /**
      * @var string
      */
-    protected $_content = null;
+    protected $_content;
 
     /**
-     * setContent()
+     * setContent().
      *
      * @param string $content
+     *
      * @return Zend_CodeGenerator_Php_Body
      */
     public function setContent($content)
     {
         $this->_content = $content;
+
         return $this;
     }
 
     /**
-     * getContent()
+     * getContent().
      *
      * @return string
      */
@@ -62,7 +63,7 @@ class Zend_CodeGenerator_Php_Body extends Zend_CodeGenerator_Abstract
     }
 
     /**
-     * generate()
+     * generate().
      *
      * @return string
      */

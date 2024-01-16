@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,60 +13,65 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Ldap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Ldap
+ * Zend_Ldap.
  */
 // require_once 'Zend/Ldap.php';
 
 /**
  * @category   Zend
- * @package    Zend_Ldap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Ldap
  */
 #[AllowDynamicProperties]
 class Zend_Ldap_OriginalCanonTest extends PHPUnit_Framework_TestCase
 {
-    protected $_options = null;
+    protected $_options;
     protected $_principalName = TESTS_ZEND_LDAP_PRINCIPAL_NAME;
-    protected $_names = array();
+    protected $_names = [];
 
     public function setUp()
     {
-        $this->_options = array(
+        $this->_options = [
             'host' => TESTS_ZEND_LDAP_HOST,
             'username' => TESTS_ZEND_LDAP_USERNAME,
             'password' => TESTS_ZEND_LDAP_PASSWORD,
             'baseDn' => TESTS_ZEND_LDAP_BASE_DN,
-        );
-        if (defined('TESTS_ZEND_LDAP_PORT') && TESTS_ZEND_LDAP_PORT != 389)
+        ];
+        if (defined('TESTS_ZEND_LDAP_PORT') && TESTS_ZEND_LDAP_PORT != 389) {
             $this->_options['port'] = TESTS_ZEND_LDAP_PORT;
-        if (defined('TESTS_ZEND_LDAP_USE_SSL'))
+        }
+        if (defined('TESTS_ZEND_LDAP_USE_SSL')) {
             $this->_options['useSsl'] = TESTS_ZEND_LDAP_USE_SSL;
-        if (defined('TESTS_ZEND_LDAP_BIND_REQUIRES_DN'))
+        }
+        if (defined('TESTS_ZEND_LDAP_BIND_REQUIRES_DN')) {
             $this->_options['bindRequiresDn'] = TESTS_ZEND_LDAP_BIND_REQUIRES_DN;
-        if (defined('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME'))
+        }
+        if (defined('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME')) {
             $this->_options['accountDomainName'] = TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME;
-        if (defined('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT'))
+        }
+        if (defined('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT')) {
             $this->_options['accountDomainNameShort'] = TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT;
+        }
         if (defined('TESTS_ZEND_LDAP_ALT_USERNAME')) {
             $this->_names[Zend_Ldap::ACCTNAME_FORM_USERNAME] = TESTS_ZEND_LDAP_ALT_USERNAME;
             if (defined('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME')) {
                 $this->_names[Zend_Ldap::ACCTNAME_FORM_PRINCIPAL] =
-                    TESTS_ZEND_LDAP_ALT_USERNAME . '@' . TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME;
+                    TESTS_ZEND_LDAP_ALT_USERNAME.'@'.TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME;
             }
             if (defined('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT')) {
                 $this->_names[Zend_Ldap::ACCTNAME_FORM_BACKSLASH] =
-                    TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT . '\\' . TESTS_ZEND_LDAP_ALT_USERNAME;
+                    TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT.'\\'.TESTS_ZEND_LDAP_ALT_USERNAME;
             }
         }
     }
@@ -87,6 +92,7 @@ class Zend_Ldap_OriginalCanonTest extends PHPUnit_Framework_TestCase
             }
         }
     }
+
     public function testInvalidAccountCanon()
     {
         $ldap = new Zend_Ldap($this->_options);
@@ -97,23 +103,26 @@ class Zend_Ldap_OriginalCanonTest extends PHPUnit_Framework_TestCase
             $this->assertTrue(strstr((string) $msg, 'Invalid credentials') || strstr((string) $msg, 'No such object'));
         }
     }
+
     public function testDnCanon()
     {
         $ldap = new Zend_Ldap($this->_options);
         $name = $ldap->getCanonicalAccountName(TESTS_ZEND_LDAP_ALT_DN, Zend_Ldap::ACCTNAME_FORM_DN);
     }
+
     public function testMismatchDomainBind()
     {
         $ldap = new Zend_Ldap($this->_options);
         try {
             $ldap->bind('BOGUS\\doesntmatter', 'doesntmatter');
         } catch (Zend_Ldap_Exception $zle) {
-            $this->assertTrue($zle->getCode() == Zend_Ldap_Exception::LDAP_X_DOMAIN_MISMATCH);
+            $this->assertTrue(Zend_Ldap_Exception::LDAP_X_DOMAIN_MISMATCH == $zle->getCode());
         }
     }
+
     public function testBindCanon()
     {
-        /**
+        /*
          * @todo test accountCanonicalForm option
          */
     }

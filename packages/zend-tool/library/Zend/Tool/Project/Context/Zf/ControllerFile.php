@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,27 +13,26 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage Framework
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * This class is the front most class for utilizing Zend_Tool_Project
+ * This class is the front most class for utilizing Zend_Tool_Project.
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
  * @category   Zend
- * @package    Zend_Tool
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Project_Context_Zf_ControllerFile extends Zend_Tool_Project_Context_Filesystem_File
 {
-
     /**
      * @var string
      */
@@ -42,7 +41,7 @@ class Zend_Tool_Project_Context_Zf_ControllerFile extends Zend_Tool_Project_Cont
     /**
      * @var string
      */
-    protected $_moduleName = null;
+    protected $_moduleName;
 
     /**
      * @var string
@@ -50,31 +49,30 @@ class Zend_Tool_Project_Context_Zf_ControllerFile extends Zend_Tool_Project_Cont
     protected $_filesystemName = 'controllerName';
 
     /**
-     * init()
-     *
+     * init().
      */
     public function init()
     {
         $this->_controllerName = $this->_resource->getAttribute('controllerName');
         $this->_moduleName = $this->_resource->getAttribute('moduleName');
-        $this->_filesystemName = ucfirst($this->_controllerName) . 'Controller.php';
+        $this->_filesystemName = ucfirst($this->_controllerName).'Controller.php';
         parent::init();
     }
 
     /**
-     * getPersistentAttributes
+     * getPersistentAttributes.
      *
      * @return array
      */
     public function getPersistentAttributes()
     {
-        return array(
-            'controllerName' => $this->getControllerName()
-            );
+        return [
+            'controllerName' => $this->getControllerName(),
+            ];
     }
 
     /**
-     * getName()
+     * getName().
      *
      * @return string
      */
@@ -84,7 +82,7 @@ class Zend_Tool_Project_Context_Zf_ControllerFile extends Zend_Tool_Project_Cont
     }
 
     /**
-     * getControllerName()
+     * getControllerName().
      *
      * @return string
      */
@@ -94,44 +92,42 @@ class Zend_Tool_Project_Context_Zf_ControllerFile extends Zend_Tool_Project_Cont
     }
 
     /**
-     * getContents()
+     * getContents().
      *
      * @return string
      */
     public function getContents()
     {
         $filter = new Zend_Filter_Word_DashToCamelCase();
-        
-        $className = ($this->_moduleName) ? $filter->filter(ucfirst($this->_moduleName)) . '_' : '';
-        $className .= ucfirst($this->_controllerName) . 'Controller';
 
-        $codeGenFile = new Zend_CodeGenerator_Php_File(array(
+        $className = ($this->_moduleName) ? $filter->filter(ucfirst($this->_moduleName)).'_' : '';
+        $className .= ucfirst($this->_controllerName).'Controller';
+
+        $codeGenFile = new Zend_CodeGenerator_Php_File([
             'fileName' => $this->getPath(),
-            'classes' => array(
-                new Zend_CodeGenerator_Php_Class(array(
+            'classes' => [
+                new Zend_CodeGenerator_Php_Class([
                     'name' => $className,
                     'extendedClass' => 'Zend_Controller_Action',
-                    'methods' => array(
-                        new Zend_CodeGenerator_Php_Method(array(
+                    'methods' => [
+                        new Zend_CodeGenerator_Php_Method([
                             'name' => 'init',
                             'body' => '/* Initialize action controller here */',
-                            ))
-                        )
-                    ))
-                )
-            ));
+                            ]),
+                        ],
+                    ]),
+                ],
+            ]);
 
-
-        if ($className == 'ErrorController') {
-
-            $codeGenFile = new Zend_CodeGenerator_Php_File(array(
+        if ('ErrorController' == $className) {
+            $codeGenFile = new Zend_CodeGenerator_Php_File([
                 'fileName' => $this->getPath(),
-                'classes' => array(
-                    new Zend_CodeGenerator_Php_Class(array(
+                'classes' => [
+                    new Zend_CodeGenerator_Php_Class([
                         'name' => $className,
                         'extendedClass' => 'Zend_Controller_Action',
-                        'methods' => array(
-                            new Zend_CodeGenerator_Php_Method(array(
+                        'methods' => [
+                            new Zend_CodeGenerator_Php_Method([
                                 'name' => 'errorAction',
                                 'body' => <<<EOS
 \$errors = \$this->_getParam('error_handler');
@@ -171,8 +167,8 @@ if (\$this->getInvokeArg('displayExceptions') == true) {
 
 \$this->view->request   = \$errors->request;
 EOS
-                                )),
-                            new Zend_CodeGenerator_Php_Method(array(
+                                ]),
+                            new Zend_CodeGenerator_Php_Method([
                                 'name' => 'getLog',
                                 'body' => <<<EOS
 \$bootstrap = \$this->getInvokeArg('bootstrap');
@@ -182,33 +178,33 @@ if (!\$bootstrap->hasResource('Log')) {
 \$log = \$bootstrap->getResource('Log');
 return \$log;
 EOS
-                                )),
-                            )
-                        ))
-                    )
-                ));
-
+                                ]),
+                            ],
+                        ]),
+                    ],
+                ]);
         }
 
         // store the generator into the registry so that the addAction command can use the same object later
         Zend_CodeGenerator_Php_File::registerFileCodeGenerator($codeGenFile); // REQUIRES filename to be set
+
         return $codeGenFile->generate();
     }
 
     /**
-     * addAction()
+     * addAction().
      *
      * @param string $actionName
      */
     public function addAction($actionName)
     {
         $classCodeGen = $this->getCodeGenerator();
-        $classCodeGen->setMethod(array('name' => $actionName . 'Action', 'body' => '        // action body here'));
+        $classCodeGen->setMethod(['name' => $actionName.'Action', 'body' => '        // action body here']);
         file_put_contents($this->getPath(), $classCodeGen->generate());
     }
 
     /**
-     * getCodeGenerator()
+     * getCodeGenerator().
      *
      * @return Zend_CodeGenerator_Php_Class
      */
@@ -217,7 +213,7 @@ EOS
         $codeGenFile = Zend_CodeGenerator_Php_File::fromReflectedFileName($this->getPath());
         $codeGenFileClasses = $codeGenFile->getClasses();
         $class = array_shift($codeGenFileClasses);
+
         return $class;
     }
-
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,8 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -22,26 +21,22 @@
 /** Zend_Service_ShortUrl_JdemCz */
 // require_once 'Zend/Service/ShortUrl/JdemCz.php';
 
-/**
- * @package  Zend_Service
- * @subpackage  UnitTests
- */
 #[AllowDynamicProperties]
 class Zend_Service_ShortUrl_JdemCzTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_Service_JdemCz object
+     * Zend_Service_JdemCz object.
      *
      * @var Zend_Service_JdemCz
      */
     protected $_s;
 
     /**
-     * Creates a new Zend_Service_JdemCz object for each test method
+     * Creates a new Zend_Service_JdemCz object for each test method.
      *
      * @return void
      */
-    public function setUp ()
+    public function setUp()
     {
         if (!defined('TESTS_ZEND_SERVICE_SHORTURL_JDEMCZ_ENABLED')
             || !constant('TESTS_ZEND_SERVICE_SHORTURL_JDEMCZ_ENABLED')
@@ -68,10 +63,10 @@ class Zend_Service_ShortUrl_JdemCzTest extends PHPUnit_Framework_TestCase
 
     public function testShorten()
     {
-        $urls = array(
-            'http://framework.zend.com/'           => 'http://jdem.cz/ab2l1',
-            'http://framework.zend.com/manual/en/' => 'http://jdem.cz/ab3z7'
-        );
+        $urls = [
+            'http://framework.zend.com/' => 'http://jdem.cz/ab2l1',
+            'http://framework.zend.com/manual/en/' => 'http://jdem.cz/ab3z7',
+        ];
 
         foreach ($urls as $url => $shortenedUrl) {
             $this->assertEquals($shortenedUrl, $this->_s->shorten($url));
@@ -80,10 +75,10 @@ class Zend_Service_ShortUrl_JdemCzTest extends PHPUnit_Framework_TestCase
 
     public function testUnshorten()
     {
-        $urls = array(
-            'http://framework.zend.com/'           => 'http://jdem.cz/ab2l1',
-            'http://framework.zend.com/manual/en/' => 'http://jdem.cz/ab3z7'
-        );
+        $urls = [
+            'http://framework.zend.com/' => 'http://jdem.cz/ab2l1',
+            'http://framework.zend.com/manual/en/' => 'http://jdem.cz/ab3z7',
+        ];
 
         foreach ($urls as $url => $shortenedUrl) {
             $this->assertEquals($url, $this->_s->unshorten($shortenedUrl));

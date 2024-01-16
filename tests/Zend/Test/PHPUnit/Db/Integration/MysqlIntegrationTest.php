@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,21 +13,21 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Test
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
-require_once "AbstractTestCase.php";
+require_once 'AbstractTestCase.php';
 
 /**
  * @category   Zend
- * @package    Zend_Test
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Test
  */
 #[AllowDynamicProperties]
@@ -37,29 +37,32 @@ class Zend_Test_PHPUnit_Db_Integration_MysqlIntegrationTest extends Zend_Test_PH
     {
         if (!TESTS_ZEND_DB_ADAPTER_PDO_MYSQL_ENABLED) {
             $this->markTestSkipped('Database tests are not enabled.');
+
             return;
         }
 
         if (!extension_loaded('pdo')) {
             $this->markTestSkipped('PDO is required for this test.');
+
             return;
         }
 
         if (!in_array('mysql', PDO::getAvailableDrivers())) {
             $this->markTestSkipped('Mysql is not included in PDO in this PHP installation.');
+
             return;
         }
 
-        $params = array(
-            'host'     => TESTS_ZEND_DB_ADAPTER_MYSQL_HOSTNAME,
+        $params = [
+            'host' => TESTS_ZEND_DB_ADAPTER_MYSQL_HOSTNAME,
             'username' => TESTS_ZEND_DB_ADAPTER_MYSQL_USERNAME,
             'password' => TESTS_ZEND_DB_ADAPTER_MYSQL_PASSWORD,
-            'dbname'   => TESTS_ZEND_DB_ADAPTER_MYSQL_DATABASE,
-        );
+            'dbname' => TESTS_ZEND_DB_ADAPTER_MYSQL_DATABASE,
+        ];
 
         $this->dbAdapter = Zend_Db::factory('pdo_mysql', $params);
-        $this->dbAdapter->query("DROP TABLE IF EXISTS foo");
-        $this->dbAdapter->query("DROP TABLE IF EXISTS bar");
+        $this->dbAdapter->query('DROP TABLE IF EXISTS foo');
+        $this->dbAdapter->query('DROP TABLE IF EXISTS bar');
         $this->dbAdapter->query(
             'CREATE TABLE foo (id INT(10) AUTO_INCREMENT PRIMARY KEY, foo VARCHAR(255), bar VARCHAR(255), baz VARCHAR(255)) AUTO_INCREMENT=1'
         );

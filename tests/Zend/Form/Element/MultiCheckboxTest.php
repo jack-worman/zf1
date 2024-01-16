@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,28 +13,28 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Form_Element_MultiCheckboxTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Form_Element_MultiCheckboxTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Form_Element_MultiCheckboxTest::main');
 }
 
 // require_once 'Zend/Form/Element/MultiCheckbox.php';
 
 /**
- * Test class for Zend_Form_Element_MultiCheckbox
+ * Test class for Zend_Form_Element_MultiCheckbox.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Form
  */
 #[AllowDynamicProperties]
@@ -47,7 +47,7 @@ class Zend_Form_Element_MultiCheckboxTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Element_MultiCheckboxTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Form_Element_MultiCheckboxTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -76,7 +76,8 @@ class Zend_Form_Element_MultiCheckboxTest extends PHPUnit_Framework_TestCase
     {
         // require_once 'Zend/View.php';
         $view = new Zend_View();
-        $view->addHelperPath(__DIR__ . '/../../../../library/Zend/View/Helper');
+        $view->addHelperPath(__DIR__.'/../../../../library/Zend/View/Helper');
+
         return $view;
     }
 
@@ -116,24 +117,24 @@ class Zend_Form_Element_MultiCheckboxTest extends PHPUnit_Framework_TestCase
 
     public function testCanDisableIndividualMultiCheckboxOptions()
     {
-        $this->element->setMultiOptions(array(
-                'foo'  => 'Foo',
-                'bar'  => 'Bar',
-                'baz'  => 'Baz',
-                'bat'  => 'Bat',
+        $this->element->setMultiOptions([
+                'foo' => 'Foo',
+                'bar' => 'Bar',
+                'baz' => 'Baz',
+                'bat' => 'Bat',
                 'test' => 'Test',
-            ))
-            ->setAttrib('disable', array('baz', 'test'));
+            ])
+            ->setAttrib('disable', ['baz', 'test']);
         $html = $this->element->render($this->getView());
-        foreach (array('baz', 'test') as $test) {
-            if (!preg_match('/(<input[^>]*?(value="' . $test . '")[^>]*>)/', $html, $m)) {
-                $this->fail('Unable to find matching disabled option for ' . $test);
+        foreach (['baz', 'test'] as $test) {
+            if (!preg_match('/(<input[^>]*?(value="'.$test.'")[^>]*>)/', $html, $m)) {
+                $this->fail('Unable to find matching disabled option for '.$test);
             }
             $this->assertRegexp('/<input[^>]*?(disabled="disabled")/', $m[1]);
         }
-        foreach (array('foo', 'bar', 'bat') as $test) {
-            if (!preg_match('/(<input[^>]*?(value="' . $test . '")[^>]*>)/', $html, $m)) {
-                $this->fail('Unable to find matching option for ' . $test);
+        foreach (['foo', 'bar', 'bat'] as $test) {
+            if (!preg_match('/(<input[^>]*?(value="'.$test.'")[^>]*>)/', $html, $m)) {
+                $this->fail('Unable to find matching option for '.$test);
             }
             $this->assertNotRegexp('/<input[^>]*?(disabled="disabled")/', $m[1], var_export($m, 1));
         }
@@ -141,13 +142,13 @@ class Zend_Form_Element_MultiCheckboxTest extends PHPUnit_Framework_TestCase
 
     public function testSpecifiedSeparatorIsUsedWhenRendering()
     {
-        $this->element->setMultiOptions(array(
-                'foo'  => 'Foo',
-                'bar'  => 'Bar',
-                'baz'  => 'Baz',
-                'bat'  => 'Bat',
+        $this->element->setMultiOptions([
+                'foo' => 'Foo',
+                'bar' => 'Bar',
+                'baz' => 'Baz',
+                'bat' => 'Bat',
                 'test' => 'Test',
-            ))
+            ])
             ->setSeparator('--FooBarFunSep--');
         $html = $this->element->render($this->getView());
         $this->assertContains($this->element->getSeparator(), $html);
@@ -173,32 +174,32 @@ class Zend_Form_Element_MultiCheckboxTest extends PHPUnit_Framework_TestCase
      */
     public function testCanPopulateCheckboxOptionsFromPostedData()
     {
-        $form = new Zend_Form(array(
-            'elements' => array(
-                '100_1' => array('MultiCheckbox', array(
-                    'multiOptions' => array(
-                        '100_1_1'  => 'Agriculture',
-                        '100_1_2'  => 'Automotive',
+        $form = new Zend_Form([
+            'elements' => [
+                '100_1' => ['MultiCheckbox', [
+                    'multiOptions' => [
+                        '100_1_1' => 'Agriculture',
+                        '100_1_2' => 'Automotive',
                         '100_1_12' => 'Chemical',
                         '100_1_13' => 'Communications',
-                    ),
+                    ],
                     'required' => true,
-                )),
-            ),
-        ));
-        $data = array(
-            '100_1' => array(
+                ]],
+            ],
+        ]);
+        $data = [
+            '100_1' => [
                 '100_1_1',
                 '100_1_2',
                 '100_1_12',
-                '100_1_13'
-            ),
-        );
+                '100_1_13',
+            ],
+        ];
         $form->populate($data);
         $html = $form->render($this->getView());
         foreach ($form->getElement('100_1')->getMultiOptions() as $key => $value) {
-            if (!preg_match('#(<input[^>]*' . $key . '[^>]*>)#', $html, $m)) {
-                $this->fail('Missing input for a given multi option: ' . $html);
+            if (!preg_match('#(<input[^>]*'.$key.'[^>]*>)#', $html, $m)) {
+                $this->fail('Missing input for a given multi option: '.$html);
             }
             $this->assertContains('checked="checked"', $m[1]);
         }
@@ -223,11 +224,11 @@ class Zend_Form_Element_MultiCheckboxTest extends PHPUnit_Framework_TestCase
 
     public function testInArrayValidatorShouldBeRegisteredAfterValidation()
     {
-        $options = array(
+        $options = [
             'foo' => 'Foo Value',
             'bar' => 'Bar Value',
             'baz' => 'Baz Value',
-        );
+        ];
         $this->element->setMultiOptions($options);
         $this->assertFalse($this->element->getValidator('InArray'));
         $this->element->isValid('test');
@@ -237,11 +238,11 @@ class Zend_Form_Element_MultiCheckboxTest extends PHPUnit_Framework_TestCase
 
     public function testShouldNotValidateIfValueIsNotInArray()
     {
-        $options = array(
+        $options = [
             'foo' => 'Foo Value',
             'bar' => 'Bar Value',
             'baz' => 'Baz Value',
-        );
+        ];
         $this->element->setMultiOptions($options);
         $this->assertFalse($this->element->getValidator('InArray'));
         $this->assertFalse($this->element->isValid('test'));
@@ -249,19 +250,19 @@ class Zend_Form_Element_MultiCheckboxTest extends PHPUnit_Framework_TestCase
     /**#@-*/
 
     /**
-     * No assertion; just making sure no error occurs
+     * No assertion; just making sure no error occurs.
      *
      * @group ZF-4915
      */
     public function testRetrievingErrorMessagesShouldNotResultInError()
     {
-        $this->element->addMultiOptions(array(
+        $this->element->addMultiOptions([
                           'foo' => 'Foo',
                           'bar' => 'Bar',
                           'baz' => 'Baz',
-                      ))
+                      ])
                       ->addErrorMessage('%value% is invalid');
-        $this->element->isValid(array('foo', 'bogus'));
+        $this->element->isValid(['foo', 'bogus']);
         $html = $this->element->render($this->getView());
     }
 
@@ -270,25 +271,25 @@ class Zend_Form_Element_MultiCheckboxTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateShouldNotAcceptEmptyArray()
     {
-        $this->element->addMultiOptions(array(
+        $this->element->addMultiOptions([
             'foo' => 'Foo',
             'bar' => 'Bar',
             'baz' => 'Baz',
-        ));
+        ]);
         $this->element->setRegisterInArrayValidator(true);
 
-        $this->assertTrue($this->element->isValid(array('foo')));
-        $this->assertTrue($this->element->isValid(array('foo','baz')));
+        $this->assertTrue($this->element->isValid(['foo']));
+        $this->assertTrue($this->element->isValid(['foo', 'baz']));
 
         $this->element->setAllowEmpty(true);
-        $this->assertTrue($this->element->isValid(array()));
+        $this->assertTrue($this->element->isValid([]));
 
         // Empty value + AllowEmpty=true = no error messages
         $messages = $this->element->getMessages();
         $this->assertEquals(0, count($messages), 'Received unexpected error message(s)');
 
         $this->element->setAllowEmpty(false);
-        $this->assertFalse($this->element->isValid(array()));
+        $this->assertFalse($this->element->isValid([]));
 
         // Empty value + AllowEmpty=false = notInArray error message
         $messages = $this->element->getMessages();
@@ -296,7 +297,7 @@ class Zend_Form_Element_MultiCheckboxTest extends PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('notInArray', $messages, 'Expected \'notInArray\' error message');
 
         $this->element->setRequired(true)->setAllowEmpty(false);
-        $this->assertFalse($this->element->isValid(array()));
+        $this->assertFalse($this->element->isValid([]));
 
         // Empty value + Required=true + AllowEmpty=false = isEmpty error message
         $messages = $this->element->getMessages();
@@ -312,10 +313,10 @@ class Zend_Form_Element_MultiCheckboxTest extends PHPUnit_Framework_TestCase
         $this->element->setLabel('Foo');
 
         $expected = '<dt id="foo-label"><label class="optional">Foo</label></dt>'
-                  . PHP_EOL
-                  . '<dd id="foo-element">'
-                  . PHP_EOL
-                  . '</dd>';
+                  .PHP_EOL
+                  .'<dd id="foo-element">'
+                  .PHP_EOL
+                  .'</dd>';
         $this->assertSame($expected, $this->element->render($this->getView()));
     }
 
@@ -327,13 +328,13 @@ class Zend_Form_Element_MultiCheckboxTest extends PHPUnit_Framework_TestCase
         $this->element->setLabel('Foo')->removeDecorator('label');
 
         $expected = '<dd id="foo-element">'
-                  . PHP_EOL
-                  . '</dd>';
+                  .PHP_EOL
+                  .'</dd>';
         $this->assertSame($expected, $this->element->render($this->getView()));
     }
 }
 
 // Call Zend_Form_Element_MultiCheckboxTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Form_Element_MultiCheckboxTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Form_Element_MultiCheckboxTest::main') {
     Zend_Form_Element_MultiCheckboxTest::main();
 }

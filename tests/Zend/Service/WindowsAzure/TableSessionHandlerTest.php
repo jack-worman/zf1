@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,22 +13,21 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_WindowsAzure
- * @subpackage UnitTests
+ *
  * @version    $Id$
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Service_WindowsAzure_TableSessionHandlerTest::main');
 }
 
 /**
- * Test helpers
+ * Test helpers.
  */
 // require_once __DIR__ . '/../../../TestHelper.php';
-require_once __DIR__ . '/../../../TestConfiguration.dist.php';
+require_once __DIR__.'/../../../TestConfiguration.dist.php';
 
 /** Zend_Service_WindowsAzure_SessionHandler */
 // require_once 'Zend/Service/WindowsAzure/SessionHandler.php';
@@ -38,9 +37,9 @@ require_once __DIR__ . '/../../../TestConfiguration.dist.php';
 
 /**
  * @category   Zend
- * @package    Zend_Service_WindowsAzure
- * @subpackage UnitTests
+ *
  * @version    $Id$
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -54,27 +53,29 @@ class Zend_Service_WindowsAzure_TableSessionHandlerTest extends PHPUnit_Framewor
     public static function main()
     {
         if (TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_RUNTESTS) {
-            $suite  = new PHPUnit_Framework_TestSuite("Zend_Service_WindowsAzure_TableSessionHandlerTest");
+            $suite = new PHPUnit_Framework_TestSuite('Zend_Service_WindowsAzure_TableSessionHandlerTest');
             $result = PHPUnit_TextUI_TestRunner::run($suite);
         }
     }
 
     /**
-     * Test setup
+     * Test setup.
      */
     protected function setUp()
     {
     }
 
     /**
-     * Test teardown
+     * Test teardown.
      */
     protected function tearDown()
     {
         $storageClient = $this->createStorageInstance();
-        for ($i = 1; $i <= self::$uniqId; $i++)
-        {
-            try { $storageClient->deleteTable(TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_TABLENAME_PREFIX . $i); } catch (\Throwable $e) { }
+        for ($i = 1; $i <= self::$uniqId; ++$i) {
+            try {
+                $storageClient->deleteTable(TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_TABLENAME_PREFIX.$i);
+            } catch (Throwable $e) {
+            }
         }
     }
 
@@ -100,6 +101,7 @@ class Zend_Service_WindowsAzure_TableSessionHandlerTest extends PHPUnit_Framewor
             $storageInstance,
             $tableName
         );
+
         return $sessionHandler;
     }
 
@@ -107,12 +109,13 @@ class Zend_Service_WindowsAzure_TableSessionHandlerTest extends PHPUnit_Framewor
 
     protected function generateName()
     {
-        self::$uniqId++;
-        return TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_TABLENAME_PREFIX . self::$uniqId;
+        ++self::$uniqId;
+
+        return TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_TABLENAME_PREFIX.self::$uniqId;
     }
 
     /**
-     * Test register
+     * Test register.
      */
     public function testRegister()
     {
@@ -127,7 +130,7 @@ class Zend_Service_WindowsAzure_TableSessionHandlerTest extends PHPUnit_Framewor
     }
 
     /**
-     * Test open
+     * Test open.
      */
     public function testOpen()
     {
@@ -139,14 +142,13 @@ class Zend_Service_WindowsAzure_TableSessionHandlerTest extends PHPUnit_Framewor
 
             $this->assertTrue($result);
 
-
             $verifyResult = $storageClient->listTables();
             $this->assertEquals($tableName, $verifyResult[0]->Name);
         }
     }
 
     /**
-     * Test close
+     * Test close.
      */
     public function testClose()
     {
@@ -162,7 +164,7 @@ class Zend_Service_WindowsAzure_TableSessionHandlerTest extends PHPUnit_Framewor
     }
 
     /**
-     * Test read
+     * Test read.
      */
     public function testRead()
     {
@@ -173,17 +175,17 @@ class Zend_Service_WindowsAzure_TableSessionHandlerTest extends PHPUnit_Framewor
             $sessionHandler->open();
 
             $sessionId = $this->session_id();
-            $sessionData = serialize( 'PHPAzure' );
+            $sessionData = serialize('PHPAzure');
             $sessionHandler->write($sessionId, $sessionData);
 
-            $result = unserialize( $sessionHandler->read($sessionId) );
+            $result = unserialize($sessionHandler->read($sessionId));
 
             $this->assertEquals('PHPAzure', $result);
         }
     }
 
     /**
-     * Test write
+     * Test write.
      */
     public function testWrite()
     {
@@ -194,9 +196,8 @@ class Zend_Service_WindowsAzure_TableSessionHandlerTest extends PHPUnit_Framewor
             $sessionHandler->open();
 
             $sessionId = $this->session_id();
-            $sessionData = serialize( 'PHPAzure' );
+            $sessionData = serialize('PHPAzure');
             $sessionHandler->write($sessionId, $sessionData);
-
 
             $verifyResult = $storageClient->retrieveEntities($tableName);
             $this->assertEquals(1, count($verifyResult));
@@ -204,7 +205,7 @@ class Zend_Service_WindowsAzure_TableSessionHandlerTest extends PHPUnit_Framewor
     }
 
     /**
-     * Test write large
+     * Test write large.
      */
     public function testWriteLarge()
     {
@@ -217,16 +218,16 @@ class Zend_Service_WindowsAzure_TableSessionHandlerTest extends PHPUnit_Framewor
             $sessionId = $this->session_id();
 
             $sessionData = '';
-            for ($i = 0; $i < Zend_Service_WindowsAzure_SessionHandler::MAX_TS_PROPERTY_SIZE; $i++) {
-            	$sessionData .= 'a';
+            for ($i = 0; $i < Zend_Service_WindowsAzure_SessionHandler::MAX_TS_PROPERTY_SIZE; ++$i) {
+                $sessionData .= 'a';
             }
-            $sessionData = serialize( $sessionData );
+            $sessionData = serialize($sessionData);
 
             $exceptionThrown = false;
             try {
-            	$sessionHandler->write($sessionId, $sessionData);
-            } catch (\Throwable $ex) {
-            	$exceptionThrown = true;
+                $sessionHandler->write($sessionId, $sessionData);
+            } catch (Throwable $ex) {
+                $exceptionThrown = true;
             }
 
             $this->assertTrue($exceptionThrown);
@@ -234,7 +235,7 @@ class Zend_Service_WindowsAzure_TableSessionHandlerTest extends PHPUnit_Framewor
     }
 
     /**
-     * Test destroy
+     * Test destroy.
      */
     public function testDestroy()
     {
@@ -245,7 +246,7 @@ class Zend_Service_WindowsAzure_TableSessionHandlerTest extends PHPUnit_Framewor
             $sessionHandler->open();
 
             $sessionId = $this->session_id();
-            $sessionData = serialize( 'PHPAzure' );
+            $sessionData = serialize('PHPAzure');
             $sessionHandler->write($sessionId, $sessionData);
 
             $result = $sessionHandler->destroy($sessionId);
@@ -257,7 +258,7 @@ class Zend_Service_WindowsAzure_TableSessionHandlerTest extends PHPUnit_Framewor
     }
 
     /**
-     * Test gc
+     * Test gc.
      */
     public function testGc()
     {
@@ -268,7 +269,7 @@ class Zend_Service_WindowsAzure_TableSessionHandlerTest extends PHPUnit_Framewor
             $sessionHandler->open();
 
             $sessionId = $this->session_id();
-            $sessionData = serialize( 'PHPAzure' );
+            $sessionData = serialize('PHPAzure');
             $sessionHandler->write($sessionId, $sessionData);
 
             sleep(1); // let time() tick
@@ -288,6 +289,6 @@ class Zend_Service_WindowsAzure_TableSessionHandlerTest extends PHPUnit_Framewor
 }
 
 // Call Zend_Service_WindowsAzure_TableSessionHandlerTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Service_WindowsAzure_TableSessionHandlerTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Service_WindowsAzure_TableSessionHandlerTest::main') {
     Zend_Service_WindowsAzure_TableSessionHandlerTest::main();
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,45 +13,48 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Controller
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
- * Zend_XmlRpc_Request
+ * Zend_XmlRpc_Request.
  */
 // require_once 'Zend/XmlRpc/Request.php';
 
 /**
- * XmlRpc Request object -- Request via HTTP
+ * XmlRpc Request object -- Request via HTTP.
  *
  * Extends {@link Zend_XmlRpc_Request} to accept a request via HTTP. Request is
  * built at construction time using a raw POST; if no data is available, the
  * request is declared a fault.
  *
  * @category Zend
- * @package  Zend_XmlRpc
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version $Id$
  */
 class Zend_XmlRpc_Request_Http extends Zend_XmlRpc_Request
 {
     /**
-     * Array of headers
+     * Array of headers.
+     *
      * @var array
      */
     protected $_headers;
 
     /**
-     * Raw XML as received via request
+     * Raw XML as received via request.
+     *
      * @var string
      */
     protected $_xml;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * Attempts to read from php://input to get raw POST request; if an error
      * occurs in doing so, or if the XML is invalid, the request is declared a
@@ -65,6 +68,7 @@ class Zend_XmlRpc_Request_Http extends Zend_XmlRpc_Request
         if (!$xml) {
             // require_once 'Zend/XmlRpc/Fault.php';
             $this->_fault = new Zend_XmlRpc_Fault(630);
+
             return;
         }
 
@@ -74,7 +78,7 @@ class Zend_XmlRpc_Request_Http extends Zend_XmlRpc_Request
     }
 
     /**
-     * Retrieve the raw XML request
+     * Retrieve the raw XML request.
      *
      * @return string
      */
@@ -84,7 +88,7 @@ class Zend_XmlRpc_Request_Http extends Zend_XmlRpc_Request
     }
 
     /**
-     * Get headers
+     * Get headers.
      *
      * Gets all headers as key => value pairs and returns them.
      *
@@ -93,7 +97,7 @@ class Zend_XmlRpc_Request_Http extends Zend_XmlRpc_Request
     public function getHeaders()
     {
         if (null === $this->_headers) {
-            $this->_headers = array();
+            $this->_headers = [];
             foreach ($_SERVER as $key => $value) {
                 if ('HTTP_' == substr((string) $key, 0, 5)) {
                     $header = str_replace((string) ' ', '-', ucwords(strtolower((string) str_replace((string) '_', ' ', substr((string) $key, 5)))));
@@ -106,7 +110,7 @@ class Zend_XmlRpc_Request_Http extends Zend_XmlRpc_Request
     }
 
     /**
-     * Retrieve the full HTTP request, including headers and XML
+     * Retrieve the full HTTP request, including headers and XML.
      *
      * @return string
      */
@@ -114,7 +118,7 @@ class Zend_XmlRpc_Request_Http extends Zend_XmlRpc_Request
     {
         $request = '';
         foreach ($this->getHeaders() as $key => $value) {
-            $request .= $key . ': ' . $value . "\n";
+            $request .= $key.': '.$value."\n";
         }
 
         $request .= $this->_xml;

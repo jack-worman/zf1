@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,51 +13,46 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
-
 /**
  * require other test files needed, this will
- * ensure that Zend_Loader::loadClass is not called
+ * ensure that Zend_Loader::loadClass is not called.
  */
 require_once 'TableBugsProducts.php';
 require_once 'TableBugsCustom.php';
 
-
-
-
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class My_ZendDbTable_TableBugsProductsCustom extends My_ZendDbTable_TableBugsProducts
 {
-    protected $_rowClass    = 'My_ZendDbTable_Row_TestMyRow';
+    protected $_rowClass = 'My_ZendDbTable_Row_TestMyRow';
     protected $_rowsetClass = 'My_ZendDbTable_Rowset_TestMyRowset';
 
-    protected $_referenceMap    = array(
-        'Bug' => array(
-            'columns'           => 'bug_id',
-            'refTableClass'     => 'My_ZendDbTable_TableBugsCustom',
-            'refColumns'        => 'bug_id',
-            'onDelete'          => self::CASCADE,
-            'onUpdate'          => self::CASCADE
-        ),
-        'Product' => array(
-            'columns'           => 'product_id',
-            'refTableClass'     => 'My_ZendDbTable_TableProductsCustom',
-            'refColumns'        => 'product_id',
-            'onDelete'          => 'anything but self::CASCADE',
-            'onUpdate'          => 'anything but self::CASCADE'
-        )
-    );
+    protected $_referenceMap = [
+        'Bug' => [
+            'columns' => 'bug_id',
+            'refTableClass' => 'My_ZendDbTable_TableBugsCustom',
+            'refColumns' => 'bug_id',
+            'onDelete' => self::CASCADE,
+            'onUpdate' => self::CASCADE,
+        ],
+        'Product' => [
+            'columns' => 'product_id',
+            'refTableClass' => 'My_ZendDbTable_TableProductsCustom',
+            'refColumns' => 'product_id',
+            'onDelete' => 'anything but self::CASCADE',
+            'onUpdate' => 'anything but self::CASCADE',
+        ],
+    ];
 }

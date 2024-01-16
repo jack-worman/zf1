@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,54 +13,49 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Pdf
- * @subpackage Destination
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
-
 /** Internally used classes */
 // require_once 'Zend/Pdf/Element.php';
-
 
 /** Zend_Pdf_Destination */
 // require_once 'Zend/Pdf/Destination.php';
 
 /**
- * Abstract PDF explicit destination representation class
+ * Abstract PDF explicit destination representation class.
  *
- * @package    Zend_Pdf
- * @subpackage Destination
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Pdf_Destination_Explicit extends Zend_Pdf_Destination
 {
     /**
-     * Destination description array
+     * Destination description array.
      *
      * @var Zend_Pdf_Element_Array
      */
     protected $_destinationArray;
 
     /**
-     * True if it's a remote destination
+     * True if it's a remote destination.
      *
-     * @var boolean
+     * @var bool
      */
     protected $_isRemote;
 
     /**
-     * Explicit destination object constructor
+     * Explicit destination object constructor.
      *
-     * @param Zend_Pdf_Element $destinationArray
      * @throws Zend_Pdf_Exception
      */
     public function __construct(Zend_Pdf_Element $destinationArray)
     {
-        if ($destinationArray->getType() != Zend_Pdf_Element::TYPE_ARRAY) {
+        if (Zend_Pdf_Element::TYPE_ARRAY != $destinationArray->getType()) {
             // require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Explicit destination resource Array must be a direct or an indirect array object.');
         }
@@ -100,9 +95,9 @@ abstract class Zend_Pdf_Destination_Explicit extends Zend_Pdf_Destination
     }
 
     /**
-     * Returns true if it's a remote destination
+     * Returns true if it's a remote destination.
      *
-     * @return boolean
+     * @return bool
      */
     public function isRemote()
     {
@@ -110,9 +105,10 @@ abstract class Zend_Pdf_Destination_Explicit extends Zend_Pdf_Destination
     }
 
     /**
-     * Get resource
+     * Get resource.
      *
      * @internal
+     *
      * @return Zend_Pdf_Element
      */
     public function getResource()

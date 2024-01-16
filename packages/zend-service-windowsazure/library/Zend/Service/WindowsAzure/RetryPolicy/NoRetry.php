@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,9 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_WindowsAzure
- * @subpackage RetryPolicy
+ *
  * @version    $Id$
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -27,31 +27,27 @@
 
 /**
  * @category   Zend
- * @package    Zend_Service_WindowsAzure
- * @subpackage RetryPolicy
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_WindowsAzure_RetryPolicy_NoRetry extends Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract
 {
     /**
-     * Execute function under retry policy
-     * 
-     * @param string|array $function       Function to execute
-     * @param array        $parameters     Parameters for function call
-     * @return mixed
+     * Execute function under retry policy.
+     *
+     * @param string|array $function   Function to execute
+     * @param array        $parameters Parameters for function call
      */
-    public function execute($function, $parameters = array())
+    public function execute($function, $parameters = [])
     {
         $returnValue = null;
-        
-        try
-        {
+
+        try {
             $returnValue = call_user_func_array($function, $parameters);
+
             return $returnValue;
-        }
-        catch (\Throwable $ex)
-        {
+        } catch (Throwable $ex) {
             throw $ex;
         }
     }

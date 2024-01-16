@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Gdata
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -37,21 +37,19 @@
 // require_once 'Zend/Gdata/Extension/When.php';
 
 /**
- * Represents the gd:originalEvent element
+ * Represents the gd:originalEvent element.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Gdata
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_Extension_OriginalEvent extends Zend_Gdata_Extension
 {
-
     protected $_rootElement = 'originalEvent';
-    protected $_id = null;
-    protected $_href = null;
-    protected $_when = null;
+    protected $_id;
+    protected $_href;
+    protected $_when;
 
     public function __construct($id = null, $href = null, $when = null)
     {
@@ -64,44 +62,45 @@ class Zend_Gdata_Extension_OriginalEvent extends Zend_Gdata_Extension
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
         $element = parent::getDOM($doc, $majorVersion, $minorVersion);
-        if ($this->_id !== null) {
+        if (null !== $this->_id) {
             $element->setAttribute('id', $this->_id);
         }
-        if ($this->_href !== null) {
+        if (null !== $this->_href) {
             $element->setAttribute('href', $this->_href);
         }
-        if ($this->_when !== null) {
+        if (null !== $this->_when) {
             $element->appendChild($this->_when->getDOM($element->ownerDocument));
         }
+
         return $element;
     }
 
     protected function takeAttributeFromDOM($attribute)
     {
         switch ($attribute->localName) {
-        case 'id':
-            $this->_id = $attribute->nodeValue;
-            break;
-        case 'href':
-            $this->_href = $attribute->nodeValue;
-            break;
-        default:
-            parent::takeAttributeFromDOM($attribute);
+            case 'id':
+                $this->_id = $attribute->nodeValue;
+                break;
+            case 'href':
+                $this->_href = $attribute->nodeValue;
+                break;
+            default:
+                parent::takeAttributeFromDOM($attribute);
         }
     }
 
     protected function takeChildFromDOM($child)
     {
-        $absoluteNodeName = $child->namespaceURI . ':' . $child->localName;
+        $absoluteNodeName = $child->namespaceURI.':'.$child->localName;
         switch ($absoluteNodeName) {
-            case $this->lookupNamespace('gd') . ':' . 'when';
+            case $this->lookupNamespace('gd').':when':
                 $when = new Zend_Gdata_Extension_When();
                 $when->transferFromDOM($child);
                 $this->_when = $when;
                 break;
-        default:
-            parent::takeChildFromDOM($child);
-            break;
+            default:
+                parent::takeChildFromDOM($child);
+                break;
         }
     }
 
@@ -113,6 +112,7 @@ class Zend_Gdata_Extension_OriginalEvent extends Zend_Gdata_Extension
     public function setId($value)
     {
         $this->_id = $value;
+
         return $this;
     }
 
@@ -124,6 +124,7 @@ class Zend_Gdata_Extension_OriginalEvent extends Zend_Gdata_Extension
     public function setHref($value)
     {
         $this->_href = $value;
+
         return $this;
     }
 
@@ -135,8 +136,7 @@ class Zend_Gdata_Extension_OriginalEvent extends Zend_Gdata_Extension
     public function setWhen($value)
     {
         $this->_when = $value;
+
         return $this;
     }
-
-
 }

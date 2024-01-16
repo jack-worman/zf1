@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,57 +13,55 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Cache
- * @subpackage Zend_Cache_Frontend
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /**
  * @see Zend_Cache_Core
  */
 // require_once 'Zend/Cache/Core.php';
 
-
 /**
- * @package    Zend_Cache
- * @subpackage Zend_Cache_Frontend
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Cache_Frontend_Output extends Zend_Cache_Core
 {
-
-    private $_idStack = array();
+    private $_idStack = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param  array $options Associative array of options
+     * @param array $options Associative array of options
+     *
      * @return void
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         parent::__construct($options);
-        $this->_idStack = array();
+        $this->_idStack = [];
     }
 
     /**
-     * Start the cache
+     * Start the cache.
      *
-     * @param  string  $id                     Cache id
-     * @param  boolean $doNotTestCacheValidity If set to true, the cache validity won't be tested
-     * @param  boolean $echoData               If set to true, datas are sent to the browser if the cache is hit (simply returned else)
+     * @param string $id                     Cache id
+     * @param bool   $doNotTestCacheValidity If set to true, the cache validity won't be tested
+     * @param bool   $echoData               If set to true, datas are sent to the browser if the cache is hit (simply returned else)
+     *
      * @return mixed True if the cache is hit (false else) with $echoData=true (default) ; string else (datas)
      */
     public function start($id, $doNotTestCacheValidity = false, $echoData = true)
     {
         $data = $this->load($id, $doNotTestCacheValidity);
-        if ($data !== false) {
-            if ( $echoData ) {
-                echo($data);
+        if (false !== $data) {
+            if ($echoData) {
+                echo $data;
+
                 return true;
             } else {
                 return $data;
@@ -72,34 +70,35 @@ class Zend_Cache_Frontend_Output extends Zend_Cache_Core
         ob_start();
         ob_implicit_flush(false);
         $this->_idStack[] = $id;
+
         return false;
     }
 
     /**
-     * Stop the cache
+     * Stop the cache.
      *
-     * @param  array   $tags             Tags array
-     * @param  int     $specificLifetime If != false, set a specific lifetime for this cache record (null => infinite lifetime)
-     * @param  string  $forcedDatas      If not null, force written datas with this
-     * @param  boolean $echoData         If set to true, datas are sent to the browser
-     * @param  int     $priority         integer between 0 (very low priority) and 10 (maximum priority) used by some particular backends
+     * @param array  $tags             Tags array
+     * @param int    $specificLifetime If != false, set a specific lifetime for this cache record (null => infinite lifetime)
+     * @param string $forcedDatas      If not null, force written datas with this
+     * @param bool   $echoData         If set to true, datas are sent to the browser
+     * @param int    $priority         integer between 0 (very low priority) and 10 (maximum priority) used by some particular backends
+     *
      * @return void
      */
-    public function end($tags = array(), $specificLifetime = false, $forcedDatas = null, $echoData = true, $priority = 8)
+    public function end($tags = [], $specificLifetime = false, $forcedDatas = null, $echoData = true, $priority = 8)
     {
-        if ($forcedDatas === null) {
+        if (null === $forcedDatas) {
             $data = ob_get_clean();
         } else {
-            $data =& $forcedDatas;
+            $data = &$forcedDatas;
         }
         $id = array_pop($this->_idStack);
-        if ($id === null) {
+        if (null === $id) {
             Zend_Cache::throwException('use of end() without a start()');
         }
         $this->save($data, $id, $tags, $specificLifetime, $priority);
         if ($echoData) {
-            echo($data);
+            echo $data;
         }
     }
-
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,29 +13,28 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Barcode
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
-require_once __DIR__ . '/TestCommon.php';
+require_once __DIR__.'/TestCommon.php';
 
 // require_once 'Zend/Barcode/Object/Ean2.php';
 
 /**
  * @category   Zend
- * @package    Zend_Barcode
- * @subpackage UnitTests
+ *
  * @group      Zend_Barcode
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Zend_Barcode_Object_Ean2Test extends Zend_Barcode_Object_TestCommon
 {
-
     protected function _getBarcodeObject($options = null)
     {
         return new Zend_Barcode_Object_Ean2($options);
@@ -99,7 +98,6 @@ class Zend_Barcode_Object_Ean2Test extends Zend_Barcode_Object_TestCommon
         $this->assertTrue($this->_object->checkParams());
     }
 
-
     public function testGetKnownWidthWithoutOrientation()
     {
         $this->_object->setText('43');
@@ -122,7 +120,7 @@ class Zend_Barcode_Object_Ean2Test extends Zend_Barcode_Object_TestCommon
         $this->_object->setWithBorder(true);
         $this->_object->draw();
         $instructions = $this->loadInstructionsFile(
-                'Ean2_43_border_instructions');
+            'Ean2_43_border_instructions');
         $this->assertEquals($instructions, $this->_object->getInstructions());
     }
 
@@ -132,7 +130,7 @@ class Zend_Barcode_Object_Ean2Test extends Zend_Barcode_Object_TestCommon
         $this->_object->setOrientation(60);
         $this->_object->draw();
         $instructions = $this->loadInstructionsFile(
-                'Ean2_43_oriented_instructions');
+            'Ean2_43_oriented_instructions');
         $this->assertEquals($instructions, $this->_object->getInstructions());
     }
 
@@ -143,7 +141,7 @@ class Zend_Barcode_Object_Ean2Test extends Zend_Barcode_Object_TestCommon
         $this->_object->setWithBorder(true);
         $this->_object->draw();
         $instructions = $this->loadInstructionsFile(
-                'Ean2_43_border_oriented_instructions');
+            'Ean2_43_border_oriented_instructions');
         $this->assertEquals($instructions, $this->_object->getInstructions());
     }
 

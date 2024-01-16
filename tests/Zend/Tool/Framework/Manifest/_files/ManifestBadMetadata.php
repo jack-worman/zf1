@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,23 +25,18 @@
 
 /**
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
-class Zend_Tool_Framework_Manifest_ManifestBadMetadata
-    implements Zend_Tool_Framework_Manifest_MetadataManifestable
+class Zend_Tool_Framework_Manifest_ManifestBadMetadata implements Zend_Tool_Framework_Manifest_MetadataManifestable
 {
-
     public function getMetadata()
     {
-        return array(
-            new Zend_Tool_Framework_Metadata_Basic(array('name' => 'FooTwo', 'value' => 'Baz1')),
-            new ArrayObject()
-            );
-
+        return [
+            new Zend_Tool_Framework_Metadata_Basic(['name' => 'FooTwo', 'value' => 'Baz1']),
+            new ArrayObject(),
+            ];
     }
-
 }

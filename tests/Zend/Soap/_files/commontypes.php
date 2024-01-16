@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,19 +13,18 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /* Test Functions */
 
 /**
- * Test Function
+ * Test Function.
  *
- * @param string $arg
  * @return string
  */
 function Zend_Soap_AutoDiscover_TestFunc($who)
@@ -34,15 +33,15 @@ function Zend_Soap_AutoDiscover_TestFunc($who)
 }
 
 /**
- * Test Function 2
+ * Test Function 2.
  */
 function Zend_Soap_AutoDiscover_TestFunc2()
 {
-    return "Hello World";
+    return 'Hello World';
 }
 
 /**
- * Return false
+ * Return false.
  *
  * @return bool
  */
@@ -52,7 +51,7 @@ function Zend_Soap_AutoDiscover_TestFunc3()
 }
 
 /**
- * Return true
+ * Return true.
  *
  * @return bool
  */
@@ -62,7 +61,7 @@ function Zend_Soap_AutoDiscover_TestFunc4()
 }
 
 /**
- * Return integer
+ * Return integer.
  *
  * @return int
  */
@@ -72,41 +71,43 @@ function Zend_Soap_AutoDiscover_TestFunc5()
 }
 
 /**
- * Return string
+ * Return string.
  *
  * @return string
  */
 function Zend_Soap_AutoDiscover_TestFunc6()
 {
-    return "string";
+    return 'string';
 }
 
 /**
- * Return array
+ * Return array.
  *
  * @return array
  */
 function Zend_Soap_AutoDiscover_TestFunc7()
 {
-    return array('foo' => 'bar', 'baz' => true, 1 => false, 'bat' => 123);
+    return ['foo' => 'bar', 'baz' => true, 1 => false, 'bat' => 123];
 }
 
 /**
- * Return Object
+ * Return Object.
  *
  * @return StdClass
  */
 function Zend_Soap_AutoDiscover_TestFunc8()
 {
-    $return = (object) array('foo' => 'bar', 'baz' => true, 'bat' => 123, 'qux' => false);
+    $return = (object) ['foo' => 'bar', 'baz' => true, 'bat' => 123, 'qux' => false];
+
     return $return;
 }
 
 /**
- * Multiple Args
+ * Multiple Args.
  *
  * @param string $foo
  * @param string $bar
+ *
  * @return string
  */
 function Zend_Soap_AutoDiscover_TestFunc9($foo, $bar)
@@ -116,8 +117,7 @@ function Zend_Soap_AutoDiscover_TestFunc9($foo, $bar)
 
 /**
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -125,67 +125,69 @@ function Zend_Soap_AutoDiscover_TestFunc9($foo, $bar)
 class Zend_Soap_AutoDiscover_TestFixingMultiplePrototypes
 {
     /**
-     * Test function
+     * Test function.
      *
-     * @param integer $a
-     * @param integer $b
-     * @param integer $d
-     * @return integer
+     * @param int $a
+     * @param int $b
+     * @param int $d
+     *
+     * @return int
      */
-    function testFunc($a=100, $b=200, $d=300)
+    public function testFunc($a = 100, $b = 200, $d = 300)
     {
-
     }
 }
 
 /**
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
-class Zend_Soap_AutoDiscover_Test {
+class Zend_Soap_AutoDiscover_Test
+{
     /**
-     * Test Function 1
+     * Test Function 1.
      *
      * @return string
      */
-    function testFunc1()
+    public function testFunc1()
     {
-        return "Hello World";
+        return 'Hello World';
     }
 
     /**
-     * Test Function 2
+     * Test Function 2.
      *
      * @param string $who Some Arg
+     *
      * @return string
      */
-    function testFunc2($who)
+    public function testFunc2($who)
     {
         return "Hello $who!";
     }
 
     /**
-     * Test Function 3
+     * Test Function 3.
      *
-     * @param string $who Some Arg
-     * @param int $when Some
+     * @param string $who  Some Arg
+     * @param int    $when Some
+     *
      * @return string
      */
-    function testFunc3($who, $when)
+    public function testFunc3($who, $when)
     {
         return "Hello $who, How are you $when";
     }
 
     /**
-     * Test Function 4
+     * Test Function 4.
      *
      * @return string
      */
-    static function testFunc4()
+    public static function testFunc4()
     {
         return "I'm Static!";
     }
@@ -195,20 +197,19 @@ class Zend_Soap_AutoDiscover_Test {
 class Zend_Soap_AutoDiscoverTestClass1
 {
     /**
-     * @var integer $var
+     * @var int
      */
     public $var = 1;
 
     /**
-     * @var string $param
+     * @var string
      */
-    public $param = "hello";
+    public $param = 'hello';
 }
 
 /**
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -216,9 +217,7 @@ class Zend_Soap_AutoDiscoverTestClass1
 class Zend_Soap_AutoDiscoverTestClass2
 {
     /**
-     *
-     * @param Zend_Soap_AutoDiscoverTestClass1 $test
-     * @return boolean
+     * @return bool
      */
     public function add(Zend_Soap_AutoDiscoverTestClass1 $test)
     {
@@ -230,10 +229,10 @@ class Zend_Soap_AutoDiscoverTestClass2
      */
     public function fetchAll()
     {
-        return array(
+        return [
             new Zend_Soap_AutoDiscoverTestClass1(),
             new Zend_Soap_AutoDiscoverTestClass1(),
-        );
+        ];
     }
 
     /**
@@ -241,14 +240,12 @@ class Zend_Soap_AutoDiscoverTestClass2
      */
     public function addMultiple($test)
     {
-
     }
 }
 
 /**
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -267,8 +264,7 @@ class Zend_Soap_Wsdl_ComplexTypeB
 
 /**
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -278,13 +274,12 @@ class Zend_Soap_Wsdl_ComplexTypeA
     /**
      * @var Zend_Soap_Wsdl_ComplexTypeB[]
      */
-    public $baz = array();
+    public $baz = [];
 }
 
 /**
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -299,8 +294,7 @@ class Zend_Soap_Wsdl_ComplexTest
 
 /**
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -308,14 +302,14 @@ class Zend_Soap_Wsdl_ComplexTest
 class Zend_Soap_Wsdl_ComplexObjectStructure
 {
     /**
-     * @var boolean
+     * @var bool
      */
     public $boolean = true;
 
     /**
      * @var string
      */
-    public $string = "Hello World";
+    public $string = 'Hello World';
 
     /**
      * @var int
@@ -325,13 +319,12 @@ class Zend_Soap_Wsdl_ComplexObjectStructure
     /**
      * @var array
      */
-    public $array = array(1, 2, 3);
+    public $array = [1, 2, 3];
 }
 
 /**
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -346,8 +339,7 @@ class Zend_Soap_Wsdl_ComplexObjectWithObjectStructure
 
 /**
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -355,30 +347,36 @@ class Zend_Soap_Wsdl_ComplexObjectWithObjectStructure
 class Zend_Soap_AutoDiscover_MyService
 {
     /**
-     *    @param string $foo
-     *    @return Zend_Soap_AutoDiscover_MyResponse[]
+     * @param string $foo
+     *
+     * @return Zend_Soap_AutoDiscover_MyResponse[]
      */
-    public function foo($foo) {
-    }
-    /**
-     *    @param string $bar
-     *    @return Zend_Soap_AutoDiscover_MyResponse[]
-     */
-    public function bar($bar) {
+    public function foo($foo)
+    {
     }
 
     /**
-     *    @param string $baz
-     *    @return Zend_Soap_AutoDiscover_MyResponse[]
+     * @param string $bar
+     *
+     * @return Zend_Soap_AutoDiscover_MyResponse[]
      */
-    public function baz($baz) {
+    public function bar($bar)
+    {
+    }
+
+    /**
+     * @param string $baz
+     *
+     * @return Zend_Soap_AutoDiscover_MyResponse[]
+     */
+    public function baz($baz)
+    {
     }
 }
 
 /**
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -386,37 +384,45 @@ class Zend_Soap_AutoDiscover_MyService
 class Zend_Soap_AutoDiscover_MyServiceSequence
 {
     /**
-     *    @param string $foo
-     *    @return string[]
+     * @param string $foo
+     *
+     * @return string[]
      */
-    public function foo($foo) {
-    }
-    /**
-     *    @param string $bar
-     *    @return string[]
-     */
-    public function bar($bar) {
+    public function foo($foo)
+    {
     }
 
     /**
-     *    @param string $baz
-     *    @return string[]
+     * @param string $bar
+     *
+     * @return string[]
      */
-    public function baz($baz) {
+    public function bar($bar)
+    {
     }
 
     /**
-     *    @param string $baz
-     *    @return string[][][]
+     * @param string $baz
+     *
+     * @return string[]
      */
-    public function bazNested($baz) {
+    public function baz($baz)
+    {
+    }
+
+    /**
+     * @param string $baz
+     *
+     * @return string[][][]
+     */
+    public function bazNested($baz)
+    {
     }
 }
 
 /**
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -431,8 +437,7 @@ class Zend_Soap_AutoDiscover_MyResponse
 
 /**
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -447,7 +452,9 @@ class Zend_Soap_AutoDiscover_Recursion
     /**
      * @return Zend_Soap_AutoDiscover_Recursion
      */
-    public function create() {}
+    public function create()
+    {
+    }
 }
 
 /**
@@ -455,13 +462,11 @@ class Zend_Soap_AutoDiscover_Recursion
  */
 function Zend_Soap_AutoDiscover_OneWay($message)
 {
-
 }
 
 /**
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -469,11 +474,9 @@ function Zend_Soap_AutoDiscover_OneWay($message)
 class Zend_Soap_AutoDiscover_NoReturnType
 {
     /**
-     *
      * @param string $message
      */
     public function pushOneWay($message)
     {
-
     }
 }

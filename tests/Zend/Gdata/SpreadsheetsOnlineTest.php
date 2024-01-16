@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata_Spreadsheets
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -26,17 +26,16 @@
 
 /**
  * @category   Zend
- * @package    Zend_Gdata_Spreadsheets
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Spreadsheets
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_SpreadsheetsOnlineTest extends PHPUnit_Framework_TestCase
 {
-
     public function setUp()
     {
         $user = constant('TESTS_ZEND_GDATA_CLIENTLOGIN_EMAIL');
@@ -54,14 +53,14 @@ class Zend_Gdata_SpreadsheetsOnlineTest extends PHPUnit_Framework_TestCase
 
         $spreadsheets = $this->gdata->getSpreadsheets();
         $testedContents = false;
-        foreach($spreadsheets as $spreadsheet) {
-            $spreadsheetCount++;
+        foreach ($spreadsheets as $spreadsheet) {
+            ++$spreadsheetCount;
             $worksheetCount = 0;
             $this->assertTrue($spreadsheet instanceof Zend_Gdata_Spreadsheets_SpreadsheetEntry, 'not instance of SpreadsheetEntry');
-            foreach($spreadsheet->getWorksheets() as $worksheet) {
+            foreach ($spreadsheet->getWorksheets() as $worksheet) {
                 $this->assertTrue($worksheet instanceof Zend_Gdata_Spreadsheets_WorksheetEntry, 'not instance of WorksheetEntry');
-                $worksheetCount++;
-                if ($spreadsheet->getTitle()->getText() == 'PHP Unit Test Sheet') {
+                ++$worksheetCount;
+                if ('PHP Unit Test Sheet' == $spreadsheet->getTitle()->getText()) {
                     $testedContents = true;
                     $contentAsCells = $worksheet->getContentsAsCells();
                     $this->assertEquals('a1', $contentAsCells['A1']['value']);
@@ -222,14 +221,14 @@ class Zend_Gdata_SpreadsheetsOnlineTest extends PHPUnit_Framework_TestCase
         $query->setCellId('R5C1');
         $entry = $this->gdata->getCellEntry($query);
         $this->assertTrue($entry instanceof Zend_Gdata_Spreadsheets_CellEntry);
-        $this->assertTrue($entry->cell->getText() == 'updated data');
+        $this->assertTrue('updated data' == $entry->cell->getText());
 
         $this->gdata->updateCell(5, 1, '', $this->sprKey, $this->wksId);
     }
 
     public function testInsertUpdateDeleteRow()
     {
-        $rowData = array();
+        $rowData = [];
         $rowData['a1'] = 'new';
         $rowData['b1'] = 'row';
         $rowData['c1'] = 'data';
@@ -242,7 +241,7 @@ class Zend_Gdata_SpreadsheetsOnlineTest extends PHPUnit_Framework_TestCase
 
     public function testInsertUpdateDeleteRow2()
     {
-        $rowData = array();
+        $rowData = [];
         $rowData['a1'] = 'new';
         $rowData['b1'] = 'row';
         $rowData['c1'] = 'data';
@@ -256,7 +255,7 @@ class Zend_Gdata_SpreadsheetsOnlineTest extends PHPUnit_Framework_TestCase
 
     public function testInsertUpdateDeleteRow3()
     {
-        $rowData = array();
+        $rowData = [];
         $rowData['a1'] = 'new';
         $rowData['b1'] = 'row';
         $rowData['c1'] = 'data';
@@ -268,8 +267,9 @@ class Zend_Gdata_SpreadsheetsOnlineTest extends PHPUnit_Framework_TestCase
         $ssTest->delete($entry);
     }
 
-    public function testCustomElementsCollected() {
-        $rowData = array();
+    public function testCustomElementsCollected()
+    {
+        $rowData = [];
         $rowData['a1'] = 'new';
         $rowData['b1'] = 'row';
         $rowData['c1'] = 'data';
@@ -292,5 +292,4 @@ class Zend_Gdata_SpreadsheetsOnlineTest extends PHPUnit_Framework_TestCase
         $ssTest = new Zend_Gdata_Spreadsheets($entry->getHttpClient());
         $ssTest->delete($entry);
     }
-
 }

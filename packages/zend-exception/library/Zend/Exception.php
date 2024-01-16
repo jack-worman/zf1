@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,27 +13,29 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
-* @category   Zend
-* @package    Zend
-* @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
-* @license    http://framework.zend.com/license/new-bsd     New BSD License
-*/
+ * @category   Zend
+ *
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 #[AllowDynamicProperties]
 class Zend_Exception extends Exception
 {
     /**
-     * Construct the exception
+     * Construct the exception.
      *
-     * @param  string $msg
-     * @param  int $code
-     * @param  Exception|Throwable $previous
+     * @param string              $msg
+     * @param int                 $code
+     * @param Exception|Throwable $previous
+     *
      * @return void
      */
     public function __construct($msg = '', $code = 0, $previous = null)

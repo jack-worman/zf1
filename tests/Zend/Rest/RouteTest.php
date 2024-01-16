@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,39 +13,38 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Rest
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
-/** Zend_Rest_Route */
+/* Zend_Rest_Route */
 // require_once 'Zend/Rest/Route.php';
 
-/** Zend_Controller_Front */
+/* Zend_Controller_Front */
 // require_once 'Zend/Controller/Front.php';
 
-/** Zend_Controller_Request_HttpTestCase */
+/* Zend_Controller_Request_HttpTestCase */
 // require_once 'Zend/Controller/Request/HttpTestCase.php';
 
 // Call Zend_Rest_RouteTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Rest_RouteTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Rest_RouteTest::main');
 }
 
 /**
  * @category   Zend
- * @package    Zend_Rest
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Rest
  */
 #[AllowDynamicProperties]
 class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
 {
-
     protected $_front;
     protected $_request;
     protected $_dispatcher;
@@ -53,13 +52,11 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
     /**
      * Runs the test methods of this class.
      *
-     * @access public
      * @static
      */
     public static function main()
     {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Rest_RouteTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Rest_RouteTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -72,54 +69,54 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
 
         $this->_dispatcher = $this->_front->getDispatcher();
 
-        $this->_dispatcher->setControllerDirectory(array(
-            'default' => __DIR__ . DIRECTORY_SEPARATOR .
-                '..' . DIRECTORY_SEPARATOR .
-                'Controller' . DIRECTORY_SEPARATOR .
+        $this->_dispatcher->setControllerDirectory([
+            'default' => __DIR__.DIRECTORY_SEPARATOR.
+                '..'.DIRECTORY_SEPARATOR.
+                'Controller'.DIRECTORY_SEPARATOR.
                 '_files',
-            'mod'     => __DIR__ . DIRECTORY_SEPARATOR .
-                '..' . DIRECTORY_SEPARATOR .
-                'Controller' . DIRECTORY_SEPARATOR .
-                '_files' . DIRECTORY_SEPARATOR .
+            'mod' => __DIR__.DIRECTORY_SEPARATOR.
+                '..'.DIRECTORY_SEPARATOR.
+                'Controller'.DIRECTORY_SEPARATOR.
+                '_files'.DIRECTORY_SEPARATOR.
                 'Admin',
-        ));
+        ]);
     }
 
-    public function test_getVersion()
+    public function testGetVersion()
     {
         $route = new Zend_Rest_Route($this->_front);
         $this->assertEquals(2, $route->getVersion());
     }
 
-    public function test_getInstance_fromINIConfig()
+    public function testGetInstanceFromINIConfig()
     {
-    	// require_once('Zend/Config/Ini.php');
-    	$config = new Zend_Config_Ini(__DIR__ . '/../Controller/_files/routes.ini', 'testing');
-    	// require_once('Zend/Controller/Router/Rewrite.php');
-    	$router = new Zend_Controller_Router_Rewrite();
-    	$router->addConfig($config, 'routes');
-    	$route = $router->getRoute('rest');
-    	$this->assertTrue($route instanceof Zend_Rest_Route);
-    	$this->assertEquals('object', $route->getDefault('controller'));
+        // require_once('Zend/Config/Ini.php');
+        $config = new Zend_Config_Ini(__DIR__.'/../Controller/_files/routes.ini', 'testing');
+        // require_once('Zend/Controller/Router/Rewrite.php');
+        $router = new Zend_Controller_Router_Rewrite();
+        $router->addConfig($config, 'routes');
+        $route = $router->getRoute('rest');
+        $this->assertTrue($route instanceof Zend_Rest_Route);
+        $this->assertEquals('object', $route->getDefault('controller'));
 
-    	$request = $this->_buildRequest('GET', '/mod/project');
-    	$values = $this->_invokeRouteMatch($request, array(), $route);
-    	$this->assertEquals('mod', $values['module']);
-    	$this->assertEquals('project', $values['controller']);
-    	$this->assertEquals('index', $values['action']);
+        $request = $this->_buildRequest('GET', '/mod/project');
+        $values = $this->_invokeRouteMatch($request, [], $route);
+        $this->assertEquals('mod', $values['module']);
+        $this->assertEquals('project', $values['controller']);
+        $this->assertEquals('index', $values['action']);
 
-    	$request = $this->_buildRequest('POST', '/mod/user');
-    	$values = $this->_invokeRouteMatch($request, array(), $route);
-    	$this->assertEquals('mod', $values['module']);
-    	$this->assertEquals('user', $values['controller']);
-    	$this->assertEquals('post', $values['action']);
+        $request = $this->_buildRequest('POST', '/mod/user');
+        $values = $this->_invokeRouteMatch($request, [], $route);
+        $this->assertEquals('mod', $values['module']);
+        $this->assertEquals('user', $values['controller']);
+        $this->assertEquals('post', $values['action']);
 
-    	$request = $this->_buildRequest('GET', '/other');
-    	$values = $this->_invokeRouteMatch($request, array(), $route);
-    	$this->assertFalse($values);
+        $request = $this->_buildRequest('GET', '/other');
+        $values = $this->_invokeRouteMatch($request, [], $route);
+        $this->assertFalse($values);
     }
 
-    public function test_RESTfulApp_defaults()
+    public function testRESTfulAppDefaults()
     {
         $request = $this->_buildRequest('GET', '/');
         $values = $this->_invokeRouteMatch($request);
@@ -134,7 +131,7 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
     /*
      * @group ZF-7437
      */
-    public function test_RESTfulApp_GET_user_defaults()
+    public function testRESTfulAppGETUserDefaults()
     {
         $request = $this->_buildRequest('GET', '/user');
         $values = $this->_invokeRouteMatch($request);
@@ -146,7 +143,7 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('index', $values['action']);
     }
 
-    public function test_RESTfulApp_GET_user_index()
+    public function testRESTfulAppGETUserIndex()
     {
         $request = $this->_buildRequest('GET', '/user/index');
         $values = $this->_invokeRouteMatch($request);
@@ -158,7 +155,7 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('index', $values['action']);
     }
 
-    public function test_RESTfulApp_GET_user_index_withParams()
+    public function testRESTfulAppGETUserIndexWithParams()
     {
         $request = $this->_buildRequest('GET', '/user/index/changedSince/123456789/status/active');
         $values = $this->_invokeRouteMatch($request);
@@ -172,7 +169,7 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('active', $values['status']);
     }
 
-    public function test_RESTfulApp_GET_user_index_withQueryParams()
+    public function testRESTfulAppGETUserIndexWithQueryParams()
     {
         $request = $this->_buildRequest('GET', '/user/?changedSince=123456789&status=active');
         $values = $this->_invokeRouteMatch($request);
@@ -189,7 +186,7 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
     /**
      * @group ZF-10964
      */
-    public function test_RESTfulApp_GET_user_index_withParam_urlencodedWithPlusSymbol()
+    public function testRESTfulAppGETUserIndexWithParamUrlencodedWithPlusSymbol()
     {
         $request = $this->_buildRequest('GET', '/user/index/the%2Bemail%40address/email%2Btest%40example.com');
         $values = $this->_invokeRouteMatch($request);
@@ -202,7 +199,7 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('email+test@example.com', $values['the+email@address']);
     }
 
-    public function test_RESTfulApp_GET_project_byIdentifier()
+    public function testRESTfulAppGETProjectByIdentifier()
     {
         $request = $this->_buildRequest('GET', '/project/zendframework');
         $values = $this->_invokeRouteMatch($request);
@@ -215,7 +212,7 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('zendframework', $values['id']);
     }
 
-    public function test_RESTfulApp_GET_project_byIdQueryParam()
+    public function testRESTfulAppGETProjectByIdQueryParam()
     {
         $request = $this->_buildRequest('GET', '/project/?id=zendframework');
         $values = $this->_invokeRouteMatch($request);
@@ -228,7 +225,7 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('zendframework', $values['id']);
     }
 
-    public function test_RESTfulApp_GET_project_byIdentifier_urlencoded()
+    public function testRESTfulAppGETProjectByIdentifierUrlencoded()
     {
         $request = $this->_buildRequest('GET', '/project/zend+framework');
         $values = $this->_invokeRouteMatch($request);
@@ -244,7 +241,7 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
     /**
      * @group ZF-10964
      */
-    public function test_RESTfulApp_GET_project_byIdentifier_urlencodedWithPlusSymbol()
+    public function testRESTfulAppGETProjectByIdentifierUrlencodedWithPlusSymbol()
     {
         $request = $this->_buildRequest('GET', '/project/email%2Btest%40example.com');
         $values = $this->_invokeRouteMatch($request);
@@ -257,7 +254,7 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('email+test@example.com', $values['id']);
     }
 
-    public function test_RESTfulApp_HEAD_project_byIdentifier()
+    public function testRESTfulAppHEADProjectByIdentifier()
     {
         $request = $this->_buildRequest('HEAD', '/project/lcrouch');
         $values = $this->_invokeRouteMatch($request);
@@ -272,7 +269,7 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
     /**
      * @group ZF-10964
      */
-    public function test_RESTfulApp_HEAD_project_byIdentifier_urlencodedWithPlusSymbol()
+    public function testRESTfulAppHEADProjectByIdentifierUrlencodedWithPlusSymbol()
     {
         $request = $this->_buildRequest('HEAD', '/project/email%2Btest%40example.com');
         $values = $this->_invokeRouteMatch($request);
@@ -285,7 +282,7 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('email+test@example.com', $values['id']);
     }
 
-    public function test_RESTfulApp_GET_project_edit()
+    public function testRESTfulAppGETProjectEdit()
     {
         $request = $this->_buildRequest('GET', '/project/zendframework/edit');
         $values = $this->_invokeRouteMatch($request);
@@ -301,7 +298,7 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
     /**
      * @group ZF-10964
      */
-    public function test_RESTfulApp_GET_project_edit_urlencodedWithPlusSymbol()
+    public function testRESTfulAppGETProjectEditUrlencodedWithPlusSymbol()
     {
         $request = $this->_buildRequest('GET', '/project/email%2Btest%40example.com/edit');
         $values = $this->_invokeRouteMatch($request);
@@ -314,7 +311,7 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('email+test@example.com', $values['id']);
     }
 
-    public function test_RESTfulApp_PUT_user_byIdentifier()
+    public function testRESTfulAppPUTUserByIdentifier()
     {
         $request = $this->_buildRequest('PUT', '/mod/user/lcrouch');
         $values = $this->_invokeRouteMatch($request);
@@ -330,7 +327,7 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
     /**
      * @group ZF-10964
      */
-    public function test_RESTfulApp_PUT_user_byIdentifier_urlencodedWithPlusSymbol()
+    public function testRESTfulAppPUTUserByIdentifierUrlencodedWithPlusSymbol()
     {
         $request = $this->_buildRequest('PUT', '/mod/user/email%2Btest%40example.com');
         $values = $this->_invokeRouteMatch($request);
@@ -343,7 +340,7 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('email+test@example.com', $values['id']);
     }
 
-    public function test_RESTfulApp_POST_user()
+    public function testRESTfulAppPOSTUser()
     {
         $request = $this->_buildRequest('POST', '/mod/user');
         $values = $this->_invokeRouteMatch($request);
@@ -355,7 +352,7 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('post', $values['action']);
     }
 
-    public function test_RESTfulApp_DELETE_user_byIdentifier()
+    public function testRESTfulAppDELETEUserByIdentifier()
     {
         $request = $this->_buildRequest('DELETE', '/mod/user/lcrouch');
         $values = $this->_invokeRouteMatch($request);
@@ -371,7 +368,7 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
     /**
      * @group ZF-10964
      */
-    public function test_RESTfulApp_DELETE_user_byIdentifier_urlencodedWithPlusSymbol()
+    public function testRESTfulAppDELETEUserByIdentifierUrlencodedWithPlusSymbol()
     {
         $request = $this->_buildRequest('DELETE', '/mod/user/email%2Btest%40example.com');
         $values = $this->_invokeRouteMatch($request);
@@ -384,7 +381,7 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('email+test@example.com', $values['id']);
     }
 
-    public function test_RESTfulApp_POST_user_with_identifier_doesPUT()
+    public function testRESTfulAppPOSTUserWithIdentifierDoesPUT()
     {
         $request = $this->_buildRequest('POST', '/mod/user/lcrouch');
         $values = $this->_invokeRouteMatch($request);
@@ -400,7 +397,7 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
     /**
      * @group ZF-10964
      */
-    public function test_RESTfulApp_POST_user_with_identifier_urlencodedWithPlusSymbol_doesPUT()
+    public function testRESTfulAppPOSTUserWithIdentifierUrlencodedWithPlusSymbolDoesPUT()
     {
         $request = $this->_buildRequest('POST', '/mod/user/email%2Btest%40example.com');
         $values = $this->_invokeRouteMatch($request);
@@ -413,7 +410,7 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('email+test@example.com', $values['id']);
     }
 
-    public function test_RESTfulApp_overload_POST_with_method_param_PUT()
+    public function testRESTfulAppOverloadPOSTWithMethodParamPUT()
     {
         $request = $this->_buildRequest('POST', '/mod/user');
         $request->setParam('_method', 'PUT');
@@ -426,7 +423,7 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('put', $values['action']);
     }
 
-    public function test_RESTfulApp_overload_POST_with_http_header_DELETE()
+    public function testRESTfulAppOverloadPOSTWithHttpHeaderDELETE()
     {
         $request = $this->_buildRequest('POST', '/mod/user/lcrouch');
         $request->setHeader('X-HTTP-Method-Override', 'DELETE');
@@ -443,7 +440,7 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
     /**
      * @group ZF-10964
      */
-    public function test_RESTfulApp_overload_POST_with_http_header_DELETE_urlencodedWithPlusSymbol()
+    public function testRESTfulAppOverloadPOSTWithHttpHeaderDELETEUrlencodedWithPlusSymbol()
     {
         $request = $this->_buildRequest('POST', '/mod/user/email%2Btest%40example.com');
         $request->setHeader('X-HTTP-Method-Override', 'DELETE');
@@ -457,7 +454,7 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('email+test@example.com', $values['id']);
     }
 
-    public function test_RESTfulApp_route_chaining()
+    public function testRESTfulAppRouteChaining()
     {
         $request = $this->_buildRequest('GET', '/api/user/lcrouch');
         $this->_front->setRequest($request);
@@ -467,20 +464,20 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
 
         $nonRESTRoute = new Zend_Controller_Router_Route('api');
         $RESTRoute = new Zend_Rest_Route($this->_front);
-        $router->addRoute("api", $nonRESTRoute->chain($RESTRoute));
+        $router->addRoute('api', $nonRESTRoute->chain($RESTRoute));
 
         $routedRequest = $router->route($request);
 
-        $this->assertEquals("default", $routedRequest->getParam("module"));
-        $this->assertEquals("user", $routedRequest->getParam("controller"));
-        $this->assertEquals("get", $routedRequest->getParam("action"));
-        $this->assertEquals("lcrouch", $routedRequest->getParam("id"));
+        $this->assertEquals('default', $routedRequest->getParam('module'));
+        $this->assertEquals('user', $routedRequest->getParam('controller'));
+        $this->assertEquals('get', $routedRequest->getParam('action'));
+        $this->assertEquals('lcrouch', $routedRequest->getParam('id'));
     }
 
     /**
      * @group ZF-10964
      */
-    public function test_RESTfulApp_route_chaining_urlencodedWithPlusSymbol()
+    public function testRESTfulAppRouteChainingUrlencodedWithPlusSymbol()
     {
         $request = $this->_buildRequest('GET', '/api/user/email%2Btest%40example.com');
         $this->_front->setRequest($request);
@@ -490,20 +487,20 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
 
         $nonRESTRoute = new Zend_Controller_Router_Route('api');
         $RESTRoute = new Zend_Rest_Route($this->_front);
-        $router->addRoute("api", $nonRESTRoute->chain($RESTRoute));
+        $router->addRoute('api', $nonRESTRoute->chain($RESTRoute));
 
         $routedRequest = $router->route($request);
 
-        $this->assertEquals("default", $routedRequest->getParam("module"));
-        $this->assertEquals("user", $routedRequest->getParam("controller"));
-        $this->assertEquals("get", $routedRequest->getParam("action"));
-        $this->assertEquals("email+test@example.com", $routedRequest->getParam("id"));
+        $this->assertEquals('default', $routedRequest->getParam('module'));
+        $this->assertEquals('user', $routedRequest->getParam('controller'));
+        $this->assertEquals('get', $routedRequest->getParam('action'));
+        $this->assertEquals('email+test@example.com', $routedRequest->getParam('id'));
     }
 
-    public function test_RESTfulModule_GET_user_index()
+    public function testRESTfulModuleGETUserIndex()
     {
         $request = $this->_buildRequest('GET', '/mod/user/index');
-        $config = array('mod');
+        $config = ['mod'];
         $values = $this->_invokeRouteMatch($request, $config);
 
         $this->assertTrue(is_array($values));
@@ -516,10 +513,10 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
     /**
      * @group ZF-10964
      */
-    public function test_RESTfulModule_GET_user_index_withParam_urlencodedWithPlusSymbol()
+    public function testRESTfulModuleGETUserIndexWithParamUrlencodedWithPlusSymbol()
     {
         $request = $this->_buildRequest('GET', '/mod/user/index/the%2Bemail%40address/email%2Btest%40example.com');
-        $config = array('mod');
+        $config = ['mod'];
         $values = $this->_invokeRouteMatch($request, $config);
 
         $this->assertTrue(is_array($values));
@@ -530,10 +527,10 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('email+test@example.com', $values['the+email@address']);
     }
 
-    public function test_RESTfulModule_GET_user()
+    public function testRESTfulModuleGETUser()
     {
         $request = $this->_buildRequest('GET', '/mod/user/1234');
-        $config = array('mod');
+        $config = ['mod'];
         $values = $this->_invokeRouteMatch($request, $config);
 
         $this->assertTrue(is_array($values));
@@ -546,10 +543,10 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
     /**
      * @group ZF-10964
      */
-    public function test_RESTfulModule_GET_user_urlencodedWithPlusSymbol()
+    public function testRESTfulModuleGETUserUrlencodedWithPlusSymbol()
     {
         $request = $this->_buildRequest('GET', '/mod/user/email%2Btest%40example.com');
-        $config = array('mod');
+        $config = ['mod'];
         $values = $this->_invokeRouteMatch($request, $config);
 
         $this->assertTrue(is_array($values));
@@ -560,10 +557,10 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('email+test@example.com', $values['id']);
     }
 
-    public function test_RESTfulModule_POST_user()
+    public function testRESTfulModulePOSTUser()
     {
         $request = $this->_buildRequest('POST', '/mod/user');
-        $config = array('mod');
+        $config = ['mod'];
         $values = $this->_invokeRouteMatch($request, $config);
 
         $this->assertTrue(is_array($values));
@@ -573,19 +570,19 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('post', $values['action']);
     }
 
-    public function test_RESTfulModule_POST_user_inNonRESTModule_returnsFalse()
+    public function testRESTfulModulePOSTUserInNonRESTModuleReturnsFalse()
     {
         $request = $this->_buildRequest('POST', '/default/user');
-        $config = array('mod');
+        $config = ['mod'];
         $values = $this->_invokeRouteMatch($request, $config);
 
         $this->assertFalse($values);
     }
 
-    public function test_RESTfulModule_PUT_user_byIdentifier()
+    public function testRESTfulModulePUTUserByIdentifier()
     {
         $request = $this->_buildRequest('PUT', '/mod/user/lcrouch');
-        $config = array('mod');
+        $config = ['mod'];
         $values = $this->_invokeRouteMatch($request, $config);
 
         $this->assertTrue(is_array($values));
@@ -599,10 +596,10 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
     /**
      * @group ZF-10964
      */
-    public function test_RESTfulModule_PUT_user_byIdentifier_urlencodedWithPlusSymbol()
+    public function testRESTfulModulePUTUserByIdentifierUrlencodedWithPlusSymbol()
     {
         $request = $this->_buildRequest('PUT', '/mod/user/email%2Btest%40example.com');
-        $config = array('mod');
+        $config = ['mod'];
         $values = $this->_invokeRouteMatch($request, $config);
 
         $this->assertTrue(is_array($values));
@@ -613,10 +610,10 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('email+test@example.com', $values['id']);
     }
 
-    public function test_RESTfulModule_DELETE_user_byIdentifier()
+    public function testRESTfulModuleDELETEUserByIdentifier()
     {
         $request = $this->_buildRequest('DELETE', '/mod/user/lcrouch');
-        $config = array('mod');
+        $config = ['mod'];
         $values = $this->_invokeRouteMatch($request, $config);
 
         $this->assertTrue(is_array($values));
@@ -630,10 +627,10 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
     /**
      * @group ZF-10964
      */
-    public function test_RESTfulModule_DELETE_user_byIdentifier_urlencodedWithPlusSymbol()
+    public function testRESTfulModuleDELETEUserByIdentifierUrlencodedWithPlusSymbol()
     {
         $request = $this->_buildRequest('DELETE', '/mod/user/email%2Btest%40example.com');
-        $config = array('mod');
+        $config = ['mod'];
         $values = $this->_invokeRouteMatch($request, $config);
 
         $this->assertTrue(is_array($values));
@@ -644,10 +641,10 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('email+test@example.com', $values['id']);
     }
 
-    public function test_RESTfulController_GET_user_index()
+    public function testRESTfulControllerGETUserIndex()
     {
         $request = $this->_buildRequest('GET', '/mod/user/index');
-        $config = array('mod'=>array('user'));
+        $config = ['mod' => ['user']];
         $values = $this->_invokeRouteMatch($request, $config);
 
         $this->assertTrue(is_array($values));
@@ -657,28 +654,28 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('index', $values['action']);
     }
 
-    public function test_RESTfulController_GET_default_controller_returns_false()
+    public function testRESTfulControllerGETDefaultControllerReturnsFalse()
     {
         $request = $this->_buildRequest('GET', '/mod/index/index');
-        $config = array('mod'=>array('user'));
+        $config = ['mod' => ['user']];
         $values = $this->_invokeRouteMatch($request, $config);
 
         $this->assertFalse($values);
     }
 
-    public function test_RESTfulController_GET_other_index_returns_false()
+    public function testRESTfulControllerGETOtherIndexReturnsFalse()
     {
         $request = $this->_buildRequest('GET', '/mod/project/index');
-        $config = array('mod'=>array('user'));
+        $config = ['mod' => ['user']];
         $values = $this->_invokeRouteMatch($request, $config);
 
         $this->assertFalse($values);
     }
 
-    public function test_RESTfulController_GET_user()
+    public function testRESTfulControllerGETUser()
     {
         $request = $this->_buildRequest('GET', '/mod/user/1234');
-        $config = array('mod'=>array('user'));
+        $config = ['mod' => ['user']];
         $values = $this->_invokeRouteMatch($request, $config);
 
         $this->assertTrue(is_array($values));
@@ -691,10 +688,10 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
     /**
      * @group ZF-10964
      */
-    public function test_RESTfulController_GET_user_urlencodedWithPlusSymbol()
+    public function testRESTfulControllerGETUserUrlencodedWithPlusSymbol()
     {
         $request = $this->_buildRequest('GET', '/mod/user/email%2Btest%40example.com');
-        $config = array('mod'=>array('user'));
+        $config = ['mod' => ['user']];
         $values = $this->_invokeRouteMatch($request, $config);
 
         $this->assertTrue(is_array($values));
@@ -705,10 +702,10 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('email+test@example.com', $values['id']);
     }
 
-    public function test_RESTfulController_POST_user()
+    public function testRESTfulControllerPOSTUser()
     {
         $request = $this->_buildRequest('POST', '/mod/user');
-        $config = array('mod'=>array('user'));
+        $config = ['mod' => ['user']];
         $values = $this->_invokeRouteMatch($request, $config);
 
         $this->assertTrue(is_array($values));
@@ -718,37 +715,37 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('post', $values['action']);
     }
 
-    public function test_RESTfulController_POST_user_inNonRESTModule_returnsFalse()
+    public function testRESTfulControllerPOSTUserInNonRESTModuleReturnsFalse()
     {
         $request = $this->_buildRequest('POST', '/default/user');
-        $config = array('mod'=>array('user'));
+        $config = ['mod' => ['user']];
         $values = $this->_invokeRouteMatch($request, $config);
 
         $this->assertFalse($values);
     }
 
-    public function test_postToNonRESTfulDefaultController_moduleHasAnotherRESTfulController_defaultControllerInURL_returnsFalse()
+    public function testPostToNonRESTfulDefaultControllerModuleHasAnotherRESTfulControllerDefaultControllerInURLReturnsFalse()
     {
         $request = $this->_buildRequest('POST', '/mod/index');
-        $config = array('mod'=>array('user'));
+        $config = ['mod' => ['user']];
         $values = $this->_invokeRouteMatch($request, $config);
 
         $this->assertFalse($values);
     }
 
-    public function test_postToNonRESTfulDefaultController_moduleHasAnotherRESTfulController_noDefaultControllerInURL_returnsFalse()
+    public function testPostToNonRESTfulDefaultControllerModuleHasAnotherRESTfulControllerNoDefaultControllerInURLReturnsFalse()
     {
         $request = $this->_buildRequest('POST', '/mod');
-        $config = array('mod'=>array('user'));
+        $config = ['mod' => ['user']];
         $values = $this->_invokeRouteMatch($request, $config);
 
         $this->assertFalse($values);
     }
 
-    public function test_RESTfulController_PUT_user_byIdentifier()
+    public function testRESTfulControllerPUTUserByIdentifier()
     {
         $request = $this->_buildRequest('PUT', '/mod/user/lcrouch');
-        $config = array('mod'=>array('user'));
+        $config = ['mod' => ['user']];
         $values = $this->_invokeRouteMatch($request, $config);
 
         $this->assertTrue(is_array($values));
@@ -762,10 +759,10 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
     /**
      * @group ZF-10964
      */
-    public function test_RESTfulController_PUT_user_byIdentifier_urlencodedWithPlusSymbol()
+    public function testRESTfulControllerPUTUserByIdentifierUrlencodedWithPlusSymbol()
     {
         $request = $this->_buildRequest('PUT', '/mod/user/email%2Btest%40example.com');
-        $config = array('mod'=>array('user'));
+        $config = ['mod' => ['user']];
         $values = $this->_invokeRouteMatch($request, $config);
 
         $this->assertTrue(is_array($values));
@@ -776,10 +773,10 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('email+test@example.com', $values['id']);
     }
 
-    public function test_RESTfulController_DELETE_user_byIdentifier()
+    public function testRESTfulControllerDELETEUserByIdentifier()
     {
         $request = $this->_buildRequest('DELETE', '/mod/user/lcrouch');
-        $config = array('mod');
+        $config = ['mod'];
         $values = $this->_invokeRouteMatch($request, $config);
 
         $this->assertTrue(is_array($values));
@@ -793,10 +790,10 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
     /**
      * @group ZF-10964
      */
-    public function test_RESTfulController_DELETE_user_byIdentifier_urlencodedWithPlusSymbol()
+    public function testRESTfulControllerDELETEUserByIdentifierUrlencodedWithPlusSymbol()
     {
         $request = $this->_buildRequest('DELETE', '/mod/user/email%2Btest%40example.com');
-        $config = array('mod');
+        $config = ['mod'];
         $values = $this->_invokeRouteMatch($request, $config);
 
         $this->assertTrue(is_array($values));
@@ -807,42 +804,42 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('email+test@example.com', $values['id']);
     }
 
-    public function test_assemble_plain_ignores_action()
+    public function testAssemblePlainIgnoresAction()
     {
-        $route = new Zend_Rest_Route($this->_front, array(), array());
-        $params = array('module'=>'mod', 'controller'=>'user', 'action'=>'get');
+        $route = new Zend_Rest_Route($this->_front, [], []);
+        $params = ['module' => 'mod', 'controller' => 'user', 'action' => 'get'];
         $url = $route->assemble($params);
         $this->assertEquals('mod/user', $url);
     }
 
-    public function test_assemble_id_after_controller()
+    public function testAssembleIdAfterController()
     {
-        $route = new Zend_Rest_Route($this->_front, array(), array());
-        $params = array('module'=>'mod', 'controller'=>'user', 'id'=>'lcrouch');
+        $route = new Zend_Rest_Route($this->_front, [], []);
+        $params = ['module' => 'mod', 'controller' => 'user', 'id' => 'lcrouch'];
         $url = $route->assemble($params);
         $this->assertEquals('mod/user/lcrouch', $url);
     }
 
-    public function test_assemble_index_after_controller_with_params()
+    public function testAssembleIndexAfterControllerWithParams()
     {
-        $route = new Zend_Rest_Route($this->_front, array(), array());
-        $params = array('module'=>'mod', 'controller'=>'user', 'index'=>true, 'foo'=>'bar');
+        $route = new Zend_Rest_Route($this->_front, [], []);
+        $params = ['module' => 'mod', 'controller' => 'user', 'index' => true, 'foo' => 'bar'];
         $url = $route->assemble($params);
         $this->assertEquals('mod/user/index/foo/bar', $url);
     }
 
-    public function test_assemble_encode_param_values()
+    public function testAssembleEncodeParamValues()
     {
-        $route = new Zend_Rest_Route($this->_front, array(), array());
-        $params = array('module'=>'mod', 'controller'=>'user', 'index'=>true, 'foo'=>'bar is n!ice');
+        $route = new Zend_Rest_Route($this->_front, [], []);
+        $params = ['module' => 'mod', 'controller' => 'user', 'index' => true, 'foo' => 'bar is n!ice'];
         $url = $route->assemble($params);
         $this->assertEquals('mod/user/index/foo/bar+is+n%21ice', $url);
     }
 
-    public function test_assemble_does_NOT_encode_param_values()
+    public function testAssembleDoesNOTEncodeParamValues()
     {
-        $route = new Zend_Rest_Route($this->_front, array(), array());
-        $params = array('module'=>'mod', 'controller'=>'user', 'index'=>true, 'foo'=>'bar is n!ice');
+        $route = new Zend_Rest_Route($this->_front, [], []);
+        $params = ['module' => 'mod', 'controller' => 'user', 'index' => true, 'foo' => 'bar is n!ice'];
         $url = $route->assemble($params, false, false);
         $this->assertEquals('mod/user/index/foo/bar is n!ice', $url);
     }
@@ -850,10 +847,10 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
     /**
      * @group ZF-9823
      */
-    public function test_assemble_edit_with_module_appends_action_after_id()
+    public function testAssembleEditWithModuleAppendsActionAfterId()
     {
-        $route = new Zend_Rest_Route($this->_front, array(), array());
-        $params = array('module'=>'mod', 'controller'=>'users', 'action'=>'edit', 'id'=>1);
+        $route = new Zend_Rest_Route($this->_front, [], []);
+        $params = ['module' => 'mod', 'controller' => 'users', 'action' => 'edit', 'id' => 1];
         $url = $route->assemble($params);
         $this->assertEquals('mod/users/1/edit', $url);
     }
@@ -861,10 +858,10 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
     /**
      * @group ZF-9823
      */
-    public function test_assemble_edit_without_module_appends_action_after_id()
+    public function testAssembleEditWithoutModuleAppendsActionAfterId()
     {
-        $route = new Zend_Rest_Route($this->_front, array(), array());
-        $params = array('controller'=>'users', 'action'=>'edit', 'id'=>1);
+        $route = new Zend_Rest_Route($this->_front, [], []);
+        $params = ['controller' => 'users', 'action' => 'edit', 'id' => 1];
         $url = $route->assemble($params);
         $this->assertEquals('users/1/edit', $url);
     }
@@ -872,10 +869,10 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
     /**
      * @group ZF-9823
      */
-    public function test_assemble_new_with_module_appends_action()
+    public function testAssembleNewWithModuleAppendsAction()
     {
-        $route = new Zend_Rest_Route($this->_front, array(), array());
-        $params = array('module'=>'mod', 'controller'=>'users', 'action'=>'new');
+        $route = new Zend_Rest_Route($this->_front, [], []);
+        $params = ['module' => 'mod', 'controller' => 'users', 'action' => 'new'];
         $url = $route->assemble($params);
         $this->assertEquals('mod/users/new', $url);
     }
@@ -883,10 +880,10 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
     /**
      * @group ZF-9823
      */
-    public function test_assemble_new_without_module_appends_action()
+    public function testAssembleNewWithoutModuleAppendsAction()
     {
-        $route = new Zend_Rest_Route($this->_front, array(), array());
-        $params = array('controller'=>'users', 'action'=>'new');
+        $route = new Zend_Rest_Route($this->_front, [], []);
+        $params = ['controller' => 'users', 'action' => 'new'];
         $url = $route->assemble($params);
         $this->assertEquals('users/new', $url);
     }
@@ -894,10 +891,10 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
     /**
      * @group ZF-9823
      */
-    public function test_assemble_random_action_with_module_removes_action()
+    public function testAssembleRandomActionWithModuleRemovesAction()
     {
-        $route = new Zend_Rest_Route($this->_front, array(), array());
-        $params = array('module'=>'mod', 'controller'=>'users', 'action'=>'newbar');
+        $route = new Zend_Rest_Route($this->_front, [], []);
+        $params = ['module' => 'mod', 'controller' => 'users', 'action' => 'newbar'];
         $url = $route->assemble($params);
         $this->assertNotEquals('mod/users/newbar', $url);
     }
@@ -905,10 +902,10 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
     /**
      * @group ZF-9823
      */
-    public function test_assemble_random_action_without_module_removes_action()
+    public function testAssembleRandomActionWithoutModuleRemovesAction()
     {
-        $route = new Zend_Rest_Route($this->_front, array(), array());
-        $params = array('controller'=>'users', 'action'=>'newbar');
+        $route = new Zend_Rest_Route($this->_front, [], []);
+        $params = ['controller' => 'users', 'action' => 'newbar'];
         $url = $route->assemble($params);
         $this->assertNotEquals('users/newbar', $url);
     }
@@ -916,10 +913,10 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
     /**
      * @group ZF-9823
      */
-    public function test_assemble_with_module_honors_index_parameter_with_resource_id_and_extra_parameters()
+    public function testAssembleWithModuleHonorsIndexParameterWithResourceIdAndExtraParameters()
     {
-        $route = new Zend_Rest_Route($this->_front, array(), array());
-        $params = array('module'=>'mod', 'controller'=>'users', 'id' => 1, 'extra'=>'parameter', 'another' => 'parameter', 'index' => true);
+        $route = new Zend_Rest_Route($this->_front, [], []);
+        $params = ['module' => 'mod', 'controller' => 'users', 'id' => 1, 'extra' => 'parameter', 'another' => 'parameter', 'index' => true];
         $url = $route->assemble($params, false, false);
         $this->assertEquals('mod/users/index/1/extra/parameter/another/parameter', $url);
     }
@@ -927,47 +924,49 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
     /**
      * @group ZF-9823
      */
-    public function test_assemble_without_module_honors_index_parameter_with_resource_id_and_extra_parameters()
+    public function testAssembleWithoutModuleHonorsIndexParameterWithResourceIdAndExtraParameters()
     {
-        $route = new Zend_Rest_Route($this->_front, array(), array());
-        $params = array('controller'=>'users', 'id' => 1, 'extra'=>'parameter', 'another' => 'parameter', 'index' => true);
+        $route = new Zend_Rest_Route($this->_front, [], []);
+        $params = ['controller' => 'users', 'id' => 1, 'extra' => 'parameter', 'another' => 'parameter', 'index' => true];
         $url = $route->assemble($params, false, false);
         $this->assertEquals('users/index/1/extra/parameter/another/parameter', $url);
     }
+
     /**
      * @group ZF-9115
      */
-    public function test_request_get_user_params()
+    public function testRequestGetUserParams()
     {
         $uri = Zend_Uri::factory('http://localhost.com/user/index?a=1&b=2');
         $request = new Zend_Controller_Request_Http($uri);
         $request->setParam('test', 5);
-        $config = array('mod'=>array('user'));
+        $config = ['mod' => ['user']];
         $this->_invokeRouteMatch($request, $config);
-        $this->assertEquals(array("test"=>5), $request->getUserParams());
-        $this->assertEquals(array("test"=>5,"a"=>1,"b"=>2), $request->getParams());
+        $this->assertEquals(['test' => 5], $request->getUserParams());
+        $this->assertEquals(['test' => 5, 'a' => 1, 'b' => 2], $request->getParams());
     }
-
 
     private function _buildRequest($method, $uri)
     {
         $request = new Zend_Controller_Request_HttpTestCase();
         $request->setMethod($method)->setRequestUri($uri);
+
         return $request;
     }
 
-    private function _invokeRouteMatch($request, $config = array(), $route = null)
+    private function _invokeRouteMatch($request, $config = [], $route = null)
     {
         $this->_front->setRequest($request);
-        if ($route == null) {
-        	$route = new Zend_Rest_Route($this->_front, array(), $config);
+        if (null == $route) {
+            $route = new Zend_Rest_Route($this->_front, [], $config);
         }
         $values = $route->match($request);
+
         return $values;
     }
 }
 
 // Call Zend_Rest_RouteTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Rest_RouteTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Rest_RouteTest::main') {
     Zend_Rest_RouteTest::main();
 }

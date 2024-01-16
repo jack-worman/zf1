@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_EventManager
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -27,27 +27,22 @@
  * wire up one or more listeners.
  *
  * @category   Zend
- * @package    Zend_EventManager
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface Zend_EventManager_ListenerAggregate
 {
     /**
-     * Attach one or more listeners
+     * Attach one or more listeners.
      *
      * Implementors may add an optional $priority argument; the EventManager
      * implementation will pass this to the aggregate.
-     *
-     * @param Zend_EventManager_EventCollection $events
-     * @param null|int $priority Optional priority "hint" to use when attaching listeners
      */
     public function attach(Zend_EventManager_EventCollection $events);
 
     /**
-     * Detach all previously attached listeners
-     *
-     * @param Zend_EventManager_EventCollection $events
+     * Detach all previously attached listeners.
      */
     public function detach(Zend_EventManager_EventCollection $events);
 }

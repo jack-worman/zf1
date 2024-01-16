@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,27 +13,23 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Pdf
- * @subpackage Actions
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /** Zend_Pdf_Action */
 // require_once 'Zend/Pdf/Action.php';
 
-
 /**
  * PDF 'Set the current view of a 3D annotation' action
- * PDF 1.6+ feature
+ * PDF 1.6+ feature.
  *
- * @package    Zend_Pdf
- * @subpackage Actions
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Pdf_Action_GoTo3DView extends Zend_Pdf_Action
 {
 }
-

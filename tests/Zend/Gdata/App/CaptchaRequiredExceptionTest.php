@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,47 +13,47 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata_App
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
- // require_once 'Zend/Gdata/App/CaptchaRequiredException.php';
+// require_once 'Zend/Gdata/App/CaptchaRequiredException.php';
 
 /**
  * @category   Zend
- * @package    Zend_Gdata_App
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_App
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_App_CaptchaRequiredExceptionTest extends PHPUnit_Framework_TestCase
 {
-
-    public function setUp() {
+    public function setUp()
+    {
         $this->exampleException = new Zend_Gdata_App_CaptchaRequiredException('testtoken', 'Captcha?ctoken=testtoken');
     }
 
-    public function testExceptionContainsValidInformation() {
+    public function testExceptionContainsValidInformation()
+    {
         $this->assertEquals('testtoken', $this->exampleException->getCaptchaToken());
         $this->assertEquals('https://www.google.com/accounts/Captcha?ctoken=testtoken', $this->exampleException->getCaptchaUrl());
     }
 
-    public function testExceptionIsThrowable() {
+    public function testExceptionIsThrowable()
+    {
         $caught = false;
         try {
             throw $this->exampleException;
-        }
-        catch(Zend_Gdata_App_CaptchaRequiredException $e) {
+        } catch (Zend_Gdata_App_CaptchaRequiredException $e) {
             $caught = true;
         }
 
         $this->assertTrue($caught);
     }
-
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -28,8 +28,7 @@ require_once '_files/ProviderFullFeatured.php';
 
 /**
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
@@ -40,10 +39,9 @@ require_once '_files/ProviderFullFeatured.php';
 #[AllowDynamicProperties]
 class Zend_Tool_Framework_Provider_AbstractTest extends PHPUnit_Framework_TestCase
 {
-
-    protected $_request = null;
-    protected $_response = null;
-    protected $_registry = null;
+    protected $_request;
+    protected $_response;
+    protected $_registry;
 
     public function setup()
     {
@@ -63,5 +61,4 @@ class Zend_Tool_Framework_Provider_AbstractTest extends PHPUnit_Framework_TestCa
         $this->assertTrue(array_shift($returnInternals) === $this->_request);
         $this->assertTrue(array_shift($returnInternals) === $this->_response);
     }
-
 }

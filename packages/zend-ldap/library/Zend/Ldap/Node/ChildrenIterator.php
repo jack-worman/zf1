@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Ldap
- * @subpackage Node
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -29,15 +29,14 @@
  * Zend_Ldap_Node_ChildrenIterator provides an iterator to a collection of children nodes.
  *
  * @category   Zend
- * @package    Zend_Ldap
- * @subpackage Node
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Ldap_Node_ChildrenIterator implements Iterator, Countable, RecursiveIterator, ArrayAccess
 {
     /**
-     * An array of Zend_Ldap_Node objects
+     * An array of Zend_Ldap_Node objects.
      *
      * @var array
      */
@@ -46,7 +45,6 @@ class Zend_Ldap_Node_ChildrenIterator implements Iterator, Countable, RecursiveI
     /**
      * Constructor.
      *
-     * @param  array $data
      * @return void
      */
     public function __construct(array $data)
@@ -56,11 +54,11 @@ class Zend_Ldap_Node_ChildrenIterator implements Iterator, Countable, RecursiveI
 
     /**
      * Returns the number of child nodes.
-     * Implements Countable
+     * Implements Countable.
      *
      * @return int
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function count()
     {
         return count($this->_data);
@@ -68,11 +66,11 @@ class Zend_Ldap_Node_ChildrenIterator implements Iterator, Countable, RecursiveI
 
     /**
      * Return the current child.
-     * Implements Iterator
+     * Implements Iterator.
      *
      * @return Zend_Ldap_Node
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function current()
     {
         return current($this->_data);
@@ -80,11 +78,11 @@ class Zend_Ldap_Node_ChildrenIterator implements Iterator, Countable, RecursiveI
 
     /**
      * Return the child'd RDN.
-     * Implements Iterator
+     * Implements Iterator.
      *
      * @return string
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function key()
     {
         return key($this->_data);
@@ -92,9 +90,9 @@ class Zend_Ldap_Node_ChildrenIterator implements Iterator, Countable, RecursiveI
 
     /**
      * Move forward to next child.
-     * Implements Iterator
+     * Implements Iterator.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function next()
     {
         next($this->_data);
@@ -102,9 +100,9 @@ class Zend_Ldap_Node_ChildrenIterator implements Iterator, Countable, RecursiveI
 
     /**
      * Rewind the Iterator to the first child.
-     * Implements Iterator
+     * Implements Iterator.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function rewind()
     {
         reset($this->_data);
@@ -113,21 +111,21 @@ class Zend_Ldap_Node_ChildrenIterator implements Iterator, Countable, RecursiveI
     /**
      * Check if there is a current child
      * after calls to rewind() or next().
-     * Implements Iterator
+     * Implements Iterator.
      *
-     * @return boolean
+     * @return bool
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function valid()
     {
-        return (current($this->_data)!==false);
+        return false !== current($this->_data);
     }
 
     /**
      * Checks if current node has children.
      * Returns whether the current element has children.
      *
-     * @return boolean
+     * @return bool
      */
     public function hasChildren()
     {
@@ -143,7 +141,7 @@ class Zend_Ldap_Node_ChildrenIterator implements Iterator, Countable, RecursiveI
      *
      * @return Zend_Ldap_Node_ChildrenIterator
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function getChildren()
     {
         if ($this->current() instanceof Zend_Ldap_Node) {
@@ -157,10 +155,11 @@ class Zend_Ldap_Node_ChildrenIterator implements Iterator, Countable, RecursiveI
      * Returns a child with a given RDN.
      * Implements ArrayAccess.
      *
-     * @param  string $rdn
+     * @param string $rdn
+     *
      * @return Zend_Ldap_node
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($rdn)
     {
         if ($this->offsetExists($rdn)) {
@@ -174,47 +173,54 @@ class Zend_Ldap_Node_ChildrenIterator implements Iterator, Countable, RecursiveI
      * Checks whether a given rdn exists.
      * Implements ArrayAccess.
      *
-     * @param  string $rdn
-     * @return boolean
+     * @param string $rdn
+     *
+     * @return bool
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetExists($rdn)
     {
-        return (array_key_exists($rdn, $this->_data));
+        return array_key_exists($rdn, $this->_data);
     }
 
     /**
      * Does nothing.
      * Implements ArrayAccess.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return null
      */
-    #[\ReturnTypeWillChange]
-    public function offsetUnset($name) { }
+    #[ReturnTypeWillChange]
+    public function offsetUnset($name)
+    {
+    }
 
     /**
      * Does nothing.
      * Implements ArrayAccess.
      *
-     * @param  string $name
-     * @param  mixed $value
+     * @param string $name
+     *
      * @return null
      */
-    #[\ReturnTypeWillChange]
-    public function offsetSet($name, $value) { }
+    #[ReturnTypeWillChange]
+    public function offsetSet($name, $value)
+    {
+    }
 
     /**
-     * Get all children as an array
+     * Get all children as an array.
      *
      * @return array
      */
     public function toArray()
     {
-        $data = array();
+        $data = [];
         foreach ($this as $rdn => $node) {
             $data[$rdn] = $node;
         }
+
         return $data;
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,24 +13,24 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Measure
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Measure_Cooking_Weight
+ * Zend_Measure_Cooking_Weight.
  */
 // require_once 'Zend/Measure/Cooking/Weight.php';
 
 /**
  * @category   Zend
- * @package    Zend_Measure
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Measure
  */
 #[AllowDynamicProperties]
@@ -38,313 +38,290 @@ class Zend_Measure_Cooking_WeightTest extends PHPUnit_Framework_TestCase
 {
     /**
      * test for Mass initialisation
-     * expected instance
+     * expected instance.
      */
-    public function testCooking_WeightInit()
+    public function testCookingWeightInit()
     {
-        $value = new Zend_Measure_Cooking_Weight('100',Zend_Measure_Cooking_Weight::STANDARD,'de');
-        $this->assertTrue($value instanceof Zend_Measure_Cooking_Weight,'Zend_Measure_Cooking_Weight Object not returned');
+        $value = new Zend_Measure_Cooking_Weight('100', Zend_Measure_Cooking_Weight::STANDARD, 'de');
+        $this->assertTrue($value instanceof Zend_Measure_Cooking_Weight, 'Zend_Measure_Cooking_Weight Object not returned');
     }
-
 
     /**
      * test for exception unknown type
-     * expected exception
+     * expected exception.
      */
-    public function testCooking_WeightUnknownType()
+    public function testCookingWeightUnknownType()
     {
         try {
-            $value = new Zend_Measure_Cooking_Weight('100','Cooking_Weight::UNKNOWN','de');
+            $value = new Zend_Measure_Cooking_Weight('100', 'Cooking_Weight::UNKNOWN', 'de');
             $this->fail('Exception expected because of unknown type');
         } catch (Zend_Measure_Exception $e) {
             // success
         }
     }
 
-
     /**
      * test for exception unknown value
-     * expected exception
+     * expected exception.
      */
-    public function testCooking_WeightUnknownValue()
+    public function testCookingWeightUnknownValue()
     {
         try {
-            $value = new Zend_Measure_Cooking_Weight('novalue',Zend_Measure_Cooking_Weight::STANDARD,'de');
+            $value = new Zend_Measure_Cooking_Weight('novalue', Zend_Measure_Cooking_Weight::STANDARD, 'de');
             $this->fail('Exception expected because of empty value');
         } catch (Zend_Measure_Exception $e) {
             // success
         }
     }
 
-
     /**
      * test for exception unknown locale
-     * expected root value
+     * expected root value.
      */
-    public function testCooking_WeightUnknownLocale()
+    public function testCookingWeightUnknownLocale()
     {
         try {
-            $value = new Zend_Measure_Cooking_Weight('100',Zend_Measure_Cooking_Weight::STANDARD,'nolocale');
+            $value = new Zend_Measure_Cooking_Weight('100', Zend_Measure_Cooking_Weight::STANDARD, 'nolocale');
             $this->fail('Exception expected because of unknown locale');
         } catch (Zend_Measure_Exception $e) {
             // success
         }
     }
-
 
     /**
      * test for standard locale
-     * expected integer
+     * expected integer.
      */
-    public function testCooking_WeightNoLocale()
+    public function testCookingWeightNoLocale()
     {
-        $value = new Zend_Measure_Cooking_Weight('100',Zend_Measure_Cooking_Weight::STANDARD);
-        $this->assertEquals(100, $value->getValue(),'Zend_Measure_Cooking_Weight value expected');
+        $value = new Zend_Measure_Cooking_Weight('100', Zend_Measure_Cooking_Weight::STANDARD);
+        $this->assertEquals(100, $value->getValue(), 'Zend_Measure_Cooking_Weight value expected');
     }
-
 
     /**
      * test for positive value
-     * expected integer
+     * expected integer.
      */
-    public function testCooking_WeightValuePositive()
+    public function testCookingWeightValuePositive()
     {
-        $value = new Zend_Measure_Cooking_Weight('100',Zend_Measure_Cooking_Weight::STANDARD,'de');
+        $value = new Zend_Measure_Cooking_Weight('100', Zend_Measure_Cooking_Weight::STANDARD, 'de');
         $this->assertEquals(100, $value->getValue(), 'Zend_Measure_Cooking_Weight value expected to be a positive integer');
     }
 
-
     /**
      * test for negative value
-     * expected integer
+     * expected integer.
      */
-    public function testCooking_WeightValueNegative()
+    public function testCookingWeightValueNegative()
     {
-        $value = new Zend_Measure_Cooking_Weight('-100',Zend_Measure_Cooking_Weight::STANDARD,'de');
+        $value = new Zend_Measure_Cooking_Weight('-100', Zend_Measure_Cooking_Weight::STANDARD, 'de');
         $this->assertEquals(-100, $value->getValue(), 'Zend_Measure_Cooking_Weight value expected to be a negative integer');
     }
 
-
     /**
      * test for decimal value
-     * expected float
+     * expected float.
      */
-    public function testCooking_WeightValueDecimal()
+    public function testCookingWeightValueDecimal()
     {
-        $value = new Zend_Measure_Cooking_Weight('-100,200',Zend_Measure_Cooking_Weight::STANDARD,'de');
+        $value = new Zend_Measure_Cooking_Weight('-100,200', Zend_Measure_Cooking_Weight::STANDARD, 'de');
         $this->assertEquals(-100.200, $value->getValue(), 'Zend_Measure_Cooking_Weight value expected to be a decimal value');
     }
 
-
     /**
      * test for decimal seperated value
-     * expected float
+     * expected float.
      */
-    public function testCooking_WeightValueDecimalSeperated()
+    public function testCookingWeightValueDecimalSeperated()
     {
-        $value = new Zend_Measure_Cooking_Weight('-100.100,200',Zend_Measure_Cooking_Weight::STANDARD,'de');
-        $this->assertEquals(-100100.200, $value->getValue(),'Zend_Measure_Cooking_Weight Object not returned');
+        $value = new Zend_Measure_Cooking_Weight('-100.100,200', Zend_Measure_Cooking_Weight::STANDARD, 'de');
+        $this->assertEquals(-100100.200, $value->getValue(), 'Zend_Measure_Cooking_Weight Object not returned');
     }
-
 
     /**
      * test for string with integrated value
-     * expected float
+     * expected float.
      */
-    public function testCooking_WeightValueString()
+    public function testCookingWeightValueString()
     {
-        $value = new Zend_Measure_Cooking_Weight('-100.100,200',Zend_Measure_Cooking_Weight::STANDARD,'de');
-        $this->assertEquals(-100100.200, $value->getValue(),'Zend_Measure_Cooking_Weight Object not returned');
+        $value = new Zend_Measure_Cooking_Weight('-100.100,200', Zend_Measure_Cooking_Weight::STANDARD, 'de');
+        $this->assertEquals(-100100.200, $value->getValue(), 'Zend_Measure_Cooking_Weight Object not returned');
     }
-
 
     /**
      * test for equality
-     * expected true
+     * expected true.
      */
-    public function testCooking_WeightEquality()
+    public function testCookingWeightEquality()
     {
-        $value = new Zend_Measure_Cooking_Weight('-100.100,200',Zend_Measure_Cooking_Weight::STANDARD,'de');
-        $newvalue = new Zend_Measure_Cooking_Weight('-100.100,200',Zend_Measure_Cooking_Weight::STANDARD,'de');
-        $this->assertTrue($value->equals($newvalue),'Zend_Measure_Cooking_Weight Object should be equal');
+        $value = new Zend_Measure_Cooking_Weight('-100.100,200', Zend_Measure_Cooking_Weight::STANDARD, 'de');
+        $newvalue = new Zend_Measure_Cooking_Weight('-100.100,200', Zend_Measure_Cooking_Weight::STANDARD, 'de');
+        $this->assertTrue($value->equals($newvalue), 'Zend_Measure_Cooking_Weight Object should be equal');
     }
-
 
     /**
      * test for no equality
-     * expected false
+     * expected false.
      */
-    public function testCooking_WeightNoEquality()
+    public function testCookingWeightNoEquality()
     {
-        $value = new Zend_Measure_Cooking_Weight('-100.100,200',Zend_Measure_Cooking_Weight::STANDARD,'de');
-        $newvalue = new Zend_Measure_Cooking_Weight('-100,200',Zend_Measure_Cooking_Weight::STANDARD,'de');
-        $this->assertFalse($value->equals($newvalue),'Zend_Measure_Cooking_Weight Object should be not equal');
+        $value = new Zend_Measure_Cooking_Weight('-100.100,200', Zend_Measure_Cooking_Weight::STANDARD, 'de');
+        $newvalue = new Zend_Measure_Cooking_Weight('-100,200', Zend_Measure_Cooking_Weight::STANDARD, 'de');
+        $this->assertFalse($value->equals($newvalue), 'Zend_Measure_Cooking_Weight Object should be not equal');
     }
-
 
     /**
      * test for set positive value
-     * expected integer
+     * expected integer.
      */
-    public function testCooking_WeightSetPositive()
+    public function testCookingWeightSetPositive()
     {
-        $value = new Zend_Measure_Cooking_Weight('100',Zend_Measure_Cooking_Weight::STANDARD,'de');
-        $value->setValue('200',Zend_Measure_Cooking_Weight::STANDARD,'de');
+        $value = new Zend_Measure_Cooking_Weight('100', Zend_Measure_Cooking_Weight::STANDARD, 'de');
+        $value->setValue('200', Zend_Measure_Cooking_Weight::STANDARD, 'de');
         $this->assertEquals(200, $value->getValue(), 'Zend_Measure_Cooking_Weight value expected to be a positive integer');
     }
 
-
     /**
      * test for set negative value
-     * expected integer
+     * expected integer.
      */
-    public function testCooking_WeightSetNegative()
+    public function testCookingWeightSetNegative()
     {
-        $value = new Zend_Measure_Cooking_Weight('-100',Zend_Measure_Cooking_Weight::STANDARD,'de');
-        $value->setValue('-200',Zend_Measure_Cooking_Weight::STANDARD,'de');
+        $value = new Zend_Measure_Cooking_Weight('-100', Zend_Measure_Cooking_Weight::STANDARD, 'de');
+        $value->setValue('-200', Zend_Measure_Cooking_Weight::STANDARD, 'de');
         $this->assertEquals(-200, $value->getValue(), 'Zend_Measure_Cooking_Weight value expected to be a negative integer');
     }
 
-
     /**
      * test for set decimal value
-     * expected float
+     * expected float.
      */
-    public function testCooking_WeightSetDecimal()
+    public function testCookingWeightSetDecimal()
     {
-        $value = new Zend_Measure_Cooking_Weight('-100,200',Zend_Measure_Cooking_Weight::STANDARD,'de');
-        $value->setValue('-200,200',Zend_Measure_Cooking_Weight::STANDARD,'de');
+        $value = new Zend_Measure_Cooking_Weight('-100,200', Zend_Measure_Cooking_Weight::STANDARD, 'de');
+        $value->setValue('-200,200', Zend_Measure_Cooking_Weight::STANDARD, 'de');
         $this->assertEquals(-200.200, $value->getValue(), 'Zend_Measure_Cooking_Weight value expected to be a decimal value');
     }
 
-
     /**
      * test for set decimal seperated value
-     * expected float
+     * expected float.
      */
-    public function testCooking_WeightSetDecimalSeperated()
+    public function testCookingWeightSetDecimalSeperated()
     {
-        $value = new Zend_Measure_Cooking_Weight('-100.100,200',Zend_Measure_Cooking_Weight::STANDARD,'de');
-        $value->setValue('-200.200,200',Zend_Measure_Cooking_Weight::STANDARD,'de');
-        $this->assertEquals(-200200.200, $value->getValue(),'Zend_Measure_Cooking_Weight Object not returned');
+        $value = new Zend_Measure_Cooking_Weight('-100.100,200', Zend_Measure_Cooking_Weight::STANDARD, 'de');
+        $value->setValue('-200.200,200', Zend_Measure_Cooking_Weight::STANDARD, 'de');
+        $this->assertEquals(-200200.200, $value->getValue(), 'Zend_Measure_Cooking_Weight Object not returned');
     }
-
 
     /**
      * test for set string with integrated value
-     * expected float
+     * expected float.
      */
-    public function testCooking_WeightSetString()
+    public function testCookingWeightSetString()
     {
-        $value = new Zend_Measure_Cooking_Weight('-100.100,200',Zend_Measure_Cooking_Weight::STANDARD,'de');
-        $value->setValue('-200.200,200',Zend_Measure_Cooking_Weight::STANDARD,'de');
-        $this->assertEquals(-200200.200, $value->getValue(),'Zend_Measure_Cooking_Weight Object not returned');
+        $value = new Zend_Measure_Cooking_Weight('-100.100,200', Zend_Measure_Cooking_Weight::STANDARD, 'de');
+        $value->setValue('-200.200,200', Zend_Measure_Cooking_Weight::STANDARD, 'de');
+        $this->assertEquals(-200200.200, $value->getValue(), 'Zend_Measure_Cooking_Weight Object not returned');
     }
-
 
     /**
      * test for exception unknown type
-     * expected exception
+     * expected exception.
      */
-    public function testCooking_WeightSetUnknownType()
+    public function testCookingWeightSetUnknownType()
     {
         try {
-            $value = new Zend_Measure_Cooking_Weight('100',Zend_Measure_Cooking_Weight::STANDARD,'de');
-            $value->setValue('-200.200,200','Cooking_Weight::UNKNOWN','de');
+            $value = new Zend_Measure_Cooking_Weight('100', Zend_Measure_Cooking_Weight::STANDARD, 'de');
+            $value->setValue('-200.200,200', 'Cooking_Weight::UNKNOWN', 'de');
             $this->fail('Exception expected because of unknown type');
         } catch (Zend_Measure_Exception $e) {
             // success
         }
     }
 
-
     /**
      * test for exception unknown value
-     * expected exception
+     * expected exception.
      */
-    public function testCooking_WeightSetUnknownValue()
+    public function testCookingWeightSetUnknownValue()
     {
         try {
-            $value = new Zend_Measure_Cooking_Weight('100',Zend_Measure_Cooking_Weight::STANDARD,'de');
-            $value->setValue('novalue',Zend_Measure_Cooking_Weight::STANDARD,'de');
+            $value = new Zend_Measure_Cooking_Weight('100', Zend_Measure_Cooking_Weight::STANDARD, 'de');
+            $value->setValue('novalue', Zend_Measure_Cooking_Weight::STANDARD, 'de');
             $this->fail('Exception expected because of empty value');
         } catch (Zend_Measure_Exception $e) {
             // success
         }
     }
 
-
     /**
      * test for exception unknown locale
-     * expected exception
+     * expected exception.
      */
-    public function testCooking_WeightSetUnknownLocale()
+    public function testCookingWeightSetUnknownLocale()
     {
         try {
-            $value = new Zend_Measure_Cooking_Weight('100',Zend_Measure_Cooking_Weight::STANDARD,'de');
-            $value->setValue('200',Zend_Measure_Cooking_Weight::STANDARD,'nolocale');
+            $value = new Zend_Measure_Cooking_Weight('100', Zend_Measure_Cooking_Weight::STANDARD, 'de');
+            $value->setValue('200', Zend_Measure_Cooking_Weight::STANDARD, 'nolocale');
             $this->fail('Exception expected because of unknown locale');
         } catch (Zend_Measure_Exception $e) {
             // success
         }
     }
 
-
     /**
      * test for exception unknown locale
-     * expected exception
+     * expected exception.
      */
-    public function testCooking_WeightSetWithNoLocale()
+    public function testCookingWeightSetWithNoLocale()
     {
         $value = new Zend_Measure_Cooking_Weight('100', Zend_Measure_Cooking_Weight::STANDARD, 'de');
         $value->setValue('200', Zend_Measure_Cooking_Weight::STANDARD);
         $this->assertEquals(200, $value->getValue(), 'Zend_Measure_Cooking_Weight value expected to be a positive integer');
     }
 
-
     /**
      * test setting type
-     * expected new type
+     * expected new type.
      */
-    public function testCooking_WeightSetType()
+    public function testCookingWeightSetType()
     {
-        $value = new Zend_Measure_Cooking_Weight('-100',Zend_Measure_Cooking_Weight::STANDARD,'de');
-        $value->setType(Zend_Measure_Cooking_Weight::CUP);
-        $this->assertEquals(Zend_Measure_Cooking_Weight::CUP, $value->getType(), 'Zend_Measure_Cooking_Weight type expected');    }
-
-
-    /**
-     * test setting computed type
-     * expected new type
-     */
-    public function testCooking_WeightSetComputedType1()
-    {
-        $value = new Zend_Measure_Cooking_Weight('-100',Zend_Measure_Cooking_Weight::STANDARD,'de');
+        $value = new Zend_Measure_Cooking_Weight('-100', Zend_Measure_Cooking_Weight::STANDARD, 'de');
         $value->setType(Zend_Measure_Cooking_Weight::CUP);
         $this->assertEquals(Zend_Measure_Cooking_Weight::CUP, $value->getType(), 'Zend_Measure_Cooking_Weight type expected');
     }
 
+    /**
+     * test setting computed type
+     * expected new type.
+     */
+    public function testCookingWeightSetComputedType1()
+    {
+        $value = new Zend_Measure_Cooking_Weight('-100', Zend_Measure_Cooking_Weight::STANDARD, 'de');
+        $value->setType(Zend_Measure_Cooking_Weight::CUP);
+        $this->assertEquals(Zend_Measure_Cooking_Weight::CUP, $value->getType(), 'Zend_Measure_Cooking_Weight type expected');
+    }
 
     /**
      * test setting computed type
-     * expected new type
+     * expected new type.
      */
-    public function testCooking_WeightSetComputedType2()
+    public function testCookingWeightSetComputedType2()
     {
-        $value = new Zend_Measure_Cooking_Weight('-100',Zend_Measure_Cooking_Weight::CUP,'de');
+        $value = new Zend_Measure_Cooking_Weight('-100', Zend_Measure_Cooking_Weight::CUP, 'de');
         $value->setType(Zend_Measure_Cooking_Weight::STANDARD);
         $this->assertEquals(Zend_Measure_Cooking_Weight::STANDARD, $value->getType(), 'Zend_Measure_Cooking_Weight type expected');
     }
 
-
     /**
      * test setting unknown type
-     * expected new type
+     * expected new type.
      */
-    public function testCooking_WeightSetTypeFailed()
+    public function testCookingWeightSetTypeFailed()
     {
         try {
-            $value = new Zend_Measure_Cooking_Weight('-100',Zend_Measure_Cooking_Weight::STANDARD,'de');
+            $value = new Zend_Measure_Cooking_Weight('-100', Zend_Measure_Cooking_Weight::STANDARD, 'de');
             $value->setType('Cooking_Weight::UNKNOWN');
             $this->fail('Exception expected because of unknown type');
         } catch (Zend_Measure_Exception $e) {
@@ -352,37 +329,34 @@ class Zend_Measure_Cooking_WeightTest extends PHPUnit_Framework_TestCase
         }
     }
 
-
     /**
      * test toString
-     * expected string
+     * expected string.
      */
-    public function testCooking_WeightToString()
+    public function testCookingWeightToString()
     {
-        $value = new Zend_Measure_Cooking_Weight('-100',Zend_Measure_Cooking_Weight::STANDARD,'de');
+        $value = new Zend_Measure_Cooking_Weight('-100', Zend_Measure_Cooking_Weight::STANDARD, 'de');
         $this->assertEquals('-100 g', $value->toString(), 'Value -100 g expected');
     }
 
-
     /**
      * test __toString
-     * expected string
+     * expected string.
      */
-    public function testCooking_Weight_ToString()
+    public function testCookingWeightToString()
     {
-        $value = new Zend_Measure_Cooking_Weight('-100',Zend_Measure_Cooking_Weight::STANDARD,'de');
+        $value = new Zend_Measure_Cooking_Weight('-100', Zend_Measure_Cooking_Weight::STANDARD, 'de');
         $this->assertEquals('-100 g', $value->__toString(), 'Value -100 g expected');
     }
 
-
     /**
      * test getConversionList
-     * expected array
+     * expected array.
      */
-    public function testCooking_WeightConversionList()
+    public function testCookingWeightConversionList()
     {
-        $value = new Zend_Measure_Cooking_Weight('-100',Zend_Measure_Cooking_Weight::STANDARD,'de');
-        $unit  = $value->getConversionList();
+        $value = new Zend_Measure_Cooking_Weight('-100', Zend_Measure_Cooking_Weight::STANDARD, 'de');
+        $unit = $value->getConversionList();
         $this->assertTrue(is_array($unit), 'Array expected');
     }
 }

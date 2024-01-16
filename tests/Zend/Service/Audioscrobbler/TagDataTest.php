@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_Audioscrobbler
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,21 +25,21 @@
  */
 // require_once 'Zend/Service/Audioscrobbler.php';
 
-require_once "AudioscrobblerTestCase.php";
+require_once 'AudioscrobblerTestCase.php';
 
 /**
  * @category   Zend
- * @package    Zend_Service_Audioscrobbler
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Service
  * @group      Zend_Service_Audioscrobbler
  */
 #[AllowDynamicProperties]
 class Zend_Service_Audioscrobbler_TagDataTest extends Zend_Service_Audioscrobbler_AudioscrobblerTestCase
 {
-    var $header = "HTTP/1.1 200 OK\r\nContent-type: text/xml\r\n\r\n";
+    public $header = "HTTP/1.1 200 OK\r\nContent-type: text/xml\r\n\r\n";
 
     public function testGetTopTags()
     {
@@ -49,14 +49,14 @@ class Zend_Service_Audioscrobbler_TagDataTest extends Zend_Service_Audioscrobble
             $as = new Zend_Service_Audioscrobbler();
             $response = $as->tagGetTopTags();
             $this->assertNotNull(count($response->tag));
-        } catch (\Throwable $e ) {
-                $this->fail("Exception: [" . $e->getMessage() . "] thrown by test");
+        } catch (Throwable $e) {
+            $this->fail('Exception: ['.$e->getMessage().'] thrown by test');
         }
     }
 
     public function testGetTopArtists()
     {
-        $testing_response = $this->header .
+        $testing_response = $this->header.
 '<?xml version="1.0" encoding="UTF-8"?>
 <tag tag="rock" count="785147">
 <artist name="Red Hot Chili Peppers" count="5097" streamable="yes">
@@ -85,12 +85,12 @@ class Zend_Service_Audioscrobbler_TagDataTest extends Zend_Service_Audioscrobble
         $as->set('tag', 'Rock');
         $response = $as->tagGetTopArtists();
         $this->assertNotNull($response->artist);
-        $this->assertEquals((string)$response['tag'], strtolower((string) $as->get('tag')));
+        $this->assertEquals((string) $response['tag'], strtolower((string) $as->get('tag')));
     }
 
     public function testGetTopAlbums()
     {
-        $testing_response = $this->header .
+        $testing_response = $this->header.
 '<?xml version="1.0" encoding="UTF-8"?>
 <tag tag="rock" count="786251">
 <album name="Fallen" count="79" streamable="yes">
@@ -124,12 +124,12 @@ class Zend_Service_Audioscrobbler_TagDataTest extends Zend_Service_Audioscrobble
         $as->set('tag', 'Rock');
         $response = $as->tagGetTopAlbums();
         $this->assertNotNull(count($response->album));
-        $this->assertEquals((string)$response['tag'], strtolower((string) $as->get('tag')));
+        $this->assertEquals((string) $response['tag'], strtolower((string) $as->get('tag')));
     }
 
     public function testGetTopTracks()
     {
-            $testing_response = $this->header .
+        $testing_response = $this->header.
 '<?xml version="1.0" encoding="UTF-8"?>
 <tag tag="rock" count="785836">
 <track name="Dani California" count="295" streamable="yes">
@@ -161,8 +161,7 @@ class Zend_Service_Audioscrobbler_TagDataTest extends Zend_Service_Audioscrobble
         $response = $as->tagGetTopTracks();
         $artist = $response->track[0];
         $this->assertNotNull(count($response->track));
-        $this->assertNotNull((string)$artist->name);
-        $this->assertEquals((string)$response['tag'], strtolower((string) $as->get('tag')));
+        $this->assertNotNull((string) $artist->name);
+        $this->assertEquals((string) $response['tag'], strtolower((string) $as->get('tag')));
     }
-
 }

@@ -1,9 +1,9 @@
 <?php
+
 #[AllowDynamicProperties]
 class MyBarcode5
 {
-    protected $_length     = 'odd';
+    protected $_length = 'odd';
     protected $_characters = 128;
-    protected $_checksum   = '_mod10';
+    protected $_checksum = '_mod10';
 }
-?>

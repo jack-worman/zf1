@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Dojo_View_Helper_ContentPaneTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_View_Helper_ContentPaneTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Dojo_View_Helper_ContentPaneTest::main');
 }
 
 /** Zend_Dojo_View_Helper_ContentPane */
@@ -41,10 +41,10 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * Test class for Zend_Dojo_View_Helper_ContentPane.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Dojo
  * @group      Zend_Dojo_View
  */
@@ -58,7 +58,7 @@ class Zend_Dojo_View_Helper_ContentPaneTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_View_Helper_ContentPaneTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Dojo_View_Helper_ContentPaneTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -73,7 +73,7 @@ class Zend_Dojo_View_Helper_ContentPaneTest extends PHPUnit_Framework_TestCase
         Zend_Registry::_unsetInstance();
         Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
 
-        $this->view   = $this->getView();
+        $this->view = $this->getView();
         $this->helper = new Zend_Dojo_View_Helper_ContentPane();
         $this->helper->setView($this->view);
     }
@@ -93,12 +93,13 @@ class Zend_Dojo_View_Helper_ContentPaneTest extends PHPUnit_Framework_TestCase
         // require_once 'Zend/View.php';
         $view = new Zend_View();
         $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
+
         return $view;
     }
 
     public function getContainer()
     {
-        return $this->view->contentPane('pane1', 'This is the pane content', array('title' => 'Pane 1'));
+        return $this->view->contentPane('pane1', 'This is the pane content', ['title' => 'Pane 1']);
     }
 
     public function testShouldAllowDeclarativeDijitCreation()
@@ -120,11 +121,11 @@ class Zend_Dojo_View_Helper_ContentPaneTest extends PHPUnit_Framework_TestCase
      */
     public function testContentPaneMarkupShouldNotContainNameAttribute()
     {
-        $html = $this->view->contentPane('pane1', 'This is the pane content', array('id' => 'pane', 'title' => 'Pane 1'));
+        $html = $this->view->contentPane('pane1', 'This is the pane content', ['id' => 'pane', 'title' => 'Pane 1']);
         $this->assertNotContains('name="/', $html, $html);
 
         Zend_Dojo_View_Helper_Dojo::setUseProgrammatic();
-        $html = $this->view->contentPane('pane1', 'This is the pane content', array('id' => 'pane', 'title' => 'Pane 1'));
+        $html = $this->view->contentPane('pane1', 'This is the pane content', ['id' => 'pane', 'title' => 'Pane 1']);
         $this->assertNotContains('name="/', $html, $html);
     }
 
@@ -140,6 +141,6 @@ class Zend_Dojo_View_Helper_ContentPaneTest extends PHPUnit_Framework_TestCase
 }
 
 // Call Zend_Dojo_View_Helper_ContentPaneTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dojo_View_Helper_ContentPaneTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Dojo_View_Helper_ContentPaneTest::main') {
     Zend_Dojo_View_Helper_ContentPaneTest::main();
 }

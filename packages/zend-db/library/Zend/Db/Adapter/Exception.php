@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,30 +13,29 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage Adapter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Db_Exception
+ * Zend_Db_Exception.
  */
 // require_once 'Zend/Db/Exception.php';
 
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage Adapter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Db_Adapter_Exception extends Zend_Db_Exception
 {
-    protected $_chainedException = null;
+    protected $_chainedException;
 
-    public function __construct($message = '', $code = 0, \Throwable $e = null)
+    public function __construct($message = '', $code = 0, Throwable $e = null)
     {
         if ($e && (0 === $code)) {
             $code = $e->getCode();
@@ -46,12 +45,11 @@ class Zend_Db_Adapter_Exception extends Zend_Db_Exception
 
     public function hasChainedException()
     {
-        return ($this->getPrevious() !== null);
+        return null !== $this->getPrevious();
     }
 
     public function getChainedException()
     {
         return $this->getPrevious();
     }
-
 }

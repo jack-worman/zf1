@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata_Spreadsheets
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -25,30 +25,28 @@
 
 /**
  * @category   Zend
- * @package    Zend_Gdata_Spreadsheets
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Spreadsheets
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_Spreadsheets_ListFeedTest extends PHPUnit_Framework_TestCase
 {
-
     public function setUp()
     {
         $this->listFeed = new Zend_Gdata_Spreadsheets_ListFeed(
-                file_get_contents(__DIR__ . '/_files/TestDataListFeedSample1.xml'),
-                true);
+            file_get_contents(__DIR__.'/_files/TestDataListFeedSample1.xml'),
+            true);
     }
 
     public function testToAndFromString()
     {
-        $this->assertTrue(count($this->listFeed->entries) == 2);
-        $this->assertTrue($this->listFeed->entries->count() == 2);
-        foreach($this->listFeed->entries as $entry)
-        {
+        $this->assertTrue(2 == count($this->listFeed->entries));
+        $this->assertTrue(2 == $this->listFeed->entries->count());
+        foreach ($this->listFeed->entries as $entry) {
             $this->assertTrue($entry instanceof Zend_Gdata_Spreadsheets_ListEntry);
         }
 
@@ -57,13 +55,10 @@ class Zend_Gdata_Spreadsheets_ListFeedTest extends PHPUnit_Framework_TestCase
         $doc->loadXML($this->listFeed->saveXML());
         $newListFeed->transferFromDom($doc->documentElement);
 
-        $this->assertTrue(count($newListFeed->entries) == 2);
-        $this->assertTrue($newListFeed->entries->count() == 2);
-        foreach($newListFeed->entries as $entry)
-        {
+        $this->assertTrue(2 == count($newListFeed->entries));
+        $this->assertTrue(2 == $newListFeed->entries->count());
+        foreach ($newListFeed->entries as $entry) {
             $this->assertTrue($entry instanceof Zend_Gdata_Spreadsheets_ListEntry);
         }
-
     }
-
 }

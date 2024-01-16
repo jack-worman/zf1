@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,48 +25,47 @@
  */
 // require_once 'Zend/Filter.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Filter
  */
 #[AllowDynamicProperties]
 class Zend_FilterTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_Filter object
+     * Zend_Filter object.
      *
      * @var Zend_Filter
      */
     protected $_filter;
 
     /**
-     * Creates a new Zend_Filter object for each test method
+     * Creates a new Zend_Filter object for each test method.
      *
      * @return void
      */
     public function setUp()
     {
-        $this->error   = null;
+        $this->error = null;
         $this->_filter = new Zend_Filter();
     }
 
     /**
-     * Resets the default namespaces
+     * Resets the default namespaces.
      *
      * @return void
      */
     public function tearDown()
     {
-        Zend_Filter::setDefaultNamespaces(array());
+        Zend_Filter::setDefaultNamespaces([]);
     }
 
     /**
-     * Ensures expected return value from empty filter chain
+     * Ensures expected return value from empty filter chain.
      *
      * @return void
      */
@@ -77,7 +76,7 @@ class Zend_FilterTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that filters are executed in the expected order (FIFO)
+     * Ensures that filters are executed in the expected order (FIFO).
      *
      * @return void
      */
@@ -92,7 +91,7 @@ class Zend_FilterTest extends PHPUnit_Framework_TestCase
 
     /**
      * Ensures that filters can be prepended and will be executed in the
-     * expected order
+     * expected order.
      */
     public function testFilterPrependOrder()
     {
@@ -121,13 +120,13 @@ class Zend_FilterTest extends PHPUnit_Framework_TestCase
     public function testStaticFactoryWithConstructorArguments()
     {
         // Test HtmlEntities with one ctor argument.
-        $filteredValue = Zend_Filter::filterStatic('"O\'Reilly"', 'HtmlEntities', array(array('quotestyle' => ENT_COMPAT)));
+        $filteredValue = Zend_Filter::filterStatic('"O\'Reilly"', 'HtmlEntities', [['quotestyle' => ENT_COMPAT]]);
         $this->assertEquals('&quot;O\'Reilly&quot;', $filteredValue);
 
         // Test HtmlEntities with a different ctor argument,
         // and make sure it gives the correct response
         // so we know it passed the arg to the ctor.
-        $filteredValue = Zend_Filter::filterStatic('"O\'Reilly"', 'HtmlEntities', array(array('quotestyle' => ENT_QUOTES)));
+        $filteredValue = Zend_Filter::filterStatic('"O\'Reilly"', 'HtmlEntities', [['quotestyle' => ENT_QUOTES]]);
         $this->assertEquals('&quot;O&#039;Reilly&quot;', $filteredValue);
     }
 
@@ -138,8 +137,10 @@ class Zend_FilterTest extends PHPUnit_Framework_TestCase
      * Refactored to conform with ZF-2724.
      *
      * @group  ZF-2724
+     *
      * @return void
-     * @expectedException Zend_Filter_Exception
+     *
+     * @expectedException \Zend_Filter_Exception
      */
     public function testStaticFactoryClassNotFound()
     {
@@ -147,11 +148,13 @@ class Zend_FilterTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Handle file not found errors
+     * Handle file not found errors.
      *
      * @group  ZF-2724
-     * @param  int $errnum
-     * @param  string $errstr
+     *
+     * @param int    $errnum
+     * @param string $errstr
+     *
      * @return void
      */
     public function handleNotFoundError($errnum, $errstr)
@@ -162,64 +165,63 @@ class Zend_FilterTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Testing Namespaces
+     * Testing Namespaces.
      *
      * @return void
      */
     public function testNamespaces()
     {
-        $this->assertEquals(array(), Zend_Filter::getDefaultNamespaces());
+        $this->assertEquals([], Zend_Filter::getDefaultNamespaces());
         $this->assertFalse(Zend_Filter::hasDefaultNamespaces());
 
         Zend_Filter::setDefaultNamespaces('TestDir');
-        $this->assertEquals(array('TestDir'), Zend_Filter::getDefaultNamespaces());
+        $this->assertEquals(['TestDir'], Zend_Filter::getDefaultNamespaces());
 
         Zend_Filter::setDefaultNamespaces('OtherTestDir');
-        $this->assertEquals(array('OtherTestDir'), Zend_Filter::getDefaultNamespaces());
+        $this->assertEquals(['OtherTestDir'], Zend_Filter::getDefaultNamespaces());
 
         $this->assertTrue(Zend_Filter::hasDefaultNamespaces());
 
-        Zend_Filter::setDefaultNamespaces(array());
+        Zend_Filter::setDefaultNamespaces([]);
 
-        $this->assertEquals(array(), Zend_Filter::getDefaultNamespaces());
+        $this->assertEquals([], Zend_Filter::getDefaultNamespaces());
         $this->assertFalse(Zend_Filter::hasDefaultNamespaces());
 
-        Zend_Filter::addDefaultNamespaces(array('One', 'Two'));
-        $this->assertEquals(array('One', 'Two'), Zend_Filter::getDefaultNamespaces());
+        Zend_Filter::addDefaultNamespaces(['One', 'Two']);
+        $this->assertEquals(['One', 'Two'], Zend_Filter::getDefaultNamespaces());
 
         Zend_Filter::addDefaultNamespaces('Three');
-        $this->assertEquals(array('One', 'Two', 'Three'), Zend_Filter::getDefaultNamespaces());
+        $this->assertEquals(['One', 'Two', 'Three'], Zend_Filter::getDefaultNamespaces());
 
-        Zend_Filter::setDefaultNamespaces(array());
+        Zend_Filter::setDefaultNamespaces([]);
     }
 
     /**
-     * ZF-2105
+     * ZF-2105.
      */
     public function testUsageOfOldStaticFactory()
     {
-        set_error_handler(array($this, 'errorHandlerIgnore'));
+        set_error_handler([$this, 'errorHandlerIgnore']);
         $filteredValue = Zend_Filter::get('1a2b3c4d', 'Digits');
         $this->assertEquals('1234', $filteredValue);
         restore_error_handler();
     }
 
     /**
-     * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred
+     * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred.
      *
-     * @param  integer $errno
-     * @param  string  $errstr
-     * @param  string  $errfile
-     * @param  integer $errline
-     * @param  array   $errcontext
+     * @param int    $errno
+     * @param string $errstr
+     * @param string $errfile
+     * @param int    $errline
+     *
      * @return void
      */
-    public function errorHandlerIgnore($errno, $errstr, $errfile, $errline, array $errcontext = array())
+    public function errorHandlerIgnore($errno, $errstr, $errfile, $errline, array $errcontext = [])
     {
         $this->_errorOccurred = true;
     }
 }
-
 
 #[AllowDynamicProperties]
 class Zend_FilterTest_LowerCase implements Zend_Filter_Interface
@@ -229,7 +231,6 @@ class Zend_FilterTest_LowerCase implements Zend_Filter_Interface
         return strtolower((string) $value);
     }
 }
-
 
 #[AllowDynamicProperties]
 class Zend_FilterTest_StripUpperCase implements Zend_Filter_Interface

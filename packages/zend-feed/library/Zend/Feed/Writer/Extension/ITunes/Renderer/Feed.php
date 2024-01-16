@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed_Writer
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,14 +27,12 @@
 
 /**
  * @category   Zend
- * @package    Zend_Feed_Writer
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
-    extends Zend_Feed_Writer_Extension_RendererAbstract
+class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed extends Zend_Feed_Writer_Extension_RendererAbstract
 {
-
     /**
      * Set to TRUE if a rendering method actually renders something. This
      * is used to prevent premature appending of a XML namespace declaration
@@ -44,7 +43,7 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
     protected $_called = false;
 
     /**
-     * Render feed
+     * Render feed.
      *
      * @return void
      */
@@ -67,7 +66,7 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
     }
 
     /**
-     * Append feed namespaces
+     * Append feed namespaces.
      *
      * @return void
      */
@@ -78,10 +77,8 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
     }
 
     /**
-     * Set feed authors
+     * Set feed authors.
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
      * @return void
      */
     protected function _setAuthors(DOMDocument $dom, DOMElement $root)
@@ -100,16 +97,14 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
     }
 
     /**
-     * Set feed itunes block
+     * Set feed itunes block.
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
      * @return void
      */
     protected function _setBlock(DOMDocument $dom, DOMElement $root)
     {
         $block = $this->getDataContainer()->getItunesBlock();
-        if ($block === null) {
+        if (null === $block) {
             return;
         }
         $el = $dom->createElement('itunes:block');
@@ -120,10 +115,8 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
     }
 
     /**
-     * Set feed categories
+     * Set feed categories.
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
      * @return void
      */
     protected function _setCategories(DOMDocument $dom, DOMElement $root)
@@ -132,7 +125,7 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
         if (!$cats || empty($cats)) {
             return;
         }
-        foreach ($cats as $key=>$cat) {
+        foreach ($cats as $key => $cat) {
             if (!is_array($cat)) {
                 $el = $dom->createElement('itunes:category');
                 $el->setAttribute('text', $cat);
@@ -152,10 +145,8 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
     }
 
     /**
-     * Set feed image (icon)
+     * Set feed image (icon).
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
      * @return void
      */
     protected function _setImage(DOMDocument $dom, DOMElement $root)
@@ -171,10 +162,8 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
     }
 
     /**
-     * Set feed cumulative duration
+     * Set feed cumulative duration.
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
      * @return void
      */
     protected function _setDuration(DOMDocument $dom, DOMElement $root)
@@ -191,16 +180,14 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
     }
 
     /**
-     * Set explicit flag
+     * Set explicit flag.
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
      * @return void
      */
     protected function _setExplicit(DOMDocument $dom, DOMElement $root)
     {
         $explicit = $this->getDataContainer()->getItunesExplicit();
-        if ($explicit === null) {
+        if (null === $explicit) {
             return;
         }
         $el = $dom->createElement('itunes:explicit');
@@ -211,10 +198,8 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
     }
 
     /**
-     * Set feed keywords
+     * Set feed keywords.
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
      * @return void
      */
     protected function _setKeywords(DOMDocument $dom, DOMElement $root)
@@ -231,10 +216,8 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
     }
 
     /**
-     * Set feed's new URL
+     * Set feed's new URL.
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
      * @return void
      */
     protected function _setNewFeedUrl(DOMDocument $dom, DOMElement $root)
@@ -251,10 +234,8 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
     }
 
     /**
-     * Set feed owners
+     * Set feed owners.
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
      * @return void
      */
     protected function _setOwners(DOMDocument $dom, DOMElement $root)
@@ -279,10 +260,8 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
     }
 
     /**
-     * Set feed subtitle
+     * Set feed subtitle.
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
      * @return void
      */
     protected function _setSubtitle(DOMDocument $dom, DOMElement $root)
@@ -299,10 +278,8 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
     }
 
     /**
-     * Set feed summary
+     * Set feed summary.
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
      * @return void
      */
     protected function _setSummary(DOMDocument $dom, DOMElement $root)

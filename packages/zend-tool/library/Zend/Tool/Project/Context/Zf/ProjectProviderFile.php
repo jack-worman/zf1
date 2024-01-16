@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage Framework
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -31,66 +31,65 @@
 // require_once 'Zend/CodeGenerator/Php/File.php';
 
 /**
- * This class is the front most class for utilizing Zend_Tool_Project
+ * This class is the front most class for utilizing Zend_Tool_Project.
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
  * @category   Zend
- * @package    Zend_Tool
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Project_Context_Zf_ProjectProviderFile extends Zend_Tool_Project_Context_Filesystem_File
 {
-
     /**
      * @var string
      */
-    protected $_projectProviderName = null;
+    protected $_projectProviderName;
 
     /**
      * @var array
      */
-    protected $_actionNames = array();
+    protected $_actionNames = [];
 
     /**
-     * init()
+     * init().
      *
      * @return Zend_Tool_Project_Context_Zf_ProjectProviderFile
      */
     public function init()
     {
-
         $this->_projectProviderName = $this->_resource->getAttribute('projectProviderName');
         $this->_actionNames = $this->_resource->getAttribute('actionNames');
-        $this->_filesystemName = ucfirst($this->_projectProviderName) . 'Provider.php';
+        $this->_filesystemName = ucfirst($this->_projectProviderName).'Provider.php';
 
         if (strpos((string) $this->_actionNames, ',')) {
             $this->_actionNames = explode(',', $this->_actionNames);
         } else {
-            $this->_actionNames = ($this->_actionNames) ? array($this->_actionNames) : array();
+            $this->_actionNames = ($this->_actionNames) ? [$this->_actionNames] : [];
         }
 
         parent::init();
+
         return $this;
     }
 
     /**
-     * getPersistentAttributes()
+     * getPersistentAttributes().
      *
      * @return array
      */
     public function getPersistentAttributes()
     {
-        return array(
+        return [
             'projectProviderName' => $this->getProjectProviderName(),
-            'actionNames' => implode(',', $this->_actionNames)
-            );
+            'actionNames' => implode(',', $this->_actionNames),
+            ];
     }
 
     /**
-     * getName()
+     * getName().
      *
      * @return string
      */
@@ -100,7 +99,7 @@ class Zend_Tool_Project_Context_Zf_ProjectProviderFile extends Zend_Tool_Project
     }
 
     /**
-     * getProjectProviderName()
+     * getProjectProviderName().
      *
      * @return string
      */
@@ -110,43 +109,41 @@ class Zend_Tool_Project_Context_Zf_ProjectProviderFile extends Zend_Tool_Project
     }
 
     /**
-     * getContents()
+     * getContents().
      *
      * @return string
      */
     public function getContents()
     {
-
         $filter = new Zend_Filter_Word_DashToCamelCase();
 
-        $className = $filter->filter($this->_projectProviderName) . 'Provider';
+        $className = $filter->filter($this->_projectProviderName).'Provider';
 
-        $class = new Zend_CodeGenerator_Php_Class(array(
+        $class = new Zend_CodeGenerator_Php_Class([
             'name' => $className,
-            'extendedClass' => 'Zend_Tool_Project_Provider_Abstract'
-            ));
+            'extendedClass' => 'Zend_Tool_Project_Provider_Abstract',
+            ]);
 
-        $methods = array();
+        $methods = [];
         foreach ($this->_actionNames as $actionName) {
-            $methods[] = new Zend_CodeGenerator_Php_Method(array(
+            $methods[] = new Zend_CodeGenerator_Php_Method([
                 'name' => $actionName,
-                'body' => '        /** @todo Implementation */'
-                ));
+                'body' => '        /** @todo Implementation */',
+                ]);
         }
 
         if ($methods) {
             $class->setMethods($methods);
         }
 
-        $codeGenFile = new Zend_CodeGenerator_Php_File(array(
-            'requiredFiles' => array(
+        $codeGenFile = new Zend_CodeGenerator_Php_File([
+            'requiredFiles' => [
                 'Zend/Tool/Project/Provider/Abstract.php',
-                'Zend/Tool/Project/Provider/Exception.php'
-                ),
-            'classes' => array($class)
-            ));
+                'Zend/Tool/Project/Provider/Exception.php',
+                ],
+            'classes' => [$class],
+            ]);
 
         return $codeGenFile->generate();
     }
-
 }

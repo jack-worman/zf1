@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata_Calendar
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -26,18 +26,17 @@
 
 /**
  * @category   Zend
- * @package    Zend_Gdata_Calendar
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Calendar
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_Calendar_EventQueryExceptionTest extends PHPUnit_Framework_TestCase
 {
-
-    const GOOGLE_DEVELOPER_CALENDAR = 'developer-calendar@google.com';
+    public const GOOGLE_DEVELOPER_CALENDAR = 'developer-calendar@google.com';
 
     public function setUp()
     {
@@ -45,7 +44,7 @@ class Zend_Gdata_Calendar_EventQueryExceptionTest extends PHPUnit_Framework_Test
     }
 
     /**
-     * @expectedException Zend_Gdata_App_Exception
+     * @expectedException \Zend_Gdata_App_Exception
      */
     public function testSingleEventsThrowsExceptionOnSetInvalidValue()
     {
@@ -56,7 +55,7 @@ class Zend_Gdata_Calendar_EventQueryExceptionTest extends PHPUnit_Framework_Test
     }
 
     /**
-     * @expectedException Zend_Gdata_App_Exception
+     * @expectedException \Zend_Gdata_App_Exception
      */
     public function testFutureEventsThrowsExceptionOnSetInvalidValue()
     {
@@ -65,5 +64,4 @@ class Zend_Gdata_Calendar_EventQueryExceptionTest extends PHPUnit_Framework_Test
         $this->query->setUser(self::GOOGLE_DEVELOPER_CALENDAR);
         $this->query->setFutureEvents($futureEvents);
     }
-
 }

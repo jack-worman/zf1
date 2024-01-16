@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_View_Helper_Placeholder_RegistryTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_Placeholder_RegistryTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_View_Helper_Placeholder_RegistryTest::main');
 }
 
 /** Zend_View_Helper_Placeholder_Registry */
@@ -32,10 +32,10 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * Test class for Zend_View_Helper_Placeholder_Registry.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
@@ -54,8 +54,7 @@ class Zend_View_Helper_Placeholder_RegistryTest extends PHPUnit_Framework_TestCa
      */
     public static function main()
     {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_Placeholder_RegistryTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_View_Helper_Placeholder_RegistryTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -121,7 +120,7 @@ class Zend_View_Helper_Placeholder_RegistryTest extends PHPUnit_Framework_TestCa
      */
     public function testSetContainerCreatesRegistryEntry()
     {
-        $foo = new Zend_View_Helper_Placeholder_Container(array('foo', 'bar'));
+        $foo = new Zend_View_Helper_Placeholder_Container(['foo', 'bar']);
         $this->assertFalse($this->registry->containerExists('foo'));
         $this->registry->setContainer('foo', $foo);
         $this->assertTrue($this->registry->containerExists('foo'));
@@ -132,7 +131,7 @@ class Zend_View_Helper_Placeholder_RegistryTest extends PHPUnit_Framework_TestCa
      */
     public function testSetContainerCreatesRegistersContainerInstance()
     {
-        $foo = new Zend_View_Helper_Placeholder_Container(array('foo', 'bar'));
+        $foo = new Zend_View_Helper_Placeholder_Container(['foo', 'bar']);
         $this->assertFalse($this->registry->containerExists('foo'));
         $this->registry->setContainer('foo', $foo);
         $container = $this->registry->getContainer('foo');
@@ -157,7 +156,7 @@ class Zend_View_Helper_Placeholder_RegistryTest extends PHPUnit_Framework_TestCa
         try {
             $this->registry->setContainerClass('Zend_View_Helper_Placeholder_RegistryTest_BogusContainer');
             $this->fail('Invalid container classes should not be accepted');
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
         }
     }
 
@@ -215,18 +214,18 @@ class Zend_View_Helper_Placeholder_RegistryTest extends PHPUnit_Framework_TestCa
     public function testSetValueCreateContainer()
     {
         $this->registry->setContainerClass('Zend_View_Helper_Placeholder_RegistryTest_Container');
-        $data = array(
-            'ZF-10793'
-        );
+        $data = [
+            'ZF-10793',
+        ];
         $container = $this->registry->createContainer('foo', $data);
-        $this->assertEquals(array('ZF-10793'), $container->data);
+        $this->assertEquals(['ZF-10793'], $container->data);
     }
 }
 
 #[AllowDynamicProperties]
 class Zend_View_Helper_Placeholder_RegistryTest_Container extends Zend_View_Helper_Placeholder_Container_Abstract
 {
-    public $data = array();
+    public $data = [];
 
     public function __construct($data)
     {
@@ -240,6 +239,6 @@ class Zend_View_Helper_Placeholder_RegistryTest_BogusContainer
 }
 
 // Call Zend_View_Helper_Placeholder_RegistryTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_Placeholder_RegistryTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_View_Helper_Placeholder_RegistryTest::main') {
     Zend_View_Helper_Placeholder_RegistryTest::main();
 }

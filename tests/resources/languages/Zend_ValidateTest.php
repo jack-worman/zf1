@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Exception
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,27 +27,27 @@
 
 /**
  * @category   Zend
- * @package    Zend_resources
- * @subpackage UnitTests
+ *
  * @group      Zend_Exception
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class resources_languages_Zend_ValidateTest extends PHPUnit_Framework_TestCase
 {
-
-    protected $_langDir      = null;
-    protected $_languages    = array();
-    protected $_translations = array();
+    protected $_langDir;
+    protected $_languages = [];
+    protected $_translations = [];
 
     public function setUp()
     {
         $this->markTestSkipped('skip this for now, maybe extract and fix original resources into a zend-resources package later...');
+
         return;
 
         $this->_langDir = dirname(dirname(dirname(__DIR__)))
-                        . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'languages';
+                        .DIRECTORY_SEPARATOR.'resources'.DIRECTORY_SEPARATOR.'languages';
         if (!is_readable($this->_langDir)) {
             throw new Exception('Language resource directory "'.$this->_langDir.'" not readable.');
         }
@@ -56,7 +56,7 @@ class resources_languages_Zend_ValidateTest extends PHPUnit_Framework_TestCase
         $langs = 'all';
         if (defined('TESTS_ZEND_RESOURCES_TRANSLATIONS')) {
             $langs = constant('TESTS_ZEND_RESOURCES_TRANSLATIONS');
-            if ($langs == 'en' || !Zend_Locale::isLocale($langs, true, false)) {
+            if ('en' == $langs || !Zend_Locale::isLocale($langs, true, false)) {
                 $langs = 'all';
             }
         }
@@ -69,24 +69,24 @@ class resources_languages_Zend_ValidateTest extends PHPUnit_Framework_TestCase
 
             // skip "." or ".." or ".svn"
             $fname = $entry->getFilename();
-            if ($fname[0] == '.') {
+            if ('.' == $fname[0]) {
                 continue;
             }
 
             // add all languages for testIsLocale
-            if ($langs == 'all' || $langs == $fname || $fname == 'en') {
+            if ('all' == $langs || $langs == $fname || 'en' == $fname) {
                 $this->_languages[] = $fname;
             }
 
             // include Zend_Validate translation tables
-            $translationFile = $entry->getPathname() . DIRECTORY_SEPARATOR . 'Zend_Validate.php';
+            $translationFile = $entry->getPathname().DIRECTORY_SEPARATOR.'Zend_Validate.php';
             if (file_exists((string) $translationFile)) {
                 $translation = include $translationFile;
                 if (!is_array($translation)) {
                     $this->fail("Invalid or empty translation table found for language '{$fname}'");
                 }
 
-                if ($langs == 'all' || $langs == $fname || $fname == 'en') {
+                if ('all' == $langs || $langs == $fname || 'en' == $fname) {
                     $this->_translations[$fname] = $translation;
                 }
             }
@@ -94,7 +94,7 @@ class resources_languages_Zend_ValidateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests if the given language is really a language
+     * Tests if the given language is really a language.
      */
     public function testIsLocale()
     {
@@ -106,16 +106,16 @@ class resources_languages_Zend_ValidateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests if all english original keys have the same translations
+     * Tests if all english original keys have the same translations.
      */
     public function testEnglishKeySameAsValue()
     {
-        $errors = array();
-        $cnt    = 0;
+        $errors = [];
+        $cnt = 0;
         foreach ($this->_translations['en'] as $key => $value) {
             if ($key !== $value) {
                 ++$cnt;
-                $errors['en ' . $cnt] = "The key $key is not identical in the english original";
+                $errors['en '.$cnt] = "The key $key is not identical in the english original";
             }
         }
 
@@ -125,21 +125,21 @@ class resources_languages_Zend_ValidateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests if all translation keys are also available in the english original
+     * Tests if all translation keys are also available in the english original.
      */
     public function testTranslationAvailableInEnglish()
     {
-        $errors = array();
-        $cnt    = 0;
+        $errors = [];
+        $cnt = 0;
         foreach ($this->_translations as $lang => $translation) {
-            if ($lang == 'en') {
+            if ('en' == $lang) {
                 continue;
             }
 
             foreach ($translation as $key => $value) {
                 if (!isset($this->_translations['en'][$key])) {
                     ++$cnt;
-                    $errors[$lang . ' ' . $cnt] = "The key \"" . $key . "\" isn't available within english translation file";
+                    $errors[$lang.' '.$cnt] = 'The key "'.$key."\" isn't available within english translation file";
                 }
             }
         }
@@ -150,21 +150,21 @@ class resources_languages_Zend_ValidateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests if the key is translated
+     * Tests if the key is translated.
      */
     public function testTranslationDiffersFromEnglish()
     {
-        $errors = array();
-        $cnt    = 0;
+        $errors = [];
+        $cnt = 0;
         foreach ($this->_translations as $lang => $translation) {
-            if ($lang == 'en') {
+            if ('en' == $lang) {
                 continue;
             }
 
             foreach ($translation as $key => $value) {
                 if ($key == $value) {
                     ++$cnt;
-                    $errors[$lang . ' ' . $cnt] = "The translated message \"" . $value . "\" is the same the english version";
+                    $errors[$lang.' '.$cnt] = 'The translated message "'.$value.'" is the same the english version';
                 }
             }
         }
@@ -175,14 +175,14 @@ class resources_languages_Zend_ValidateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests if all placeholders from the original are also available within the translation
+     * Tests if all placeholders from the original are also available within the translation.
      */
     public function testPlaceholder()
     {
-        $errors = array();
-        $cnt    = 0;
+        $errors = [];
+        $cnt = 0;
         foreach ($this->_translations as $lang => $translation) {
-            if ($lang == 'en') { // not needed to test - see testEnglishKeySameAsValue
+            if ('en' == $lang) { // not needed to test - see testEnglishKeySameAsValue
                 continue;
             }
 
@@ -191,7 +191,7 @@ class resources_languages_Zend_ValidateTest extends PHPUnit_Framework_TestCase
                     foreach ($matches as $match) {
                         if (!strpos((string) $value, $match[1])) {
                             ++$cnt;
-                            $errors[$lang . ' ' . $cnt] = "Missing placeholder \"" . $match[1] . "\" within \"" . $value . "\"";
+                            $errors[$lang.' '.$cnt] = 'Missing placeholder "'.$match[1].'" within "'.$value.'"';
                         }
                     }
                 }
@@ -204,21 +204,21 @@ class resources_languages_Zend_ValidateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests if all english originals are translated
+     * Tests if all english originals are translated.
      */
     public function testAllTranslated()
     {
-        $errors = array();
-        $cnt    = 0;
+        $errors = [];
+        $cnt = 0;
         foreach ($this->_translations as $lang => $translation) {
             foreach ($this->_translations['en'] as $key => $value) {
-                if ($lang == 'en') {
+                if ('en' == $lang) {
                     continue;
                 }
 
                 if (!isset($translation[$key])) {
                     ++$cnt;
-                    $errors[$lang . ' ' . $cnt] = "Message \"" . $key . "\" not translated";
+                    $errors[$lang.' '.$cnt] = 'Message "'.$key.'" not translated';
                 }
             }
         }

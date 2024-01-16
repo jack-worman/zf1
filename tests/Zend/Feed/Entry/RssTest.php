@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,19 +27,18 @@
 
 /**
  * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Feed
  */
 #[AllowDynamicProperties]
 class Zend_Feed_Entry_RssTest extends PHPUnit_Framework_TestCase
 {
-
     public function testContentEncodedSupport()
     {
-        $feed = Zend_Feed::importFile(__DIR__ . '/../_files/TestFeedEntryRssContentEncoded.xml');
+        $feed = Zend_Feed::importFile(__DIR__.'/../_files/TestFeedEntryRssContentEncoded.xml');
         $this->assertTrue($feed instanceof Zend_Feed_Rss);
 
         $item = $feed->current();
@@ -49,22 +48,22 @@ class Zend_Feed_Entry_RssTest extends PHPUnit_Framework_TestCase
         $this->assertContains(
             'http://framework.zend.com/fisheye/changelog/Zend_Framework/?cs=7757',
             $item->content->__toString()
-            );
+        );
         $this->assertContains(
             'http://framework.zend.com/fisheye/changelog/Zend_Framework/?cs=7757',
             $item->content()
-            );
+        );
         $item->content = 'foo';
         $this->assertEquals('foo', $item->content->__toString());
     }
 
     public function testContentEncodedNullIfEmpty()
     {
-        $feed = Zend_Feed::importFile(__DIR__ . '/../_files/TestFeedEntryRssContentEncoded.xml');
+        $feed = Zend_Feed::importFile(__DIR__.'/../_files/TestFeedEntryRssContentEncoded.xml');
         $this->assertTrue($feed instanceof Zend_Feed_Rss);
 
         $feed->next();
-        $item =  $feed->current();
+        $item = $feed->current();
         $this->assertTrue($item instanceof Zend_Feed_Entry_Rss);
         $this->assertFalse(isset($item->content));
         $this->assertNull($item->content());
@@ -75,7 +74,7 @@ class Zend_Feed_Entry_RssTest extends PHPUnit_Framework_TestCase
     {
         try {
             new Zend_Feed_Entry_Rss(null, 'foo');
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             self::assertInstanceOf('Zend_Feed_Exception', $e);
 
             return;

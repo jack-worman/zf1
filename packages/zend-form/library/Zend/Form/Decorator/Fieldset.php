@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,8 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage Decorator
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -23,47 +22,49 @@
 // require_once 'Zend/Form/Decorator/Abstract.php';
 
 /**
- * Zend_Form_Decorator_Fieldset
+ * Zend_Form_Decorator_Fieldset.
  *
  * Any options passed will be used as HTML attributes of the fieldset tag.
- * 
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage Decorator
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 class Zend_Form_Decorator_Fieldset extends Zend_Form_Decorator_Abstract
 {
     /**
-     * Attribs that should be removed prior to rendering
+     * Attribs that should be removed prior to rendering.
+     *
      * @var array
      */
-    public $stripAttribs = array(
+    public $stripAttribs = [
         'action',
         'enctype',
         'helper',
         'method',
         'name',
         'accept-charset',
-    );
+    ];
 
     /**
-     * Fieldset legend
+     * Fieldset legend.
+     *
      * @var string
      */
     protected $_legend;
 
     /**
-     * Default placement: surround content
+     * Default placement: surround content.
+     *
      * @var string
      */
-    protected $_placement = null;
+    protected $_placement;
 
     /**
-     * Get options
+     * Get options.
      *
      * Merges in element attributes as well.
      *
@@ -77,23 +78,26 @@ class Zend_Form_Decorator_Fieldset extends Zend_Form_Decorator_Abstract
             $options = array_merge($attribs, $options);
             $this->setOptions($options);
         }
+
         return $options;
     }
 
     /**
-     * Set legend
+     * Set legend.
      *
-     * @param  string $value
+     * @param string $value
+     *
      * @return Zend_Form_Decorator_Fieldset
      */
     public function setLegend($value)
     {
         $this->_legend = (string) $value;
+
         return $this;
     }
 
     /**
-     * Get legend
+     * Get legend.
      *
      * @return string
      */
@@ -115,26 +119,27 @@ class Zend_Form_Decorator_Fieldset extends Zend_Form_Decorator_Abstract
     }
 
     /**
-     * Render a fieldset
+     * Render a fieldset.
      *
-     * @param  string $content
+     * @param string $content
+     *
      * @return string
      */
     public function render($content)
     {
         $element = $this->getElement();
-        $view    = $element->getView();
+        $view = $element->getView();
         if (null === $view) {
             return $content;
         }
 
-        $legend  = $this->getLegend();
+        $legend = $this->getLegend();
         $attribs = $this->getOptions();
-        $name    = $element->getFullyQualifiedName();
-        $id      = (string)$element->getId();
+        $name = $element->getFullyQualifiedName();
+        $id = (string) $element->getId();
 
         if ((!array_key_exists('id', $attribs) || $attribs['id'] == $id) && '' !== $id) {
-            $attribs['id'] = 'fieldset-' . $id;
+            $attribs['id'] = 'fieldset-'.$id;
         }
 
         if (null !== $legend) {

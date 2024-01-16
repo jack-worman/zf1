@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Search_Lucene
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,28 +27,28 @@
 // require_once 'Zend/Search/Lucene/Storage/File.php';
 
 /**
- * This is an utility class which provides index locks processing functionality
+ * This is an utility class which provides index locks processing functionality.
  *
  * @category   Zend
- * @package    Zend_Search_Lucene
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Search_Lucene_LockManager
 {
     /**
-     * consts for name of file to show lock status
+     * consts for name of file to show lock status.
      */
-    const WRITE_LOCK_FILE                = 'write.lock.file';
-    const READ_LOCK_FILE                 = 'read.lock.file';
-    const READ_LOCK_PROCESSING_LOCK_FILE = 'read-lock-processing.lock.file';
-    const OPTIMIZATION_LOCK_FILE         = 'optimization.lock.file';
+    public const WRITE_LOCK_FILE = 'write.lock.file';
+    public const READ_LOCK_FILE = 'read.lock.file';
+    public const READ_LOCK_PROCESSING_LOCK_FILE = 'read-lock-processing.lock.file';
+    public const OPTIMIZATION_LOCK_FILE = 'optimization.lock.file';
 
     /**
-     * Obtain exclusive write lock on the index
+     * Obtain exclusive write lock on the index.
      *
-     * @param Zend_Search_Lucene_Storage_Directory $lockDirectory
      * @return Zend_Search_Lucene_Storage_File
+     *
      * @throws Zend_Search_Lucene_Exception
      */
     public static function obtainWriteLock(Zend_Search_Lucene_Storage_Directory $lockDirectory)
@@ -57,13 +58,12 @@ class Zend_Search_Lucene_LockManager
             // require_once 'Zend/Search/Lucene/Exception.php';
             throw new Zend_Search_Lucene_Exception('Can\'t obtain exclusive index lock');
         }
+
         return $lock;
     }
 
     /**
-     * Release exclusive write lock
-     *
-     * @param Zend_Search_Lucene_Storage_Directory $lockDirectory
+     * Release exclusive write lock.
      */
     public static function releaseWriteLock(Zend_Search_Lucene_Storage_Directory $lockDirectory)
     {
@@ -72,7 +72,7 @@ class Zend_Search_Lucene_LockManager
     }
 
     /**
-     * Obtain the exclusive "read escalation/de-escalation" lock
+     * Obtain the exclusive "read escalation/de-escalation" lock.
      *
      * Required to protect the escalate/de-escalate read lock process
      * on GFS (and potentially other) mounted filesystems.
@@ -91,8 +91,8 @@ class Zend_Search_Lucene_LockManager
      *  of opportunity for another process to gain an exclusive lock when
      *  it shoudln't be allowed to).
      *
-     * @param Zend_Search_Lucene_Storage_Directory $lockDirectory
      * @return Zend_Search_Lucene_Storage_File
+     *
      * @throws Zend_Search_Lucene_Exception
      */
     private static function _startReadLockProcessing(Zend_Search_Lucene_Storage_Directory $lockDirectory)
@@ -102,16 +102,15 @@ class Zend_Search_Lucene_LockManager
             // require_once 'Zend/Search/Lucene/Exception.php';
             throw new Zend_Search_Lucene_Exception('Can\'t obtain exclusive lock for the read lock processing file');
         }
+
         return $lock;
     }
 
     /**
-     * Release the exclusive "read escalation/de-escalation" lock
+     * Release the exclusive "read escalation/de-escalation" lock.
      *
      * Required to protect the escalate/de-escalate read lock process
      * on GFS (and potentially other) mounted filesystems.
-     *
-     * @param Zend_Search_Lucene_Storage_Directory $lockDirectory
      */
     private static function _stopReadLockProcessing(Zend_Search_Lucene_Storage_Directory $lockDirectory)
     {
@@ -119,14 +118,13 @@ class Zend_Search_Lucene_LockManager
         $lock->unlock();
     }
 
-
     /**
-     * Obtain shared read lock on the index
+     * Obtain shared read lock on the index.
      *
      * It doesn't block other read or update processes, but prevent index from the premature cleaning-up
      *
-     * @param Zend_Search_Lucene_Storage_Directory $defaultLockDirectory
      * @return Zend_Search_Lucene_Storage_File
+     *
      * @throws Zend_Search_Lucene_Exception
      */
     public static function obtainReadLock(Zend_Search_Lucene_Storage_Directory $lockDirectory)
@@ -136,13 +134,12 @@ class Zend_Search_Lucene_LockManager
             // require_once 'Zend/Search/Lucene/Exception.php';
             throw new Zend_Search_Lucene_Exception('Can\'t obtain shared reading index lock');
         }
+
         return $lock;
     }
 
     /**
-     * Release shared read lock
-     *
-     * @param Zend_Search_Lucene_Storage_Directory $lockDirectory
+     * Release shared read lock.
      */
     public static function releaseReadLock(Zend_Search_Lucene_Storage_Directory $lockDirectory)
     {
@@ -151,10 +148,9 @@ class Zend_Search_Lucene_LockManager
     }
 
     /**
-     * Escalate Read lock to exclusive level
+     * Escalate Read lock to exclusive level.
      *
-     * @param Zend_Search_Lucene_Storage_Directory $lockDirectory
-     * @return boolean
+     * @return bool
      */
     public static function escalateReadLock(Zend_Search_Lucene_Storage_Directory $lockDirectory)
     {
@@ -176,10 +172,11 @@ class Zend_Search_Lucene_LockManager
         // in the grand scheme of things and only will occur with GFS
         // filesystems or if another local process has the shared lock
         // on local filesystems.
-        for ($retries = 0; $retries < 10; $retries++) {
+        for ($retries = 0; $retries < 10; ++$retries) {
             if ($lock->lock(LOCK_EX, true)) {
                 // Exclusive lock is obtained!
                 self::_stopReadLockProcessing($lockDirectory);
+
                 return true;
             }
 
@@ -191,13 +188,12 @@ class Zend_Search_Lucene_LockManager
         $lock->lock(LOCK_SH);
 
         self::_stopReadLockProcessing($lockDirectory);
+
         return false;
     }
 
     /**
-     * De-escalate Read lock to shared level
-     *
-     * @param Zend_Search_Lucene_Storage_Directory $lockDirectory
+     * De-escalate Read lock to shared level.
      */
     public static function deEscalateReadLock(Zend_Search_Lucene_Storage_Directory $lockDirectory)
     {
@@ -206,11 +202,10 @@ class Zend_Search_Lucene_LockManager
     }
 
     /**
-     * Obtain exclusive optimization lock on the index
+     * Obtain exclusive optimization lock on the index.
      *
      * Returns lock object on success and false otherwise (doesn't block execution)
      *
-     * @param Zend_Search_Lucene_Storage_Directory $lockDirectory
      * @return false|Zend_Search_Lucene_Storage_File
      */
     public static function obtainOptimizationLock(Zend_Search_Lucene_Storage_Directory $lockDirectory)
@@ -219,18 +214,16 @@ class Zend_Search_Lucene_LockManager
         if (!$lock->lock(LOCK_EX, true)) {
             return false;
         }
+
         return $lock;
     }
 
     /**
-     * Release exclusive optimization lock
-     *
-     * @param Zend_Search_Lucene_Storage_Directory $lockDirectory
+     * Release exclusive optimization lock.
      */
     public static function releaseOptimizationLock(Zend_Search_Lucene_Storage_Directory $lockDirectory)
     {
         $lock = $lockDirectory->getFileObject(self::OPTIMIZATION_LOCK_FILE);
         $lock->unlock();
     }
-
 }

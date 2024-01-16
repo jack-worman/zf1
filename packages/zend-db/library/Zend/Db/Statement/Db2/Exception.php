@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,25 +13,22 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage Statement
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Db_Statement_Exception
+ * Zend_Db_Statement_Exception.
  */
 // require_once 'Zend/Db/Statement/Exception.php';
 
 /**
- * @package    Zend_Db
- * @subpackage Statement
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
 class Zend_Db_Statement_Db2_Exception extends Zend_Db_Statement_Exception
 {
     /**
@@ -48,11 +45,9 @@ class Zend_Db_Statement_Db2_Exception extends Zend_Db_Statement_Exception
      * @param string $msg
      * @param string $state
      */
-    function __construct($msg = 'unknown exception', $state = '00000')
+    public function __construct($msg = 'unknown exception', $state = '00000')
     {
         $this->message = $msg;
         $this->code = $state;
     }
-
 }
-

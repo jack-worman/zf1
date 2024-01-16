@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Pdf
- * @subpackage Annotation
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -28,35 +28,32 @@
 // require_once 'Zend/Pdf/Element/Numeric.php';
 // require_once 'Zend/Pdf/Element/String.php';
 
-
 /** Zend_Pdf_Annotation */
 // require_once 'Zend/Pdf/Annotation.php';
 
 /**
  * A text annotation represents a "sticky note" attached to a point in the PDF document.
  *
- * @package    Zend_Pdf
- * @subpackage Annotation
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Pdf_Annotation_Text extends Zend_Pdf_Annotation
 {
     /**
-     * Annotation object constructor
+     * Annotation object constructor.
      *
      * @throws Zend_Pdf_Exception
      */
     public function __construct(Zend_Pdf_Element $annotationDictionary)
     {
-        if ($annotationDictionary->getType() != Zend_Pdf_Element::TYPE_DICTIONARY) {
+        if (Zend_Pdf_Element::TYPE_DICTIONARY != $annotationDictionary->getType()) {
             // require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Annotation dictionary resource has to be a dictionary.');
         }
 
-        if ($annotationDictionary->Subtype === null  ||
-            $annotationDictionary->Subtype->getType() != Zend_Pdf_Element::TYPE_NAME  ||
-            $annotationDictionary->Subtype->value != 'Text') {
+        if (null === $annotationDictionary->Subtype
+            || Zend_Pdf_Element::TYPE_NAME != $annotationDictionary->Subtype->getType()
+            || 'Text' != $annotationDictionary->Subtype->value) {
             // require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Subtype => Text entry is requires');
         }
@@ -65,20 +62,21 @@ class Zend_Pdf_Annotation_Text extends Zend_Pdf_Annotation
     }
 
     /**
-     * Create link annotation object
+     * Create link annotation object.
      *
-     * @param float $x1
-     * @param float $y1
-     * @param float $x2
-     * @param float $y2
+     * @param float  $x1
+     * @param float  $y1
+     * @param float  $x2
+     * @param float  $y2
      * @param string $text
+     *
      * @return Zend_Pdf_Annotation_Text
      */
     public static function create($x1, $y1, $x2, $y2, $text)
     {
         $annotationDictionary = new Zend_Pdf_Element_Dictionary();
 
-        $annotationDictionary->Type    = new Zend_Pdf_Element_Name('Annot');
+        $annotationDictionary->Type = new Zend_Pdf_Element_Name('Annot');
         $annotationDictionary->Subtype = new Zend_Pdf_Element_Name('Text');
 
         $rectangle = new Zend_Pdf_Element_Array();

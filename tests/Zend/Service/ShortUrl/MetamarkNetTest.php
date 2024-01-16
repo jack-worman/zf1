@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,8 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -23,26 +22,24 @@
 // require_once 'Zend/Service/ShortUrl/MetamarkNet.php';
 
 /**
- * @package  Zend_Service
- * @subpackage  UnitTests
  * @see http://metamark.net/docs/api/rest.html
  */
 #[AllowDynamicProperties]
 class Zend_Service_ShortUrl_MetamarkNetTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_Service_ShortUrl_MetamarkNet object
+     * Zend_Service_ShortUrl_MetamarkNet object.
      *
      * @var Zend_Service_ShortUrl_MetamarkNet
      */
     protected $_s;
 
     /**
-     * Creates a new Zend_Service_ShortUrl_MetamarkNet object for each test method
+     * Creates a new Zend_Service_ShortUrl_MetamarkNet object for each test method.
      *
      * @return void
      */
-    public function setUp ()
+    public function setUp()
     {
         if (!defined('TESTS_ZEND_SERVICE_SHORTURL_METAMARKNET_ENABLED')
             || !constant('TESTS_ZEND_SERVICE_SHORTURL_METAMARKNET_ENABLED')
@@ -69,10 +66,10 @@ class Zend_Service_ShortUrl_MetamarkNetTest extends PHPUnit_Framework_TestCase
 
     public function testShorten()
     {
-        $urls = array(
-            'http://framework.zend.com/'           => 'http://xrl.us/bh4ptf',
-            'http://framework.zend.com/manual/en/' => 'http://xrl.us/bh4pth'
-        );
+        $urls = [
+            'http://framework.zend.com/' => 'http://xrl.us/bh4ptf',
+            'http://framework.zend.com/manual/en/' => 'http://xrl.us/bh4pth',
+        ];
 
         foreach ($urls as $url => $shortenedUrl) {
             $this->assertEquals($shortenedUrl, $this->_s->shorten($url));
@@ -81,10 +78,10 @@ class Zend_Service_ShortUrl_MetamarkNetTest extends PHPUnit_Framework_TestCase
 
     public function testUnshorten()
     {
-        $urls = array(
-            'http://framework.zend.com/'           => 'http://xrl.us/bh4ptf',
-            'http://framework.zend.com/manual/en/' => 'http://xrl.us/bh4pth'
-        );
+        $urls = [
+            'http://framework.zend.com/' => 'http://xrl.us/bh4ptf',
+            'http://framework.zend.com/manual/en/' => 'http://xrl.us/bh4pth',
+        ];
 
         foreach ($urls as $url => $shortenedUrl) {
             $this->assertEquals($url, $this->_s->unshorten($shortenedUrl));

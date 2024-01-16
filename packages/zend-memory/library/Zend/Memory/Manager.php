@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Memory
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -28,62 +29,60 @@
 /** Zend_Memory_AccessController */
 // require_once 'Zend/Memory/AccessController.php';
 
-
 /**
- * Memory manager
+ * Memory manager.
  *
  * This class encapsulates memory menagement operations, when PHP works
  * in limited memory mode.
  *
- *
  * @category   Zend
- * @package    Zend_Memory
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Memory_Manager
 {
     /**
-     * Object storage backend
+     * Object storage backend.
      *
      * @var Zend_Cache_Backend_Interface
      */
-    private $_backend = null;
+    private $_backend;
 
     /**
      * Memory grow limit.
      * Default value is 2/3 of memory_limit php.ini variable
-     * Negative value means no limit
+     * Negative value means no limit.
      *
-     * @var integer
+     * @var int
      */
     private $_memoryLimit = -1;
 
     /**
      * Minimum value size to be swapped.
      * Default value is 16K
-     * Negative value means that memory objects are never swapped
+     * Negative value means that memory objects are never swapped.
      *
-     * @var integer
+     * @var int
      */
     private $_minSize = 16384;
 
     /**
-     * Overall size of memory, used by values
+     * Overall size of memory, used by values.
      *
-     * @var integer
+     * @var int
      */
     private $_memorySize = 0;
 
     /**
-     * Id for next Zend_Memory object
+     * Id for next Zend_Memory object.
      *
-     * @var integer
+     * @var int
      */
     private $_nextId = 0;
 
     /**
-     * List of candidates to unload
+     * List of candidates to unload.
      *
      * It also represents objects access history. Last accessed objects are moved to the end of array
      *
@@ -94,7 +93,7 @@ class Zend_Memory_Manager
      *
      * @var array
      */
-    private $_unloadCandidates = array();
+    private $_unloadCandidates = [];
 
     /**
      * List of object sizes.
@@ -105,10 +104,10 @@ class Zend_Memory_Manager
      *
      * @var array
      */
-    private $_sizes = array();
+    private $_sizes = [];
 
     /**
-     * Last modified object
+     * Last modified object.
      *
      * It's used to reduce number of calls necessary to trace objects' modifications
      * Modification is not processed by memory manager until we do not switch to another
@@ -117,50 +116,48 @@ class Zend_Memory_Manager
      *
      * @var Zend_Memory_Container_Movable
      */
-    private $_lastModified = null;
+    private $_lastModified;
 
     /**
-     * Unique memory manager id
+     * Unique memory manager id.
      *
-     * @var integer
+     * @var int
      */
     private $_managerId;
 
     /**
-     * Tags array, used by backend to categorize stored values
+     * Tags array, used by backend to categorize stored values.
      *
      * @var array
      */
     private $_tags;
 
     /**
-     * This function is intended to generate unique id, used by memory manager
+     * This function is intended to generate unique id, used by memory manager.
      */
     private function _generateMemManagerId()
     {
-        /**
+        /*
          * @todo !!!
          * uniqid() php function doesn't really garantee the id to be unique
          * it should be changed by something else
          * (Ex. backend interface should be extended to provide this functionality)
          */
         $this->_managerId = uniqid('ZendMemManager', true);
-        $this->_tags = array($this->_managerId);
+        $this->_tags = [$this->_managerId];
         $this->_managerId .= '_';
     }
 
-
     /**
-     * Memory manager constructor
+     * Memory manager constructor.
      *
      * If backend is not specified, then memory objects are never swapped
      *
      * @param Zend_Cache_Backend $backend
-     * @param array $backendOptions associative array of options for the corresponding backend constructor
      */
     public function __construct($backend = null)
     {
-        if ($backend === null) {
+        if (null === $backend) {
             return;
         }
 
@@ -168,15 +165,17 @@ class Zend_Memory_Manager
         $this->_generateMemManagerId();
 
         $memoryLimitStr = \trim((string) ini_get('memory_limit'));
-        if ($memoryLimitStr != ''  &&  $memoryLimitStr != -1) {
-            $this->_memoryLimit = (integer)$memoryLimitStr;
-            switch (strtolower((string) $memoryLimitStr[strlen((string) $memoryLimitStr)-1])) {
+        if ('' != $memoryLimitStr && -1 != $memoryLimitStr) {
+            $this->_memoryLimit = (int) $memoryLimitStr;
+            switch (strtolower((string) $memoryLimitStr[strlen((string) $memoryLimitStr) - 1])) {
                 case 'g':
                     $this->_memoryLimit *= 1024;
                     // Break intentionally omitted
+                    // no break
                 case 'm':
                     $this->_memoryLimit *= 1024;
                     // Break intentionally omitted
+                    // no break
                 case 'k':
                     $this->_memoryLimit *= 1024;
                     break;
@@ -185,26 +184,27 @@ class Zend_Memory_Manager
                     break;
             }
 
-            $this->_memoryLimit = (int)($this->_memoryLimit*2/3);
+            $this->_memoryLimit = (int) ($this->_memoryLimit * 2 / 3);
         } // No limit otherwise
     }
 
     /**
-     * Object destructor
+     * Object destructor.
      *
      * Clean up backend storage
      */
     public function __destruct()
     {
-        if ($this->_backend !== null) {
+        if (null !== $this->_backend) {
             $this->_backend->clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG, $this->_tags);
         }
     }
 
     /**
-     * Set memory grow limit
+     * Set memory grow limit.
      *
-     * @param integer $newLimit
+     * @param int $newLimit
+     *
      * @throws Zend_Exception
      */
     public function setMemoryLimit($newLimit)
@@ -215,9 +215,9 @@ class Zend_Memory_Manager
     }
 
     /**
-     * Get memory grow limit
+     * Get memory grow limit.
      *
-     * @return integer
+     * @return int
      */
     public function getMemoryLimit()
     {
@@ -225,9 +225,9 @@ class Zend_Memory_Manager
     }
 
     /**
-     * Set minimum size of values, which may be swapped
+     * Set minimum size of values, which may be swapped.
      *
-     * @param integer $newSize
+     * @param int $newSize
      */
     public function setMinSize($newSize)
     {
@@ -235,9 +235,9 @@ class Zend_Memory_Manager
     }
 
     /**
-     * Get minimum size of values, which may be swapped
+     * Get minimum size of values, which may be swapped.
      *
-     * @return integer
+     * @return int
      */
     public function getMinSize()
     {
@@ -245,23 +245,27 @@ class Zend_Memory_Manager
     }
 
     /**
-     * Create new Zend_Memory value container
+     * Create new Zend_Memory value container.
      *
      * @param string $value
+     *
      * @return Zend_Memory_Container_Interface
+     *
      * @throws Zend_Memory_Exception
      */
     public function create($value = '')
     {
-        return $this->_create($value,  false);
+        return $this->_create($value, false);
     }
 
     /**
      * Create new Zend_Memory value container, which has value always
-     * locked in memory
+     * locked in memory.
      *
      * @param string $value
+     *
      * @return Zend_Memory_Container_Interface
+     *
      * @throws Zend_Memory_Exception
      */
     public function createLocked($value = '')
@@ -270,18 +274,20 @@ class Zend_Memory_Manager
     }
 
     /**
-     * Create new Zend_Memory object
+     * Create new Zend_Memory object.
      *
      * @param string $value
-     * @param boolean $locked
+     * @param bool   $locked
+     *
      * @return Zend_Memory_Container_Interface
+     *
      * @throws Zend_Memory_Exception
      */
     private function _create($value, $locked)
     {
         $id = $this->_nextId++;
 
-        if ($locked  ||  ($this->_backend === null) /* Use only memory locked objects if backend is not specified */) {
+        if ($locked || (null === $this->_backend) /* Use only memory locked objects if backend is not specified */) {
             return new Zend_Memory_Container_Locked($value);
         }
 
@@ -299,12 +305,14 @@ class Zend_Memory_Manager
     }
 
     /**
-     * Unlink value container from memory manager
+     * Unlink value container from memory manager.
      *
      * Used by Memory container destroy() method
      *
-     * @param integer $id
+     * @param int $id
+     *
      * @return void
+     *
      *@internal
      */
     public function unlink(Zend_Memory_Container_Movable $container, $id)
@@ -313,6 +321,7 @@ class Zend_Memory_Manager
             // Drop all object modifications
             $this->_lastModified = null;
             unset($this->_sizes[$id]);
+
             return;
         }
 
@@ -325,15 +334,15 @@ class Zend_Memory_Manager
     }
 
     /**
-     * Process value update
+     * Process value update.
      *
      * @internal
-     * @param Zend_Memory_Container_Movable $container
-     * @param integer $id
+     *
+     * @param int $id
      */
     public function processUpdate(Zend_Memory_Container_Movable $container, $id)
     {
-        /**
+        /*
          * This method is automatically invoked by memory container only once per
          * "modification session", but user may call memory container touch() method
          * several times depending on used algorithm. So we have to use this check
@@ -344,7 +353,7 @@ class Zend_Memory_Manager
         }
 
         // Remove just updated object from list of candidates to unload
-        if( isset($this->_unloadCandidates[$id])) {
+        if (isset($this->_unloadCandidates[$id])) {
             unset($this->_unloadCandidates[$id]);
         }
 
@@ -358,7 +367,7 @@ class Zend_Memory_Manager
     }
 
     /**
-     * Commit modified object and put it back to the loaded objects list
+     * Commit modified object and put it back to the loaded objects list.
      */
     private function _commit()
     {
@@ -384,13 +393,13 @@ class Zend_Memory_Manager
     }
 
     /**
-     * Check and swap objects if necessary
+     * Check and swap objects if necessary.
      *
      * @throws Zend_MemoryException
      */
     private function _swapCheck()
     {
-        if ($this->_memoryLimit < 0  ||  $this->_memorySize < $this->_memoryLimit) {
+        if ($this->_memoryLimit < 0 || $this->_memorySize < $this->_memoryLimit) {
             // Memory limit is not reached
             // Do nothing
             return;
@@ -411,14 +420,12 @@ class Zend_Memory_Manager
         throw new Zend_Memory_Exception('Memory manager can\'t get enough space.');
     }
 
-
     /**
      * Swap object data to disk
      * Actualy swaps data or only unloads it from memory,
-     * if object is not changed since last swap
+     * if object is not changed since last swap.
      *
-     * @param Zend_Memory_Container_Movable $container
-     * @param integer $id
+     * @param int $id
      */
     private function _swap(Zend_Memory_Container_Movable $container, $id)
     {
@@ -427,7 +434,7 @@ class Zend_Memory_Manager
         }
 
         if (!$container->isSwapped()) {
-            $this->_backend->save($container->getRef(), $this->_managerId . $id, $this->_tags);
+            $this->_backend->save($container->getRef(), $this->_managerId.$id, $this->_tags);
         }
 
         $this->_memorySize -= $this->_sizes[$id];
@@ -440,12 +447,12 @@ class Zend_Memory_Manager
      * Load value from swap file.
      *
      * @internal
-     * @param Zend_Memory_Container_Movable $container
-     * @param integer $id
+     *
+     * @param int $id
      */
     public function load(Zend_Memory_Container_Movable $container, $id)
     {
-        $value = $this->_backend->load($this->_managerId . $id, true);
+        $value = $this->_backend->load($this->_managerId.$id, true);
 
         // Try to swap other objects if necessary
         // (do not include specified object into check)

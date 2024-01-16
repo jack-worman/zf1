@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Memory
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -23,30 +24,27 @@
 // require_once 'Zend/Memory/Container.php';
 
 /**
- * Memory value container
+ * Memory value container.
  *
  * Locked (always stored in memory).
  *
  * @category   Zend
- * @package    Zend_Memory
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Memory_Container_Locked extends Zend_Memory_Container
 {
     /**
-     * Value object
+     * Value object.
      *
      * @var string
      */
     public $value;
 
-
     /**
-     * Object constructor
+     * Object constructor.
      *
-     * @param Zend_Memory_Manager $memoryManager
-     * @param integer $id
      * @param string $value
      */
     public function __construct($value)
@@ -63,7 +61,7 @@ class Zend_Memory_Container_Locked extends Zend_Memory_Container
     }
 
     /**
-     * Unlock object
+     * Unlock object.
      */
     public function unlock()
     {
@@ -71,9 +69,9 @@ class Zend_Memory_Container_Locked extends Zend_Memory_Container
     }
 
     /**
-     * Return true if object is locked
+     * Return true if object is locked.
      *
-     * @return boolean
+     * @return bool
      */
     public function isLocked()
     {
@@ -81,7 +79,7 @@ class Zend_Memory_Container_Locked extends Zend_Memory_Container
     }
 
     /**
-     * Get string value reference
+     * Get string value reference.
      *
      * _Must_ be used for value access before PHP v 5.2
      * or _may_ be used for performance considerations
@@ -104,7 +102,7 @@ class Zend_Memory_Container_Locked extends Zend_Memory_Container
     }
 
     /**
-     * Destroy memory container and remove it from memory manager list
+     * Destroy memory container and remove it from memory manager list.
      */
     public function destroy()
     {

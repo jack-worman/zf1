@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata_Photos
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -28,18 +28,17 @@
 
 /**
  * @category   Zend
- * @package    Zend_Gdata_Photos
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Photos
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_PhotosOnlineTest extends PHPUnit_Framework_TestCase
 {
-
-    protected $photos = null;
+    protected $photos;
 
     public function setUp()
     {
@@ -51,19 +50,19 @@ class Zend_Gdata_PhotosOnlineTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-      * Verify that a given property is set to a specific value
-      * and that the getter and magic variable return the same value.
-      *
-      * @param object $obj The object to be interrogated.
-      * @param string $name The name of the property to be verified.
-      * @param string $secondName 2nd level accessor function name
-      * @param object $value The expected value of the property.
-      */
+     * Verify that a given property is set to a specific value
+     * and that the getter and magic variable return the same value.
+     *
+     * @param object $obj        the object to be interrogated
+     * @param string $name       the name of the property to be verified
+     * @param string $secondName 2nd level accessor function name
+     * @param object $value      the expected value of the property
+     */
     protected function verifyProperty($obj, $name, $secondName, $value)
     {
         $propName = $name;
-        $propGetter = "get" . ucfirst($name);
-        $secondGetter = "get" . ucfirst($secondName);
+        $propGetter = 'get'.ucfirst($name);
+        $secondGetter = 'get'.ucfirst($secondName);
 
         $this->assertEquals($obj->$propGetter(), $obj->$propName);
         $this->assertEquals($value, $obj->$propGetter()->$secondGetter());
@@ -74,10 +73,10 @@ class Zend_Gdata_PhotosOnlineTest extends PHPUnit_Framework_TestCase
         $client = $this->photos;
 
         $album = new Zend_Gdata_Photos_AlbumEntry();
-        $album->setTitle($client->newTitle("testAlbum"));
-        $album->setCategory(array($client->newCategory(
+        $album->setTitle($client->newTitle('testAlbum'));
+        $album->setCategory([$client->newCategory(
             'http://schemas.google.com/photos/2007#album',
-            'http://schemas.google.com/g/2005#kind')));
+            'http://schemas.google.com/g/2005#kind')]);
 
         $newAlbum = $client->insertAlbumEntry($album);
         $this->assertEquals($album->getTitle(), $newAlbum->getTitle());
@@ -85,7 +84,7 @@ class Zend_Gdata_PhotosOnlineTest extends PHPUnit_Framework_TestCase
 
         $albumFeedUri = $newAlbum->getLink('http://schemas.google.com/g/2005#feed')->href;
         $albumFeed = $client->getAlbumFeed($albumFeedUri);
-        $this->verifyProperty($albumFeed, "title", "text", "testAlbum");
+        $this->verifyProperty($albumFeed, 'title', 'text', 'testAlbum');
 
         return $newAlbum;
     }
@@ -99,10 +98,10 @@ class Zend_Gdata_PhotosOnlineTest extends PHPUnit_Framework_TestCase
 
         $photo = new Zend_Gdata_Photos_PhotoEntry();
         $photo->setMediaSource($fd);
-        $photo->setTitle($client->newTitle("test photo"));
-        $photo->setCategory(array($client->newCategory(
+        $photo->setTitle($client->newTitle('test photo'));
+        $photo->setCategory([$client->newCategory(
             'http://schemas.google.com/photos/2007#photo',
-            'http://schemas.google.com/g/2005#kind')));
+            'http://schemas.google.com/g/2005#kind')]);
 
         $newPhoto = $client->insertPhotoEntry($photo, $album);
         $this->assertEquals($photo->getTitle(), $newPhoto->getTitle());
@@ -110,7 +109,7 @@ class Zend_Gdata_PhotosOnlineTest extends PHPUnit_Framework_TestCase
 
         $photoFeedUri = $newPhoto->getLink('http://schemas.google.com/g/2005#feed')->href;
         $photoFeed = $client->getPhotoFeed($photoFeedUri);
-        $this->verifyProperty($photoFeed, "title", "text", "test photo");
+        $this->verifyProperty($photoFeed, 'title', 'text', 'test photo');
 
         return $newPhoto;
     }
@@ -121,14 +120,15 @@ class Zend_Gdata_PhotosOnlineTest extends PHPUnit_Framework_TestCase
         $album = $this->createAlbum();
         $insertedEntry = $this->createPhoto($album);
 
-        $insertedEntry->title->text = "New Photo";
-        $insertedEntry->summary->text = "Photo caption";
+        $insertedEntry->title->text = 'New Photo';
+        $insertedEntry->summary->text = 'Photo caption';
         $keywords = new Zend_Gdata_Media_Extension_MediaKeywords();
-        $keywords->setText("foo, bar, baz");
+        $keywords->setText('foo, bar, baz');
         $insertedEntry->mediaGroup->keywords = $keywords;
 
         $updatedEntry = $insertedEntry->save();
-        return array($updatedEntry, $album);
+
+        return [$updatedEntry, $album];
     }
 
     public function createComment($photo)
@@ -136,11 +136,11 @@ class Zend_Gdata_PhotosOnlineTest extends PHPUnit_Framework_TestCase
         $client = $this->photos;
 
         $comment = new Zend_Gdata_Photos_CommentEntry();
-        $comment->setTitle($client->newTitle("test comment"));
-        $comment->setContent($client->newContent("test comment"));
-        $comment->setCategory(array($client->newCategory(
+        $comment->setTitle($client->newTitle('test comment'));
+        $comment->setContent($client->newContent('test comment'));
+        $comment->setCategory([$client->newCategory(
             'http://schemas.google.com/photos/2007#comment',
-            'http://schemas.google.com/g/2005#kind')));
+            'http://schemas.google.com/g/2005#kind')]);
 
         $newComment = $client->insertCommentEntry($comment, $photo);
         $this->assertEquals($comment->getContent(), $newComment->getContent());
@@ -154,11 +154,11 @@ class Zend_Gdata_PhotosOnlineTest extends PHPUnit_Framework_TestCase
         $client = $this->photos;
 
         $tag = new Zend_Gdata_Photos_TagEntry();
-        $tag->setTitle($client->newTitle("test tag"));
-        $tag->setContent($client->newContent("test tag"));
-        $tag->setCategory(array($client->newCategory(
+        $tag->setTitle($client->newTitle('test tag'));
+        $tag->setContent($client->newContent('test tag'));
+        $tag->setCategory([$client->newCategory(
             'http://schemas.google.com/photos/2007#tag',
-            'http://schemas.google.com/g/2005#kind')));
+            'http://schemas.google.com/g/2005#kind')]);
 
         $newTag = $client->insertTagEntry($tag, $photo);
         $this->assertEquals($tag->getTitle(), $newTag->getTitle());
@@ -196,19 +196,18 @@ class Zend_Gdata_PhotosOnlineTest extends PHPUnit_Framework_TestCase
     {
         $client = $this->photos;
 
-        $userEntryUri = "http://picasaweb.google.com/data/entry/api/user/" .
+        $userEntryUri = 'http://picasaweb.google.com/data/entry/api/user/'.
             constant('TESTS_ZEND_GDATA_PHOTOS_USERNAME');
 
         $userEntry = $client->getUserEntry($userEntryUri);
-        $this->verifyProperty($userEntry, "id", "text",
-                "http://picasaweb.google.com/data/entry/api/user/" .
-                constant('TESTS_ZEND_GDATA_PHOTOS_USERNAME'));
-
+        $this->verifyProperty($userEntry, 'id', 'text',
+            'http://picasaweb.google.com/data/entry/api/user/'.
+            constant('TESTS_ZEND_GDATA_PHOTOS_USERNAME'));
 
         $userFeed = $client->getUserFeed(constant('TESTS_ZEND_GDATA_PHOTOS_USERNAME'));
-        $this->verifyProperty($userFeed, "id", "text",
-                "http://picasaweb.google.com/data/feed/api/user/" .
-                constant('TESTS_ZEND_GDATA_PHOTOS_USERNAME'));
+        $this->verifyProperty($userFeed, 'id', 'text',
+            'http://picasaweb.google.com/data/feed/api/user/'.
+            constant('TESTS_ZEND_GDATA_PHOTOS_USERNAME'));
     }
 
     public function testCreatePhotoCommentAndTag()
@@ -232,45 +231,45 @@ class Zend_Gdata_PhotosOnlineTest extends PHPUnit_Framework_TestCase
 
         try {
             $userEntry = $client->getUserEntry(null);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->assertTrue($e instanceof Zend_Gdata_App_InvalidArgumentException);
         }
         try {
             $userEntry = $client->getAlbumEntry(null);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->assertTrue($e instanceof Zend_Gdata_App_InvalidArgumentException);
         }
         try {
             $photoEntry = $client->getPhotoEntry(null);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->assertTrue($e instanceof Zend_Gdata_App_InvalidArgumentException);
         }
         try {
             $tagEntry = $client->getTagEntry(null);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->assertTrue($e instanceof Zend_Gdata_App_InvalidArgumentException);
         }
         try {
             $commentEntry = $client->getCommentEntry(null);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->assertTrue($e instanceof Zend_Gdata_App_InvalidArgumentException);
         }
         try {
             $photo = new Zend_Gdata_Photos_PhotoEntry();
             $result = $client->insertPhotoEntry($photo, null);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->assertTrue($e instanceof Zend_Gdata_App_InvalidArgumentException);
         }
         try {
             $comment = new Zend_Gdata_Photos_CommentEntry();
             $result = $client->insertCommentEntry($comment, null);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->assertTrue($e instanceof Zend_Gdata_App_InvalidArgumentException);
         }
         try {
             $tag = new Zend_Gdata_Photos_TagEntry();
             $result = $client->insertTagEntry($tag, null);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->assertTrue($e instanceof Zend_Gdata_App_InvalidArgumentException);
         }
     }
@@ -281,9 +280,8 @@ class Zend_Gdata_PhotosOnlineTest extends PHPUnit_Framework_TestCase
 
         try {
             $albumFeed = $client->getAlbumFeed(null);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->assertTrue($e instanceof Zend_Gdata_App_InvalidArgumentException);
         }
     }
-
 }

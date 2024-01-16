@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_Audioscrobbler
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -29,10 +29,10 @@ require_once 'AudioscrobblerTestCase.php';
 
 /**
  * @category   Zend
- * @package    Zend_Service_Audioscrobbler
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Service
  * @group      Zend_Service_Audioscrobbler
  */
@@ -48,8 +48,8 @@ class Zend_Service_Audioscrobbler_AudioscrobblerTest extends Zend_Service_Audios
         try {
             $response = $as->userGetProfileInformation();
             $this->fail('Expected Zend_Http_Client_Exception not thrown');
-        } catch(Zend_Http_Client_Exception $e) {
-            $this->assertContains("No user exists with this name", $e->getMessage());
+        } catch (Zend_Http_Client_Exception $e) {
+            $this->assertContains('No user exists with this name', $e->getMessage());
         }
     }
 
@@ -62,8 +62,8 @@ class Zend_Service_Audioscrobbler_AudioscrobblerTest extends Zend_Service_Audios
         try {
             $response = $as->userGetProfileInformation();
             $this->fail('Expected Zend_Http_Client_Exception not thrown');
-        } catch(Zend_Http_Client_Exception $e) {
-            $this->assertContains("404", $e->getMessage());
+        } catch (Zend_Http_Client_Exception $e) {
+            $this->assertContains('404', $e->getMessage());
         }
     }
 
@@ -73,10 +73,10 @@ class Zend_Service_Audioscrobbler_AudioscrobblerTest extends Zend_Service_Audios
     public function testSetViaCallIntercept()
     {
         $as = new Zend_Service_Audioscrobbler();
-        $as->setUser("foobar");
-        $as->setAlbum("Baz");
-        $this->assertEquals("foobar", $as->get("user"));
-        $this->assertEquals("Baz",    $as->get("album"));
+        $as->setUser('foobar');
+        $as->setAlbum('Baz');
+        $this->assertEquals('foobar', $as->get('user'));
+        $this->assertEquals('Baz', $as->get('album'));
     }
 
     /**
@@ -84,7 +84,7 @@ class Zend_Service_Audioscrobbler_AudioscrobblerTest extends Zend_Service_Audios
      */
     public function testUnknownMethodViaCallInterceptThrowsException()
     {
-        $this->setExpectedException("Zend_Service_Exception");
+        $this->setExpectedException('Zend_Service_Exception');
 
         $as = new Zend_Service_Audioscrobbler();
         $as->someInvalidMethod();
@@ -95,7 +95,7 @@ class Zend_Service_Audioscrobbler_AudioscrobblerTest extends Zend_Service_Audios
      */
     public function testCallInterceptMethodsRequireExactlyOneParameterAndThrowExceptionOtherwise()
     {
-        $this->setExpectedException("Zend_Service_Exception");
+        $this->setExpectedException('Zend_Service_Exception');
 
         $as = new Zend_Service_Audioscrobbler();
         $as->setUser();
@@ -104,6 +104,7 @@ class Zend_Service_Audioscrobbler_AudioscrobblerTest extends Zend_Service_Audios
     public static function readTestResponse($file)
     {
         $message = file_get_contents(sprintf('%s/_files/%s', __DIR__, $file));
+
         // Line endings are sometimes an issue inside the canned responses; the
         // following is a negative lookbehind assertion, and replaces any \n
         // not preceded by \r with the sequence \r\n, ensuring that the message

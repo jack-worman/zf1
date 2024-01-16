@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage Framework
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,15 +27,14 @@
 
 /**
  * @category   Zend
- * @package    Zend_Tool
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface Zend_Tool_Framework_Manifest_MetadataManifestable extends Zend_Tool_Framework_Manifest_Interface
 {
-
     /**
-     * getMetadata()
+     * getMetadata().
      *
      * Should either return a single metadata object or an array
      * of metadata objects
@@ -43,5 +42,4 @@ interface Zend_Tool_Framework_Manifest_MetadataManifestable extends Zend_Tool_Fr
      * @return array|Zend_Tool_Framework_Manifest_Metadata
      */
     public function getMetadata();
-
 }

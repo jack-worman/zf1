@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,8 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage Form
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -23,23 +22,23 @@
 // require_once 'Zend/Form/DisplayGroup.php';
 
 /**
- * Dijit-enabled DisplayGroup
+ * Dijit-enabled DisplayGroup.
  *
  * @uses       Zend_Form_DisplayGroup
- * @package    Zend_Dojo
- * @subpackage Form
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 class Zend_Dojo_Form_DisplayGroup extends Zend_Form_DisplayGroup
 {
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param  string $name
-     * @param  Zend_Loader_PluginLoader $loader
-     * @param  array|Zend_Config|null $options
+     * @param string                 $name
+     * @param array|Zend_Config|null $options
+     *
      * @return void
      */
     public function __construct($name, Zend_Loader_PluginLoader $loader, $options = null)
@@ -49,11 +48,10 @@ class Zend_Dojo_Form_DisplayGroup extends Zend_Form_DisplayGroup
     }
 
     /**
-     * Set the view object
+     * Set the view object.
      *
      * Ensures that the view object has the dojo view helper path set.
      *
-     * @param  Zend_View_Interface $view
      * @return Zend_Dojo_Form_DisplayGroup
      */
     public function setView(Zend_View_Interface $view = null)
@@ -63,6 +61,7 @@ class Zend_Dojo_Form_DisplayGroup extends Zend_Form_DisplayGroup
                 $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
             }
         }
+
         return parent::setView($view);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,48 +13,44 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Search
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Search
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Search_Lucene_Search_QueryEntry
 {
     /**
-     * Query entry boost factor
+     * Query entry boost factor.
      *
      * @var float
      */
     protected $_boost = 1.0;
 
-
     /**
-     * Process modifier ('~')
-     *
-     * @param mixed $parameter
+     * Process modifier ('~').
      */
     abstract public function processFuzzyProximityModifier($parameter = null);
 
-
     /**
-     * Transform entry to a subquery
+     * Transform entry to a subquery.
      *
      * @param string $encoding
+     *
      * @return Zend_Search_Lucene_Search_Query
      */
     abstract public function getQuery($encoding);
 
     /**
-     * Boost query entry
+     * Boost query entry.
      *
      * @param float $boostFactor
      */
@@ -62,6 +58,4 @@ abstract class Zend_Search_Lucene_Search_QueryEntry
     {
         $this->_boost *= $boostFactor;
     }
-
-
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata_Docs
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -26,27 +26,26 @@
 
 /**
  * @category   Zend
- * @package    Zend_Gdata_Docsj
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Docsj
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_Docs_DocumentListEntryTest extends PHPUnit_Framework_TestCase
 {
-
     public function setUp()
     {
         $this->doc = new Zend_Gdata_Docs_DocumentListEntry(
-                file_get_contents('Zend/Gdata/Docs/_files/TestDataDocumentListEntrySample.xml', true));
+            file_get_contents('Zend/Gdata/Docs/_files/TestDataDocumentListEntrySample.xml', true));
     }
 
     public function testToAndFromString()
     {
         $this->assertTrue($this->doc instanceof Zend_Gdata_Docs_DocumentListEntry);
-        $this->assertTrue($this->doc->title->text === 'Test Spreadsheet');
+        $this->assertTrue('Test Spreadsheet' === $this->doc->title->text);
 
         $newDoc = new Zend_Gdata_Docs_DocumentListEntry();
         $doc = new DOMDocument();
@@ -64,10 +63,9 @@ class Zend_Gdata_Docs_DocumentListEntryTest extends PHPUnit_Framework_TestCase
         $mediaSource->setSlug('test slug');
         $mediaSource->setContentType('test content type');
         $this->doc->setMediaSource($mediaSource);
-        $this->assertTrue($this->doc->getMediaSource()->getContentType() ===
-            'test content type');
-        $this->assertTrue($this->doc->getMediaSource()->getSlug() ===
-            'test slug');
+        $this->assertTrue('test content type' ===
+            $this->doc->getMediaSource()->getContentType());
+        $this->assertTrue('test slug' ===
+            $this->doc->getMediaSource()->getSlug());
     }
-
 }

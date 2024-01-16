@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage Ec2
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -30,58 +30,58 @@
 
 /**
  * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage Ec2
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Amazon_Ec2_Response {
+class Zend_Service_Amazon_Ec2_Response
+{
     /**
      * XML namespace used for EC2 responses.
      */
     protected $_xmlNamespace = 'http://ec2.amazonaws.com/doc/2009-04-04/';
 
     /**
-     * The original HTTP response
+     * The original HTTP response.
      *
      * This contains the response body and headers.
      *
      * @var Zend_Http_Response
      */
-    private $_httpResponse = null;
+    private $_httpResponse;
 
     /**
-     * The response document object
+     * The response document object.
      *
      * @var DOMDocument
      */
-    private $_document = null;
+    private $_document;
 
     /**
-     * The response XPath
+     * The response XPath.
      *
      * @var DOMXPath
      */
-    private $_xpath = null;
+    private $_xpath;
 
     /**
-     * Last error code
+     * Last error code.
      *
-     * @var integer
+     * @var int
      */
     private $_errorCode = 0;
 
     /**
-     * Last error message
+     * Last error message.
      *
      * @var string
      */
     private $_errorMessage = '';
 
     /**
-     * Creates a new high-level EC2 response object
+     * Creates a new high-level EC2 response object.
      *
-     * @param Zend_Http_Response $httpResponse the HTTP response.
+     * @param Zend_Http_Response $httpResponse the HTTP response
      */
     public function __construct(Zend_Http_Response $httpResponse)
     {
@@ -89,15 +89,15 @@ class Zend_Service_Amazon_Ec2_Response {
     }
 
     /**
-     * Gets the XPath object for this response
+     * Gets the XPath object for this response.
      *
-     * @return DOMXPath the XPath object for response.
+     * @return DOMXPath the XPath object for response
      */
     public function getXPath()
     {
-        if ($this->_xpath === null) {
+        if (null === $this->_xpath) {
             $document = $this->getDocument();
-            if ($document === false) {
+            if (false === $document) {
                 $this->_xpath = false;
             } else {
                 $this->_xpath = new DOMXPath($document);
@@ -110,9 +110,9 @@ class Zend_Service_Amazon_Ec2_Response {
     }
 
     /**
-     * Gets the document object for this response
+     * Gets the document object for this response.
      *
-     * @return DOMDocument the DOM Document for this response.
+     * @return DOMDocument the DOM Document for this response
      */
     public function getDocument()
     {
@@ -121,9 +121,9 @@ class Zend_Service_Amazon_Ec2_Response {
         } catch (Zend_Http_Exception $e) {
             $body = false;
         }
-        
-        if ($this->_document === null) {
-            if ($body !== false) {
+
+        if (null === $this->_document) {
+            if (false !== $body) {
                 // turn off libxml error handling
                 $errors = libxml_use_internal_errors();
 
@@ -152,7 +152,7 @@ class Zend_Service_Amazon_Ec2_Response {
     }
 
     /**
-     * Set a new XML Namespace
+     * Set a new XML Namespace.
      *
      * @param string $namespace
      */
@@ -160,5 +160,4 @@ class Zend_Service_Amazon_Ec2_Response {
     {
         $this->_xmlNamespace = $namespace;
     }
-
 }

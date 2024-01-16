@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,8 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage Decorator
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -23,23 +22,24 @@
 // require_once 'Zend/Form/Decorator/Abstract.php';
 
 /**
- * Captcha generic decorator
+ * Captcha generic decorator.
  *
  * Adds captcha adapter output
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage Decorator
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 class Zend_Form_Decorator_Captcha extends Zend_Form_Decorator_Abstract
 {
     /**
-     * Render captcha
+     * Render captcha.
      *
-     * @param  string $content
+     * @param string $content
+     *
      * @return string
      */
     public function render($content)
@@ -49,7 +49,7 @@ class Zend_Form_Decorator_Captcha extends Zend_Form_Decorator_Abstract
             return $content;
         }
 
-        $view    = $element->getView();
+        $view = $element->getView();
         if (null === $view) {
             return $content;
         }
@@ -58,15 +58,16 @@ class Zend_Form_Decorator_Captcha extends Zend_Form_Decorator_Abstract
         $separator = $this->getSeparator();
 
         $captcha = $element->getCaptcha();
-        $markup  = $captcha->render($view, $element);
+        $markup = $captcha->render($view, $element);
         switch ($placement) {
             case 'PREPEND':
-                $content = $markup . $separator .  $content;
+                $content = $markup.$separator.$content;
                 break;
             case 'APPEND':
             default:
-                $content = $content . $separator . $markup;
+                $content = $content.$separator.$markup;
         }
+
         return $content;
     }
 }

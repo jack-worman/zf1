@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,35 +13,33 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_Delicious
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /**
  * @see Zend_Service_Delicious
  */
 // require_once 'Zend/Service/Delicious.php';
 
-
 /**
  * @category   Zend_Service
- * @package    Zend_Service_Delicious
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Service
  * @group      Zend_Service_Delicious
  */
 #[AllowDynamicProperties]
 class Zend_Service_Delicious_PublicDataTest extends PHPUnit_Framework_TestCase
 {
-    const TEST_UNAME = 'zfTestUser';
-    const TEST_PASS  = 'zfuser';
-    const TEST_URL  = 'http://framework.zend.com/';
+    public const TEST_UNAME = 'zfTestUser';
+    public const TEST_PASS = 'zfuser';
+    public const TEST_URL = 'http://framework.zend.com/';
 
     /**
      * @var Zend_Service_Delicious
@@ -54,17 +52,17 @@ class Zend_Service_Delicious_PublicDataTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $httpClient = new Zend_Http_Client();
-        $httpClient->setConfig(array(
+        $httpClient->setConfig([
                 'useragent' => 'Zend_Service_Delicious - Unit tests/0.1',
-                'keepalive' => true
-        ));
+                'keepalive' => true,
+        ]);
         Zend_Rest_Client::setHttpClient($httpClient);
 
         $this->_delicious = new Zend_Service_Delicious();
     }
 
     /**
-     * Try to get tags of some user
+     * Try to get tags of some user.
      *
      * @return void
      */
@@ -144,11 +142,12 @@ class Zend_Service_Delicious_PublicDataTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Try to get details of some URL
+     * Try to get details of some URL.
      *
      * @return void
      */
-    public function testGetUrlDetails() {
+    public function testGetUrlDetails()
+    {
         $details = $this->_delicious->getUrlDetails(self::TEST_URL);
 
         $this->assertTrue(is_array($details));

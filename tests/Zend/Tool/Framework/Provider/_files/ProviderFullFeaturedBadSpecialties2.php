@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -24,19 +24,15 @@
 
 /**
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Zend_Tool_Framework_Provider_ProviderFullFeaturedBadSpecialties2 extends Zend_Tool_Framework_Provider_Abstract
 {
-
     public function getSpecialties()
     {
-        return new ArrayObject(array('Hi', 'BloodyMurder', 'ForYourTeam'));
+        return new ArrayObject(['Hi', 'BloodyMurder', 'ForYourTeam']);
     }
-
 }
-

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,29 +13,24 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /**
  * @see Zend_Db_Table_Select_TestCommon
  */
 require_once 'Zend/Db/Table/Select/TestCommon.php';
 
-
-
-
-
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Db
  * @group      Zend_Db_Table
  * @group      Zend_Db_Table_Select
@@ -43,7 +38,6 @@ require_once 'Zend/Db/Table/Select/TestCommon.php';
 #[AllowDynamicProperties]
 class Zend_Db_Table_Select_Pdo_IbmTest extends Zend_Db_Table_Select_TestCommon
 {
-
     public function getDriver()
     {
         return 'Pdo_Ibm';
@@ -51,9 +45,9 @@ class Zend_Db_Table_Select_Pdo_IbmTest extends Zend_Db_Table_Select_TestCommon
 
     public function testSelectGroupByExpr()
     {
-       $server = $this->_util->getServer();
+        $server = $this->_util->getServer();
 
-        if ($server == 'IDS') {
+        if ('IDS' == $server) {
             $this->markTestIncomplete('IDS does not support this SQL syntax');
         } else {
             parent::testSelectGroupByExpr();
@@ -62,9 +56,9 @@ class Zend_Db_Table_Select_Pdo_IbmTest extends Zend_Db_Table_Select_TestCommon
 
     public function testSelectGroupByAutoExpr()
     {
-       $server = $this->_util->getServer();
+        $server = $this->_util->getServer();
 
-        if ($server == 'IDS') {
+        if ('IDS' == $server) {
             $this->markTestIncomplete('IDS does not support this SQL syntax');
         } else {
             parent::testSelectGroupByAutoExpr();
@@ -73,6 +67,6 @@ class Zend_Db_Table_Select_Pdo_IbmTest extends Zend_Db_Table_Select_TestCommon
 
     public function testSelectJoinCross()
     {
-        $this->markTestSkipped($this->getDriver() . ' adapter support for CROSS JOIN not yet available');
+        $this->markTestSkipped($this->getDriver().' adapter support for CROSS JOIN not yet available');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,8 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Service\Rackspace
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -23,58 +22,57 @@
 // require_once 'Zend/Http/Client/Adapter/Test.php';
 
 /**
- * Test helper
+ * Test helper.
  */
 
 /**
  * @category   Zend
- * @package    Zend_Service_Rackspace_Files
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Service_Rackspace_Files
  */
 #[AllowDynamicProperties]
-class Zend_Service_Rackspace_Files_OfflineTest
-    extends PHPUnit_Framework_TestCase
+class Zend_Service_Rackspace_Files_OfflineTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Reference to RackspaceFiles
+     * Reference to RackspaceFiles.
      *
      * @var Zend_Service_Rackspace_Files
      */
     protected $rackspace;
 
     /**
-     * HTTP client adapter for testing
+     * HTTP client adapter for testing.
      *
      * @var Zend_Http_Client_Adapter_Test
      */
     protected $httpClientAdapterTest;
 
     /**
-     * Metadata for container/object test
+     * Metadata for container/object test.
      *
      * @var array
      */
     protected $metadata;
 
     /**
-     * Another metadata for container/object test
+     * Another metadata for container/object test.
      *
      * @var array
      */
     protected $metadata2;
 
     /**
-     * Reference to Container
+     * Reference to Container.
      *
      * @var Zend_Service_Rackspace_Files_Container
      */
     protected $container;
 
     /**
-     * Set up the test case
+     * Set up the test case.
      *
      * @return void
      */
@@ -84,9 +82,9 @@ class Zend_Service_Rackspace_Files_OfflineTest
 
         $this->container = new Zend_Service_Rackspace_Files_Container(
             $this->rackspace,
-            array(
-                 'name' => TESTS_ZEND_SERVICE_RACKSPACE_CONTAINER_NAME
-            )
+            [
+                 'name' => TESTS_ZEND_SERVICE_RACKSPACE_CONTAINER_NAME,
+            ]
         );
 
         $this->httpClientAdapterTest = new Zend_Http_Client_Adapter_Test();
@@ -103,14 +101,14 @@ class Zend_Service_Rackspace_Files_OfflineTest
             $this->rackspace->authenticate(), 'Authentication failed'
         );
 
-        $this->metadata = array(
-            'foo'  => 'bar',
-            'foo2' => 'bar2'
-        );
+        $this->metadata = [
+            'foo' => 'bar',
+            'foo2' => 'bar2',
+        ];
 
-        $this->metadata2 = array(
-            'hello' => 'world'
-        );
+        $this->metadata2 = [
+            'hello' => 'world',
+        ];
 
         // load the HTTP response (from a file)
         $this->httpClientAdapterTest->setResponse(
@@ -119,22 +117,22 @@ class Zend_Service_Rackspace_Files_OfflineTest
     }
 
     /**
-     * Utility method for returning a string HTTP response, which is loaded from a file
+     * Utility method for returning a string HTTP response, which is loaded from a file.
      *
-     * @param  string $name
+     * @param string $name
      *
      * @return string
      */
     protected function loadResponse($name)
     {
-        return file_get_contents(__DIR__ . '/_files/' . $name . '.response');
+        return file_get_contents(__DIR__.'/_files/'.$name.'.response');
     }
 
     public function testCreateContainer()
     {
         $container =
             $this->rackspace->createContainer('zf-unit-test', $this->metadata);
-        $this->assertTrue($container !== false);
+        $this->assertTrue(false !== $container);
         $this->assertEquals($container->getName(), 'zf-unit-test');
     }
 
@@ -147,17 +145,17 @@ class Zend_Service_Rackspace_Files_OfflineTest
     public function testGetContainer()
     {
         $container = $this->rackspace->getContainer('zf-unit-test');
-        $this->assertTrue($container !== false);
+        $this->assertTrue(false !== $container);
         $this->assertEquals($container->getName(), 'zf-unit-test');
     }
 
     public function testGetContainers()
     {
         $containers = $this->rackspace->getContainers();
-        $this->assertTrue($containers !== false);
+        $this->assertTrue(false !== $containers);
         $found = false;
         foreach ($containers as $container) {
-            if ($container->getName() == 'zf-unit-test') {
+            if ('zf-unit-test' == $container->getName()) {
                 $found = true;
                 break;
             }
@@ -168,7 +166,7 @@ class Zend_Service_Rackspace_Files_OfflineTest
     public function testGetMetadataContainer()
     {
         $data = $this->rackspace->getMetadataContainer('zf-unit-test');
-        $this->assertTrue($data !== false);
+        $this->assertTrue(false !== $data);
         $this->assertEquals($data['name'], 'zf-unit-test');
         $this->assertEquals($data['metadata'], $this->metadata);
     }
@@ -176,14 +174,14 @@ class Zend_Service_Rackspace_Files_OfflineTest
     public function testGetInfoAccount()
     {
         $data = $this->rackspace->getInfoAccount();
-        $this->assertTrue($data !== false);
+        $this->assertTrue(false !== $data);
         $this->assertTrue($data['tot_containers'] > 0);
     }
 
     public function testStoreObject()
     {
         $content = 'This is a test!';
-        $result  = $this->rackspace->storeObject(
+        $result = $this->rackspace->storeObject(
             'zf-unit-test',
             'zf-object-test',
             $content,
@@ -198,7 +196,7 @@ class Zend_Service_Rackspace_Files_OfflineTest
             'zf-unit-test',
             'zf-object-test'
         );
-        $this->assertTrue($object !== false);
+        $this->assertTrue(false !== $object);
         $this->assertEquals($object->getName(), 'zf-object-test');
         $this->assertEquals($object->getSize(), 15);
         $this->assertEquals($object->getMetadata(), $this->metadata);
@@ -210,8 +208,7 @@ class Zend_Service_Rackspace_Files_OfflineTest
             'zf-unit-test',
             'zf-object-test',
             'zf-unit-test',
-            'zf-object-test' . '-copy'
-        );
+            'zf-object-test-copy');
         $this->assertTrue($result);
         $this->assertNotContains('application/x-www-form-urlencoded', $this->rackspace->getHttpClient()->getLastRequest());
     }
@@ -219,10 +216,10 @@ class Zend_Service_Rackspace_Files_OfflineTest
     public function testGetObjects()
     {
         $objects = $this->rackspace->getObjects('zf-unit-test');
-        $this->assertTrue($objects !== false);
+        $this->assertTrue(false !== $objects);
 
         $this->assertEquals($objects[0]->getName(), 'zf-object-test');
-        $this->assertEquals($objects[1]->getName(), 'zf-object-test' . '-copy');
+        $this->assertEquals($objects[1]->getName(), 'zf-object-test-copy');
     }
 
     /**
@@ -232,12 +229,12 @@ class Zend_Service_Rackspace_Files_OfflineTest
     {
         $objects = $this->rackspace->getObjects(
             'zf-unit-test',
-            array(
+            [
                 'delimiter' => '/',
-                'prefix'    => 'dir/',
-            )
+                'prefix' => 'dir/',
+            ]
         );
-        $this->assertTrue($objects !== false);
+        $this->assertTrue(false !== $objects);
 
         $this->assertEquals($objects[0]->getName(), 'dir/subdir1/');
         $this->assertEquals($objects[1]->getName(), 'dir/subdir2/');
@@ -246,14 +243,14 @@ class Zend_Service_Rackspace_Files_OfflineTest
     public function testGetSizeContainers()
     {
         $size = $this->rackspace->getSizeContainers();
-        $this->assertTrue($size !== false);
+        $this->assertTrue(false !== $size);
         $this->assertTrue(is_numeric($size));
     }
 
     public function testGetCountObjects()
     {
         $count = $this->rackspace->getCountObjects();
-        $this->assertTrue($count !== false);
+        $this->assertTrue(false !== $count);
         $this->assertTrue(is_numeric($count));
     }
 
@@ -273,14 +270,14 @@ class Zend_Service_Rackspace_Files_OfflineTest
             'zf-unit-test',
             'zf-object-test'
         );
-        $this->assertTrue($data !== false);
+        $this->assertTrue(false !== $data);
         $this->assertEquals($data['metadata'], $this->metadata2);
     }
 
     public function testEnableCdnContainer()
     {
         $data = $this->rackspace->enableCdnContainer('zf-unit-test');
-        $this->assertTrue($data !== false);
+        $this->assertTrue(false !== $data);
         $this->assertTrue(is_array($data));
         $this->assertTrue(!empty($data['cdn_uri']));
         $this->assertTrue(!empty($data['cdn_uri_ssl']));
@@ -289,10 +286,10 @@ class Zend_Service_Rackspace_Files_OfflineTest
     public function testGetCdnContainers()
     {
         $containers = $this->rackspace->getCdnContainers();
-        $this->assertTrue($containers !== false);
+        $this->assertTrue(false !== $containers);
         $found = false;
         foreach ($containers as $container) {
-            if ($container->getName() == 'zf-unit-test') {
+            if ('zf-unit-test' == $container->getName()) {
                 $found = true;
                 break;
             }
@@ -304,7 +301,7 @@ class Zend_Service_Rackspace_Files_OfflineTest
     {
         $data =
             $this->rackspace->updateCdnContainer('zf-unit-test', null, false);
-        $this->assertTrue($data !== false);
+        $this->assertTrue(false !== $data);
     }
 
     public function testDeleteObject()
@@ -322,8 +319,7 @@ class Zend_Service_Rackspace_Files_OfflineTest
         $this->assertTrue(
             $this->rackspace->deleteObject(
                 'zf-unit-test',
-                'zf-object-test' . '-copy'
-            )
+                'zf-object-test-copy')
         );
     }
 
@@ -340,7 +336,7 @@ class Zend_Service_Rackspace_Files_OfflineTest
         $info = $this->rackspace->getInfoCdnContainer(
             TESTS_ZEND_SERVICE_RACKSPACE_CONTAINER_NAME
         );
-        $this->assertTrue($info !== false);
+        $this->assertTrue(false !== $info);
         $this->assertTrue(is_array($info));
         $this->assertTrue(!empty($info['ttl']));
         $this->assertTrue(!empty($info['cdn_uri']));
@@ -355,7 +351,7 @@ class Zend_Service_Rackspace_Files_OfflineTest
     public function testGetCdnTtl()
     {
         $ttl = $this->container->getCdnTtl();
-        $this->assertTrue($ttl !== false);
+        $this->assertTrue(false !== $ttl);
     }
 
     /**
@@ -364,7 +360,7 @@ class Zend_Service_Rackspace_Files_OfflineTest
     public function testGetCdnUri()
     {
         $uri = $this->container->getCdnUri();
-        $this->assertTrue($uri !== false);
+        $this->assertTrue(false !== $uri);
     }
 
     /**
@@ -373,6 +369,6 @@ class Zend_Service_Rackspace_Files_OfflineTest
     public function testGetCdnUriSsl()
     {
         $uri = $this->container->getCdnUriSsl();
-        $this->assertTrue($uri !== false);
+        $this->assertTrue(false !== $uri);
     }
 }

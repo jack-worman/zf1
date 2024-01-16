@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,11 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ *
  * @version    $Id$
+ *
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -32,18 +33,17 @@
  * for non-Placeholder things. That said, the support for this is only
  * guaranteed to effect subsequently rendered templates, and of course Layouts.
  *
- * @package    Zend_View
- * @subpackage Helper
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_View_Helper_Placeholder extends Zend_View_Helper_Abstract
 {
     /**
-     * Placeholder items
+     * Placeholder items.
+     *
      * @var array
      */
-    protected $_items = array();
+    protected $_items = [];
 
     /**
      * @var Zend_View_Helper_Placeholder_Registry
@@ -51,7 +51,7 @@ class Zend_View_Helper_Placeholder extends Zend_View_Helper_Abstract
     protected $_registry;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * Retrieve container registry from Zend_Registry, or create new one and register it.
      *
@@ -62,21 +62,22 @@ class Zend_View_Helper_Placeholder extends Zend_View_Helper_Abstract
         $this->_registry = Zend_View_Helper_Placeholder_Registry::getRegistry();
     }
 
-
     /**
-     * Placeholder helper
+     * Placeholder helper.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return Zend_View_Helper_Placeholder_Container_Abstract
      */
     public function placeholder($name)
     {
         $name = (string) $name;
+
         return $this->_registry->getContainer($name);
     }
 
     /**
-     * Retrieve the registry
+     * Retrieve the registry.
      *
      * @return Zend_View_Helper_Placeholder_Registry
      */

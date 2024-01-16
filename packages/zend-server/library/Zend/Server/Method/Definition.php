@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,19 +13,18 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Server
- * @subpackage Method
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Method definition metadata
+ * Method definition metadata.
  *
  * @category   Zend
- * @package    Zend_Server
- * @subpackage Method
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -39,7 +38,7 @@ class Zend_Server_Method_Definition
     /**
      * @var array
      */
-    protected $_invokeArguments = array();
+    protected $_invokeArguments = [];
 
     /**
      * @var string
@@ -52,19 +51,20 @@ class Zend_Server_Method_Definition
     protected $_name;
 
     /**
-     * @var null|object
+     * @var object|null
      */
     protected $_object;
 
     /**
      * @var array Array of Zend_Server_Method_Prototype objects
      */
-    protected $_prototypes = array();
+    protected $_prototypes = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param  null|array $options
+     * @param array|null $options
+     *
      * @return void
      */
     public function __construct($options = null)
@@ -75,36 +75,38 @@ class Zend_Server_Method_Definition
     }
 
     /**
-     * Set object state from options
+     * Set object state from options.
      *
-     * @param  array $options
      * @return Zend_Server_Method_Definition
      */
     public function setOptions(array $options)
     {
         foreach ($options as $key => $value) {
-            $method = 'set' . ucfirst($key);
+            $method = 'set'.ucfirst($key);
             if (method_exists($this, $method)) {
                 $this->$method($value);
             }
         }
+
         return $this;
     }
 
     /**
-     * Set method name
+     * Set method name.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return Zend_Server_Method_Definition
      */
     public function setName($name)
     {
         $this->_name = (string) $name;
+
         return $this;
     }
 
     /**
-     * Get method name
+     * Get method name.
      *
      * @return string
      */
@@ -114,9 +116,10 @@ class Zend_Server_Method_Definition
     }
 
     /**
-     * Set method callback
+     * Set method callback.
      *
-     * @param  array|Zend_Server_Method_Callback $callback
+     * @param array|Zend_Server_Method_Callback $callback
+     *
      * @return Zend_Server_Method_Definition
      */
     public function setCallback($callback)
@@ -129,11 +132,12 @@ class Zend_Server_Method_Definition
             throw new Zend_Server_Exception('Invalid method callback provided');
         }
         $this->_callback = $callback;
+
         return $this;
     }
 
     /**
-     * Get method callback
+     * Get method callback.
      *
      * @return Zend_Server_Method_Callback
      */
@@ -143,9 +147,10 @@ class Zend_Server_Method_Definition
     }
 
     /**
-     * Add prototype to method definition
+     * Add prototype to method definition.
      *
-     * @param  array|Zend_Server_Method_Prototype $prototype
+     * @param array|Zend_Server_Method_Prototype $prototype
+     *
      * @return Zend_Server_Method_Definition
      */
     public function addPrototype($prototype)
@@ -158,13 +163,15 @@ class Zend_Server_Method_Definition
             throw new Zend_Server_Exception('Invalid method prototype provided');
         }
         $this->_prototypes[] = $prototype;
+
         return $this;
     }
 
     /**
-     * Add multiple prototypes at once
+     * Add multiple prototypes at once.
      *
-     * @param  array $prototypes Array of Zend_Server_Method_Prototype objects or arrays
+     * @param array $prototypes Array of Zend_Server_Method_Prototype objects or arrays
+     *
      * @return Zend_Server_Method_Definition
      */
     public function addPrototypes(array $prototypes)
@@ -172,24 +179,27 @@ class Zend_Server_Method_Definition
         foreach ($prototypes as $prototype) {
             $this->addPrototype($prototype);
         }
+
         return $this;
     }
 
     /**
-     * Set all prototypes at once (overwrites)
+     * Set all prototypes at once (overwrites).
      *
-     * @param  array $prototypes Array of Zend_Server_Method_Prototype objects or arrays
+     * @param array $prototypes Array of Zend_Server_Method_Prototype objects or arrays
+     *
      * @return Zend_Server_Method_Definition
      */
     public function setPrototypes(array $prototypes)
     {
-        $this->_prototypes = array();
+        $this->_prototypes = [];
         $this->addPrototypes($prototypes);
+
         return $this;
     }
 
     /**
-     * Get all prototypes
+     * Get all prototypes.
      *
      * @return array $prototypes Array of Zend_Server_Method_Prototype objects or arrays
      */
@@ -199,19 +209,21 @@ class Zend_Server_Method_Definition
     }
 
     /**
-     * Set method help
+     * Set method help.
      *
-     * @param  string $methodHelp
+     * @param string $methodHelp
+     *
      * @return Zend_Server_Method_Definition
      */
     public function setMethodHelp($methodHelp)
     {
         $this->_methodHelp = (string) $methodHelp;
+
         return $this;
     }
 
     /**
-     * Get method help
+     * Get method help.
      *
      * @return string
      */
@@ -221,25 +233,27 @@ class Zend_Server_Method_Definition
     }
 
     /**
-     * Set object to use with method calls
+     * Set object to use with method calls.
      *
-     * @param  object $object
+     * @param object $object
+     *
      * @return Zend_Server_Method_Definition
      */
     public function setObject($object)
     {
         if (!is_object($object) && (null !== $object)) {
             // require_once 'Zend/Server/Exception.php';
-            throw new Zend_Server_Exception('Invalid object passed to ' . __CLASS__ . '::' . __METHOD__);
+            throw new Zend_Server_Exception('Invalid object passed to '.__CLASS__.'::'.__METHOD__);
         }
         $this->_object = $object;
+
         return $this;
     }
 
     /**
-     * Get object to use with method calls
+     * Get object to use with method calls.
      *
-     * @return null|object
+     * @return object|null
      */
     public function getObject()
     {
@@ -247,19 +261,19 @@ class Zend_Server_Method_Definition
     }
 
     /**
-     * Set invoke arguments
+     * Set invoke arguments.
      *
-     * @param  array $invokeArguments
      * @return Zend_Server_Method_Definition
      */
     public function setInvokeArguments(array $invokeArguments)
     {
         $this->_invokeArguments = $invokeArguments;
+
         return $this;
     }
 
     /**
-     * Retrieve invoke arguments
+     * Retrieve invoke arguments.
      *
      * @return array
      */
@@ -269,25 +283,25 @@ class Zend_Server_Method_Definition
     }
 
     /**
-     * Serialize to array
+     * Serialize to array.
      *
      * @return array
      */
     public function toArray()
     {
         $prototypes = $this->getPrototypes();
-        $signatures = array();
+        $signatures = [];
         foreach ($prototypes as $prototype) {
             $signatures[] = $prototype->toArray();
         }
 
-        return array(
-            'name'            => $this->getName(),
-            'callback'        => $this->getCallback()->toArray(),
-            'prototypes'      => $signatures,
-            'methodHelp'      => $this->getMethodHelp(),
+        return [
+            'name' => $this->getName(),
+            'callback' => $this->getCallback()->toArray(),
+            'prototypes' => $signatures,
+            'methodHelp' => $this->getMethodHelp(),
             'invokeArguments' => $this->getInvokeArguments(),
-            'object'          => $this->getObject(),
-        );
+            'object' => $this->getObject(),
+        ];
     }
 }

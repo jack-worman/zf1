@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage Framework
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,26 +27,25 @@
 
 /**
  * @category   Zend
- * @package    Zend_Tool
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Framework_Action_Base implements Zend_Tool_Framework_Action_Interface
 {
-
     /**
      * @var string
      */
-    protected $_name = null;
+    protected $_name;
 
     /**
-     * constructor -
+     * constructor -.
      *
      * @param unknown_type $options
      */
     public function __construct($options = null)
     {
-        if ($options !== null) {
+        if (null !== $options) {
             if (is_string($options)) {
                 $this->setName($options);
             }
@@ -55,41 +54,43 @@ class Zend_Tool_Framework_Action_Base implements Zend_Tool_Framework_Action_Inte
     }
 
     /**
-     * setName()
+     * setName().
      *
      * @param string $name
+     *
      * @return Zend_Tool_Framework_Action_Base
      */
     public function setName($name)
     {
         $this->_name = $name;
+
         return $this;
     }
 
     /**
-     * getName()
+     * getName().
      *
      * @return string
      */
     public function getName()
     {
-        if ($this->_name == null) {
+        if (null == $this->_name) {
             $this->_name = $this->_parseName();
         }
+
         return $this->_name;
     }
 
     /**
      * _parseName - internal method to determine the name of an action when one is not explicity provided.
      *
-     * @param Zend_Tool_Framework_Action_Interface $action
      * @return string
      */
     protected function _parseName()
     {
         $className = get_class($this);
-        $actionName = substr((string) $className, strrpos($className, '_')+1);
+        $actionName = substr((string) $className, strrpos($className, '_') + 1);
+
         return $actionName;
     }
-
 }

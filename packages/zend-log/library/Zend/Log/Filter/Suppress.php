@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Log
- * @subpackage Filter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,16 +25,16 @@
 
 /**
  * @category   Zend
- * @package    Zend_Log
- * @subpackage Filter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 class Zend_Log_Filter_Suppress extends Zend_Log_Filter_Abstract
 {
     /**
-     * @var boolean
+     * @var bool
      */
     protected $_accept = true;
 
@@ -44,19 +44,21 @@ class Zend_Log_Filter_Suppress extends Zend_Log_Filter_Abstract
      * Call suppress(true) to suppress all log events.
      * Call suppress(false) to accept all log events.
      *
-     * @param  boolean  $suppress  Should all log events be suppressed?
-     * @return  void
+     * @param bool $suppress Should all log events be suppressed?
+     *
+     * @return void
      */
     public function suppress($suppress)
     {
-        $this->_accept = (! $suppress);
+        $this->_accept = (!$suppress);
     }
 
     /**
      * Returns TRUE to accept the message, FALSE to block it.
      *
-     * @param  array    $event    event data
-     * @return boolean            accepted?
+     * @param array $event event data
+     *
+     * @return bool accepted?
      */
     public function accept($event)
     {
@@ -64,13 +66,15 @@ class Zend_Log_Filter_Suppress extends Zend_Log_Filter_Abstract
     }
 
     /**
-     * Create a new instance of Zend_Log_Filter_Suppress
+     * Create a new instance of Zend_Log_Filter_Suppress.
      *
-     * @param  array|Zend_Config $config
+     * @param array|Zend_Config $config
+     *
      * @return Zend_Log_Filter_Suppress
+     *
      * @throws Zend_Log_Exception
      */
-    static public function factory($config)
+    public static function factory($config)
     {
         return new self();
     }

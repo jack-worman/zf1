@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata_Spreadsheets
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -25,17 +25,16 @@
 
 /**
  * @category   Zend
- * @package    Zend_Gdata_Spreadsheets
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Spreadsheets
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_Spreadsheets_CustomTest extends PHPUnit_Framework_TestCase
 {
-
     public function setUp()
     {
         $this->custom = new Zend_Gdata_Spreadsheets_Extension_Custom();
@@ -44,9 +43,9 @@ class Zend_Gdata_Spreadsheets_CustomTest extends PHPUnit_Framework_TestCase
     public function testToAndFromString()
     {
         $this->custom->setText('value');
-        $this->assertTrue($this->custom->getText() == 'value');
+        $this->assertTrue('value' == $this->custom->getText());
         $this->custom->setColumnName('column_name');
-        $this->assertTrue($this->custom->getColumnName() == 'column_name');
+        $this->assertTrue('column_name' == $this->custom->getColumnName());
         $newCustom = new Zend_Gdata_Spreadsheets_Extension_Custom();
         $doc = new DOMDocument();
         $doc->loadXML($this->custom->saveXML());
@@ -54,5 +53,4 @@ class Zend_Gdata_Spreadsheets_CustomTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->custom->getText() == $newCustom->getText());
         $this->assertTrue($this->custom->getColumnName() == $newCustom->getColumnName());
     }
-
 }

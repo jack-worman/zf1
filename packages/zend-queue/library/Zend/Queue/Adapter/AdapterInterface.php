@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,44 +13,42 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Queue
- * @subpackage Adapter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Interface for common queue operations
+ * Interface for common queue operations.
  *
  * @category   Zend
- * @package    Zend_Queue
- * @subpackage Adapter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface Zend_Queue_Adapter_AdapterInterface
 {
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param  array|Zend_Config $options
-     * @param  Zend_Queue $queue
+     * @param array|Zend_Config $options
+     *
      * @return void
      */
     public function __construct($options, Zend_Queue $queue = null);
 
     /**
-     * Retrieve queue instance
+     * Retrieve queue instance.
      *
      * @return Zend_Queue
      */
     public function getQueue();
 
     /**
-     * Set queue instnace
+     * Set queue instnace.
      *
-     * @param  Zend_Queue $queue
      * @return Zend_Queue_Adapter_AdapterInterface
      */
     public function setQueue(Zend_Queue $queue);
@@ -61,13 +59,14 @@ interface Zend_Queue_Adapter_AdapterInterface
      * Use isSupported('isExists') to determine if an adapter can test for
      * queue existance.
      *
-     * @param  string $name Queue name
-     * @return boolean
+     * @param string $name Queue name
+     *
+     * @return bool
      */
     public function isExists($name);
 
     /**
-     * Create a new queue
+     * Create a new queue.
      *
      * Visibility timeout is how long a message is left in the queue
      * "invisible" to other readers.  If the message is acknowleged (deleted)
@@ -75,24 +74,26 @@ interface Zend_Queue_Adapter_AdapterInterface
      * timeout expires then the message will be made available to other queue
      * readers.
      *
-     * @param  string  $name Queue name
-     * @param  integer $timeout Default visibility timeout
-     * @return boolean
+     * @param string $name    Queue name
+     * @param int    $timeout Default visibility timeout
+     *
+     * @return bool
      */
-    public function create($name, $timeout=null);
+    public function create($name, $timeout = null);
 
     /**
-     * Delete a queue and all of its messages
+     * Delete a queue and all of its messages.
      *
      * Return false if the queue is not found, true if the queue exists.
      *
-     * @param  string $name Queue name
-     * @return boolean
+     * @param string $name Queue name
+     *
+     * @return bool
      */
     public function delete($name);
 
     /**
-     * Get an array of all available queues
+     * Get an array of all available queues.
      *
      * Not all adapters support getQueues(); use isSupported('getQueues')
      * to determine if the adapter supports this feature.
@@ -102,12 +103,11 @@ interface Zend_Queue_Adapter_AdapterInterface
     public function getQueues();
 
     /**
-     * Return the approximate number of messages in the queue
+     * Return the approximate number of messages in the queue.
      *
-     * @param  Zend_Queue|null $queue
-     * @return integer
+     * @return int
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function count(Zend_Queue $queue = null);
 
     /********************************************************************
@@ -115,32 +115,31 @@ interface Zend_Queue_Adapter_AdapterInterface
      *********************************************************************/
 
     /**
-     * Send a message to the queue
+     * Send a message to the queue.
      *
-     * @param  mixed $message Message to send to the active queue
-     * @param  Zend_Queue|null $queue
+     * @param mixed $message Message to send to the active queue
+     *
      * @return Zend_Queue_Message
      */
     public function send($message, Zend_Queue $queue = null);
 
     /**
-     * Get messages in the queue
+     * Get messages in the queue.
      *
-     * @param  integer|null $maxMessages Maximum number of messages to return
-     * @param  integer|null $timeout Visibility timeout for these messages
-     * @param  Zend_Queue|null $queue
+     * @param int|null $maxMessages Maximum number of messages to return
+     * @param int|null $timeout     Visibility timeout for these messages
+     *
      * @return Zend_Queue_Message_Iterator
      */
     public function receive($maxMessages = null, $timeout = null, Zend_Queue $queue = null);
 
     /**
-     * Delete a message from the queue
+     * Delete a message from the queue.
      *
      * Return true if the message is deleted, false if the deletion is
      * unsuccessful.
      *
-     * @param  Zend_Queue_Message $message
-     * @return boolean
+     * @return bool
      */
     public function deleteMessage(Zend_Queue_Message $message);
 
@@ -156,7 +155,7 @@ interface Zend_Queue_Adapter_AdapterInterface
     public function getOptions();
 
     /**
-     * Return a list of queue capabilities functions
+     * Return a list of queue capabilities functions.
      *
      * $array['function name'] = true or false
      * true is supported, false is not supported.
@@ -168,8 +167,9 @@ interface Zend_Queue_Adapter_AdapterInterface
     /**
      * Indicates if a function is supported or not.
      *
-     * @param  string $name Function name
-     * @return boolean
+     * @param string $name Function name
+     *
+     * @return bool
      */
     public function isSupported($name);
 }

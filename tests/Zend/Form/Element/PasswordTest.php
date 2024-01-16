@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,29 +13,29 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Form_Element_PasswordTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Form_Element_PasswordTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Form_Element_PasswordTest::main');
 }
 
 // require_once 'Zend/Form/Element/Password.php';
 // require_once 'Zend/View.php';
 
 /**
- * Test class for Zend_Form_Element_Password
+ * Test class for Zend_Form_Element_Password.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Form
  */
 #[AllowDynamicProperties]
@@ -48,8 +48,7 @@ class Zend_Form_Element_PasswordTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Element_PasswordTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Form_Element_PasswordTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -61,7 +60,7 @@ class Zend_Form_Element_PasswordTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->errors = array();
+        $this->errors = [];
         $this->element = new Zend_Form_Element_Password('foo');
     }
 
@@ -101,11 +100,11 @@ class Zend_Form_Element_PasswordTest extends PHPUnit_Framework_TestCase
 
     public function testPasswordValueMaskedByGetMessages()
     {
-        $this->element->addValidators(array(
+        $this->element->addValidators([
             'Alpha',
-            'Alnum'
-        ));
-        $value  = 'abc-123';
+            'Alnum',
+        ]);
+        $value = 'abc-123';
         $expect = '*******';
         $this->assertFalse($this->element->isValid($value));
         foreach ($this->element->getMessages() as $message) {
@@ -117,20 +116,20 @@ class Zend_Form_Element_PasswordTest extends PHPUnit_Framework_TestCase
     public function handleErrors($errno, $errmsg, $errfile, $errline, $errcontext)
     {
         if (!isset($this->errors)) {
-            $this->errors = array();
+            $this->errors = [];
         }
         $this->errors[] = $errmsg;
     }
 
     /**
-     * ZF-2656
+     * ZF-2656.
      */
     public function testGetMessagesReturnsEmptyArrayWhenNoMessagesRegistered()
     {
-        set_error_handler(array($this, 'handleErrors'));
+        set_error_handler([$this, 'handleErrors']);
         $messages = $this->element->getMessages();
         restore_error_handler();
-        $this->assertSame(array(), $messages);
+        $this->assertSame([], $messages);
         $this->assertTrue(empty($this->errors));
     }
 
@@ -162,6 +161,6 @@ class Zend_Form_Element_PasswordTest extends PHPUnit_Framework_TestCase
 }
 
 // Call Zend_Form_Element_PasswordTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Form_Element_PasswordTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Form_Element_PasswordTest::main') {
     Zend_Form_Element_PasswordTest::main();
 }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Gapps
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -59,14 +59,12 @@
  * This class represents <atom:entry> in the Google Data protocol.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Gapps
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_Gapps_UserEntry extends Zend_Gdata_Entry
 {
-
     protected $_entryClassName = 'Zend_Gdata_Gapps_UserEntry';
 
     /**
@@ -75,14 +73,14 @@ class Zend_Gdata_Gapps_UserEntry extends Zend_Gdata_Entry
      *
      * @var Zend_Gdata_Gapps_Extension_Login
      */
-    protected $_login = null;
+    protected $_login;
 
     /**
      * <apps:name> element containing the user's actual name.
      *
      * @var Zend_Gdata_Gapps_Extension_Name
      */
-    protected $_name = null;
+    protected $_name;
 
     /**
      * <apps:quotq> element describing any storage quotas in place for
@@ -90,7 +88,7 @@ class Zend_Gdata_Gapps_UserEntry extends Zend_Gdata_Entry
      *
      * @var Zend_Gdata_Gapps_Extension_Quota
      */
-    protected $_quota = null;
+    protected $_quota;
 
     /**
      * <gd:feedLink> element containing information about other feeds
@@ -98,13 +96,13 @@ class Zend_Gdata_Gapps_UserEntry extends Zend_Gdata_Entry
      *
      * @var Zend_Gdata_Extension_FeedLink
      */
-    protected $_feedLink = array();
+    protected $_feedLink = [];
 
     /**
      * Create a new instance.
      *
      * @param DOMElement $element (optional) DOMElement from which this
-     *          object should be constructed.
+     *                            object should be constructed
      */
     public function __construct($element = null)
     {
@@ -118,24 +116,26 @@ class Zend_Gdata_Gapps_UserEntry extends Zend_Gdata_Entry
      * and eventually XML text for application storage/persistence.
      *
      * @param DOMDocument $doc The DOMDocument used to construct DOMElements
-     * @return DOMElement The DOMElement representing this element and all
-     *          child properties.
+     *
+     * @return DOMElement the DOMElement representing this element and all
+     *                    child properties
      */
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
         $element = parent::getDOM($doc, $majorVersion, $minorVersion);
-        if ($this->_login !== null) {
+        if (null !== $this->_login) {
             $element->appendChild($this->_login->getDOM($element->ownerDocument));
         }
-        if ($this->_name !== null) {
+        if (null !== $this->_name) {
             $element->appendChild($this->_name->getDOM($element->ownerDocument));
         }
-        if ($this->_quota !== null) {
+        if (null !== $this->_quota) {
             $element->appendChild($this->_quota->getDOM($element->ownerDocument));
         }
         foreach ($this->_feedLink as $feedLink) {
             $element->appendChild($feedLink->getDOM($element->ownerDocument));
         }
+
         return $element;
     }
 
@@ -147,25 +147,25 @@ class Zend_Gdata_Gapps_UserEntry extends Zend_Gdata_Entry
      */
     protected function takeChildFromDOM($child)
     {
-        $absoluteNodeName = $child->namespaceURI . ':' . $child->localName;
+        $absoluteNodeName = $child->namespaceURI.':'.$child->localName;
 
         switch ($absoluteNodeName) {
-            case $this->lookupNamespace('apps') . ':' . 'login';
+            case $this->lookupNamespace('apps').':login':
                 $login = new Zend_Gdata_Gapps_Extension_Login();
                 $login->transferFromDOM($child);
                 $this->_login = $login;
                 break;
-            case $this->lookupNamespace('apps') . ':' . 'name';
+            case $this->lookupNamespace('apps').':name':
                 $name = new Zend_Gdata_Gapps_Extension_Name();
                 $name->transferFromDOM($child);
                 $this->_name = $name;
                 break;
-            case $this->lookupNamespace('apps') . ':' . 'quota';
+            case $this->lookupNamespace('apps').':quota':
                 $quota = new Zend_Gdata_Gapps_Extension_Quota();
                 $quota->transferFromDOM($child);
                 $this->_quota = $quota;
                 break;
-            case $this->lookupNamespace('gd') . ':' . 'feedLink';
+            case $this->lookupNamespace('gd').':feedLink':
                 $feedLink = new Zend_Gdata_Extension_FeedLink();
                 $feedLink->transferFromDOM($child);
                 $this->_feedLink[] = $feedLink;
@@ -180,7 +180,8 @@ class Zend_Gdata_Gapps_UserEntry extends Zend_Gdata_Entry
      * Get the value of the login property for this object.
      *
      * @see setLogin
-     * @return Zend_Gdata_Gapps_Extension_Login The requested object.
+     *
+     * @return Zend_Gdata_Gapps_Extension_Login the requested object
      */
     public function getLogin()
     {
@@ -191,13 +192,15 @@ class Zend_Gdata_Gapps_UserEntry extends Zend_Gdata_Entry
      * Set the value of the login property for this object. This property
      * is used to store the username address of the current user.
      *
-     * @param Zend_Gdata_Gapps_Extension_Login $value The desired value for
-     *          this instance's login property.
-     * @return Zend_Gdata_Gapps_UserEntry Provides a fluent interface.
+     * @param Zend_Gdata_Gapps_Extension_Login $value the desired value for
+     *                                                this instance's login property
+     *
+     * @return Zend_Gdata_Gapps_UserEntry provides a fluent interface
      */
     public function setLogin($value)
     {
         $this->_login = $value;
+
         return $this;
     }
 
@@ -205,7 +208,8 @@ class Zend_Gdata_Gapps_UserEntry extends Zend_Gdata_Entry
      * Get the value of the name property for this object.
      *
      * @see setName
-     * @return Zend_Gdata_Gapps_Extension_Name The requested object.
+     *
+     * @return Zend_Gdata_Gapps_Extension_Name the requested object
      */
     public function getName()
     {
@@ -216,13 +220,15 @@ class Zend_Gdata_Gapps_UserEntry extends Zend_Gdata_Entry
      * Set the value of the name property for this object. This property
      * is used to store the full name of the current user.
      *
-     * @param Zend_Gdata_Gapps_Extension_Name $value The desired value for
-     *          this instance's name property.
-     * @return Zend_Gdata_Gapps_UserEntry Provides a fluent interface.
+     * @param Zend_Gdata_Gapps_Extension_Name $value the desired value for
+     *                                               this instance's name property
+     *
+     * @return Zend_Gdata_Gapps_UserEntry provides a fluent interface
      */
     public function setName($value)
     {
         $this->_name = $value;
+
         return $this;
     }
 
@@ -230,7 +236,8 @@ class Zend_Gdata_Gapps_UserEntry extends Zend_Gdata_Entry
      * Get the value of the quota property for this object.
      *
      * @see setQuota
-     * @return Zend_Gdata_Gapps_Extension_Quota The requested object.
+     *
+     * @return Zend_Gdata_Gapps_Extension_Quota the requested object
      */
     public function getQuota()
     {
@@ -242,13 +249,15 @@ class Zend_Gdata_Gapps_UserEntry extends Zend_Gdata_Entry
      * is used to store the amount of storage available for the current
      * user. Quotas may not be modifiable depending on the domain used.
      *
-     * @param Zend_Gdata_Gapps_Extension_Quota $value The desired value for
-     *          this instance's quota property.
-     * @return Zend_Gdata_Gapps_UserEntry Provides a fluent interface.
+     * @param Zend_Gdata_Gapps_Extension_Quota $value the desired value for
+     *                                                this instance's quota property
+     *
+     * @return Zend_Gdata_Gapps_UserEntry provides a fluent interface
      */
     public function setQuota($value)
     {
         $this->_quota = $value;
+
         return $this;
     }
 
@@ -257,16 +266,17 @@ class Zend_Gdata_Gapps_UserEntry extends Zend_Gdata_Entry
      * specified, the feed link associated with that value is returned.
      *
      * @param string $rel The rel value of the link to be found. If null,
-     *          the array of links is returned instead.
-     * @return mixed Either an array of Zend_Gdata_Extension_FeedLink
-     *          objects if $rel is null, a single
-     *          Zend_Gdata_Extension_FeedLink object if $rel is specified
-     *          and a matching feed link is found, or null if $rel is
-     *          specified and no matching feed link is found.
+     *                    the array of links is returned instead.
+     *
+     * @return mixed either an array of Zend_Gdata_Extension_FeedLink
+     *               objects if $rel is null, a single
+     *               Zend_Gdata_Extension_FeedLink object if $rel is specified
+     *               and a matching feed link is found, or null if $rel is
+     *               specified and no matching feed link is found
      */
     public function getFeedLink($rel = null)
     {
-        if ($rel == null) {
+        if (null == $rel) {
             return $this->_feedLink;
         } else {
             foreach ($this->_feedLink as $feedLink) {
@@ -274,6 +284,7 @@ class Zend_Gdata_Gapps_UserEntry extends Zend_Gdata_Entry
                     return $feedLink;
                 }
             }
+
             return null;
         }
     }
@@ -282,14 +293,15 @@ class Zend_Gdata_Gapps_UserEntry extends Zend_Gdata_Entry
      * Set the value of the feed link property for this object. This property
      * is used to provide links to alternative feeds relevant to this entry.
      *
-     * @param array $value A collection of
-     *          Zend_Gdata_Gapps_Extension_FeedLink objects.
-     * @return Zend_Gdata_Gapps_UserEntry Provides a fluent interface.
+     * @param array $value a collection of
+     *                     Zend_Gdata_Gapps_Extension_FeedLink objects
+     *
+     * @return Zend_Gdata_Gapps_UserEntry provides a fluent interface
      */
     public function setFeedLink($value)
     {
         $this->_feedLink = $value;
+
         return $this;
     }
-
 }

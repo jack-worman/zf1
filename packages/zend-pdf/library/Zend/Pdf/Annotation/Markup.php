@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Pdf
- * @subpackage Annotation
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -28,47 +28,44 @@
 // require_once 'Zend/Pdf/Element/Numeric.php';
 // require_once 'Zend/Pdf/Element/String.php';
 
-
 /** Zend_Pdf_Annotation */
 // require_once 'Zend/Pdf/Annotation.php';
 
 /**
- * A markup annotation
+ * A markup annotation.
  *
- * @package    Zend_Pdf
- * @subpackage Annotation
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Pdf_Annotation_Markup extends Zend_Pdf_Annotation
 {
     /**
-     * Annotation subtypes
+     * Annotation subtypes.
      */
-    const SUBTYPE_HIGHLIGHT = 'Highlight';
-    const SUBTYPE_UNDERLINE = 'Underline';
-    const SUBTYPE_SQUIGGLY  = 'Squiggly';
-    const SUBTYPE_STRIKEOUT = 'StrikeOut';
+    public const SUBTYPE_HIGHLIGHT = 'Highlight';
+    public const SUBTYPE_UNDERLINE = 'Underline';
+    public const SUBTYPE_SQUIGGLY = 'Squiggly';
+    public const SUBTYPE_STRIKEOUT = 'StrikeOut';
 
     /**
-     * Annotation object constructor
+     * Annotation object constructor.
      *
      * @throws Zend_Pdf_Exception
      */
     public function __construct(Zend_Pdf_Element $annotationDictionary)
     {
-        if ($annotationDictionary->getType() != Zend_Pdf_Element::TYPE_DICTIONARY) {
+        if (Zend_Pdf_Element::TYPE_DICTIONARY != $annotationDictionary->getType()) {
             // require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Annotation dictionary resource has to be a dictionary.');
         }
 
-        if ($annotationDictionary->Subtype === null  ||
-            $annotationDictionary->Subtype->getType() != Zend_Pdf_Element::TYPE_NAME  ||
-            !in_array( $annotationDictionary->Subtype->value,
-                       array(self::SUBTYPE_HIGHLIGHT,
-                             self::SUBTYPE_UNDERLINE,
-                             self::SUBTYPE_SQUIGGLY,
-                             self::SUBTYPE_STRIKEOUT) )) {
+        if (null === $annotationDictionary->Subtype
+            || Zend_Pdf_Element::TYPE_NAME != $annotationDictionary->Subtype->getType()
+            || !in_array($annotationDictionary->Subtype->value,
+                [self::SUBTYPE_HIGHLIGHT,
+                      self::SUBTYPE_UNDERLINE,
+                      self::SUBTYPE_SQUIGGLY,
+                      self::SUBTYPE_STRIKEOUT])) {
             // require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Subtype => Markup entry is omitted or has wrong value.');
         }
@@ -77,7 +74,7 @@ class Zend_Pdf_Annotation_Markup extends Zend_Pdf_Annotation
     }
 
     /**
-     * Create markup annotation object
+     * Create markup annotation object.
      *
      * Text markup annotations appear as highlights, underlines, strikeouts or
      * jagged ("squiggly") underlines in the text of a document. When opened,
@@ -101,21 +98,23 @@ class Zend_Pdf_Annotation_Markup extends Zend_Pdf_Annotation
      * The text is oriented with respect to the edge connecting points
      * (x1, y1) and (x2, y2).
      *
-     * @param float $x1
-     * @param float $y1
-     * @param float $x2
-     * @param float $y2
+     * @param float  $x1
+     * @param float  $y1
+     * @param float  $x2
+     * @param float  $y2
      * @param string $text
      * @param string $subType
-     * @param array $quadPoints  [x1 y1 x2 y2 x3 y3 x4 y4]
+     * @param array  $quadPoints [x1 y1 x2 y2 x3 y3 x4 y4]
+     *
      * @return Zend_Pdf_Annotation_Markup
+     *
      * @throws Zend_Pdf_Exception
      */
     public static function create($x1, $y1, $x2, $y2, $text, $subType, $quadPoints)
     {
         $annotationDictionary = new Zend_Pdf_Element_Dictionary();
 
-        $annotationDictionary->Type    = new Zend_Pdf_Element_Name('Annot');
+        $annotationDictionary->Type = new Zend_Pdf_Element_Name('Annot');
         $annotationDictionary->Subtype = new Zend_Pdf_Element_Name($subType);
 
         $rectangle = new Zend_Pdf_Element_Array();
@@ -127,7 +126,7 @@ class Zend_Pdf_Annotation_Markup extends Zend_Pdf_Annotation
 
         $annotationDictionary->Contents = new Zend_Pdf_Element_String($text);
 
-        if (!is_array($quadPoints)  ||  count($quadPoints) == 0  ||  count($quadPoints) % 8 != 0) {
+        if (!is_array($quadPoints) || 0 == count($quadPoints) || 0 != count($quadPoints) % 8) {
             // require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('$quadPoints parameter must be an array of 8xN numbers');
         }

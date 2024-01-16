@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,33 +13,28 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage Value
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
-
 /**
- * Zend_XmlRpc_Value_Scalar
+ * Zend_XmlRpc_Value_Scalar.
  */
 // require_once 'Zend/XmlRpc/Value/Scalar.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage Value
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_XmlRpc_Value_Nil extends Zend_XmlRpc_Value_Scalar
 {
-
     /**
-     * Set the value of a nil native type
-     *
+     * Set the value of a nil native type.
      */
     public function __construct()
     {
@@ -48,7 +43,7 @@ class Zend_XmlRpc_Value_Nil extends Zend_XmlRpc_Value_Scalar
     }
 
     /**
-     * Return the value of this object, convert the XML-RPC native nill value into a PHP NULL
+     * Return the value of this object, convert the XML-RPC native nill value into a PHP NULL.
      *
      * @return null
      */
@@ -57,4 +52,3 @@ class Zend_XmlRpc_Value_Nil extends Zend_XmlRpc_Value_Scalar
         return null;
     }
 }
-

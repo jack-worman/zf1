@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_View_Helper_FormButtonTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_FormButtonTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_View_Helper_FormButtonTest::main');
 }
 
 // require_once 'Zend/View.php';
@@ -32,10 +32,10 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * Test class for Zend_View_Helper_FormButton.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
@@ -45,21 +45,17 @@ class Zend_View_Helper_FormButtonTest extends PHPUnit_Framework_TestCase
     /**
      * Runs the test methods of this class.
      *
-     * @access public
      * @static
      */
     public static function main()
     {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_FormButtonTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_View_Helper_FormButtonTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @access protected
      */
     protected function setUp()
     {
@@ -71,8 +67,6 @@ class Zend_View_Helper_FormButtonTest extends PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
-     *
-     * @access protected
      */
     protected function tearDown()
     {
@@ -89,7 +83,7 @@ class Zend_View_Helper_FormButtonTest extends PHPUnit_Framework_TestCase
 
     public function testCanPassContentViaContentAttribKey()
     {
-        $button = $this->helper->formButton('foo', 'bar', array('content' => 'Display this'));
+        $button = $this->helper->formButton('foo', 'bar', ['content' => 'Display this']);
         $this->assertContains('>Display this<', $button);
         $this->assertContains('<button', $button);
         $this->assertContains('</button>', $button);
@@ -97,13 +91,13 @@ class Zend_View_Helper_FormButtonTest extends PHPUnit_Framework_TestCase
 
     public function testCanDisableContentEscaping()
     {
-        $button = $this->helper->formButton('foo', 'bar', array('content' => '<b>Display this</b>', 'escape' => false));
+        $button = $this->helper->formButton('foo', 'bar', ['content' => '<b>Display this</b>', 'escape' => false]);
         $this->assertContains('><b>Display this</b><', $button);
 
-        $button = $this->helper->formButton(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('content' => '<b>Display this</b>', 'escape' => false)));
+        $button = $this->helper->formButton(['name' => 'foo', 'value' => 'bar', 'attribs' => ['content' => '<b>Display this</b>', 'escape' => false]]);
         $this->assertContains('><b>Display this</b><', $button);
 
-        $button = $this->helper->formButton(array('name' => 'foo', 'value' => 'bar', 'escape' => false, 'attribs' => array('content' => '<b>Display this</b>')));
+        $button = $this->helper->formButton(['name' => 'foo', 'value' => 'bar', 'escape' => false, 'attribs' => ['content' => '<b>Display this</b>']]);
         $this->assertContains('><b>Display this</b><', $button);
         $this->assertContains('<button', $button);
         $this->assertContains('</button>', $button);
@@ -111,30 +105,30 @@ class Zend_View_Helper_FormButtonTest extends PHPUnit_Framework_TestCase
 
     public function testValueUsedForContentWhenNoContentProvided()
     {
-        $button = $this->helper->formButton(array('name' => 'foo', 'value' => 'bar'));
+        $button = $this->helper->formButton(['name' => 'foo', 'value' => 'bar']);
         $this->assertRegexp('#<button[^>]*?value="bar"[^>]*>bar</button>#', $button);
     }
 
     public function testButtonTypeIsButtonByDefault()
     {
-        $button = $this->helper->formButton(array('name' => 'foo', 'value' => 'bar'));
+        $button = $this->helper->formButton(['name' => 'foo', 'value' => 'bar']);
         $this->assertContains('type="button"', $button);
     }
 
     public function testButtonTypeMayOnlyBeValidXhtmlButtonType()
     {
-        $button = $this->helper->formButton(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('type' => 'submit')));
+        $button = $this->helper->formButton(['name' => 'foo', 'value' => 'bar', 'attribs' => ['type' => 'submit']]);
         $this->assertContains('type="submit"', $button);
-        $button = $this->helper->formButton(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('type' => 'reset')));
+        $button = $this->helper->formButton(['name' => 'foo', 'value' => 'bar', 'attribs' => ['type' => 'reset']]);
         $this->assertContains('type="reset"', $button);
-        $button = $this->helper->formButton(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('type' => 'button')));
+        $button = $this->helper->formButton(['name' => 'foo', 'value' => 'bar', 'attribs' => ['type' => 'button']]);
         $this->assertContains('type="button"', $button);
-        $button = $this->helper->formButton(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('type' => 'bogus')));
+        $button = $this->helper->formButton(['name' => 'foo', 'value' => 'bar', 'attribs' => ['type' => 'bogus']]);
         $this->assertContains('type="button"', $button);
     }
 }
 
 // Call Zend_View_Helper_FormButtonTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_FormButtonTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_View_Helper_FormButtonTest::main') {
     Zend_View_Helper_FormButtonTest::main();
 }

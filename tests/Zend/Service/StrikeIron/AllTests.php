@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +13,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_StrikeIron
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Service_StrikeIron_AllTests::main');
 }
@@ -33,13 +32,12 @@ require_once 'Zend/Service/StrikeIron/USAddressVerificationTest.php';
 require_once 'Zend/Service/StrikeIron/ZipCodeInfoTest.php';
 require_once 'Zend/Service/StrikeIron/NoSoapTest.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_Service_StrikeIron
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Service
  * @group      Zend_Service_StrikeIron
  */
@@ -68,6 +66,7 @@ class Zend_Service_StrikeIron_AllTests
         $suite->addTestSuite('Zend_Service_StrikeIron_SalesUseTaxBasicTest');
         $suite->addTestSuite('Zend_Service_StrikeIron_USAddressVerificationTest');
         $suite->addTestSuite('Zend_Service_StrikeIron_ZipCodeInfoTest');
+
         return $suite;
     }
 }

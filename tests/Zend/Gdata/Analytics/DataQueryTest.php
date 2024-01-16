@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata_Analytics
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -24,17 +24,16 @@
 
 /**
  * @category   Zend
- * @package    Zend_Gdata_Analytics
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Analytics
  */
 #[AllowDynamicProperties]
 class Zend_GData_Analytics_DataQueryTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * @var Zend_GData_Analytics_DataQuery
      */
@@ -47,37 +46,37 @@ class Zend_GData_Analytics_DataQueryTest extends PHPUnit_Framework_TestCase
 
     public function testProfileId()
     {
-        $this->assertTrue($this->dataQuery->getProfileId() == null);
+        $this->assertTrue(null == $this->dataQuery->getProfileId());
         $this->dataQuery->setProfileId(123456);
-        $this->assertTrue($this->dataQuery->getProfileId() == 123456);
+        $this->assertTrue(123456 == $this->dataQuery->getProfileId());
     }
 
     public function testAddMetric()
     {
-        $this->assertTrue(count($this->dataQuery->getMetrics()) == 0);
+        $this->assertTrue(0 == count($this->dataQuery->getMetrics()));
         $this->dataQuery->addMetric(Zend_GData_Analytics_DataQuery::METRIC_BOUNCES);
-        $this->assertTrue(count($this->dataQuery->getMetrics()) == 1);
+        $this->assertTrue(1 == count($this->dataQuery->getMetrics()));
     }
 
     public function testAddAndRemoveMetric()
     {
         $this->dataQuery->addMetric(Zend_GData_Analytics_DataQuery::METRIC_BOUNCES);
         $this->dataQuery->removeMetric(Zend_GData_Analytics_DataQuery::METRIC_BOUNCES);
-        $this->assertTrue(count($this->dataQuery->getMetrics()) == 0);
+        $this->assertTrue(0 == count($this->dataQuery->getMetrics()));
     }
 
     public function testAddDimension()
     {
-        $this->assertTrue(count($this->dataQuery->getDimensions()) == 0);
+        $this->assertTrue(0 == count($this->dataQuery->getDimensions()));
         $this->dataQuery->addDimension(Zend_GData_Analytics_DataQuery::DIMENSION_AD_SLOT);
-        $this->assertTrue(count($this->dataQuery->getDimensions()) == 1);
+        $this->assertTrue(1 == count($this->dataQuery->getDimensions()));
     }
 
     public function testAddAndRemoveDimension()
     {
         $this->dataQuery->addDimension(Zend_GData_Analytics_DataQuery::DIMENSION_AD_SLOT);
         $this->dataQuery->removeDimension(Zend_GData_Analytics_DataQuery::DIMENSION_AD_SLOT);
-        $this->assertTrue(count($this->dataQuery->getDimensions()) == 0);
+        $this->assertTrue(0 == count($this->dataQuery->getDimensions()));
     }
 
     public function testQueryString()
@@ -94,9 +93,9 @@ class Zend_GData_Analytics_DataQueryTest extends PHPUnit_Framework_TestCase
         parse_str($url['query'], $parameter);
 
         $this->assertEquals(count($parameter), 4);
-        $this->assertEquals($parameter['ids'], "ga:123456789");
-        $this->assertEquals($parameter['dimensions'], "ga:city");
-        $this->assertEquals($parameter['metrics'], "ga:pageviews,ga:visits");
+        $this->assertEquals($parameter['ids'], 'ga:123456789');
+        $this->assertEquals($parameter['dimensions'], 'ga:city');
+        $this->assertEquals($parameter['metrics'], 'ga:pageviews,ga:visits');
         $this->assertEquals($parameter['filters'], 'foo=bar;bar>2,baz=42');
     }
 }

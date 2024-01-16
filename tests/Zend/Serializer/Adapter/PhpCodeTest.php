@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Serializer
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,15 +27,13 @@
 
 /**
  * @category   Zend
- * @package    Zend_Serializer
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Zend_Serializer_Adapter_PhpCodeTest extends PHPUnit_Framework_TestCase
 {
-
     private $_adapter;
 
     public function setUp()
@@ -50,8 +48,8 @@ class Zend_Serializer_Adapter_PhpCodeTest extends PHPUnit_Framework_TestCase
 
     public function testSerializeString()
     {
-        $value      = 'test';
-        $expected   = "'test'";
+        $value = 'test';
+        $expected = "'test'";
 
         $data = $this->_adapter->serialize($value);
         $this->assertEquals($expected, $data);
@@ -59,7 +57,7 @@ class Zend_Serializer_Adapter_PhpCodeTest extends PHPUnit_Framework_TestCase
 
     public function testSerializeFalse()
     {
-        $value    = false;
+        $value = false;
         $expected = 'false';
 
         $data = $this->_adapter->serialize($value);
@@ -68,7 +66,7 @@ class Zend_Serializer_Adapter_PhpCodeTest extends PHPUnit_Framework_TestCase
 
     public function testSerializeNull()
     {
-        $value    = null;
+        $value = null;
         $expected = 'NULL';
 
         $data = $this->_adapter->serialize($value);
@@ -77,7 +75,7 @@ class Zend_Serializer_Adapter_PhpCodeTest extends PHPUnit_Framework_TestCase
 
     public function testSerializeNumeric()
     {
-        $value    = 100.12345;
+        $value = 100.12345;
         $expected = '100.12345';
 
         $data = $this->_adapter->serialize($value);
@@ -86,7 +84,7 @@ class Zend_Serializer_Adapter_PhpCodeTest extends PHPUnit_Framework_TestCase
 
     public function testSerializeObject()
     {
-        $value    = new stdClass();
+        $value = new stdClass();
         if (PHP_VERSION_ID >= 70300) {
             $expected = "(object) array(\n)";
         } else {
@@ -99,7 +97,7 @@ class Zend_Serializer_Adapter_PhpCodeTest extends PHPUnit_Framework_TestCase
 
     public function testUnserializeString()
     {
-        $value    = "'test'";
+        $value = "'test'";
         $expected = 'test';
 
         $data = $this->_adapter->unserialize($value);
@@ -108,7 +106,7 @@ class Zend_Serializer_Adapter_PhpCodeTest extends PHPUnit_Framework_TestCase
 
     public function testUnserializeFalse()
     {
-        $value    = 'false';
+        $value = 'false';
         $expected = false;
 
         $data = $this->_adapter->unserialize($value);
@@ -117,7 +115,7 @@ class Zend_Serializer_Adapter_PhpCodeTest extends PHPUnit_Framework_TestCase
 
     public function testUnserializeNull()
     {
-        $value    = 'NULL';
+        $value = 'NULL';
         $expected = null;
 
         $data = $this->_adapter->unserialize($value);
@@ -126,23 +124,23 @@ class Zend_Serializer_Adapter_PhpCodeTest extends PHPUnit_Framework_TestCase
 
     public function testUnserializeNumeric()
     {
-        $value    = '100';
+        $value = '100';
         $expected = 100;
 
         $data = $this->_adapter->unserialize($value);
         $this->assertEquals($expected, $data);
     }
 
-/* TODO: PHP Fatal error:  Call to undefined method stdClass::__set_state()
-    public function testUnserializeObject()
-    {
-        $value    = "stdClass::__set_state(array(\n))";
-        $expected = new stdClass();
+    /* TODO: PHP Fatal error:  Call to undefined method stdClass::__set_state()
+        public function testUnserializeObject()
+        {
+            $value    = "stdClass::__set_state(array(\n))";
+            $expected = new stdClass();
 
-        $data = $this->_adapter->unserialize($value);
-        $this->assertEquals($expected, $data);
-    }
-*/
+            $data = $this->_adapter->unserialize($value);
+            $this->assertEquals($expected, $data);
+        }
+    */
 
     public function testUnserialzeInvalid()
     {
@@ -153,5 +151,4 @@ class Zend_Serializer_Adapter_PhpCodeTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend_Serializer_Exception');
         $this->_adapter->unserialize($value);
     }
-
 }

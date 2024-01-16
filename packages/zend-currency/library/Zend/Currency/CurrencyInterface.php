@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,24 +13,25 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category  Zend
- * @package   Zend_Currency
+ *
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version   $Id$
  */
 
 /**
- * Exception class for Zend_Currency
+ * Exception class for Zend_Currency.
  *
  * @category  Zend
- * @package   Zend_Currency
+ *
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface Zend_Currency_CurrencyInterface
 {
     /**
-     * Returns the actual exchange rate
+     * Returns the actual exchange rate.
      *
      * @param string $from Short Name of the base currency
      * @param string $to   Short Name of the currency to exchange to

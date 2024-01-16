@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Validate_NotEmptyTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Validate_NotEmptyTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Validate_NotEmptyTest::main');
 }
 
 /**
@@ -30,13 +30,12 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  */
 // require_once 'Zend/Validate/NotEmpty.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_Validate
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Validate
  */
 #[AllowDynamicProperties]
@@ -49,19 +48,19 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Validate_NotEmptyTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Validate_NotEmptyTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     /**
-     * Zend_Validate_NotEmpty object
+     * Zend_Validate_NotEmpty object.
      *
      * @var Zend_Validate_NotEmpty
      */
     protected $_validator;
 
     /**
-     * Creates a new Zend_Validate_NotEmpty object for each test method
+     * Creates a new Zend_Validate_NotEmpty object for each test method.
      *
      * @return void
      */
@@ -71,30 +70,31 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that the validator follows expected behavior
+     * Ensures that the validator follows expected behavior.
      *
      * ZF-6708 introduces a change for validating integer 0; it is a valid
      * integer value. '0' is also valid.
      *
      * @group ZF-6708
+     *
      * @return void
      */
     public function testBasic()
     {
-        $valuesExpected = array(
-            array('word', true),
-            array('', false),
-            array('    ', false),
-            array('  word  ', true),
-            array('0', true),
-            array(1, true),
-            array(0, true),
-            array(true, true),
-            array(false, false),
-            array(null, false),
-            array(array(), false),
-            array(array(5), true),
-        );
+        $valuesExpected = [
+            ['word', true],
+            ['', false],
+            ['    ', false],
+            ['  word  ', true],
+            ['0', true],
+            [1, true],
+            [0, true],
+            [true, true],
+            [false, false],
+            [null, false],
+            [[], false],
+            [[5], true],
+        ];
         foreach ($valuesExpected as $i => $element) {
             $this->assertEquals($element[1], $this->_validator->isValid($element[0]),
                 "Failed test #$i");
@@ -102,7 +102,7 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that the validator follows expected behavior
+     * Ensures that the validator follows expected behavior.
      *
      * @return void
      */
@@ -119,13 +119,13 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->_validator->isValid('abc'));
         $this->assertTrue($this->_validator->isValid('0'));
         $this->assertTrue($this->_validator->isValid('1'));
-        $this->assertTrue($this->_validator->isValid(array()));
-        $this->assertTrue($this->_validator->isValid(array('xxx')));
+        $this->assertTrue($this->_validator->isValid([]));
+        $this->assertTrue($this->_validator->isValid(['xxx']));
         $this->assertTrue($this->_validator->isValid(null));
     }
 
     /**
-     * Ensures that the validator follows expected behavior
+     * Ensures that the validator follows expected behavior.
      *
      * @return void
      */
@@ -142,13 +142,13 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->_validator->isValid('abc'));
         $this->assertTrue($this->_validator->isValid('0'));
         $this->assertTrue($this->_validator->isValid('1'));
-        $this->assertTrue($this->_validator->isValid(array()));
-        $this->assertTrue($this->_validator->isValid(array('xxx')));
+        $this->assertTrue($this->_validator->isValid([]));
+        $this->assertTrue($this->_validator->isValid(['xxx']));
         $this->assertTrue($this->_validator->isValid(null));
     }
 
     /**
-     * Ensures that the validator follows expected behavior
+     * Ensures that the validator follows expected behavior.
      *
      * @return void
      */
@@ -165,13 +165,13 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->_validator->isValid('abc'));
         $this->assertTrue($this->_validator->isValid('0'));
         $this->assertTrue($this->_validator->isValid('1'));
-        $this->assertTrue($this->_validator->isValid(array()));
-        $this->assertTrue($this->_validator->isValid(array('xxx')));
+        $this->assertTrue($this->_validator->isValid([]));
+        $this->assertTrue($this->_validator->isValid(['xxx']));
         $this->assertTrue($this->_validator->isValid(null));
     }
 
     /**
-     * Ensures that the validator follows expected behavior
+     * Ensures that the validator follows expected behavior.
      *
      * @return void
      */
@@ -188,13 +188,13 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->_validator->isValid('abc'));
         $this->assertTrue($this->_validator->isValid('0'));
         $this->assertTrue($this->_validator->isValid('1'));
-        $this->assertTrue($this->_validator->isValid(array()));
-        $this->assertTrue($this->_validator->isValid(array('xxx')));
+        $this->assertTrue($this->_validator->isValid([]));
+        $this->assertTrue($this->_validator->isValid(['xxx']));
         $this->assertTrue($this->_validator->isValid(null));
     }
 
     /**
-     * Ensures that the validator follows expected behavior
+     * Ensures that the validator follows expected behavior.
      *
      * @return void
      */
@@ -211,13 +211,13 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->_validator->isValid('abc'));
         $this->assertFalse($this->_validator->isValid('0'));
         $this->assertTrue($this->_validator->isValid('1'));
-        $this->assertTrue($this->_validator->isValid(array()));
-        $this->assertTrue($this->_validator->isValid(array('xxx')));
+        $this->assertTrue($this->_validator->isValid([]));
+        $this->assertTrue($this->_validator->isValid(['xxx']));
         $this->assertTrue($this->_validator->isValid(null));
     }
 
     /**
-     * Ensures that the validator follows expected behavior
+     * Ensures that the validator follows expected behavior.
      *
      * @return void
      */
@@ -234,13 +234,13 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->_validator->isValid('abc'));
         $this->assertTrue($this->_validator->isValid('0'));
         $this->assertTrue($this->_validator->isValid('1'));
-        $this->assertFalse($this->_validator->isValid(array()));
-        $this->assertTrue($this->_validator->isValid(array('xxx')));
+        $this->assertFalse($this->_validator->isValid([]));
+        $this->assertTrue($this->_validator->isValid(['xxx']));
         $this->assertTrue($this->_validator->isValid(null));
     }
 
     /**
-     * Ensures that the validator follows expected behavior
+     * Ensures that the validator follows expected behavior.
      *
      * @return void
      */
@@ -257,13 +257,13 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->_validator->isValid('abc'));
         $this->assertTrue($this->_validator->isValid('0'));
         $this->assertTrue($this->_validator->isValid('1'));
-        $this->assertTrue($this->_validator->isValid(array()));
-        $this->assertTrue($this->_validator->isValid(array('xxx')));
+        $this->assertTrue($this->_validator->isValid([]));
+        $this->assertTrue($this->_validator->isValid(['xxx']));
         $this->assertFalse($this->_validator->isValid(null));
     }
 
     /**
-     * Ensures that the validator follows expected behavior
+     * Ensures that the validator follows expected behavior.
      *
      * @return void
      */
@@ -280,13 +280,13 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->_validator->isValid('abc'));
         $this->assertFalse($this->_validator->isValid('0'));
         $this->assertTrue($this->_validator->isValid('1'));
-        $this->assertFalse($this->_validator->isValid(array()));
-        $this->assertTrue($this->_validator->isValid(array('xxx')));
+        $this->assertFalse($this->_validator->isValid([]));
+        $this->assertTrue($this->_validator->isValid(['xxx']));
         $this->assertFalse($this->_validator->isValid(null));
     }
 
     /**
-     * Ensures that the validator follows expected behavior
+     * Ensures that the validator follows expected behavior.
      *
      * @return void
      */
@@ -303,13 +303,13 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->_validator->isValid('abc'));
         $this->assertTrue($this->_validator->isValid('0'));
         $this->assertTrue($this->_validator->isValid('1'));
-        $this->assertTrue($this->_validator->isValid(array()));
-        $this->assertTrue($this->_validator->isValid(array('xxx')));
+        $this->assertTrue($this->_validator->isValid([]));
+        $this->assertTrue($this->_validator->isValid(['xxx']));
         $this->assertTrue($this->_validator->isValid(null));
     }
 
     /**
-     * Ensures that the validator follows expected behavior
+     * Ensures that the validator follows expected behavior.
      *
      * @return void
      */
@@ -326,26 +326,26 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->_validator->isValid('abc'));
         $this->assertFalse($this->_validator->isValid('0'));
         $this->assertTrue($this->_validator->isValid('1'));
-        $this->assertFalse($this->_validator->isValid(array()));
-        $this->assertTrue($this->_validator->isValid(array('xxx')));
+        $this->assertFalse($this->_validator->isValid([]));
+        $this->assertTrue($this->_validator->isValid(['xxx']));
         $this->assertFalse($this->_validator->isValid(null));
     }
 
     /**
-     * Ensures that the validator follows expected behavior
+     * Ensures that the validator follows expected behavior.
      *
      * @return void
      */
     public function testArrayConstantNotation()
     {
         $filter = new Zend_Validate_NotEmpty(
-            array(
-                'type' => array(
+            [
+                'type' => [
                     Zend_Validate_NotEmpty::ZERO,
                     Zend_Validate_NotEmpty::STRING,
-                    Zend_Validate_NotEmpty::BOOLEAN
-                )
-            )
+                    Zend_Validate_NotEmpty::BOOLEAN,
+                ],
+            ]
         );
 
         $this->assertFalse($filter->isValid(false));
@@ -358,26 +358,26 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($filter->isValid('abc'));
         $this->assertFalse($filter->isValid('0'));
         $this->assertTrue($filter->isValid('1'));
-        $this->assertTrue($filter->isValid(array()));
-        $this->assertTrue($filter->isValid(array('xxx')));
+        $this->assertTrue($filter->isValid([]));
+        $this->assertTrue($filter->isValid(['xxx']));
         $this->assertTrue($filter->isValid(null));
     }
 
     /**
-     * Ensures that the validator follows expected behavior
+     * Ensures that the validator follows expected behavior.
      *
      * @return void
      */
     public function testArrayConfigNotation()
     {
         $filter = new Zend_Validate_NotEmpty(
-            array(
-                'type' => array(
+            [
+                'type' => [
                     Zend_Validate_NotEmpty::ZERO,
                     Zend_Validate_NotEmpty::STRING,
-                    Zend_Validate_NotEmpty::BOOLEAN),
-                'test' => false
-            )
+                    Zend_Validate_NotEmpty::BOOLEAN],
+                'test' => false,
+            ]
         );
 
         $this->assertFalse($filter->isValid(false));
@@ -390,13 +390,13 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($filter->isValid('abc'));
         $this->assertFalse($filter->isValid('0'));
         $this->assertTrue($filter->isValid('1'));
-        $this->assertTrue($filter->isValid(array()));
-        $this->assertTrue($filter->isValid(array('xxx')));
+        $this->assertTrue($filter->isValid([]));
+        $this->assertTrue($filter->isValid(['xxx']));
         $this->assertTrue($filter->isValid(null));
     }
 
     /**
-     * Ensures that the validator follows expected behavior
+     * Ensures that the validator follows expected behavior.
      *
      * @return void
      */
@@ -416,22 +416,22 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($filter->isValid('abc'));
         $this->assertFalse($filter->isValid('0'));
         $this->assertTrue($filter->isValid('1'));
-        $this->assertTrue($filter->isValid(array()));
-        $this->assertTrue($filter->isValid(array('xxx')));
+        $this->assertTrue($filter->isValid([]));
+        $this->assertTrue($filter->isValid(['xxx']));
         $this->assertTrue($filter->isValid(null));
     }
 
     /**
-     * Ensures that the validator follows expected behavior
+     * Ensures that the validator follows expected behavior.
      *
      * @return void
      */
     public function testStringNotation()
     {
         $filter = new Zend_Validate_NotEmpty(
-            array(
-                'type' => array('zero', 'string', 'boolean')
-            )
+            [
+                'type' => ['zero', 'string', 'boolean'],
+            ]
         );
 
         $this->assertFalse($filter->isValid(false));
@@ -444,13 +444,13 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($filter->isValid('abc'));
         $this->assertFalse($filter->isValid('0'));
         $this->assertTrue($filter->isValid('1'));
-        $this->assertTrue($filter->isValid(array()));
-        $this->assertTrue($filter->isValid(array('xxx')));
+        $this->assertTrue($filter->isValid([]));
+        $this->assertTrue($filter->isValid(['xxx']));
         $this->assertTrue($filter->isValid(null));
     }
 
     /**
-     * Ensures that the validator follows expected behavior
+     * Ensures that the validator follows expected behavior.
      *
      * @return void
      */
@@ -470,21 +470,21 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($filter->isValid('abc'));
         $this->assertTrue($filter->isValid('0'));
         $this->assertTrue($filter->isValid('1'));
-        $this->assertTrue($filter->isValid(array()));
-        $this->assertTrue($filter->isValid(array('xxx')));
+        $this->assertTrue($filter->isValid([]));
+        $this->assertTrue($filter->isValid(['xxx']));
         $this->assertTrue($filter->isValid(null));
     }
 
     /**
-     * Ensures that the validator follows expected behavior
+     * Ensures that the validator follows expected behavior.
      *
      * @return void
      */
     public function testConfigObject()
     {
         // require_once 'Zend/Config.php';
-        $options = array('type' => 'all');
-        $config  = new Zend_Config($options);
+        $options = ['type' => 'all'];
+        $config = new Zend_Config($options);
 
         $filter = new Zend_Validate_NotEmpty(
             $config
@@ -500,13 +500,13 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($filter->isValid('abc'));
         $this->assertFalse($filter->isValid('0'));
         $this->assertTrue($filter->isValid('1'));
-        $this->assertFalse($filter->isValid(array()));
-        $this->assertTrue($filter->isValid(array('xxx')));
+        $this->assertFalse($filter->isValid([]));
+        $this->assertTrue($filter->isValid(['xxx']));
         $this->assertFalse($filter->isValid(null));
     }
 
     /**
-     * Ensures that the validator follows expected behavior
+     * Ensures that the validator follows expected behavior.
      *
      * @return void
      */
@@ -521,7 +521,7 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that the validator follows expected behavior
+     * Ensures that the validator follows expected behavior.
      *
      * @return void
      */
@@ -539,13 +539,13 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that getMessages() returns expected default value
+     * Ensures that getMessages() returns expected default value.
      *
      * @return void
      */
     public function testGetMessages()
     {
-        $this->assertEquals(array(), $this->_validator->getMessages());
+        $this->assertEquals([], $this->_validator->getMessages());
     }
 
     /**
@@ -605,7 +605,9 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
 }
 
 #[AllowDynamicProperties]
-class ClassTest1 {}
+class ClassTest1
+{
+}
 
 #[AllowDynamicProperties]
 class ClassTest2
@@ -626,6 +628,6 @@ class ClassTest3
 }
 
 // Call Zend_Validate_NotEmptyTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Validate_NotEmptyTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Validate_NotEmptyTest::main') {
     Zend_Validate_NotEmptyTest::main();
 }

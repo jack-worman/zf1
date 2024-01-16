@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,39 +13,33 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
 require_once 'Zend/Db/Statement/Pdo/TestCommon.php';
 
-
-
-
-
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Db
  * @group      Zend_Db_Statement
  */
 #[AllowDynamicProperties]
 class Zend_Db_Statement_Pdo_PgsqlTest extends Zend_Db_Statement_Pdo_TestCommon
 {
-
-    protected $_getColumnMetaKeys = array(
-        'pgsql:oid', 'native_type', 'name', 'len', 'precision', 'pdo_type'
-    );
+    protected $_getColumnMetaKeys = [
+        'pgsql:oid', 'native_type', 'name', 'len', 'precision', 'pdo_type',
+    ];
 
     public function getDriver()
     {
         return 'Pdo_Pgsql';
     }
-
 }

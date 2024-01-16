@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Mobile
- * @subpackage Zend_Mobile_Push
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,33 +27,33 @@
 // require_once 'Zend/Mobile/Push/Message/Exception.php';
 
 /**
- * Message Abstract
+ * Message Abstract.
  *
  * @category   Zend
- * @package    Zend_Mobile
- * @subpackage Zend_Mobile_Push_Message
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 abstract class Zend_Mobile_Push_Message_Abstract implements Zend_Mobile_Push_Message_Interface
 {
     /**
-     * Token
+     * Token.
      *
      * @var string
      */
     protected $_token;
 
     /**
-     * Id
+     * Id.
      *
      * @var int|string|float|bool Scalar
      */
     protected $_id;
 
     /**
-     * Get Token
+     * Get Token.
      *
      * @return string
      */
@@ -63,11 +63,13 @@ abstract class Zend_Mobile_Push_Message_Abstract implements Zend_Mobile_Push_Mes
     }
 
     /**
-     * Set Token
+     * Set Token.
      *
-     * @param  string $token
-     * @throws Zend_Mobile_Push_Message_Exception
+     * @param string $token
+     *
      * @return Zend_Mobile_Push_Message_Abstract
+     *
+     * @throws Zend_Mobile_Push_Message_Exception
      */
     public function setToken($token)
     {
@@ -75,12 +77,13 @@ abstract class Zend_Mobile_Push_Message_Abstract implements Zend_Mobile_Push_Mes
             throw new Zend_Mobile_Push_Message_Exception('$token must be a string');
         }
         $this->_token = $token;
+
         return $this;
     }
 
     /**
-     * Get Message ID
-     * 
+     * Get Message ID.
+     *
      * @return int|string|float|bool Scalar
      */
     public function getId()
@@ -89,10 +92,12 @@ abstract class Zend_Mobile_Push_Message_Abstract implements Zend_Mobile_Push_Mes
     }
 
     /**
-     * Set Message ID
+     * Set Message ID.
      *
-     * @param  int|string|float|bool $id Scalar
+     * @param int|string|float|bool $id Scalar
+     *
      * @return Zend_Mobile_Push_Message_Abstract
+     *
      * @throws Exception
      */
     public function setId($id)
@@ -101,33 +106,34 @@ abstract class Zend_Mobile_Push_Message_Abstract implements Zend_Mobile_Push_Mes
             throw new Zend_Mobile_Push_Message_Exception('$id must be a scalar');
         }
         $this->_id = $id;
+
         return $this;
     }
 
     /**
-     * Set Options
+     * Set Options.
      *
-     * @param array $options
      * @return Zend_Mobile_Push_Message_Abstract
+     *
      * @throws Zend_Mobile_Push_Message_Exception
      */
     public function setOptions(array $options)
     {
         foreach ($options as $k => $v) {
-            $method = 'set' . ucwords($k);
+            $method = 'set'.ucwords($k);
             if (!method_exists($this, $method)) {
-                throw new Zend_Mobile_Push_Message_Exception('The method "' . $method . "' does not exist.");
+                throw new Zend_Mobile_Push_Message_Exception('The method "'.$method."' does not exist.");
             }
             $this->$method($v);
         }
+
         return $this;
     }
 
-
     /**
-     * Validate Message format
+     * Validate Message format.
      *
-     * @return boolean
+     * @return bool
      */
     public function validate()
     {

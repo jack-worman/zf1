@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Gapps
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -47,14 +47,12 @@
  * This class represents <atom:entry> in the Google Data protocol.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Gapps
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_Gapps_EmailListRecipientEntry extends Zend_Gdata_Entry
 {
-
     protected $_entryClassName = 'Zend_Gdata_Gapps_EmailListRecipientEntry';
 
     /**
@@ -64,13 +62,13 @@ class Zend_Gdata_Gapps_EmailListRecipientEntry extends Zend_Gdata_Entry
      *
      * @var Zend_Gdata_Extension_Who
      */
-    protected $_who = null;
+    protected $_who;
 
     /**
      * Create a new instance.
      *
      * @param DOMElement $element (optional) DOMElement from which this
-     *          object should be constructed.
+     *                            object should be constructed
      */
     public function __construct($element = null)
     {
@@ -84,15 +82,17 @@ class Zend_Gdata_Gapps_EmailListRecipientEntry extends Zend_Gdata_Entry
      * and eventually XML text for application storage/persistence.
      *
      * @param DOMDocument $doc The DOMDocument used to construct DOMElements
-     * @return DOMElement The DOMElement representing this element and all
-     *          child properties.
+     *
+     * @return DOMElement the DOMElement representing this element and all
+     *                    child properties
      */
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
         $element = parent::getDOM($doc, $majorVersion, $minorVersion);
-        if ($this->_who !== null) {
+        if (null !== $this->_who) {
             $element->appendChild($this->_who->getDOM($element->ownerDocument));
         }
+
         return $element;
     }
 
@@ -104,10 +104,10 @@ class Zend_Gdata_Gapps_EmailListRecipientEntry extends Zend_Gdata_Entry
      */
     protected function takeChildFromDOM($child)
     {
-        $absoluteNodeName = $child->namespaceURI . ':' . $child->localName;
+        $absoluteNodeName = $child->namespaceURI.':'.$child->localName;
 
         switch ($absoluteNodeName) {
-            case $this->lookupNamespace('gd') . ':' . 'who';
+            case $this->lookupNamespace('gd').':who':
                 $who = new Zend_Gdata_Extension_Who();
                 $who->transferFromDOM($child);
                 $this->_who = $who;
@@ -122,7 +122,8 @@ class Zend_Gdata_Gapps_EmailListRecipientEntry extends Zend_Gdata_Entry
      * Get the value of the who property for this object.
      *
      * @see setWho
-     * @return Zend_Gdata_Extension_Who The requested object.
+     *
+     * @return Zend_Gdata_Extension_Who the requested object
      */
     public function getWho()
     {
@@ -133,14 +134,15 @@ class Zend_Gdata_Gapps_EmailListRecipientEntry extends Zend_Gdata_Entry
      * Set the value of the who property for this object. This property
      * is used to store the email address of the current recipient.
      *
-     * @param Zend_Gdata_Extension_Who $value The desired value for this
-     *          instance's who property.
-     * @return Zend_Gdata_Gapps_EmailListRecipientEntry Provides a fluent interface.
+     * @param Zend_Gdata_Extension_Who $value the desired value for this
+     *                                        instance's who property
+     *
+     * @return Zend_Gdata_Gapps_EmailListRecipientEntry provides a fluent interface
      */
     public function setWho($value)
     {
         $this->_who = $value;
+
         return $this;
     }
-
 }

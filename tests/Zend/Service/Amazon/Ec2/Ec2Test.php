@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,10 +26,10 @@
  * Zend_Service_Amazon_Ec2 test case.
  *
  * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_Ec2
@@ -37,7 +37,6 @@
 #[AllowDynamicProperties]
 class Zend_Service_Amazon_Ec2_Ec2Test extends PHPUnit_Framework_TestCase
 {
-
     /**
      * @var Zend_Service_Amazon_Ec2
      */
@@ -71,7 +70,6 @@ class Zend_Service_Amazon_Ec2_Ec2Test extends PHPUnit_Framework_TestCase
         $this->assertTrue($object instanceof Zend_Service_Amazon_Ec2_Elasticip);
     }
 
-
     public function testFactoryReturnsEbsObject()
     {
         $object = Zend_Service_Amazon_Ec2::factory('ebs', 'access_key', 'secret_access_key');
@@ -95,6 +93,4 @@ class Zend_Service_Amazon_Ec2_Ec2Test extends PHPUnit_Framework_TestCase
         $object = Zend_Service_Amazon_Ec2::factory('security', 'access_key', 'secret_access_key');
         $this->assertTrue($object instanceof Zend_Service_Amazon_Ec2_Securitygroups);
     }
-
 }
-

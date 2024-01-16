@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,15 +13,14 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Cloud_StorageService
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 // Call Zend_Cloud_StorageService_Adapter_FileSystemTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Cloud_StorageService_Adapter_FileSystemTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Cloud_StorageService_Adapter_FileSystemTest::main');
 }
 
 /**
@@ -36,29 +35,26 @@ require_once 'Zend/Cloud/StorageService/TestCase.php';
 
 /**
  * @category   Zend
- * @package    Zend_Cloud
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
-class Zend_Cloud_StorageService_Adapter_FileSystemTest
-    extends Zend_Cloud_StorageService_TestCase
+class Zend_Cloud_StorageService_Adapter_FileSystemTest extends Zend_Cloud_StorageService_TestCase
 {
-	/**
+    /**
      * Runs the test methods of this class.
      *
-     * @access public
      * @static
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
+        $suite = new PHPUnit_Framework_TestSuite(__CLASS__);
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     /**
-     * Sets up this test case
+     * Sets up this test case.
      *
      * @return void
      */
@@ -78,12 +74,12 @@ class Zend_Cloud_StorageService_Adapter_FileSystemTest
 
     public function testGetClient()
     {
-    	$this->assertTrue(is_string($this->_commonStorage->getClient()));
+        $this->assertTrue(is_string($this->_commonStorage->getClient()));
     }
 
     public function testNoParams()
     {
-		$this->markTestSkipped('No config params needed for FileSystem');
+        $this->markTestSkipped('No config params needed for FileSystem');
     }
 
     // TODO: Create a custom test for FileSystem that checks fetchMetadata() with file system MD.
@@ -102,8 +98,8 @@ class Zend_Cloud_StorageService_Adapter_FileSystemTest
         $this->markTestSkipped('FileSystem doesn\'t support writable metadata.');
     }
 
-	/**
-     * Tears down this test case
+    /**
+     * Tears down this test case.
      *
      * @return void
      */
@@ -112,7 +108,7 @@ class Zend_Cloud_StorageService_Adapter_FileSystemTest
         $path = $this->_config->local_directory;
 
         // If the test directory exists, remove it
-        if(file_exists((string) $path)) {
+        if (file_exists((string) $path)) {
             $this->_rmRecursive($path);
         }
 
@@ -126,24 +122,25 @@ class Zend_Cloud_StorageService_Adapter_FileSystemTest
 
         if (!file_exists((string) $path)) {
             return true;
-        } else if (!is_dir($path)) {
+        } elseif (!is_dir($path)) {
             return unlink($path);
         } else {
             foreach (scandir($path) as $item) {
-                if (!($item == '.' || $item == '..')) {
+                if (!('.' == $item || '..' == $item)) {
                     $this->_rmRecursive($item);
                 }
             }
+
             return rmdir($path);
         }
     }
 
     protected function _getConfig()
     {
-        $config = new Zend_Config(array(
-            Zend_Cloud_StorageService_Factory::STORAGE_ADAPTER_KEY        => 'Zend_Cloud_StorageService_Adapter_Filesystem',
-            Zend_Cloud_StorageService_Adapter_FileSystem::LOCAL_DIRECTORY => __DIR__ . '/../_files/data/FileSystemTest',
-        ));
+        $config = new Zend_Config([
+            Zend_Cloud_StorageService_Factory::STORAGE_ADAPTER_KEY => 'Zend_Cloud_StorageService_Adapter_Filesystem',
+            Zend_Cloud_StorageService_Adapter_FileSystem::LOCAL_DIRECTORY => __DIR__.'/../_files/data/FileSystemTest',
+        ]);
 
         return $config;
     }

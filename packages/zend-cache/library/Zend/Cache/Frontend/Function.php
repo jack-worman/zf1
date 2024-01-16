@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,30 +13,26 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Cache
- * @subpackage Zend_Cache_Frontend
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /**
  * @see Zend_Cache_Core
  */
 // require_once 'Zend/Cache/Core.php';
 
-
 /**
- * @package    Zend_Cache
- * @subpackage Zend_Cache_Frontend
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Cache_Frontend_Function extends Zend_Cache_Core
 {
     /**
-     * This frontend specific options
+     * This frontend specific options.
      *
      * ====> (boolean) cache_by_default :
      * - if true, function calls will be cached by default
@@ -49,19 +45,20 @@ class Zend_Cache_Frontend_Function extends Zend_Cache_Core
      *
      * @var array options
      */
-    protected $_specificOptions = array(
+    protected $_specificOptions = [
         'cache_by_default' => true,
-        'cached_functions' => array(),
-        'non_cached_functions' => array()
-    );
+        'cached_functions' => [],
+        'non_cached_functions' => [],
+    ];
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param  array $options Associative array of options
+     * @param array $options Associative array of options
+     *
      * @return void
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         foreach ($options as $name => $value) {
             $this->setOption($name, $value);
@@ -70,16 +67,17 @@ class Zend_Cache_Frontend_Function extends Zend_Cache_Core
     }
 
     /**
-     * Main method : call the specified function or get the result from cache
+     * Main method : call the specified function or get the result from cache.
      *
-     * @param  callback $callback         A valid callback
-     * @param  array    $parameters       Function parameters
-     * @param  array    $tags             Cache tags
-     * @param  int      $specificLifetime If != false, set a specific lifetime for this cache record (null => infinite lifetime)
-     * @param  int      $priority         integer between 0 (very low priority) and 10 (maximum priority) used by some particular backends
+     * @param callable $callback         A valid callback
+     * @param array    $parameters       Function parameters
+     * @param array    $tags             Cache tags
+     * @param int      $specificLifetime If != false, set a specific lifetime for this cache record (null => infinite lifetime)
+     * @param int      $priority         integer between 0 (very low priority) and 10 (maximum priority) used by some particular backends
+     *
      * @return mixed Result
      */
-    public function call($callback, array $parameters = array(), $tags = array(), $specificLifetime = false, $priority = 8)
+    public function call($callback, array $parameters = [], $tags = [], $specificLifetime = false, $priority = 8)
     {
         if (!is_callable($callback, true, $name)) {
             Zend_Cache::throwException('Invalid callback');
@@ -95,7 +93,7 @@ class Zend_Cache_Frontend_Function extends Zend_Cache_Core
         }
 
         $id = $this->_makeId($callback, $parameters);
-        if ( ($rs = $this->load($id)) && isset($rs[0], $rs[1])) {
+        if (($rs = $this->load($id)) && isset($rs[0], $rs[1])) {
             // A cache is available
             $output = $rs[0];
             $return = $rs[1];
@@ -105,16 +103,17 @@ class Zend_Cache_Frontend_Function extends Zend_Cache_Core
             ob_implicit_flush(false);
             $return = call_user_func_array($callback, $parameters);
             $output = ob_get_clean();
-            $data = array($output, $return);
+            $data = [$output, $return];
             $this->save($data, $id, $tags, $specificLifetime, $priority);
         }
 
         echo $output;
+
         return $return;
     }
 
     /**
-     * ZF-9970
+     * ZF-9970.
      *
      * @deprecated
      */
@@ -124,14 +123,16 @@ class Zend_Cache_Frontend_Function extends Zend_Cache_Core
     }
 
     /**
-     * Make a cache id from the function name and parameters
+     * Make a cache id from the function name and parameters.
      *
-     * @param  callback $callback A valid callback
-     * @param  array    $args     Function parameters
-     * @throws Zend_Cache_Exception
+     * @param callable $callback A valid callback
+     * @param array    $args     Function parameters
+     *
      * @return string Cache id
+     *
+     * @throws Zend_Cache_Exception
      */
-    public function makeId($callback, array $args = array())
+    public function makeId($callback, array $args = [])
     {
         if (!is_callable($callback, true, $name)) {
             Zend_Cache::throwException('Invalid callback');
@@ -149,14 +150,14 @@ class Zend_Cache_Frontend_Function extends Zend_Cache_Core
         if (isset($object)) {
             try {
                 $tmp = @serialize($callback);
-            } catch (\Throwable $e) {
+            } catch (Throwable $e) {
                 Zend_Cache::throwException($e->getMessage());
             }
             if (!$tmp) {
                 $lastErr = error_get_last();
                 Zend_Cache::throwException("Can't serialize callback object to generate id: {$lastErr['message']}");
             }
-            $name.= '__' . $tmp;
+            $name .= '__'.$tmp;
         }
 
         // generate a unique id for arguments
@@ -164,7 +165,7 @@ class Zend_Cache_Frontend_Function extends Zend_Cache_Core
         if ($args) {
             try {
                 $argsStr = @serialize(array_values($args));
-            } catch (\Throwable $e) {
+            } catch (Throwable $e) {
                 Zend_Cache::throwException($e->getMessage());
             }
             if (!$argsStr) {
@@ -173,7 +174,6 @@ class Zend_Cache_Frontend_Function extends Zend_Cache_Core
             }
         }
 
-        return md5((string) $name . $argsStr);
+        return md5((string) $name.$argsStr);
     }
-
 }

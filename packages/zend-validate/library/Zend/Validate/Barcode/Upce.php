@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,39 +27,43 @@
 
 /**
  * @category   Zend
- * @package    Zend_Validate
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Validate_Barcode_Upce extends Zend_Validate_Barcode_AdapterAbstract
 {
     /**
-     * Allowed barcode lengths
-     * @var integer
+     * Allowed barcode lengths.
+     *
+     * @var int
      */
-    protected $_length = array(6, 7, 8);
+    protected $_length = [6, 7, 8];
 
     /**
-     * Allowed barcode characters
+     * Allowed barcode characters.
+     *
      * @var string
      */
     protected $_characters = '0123456789';
 
     /**
-     * Checksum function
+     * Checksum function.
+     *
      * @var string
      */
     protected $_checksum = '_gtin';
 
     /**
-     * Overrides parent checkLength
+     * Overrides parent checkLength.
      *
      * @param string $value Value
-     * @return boolean
+     *
+     * @return bool
      */
     public function checkLength($value)
     {
-        if (strlen((string) $value) !== 8) {
+        if (8 !== strlen((string) $value)) {
             $this->setCheck(false);
         } else {
             $this->setCheck(true);

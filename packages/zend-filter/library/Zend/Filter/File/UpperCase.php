@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Filter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,14 +27,14 @@
 
 /**
  * @category   Zend
- * @package    Zend_Filter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Filter_File_UpperCase extends Zend_Filter_StringToUpper
 {
     /**
-     * Adds options to the filter at initiation
+     * Adds options to the filter at initiation.
      *
      * @param string $options
      */
@@ -45,12 +46,14 @@ class Zend_Filter_File_UpperCase extends Zend_Filter_StringToUpper
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend_Filter_Interface.
      *
      * Does a lowercase on the content of the given file
      *
-     * @param  string $value Full path of file to change
+     * @param string $value Full path of file to change
+     *
      * @return string The given $value
+     *
      * @throws Zend_Filter_Exception
      */
     public function filter($value)
@@ -72,7 +75,7 @@ class Zend_Filter_File_UpperCase extends Zend_Filter_StringToUpper
         }
 
         $content = parent::filter($content);
-        $result  = file_put_contents($value, $content);
+        $result = file_put_contents($value, $content);
 
         if (!$result) {
             // require_once 'Zend/Filter/Exception.php';

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +13,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Log
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Log_Writer_AbstractTest::main');
 }
@@ -29,10 +28,10 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 /**
  * @category   Zend
- * @package    Zend_Log
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Log
  */
 #[AllowDynamicProperties]
@@ -45,7 +44,7 @@ class Zend_Log_Writer_AbstractTest extends PHPUnit_Framework_TestCase
 
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
+        $suite = new PHPUnit_Framework_TestSuite(__CLASS__);
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -66,7 +65,7 @@ class Zend_Log_Writer_AbstractTest extends PHPUnit_Framework_TestCase
         // require_once 'Zend/Log/Formatter/Simple.php';
         $this->_writer->setFormatter(new Zend_Log_Formatter_Simple());
         $this->setExpectedException('PHPUnit_Framework_Error');
-        $this->_writer->setFormatter(new StdClass());
+        $this->_writer->setFormatter(new stdClass());
     }
 
     public function testAddFilter()
@@ -75,7 +74,7 @@ class Zend_Log_Writer_AbstractTest extends PHPUnit_Framework_TestCase
         // require_once 'Zend/Log/Filter/Message.php';
         $this->_writer->addFilter(new Zend_Log_Filter_Message('/mess/'));
         $this->setExpectedException('Zend_Log_Exception');
-        $this->_writer->addFilter(new StdClass());
+        $this->_writer->addFilter(new stdClass());
     }
 
     /**
@@ -98,7 +97,7 @@ class Zend_Log_Writer_AbstractTest_Concrete extends Zend_Log_Writer_Abstract
     {
     }
 
-    static public function factory($config)
+    public static function factory($config)
     {
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata_Gapps
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -28,21 +28,20 @@
 
 /**
  * @category   Zend
- * @package    Zend_Gdata_Gapps
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Gapps
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
 {
-
-    const GIVEN_NAME = 'Zend_Gdata';
-    const FAMILY_NAME = 'Automated Test Account';
-    const PASSWORD = '4ohtladfl;';
-    const PASSWORD_HASH = 'SHA-1';
+    public const GIVEN_NAME = 'Zend_Gdata';
+    public const FAMILY_NAME = 'Automated Test Account';
+    public const PASSWORD = '4ohtladfl;';
+    public const PASSWORD_HASH = 'SHA-1';
 
     public function setUp()
     {
@@ -58,7 +57,7 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
         //
         // Failed deletions are okay, so add everying creatd in here, even if
         // you plan to delete the user yourself!
-        $this->autoDeletePool = array();
+        $this->autoDeletePool = [];
     }
 
     public function tearDown()
@@ -67,19 +66,21 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
         foreach ($this->autoDeletePool as $x) {
             try {
                 $x->delete();
-            } catch (\Throwable $e) {
+            } catch (Throwable $e) {
                 // Failed deletes are okay. Try and delete the rest anyway.
             }
         }
     }
 
     // Schedule an entry for deletion at test tear-down.
-    protected function autoDelete($entry) {
+    protected function autoDelete($entry)
+    {
         $this->autoDeletePool[] = $entry;
     }
 
     // Test Create/Read/Update/Destroy operations on a UserEntry
-    public function testUserCRUDOperations() {
+    public function testUserCRUDOperations()
+    {
         // Create a new user
         $user = $this->gdata->createUser($this->id, self::GIVEN_NAME, self::FAMILY_NAME,
             sha1(self::PASSWORD), self::PASSWORD_HASH);
@@ -93,16 +94,16 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
         // Since we can't retrieve the password or hash function via the
         // API, let's see if a ClientLogin auth request succeeds
         try {
-            Zend_Gdata_ClientLogin::getHTTPClient($this->id . '@' .
+            Zend_Gdata_ClientLogin::getHTTPClient($this->id.'@'.
                 $this->domain, self::PASSWORD, 'xapi');
         } catch (Zend_Gdata_App_AuthException $e) {
-           $this->fail("Unable to authenticate new user via ClientLogin.");
+            $this->fail('Unable to authenticate new user via ClientLogin.');
         }
 
         // Check to make sure there are no extension elements/attributes
         // in the retrieved user
-        $this->assertTrue(count($user->extensionElements) == 0);
-        $this->assertTrue(count($user->extensionAttributes) == 0);
+        $this->assertTrue(0 == count($user->extensionElements));
+        $this->assertTrue(0 == count($user->extensionAttributes));
 
         // Try searching for the same user and make sure that they're returned
         $user2 = $this->gdata->retrieveUser($this->id);
@@ -119,7 +120,8 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
 
     // Test to make sure that users with unicode characters can be created
     // okay.
-    public function testUsersSupportUnicode() {
+    public function testUsersSupportUnicode()
+    {
         // Create a user
         $user = $this->gdata->createUser($this->id, 'テスト', 'ユーザー',
             sha1(self::PASSWORD), self::PASSWORD_HASH);
@@ -131,14 +133,16 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
     }
 
     // Test to make sure that a page of users can be retrieved.
-    public function testRetrievePageOfUsers() {
+    public function testRetrievePageOfUsers()
+    {
         $feed = $this->gdata->retrievePageOfUsers();
         $this->assertTrue(count($feed->entries) > 0);
     }
 
     // Test to make sure that a page of users can be retrieved with a
     // startUsername parameter.
-    public function testRetrievePageOfUsersWithStartingUsername() {
+    public function testRetrievePageOfUsersWithStartingUsername()
+    {
         $feed = $this->gdata->retrievePageOfUsers();
         $this->assertTrue(count($feed->entries) > 0);
         $username = $feed->entries[0]->login->username;
@@ -149,9 +153,10 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
     // Test to see if all users can be retrieved
     // NOTE: This test may timeout if the domain used for testing contains
     //       many pages of users.
-    public function testRetrieveAllUsers() {
+    public function testRetrieveAllUsers()
+    {
         // Create 35 users to make sure that there's more than one page.
-        for ($i = 0; $i < 25; $i++) {
+        for ($i = 0; $i < 25; ++$i) {
             $user = $this->gdata->createUser(uniqid('ZF-'), self::GIVEN_NAME,
                 self::FAMILY_NAME, sha1(self::PASSWORD), self::PASSWORD_HASH);
             $this->autoDelete($user);
@@ -162,17 +167,19 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
     }
 
     // Test to see if a user can be manually updated by calling updateUser().
-    public function testManualUserEntryUpdate() {
+    public function testManualUserEntryUpdate()
+    {
         $user = $this->gdata->createUser($this->id, self::GIVEN_NAME, self::FAMILY_NAME,
             sha1(self::PASSWORD), self::PASSWORD_HASH);
         $this->autoDelete($user);
-        $user->name->givenName = "Renamed";
+        $user->name->givenName = 'Renamed';
         $user2 = $this->gdata->updateUser($this->id, $user);
-        $this->assertEquals("Renamed", $user2->name->givenName);
+        $this->assertEquals('Renamed', $user2->name->givenName);
     }
 
     // Test to see if a user can be suspended, then un-suspended
-    public function testCanSuspendAndRestoreUser() {
+    public function testCanSuspendAndRestoreUser()
+    {
         $user = $this->gdata->createUser($this->id, self::GIVEN_NAME, self::FAMILY_NAME,
             sha1(self::PASSWORD), self::PASSWORD_HASH);
         $this->autoDelete($user);
@@ -189,7 +196,8 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
     }
 
     // Test the convenience delete method for users
-    public function testCanDeleteUser() {
+    public function testCanDeleteUser()
+    {
         $user = $this->gdata->createUser($this->id, self::GIVEN_NAME, self::FAMILY_NAME,
             sha1(self::PASSWORD), self::PASSWORD_HASH);
         $this->autoDelete($user);
@@ -206,7 +214,8 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
         $this->assertNull($rUser);
     }
 
-    public function testNicknameCRUDOperations() {
+    public function testNicknameCRUDOperations()
+    {
         $user = $this->gdata->createUser($this->id, self::GIVEN_NAME, self::FAMILY_NAME,
             sha1(self::PASSWORD), self::PASSWORD_HASH);
         $this->autoDelete($user);
@@ -234,13 +243,14 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
         $this->assertNull($nickname);
     }
 
-    public function testRetrieveNicknames() {
+    public function testRetrieveNicknames()
+    {
         $user = $this->gdata->createUser($this->id, self::GIVEN_NAME,
             self::FAMILY_NAME, sha1(self::PASSWORD), self::PASSWORD_HASH);
         $this->autoDelete($user);
 
         // Create 5 nicknames
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 5; ++$i) {
             $generatedNickname[$i] = strtolower((string) uniqid('zf-nick-'));
             $this->gdata->createNickname($this->id, $generatedNickname[$i]);
         }
@@ -257,13 +267,14 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(0, count($generatedNickname));
     }
 
-    public function testRetrievePageOfNicknames() {
+    public function testRetrievePageOfNicknames()
+    {
         $user = $this->gdata->createUser($this->id, self::GIVEN_NAME,
             self::FAMILY_NAME, sha1(self::PASSWORD), self::PASSWORD_HASH);
         $this->autoDelete($user);
 
         // Create 5 nicknames
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 5; ++$i) {
             $generatedNickname[$i] = strtolower((string) uniqid('zf-nick-'));
             $this->gdata->createNickname($this->id, $generatedNickname[$i]);
         }
@@ -274,13 +285,14 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(count($results->entry) >= 5);
     }
 
-    public function testRetrieveAllNicknames() {
+    public function testRetrieveAllNicknames()
+    {
         // Create 3 users, each with 10 nicknames
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 3; ++$i) {
             $user = $this->gdata->createUser(uniqid('ZF-'), self::GIVEN_NAME,
                 self::FAMILY_NAME, sha1(self::PASSWORD), self::PASSWORD_HASH);
             $this->autoDelete($user);
-            for ($j = 0; $j < 10; $j++) {
+            for ($j = 0; $j < 10; ++$j) {
                 $generatedNickname = strtolower((string) uniqid('zf-nick-'));
                 $this->gdata->createNickname($user->login->username, $generatedNickname);
             }
@@ -293,7 +305,8 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
     }
 
     // Test the convenience delete method for nicknames
-    public function testCanDeleteNickname() {
+    public function testCanDeleteNickname()
+    {
         $user = $this->gdata->createUser($this->id, self::GIVEN_NAME, self::FAMILY_NAME,
             sha1(self::PASSWORD), self::PASSWORD_HASH);
         $this->autoDelete($user);
@@ -312,17 +325,18 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
         $this->assertNull($rNick);
     }
 
-    public function testGroupCRUDOperations() {
+    public function testGroupCRUDOperations()
+    {
         // Create group
         $generatedGroupName = strtolower((string) uniqid('zf-group-'));
         $group = $this->gdata->createGroup($generatedGroupName, 'zf-group-',
-                'testGroupCRUDOperations()');
+            'testGroupCRUDOperations()');
         $this->autoDelete($group);
 
         $groupId = null;
         $properties = $group->getProperty();
         foreach ($properties as $property) {
-            if($property->name == 'groupId') {
+            if ('groupId' == $property->name) {
                 $groupId = $property->value;
             }
         }
@@ -342,10 +356,10 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
         // Ensure that group was deleted
         $groupFeed = $this->gdata->getGroupFeed($query);
         $this->assertEquals($entryCount - 1, count($groupFeed->entry));
-
     }
 
-    public function testCanAssignMultipleGroupsToOneUser() {
+    public function testCanAssignMultipleGroupsToOneUser()
+    {
         // Create a user
         $user = $this->gdata->createUser($this->id, self::GIVEN_NAME, self::FAMILY_NAME,
             sha1(self::PASSWORD), self::PASSWORD_HASH);
@@ -354,10 +368,10 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
         // Create two groups
         $groupCount = 2;
 
-        for ($i = 0; $i < $groupCount; $i++) {
+        for ($i = 0; $i < $groupCount; ++$i) {
             $generatedGroupName = strtolower((string) uniqid('zf-group-'));
             $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
-                    'testCanAssignMultipleGroupsToOneUser() ' . $i);
+                'testCanAssignMultipleGroupsToOneUser() '.$i);
             $this->autoDelete($group);
             $this->gdata->addMemberToGroup($this->id, $generatedGroupName);
         }
@@ -365,26 +379,26 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
         // Make sure that the user is subscribed to both groups
         $subscriptions = $this->gdata->retrieveGroups($this->id);
         $this->assertEquals($groupCount, count($subscriptions->entry));
-
     }
 
-    public function testCanRetrievePageOfGroups() {
+    public function testCanRetrievePageOfGroups()
+    {
         // Create a group
         $generatedGroupName = strtolower((string) uniqid('zf-group-'));
         $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
-                'testCanRetrievePageOfGroups()');
+            'testCanRetrievePageOfGroups()');
         $this->autoDelete($group);
 
         // Try retrieving the group feed
         $feed = $this->gdata->retrievePageOfGroups();
         $this->assertTrue(count($feed->entry) > 0);
-
     }
 
-    public function testCanRetrieveAllGroups() {
+    public function testCanRetrieveAllGroups()
+    {
         // Create a couple of users to make sure we don't hit the limit
         // on the max number of groups.
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 3; ++$i) {
             $user = $this->gdata->createUser(uniqid('ZF-'), self::GIVEN_NAME, self::FAMILY_NAME,
                 sha1(self::PASSWORD), self::PASSWORD_HASH);
             $this->autoDelete($user);
@@ -392,25 +406,25 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
 
         // Create a whole bunch of groups to make sure we trigger
         // paging.
-        for ($i = 0; $i < 30; $i++) {
+        for ($i = 0; $i < 30; ++$i) {
             $generatedGroupName = strtolower((string) uniqid('zf-group-'));
-            $group = $this->gdata->createGroup($generatedGroupName, 'Test Group ' . $i,
-                    'testCanRetrieveAllGroups()');
+            $group = $this->gdata->createGroup($generatedGroupName, 'Test Group '.$i,
+                'testCanRetrieveAllGroups()');
             $this->autoDelete($group);
         }
 
         // Try retrieving the group feed
         $feed = $this->gdata->retrieveAllGroups();
         $this->assertTrue(count($feed->entry) >= 30);
-
     }
 
     // Test the convenience delete method for groups
-    public function testCanDeleteGroup() {
+    public function testCanDeleteGroup()
+    {
         // Create a group
         $generatedGroupName = strtolower((string) uniqid('zf-group-'));
         $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
-                'testCanDeleteGroup()');
+            'testCanDeleteGroup()');
         $this->autoDelete($group);
 
         // Assert that the group exists, just in case...
@@ -428,7 +442,7 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
             $query->setGroupId($generatedGroupName);
             $entry = $this->gdata->getGroupEntry($query);
             // This souldn't execute
-            $this->fail('Retrieving a non-existant group entry didn\'t' .
+            $this->fail('Retrieving a non-existant group entry didn\'t'.
                 'raise exception.');
         } catch (Zend_Gdata_Gapps_ServiceException $e) {
             if ($e->hasError(Zend_Gdata_Gapps_Error::ENTITY_DOES_NOT_EXIST)) {
@@ -439,19 +453,19 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
                 throw $e;
             }
         }
-
     }
 
-    public function testCanRetrievePageOfMembers() {
+    public function testCanRetrievePageOfMembers()
+    {
         // Create a new group
         $generatedGroupName = strtolower((string) uniqid('zf-group-'));
         $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
-                'testCanRetrievePageOfMembers()');
+            'testCanRetrievePageOfMembers()');
         $this->autoDelete($group);
 
         // Create two users and assign them to the group
         $userCount = 2;
-        for ($i = 0; $i < $userCount; $i++) {
+        for ($i = 0; $i < $userCount; ++$i) {
             $generatedUsername = uniqid('ZF-');
             $user = $this->gdata->createUser($generatedUsername,
                 self::GIVEN_NAME, self::FAMILY_NAME, sha1(self::PASSWORD),
@@ -464,19 +478,19 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
         // Retrieve members
         $memberFeed = $this->gdata->retrievePageOfMembers($generatedGroupName);
         $this->assertTrue(count($memberFeed->entry) == $userCount);
-
     }
 
-    public function testCanRetrievAllMembers() {
+    public function testCanRetrievAllMembers()
+    {
         // Create a new group
         $generatedGroupName = strtolower((string) uniqid('zf-list-'));
         $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
-                'testCanRetrievAllMembers()');
+            'testCanRetrievAllMembers()');
         $this->autoDelete($group);
 
         // Create enough users to trigger paging and assign them to the group
         $userCount = 30;
-        for ($i = 0; $i < $userCount; $i++) {
+        for ($i = 0; $i < $userCount; ++$i) {
             $generatedUsername = uniqid('ZF-');
             $user = $this->gdata->createUser($generatedUsername,
                 self::GIVEN_NAME, self::FAMILY_NAME, sha1(self::PASSWORD),
@@ -488,15 +502,15 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
         // Retrieve members
         $memberFeed = $this->gdata->retrieveAllMembers($generatedGroupName);
         $this->assertTrue(count($memberFeed->entry) == $userCount);
-
     }
 
     // Test the convenience removeMemberFromGroup method for group members
-    public function testCanRemoveMemberFromGroup() {
+    public function testCanRemoveMemberFromGroup()
+    {
         // Create a group
         $generatedGroupName = strtolower((string) uniqid('zf-list-'));
         $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
-                'testCanDeleteGroupMember()');
+            'testCanDeleteGroupMember()');
         $this->autoDelete($group);
 
         // Create a user for the group
@@ -507,27 +521,27 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
 
         // Assert that the member exists, just in case...
         $members = $this->gdata->retrieveAllMembers($generatedGroupName);
-        $this->assertTrue(count($members->entry) == 1);
+        $this->assertTrue(1 == count($members->entry));
 
         // Remove the member from the group
         $this->gdata->removeMemberFromGroup($user->login->username,
             $generatedGroupName);
 
         // Ensure that user was deleted
-        $members =  $this->gdata->retrieveAllMembers($generatedGroupName);
-        $this->assertTrue(count($members->entry) == 0);
-
+        $members = $this->gdata->retrieveAllMembers($generatedGroupName);
+        $this->assertTrue(0 == count($members->entry));
     }
 
-    public function testCanRetrieveGroupOwners() {
+    public function testCanRetrieveGroupOwners()
+    {
         // Create a new group
         $generatedGroupName = strtolower((string) uniqid('zf-list-'));
         $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
-                'testCanRetrievAllOwners()');
+            'testCanRetrievAllOwners()');
         $this->autoDelete($group);
 
         $userCount = 3;
-        for ($i = 0; $i < $userCount; $i++) {
+        for ($i = 0; $i < $userCount; ++$i) {
             $generatedUsername = uniqid('ZF-');
             $user = $this->gdata->createUser($generatedUsername,
                 self::GIVEN_NAME, self::FAMILY_NAME, sha1(self::PASSWORD),
@@ -540,15 +554,15 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
         // Retrieve owners
         $ownerFeed = $this->gdata->retrieveGroupOwners($generatedGroupName);
         $this->assertTrue(count($ownerFeed->entry) == $userCount);
-
     }
 
     // Test the convenience removeOwnerFromGroup method for group owners
-    public function testCanRemoveOwnerFromGroup() {
+    public function testCanRemoveOwnerFromGroup()
+    {
         // Create a group
         $generatedGroupName = strtolower((string) uniqid('zf-list-'));
         $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
-                'testCanDeleteGroupOwner()');
+            'testCanDeleteGroupOwner()');
         $this->autoDelete($group);
 
         // Create a user for the group
@@ -559,7 +573,7 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
 
         // Assert that the owner exists, just in case...
         $owners = $this->gdata->retrieveGroupOwners($generatedGroupName);
-        $this->assertTrue(count($owners->entry) == 1);
+        $this->assertTrue(1 == count($owners->entry));
 
         // Remove the owner from the group
         $this->gdata->removeOwnerFromGroup($user->login->username,
@@ -567,15 +581,16 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
 
         // Ensure that user was deleted
         $owners = $this->gdata->retrieveGroupOwners($generatedGroupName);
-        $this->assertTrue(count($owners->entry) == 0);
+        $this->assertTrue(0 == count($owners->entry));
     }
 
     // Test the convenience isMember method
-    public function testIsMember() {
+    public function testIsMember()
+    {
         // Create a group
         $generatedGroupName = strtolower((string) uniqid('zf-list-'));
         $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
-                'testIsMember()');
+            'testIsMember()');
         $this->autoDelete($group);
 
         // Create a user for the group
@@ -588,18 +603,18 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($isMember);
 
-        $isMember = $this->gdata->isMember('foo_' . $this->id, $generatedGroupName);
+        $isMember = $this->gdata->isMember('foo_'.$this->id, $generatedGroupName);
 
         $this->assertFalse($isMember);
-
     }
 
     // Test the convenience isOwner method
-    public function testIsOwner() {
+    public function testIsOwner()
+    {
         // Create a group
         $generatedGroupName = strtolower((string) uniqid('zf-list-'));
         $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
-                'testIsMember()');
+            'testIsMember()');
         $this->autoDelete($group);
 
         // Create a user for the group
@@ -612,39 +627,39 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($isOwner);
 
-        $isOwner = $this->gdata->isOwner('foo_' . $this->id, $generatedGroupName);
+        $isOwner = $this->gdata->isOwner('foo_'.$this->id, $generatedGroupName);
 
         $this->assertFalse($isOwner);
-
     }
 
     // Test the convenience updateGroup method
-    public function testCanUpdateGroup() {
+    public function testCanUpdateGroup()
+    {
         // Create a group
         $generatedGroupName = strtolower((string) uniqid('zf-list-'));
         $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
-                'testCanUpdateGroup()');
+            'testCanUpdateGroup()');
         $this->autoDelete($group);
 
-        //set new value and save it
+        // set new value and save it
 
         $group = $this->gdata->updateGroup($generatedGroupName, null, 'new description here');
 
-        //verify new value
+        // verify new value
         $description = null;
 
         $properties = $group->getProperty();
         foreach ($properties as $property) {
-            if($property->name == 'description') {
+            if ('description' == $property->name) {
                 $description = $property->value;
             }
         }
 
         $this->assertEquals('new description here', $description);
-
     }
 
-    public function testEmailListCRUDOperations() {
+    public function testEmailListCRUDOperations()
+    {
         // Create email list
         $generatedListName = strtolower((string) uniqid('zf-list-'));
         $list = $this->gdata->createEmailList($generatedListName);
@@ -666,7 +681,8 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($entryCount - 1, count($listFeed->entry));
     }
 
-    public function testCanAssignMultipleEmailListsToOneUser() {
+    public function testCanAssignMultipleEmailListsToOneUser()
+    {
         // Create a user
         $user = $this->gdata->createUser($this->id, self::GIVEN_NAME, self::FAMILY_NAME,
             sha1(self::PASSWORD), self::PASSWORD_HASH);
@@ -675,7 +691,7 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
         // Create two email lists
         $listCount = 2;
 
-        for ($i = 0; $i < $listCount; $i++) {
+        for ($i = 0; $i < $listCount; ++$i) {
             $generatedListName = strtolower((string) uniqid('zf-list-'));
             $list = $this->gdata->createEmailList($generatedListName);
             $this->autoDelete($list);
@@ -687,7 +703,8 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($listCount, count($subscriptions->entry));
     }
 
-    public function testCanRetrievePageOfEmailLists() {
+    public function testCanRetrievePageOfEmailLists()
+    {
         // Create an email list
         $generatedListName = strtolower((string) uniqid('zf-list-'));
         $list = $this->gdata->createEmailList($generatedListName);
@@ -698,10 +715,11 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(count($feed->entry) > 0);
     }
 
-    public function testCanRetrieveAllEmailLists() {
+    public function testCanRetrieveAllEmailLists()
+    {
         // Create a couple of users to make sure we don't hit the limit
         // on the max number of email lists.
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 3; ++$i) {
             $user = $this->gdata->createUser(uniqid('ZF-'), self::GIVEN_NAME, self::FAMILY_NAME,
                 sha1(self::PASSWORD), self::PASSWORD_HASH);
             $this->autoDelete($user);
@@ -709,7 +727,7 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
 
         // Create a whole bunch of email lists to make sure we trigger
         // paging.
-        for ($i = 0; $i < 30; $i++) {
+        for ($i = 0; $i < 30; ++$i) {
             $generatedListName = strtolower((string) uniqid('zf-list-'));
             $list = $this->gdata->createEmailList($generatedListName);
             $this->autoDelete($list);
@@ -721,7 +739,8 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
     }
 
     // Test the convenience delete method for email lists
-    public function testCanDeleteEmailList() {
+    public function testCanDeleteEmailList()
+    {
         // Create an email list
         $generatedListName = strtolower((string) uniqid('zf-list-'));
         $list = $this->gdata->createEmailList($generatedListName);
@@ -742,7 +761,7 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
             $query->setEmailListName($generatedListName);
             $entry = $this->gdata->getEmailListEntry($query);
             // This souldn't execute
-            $this->fail('Retrieving a non-existant email list entry didn\'t' .
+            $this->fail('Retrieving a non-existant email list entry didn\'t'.
                 'raise exception.');
         } catch (Zend_Gdata_Gapps_ServiceException $e) {
             if ($e->hasError(Zend_Gdata_Gapps_Error::ENTITY_DOES_NOT_EXIST)) {
@@ -755,7 +774,8 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function testCanRetrievePageOfRecipients() {
+    public function testCanRetrievePageOfRecipients()
+    {
         // Create a new email list
         $generatedListName = strtolower((string) uniqid('zf-list-'));
         $list = $this->gdata->createEmailList($generatedListName);
@@ -763,7 +783,7 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
 
         // Create two users and assign them to the email list
         $userCount = 2;
-        for ($i = 0; $i < $userCount; $i++) {
+        for ($i = 0; $i < $userCount; ++$i) {
             $generatedUsername = uniqid('ZF-');
             $user = $this->gdata->createUser($generatedUsername,
                 self::GIVEN_NAME, self::FAMILY_NAME, sha1(self::PASSWORD),
@@ -779,7 +799,8 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(count($recipientFeed->entry) == $userCount);
     }
 
-    public function testCanRetrievAllRecipients() {
+    public function testCanRetrievAllRecipients()
+    {
         // Create a new email list
         $generatedListName = strtolower((string) uniqid('zf-list-'));
         $list = $this->gdata->createEmailList($generatedListName);
@@ -788,7 +809,7 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
         // Create enough users to trigger paging and assign them to the email
         // list
         $userCount = 30;
-        for ($i = 0; $i < $userCount; $i++) {
+        for ($i = 0; $i < $userCount; ++$i) {
             $generatedUsername = uniqid('ZF-');
             $user = $this->gdata->createUser($generatedUsername,
                 self::GIVEN_NAME, self::FAMILY_NAME, sha1(self::PASSWORD),
@@ -805,7 +826,8 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
     }
 
     // Test the convenience delete method for email list recipients
-    public function testCanDeleteEmailListRecipient() {
+    public function testCanDeleteEmailListRecipient()
+    {
         // Create an email list
         $generatedListName = strtolower((string) uniqid('zf-list-'));
         $list = $this->gdata->createEmailList($generatedListName);
@@ -820,7 +842,7 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
         // Assert that the recipient exists, just in case...
         $recipients =
             $this->gdata->retrieveAllRecipients($generatedListName);
-        $this->assertTrue(count($recipients->entry) == 1);
+        $this->assertTrue(1 == count($recipients->entry));
 
         // Remove the user from the list
         $this->gdata->removeRecipientFromEmailList($user->login->username,
@@ -829,7 +851,6 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
         // Ensure that user was deleted
         $recipients =
             $this->gdata->retrieveAllRecipients($generatedListName);
-        $this->assertTrue(count($recipients->entry) == 0);
+        $this->assertTrue(0 == count($recipients->entry));
     }
-
 }

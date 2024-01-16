@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_Yahoo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -32,10 +32,10 @@
 
 /**
  * @category   Zend
- * @package    Zend_Service_Yahoo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Service
  * @group      Zend_Service_Yahoo
  */
@@ -43,21 +43,21 @@
 class Zend_Service_Yahoo_OnlineTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Reference to Yahoo service consumer object
+     * Reference to Yahoo service consumer object.
      *
      * @var Zend_Service_Yahoo
      */
     protected $_yahoo;
 
     /**
-     * Socket based HTTP client adapter
+     * Socket based HTTP client adapter.
      *
      * @var Zend_Http_Client_Adapter_Socket
      */
     protected $_httpClientAdapterSocket;
 
     /**
-     * Sets up this test case
+     * Sets up this test case.
      *
      * @return void
      */
@@ -73,7 +73,7 @@ class Zend_Service_Yahoo_OnlineTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that inlinkDataSearch() works as expected given 'http://framework.zend.com/' as a query
+     * Ensures that inlinkDataSearch() works as expected given 'http://framework.zend.com/' as a query.
      *
      * @return void
      */
@@ -105,7 +105,7 @@ class Zend_Service_Yahoo_OnlineTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that imageSearch() works as expected given 'php' as a query
+     * Ensures that imageSearch() works as expected given 'php' as a query.
      *
      * @return void
      */
@@ -137,14 +137,14 @@ class Zend_Service_Yahoo_OnlineTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that imageSearch() throws an exception when the adult_ok option is invalid
+     * Ensures that imageSearch() throws an exception when the adult_ok option is invalid.
      *
      * @return void
      */
     public function testImageSearchExceptionAdultOkInvalid()
     {
         try {
-            $this->_yahoo->imageSearch('php', array('adult_ok' => -1));
+            $this->_yahoo->imageSearch('php', ['adult_ok' => -1]);
             $this->fail('Expected Zend_Service_Exception not thrown');
         } catch (Zend_Service_Exception $e) {
             $this->assertContains('error occurred sending request', $e->getMessage());
@@ -152,13 +152,13 @@ class Zend_Service_Yahoo_OnlineTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that localSearch() works as expected when searching for restaurants in ZIP 95014
+     * Ensures that localSearch() works as expected when searching for restaurants in ZIP 95014.
      *
      * @return void
      */
     public function testLocalSearchRestaurants()
     {
-        $localResultSet = $this->_yahoo->localSearch('restaurants', array('zip' => '95014'));
+        $localResultSet = $this->_yahoo->localSearch('restaurants', ['zip' => '95014']);
 
         $this->assertTrue($localResultSet instanceof Zend_Service_Yahoo_LocalResultSet);
 
@@ -173,14 +173,14 @@ class Zend_Service_Yahoo_OnlineTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that localSearch() throws an exception when the radius option is invalid
+     * Ensures that localSearch() throws an exception when the radius option is invalid.
      *
      * @return void
      */
     public function testLocalSearchExceptionRadiusInvalid()
     {
         try {
-            $this->_yahoo->localSearch('php', array('zip' => '95014', 'radius' => -1));
+            $this->_yahoo->localSearch('php', ['zip' => '95014', 'radius' => -1]);
             $this->fail('Expected Zend_Service_Exception not thrown');
         } catch (Zend_Service_Exception $e) {
             $this->assertContains('error occurred sending request', $e->getMessage());
@@ -188,7 +188,7 @@ class Zend_Service_Yahoo_OnlineTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that newsSearch() works as expected when searching for 'php'
+     * Ensures that newsSearch() works as expected when searching for 'php'.
      *
      * @return void
      */
@@ -209,7 +209,7 @@ class Zend_Service_Yahoo_OnlineTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that pageDataSearch() works as expected given 'http://framework.zend.com/' as a query
+     * Ensures that pageDataSearch() works as expected given 'http://framework.zend.com/' as a query.
      *
      * @return void
      */
@@ -241,7 +241,7 @@ class Zend_Service_Yahoo_OnlineTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that videoSearch() works as expected given 'php' as a query
+     * Ensures that videoSearch() works as expected given 'php' as a query.
      *
      * @return void
      */
@@ -273,7 +273,7 @@ class Zend_Service_Yahoo_OnlineTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that webSearch() works as expected when searching for 'php'
+     * Ensures that webSearch() works as expected when searching for 'php'.
      *
      * @return void
      */
@@ -294,14 +294,14 @@ class Zend_Service_Yahoo_OnlineTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that webSearch() throws an exception when the adult_ok option is invalid
+     * Ensures that webSearch() throws an exception when the adult_ok option is invalid.
      *
      * @return void
      */
     public function testWebSearchExceptionAdultOkInvalid()
     {
         try {
-            $this->_yahoo->webSearch('php', array('adult_ok' => 'oops'));
+            $this->_yahoo->webSearch('php', ['adult_ok' => 'oops']);
             $this->fail('Expected Zend_Service_Exception not thrown');
         } catch (Zend_Service_Exception $e) {
             $this->assertContains('error occurred sending request', $e->getMessage());
@@ -309,14 +309,14 @@ class Zend_Service_Yahoo_OnlineTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that webSearch() throws an exception when the similar_ok option is invalid
+     * Ensures that webSearch() throws an exception when the similar_ok option is invalid.
      *
      * @return void
      */
     public function testWebSearchExceptionSimilarOkInvalid()
     {
         try {
-            $this->_yahoo->webSearch('php', array('similar_ok' => 'oops'));
+            $this->_yahoo->webSearch('php', ['similar_ok' => 'oops']);
             $this->fail('Expected Zend_Service_Exception not thrown');
         } catch (Zend_Service_Exception $e) {
             $this->assertContains('error occurred sending request', $e->getMessage());
@@ -325,30 +325,31 @@ class Zend_Service_Yahoo_OnlineTest extends PHPUnit_Framework_TestCase
 
     /**
      * Check support for the region option and ensure that it throws an exception
-     * for unsupported regions
+     * for unsupported regions.
      *
      * @group ZF-3222
+     *
      * @return void
      */
     public function testWebSearchRegion()
     {
-        $this->_yahoo->webSearch('php', array('region' => 'nl'));
+        $this->_yahoo->webSearch('php', ['region' => 'nl']);
         try {
-            $this->_yahoo->webSearch('php', array('region' => 'oops'));
+            $this->_yahoo->webSearch('php', ['region' => 'oops']);
             $this->fail('Expected Zend_Service_Exception not thrown');
-        }catch (Zend_Service_Exception $e) {
+        } catch (Zend_Service_Exception $e) {
             $this->assertContains("Invalid value for option 'region': oops", $e->getMessage());
         }
     }
 
     /**
-     * Ensures that webSearch() works as expected when searching for 'php'
+     * Ensures that webSearch() works as expected when searching for 'php'.
      *
      *  @see ZF-2358
      */
     public function testWebSearchForSite()
     {
-        $webResultSet = $this->_yahoo->webSearch('php', array('site' => 'www.php.net'));
+        $webResultSet = $this->_yahoo->webSearch('php', ['site' => 'www.php.net']);
 
         $this->assertTrue($webResultSet instanceof Zend_Service_Yahoo_WebResultSet);
 
@@ -365,10 +366,10 @@ class Zend_Service_Yahoo_OnlineTest extends PHPUnit_Framework_TestCase
 
 /**
  * @category   Zend
- * @package    Zend_Service_Yahoo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Service
  * @group      Zend_Service_Yahoo
  */

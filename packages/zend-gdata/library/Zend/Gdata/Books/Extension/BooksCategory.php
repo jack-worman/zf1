@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Books
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,33 +27,29 @@
 // require_once 'Zend/Gdata/App/Extension/Category.php';
 
 /**
- * Describes a books category
+ * Describes a books category.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Books
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Gdata_Books_Extension_BooksCategory extends
-    Zend_Gdata_App_Extension_Category
+class Zend_Gdata_Books_Extension_BooksCategory extends Zend_Gdata_App_Extension_Category
 {
-
     /**
      * Constructor for Zend_Gdata_Books_Extension_BooksCategory which
-     * Describes a books category
+     * Describes a books category.
      *
-     * @param string|null $term An identifier representing the category within
-     *        the categorization scheme.
-     * @param string|null $scheme A string containing a URI identifying the
-     *        categorization scheme.
-     * @param string|null $label A human-readable label for display in
-     *        end-user applications.
+     * @param string|null $term   an identifier representing the category within
+     *                            the categorization scheme
+     * @param string|null $scheme a string containing a URI identifying the
+     *                            categorization scheme
+     * @param string|null $label  a human-readable label for display in
+     *                            end-user applications
      */
     public function __construct($term = null, $scheme = null, $label = null)
     {
         $this->registerAllNamespaces(Zend_Gdata_Books::$namespaces);
         parent::__construct($term, $scheme, $label);
     }
-
 }

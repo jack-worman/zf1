@@ -1,6 +1,6 @@
 <?php
 /**
- * LICENSE
+ * LICENSE.
  *
  * This source file is subject to the new BSD license that is bundled
  * with this package in the file LICENSE.txt.
@@ -11,8 +11,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Cloud
- * @subpackage StorageService
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -22,60 +21,57 @@
 // require_once 'Zend/Cloud/StorageService/Exception.php';
 
 /**
- *
- * Windows Azure Blob Service abstraction
+ * Windows Azure Blob Service abstraction.
  *
  * @category   Zend
- * @package    Zend_Cloud
- * @subpackage StorageService
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Cloud_StorageService_Adapter_WindowsAzure
-    implements Zend_Cloud_StorageService_Adapter
+class Zend_Cloud_StorageService_Adapter_WindowsAzure implements Zend_Cloud_StorageService_Adapter
 {
-    const ACCOUNT_NAME      = 'storage_accountname';
-    const ACCOUNT_KEY       = 'storage_accountkey';
-    const HOST              = "storage_host";
-    const PROXY_HOST        = "storage_proxy_host";
-    const PROXY_PORT        = "storage_proxy_port";
-    const PROXY_CREDENTIALS = "storage_proxy_credentials";
-    const CONTAINER         = "storage_container";
-    const RETURN_TYPE       = 'return_type';
-    const RETURN_PATHNAME   = 'return_path';
-    const RETURN_OPENMODE   = 'return_openmode';
+    public const ACCOUNT_NAME = 'storage_accountname';
+    public const ACCOUNT_KEY = 'storage_accountkey';
+    public const HOST = 'storage_host';
+    public const PROXY_HOST = 'storage_proxy_host';
+    public const PROXY_PORT = 'storage_proxy_port';
+    public const PROXY_CREDENTIALS = 'storage_proxy_credentials';
+    public const CONTAINER = 'storage_container';
+    public const RETURN_TYPE = 'return_type';
+    public const RETURN_PATHNAME = 'return_path';
+    public const RETURN_OPENMODE = 'return_openmode';
 
     /** return types  for fetch */
-    const RETURN_PATH   = 1;   // return filename
-    const RETURN_STRING = 2; // return data as string
-    const RETURN_STREAM = 3; // return PHP stream
+    public const RETURN_PATH = 1;   // return filename
+    public const RETURN_STRING = 2; // return data as string
+    public const RETURN_STREAM = 3; // return PHP stream
 
     /** return types  for list */
-    const RETURN_LIST  = 1;   // return native list
-    const RETURN_NAMES = 2;  // return only names
+    public const RETURN_LIST = 1;   // return native list
+    public const RETURN_NAMES = 2;  // return only names
 
-    const DEFAULT_HOST = Zend_Service_WindowsAzure_Storage::URL_CLOUD_BLOB;
+    public const DEFAULT_HOST = Zend_Service_WindowsAzure_Storage::URL_CLOUD_BLOB;
 
     /**
-     * Storage container to operate on
+     * Storage container to operate on.
      *
      * @var string
      */
     protected $_container;
 
     /**
-     * Storage client
+     * Storage client.
      *
      * @var Zend_Service_WindowsAzure_Storage_Blob
      */
-    protected $_storageClient = null;
+    protected $_storageClient;
 
     /**
-     * Creates a new Zend_Cloud_Storage_WindowsAzure instance
+     * Creates a new Zend_Cloud_Storage_WindowsAzure instance.
      *
-     * @param array|Zend_Config  $options   Options for the Zend_Cloud_Storage_WindowsAzure instance
+     * @param array|Zend_Config $options Options for the Zend_Cloud_Storage_WindowsAzure instance
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
@@ -100,7 +96,7 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
         }
 
         $this->_storageClient = new Zend_Service_WindowsAzure_Storage_Blob($host,
-             $options[self::ACCOUNT_NAME], $options[self::ACCOUNT_KEY]);
+            $options[self::ACCOUNT_NAME], $options[self::ACCOUNT_KEY]);
 
         // Parse other options
         if (!empty($options[self::PROXY_HOST])) {
@@ -127,16 +123,15 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
     /**
      * Get an item from the storage service.
      *
-     * @param  string $path
-     * @param  array $options
-     * @return mixed
+     * @param string $path
+     * @param array  $options
      */
     public function fetchItem($path, $options = null)
     {
         // Options
         $returnType = self::RETURN_STRING;
         $returnPath = tempnam('', 'azr');
-        $openMode   = 'r';
+        $openMode = 'r';
 
         // Parse options
         if (is_array($options)) {
@@ -161,20 +156,20 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
                 $returnPath
             );
         } catch (Zend_Service_WindowsAzure_Exception $e) {
-            if (strpos((string) $e->getMessage(), "does not exist") !== false) {
+            if (false !== strpos((string) $e->getMessage(), 'does not exist')) {
                 return false;
             }
             throw new Zend_Cloud_StorageService_Exception('Error on fetch: '.$e->getMessage(), $e->getCode(), $e);
         }
 
         // Return value
-        if ($returnType == self::RETURN_PATH) {
+        if (self::RETURN_PATH == $returnType) {
             return $returnPath;
         }
-        if ($returnType == self::RETURN_STRING) {
+        if (self::RETURN_STRING == $returnType) {
             return file_get_contents($returnPath);
         }
-        if ($returnType == self::RETURN_STREAM) {
+        if (self::RETURN_STREAM == $returnType) {
             return fopen($returnPath, $openMode);
         }
     }
@@ -185,19 +180,19 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
      * $destinationPath.
      *
      * @param string $destinationPath
-     * @param mixed  $data
-     * @param  array $options
+     * @param array  $options
+     *
      * @return void
      */
     public function storeItem($destinationPath, $data, $options = null)
     {
         // Create a temporary file that will be uploaded
-        $temporaryFilePath       = '';
+        $temporaryFilePath = '';
         $removeTemporaryFilePath = false;
 
-        if (is_resource($data))    {
+        if (is_resource($data)) {
             $temporaryFilePath = tempnam('', 'azr');
-            $fpDestination     = fopen($temporaryFilePath, 'w');
+            $fpDestination = fopen($temporaryFilePath, 'w');
 
             $fpSource = $data;
             rewind($fpSource);
@@ -209,7 +204,7 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
 
             $removeTemporaryFilePath = true;
         } elseif (file_exists((string) $data)) {
-            $temporaryFilePath       = $data;
+            $temporaryFilePath = $data;
             $removeTemporaryFilePath = false;
         } else {
             $temporaryFilePath = tempnam('', 'azr');
@@ -224,7 +219,7 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
                 $destinationPath,
                 $temporaryFilePath
             );
-        } catch(Zend_Service_WindowsAzure_Exception $e) {
+        } catch (Zend_Service_WindowsAzure_Exception $e) {
             @unlink($temporaryFilePath);
             throw new Zend_Cloud_StorageService_Exception('Error on store: '.$e->getMessage(), $e->getCode(), $e);
         }
@@ -236,8 +231,9 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
     /**
      * Delete an item in the storage service.
      *
-     * @param  string $path
-     * @param  array  $options
+     * @param string $path
+     * @param array  $options
+     *
      * @return void
      */
     public function deleteItem($path, $options = null)
@@ -255,9 +251,10 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
     /**
      * Copy an item in the storage service to a given path.
      *
-     * @param  string $sourcePath
-     * @param  string $destinationPath
-     * @param  array  $options
+     * @param string $sourcePath
+     * @param string $destinationPath
+     * @param array  $options
+     *
      * @return void
      */
     public function copyItem($sourcePath, $destinationPath, $options = null)
@@ -277,9 +274,10 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
     /**
      * Move an item in the storage service to a given path.
      *
-     * @param  string $sourcePath
-     * @param  string $destinationPath
-     * @param  array  $options
+     * @param string $sourcePath
+     * @param string $destinationPath
+     * @param array  $options
+     *
      * @return void
      */
     public function moveItem($sourcePath, $destinationPath, $options = null)
@@ -299,16 +297,15 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
         } catch (Zend_Service_WindowsAzure_Exception $e) {
             throw new Zend_Cloud_StorageService_Exception('Error on move: '.$e->getMessage(), $e->getCode(), $e);
         }
-
     }
 
     /**
      * Rename an item in the storage service to a given name.
      *
+     * @param string $path
+     * @param string $name
+     * @param array  $options
      *
-     * @param  string $path
-     * @param  string $name
-     * @param  array $options
      * @return void
      */
     public function renameItem($path, $name, $options = null)
@@ -317,13 +314,13 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
     }
 
     /**
-     * List items in the given directory in the storage service
+     * List items in the given directory in the storage service.
      *
      * The $path must be a directory
      *
+     * @param string $path    Must be a directory
+     * @param array  $options
      *
-     * @param  string $path Must be a directory
-     * @param  array $options
      * @return array A list of item names
      */
     public function listItems($path, $options = null)
@@ -332,8 +329,8 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
         $returnType = self::RETURN_NAMES; // 1: return list of paths, 2: return raw output from underlying provider
 
         // Parse options
-        if (is_array($options)&& isset($options[self::RETURN_TYPE])) {
-               $returnType = $options[self::RETURN_TYPE];
+        if (is_array($options) && isset($options[self::RETURN_TYPE])) {
+            $returnType = $options[self::RETURN_TYPE];
         }
 
         try {
@@ -347,11 +344,11 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
         }
 
         // Return
-        if ($returnType == self::RETURN_LIST) {
+        if (self::RETURN_LIST == $returnType) {
             return $blobList;
         }
 
-        $returnValue = array();
+        $returnValue = [];
         foreach ($blobList as $blob) {
             $returnValue[] = $blob->Name;
         }
@@ -362,8 +359,9 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
     /**
      * Get a key/value array of metadata for the given path.
      *
-     * @param  string $path
-     * @param  array  $options
+     * @param string $path
+     * @param array  $options
+     *
      * @return array
      */
     public function fetchMetadata($path, $options = null)
@@ -374,7 +372,7 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
                 $path
             );
         } catch (Zend_Service_WindowsAzure_Exception $e) {
-            if (strpos((string) $e->getMessage(), "could not be accessed") !== false) {
+            if (false !== strpos((string) $e->getMessage(), 'could not be accessed')) {
                 return false;
             }
             throw new Zend_Cloud_StorageService_Exception('Error on fetch: '.$e->getMessage(), $e->getCode(), $e);
@@ -386,16 +384,17 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
      * WARNING: This operation overwrites any metadata that is located at
      * $destinationPath.
      *
-     * @param  string $destinationPath
-     * @param  array $options
+     * @param string $destinationPath
+     * @param array  $options
+     *
      * @return void
      */
     public function storeMetadata($destinationPath, $metadata, $options = null)
     {
-        try    {
+        try {
             $this->_storageClient->setBlobMetadata($this->_container, $destinationPath, $metadata);
         } catch (Zend_Service_WindowsAzure_Exception $e) {
-            if (strpos((string) $e->getMessage(), "could not be accessed") === false) {
+            if (false === strpos((string) $e->getMessage(), 'could not be accessed')) {
                 throw new Zend_Cloud_StorageService_Exception('Error on store metadata: '.$e->getMessage(), $e->getCode(), $e);
             }
         }
@@ -404,23 +403,24 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
     /**
      * Delete a key/value array of metadata at the given path.
      *
-     * @param  string $path
-     * @param  array $options
+     * @param string $path
+     * @param array  $options
+     *
      * @return void
      */
     public function deleteMetadata($path, $options = null)
     {
         try {
-            $this->_storageClient->setBlobMetadata($this->_container, $destinationPath, array());
+            $this->_storageClient->setBlobMetadata($this->_container, $destinationPath, []);
         } catch (Zend_Service_WindowsAzure_Exception $e) {
-            if (strpos((string) $e->getMessage(), "could not be accessed") === false) {
+            if (false === strpos((string) $e->getMessage(), 'could not be accessed')) {
                 throw new Zend_Cloud_StorageService_Exception('Error on delete metadata: '.$e->getMessage(), $e->getCode(), $e);
             }
         }
     }
 
     /**
-     * Delete container
+     * Delete container.
      *
      * @return void
      */
@@ -440,6 +440,6 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
      */
     public function getClient()
     {
-         return $this->_storageClient;
+        return $this->_storageClient;
     }
 }

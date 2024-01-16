@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -31,44 +32,45 @@
 
 /**
  * @category   Zend
- * @package    Zend_Validate
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Validate_PostCode extends Zend_Validate_Abstract
 {
-    const INVALID  = 'postcodeInvalid';
-    const NO_MATCH = 'postcodeNoMatch';
+    public const INVALID = 'postcodeInvalid';
+    public const NO_MATCH = 'postcodeNoMatch';
 
     /**
      * @var array
      */
-    protected $_messageTemplates = array(
-        self::INVALID  => "Invalid type given. String or integer expected",
+    protected $_messageTemplates = [
+        self::INVALID => 'Invalid type given. String or integer expected',
         self::NO_MATCH => "'%value%' does not appear to be a postal code",
-    );
+    ];
 
     /**
-     * Locale to use
+     * Locale to use.
      *
      * @var string
      */
     protected $_locale;
 
     /**
-     * Manual postal code format
+     * Manual postal code format.
      *
      * @var unknown_type
      */
     protected $_format;
 
     /**
-     * Constructor for the integer validator
+     * Constructor for the integer validator.
      *
      * Accepts either a string locale, a Zend_Locale object, or an array or
      * Zend_Config object containing the keys "locale" and/or "format".
      *
      * @param string|Zend_Locale|array|Zend_Config $options
+     *
      * @throws Zend_Validate_Exception On empty format
      */
     public function __construct($options = null)
@@ -99,12 +101,12 @@ class Zend_Validate_PostCode extends Zend_Validate_Abstract
         $format = $this->getFormat();
         if (empty($format)) {
             // require_once 'Zend/Validate/Exception.php';
-            throw new Zend_Validate_Exception("A postcode-format string has to be given for validation");
+            throw new Zend_Validate_Exception('A postcode-format string has to be given for validation');
         }
     }
 
     /**
-     * Returns the set locale
+     * Returns the set locale.
      *
      * @return string The set locale
      */
@@ -114,19 +116,21 @@ class Zend_Validate_PostCode extends Zend_Validate_Abstract
     }
 
     /**
-     * Sets the locale to use
+     * Sets the locale to use.
      *
      * @param string|Zend_Locale $locale
+     *
+     * @return Zend_Validate_PostCode Provides a fluent interface
+     *
      * @throws Zend_Validate_Exception On unrecognised region
      * @throws Zend_Validate_Exception On not detected format
-     * @return Zend_Validate_PostCode  Provides a fluent interface
      */
     public function setLocale($locale = null)
     {
         // require_once 'Zend/Locale.php';
         $this->_locale = Zend_Locale::findLocale($locale);
-        $locale        = new Zend_Locale($this->_locale);
-        $region        = $locale->getRegion();
+        $locale = new Zend_Locale($this->_locale);
+        $region = $locale->getRegion();
         if (empty($region)) {
             // require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception("Unable to detect a region for the locale '$locale'");
@@ -144,11 +148,12 @@ class Zend_Validate_PostCode extends Zend_Validate_Abstract
         }
 
         $this->setFormat($format);
+
         return $this;
     }
 
     /**
-     * Returns the set postal code format
+     * Returns the set postal code format.
      *
      * @return unknown_type
      */
@@ -158,50 +163,56 @@ class Zend_Validate_PostCode extends Zend_Validate_Abstract
     }
 
     /**
-     * Sets a self defined postal format as regex
+     * Sets a self defined postal format as regex.
      *
      * @param string $format
+     *
+     * @return Zend_Validate_PostCode Provides a fluent interface
+     *
      * @throws Zend_Validate_Exception On empty format
-     * @return Zend_Validate_PostCode  Provides a fluent interface
      */
     public function setFormat($format)
     {
         if (empty($format) || !is_string($format)) {
             // require_once 'Zend/Validate/Exception.php';
-            throw new Zend_Validate_Exception("A postcode-format string has to be given for validation");
+            throw new Zend_Validate_Exception('A postcode-format string has to be given for validation');
         }
 
-        if ($format[0] !== '/') {
-            $format = '/^' . $format;
+        if ('/' !== $format[0]) {
+            $format = '/^'.$format;
         }
 
-        if ($format[strlen((string) $format) - 1] !== '/') {
+        if ('/' !== $format[strlen((string) $format) - 1]) {
             $format .= '$/';
         }
 
         $this->_format = $format;
+
         return $this;
     }
 
     /**
-     * Defined by Zend_Validate_Interface
+     * Defined by Zend_Validate_Interface.
      *
      * Returns true if and only if $value is a valid postalcode
      *
-     * @param  string $value
-     * @return boolean
+     * @param string $value
+     *
+     * @return bool
      */
     public function isValid($value)
     {
         $this->_setValue($value);
         if (!is_string($value) && !is_int($value)) {
             $this->_error(self::INVALID);
+
             return false;
         }
 
         $format = $this->getFormat();
         if (!preg_match($format, $value)) {
             $this->_error(self::NO_MATCH);
+
             return false;
         }
 

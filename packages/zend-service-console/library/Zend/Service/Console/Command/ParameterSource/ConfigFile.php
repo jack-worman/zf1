@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,9 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_Console
- * @subpackage Exception
+ *
  * @version    $Id$
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @copyright  Copyright (c) 2009 - 2011, RealDolmen (http://www.realdolmen.com)
@@ -23,82 +23,84 @@
  */
 
 /**
-* @see Zend_Service_Console_Command_ParameterSource_ParameterSourceInterface
-*/
+ * @see Zend_Service_Console_Command_ParameterSource_ParameterSourceInterface
+ */
 // require_once 'Zend/Service/Console/Command/ParameterSource/ParameterSourceInterface.php';
 
 /**
  * @category   Zend
- * @package    Zend_Service_Console
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @copyright  Copyright (c) 2009 - 2011, RealDolmen (http://www.realdolmen.com)
  * @license    http://phpazure.codeplex.com/license
  */
-class Zend_Service_Console_Command_ParameterSource_ConfigFile
-	implements Zend_Service_Console_Command_ParameterSource_ParameterSourceInterface
+class Zend_Service_Console_Command_ParameterSource_ConfigFile implements Zend_Service_Console_Command_ParameterSource_ParameterSourceInterface
 {
-	/**
-	 * Get value for a named parameter.
-	 *
-	 * @param mixed $parameter Parameter to get a value for
-	 * @param array $argv Argument values passed to the script when run in console.
-	 * @return mixed
-	 */
-	public function getValueForParameter($parameter, $argv = array())
-	{
-		// Configuration file path
-		$configurationFilePath = null;
+    /**
+     * Get value for a named parameter.
+     *
+     * @param mixed $parameter Parameter to get a value for
+     * @param array $argv      argument values passed to the script when run in console
+     */
+    public function getValueForParameter($parameter, $argv = [])
+    {
+        // Configuration file path
+        $configurationFilePath = null;
 
-		// Check if a path to a configuration file is specified
-		foreach ($argv as $parameterInput) {
-			$parameterInput = explode('=', $parameterInput, 2);
+        // Check if a path to a configuration file is specified
+        foreach ($argv as $parameterInput) {
+            $parameterInput = explode('=', $parameterInput, 2);
 
-			if (strtolower((string) $parameterInput[0]) == '--configfile' || strtolower((string) $parameterInput[0]) == '-f') {
-				if (!isset($parameterInput[1])) {
-					// require_once 'Zend/Service/Console/Exception.php';
-					throw new Zend_Service_Console_Exception("No path to a configuration file is given. Specify the path using the --ConfigFile or -F switch.");
-				}
-				$configurationFilePath = $parameterInput[1];
-				break;
-			}
-		}
+            if ('--configfile' == strtolower((string) $parameterInput[0]) || '-f' == strtolower((string) $parameterInput[0])) {
+                if (!isset($parameterInput[1])) {
+                    // require_once 'Zend/Service/Console/Exception.php';
+                    throw new Zend_Service_Console_Exception('No path to a configuration file is given. Specify the path using the --ConfigFile or -F switch.');
+                }
+                $configurationFilePath = $parameterInput[1];
+                break;
+            }
+        }
 
-		// Value given?
-		if (is_null($configurationFilePath)) {
-			return null;
-		}
-		if (!file_exists((string) $configurationFilePath)) {
-			// require_once 'Zend/Service/Console/Exception.php';
-			throw new Zend_Service_Console_Exception("Invalid configuration file given. Specify the correct path using the --ConfigFile or -F switch.");
-		}
+        // Value given?
+        if (is_null($configurationFilePath)) {
+            return null;
+        }
+        if (!file_exists((string) $configurationFilePath)) {
+            // require_once 'Zend/Service/Console/Exception.php';
+            throw new Zend_Service_Console_Exception('Invalid configuration file given. Specify the correct path using the --ConfigFile or -F switch.');
+        }
 
-		// Parse values
-		$iniValues = parse_ini_file($configurationFilePath);
+        // Parse values
+        $iniValues = parse_ini_file($configurationFilePath);
 
-		// Default value
-		$parameterValue = null;
+        // Default value
+        $parameterValue = null;
 
-		// Loop aliases
-		foreach ($parameter->aliases as $alias) {
-			if (array_key_exists($alias, $iniValues)) {
-				$parameterValue = $iniValues[$alias]; break;
-			} else if (array_key_exists(strtolower((string) $alias), $iniValues)) {
-				$parameterValue = $iniValues[strtolower((string) $alias)]; break;
-			} else if (array_key_exists(str_replace((string) '-', '', $alias), $iniValues)) {
-				$parameterValue = $iniValues[str_replace((string) '-', '', $alias)]; break;
-			} else if (array_key_exists(strtolower((string) str_replace((string) '-', '', $alias)), $iniValues)) {
-				$parameterValue = $iniValues[strtolower((string) str_replace((string) '-', '', $alias))]; break;
-			}
-		}
+        // Loop aliases
+        foreach ($parameter->aliases as $alias) {
+            if (array_key_exists($alias, $iniValues)) {
+                $parameterValue = $iniValues[$alias];
+                break;
+            } elseif (array_key_exists(strtolower((string) $alias), $iniValues)) {
+                $parameterValue = $iniValues[strtolower((string) $alias)];
+                break;
+            } elseif (array_key_exists(str_replace((string) '-', '', $alias), $iniValues)) {
+                $parameterValue = $iniValues[str_replace((string) '-', '', $alias)];
+                break;
+            } elseif (array_key_exists(strtolower((string) str_replace((string) '-', '', $alias)), $iniValues)) {
+                $parameterValue = $iniValues[strtolower((string) str_replace((string) '-', '', $alias))];
+                break;
+            }
+        }
 
-		if (strtolower((string) $parameterValue) == 'true') {
-			$parameterValue = true;
-		} else if (strtolower((string) $parameterValue) == 'false') {
-			$parameterValue = false;
-		}
+        if ('true' == strtolower((string) $parameterValue)) {
+            $parameterValue = true;
+        } elseif ('false' == strtolower((string) $parameterValue)) {
+            $parameterValue = false;
+        }
 
-		// Done!
-		return $parameterValue;
-	}
+        // Done!
+        return $parameterValue;
+    }
 }

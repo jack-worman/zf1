@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Serializer
- * @subpackage Adapter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -28,8 +28,7 @@
 
 /**
  * @category   Zend
- * @package    Zend_Serializer
- * @subpackage Adapter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -38,40 +37,37 @@ class Zend_Serializer_Adapter_Json extends Zend_Serializer_Adapter_AdapterAbstra
     /**
      * @var array Default options
      */
-    protected $_options = array(
-        'cycleCheck'           => false,
+    protected $_options = [
+        'cycleCheck' => false,
         'enableJsonExprFinder' => false,
-        'objectDecodeType'     => Zend_Json::TYPE_ARRAY,
-    );
+        'objectDecodeType' => Zend_Json::TYPE_ARRAY,
+    ];
 
     /**
-     * Serialize PHP value to JSON
+     * Serialize PHP value to JSON.
      *
-     * @param  mixed $value
-     * @param  array $opts
      * @return string
+     *
      * @throws Zend_Serializer_Exception on JSON encoding exception
      */
-    public function serialize($value, array $opts = array())
+    public function serialize($value, array $opts = [])
     {
         $opts = $opts + $this->_options;
 
-        try  {
+        try {
             return Zend_Json::encode($value, $opts['cycleCheck'], $opts);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             // require_once 'Zend/Serializer/Exception.php';
             throw new Zend_Serializer_Exception('Serialization failed', 0, $e);
         }
     }
 
     /**
-     * Deserialize JSON to PHP value
+     * Deserialize JSON to PHP value.
      *
-     * @param  string $json
-     * @param  array $opts
-     * @return mixed
+     * @param string $json
      */
-    public function unserialize($json, array $opts = array())
+    public function unserialize($json, array $opts = [])
     {
         $opts = $opts + $this->_options;
 
@@ -80,7 +76,7 @@ class Zend_Serializer_Adapter_Json extends Zend_Serializer_Adapter_AdapterAbstra
         } catch (Zend_Json_Exception $e) {
             // require_once 'Zend/Serializer/Exception.php';
             throw new Zend_Serializer_Exception('Invalid json data');
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             // require_once 'Zend/Serializer/Exception.php';
             throw new Zend_Serializer_Exception('Unserialization failed by previous error', 0, $e);
         }

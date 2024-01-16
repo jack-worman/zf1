@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Barcode
- * @subpackage Object
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -31,10 +31,10 @@
 // require_once 'Zend/Validate/Barcode.php';
 
 /**
- * Class for generate Interleaved 2 of 5 barcode
+ * Class for generate Interleaved 2 of 5 barcode.
  *
  * @category   Zend
- * @package    Zend_Barcode
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -43,10 +43,11 @@ class Zend_Barcode_Object_Code25 extends Zend_Barcode_Object_ObjectAbstract
     /**
      * Coding map
      * - 0 = narrow bar
-     * - 1 = wide bar
+     * - 1 = wide bar.
+     *
      * @var array
      */
-    protected $_codingMap = array(
+    protected $_codingMap = [
         '0' => '00110',
         '1' => '10001',
         '2' => '01001',
@@ -57,27 +58,31 @@ class Zend_Barcode_Object_Code25 extends Zend_Barcode_Object_ObjectAbstract
         '7' => '00011',
         '8' => '10010',
         '9' => '01010',
-    );
+    ];
 
     /**
-     * Width of the barcode (in pixels)
-     * @return integer
+     * Width of the barcode (in pixels).
+     *
+     * @return int
      */
     protected function _calculateBarcodeWidth()
     {
-        $quietZone       = $this->getQuietZone();
-        $startCharacter  = (2 * $this->_barThickWidth + 4 * $this->_barThinWidth) * $this->_factor;
+        $quietZone = $this->getQuietZone();
+        $startCharacter = (2 * $this->_barThickWidth + 4 * $this->_barThinWidth) * $this->_factor;
         $characterLength = (3 * $this->_barThinWidth + 2 * $this->_barThickWidth + 5 * $this->_barThinWidth)
                          * $this->_factor;
-        $encodedData     = strlen((string) $this->getText()) * $characterLength;
-        $stopCharacter   = (2 * $this->_barThickWidth + 4 * $this->_barThinWidth) * $this->_factor;
+        $encodedData = strlen((string) $this->getText()) * $characterLength;
+        $stopCharacter = (2 * $this->_barThickWidth + 4 * $this->_barThinWidth) * $this->_factor;
+
         return $quietZone + $startCharacter + $encodedData + $stopCharacter + $quietZone;
     }
 
     /**
-     * Partial check of interleaved 2 of 5 barcode
-     * @throws Zend_Barcode_Object_Exception
+     * Partial check of interleaved 2 of 5 barcode.
+     *
      * @return void
+     *
+     * @throws Zend_Barcode_Object_Exception
      */
     protected function _checkParams()
     {
@@ -85,20 +90,21 @@ class Zend_Barcode_Object_Code25 extends Zend_Barcode_Object_ObjectAbstract
     }
 
     /**
-     * Prepare array to draw barcode
+     * Prepare array to draw barcode.
+     *
      * @return array
      */
     protected function _prepareBarcode()
     {
-        $barcodeTable = array();
+        $barcodeTable = [];
 
         // Start character (30301)
-        $barcodeTable[] = array(1 , $this->_barThickWidth , 0 , 1);
-        $barcodeTable[] = array(0 , $this->_barThinWidth , 0 , 1);
-        $barcodeTable[] = array(1 , $this->_barThickWidth , 0 , 1);
-        $barcodeTable[] = array(0 , $this->_barThinWidth , 0 , 1);
-        $barcodeTable[] = array(1 , $this->_barThinWidth , 0 , 1);
-        $barcodeTable[] = array(0 , $this->_barThinWidth);
+        $barcodeTable[] = [1, $this->_barThickWidth, 0, 1];
+        $barcodeTable[] = [0, $this->_barThinWidth, 0, 1];
+        $barcodeTable[] = [1, $this->_barThickWidth, 0, 1];
+        $barcodeTable[] = [0, $this->_barThinWidth, 0, 1];
+        $barcodeTable[] = [1, $this->_barThinWidth, 0, 1];
+        $barcodeTable[] = [0, $this->_barThinWidth];
 
         $text = str_split($this->getText());
         foreach ($text as $char) {
@@ -106,36 +112,39 @@ class Zend_Barcode_Object_Code25 extends Zend_Barcode_Object_ObjectAbstract
             foreach ($barcodeChar as $c) {
                 /* visible, width, top, length */
                 $width = $c ? $this->_barThickWidth : $this->_barThinWidth;
-                $barcodeTable[] = array(1 , $width , 0 , 1);
-                $barcodeTable[] = array(0 , $this->_barThinWidth);
+                $barcodeTable[] = [1, $width, 0, 1];
+                $barcodeTable[] = [0, $this->_barThinWidth];
             }
         }
 
         // Stop character (30103)
-        $barcodeTable[] = array(1 , $this->_barThickWidth , 0 , 1);
-        $barcodeTable[] = array(0 , $this->_barThinWidth , 0 , 1);
-        $barcodeTable[] = array(1 , $this->_barThinWidth , 0 , 1);
-        $barcodeTable[] = array(0 , $this->_barThinWidth , 0 , 1);
-        $barcodeTable[] = array(1 , $this->_barThickWidth , 0 , 1);
+        $barcodeTable[] = [1, $this->_barThickWidth, 0, 1];
+        $barcodeTable[] = [0, $this->_barThinWidth, 0, 1];
+        $barcodeTable[] = [1, $this->_barThinWidth, 0, 1];
+        $barcodeTable[] = [0, $this->_barThinWidth, 0, 1];
+        $barcodeTable[] = [1, $this->_barThickWidth, 0, 1];
+
         return $barcodeTable;
     }
 
     /**
-     * Get barcode checksum
+     * Get barcode checksum.
      *
      * @param string $text
-     * @throws Zend_Barcode_Object_Exception
+     *
      * @return int
+     *
+     * @throws Zend_Barcode_Object_Exception
      */
     public function getChecksum($text)
     {
         $this->_checkText($text);
-        $factor   = 3;
+        $factor = 3;
         $checksum = 0;
 
-        for ($i = strlen((string) $text); $i > 0; $i --) {
-            $checksum += (int)$text[$i - 1] * $factor;
-            $factor    = 4 - $factor;
+        for ($i = strlen((string) $text); $i > 0; --$i) {
+            $checksum += (int) $text[$i - 1] * $factor;
+            $factor = 4 - $factor;
         }
 
         $checksum = (10 - ($checksum % 10)) % 10;

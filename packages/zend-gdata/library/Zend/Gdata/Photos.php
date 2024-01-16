@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Photos
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -47,86 +47,84 @@
  * Like other service classes in this module, this class provides access via
  * an HTTP client to Google servers for working with entries and feeds.
  *
- * @link http://code.google.com/apis/picasaweb/gdata.html
+ * @see http://code.google.com/apis/picasaweb/gdata.html
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Photos
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_Photos extends Zend_Gdata
 {
-
-    const PICASA_BASE_URI = 'https://picasaweb.google.com/data';
-    const PICASA_BASE_FEED_URI = 'https://picasaweb.google.com/data/feed';
-    const AUTH_SERVICE_NAME = 'lh2';
+    public const PICASA_BASE_URI = 'https://picasaweb.google.com/data';
+    public const PICASA_BASE_FEED_URI = 'https://picasaweb.google.com/data/feed';
+    public const AUTH_SERVICE_NAME = 'lh2';
 
     /**
      * Default projection when interacting with the Picasa server.
      */
-    const DEFAULT_PROJECTION = 'api';
+    public const DEFAULT_PROJECTION = 'api';
 
     /**
      * The default visibility to filter events by.
      */
-    const DEFAULT_VISIBILITY = 'all';
+    public const DEFAULT_VISIBILITY = 'all';
 
     /**
      * The default user to retrieve feeds for.
      */
-    const DEFAULT_USER = 'default';
+    public const DEFAULT_USER = 'default';
 
     /**
      * Path to the user feed on the Picasa server.
      */
-    const USER_PATH = 'user';
+    public const USER_PATH = 'user';
 
     /**
      * Path to album feeds on the Picasa server.
      */
-    const ALBUM_PATH = 'albumid';
+    public const ALBUM_PATH = 'albumid';
 
     /**
      * Path to photo feeds on the Picasa server.
      */
-    const PHOTO_PATH = 'photoid';
+    public const PHOTO_PATH = 'photoid';
 
     /**
      * The path to the community search feed on the Picasa server.
      */
-    const COMMUNITY_SEARCH_PATH = 'all';
+    public const COMMUNITY_SEARCH_PATH = 'all';
 
     /**
-     * The path to use for finding links to feeds within entries
+     * The path to use for finding links to feeds within entries.
      */
-    const FEED_LINK_PATH = 'http://schemas.google.com/g/2005#feed';
+    public const FEED_LINK_PATH = 'http://schemas.google.com/g/2005#feed';
 
     /**
-     * The path to use for the determining type of an entry
+     * The path to use for the determining type of an entry.
      */
-    const KIND_PATH = 'http://schemas.google.com/g/2005#kind';
+    public const KIND_PATH = 'http://schemas.google.com/g/2005#kind';
 
     /**
-     * Namespaces used for Zend_Gdata_Photos
+     * Namespaces used for Zend_Gdata_Photos.
      *
      * @var array
      */
-    public static $namespaces = array(
-        array('gphoto', 'http://schemas.google.com/photos/2007', 1, 0),
-        array('photo', 'http://www.pheed.com/pheed/', 1, 0),
-        array('exif', 'http://schemas.google.com/photos/exif/2007', 1, 0),
-        array('georss', 'http://www.georss.org/georss', 1, 0),
-        array('gml', 'http://www.opengis.net/gml', 1, 0),
-        array('media', 'http://search.yahoo.com/mrss/', 1, 0)
-    );
+    public static $namespaces = [
+        ['gphoto', 'http://schemas.google.com/photos/2007', 1, 0],
+        ['photo', 'http://www.pheed.com/pheed/', 1, 0],
+        ['exif', 'http://schemas.google.com/photos/exif/2007', 1, 0],
+        ['georss', 'http://www.georss.org/georss', 1, 0],
+        ['gml', 'http://www.opengis.net/gml', 1, 0],
+        ['media', 'http://search.yahoo.com/mrss/', 1, 0],
+    ];
 
     /**
-     * Create Zend_Gdata_Photos object
+     * Create Zend_Gdata_Photos object.
      *
-     * @param Zend_Http_Client $client (optional) The HTTP client to use when
-     *          when communicating with the servers.
-     * @param string $applicationId The identity of the app in the form of Company-AppName-Version
+     * @param zend_Http_Client $client        (optional) The HTTP client to use when
+     *                                        when communicating with the servers
+     * @param string           $applicationId The identity of the app in the form of Company-AppName-Version
      */
     public function __construct($client = null, $applicationId = 'MyCompany-MyApp-1.0')
     {
@@ -141,9 +139,11 @@ class Zend_Gdata_Photos extends Zend_Gdata
      * TagEntries associated with a given user.
      *
      * @param string $userName The userName of interest
-     * @param mixed $location (optional) The location for the feed, as a URL
-     *          or Query. If not provided, a default URL will be used instead.
+     * @param mixed  $location (optional) The location for the feed, as a URL
+     *                         or Query. If not provided, a default URL will be used instead.
+     *
      * @return string|Zend_Gdata_App_Feed
+     *
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      */
@@ -151,24 +151,24 @@ class Zend_Gdata_Photos extends Zend_Gdata
     {
         if ($location instanceof Zend_Gdata_Photos_UserQuery) {
             $location->setType('feed');
-            if ($userName !== null) {
+            if (null !== $userName) {
                 $location->setUser($userName);
             }
             $uri = $location->getQueryUrl();
-        } else if ($location instanceof Zend_Gdata_Query) {
-            if ($userName !== null) {
+        } elseif ($location instanceof Zend_Gdata_Query) {
+            if (null !== $userName) {
                 $location->setUser($userName);
             }
             $uri = $location->getQueryUrl();
-        } else if ($location !== null) {
+        } elseif (null !== $location) {
             $uri = $location;
-        } else if ($userName !== null) {
-            $uri = self::PICASA_BASE_FEED_URI . '/' .
-                self::DEFAULT_PROJECTION . '/' . self::USER_PATH . '/' .
+        } elseif (null !== $userName) {
+            $uri = self::PICASA_BASE_FEED_URI.'/'.
+                self::DEFAULT_PROJECTION.'/'.self::USER_PATH.'/'.
                 $userName;
         } else {
-            $uri = self::PICASA_BASE_FEED_URI . '/' .
-                self::DEFAULT_PROJECTION . '/' . self::USER_PATH . '/' .
+            $uri = self::PICASA_BASE_FEED_URI.'/'.
+                self::DEFAULT_PROJECTION.'/'.self::USER_PATH.'/'.
                 self::DEFAULT_USER;
         }
 
@@ -179,25 +179,27 @@ class Zend_Gdata_Photos extends Zend_Gdata
      * Retreive AlbumFeed object containing multiple PhotoEntry or TagEntry
      * objects.
      *
-     * @param mixed $location (optional) The location for the feed, as a URL or Query.
+     * @param mixed $location (optional) The location for the feed, as a URL or Query
+     *
      * @return string|Zend_Gdata_App_Feed
+     *
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      */
     public function getAlbumFeed($location = null)
     {
-        if ($location === null) {
+        if (null === $location) {
             // require_once 'Zend/Gdata/App/InvalidArgumentException.php';
-            throw new Zend_Gdata_App_InvalidArgumentException(
-                    'Location must not be null');
-        } else if ($location instanceof Zend_Gdata_Photos_UserQuery) {
+            throw new Zend_Gdata_App_InvalidArgumentException('Location must not be null');
+        } elseif ($location instanceof Zend_Gdata_Photos_UserQuery) {
             $location->setType('feed');
             $uri = $location->getQueryUrl();
-        } else if ($location instanceof Zend_Gdata_Query) {
+        } elseif ($location instanceof Zend_Gdata_Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
         }
+
         return parent::getFeed($uri, 'Zend_Gdata_Photos_AlbumFeed');
     }
 
@@ -206,187 +208,199 @@ class Zend_Gdata_Photos extends Zend_Gdata
      * with a given photo.
      *
      * @param mixed $location (optional) The location for the feed, as a URL
-     *          or Query. If not specified, the community search feed will
-     *          be returned instead.
+     *                        or Query. If not specified, the community search feed will
+     *                        be returned instead.
+     *
      * @return string|Zend_Gdata_App_Feed
+     *
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      */
     public function getPhotoFeed($location = null)
     {
-        if ($location === null) {
-            $uri = self::PICASA_BASE_FEED_URI . '/' .
-                self::DEFAULT_PROJECTION . '/' .
+        if (null === $location) {
+            $uri = self::PICASA_BASE_FEED_URI.'/'.
+                self::DEFAULT_PROJECTION.'/'.
                 self::COMMUNITY_SEARCH_PATH;
-        } else if ($location instanceof Zend_Gdata_Photos_UserQuery) {
+        } elseif ($location instanceof Zend_Gdata_Photos_UserQuery) {
             $location->setType('feed');
             $uri = $location->getQueryUrl();
-        } else if ($location instanceof Zend_Gdata_Query) {
+        } elseif ($location instanceof Zend_Gdata_Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
         }
+
         return parent::getFeed($uri, 'Zend_Gdata_Photos_PhotoFeed');
     }
 
     /**
      * Retreive a single UserEntry object.
      *
-     * @param mixed $location The location for the feed, as a URL or Query.
+     * @param mixed $location the location for the feed, as a URL or Query
+     *
      * @return string|Zend_Gdata_App_Entry
+     *
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      */
     public function getUserEntry($location)
     {
-        if ($location === null) {
+        if (null === $location) {
             // require_once 'Zend/Gdata/App/InvalidArgumentException.php';
-            throw new Zend_Gdata_App_InvalidArgumentException(
-                    'Location must not be null');
-        } else if ($location instanceof Zend_Gdata_Photos_UserQuery) {
+            throw new Zend_Gdata_App_InvalidArgumentException('Location must not be null');
+        } elseif ($location instanceof Zend_Gdata_Photos_UserQuery) {
             $location->setType('entry');
             $uri = $location->getQueryUrl();
-        } else if ($location instanceof Zend_Gdata_Query) {
+        } elseif ($location instanceof Zend_Gdata_Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
         }
+
         return parent::getEntry($uri, 'Zend_Gdata_Photos_UserEntry');
     }
 
     /**
      * Retreive a single AlbumEntry object.
      *
-     * @param mixed $location The location for the feed, as a URL or Query.
+     * @param mixed $location the location for the feed, as a URL or Query
+     *
      * @return string|Zend_Gdata_App_Entry
+     *
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      */
     public function getAlbumEntry($location)
     {
-        if ($location === null) {
+        if (null === $location) {
             // require_once 'Zend/Gdata/App/InvalidArgumentException.php';
-            throw new Zend_Gdata_App_InvalidArgumentException(
-                    'Location must not be null');
-        } else if ($location instanceof Zend_Gdata_Photos_UserQuery) {
+            throw new Zend_Gdata_App_InvalidArgumentException('Location must not be null');
+        } elseif ($location instanceof Zend_Gdata_Photos_UserQuery) {
             $location->setType('entry');
             $uri = $location->getQueryUrl();
-        } else if ($location instanceof Zend_Gdata_Query) {
+        } elseif ($location instanceof Zend_Gdata_Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
         }
+
         return parent::getEntry($uri, 'Zend_Gdata_Photos_AlbumEntry');
     }
 
     /**
      * Retreive a single PhotoEntry object.
      *
-     * @param mixed $location The location for the feed, as a URL or Query.
+     * @param mixed $location the location for the feed, as a URL or Query
+     *
      * @return string|Zend_Gdata_App_Entry
+     *
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      */
     public function getPhotoEntry($location)
     {
-        if ($location === null) {
+        if (null === $location) {
             // require_once 'Zend/Gdata/App/InvalidArgumentException.php';
-            throw new Zend_Gdata_App_InvalidArgumentException(
-                    'Location must not be null');
-        } else if ($location instanceof Zend_Gdata_Photos_UserQuery) {
+            throw new Zend_Gdata_App_InvalidArgumentException('Location must not be null');
+        } elseif ($location instanceof Zend_Gdata_Photos_UserQuery) {
             $location->setType('entry');
             $uri = $location->getQueryUrl();
-        } else if ($location instanceof Zend_Gdata_Query) {
+        } elseif ($location instanceof Zend_Gdata_Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
         }
+
         return parent::getEntry($uri, 'Zend_Gdata_Photos_PhotoEntry');
     }
 
     /**
      * Retreive a single TagEntry object.
      *
-     * @param mixed $location The location for the feed, as a URL or Query.
+     * @param mixed $location the location for the feed, as a URL or Query
+     *
      * @return string|Zend_Gdata_App_Entry
+     *
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      */
     public function getTagEntry($location)
     {
-        if ($location === null) {
+        if (null === $location) {
             // require_once 'Zend/Gdata/App/InvalidArgumentException.php';
-            throw new Zend_Gdata_App_InvalidArgumentException(
-                    'Location must not be null');
-        } else if ($location instanceof Zend_Gdata_Photos_UserQuery) {
+            throw new Zend_Gdata_App_InvalidArgumentException('Location must not be null');
+        } elseif ($location instanceof Zend_Gdata_Photos_UserQuery) {
             $location->setType('entry');
             $uri = $location->getQueryUrl();
-        } else if ($location instanceof Zend_Gdata_Query) {
+        } elseif ($location instanceof Zend_Gdata_Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
         }
+
         return parent::getEntry($uri, 'Zend_Gdata_Photos_TagEntry');
     }
 
     /**
      * Retreive a single CommentEntry object.
      *
-     * @param mixed $location The location for the feed, as a URL or Query.
+     * @param mixed $location the location for the feed, as a URL or Query
+     *
      * @return string|Zend_Gdata_App_Entry
+     *
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      */
     public function getCommentEntry($location)
     {
-        if ($location === null) {
+        if (null === $location) {
             // require_once 'Zend/Gdata/App/InvalidArgumentException.php';
-            throw new Zend_Gdata_App_InvalidArgumentException(
-                    'Location must not be null');
-        } else if ($location instanceof Zend_Gdata_Photos_UserQuery) {
+            throw new Zend_Gdata_App_InvalidArgumentException('Location must not be null');
+        } elseif ($location instanceof Zend_Gdata_Photos_UserQuery) {
             $location->setType('entry');
             $uri = $location->getQueryUrl();
-        } else if ($location instanceof Zend_Gdata_Query) {
+        } elseif ($location instanceof Zend_Gdata_Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
         }
+
         return parent::getEntry($uri, 'Zend_Gdata_Photos_CommentEntry');
     }
 
     /**
      * Create a new album from a AlbumEntry.
      *
-     * @param Zend_Gdata_Photos_AlbumEntry $album The album entry to
-     *          insert.
-     * @param string $url (optional) The URI that the album should be
-     *          uploaded to. If null, the default album creation URI for
-     *          this domain will be used.
-     * @return Zend_Gdata_App_Entry The inserted album entry as
-     *          returned by the server.
+     * @param Zend_Gdata_Photos_AlbumEntry $album the album entry to
+     *                                            insert
+     *
+     * @return Zend_Gdata_App_Entry the inserted album entry as
+     *                              returned by the server
+     *
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      */
     public function insertAlbumEntry($album, $uri = null)
     {
-        if ($uri === null) {
-            $uri = self::PICASA_BASE_FEED_URI . '/' .
-                self::DEFAULT_PROJECTION . '/' . self::USER_PATH . '/' .
+        if (null === $uri) {
+            $uri = self::PICASA_BASE_FEED_URI.'/'.
+                self::DEFAULT_PROJECTION.'/'.self::USER_PATH.'/'.
                 self::DEFAULT_USER;
         }
         $newEntry = $this->insertEntry($album, $uri, 'Zend_Gdata_Photos_AlbumEntry');
+
         return $newEntry;
     }
 
     /**
      * Create a new photo from a PhotoEntry.
      *
-     * @param Zend_Gdata_Photos_PhotoEntry $photo The photo to insert.
-     * @param string $url The URI that the photo should be uploaded
-     *          to. Alternatively, an AlbumEntry can be provided and the
-     *          photo will be added to that album.
-     * @return Zend_Gdata_App_Entry The inserted photo entry
-     *          as returned by the server.
+     * @param Zend_Gdata_Photos_PhotoEntry $photo the photo to insert
+     *
+     * @return Zend_Gdata_App_Entry the inserted photo entry
+     *                              as returned by the server
+     *
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      */
@@ -395,24 +409,23 @@ class Zend_Gdata_Photos extends Zend_Gdata
         if ($uri instanceof Zend_Gdata_Photos_AlbumEntry) {
             $uri = $uri->getLink(self::FEED_LINK_PATH)->href;
         }
-        if ($uri === null) {
+        if (null === $uri) {
             // require_once 'Zend/Gdata/App/InvalidArgumentException.php';
-            throw new Zend_Gdata_App_InvalidArgumentException(
-                    'URI must not be null');
+            throw new Zend_Gdata_App_InvalidArgumentException('URI must not be null');
         }
         $newEntry = $this->insertEntry($photo, $uri, 'Zend_Gdata_Photos_PhotoEntry');
+
         return $newEntry;
     }
 
     /**
      * Create a new tag from a TagEntry.
      *
-     * @param Zend_Gdata_Photos_TagEntry $tag The tag entry to insert.
-     * @param string $url The URI where the tag should be
-     *          uploaded to. Alternatively, a PhotoEntry can be provided and
-     *          the tag will be added to that photo.
-     * @return Zend_Gdata_App_Entry The inserted tag entry as returned
-     *          by the server.
+     * @param Zend_Gdata_Photos_TagEntry $tag the tag entry to insert
+     *
+     * @return Zend_Gdata_App_Entry the inserted tag entry as returned
+     *                              by the server
+     *
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      */
@@ -421,25 +434,24 @@ class Zend_Gdata_Photos extends Zend_Gdata
         if ($uri instanceof Zend_Gdata_Photos_PhotoEntry) {
             $uri = $uri->getLink(self::FEED_LINK_PATH)->href;
         }
-        if ($uri === null) {
+        if (null === $uri) {
             // require_once 'Zend/Gdata/App/InvalidArgumentException.php';
-            throw new Zend_Gdata_App_InvalidArgumentException(
-                    'URI must not be null');
+            throw new Zend_Gdata_App_InvalidArgumentException('URI must not be null');
         }
         $newEntry = $this->insertEntry($tag, $uri, 'Zend_Gdata_Photos_TagEntry');
+
         return $newEntry;
     }
 
     /**
      * Create a new comment from a CommentEntry.
      *
-     * @param Zend_Gdata_Photos_CommentEntry $comment The comment entry to
-     *          insert.
-     * @param string $url The URI where the comment should be uploaded to.
-     *          Alternatively, a PhotoEntry can be provided and
-     *          the comment will be added to that photo.
-     * @return Zend_Gdata_App_Entry The inserted comment entry
-     *          as returned by the server.
+     * @param Zend_Gdata_Photos_CommentEntry $comment the comment entry to
+     *                                                insert
+     *
+     * @return Zend_Gdata_App_Entry the inserted comment entry
+     *                              as returned by the server
+     *
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      */
@@ -448,23 +460,25 @@ class Zend_Gdata_Photos extends Zend_Gdata
         if ($uri instanceof Zend_Gdata_Photos_PhotoEntry) {
             $uri = $uri->getLink(self::FEED_LINK_PATH)->href;
         }
-        if ($uri === null) {
+        if (null === $uri) {
             // require_once 'Zend/Gdata/App/InvalidArgumentException.php';
-            throw new Zend_Gdata_App_InvalidArgumentException(
-                    'URI must not be null');
+            throw new Zend_Gdata_App_InvalidArgumentException('URI must not be null');
         }
         $newEntry = $this->insertEntry($comment, $uri, 'Zend_Gdata_Photos_CommentEntry');
+
         return $newEntry;
     }
 
     /**
      * Delete an AlbumEntry.
      *
-     * @param Zend_Gdata_Photos_AlbumEntry $album The album entry to
-     *          delete.
-     * @param boolean $catch Whether to catch an exception when
-     *            modified and re-delete or throw
-     * @return void.
+     * @param Zend_Gdata_Photos_AlbumEntry $album the album entry to
+     *                                            delete
+     * @param bool                         $catch Whether to catch an exception when
+     *                                            modified and re-delete or throw
+     *
+     * @return void
+     *
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      */
@@ -474,7 +488,7 @@ class Zend_Gdata_Photos extends Zend_Gdata
             try {
                 $this->delete($album);
             } catch (Zend_Gdata_App_HttpException $e) {
-                if ($e->getResponse()->getStatus() === 409) {
+                if (409 === $e->getResponse()->getStatus()) {
                     $entry = new Zend_Gdata_Photos_AlbumEntry($e->getResponse()->getBody());
                     $this->delete($entry->getLink('edit')->href);
                 } else {
@@ -489,11 +503,13 @@ class Zend_Gdata_Photos extends Zend_Gdata
     /**
      * Delete a PhotoEntry.
      *
-     * @param Zend_Gdata_Photos_PhotoEntry $photo The photo entry to
-     *          delete.
-     * @param boolean $catch Whether to catch an exception when
-     *            modified and re-delete or throw
-     * @return void.
+     * @param Zend_Gdata_Photos_PhotoEntry $photo the photo entry to
+     *                                            delete
+     * @param bool                         $catch Whether to catch an exception when
+     *                                            modified and re-delete or throw
+     *
+     * @return void
+     *
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      */
@@ -503,7 +519,7 @@ class Zend_Gdata_Photos extends Zend_Gdata
             try {
                 $this->delete($photo);
             } catch (Zend_Gdata_App_HttpException $e) {
-                if ($e->getResponse()->getStatus() === 409) {
+                if (409 === $e->getResponse()->getStatus()) {
                     $entry = new Zend_Gdata_Photos_PhotoEntry($e->getResponse()->getBody());
                     $this->delete($entry->getLink('edit')->href);
                 } else {
@@ -518,11 +534,13 @@ class Zend_Gdata_Photos extends Zend_Gdata
     /**
      * Delete a CommentEntry.
      *
-     * @param Zend_Gdata_Photos_CommentEntry $comment The comment entry to
-     *          delete.
-     * @param boolean $catch Whether to catch an exception when
-     *            modified and re-delete or throw
-     * @return void.
+     * @param Zend_Gdata_Photos_CommentEntry $comment the comment entry to
+     *                                                delete
+     * @param bool                           $catch   Whether to catch an exception when
+     *                                                modified and re-delete or throw
+     *
+     * @return void
+     *
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      */
@@ -532,7 +550,7 @@ class Zend_Gdata_Photos extends Zend_Gdata
             try {
                 $this->delete($comment);
             } catch (Zend_Gdata_App_HttpException $e) {
-                if ($e->getResponse()->getStatus() === 409) {
+                if (409 === $e->getResponse()->getStatus()) {
                     $entry = new Zend_Gdata_Photos_CommentEntry($e->getResponse()->getBody());
                     $this->delete($entry->getLink('edit')->href);
                 } else {
@@ -547,11 +565,13 @@ class Zend_Gdata_Photos extends Zend_Gdata
     /**
      * Delete a TagEntry.
      *
-     * @param Zend_Gdata_Photos_TagEntry $tag The tag entry to
-     *          delete.
-     * @param boolean $catch Whether to catch an exception when
-     *            modified and re-delete or throw
-     * @return void.
+     * @param Zend_Gdata_Photos_TagEntry $tag   the tag entry to
+     *                                          delete
+     * @param bool                       $catch Whether to catch an exception when
+     *                                          modified and re-delete or throw
+     *
+     * @return void
+     *
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      */
@@ -561,7 +581,7 @@ class Zend_Gdata_Photos extends Zend_Gdata
             try {
                 $this->delete($tag);
             } catch (Zend_Gdata_App_HttpException $e) {
-                if ($e->getResponse()->getStatus() === 409) {
+                if (409 === $e->getResponse()->getStatus()) {
                     $entry = new Zend_Gdata_Photos_TagEntry($e->getResponse()->getBody());
                     $this->delete($entry->getLink('edit')->href);
                 } else {
@@ -572,5 +592,4 @@ class Zend_Gdata_Photos extends Zend_Gdata
             $this->delete($tag);
         }
     }
-
 }

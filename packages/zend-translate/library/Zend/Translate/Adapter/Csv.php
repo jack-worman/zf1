@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,12 +13,13 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Translate
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ *
  * @version    $Id$
+ *
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
 
 /** Zend_Locale */
 // require_once 'Zend/Locale.php';
@@ -26,33 +27,32 @@
 /** Zend_Translate_Adapter */
 // require_once 'Zend/Translate/Adapter.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_Translate
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Translate_Adapter_Csv extends Zend_Translate_Adapter
 {
-    private $_data    = array();
+    private $_data = [];
 
     /**
-     * Generates the adapter
+     * Generates the adapter.
      *
-     * @param  array|Zend_Config $options Translation content
+     * @param array|Zend_Config $options Translation content
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
-        $this->_options['delimiter'] = ";";
-        $this->_options['length']    = 0;
+        $this->_options['delimiter'] = ';';
+        $this->_options['length'] = 0;
         $this->_options['enclosure'] = '"';
 
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
-        } else if (func_num_args() > 1) {
-            $args               = func_get_args();
-            $options            = array();
+        } elseif (func_num_args() > 1) {
+            $args = func_get_args();
+            $options = [];
             $options['content'] = array_shift($args);
 
             if (!empty($args)) {
@@ -60,37 +60,37 @@ class Zend_Translate_Adapter_Csv extends Zend_Translate_Adapter
             }
 
             if (!empty($args)) {
-                $opt     = array_shift($args);
+                $opt = array_shift($args);
                 $options = array_merge($opt, $options);
             }
-        } else if (!is_array($options)) {
-            $options = array('content' => $options);
+        } elseif (!is_array($options)) {
+            $options = ['content' => $options];
         }
 
         parent::__construct($options);
     }
 
     /**
-     * Load translation data
+     * Load translation data.
      *
-     * @param  string|array  $filename  Filename and full path to the translation source
-     * @param  string        $locale    Locale/Language to add data for, identical with locale identifier,
-     *                                  see Zend_Locale for more information
-     * @param  array         $option    OPTIONAL Options to use
+     * @param string|array $filename Filename and full path to the translation source
+     * @param string       $locale   Locale/Language to add data for, identical with locale identifier,
+     *                               see Zend_Locale for more information
+     *
      * @return array
      */
-    protected function _loadTranslationData($filename, $locale, array $options = array())
+    protected function _loadTranslationData($filename, $locale, array $options = [])
     {
-        $this->_data = array();
-        $options     = $options + $this->_options;
+        $this->_data = [];
+        $options = $options + $this->_options;
         $this->_file = @fopen($filename, 'rb');
         if (!$this->_file) {
             // require_once 'Zend/Translate/Exception.php';
-            throw new Zend_Translate_Exception('Error opening translation file \'' . $filename . '\'.');
+            throw new Zend_Translate_Exception('Error opening translation file \''.$filename.'\'.');
         }
 
-        while(($data = fgetcsv($this->_file, $options['length'], $options['delimiter'], $options['enclosure'])) !== false) {
-            if (substr((string) $data[0], 0, 1) === '#') {
+        while (($data = fgetcsv($this->_file, $options['length'], $options['delimiter'], $options['enclosure'])) !== false) {
+            if ('#' === substr((string) $data[0], 0, 1)) {
                 continue;
             }
 
@@ -98,7 +98,7 @@ class Zend_Translate_Adapter_Csv extends Zend_Translate_Adapter
                 continue;
             }
 
-            if (count($data) == 2) {
+            if (2 == count($data)) {
                 $this->_data[$locale][$data[0]] = $data[1];
             } else {
                 $singular = array_shift($data);
@@ -110,12 +110,12 @@ class Zend_Translate_Adapter_Csv extends Zend_Translate_Adapter
     }
 
     /**
-     * returns the adapters name
+     * returns the adapters name.
      *
      * @return string
      */
     public function toString()
     {
-        return "Csv";
+        return 'Csv';
     }
 }

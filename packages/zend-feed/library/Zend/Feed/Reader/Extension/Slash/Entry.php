@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed_Reader
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -31,15 +32,14 @@
 
 /**
  * @category   Zend
- * @package    Zend_Feed_Reader
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Reader_Extension_Slash_Entry
-    extends Zend_Feed_Reader_Extension_EntryAbstract
+class Zend_Feed_Reader_Extension_Slash_Entry extends Zend_Feed_Reader_Extension_EntryAbstract
 {
     /**
-     * Get the entry section
+     * Get the entry section.
      *
      * @return string|null
      */
@@ -49,7 +49,7 @@ class Zend_Feed_Reader_Extension_Slash_Entry
     }
 
     /**
-     * Get the entry department
+     * Get the entry department.
      *
      * @return string|null
      */
@@ -59,7 +59,7 @@ class Zend_Feed_Reader_Extension_Slash_Entry
     }
 
     /**
-     * Get the entry hit_parade
+     * Get the entry hit_parade.
      *
      * @return array
      */
@@ -72,21 +72,23 @@ class Zend_Feed_Reader_Extension_Slash_Entry
         }
 
         $stringParade = $this->_getData($name);
-        $hitParade    = array();
+        $hitParade = [];
 
         if (!empty($stringParade)) {
             $stringParade = explode(',', $stringParade);
 
-            foreach ($stringParade as $hit)
-                $hitParade[] = $hit + 0; //cast to integer
+            foreach ($stringParade as $hit) {
+                $hitParade[] = $hit + 0;
+            } // cast to integer
         }
 
         $this->_data[$name] = $hitParade;
+
         return $hitParade;
     }
 
     /**
-     * Get the entry comments
+     * Get the entry comments.
      *
      * @return int
      */
@@ -102,6 +104,7 @@ class Zend_Feed_Reader_Extension_Slash_Entry
 
         if (!$comments) {
             $this->_data[$name] = null;
+
             return $this->_data[$name];
         }
 
@@ -109,7 +112,8 @@ class Zend_Feed_Reader_Extension_Slash_Entry
     }
 
     /**
-     * Get the entry data specified by name
+     * Get the entry data specified by name.
+     *
      * @param string $name
      * @param string $type
      *
@@ -121,7 +125,7 @@ class Zend_Feed_Reader_Extension_Slash_Entry
             return $this->_data[$name];
         }
 
-        $data = $this->_xpath->evaluate($type . '(' . $this->getXpathPrefix() . '/slash10:' . $name . ')');
+        $data = $this->_xpath->evaluate($type.'('.$this->getXpathPrefix().'/slash10:'.$name.')');
 
         if (!$data) {
             $data = null;
@@ -133,7 +137,7 @@ class Zend_Feed_Reader_Extension_Slash_Entry
     }
 
     /**
-     * Register Slash namespaces
+     * Register Slash namespaces.
      *
      * @return void
      */

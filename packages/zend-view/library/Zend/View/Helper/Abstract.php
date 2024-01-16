@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,34 +27,33 @@
 
 /**
  * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_View_Helper_Abstract implements Zend_View_Helper_Interface
 {
     /**
-     * View object
+     * View object.
      *
      * @var Zend_View_Interface
      */
-    public $view = null;
+    public $view;
 
     /**
-     * Set the View object
+     * Set the View object.
      *
-     * @param  Zend_View_Interface $view
      * @return Zend_View_Helper_Abstract
      */
     public function setView(Zend_View_Interface $view)
     {
         $this->view = $view;
+
         return $this;
     }
 
     /**
-     * Strategy pattern: currently unutilized
+     * Strategy pattern: currently unutilized.
      *
      * @return void
      */

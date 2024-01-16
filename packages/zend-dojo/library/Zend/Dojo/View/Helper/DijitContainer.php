@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage View
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -24,37 +24,37 @@
 // require_once 'Zend/Dojo/View/Helper/Dijit.php';
 
 /**
- * Dijit layout container base class
+ * Dijit layout container base class.
  *
  * @uses       Zend_Dojo_View_Helper_Dijit
- * @package    Zend_Dojo
- * @subpackage View
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
-  */
+ */
 abstract class Zend_Dojo_View_Helper_DijitContainer extends Zend_Dojo_View_Helper_Dijit
 {
     /**
-     * Capture locks
-     * @var array
-     */
-    protected $_captureLock = array();
-
-    /**
-     * Metadata information to use with captured content
-     * @var array
-     */
-    protected $_captureInfo = array();
-
-    /**
-     * Begin capturing content for layout container
+     * Capture locks.
      *
-     * @param  string $id
-     * @param  array $params
-     * @param  array $attribs
+     * @var array
+     */
+    protected $_captureLock = [];
+
+    /**
+     * Metadata information to use with captured content.
+     *
+     * @var array
+     */
+    protected $_captureInfo = [];
+
+    /**
+     * Begin capturing content for layout container.
+     *
+     * @param string $id
+     *
      * @return void
      */
-    public function captureStart($id, array $params = array(), array $attribs = array())
+    public function captureStart($id, array $params = [], array $attribs = [])
     {
         if (array_key_exists($id, $this->_captureLock)) {
             // require_once 'Zend/Dojo/View/Exception.php';
@@ -62,19 +62,21 @@ abstract class Zend_Dojo_View_Helper_DijitContainer extends Zend_Dojo_View_Helpe
         }
 
         $this->_captureLock[$id] = true;
-        $this->_captureInfo[$id] = array(
-            'params'  => $params,
+        $this->_captureInfo[$id] = [
+            'params' => $params,
             'attribs' => $attribs,
-        );
+        ];
 
         ob_start();
+
         return;
     }
 
     /**
-     * Finish capturing content for layout container
+     * Finish capturing content for layout container.
      *
-     * @param  string $id
+     * @param string $id
+     *
      * @return string
      */
     public function captureEnd($id)
@@ -87,6 +89,7 @@ abstract class Zend_Dojo_View_Helper_DijitContainer extends Zend_Dojo_View_Helpe
         $content = ob_get_clean();
         extract($this->_captureInfo[$id]);
         unset($this->_captureLock[$id], $this->_captureInfo[$id]);
+
         return $this->_createLayoutContainer($id, $content, $params, $attribs);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,20 +25,15 @@
  */
 require_once 'Zend/Db/TestUtil/Pdo/Common.php';
 
-
-
-
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Zend_Db_TestUtil_Pdo_Pgsql extends Zend_Db_TestUtil_Pdo_Common
 {
-
     public function setUp(Zend_Db_Adapter_Abstract $db)
     {
         $this->_db = $db;
@@ -46,14 +41,15 @@ class Zend_Db_TestUtil_Pdo_Pgsql extends Zend_Db_TestUtil_Pdo_Common
         parent::setUp($db);
     }
 
-    public function getParams(array $constants = array())
+    public function getParams(array $constants = [])
     {
-        $constants = array (
-            'host'     => 'TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_HOSTNAME',
+        $constants = [
+            'host' => 'TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_HOSTNAME',
             'username' => 'TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_USERNAME',
             'password' => 'TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_PASSWORD',
-            'dbname'   => 'TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_DATABASE'
-        );
+            'dbname' => 'TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_DATABASE',
+        ];
+
         return parent::getParams($constants);
     }
 
@@ -68,10 +64,10 @@ class Zend_Db_TestUtil_Pdo_Pgsql extends Zend_Db_TestUtil_Pdo_Common
      */
     protected function _getColumnsProducts()
     {
-        return array(
-            'product_id'   => 'INT NOT NULL PRIMARY KEY',
-            'product_name' => 'VARCHAR(100)'
-        );
+        return [
+            'product_id' => 'INT NOT NULL PRIMARY KEY',
+            'product_name' => 'VARCHAR(100)',
+        ];
     }
 
     protected function _getDataProducts()
@@ -80,68 +76,73 @@ class Zend_Db_TestUtil_Pdo_Pgsql extends Zend_Db_TestUtil_Pdo_Common
         foreach ($data as &$row) {
             $row['product_id'] = new Zend_Db_Expr('NEXTVAL('.$this->_db->quote('zfproducts_seq').')');
         }
+
         return $data;
     }
 
     public function getSqlType($type)
     {
-        if ($type == 'IDENTITY') {
+        if ('IDENTITY' == $type) {
             return 'SERIAL PRIMARY KEY';
         }
-        if ($type == 'DATETIME') {
+        if ('DATETIME' == $type) {
             return 'TIMESTAMP';
         }
-        if ($type == 'CLOB') {
+        if ('CLOB' == $type) {
             return 'TEXT';
         }
-        if ($type == 'BLOB') {
+        if ('BLOB' == $type) {
             return 'TEXT';
         }
+
         return $type;
     }
 
     protected function _getSqlCreateTable($tableName)
     {
         $tableList = $this->_db->fetchCol('SELECT relname AS table_name FROM pg_class '
-            . $this->_db->quoteInto(' WHERE relkind = \'r\' AND relname = ?', $tableName)
+            .$this->_db->quoteInto(' WHERE relkind = \'r\' AND relname = ?', $tableName)
         );
         if (in_array($tableName, $tableList)) {
             return null;
         }
-        return 'CREATE TABLE ' . $this->_db->quoteIdentifier($tableName);
+
+        return 'CREATE TABLE '.$this->_db->quoteIdentifier($tableName);
     }
 
     protected function _getSqlDropTable($tableName)
     {
         $tableList = $this->_db->fetchCol('SELECT relname AS table_name FROM pg_class '
-            . $this->_db->quoteInto(' WHERE relkind = \'r\' AND relname = ?', $tableName)
+            .$this->_db->quoteInto(' WHERE relkind = \'r\' AND relname = ?', $tableName)
         );
         if (in_array($tableName, $tableList)) {
-            return 'DROP TABLE ' . $this->_db->quoteIdentifier($tableName) . ' CASCADE';
+            return 'DROP TABLE '.$this->_db->quoteIdentifier($tableName).' CASCADE';
         }
+
         return null;
     }
 
     protected function _getSqlCreateSequence($sequenceName)
     {
         $seqList = $this->_db->fetchCol('SELECT relname AS sequence_name FROM pg_class '
-            . $this->_db->quoteInto(' WHERE relkind = \'S\' AND relname = ?', $sequenceName)
+            .$this->_db->quoteInto(' WHERE relkind = \'S\' AND relname = ?', $sequenceName)
         );
         if (in_array($sequenceName, $seqList)) {
             return null;
         }
-        return 'CREATE SEQUENCE ' . $this->_db->quoteIdentifier($sequenceName);
+
+        return 'CREATE SEQUENCE '.$this->_db->quoteIdentifier($sequenceName);
     }
 
     protected function _getSqlDropSequence($sequenceName)
     {
         $seqList = $this->_db->fetchCol('SELECT relname AS sequence_name FROM pg_class '
-            . $this->_db->quoteInto(' WHERE relkind = \'S\' AND relname = ?', $sequenceName)
+            .$this->_db->quoteInto(' WHERE relkind = \'S\' AND relname = ?', $sequenceName)
         );
         if (in_array($sequenceName, $seqList)) {
-            return 'DROP SEQUENCE ' . $this->_db->quoteIdentifier($sequenceName);
+            return 'DROP SEQUENCE '.$this->_db->quoteIdentifier($sequenceName);
         }
+
         return null;
     }
-
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Barcode
- * @subpackage Object
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -31,20 +31,21 @@
 // require_once 'Zend/Validate/Barcode.php';
 
 /**
- * Class for generate Code39 barcode
+ * Class for generate Code39 barcode.
  *
  * @category   Zend
- * @package    Zend_Barcode
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Barcode_Object_Code39 extends Zend_Barcode_Object_ObjectAbstract
 {
     /**
-     * Coding map
+     * Coding map.
+     *
      * @var array
      */
-    protected $_codingMap = array(
+    protected $_codingMap = [
         '0' => '000110100',
         '1' => '100100001',
         '2' => '001100001',
@@ -89,10 +90,11 @@ class Zend_Barcode_Object_Code39 extends Zend_Barcode_Object_ObjectAbstract
         '+' => '010001010',
         '%' => '000101010',
         '*' => '010010100',
-    );
+    ];
 
     /**
-     * Partial check of Code39 barcode
+     * Partial check of Code39 barcode.
+     *
      * @return void
      */
     protected function _checkParams()
@@ -101,89 +103,99 @@ class Zend_Barcode_Object_Code39 extends Zend_Barcode_Object_ObjectAbstract
     }
 
     /**
-     * Width of the barcode (in pixels)
+     * Width of the barcode (in pixels).
+     *
      * @return int
      */
     protected function _calculateBarcodeWidth()
     {
-        $quietZone       = $this->getQuietZone();
+        $quietZone = $this->getQuietZone();
         $characterLength = (6 * $this->_barThinWidth + 3 * $this->_barThickWidth + 1) * $this->_factor;
-        $encodedData     = strlen((string) $this->getText()) * $characterLength - $this->_factor;
+        $encodedData = strlen((string) $this->getText()) * $characterLength - $this->_factor;
+
         return $quietZone + $encodedData + $quietZone;
     }
 
     /**
-     * Set text to encode
+     * Set text to encode.
      *
      * @param string $value
+     *
      * @return Zend_Barcode_Object_Code39
      */
     public function setText($value)
     {
         $this->_text = $value;
+
         return $this;
     }
 
     /**
-     * Retrieve text to display
+     * Retrieve text to display.
+     *
      * @return string
      */
     public function getText()
     {
-        return '*' . parent::getText() . '*';
+        return '*'.parent::getText().'*';
     }
 
     /**
-     * Retrieve text to display
+     * Retrieve text to display.
+     *
      * @return string
      */
     public function getTextToDisplay()
     {
         $text = parent::getTextToDisplay();
-        if (substr((string) $text, 0, 1) != '*' && substr((string) $text, -1) != '*') {
-            return '*' . $text . '*';
+        if ('*' != substr((string) $text, 0, 1) && '*' != substr((string) $text, -1)) {
+            return '*'.$text.'*';
         } else {
             return $text;
         }
     }
 
     /**
-     * Prepare array to draw barcode
+     * Prepare array to draw barcode.
+     *
      * @return array
      */
     protected function _prepareBarcode()
     {
-        $text         = str_split($this->getText());
-        $barcodeTable = array();
+        $text = str_split($this->getText());
+        $barcodeTable = [];
         foreach ($text as $char) {
             $barcodeChar = str_split($this->_codingMap[$char]);
-            $visible     = true;
+            $visible = true;
             foreach ($barcodeChar as $c) {
                 /* visible, width, top, length */
-                $width          = $c ? $this->_barThickWidth : $this->_barThinWidth;
-                $barcodeTable[] = array((int) $visible, $width, 0, 1);
-                $visible = ! $visible;
+                $width = $c ? $this->_barThickWidth : $this->_barThinWidth;
+                $barcodeTable[] = [(int) $visible, $width, 0, 1];
+                $visible = !$visible;
             }
-            $barcodeTable[] = array(0 , $this->_barThinWidth);
+            $barcodeTable[] = [0, $this->_barThinWidth];
         }
+
         return $barcodeTable;
     }
 
     /**
-     * Get barcode checksum
+     * Get barcode checksum.
      *
-     * @param  string $text
+     * @param string $text
+     *
      * @return int
      */
     public function getChecksum($text)
     {
         $this->_checkText($text);
-        $text     = str_split($text);
-        $charset  = array_flip(array_keys($this->_codingMap));
+        $text = str_split($text);
+        $charset = array_flip(array_keys($this->_codingMap));
         $checksum = 0;
         foreach ($text as $character) {
             $checksum += $charset[$character];
         }
-        return array_search(($checksum % 43), $charset);
+
+        return array_search($checksum % 43, $charset);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,12 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage Authentication
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
 
 /**
  * @see Zend_Service_Amazon_Authentication
@@ -32,36 +30,36 @@
 
 /**
  * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage Authentication
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_Amazon_Authentication_S3 extends Zend_Service_Amazon_Authentication
 {
     /**
-     * Add the S3 Authorization signature to the request headers
+     * Add the S3 Authorization signature to the request headers.
      *
-     * @param  string $method
-     * @param  string $path
-     * @param  array &$headers
+     * @param string $method
+     * @param string $path
+     * @param array  &$headers
+     *
      * @return string
      */
     public function generateSignature($method, $path, &$headers)
     {
-        if (! is_array($headers)) {
-            $headers = array($headers);
+        if (!is_array($headers)) {
+            $headers = [$headers];
         }
 
         $type = $md5 = $date = '';
 
         // Search for the Content-type, Content-MD5 and Date headers
         foreach ($headers as $key => $val) {
-            if (strcasecmp($key, 'content-type') == 0) {
+            if (0 == strcasecmp($key, 'content-type')) {
                 $type = $val;
-            } else if (strcasecmp($key, 'content-md5') == 0) {
+            } elseif (0 == strcasecmp($key, 'content-md5')) {
                 $md5 = $val;
-            } else if (strcasecmp($key, 'date') == 0) {
+            } elseif (0 == strcasecmp($key, 'date')) {
                 $date = $val;
             }
         }
@@ -75,10 +73,10 @@ class Zend_Service_Amazon_Authentication_S3 extends Zend_Service_Amazon_Authenti
 
         // For x-amz- headers, combine like keys, lowercase them, sort them
         // alphabetically and remove excess spaces around values
-        $amz_headers = array();
+        $amz_headers = [];
         foreach ($headers as $key => $val) {
             $key = strtolower((string) $key);
-            if (substr((string) $key, 0, 6) == 'x-amz-') {
+            if ('x-amz-' == substr((string) $key, 0, 6)) {
                 if (is_array($val)) {
                     $amz_headers[$key] = $val;
                 } else {
@@ -89,23 +87,21 @@ class Zend_Service_Amazon_Authentication_S3 extends Zend_Service_Amazon_Authenti
         if (!empty($amz_headers)) {
             ksort($amz_headers);
             foreach ($amz_headers as $key => $val) {
-                $sig_str .= $key . ':' . implode(',', $val) . "\n";
+                $sig_str .= $key.':'.implode(',', $val)."\n";
             }
         }
 
         $sig_str .= '/'.parse_url($path, PHP_URL_PATH);
-        if (strpos((string) $path, '?location') !== false) {
+        if (false !== strpos((string) $path, '?location')) {
             $sig_str .= '?location';
-        } else
-            if (strpos((string) $path, '?acl') !== false) {
-                $sig_str .= '?acl';
-            } else
-                if (strpos((string) $path, '?torrent') !== false) {
-                    $sig_str .= '?torrent';
-                }
+        } elseif (false !== strpos((string) $path, '?acl')) {
+            $sig_str .= '?acl';
+        } elseif (false !== strpos((string) $path, '?torrent')) {
+            $sig_str .= '?torrent';
+        }
 
         $signature = base64_encode(Zend_Crypt_Hmac::compute($this->_secretKey, 'sha1', mb_convert_encoding($sig_str, 'UTF-8', 'ISO-8859-1'), Zend_Crypt_Hmac::BINARY));
-        $headers['Authorization'] = 'AWS ' . $this->_accessKey . ':' . $signature;
+        $headers['Authorization'] = 'AWS '.$this->_accessKey.':'.$signature;
 
         return $sig_str;
     }

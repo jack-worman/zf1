@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +13,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Stdlib
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id:$
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Stdlib_SplPriorityQueueTest::main');
 }
@@ -28,9 +27,9 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 /**
  * @category   Zend
- * @package    Zend_Stdlib
- * @subpackage UnitTests
+ *
  * @group      Zend_Stdlib
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -39,7 +38,7 @@ class Zend_Stdlib_SplPriorityQueueTest extends PHPUnit_Framework_TestCase
 {
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
+        $suite = new PHPUnit_Framework_TestSuite(__CLASS__);
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -60,8 +59,8 @@ class Zend_Stdlib_SplPriorityQueueTest extends PHPUnit_Framework_TestCase
         $queue->insert('baz', 1000);
         $queue->insert('bat', 1000);
 
-        $expected = array('foo', 'bar', 'baz', 'bat');
-        $test     = array();
+        $expected = ['foo', 'bar', 'baz', 'bat'];
+        $test = [];
         foreach ($queue as $datum) {
             $test[] = $datum;
         }
@@ -73,28 +72,28 @@ class Zend_Stdlib_SplPriorityQueueTest extends PHPUnit_Framework_TestCase
         $s = serialize($this->queue);
         $unserialized = unserialize($s);
         $count = count($this->queue);
-        $this->assertSame($count, count($unserialized), 'Expected count ' . $count . '; received ' . count($unserialized));
+        $this->assertSame($count, count($unserialized), 'Expected count '.$count.'; received '.count($unserialized));
 
-        $expected = array();
+        $expected = [];
         foreach ($this->queue as $item) {
             $expected[] = $item;
         }
-        $test = array();
+        $test = [];
         foreach ($unserialized as $item) {
             $test[] = $item;
         }
-        $this->assertSame($expected, $test, 'Expected: ' . var_export($expected, 1) . "\nReceived:" . var_export($test, 1));
+        $this->assertSame($expected, $test, 'Expected: '.var_export($expected, 1)."\nReceived:".var_export($test, 1));
     }
 
     public function testCanRetrieveQueueAsArray()
     {
-        $expected = array(
+        $expected = [
             'bar',
             'foo',
             'baz',
             'bat',
-        );
-        $test     = $this->queue->toArray();
+        ];
+        $test = $this->queue->toArray();
         $this->assertSame($expected, $test, var_export($test, 1));
     }
 }

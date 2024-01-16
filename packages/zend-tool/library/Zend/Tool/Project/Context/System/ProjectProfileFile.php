@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage Framework
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -41,22 +41,18 @@
 // require_once 'Zend/Tool/Project/Profile/FileParser/Xml.php';
 
 /**
- * This class is the front most class for utilizing Zend_Tool_Project
+ * This class is the front most class for utilizing Zend_Tool_Project.
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
  * @category   Zend
- * @package    Zend_Tool
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Context_System_ProjectProfileFile
-    extends Zend_Tool_Project_Context_Filesystem_File
-    implements Zend_Tool_Project_Context_System_Interface,
-               Zend_Tool_Project_Context_System_NotOverwritable
+class Zend_Tool_Project_Context_System_ProjectProfileFile extends Zend_Tool_Project_Context_Filesystem_File implements Zend_Tool_Project_Context_System_Interface, Zend_Tool_Project_Context_System_NotOverwritable
 {
-
     /**
      * @var string
      */
@@ -65,10 +61,10 @@ class Zend_Tool_Project_Context_System_ProjectProfileFile
     /**
      * @var Zend_Tool_Project_Profile
      */
-    protected $_profile = null;
+    protected $_profile;
 
     /**
-     * getName()
+     * getName().
      *
      * @return string
      */
@@ -78,19 +74,21 @@ class Zend_Tool_Project_Context_System_ProjectProfileFile
     }
 
     /**
-     * setProfile()
+     * setProfile().
      *
      * @param Zend_Tool_Project_Profile $profile
+     *
      * @return Zend_Tool_Project_Context_System_ProjectProfileFile
      */
     public function setProfile($profile)
     {
         $this->_profile = $profile;
+
         return $this;
     }
 
     /**
-     * save()
+     * save().
      *
      * Proxy to create
      *
@@ -99,11 +97,12 @@ class Zend_Tool_Project_Context_System_ProjectProfileFile
     public function save()
     {
         parent::create();
+
         return $this;
     }
 
     /**
-     * getContents()
+     * getContents().
      *
      * @return string
      */
@@ -112,7 +111,7 @@ class Zend_Tool_Project_Context_System_ProjectProfileFile
         $parser = new Zend_Tool_Project_Profile_FileParser_Xml();
         $profile = $this->_resource->getProfile();
         $xml = $parser->serialize($profile);
+
         return $xml;
     }
-
 }

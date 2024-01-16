@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,36 +13,37 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Pdf
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /** Zend_Pdf_Filter_Compression */
 // require_once 'Zend/Pdf/Filter/Compression.php';
 
 /**
- * Flate stream filter
+ * Flate stream filter.
  *
- * @package    Zend_Pdf
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Pdf_Filter_Compression_Flate extends Zend_Pdf_Filter_Compression
 {
     /**
-     * Encode data
+     * Encode data.
      *
      * @param string $data
-     * @param array $params
+     * @param array  $params
+     *
      * @return string
+     *
      * @throws Zend_Pdf_Exception
      */
     public static function encode($data, $params = null)
     {
-        if ($params != null) {
+        if (null != $params) {
             $data = self::_applyEncodeParams($data, $params);
         }
 
@@ -63,11 +64,13 @@ class Zend_Pdf_Filter_Compression_Flate extends Zend_Pdf_Filter_Compression
     }
 
     /**
-     * Decode data
+     * Decode data.
      *
      * @param string $data
-     * @param array $params
+     * @param array  $params
+     *
      * @return string
+     *
      * @throws Zend_Pdf_Exception
      */
     public static function decode($data, $params = null)
@@ -85,7 +88,7 @@ class Zend_Pdf_Filter_Compression_Flate extends Zend_Pdf_Filter_Compression
             throw new Zend_Pdf_Exception('Not implemented yet');
         }
 
-        if ($params !== null) {
+        if (null !== $params) {
             return self::_applyDecodeParams($output, $params);
         } else {
             return $output;

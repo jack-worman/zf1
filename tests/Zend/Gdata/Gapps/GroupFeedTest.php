@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata_Gapps
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id:$
  */
 
@@ -25,86 +25,89 @@
 
 /**
  * @category   Zend
- * @package    Zend_Gdata_Gapps
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Gapps
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_Gapps_GroupFeedTest extends PHPUnit_Framework_TestCase
 {
-    protected $groupFeed = null;
+    protected $groupFeed;
 
     /**
-      * Called before each test to setup any fixtures.
-      */
+     * Called before each test to setup any fixtures.
+     */
     public function setUp()
     {
         $groupFeedText = file_get_contents(
-                'Zend/Gdata/Gapps/_files/GroupFeedDataSample1.xml',
-                true);
+            'Zend/Gdata/Gapps/_files/GroupFeedDataSample1.xml',
+            true);
         $this->groupFeed = new Zend_Gdata_Gapps_GroupFeed($groupFeedText);
         $this->emptyGroupFeed = new Zend_Gdata_Gapps_GroupFeed();
     }
 
-    public function testEmptyFeedShouldHaveNoExtensionElements() {
+    public function testEmptyFeedShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->emptyGroupFeed->extensionElements));
-        $this->assertTrue(count($this->emptyGroupFeed->extensionElements) == 0);
+        $this->assertTrue(0 == count($this->emptyGroupFeed->extensionElements));
     }
 
-    public function testEmptyFeedShouldHaveNoExtensionAttributes() {
+    public function testEmptyFeedShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->emptyGroupFeed->extensionAttributes));
-        $this->assertTrue(count($this->emptyGroupFeed->extensionAttributes) == 0);
+        $this->assertTrue(0 == count($this->emptyGroupFeed->extensionAttributes));
     }
 
-    public function testSampleFeedShouldHaveNoExtensionElements() {
+    public function testSampleFeedShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->groupFeed->extensionElements));
-        $this->assertTrue(count($this->groupFeed->extensionElements) == 0);
+        $this->assertTrue(0 == count($this->groupFeed->extensionElements));
     }
 
-    public function testSampleFeedShouldHaveNoExtensionAttributes() {
+    public function testSampleFeedShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->groupFeed->extensionAttributes));
-        $this->assertTrue(count($this->groupFeed->extensionAttributes) == 0);
+        $this->assertTrue(0 == count($this->groupFeed->extensionAttributes));
     }
 
     /**
-      * Convert sample feed to XML then back to objects. Ensure that
-      * all objects are instances of GroupEntry and object count matches.
-      */
+     * Convert sample feed to XML then back to objects. Ensure that
+     * all objects are instances of GroupEntry and object count matches.
+     */
     public function testXmlImportAndOutputAreNonDestructive()
     {
         $entryCount = 0;
         foreach ($this->groupFeed as $entry) {
-            $entryCount++;
+            ++$entryCount;
             $this->assertTrue($entry instanceof Zend_Gdata_Gapps_GroupEntry);
         }
         $this->assertTrue($entryCount > 0);
 
         /* Grab XML from $this->groupFeed and convert back to objects */
         $newGroupFeed = new Zend_Gdata_Gapps_GroupFeed(
-                $this->groupFeed->saveXML());
+            $this->groupFeed->saveXML());
         $newEntryCount = 0;
         foreach ($newGroupFeed as $entry) {
-            $newEntryCount++;
+            ++$newEntryCount;
             $this->assertTrue($entry instanceof Zend_Gdata_Gapps_GroupEntry);
         }
         $this->assertEquals($entryCount, $newEntryCount);
     }
 
     /**
-      * Ensure that there number of group entries equals the number
-      * of groups defined in the sample file.
-      */
+     * Ensure that there number of group entries equals the number
+     * of groups defined in the sample file.
+     */
     public function testAllEntriesInFeedAreInstantiated()
     {
-        //TODO feeds implementing ArrayAccess would be helpful here
+        // TODO feeds implementing ArrayAccess would be helpful here
         $entryCount = 0;
         foreach ($this->groupFeed as $entry) {
-            $entryCount++;
+            ++$entryCount;
         }
         $this->assertEquals(2, $entryCount);
     }
-
 }

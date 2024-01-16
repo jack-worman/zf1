@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id: TranslateTest.php 18387 2010-09-23 21:00:00Z thomas $
  */
 
 // Call Zend_View_Helper_CurrencyTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_CurrencyTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_View_Helper_CurrencyTest::main');
 }
 
 /** Zend_View_Helper_Currency */
@@ -35,13 +35,13 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 // require_once 'Zend/Currency.php';
 
 /**
- * Test class for Zend_View_Helper_Currency
+ * Test class for Zend_View_Helper_Currency.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
@@ -60,8 +60,7 @@ class Zend_View_Helper_CurrencyTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_CurrencyTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_View_Helper_CurrencyTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -85,8 +84,8 @@ class Zend_View_Helper_CurrencyTest extends PHPUnit_Framework_TestCase
         $this->clearRegistry();
         // require_once 'Zend/Cache.php';
         $this->_cache = Zend_Cache::factory('Core', 'File',
-                 array('lifetime' => 120, 'automatic_serialization' => true),
-                 array('cache_dir' => __DIR__ . '/../../_files/'));
+            ['lifetime' => 120, 'automatic_serialization' => true],
+            ['cache_dir' => __DIR__.'/../../_files/']);
         Zend_Currency::setCache($this->_cache);
 
         $this->helper = new Zend_View_Helper_Currency('de_AT');
@@ -134,8 +133,8 @@ class Zend_View_Helper_CurrencyTest extends PHPUnit_Framework_TestCase
     {
         try {
             $helper = new Zend_View_Helper_Currency('something');
-        } catch (\Throwable $e) {
-            if (substr((string) $e->getMessage(), 0, 15) == 'No region found') {
+        } catch (Throwable $e) {
+            if ('No region found' == substr((string) $e->getMessage(), 0, 15)) {
                 $this->assertContains('within the locale', $e->getMessage());
             } else {
                 $this->assertContains('not found', $e->getMessage());
@@ -147,8 +146,8 @@ class Zend_View_Helper_CurrencyTest extends PHPUnit_Framework_TestCase
     {
         try {
             $this->helper->setCurrency('something');
-        } catch (\Throwable $e) {
-            if (substr((string) $e->getMessage(), 0, 15) == 'No region found') {
+        } catch (Throwable $e) {
+            if ('No region found' == substr((string) $e->getMessage(), 0, 15)) {
                 $this->assertContains('within the locale', $e->getMessage());
             } else {
                 $this->assertContains('not found', $e->getMessage());
@@ -161,7 +160,7 @@ class Zend_View_Helper_CurrencyTest extends PHPUnit_Framework_TestCase
         $curr = new Zend_Currency('de_AT');
 
         $this->helper->setCurrency($curr);
-        $this->assertEquals("€ 1.234,56", $this->helper->currency(1234.56, "de_AT"));
+        $this->assertEquals('€ 1.234,56', $this->helper->currency(1234.56, 'de_AT'));
     }
 
     public function testCurrencyObjectNullByDefault()
@@ -196,6 +195,6 @@ class Zend_View_Helper_CurrencyTest extends PHPUnit_Framework_TestCase
 }
 
 // Call Zend_View_Helper_TranslateTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_TranslateTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_View_Helper_TranslateTest::main') {
     Zend_View_Helper_TranslateTest::main();
 }

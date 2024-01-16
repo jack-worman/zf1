@@ -1,19 +1,18 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
+ * Zend Framework (http://framework.zend.com/).
  *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @see      http://github.com/zendframework/zf2 for the canonical source repository
+ *
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Soap
  */
 
 /* Test Functions */
 
 /**
- * Test Function
+ * Test Function.
  *
- * @param string $arg
  * @return string
  */
 function Zend_Soap_TestAsset_TestFunc($who)
@@ -22,15 +21,15 @@ function Zend_Soap_TestAsset_TestFunc($who)
 }
 
 /**
- * Test Function 2
+ * Test Function 2.
  */
 function Zend_Soap_TestAsset_TestFunc2()
 {
-    return "Hello World";
+    return 'Hello World';
 }
 
 /**
- * Return false
+ * Return false.
  *
  * @return bool
  */
@@ -40,7 +39,7 @@ function Zend_Soap_TestAsset_TestFunc3()
 }
 
 /**
- * Return true
+ * Return true.
  *
  * @return bool
  */
@@ -50,7 +49,7 @@ function Zend_Soap_TestAsset_TestFunc4()
 }
 
 /**
- * Return integer
+ * Return integer.
  *
  * @return int
  */
@@ -60,41 +59,43 @@ function Zend_Soap_TestAsset_TestFunc5()
 }
 
 /**
- * Return string
+ * Return string.
  *
  * @return string
  */
 function Zend_Soap_TestAsset_TestFunc6()
 {
-    return "string";
+    return 'string';
 }
 
 /**
- * Return array
+ * Return array.
  *
  * @return array
  */
 function Zend_Soap_TestAsset_TestFunc7()
 {
-    return array('foo' => 'bar', 'baz' => true, 1 => false, 'bat' => 123);
+    return ['foo' => 'bar', 'baz' => true, 1 => false, 'bat' => 123];
 }
 
 /**
- * Return Object
+ * Return Object.
  *
  * @return StdClass
  */
 function Zend_Soap_TestAsset_TestFunc8()
 {
-    $return = (object) array('foo' => 'bar', 'baz' => true, 'bat' => 123, 'qux' => false);
+    $return = (object) ['foo' => 'bar', 'baz' => true, 'bat' => 123, 'qux' => false];
+
     return $return;
 }
 
 /**
- * Multiple Args
+ * Multiple Args.
  *
  * @param string $foo
  * @param string $bar
+ *
  * @return string
  */
 function Zend_Soap_TestAsset_TestFunc9($foo, $bar)
@@ -104,48 +105,45 @@ function Zend_Soap_TestAsset_TestFunc9($foo, $bar)
 
 /**
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
  */
 #[AllowDynamicProperties]
 class Zend_Soap_TestAsset_TestFixingMultiplePrototypes
 {
     /**
-     * Test function
+     * Test function.
      *
-     * @param integer $a
-     * @param integer $b
-     * @param integer $d
-     * @return integer
+     * @param int $a
+     * @param int $b
+     * @param int $d
+     *
+     * @return int
      */
-    public function testFunc($a=100, $b=200, $d=300)
+    public function testFunc($a = 100, $b = 200, $d = 300)
     {
-
     }
 }
 
 /**
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
  */
 #[AllowDynamicProperties]
 class Zend_Soap_TestAsset_Test
 {
     /**
-     * Test Function 1
+     * Test Function 1.
      *
      * @return string
      */
     public function testFunc1()
     {
-        return "Hello World";
+        return 'Hello World';
     }
 
     /**
-     * Test Function 2
+     * Test Function 2.
      *
      * @param string $who Some Arg
+     *
      * @return string
      */
     public function testFunc2($who)
@@ -154,10 +152,11 @@ class Zend_Soap_TestAsset_Test
     }
 
     /**
-     * Test Function 3
+     * Test Function 3.
      *
-     * @param string $who Some Arg
-     * @param int $when Some
+     * @param string $who  Some Arg
+     * @param int    $when Some
+     *
      * @return string
      */
     public function testFunc3($who, $when)
@@ -166,7 +165,7 @@ class Zend_Soap_TestAsset_Test
     }
 
     /**
-     * Test Function 4
+     * Test Function 4.
      *
      * @return string
      */
@@ -180,28 +179,26 @@ class Zend_Soap_TestAsset_Test
 class Zend_Soap_TestAsset_AutoDiscoverTestClass1
 {
     /**
-     * @var integer $var
+     * @var int
      */
     public $var = 1;
 
     /**
-     * @var string $param
+     * @var string
      */
-    public $param = "hello";
+    public $param = 'hello';
 }
 
 /**
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
  */
 #[AllowDynamicProperties]
 class Zend_Soap_TestAsset_AutoDiscoverTestClass2
 {
     /**
-     *
      * @param Zend_Soap_TestAsset_AutoDiscoverTestClass1 $test
-     * @return boolean
+     *
+     * @return bool
      */
     public function add(AutoDiscoverTestClass1 $test)
     {
@@ -213,10 +210,10 @@ class Zend_Soap_TestAsset_AutoDiscoverTestClass2
      */
     public function fetchAll()
     {
-        return array(
+        return [
             new AutoDiscoverTestClass1(),
             new AutoDiscoverTestClass1(),
-        );
+        ];
     }
 
     /**
@@ -224,14 +221,11 @@ class Zend_Soap_TestAsset_AutoDiscoverTestClass2
      */
     public function addMultiple($test)
     {
-
     }
 }
 
 /**
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
  */
 #[AllowDynamicProperties]
 class Zend_Soap_TestAsset_ComplexTypeB
@@ -248,8 +242,6 @@ class Zend_Soap_TestAsset_ComplexTypeB
 
 /**
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
  */
 #[AllowDynamicProperties]
 class Zend_Soap_TestAsset_ComplexTypeA
@@ -257,13 +249,11 @@ class Zend_Soap_TestAsset_ComplexTypeA
     /**
      * @var Zend_Soap_TestAsset_ComplexTypeB[]
      */
-    public $baz = array();
+    public $baz = [];
 }
 
 /**
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
  */
 #[AllowDynamicProperties]
 class Zend_Soap_TestAsset_ComplexTest
@@ -276,21 +266,19 @@ class Zend_Soap_TestAsset_ComplexTest
 
 /**
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
  */
 #[AllowDynamicProperties]
 class Zend_Soap_TestAsset_ComplexObjectStructure
 {
     /**
-     * @var boolean
+     * @var bool
      */
     public $boolean = true;
 
     /**
      * @var string
      */
-    public $string = "Hello World";
+    public $string = 'Hello World';
 
     /**
      * @var int
@@ -300,13 +288,11 @@ class Zend_Soap_TestAsset_ComplexObjectStructure
     /**
      * @var array
      */
-    public $array = array(1, 2, 3);
+    public $array = [1, 2, 3];
 }
 
 /**
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
  */
 #[AllowDynamicProperties]
 class Zend_Soap_TestAsset_ComplexObjectWithObjectStructure
@@ -319,30 +305,32 @@ class Zend_Soap_TestAsset_ComplexObjectWithObjectStructure
 
 /**
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
  */
 #[AllowDynamicProperties]
 class Zend_Soap_TestAsset_MyService
 {
     /**
-     *    @param string $foo
-     *    @return Zend_Soap_TestAsset_MyResponse[]
+     * @param string $foo
+     *
+     * @return Zend_Soap_TestAsset_MyResponse[]
      */
     public function foo($foo)
     {
     }
+
     /**
-     *    @param string $bar
-     *    @return Zend_Soap_TestAsset_MyResponse[]
+     * @param string $bar
+     *
+     * @return Zend_Soap_TestAsset_MyResponse[]
      */
     public function bar($bar)
     {
     }
 
     /**
-     *    @param string $baz
-     *    @return Zend_Soap_TestAsset_MyResponse[]
+     * @param string $baz
+     *
+     * @return Zend_Soap_TestAsset_MyResponse[]
      */
     public function baz($baz)
     {
@@ -351,38 +339,41 @@ class Zend_Soap_TestAsset_MyService
 
 /**
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
  */
 #[AllowDynamicProperties]
 class Zend_Soap_TestAsset_MyServiceSequence
 {
     /**
-     *    @param string $foo
-     *    @return string[]
+     * @param string $foo
+     *
+     * @return string[]
      */
     public function foo($foo)
     {
     }
+
     /**
-     *    @param string $bar
-     *    @return string[]
+     * @param string $bar
+     *
+     * @return string[]
      */
     public function bar($bar)
     {
     }
 
     /**
-     *    @param string $baz
-     *    @return string[]
+     * @param string $baz
+     *
+     * @return string[]
      */
     public function baz($baz)
     {
     }
 
     /**
-     *    @param string $baz
-     *    @return string[][][]
+     * @param string $baz
+     *
+     * @return string[][][]
      */
     public function bazNested($baz)
     {
@@ -391,8 +382,6 @@ class Zend_Soap_TestAsset_MyServiceSequence
 
 /**
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
  */
 #[AllowDynamicProperties]
 class Zend_Soap_TestAsset_MyResponse
@@ -405,8 +394,6 @@ class Zend_Soap_TestAsset_MyResponse
 
 /**
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
  */
 #[AllowDynamicProperties]
 class Zend_Soap_TestAsset_Recursion
@@ -419,7 +406,9 @@ class Zend_Soap_TestAsset_Recursion
     /**
      * @return Zend_Soap_TestAsset_Recursion
      */
-    public function create() {}
+    public function create()
+    {
+    }
 }
 
 /**
@@ -427,24 +416,19 @@ class Zend_Soap_TestAsset_Recursion
  */
 function Zend_Soap_TestAsset_OneWay($message)
 {
-
 }
 
 /**
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
  */
 #[AllowDynamicProperties]
 class Zend_Soap_TestAsset_NoReturnType
 {
     /**
-     *
      * @param string $message
      */
     public function pushOneWay($message)
     {
-
     }
 }
 
@@ -454,19 +438,20 @@ class Zend_Soap_TestAsset_NoReturnType
 class Zend_Soap_TestAsset_TestClass
 {
     /**
-     * Test Function 1
+     * Test Function 1.
      *
      * @return string
      */
     public function testFunc1()
     {
-        return "Hello World";
+        return 'Hello World';
     }
 
     /**
-     * Test Function 2
+     * Test Function 2.
      *
      * @param string $who Some Arg
+     *
      * @return string
      */
     public function testFunc2($who)
@@ -475,10 +460,11 @@ class Zend_Soap_TestAsset_TestClass
     }
 
     /**
-     * Test Function 3
+     * Test Function 3.
      *
-     * @param string $who Some Arg
-     * @param int $when Some
+     * @param string $who  Some Arg
+     * @param int    $when Some
+     *
      * @return string
      */
     public function testFunc3($who, $when)
@@ -487,7 +473,7 @@ class Zend_Soap_TestAsset_TestClass
     }
 
     /**
-     * Test Function 4
+     * Test Function 4.
      *
      * @return string
      */
@@ -502,18 +488,18 @@ class Zend_Soap_TestAsset_TestClass
 class Zend_Soap_TestAsset_TestData1
 {
     /**
-     * Property1
+     * Property1.
      *
      * @var string
      */
-     public $property1;
+    public $property1;
 
     /**
-     * Property2
+     * Property2.
      *
      * @var float
      */
-     public $property2;
+    public $property2;
 }
 
 /** Test class 2 */
@@ -521,61 +507,67 @@ class Zend_Soap_TestAsset_TestData1
 class Zend_Soap_TestAsset_TestData2
 {
     /**
-     * Property1
+     * Property1.
      *
-     * @var integer
+     * @var int
      */
-     public $property1;
+    public $property1;
 
     /**
-     * Property1
+     * Property1.
      *
      * @var float
      */
-     public $property2;
+    public $property2;
 }
 
 #[AllowDynamicProperties]
 class Zend_Soap_TestAsset_MockSoapServer
 {
-    public $handle = null;
+    public $handle;
+
     public function handle()
     {
         $this->handle = func_get_args();
     }
-    public function __call($name, $args) {}
+
+    public function __call($name, $args)
+    {
+    }
 }
 
 #[AllowDynamicProperties]
 class Zend_Soap_TestAsset_MockServer extends Zend_Soap_Server
 {
-    public $mockSoapServer = null;
+    public $mockSoapServer;
+
     protected function _getSoap()
     {
         $this->mockSoapServer = new MockSoapServer();
+
         return $this->mockSoapServer;
     }
 }
-
 
 /** Server test classes */
 #[AllowDynamicProperties]
 class Zend_Soap_TestAsset_ServerTestClass
 {
     /**
-     * Test Function 1
+     * Test Function 1.
      *
      * @return string
      */
     public function testFunc1()
     {
-        return "Hello World";
+        return 'Hello World';
     }
 
     /**
-     * Test Function 2
+     * Test Function 2.
      *
      * @param string $who Some Arg
+     *
      * @return string
      */
     public function testFunc2($who)
@@ -584,10 +576,11 @@ class Zend_Soap_TestAsset_ServerTestClass
     }
 
     /**
-     * Test Function 3
+     * Test Function 3.
      *
-     * @param string $who Some Arg
-     * @param int $when Some
+     * @param string $who  Some Arg
+     * @param int    $when Some
+     *
      * @return string
      */
     public function testFunc3($who, $when)
@@ -596,7 +589,7 @@ class Zend_Soap_TestAsset_ServerTestClass
     }
 
     /**
-     * Test Function 4
+     * Test Function 4.
      *
      * @return string
      */
@@ -606,51 +599,48 @@ class Zend_Soap_TestAsset_ServerTestClass
     }
 
     /**
-     * Test Function 5 raises a user error
+     * Test Function 5 raises a user error.
      *
      * @return void
      */
     public function testFunc5()
     {
-        trigger_error("Test Message", E_USER_ERROR);
+        trigger_error('Test Message', E_USER_ERROR);
     }
 }
 
 if (extension_loaded('soap')) {
-
-/** Local SOAP client */
-#[AllowDynamicProperties]
-class Zend_Soap_TestAsset_TestLocalSoapClient extends SoapClient
-{
-    /**
-     * Server object
-     *
-     * @var Zend_Soap_Server
-     */
-    public $server;
-
-    /**
-     * Local client constructor
-     *
-     * @param Zend_Soap_Server $server
-     * @param string $wsdl
-     * @param array $options
-     */
-    public function __construct(Zend_Soap_Server $server, $wsdl, $options)
+    /** Local SOAP client */
+    #[AllowDynamicProperties]
+    class Zend_Soap_TestAsset_TestLocalSoapClient extends SoapClient
     {
-        $this->server = $server;
-        parent::__construct($wsdl, $options);
+        /**
+         * Server object.
+         *
+         * @var Zend_Soap_Server
+         */
+        public $server;
+
+        /**
+         * Local client constructor.
+         *
+         * @param string $wsdl
+         * @param array  $options
+         */
+        public function __construct(Zend_Soap_Server $server, $wsdl, $options)
+        {
+            $this->server = $server;
+            parent::__construct($wsdl, $options);
+        }
+
+        #[ReturnTypeWillChange]
+        public function __doRequest($request, $location, $action, $version, $one_way = 0)
+        {
+            ob_start();
+            $this->server->handle($request);
+            $response = ob_get_clean();
+
+            return $response;
+        }
     }
-
-    #[\ReturnTypeWillChange]
-    public function __doRequest($request, $location, $action, $version, $one_way = 0)
-    {
-        ob_start();
-        $this->server->handle($request);
-        $response = ob_get_clean();
-
-        return $response;
-    }
-}
-
 }

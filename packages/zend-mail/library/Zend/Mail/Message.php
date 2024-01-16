@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,45 +13,45 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Mail
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
-
 /**
- * Zend_Mail_Part
+ * Zend_Mail_Part.
  */
 // require_once 'Zend/Mail/Part.php';
 
 /**
- * Zend_Mail_Message_Interface
+ * Zend_Mail_Message_Interface.
  */
 // require_once 'Zend/Mail/Message/Interface.php';
 
 /**
  * @category   Zend
- * @package    Zend_Mail
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Mail_Message extends Zend_Mail_Part implements Zend_Mail_Message_Interface
 {
     /**
-     * flags for this message
+     * flags for this message.
+     *
      * @var array
      */
-    protected $_flags = array();
+    protected $_flags = [];
 
     /**
-     * Public constructor
+     * Public constructor.
      *
      * In addition to the parameters of Zend_Mail_Part::__construct() this constructor supports:
      * - file  filename or file handle of a file with raw message content
      * - flags array with flags for message, keys are ignored, use constants defined in Zend_Mail_Storage
      *
-     * @param  string $rawMessage  full message with or without headers
      * @throws Zend_Mail_Exception
      */
     public function __construct(array $params)
@@ -59,8 +59,8 @@ class Zend_Mail_Message extends Zend_Mail_Part implements Zend_Mail_Message_Inte
         if (isset($params['file'])) {
             if (!is_resource($params['file'])) {
                 $params['raw'] = @file_get_contents($params['file']);
-                if ($params['raw'] === false) {
-                    /**
+                if (false === $params['raw']) {
+                    /*
                      * @see Zend_Mail_Exception
                      */
                     // require_once 'Zend/Mail/Exception.php';
@@ -74,14 +74,14 @@ class Zend_Mail_Message extends Zend_Mail_Part implements Zend_Mail_Message_Inte
 
         if (!empty($params['flags'])) {
             // set key and value to the same value for easy lookup
-            $this->_flags = array_merge($this->_flags, array_combine($params['flags'],$params['flags']));
+            $this->_flags = array_merge($this->_flags, array_combine($params['flags'], $params['flags']));
         }
 
         parent::__construct($params);
     }
 
     /**
-     * return toplines as found after headers
+     * return toplines as found after headers.
      *
      * @return string toplines
      */
@@ -91,9 +91,10 @@ class Zend_Mail_Message extends Zend_Mail_Part implements Zend_Mail_Message_Inte
     }
 
     /**
-     * check if flag is set
+     * check if flag is set.
      *
      * @param mixed $flag a flag name, use constants defined in Zend_Mail_Storage
+     *
      * @return bool true if set, otherwise false
      */
     public function hasFlag($flag)
@@ -102,7 +103,7 @@ class Zend_Mail_Message extends Zend_Mail_Part implements Zend_Mail_Message_Inte
     }
 
     /**
-     * get all set flags
+     * get all set flags.
      *
      * @return array array with flags, key and value are the same for easy lookup
      */

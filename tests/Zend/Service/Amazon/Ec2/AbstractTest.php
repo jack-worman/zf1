@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id: AbstractTest.php 17667 2009-08-18 21:40:09Z mikaelkael $
  */
 
@@ -26,10 +26,10 @@
  * @todo: Rename class to Zend_Service_Amazon_AbstractTest
  *
  * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_Ec2
@@ -58,7 +58,8 @@ class Zend_Service_Amazon_Ec2_AbstractTest extends PHPUnit_Framework_TestCase
         try {
             $class = new TestAmamzonEc2Abstract();
             $this->fail('Exception should be thrown when no keys are passed in.');
-        } catch(Zend_Service_Amazon_Exception $zsae) {}
+        } catch (Zend_Service_Amazon_Exception $zsae) {
+        }
     }
 
     public function testSetRegion()
@@ -82,7 +83,7 @@ class Zend_Service_Amazon_Ec2_AbstractTest extends PHPUnit_Framework_TestCase
     public function testSignParamsWithSpaceEncodesWithPercentInsteadOfPlus()
     {
         $class = new TestAmamzonEc2Abstract('TestAccessKey', 'TestSecretKey');
-        $ret = $class->testSign(array('Action' => 'Space Test'));
+        $ret = $class->testSign(['Action' => 'Space Test']);
 
         // this is the encode signuature with urlencode - It's Invalid!
         $invalidSignature = 'EeHAfo7cMcLyvH4SW4fEpjo51xJJ4ES1gdjRPxZTlto=';
@@ -94,7 +95,6 @@ class Zend_Service_Amazon_Ec2_AbstractTest extends PHPUnit_Framework_TestCase
 #[AllowDynamicProperties]
 class TestAmamzonEc2Abstract extends Zend_Service_Amazon_Ec2_Abstract
 {
-
     public function returnRegion()
     {
         return $this->_region;
@@ -105,4 +105,3 @@ class TestAmamzonEc2Abstract extends Zend_Service_Amazon_Ec2_Abstract
         return $this->signParameters($params);
     }
 }
-

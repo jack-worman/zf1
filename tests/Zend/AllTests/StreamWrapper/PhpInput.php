@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,15 +13,15 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Class for mocking php://input
+ * Class for mocking php://input.
  *
  * <code>
  * class ...
@@ -42,10 +42,9 @@
  *         Zend_AllTests_StreamWrapper_PhpInput::restoreDefault();
  *     }
  * }
-*
+ *
  * @category   Zend
- * @package    Zend
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -54,9 +53,9 @@ class Zend_AllTests_StreamWrapper_PhpInput
 {
     protected static $_data;
 
-    protected static $_returnValues = array();
+    protected static $_returnValues = [];
 
-    protected static $_arguments = array();
+    protected static $_arguments = [];
 
     protected $_position = 0;
 
@@ -70,8 +69,8 @@ class Zend_AllTests_StreamWrapper_PhpInput
     public static function restoreDefault()
     {
         // Reset static values
-        self::$_returnValues = array();
-        self::$_arguments = array();
+        self::$_returnValues = [];
+        self::$_arguments = [];
 
         // Restore original stream wrapper
         stream_wrapper_restore('php');
@@ -112,7 +111,7 @@ class Zend_AllTests_StreamWrapper_PhpInput
             return self::$_returnValues[__FUNCTION__];
         }
 
-        return (0 == strlen((string) self::$_data));
+        return 0 == strlen((string) self::$_data);
     }
 
     public function stream_read($count)
@@ -132,6 +131,7 @@ class Zend_AllTests_StreamWrapper_PhpInput
             $data = substr((string) self::$_data, 0, $count);
             self::$_data = substr((string) self::$_data, $count);
         }
+
         return $data;
     }
 
@@ -143,6 +143,6 @@ class Zend_AllTests_StreamWrapper_PhpInput
             return self::$_returnValues[__FUNCTION__];
         }
 
-        return array();
+        return [];
     }
 }

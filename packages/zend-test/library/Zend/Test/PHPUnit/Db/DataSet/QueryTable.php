@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Test
- * @subpackage PHPUnit
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -24,9 +24,9 @@
  * Represent a PHPUnit Database Extension table with Queries using a Zend_Db adapter for assertion against other tables.
  *
  * @uses       PHPUnit_Extensions_Database_DataSet_QueryTable
+ *
  * @category   Zend
- * @package    Zend_Test
- * @subpackage PHPUnit
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -35,16 +35,16 @@ class Zend_Test_PHPUnit_Db_DataSet_QueryTable extends PHPUnit_Extensions_Databas
     /**
      * Creates a new database query table object.
      *
-     * @param string                                             $tableName
-     * @param string                                             $query
-     * @param PHPUnit_Extensions_Database_DB_IDatabaseConnection $databaseConnection
+     * @param string $tableName
+     * @param string $query
+     *
      * @throws Zend_Test_PHPUnit_Db_Exception
      */
     public function __construct($tableName, $query, PHPUnit_Extensions_Database_DB_IDatabaseConnection $databaseConnection)
     {
-        if( !($databaseConnection instanceof Zend_Test_PHPUnit_Db_Connection) ) {
+        if (!($databaseConnection instanceof Zend_Test_PHPUnit_Db_Connection)) {
             // require_once "Zend/Test/PHPUnit/Db/Exception.php";
-            throw new Zend_Test_PHPUnit_Db_Exception("Zend_Test_PHPUnit_Db_DataSet_QueryTable only works with Zend_Test_PHPUnit_Db_Connection connections-");
+            throw new Zend_Test_PHPUnit_Db_Exception('Zend_Test_PHPUnit_Db_DataSet_QueryTable only works with Zend_Test_PHPUnit_Db_Connection connections-');
         }
         parent::__construct($tableName, $query, $databaseConnection);
     }
@@ -56,22 +56,21 @@ class Zend_Test_PHPUnit_Db_DataSet_QueryTable extends PHPUnit_Extensions_Databas
      */
     protected function loadData()
     {
-        if($this->data === null) {
+        if (null === $this->data) {
             $stmt = $this->databaseConnection->getConnection()->query($this->query);
             $this->data = $stmt->fetchAll(Zend_Db::FETCH_ASSOC);
         }
     }
 
     /**
-     * Create Table Metadata
+     * Create Table Metadata.
      */
     protected function createTableMetaData()
     {
-        if ($this->tableMetaData === NULL)
-        {
+        if (null === $this->tableMetaData) {
             $this->loadData();
-            $keys = array();
-            if(count($this->data) > 0) {
+            $keys = [];
+            if (count($this->data) > 0) {
                 $keys = array_keys($this->data[0]);
             }
             $this->tableMetaData = new PHPUnit_Extensions_Database_DataSet_DefaultTableMetaData(

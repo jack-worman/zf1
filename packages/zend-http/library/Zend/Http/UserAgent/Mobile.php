@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,8 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Http
- * @subpackage UserAgent
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -22,27 +21,25 @@
 // require_once 'Zend/Http/UserAgent/AbstractDevice.php';
 
 /**
- * Mobile browser type matcher
+ * Mobile browser type matcher.
  *
  * @category   Zend
- * @package    Zend_Http
- * @subpackage UserAgent
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Http_UserAgent_Mobile extends Zend_Http_UserAgent_AbstractDevice
 {
+    public const DEFAULT_FEATURES_ADAPTER_CLASSNAME = 'Zend_Http_UserAgent_Features_Adapter_Browscap';
 
-    const DEFAULT_FEATURES_ADAPTER_CLASSNAME = 'Zend_Http_UserAgent_Features_Adapter_Browscap';
-
-    const DEFAULT_FEATURES_ADAPTER_PATH = 'Zend/Http/UserAgent/Features/Adapter/Browscap.php';
+    public const DEFAULT_FEATURES_ADAPTER_PATH = 'Zend/Http/UserAgent/Features/Adapter/Browscap.php';
 
     /**
-     * User Agent Signatures
+     * User Agent Signatures.
      *
      * @var array
      */
-    protected static $_uaSignatures = array(
+    protected static $_uaSignatures = [
         'iphone',
         'ipod',
         'ipad',
@@ -161,26 +158,26 @@ class Zend_Http_UserAgent_Mobile extends Zend_Http_UserAgent_AbstractDevice
         'psion',
         'j2me',
         'klondike',
-        'kbrowser'
-    );
+        'kbrowser',
+    ];
 
     /**
      * @var array
      */
-    protected static $_haTerms = array(
+    protected static $_haTerms = [
         'midp',
         'wml',
         'vnd.rim',
         'vnd.wap',
         'j2me',
-    );
+    ];
 
     /**
-     * first 4 letters of mobile User Agent chains
+     * first 4 letters of mobile User Agent chains.
      *
      * @var array
      */
-    protected static $_uaBegin = array(
+    protected static $_uaBegin = [
         'w3c ',
         'acs-',
         'alav',
@@ -266,20 +263,21 @@ class Zend_Http_UserAgent_Mobile extends Zend_Http_UserAgent_AbstractDevice
         'winw',
         'xda',
         'xda-',
-    );
+    ];
 
     /**
-     * Comparison of the UserAgent chain and User Agent signatures
+     * Comparison of the UserAgent chain and User Agent signatures.
      *
-     * @param  string $userAgent User Agent chain
-     * @param  array $server $_SERVER like param
+     * @param string $userAgent User Agent chain
+     * @param array  $server    $_SERVER like param
+     *
      * @return bool
      */
     public static function match($userAgent, $server)
     {
         //  To have a quick identification, try light-weight tests first
         if (isset($server['all_http'])) {
-            if (strpos((string) strtolower((string) str_replace((string) ' ', '', $server['all_http'])), 'operam') !== false) {
+            if (false !== strpos((string) strtolower((string) str_replace((string) ' ', '', $server['all_http'])), 'operam')) {
                 // Opera Mini or Opera Mobi
                 return true;
             }
@@ -307,36 +305,36 @@ class Zend_Http_UserAgent_Mobile extends Zend_Http_UserAgent_AbstractDevice
     }
 
     /**
-     * Retrieve beginning clause of user agent
+     * Retrieve beginning clause of user agent.
      *
-     * @param  string $userAgent
+     * @param string $userAgent
+     *
      * @return bool
      */
     public static function userAgentStart($userAgent)
     {
-
         $mobile_ua = strtolower((string) substr((string) $userAgent, 0, 4));
 
-        return (in_array($mobile_ua, self::$_uaBegin));
+        return in_array($mobile_ua, self::$_uaBegin);
     }
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @return void
      */
-    public function __construct($userAgent = null, array $server = array(), array $config = array())
+    public function __construct($userAgent = null, array $server = [], array $config = [])
     {
         // For mobile detection, an adapter must be defined
         if (empty($config['mobile']['features'])) {
-            $config['mobile']['features']['path']      = self::DEFAULT_FEATURES_ADAPTER_PATH;
+            $config['mobile']['features']['path'] = self::DEFAULT_FEATURES_ADAPTER_PATH;
             $config['mobile']['features']['classname'] = self::DEFAULT_FEATURES_ADAPTER_CLASSNAME;
         }
         parent::__construct($userAgent, $server, $config);
     }
 
     /**
-     * Gives the current browser type
+     * Gives the current browser type.
      *
      * @return string
      */
@@ -346,7 +344,7 @@ class Zend_Http_UserAgent_Mobile extends Zend_Http_UserAgent_AbstractDevice
     }
 
     /**
-     * Look for features
+     * Look for features.
      *
      * @return array
      */
@@ -356,18 +354,18 @@ class Zend_Http_UserAgent_Mobile extends Zend_Http_UserAgent_AbstractDevice
 
         parent::_defineFeatures();
 
-        if (isset($this->_aFeatures["mobile_browser"])) {
-            $this->setFeature("browser_name", $this->_aFeatures["mobile_browser"]);
-            $this->_browser = $this->_aFeatures["mobile_browser"];
+        if (isset($this->_aFeatures['mobile_browser'])) {
+            $this->setFeature('browser_name', $this->_aFeatures['mobile_browser']);
+            $this->_browser = $this->_aFeatures['mobile_browser'];
         }
-        if (isset($this->_aFeatures["mobile_browser_version"])) {
-            $this->setFeature("browser_version", $this->_aFeatures["mobile_browser_version"]);
-            $this->_browserVersion = $this->_aFeatures["mobile_browser_version"];
+        if (isset($this->_aFeatures['mobile_browser_version'])) {
+            $this->setFeature('browser_version', $this->_aFeatures['mobile_browser_version']);
+            $this->_browserVersion = $this->_aFeatures['mobile_browser_version'];
         }
 
         // markup
-        if ($this->getFeature('device_os') == 'iPhone OS'
-            || $this->getFeature('device_os_token') == 'iPhone OS'
+        if ('iPhone OS' == $this->getFeature('device_os')
+            || 'iPhone OS' == $this->getFeature('device_os_token')
         ) {
             $this->setFeature('markup', 'iphone');
         } else {
@@ -375,7 +373,7 @@ class Zend_Http_UserAgent_Mobile extends Zend_Http_UserAgent_AbstractDevice
         }
 
         // image format
-        $this->_images = array();
+        $this->_images = [];
 
         if ($this->getFeature('png')) {
             $this->_images[] = 'png';
@@ -394,9 +392,8 @@ class Zend_Http_UserAgent_Mobile extends Zend_Http_UserAgent_AbstractDevice
     }
 
     /**
-     * Determine markup language expected
+     * Determine markup language expected.
      *
-     * @access public
      * @return string
      */
     public function getMarkupLanguage($preferredMarkup = null)
@@ -406,26 +403,30 @@ class Zend_Http_UserAgent_Mobile extends Zend_Http_UserAgent_AbstractDevice
             case 'wml_1_1':
             case 'wml_1_2':
             case 'wml_1_3':
-                $return = 'wml'; //text/vnd.wap.wml encoding="ISO-8859-15"
+                $return = 'wml'; // text/vnd.wap.wml encoding="ISO-8859-15"
+                // no break
             case 'html_wi_imode_compact_generic':
             case 'html_wi_imode_html_1':
             case 'html_wi_imode_html_2':
             case 'html_wi_imode_html_3':
             case 'html_wi_imode_html_4':
             case 'html_wi_imode_html_5':
-                $return = 'chtml'; //text/html
-            case 'html_wi_oma_xhtmlmp_1_0': //application/vnd.wap.xhtml+xml
-            case 'html_wi_w3_xhtmlbasic': //application/xhtml+xml DTD XHTML Basic 1.0
+                $return = 'chtml'; // text/html
+                // no break
+            case 'html_wi_oma_xhtmlmp_1_0': // application/vnd.wap.xhtml+xml
+            case 'html_wi_w3_xhtmlbasic': // application/xhtml+xml DTD XHTML Basic 1.0
                 $return = 'xhtml';
-            case 'html_web_3_2': //text/html DTD Html 3.2 Final
-            case 'html_web_4_0': //text/html DTD Html 4.01 Transitional
+                // no break
+            case 'html_web_3_2': // text/html DTD Html 3.2 Final
+            case 'html_web_4_0': // text/html DTD Html 4.01 Transitional
                 $return = '';
         }
+
         return $return;
     }
 
     /**
-     * Determine image format support
+     * Determine image format support.
      *
      * @return array
      */
@@ -435,7 +436,7 @@ class Zend_Http_UserAgent_Mobile extends Zend_Http_UserAgent_AbstractDevice
     }
 
     /**
-     * Determine maximum image height supported
+     * Determine maximum image height supported.
      *
      * @return string|null
      */
@@ -445,7 +446,7 @@ class Zend_Http_UserAgent_Mobile extends Zend_Http_UserAgent_AbstractDevice
     }
 
     /**
-     * Determine maximum image width supported
+     * Determine maximum image width supported.
      *
      * @return string|null
      */
@@ -455,7 +456,7 @@ class Zend_Http_UserAgent_Mobile extends Zend_Http_UserAgent_AbstractDevice
     }
 
     /**
-     * Determine physical screen height
+     * Determine physical screen height.
      *
      * @return string|null
      */
@@ -465,7 +466,7 @@ class Zend_Http_UserAgent_Mobile extends Zend_Http_UserAgent_AbstractDevice
     }
 
     /**
-     * Determine physical screen width
+     * Determine physical screen width.
      *
      * @return string|null
      */
@@ -475,17 +476,17 @@ class Zend_Http_UserAgent_Mobile extends Zend_Http_UserAgent_AbstractDevice
     }
 
     /**
-     * Determine preferred markup
+     * Determine preferred markup.
      *
      * @return string
      */
     public function getPreferredMarkup()
     {
-        return $this->getFeature("markup");
+        return $this->getFeature('markup');
     }
 
     /**
-     * Determine X/HTML support level
+     * Determine X/HTML support level.
      *
      * @return string|null
      */
@@ -531,6 +532,6 @@ class Zend_Http_UserAgent_Mobile extends Zend_Http_UserAgent_AbstractDevice
      */
     public function httpsSupport()
     {
-        return ($this->getFeature('https_support') == 'supported');
+        return 'supported' == $this->getFeature('https_support');
     }
 }

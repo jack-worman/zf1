@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata_Analytics
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -24,10 +24,10 @@
 
 /**
  * @category   Zend
- * @package    Zend_Gdata_Analytics
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Analytics
  */
@@ -51,7 +51,7 @@ class Zend_GData_Analytics_AccountQueryTest extends PHPUnit_Framework_TestCase
         $allQuery = $this->accountQuery->getQueryUrl();
 
         $this->assertEquals(
-            $this->queryBase . '/~all/webproperties',
+            $this->queryBase.'/~all/webproperties',
             $allQuery
         );
     }
@@ -62,7 +62,7 @@ class Zend_GData_Analytics_AccountQueryTest extends PHPUnit_Framework_TestCase
         $specificQuery = $this->accountQuery->getQueryUrl();
 
         $this->assertEquals(
-            $this->queryBase . '/12345678/webproperties',
+            $this->queryBase.'/12345678/webproperties',
             $specificQuery
         );
     }
@@ -73,7 +73,7 @@ class Zend_GData_Analytics_AccountQueryTest extends PHPUnit_Framework_TestCase
         $allQuery = $this->accountQuery->getQueryUrl();
 
         $this->assertEquals(
-            $this->queryBase . '/~all/webproperties/~all/profiles',
+            $this->queryBase.'/~all/webproperties/~all/profiles',
             $allQuery
         );
     }
@@ -84,7 +84,7 @@ class Zend_GData_Analytics_AccountQueryTest extends PHPUnit_Framework_TestCase
         $specificQuery = $this->accountQuery->getQueryUrl();
 
         $this->assertEquals(
-            $this->queryBase . '/87654321/webproperties/U-87654321-0/profiles',
+            $this->queryBase.'/87654321/webproperties/U-87654321-0/profiles',
             $specificQuery
         );
     }
@@ -95,7 +95,7 @@ class Zend_GData_Analytics_AccountQueryTest extends PHPUnit_Framework_TestCase
         $allQuery = $this->accountQuery->getQueryUrl();
 
         $this->assertEquals(
-            $this->queryBase . '/~all/webproperties/~all/profiles/~all/goals',
+            $this->queryBase.'/~all/webproperties/~all/profiles/~all/goals',
             $allQuery
         );
     }
@@ -106,7 +106,7 @@ class Zend_GData_Analytics_AccountQueryTest extends PHPUnit_Framework_TestCase
         $specificQuery = $this->accountQuery->getQueryUrl();
 
         $this->assertEquals(
-            $this->queryBase . '/87654321/webproperties/U-87654321-0/profiles/42/goals',
+            $this->queryBase.'/87654321/webproperties/U-87654321-0/profiles/42/goals',
             $specificQuery
         );
     }
@@ -120,7 +120,7 @@ class Zend_GData_Analytics_AccountQueryTest extends PHPUnit_Framework_TestCase
         $specificQuery = $this->accountQuery->getQueryUrl();
 
         $this->assertEquals(
-            $this->queryBase . '/87654321/webproperties/U-87654321-0/profiles/42/goals',
+            $this->queryBase.'/87654321/webproperties/U-87654321-0/profiles/42/goals',
             $specificQuery
         );
     }

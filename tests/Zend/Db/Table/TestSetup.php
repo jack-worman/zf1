@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,50 +13,44 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /**
  * @see Zend_Db_TestSetup
  */
 require_once 'Zend/Db/TestSetup.php';
 
-
-
-
-
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Db
  * @group      Zend_Db_Table
  */
 abstract class Zend_Db_Table_TestSetup extends Zend_Db_TestSetup
 {
-
     /**
      * @var array of Zend_Db_Table_Abstract
      */
-    protected $_table = array();
+    protected $_table = [];
 
-    protected $_runtimeIncludePath = null;
+    protected $_runtimeIncludePath;
 
     public function setUp()
     {
         parent::setUp();
 
-        $this->_table['accounts']      = $this->_getTable('My_ZendDbTable_TableAccounts');
-        $this->_table['bugs']          = $this->_getTable('My_ZendDbTable_TableBugs');
+        $this->_table['accounts'] = $this->_getTable('My_ZendDbTable_TableAccounts');
+        $this->_table['bugs'] = $this->_getTable('My_ZendDbTable_TableBugs');
         $this->_table['bugs_products'] = $this->_getTable('My_ZendDbTable_TableBugsProducts');
-        $this->_table['products']      = $this->_getTable('My_ZendDbTable_TableProducts');
+        $this->_table['products'] = $this->_getTable('My_ZendDbTable_TableProducts');
     }
 
     public function tearDown()
@@ -67,7 +61,7 @@ abstract class Zend_Db_Table_TestSetup extends Zend_Db_TestSetup
         parent::tearDown();
     }
 
-    protected function _getTable($tableClass, $options = array())
+    protected function _getTable($tableClass, $options = [])
     {
         if (is_array($options) && !isset($options['db'])) {
             $options['db'] = $this->_db;
@@ -78,13 +72,14 @@ abstract class Zend_Db_Table_TestSetup extends Zend_Db_TestSetup
             $this->_restoreIncludePath();
         }
         $table = new $tableClass($options);
+
         return $table;
     }
 
     protected function _useMyIncludePath()
     {
         $this->_runtimeIncludePath = get_include_path();
-        set_include_path(__DIR__ . '/_files/' . PATH_SEPARATOR . $this->_runtimeIncludePath);
+        set_include_path(__DIR__.'/_files/'.PATH_SEPARATOR.$this->_runtimeIncludePath);
     }
 
     protected function _restoreIncludePath()
@@ -92,5 +87,4 @@ abstract class Zend_Db_Table_TestSetup extends Zend_Db_TestSetup
         set_include_path($this->_runtimeIncludePath);
         $this->_runtimeIncludePath = null;
     }
-
 }

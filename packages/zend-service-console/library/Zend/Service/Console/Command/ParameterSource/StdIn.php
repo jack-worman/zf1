@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,9 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_Console
- * @subpackage Exception
+ *
  * @version    $Id$
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @copyright  Copyright (c) 2009 - 2011, RealDolmen (http://www.realdolmen.com)
@@ -23,59 +23,59 @@
  */
 
 /**
-* @see Zend_Service_Console_Command_ParameterSource_ParameterSourceInterface
-*/
+ * @see Zend_Service_Console_Command_ParameterSource_ParameterSourceInterface
+ */
 // require_once 'Zend/Service/Console/Command/ParameterSource/ParameterSourceInterface.php';
 
 /**
  * @category   Zend
- * @package    Zend_Service_Console
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @copyright  Copyright (c) 2009 - 2011, RealDolmen (http://www.realdolmen.com)
  * @license    http://phpazure.codeplex.com/license
  */
-class Zend_Service_Console_Command_ParameterSource_StdIn
-	implements Zend_Service_Console_Command_ParameterSource_ParameterSourceInterface
+class Zend_Service_Console_Command_ParameterSource_StdIn implements Zend_Service_Console_Command_ParameterSource_ParameterSourceInterface
 {
-	/**
-	 * Get value for a named parameter.
-	 *
-	 * @param mixed $parameter Parameter to get a value for
-	 * @param array $argv Argument values passed to the script when run in console.
-	 * @return bool|string|null
+    /**
+     * Get value for a named parameter.
+     *
+     * @param mixed $parameter Parameter to get a value for
+     * @param array $argv      argument values passed to the script when run in console
+     *
+     * @return bool|string|null
      */
-	public function getValueForParameter($parameter, $argv = array())
-	{
-		// Default value
-		$parameterValue = null;
+    public function getValueForParameter($parameter, $argv = [])
+    {
+        // Default value
+        $parameterValue = null;
 
-		// Check STDIN for data
-		if (ftell(STDIN) !== false) {
-			// Read from STDIN
-			$fs = fopen("php://stdin", "r");
-			if ($fs !== false) {
-				/*
-				while (!feof($fs)) {
-					$data = fread($fs, 1);
-					var_dump($data);
-					$parameterValue .= $data;
-				} */
-				$parameterValue = stream_get_contents($fs);
-				fclose($fs);
-			}
+        // Check STDIN for data
+        if (false !== ftell(STDIN)) {
+            // Read from STDIN
+            $fs = fopen('php://stdin', 'r');
+            if (false !== $fs) {
+                /*
+                while (!feof($fs)) {
+                    $data = fread($fs, 1);
+                    var_dump($data);
+                    $parameterValue .= $data;
+                } */
+                $parameterValue = stream_get_contents($fs);
+                fclose($fs);
+            }
 
-			// Remove ending \r\n
-			$parameterValue = rtrim((string) $parameterValue);
+            // Remove ending \r\n
+            $parameterValue = rtrim((string) $parameterValue);
 
-			if (strtolower((string) $parameterValue) == 'true') {
-				$parameterValue = true;
-			} else if (strtolower((string) $parameterValue) == 'false') {
-				$parameterValue = false;
-			}
-		}
+            if ('true' == strtolower((string) $parameterValue)) {
+                $parameterValue = true;
+            } elseif ('false' == strtolower((string) $parameterValue)) {
+                $parameterValue = false;
+            }
+        }
 
-		// Done!
-		return $parameterValue;
-	}
+        // Done!
+        return $parameterValue;
+    }
 }

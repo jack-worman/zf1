@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,26 +13,24 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /**
  * @see Zend_Db_Table_TestCommon
  */
 require_once 'Zend/Db/Table/TestCommon.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Db
  * @group      Zend_Db_Table
  */
@@ -47,14 +45,14 @@ class Zend_Db_Table_Pdo_PgsqlTest extends Zend_Db_Table_TestCommon
     public function testTableInsert()
     {
         $table = $this->_table['bugs'];
-        $row = array (
+        $row = [
             'bug_description' => 'New bug',
-            'bug_status'      => 'NEW',
-            'created_on'      => '2007-04-02',
-            'updated_on'      => '2007-04-02',
-            'reported_by'     => 'micky',
-            'assigned_to'     => 'goofy'
-        );
+            'bug_status' => 'NEW',
+            'created_on' => '2007-04-02',
+            'updated_on' => '2007-04-02',
+            'reported_by' => 'micky',
+            'assigned_to' => 'goofy',
+        ];
         $insertResult = $table->insert($row);
         $lastInsertId = $this->_db->lastInsertId('zfbugs', 'bug_id');
         $lastSequenceId = $this->_db->lastSequenceId('zfbugs_bug_id_seq');
@@ -66,15 +64,15 @@ class Zend_Db_Table_Pdo_PgsqlTest extends Zend_Db_Table_TestCommon
     public function testTableInsertPkNull()
     {
         $table = $this->_table['bugs'];
-        $row = array (
-            'bug_id'          => null,
+        $row = [
+            'bug_id' => null,
             'bug_description' => 'New bug',
-            'bug_status'      => 'NEW',
-            'created_on'      => '2007-04-02',
-            'updated_on'      => '2007-04-02',
-            'reported_by'     => 'micky',
-            'assigned_to'     => 'goofy'
-        );
+            'bug_status' => 'NEW',
+            'created_on' => '2007-04-02',
+            'updated_on' => '2007-04-02',
+            'reported_by' => 'micky',
+            'assigned_to' => 'goofy',
+        ];
         $insertResult = $table->insert($row);
         $lastInsertId = $this->_db->lastInsertId('zfbugs', 'bug_id');
         $lastSequenceId = $this->_db->lastSequenceId('zfbugs_bug_id_seq');
@@ -86,20 +84,20 @@ class Zend_Db_Table_Pdo_PgsqlTest extends Zend_Db_Table_TestCommon
     public function testTableInsertSequence()
     {
         $table = $this->_getTable('My_ZendDbTable_TableProducts',
-            array(Zend_Db_Table_Abstract::SEQUENCE => 'zfproducts_seq'));
-        $row = array (
-            'product_name' => 'Solaris'
-        );
-        $insertResult         = $table->insert($row);
-        $lastInsertId         = $this->_db->lastInsertId('zfproducts');
-        $lastSequenceId       = $this->_db->lastSequenceId('zfproducts_seq');
+            [Zend_Db_Table_Abstract::SEQUENCE => 'zfproducts_seq']);
+        $row = [
+            'product_name' => 'Solaris',
+        ];
+        $insertResult = $table->insert($row);
+        $lastInsertId = $this->_db->lastInsertId('zfproducts');
+        $lastSequenceId = $this->_db->lastSequenceId('zfproducts_seq');
         $this->assertEquals($insertResult, $lastInsertId);
         $this->assertEquals($insertResult, $lastSequenceId);
         $this->assertEquals(4, $insertResult);
     }
 
     /**
-     * Ensures that the schema is null if not specified
+     * Ensures that the schema is null if not specified.
      *
      * @return void
      */
@@ -111,7 +109,7 @@ class Zend_Db_Table_Pdo_PgsqlTest extends Zend_Db_Table_TestCommon
     }
 
     /**
-     * Ensures that the schema is set by the 'schema' constructor configuration directive
+     * Ensures that the schema is set by the 'schema' constructor configuration directive.
      *
      * @return void
      */
@@ -119,10 +117,10 @@ class Zend_Db_Table_Pdo_PgsqlTest extends Zend_Db_Table_TestCommon
     {
         $schema = 'public';
 
-        $config = array(
-            'db'        => $this->_db,
-            'schema'    => $schema
-            );
+        $config = [
+            'db' => $this->_db,
+            'schema' => $schema,
+            ];
 
         $table = new My_ZendDbTable_TableBugs($config);
 
@@ -132,7 +130,7 @@ class Zend_Db_Table_Pdo_PgsqlTest extends Zend_Db_Table_TestCommon
     }
 
     /**
-     * Ensures that the schema is set by the 'name' constructor configuration directive
+     * Ensures that the schema is set by the 'name' constructor configuration directive.
      *
      * @return void
      */
@@ -142,10 +140,10 @@ class Zend_Db_Table_Pdo_PgsqlTest extends Zend_Db_Table_TestCommon
 
         $tableName = "$schema.zfbugs";
 
-        $config = array(
-            'db'        => $this->_db,
-            'name'      => $tableName
-            );
+        $config = [
+            'db' => $this->_db,
+            'name' => $tableName,
+            ];
 
         $table = new My_ZendDbTable_TableBugs($config);
 
@@ -166,11 +164,11 @@ class Zend_Db_Table_Pdo_PgsqlTest extends Zend_Db_Table_TestCommon
 
         $tableName = "$schema.zfbugs";
 
-        $config = array(
-            'db'        => $this->_db,
-            'schema'    => 'foo',
-            'name'      => $tableName
-            );
+        $config = [
+            'db' => $this->_db,
+            'schema' => 'foo',
+            'name' => $tableName,
+            ];
 
         $table = new My_ZendDbTable_TableBugs($config);
 
@@ -180,7 +178,7 @@ class Zend_Db_Table_Pdo_PgsqlTest extends Zend_Db_Table_TestCommon
     }
 
     /**
-     * Ensures that fetchAll() provides expected behavior when the schema is specified
+     * Ensures that fetchAll() provides expected behavior when the schema is specified.
      *
      * @return void
      */
@@ -188,10 +186,10 @@ class Zend_Db_Table_Pdo_PgsqlTest extends Zend_Db_Table_TestCommon
     {
         $schema = 'public';
 
-        $config = array(
-            'db'        => $this->_db,
-            'schema'    => $schema,
-            );
+        $config = [
+            'db' => $this->_db,
+            'schema' => $schema,
+            ];
 
         $table = new My_ZendDbTable_TableBugs($config);
 
@@ -200,11 +198,11 @@ class Zend_Db_Table_Pdo_PgsqlTest extends Zend_Db_Table_TestCommon
         $this->assertThat(
             $rowset,
             $this->isInstanceOf('Zend_Db_Table_Rowset')
-            );
+        );
 
         $this->assertEquals(
             4,
             count($rowset)
-            );
+        );
     }
 }

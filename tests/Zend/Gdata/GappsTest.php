@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata_Gapps
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -27,17 +27,17 @@
 
 /**
  * @category   Zend
- * @package    Zend_Gdata_Gapps
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Gapps
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_GappsTest extends PHPUnit_Framework_TestCase
 {
-    const TEST_DOMAIN = 'nowhere.invalid';
+    public const TEST_DOMAIN = 'nowhere.invalid';
 
     public function setUp()
     {
@@ -46,7 +46,8 @@ class Zend_Gdata_GappsTest extends PHPUnit_Framework_TestCase
         $this->gdata = new Zend_Gdata_Gapps(null, self::TEST_DOMAIN);
     }
 
-    public function testMagicFactoryProvidesQueriesWithDomains() {
+    public function testMagicFactoryProvidesQueriesWithDomains()
+    {
         $userQ = $this->gdata->newUserQuery();
         $this->assertTrue($userQ instanceof Zend_Gdata_Gapps_UserQuery);
         $this->assertEquals(self::TEST_DOMAIN, $userQ->getDomain());
@@ -58,23 +59,24 @@ class Zend_Gdata_GappsTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('foo', $userQ->getUsername());
     }
 
-    public function testMagicFactoryLeavesNonQueriesAlone() {
+    public function testMagicFactoryLeavesNonQueriesAlone()
+    {
         $login = $this->gdata->newLogin('blah');
         $this->assertTrue($login instanceof Zend_Gdata_Gapps_Extension_Login);
         $this->assertEquals('blah', $login->username);
     }
 
-    public function testEmptyResponseExceptionRaisesException() {
-      // require_once('Zend/Gdata/App/HttpException.php');
-      $e = new Zend_Gdata_App_HttpException();
-      $e->setResponse(null);
-      $success = false;
-      try {
-        $this->gdata->throwServiceExceptionIfDetected($e);
-      } catch (Zend_Gdata_App_IOException $f) {
-        $success = true;
-      }
-      $this->assertTrue($success, 'Zend_Gdata_App_IOException not thrown');
+    public function testEmptyResponseExceptionRaisesException()
+    {
+        // require_once('Zend/Gdata/App/HttpException.php');
+        $e = new Zend_Gdata_App_HttpException();
+        $e->setResponse(null);
+        $success = false;
+        try {
+            $this->gdata->throwServiceExceptionIfDetected($e);
+        } catch (Zend_Gdata_App_IOException $f) {
+            $success = true;
+        }
+        $this->assertTrue($success, 'Zend_Gdata_App_IOException not thrown');
     }
-
 }

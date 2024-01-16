@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_Audioscrobbler
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,25 +25,25 @@
  */
 // require_once 'Zend/Service/Audioscrobbler.php';
 
-require_once "AudioscrobblerTestCase.php";
+require_once 'AudioscrobblerTestCase.php';
 
 /**
  * @category   Zend
- * @package    Zend_Service_Audioscrobbler
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Service
  * @group      Zend_Service_Audioscrobbler
  */
 #[AllowDynamicProperties]
 class Zend_Service_Audioscrobbler_TrackDataTest extends Zend_Service_Audioscrobbler_AudioscrobblerTestCase
 {
-    var $header = "HTTP/1.1 200 OK\r\nContent-type: text/xml\r\n\r\n";
+    public $header = "HTTP/1.1 200 OK\r\nContent-type: text/xml\r\n\r\n";
 
     public function testGetTopFans()
     {
-        $testing_response = $this->header .
+        $testing_response = $this->header.
                             '<?xml version="1.0" encoding="UTF-8"?>
                             <fans artist="Metallica" track="Enter Sandman">
                             <user username="suhis">
@@ -69,14 +69,14 @@ class Zend_Service_Audioscrobbler_TrackDataTest extends Zend_Service_Audioscrobb
         $as->set('artist', 'Metallica');
         $as->set('track', 'Enter Sandman');
         $response = $as->trackGetTopFans();
-        $this->assertEquals((string)$response['artist'], 'Metallica');
-        $this->assertEquals((string)$response['track'], 'Enter Sandman');
+        $this->assertEquals((string) $response['artist'], 'Metallica');
+        $this->assertEquals((string) $response['track'], 'Enter Sandman');
         $this->assertNotNull(count($response->user));
     }
 
     public function testGetTopTags()
     {
-        $testing_response = $this->header .
+        $testing_response = $this->header.
                             '<?xml version="1.0" encoding="UTF-8"?>
                             <toptags artist="Metallica" track="Enter Sandman">
                             <tag>
@@ -103,7 +103,7 @@ class Zend_Service_Audioscrobbler_TrackDataTest extends Zend_Service_Audioscrobb
         $as->set('track', 'Enter Sandman');
         $response = $as->trackGetTopTags();
         $this->assertNotNull(count($response->tag));
-        $this->assertEquals((string)$response['artist'], 'Metallica');
-        $this->assertEquals((string)$response['track'], 'Enter Sandman');
+        $this->assertEquals((string) $response['artist'], 'Metallica');
+        $this->assertEquals((string) $response['track'], 'Enter Sandman');
     }
 }

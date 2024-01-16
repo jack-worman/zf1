@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -30,8 +30,7 @@ require_once '_files/Foo.php';
 
 /**
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
@@ -45,7 +44,7 @@ class Zend_Tool_Framework_Action_RepositoryTest extends PHPUnit_Framework_TestCa
     /**
      * @var Zend_Tool_Framework_Action_Repository
      */
-    protected $_repository = null;
+    protected $_repository;
 
     public function setup()
     {
@@ -79,7 +78,7 @@ class Zend_Tool_Framework_Action_RepositoryTest extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * @expectedException Zend_Tool_Framework_Action_Exception
+     * @expectedException \Zend_Tool_Framework_Action_Exception
      */
     public function testAddActionThrowsExceptionOnDuplicateNameAction()
     {
@@ -88,7 +87,7 @@ class Zend_Tool_Framework_Action_RepositoryTest extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * @expectedException Zend_Tool_Framework_Action_Exception
+     * @expectedException \Zend_Tool_Framework_Action_Exception
      */
     public function testAddActionThrowsExceptionOnActionWithNoName()
     {
@@ -114,9 +113,9 @@ class Zend_Tool_Framework_Action_RepositoryTest extends PHPUnit_Framework_TestCa
     {
         $this->_repository->addAction(new Zend_Tool_Framework_Action_Base('Foo'));
         $this->_repository->addAction(new Zend_Tool_Framework_Action_Base('Bar'));
-        $i=0;
+        $i = 0;
         foreach ($this->_repository as $action) {
-            $i++;
+            ++$i;
             $this->assertEquals('Zend_Tool_Framework_Action_Base', get_class($action));
         }
         $this->assertEquals(2, $i);
@@ -126,9 +125,9 @@ class Zend_Tool_Framework_Action_RepositoryTest extends PHPUnit_Framework_TestCa
     {
         $this->_repository->addAction(new Zend_Tool_Framework_Action_Base('Foo'));
         $this->_repository->addAction(new Zend_Tool_Framework_Action_Base('Bar'));
-        $i=0;
+        $i = 0;
         foreach ($this->_repository->getActions() as $action) {
-            $i++;
+            ++$i;
             $this->assertEquals('Zend_Tool_Framework_Action_Base', get_class($action));
         }
         $this->assertEquals(2, $i);
@@ -138,7 +137,4 @@ class Zend_Tool_Framework_Action_RepositoryTest extends PHPUnit_Framework_TestCa
     {
         $this->assertNull($this->_repository->process());
     }
-
-
-
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_WindowsAzure
- * @subpackage Management
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,31 +27,29 @@
 
 /**
  * @category   Zend
- * @package    Zend_Service_SqlAzure
- * @subpackage Management
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * 
- * @property string $Name               The name of the firewall rule.
- * @property string $StartIpAddress     The start IP address.
- * @property string $EndIpAddress       The end IP address.
+ *
+ * @property string $Name           The name of the firewall rule.
+ * @property string $StartIpAddress The start IP address.
+ * @property string $EndIpAddress   The end IP address.
  */
-class Zend_Service_SqlAzure_Management_FirewallRuleInstance
-	extends Zend_Service_SqlAzure_Management_ServiceEntityAbstract
-{    
+class Zend_Service_SqlAzure_Management_FirewallRuleInstance extends Zend_Service_SqlAzure_Management_ServiceEntityAbstract
+{
     /**
-     * Constructor
-     * 
-     * @param string $name               The name of the firewall rule.
-     * @param string $startIpAddress     The start IP address.
-     * @param string $endIpAddress       The end IP address.
-	 */
-    public function __construct($name, $startIpAddress, $endIpAddress) 
-    {	        
-        $this->_data = array(
-            'name'               => $name,
-            'startipaddress'     => $startIpAddress,
-            'endipaddress'       => $endIpAddress       
-        );
+     * Constructor.
+     *
+     * @param string $name           the name of the firewall rule
+     * @param string $startIpAddress the start IP address
+     * @param string $endIpAddress   the end IP address
+     */
+    public function __construct($name, $startIpAddress, $endIpAddress)
+    {
+        $this->_data = [
+            'name' => $name,
+            'startipaddress' => $startIpAddress,
+            'endipaddress' => $endIpAddress,
+        ];
     }
 }

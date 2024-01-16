@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,35 +13,34 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Mail
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Mail
+ * Zend_Mail.
  */
 // require_once 'Zend/Mail.php';
 
 /**
- * Zend_Mail_Protocol_Smtp
+ * Zend_Mail_Protocol_Smtp.
  */
 // require_once 'Zend/Mail/Protocol/Smtp.php';
 
-
 /**
- * Zend_Mail_Transport_Smtp
+ * Zend_Mail_Transport_Smtp.
  */
 // require_once 'Zend/Mail/Transport/Smtp.php';
 
 /**
  * @category   Zend
- * @package    Zend_Mail
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Mail
  */
 #[AllowDynamicProperties]
@@ -51,11 +50,11 @@ class Zend_Mail_SmtpOfflineTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_params = array('host'     => TESTS_ZEND_MAIL_SMTP_HOST,
-                               'port'     => TESTS_ZEND_MAIL_SMTP_PORT,
+        $this->_params = ['host' => TESTS_ZEND_MAIL_SMTP_HOST,
+                               'port' => TESTS_ZEND_MAIL_SMTP_PORT,
                                'username' => TESTS_ZEND_MAIL_SMTP_USER,
                                'password' => TESTS_ZEND_MAIL_SMTP_PASSWORD,
-                               'auth'     => TESTS_ZEND_MAIL_SMTP_AUTH);
+                               'auth' => TESTS_ZEND_MAIL_SMTP_AUTH];
     }
 
     /**

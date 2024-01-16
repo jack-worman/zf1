@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,18 +13,17 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Filter_DashToUnderscoreTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Filter_Word_DashToUnderscoreTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Filter_Word_DashToUnderscoreTest::main');
 }
-
 
 // require_once 'Zend/Filter/Word/DashToUnderscore.php';
 
@@ -32,10 +31,10 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * Test class for Zend_Filter_Word_DashToUnderscore.
  *
  * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Filter
  */
 #[AllowDynamicProperties]
@@ -44,20 +43,18 @@ class Zend_Filter_Word_DashToUnderscoreTest extends PHPUnit_Framework_TestCase
     /**
      * Runs the test methods of this class.
      *
-     * @access public
      * @static
      */
     public static function main()
     {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Filter_Word_DashToUnderscoreTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Filter_Word_DashToUnderscoreTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     public function testFilterSeparatesCamelCasedWordsWithDashes()
     {
-        $string   = 'dash-separated-words';
-        $filter   = new Zend_Filter_Word_DashToUnderscore();
+        $string = 'dash-separated-words';
+        $filter = new Zend_Filter_Word_DashToUnderscore();
         $filtered = $filter->filter($string);
 
         $this->assertNotEquals($string, $filtered);
@@ -66,6 +63,6 @@ class Zend_Filter_Word_DashToUnderscoreTest extends PHPUnit_Framework_TestCase
 }
 
 // Call Zend_Filter_Word_DashToUnderscoreTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Filter_Word_DashToUnderscoreTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Filter_Word_DashToUnderscoreTest::main') {
     Zend_Filter_Word_DashToUnderscoreTest::main();
 }

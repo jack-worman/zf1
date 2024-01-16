@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,29 +13,29 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version $Id$
  */
 
 // Call Zend_XmlRpc_Server_CacheTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_XmlRpc_Server_CacheTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_XmlRpc_Server_CacheTest::main');
 }
 
 // require_once 'Zend/XmlRpc/Server.php';
 // require_once 'Zend/XmlRpc/Server/Cache.php';
 
 /**
- * Test case for Zend_XmlRpc_Server_Cache
+ * Test case for Zend_XmlRpc_Server_Cache.
  *
  * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_XmlRpc
  */
 #[AllowDynamicProperties]
@@ -48,34 +48,36 @@ class Zend_XmlRpc_Server_CacheTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_XmlRpc_Server_CacheTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_XmlRpc_Server_CacheTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     /**
-     * Zend_XmlRpc_Server object
+     * Zend_XmlRpc_Server object.
+     *
      * @var Zend_XmlRpc_Server
      */
     protected $_server;
 
     /**
-     * Local file for caching
+     * Local file for caching.
+     *
      * @var string
      */
     protected $_file;
 
     /**
-     * Setup environment
+     * Setup environment.
      */
     public function setUp()
     {
-        $this->_file = realpath(__DIR__) . '/xmlrpc.cache';
+        $this->_file = realpath(__DIR__).'/xmlrpc.cache';
         $this->_server = new Zend_XmlRpc_Server();
         $this->_server->setClass('Zend_XmlRpc_Server_Cache', 'cache');
     }
 
     /**
-     * Teardown environment
+     * Teardown environment.
      */
     public function tearDown()
     {
@@ -86,7 +88,7 @@ class Zend_XmlRpc_Server_CacheTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests functionality of both get() and save()
+     * Tests functionality of both get() and save().
      */
     public function testGetSave()
     {
@@ -104,7 +106,7 @@ class Zend_XmlRpc_Server_CacheTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Zend_XmlRpc_Server_Cache::delete() test
+     * Zend_XmlRpc_Server_Cache::delete() test.
      */
     public function testDelete()
     {
@@ -129,6 +131,6 @@ class Zend_XmlRpc_Server_CacheTest extends PHPUnit_Framework_TestCase
 }
 
 // Call Zend_XmlRpc_Server_CacheTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_XmlRpc_Server_CacheTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_XmlRpc_Server_CacheTest::main') {
     Zend_XmlRpc_Server_CacheTest::main();
 }

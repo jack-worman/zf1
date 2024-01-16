@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata_Analytics
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,10 +25,10 @@
 
 /**
  * @category   Zend
- * @package    Zend_Gdata_Analytics
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Analytics
  */
@@ -41,7 +41,7 @@ class Zend_Gdata_Analytics_AccountFeedTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->accountFeed = new Zend_Gdata_Analytics_AccountFeed(
-            file_get_contents(__DIR__ . '/_files/TestAccountFeed.xml')
+            file_get_contents(__DIR__.'/_files/TestAccountFeed.xml')
         );
     }
 
@@ -54,7 +54,7 @@ class Zend_Gdata_Analytics_AccountFeedTest extends PHPUnit_Framework_TestCase
         }
     }
 
-	public function testFirstAccountProperties()
+    public function testFirstAccountProperties()
     {
         $account = $this->accountFeed->entries[0];
         $this->assertEquals(876543, "{$account->accountId}");

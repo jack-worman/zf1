@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -32,10 +32,10 @@
 
 /**
  * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Feed
  */
 #[AllowDynamicProperties]
@@ -81,7 +81,7 @@ class Zend_Feed_AtomPublishingTest extends PHPUnit_Framework_TestCase
     public function testEdit()
     {
         Zend_Feed::setHttpClient(new TestClient());
-        $contents = file_get_contents(__DIR__ .  '/_files/AtomPublishingTest-before-update.xml');
+        $contents = file_get_contents(__DIR__.'/_files/AtomPublishingTest-before-update.xml');
 
         /* The base feed URI is the same as the POST URI, so just supply the
          * Zend_Feed_Entry_Atom object with that. */
@@ -107,7 +107,6 @@ class Zend_Feed_AtomPublishingTest extends PHPUnit_Framework_TestCase
 /**
  * A test wrapper around Zend_Http_Client, not actually performing
  * the request.
- *
  */
 #[AllowDynamicProperties]
 class TestClient extends Zend_Http_Client
@@ -120,19 +119,19 @@ class TestClient extends Zend_Http_Client
         switch ($method) {
             case self::POST:
                 $code = 201;
-                $body = file_get_contents(__DIR__ . '/_files/AtomPublishingTest-created-entry.xml');
+                $body = file_get_contents(__DIR__.'/_files/AtomPublishingTest-created-entry.xml');
                 break;
 
             case self::PUT:
                 // DOMDocument::load() was sometimes failing in full test suite with "failed to load external entity" error...
-                $xml = file_get_contents(__DIR__ . '/_files/AtomPublishingTest-expected-update.xml');
+                $xml = file_get_contents(__DIR__.'/_files/AtomPublishingTest-expected-update.xml');
                 $doc1 = new DOMDocument();
                 $doc1->loadXML($xml);
                 $doc2 = new DOMDocument();
                 $doc2->loadXML($this->raw_post_data);
                 if ($doc1->saveXml() == $doc2->saveXml()) {
                     $code = 200;
-                    $body = file_get_contents(__DIR__ . '/_files/AtomPublishingTest-updated-entry.xml');
+                    $body = file_get_contents(__DIR__.'/_files/AtomPublishingTest-updated-entry.xml');
                 }
                 break;
 
@@ -140,6 +139,6 @@ class TestClient extends Zend_Http_Client
                 break;
         }
 
-        return new Zend_Http_Response($code, array(), $body);
+        return new Zend_Http_Response($code, [], $body);
     }
 }

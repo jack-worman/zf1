@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,11 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage Router
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ *
  * @version    $Id$
+ *
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -26,12 +27,10 @@
 // require_once 'Zend/Controller/Router/Route/Interface.php';
 
 /**
- * Abstract Route
+ * Abstract Route.
  *
  * Implements interface and provides convenience methods
  *
- * @package    Zend_Controller
- * @subpackage Router
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -39,28 +38,28 @@
 abstract class Zend_Controller_Router_Route_Abstract implements Zend_Controller_Router_Route_Interface
 {
     /**
-     * URI delimiter
+     * URI delimiter.
      */
-    const URI_DELIMITER = '/';
+    public const URI_DELIMITER = '/';
 
     /**
-     * Wether this route is abstract or not
+     * Wether this route is abstract or not.
      *
-     * @var boolean
+     * @var bool
      */
     protected $_isAbstract = false;
 
     /**
-     * Path matched by this route
+     * Path matched by this route.
      *
      * @var string
      */
-    protected $_matchedPath = null;
+    protected $_matchedPath;
 
     /**
-     * Get the version of the route
+     * Get the version of the route.
      *
-     * @return integer
+     * @return int
      */
     public function getVersion()
     {
@@ -68,9 +67,10 @@ abstract class Zend_Controller_Router_Route_Abstract implements Zend_Controller_
     }
 
     /**
-     * Set partially matched path
+     * Set partially matched path.
      *
-     * @param  string $path
+     * @param string $path
+     *
      * @return void
      */
     public function setMatchedPath($path)
@@ -79,7 +79,7 @@ abstract class Zend_Controller_Router_Route_Abstract implements Zend_Controller_
     }
 
     /**
-     * Get partially matched path
+     * Get partially matched path.
      *
      * @return string
      */
@@ -89,14 +89,15 @@ abstract class Zend_Controller_Router_Route_Abstract implements Zend_Controller_
     }
 
     /**
-     * Check or set wether this is an abstract route or not
+     * Check or set wether this is an abstract route or not.
      *
-     * @param  boolean $flag
-     * @return boolean
+     * @param bool $flag
+     *
+     * @return bool
      */
     public function isAbstract($flag = null)
     {
-        if ($flag !== null) {
+        if (null !== $flag) {
             $this->_isAbstract = $flag;
         }
 
@@ -104,10 +105,10 @@ abstract class Zend_Controller_Router_Route_Abstract implements Zend_Controller_
     }
 
     /**
-     * Create a new chain
+     * Create a new chain.
      *
-     * @param  Zend_Controller_Router_Route_Abstract $route
-     * @param  string                                $separator
+     * @param string $separator
+     *
      * @return Zend_Controller_Router_Route_Chain
      */
     public function chain(Zend_Controller_Router_Route_Abstract $route, $separator = '/')

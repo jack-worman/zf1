@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -25,13 +25,9 @@
  */
 require_once 'Zend/Db/TestUtil/Db2.php';
 
-
-
-
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -41,6 +37,7 @@ class Zend_Db_TestUtil_Pdo_Ibm extends Zend_Db_TestUtil_Db2
     public function getSchema()
     {
         $desc = $this->_db->describeTable('zfproducts');
+
         return $desc['product_id']['SCHEMA_NAME'];
     }
 
@@ -49,11 +46,12 @@ class Zend_Db_TestUtil_Pdo_Ibm extends Zend_Db_TestUtil_Db2
         $data = parent::_getDataProducts();
 
         $server = $this->getServer();
-        if ($server == 'IDS') {
+        if ('IDS' == $server) {
             foreach ($data as &$row) {
-                $row['product_id'] = new Zend_Db_Expr($this->_db->quoteIdentifier('zfproducts_seq', true) . ".NEXTVAL");
+                $row['product_id'] = new Zend_Db_Expr($this->_db->quoteIdentifier('zfproducts_seq', true).'.NEXTVAL');
             }
         }
+
         return $data;
     }
 
@@ -61,18 +59,18 @@ class Zend_Db_TestUtil_Pdo_Ibm extends Zend_Db_TestUtil_Db2
     {
         $server = $this->getServer();
 
-        if ($server == 'IDS') {
-            return array (
-            array(
-                'doc_id'    => 1,
-                'doc_clob'  => 'this is the clob that never ends...'.
+        if ('IDS' == $server) {
+            return [
+            [
+                'doc_id' => 1,
+                'doc_clob' => 'this is the clob that never ends...'.
                                'this is the clob that never ends...'.
                                'this is the clob that never ends...',
-                'doc_blob'  => 'this is the blob that never ends...'.
+                'doc_blob' => 'this is the blob that never ends...'.
                                'this is the blob that never ends...'.
-                               'this is the blob that never ends...'
-                )
-            );
+                               'this is the blob that never ends...',
+                ],
+            ];
         }
 
         return parent::_getDataDocuments();
@@ -82,16 +80,17 @@ class Zend_Db_TestUtil_Pdo_Ibm extends Zend_Db_TestUtil_Db2
     {
         $server = $this->getServer();
 
-        if ($server == 'IDS') {
-
-            if ($type == 'IDENTITY') {
+        if ('IDS' == $server) {
+            if ('IDENTITY' == $type) {
                 return 'SERIAL(1) PRIMARY KEY';
             }
-            if ($type == 'DATETIME') {
+            if ('DATETIME' == $type) {
                 return 'DATE';
             }
+
             return $type;
         }
+
         return parent::getSqlType($type);
     }
 
@@ -99,14 +98,15 @@ class Zend_Db_TestUtil_Pdo_Ibm extends Zend_Db_TestUtil_Db2
     {
         $server = $this->getServer();
 
-        if ($server == 'IDS') {
+        if ('IDS' == $server) {
             $tableList = $this->_db->fetchCol('SELECT T.TABNAME FROM SYSTABLES T '
-            . $this->_db->quoteInto(' WHERE T.TABNAME = ?', $tableName)
+            .$this->_db->quoteInto(' WHERE T.TABNAME = ?', $tableName)
             );
             if (in_array($tableName, $tableList)) {
                 return null;
             }
-            return 'CREATE TABLE ' . $this->_db->quoteIdentifier($tableName, true);
+
+            return 'CREATE TABLE '.$this->_db->quoteIdentifier($tableName, true);
         }
 
         return parent::_getSqlCreateTable($tableName);
@@ -116,13 +116,14 @@ class Zend_Db_TestUtil_Pdo_Ibm extends Zend_Db_TestUtil_Db2
     {
         $server = $this->getServer();
 
-        if ($server == 'IDS') {
+        if ('IDS' == $server) {
             $tableList = $this->_db->fetchCol('SELECT T.TABNAME FROM SYSTABLES T '
-            . $this->_db->quoteInto(' WHERE T.TABNAME = ?', $tableName)
+            .$this->_db->quoteInto(' WHERE T.TABNAME = ?', $tableName)
             );
             if (in_array($tableName, $tableList)) {
-                return 'DROP TABLE ' . $this->_db->quoteIdentifier($tableName, true);
+                return 'DROP TABLE '.$this->_db->quoteIdentifier($tableName, true);
             }
+
             return null;
         }
 
@@ -133,16 +134,17 @@ class Zend_Db_TestUtil_Pdo_Ibm extends Zend_Db_TestUtil_Db2
     {
         $server = $this->getServer();
 
-        if ($server == 'IDS') {
+        if ('IDS' == $server) {
             $seqList = $this->_db->fetchCol('SELECT S.TABNAME FROM SYSTABLES S '
-            . $this->_db->quoteInto(' WHERE S.TABNAME = ?', $sequenceName)
-            . " AND S.TABTYPE = 'Q'"
+            .$this->_db->quoteInto(' WHERE S.TABNAME = ?', $sequenceName)
+            ." AND S.TABTYPE = 'Q'"
             );
 
             if (in_array($sequenceName, $seqList)) {
                 return null;
             }
-            return 'CREATE SEQUENCE ' . $this->_db->quoteIdentifier($sequenceName, true) . ' START WITH 1 INCREMENT BY 1 MINVALUE 1';
+
+            return 'CREATE SEQUENCE '.$this->_db->quoteIdentifier($sequenceName, true).' START WITH 1 INCREMENT BY 1 MINVALUE 1';
         }
 
         return parent::_getSqlCreateSequence($sequenceName);
@@ -152,15 +154,16 @@ class Zend_Db_TestUtil_Pdo_Ibm extends Zend_Db_TestUtil_Db2
     {
         $server = $this->getServer();
 
-        if ($server == 'IDS') {
+        if ('IDS' == $server) {
             $seqList = $this->_db->fetchCol('SELECT S.TABNAME FROM SYSTABLES S '
-            . $this->_db->quoteInto(' WHERE S.TABNAME = ?', $sequenceName)
-            . " AND S.TABTYPE = 'Q'"
+            .$this->_db->quoteInto(' WHERE S.TABNAME = ?', $sequenceName)
+            ." AND S.TABTYPE = 'Q'"
             );
 
             if (in_array($sequenceName, $seqList)) {
-                return 'DROP SEQUENCE ' . $this->_db->quoteIdentifier($sequenceName, true);
+                return 'DROP SEQUENCE '.$this->_db->quoteIdentifier($sequenceName, true);
             }
+
             return null;
         }
 

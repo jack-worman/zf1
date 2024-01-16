@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage DublinCore
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -28,27 +28,22 @@
 
 /**
  * Point or period of time associated with an event in the lifecycle of the
- * resource
+ * resource.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage DublinCore
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_DublinCore_Extension_Date extends Zend_Gdata_Extension
 {
-
     protected $_rootNamespace = 'dc';
     protected $_rootElement = 'date';
 
     /**
      * Constructor for Zend_Gdata_DublinCore_Extension_Date which
      * Point or period of time associated with an event in the lifecycle of the
-     * resource
-     *
-     * @param DOMElement $element (optional) DOMElement from which this
-     *          object should be constructed.
+     * resource.
      */
     public function __construct($value = null)
     {
@@ -56,5 +51,4 @@ class Zend_Gdata_DublinCore_Extension_Date extends Zend_Gdata_Extension
         parent::__construct();
         $this->_text = $value;
     }
-
 }

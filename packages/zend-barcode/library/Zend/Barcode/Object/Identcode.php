@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Barcode
- * @subpackage Object
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -31,18 +31,18 @@
 // require_once 'Zend/Validate/Barcode.php';
 
 /**
- * Class for generate Identcode barcode
+ * Class for generate Identcode barcode.
  *
  * @category   Zend
- * @package    Zend_Barcode
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Barcode_Object_Identcode extends Zend_Barcode_Object_Code25interleaved
 {
-
     /**
-     * Default options for Identcode barcode
+     * Default options for Identcode barcode.
+     *
      * @return void
      */
     protected function _getDefaultOptions()
@@ -52,42 +52,47 @@ class Zend_Barcode_Object_Identcode extends Zend_Barcode_Object_Code25interleave
     }
 
     /**
-     * Retrieve text to display
+     * Retrieve text to display.
+     *
      * @return string
      */
     public function getTextToDisplay()
     {
         return preg_replace('/([0-9]{2})([0-9]{3})([0-9]{3})([0-9]{3})([0-9])/',
-                            '$1.$2 $3.$4 $5',
-                            $this->getText());
+            '$1.$2 $3.$4 $5',
+            $this->getText());
     }
 
     /**
-     * Check allowed characters
+     * Check allowed characters.
      *
      * @param string $value
+     *
      * @return void
+     *
      * @throws Zend_Barcode_Object_Exception
      */
     public function validateText($value)
     {
-        $this->_validateText($value, array('validator' => $this->getType()));
+        $this->_validateText($value, ['validator' => $this->getType()]);
     }
 
     /**
-     * Get barcode checksum
+     * Get barcode checksum.
      *
      * @param string $text
-     * @throws Zend_Barcode_Object_Exception
+     *
      * @return int
+     *
+     * @throws Zend_Barcode_Object_Exception
      */
     public function getChecksum($text)
     {
         $this->_checkText($text);
         $checksum = 0;
 
-        for ($i = strlen((string) $text); $i > 0; $i --) {
-            $checksum += (int)$text[$i - 1] * (($i % 2) ? 4 : 9);
+        for ($i = strlen((string) $text); $i > 0; --$i) {
+            $checksum += (int) $text[$i - 1] * (($i % 2) ? 4 : 9);
         }
 
         $checksum = (10 - ($checksum % 10)) % 10;

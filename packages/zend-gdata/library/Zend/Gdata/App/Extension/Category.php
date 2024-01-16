@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage App
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,23 +27,21 @@
 // require_once 'Zend/Gdata/App/Extension.php';
 
 /**
- * Represents the atom:category element
+ * Represents the atom:category element.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage App
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_App_Extension_Category extends Zend_Gdata_App_Extension
 {
-
     protected $_rootElement = 'category';
-    protected $_term = null;
-    protected $_scheme = null;
-    protected $_label = null;
+    protected $_term;
+    protected $_scheme;
+    protected $_label;
 
-    public function __construct($term = null, $scheme = null, $label=null)
+    public function __construct($term = null, $scheme = null, $label = null)
     {
         parent::__construct();
         $this->_term = $term;
@@ -54,32 +52,33 @@ class Zend_Gdata_App_Extension_Category extends Zend_Gdata_App_Extension
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
         $element = parent::getDOM($doc, $majorVersion, $minorVersion);
-        if ($this->_term !== null) {
+        if (null !== $this->_term) {
             $element->setAttribute('term', $this->_term);
         }
-        if ($this->_scheme !== null) {
+        if (null !== $this->_scheme) {
             $element->setAttribute('scheme', $this->_scheme);
         }
-        if ($this->_label !== null) {
+        if (null !== $this->_label) {
             $element->setAttribute('label', $this->_label);
         }
+
         return $element;
     }
 
     protected function takeAttributeFromDOM($attribute)
     {
         switch ($attribute->localName) {
-        case 'term':
-            $this->_term = $attribute->nodeValue;
-            break;
-        case 'scheme':
-            $this->_scheme = $attribute->nodeValue;
-            break;
-        case 'label':
-            $this->_label = $attribute->nodeValue;
-            break;
-        default:
-            parent::takeAttributeFromDOM($attribute);
+            case 'term':
+                $this->_term = $attribute->nodeValue;
+                break;
+            case 'scheme':
+                $this->_scheme = $attribute->nodeValue;
+                break;
+            case 'label':
+                $this->_label = $attribute->nodeValue;
+                break;
+            default:
+                parent::takeAttributeFromDOM($attribute);
         }
     }
 
@@ -93,11 +92,13 @@ class Zend_Gdata_App_Extension_Category extends Zend_Gdata_App_Extension
 
     /**
      * @param string|null $value
+     *
      * @return Zend_Gdata_App_Extension_Category Provides a fluent interface
      */
     public function setTerm($value)
     {
         $this->_term = $value;
+
         return $this;
     }
 
@@ -111,11 +112,13 @@ class Zend_Gdata_App_Extension_Category extends Zend_Gdata_App_Extension
 
     /**
      * @param string|null $value
+     *
      * @return Zend_Gdata_App_Extension_Category Provides a fluent interface
      */
     public function setScheme($value)
     {
         $this->_scheme = $value;
+
         return $this;
     }
 
@@ -129,12 +132,13 @@ class Zend_Gdata_App_Extension_Category extends Zend_Gdata_App_Extension
 
     /**
      * @param string|null $value
+     *
      * @return Zend_Gdata_App_Extension_Category Provides a fluent interface
      */
     public function setLabel($value)
     {
         $this->_label = $value;
+
         return $this;
     }
-
 }

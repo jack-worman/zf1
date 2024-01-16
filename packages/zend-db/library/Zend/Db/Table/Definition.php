@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage Table
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -24,21 +24,19 @@
  * Class for SQL table interface.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage Table
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Db_Table_Definition
 {
-
     /**
      * @var array
      */
-    protected $_tableConfigs = array();
+    protected $_tableConfigs = [];
 
     /**
-     * __construct()
+     * __construct().
      *
      * @param array|Zend_Config $options
      */
@@ -52,34 +50,34 @@ class Zend_Db_Table_Definition
     }
 
     /**
-     * setConfig()
+     * setConfig().
      *
-     * @param Zend_Config $config
      * @return Zend_Db_Table_Definition
      */
     public function setConfig(Zend_Config $config)
     {
         $this->setOptions($config->toArray());
+
         return $this;
     }
 
     /**
-     * setOptions()
+     * setOptions().
      *
-     * @param array $options
      * @return Zend_Db_Table_Definition
      */
-    public function setOptions(Array $options)
+    public function setOptions(array $options)
     {
         foreach ($options as $optionName => $optionValue) {
             $this->setTableConfig($optionName, $optionValue);
         }
+
         return $this;
     }
 
     /**
      * @param string $tableName
-     * @param array  $tableConfig
+     *
      * @return Zend_Db_Table_Definition
      */
     public function setTableConfig($tableName, array $tableConfig)
@@ -93,13 +91,15 @@ class Zend_Db_Table_Definition
         }
 
         $this->_tableConfigs[$tableName] = $tableConfig;
+
         return $this;
     }
 
     /**
-     * getTableConfig()
+     * getTableConfig().
      *
      * @param string $tableName
+     *
      * @return array
      */
     public function getTableConfig($tableName)
@@ -108,7 +108,7 @@ class Zend_Db_Table_Definition
     }
 
     /**
-     * removeTableConfig()
+     * removeTableConfig().
      *
      * @param string $tableName
      */
@@ -118,14 +118,14 @@ class Zend_Db_Table_Definition
     }
 
     /**
-     * hasTableConfig()
+     * hasTableConfig().
      *
      * @param string $tableName
+     *
      * @return bool
      */
     public function hasTableConfig($tableName)
     {
-        return (isset($this->_tableConfigs[$tableName]));
+        return isset($this->_tableConfigs[$tableName]);
     }
-
 }

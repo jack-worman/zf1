@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,10 +26,10 @@
  * @todo: Rename class to Zend_Service_Amazon_AbstractTest
  *
  * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
  */
@@ -57,14 +57,15 @@ class AmamzonAbstract extends PHPUnit_Framework_TestCase
         try {
             $class = new TestAmamzonAbstract();
             $this->fail('Exception should be thrown when no keys are passed in.');
-        } catch(Zend_Service_Amazon_Exception $zsae) {}
+        } catch (Zend_Service_Amazon_Exception $zsae) {
+        }
     }
 
     public function testConstructorWithKeysDoesNotThrowException()
     {
         try {
             $class = new TestAmamzonAbstract('TestAccessKey', 'TestSecretKey');
-        } catch(Zend_Service_Amazon_Exception $zsae) {
+        } catch (Zend_Service_Amazon_Exception $zsae) {
             $this->fail('Exception should be thrown when no keys are passed in.');
         }
     }
@@ -108,6 +109,4 @@ class TestAmamzonAbstract extends Zend_Service_Amazon_Abstract
     {
         return $this->_secretKey;
     }
-
 }
-

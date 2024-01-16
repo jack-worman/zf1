@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,25 +13,21 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 require_once 'Zend/Db/Select/TestCommon.php';
 
-
-
-
-
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Db
  * @group      Zend_Db_Select
  */
@@ -40,27 +36,27 @@ class Zend_Db_Select_SqlsrvTest extends Zend_Db_Select_TestCommon
 {
     public function testSelectQueryWithBinds()
     {
-        $this->markTestSkipped($this->getDriver() . ' does not support binding by name.');
+        $this->markTestSkipped($this->getDriver().' does not support binding by name.');
     }
 
     public function testSelectColumnWithColonQuotedParameter()
     {
-        $this->markTestSkipped($this->getDriver() . ' does not support selecting int columns by varchar param.');
+        $this->markTestSkipped($this->getDriver().' does not support selecting int columns by varchar param.');
     }
 
     public function testSelectFromForUpdate()
     {
-        $this->markTestSkipped($this->getDriver() . ' does not support for update.');
+        $this->markTestSkipped($this->getDriver().' does not support for update.');
     }
 
     public function testSelectFromQualified()
     {
-        $this->markTestIncomplete($this->getDriver() . ' needs more syntax for qualified table names.');
+        $this->markTestIncomplete($this->getDriver().' needs more syntax for qualified table names.');
     }
 
     public function testSelectJoinQualified()
     {
-        $this->markTestIncomplete($this->getDriver() . ' needs more syntax for qualified table names.');
+        $this->markTestIncomplete($this->getDriver().' needs more syntax for qualified table names.');
     }
 
     public function getDriver()

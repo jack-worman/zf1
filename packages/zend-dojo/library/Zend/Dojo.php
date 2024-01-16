@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,45 +13,44 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Dojo
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
- * Enable Dojo components
+ * Enable Dojo components.
  *
- * @package    Zend_Dojo
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 class Zend_Dojo
 {
     /**
-     * Base path to AOL CDN
+     * Base path to AOL CDN.
      */
-    const CDN_BASE_AOL = 'http://o.aolcdn.com/dojo/';
+    public const CDN_BASE_AOL = 'http://o.aolcdn.com/dojo/';
 
     /**
-     * Path to dojo on AOL CDN (following version string)
+     * Path to dojo on AOL CDN (following version string).
      */
-    const CDN_DOJO_PATH_AOL = '/dojo/dojo.xd.js';
+    public const CDN_DOJO_PATH_AOL = '/dojo/dojo.xd.js';
 
     /**
-     * Base path to Google CDN
+     * Base path to Google CDN.
      */
-    const CDN_BASE_GOOGLE = 'http://ajax.googleapis.com/ajax/libs/dojo/';
+    public const CDN_BASE_GOOGLE = 'http://ajax.googleapis.com/ajax/libs/dojo/';
 
     /**
-     * Path to dojo on Google CDN (following version string)
+     * Path to dojo on Google CDN (following version string).
      */
-    const CDN_DOJO_PATH_GOOGLE = '/dojo/dojo.xd.js';
+    public const CDN_DOJO_PATH_GOOGLE = '/dojo/dojo.xd.js';
 
     /**
-     * Dojo-enable a form instance
+     * Dojo-enable a form instance.
      *
-     * @param  Zend_Form $form
      * @return void
      */
     public static function enableForm(Zend_Form $form)
@@ -72,9 +71,8 @@ class Zend_Dojo
     }
 
     /**
-     * Dojo-enable a view instance
+     * Dojo-enable a view instance.
      *
-     * @param  Zend_View_Interface $view
      * @return void
      */
     public static function enableView(Zend_View_Interface $view)
@@ -84,4 +82,3 @@ class Zend_Dojo
         }
     }
 }
-

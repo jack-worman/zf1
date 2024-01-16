@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Dojo_Form_SubFormTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_Form_SubFormTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Dojo_Form_SubFormTest::main');
 }
 
 /** Zend_Dojo_Form_SubForm */
@@ -32,13 +32,13 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 // require_once 'Zend/View.php';
 
 /**
- * Test class for Zend_Dojo_SubForm
+ * Test class for Zend_Dojo_SubForm.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Dojo
  * @group      Zend_Dojo_Form
  */
@@ -52,7 +52,7 @@ class Zend_Dojo_Form_SubFormTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_Form_SubFormTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Dojo_Form_SubFormTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -66,7 +66,7 @@ class Zend_Dojo_Form_SubFormTest extends PHPUnit_Framework_TestCase
     {
         $this->form = new Zend_Dojo_Form_SubForm();
         $this->form->addElement('TextBox', 'foo')
-                   ->addDisplayGroup(array('foo'), 'dg')
+                   ->addDisplayGroup(['foo'], 'dg')
                    ->setView(new Zend_View());
     }
 
@@ -116,14 +116,14 @@ class Zend_Dojo_Form_SubFormTest extends PHPUnit_Framework_TestCase
 
     public function testShouldRegisterDojoViewHelperPath()
     {
-        $view   = $this->form->getView();
+        $view = $this->form->getView();
         $loader = $view->getPluginLoader('helper');
-        $paths  = $loader->getPaths('Zend_Dojo_View_Helper');
+        $paths = $loader->getPaths('Zend_Dojo_View_Helper');
         $this->assertTrue(is_array($paths));
     }
 }
 
 // Call Zend_Dojo_Form_SubFormTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dojo_Form_SubFormTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Dojo_Form_SubFormTest::main') {
     Zend_Dojo_Form_SubFormTest::main();
 }

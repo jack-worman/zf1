@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,11 +13,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @feed       Zend
+ *
  * @category   Zend
- * @package    Zend_Gdata_Calendar
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -26,58 +27,64 @@
 
 /**
  * @category   Zend
- * @package    Zend_Gdata_Calendar
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Calendar
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_Calendar_EventEntryTest extends PHPUnit_Framework_TestCase
 {
-
-    public function setUp() {
+    public function setUp()
+    {
         $this->entryText = file_get_contents(
-                'Zend/Gdata/Calendar/_files/EventEntrySample1.xml',
-                true);
+            'Zend/Gdata/Calendar/_files/EventEntrySample1.xml',
+            true);
         $this->entry = new Zend_Gdata_Calendar_EventEntry();
     }
 
-    public function testSetters() {
+    public function testSetters()
+    {
         $entry = new Zend_Gdata_Calendar_EventEntry();
         $who = new Zend_Gdata_Extension_Who();
-        $who->setValueString("John Doe");
-        $who->setEmail("john@doe.com");
+        $who->setValueString('John Doe');
+        $who->setEmail('john@doe.com');
         $entry->setWho($who);
         $whoRetrieved = $entry->getWho();
-        $this->assertEquals("john@doe.com", $whoRetrieved->getEmail());
-        $this->assertEquals("John Doe", $whoRetrieved->getValueString());
+        $this->assertEquals('john@doe.com', $whoRetrieved->getEmail());
+        $this->assertEquals('John Doe', $whoRetrieved->getValueString());
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionElements() {
+    public function testEmptyEntryShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->entry->extensionElements));
-        $this->assertTrue(count($this->entry->extensionElements) == 0);
+        $this->assertTrue(0 == count($this->entry->extensionElements));
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionAttributes() {
+    public function testEmptyEntryShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->entry->extensionAttributes));
-        $this->assertTrue(count($this->entry->extensionAttributes) == 0);
+        $this->assertTrue(0 == count($this->entry->extensionAttributes));
     }
 
-    public function testSampleEntryShouldHaveNoExtensionElements() {
+    public function testSampleEntryShouldHaveNoExtensionElements()
+    {
         $this->entry->transferFromXML($this->entryText);
         $this->assertTrue(is_array($this->entry->extensionElements));
-        $this->assertTrue(count($this->entry->extensionElements) == 0);
+        $this->assertTrue(0 == count($this->entry->extensionElements));
     }
 
-    public function testSampleEntryShouldHaveNoExtensionAttributes() {
+    public function testSampleEntryShouldHaveNoExtensionAttributes()
+    {
         $this->entry->transferFromXML($this->entryText);
         $this->assertTrue(is_array($this->entry->extensionAttributes));
-        $this->assertTrue(count($this->entry->extensionAttributes) == 0);
+        $this->assertTrue(0 == count($this->entry->extensionAttributes));
     }
 
-    public function testEmptyEventEntryToAndFromStringShouldMatch() {
+    public function testEmptyEventEntryToAndFromStringShouldMatch()
+    {
         $entryXml = $this->entry->saveXML();
         $newEventEntry = new Zend_Gdata_Calendar_EventEntry();
         $newEventEntry->transferFromXML($entryXml);
@@ -85,7 +92,8 @@ class Zend_Gdata_Calendar_EventEntryTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($entryXml == $newEventEntryXml);
     }
 
-    public function testConvertEventEntryToAndFromString() {
+    public function testConvertEventEntryToAndFromString()
+    {
         $this->entry->transferFromXML($this->entryText);
         $entryXml = $this->entry->saveXML();
         $newEventEntry = new Zend_Gdata_Calendar_EventEntry();
@@ -93,9 +101,9 @@ class Zend_Gdata_Calendar_EventEntryTest extends PHPUnit_Framework_TestCase
         $newEventEntryXml = $newEventEntry->saveXML();
         $this->assertEquals($entryXml, $newEventEntryXml);
         $this->assertEquals('http://www.google.com/calendar/feeds/default/private/full/s0dtsvq4pe15ku09jideg67fv4_20070509T193000Z',
-                $newEventEntry->id->text);
+            $newEventEntry->id->text);
         $this->assertEquals('Mantek',
-                $newEventEntry->extendedProperty[0]->value);
+            $newEventEntry->extendedProperty[0]->value);
         $this->assertEquals('s0dtsvq4pe15ku09jideg67fv4',
             $newEventEntry->originalEvent->id);
         $this->assertEquals('s0dtsvq4pe15ku09jideg67fv4',
@@ -104,36 +112,35 @@ class Zend_Gdata_Calendar_EventEntryTest extends PHPUnit_Framework_TestCase
             $newEventEntry->comments->feedLink->href);
     }
 
-/*
-    public function testEventEntryWithTextAndTypeToAndFromStringShouldMatch() {
-        $this->feed->text = '<img src="http://www.example.com/image.jpg"/>';
-        $this->feed->type = 'xhtml';
-        $feedXml = $this->feed->saveXML();
-        $newEventEntry = new Zend_Gdata_App_EventEntry();
-        $newEventEntry->transferFromXML($feedXml);
-        $newEventEntryXml = $newEventEntry->saveXML();
-        $this->assertEquals($newEventEntryXml, $feedXml);
-        $this->assertEquals('<img src="http://www.example.com/image.jpg"/>', $newEventEntry->text);
-        $this->assertEquals('xhtml', $newEventEntry->type);
-    }
+    /*
+        public function testEventEntryWithTextAndTypeToAndFromStringShouldMatch() {
+            $this->feed->text = '<img src="http://www.example.com/image.jpg"/>';
+            $this->feed->type = 'xhtml';
+            $feedXml = $this->feed->saveXML();
+            $newEventEntry = new Zend_Gdata_App_EventEntry();
+            $newEventEntry->transferFromXML($feedXml);
+            $newEventEntryXml = $newEventEntry->saveXML();
+            $this->assertEquals($newEventEntryXml, $feedXml);
+            $this->assertEquals('<img src="http://www.example.com/image.jpg"/>', $newEventEntry->text);
+            $this->assertEquals('xhtml', $newEventEntry->type);
+        }
 
-    public function testEventEntryWithSrcAndTypeToAndFromStringShouldMatch() {
-        $this->feed->src = 'http://www.example.com/image.png';
-        $this->feed->type = 'image/png';
-        $feedXml = $this->feed->saveXML();
-        $newEventEntry = new Zend_Gdata_App_EventEntry();
-        $newEventEntry->transferFromXML($feedXml);
-        $newEventEntryXml = $newEventEntry->saveXML();
-        $this->assertEquals($newEventEntryXml, $feedXml);
-        $this->assertEquals('http://www.example.com/image.png', $newEventEntry->src);
-        $this->assertEquals('image/png', $newEventEntry->type);
-    }
+        public function testEventEntryWithSrcAndTypeToAndFromStringShouldMatch() {
+            $this->feed->src = 'http://www.example.com/image.png';
+            $this->feed->type = 'image/png';
+            $feedXml = $this->feed->saveXML();
+            $newEventEntry = new Zend_Gdata_App_EventEntry();
+            $newEventEntry->transferFromXML($feedXml);
+            $newEventEntryXml = $newEventEntry->saveXML();
+            $this->assertEquals($newEventEntryXml, $feedXml);
+            $this->assertEquals('http://www.example.com/image.png', $newEventEntry->src);
+            $this->assertEquals('image/png', $newEventEntry->type);
+        }
 
-    public function testConvertEventEntryWithSrcAndTypeToAndFromString() {
-        $this->feed->transferFromXML($this->feedText);
-        $this->assertEquals('http://www.example.com/image.png', $this->feed->src);
-        $this->assertEquals('image/png', $this->feed->type);
-    }
-*/
-
+        public function testConvertEventEntryWithSrcAndTypeToAndFromString() {
+            $this->feed->transferFromXML($this->feedText);
+            $this->assertEquals('http://www.example.com/image.png', $this->feed->src);
+            $this->assertEquals('image/png', $this->feed->type);
+        }
+    */
 }

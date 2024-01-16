@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tool
- * @subpackage Framework
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,13 +27,12 @@
 
 /**
  * @category   Zend
- * @package    Zend_Tool
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Framework_Metadata_Tool extends Zend_Tool_Framework_Metadata_Basic
 {
-
     /**
      * @var string
      */
@@ -42,23 +41,24 @@ class Zend_Tool_Framework_Metadata_Tool extends Zend_Tool_Framework_Metadata_Bas
     /**#@+
      * @var string
      */
-    protected $_clientName    = null;
-    protected $_actionName    = null;
-    protected $_providerName  = null;
-    protected $_specialtyName = null;
+    protected $_clientName;
+    protected $_actionName;
+    protected $_providerName;
+    protected $_specialtyName;
     /**#@-*/
 
     /**#@+
      * @var string
      */
-    protected $_clientReference = null;
-    protected $_actionReference = null;
-    protected $_providerReference = null;
+    protected $_clientReference;
+    protected $_actionReference;
+    protected $_providerReference;
     /**#@-*/
 
     public function setClientName($clientName)
     {
         $this->_clientName = $clientName;
+
         return $this;
     }
 
@@ -68,19 +68,21 @@ class Zend_Tool_Framework_Metadata_Tool extends Zend_Tool_Framework_Metadata_Bas
     }
 
     /**
-     * setActionName()
+     * setActionName().
      *
      * @param string $actionName
+     *
      * @return Zend_Tool_Framework_Metadata_Tool
      */
     public function setActionName($actionName)
     {
         $this->_actionName = $actionName;
+
         return $this;
     }
 
     /**
-     * getActionName()
+     * getActionName().
      *
      * @return string|null
      */
@@ -90,19 +92,21 @@ class Zend_Tool_Framework_Metadata_Tool extends Zend_Tool_Framework_Metadata_Bas
     }
 
     /**
-     * setProviderName()
+     * setProviderName().
      *
      * @param string $providerName
+     *
      * @return Zend_Tool_Framework_Metadata_Tool
      */
     public function setProviderName($providerName)
     {
         $this->_providerName = $providerName;
+
         return $this;
     }
 
     /**
-     * getProviderName()
+     * getProviderName().
      *
      * @return string|null
      */
@@ -112,19 +116,21 @@ class Zend_Tool_Framework_Metadata_Tool extends Zend_Tool_Framework_Metadata_Bas
     }
 
     /**
-     * setSpecialtyName()
+     * setSpecialtyName().
      *
      * @param string $specialtyName
+     *
      * @return Zend_Tool_Framework_Metadata_Tool
      */
     public function setSpecialtyName($specialtyName)
     {
         $this->_specialtyName = $specialtyName;
+
         return $this;
     }
 
     /**
-     * getSpecialtyName()
+     * getSpecialtyName().
      *
      * @return string|null
      */
@@ -134,19 +140,19 @@ class Zend_Tool_Framework_Metadata_Tool extends Zend_Tool_Framework_Metadata_Bas
     }
 
     /**
-     * setClientReference()
+     * setClientReference().
      *
-     * @param Zend_Tool_Framework_Client_Abstract $client
      * @return Zend_Tool_Framework_Metadata_Tool
      */
     public function setClientReference(Zend_Tool_Framework_Client_Abstract $client)
     {
         $this->_clientReference = $client;
+
         return $this;
     }
 
     /**
-     * getClientReference()
+     * getClientReference().
      *
      * @return string|null
      */
@@ -156,19 +162,19 @@ class Zend_Tool_Framework_Metadata_Tool extends Zend_Tool_Framework_Metadata_Bas
     }
 
     /**
-     * setActionReference()
+     * setActionReference().
      *
-     * @param Zend_Tool_Framework_Action_Interface $action
      * @return Zend_Tool_Framework_Metadata_Tool
      */
     public function setActionReference(Zend_Tool_Framework_Action_Interface $action)
     {
         $this->_actionReference = $action;
+
         return $this;
     }
 
     /**
-     * getActionReference()
+     * getActionReference().
      *
      * @return Zend_Tool_Framework_Action_Interface|null
      */
@@ -178,19 +184,19 @@ class Zend_Tool_Framework_Metadata_Tool extends Zend_Tool_Framework_Metadata_Bas
     }
 
     /**
-     * setProviderReference()
+     * setProviderReference().
      *
-     * @param Zend_Tool_Framework_Provider_Interface $provider
      * @return Zend_Tool_Framework_Metadata_Tool
      */
     public function setProviderReference(Zend_Tool_Framework_Provider_Interface $provider)
     {
         $this->_providerReference = $provider;
+
         return $this;
     }
 
     /**
-     * getProviderReference()
+     * getProviderReference().
      *
      * @return Zend_Tool_Framework_Provider_Interface|null
      */
@@ -200,19 +206,18 @@ class Zend_Tool_Framework_Metadata_Tool extends Zend_Tool_Framework_Metadata_Bas
     }
 
     /**
-     * __toString() cast to string
+     * __toString() cast to string.
      *
      * @return string
      */
     public function __toString()
     {
         $string = parent::__toString();
-        $string .= ' (ProviderName: ' . $this->_providerName
-             . ', ActionName: '     . $this->_actionName
-             . ', SpecialtyName: '  . $this->_specialtyName
-             . ')';
+        $string .= ' (ProviderName: '.$this->_providerName
+             .', ActionName: '.$this->_actionName
+             .', SpecialtyName: '.$this->_specialtyName
+             .')';
 
         return $string;
     }
-
 }

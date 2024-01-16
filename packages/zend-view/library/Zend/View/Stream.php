@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_View
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -29,11 +30,11 @@
  * As well as the example provided at:
  *     http://mikenaberezny.com/2006/02/19/symphony-templates-ruby-erb/
  * written by
- *     Mike Naberezny (@link http://mikenaberezny.com)
- *     Paul M. Jones  (@link http://paul-m-jones.com)
+ *     Mike Naberezny (@see http://mikenaberezny.com)
+ *     Paul M. Jones  (@see http://paul-m-jones.com)
  *
  * @category   Zend
- * @package    Zend_View
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -66,26 +67,27 @@ class Zend_View_Stream
     public function stream_open($path, $mode, $options, &$opened_path)
     {
         // get the view script source
-        $path        = str_replace((string) 'zend.view://', '', $path);
+        $path = str_replace((string) 'zend.view://', '', $path);
         $this->_data = file_get_contents($path);
 
-        /**
+        /*
          * If reading the file failed, update our local stat store
          * to reflect the real stat of the file, then return on failure
          */
-        if ($this->_data === false) {
+        if (false === $this->_data) {
             $this->_stat = stat($path);
+
             return false;
         }
 
-        /**
+        /*
          * Convert <?= ?> to long-form <?php echo ?> and <? ?> to <?php ?>
          *
          */
-        $this->_data = preg_replace('/\<\?\=/',          "<?php echo ",  $this->_data);
-        $this->_data = preg_replace('/<\?(?!xml|php)/s', '<?php ',       $this->_data);
+        $this->_data = preg_replace('/\<\?\=/', '<?php echo ', $this->_data);
+        $this->_data = preg_replace('/<\?(?!xml|php)/s', '<?php ', $this->_data);
 
-        /**
+        /*
          * file_get_contents() won't update PHP's stat cache, so we grab a stat
          * of the file to prevent additional reads should the script be
          * requested again, which will make include() happy.
@@ -96,7 +98,7 @@ class Zend_View_Stream
     }
 
     /**
-     * Included so that __FILE__ returns the appropriate info
+     * Included so that __FILE__ returns the appropriate info.
      *
      * @return array
      */
@@ -112,9 +114,9 @@ class Zend_View_Stream
     {
         $ret = substr((string) $this->_data, $this->_pos, $count);
         $this->_pos += strlen((string) $ret);
+
         return $ret;
     }
-
 
     /**
      * Tells the current position in the stream.
@@ -124,7 +126,6 @@ class Zend_View_Stream
         return $this->_pos;
     }
 
-
     /**
      * Tells if we are at the end of the stream.
      */
@@ -132,7 +133,6 @@ class Zend_View_Stream
     {
         return $this->_pos >= strlen((string) $this->_data);
     }
-
 
     /**
      * Stream statistics.
@@ -142,7 +142,6 @@ class Zend_View_Stream
         return $this->_stat;
     }
 
-
     /**
      * Seek to a specific point in the stream.
      */
@@ -151,7 +150,8 @@ class Zend_View_Stream
         switch ($whence) {
             case SEEK_SET:
                 if ($offset < strlen((string) $this->_data) && $offset >= 0) {
-                $this->_pos = $offset;
+                    $this->_pos = $offset;
+
                     return true;
                 } else {
                     return false;
@@ -161,6 +161,7 @@ class Zend_View_Stream
             case SEEK_CUR:
                 if ($offset >= 0) {
                     $this->_pos += $offset;
+
                     return true;
                 } else {
                     return false;
@@ -170,6 +171,7 @@ class Zend_View_Stream
             case SEEK_END:
                 if (strlen((string) $this->_data) + $offset >= 0) {
                     $this->_pos = strlen((string) $this->_data) + $offset;
+
                     return true;
                 } else {
                     return false;

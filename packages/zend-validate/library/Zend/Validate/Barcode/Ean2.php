@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,26 +27,28 @@
 
 /**
  * @category   Zend
- * @package    Zend_Validate
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Validate_Barcode_Ean2 extends Zend_Validate_Barcode_AdapterAbstract
 {
     /**
-     * Allowed barcode lengths
-     * @var integer
+     * Allowed barcode lengths.
+     *
+     * @var int
      */
     protected $_length = 2;
 
     /**
-     * Allowed barcode characters
+     * Allowed barcode characters.
+     *
      * @var string
      */
     protected $_characters = '0123456789';
 
     /**
-     * Constructor
+     * Constructor.
      *
      * Sets check flag to false.
      */

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed_Reader
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -41,25 +42,25 @@
 
 /**
  * @category   Zend
- * @package    Zend_Feed_Reader
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract implements Zend_Feed_Reader_EntryInterface
 {
     /**
-     * XPath query
+     * XPath query.
      *
      * @var string
      */
     protected $_xpathQuery = '';
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param  DOMElement $entry
-     * @param  int $entryKey
-     * @param  string $type
+     * @param int    $entryKey
+     * @param string $type
+     *
      * @return void
      */
     public function __construct(DOMElement $entry, $entryKey, $type = null)
@@ -67,7 +68,7 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
         parent::__construct($entry, $entryKey, $type);
 
         // Everyone by now should know XPath indices start from 1 not 0
-        $this->_xpathQuery = '//atom:entry[' . ($this->_entryKey + 1) . ']';
+        $this->_xpathQuery = '//atom:entry['.($this->_entryKey + 1).']';
 
         $atomClass = Zend_Feed_Reader::getPluginLoader()->getClassName('Atom_Entry');
         $this->_extensions['Atom_Entry'] = new $atomClass($entry, $entryKey, $type);
@@ -80,9 +81,10 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
     }
 
     /**
-     * Get the specified author
+     * Get the specified author.
      *
-     * @param  int $index
+     * @param int $index
+     *
      * @return string|null
      */
     public function getAuthor($index = 0)
@@ -97,7 +99,7 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
     }
 
     /**
-     * Get an array with feed authors
+     * Get an array with feed authors.
      *
      * @return array
      */
@@ -115,7 +117,7 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
     }
 
     /**
-     * Get the entry content
+     * Get the entry content.
      *
      * @return string
      */
@@ -133,7 +135,7 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
     }
 
     /**
-     * Get the entry creation date
+     * Get the entry creation date.
      *
      * @return string
      */
@@ -151,7 +153,7 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
     }
 
     /**
-     * Get the entry modification date
+     * Get the entry modification date.
      *
      * @return string
      */
@@ -169,7 +171,7 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
     }
 
     /**
-     * Get the entry description
+     * Get the entry description.
      *
      * @return string
      */
@@ -187,7 +189,7 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
     }
 
     /**
-     * Get the entry enclosure
+     * Get the entry enclosure.
      *
      * @return string
      */
@@ -205,7 +207,7 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
     }
 
     /**
-     * Get the entry ID
+     * Get the entry ID.
      *
      * @return string
      */
@@ -223,9 +225,10 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
     }
 
     /**
-     * Get a specific link
+     * Get a specific link.
      *
-     * @param  int $index
+     * @param int $index
+     *
      * @return string
      */
     public function getLink($index = 0)
@@ -242,7 +245,7 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
     }
 
     /**
-     * Get all links
+     * Get all links.
      *
      * @return array
      */
@@ -260,7 +263,7 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
     }
 
     /**
-     * Get a permalink to the entry
+     * Get a permalink to the entry.
      *
      * @return string
      */
@@ -270,7 +273,7 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
     }
 
     /**
-     * Get the entry title
+     * Get the entry title.
      *
      * @return string
      */
@@ -288,9 +291,9 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
     }
 
     /**
-     * Get the number of comments/replies for current entry
+     * Get the number of comments/replies for current entry.
      *
-     * @return integer
+     * @return int
      */
     public function getCommentCount()
     {
@@ -310,7 +313,7 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
     }
 
     /**
-     * Returns a URI pointing to the HTML page where comments can be made on this entry
+     * Returns a URI pointing to the HTML page where comments can be made on this entry.
      *
      * @return string
      */
@@ -328,7 +331,7 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
     }
 
     /**
-     * Returns a URI pointing to a feed of all comments for this entry
+     * Returns a URI pointing to a feed of all comments for this entry.
      *
      * @return string
      */
@@ -346,7 +349,7 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
     }
 
     /**
-     * Get category data as a Zend_Feed_Reader_Collection_Category object
+     * Get category data as a Zend_Feed_Reader_Collection_Category object.
      *
      * @return Zend_Feed_Reader_Collection_Category
      */
@@ -358,7 +361,7 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
 
         $categoryCollection = $this->getExtension('Atom')->getCategories();
 
-        if (count($categoryCollection) == 0) {
+        if (0 == count($categoryCollection)) {
             $categoryCollection = $this->getExtension('DublinCore')->getCategories();
         }
 
@@ -368,7 +371,7 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
     }
 
     /**
-     * Get source feed metadata from the entry
+     * Get source feed metadata from the entry.
      *
      * @return Zend_Feed_Reader_Feed_Atom_Source|null
      */
@@ -386,9 +389,7 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
     }
 
     /**
-     * Set the XPath query (incl. on all Extensions)
-     *
-     * @param DOMXPath $xpath
+     * Set the XPath query (incl. on all Extensions).
      */
     public function setXpath(DOMXPath $xpath)
     {

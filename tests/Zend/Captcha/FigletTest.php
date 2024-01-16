@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Captcha
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Captcha_FigletTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Captcha_FigletTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Captcha_FigletTest::main');
 }
 
 // require_once 'Zend/Form/Element/Captcha.php';
@@ -31,10 +31,10 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 
 /**
  * @category   Zend
- * @package    Zend_Captcha
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Captcha
  */
 #[AllowDynamicProperties]
@@ -47,7 +47,7 @@ class Zend_Captcha_FigletTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Captcha_FigletTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Captcha_FigletTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -65,14 +65,14 @@ class Zend_Captcha_FigletTest extends PHPUnit_Framework_TestCase
 
         $this->element = new Zend_Form_Element_Captcha(
             'captchaF',
-            array(
-                'captcha' => array(
+            [
+                'captcha' => [
                     'Figlet',
-                    'sessionClass' => 'Zend_Captcha_FigletTest_SessionContainer'
-                )
-            )
+                    'sessionClass' => 'Zend_Captcha_FigletTest_SessionContainer',
+                ],
+            ]
         );
-        $this->captcha =  $this->element->getCaptcha();
+        $this->captcha = $this->element->getCaptcha();
     }
 
     /**
@@ -94,7 +94,8 @@ class Zend_Captcha_FigletTest extends PHPUnit_Framework_TestCase
     {
         // require_once 'Zend/View.php';
         $view = new Zend_View();
-        $view->addHelperPath(__DIR__ . '/../../../../library/Zend/View/Helper');
+        $view->addHelperPath(__DIR__.'/../../../../library/Zend/View/Helper');
+
         return $view;
     }
 
@@ -121,7 +122,7 @@ class Zend_Captcha_FigletTest extends PHPUnit_Framework_TestCase
         // require_once 'Zend/Form.php';
         $form = new Zend_Form();
         $form->setElementsBelongTo('comment');
-        $this->element->setLabel("My Captcha");
+        $this->element->setLabel('My Captcha');
         $form->addElement($this->element);
         $html = $form->render($this->getView());
         $expect = sprintf('for="comment-%s-input"', $this->element->getName());
@@ -157,7 +158,7 @@ class Zend_Captcha_FigletTest extends PHPUnit_Framework_TestCase
         $word = $this->captcha->getWord();
         $this->assertFalse(empty($word));
         $this->assertTrue(is_string($word));
-        $this->assertTrue(strlen((string) $word) == 8);
+        $this->assertTrue(8 == strlen((string) $word));
         $this->word = $word;
     }
 
@@ -167,14 +168,14 @@ class Zend_Captcha_FigletTest extends PHPUnit_Framework_TestCase
         $this->captcha->generate();
         $word = $this->captcha->getWord();
         $this->assertTrue(is_string($word));
-        $this->assertTrue(strlen((string) $word) == 4);
+        $this->assertTrue(4 == strlen((string) $word));
         $this->word = $word;
     }
 
     public function testAdapterElementName()
     {
         $this->assertEquals($this->captcha->getName(),
-                    $this->element->getName());
+            $this->element->getName());
     }
 
     public function testGenerateIsRandomised()
@@ -194,7 +195,7 @@ class Zend_Captcha_FigletTest extends PHPUnit_Framework_TestCase
     {
         $this->testCaptchaIsRendered();
         $this->assertEquals($this->captcha->getId(),
-                $this->element->getValue());
+            $this->element->getValue());
     }
 
     public function testLabelIsNull()
@@ -214,23 +215,23 @@ class Zend_Captcha_FigletTest extends PHPUnit_Framework_TestCase
     public function testWordValidates()
     {
         $this->testCaptchaIsRendered();
-        $input = array($this->element->getName() => array("id" => $this->captcha->getId(), "input" => $this->captcha->getWord()));
-        $this->assertTrue($this->element->isValid("", $input));
+        $input = [$this->element->getName() => ['id' => $this->captcha->getId(), 'input' => $this->captcha->getWord()]];
+        $this->assertTrue($this->element->isValid('', $input));
     }
 
     public function testMissingNotValid()
     {
         $this->testCaptchaIsRendered();
-        $this->assertFalse($this->element->isValid("", array()));
-        $input = array($this->element->getName() => array("input" => "blah"));
-        $this->assertFalse($this->element->isValid("", $input));
+        $this->assertFalse($this->element->isValid('', []));
+        $input = [$this->element->getName() => ['input' => 'blah']];
+        $this->assertFalse($this->element->isValid('', $input));
     }
 
     public function testWrongWordNotValid()
     {
         $this->testCaptchaIsRendered();
-        $input = array($this->element->getName() => array("id" => $this->captcha->getId(), "input" => "blah"));
-        $this->assertFalse($this->element->isValid("", $input));
+        $input = [$this->element->getName() => ['id' => $this->captcha->getId(), 'input' => 'blah']];
+        $this->assertFalse($this->element->isValid('', $input));
     }
 
     public function testUsesWordCaptchaDecoratorByDefault()
@@ -240,13 +241,13 @@ class Zend_Captcha_FigletTest extends PHPUnit_Framework_TestCase
 
     public function testCaptchaShouldBeConfigurableViaConfigObject()
     {
-        $options = array(
-            'name'         => 'foo',
+        $options = [
+            'name' => 'foo',
             'sessionClass' => 'Zend_Captcha_FigletTest_SessionContainer',
-            'wordLen'      => 6,
-            'timeout'      => 300,
-        );
-        $config  = new Zend_Config($options);
+            'wordLen' => 6,
+            'timeout' => 300,
+        ];
+        $config = new Zend_Config($options);
         $captcha = new Zend_Captcha_Figlet($config);
         $test = $captcha->getOptions();
         $this->assertEquals($options, $test);
@@ -273,7 +274,7 @@ class Zend_Captcha_FigletTest extends PHPUnit_Framework_TestCase
         $this->captcha->setName('foo')
                       ->setWordLen(6)
                       ->setTimeout(300);
-        $empty = array($this->captcha->getName() => array('id' => $id, 'input' => ''));
+        $empty = [$this->captcha->getName() => ['id' => $id, 'input' => '']];
         $this->assertEquals(false, $this->captcha->isValid(null, $empty));
     }
 
@@ -283,7 +284,7 @@ class Zend_Captcha_FigletTest extends PHPUnit_Framework_TestCase
     public function testIsValidShouldAllowPassingArrayValueAndOmittingContext()
     {
         $this->testCaptchaIsRendered();
-        $input = array($this->element->getName() => array("id" => $this->captcha->getId(), "input" => $this->captcha->getWord()));
+        $input = [$this->element->getName() => ['id' => $this->captcha->getId(), 'input' => $this->captcha->getWord()]];
         $this->assertTrue($this->element->isValid($input));
     }
 
@@ -293,7 +294,7 @@ class Zend_Captcha_FigletTest extends PHPUnit_Framework_TestCase
     public function testIsValidShouldNotRequireValueToBeNestedArray()
     {
         $this->testCaptchaIsRendered();
-        $input = array("id" => $this->captcha->getId(), "input" => $this->captcha->getWord());
+        $input = ['id' => $this->captcha->getId(), 'input' => $this->captcha->getWord()];
         $this->assertTrue($this->element->isValid($input));
     }
 
@@ -301,18 +302,19 @@ class Zend_Captcha_FigletTest extends PHPUnit_Framework_TestCase
      * Test currently disabled because it freezes phpunit.
      *
      * @group ZF-5728
+     *
      * @runInSeparateProcess
      */
     public function _testSetSessionWorks()
     {
-        if(headers_sent($file, $line)) {
-            $this->markTestSkipped("Cannot use sessions because headers already sent");
+        if (headers_sent($file, $line)) {
+            $this->markTestSkipped('Cannot use sessions because headers already sent');
         }
         // require_once 'Zend/Session/Namespace.php';
         $session = new Zend_Session_Namespace('captcha');
         $this->captcha->setSession($session);
         $this->testCaptchaIsRendered();
-        $input = array("id" => $this->captcha->getId(), "input" => $this->captcha->getWord());
+        $input = ['id' => $this->captcha->getId(), 'input' => $this->captcha->getWord()];
         $this->assertTrue($this->element->isValid($input));
         $this->assertEquals($session->word, $this->captcha->getWord());
     }
@@ -343,7 +345,7 @@ class Zend_Captcha_FigletTest_SessionContainer
 
     public function __isset($name)
     {
-        if (('word' == $name) && (null !== self::$_word))  {
+        if (('word' == $name) && (null !== self::$_word)) {
             return true;
         }
 
@@ -363,6 +365,6 @@ class Zend_Captcha_FigletTest_SessionContainer
 }
 
 // Call Zend_Captcha_FigletTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Captcha_FigletTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Captcha_FigletTest::main') {
     Zend_Captcha_FigletTest::main();
 }

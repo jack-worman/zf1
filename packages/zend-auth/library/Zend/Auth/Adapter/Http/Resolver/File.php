@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,42 +13,39 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Auth
- * @subpackage Zend_Auth_Adapter_Http
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /**
  * @see Zend_Auth_Adapter_Http_Resolver_Interface
  */
 // require_once 'Zend/Auth/Adapter/Http/Resolver/Interface.php';
 
-
 /**
- * HTTP Authentication File Resolver
+ * HTTP Authentication File Resolver.
  *
  * @category   Zend
- * @package    Zend_Auth
- * @subpackage Zend_Auth_Adapter_Http
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Auth_Adapter_Http_Resolver_File implements Zend_Auth_Adapter_Http_Resolver_Interface
 {
     /**
-     * Path to credentials file
+     * Path to credentials file.
      *
      * @var string
      */
     protected $_file;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param  string $path Complete filename where the credentials are stored
+     * @param string $path Complete filename where the credentials are stored
      */
     public function __construct($path = '')
     {
@@ -58,20 +55,22 @@ class Zend_Auth_Adapter_Http_Resolver_File implements Zend_Auth_Adapter_Http_Res
     }
 
     /**
-     * Set the path to the credentials file
+     * Set the path to the credentials file.
      *
-     * @param  string $path
-     * @throws Zend_Auth_Adapter_Http_Resolver_Exception
+     * @param string $path
+     *
      * @return Zend_Auth_Adapter_Http_Resolver_File Provides a fluent interface
+     *
+     * @throws Zend_Auth_Adapter_Http_Resolver_Exception
      */
     public function setFile($path)
     {
         if (empty($path) || !is_readable($path)) {
-            /**
+            /*
              * @see Zend_Auth_Adapter_Http_Resolver_Exception
              */
             // require_once 'Zend/Auth/Adapter/Http/Resolver/Exception.php';
-            throw new Zend_Auth_Adapter_Http_Resolver_Exception('Path not readable: ' . $path);
+            throw new Zend_Auth_Adapter_Http_Resolver_Exception('Path not readable: '.$path);
         }
         $this->_file = $path;
 
@@ -79,7 +78,7 @@ class Zend_Auth_Adapter_Http_Resolver_File implements Zend_Auth_Adapter_Http_Res
     }
 
     /**
-     * Returns the path to the credentials file
+     * Returns the path to the credentials file.
      *
      * @return string
      */
@@ -89,7 +88,7 @@ class Zend_Auth_Adapter_Http_Resolver_File implements Zend_Auth_Adapter_Http_Res
     }
 
     /**
-     * Resolve credentials
+     * Resolve credentials.
      *
      * Only the first matching username/realm combination in the file is
      * returned. If the file contains credentials for Digest authentication,
@@ -103,51 +102,51 @@ class Zend_Auth_Adapter_Http_Resolver_File implements Zend_Auth_Adapter_Http_Res
      * authentication realm, and the password or hash, each delimited by
      * colons.
      *
-     * @param  string $username Username
-     * @param  string $realm    Authentication Realm
+     * @param string $username Username
+     * @param string $realm    Authentication Realm
+     *
+     * @return string|false user's shared secret, if the user is found in the
+     *                      realm, false otherwise
+     *
      * @throws Zend_Auth_Adapter_Http_Resolver_Exception
-     * @return string|false User's shared secret, if the user is found in the
-     *         realm, false otherwise.
      */
     public function resolve($username, $realm)
     {
         if (empty($username)) {
-            /**
+            /*
              * @see Zend_Auth_Adapter_Http_Resolver_Exception
              */
             // require_once 'Zend/Auth/Adapter/Http/Resolver/Exception.php';
             throw new Zend_Auth_Adapter_Http_Resolver_Exception('Username is required');
-        } else if (!ctype_print($username) || strpos((string) $username, ':') !== false) {
-            /**
+        } elseif (!ctype_print($username) || false !== strpos((string) $username, ':')) {
+            /*
              * @see Zend_Auth_Adapter_Http_Resolver_Exception
              */
             // require_once 'Zend/Auth/Adapter/Http/Resolver/Exception.php';
-            throw new Zend_Auth_Adapter_Http_Resolver_Exception('Username must consist only of printable characters, '
-                                                              . 'excluding the colon');
+            throw new Zend_Auth_Adapter_Http_Resolver_Exception('Username must consist only of printable characters, excluding the colon');
         }
         if (empty($realm)) {
-            /**
+            /*
              * @see Zend_Auth_Adapter_Http_Resolver_Exception
              */
             // require_once 'Zend/Auth/Adapter/Http/Resolver/Exception.php';
             throw new Zend_Auth_Adapter_Http_Resolver_Exception('Realm is required');
-        } else if (!ctype_print($realm) || strpos((string) $realm, ':') !== false) {
-            /**
+        } elseif (!ctype_print($realm) || false !== strpos((string) $realm, ':')) {
+            /*
              * @see Zend_Auth_Adapter_Http_Resolver_Exception
              */
             // require_once 'Zend/Auth/Adapter/Http/Resolver/Exception.php';
-            throw new Zend_Auth_Adapter_Http_Resolver_Exception('Realm must consist only of printable characters, '
-                                                              . 'excluding the colon.');
+            throw new Zend_Auth_Adapter_Http_Resolver_Exception('Realm must consist only of printable characters, excluding the colon.');
         }
 
         // Open file, read through looking for matching credentials
         $fp = @fopen($this->_file, 'r');
         if (!$fp) {
-            /**
+            /*
              * @see Zend_Auth_Adapter_Http_Resolver_Exception
              */
             // require_once 'Zend/Auth/Adapter/Http/Resolver/Exception.php';
-            throw new Zend_Auth_Adapter_Http_Resolver_Exception('Unable to open password file: ' . $this->_file);
+            throw new Zend_Auth_Adapter_Http_Resolver_Exception('Unable to open password file: '.$this->_file);
         }
 
         // No real validation is done on the contents of the password file. The
@@ -156,11 +155,13 @@ class Zend_Auth_Adapter_Http_Resolver_File implements Zend_Auth_Adapter_Http_Res
             if ($line[0] == $username && $line[1] == $realm) {
                 $password = $line[2];
                 fclose($fp);
+
                 return $password;
             }
         }
 
         fclose($fp);
+
         return false;
     }
 }

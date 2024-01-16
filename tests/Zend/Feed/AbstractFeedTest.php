@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -32,17 +32,17 @@
 
 /**
  * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Feed
  */
 abstract class Zend_Feed_AbstractFeedTest extends PHPUnit_Framework_TestCase
 {
     public $baseUri;
 
-    public $remoteFeedNames = array();
+    public $remoteFeedNames = [];
 
     public function setUp()
     {
@@ -61,9 +61,9 @@ abstract class Zend_Feed_AbstractFeedTest extends PHPUnit_Framework_TestCase
             return parent::tearDown();
         }
 
-        $basePath = __DIR__ . '/_files/';
+        $basePath = __DIR__.'/_files/';
         foreach ($this->remoteFeedNames as $file) {
-            $filename = $basePath . $file;
+            $filename = $basePath.$file;
             if (!file_exists((string) $filename)) {
                 continue;
             }
@@ -73,12 +73,13 @@ abstract class Zend_Feed_AbstractFeedTest extends PHPUnit_Framework_TestCase
 
     public function prepareFeed($filename)
     {
-        $basePath = __DIR__ . '/_files/';
-        $path     = $basePath . $filename;
-        $remote   = str_replace((string) '.xml', '.remote.xml', $filename);
-        $string   = file_get_contents($path);
-        $string   = str_replace((string) 'XXE_URI', $this->baseUri . '/xxe-info.txt', $string);
-        file_put_contents($basePath . '/' . $remote, $string);
+        $basePath = __DIR__.'/_files/';
+        $path = $basePath.$filename;
+        $remote = str_replace((string) '.xml', '.remote.xml', $filename);
+        $string = file_get_contents($path);
+        $string = str_replace((string) 'XXE_URI', $this->baseUri.'/xxe-info.txt', $string);
+        file_put_contents($basePath.'/'.$remote, $string);
+
         return $remote;
     }
 }

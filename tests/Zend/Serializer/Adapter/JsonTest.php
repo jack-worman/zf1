@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Serializer
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,15 +27,13 @@
 
 /**
  * @category   Zend
- * @package    Zend_Serializer
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Zend_Serializer_Adapter_JsonTest extends PHPUnit_Framework_TestCase
 {
-
     private $_adapter;
 
     public function setUp()
@@ -50,7 +48,7 @@ class Zend_Serializer_Adapter_JsonTest extends PHPUnit_Framework_TestCase
 
     public function testSerializeString()
     {
-        $value    = 'test';
+        $value = 'test';
         $expected = '"test"';
 
         $data = $this->_adapter->serialize($value);
@@ -59,7 +57,7 @@ class Zend_Serializer_Adapter_JsonTest extends PHPUnit_Framework_TestCase
 
     public function testSerializeFalse()
     {
-        $value    = false;
+        $value = false;
         $expected = 'false';
 
         $data = $this->_adapter->serialize($value);
@@ -68,7 +66,7 @@ class Zend_Serializer_Adapter_JsonTest extends PHPUnit_Framework_TestCase
 
     public function testSerializeNull()
     {
-        $value    = null;
+        $value = null;
         $expected = 'null';
 
         $data = $this->_adapter->serialize($value);
@@ -77,7 +75,7 @@ class Zend_Serializer_Adapter_JsonTest extends PHPUnit_Framework_TestCase
 
     public function testSerializeNumeric()
     {
-        $value    = 100;
+        $value = 100;
         $expected = '100';
 
         $data = $this->_adapter->serialize($value);
@@ -86,9 +84,9 @@ class Zend_Serializer_Adapter_JsonTest extends PHPUnit_Framework_TestCase
 
     public function testSerializeObject()
     {
-        $value       = new stdClass();
-        $value->test = "test";
-        $expected    = '{"test":"test"}';
+        $value = new stdClass();
+        $value->test = 'test';
+        $expected = '{"test":"test"}';
 
         $data = $this->_adapter->serialize($value);
         $this->assertEquals($expected, $data);
@@ -96,7 +94,7 @@ class Zend_Serializer_Adapter_JsonTest extends PHPUnit_Framework_TestCase
 
     public function testUnserializeString()
     {
-        $value    = '"test"';
+        $value = '"test"';
         $expected = 'test';
 
         $data = $this->_adapter->unserialize($value);
@@ -105,15 +103,16 @@ class Zend_Serializer_Adapter_JsonTest extends PHPUnit_Framework_TestCase
 
     public function testUnserializeFalse()
     {
-        $value    = 'false';
+        $value = 'false';
         $expected = false;
 
         $data = $this->_adapter->unserialize($value);
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeNull() {
-        $value    = 'null';
+    public function testUnserializeNull()
+    {
+        $value = 'null';
         $expected = null;
 
         $data = $this->_adapter->unserialize($value);
@@ -122,7 +121,7 @@ class Zend_Serializer_Adapter_JsonTest extends PHPUnit_Framework_TestCase
 
     public function testUnserializeNumeric()
     {
-        $value    = '100';
+        $value = '100';
         $expected = 100;
 
         $data = $this->_adapter->unserialize($value);
@@ -131,8 +130,8 @@ class Zend_Serializer_Adapter_JsonTest extends PHPUnit_Framework_TestCase
 
     public function testUnserializeAsArray()
     {
-        $value    = '{"test":"test"}';
-        $expected = array('test' => 'test');
+        $value = '{"test":"test"}';
+        $expected = ['test' => 'test'];
 
         $data = $this->_adapter->unserialize($value);
         $this->assertEquals($expected, $data);
@@ -140,11 +139,11 @@ class Zend_Serializer_Adapter_JsonTest extends PHPUnit_Framework_TestCase
 
     public function testUnserializeAsObject()
     {
-        $value      = '{"test":"test"}';
-        $expected   = new stdClass();
+        $value = '{"test":"test"}';
+        $expected = new stdClass();
         $expected->test = 'test';
 
-        $data = $this->_adapter->unserialize($value, array('objectDecodeType' => Zend_Json::TYPE_OBJECT));
+        $data = $this->_adapter->unserialize($value, ['objectDecodeType' => Zend_Json::TYPE_OBJECT]);
         $this->assertEquals($expected, $data);
     }
 
@@ -154,5 +153,4 @@ class Zend_Serializer_Adapter_JsonTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend_Serializer_Exception');
         $this->_adapter->unserialize($value);
     }
-
 }

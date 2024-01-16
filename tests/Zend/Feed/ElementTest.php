@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,16 +27,15 @@
 
 /**
  * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Feed
  */
 #[AllowDynamicProperties]
 class Zend_Feed_ElementTest extends PHPUnit_Framework_TestCase
 {
-
     public function testIsInitialized()
     {
         $e = new Zend_Feed_Entry_Atom();
@@ -57,7 +56,7 @@ class Zend_Feed_ElementTest extends PHPUnit_Framework_TestCase
         $xml = $e->saveXml();
 
         $this->assertFalse(strpos((string) $xml, 'pants'), '<pants> should not be in the xml output');
-        $this->assertTrue(strpos((string) $xml, 'marina.horde.org') !== false, 'the url attribute should be set');
+        $this->assertTrue(false !== strpos((string) $xml, 'marina.horde.org'), 'the url attribute should be set');
     }
 
     public function testStrings()
@@ -88,7 +87,7 @@ class Zend_Feed_ElementTest extends PHPUnit_Framework_TestCase
         $value = 'value';
 
         $e = new Zend_Feed_Entry_Atom();
-        $e->test['attr']            = $value;
+        $e->test['attr'] = $value;
         $e->test['namespace1:attr'] = $value;
         $e->test['namespace2:attr'] = $value;
 
@@ -102,7 +101,7 @@ class Zend_Feed_ElementTest extends PHPUnit_Framework_TestCase
         $value = 'value';
 
         $e = new Zend_Feed_Entry_Atom();
-        $e->test['attr']            = $value;
+        $e->test['attr'] = $value;
         $e->test['namespace1:attr'] = $value;
         $e->test['namespace2:attr'] = $value;
 
@@ -125,11 +124,11 @@ class Zend_Feed_ElementTest extends PHPUnit_Framework_TestCase
     public function testValuesWithXmlSpecialChars()
     {
         $testAmp = '&';
-        $testLt  = '<';
-        $testGt  = '>';
+        $testLt = '<';
+        $testGt = '>';
 
         $e = new Zend_Feed_Entry_Atom();
-        $e->testAmp           = $testAmp;
+        $e->testAmp = $testAmp;
         $e->{'namespace1:lt'} = $testLt;
         $e->{'namespace1:gt'} = $testGt;
 
@@ -143,17 +142,17 @@ class Zend_Feed_ElementTest extends PHPUnit_Framework_TestCase
      */
     public function testAttributesWithXmlSpecialChars()
     {
-        $testAmp   = '&';
-        $testLt    = '<';
-        $testGt    = '>';
-        $testQuot  = '"';
+        $testAmp = '&';
+        $testLt = '<';
+        $testGt = '>';
+        $testQuot = '"';
         $testSquot = "'";
 
         $e = new Zend_Feed_Entry_Atom();
-        $e->test['amp']              = $testAmp;
-        $e->test['namespace1:lt']    = $testLt;
-        $e->test['namespace1:gt']    = $testGt;
-        $e->test['namespace1:quot']  = $testQuot;
+        $e->test['amp'] = $testAmp;
+        $e->test['namespace1:lt'] = $testLt;
+        $e->test['namespace1:gt'] = $testGt;
+        $e->test['namespace1:quot'] = $testQuot;
         $e->test['namespace1:squot'] = $testSquot;
 
         $this->assertEquals($testAmp, $e->test['amp']);
@@ -162,5 +161,4 @@ class Zend_Feed_ElementTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($testQuot, $e->test['namespace1:quot']);
         $this->assertEquals($testSquot, $e->test['namespace1:squot']);
     }
-
 }

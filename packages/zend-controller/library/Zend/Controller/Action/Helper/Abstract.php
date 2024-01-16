@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage Zend_Controller_Action_Helper
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,39 +27,35 @@
 
 /**
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage Zend_Controller_Action_Helper
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Controller_Action_Helper_Abstract
 {
     /**
-     * $_actionController
+     * $_actionController.
      *
-     * @var Zend_Controller_Action $_actionController
+     * @var Zend_Controller_Action
      */
-    protected $_actionController = null;
+    protected $_actionController;
+
+    protected $_frontController;
 
     /**
-     * @var mixed $_frontController
-     */
-    protected $_frontController = null;
-
-    /**
-     * setActionController()
+     * setActionController().
      *
-     * @param  Zend_Controller_Action $actionController
      * @return Zend_Controller_Action_Helper_Abstract Provides a fluent interface
      */
     public function setActionController(Zend_Controller_Action $actionController = null)
     {
         $this->_actionController = $actionController;
+
         return $this;
     }
 
     /**
-     * Retrieve current action controller
+     * Retrieve current action controller.
      *
      * @return Zend_Controller_Action
      */
@@ -69,7 +65,7 @@ abstract class Zend_Controller_Action_Helper_Abstract
     }
 
     /**
-     * Retrieve front controller instance
+     * Retrieve front controller instance.
      *
      * @return Zend_Controller_Front
      */
@@ -79,7 +75,7 @@ abstract class Zend_Controller_Action_Helper_Abstract
     }
 
     /**
-     * Hook into action controller initialization
+     * Hook into action controller initialization.
      *
      * @return void
      */
@@ -88,7 +84,7 @@ abstract class Zend_Controller_Action_Helper_Abstract
     }
 
     /**
-     * Hook into action controller preDispatch() workflow
+     * Hook into action controller preDispatch() workflow.
      *
      * @return void
      */
@@ -97,7 +93,7 @@ abstract class Zend_Controller_Action_Helper_Abstract
     }
 
     /**
-     * Hook into action controller postDispatch() workflow
+     * Hook into action controller postDispatch() workflow.
      *
      * @return void
      */
@@ -106,7 +102,7 @@ abstract class Zend_Controller_Action_Helper_Abstract
     }
 
     /**
-     * getRequest() -
+     * getRequest() -.
      *
      * @return Zend_Controller_Request_Abstract $request
      */
@@ -121,7 +117,7 @@ abstract class Zend_Controller_Action_Helper_Abstract
     }
 
     /**
-     * getResponse() -
+     * getResponse() -.
      *
      * @return Zend_Controller_Response_Abstract $response
      */
@@ -136,18 +132,20 @@ abstract class Zend_Controller_Action_Helper_Abstract
     }
 
     /**
-     * getName()
+     * getName().
      *
      * @return string
      */
     public function getName()
     {
         $fullClassName = get_class($this);
-        if (strpos((string) $fullClassName, '_') !== false) {
+        if (false !== strpos((string) $fullClassName, '_')) {
             $helperName = strrchr($fullClassName, '_');
+
             return ltrim((string) $helperName, '_');
-        } elseif (strpos((string) $fullClassName, '\\') !== false) {
+        } elseif (false !== strpos((string) $fullClassName, '\\')) {
             $helperName = strrchr($fullClassName, '\\');
+
             return ltrim((string) $helperName, '\\');
         } else {
             return $fullClassName;

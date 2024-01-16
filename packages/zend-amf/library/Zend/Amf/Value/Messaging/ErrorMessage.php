@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Amf
- * @subpackage Value
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -24,44 +24,47 @@
 // require_once 'Zend/Amf/Value/Messaging/AcknowledgeMessage.php';
 
 /**
- * Creates the error message to report to flex the issue with the call
+ * Creates the error message to report to flex the issue with the call.
  *
  * Corresponds to flex.messaging.messages.ErrorMessage
  *
- * @package    Zend_Amf
- * @subpackage Value
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Amf_Value_Messaging_ErrorMessage extends Zend_Amf_Value_Messaging_AcknowledgeMessage
 {
     /**
-     * Additional data with error
+     * Additional data with error.
+     *
      * @var object
      */
-    public $extendedData = null;
+    public $extendedData;
 
     /**
-     * Error code number
+     * Error code number.
+     *
      * @var string
      */
     public $faultCode;
 
     /**
-     * Description as to the cause of the error
+     * Description as to the cause of the error.
+     *
      * @var string
      */
     public $faultDetail;
 
     /**
-     * Short description of error
+     * Short description of error.
+     *
      * @var string
      */
     public $faultString = '';
 
     /**
-     * root cause of error
+     * root cause of error.
+     *
      * @var object
      */
-    public $rootCause = null;
+    public $rootCause;
 }
