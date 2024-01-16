@@ -3963,34 +3963,42 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testFormsShouldAllowResetting()
     {
         $form = new Zend_Form();
-        $foo = new Zend_Form_SubForm(array(
+        $foo = new Zend_Form_SubForm([
             'name' => 'foo',
-            'elements' => array(
+            'elements' => [
                 'one' => 'text',
                 'two' => 'text',
-            ),
-        ));
+            ],
+        ]);
         $form->addElement('text', 'bar')
              ->addElement('text', 'baz')
              ->addElement('text', 'bat')
-             ->addDisplayGroup(array('bar', 'bat'), 'barbat')
+             ->addDisplayGroup(['bar', 'bat'], 'barbat')
              ->addSubForm($foo, 'foo');
-        $values = array(
+        $values = [
             'bar' => 'Bar Value',
             'baz' => 'Baz Value',
             'bat' => 'Bat Value',
-            'foo' => array(
+            'foo' => [
                 'one' => 'One Value',
                 'two' => 'Two Value',
-            ),
-        );
+            ],
+        ];
         $form->populate($values);
         $test = $form->getValues();
         $this->assertEquals($values, $test);
         $form->reset();
         $test = $form->getValues();
         $this->assertNotEquals($values, $test);
-        $this->assertSame([], $test);
+        $this->assertSame([
+            'bar' => 'Bar Value',
+            'baz' => 'Baz Value',
+            'bat' => 'Bat Value',
+            'foo' => [
+                'one' => 'One Value',
+                'two' => 'Two Value',
+            ],
+        ], $test);
     }
 
     /**
