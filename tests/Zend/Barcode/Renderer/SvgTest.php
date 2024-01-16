@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,29 +13,30 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Barcode
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id: SvgTest.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
 
-require_once __DIR__.'/TestCommon.php';
+require_once __DIR__ . '/TestCommon.php';
 
 // require_once 'Zend/Barcode/Renderer/Svg.php';
 // require_once 'Zend/Barcode/Object/Code39.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Barcode
+ * @subpackage UnitTests
  * @group      Zend_Barcode
- *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Zend_Barcode_Renderer_SvgTest extends Zend_Barcode_Renderer_TestCommon
 {
+
     protected function _getRendererObject($options = null)
     {
         return new Zend_Barcode_Renderer_Svg($options);
@@ -56,7 +57,7 @@ class Zend_Barcode_Renderer_SvgTest extends Zend_Barcode_Renderer_TestCommon
     }
 
     /**
-     * @expectedException \Zend_Barcode_Renderer_Exception
+     * @expectedException Zend_Barcode_Renderer_Exception
      */
     public function testBadHeight()
     {
@@ -73,7 +74,7 @@ class Zend_Barcode_Renderer_SvgTest extends Zend_Barcode_Renderer_TestCommon
     }
 
     /**
-     * @expectedException \Zend_Barcode_Renderer_Exception
+     * @expectedException Zend_Barcode_Renderer_Exception
      */
     public function testBadWidth()
     {
@@ -87,18 +88,18 @@ class Zend_Barcode_Renderer_SvgTest extends Zend_Barcode_Renderer_TestCommon
     }
 
     /**
-     * @expectedException \Zend_Barcode_Renderer_Exception
+     * @expectedException Zend_Barcode_Renderer_Exception
      */
     public function testObjectSvgResource()
     {
-        $svgResource = new stdClass();
+        $svgResource = new StdClass();
         $this->_renderer->setResource($svgResource);
     }
 
     public function testDrawReturnResource()
     {
-        Zend_Barcode::setBarcodeFont(__DIR__.'/../Object/_fonts/Vera.ttf');
-        $barcode = new Zend_Barcode_Object_Code39(['text' => '0123456789']);
+        Zend_Barcode::setBarcodeFont(__DIR__ . '/../Object/_fonts/Vera.ttf');
+        $barcode = new Zend_Barcode_Object_Code39(array('text' => '0123456789'));
         $this->_renderer->setBarcode($barcode);
         $resource = $this->_renderer->draw();
         $this->assertTrue($resource instanceof DOMDocument);
@@ -107,12 +108,12 @@ class Zend_Barcode_Renderer_SvgTest extends Zend_Barcode_Renderer_TestCommon
 
     public function testDrawWithExistantResourceReturnResource()
     {
-        Zend_Barcode::setBarcodeFont(__DIR__.'/../Object/_fonts/Vera.ttf');
-        $barcode = new Zend_Barcode_Object_Code39(['text' => '0123456789']);
+        Zend_Barcode::setBarcodeFont(__DIR__ . '/../Object/_fonts/Vera.ttf');
+        $barcode = new Zend_Barcode_Object_Code39(array('text' => '0123456789'));
         $this->_renderer->setBarcode($barcode);
         $svgResource = new DOMDocument();
         $rootElement = $svgResource->createElement('svg');
-        $rootElement->setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+        $rootElement->setAttribute('xmlns', "http://www.w3.org/2000/svg");
         $rootElement->setAttribute('version', '1.1');
         $rootElement->setAttribute('width', 500);
         $rootElement->setAttribute('height', 300);
@@ -128,12 +129,11 @@ class Zend_Barcode_Renderer_SvgTest extends Zend_Barcode_Renderer_TestCommon
     {
         $svg = new DOMDocument();
         $rootElement = $svg->createElement('svg');
-        $rootElement->setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+        $rootElement->setAttribute('xmlns', "http://www.w3.org/2000/svg");
         $rootElement->setAttribute('version', '1.1');
         $rootElement->setAttribute('width', 500);
         $rootElement->setAttribute('height', 300);
         $svg->appendChild($rootElement);
-
         return $this->_renderer->setResource($svg);
     }
 }

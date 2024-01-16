@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,49 +13,54 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Filter
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
+
 
 /**
  * @see Zend_Validate_Abstract
  */
 // require_once 'Zend/Validate/Abstract.php';
 
+
+
+
 /**
- * Mock file for testbed.
+ * Mock file for testbed
  *
  * @category   Zend
- *
+ * @package    Zend_Filter
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class TestNamespace_StringEquals extends Zend_Validate_Abstract
 {
-    public const NOT_EQUALS = 'stringNotEquals';
+
+    const NOT_EQUALS = 'stringNotEquals';
 
     /**
-     * Array with message templates.
+     * Array with message templates
      *
      * @var array
      */
-    protected $_messageTemplates = [
-        self::NOT_EQUALS => 'Not all strings in the argument are equal',
-    ];
+    protected $_messageTemplates = array(
+        self::NOT_EQUALS => 'Not all strings in the argument are equal'
+    );
 
     /**
-     * Defined by Zend_Validate_Interface.
+     * Defined by Zend_Validate_Interface
      *
      * Returns true if and only if all the elements of the array argument
      * are equal to one another with string comparison.
      *
-     * @param array $value Value to validate
-     *
-     * @return bool
+     * @param  array $value Value to validate
+     * @return boolean
      */
     public function isValid($value)
     {
@@ -65,11 +70,11 @@ class TestNamespace_StringEquals extends Zend_Validate_Abstract
         foreach ((array) $value as $element) {
             if ((string) $element !== $initial) {
                 $this->_error(self::NOT_EQUALS);
-
                 return false;
             }
         }
 
         return true;
     }
+
 }

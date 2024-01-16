@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Gdata_Gapps
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id:$
  */
 
@@ -25,26 +25,25 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Gdata_Gapps
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Gapps
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_Gapps_MemberEntryTest extends PHPUnit_Framework_TestCase
 {
-    public function setUp()
-    {
+
+    public function setUp() {
         $this->entryText = file_get_contents(
-            'Zend/Gdata/Gapps/_files/MemberEntryDataSample1.xml',
-            true);
+                'Zend/Gdata/Gapps/_files/MemberEntryDataSample1.xml',
+                true);
         $this->entry = new Zend_Gdata_Gapps_MemberEntry();
     }
 
-    private function verifyAllSamplePropertiesAreCorrect($memberEntry)
-    {
+    private function verifyAllSamplePropertiesAreCorrect ($memberEntry) {
         $this->assertEquals('https://www.google.com/a/feeds/group/2.0/example.com/us-sales/member/suejones%40example.com',
             $memberEntry->id->text);
         $this->assertEquals('1970-01-01T00:00:00.000Z', $memberEntry->updated->text);
@@ -62,34 +61,29 @@ class Zend_Gdata_Gapps_MemberEntryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('true', $memberEntry->property[2]->value);
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionElements()
-    {
+    public function testEmptyEntryShouldHaveNoExtensionElements() {
         $this->assertTrue(is_array($this->entry->extensionElements));
-        $this->assertTrue(0 == count($this->entry->extensionElements));
+        $this->assertTrue(count($this->entry->extensionElements) == 0);
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionAttributes()
-    {
+    public function testEmptyEntryShouldHaveNoExtensionAttributes() {
         $this->assertTrue(is_array($this->entry->extensionAttributes));
-        $this->assertTrue(0 == count($this->entry->extensionAttributes));
+        $this->assertTrue(count($this->entry->extensionAttributes) == 0);
     }
 
-    public function testSampleEntryShouldHaveNoExtensionElements()
-    {
+    public function testSampleEntryShouldHaveNoExtensionElements() {
         $this->entry->transferFromXML($this->entryText);
         $this->assertTrue(is_array($this->entry->extensionElements));
-        $this->assertTrue(0 == count($this->entry->extensionElements));
+        $this->assertTrue(count($this->entry->extensionElements) == 0);
     }
 
-    public function testSampleEntryShouldHaveNoExtensionAttributes()
-    {
+    public function testSampleEntryShouldHaveNoExtensionAttributes() {
         $this->entry->transferFromXML($this->entryText);
         $this->assertTrue(is_array($this->entry->extensionAttributes));
-        $this->assertTrue(0 == count($this->entry->extensionAttributes));
+        $this->assertTrue(count($this->entry->extensionAttributes) == 0);
     }
 
-    public function testEmptyMemberEntryToAndFromStringShouldMatch()
-    {
+    public function testEmptyMemberEntryToAndFromStringShouldMatch() {
         $entryXml = $this->entry->saveXML();
         $newMemberEntry = new Zend_Gdata_Gapps_MemberEntry();
         $newMemberEntry->transferFromXML($entryXml);
@@ -97,14 +91,12 @@ class Zend_Gdata_Gapps_MemberEntryTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($entryXml == $newMemberEntryXml);
     }
 
-    public function testSamplePropertiesAreCorrect()
-    {
+    public function testSamplePropertiesAreCorrect () {
         $this->entry->transferFromXML($this->entryText);
         $this->verifyAllSamplePropertiesAreCorrect($this->entry);
     }
 
-    public function testConvertMemberEntryToAndFromString()
-    {
+    public function testConvertMemberEntryToAndFromString() {
         $this->entry->transferFromXML($this->entryText);
         $entryXml = $this->entry->saveXML();
         $newMemberEntry = new Zend_Gdata_Gapps_MemberEntry();
@@ -113,4 +105,5 @@ class Zend_Gdata_Gapps_MemberEntryTest extends PHPUnit_Framework_TestCase
         $newMemberEntryXml = $newMemberEntry->saveXML();
         $this->assertEquals($entryXml, $newMemberEntryXml);
     }
+
 }

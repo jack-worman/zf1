@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Tool
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -37,7 +37,8 @@ require_once '_files/ProviderFullFeaturedBadSpecialties2.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Tool
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
@@ -48,12 +49,13 @@ require_once '_files/ProviderFullFeaturedBadSpecialties2.php';
 #[AllowDynamicProperties]
 class Zend_Tool_Framework_Provider_SignatureTest extends PHPUnit_Framework_TestCase
 {
-    protected $_registry;
+
+    protected $_registry = null;
 
     /**
      * @var Zend_Tool_Framework_Provider_Signature
      */
-    protected $_targetSignature;
+    protected $_targetSignature = null;
 
     public function setup()
     {
@@ -105,7 +107,7 @@ class Zend_Tool_Framework_Provider_SignatureTest extends PHPUnit_Framework_TestC
 
     public function testGetSpecialtiesReturnsParsedSpecialties()
     {
-        $this->assertEquals(['_Global', 'Hi', 'BloodyMurder', 'ForYourTeam'], $this->_targetSignature->getSpecialties());
+        $this->assertEquals(array('_Global', 'Hi', 'BloodyMurder', 'ForYourTeam'), $this->_targetSignature->getSpecialties());
     }
 
     public function testGetSpecialtiesReturnsParsedSpecialtiesFromMethodInsteadOfProperty()
@@ -113,11 +115,11 @@ class Zend_Tool_Framework_Provider_SignatureTest extends PHPUnit_Framework_TestC
         $signature = new Zend_Tool_Framework_Provider_Signature(new Zend_Tool_Framework_Provider_ProviderFullFeatured2());
         $signature->setRegistry($this->_registry);
         $signature->process();
-        $this->assertEquals(['_Global', 'Hi', 'BloodyMurder', 'ForYourTeam'], $signature->getSpecialties());
+        $this->assertEquals(array('_Global', 'Hi', 'BloodyMurder', 'ForYourTeam'), $signature->getSpecialties());
     }
 
     /**
-     * @expectedException \Zend_Tool_Framework_Provider_Exception
+     * @expectedException Zend_Tool_Framework_Provider_Exception
      */
     public function testGetSpecialtiesReturnsParsedSpecialtiesThrowsExceptionOnBadPropertyValue()
     {
@@ -127,7 +129,7 @@ class Zend_Tool_Framework_Provider_SignatureTest extends PHPUnit_Framework_TestC
     }
 
     /**
-     * @expectedException \Zend_Tool_Framework_Provider_Exception
+     * @expectedException Zend_Tool_Framework_Provider_Exception
      */
     public function testGetSpecialtiesReturnsParsedSpecialtiesThrowsExceptionOnBadReturnValue()
     {
@@ -179,4 +181,5 @@ class Zend_Tool_Framework_Provider_SignatureTest extends PHPUnit_Framework_TestC
 
         $this->assertFalse($this->_targetSignature->getActionableMethodByActionName('Foo'));
     }
+
 }

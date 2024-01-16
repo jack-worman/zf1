@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Cache
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -24,15 +24,15 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Cache
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Zend_Cache_FactoryException extends PHPUnit_Extensions_ExceptionTestCase
 {
-    public function setUp()
-    {
+    function setUp(){
         $this->setExpectedException('Zend_Cache_Exception');
     }
 
@@ -48,12 +48,12 @@ class Zend_Cache_FactoryException extends PHPUnit_Extensions_ExceptionTestCase
 
     public function testFrontendBadParam()
     {
-        Zend_Cache::factory('badFrontend', 'File', ['badParam' => true]);
+        Zend_Cache::factory('badFrontend', 'File', array('badParam'=>true));
     }
 
     public function testBackendBadParam()
     {
-        Zend_Cache::factory('Output', 'badBackend', [], ['badParam' => true]);
+        Zend_Cache::factory('Output', 'badBackend', array(), array('badParam'=>true));
     }
 
     public function testThrowMethod()

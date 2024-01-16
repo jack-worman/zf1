@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Queue
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -42,10 +42,10 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Queue
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Queue
  */
 abstract class Zend_Queue_QueueBaseTest extends PHPUnit_Framework_TestCase
@@ -53,9 +53,9 @@ abstract class Zend_Queue_QueueBaseTest extends PHPUnit_Framework_TestCase
     protected function setUp()
     {
         // Test Zend_Config
-        $this->config = [
-            'name' => 'queue1',
-        ];
+        $this->config = array(
+            'name'      => 'queue1',
+        );
 
         $this->queue = new Zend_Queue('Null', $this->config);
     }
@@ -72,16 +72,19 @@ abstract class Zend_Queue_QueueBaseTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Constructor.
+     * Constructor
+     *
+     * @param string|Zend_Queue_Adapter_Abstract $adapter
+     * @param array  $config
      */
     public function testConstruct()
     {
         // Test Zend_Config
-        $config = [
-            'name' => 'queue1',
-            'params' => [],
-            'adapter' => 'array',
-        ];
+        $config = array(
+            'name'      => 'queue1',
+            'params'    => array(),
+            'adapter'   => 'array'
+        );
 
         $zend_config = new Zend_Config($config);
 
@@ -94,7 +97,7 @@ abstract class Zend_Queue_QueueBaseTest extends PHPUnit_Framework_TestCase
         try {
             $obj = new Zend_Queue('ops');
             $this->fail('Zend_Queue cannot accept a string');
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->assertTrue(true);
         }
     }
@@ -142,16 +145,16 @@ abstract class Zend_Queue_QueueBaseTest extends PHPUnit_Framework_TestCase
     {
         // parameter testing
         try {
-            $this->queue->createQueue([]);
+            $this->queue->createQueue(array());
             $this->fail('createQueue() $name must be a string');
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->assertTrue(true);
         }
 
         try {
             $this->queue->createQueue('test', 'test');
             $this->fail('createQueue() $timeout must be an integer');
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->assertTrue(true);
         }
 
@@ -171,20 +174,19 @@ abstract class Zend_Queue_QueueBaseTest extends PHPUnit_Framework_TestCase
 
     public function testSendAndCountAndReceiveAndDeleteMessage()
     {
-        if (!$this->queue->isSupported('send')
-            && !$this->queue->isSupported('receive')
-            && !$this->queue->isSupported('count')) {
+        if (! $this->queue->isSupported('send')
+            && ! $this->queue->isSupported('receive')
+            && ! $this->queue->isSupported('count')) {
             $this->markTestSkipped('send/count/receive are not supported');
-
             return;
         }
 
         // ------------------------------------ send()
         // parameter verification
         try {
-            $this->queue->send([]);
+            $this->queue->send(array());
             $this->fail('send() $mesage must be a string');
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->assertTrue(true);
         }
 
@@ -197,16 +199,16 @@ abstract class Zend_Queue_QueueBaseTest extends PHPUnit_Framework_TestCase
         // ------------------------------------ receive()
         // parameter verification
         try {
-            $this->queue->receive([]);
+            $this->queue->receive(array());
             $this->fail('receive() $maxMessages must be a integer or null');
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->assertTrue(true);
         }
 
         try {
-            $this->queue->receive(1, []);
+            $this->queue->receive(1, array());
             $this->fail('receive() $timeout must be a integer or null');
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->assertTrue(true);
         }
 
@@ -225,13 +227,13 @@ abstract class Zend_Queue_QueueBaseTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($list));
 
         // these functions must have an boolean answer
-        $func = [
+        $func = array(
             'create', 'delete', 'send', 'receive',
             'deleteMessage', 'getQueues', 'count',
-            'isExists',
-        ];
+            'isExists'
+        );
 
-        foreach (array_values($func) as $f) {
+        foreach ( array_values($func) as $f ) {
             $this->assertTrue(isset($list[$f]));
             $this->assertTrue(is_bool($list[$f]));
         }
@@ -240,9 +242,9 @@ abstract class Zend_Queue_QueueBaseTest extends PHPUnit_Framework_TestCase
     public function testIsSupported()
     {
         $list = $this->queue->getCapabilities();
-        foreach ($list as $function => $result) {
+        foreach ( $list as $function => $result ) {
             $this->assertTrue(is_bool($result));
-            if ($result) {
+            if ( $result ) {
                 $this->assertTrue($this->queue->isSupported($function));
             } else {
                 $this->assertFalse($this->queue->isSupported($function));
@@ -260,7 +262,7 @@ abstract class Zend_Queue_QueueBaseTest extends PHPUnit_Framework_TestCase
             try {
                 $queues = $this->queue->getQueues();
                 $this->fail('getQueues() should have thrown an error');
-            } catch (Throwable $e) {
+            } catch (\Throwable $e) {
                 $this->assertTrue(true);
             }
         }

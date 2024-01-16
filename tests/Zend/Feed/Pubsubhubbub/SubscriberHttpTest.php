@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,9 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -29,55 +28,56 @@
  * Note that $this->_baseuri must point to a directory on a web server
  * containing all the files under the _files directory. You should symlink
  * or copy these files and set '_baseuri' properly using the constant in
- * TestConfiguration.php (based on TestConfiguration.dist.php).
+ * TestConfiguration.php (based on TestConfiguration.dist.php)
  *
  * You can also set the proper constant in your test configuration file to
  * point to the right place.
  *
  * @category   Zend
- *
+ * @package    Zend_Feed
+ * @subpackage UnitTests
  * @group      Zend_Feed
  * @group      Zend_Feed_Subsubhubbub
- *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Zend_Feed_Pubsubhubbub_SubscriberHttpTest extends PHPUnit_Framework_TestCase
 {
-    protected $_subscriber;
+
+    protected $_subscriber = null;
 
     protected $_baseuri;
 
-    protected $_client;
+    protected $_client = null;
 
-    protected $_adapter;
+    protected $_adapter = null;
 
-    protected $_config = [
-        'adapter' => 'Zend_Http_Client_Adapter_Socket',
-    ];
+    protected $_config = array(
+        'adapter'     => 'Zend_Http_Client_Adapter_Socket'
+    );
 
     public function setUp()
     {
-        if (defined('TESTS_Zend_Feed_Pubsubhubbub_BASEURI')
-            && Zend_Uri_Http::check(TESTS_Zend_Feed_Pubsubhubbub_BASEURI)) {
+        if (defined('TESTS_Zend_Feed_Pubsubhubbub_BASEURI') &&
+            Zend_Uri_Http::check(TESTS_Zend_Feed_Pubsubhubbub_BASEURI)) {
             $this->_baseuri = TESTS_Zend_Feed_Pubsubhubbub_BASEURI;
-            if ('/' != substr((string) $this->_baseuri, -1)) {
-                $this->_baseuri .= '/';
-            }
+            if (substr((string) $this->_baseuri, -1) != '/') $this->_baseuri .= '/';
             $name = $this->getName();
             if (($pos = strpos((string) $name, ' ')) !== false) {
                 $name = substr((string) $name, 0, $pos);
             }
-            $uri = $this->_baseuri.$name.'.php';
-            $this->_adapter = new $this->_config['adapter']();
+            $uri = $this->_baseuri . $name . '.php';
+            $this->_adapter = new $this->_config['adapter'];
             $this->_client = new Zend_Http_Client($uri, $this->_config);
             $this->_client->setAdapter($this->_adapter);
             Zend_Feed_Pubsubhubbub::setHttpClient($this->_client);
-            $this->_subscriber = new Zend_Feed_Pubsubhubbub_Subscriber();
+            $this->_subscriber = new Zend_Feed_Pubsubhubbub_Subscriber;
+
 
             $this->_storage = $this->_getCleanMock('Zend_Feed_Pubsubhubbub_Entity_TopicSubscription');
             $this->_subscriber->setStorage($this->_storage);
+
         } else {
             // Skip tests
             $this->markTestSkipped("Zend_Feed_Pubsubhubbub_Subscriber dynamic tests'
@@ -88,7 +88,7 @@ class Zend_Feed_Pubsubhubbub_SubscriberHttpTest extends PHPUnit_Framework_TestCa
     public function testSubscriptionRequestSendsExpectedPostData()
     {
         $this->_subscriber->setTopicUrl('http://www.example.com/topic');
-        $this->_subscriber->addHubUrl($this->_baseuri.'/testRawPostData.php');
+        $this->_subscriber->addHubUrl($this->_baseuri . '/testRawPostData.php');
         $this->_subscriber->setCallbackUrl('http://www.example.com/callback');
         $this->_subscriber->setTestStaticToken('abc'); // override for testing
         $this->_subscriber->subscribeAll();
@@ -103,9 +103,9 @@ class Zend_Feed_Pubsubhubbub_SubscriberHttpTest extends PHPUnit_Framework_TestCa
     public function testUnsubscriptionRequestSendsExpectedPostData()
     {
         $this->_subscriber->setTopicUrl('http://www.example.com/topic');
-        $this->_subscriber->addHubUrl($this->_baseuri.'/testRawPostData.php');
+        $this->_subscriber->addHubUrl($this->_baseuri . '/testRawPostData.php');
         $this->_subscriber->setCallbackUrl('http://www.example.com/callback');
-        $this->_subscriber->setTestStaticToken('abc'); // override for testing
+        $this->_subscriber->setTestStaticToken('abc'); //override for testing
         $this->_subscriber->unsubscribeAll();
         $this->assertEquals(
             'hub.callback=http%3A%2F%2Fwww.example.com%2Fcallback%3Fxhub.subscription%3D5536df06b5d'
@@ -115,11 +115,10 @@ class Zend_Feed_Pubsubhubbub_SubscriberHttpTest extends PHPUnit_Framework_TestCa
             $this->_client->getLastResponse()->getBody());
     }
 
-    protected function _getCleanMock($className)
-    {
+    protected function _getCleanMock($className) {
         $class = new ReflectionClass($className);
         $methods = $class->getMethods();
-        $stubMethods = [];
+        $stubMethods = array();
         foreach ($methods as $method) {
             if ($method->isPublic() || ($method->isProtected()
             && $method->isAbstract())) {
@@ -129,11 +128,11 @@ class Zend_Feed_Pubsubhubbub_SubscriberHttpTest extends PHPUnit_Framework_TestCa
         $mocked = $this->getMock(
             $className,
             $stubMethods,
-            [],
-            $className.'_SubscriberHttpTestMock_'.uniqid(),
+            array(),
+            $className . '_SubscriberHttpTestMock_' . uniqid(),
             false
         );
-
         return $mocked;
     }
+
 }

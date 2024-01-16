@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,30 +13,31 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Form
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
 // Call Zend_Form_Decorator_PrepareElementsTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Form_Decorator_PrepareElementsTest::main');
+if (!defined("PHPUnit_MAIN_METHOD")) {
+    define("PHPUnit_MAIN_METHOD", "Zend_Form_Decorator_PrepareElementsTest::main");
 }
 
 // require_once 'Zend/Form/Decorator/PrepareElements.php';
 // require_once 'Zend/Form.php';
 // require_once 'Zend/Form/SubForm.php';
 
+
 /**
- * Test class for Zend_Form_Decorator_PrepareElements.
+ * Test class for Zend_Form_Decorator_PrepareElements
  *
  * @category   Zend
- *
+ * @package    Zend_Form
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Form
  */
 #[AllowDynamicProperties]
@@ -49,7 +50,7 @@ class Zend_Form_Decorator_PrepareElementsTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend_Form_Decorator_PrepareElementsTest');
+        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Decorator_PrepareElementsTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -62,7 +63,7 @@ class Zend_Form_Decorator_PrepareElementsTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->form = new Zend_Form();
-        $this->form->setDecorators(['PrepareElements']);
+        $this->form->setDecorators(array('PrepareElements'));
         $this->decorator = $this->form->getDecorator('PrepareElements');
     }
 
@@ -80,7 +81,6 @@ class Zend_Form_Decorator_PrepareElementsTest extends PHPUnit_Framework_TestCase
     {
         // require_once 'Zend/View.php';
         $view = new Zend_View();
-
         return $view;
     }
 
@@ -95,7 +95,7 @@ class Zend_Form_Decorator_PrepareElementsTest extends PHPUnit_Framework_TestCase
                    ->addElement('text', 'bar')
                    ->addElement('text', 'baz')
                    ->addElement('text', 'bat')
-                   ->addDisplayGroup(['baz', 'bat'], 'bazbat')
+                   ->addDisplayGroup(array('baz', 'bat'), 'bazbat')
                    ->addSubForm($sub1, 'sub')
                    ->setView($this->getView());
     }
@@ -111,7 +111,7 @@ class Zend_Form_Decorator_PrepareElementsTest extends PHPUnit_Framework_TestCase
         foreach ($this->form->getSubForms() as $subForm) {
             $name = $subForm->getElementsBelongTo();
             foreach ($subForm->getElements() as $element) {
-                $this->assertEquals($name, $element->getBelongsTo(), 'Tested sub element; wrong belongsTo; '.$name.': '.$element->getName());
+                $this->assertEquals($name, $element->getBelongsTo(), 'Tested sub element; wrong belongsTo; ' . $name . ': ' . $element->getName());
             }
         }
     }
@@ -135,12 +135,12 @@ class Zend_Form_Decorator_PrepareElementsTest extends PHPUnit_Framework_TestCase
     {
         $this->prepareForm();
         // require_once 'Zend/Translate.php';
-        $translator = new Zend_Translate('array', ['foo' => 'bar'], 'en');
+        $translator = new Zend_Translate('array', array('foo' => 'bar'), 'en');
         $this->form->setTranslator($translator);
         $this->form->render();
         $translator = $this->form->getTranslator();
         foreach ($this->form as $item) {
-            $this->assertSame($translator, $item->getTranslator(), 'Translator not the same: '.var_export($item->getTranslator(), 1));
+            $this->assertSame($translator, $item->getTranslator(), 'Translator not the same: ' . var_export($item->getTranslator(), 1));
             if ($item instanceof Zend_Form) {
                 foreach ($item->getElements() as $subItem) {
                     $this->assertSame($translator, $subItem->getTranslator(), var_export($subItem, 1));
@@ -151,6 +151,6 @@ class Zend_Form_Decorator_PrepareElementsTest extends PHPUnit_Framework_TestCase
 }
 
 // Call Zend_Form_Decorator_PrepareElementsTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_Form_Decorator_PrepareElementsTest::main') {
+if (PHPUnit_MAIN_METHOD == "Zend_Form_Decorator_PrepareElementsTest::main") {
     Zend_Form_Decorator_PrepareElementsTest::main();
 }

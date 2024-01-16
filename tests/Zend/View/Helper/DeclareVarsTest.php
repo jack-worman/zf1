@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,16 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_View
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
 // Call Zend_View_Helper_DeclareVarsTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_View_Helper_DeclareVarsTest::main');
+if (!defined("PHPUnit_MAIN_METHOD")) {
+    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_DeclareVarsTest::main");
 }
 
 // require_once 'Zend/View.php';
@@ -30,10 +30,10 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 /**
  * @category   Zend
- *
+ * @package    Zend_View
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
@@ -43,11 +43,13 @@ class Zend_View_Helper_DeclareVarsTest extends PHPUnit_Framework_TestCase
     /**
      * Runs the test methods of this class.
      *
+     * @access public
      * @static
      */
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend_View_Helper_DeclareVarsTest');
+
+        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_DeclareVarsTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -55,7 +57,7 @@ class Zend_View_Helper_DeclareVarsTest extends PHPUnit_Framework_TestCase
     {
         $view = new Zend_View();
         $base = str_replace((string) '/', DIRECTORY_SEPARATOR, '/../_templates');
-        $view->setScriptPath(__DIR__.$base);
+        $view->setScriptPath(__DIR__ . $base);
         $view->strictVars(true);
         $this->view = $view;
     }
@@ -70,10 +72,10 @@ class Zend_View_Helper_DeclareVarsTest extends PHPUnit_Framework_TestCase
         $this->view->declareVars(
             'varName1',
             'varName2',
-            [
+            array(
                 'varName3' => 'defaultValue',
-                'varName4' => [],
-            ]
+                'varName4' => array()
+            )
         );
     }
 
@@ -87,7 +89,7 @@ class Zend_View_Helper_DeclareVarsTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(isset($this->view->varName4));
 
         $this->assertEquals('defaultValue', $this->view->varName3);
-        $this->assertEquals([], $this->view->varName4);
+        $this->assertEquals(array(), $this->view->varName4);
     }
 
     public function testDeclareDeclaredVars()
@@ -111,6 +113,6 @@ class Zend_View_Helper_DeclareVarsTest extends PHPUnit_Framework_TestCase
 }
 
 // Call Zend_View_Helper_DeclareVarsTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_View_Helper_DeclareVarsTest::main') {
+if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_DeclareVarsTest::main") {
     Zend_View_Helper_DeclareVarsTest::main();
 }

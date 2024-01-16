@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Queue
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -41,10 +41,10 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Queue
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Queue
  */
 #[AllowDynamicProperties]
@@ -53,30 +53,30 @@ class Zend_Queue_Message_IteratorTest extends PHPUnit_Framework_TestCase
     protected function setUp()
     {
         // Test Zend_Config
-        $this->options = [
-            'name' => 'queue1',
-            'params' => [],
-        ];
+        $this->options = array(
+            'name'      => 'queue1',
+            'params'    => array(),
+        );
 
         $this->queue = new Zend_Queue('array', $this->options);
 
         // construct messages
         $this->message_count = 5;
-        $data = [];
-        $datum = [];
-        for ($i = 0; $i < $this->message_count; ++$i) {
-            $data[] = [
-                'id' => $i + 1,
+        $data  = array();
+        $datum = array();
+        for ($i = 0; $i < $this->message_count; $i++) {
+            $data[] = array(
+                'id' => $i+1,
                 'handle' => null,
-                'body' => 'Hello world', // This is my 2524'th time writing that.
-            ];
+                'body' => 'Hello world' // This is my 2524'th time writing that.
+            );
         }
 
-        $options = [
-            'queue' => $this->queue,
-            'data' => $data,
-            'messageClass' => $this->queue->getMessageClass(),
-        ];
+        $options = array(
+            'queue'    => $this->queue,
+            'data'     => $data,
+            'messageClass' => $this->queue->getMessageClass()
+        );
 
         $classname = $this->queue->getMessageSetClass();
         if (!class_exists($classname)) {
@@ -86,7 +86,8 @@ class Zend_Queue_Message_IteratorTest extends PHPUnit_Framework_TestCase
         $this->messages = new $classname($options);
     }
 
-    public function testSetup()
+
+    public function test_setup()
     {
         $this->assertTrue($this->queue instanceof Zend_Queue);
         $this->assertTrue(is_array($this->options));
@@ -108,23 +109,23 @@ class Zend_Queue_Message_IteratorTest extends PHPUnit_Framework_TestCase
         // parameter validation
         try {
             $config = $this->options;
-            $config['data'] = 'ops';
+            $config['data']='ops';
 
             $classname = $this->queue->getMessageSetClass();
             Zend_Loader::loadClass($classname);
             $this->messages = new $classname($config);
             $this->fail('config[data] must be an array.  a message should have been thrown');
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->assertTrue(true);
         }
     }
 
-    public function testCount()
+    public function test_count()
     {
         $this->assertEquals($this->message_count, count($this->messages));
     }
 
-    public function testMagic()
+    public function test_magic()
     {
         $this->assertTrue(is_array($this->messages->__sleep()));
 
@@ -133,7 +134,7 @@ class Zend_Queue_Message_IteratorTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->messages->current()->body, $woken->current()->body);
     }
 
-    public function testGetSetQueue()
+    public function test_get_setQueue()
     {
         $queue = $this->messages->getQueue();
         $this->assertTrue($queue instanceof Zend_Queue);
@@ -141,23 +142,24 @@ class Zend_Queue_Message_IteratorTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->messages->setQueue($queue));
     }
 
-    public function testGetQueueClass()
+    public function test_getQueueClass()
     {
         $this->assertEquals(get_class($this->queue), $this->messages->getQueueClass());
     }
 
-    public function testIterator()
+    public function test_iterator()
     {
         foreach ($this->messages as $i => $message) {
             $this->assertEquals('Hello world', $message->body);
         }
     }
 
-    public function testToArray()
+    public function test_toArray()
     {
         $array = $this->messages->toArray();
         $this->assertTrue(is_array($array));
         $this->assertEquals($this->message_count, count($array));
         $this->assertEquals('Hello world', $array[0]['body']);
     }
+
 }

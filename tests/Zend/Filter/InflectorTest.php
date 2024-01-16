@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,12 +13,13 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Filter
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
+
 
 // Call Zend_Filter_InflectorTest::main() if this source file is executed directly.
 if (!defined('PHPUnit_MAIN_METHOD')) {
@@ -35,14 +36,15 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  */
 // require_once 'Zend/Config.php';
 
+
 /**
  * Test class for Zend_Filter_Inflector.
  *
  * @category   Zend
- *
+ * @package    Zend_Filter
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Filter
  */
 #[AllowDynamicProperties]
@@ -55,7 +57,7 @@ class Zend_Filter_InflectorTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend_Filter_InflectorTest');
+        $suite  = new PHPUnit_Framework_TestSuite('Zend_Filter_InflectorTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -68,7 +70,7 @@ class Zend_Filter_InflectorTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->inflector = new Zend_Filter_Inflector();
-        $this->loader = $this->inflector->getPluginLoader();
+        $this->loader    = $this->inflector->getPluginLoader();
     }
 
     /**
@@ -105,7 +107,7 @@ class Zend_Filter_InflectorTest extends PHPUnit_Framework_TestCase
     {
         $this->inflector->addFilterPrefixPath('Foo_Bar', 'Zend/View/');
         $loader = $this->inflector->getPluginLoader();
-        $paths = $loader->getPaths();
+        $paths  = $loader->getPaths();
         $this->assertTrue(array_key_exists('Foo_Bar_', $paths));
     }
 
@@ -163,7 +165,7 @@ class Zend_Filter_InflectorTest extends PHPUnit_Framework_TestCase
     {
         $rules = $this->inflector->getRules();
         $this->assertEquals(0, count($rules));
-        $this->inflector->setFilterRule('controller', ['PregReplace', 'Alpha']);
+        $this->inflector->setFilterRule('controller', array('PregReplace', 'Alpha'));
         $rules = $this->inflector->getRules('controller');
         $this->assertEquals(2, count($rules));
         $this->assertTrue($rules[0] instanceof Zend_Filter_Interface);
@@ -205,7 +207,7 @@ class Zend_Filter_InflectorTest extends PHPUnit_Framework_TestCase
 
     public function testSetStaticRuleReferenceAllowsUpdatingRuleByReference()
     {
-        $rule = 'foobar';
+        $rule  = 'foobar';
         $rules = $this->inflector->getRules();
         $this->assertEquals(0, count($rules));
         $this->inflector->setStaticRuleReference('controller', $rule);
@@ -220,10 +222,10 @@ class Zend_Filter_InflectorTest extends PHPUnit_Framework_TestCase
     {
         $rules = $this->inflector->getRules();
         $this->assertEquals(0, count($rules));
-        $this->inflector->addRules([
-            ':controller' => ['PregReplace', 'Alpha'],
-            'suffix' => 'phtml',
-        ]);
+        $this->inflector->addRules(array(
+            ':controller' => array('PregReplace', 'Alpha'),
+            'suffix'      => 'phtml',
+        ));
         $rules = $this->inflector->getRules();
         $this->assertEquals(2, count($rules));
         $this->assertEquals(2, count($rules['controller']));
@@ -235,10 +237,10 @@ class Zend_Filter_InflectorTest extends PHPUnit_Framework_TestCase
         $this->inflector->setStaticRule('some-rules', 'some-value');
         $rules = $this->inflector->getRules();
         $this->assertEquals(1, count($rules));
-        $this->inflector->setRules([
-            ':controller' => ['PregReplace', 'Alpha'],
-            'suffix' => 'phtml',
-        ]);
+        $this->inflector->setRules(array(
+            ':controller' => array('PregReplace', 'Alpha'),
+            'suffix'      => 'phtml',
+        ));
         $rules = $this->inflector->getRules();
         $this->assertEquals(2, count($rules));
         $this->assertEquals(2, count($rules['controller']));
@@ -247,7 +249,7 @@ class Zend_Filter_InflectorTest extends PHPUnit_Framework_TestCase
 
     public function testGetRule()
     {
-        $this->inflector->setFilterRule(':controller', ['Alpha', 'StringToLower']);
+        $this->inflector->setFilterRule(':controller', array('Alpha', 'StringToLower'));
         $this->assertTrue($this->inflector->getRule('controller', 1) instanceof Zend_Filter_StringToLower);
         $this->assertFalse($this->inflector->getRule('controller', 2));
     }
@@ -255,15 +257,15 @@ class Zend_Filter_InflectorTest extends PHPUnit_Framework_TestCase
     public function testFilterTransformsStringAccordingToRules()
     {
         $this->inflector->setTarget(':controller/:action.:suffix')
-             ->addRules([
-                 ':controller' => ['Word_CamelCaseToDash'],
-                 ':action' => ['Word_CamelCaseToDash'],
-                 'suffix' => 'phtml',
-             ]);
-        $filtered = $this->inflector->filter([
+             ->addRules(array(
+                 ':controller' => array('Word_CamelCaseToDash'),
+                 ':action'     => array('Word_CamelCaseToDash'),
+                 'suffix'      => 'phtml'
+             ));
+        $filtered = $this->inflector->filter(array(
             'controller' => 'FooBar',
-            'action' => 'bazBat',
-        ]);
+            'action'     => 'bazBat'
+        ));
         $this->assertEquals('Foo-Bar/baz-Bat.phtml', $filtered);
     }
 
@@ -278,19 +280,19 @@ class Zend_Filter_InflectorTest extends PHPUnit_Framework_TestCase
     {
         $this->inflector = new Zend_Filter_Inflector(
             '?=##controller/?=##action.?=##suffix',
-            [
-                 ':controller' => ['Word_CamelCaseToDash'],
-                 ':action' => ['Word_CamelCaseToDash'],
-                 'suffix' => 'phtml',
-                 ],
+            array(
+                 ':controller' => array('Word_CamelCaseToDash'),
+                 ':action'     => array('Word_CamelCaseToDash'),
+                 'suffix'      => 'phtml'
+                 ),
             null,
             '?=##'
-        );
+            );
 
-        $filtered = $this->inflector->filter([
+        $filtered = $this->inflector->filter(array(
             'controller' => 'FooBar',
-            'action' => 'bazBat',
-        ]);
+            'action'     => 'bazBat'
+        ));
 
         $this->assertEquals('Foo-Bar/baz-Bat.phtml', $filtered);
     }
@@ -313,19 +315,19 @@ class Zend_Filter_InflectorTest extends PHPUnit_Framework_TestCase
     {
         $this->inflector = new Zend_Filter_Inflector(
             '?=##controller/?=##action.?=##suffix',
-            [
-                 ':controller' => ['Word_CamelCaseToDash'],
-                 ':action' => ['Word_CamelCaseToDash'],
-                 'suffix' => 'phtml',
-                 ],
+            array(
+                 ':controller' => array('Word_CamelCaseToDash'),
+                 ':action'     => array('Word_CamelCaseToDash'),
+                 'suffix'      => 'phtml'
+                 ),
             true,
             '?=##'
-        );
+            );
 
         try {
-            $filtered = $this->inflector->filter(['controller' => 'FooBar']);
+            $filtered = $this->inflector->filter(array('controller' => 'FooBar'));
             $this->fail('Exception was not thrown when it was suppose to be.');
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->assertTrue($e instanceof Zend_Filter_Exception);
         }
     }
@@ -334,60 +336,58 @@ class Zend_Filter_InflectorTest extends PHPUnit_Framework_TestCase
     {
         $this->inflector = new Zend_Filter_Inflector(
             'e:\path\to\:controller\:action.:suffix',
-            [
-                 ':controller' => ['Word_CamelCaseToDash', 'StringToLower'],
-                 ':action' => ['Word_CamelCaseToDash'],
-                 'suffix' => 'phtml',
-                ],
+            array(
+                 ':controller' => array('Word_CamelCaseToDash', 'StringToLower'),
+                 ':action'     => array('Word_CamelCaseToDash'),
+                 'suffix'      => 'phtml'
+                ),
             true,
             ':'
-        );
+            );
 
         try {
-            $filtered = $this->inflector->filter(['controller' => 'FooBar', 'action' => 'MooToo']);
+            $filtered = $this->inflector->filter(array('controller' => 'FooBar', 'action' => 'MooToo'));
             $this->assertEquals($filtered, 'e:\path\to\foo-bar\Moo-Too.phtml');
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->fail($e->getMessage());
         }
     }
 
     public function getOptions()
     {
-        $options = [
+        $options = array(
             'target' => '$controller/$action.$suffix',
             'throwTargetExceptionsOn' => true,
             'targetReplacementIdentifier' => '$',
-            'rules' => [
-                ':controller' => [
+            'rules' => array(
+                ':controller' => array(
                     'rule1' => 'Word_CamelCaseToUnderscore',
                     'rule2' => 'StringToLower',
-                ],
-                ':action' => [
+                ),
+                ':action' => array(
                     'rule1' => 'Word_CamelCaseToDash',
                     'rule2' => 'StringToUpper',
-                ],
-                'suffix' => 'php',
-            ],
-            'filterPrefixPath' => [
+                ),
+                'suffix' => 'php'
+            ),
+            'filterPrefixPath' => array(
                 'Zend_View_Filter' => 'Zend/View/Filter/',
-                'Foo_Filter' => 'foo/filters/',
-            ],
-        ];
-
+                'Foo_Filter'       => 'foo/filters/'
+            ),
+        );
         return $options;
     }
 
     public function getConfig()
     {
         $options = $this->getOptions();
-
         return new Zend_Config($options);
     }
 
     protected function _testOptions($inflector)
     {
         $options = $this->getOptions();
-        $loader = $inflector->getPluginLoader();
+        $loader  = $inflector->getPluginLoader();
         $this->assertEquals($options['target'], $inflector->getTarget());
 
         $viewFilterPath = $loader->getPaths('Zend_View_Filter');
@@ -427,32 +427,33 @@ class Zend_Filter_InflectorTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Added str_replace((string) '\\', '\\\\', ..) to all processedParts values to disable backreferences.
+     * Added str_replace((string) '\\', '\\\\', ..) to all processedParts values to disable backreferences
      *
      * @group ZF-2538 Zend_Filter_Inflector::filter() fails with all numeric folder on Windows
      */
     public function testCheckInflectorWithPregBackreferenceLikeParts()
     {
+
         $this->inflector = new Zend_Filter_Inflector(
-            ':moduleDir'.DIRECTORY_SEPARATOR.':controller'.DIRECTORY_SEPARATOR.':action.:suffix',
-            [
-                ':controller' => ['Word_CamelCaseToDash', 'StringToLower'],
-                ':action' => ['Word_CamelCaseToDash'],
-                'suffix' => 'phtml',
-                ],
+            ':moduleDir' . DIRECTORY_SEPARATOR . ':controller' . DIRECTORY_SEPARATOR . ':action.:suffix',
+            array(
+                ':controller' => array('Word_CamelCaseToDash', 'StringToLower'),
+                ':action'     => array('Word_CamelCaseToDash'),
+                'suffix'      => 'phtml'
+                ),
             true,
             ':'
-        );
+            );
 
         $this->inflector->setStaticRule('moduleDir', 'C:\htdocs\public\cache\00\01\42\app\modules');
 
         try {
-            $filtered = $this->inflector->filter([
+            $filtered = $this->inflector->filter(array(
                 'controller' => 'FooBar',
-                'action' => 'MooToo',
-                ]);
-            $this->assertEquals($filtered, 'C:\htdocs\public\cache\00\01\42\app\modules'.DIRECTORY_SEPARATOR.'foo-bar'.DIRECTORY_SEPARATOR.'Moo-Too.phtml');
-        } catch (Throwable $e) {
+                'action' => 'MooToo'
+                ));
+            $this->assertEquals($filtered, 'C:\htdocs\public\cache\00\01\42\app\modules' . DIRECTORY_SEPARATOR . 'foo-bar' . DIRECTORY_SEPARATOR . 'Moo-Too.phtml');
+        } catch (\Throwable $e) {
             $this->fail($e->getMessage());
         }
     }
@@ -462,11 +463,11 @@ class Zend_Filter_InflectorTest extends PHPUnit_Framework_TestCase
      */
     public function testTestForFalseInConstructorParams()
     {
-        $inflector = new Zend_Filter_Inflector('something', [], false, false);
+        $inflector = new Zend_Filter_Inflector('something', array(), false, false);
         $this->assertFalse($inflector->isThrowTargetExceptionsOn());
         $this->assertEquals($inflector->getTargetReplacementIdentifier(), ':');
 
-        $inflector = new Zend_Filter_Inflector('something', [], false, '#');
+        $inflector = new Zend_Filter_Inflector('something', array(), false, '#');
         $this->assertEquals($inflector->getTargetReplacementIdentifier(), '#');
     }
 
@@ -476,8 +477,8 @@ class Zend_Filter_InflectorTest extends PHPUnit_Framework_TestCase
     public function testNoInflectableTarget()
     {
         $inflector = new Zend_Filter_Inflector('abc');
-        $inflector->addRules([':foo' => []]);
-        $this->assertEquals($inflector->filter(['fo' => 'bar']), 'abc');
+        $inflector->addRules(array(':foo' => array()));
+        $this->assertEquals($inflector->filter(array('fo' => 'bar')), 'abc');
     }
 
     /**
@@ -490,12 +491,12 @@ class Zend_Filter_InflectorTest extends PHPUnit_Framework_TestCase
         $this->inflector->setFilterRule('controller', 'PregReplace');
         $rules = $this->inflector->getRules('controller');
         $this->assertEquals(1, count($rules));
-        $this->inflector->addFilterRule('controller', ['Alpha', 'StringToLower']);
+        $this->inflector->addFilterRule('controller', array('Alpha', 'StringToLower'));
         $rules = $this->inflector->getRules('controller');
         $this->assertEquals(3, count($rules));
         $this->_context = 'StringToLower';
-        $this->inflector->setStaticRuleReference('context', $this->_context);
-        $this->inflector->addFilterRule('controller', ['Alpha', 'StringToLower']);
+        $this->inflector->setStaticRuleReference('context' , $this->_context);
+        $this->inflector->addFilterRule('controller', array('Alpha', 'StringToLower'));
         $rules = $this->inflector->getRules('controller');
         $this->assertEquals(5, count($rules));
     }

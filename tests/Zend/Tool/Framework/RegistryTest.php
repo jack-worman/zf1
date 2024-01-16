@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Tool
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -36,7 +36,8 @@ require_once '_files/EmptyLoader.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Tool
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
@@ -46,6 +47,7 @@ require_once '_files/EmptyLoader.php';
 #[AllowDynamicProperties]
 class Zend_Tool_Framework_RegistryTest extends PHPUnit_Framework_TestCase
 {
+
     public function setup()
     {
         $this->_registry = new Zend_Tool_Framework_Registry();
@@ -113,7 +115,7 @@ class Zend_Tool_Framework_RegistryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Zend_Tool_Framework_Exception
+     * @expectedException Zend_Tool_Framework_Exception
      */
     public function testMagicGetThrowsExceptionOnNonExistentItem()
     {
@@ -121,7 +123,7 @@ class Zend_Tool_Framework_RegistryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Zend_Tool_Framework_Exception
+     * @expectedException Zend_Tool_Framework_Exception
      */
     public function testMagicSetThrowsExceptionOnNonExistentItem()
     {
@@ -129,7 +131,7 @@ class Zend_Tool_Framework_RegistryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Zend_Tool_Framework_Exception
+     * @expectedException Zend_Tool_Framework_Exception
      */
     public function testIsObjectRegistryEnablableWillThrowExceptionsOnNonObject()
     {
@@ -137,10 +139,12 @@ class Zend_Tool_Framework_RegistryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Zend_Tool_Framework_Exception
+     * @expectedException Zend_Tool_Framework_Exception
      */
     public function testEnableRegistryOnObjectWillThrowExceptionsOnNonObject()
     {
         $this->_registry->enableRegistryOnObject(new ArrayObject());
     }
+
 }
+

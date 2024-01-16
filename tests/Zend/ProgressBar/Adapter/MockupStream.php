@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,74 +13,71 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Text
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
 /**
  * @category   Zend
- *
+ * @package    Zend_ProgressBar
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
-class Zend_ProgressBar_Adapter_Console_MockupStream
-{
+class Zend_ProgressBar_Adapter_Console_MockupStream {
+
     private $position;
 
     private $test;
 
-    public static $tests = [];
+    public static $tests = array();
 
-    public function stream_open($path, $mode, $options, &$opened_path)
+    function stream_open($path, $mode, $options, &$opened_path)
     {
         $url = parse_url($path);
-        $this->test = $url['host'];
+        $this->test = $url["host"];
         $this->position = 0;
 
-        self::$tests[$url['host']] = '';
-
+        self::$tests[$url["host"]] = '';
         return true;
     }
 
-    public function stream_read($count)
+    function stream_read($count)
     {
         $ret = substr((string) self::$tests[$this->test], $this->position, $count);
         $this->position += strlen((string) $ret);
-
         return $ret;
     }
 
-    public function stream_write($data)
+    function stream_write($data)
     {
         $left = substr((string) self::$tests[$this->test], 0, $this->position);
         $right = substr((string) self::$tests[$this->test], $this->position + strlen((string) $data));
-        self::$tests[$this->test] = $left.$data.$right;
+        self::$tests[$this->test] = $left . $data . $right;
         $this->position += strlen((string) $data);
-
         return strlen((string) $data);
     }
 
-    public function stream_tell()
+    function stream_tell()
     {
         return $this->position;
     }
 
-    public function stream_eof()
+    function stream_eof()
     {
         return $this->position >= strlen((string) self::$tests[$this->test]);
     }
 
-    public function stream_seek($offset, $whence)
+    function stream_seek($offset, $whence)
     {
         switch ($whence) {
             case SEEK_SET:
                 if ($offset < strlen((string) self::$tests[$this->test]) && $offset >= 0) {
                     $this->position = $offset;
-
                     return true;
                 } else {
                     return false;
@@ -90,7 +87,6 @@ class Zend_ProgressBar_Adapter_Console_MockupStream
             case SEEK_CUR:
                 if ($offset >= 0) {
                     $this->position += $offset;
-
                     return true;
                 } else {
                     return false;
@@ -100,7 +96,6 @@ class Zend_ProgressBar_Adapter_Console_MockupStream
             case SEEK_END:
                 if (strlen((string) self::$tests[$this->test]) + $offset >= 0) {
                     $this->position = strlen((string) self::$tests[$this->test]) + $offset;
-
                     return true;
                 } else {
                     return false;
@@ -112,8 +107,7 @@ class Zend_ProgressBar_Adapter_Console_MockupStream
         }
     }
 
-    public function __destruct()
-    {
+    public function __destruct() {
         unset(self::$tests[$this->test]);
     }
 }

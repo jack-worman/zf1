@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,35 +13,41 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Db
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
+
 
 /**
  * @see Zend_Db_Table_TestSetup
  */
 require_once 'Zend/Db/Table/TestSetup.php';
 
+
+
+
+
 /**
  * @category   Zend
- *
+ * @package    Zend_Db
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Db
  * @group      Zend_Db_Table
  * @group      Zend_Db_Table_Rowset
  */
 abstract class Zend_Db_Table_Rowset_TestCommon extends Zend_Db_Table_TestSetup
 {
+
     public function testTableRowsetIterator()
     {
         $table = $this->_table['bugs'];
 
-        $rows = $table->find([1, 2]);
+        $rows = $table->find(array(1, 2));
         $this->assertTrue($rows instanceof Zend_Db_Table_Rowset_Abstract,
             'Expecting object of type Zend_Db_Table_Rowset_Abstract, got '.get_class($rows));
 
@@ -92,16 +98,15 @@ abstract class Zend_Db_Table_Rowset_TestCommon extends Zend_Db_Table_TestSetup
 
         // test seeking to infinite fails
         $rows->rewind();
-        try {
+        try{
             $rows->seek(99999); // this index should not exist
             $this->fail('An exception should have been thrown here');
-        } catch (Zend_Db_Table_Rowset_Exception $e) {
-        }
-        try {
+        }catch(Zend_Db_Table_Rowset_Exception $e){ }
+        try{
             $rows->seek(-20);
             $this->fail('An exception should have been thrown here');
-        } catch (Zend_Db_Table_Rowset_Exception $e) {
-        }
+        }catch(Zend_Db_Table_Rowset_Exception $e){ }
+
 
         $rows->seek(1);
         $row = $rows->current();
@@ -125,12 +130,12 @@ abstract class Zend_Db_Table_Rowset_TestCommon extends Zend_Db_Table_TestSetup
         $row1 = $rows->getRow(1);
         $this->assertSame($rowcopy, $row1);
 
-        try {
+        try{
             $rows->getRow(99999); // this index should not exist
             $this->fail('An exception should have been thrown here');
-        } catch (Zend_Db_Table_Rowset_Exception $e) {
+        }catch(Zend_Db_Table_Rowset_Exception $e){
             // has the exception correctly been overwritten by getRow() ?
-            $this->assertRegExp('#No row could be found at position \d+#', $e->getMessage());
+            $this->assertRegExp('#No row could be found at position \d+#',$e->getMessage());
         }
     }
 
@@ -159,7 +164,7 @@ abstract class Zend_Db_Table_Rowset_TestCommon extends Zend_Db_Table_TestSetup
         $table = $this->_table['bugs'];
         $bug_description = $this->_db->foldCase('bug_description');
 
-        $rows = $table->find([1, 2]);
+        $rows = $table->find(array(1, 2));
         $this->assertEquals(2, count($rows));
 
         // iterate through the rowset, because that's the only way
@@ -235,7 +240,8 @@ abstract class Zend_Db_Table_Rowset_TestCommon extends Zend_Db_Table_TestSetup
 
         // iterate through the rowset, because that's the only way
         // to force it to instantiate the individual Rows
-        foreach ($rows as $row) {
+        foreach ($rows as $row)
+        {
             $row->$bug_description = $row->$bug_description;
         }
 
@@ -268,7 +274,7 @@ abstract class Zend_Db_Table_Rowset_TestCommon extends Zend_Db_Table_TestSetup
         try {
             $rowset[-1];
             $this->fail();
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->assertTrue($e instanceof Zend_Db_Table_Rowset_Exception);
             $this->assertContains('Illegal index', $e->getMessage());
         }
@@ -278,12 +284,14 @@ abstract class Zend_Db_Table_Rowset_TestCommon extends Zend_Db_Table_TestSetup
         try {
             $row = $rowset[count($rowset) + 1];
             $this->fail();
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->assertTrue($e instanceof Zend_Db_Table_Rowset_Exception);
             $this->assertContains('Illegal index', $e->getMessage());
         }
         $this->assertEquals(0, $rowset->key());
     }
+
+
 
     /**
      * @group ZF-8486
@@ -380,15 +388,15 @@ abstract class Zend_Db_Table_Rowset_TestCommon extends Zend_Db_Table_TestSetup
     }
 
     /**
-     * @group GH-172
-     */
+      * @group GH-172
+      */
     public function testFixForRowsetContainsDisconnectedRowObjectsWhenDeserializedDoesNotBreakPaginator()
     {
         $table = $this->_table['bugs'];
         $tableClass = get_class($table);
 
         $select = $table->select();
-        $select->from('zfbugs', ['bug_id']);
+        $select->from('zfbugs', array('bug_id'));
 
         // require_once 'Zend/Paginator.php';
         $paginator = Zend_Paginator::factory($select);
@@ -398,10 +406,9 @@ abstract class Zend_Db_Table_Rowset_TestCommon extends Zend_Db_Table_TestSetup
     }
 
     /**
-     * @group GH-172
-     *
-     * @see https://github.com/zendframework/zf1/commit/d418b73b53964c3bd84a6624075008106e7d5962#commitcomment-4438005
-     */
+      * @group GH-172
+      * @see https://github.com/zendframework/zf1/commit/d418b73b53964c3bd84a6624075008106e7d5962#commitcomment-4438005
+      */
     public function testFixForRowsetContainsDisconnectedRowObjectsWhenDeserializedDoesNotBreakTableJoin()
     {
         $table = $this->_table['bugs'];
@@ -414,4 +421,5 @@ abstract class Zend_Db_Table_Rowset_TestCommon extends Zend_Db_Table_TestSetup
         $result = $table->fetchAll($select);
         $this->assertTrue($result instanceof Zend_Db_Table_Rowset);
     }
+
 }

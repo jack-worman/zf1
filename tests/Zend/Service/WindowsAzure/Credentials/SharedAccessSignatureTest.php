@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,30 +13,31 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Service_WindowsAzure
+ * @subpackage UnitTests
  * @version    $Id$
- *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Service_WindowsAzure_Credentials_SharedAccessSignatureTest::main');
 }
 
 /**
- * Test helpers.
+ * Test helpers
  */
 // require_once __DIR__ . '/../../../../TestHelper.php';
-require_once __DIR__.'/../../../../TestConfiguration.dist.php';
+require_once __DIR__ . '/../../../../TestConfiguration.dist.php';
 
 /** Zend_Service_WindowsAzure_Credentials_SharedAccessSignature */
 // require_once 'Zend/Service/WindowsAzure/Credentials/SharedAccessSignature.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Service_WindowsAzure
+ * @subpackage UnitTests
  * @version    $Id$
- *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -45,12 +46,12 @@ class Zend_Service_WindowsAzure_Credentials_SharedAccessSignatureTest extends PH
 {
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend_Service_WindowsAzure_Credentials_SharedAccessSignatureTest');
+        $suite  = new PHPUnit_Framework_TestSuite("Zend_Service_WindowsAzure_Credentials_SharedAccessSignatureTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     /**
-     * Test signing a container.
+     * Test signing a container
      */
     public function testGenerateSignatureContainer()
     {
@@ -67,7 +68,7 @@ class Zend_Service_WindowsAzure_Credentials_SharedAccessSignatureTest extends PH
     }
 
     /**
-     * Test signing a blob.
+     * Test signing a blob
      */
     public function testGenerateSignatureBlob()
     {
@@ -83,7 +84,7 @@ class Zend_Service_WindowsAzure_Credentials_SharedAccessSignatureTest extends PH
     }
 
     /**
-     * Test container signed query string.
+     * Test container signed query string
      */
     public function testContainerSignedQueryString()
     {
@@ -101,14 +102,14 @@ class Zend_Service_WindowsAzure_Credentials_SharedAccessSignatureTest extends PH
     }
 
     /**
-     * Test blob signed query string.
+     * Test blob signed query string
      */
     public function testBlobSignedQueryString()
     {
         $credentials = new Zend_Service_WindowsAzure_Credentials_SharedAccessSignature('myaccount', '', false);
         $result = $credentials->createSignedQueryString(
             'pictures/blob.txt',
-            '',
+        	'',
             'b',
             'w',
             '2009-02-09',
@@ -118,25 +119,25 @@ class Zend_Service_WindowsAzure_Credentials_SharedAccessSignatureTest extends PH
     }
 
     /**
-     * Test sign request URL.
+     * Test sign request URL
      */
     public function testSignRequestUrl()
     {
         $credentials = new Zend_Service_WindowsAzure_Credentials_SharedAccessSignature('myaccount', '', false);
         $queryString = $credentials->createSignedQueryString('pictures/blob.txt', '', 'b', 'r', '2009-02-09', '2009-02-10');
 
-        $credentials->setPermissionSet([
-            'http://blob.core.windows.net/myaccount/pictures/blob.txt?'.$queryString,
-        ]);
+        $credentials->setPermissionSet(array(
+            'http://blob.core.windows.net/myaccount/pictures/blob.txt?' . $queryString
+        ));
 
         $requestUrl = 'http://blob.core.windows.net/myaccount/pictures/blob.txt?comp=metadata';
         $result = $credentials->signRequestUrl($requestUrl, Zend_Service_WindowsAzure_Storage::RESOURCE_BLOB);
 
-        $this->assertEquals('http://blob.core.windows.net/myaccount/pictures/blob.txt?comp=metadata&'.$queryString, $result);
+        $this->assertEquals('http://blob.core.windows.net/myaccount/pictures/blob.txt?comp=metadata&' . $queryString, $result);
     }
 }
 
 // Call Zend_Service_WindowsAzure_Credentials_SharedAccessSignatureTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_Service_WindowsAzure_Credentials_SharedAccessSignatureTest::main') {
+if (PHPUnit_MAIN_METHOD == "Zend_Service_WindowsAzure_Credentials_SharedAccessSignatureTest::main") {
     Zend_Service_WindowsAzure_Credentials_SharedAccessSignatureTest::main();
 }

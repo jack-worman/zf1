@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,9 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -24,16 +23,17 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Feed
+ * @subpackage UnitTests
  * @group      Zend_Feed
  * @group      Zend_Feed_Subsubhubbub
- *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Zend_Feed_Pubsubhubbub_PubsubhubbubTest extends PHPUnit_Framework_TestCase
 {
+
     public function teardown()
     {
         Zend_Feed_Pubsubhubbub::clearHttpClient();
@@ -49,14 +49,13 @@ class Zend_Feed_Pubsubhubbub_PubsubhubbubTest extends PHPUnit_Framework_TestCase
 
     public function testCanDetectHubs()
     {
-        $feed = Zend_Feed_Reader::importFile(__DIR__.'/_files/rss20.xml');
-        $this->assertEquals([
-            'http://www.example.com/hub', 'http://www.example.com/hub2',
-        ], Zend_Feed_Pubsubhubbub::detectHubs($feed));
+        $feed = Zend_Feed_Reader::importFile(__DIR__ . '/_files/rss20.xml');
+        $this->assertEquals(array(
+            'http://www.example.com/hub', 'http://www.example.com/hub2'
+        ), Zend_Feed_Pubsubhubbub::detectHubs($feed));
     }
+
 }
 
 #[AllowDynamicProperties]
-class Test_Http_Client_Pubsub extends Zend_Http_Client
-{
-}
+class Test_Http_Client_Pubsub extends Zend_Http_Client {}

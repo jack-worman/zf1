@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,7 +13,8 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Cloud_Infrastructure_Adapter
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -27,67 +28,66 @@
 class Zend_Cloud_Infrastructure_Adapter_Ec2Test extends PHPUnit_Framework_TestCase
 {
     /**
-     * Timeout in seconds for status change.
+     * Timeout in seconds for status change
      */
-    public const STATUS_TIMEOUT = 120;
+    const STATUS_TIMEOUT= 120;
 
     /**
-     * Reference to Infrastructure object.
+     * Reference to Infrastructure object
      *
      * @var Zend_Cloud_Infrastructure_Adapter
      */
     protected $infrastructure;
 
     /**
-     * Socket based HTTP client adapter.
+     * Socket based HTTP client adapter
      *
      * @var Zend_Http_Client_Adapter_Test
      */
     protected $httpClientAdapterTest;
 
     /**
-     * Image ID of the instance.
+     * Image ID of the instance
      *
      * @var string
      */
     protected static $instanceId;
 
     /**
-     * Setup for each test.
+     * Setup for each test
      */
     public function setUp()
     {
-        $this->infrastructure = Zend_Cloud_Infrastructure_Factory::getAdapter([
+        $this->infrastructure = Zend_Cloud_Infrastructure_Factory::getAdapter(array(
             Zend_Cloud_Infrastructure_Factory::INFRASTRUCTURE_ADAPTER_KEY => 'Zend_Cloud_Infrastructure_Adapter_Ec2',
-            Zend_Cloud_Infrastructure_Adapter_Ec2::AWS_ACCESS_KEY => 'foo',
-            Zend_Cloud_Infrastructure_Adapter_Ec2::AWS_SECRET_KEY => 'bar',
-            Zend_Cloud_Infrastructure_Adapter_Ec2::AWS_REGION => 'us-east-1',
-        ]);
+            Zend_Cloud_Infrastructure_Adapter_Ec2::AWS_ACCESS_KEY         => 'foo',
+            Zend_Cloud_Infrastructure_Adapter_Ec2::AWS_SECRET_KEY         => 'bar',
+            Zend_Cloud_Infrastructure_Adapter_Ec2::AWS_REGION             => 'us-east-1'
+        ));
 
         $this->httpClientAdapterTest = new Zend_Http_Client_Adapter_Test();
 
         // load the HTTP response (from a file)
-        $shortClassName = substr((string) __CLASS__, strlen((string) 'Zend_Cloud_Infrastructure_Adapter_'));
-        $filename = __DIR__.'/_files/'.$shortClassName.'_'.$this->getName().'.response';
+        $shortClassName = substr((string) __CLASS__,strlen((string) 'Zend_Cloud_Infrastructure_Adapter_'));
+        $filename= __DIR__ . '/_files/' . $shortClassName . '_'. $this->getName().'.response';
 
         if (file_exists((string) $filename)) {
             $this->httpClientAdapterTest->setResponse($this->loadResponse($filename));
         }
 
-        $adapter = $this->infrastructure->getAdapter();
+        $adapter= $this->infrastructure->getAdapter();
 
-        $client = new Zend_Http_Client(null, [
-            'adapter' => $this->httpClientAdapterTest,
-        ]);
+        $client = new Zend_Http_Client(null, array(
+            'adapter' => $this->httpClientAdapterTest
+        ));
 
-        call_user_func([$adapter, 'setHttpClient'], $client);
+        call_user_func(array($adapter,'setHttpClient'),$client);
+
     }
-
     /**
-     * Utility method for returning a string HTTP response, which is loaded from a file.
+     * Utility method for returning a string HTTP response, which is loaded from a file
      *
-     * @param string $name
-     *
+     * @param  string $name
      * @return string
      */
     protected function loadResponse($name)
@@ -100,25 +100,24 @@ class Zend_Cloud_Infrastructure_Adapter_Ec2Test extends PHPUnit_Framework_TestCa
         // is well-formed.
         return preg_replace("#(?<!\r)\n#", "\r\n", $response);
     }
-
     /**
-     * Get Config Array.
+     * Get Config Array
      *
      * @return array
      */
-    public static function getConfigArray()
+    static function getConfigArray()
     {
-        return [
-           Zend_Cloud_Infrastructure_Factory::INFRASTRUCTURE_ADAPTER_KEY => 'Zend_Cloud_Infrastructure_Adapter_Ec2',
-           Zend_Cloud_Infrastructure_Adapter_Ec2::AWS_ACCESS_KEY => 'foo',
-           Zend_Cloud_Infrastructure_Adapter_Ec2::AWS_SECRET_KEY => 'bar',
-           Zend_Cloud_Infrastructure_Adapter_Ec2::AWS_REGION => 'us-east-1',
-           Zend_Cloud_Infrastructure_Adapter_Ec2::AWS_SECURITY_GROUP => 'default',
-        ];
+         return array(
+            Zend_Cloud_Infrastructure_Factory::INFRASTRUCTURE_ADAPTER_KEY => 'Zend_Cloud_Infrastructure_Adapter_Ec2',
+            Zend_Cloud_Infrastructure_Adapter_Ec2::AWS_ACCESS_KEY         => 'foo',
+            Zend_Cloud_Infrastructure_Adapter_Ec2::AWS_SECRET_KEY         => 'bar',
+            Zend_Cloud_Infrastructure_Adapter_Ec2::AWS_REGION             => 'us-east-1',
+            Zend_Cloud_Infrastructure_Adapter_Ec2::AWS_SECURITY_GROUP     => 'default'
+        );
     }
 
     /**
-     * Test all the constants of the class.
+     * Test all the constants of the class
      */
     public function testConstants()
     {
@@ -128,7 +127,7 @@ class Zend_Cloud_Infrastructure_Adapter_Ec2Test extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * Test construct with missing params.
+     * Test construct with missing params
      */
     public function testConstructExceptionMissingParams()
     {
@@ -140,7 +139,7 @@ class Zend_Cloud_Infrastructure_Adapter_Ec2Test extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * Test getAdapter.
+     * Test getAdapter
      */
     public function testGetAdapter()
     {
@@ -150,28 +149,28 @@ class Zend_Cloud_Infrastructure_Adapter_Ec2Test extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * Test create an instance.
+     * Test create an instance
      */
     public function testCreateInstance()
     {
-        $options = [
-            Zend_Cloud_Infrastructure_Instance::INSTANCE_IMAGEID => 'ami-7f418316',
-            Zend_Cloud_Infrastructure_Adapter_Ec2::AWS_SECURITY_GROUP => ['default'],
-        ];
+        $options = array (
+            Zend_Cloud_Infrastructure_Instance::INSTANCE_IMAGEID      => 'ami-7f418316',
+            Zend_Cloud_Infrastructure_Adapter_Ec2::AWS_SECURITY_GROUP => array('default')
+        );
         $instance = $this->infrastructure->createInstance('test', $options);
-        self::$instanceId = $instance->getId();
+        self::$instanceId= $instance->getId();
         $this->assertEquals('ami-7f418316', $instance->getImageId());
     }
 
     /**
-     * Test list of an instance.
+     * Test list of an instance
      */
     public function testListInstance()
     {
         $instances = $this->infrastructure->listInstances(self::$instanceId);
         $found = false;
         foreach ($instances as $instance) {
-            if ($instance->getId() == self::$instanceId) {
+            if ($instance->getId()==self::$instanceId) {
                 $found = true;
                 break;
             }
@@ -180,7 +179,7 @@ class Zend_Cloud_Infrastructure_Adapter_Ec2Test extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * Test images instance.
+     * Test images instance
      */
     public function testImagesInstance()
     {
@@ -189,7 +188,7 @@ class Zend_Cloud_Infrastructure_Adapter_Ec2Test extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * Test zones instance.
+     * Test zones instance
      */
     public function testZonesInstance()
     {
@@ -198,17 +197,17 @@ class Zend_Cloud_Infrastructure_Adapter_Ec2Test extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * Test monitor instance.
+     * Test monitor instance
      */
     public function testMonitorInstance()
     {
-        $monitor = $this->infrastructure->monitorInstance(self::$instanceId, Zend_Cloud_Infrastructure_Instance::MONITOR_CPU);
+        $monitor       = $this->infrastructure->monitorInstance(self::$instanceId,Zend_Cloud_Infrastructure_Instance::MONITOR_CPU);
         $adapterResult = $this->infrastructure->getAdapterResult();
         $this->assertTrue(!empty($adapterResult['label']));
     }
 
     /**
-     * Test deploy instance.
+     * Test deploy instance
      */
     public function testDeployInstance()
     {
@@ -216,7 +215,7 @@ class Zend_Cloud_Infrastructure_Adapter_Ec2Test extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * Test stop an instance.
+     * Test stop an instance
      */
     public function testStopInstance()
     {
@@ -224,7 +223,7 @@ class Zend_Cloud_Infrastructure_Adapter_Ec2Test extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * Test start an instance.
+     * Test start an instance
      */
     public function testStartInstance()
     {
@@ -232,7 +231,7 @@ class Zend_Cloud_Infrastructure_Adapter_Ec2Test extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * Test reboot and instance.
+     * Test reboot and instance
      */
     public function testRebootInstance()
     {
@@ -240,7 +239,7 @@ class Zend_Cloud_Infrastructure_Adapter_Ec2Test extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * Test destroy instance.
+     * Test destroy instance
      */
     public function testDestroyInstance()
     {

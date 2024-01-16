@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Tool
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -29,7 +29,8 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Tool
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
@@ -40,12 +41,13 @@
 #[AllowDynamicProperties]
 class Zend_Tool_Framework_Client_ResponseTest extends PHPUnit_Framework_TestCase
 {
+
     /**
      * @var Zend_Tool_Framework_Client_Response
      */
-    protected $_response;
+    protected $_response = null;
 
-    protected $_responseBuffer = [];
+    protected $_responseBuffer = array();
 
     public function setup()
     {
@@ -75,7 +77,7 @@ class Zend_Tool_Framework_Client_ResponseTest extends PHPUnit_Framework_TestCase
 
     public function testContentCallback()
     {
-        $this->_response->setContentCallback([$this, '_responseCallback']);
+        $this->_response->setContentCallback(array($this, '_responseCallback'));
         $this->_response->appendContent('foo');
         $this->assertEquals('foo', implode('', $this->_responseBuffer));
         $this->_response->appendContent('bar');
@@ -92,7 +94,7 @@ class Zend_Tool_Framework_Client_ResponseTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Zend_Tool_Framework_Client_Exception
+     * @expectedException Zend_Tool_Framework_Client_Exception
      */
     public function testSetCallbackThrowsExceptionOnInvalidCallback()
     {
@@ -119,17 +121,17 @@ class Zend_Tool_Framework_Client_ResponseTest extends PHPUnit_Framework_TestCase
     {
         $separator = new Zend_Tool_Framework_Client_Response_ContentDecorator_Separator();
         $this->_response->addContentDecorator($separator);
-        $this->_response->appendContent('foo', ['separator' => true]);
-        $this->_response->appendContent('boo', ['separator' => true]);
-        $this->assertEquals('foo'.PHP_EOL.'boo'.PHP_EOL, $this->_response->__toString());
+        $this->_response->appendContent('foo', array('separator' => true));
+        $this->_response->appendContent('boo', array('separator' => true));
+        $this->assertEquals('foo' . PHP_EOL . 'boo' . PHP_EOL, $this->_response->__toString());
     }
 
     public function testResponseWillIgnoreUnknownDecoratorOptions()
     {
         $separator = new Zend_Tool_Framework_Client_Response_ContentDecorator_Separator();
         $this->_response->addContentDecorator($separator);
-        $this->_response->appendContent('foo', ['foo' => 'foo']);
-        $this->_response->appendContent('boo', ['bar' => 'bar']);
+        $this->_response->appendContent('foo', array('foo' => 'foo'));
+        $this->_response->appendContent('boo', array('bar' => 'bar'));
         $this->assertEquals('fooboo', $this->_response->__toString());
     }
 
@@ -137,10 +139,10 @@ class Zend_Tool_Framework_Client_ResponseTest extends PHPUnit_Framework_TestCase
     {
         $separator = new Zend_Tool_Framework_Client_Response_ContentDecorator_Separator();
         $this->_response->addContentDecorator($separator);
-        $this->_response->setDefaultDecoratorOptions(['separator' => true]);
+        $this->_response->setDefaultDecoratorOptions(array('separator' => true));
         $this->_response->appendContent('foo');
         $this->_response->appendContent('boo');
-        $this->assertEquals('foo'.PHP_EOL.'boo'.PHP_EOL, $this->_response->__toString());
+        $this->assertEquals('foo' . PHP_EOL . 'boo' . PHP_EOL, $this->_response->__toString());
     }
 
     public function _responseCallback($content)

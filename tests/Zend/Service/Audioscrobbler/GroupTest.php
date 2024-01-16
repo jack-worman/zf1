@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Service_Audioscrobbler
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -25,14 +25,15 @@
  */
 // require_once 'Zend/Service/Audioscrobbler.php';
 
-require_once 'AudioscrobblerTestCase.php';
+require_once "AudioscrobblerTestCase.php";
+
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Service_Audioscrobbler
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Service
  * @group      Zend_Service_Audioscrobbler
  */
@@ -43,7 +44,7 @@ class Zend_Service_Audioscrobbler_GroupTest extends Zend_Service_Audioscrobbler_
 
     public function testWeeklyChartList()
     {
-        $testing_response = $this->header.
+        $testing_response = $this->header .
 '<?xml version="1.0" encoding="UTF-8"?>
 <weeklychartlist group="Jazz Club">
     <chart from="1159099200" to="1159704000"/>
@@ -78,13 +79,13 @@ class Zend_Service_Audioscrobbler_GroupTest extends Zend_Service_Audioscrobbler_
         $response = $as->groupGetWeeklyChartList();
         $chart = $response->chart[0];
 
-        $this->assertEquals((int) $chart['from'], 1159099200);
-        $this->assertEquals((string) $response['group'], 'Jazz Club');
+        $this->assertEquals((int)$chart['from'], 1159099200);
+        $this->assertEquals((string)$response['group'], 'Jazz Club');
     }
 
     public function testWeeklyArtistChartList()
     {
-        $testing_response = $this->header.
+        $testing_response = $this->header .
 '<?xml version="1.0" encoding="UTF-8"?>
 <weeklyartistchart group="Jazz Club" from="1172404800" to="1173009600">
 <artist>
@@ -167,14 +168,14 @@ class Zend_Service_Audioscrobbler_GroupTest extends Zend_Service_Audioscrobbler_
         $this->assertNotNull(count($response));
         $artist = $response->artist[1];
 
-        $this->assertEquals((string) $artist->name, 'The Beatles');
-        $this->assertEquals((string) $artist->url, 'http://www.last.fm/music/The+Beatles');
-        $this->assertEquals((string) $response['group'], 'Jazz Club');
+        $this->assertEquals((string)$artist->name, 'The Beatles');
+        $this->assertEquals((string)$artist->url, 'http://www.last.fm/music/The+Beatles');
+        $this->assertEquals((string)$response['group'], 'Jazz Club');
     }
 
     public function testWeeklyAlbumChartList()
     {
-        $testing_response = $this->header.
+        $testing_response = $this->header .
 '<?xml version="1.0" encoding="UTF-8"?>
 <weeklyalbumchart group="Jazz Club" from="1172404800" to="1173009600">
 <album>
@@ -259,23 +260,22 @@ class Zend_Service_Audioscrobbler_GroupTest extends Zend_Service_Audioscrobbler_
 </album>
 </weeklyalbumchart>
 ';
-        $this->setAudioscrobblerResponse($testing_response);
-        $as = $this->getAudioscrobblerService();
+        $this->setAudioscrobblerResponse($testing_response); $as = $this->getAudioscrobblerService();
 
         $as->set('group', urlencode((string) 'Jazz Club'));
         $response = $as->groupGetWeeklyAlbumChartList();
         $this->assertNotNull(count($response));
         $album = $response->album[0];
 
-        $this->assertEquals((string) $album->artist, 'Miles Davis');
-        $this->assertEquals((string) $album->name, 'Kind of Blue');
-        $this->assertEquals((string) $album->chartposition, 1);
-        $this->assertEquals((string) $response['group'], 'Jazz Club');
+        $this->assertEquals((string)$album->artist, 'Miles Davis');
+        $this->assertEquals((string)$album->name, 'Kind of Blue');
+        $this->assertEquals((string)$album->chartposition, 1);
+        $this->assertEquals((string)$response['group'], 'Jazz Club');
     }
 
     public function testPreviousWeeklyChartList()
-    {
-        $testing_response = $this->header.
+{
+        $testing_response = $this->header .
 '<?xml version="1.0" encoding="UTF-8"?>
 <weeklyartistchart group="Jazz Club" from="1114965332" to="1115570132">
 </weeklyartistchart>
@@ -289,8 +289,9 @@ class Zend_Service_Audioscrobbler_GroupTest extends Zend_Service_Audioscrobbler_
         $response = $as->groupGetWeeklyChartList($from, $to);
 
         $this->assertNotNull(count($response));
-        $this->assertEquals((string) $response['group'], 'Jazz Club');
-        $this->assertEquals((int) $response['from'], $from);
-        $this->assertEquals((int) $response['to'], $to);
+        $this->assertEquals((string)$response['group'], 'Jazz Club');
+        $this->assertEquals((int)$response['from'], $from);
+        $this->assertEquals((int)$response['to'], $to);
     }
+
 }

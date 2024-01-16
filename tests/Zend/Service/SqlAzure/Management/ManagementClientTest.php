@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,12 +13,13 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Service_WindowsAzure
+ * @subpackage UnitTests
  * @version    $Id$
- *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+
 date_default_timezone_set('UTC');
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
@@ -26,28 +27,28 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 }
 
 /**
- * Test helpers.
+ * Test helpers
  */
 // require_once __DIR__ . '/../../../../TestHelper.php';
-require_once __DIR__.'/../../../../TestConfiguration.dist.php';
+require_once __DIR__ . '/../../../../TestConfiguration.dist.php';
 
 /** Zend_Service_SqlAzure_Management_Client */
 // require_once 'Zend/Service/SqlAzure/Management/Client.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Service_SqlAzure
+ * @subpackage UnitTests
  * @version    $Id$
- *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Zend_Service_SqlAzure_Management_ManagementClientTest extends PHPUnit_Framework_TestCase
 {
-    public static $path;
-    public static $debug = true;
-    public static $serverName = '';
+	static $path;
+	static $debug = true;
+	static $serverName = '';
 
     public function __construct()
     {
@@ -57,13 +58,13 @@ class Zend_Service_SqlAzure_Management_ManagementClientTest extends PHPUnit_Fram
     public static function main()
     {
         if (TESTS_ZEND_SERVICE_WINDOWSAZURE_SQLMANAGEMENT_RUNTESTS) {
-            $suite = new PHPUnit_Framework_TestSuite('Zend_Service_SqlAzure_Management_ManagementClientTest');
+            $suite  = new PHPUnit_Framework_TestSuite("Zend_Service_SqlAzure_Management_ManagementClientTest");
             $result = PHPUnit_TextUI_TestRunner::run($suite);
         }
     }
 
     /**
-     * Test teardown.
+     * Test teardown
      */
     protected function tearDown()
     {
@@ -71,27 +72,24 @@ class Zend_Service_SqlAzure_Management_ManagementClientTest extends PHPUnit_Fram
         $managementClient = $this->createManagementClient();
 
         // Remove server
-        try {
-            $managementClient->dropServer(self::$serverName);
-        } catch (Throwable $ex) {
-        }
+        try { $managementClient->dropServer(self::$serverName); } catch (\Throwable $ex) { }
     }
 
     protected function createManagementClient()
     {
-        return new Zend_Service_SqlAzure_Management_Client(
-            TESTS_ZEND_SERVICE_WINDOWSAZURE_SQLMANAGEMENT_SUBSCRIPTIONID, self::$path.'/management.pem', TESTS_ZEND_SERVICE_WINDOWSAZURE_SQLMANAGEMENT_CERTIFICATEPASSWORD);
+    	return new Zend_Service_SqlAzure_Management_Client(
+	            TESTS_ZEND_SERVICE_WINDOWSAZURE_SQLMANAGEMENT_SUBSCRIPTIONID, self::$path . '/management.pem', TESTS_ZEND_SERVICE_WINDOWSAZURE_SQLMANAGEMENT_CERTIFICATEPASSWORD);
     }
 
     protected function log($message)
     {
-        if (self::$debug) {
-            echo date('Y-m-d H:i:s').' - '.$message."\r\n";
-        }
+    	if (self::$debug) {
+    		echo date('Y-m-d H:i:s') . ' - ' . $message . "\r\n";
+    	}
     }
 
     /**
-     * Test create and configure server.
+     * Test create and configure server
      */
     public function testCreateAndConfigureServer()
     {
@@ -99,42 +97,42 @@ class Zend_Service_SqlAzure_Management_ManagementClientTest extends PHPUnit_Fram
             // Create a management client
             $managementClient = $this->createManagementClient();
 
-            // ** Step 1: create a server
-            $this->log('Creating server...');
-            $server = $managementClient->createServer('sqladm', '@@cool1OO', 'West Europe');
-            $this->assertEquals('sqladm', $server->AdministratorLogin);
-            $this->assertEquals('West Europe', $server->Location);
-            self::$serverName = $server->Name;
+             // ** Step 1: create a server
+	        $this->log('Creating server...');
+	        $server = $managementClient->createServer('sqladm', '@@cool1OO', 'West Europe');
+	        $this->assertEquals('sqladm', $server->AdministratorLogin);
+	        $this->assertEquals('West Europe', $server->Location);
+	        self::$serverName = $server->Name;
             $this->log('Created server.');
 
-            // ** Step 2: change password
-            $this->log('Changing password...');
-            $managementClient->setAdministratorPassword($server->Name, '@@cool1OO11');
-            $this->log('Changed password...');
+	        // ** Step 2: change password
+	        $this->log('Changing password...');
+	        $managementClient->setAdministratorPassword($server->Name, '@@cool1OO11');
+	        $this->log('Changed password...');
 
-            // ** Step 3: add firewall rule
-            $this->log('Creating firewall rule...');
-            $managementClient->createFirewallRuleForMicrosoftServices($server->Name, true);
-            $result = $managementClient->listFirewallRules($server->Name);
-            $this->assertEquals(1, count($result));
-            $this->log('Created firewall rule.');
+	        // ** Step 3: add firewall rule
+	        $this->log('Creating firewall rule...');
+			$managementClient->createFirewallRuleForMicrosoftServices($server->Name, true);
+			$result = $managementClient->listFirewallRules($server->Name);
+	        $this->assertEquals(1, count($result));
+	        $this->log('Created firewall rule.');
 
-            // ** Step 4: remove firewall rule
-            $this->log('Removing firewall rule...');
-            $managementClient->createFirewallRuleForMicrosoftServices($server->Name, false);
-            $result = $managementClient->listFirewallRules($server->Name);
-            $this->assertEquals(0, count($result));
-            $this->log('Removed firewall rule.');
+	        // ** Step 4: remove firewall rule
+	        $this->log('Removing firewall rule...');
+			$managementClient->createFirewallRuleForMicrosoftServices($server->Name, false);
+			$result = $managementClient->listFirewallRules($server->Name);
+	        $this->assertEquals(0, count($result));
+	        $this->log('Removed firewall rule.');
 
-            // ** Step 5: Drop server
-            $this->log('Dropping server...');
-            $managementClient->dropServer($server->Name);
-            $this->log('Dropped server.');
+			// ** Step 5: Drop server
+	        $this->log('Dropping server...');
+			$managementClient->dropServer($server->Name);
+	        $this->log('Dropped server.');
         }
     }
 }
 
 // Call Zend_Service_SqlAzure_Management_ManagementClientTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_Service_SqlAzure_Management_ManagementClientTest::main') {
+if (PHPUnit_MAIN_METHOD == "Zend_Service_SqlAzure_Management_ManagementClientTest::main") {
     Zend_Service_SqlAzure_Management_ManagementClientTest::main();
 }

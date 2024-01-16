@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,30 +13,35 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Db
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id $
  */
 
 require_once 'Zend/Db/Statement/Pdo/TestCommon.php';
 
+
+
+
+
 /**
  * @category   Zend
- *
+ * @package    Zend_Db
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Db
  * @group      Zend_Db_Statement
  */
 #[AllowDynamicProperties]
 class Zend_Db_Statement_Pdo_MssqlTest extends Zend_Db_Statement_Pdo_TestCommon
 {
+
     public function testStatementGetColumnMeta()
     {
-        $this->markTestSkipped($this->getDriver().' does not support meta data.');
+        $this->markTestSkipped($this->getDriver() . ' does not support meta data.');
     }
 
     public function testStatementExecuteWithParams()
@@ -93,4 +98,5 @@ class Zend_Db_Statement_Pdo_MssqlTest extends Zend_Db_Statement_Pdo_TestCommon
     {
         return 'Pdo_Mssql';
     }
+
 }

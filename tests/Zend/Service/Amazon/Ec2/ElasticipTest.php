@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Service_Amazon
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -28,10 +28,10 @@
  * Zend_Service_Amazon_Ec2_Elasticip test case.
  *
  * @category   Zend
- *
+ * @package    Zend_Service_Amazon
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_Ec2
@@ -39,6 +39,7 @@
 #[AllowDynamicProperties]
 class Zend_Service_Amazon_Ec2_ElasticipTest extends PHPUnit_Framework_TestCase
 {
+
     /**
      * @var Zend_Service_Amazon_Ec2_Elasticip
      */
@@ -54,11 +55,12 @@ class Zend_Service_Amazon_Ec2_ElasticipTest extends PHPUnit_Framework_TestCase
         $this->Zend_Service_Amazon_Ec2_Elasticip = new Zend_Service_Amazon_Ec2_Elasticip('access_key', 'secret_access_key');
 
         $adapter = new Zend_Http_Client_Adapter_Test();
-        $client = new Zend_Http_Client(null, [
-            'adapter' => $adapter,
-        ]);
+        $client = new Zend_Http_Client(null, array(
+            'adapter' => $adapter
+        ));
         $this->adapter = $adapter;
         Zend_Service_Amazon_Ec2_Elasticip::setHttpClient($client);
+
     }
 
     /**
@@ -76,17 +78,17 @@ class Zend_Service_Amazon_Ec2_ElasticipTest extends PHPUnit_Framework_TestCase
     public function testAllocateNewElasticIp()
     {
         $rawHttpResponse = "HTTP/1.1 200 OK\r\n"
-                    ."Date: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
-                    ."Server: hi\r\n"
-                    ."Last-modified: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
-                    ."Status: 200 OK\r\n"
-                    ."Content-type: application/xml; charset=utf-8\r\n"
-                    ."Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
-                    ."Connection: close\r\n"
-                    ."\r\n"
-                    ."<AllocateAddressResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
-                    ."  <publicIp>67.202.55.255</publicIp>\r\n"
-                    .'</AllocateAddressResponse>';
+                    . "Date: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
+                    . "Server: hi\r\n"
+                    . "Last-modified: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
+                    . "Status: 200 OK\r\n"
+                    . "Content-type: application/xml; charset=utf-8\r\n"
+                    . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
+                    . "Connection: close\r\n"
+                    . "\r\n"
+                    . "<AllocateAddressResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
+                    . "  <publicIp>67.202.55.255</publicIp>\r\n"
+                    . "</AllocateAddressResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
         $ipAddress = $this->Zend_Service_Amazon_Ec2_Elasticip->allocate();
@@ -96,54 +98,55 @@ class Zend_Service_Amazon_Ec2_ElasticipTest extends PHPUnit_Framework_TestCase
     public function testAssociateElasticIpWithInstanceReturnsTrue()
     {
         $rawHttpResponse = "HTTP/1.1 200 OK\r\n"
-                    ."Date: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
-                    ."Server: hi\r\n"
-                    ."Last-modified: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
-                    ."Status: 200 OK\r\n"
-                    ."Content-type: application/xml; charset=utf-8\r\n"
-                    ."Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
-                    ."Connection: close\r\n"
-                    ."\r\n"
-                    ."<AssociateAddressResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
-                    ."  <return>true</return>\r\n"
-                    .'</AssociateAddressResponse>';
+                    . "Date: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
+                    . "Server: hi\r\n"
+                    . "Last-modified: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
+                    . "Status: 200 OK\r\n"
+                    . "Content-type: application/xml; charset=utf-8\r\n"
+                    . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
+                    . "Connection: close\r\n"
+                    . "\r\n"
+                    . "<AssociateAddressResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
+                    . "  <return>true</return>\r\n"
+                    . "</AssociateAddressResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
         $return = $this->Zend_Service_Amazon_Ec2_Elasticip->associate('67.202.55.255', 'i-ag8ga0a');
 
         $this->assertTrue($return);
+
     }
 
     /**
-     * Tests Zend_Service_Amazon_Ec2_Elasticip->describe().
+     * Tests Zend_Service_Amazon_Ec2_Elasticip->describe()
      */
     public function testDescribeSingleElasticIp()
     {
         $rawHttpResponse = "HTTP/1.1 200 OK\r\n"
-                    ."Date: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
-                    ."Server: hi\r\n"
-                    ."Last-modified: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
-                    ."Status: 200 OK\r\n"
-                    ."Content-type: application/xml; charset=utf-8\r\n"
-                    ."Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
-                    ."Connection: close\r\n"
-                    ."\r\n"
-                    ."<DescribeAddressesResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
-                    ."  <addressSet>\r\n"
-                    ."    <item>\r\n"
-                    ."      <publicIp>67.202.55.255</publicIp>\r\n"
-                    ."      <instanceId>i-ag8ga0a</instanceId>\r\n"
-                    ."    </item>\r\n"
-                    ."  </addressSet>\r\n"
-                    .'</DescribeAddressesResponse>';
+                    . "Date: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
+                    . "Server: hi\r\n"
+                    . "Last-modified: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
+                    . "Status: 200 OK\r\n"
+                    . "Content-type: application/xml; charset=utf-8\r\n"
+                    . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
+                    . "Connection: close\r\n"
+                    . "\r\n"
+                    . "<DescribeAddressesResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
+                    . "  <addressSet>\r\n"
+                    . "    <item>\r\n"
+                    . "      <publicIp>67.202.55.255</publicIp>\r\n"
+                    . "      <instanceId>i-ag8ga0a</instanceId>\r\n"
+                    . "    </item>\r\n"
+                    . "  </addressSet>\r\n"
+                    . "</DescribeAddressesResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
         $response = $this->Zend_Service_Amazon_Ec2_Elasticip->describe('67.202.55.255');
 
-        $arrIp = [
-            'publicIp' => '67.202.55.255',
-            'instanceId' => 'i-ag8ga0a',
-        ];
+        $arrIp = array(
+            'publicIp'      => '67.202.55.255',
+            'instanceId'    => 'i-ag8ga0a'
+        );
 
         $this->assertSame($arrIp, $response[0]);
     }
@@ -151,91 +154,95 @@ class Zend_Service_Amazon_Ec2_ElasticipTest extends PHPUnit_Framework_TestCase
     public function testDescribeMultipleElasticIp()
     {
         $rawHttpResponse = "HTTP/1.1 200 OK\r\n"
-                    ."Date: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
-                    ."Server: hi\r\n"
-                    ."Last-modified: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
-                    ."Status: 200 OK\r\n"
-                    ."Content-type: application/xml; charset=utf-8\r\n"
-                    ."Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
-                    ."Connection: close\r\n"
-                    ."\r\n"
-                    ."<DescribeAddressesResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
-                    ."  <addressSet>\r\n"
-                    ."    <item>\r\n"
-                    ."      <publicIp>67.202.55.255</publicIp>\r\n"
-                    ."      <instanceId>i-ag8ga0a</instanceId>\r\n"
-                    ."    </item>\r\n"
-                    ."    <item>\r\n"
-                    ."      <publicIp>67.202.55.200</publicIp>\r\n"
-                    ."      <instanceId>i-aauoi9g</instanceId>\r\n"
-                    ."    </item>\r\n"
-                    ."  </addressSet>\r\n"
-                    .'</DescribeAddressesResponse>';
+                    . "Date: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
+                    . "Server: hi\r\n"
+                    . "Last-modified: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
+                    . "Status: 200 OK\r\n"
+                    . "Content-type: application/xml; charset=utf-8\r\n"
+                    . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
+                    . "Connection: close\r\n"
+                    . "\r\n"
+                    . "<DescribeAddressesResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
+                    . "  <addressSet>\r\n"
+                    . "    <item>\r\n"
+                    . "      <publicIp>67.202.55.255</publicIp>\r\n"
+                    . "      <instanceId>i-ag8ga0a</instanceId>\r\n"
+                    . "    </item>\r\n"
+                    . "    <item>\r\n"
+                    . "      <publicIp>67.202.55.200</publicIp>\r\n"
+                    . "      <instanceId>i-aauoi9g</instanceId>\r\n"
+                    . "    </item>\r\n"
+                    . "  </addressSet>\r\n"
+                    . "</DescribeAddressesResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $response = $this->Zend_Service_Amazon_Ec2_Elasticip->describe(['67.202.55.255', '67.202.55.200']);
+        $response = $this->Zend_Service_Amazon_Ec2_Elasticip->describe(array('67.202.55.255', '67.202.55.200'));
 
-        $arrIps = [
-            [
-                'publicIp' => '67.202.55.255',
-                'instanceId' => 'i-ag8ga0a',
-            ],
-            [
-                'publicIp' => '67.202.55.200',
-                'instanceId' => 'i-aauoi9g',
-            ],
-        ];
+        $arrIps = array(
+            array(
+                'publicIp'      => '67.202.55.255',
+                'instanceId'    => 'i-ag8ga0a'
+            ),
+            array(
+                'publicIp'      => '67.202.55.200',
+                'instanceId'    => 'i-aauoi9g'
+            )
+        );
 
-        foreach ($response as $k => $r) {
+        foreach($response as $k => $r) {
             $this->assertSame($arrIps[$k], $r);
         }
     }
 
     /**
-     * Tests Zend_Service_Amazon_Ec2_Elasticip->disassocate().
+     * Tests Zend_Service_Amazon_Ec2_Elasticip->disassocate()
      */
     public function testDisassocateElasticIpFromInstance()
     {
         $rawHttpResponse = "HTTP/1.1 200 OK\r\n"
-                    ."Date: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
-                    ."Server: hi\r\n"
-                    ."Last-modified: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
-                    ."Status: 200 OK\r\n"
-                    ."Content-type: application/xml; charset=utf-8\r\n"
-                    ."Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
-                    ."Connection: close\r\n"
-                    ."\r\n"
-                    ."<DisassociateAddressResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
-                    ."  <return>true</return>\r\n"
-                    .'</DisassociateAddressResponse>';
+                    . "Date: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
+                    . "Server: hi\r\n"
+                    . "Last-modified: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
+                    . "Status: 200 OK\r\n"
+                    . "Content-type: application/xml; charset=utf-8\r\n"
+                    . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
+                    . "Connection: close\r\n"
+                    . "\r\n"
+                    . "<DisassociateAddressResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
+                    . "  <return>true</return>\r\n"
+                    . "</DisassociateAddressResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
         $return = $this->Zend_Service_Amazon_Ec2_Elasticip->disassocate('67.202.55.255');
 
         $this->assertTrue($return);
+
     }
 
     /**
-     * Tests Zend_Service_Amazon_Ec2_Elasticip->release().
+     * Tests Zend_Service_Amazon_Ec2_Elasticip->release()
      */
     public function testReleaseElasticIp()
     {
         $rawHttpResponse = "HTTP/1.1 200 OK\r\n"
-                    ."Date: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
-                    ."Server: hi\r\n"
-                    ."Last-modified: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
-                    ."Status: 200 OK\r\n"
-                    ."Content-type: application/xml; charset=utf-8\r\n"
-                    ."Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
-                    ."Connection: close\r\n"
-                    ."\r\n"
-                    ."<ReleaseAddressResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
-                    ."  <return>true</return>\r\n"
-                    .'</ReleaseAddressResponse>';
+                    . "Date: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
+                    . "Server: hi\r\n"
+                    . "Last-modified: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
+                    . "Status: 200 OK\r\n"
+                    . "Content-type: application/xml; charset=utf-8\r\n"
+                    . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
+                    . "Connection: close\r\n"
+                    . "\r\n"
+                    . "<ReleaseAddressResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
+                    . "  <return>true</return>\r\n"
+                    . "</ReleaseAddressResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
         $return = $this->Zend_Service_Amazon_Ec2_Elasticip->release('67.202.55.255');
 
         $this->assertTrue($return);
+
     }
+
 }
+

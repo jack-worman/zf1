@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,29 +13,30 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Mail
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
 /**
- * Zend_Mail_Storage_Folder_Maildir.
+ * Zend_Mail_Storage_Folder_Maildir
  */
 // require_once 'Zend/Mail/Storage/Folder/Maildir.php';
 
 /**
- * Zend_Config.
+ * Zend_Config
  */
 // require_once 'Zend/Config.php';
 
+
 /**
  * @category   Zend
- *
+ * @package    Zend_Mail
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Mail
  */
 #[AllowDynamicProperties]
@@ -44,60 +45,58 @@ class Zend_Mail_MaildirFolderTest extends PHPUnit_Framework_TestCase
     protected $_params;
     protected $_originalDir;
     protected $_tmpdir;
-    protected $_subdirs = ['.', '.subfolder', '.subfolder.test'];
+    protected $_subdirs = array('.', '.subfolder', '.subfolder.test');
 
     public function setUp()
     {
-        $this->_originalDir = __DIR__.'/_files/test.maildir/';
+        $this->_originalDir = __DIR__ . '/_files/test.maildir/';
 
-        if (!is_dir($this->_originalDir.'/cur/')) {
+        if (!is_dir($this->_originalDir . '/cur/')) {
             $this->markTestSkipped('You have to unpack maildir.tar in Zend/Mail/_files/test.maildir/ '
-                                 .'directory before enabling the maildir tests');
-
+                                 . 'directory before enabling the maildir tests');
             return;
         }
 
-        if (null == $this->_tmpdir) {
+        if ($this->_tmpdir == null) {
             if (TESTS_ZEND_MAIL_TEMPDIR != null) {
                 $this->_tmpdir = TESTS_ZEND_MAIL_TEMPDIR;
             } else {
-                $this->_tmpdir = __DIR__.'/_files/test.tmp/';
+                $this->_tmpdir = __DIR__ . '/_files/test.tmp/';
             }
             if (!file_exists((string) $this->_tmpdir)) {
                 mkdir($this->_tmpdir);
             }
             $count = 0;
             $dh = opendir($this->_tmpdir);
-            while (false !== readdir($dh)) {
+            while (readdir($dh) !== false) {
                 ++$count;
             }
             closedir($dh);
-            if (2 != $count) {
+            if ($count != 2) {
                 $this->markTestSkipped('Are you sure your tmp dir is a valid empty dir?');
-
                 return;
             }
         }
 
-        $this->_params = [];
+        $this->_params = array();
         $this->_params['dirname'] = $this->_tmpdir;
 
         foreach ($this->_subdirs as $dir) {
-            if ('.' != $dir) {
-                mkdir($this->_tmpdir.$dir);
+            if ($dir != '.') {
+                mkdir($this->_tmpdir . $dir);
             }
-            foreach (['cur', 'new'] as $subdir) {
-                if (!file_exists((string) $this->_originalDir.$dir.'/'.$subdir)) {
+            foreach (array('cur', 'new') as $subdir) {
+                if (!file_exists((string) $this->_originalDir . $dir . '/' . $subdir)) {
                     continue;
                 }
-                mkdir($this->_tmpdir.$dir.'/'.$subdir);
-                $dh = opendir($this->_originalDir.$dir.'/'.$subdir);
+                mkdir($this->_tmpdir . $dir . '/' . $subdir);
+                $dh = opendir($this->_originalDir . $dir . '/' . $subdir);
                 while (($entry = readdir($dh)) !== false) {
-                    $entry = $dir.'/'.$subdir.'/'.$entry;
-                    if (!is_file($this->_originalDir.$entry)) {
+                    $entry = $dir . '/' . $subdir . '/' . $entry;
+                    if (!is_file($this->_originalDir . $entry)) {
                         continue;
                     }
-                    copy($this->_originalDir.$entry, $this->_tmpdir.$entry);
+                    copy($this->_originalDir . $entry, $this->_tmpdir . $entry);
                 }
                 closedir($dh);
             }
@@ -107,23 +106,23 @@ class Zend_Mail_MaildirFolderTest extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         foreach (array_reverse($this->_subdirs) as $dir) {
-            foreach (['cur', 'new'] as $subdir) {
-                if (!file_exists((string) $this->_tmpdir.$dir.'/'.$subdir)) {
+            foreach (array('cur', 'new') as $subdir) {
+                if (!file_exists((string) $this->_tmpdir . $dir . '/' . $subdir)) {
                     continue;
                 }
-                $dh = opendir($this->_tmpdir.$dir.'/'.$subdir);
+                $dh = opendir($this->_tmpdir . $dir . '/' . $subdir);
                 while (($entry = readdir($dh)) !== false) {
-                    $entry = $this->_tmpdir.$dir.'/'.$subdir.'/'.$entry;
+                    $entry = $this->_tmpdir . $dir . '/' . $subdir . '/' . $entry;
                     if (!is_file($entry)) {
                         continue;
                     }
                     unlink($entry);
                 }
                 closedir($dh);
-                rmdir($this->_tmpdir.$dir.'/'.$subdir);
+                rmdir($this->_tmpdir . $dir . '/' . $subdir);
             }
-            if ('.' != $dir) {
-                rmdir($this->_tmpdir.$dir);
+            if ($dir != '.') {
+                rmdir($this->_tmpdir . $dir);
             }
         }
     }
@@ -132,7 +131,7 @@ class Zend_Mail_MaildirFolderTest extends PHPUnit_Framework_TestCase
     {
         try {
             $mail = new Zend_Mail_Storage_Folder_Maildir($this->_params);
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->fail('exception raised while loading Maildir folder');
         }
     }
@@ -141,7 +140,7 @@ class Zend_Mail_MaildirFolderTest extends PHPUnit_Framework_TestCase
     {
         try {
             $mail = new Zend_Mail_Storage_Folder_Maildir(new Zend_Config($this->_params));
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->fail('exception raised while loading Maildir folder');
         }
     }
@@ -149,8 +148,8 @@ class Zend_Mail_MaildirFolderTest extends PHPUnit_Framework_TestCase
     public function testNoParams()
     {
         try {
-            $mail = new Zend_Mail_Storage_Folder_Maildir([]);
-        } catch (Throwable $e) {
+            $mail = new Zend_Mail_Storage_Folder_Maildir(array());
+        } catch (\Throwable $e) {
             return; // test ok
         }
 
@@ -160,8 +159,8 @@ class Zend_Mail_MaildirFolderTest extends PHPUnit_Framework_TestCase
     public function testLoadFailure()
     {
         try {
-            $mail = new Zend_Mail_Storage_Folder_Maildir(['dirname' => 'This/Folder/Does/Not/Exist']);
-        } catch (Throwable $e) {
+            $mail = new Zend_Mail_Storage_Folder_Maildir(array('dirname' => 'This/Folder/Does/Not/Exist'));
+        } catch (\Throwable $e) {
             return; // test ok
         }
 
@@ -173,7 +172,7 @@ class Zend_Mail_MaildirFolderTest extends PHPUnit_Framework_TestCase
         $this->_params['folder'] = 'UnknownFolder';
         try {
             $mail = new Zend_Mail_Storage_Folder_Maildir($this->_params);
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             return; // test ok
         }
 
@@ -185,7 +184,7 @@ class Zend_Mail_MaildirFolderTest extends PHPUnit_Framework_TestCase
         $mail = new Zend_Mail_Storage_Folder_Maildir($this->_params);
         try {
             $mail->selectFolder('subfolder.test');
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->fail('exception raised while selecting existing folder');
         }
 
@@ -197,7 +196,7 @@ class Zend_Mail_MaildirFolderTest extends PHPUnit_Framework_TestCase
         $mail = new Zend_Mail_Storage_Folder_Maildir($this->_params);
         try {
             $mail->selectFolder('/Unknown/Folder/');
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             return; // test ok
         }
 
@@ -210,7 +209,7 @@ class Zend_Mail_MaildirFolderTest extends PHPUnit_Framework_TestCase
         try {
             // explicit call of __toString() needed for PHP < 5.2
             $this->assertEquals($mail->getFolders()->subfolder->__toString(), 'subfolder');
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->fail('exception raised while selecting existing folder and getting global name');
         }
     }
@@ -220,7 +219,7 @@ class Zend_Mail_MaildirFolderTest extends PHPUnit_Framework_TestCase
         $mail = new Zend_Mail_Storage_Folder_Maildir($this->_params);
         try {
             $this->assertEquals($mail->getFolders()->subfolder->key(), 'test');
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->fail('exception raised while selecting existing folder and getting local name');
         }
     }
@@ -230,10 +229,10 @@ class Zend_Mail_MaildirFolderTest extends PHPUnit_Framework_TestCase
         $mail = new Zend_Mail_Storage_Folder_Maildir($this->_params);
         $iterator = new RecursiveIteratorIterator($mail->getFolders(), RecursiveIteratorIterator::SELF_FIRST);
         // we search for this folder because we can't assume a order while iterating
-        $search_folders = ['subfolder' => 'subfolder',
+        $search_folders = array('subfolder'      => 'subfolder',
                                 'subfolder.test' => 'test',
-                                'INBOX' => 'INBOX'];
-        $found_folders = [];
+                                'INBOX'          => 'INBOX');
+        $found_folders = array();
 
         foreach ($iterator as $localName => $folder) {
             if (!isset($search_folders[$folder->getGlobalName()])) {
@@ -252,10 +251,10 @@ class Zend_Mail_MaildirFolderTest extends PHPUnit_Framework_TestCase
         $mail = new Zend_Mail_Storage_Folder_Maildir($this->_params);
         $iterator = new RecursiveIteratorIterator($mail->getFolders(), RecursiveIteratorIterator::SELF_FIRST);
         // we search for this folder because we can't assume a order while iterating
-        $search_folders = ['subfolder' => 'subfolder',
+        $search_folders = array('subfolder'      => 'subfolder',
                                 'subfolder.test' => 'test',
-                                'INBOX' => 'INBOX'];
-        $found_folders = [];
+                                'INBOX'          => 'INBOX');
+        $found_folders = array();
 
         foreach ($iterator as $localName => $folder) {
             if (!isset($search_folders[$folder->getGlobalName()])) {
@@ -274,8 +273,8 @@ class Zend_Mail_MaildirFolderTest extends PHPUnit_Framework_TestCase
         $mail = new Zend_Mail_Storage_Folder_Maildir($this->_params);
         $iterator = new RecursiveIteratorIterator($mail->getFolders('INBOX.subfolder'), RecursiveIteratorIterator::SELF_FIRST);
         // we search for this folder because we can't assume a order while iterating
-        $search_folders = ['subfolder.test' => 'test'];
-        $found_folders = [];
+        $search_folders = array('subfolder.test' => 'test');
+        $found_folders = array();
 
         foreach ($iterator as $localName => $folder) {
             if (!isset($search_folders[$folder->getGlobalName()])) {
@@ -299,6 +298,7 @@ class Zend_Mail_MaildirFolderTest extends PHPUnit_Framework_TestCase
         }
     }
 
+
     public function testCount()
     {
         $mail = new Zend_Mail_Storage_Folder_Maildir($this->_params);
@@ -314,14 +314,14 @@ class Zend_Mail_MaildirFolderTest extends PHPUnit_Framework_TestCase
     public function testSize()
     {
         $mail = new Zend_Mail_Storage_Folder_Maildir($this->_params);
-        $shouldSizes = [1 => 397, 89, 694, 452, 497];
+        $shouldSizes = array(1 => 397, 89, 694, 452, 497);
 
         $sizes = $mail->getSize();
         $this->assertEquals($shouldSizes, $sizes);
 
         $mail->selectFolder('subfolder.test');
         $sizes = $mail->getSize();
-        $this->assertEquals([1 => 467], $sizes);
+        $this->assertEquals(array(1 => 467), $sizes);
     }
 
     public function testFetchHeader()
@@ -338,29 +338,28 @@ class Zend_Mail_MaildirFolderTest extends PHPUnit_Framework_TestCase
 
     public function testNotReadableFolder()
     {
-        $stat = stat($this->_params['dirname'].'.subfolder');
-        chmod($this->_params['dirname'].'.subfolder', 0);
+        $stat = stat($this->_params['dirname'] . '.subfolder');
+        chmod($this->_params['dirname'] . '.subfolder', 0);
         clearstatcache();
-        $statcheck = stat($this->_params['dirname'].'.subfolder');
+        $statcheck = stat($this->_params['dirname'] . '.subfolder');
         if ($statcheck['mode'] % (8 * 8 * 8) !== 0) {
-            chmod($this->_params['dirname'].'.subfolder', $stat['mode']);
+            chmod($this->_params['dirname'] . '.subfolder', $stat['mode']);
             $this->markTestSkipped('cannot remove read rights, which makes this test useless (maybe you are using Windows?)');
-
             return;
         }
 
         $check = false;
         try {
             $mail = new Zend_Mail_Storage_Folder_Maildir($this->_params);
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $check = true;
             // test ok
         }
 
-        chmod($this->_params['dirname'].'.subfolder', $stat['mode']);
+        chmod($this->_params['dirname'] . '.subfolder', $stat['mode']);
 
         if (!$check) {
-            $this->fail('no exception while loading invalid dir with subfolder not readable');
+           $this->fail('no exception while loading invalid dir with subfolder not readable');
         }
     }
 
@@ -373,14 +372,13 @@ class Zend_Mail_MaildirFolderTest extends PHPUnit_Framework_TestCase
         if ($statcheck['mode'] % (8 * 8 * 8) !== 0) {
             chmod($this->_params['dirname'], $stat['mode']);
             $this->markTestSkipped('cannot remove read rights, which makes this test useless (maybe you are using Windows?)');
-
             return;
         }
 
         $check = false;
         try {
             $mail = new Zend_Mail_Storage_Folder_Maildir($this->_params);
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $check = true;
             // test ok
         }
@@ -388,7 +386,7 @@ class Zend_Mail_MaildirFolderTest extends PHPUnit_Framework_TestCase
         chmod($this->_params['dirname'], $stat['mode']);
 
         if (!$check) {
-            $this->fail('no exception while loading not readable maildir');
+           $this->fail('no exception while loading not readable maildir');
         }
     }
 
@@ -396,11 +394,11 @@ class Zend_Mail_MaildirFolderTest extends PHPUnit_Framework_TestCase
     {
         $mail = new Zend_Mail_Storage_Folder_Maildir($this->_params);
         $root = $mail->getFolders();
-        $root->foobar = new Zend_Mail_Storage_Folder('foobar', DIRECTORY_SEPARATOR.'foobar');
+        $root->foobar = new Zend_Mail_Storage_Folder('foobar', DIRECTORY_SEPARATOR . 'foobar');
 
         try {
             $mail->selectFolder('foobar');
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             return; // ok
         }
 
@@ -415,7 +413,7 @@ class Zend_Mail_MaildirFolderTest extends PHPUnit_Framework_TestCase
 
         try {
             $mail->selectFolder('foobar');
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             return; // ok
         }
 
@@ -430,7 +428,7 @@ class Zend_Mail_MaildirFolderTest extends PHPUnit_Framework_TestCase
 
         try {
             $mail->selectFolder('foobar');
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             return; // ok
         }
 
@@ -439,14 +437,14 @@ class Zend_Mail_MaildirFolderTest extends PHPUnit_Framework_TestCase
 
     public function testWithAdditionalFolder()
     {
-        mkdir($this->_params['dirname'].'.xyyx');
-        mkdir($this->_params['dirname'].'.xyyx/cur');
+        mkdir($this->_params['dirname'] . '.xyyx');
+        mkdir($this->_params['dirname'] . '.xyyx/cur');
 
         $mail = new Zend_Mail_Storage_Folder_Maildir($this->_params);
         $mail->selectFolder('xyyx');
         $this->assertEquals($mail->countMessages(), 0);
 
-        rmdir($this->_params['dirname'].'.xyyx/cur');
-        rmdir($this->_params['dirname'].'.xyyx');
+        rmdir($this->_params['dirname'] . '.xyyx/cur');
+        rmdir($this->_params['dirname'] . '.xyyx');
     }
 }

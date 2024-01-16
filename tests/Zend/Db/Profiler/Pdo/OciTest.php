@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,32 +13,38 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Db
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
+
 
 /**
  * @see Zend_Db_Profiler_TestCommon
  */
 require_once 'Zend/Db/Profiler/TestCommon.php';
 
+
+
+
+
 /**
  * @category   Zend
- *
+ * @package    Zend_Db
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Db
  * @group      Zend_Db_Profiler
  */
 #[AllowDynamicProperties]
 class Zend_Db_Profiler_Pdo_OciTest extends Zend_Db_Profiler_TestCommon
 {
+
     /**
-     * Ensures that setFilterQueryType() actually filters.
+     * Ensures that setFilterQueryType() actually filters
      *
      * @return void
      */
@@ -55,9 +61,9 @@ class Zend_Db_Profiler_Pdo_OciTest extends Zend_Db_Profiler_TestCommon
         $this->assertEquals($queryType, $prof->getFilterQueryType());
 
         $this->_db->query("SELECT * FROM $bugs");
-        $this->_db->query("INSERT INTO $bugs ($bug_id, $bug_status) VALUES (:id, :status)", [':id' => 100, ':status' => 'NEW']);
+        $this->_db->query("INSERT INTO $bugs ($bug_id, $bug_status) VALUES (:id, :status)", array(':id' => 100,':status' => 'NEW'));
         $this->_db->query("DELETE FROM $bugs");
-        $this->_db->query("UPDATE $bugs SET $bug_status = :status", [':status' => 'FIXED']);
+        $this->_db->query("UPDATE $bugs SET $bug_status = :status", array(':status'=>'FIXED'));
 
         $qps = $prof->getQueryProfiles();
         $this->assertTrue(is_array($qps), 'Expecting some query profiles, got none');

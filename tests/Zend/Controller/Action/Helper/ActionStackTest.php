@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,17 +13,18 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Controller
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
 // Call Zend_Controller_Action_Helper_ActionStackTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Controller_Action_Helper_ActionStackTest::main');
+if (!defined("PHPUnit_MAIN_METHOD")) {
+    define("PHPUnit_MAIN_METHOD", "Zend_Controller_Action_Helper_ActionStackTest::main");
 }
+
 
 // require_once 'Zend/Controller/Action/Helper/ActionStack.php';
 // require_once 'Zend/Controller/Front.php';
@@ -33,10 +34,10 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * Test class for Zend_Controller_Action_Helper_ActionStack.
  *
  * @category   Zend
- *
+ * @package    Zend_Controller
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Controller
  * @group      Zend_Controller_Action
  * @group      Zend_Controller_Action_Helper
@@ -44,6 +45,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 #[AllowDynamicProperties]
 class Zend_Controller_Action_Helper_ActionStackTest extends PHPUnit_Framework_TestCase
 {
+
     /**
      * @var Zend_Controller_Front
      */
@@ -57,11 +59,13 @@ class Zend_Controller_Action_Helper_ActionStackTest extends PHPUnit_Framework_Te
     /**
      * Runs the test methods of this class.
      *
+     * @access public
      * @static
      */
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend_Controller_Action_Helper_ActionStackTest');
+
+        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Action_Helper_ActionStackTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -164,7 +168,7 @@ class Zend_Controller_Action_Helper_ActionStackTest extends PHPUnit_Framework_Te
     public function testDirectProxiesToActionToStack()
     {
         $helper = new Zend_Controller_Action_Helper_ActionStack();
-        /* FC should be reseted to test ActionStack with a really blank FC */
+        /** FC should be reseted to test ActionStack with a really blank FC */
         $this->front->resetInstance();
         try {
             $helper->direct('baz', 'bar', 'foo');
@@ -172,13 +176,13 @@ class Zend_Controller_Action_Helper_ActionStackTest extends PHPUnit_Framework_Te
         } catch (Zend_Exception $e) {
             $this->assertTrue(
                 $e instanceof Zend_Controller_Action_Exception,
-                'Zend_Controller_Action_Exception expected, '.get_class($e)
-                    .' caught'
+                'Zend_Controller_Action_Exception expected, ' . get_class($e)
+                    . ' caught'
             );
         }
     }
 
-    public function testCannotStackActionIfNoRequestAvailable()
+     public function testCannotStackActionIfNoRequestAvailable()
     {
         $helper = new Zend_Controller_Action_Helper_ActionStack();
         $plugin = $this->front->getPlugin('Zend_Controller_Plugin_ActionStack');
@@ -194,6 +198,6 @@ class Zend_Controller_Action_Helper_ActionStackTest extends PHPUnit_Framework_Te
 }
 
 // Call Zend_Controller_Action_Helper_ActionStackTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_Controller_Action_Helper_ActionStackTest::main') {
+if (PHPUnit_MAIN_METHOD == "Zend_Controller_Action_Helper_ActionStackTest::main") {
     Zend_Controller_Action_Helper_ActionStackTest::main();
 }

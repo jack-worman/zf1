@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,12 +13,13 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Service_LiveDocx
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id: $
  */
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Service_LiveDocx_LiveDocxTest::main');
 }
@@ -26,16 +27,15 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 // require_once 'Zend/Service/LiveDocx/MailMerge.php';
 
 /**
- * Zend_Service_LiveDocx test case.
+ * Zend_Service_LiveDocx test case
  *
  * @category   Zend
- *
+ * @package    Zend_Service_LiveDocx
+ * @subpackage UnitTests
  * @group      Zend_Service
  * @group      Zend_Service_LiveDocx
- *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id: $
  */
 #[AllowDynamicProperties]
@@ -45,7 +45,7 @@ class Zend_Service_LiveDocX_LiveDocxTest extends PHPUnit_Framework_TestCase
 
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite(__CLASS__);
+        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -55,7 +55,6 @@ class Zend_Service_LiveDocX_LiveDocxTest extends PHPUnit_Framework_TestCase
             || !constant('TESTS_ZEND_SERVICE_LIVEDOCX_PASSWORD')
         ) {
             $this->markTestSkipped('LiveDocx tests disabled');
-
             return;
         }
 
@@ -68,26 +67,26 @@ class Zend_Service_LiveDocX_LiveDocxTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function tearDown()
+    public function tearDown ()
     {
-        if (isset($this->phpLiveDocx)) {
-            foreach ($this->phpLiveDocx->listTemplates() as $template) {
-                $this->phpLiveDocx->deleteTemplate($template['filename']);
-            }
-            unset($this->phpLiveDocx);
-        }
+	if (isset($this->phpLiveDocx)) {
+	    foreach ($this->phpLiveDocx->listTemplates() as $template) {
+		$this->phpLiveDocx->deleteTemplate($template['filename']);
+	    }
+	    unset($this->phpLiveDocx);
+	}
     }
 
-    public function testGetFormat()
+    public function testGetFormat ()
     {
-        $this->assertEquals('', $this->phpLiveDocx->getFormat('document'));
+        $this->assertEquals('',    $this->phpLiveDocx->getFormat('document'));
         $this->assertEquals('doc', $this->phpLiveDocx->getFormat('document.doc'));
         $this->assertEquals('doc', $this->phpLiveDocx->getFormat('document-123.doc'));
         $this->assertEquals('doc', $this->phpLiveDocx->getFormat('document123.doc'));
         $this->assertEquals('doc', $this->phpLiveDocx->getFormat('document.123.doc'));
     }
 
-    public function testGetVersion()
+    public function testGetVersion ()
     {
         $expectedResults = '2.0';
         $this->assertEquals($expectedResults, $this->phpLiveDocx->getVersion());

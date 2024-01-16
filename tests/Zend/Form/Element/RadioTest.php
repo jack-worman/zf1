@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,28 +13,28 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Form
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
 // Call Zend_Form_Element_RadioTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Form_Element_RadioTest::main');
+if (!defined("PHPUnit_MAIN_METHOD")) {
+    define("PHPUnit_MAIN_METHOD", "Zend_Form_Element_RadioTest::main");
 }
 
 // require_once 'Zend/Form/Element/Radio.php';
 
 /**
- * Test class for Zend_Form_Element_Radio.
+ * Test class for Zend_Form_Element_Radio
  *
  * @category   Zend
- *
+ * @package    Zend_Form
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Form
  */
 #[AllowDynamicProperties]
@@ -47,7 +47,7 @@ class Zend_Form_Element_RadioTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend_Form_Element_RadioTest');
+        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Element_RadioTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -76,8 +76,7 @@ class Zend_Form_Element_RadioTest extends PHPUnit_Framework_TestCase
     {
         // require_once 'Zend/View.php';
         $view = new Zend_View();
-        $view->addHelperPath(__DIR__.'/../../../../library/Zend/View/Helper');
-
+        $view->addHelperPath(__DIR__ . '/../../../../library/Zend/View/Helper');
         return $view;
     }
 
@@ -117,24 +116,24 @@ class Zend_Form_Element_RadioTest extends PHPUnit_Framework_TestCase
 
     public function testCanDisableIndividualRadioOptions()
     {
-        $this->element->setMultiOptions([
-                'foo' => 'Foo',
-                'bar' => 'Bar',
-                'baz' => 'Baz',
-                'bat' => 'Bat',
+        $this->element->setMultiOptions(array(
+                'foo'  => 'Foo',
+                'bar'  => 'Bar',
+                'baz'  => 'Baz',
+                'bat'  => 'Bat',
                 'test' => 'Test',
-            ])
-            ->setAttrib('disable', ['baz', 'test']);
+            ))
+            ->setAttrib('disable', array('baz', 'test'));
         $html = $this->element->render($this->getView());
-        foreach (['baz', 'test'] as $test) {
-            if (!preg_match('/(<input[^>]*?(value="'.$test.'")[^>]*>)/', $html, $m)) {
-                $this->fail('Unable to find matching disabled option for '.$test);
+        foreach (array('baz', 'test') as $test) {
+            if (!preg_match('/(<input[^>]*?(value="' . $test . '")[^>]*>)/', $html, $m)) {
+                $this->fail('Unable to find matching disabled option for ' . $test);
             }
             $this->assertRegexp('/<input[^>]*?(disabled="disabled")/', $m[1]);
         }
-        foreach (['foo', 'bar', 'bat'] as $test) {
-            if (!preg_match('/(<input[^>]*?(value="'.$test.'")[^>]*>)/', $html, $m)) {
-                $this->fail('Unable to find matching option for '.$test);
+        foreach (array('foo', 'bar', 'bat') as $test) {
+            if (!preg_match('/(<input[^>]*?(value="' . $test . '")[^>]*>)/', $html, $m)) {
+                $this->fail('Unable to find matching option for ' . $test);
             }
             $this->assertNotRegexp('/<input[^>]*?(disabled="disabled")/', $m[1], var_export($m, 1));
         }
@@ -142,13 +141,13 @@ class Zend_Form_Element_RadioTest extends PHPUnit_Framework_TestCase
 
     public function testSpecifiedSeparatorIsUsedWhenRendering()
     {
-        $this->element->setMultiOptions([
-                'foo' => 'Foo',
-                'bar' => 'Bar',
-                'baz' => 'Baz',
-                'bat' => 'Bat',
+        $this->element->setMultiOptions(array(
+                'foo'  => 'Foo',
+                'bar'  => 'Bar',
+                'baz'  => 'Baz',
+                'bat'  => 'Bat',
                 'test' => 'Test',
-            ])
+            ))
             ->setSeparator('--FooBarFunSep--');
         $html = $this->element->render($this->getView());
         $this->assertContains($this->element->getSeparator(), $html);
@@ -158,13 +157,13 @@ class Zend_Form_Element_RadioTest extends PHPUnit_Framework_TestCase
 
     public function testRadioElementRendersDtDdWrapper()
     {
-        $this->element->setMultiOptions([
-                'foo' => 'Foo',
-                'bar' => 'Bar',
-                'baz' => 'Baz',
-                'bat' => 'Bat',
+        $this->element->setMultiOptions(array(
+                'foo'  => 'Foo',
+                'bar'  => 'Bar',
+                'baz'  => 'Baz',
+                'bat'  => 'Bat',
                 'test' => 'Test',
-            ]);
+            ));
         $html = $this->element->render($this->getView());
         $this->assertRegexp('#<dt[^>]*>&\#160;</dt>.*?<dd#s', $html, $html);
     }
@@ -175,7 +174,7 @@ class Zend_Form_Element_RadioTest extends PHPUnit_Framework_TestCase
     public function testCustomLabelDecorator()
     {
         $form = new Zend_Form();
-        $form->addElementPrefixPath('My_Decorator', __DIR__.'/../_files/decorators/', 'decorator');
+        $form->addElementPrefixPath('My_Decorator', __DIR__ . '/../_files/decorators/', 'decorator');
 
         $form->addElement($this->element);
 
@@ -191,10 +190,10 @@ class Zend_Form_Element_RadioTest extends PHPUnit_Framework_TestCase
      */
     public function testRenderingShouldCreateLabelWithoutForAttribute()
     {
-        $this->element->setMultiOptions([
-                'foo' => 'Foo',
-                'bar' => 'Bar',
-             ])
+        $this->element->setMultiOptions(array(
+                'foo'  => 'Foo',
+                'bar'  => 'Bar',
+             ))
              ->setLabel('Foo');
         $html = $this->element->render($this->getView());
         $this->assertNotContains('for="foo"', $html);
@@ -205,16 +204,16 @@ class Zend_Form_Element_RadioTest extends PHPUnit_Framework_TestCase
      */
     public function testCreationWithIndividualDecoratorsAsConstructorOptionsWithoutLabel()
     {
-        $element = new Zend_Form_Element_Radio([
-            'name' => 'foo',
-            'multiOptions' => [
-                'bar' => 'Bar',
-                'baz' => 'Baz',
-            ],
-            'decorators' => [
+        $element = new Zend_Form_Element_Radio(array(
+            'name'         => 'foo',
+            'multiOptions' => array(
+                'bar'  => 'Bar',
+                'baz'  => 'Baz',
+            ),
+            'decorators' => array(
                 'ViewHelper',
-            ],
-        ]);
+            ),
+        ));
 
         $this->assertFalse($element->getDecorator('label'));
     }
@@ -224,26 +223,25 @@ class Zend_Form_Element_RadioTest extends PHPUnit_Framework_TestCase
      */
     public function testRenderingWithIndividualDecoratorsAsConstructorOptionsWithoutLabel()
     {
-        $element = new Zend_Form_Element_Radio([
-            'name' => 'foo',
-            'multiOptions' => [
-                'bar' => 'Bar',
-                'baz' => 'Baz',
-            ],
-            'decorators' => [
+        $element = new Zend_Form_Element_Radio(array(
+            'name'         => 'foo',
+            'multiOptions' => array(
+                'bar'  => 'Bar',
+                'baz'  => 'Baz',
+            ),
+            'decorators' => array(
                 'ViewHelper',
-            ],
-        ]);
+            ),
+        ));
 
         $html = $element->render($this->getView());
         $this->assertNotContains('<dt id="foo-label">&#160;</dt>', $html);
     }
 
     /**
-     * Prove the fluent interface on Zend_Form_Element_Radio::loadDefaultDecorators.
+     * Prove the fluent interface on Zend_Form_Element_Radio::loadDefaultDecorators
      *
-     * @see http://framework.zend.com/issues/browse/ZF-9913
-     *
+     * @link http://framework.zend.com/issues/browse/ZF-9913
      * @return void
      */
     public function testFluentInterfaceOnLoadDefaultDecorators()
@@ -253,6 +251,6 @@ class Zend_Form_Element_RadioTest extends PHPUnit_Framework_TestCase
 }
 
 // Call Zend_Form_Element_RadioTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_Form_Element_RadioTest::main') {
+if (PHPUnit_MAIN_METHOD == "Zend_Form_Element_RadioTest::main") {
     Zend_Form_Element_RadioTest::main();
 }

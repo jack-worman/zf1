@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,28 +13,28 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Form
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
 // Call Zend_Form_Element_SelectTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Form_Element_SelectTest::main');
+if (!defined("PHPUnit_MAIN_METHOD")) {
+    define("PHPUnit_MAIN_METHOD", "Zend_Form_Element_SelectTest::main");
 }
 
 // require_once 'Zend/Form/Element/Select.php';
 
 /**
- * Test class for Zend_Form_Element_Select.
+ * Test class for Zend_Form_Element_Select
  *
  * @category   Zend
- *
+ * @package    Zend_Form
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Form
  */
 #[AllowDynamicProperties]
@@ -47,7 +47,7 @@ class Zend_Form_Element_SelectTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend_Form_Element_SelectTest');
+        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Element_SelectTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -75,11 +75,10 @@ class Zend_Form_Element_SelectTest extends PHPUnit_Framework_TestCase
     public function getView()
     {
         // require_once 'Zend/View.php';
-        $view = new Zend_View([
+        $view = new Zend_View(array(
             'encoding' => 'UTF-8',
-        ]);
-        $view->addHelperPath(__DIR__.'/../../../../library/Zend/View/Helper');
-
+        ));
+        $view->addHelperPath(__DIR__ . '/../../../../library/Zend/View/Helper');
         return $view;
     }
 
@@ -109,33 +108,33 @@ class Zend_Form_Element_SelectTest extends PHPUnit_Framework_TestCase
 
     public function testCanDisableIndividualSelectOptions()
     {
-        $this->element->setMultiOptions([
+        $this->element->setMultiOptions(array(
                 'foo' => 'foo',
-                'bar' => [
+                'bar' => array(
                     'baz' => 'Baz',
-                    'bat' => 'Bat',
-                ],
+                    'bat' => 'Bat'
+                ),
                 'test' => 'Test',
-            ])
-            ->setAttrib('disable', ['baz', 'test']);
+            ))
+            ->setAttrib('disable', array('baz', 'test'));
         $html = $this->element->render($this->getView());
         $this->assertNotRegexp('/<select[^>]*?(disabled="disabled")/', $html, $html);
-        foreach (['baz', 'test'] as $test) {
-            if (!preg_match('/(<option[^>]*?(value="'.$test.'")[^>]*>)/', $html, $m)) {
-                $this->fail('Unable to find matching disabled option for '.$test);
+        foreach (array('baz', 'test') as $test) {
+            if (!preg_match('/(<option[^>]*?(value="' . $test . '")[^>]*>)/', $html, $m)) {
+                $this->fail('Unable to find matching disabled option for ' . $test);
             }
             $this->assertRegexp('/<option[^>]*?(disabled="disabled")/', $m[1]);
         }
-        foreach (['foo', 'bat'] as $test) {
-            if (!preg_match('/(<option[^>]*?(value="'.$test.'")[^>]*>)/', $html, $m)) {
-                $this->fail('Unable to find matching option for '.$test);
+        foreach (array('foo', 'bat') as $test) {
+            if (!preg_match('/(<option[^>]*?(value="' . $test . '")[^>]*>)/', $html, $m)) {
+                $this->fail('Unable to find matching option for ' . $test);
             }
             $this->assertNotRegexp('/<option[^>]*?(disabled="disabled")/', $m[1], var_export($m, 1));
         }
     }
 
     /**
-     * No explicit assertions; just checking for error conditions.
+     * No explicit assertions; just checking for error conditions
      *
      * @group ZF-2847
      */
@@ -143,19 +142,19 @@ class Zend_Form_Element_SelectTest extends PHPUnit_Framework_TestCase
     {
         // require_once 'Zend/Translate.php';
         // require_once 'Zend/View.php';
-        $translate = new Zend_Translate('array', ['Select Test', 'Select Test Translated'], 'en');
+        $translate = new Zend_Translate('array', array('Select Test', 'Select Test Translated'), 'en');
         $this->element
              ->setLabel('Select Test')
-             ->setMultiOptions([
-                 'Group 1' => [
+             ->setMultiOptions(array(
+                 'Group 1' => array(
                      '1-1' => 'Hi 1-1',
                      '1-2' => 'Hi 1-2',
-                 ],
-                 'Group 2' => [
+                 ),
+                 'Group 2' => array(
                      '2-1' => 'Hi 2-1',
                      '2-2' => 'Hi 2-2',
-                 ],
-             ])
+                 ),
+             ))
              ->setTranslator($translate)
              ->setView(new Zend_View());
         $html = $this->element->render();
@@ -166,16 +165,16 @@ class Zend_Form_Element_SelectTest extends PHPUnit_Framework_TestCase
      */
     public function testUsingZeroAsValueShouldSelectAppropriateOption()
     {
-        $this->element->setMultiOptions([
-            ['key' => '1', 'value' => 'Yes'],
-            ['key' => '0', 'value' => 'No'],
-            ['key' => 'somewhat', 'value' => 'Somewhat'],
-        ]);
+        $this->element->setMultiOptions(array(
+            array('key' => '1', 'value' => 'Yes'),
+            array('key' => '0', 'value' => 'No'),
+            array('key' => 'somewhat', 'value' => 'Somewhat'),
+        ));
         $this->element->setValue(0);
         $html = $this->element->render($this->getView());
 
         if (!preg_match('#(<option[^>]*(?:value="somewhat")[^>]*>)#s', $html, $matches)) {
-            $this->fail('Could not find option: '.$html);
+            $this->fail('Could not find option: ' . $html);
         }
         $this->assertNotContains('selected', $matches[1]);
     }
@@ -185,12 +184,12 @@ class Zend_Form_Element_SelectTest extends PHPUnit_Framework_TestCase
      */
     public function testEmptyOptionsShouldNotBeTranslated()
     {
-        $translate = new Zend_Translate('array', ['unused', 'foo' => 'bar'], 'en');
+        $translate = new Zend_Translate('array', array('unused', 'foo' => 'bar'), 'en');
         $this->element->setTranslator($translate);
-        $this->element->setMultiOptions([
-            ['key' => '', 'value' => ''],
-            ['key' => 'foo', 'value' => 'foo'],
-        ]);
+        $this->element->setMultiOptions(array(
+            array('key' => '', 'value' => ''),
+            array('key' => 'foo', 'value' => 'foo'),
+        ));
         $this->element->setView($this->getView());
         $html = $this->element->render();
         $this->assertNotContains('unused', $html, $html);
@@ -206,10 +205,10 @@ class Zend_Form_Element_SelectTest extends PHPUnit_Framework_TestCase
     public function testIsValidWithPlainOptions()
     {
         // test both syntaxes for setting plain options
-        $this->element->setMultiOptions([
-            ['key' => '1', 'value' => 'Web Developer'],
+        $this->element->setMultiOptions(array(
+            array('key' => '1', 'value' => 'Web Developer'),
             '2' => 'Software Engineer',
-        ]);
+        ));
 
         $this->assertTrue($this->element->isValid('1'));
         $this->assertTrue($this->element->isValid('2'));
@@ -223,14 +222,14 @@ class Zend_Form_Element_SelectTest extends PHPUnit_Framework_TestCase
     public function testIsValidWithOptionGroups()
     {
         // test optgroup and both syntaxes for setting plain options
-        $this->element->setMultiOptions([
-            'Technology' => [
+        $this->element->setMultiOptions(array(
+            'Technology' => array(
                 '1' => 'Web Developer',
                 '2' => 'Software Engineer',
-            ],
-            ['key' => '3', 'value' => 'Trainee'],
+            ),
+            array('key' => '3', 'value' => 'Trainee'),
             '4' => 'Intern',
-        ]);
+        ));
 
         $this->assertTrue($this->element->isValid('1'));
         $this->assertTrue($this->element->isValid('3'));
@@ -245,7 +244,7 @@ class Zend_Form_Element_SelectTest extends PHPUnit_Framework_TestCase
      */
     public function testUsingPoundSymbolInOptionLabelShouldRenderCorrectly()
     {
-        $this->element->addMultiOption('1', '£'.number_format(1));
+        $this->element->addMultiOption('1', '£' . number_format(1));
         $html = $this->element->render($this->getView());
         $this->assertContains('>£', $html);
     }
@@ -257,21 +256,21 @@ class Zend_Form_Element_SelectTest extends PHPUnit_Framework_TestCase
     {
         $this->element->addMultiOption('bar', 'Bar')
                       ->setIsArray(true)
-                      ->setDecorators(['ViewHelper']);
+                      ->setDecorators(array('ViewHelper'));
 
-        $actual = $this->element->render($this->getView());
+        $actual   = $this->element->render($this->getView());
         $expected = PHP_EOL
-                  .'<select name="foo[]" id="foo">'
-                  ."\n"
-                  .'    <option value="bar">Bar</option>'
-                  ."\n"
-                  .'</select>';
+                  . '<select name="foo[]" id="foo">'
+                  . "\n"
+                  . '    <option value="bar">Bar</option>'
+                  . "\n"
+                  . '</select>';
 
         $this->assertSame($expected, $actual);
     }
 }
 
 // Call Zend_Form_Element_SelectTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_Form_Element_SelectTest::main') {
+if (PHPUnit_MAIN_METHOD == "Zend_Form_Element_SelectTest::main") {
     Zend_Form_Element_SelectTest::main();
 }

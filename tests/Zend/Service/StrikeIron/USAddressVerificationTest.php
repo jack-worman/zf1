@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Service_StrikeIron
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -30,12 +30,13 @@
  */
 // require_once 'Zend/Service/StrikeIron/USAddressVerification.php';
 
+
 /**
  * @category   Zend
- *
+ * @package    Zend_Service_StrikeIron
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Service
  * @group      Zend_Service_StrikeIron
  */
@@ -44,8 +45,8 @@ class Zend_Service_StrikeIron_USAddressVerificationTest extends PHPUnit_Framewor
 {
     public function setUp()
     {
-        $this->soapClient = new stdClass();
-        $this->service = new Zend_Service_StrikeIron_USAddressVerification(['client' => $this->soapClient]);
+        $this->soapClient = new stdclass();
+        $this->service = new Zend_Service_StrikeIron_USAddressVerification(array('client' => $this->soapClient));
     }
 
     public function testInheritsFromBase()
@@ -61,8 +62,8 @@ class Zend_Service_StrikeIron_USAddressVerificationTest extends PHPUnit_Framewor
 
     public function testInstantiationFromFactory()
     {
-        $strikeIron = new Zend_Service_StrikeIron(['client' => $this->soapClient]);
-        $client = $strikeIron->getService(['class' => 'USAddressVerification']);
+        $strikeIron = new Zend_Service_StrikeIron(array('client' => $this->soapClient));
+        $client = $strikeIron->getService(array('class' => 'USAddressVerification'));
 
         $this->assertTrue($client instanceof Zend_Service_StrikeIron_USAddressVerification);
     }

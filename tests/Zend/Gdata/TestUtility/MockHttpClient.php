@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Gdata
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -24,7 +24,8 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Gdata
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -40,7 +41,8 @@ class Test_Zend_Gdata_MockHttpClient_Request
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Gdata
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -52,23 +54,22 @@ class Test_Zend_Gdata_MockHttpClient extends Zend_Http_Client_Adapter_Test
     public function __construct()
     {
         parent::__construct();
-        $this->_requests = [];
+        $this->_requests = array();
     }
 
     public function popRequest()
     {
-        if (count($this->_requests)) {
+        if (count($this->_requests))
             return array_pop($this->_requests);
-        } else {
-            return null;
-        }
+        else
+            return NULL;
     }
 
     public function write($method,
-        $uri,
-        $http_ver = '1.1',
-        $headers = [],
-        $body = '')
+                          $uri,
+                          $http_ver = '1.1',
+                          $headers = array(),
+                          $body = '')
     {
         $request = new Test_Zend_Gdata_MockHttpClient_Request();
         $request->method = $method;
@@ -77,7 +78,6 @@ class Test_Zend_Gdata_MockHttpClient extends Zend_Http_Client_Adapter_Test
         $request->headers = $headers;
         $request->body = $body;
         array_push($this->_requests, $request);
-
         return parent::write($method, $uri, $http_ver, $headers, $body);
     }
 }

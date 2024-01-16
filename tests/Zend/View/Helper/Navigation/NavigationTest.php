@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,39 +13,40 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_View
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
-require_once __DIR__.'/TestAbstract.php';
+require_once __DIR__ . '/TestAbstract.php';
 // require_once 'Zend/View/Helper/Navigation.php';
 
 /**
- * Tests Zend_View_Helper_Navigation.
+ * Tests Zend_View_Helper_Navigation
  *
  * @category   Zend
- *
+ * @package    Zend_View
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
 #[AllowDynamicProperties]
-class Zend_View_Helper_Navigation_NavigationTest extends Zend_View_Helper_Navigation_TestAbstract
+class Zend_View_Helper_Navigation_NavigationTest
+    extends Zend_View_Helper_Navigation_TestAbstract
 {
     /**
-     * Class name for view helper to test.
+     * Class name for view helper to test
      *
      * @var string
      */
     protected $_helperName = 'Zend_View_Helper_Navigation';
 
     /**
-     * View helper.
+     * View helper
      *
      * @var Zend_View_Helper_Navigation
      */
@@ -97,11 +98,11 @@ class Zend_View_Helper_Navigation_NavigationTest extends Zend_View_Helper_Naviga
     {
         // setup
         $this->_helper->setContainer($this->_nav2);
-        $expected = [
+        $expected = array(
             'menu' => $this->_getExpected('menu/default2.html'),
-            'breadcrumbs' => $this->_getExpected('bc/default.html'),
-        ];
-        $actual = [];
+            'breadcrumbs' => $this->_getExpected('bc/default.html')
+        );
+        $actual = array();
 
         // result
         $actual['menu'] = $this->_helper->render();
@@ -120,14 +121,14 @@ class Zend_View_Helper_Navigation_NavigationTest extends Zend_View_Helper_Naviga
         $this->_helper->setContainer($this->_nav2);
 
         // result
-        $expected = [
-            'menu' => '',
-            'breadcrumbs' => '',
-        ];
-        $actual = [
-            'menu' => $this->_helper->render(),
-            'breadcrumbs' => $this->_helper->breadcrumbs()->render(),
-        ];
+        $expected = array(
+            'menu'        => '',
+            'breadcrumbs' => ''
+        );
+        $actual = array(
+            'menu'        => $this->_helper->render(),
+            'breadcrumbs' => $this->_helper->breadcrumbs()->render()
+        );
 
         $this->assertEquals($expected, $actual);
     }
@@ -182,11 +183,11 @@ class Zend_View_Helper_Navigation_NavigationTest extends Zend_View_Helper_Naviga
 
     public function testSpecifyingDefaultProxy()
     {
-        $expected = [
+        $expected = array(
             'breadcrumbs' => $this->_getExpected('bc/default.html'),
-            'menu' => $this->_getExpected('menu/default1.html'),
-        ];
-        $actual = [];
+            'menu' => $this->_getExpected('menu/default1.html')
+        );
+        $actual = array();
 
         // result
         $this->_helper->setDefaultProxy('breadcrumbs');
@@ -263,7 +264,7 @@ class Zend_View_Helper_Navigation_NavigationTest extends Zend_View_Helper_Naviga
     {
         try {
             $this->_helper->setRole(1337);
-            $this->fail('An invalid argument was given, but a '.
+            $this->fail('An invalid argument was given, but a ' .
                         'Zend_View_Exception was not thrown');
         } catch (Zend_View_Exception $e) {
             $this->assertContains('$role must be a string', $e->getMessage());
@@ -274,7 +275,7 @@ class Zend_View_Helper_Navigation_NavigationTest extends Zend_View_Helper_Naviga
     {
         try {
             $this->_helper->setRole(new stdClass());
-            $this->fail('An invalid argument was given, but a '.
+            $this->fail('An invalid argument was given, but a ' .
                         'Zend_View_Exception was not thrown');
         } catch (Zend_View_Exception $e) {
             $this->assertContains('$role must be a string', $e->getMessage());
@@ -315,7 +316,7 @@ class Zend_View_Helper_Navigation_NavigationTest extends Zend_View_Helper_Naviga
     {
         try {
             Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole(1337);
-            $this->fail('An invalid argument was given, but a '.
+            $this->fail('An invalid argument was given, but a ' .
                         'Zend_View_Exception was not thrown');
         } catch (Zend_View_Exception $e) {
             $this->assertContains('$role must be', $e->getMessage());
@@ -326,7 +327,7 @@ class Zend_View_Helper_Navigation_NavigationTest extends Zend_View_Helper_Naviga
     {
         try {
             Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole(new stdClass());
-            $this->fail('An invalid argument was given, but a '.
+            $this->fail('An invalid argument was given, but a ' .
                         'Zend_View_Exception was not thrown');
         } catch (Zend_View_Exception $e) {
             $this->assertContains('$role must be', $e->getMessage());
@@ -334,16 +335,15 @@ class Zend_View_Helper_Navigation_NavigationTest extends Zend_View_Helper_Naviga
     }
 
     private $_errorMessage;
-
-    public function toStringErrorHandler($code, $msg, $file, $line, array $c = [])
+    public function toStringErrorHandler($code, $msg, $file, $line, array $c = array())
     {
         $this->_errorMessage = $msg;
     }
 
     public function testMagicToStringShouldNotThrowException()
     {
-        set_error_handler([$this, 'toStringErrorHandler']);
-        $this->_helper->menu()->setPartial([1337]);
+        set_error_handler(array($this, 'toStringErrorHandler'));
+        $this->_helper->menu()->setPartial(array(1337));
         $this->_helper->__toString();
         restore_error_handler();
 
@@ -354,27 +354,27 @@ class Zend_View_Helper_Navigation_NavigationTest extends Zend_View_Helper_Naviga
     {
         $nl = Zend_View_Helper_Navigation::EOL;
 
-        $container = new Zend_Navigation([
-            [
+        $container = new Zend_Navigation(array(
+            array(
                 'label' => 'Page 1',
-                'id' => 'p1',
-                'uri' => 'p1',
-            ],
-            [
+                'id'    => 'p1',
+                'uri'   => 'p1'
+            ),
+            array(
                 'label' => 'Page 2',
-                'id' => 'p2',
-                'uri' => 'p2',
-            ],
-        ]);
+                'id'    => 'p2',
+                'uri'   => 'p2'
+            )
+        ));
 
-        $expected = '<ul class="navigation">'.$nl
-                  .'    <li>'.$nl
-                  .'        <a id="menu-p1" href="p1">Page 1</a>'.$nl
-                  .'    </li>'.$nl
-                  .'    <li>'.$nl
-                  .'        <a id="menu-p2" href="p2">Page 2</a>'.$nl
-                  .'    </li>'.$nl
-                  .'</ul>';
+        $expected = '<ul class="navigation">' . $nl
+                  . '    <li>' . $nl
+                  . '        <a id="menu-p1" href="p1">Page 1</a>' . $nl
+                  . '    </li>' . $nl
+                  . '    <li>' . $nl
+                  . '        <a id="menu-p2" href="p2">Page 2</a>' . $nl
+                  . '    </li>' . $nl
+                  . '</ul>';
 
         $actual = $this->_helper->render($container);
 
@@ -387,12 +387,13 @@ class Zend_View_Helper_Navigation_NavigationTest extends Zend_View_Helper_Naviga
     public function testFindCustomHelper()
     {
         $this->_helper->view->addHelperPath(
-            $this->_files.'/helpers',
+            $this->_files . '/helpers',
             'My_View_Helper_Navigation'
         );
 
         $this->assertTrue(
-            $this->_helper->findHelper('menu') instanceof My_View_Helper_Navigation_Menu
+            $this->_helper->findHelper('menu') instanceof
+                My_View_Helper_Navigation_Menu
         );
     }
 
@@ -402,18 +403,18 @@ class Zend_View_Helper_Navigation_NavigationTest extends Zend_View_Helper_Naviga
     public function testAddHelperPath()
     {
         $this->_helper->view->addHelperPath(
-            $this->_files.'/helpers',
+            $this->_files . '/helpers',
             'My_View_Helper_Navigation'
         );
 
-        $expected = [
-            'Zend_View_Helper_' => [
+        $expected = array(
+            'Zend_View_Helper_' => array(
                 'Zend/View/Helper/',
-            ],
-            'My_View_Helper_Navigation_' => [
-                $this->_files.'/helpers/',
-            ],
-        ];
+            ),
+            'My_View_Helper_Navigation_' => array(
+                $this->_files . '/helpers/',
+            ),
+        );
 
         $this->assertSame($expected, $this->_helper->view->getHelperPaths());
     }
@@ -424,7 +425,7 @@ class Zend_View_Helper_Navigation_NavigationTest extends Zend_View_Helper_Naviga
     public function testRenderCustomHelper()
     {
         $this->_helper->view->addHelperPath(
-            $this->_files.'/helpers',
+            $this->_files . '/helpers',
             'My_View_Helper_Navigation'
         );
 
@@ -436,19 +437,19 @@ class Zend_View_Helper_Navigation_NavigationTest extends Zend_View_Helper_Naviga
      */
     public function testRenderInvisibleItem()
     {
-        $container = new Zend_Navigation([
-            [
+        $container = new Zend_Navigation(array(
+            array(
                 'label' => 'Page 1',
-                'id' => 'p1',
-                'uri' => 'p1',
-            ],
-            [
-                'label' => 'Page 2',
-                'id' => 'p2',
-                'uri' => 'p2',
-                'visible' => false,
-            ],
-        ]);
+                'id'    => 'p1',
+                'uri'   => 'p1'
+            ),
+            array(
+                'label'   => 'Page 2',
+                'id'      => 'p2',
+                'uri'     => 'p2',
+                'visible' => false
+            )
+        ));
 
         $render = $this->_helper->menu()->render($container);
 
@@ -458,6 +459,6 @@ class Zend_View_Helper_Navigation_NavigationTest extends Zend_View_Helper_Naviga
 
         $render = $this->_helper->menu()->render($container);
 
-        $this->assertTrue(false !== strpos((string) $render, 'p2'));
+        $this->assertTrue(strpos((string) $render, 'p2') !== false);
     }
 }

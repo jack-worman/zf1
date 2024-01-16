@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Service_Amazon_S3
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -32,10 +32,10 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Service_Amazon_S3
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_S3
@@ -44,21 +44,21 @@
 class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Sets up this test case.
+     * Sets up this test case
      *
      * @return void
      */
     public function setUp()
     {
         $this->_amazon = new Zend_Service_Amazon_S3(constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'),
-            constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY')
-        );
-        $this->_nosuchbucket = 'nonexistingbucketnamewhichnobodyshoulduse';
+                                                    constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY')
+                                                    );
+        $this->_nosuchbucket = "nonexistingbucketnamewhichnobodyshoulduse";
         $this->_httpClientAdapterSocket = new Zend_Http_Client_Adapter_Socket();
 
         $this->_bucket = constant('TESTS_ZEND_SERVICE_AMAZON_S3_BUCKET');
-        $this->_bucketName = 's3://'.$this->_bucket;
-        $this->_fileName = $this->_bucketName.'/sample_file.txt';
+        $this->_bucketName = "s3://".$this->_bucket;
+        $this->_fileName = $this->_bucketName."/sample_file.txt";
 
         $this->_amazon->getHttpClient()
                       ->setAdapter($this->_httpClientAdapterSocket);
@@ -70,7 +70,7 @@ class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tear down each test.
+     * Tear down each test
      *
      * @return void
      */
@@ -78,8 +78,8 @@ class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
     {
         $this->_amazon->unregisterStreamWrapper();
         $buckets = $this->_amazon->getBuckets();
-        foreach ($buckets as $bucket) {
-            if (substr((string) $bucket, 0, strlen((string) $this->_bucket)) != $this->_bucket) {
+        foreach($buckets as $bucket) {
+            if(substr((string) $bucket, 0, strlen((string) $this->_bucket)) != $this->_bucket) {
                 continue;
             }
             $this->_amazon->cleanBucket($bucket);
@@ -88,7 +88,7 @@ class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test creating and removing buckets.
+     * Test creating and removing buckets
      *
      * @return void
      */
@@ -103,7 +103,7 @@ class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test writing to an object.
+     * Test writing to an object
      *
      * @return void
      */
@@ -122,7 +122,7 @@ class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
 
         // Write to an object
         $f = fopen($this->_fileName, 'w');
-        for ($i = 0; $i < 100; ++$i) {
+        for ($i = 0; $i < 100; $i++) {
             fwrite($f, 'x');
         }
         fclose($f);
@@ -139,10 +139,9 @@ class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test reading from an object.
+     * Test reading from an object
      *
      * @group ZF-10035
-     *
      * @return void
      */
     public function testReadObject()
@@ -169,7 +168,7 @@ class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
         $f = fopen($this->_fileName, 'r');
         fseek($f, 1000);
         while (!feof($f)) {
-            $chunk = fread($f, 1000);
+            $chunk =  fread($f, 1000);
             $new_data .= $chunk;
             $this->assertEquals(strlen((string) $chunk), 1000);
         }
@@ -186,13 +185,13 @@ class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test getting the list of available buckets.
+     * Test getting the list of available buckets
      *
      * @return void
      */
     public function testGetBucketList()
     {
-        $buckets = [$this->_bucket.'zf-test1', $this->_bucket.'zf-test2', $this->_bucket.'zf-test3'];
+        $buckets = array($this->_bucket.'zf-test1', $this->_bucket.'zf-test2', $this->_bucket.'zf-test3');
 
         // Create the buckets
         foreach ($buckets as $bucket) {
@@ -200,7 +199,7 @@ class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
             $this->assertTrue($result);
         }
 
-        $online_buckets = [];
+        $online_buckets = array();
 
         // Retrieve list of buckets on S3
         $e = opendir('s3://');
@@ -222,7 +221,7 @@ class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test object stat.
+     * Test object stat
      *
      * @return void
      */
@@ -257,10 +256,10 @@ class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Service_Amazon_S3
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_S3
@@ -271,7 +270,7 @@ class Zend_Service_Amazon_S3_StreamTest_Skip extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->markTestSkipped('Zend_Service_Amazon_S3 online tests not enabled with an access key ID and '
-                             .' secret key ID in TestConfiguration.php');
+                             . ' secret key ID in TestConfiguration.php');
     }
 
     public function testNothing()

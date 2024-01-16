@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,15 +13,15 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Ldap
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
 /**
- * Zend_Ldap.
+ * Zend_Ldap
  */
 // require_once 'Zend/Ldap.php';
 
@@ -33,31 +33,29 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Ldap
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Ldap
  */
 #[AllowDynamicProperties]
 class Zend_Ldap_ConnectTest extends PHPUnit_Framework_TestCase
 {
-    protected $_options;
+    protected $_options = null;
 
     public function setUp()
     {
-        $this->_options = ['host' => TESTS_ZEND_LDAP_HOST];
-        if (defined('TESTS_ZEND_LDAP_PORT') && TESTS_ZEND_LDAP_PORT != 389) {
+        $this->_options = array('host' => TESTS_ZEND_LDAP_HOST);
+        if (defined('TESTS_ZEND_LDAP_PORT') && TESTS_ZEND_LDAP_PORT != 389)
             $this->_options['port'] = TESTS_ZEND_LDAP_PORT;
-        }
-        if (defined('TESTS_ZEND_LDAP_USE_SSL')) {
+        if (defined('TESTS_ZEND_LDAP_USE_SSL'))
             $this->_options['useSsl'] = TESTS_ZEND_LDAP_USE_SSL;
-        }
     }
 
     public function testEmptyOptionsConnect()
     {
-        $ldap = new Zend_Ldap([]);
+        $ldap = new Zend_Ldap(array());
         try {
             $ldap->connect();
             $this->fail('Expected exception for empty options');
@@ -65,10 +63,9 @@ class Zend_Ldap_ConnectTest extends PHPUnit_Framework_TestCase
             $this->assertContains('host parameter is required', $zle->getMessage());
         }
     }
-
     public function testUnknownHostConnect()
     {
-        $ldap = new Zend_Ldap(['host' => 'bogus.example.com']);
+        $ldap = new Zend_Ldap(array('host' => 'bogus.example.com'));
         try {
             // connect doesn't actually try to connect until bind is called
             $ldap->connect()->bind('CN=ignored,DC=example,DC=com', 'ignored');
@@ -77,7 +74,6 @@ class Zend_Ldap_ConnectTest extends PHPUnit_Framework_TestCase
             $this->assertContains('Can\'t contact LDAP server', $zle->getMessage());
         }
     }
-
     public function testPlainConnect()
     {
         $ldap = new Zend_Ldap($this->_options);
@@ -91,18 +87,15 @@ class Zend_Ldap_ConnectTest extends PHPUnit_Framework_TestCase
             $this->assertContains('Invalid credentials', $zle->getMessage());
         }
     }
-
     public function testExplicitParamsConnect()
     {
         $host = TESTS_ZEND_LDAP_HOST;
         $port = 0;
-        if (defined('TESTS_ZEND_LDAP_PORT') && TESTS_ZEND_LDAP_PORT != 389) {
+        if (defined('TESTS_ZEND_LDAP_PORT') && TESTS_ZEND_LDAP_PORT != 389)
             $port = TESTS_ZEND_LDAP_PORT;
-        }
         $useSsl = false;
-        if (defined('TESTS_ZEND_LDAP_USE_SSL')) {
+        if (defined('TESTS_ZEND_LDAP_USE_SSL'))
             $useSsl = TESTS_ZEND_LDAP_USE_SSL;
-        }
 
         $ldap = new Zend_Ldap();
         try {
@@ -113,16 +106,13 @@ class Zend_Ldap_ConnectTest extends PHPUnit_Framework_TestCase
             $this->assertContains('Invalid credentials', $zle->getMessage());
         }
     }
-
     public function testExplicitPortConnect()
     {
         $port = 389;
-        if (defined('TESTS_ZEND_LDAP_PORT') && TESTS_ZEND_LDAP_PORT) {
+        if (defined('TESTS_ZEND_LDAP_PORT') && TESTS_ZEND_LDAP_PORT)
             $port = TESTS_ZEND_LDAP_PORT;
-        }
-        if (defined('TESTS_ZEND_LDAP_USE_SSL') && TESTS_ZEND_LDAP_USE_SSL) {
+        if (defined('TESTS_ZEND_LDAP_USE_SSL') && TESTS_ZEND_LDAP_USE_SSL)
             $port = 636;
-        }
 
         $ldap = new Zend_Ldap($this->_options);
         try {
@@ -133,7 +123,6 @@ class Zend_Ldap_ConnectTest extends PHPUnit_Framework_TestCase
             $this->assertContains('Invalid credentials', $zle->getMessage());
         }
     }
-
     public function testBadPortConnect()
     {
         $options = $this->_options;
@@ -147,7 +136,6 @@ class Zend_Ldap_ConnectTest extends PHPUnit_Framework_TestCase
             $this->assertContains('Can\'t contact LDAP server', $zle->getMessage());
         }
     }
-
     public function testSetOptionsConnect()
     {
         $ldap = new Zend_Ldap();
@@ -159,11 +147,10 @@ class Zend_Ldap_ConnectTest extends PHPUnit_Framework_TestCase
             $this->assertContains('Invalid credentials', $zle->getMessage());
         }
     }
-
     public function testMultiConnect()
     {
         $ldap = new Zend_Ldap($this->_options);
-        for ($i = 0; $i < 3; ++$i) {
+        for ($i = 0; $i < 3; $i++) {
             try {
                 $ldap->connect()->bind('CN=ignored,DC=example,DC=com', 'ignored');
                 $this->fail('Expected exception for unknown username');
@@ -172,11 +159,10 @@ class Zend_Ldap_ConnectTest extends PHPUnit_Framework_TestCase
             }
         }
     }
-
     public function testDisconnect()
     {
         $ldap = new Zend_Ldap($this->_options);
-        for ($i = 0; $i < 3; ++$i) {
+        for ($i = 0; $i < 3; $i++) {
             $ldap->disconnect();
             try {
                 $ldap->connect()->bind('CN=ignored,DC=example,DC=com', 'ignored');
@@ -212,20 +198,16 @@ class Zend_Ldap_ConnectTest extends PHPUnit_Framework_TestCase
     {
         $host = TESTS_ZEND_LDAP_HOST;
         $port = 0;
-        if (defined('TESTS_ZEND_LDAP_PORT') && TESTS_ZEND_LDAP_PORT != 389) {
-            $port = TESTS_ZEND_LDAP_PORT;
-        }
+        if (defined('TESTS_ZEND_LDAP_PORT') && TESTS_ZEND_LDAP_PORT != 389) $port = TESTS_ZEND_LDAP_PORT;
         $useSsl = false;
-        if (defined('TESTS_ZEND_LDAP_USE_SSL')) {
-            $useSsl = TESTS_ZEND_LDAP_USE_SSL;
-        }
+        if (defined('TESTS_ZEND_LDAP_USE_SSL')) $useSsl = TESTS_ZEND_LDAP_USE_SSL;
         if ($useSsl) {
-            $host = 'ldaps://'.$host;
+            $host = 'ldaps://' . $host;
         } else {
-            $host = 'ldap://'.$host;
+            $host = 'ldap://' . $host;
         }
         if ($port) {
-            $host = $host.':'.$port;
+            $host = $host . ':' . $port;
         }
 
         $ldap = new Zend_Ldap();

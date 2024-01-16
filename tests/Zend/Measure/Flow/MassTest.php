@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,24 +13,24 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Measure
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
 /**
- * Zend_Measure_Flow_Mass.
+ * Zend_Measure_Flow_Mass
  */
 // require_once 'Zend/Measure/Flow/Mass.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Measure
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Measure
  */
 #[AllowDynamicProperties]
@@ -38,290 +38,314 @@ class Zend_Measure_Flow_MassTest extends PHPUnit_Framework_TestCase
 {
     /**
      * test for Mass initialisation
-     * expected instance.
+     * expected instance
      */
     public function testMassInit()
     {
-        $value = new Zend_Measure_Flow_Mass('100', Zend_Measure_Flow_Mass::STANDARD, 'de');
-        $this->assertTrue($value instanceof Zend_Measure_Flow_Mass, 'Zend_Measure_Flow_Mass Object not returned');
+        $value = new Zend_Measure_Flow_Mass('100',Zend_Measure_Flow_Mass::STANDARD,'de');
+        $this->assertTrue($value instanceof Zend_Measure_Flow_Mass,'Zend_Measure_Flow_Mass Object not returned');
     }
+
 
     /**
      * test for exception unknown type
-     * expected exception.
+     * expected exception
      */
-    public function testFlowMassUnknownType()
+    public function testFlow_MassUnknownType()
     {
         try {
-            $value = new Zend_Measure_Flow_Mass('100', 'Flow_Mass::UNKNOWN', 'de');
+            $value = new Zend_Measure_Flow_Mass('100','Flow_Mass::UNKNOWN','de');
             $this->fail('Exception expected because of unknown type');
         } catch (Zend_Measure_Exception $e) {
             // success
         }
     }
 
+
     /**
      * test for exception unknown value
-     * expected exception.
+     * expected exception
      */
-    public function testFlowMassUnknownValue()
+    public function testFlow_MassUnknownValue()
     {
         try {
-            $value = new Zend_Measure_Flow_Mass('novalue', Zend_Measure_Flow_Mass::STANDARD, 'de');
+            $value = new Zend_Measure_Flow_Mass('novalue',Zend_Measure_Flow_Mass::STANDARD,'de');
             $this->fail('Exception expected because of empty value');
         } catch (Zend_Measure_Exception $e) {
             // success
         }
     }
 
+
     /**
      * test for exception unknown locale
-     * expected root value.
+     * expected root value
      */
-    public function testFlowMassUnknownLocale()
+    public function testFlow_MassUnknownLocale()
     {
         try {
-            $value = new Zend_Measure_Flow_Mass('100', Zend_Measure_Flow_Mass::STANDARD, 'nolocale');
+            $value = new Zend_Measure_Flow_Mass('100',Zend_Measure_Flow_Mass::STANDARD,'nolocale');
             $this->fail('Exception expected because of unknown locale');
         } catch (Zend_Measure_Exception $e) {
             // success
         }
     }
+
 
     /**
      * test for standard locale
-     * expected integer.
+     * expected integer
      */
-    public function testFlowMassNoLocale()
+    public function testFlow_MassNoLocale()
     {
-        $value = new Zend_Measure_Flow_Mass('100', Zend_Measure_Flow_Mass::STANDARD);
-        $this->assertEquals(100, $value->getValue(), 'Zend_Measure_Flow_Mass value expected');
+        $value = new Zend_Measure_Flow_Mass('100',Zend_Measure_Flow_Mass::STANDARD);
+        $this->assertEquals(100, $value->getValue(),'Zend_Measure_Flow_Mass value expected');
     }
+
 
     /**
      * test for positive value
-     * expected integer.
+     * expected integer
      */
-    public function testFlowMassValuePositive()
+    public function testFlow_MassValuePositive()
     {
-        $value = new Zend_Measure_Flow_Mass('100', Zend_Measure_Flow_Mass::STANDARD, 'de');
+        $value = new Zend_Measure_Flow_Mass('100',Zend_Measure_Flow_Mass::STANDARD,'de');
         $this->assertEquals(100, $value->getValue(), 'Zend_Measure_Flow_Mass value expected to be a positive integer');
     }
 
+
     /**
      * test for negative value
-     * expected integer.
+     * expected integer
      */
-    public function testFlowMassValueNegative()
+    public function testFlow_MassValueNegative()
     {
-        $value = new Zend_Measure_Flow_Mass('-100', Zend_Measure_Flow_Mass::STANDARD, 'de');
+        $value = new Zend_Measure_Flow_Mass('-100',Zend_Measure_Flow_Mass::STANDARD,'de');
         $this->assertEquals(-100, $value->getValue(), 'Zend_Measure_Flow_Mass value expected to be a negative integer');
     }
 
+
     /**
      * test for decimal value
-     * expected float.
+     * expected float
      */
-    public function testFlowMassValueDecimal()
+    public function testFlow_MassValueDecimal()
     {
-        $value = new Zend_Measure_Flow_Mass('-100,200', Zend_Measure_Flow_Mass::STANDARD, 'de');
+        $value = new Zend_Measure_Flow_Mass('-100,200',Zend_Measure_Flow_Mass::STANDARD,'de');
         $this->assertEquals(-100.200, $value->getValue(), 'Zend_Measure_Flow_Mass value expected to be a decimal value');
     }
 
+
     /**
      * test for decimal seperated value
-     * expected float.
+     * expected float
      */
-    public function testFlowMassValueDecimalSeperated()
+    public function testFlow_MassValueDecimalSeperated()
     {
-        $value = new Zend_Measure_Flow_Mass('-100.100,200', Zend_Measure_Flow_Mass::STANDARD, 'de');
-        $this->assertEquals(-100100.200, $value->getValue(), 'Zend_Measure_Flow_Mass Object not returned');
+        $value = new Zend_Measure_Flow_Mass('-100.100,200',Zend_Measure_Flow_Mass::STANDARD,'de');
+        $this->assertEquals(-100100.200, $value->getValue(),'Zend_Measure_Flow_Mass Object not returned');
     }
+
 
     /**
      * test for string with integrated value
-     * expected float.
+     * expected float
      */
-    public function testFlowMassValueString()
+    public function testFlow_MassValueString()
     {
-        $value = new Zend_Measure_Flow_Mass('-100.100,200', Zend_Measure_Flow_Mass::STANDARD, 'de');
-        $this->assertEquals(-100100.200, $value->getValue(), 'Zend_Measure_Flow_Mass Object not returned');
+        $value = new Zend_Measure_Flow_Mass('-100.100,200',Zend_Measure_Flow_Mass::STANDARD,'de');
+        $this->assertEquals(-100100.200, $value->getValue(),'Zend_Measure_Flow_Mass Object not returned');
     }
+
 
     /**
      * test for equality
-     * expected true.
+     * expected true
      */
-    public function testFlowMassEquality()
+    public function testFlow_MassEquality()
     {
-        $value = new Zend_Measure_Flow_Mass('-100.100,200', Zend_Measure_Flow_Mass::STANDARD, 'de');
-        $newvalue = new Zend_Measure_Flow_Mass('-100.100,200', Zend_Measure_Flow_Mass::STANDARD, 'de');
-        $this->assertTrue($value->equals($newvalue), 'Zend_Measure_Flow_Mass Object should be equal');
+        $value = new Zend_Measure_Flow_Mass('-100.100,200',Zend_Measure_Flow_Mass::STANDARD,'de');
+        $newvalue = new Zend_Measure_Flow_Mass('-100.100,200',Zend_Measure_Flow_Mass::STANDARD,'de');
+        $this->assertTrue($value->equals($newvalue),'Zend_Measure_Flow_Mass Object should be equal');
     }
+
 
     /**
      * test for no equality
-     * expected false.
+     * expected false
      */
-    public function testFlowMassNoEquality()
+    public function testFlow_MassNoEquality()
     {
-        $value = new Zend_Measure_Flow_Mass('-100.100,200', Zend_Measure_Flow_Mass::STANDARD, 'de');
-        $newvalue = new Zend_Measure_Flow_Mass('-100,200', Zend_Measure_Flow_Mass::STANDARD, 'de');
-        $this->assertFalse($value->equals($newvalue), 'Zend_Measure_Flow_Mass Object should be not equal');
+        $value = new Zend_Measure_Flow_Mass('-100.100,200',Zend_Measure_Flow_Mass::STANDARD,'de');
+        $newvalue = new Zend_Measure_Flow_Mass('-100,200',Zend_Measure_Flow_Mass::STANDARD,'de');
+        $this->assertFalse($value->equals($newvalue),'Zend_Measure_Flow_Mass Object should be not equal');
     }
+
 
     /**
      * test for set positive value
-     * expected integer.
+     * expected integer
      */
-    public function testFlowMassSetPositive()
+    public function testFlow_MassSetPositive()
     {
-        $value = new Zend_Measure_Flow_Mass('100', Zend_Measure_Flow_Mass::STANDARD, 'de');
-        $value->setValue('200', Zend_Measure_Flow_Mass::STANDARD, 'de');
+        $value = new Zend_Measure_Flow_Mass('100',Zend_Measure_Flow_Mass::STANDARD,'de');
+        $value->setValue('200',Zend_Measure_Flow_Mass::STANDARD,'de');
         $this->assertEquals(200, $value->getValue(), 'Zend_Measure_Flow_Mass value expected to be a positive integer');
     }
 
+
     /**
      * test for set negative value
-     * expected integer.
+     * expected integer
      */
-    public function testFlowMassSetNegative()
+    public function testFlow_MassSetNegative()
     {
-        $value = new Zend_Measure_Flow_Mass('-100', Zend_Measure_Flow_Mass::STANDARD, 'de');
-        $value->setValue('-200', Zend_Measure_Flow_Mass::STANDARD, 'de');
+        $value = new Zend_Measure_Flow_Mass('-100',Zend_Measure_Flow_Mass::STANDARD,'de');
+        $value->setValue('-200',Zend_Measure_Flow_Mass::STANDARD,'de');
         $this->assertEquals(-200, $value->getValue(), 'Zend_Measure_Flow_Mass value expected to be a negative integer');
     }
 
+
     /**
      * test for set decimal value
-     * expected float.
+     * expected float
      */
-    public function testFlowMassSetDecimal()
+    public function testFlow_MassSetDecimal()
     {
-        $value = new Zend_Measure_Flow_Mass('-100,200', Zend_Measure_Flow_Mass::STANDARD, 'de');
-        $value->setValue('-200,200', Zend_Measure_Flow_Mass::STANDARD, 'de');
+        $value = new Zend_Measure_Flow_Mass('-100,200',Zend_Measure_Flow_Mass::STANDARD,'de');
+        $value->setValue('-200,200',Zend_Measure_Flow_Mass::STANDARD,'de');
         $this->assertEquals(-200.200, $value->getValue(), 'Zend_Measure_Flow_Mass value expected to be a decimal value');
     }
 
+
     /**
      * test for set decimal seperated value
-     * expected float.
+     * expected float
      */
-    public function testFlowMassSetDecimalSeperated()
+    public function testFlow_MassSetDecimalSeperated()
     {
-        $value = new Zend_Measure_Flow_Mass('-100.100,200', Zend_Measure_Flow_Mass::STANDARD, 'de');
-        $value->setValue('-200.200,200', Zend_Measure_Flow_Mass::STANDARD, 'de');
-        $this->assertEquals(-200200.200, $value->getValue(), 'Zend_Measure_Flow_Mass Object not returned');
+        $value = new Zend_Measure_Flow_Mass('-100.100,200',Zend_Measure_Flow_Mass::STANDARD,'de');
+        $value->setValue('-200.200,200',Zend_Measure_Flow_Mass::STANDARD,'de');
+        $this->assertEquals(-200200.200, $value->getValue(),'Zend_Measure_Flow_Mass Object not returned');
     }
+
 
     /**
      * test for set string with integrated value
-     * expected float.
+     * expected float
      */
-    public function testFlowMassSetString()
+    public function testFlow_MassSetString()
     {
-        $value = new Zend_Measure_Flow_Mass('-100.100,200', Zend_Measure_Flow_Mass::STANDARD, 'de');
-        $value->setValue('-200.200,200', Zend_Measure_Flow_Mass::STANDARD, 'de');
-        $this->assertEquals(-200200.200, $value->getValue(), 'Zend_Measure_Flow_Mass Object not returned');
+        $value = new Zend_Measure_Flow_Mass('-100.100,200',Zend_Measure_Flow_Mass::STANDARD,'de');
+        $value->setValue('-200.200,200',Zend_Measure_Flow_Mass::STANDARD,'de');
+        $this->assertEquals(-200200.200, $value->getValue(),'Zend_Measure_Flow_Mass Object not returned');
     }
+
 
     /**
      * test for exception unknown type
-     * expected exception.
+     * expected exception
      */
-    public function testFlowMassSetUnknownType()
+    public function testFlow_MassSetUnknownType()
     {
         try {
-            $value = new Zend_Measure_Flow_Mass('100', Zend_Measure_Flow_Mass::STANDARD, 'de');
-            $value->setValue('-200.200,200', 'Flow_Mass::UNKNOWN', 'de');
+            $value = new Zend_Measure_Flow_Mass('100',Zend_Measure_Flow_Mass::STANDARD,'de');
+            $value->setValue('-200.200,200','Flow_Mass::UNKNOWN','de');
             $this->fail('Exception expected because of unknown type');
         } catch (Zend_Measure_Exception $e) {
             // success
         }
     }
 
+
     /**
      * test for exception unknown value
-     * expected exception.
+     * expected exception
      */
-    public function testFlowMassSetUnknownValue()
+    public function testFlow_MassSetUnknownValue()
     {
         try {
-            $value = new Zend_Measure_Flow_Mass('100', Zend_Measure_Flow_Mass::STANDARD, 'de');
-            $value->setValue('novalue', Zend_Measure_Flow_Mass::STANDARD, 'de');
+            $value = new Zend_Measure_Flow_Mass('100',Zend_Measure_Flow_Mass::STANDARD,'de');
+            $value->setValue('novalue',Zend_Measure_Flow_Mass::STANDARD,'de');
             $this->fail('Exception expected because of empty value');
         } catch (Zend_Measure_Exception $e) {
             // success
         }
     }
 
+
     /**
      * test for exception unknown locale
-     * expected exception.
+     * expected exception
      */
-    public function testFlowMassSetUnknownLocale()
+    public function testFlow_MassSetUnknownLocale()
     {
         try {
-            $value = new Zend_Measure_Flow_Mass('100', Zend_Measure_Flow_Mass::STANDARD, 'de');
-            $value->setValue('200', Zend_Measure_Flow_Mass::STANDARD, 'nolocale');
+            $value = new Zend_Measure_Flow_Mass('100',Zend_Measure_Flow_Mass::STANDARD,'de');
+            $value->setValue('200',Zend_Measure_Flow_Mass::STANDARD,'nolocale');
             $this->fail('Exception expected because of unknown locale');
         } catch (Zend_Measure_Exception $e) {
             // success
         }
     }
 
+
     /**
      * test for exception unknown locale
-     * expected exception.
+     * expected exception
      */
-    public function testFlowMassSetWithNoLocale()
+    public function testFlow_MassSetWithNoLocale()
     {
         $value = new Zend_Measure_Flow_Mass('100', Zend_Measure_Flow_Mass::STANDARD, 'de');
         $value->setValue('200', Zend_Measure_Flow_Mass::STANDARD);
         $this->assertEquals(200, $value->getValue(), 'Zend_Measure_Flow_Mass value expected to be a positive integer');
     }
 
+
     /**
      * test setting type
-     * expected new type.
+     * expected new type
      */
-    public function testFlowMassSetType()
+    public function testFlow_MassSetType()
     {
-        $value = new Zend_Measure_Flow_Mass('-100', Zend_Measure_Flow_Mass::STANDARD, 'de');
+        $value = new Zend_Measure_Flow_Mass('-100',Zend_Measure_Flow_Mass::STANDARD,'de');
         $value->setType(Zend_Measure_Flow_Mass::GRAM_PER_DAY);
         $this->assertEquals(Zend_Measure_Flow_Mass::GRAM_PER_DAY, $value->getType(), 'Zend_Measure_Flow_Mass type expected');
     }
 
+
     /**
      * test setting computed type
-     * expected new type.
+     * expected new type
      */
-    public function testFlowMassSetComputedType1()
+    public function testFlow_MassSetComputedType1()
     {
-        $value = new Zend_Measure_Flow_Mass('-100', Zend_Measure_Flow_Mass::STANDARD, 'de');
+        $value = new Zend_Measure_Flow_Mass('-100',Zend_Measure_Flow_Mass::STANDARD,'de');
         $value->setType(Zend_Measure_Flow_Mass::GRAM_PER_DAY);
         $this->assertEquals(Zend_Measure_Flow_Mass::GRAM_PER_DAY, $value->getType(), 'Zend_Measure_Flow_Mass type expected');
     }
 
+
     /**
      * test setting computed type
-     * expected new type.
+     * expected new type
      */
-    public function testFlowMassSetComputedType2()
+    public function testFlow_MassSetComputedType2()
     {
-        $value = new Zend_Measure_Flow_Mass('-100', Zend_Measure_Flow_Mass::GRAM_PER_DAY, 'de');
+        $value = new Zend_Measure_Flow_Mass('-100',Zend_Measure_Flow_Mass::GRAM_PER_DAY,'de');
         $value->setType(Zend_Measure_Flow_Mass::STANDARD);
         $this->assertEquals(Zend_Measure_Flow_Mass::STANDARD, $value->getType(), 'Zend_Measure_Flow_Mass type expected');
     }
 
+
     /**
      * test setting unknown type
-     * expected new type.
+     * expected new type
      */
-    public function testFlowMassSetTypeFailed()
+    public function testFlow_MassSetTypeFailed()
     {
         try {
-            $value = new Zend_Measure_Flow_Mass('-100', Zend_Measure_Flow_Mass::STANDARD, 'de');
+            $value = new Zend_Measure_Flow_Mass('-100',Zend_Measure_Flow_Mass::STANDARD,'de');
             $value->setType('Flow_Mass::UNKNOWN');
             $this->fail('Exception expected because of unknown type');
         } catch (Zend_Measure_Exception $e) {
@@ -329,34 +353,37 @@ class Zend_Measure_Flow_MassTest extends PHPUnit_Framework_TestCase
         }
     }
 
+
     /**
      * test toString
-     * expected string.
+     * expected string
      */
-    public function testFlowMassToString()
+    public function testFlow_MassToString()
     {
-        $value = new Zend_Measure_Flow_Mass('-100', Zend_Measure_Flow_Mass::STANDARD, 'de');
+        $value = new Zend_Measure_Flow_Mass('-100',Zend_Measure_Flow_Mass::STANDARD,'de');
         $this->assertEquals('-100 kg/s', $value->toString(), 'Value -100 kg/s expected');
     }
 
+
     /**
      * test __toString
-     * expected string.
+     * expected string
      */
-    public function testFlowMassToString()
+    public function testFlow_Mass_ToString()
     {
-        $value = new Zend_Measure_Flow_Mass('-100', Zend_Measure_Flow_Mass::STANDARD, 'de');
+        $value = new Zend_Measure_Flow_Mass('-100',Zend_Measure_Flow_Mass::STANDARD,'de');
         $this->assertEquals('-100 kg/s', $value->__toString(), 'Value -100 kg/s expected');
     }
 
+
     /**
      * test getConversionList
-     * expected array.
+     * expected array
      */
-    public function testFlowMassConversionList()
+    public function testFlow_MassConversionList()
     {
-        $value = new Zend_Measure_Flow_Mass('-100', Zend_Measure_Flow_Mass::STANDARD, 'de');
-        $unit = $value->getConversionList();
+        $value = new Zend_Measure_Flow_Mass('-100',Zend_Measure_Flow_Mass::STANDARD,'de');
+        $unit  = $value->getConversionList();
         $this->assertTrue(is_array($unit), 'Array expected');
     }
 }

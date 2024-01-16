@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Navigation
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -26,13 +26,13 @@
 // require_once 'Zend/Controller/Request/Http.php';
 
 /**
- * Tests the class Zend_Navigation_Container.
+ * Tests the class Zend_Navigation_Container
  *
  * @category   Zend
- *
+ * @package    Zend_Navigation
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Navigation
  */
 #[AllowDynamicProperties]
@@ -40,6 +40,7 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Prepares the environment before running a test.
+     *
      */
     protected function setUp()
     {
@@ -49,28 +50,30 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tear down the environment after running a test.
+     * Tear down the environment after running a test
+     *
      */
     protected function tearDown()
     {
+
     }
 
     public function testConstructWithArray()
     {
-        $argument = [
-            [
+        $argument = array(
+            array(
                 'label' => 'Page 1',
-                'uri' => 'page1.html',
-            ],
-            [
+                'uri'   => 'page1.html'
+            ),
+            array(
                 'label' => 'Page 2',
-                'uri' => 'page2.html',
-            ],
-            [
+                'uri'   => 'page2.html'
+            ),
+            array(
                 'label' => 'Page 3',
-                'uri' => 'page3.html',
-            ],
-        ];
+                'uri'   => 'page3.html'
+            )
+        );
 
         $container = new Zend_Navigation($argument);
         $this->assertEquals(3, $container->count());
@@ -78,20 +81,20 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
 
     public function testConstructWithConfig()
     {
-        $argument = new Zend_Config([
-            [
+        $argument = new Zend_Config(array(
+            array(
                 'label' => 'Page 1',
-                'uri' => 'page1.html',
-            ],
-            [
+                'uri'   => 'page1.html'
+            ),
+            array(
                 'label' => 'Page 2',
-                'uri' => 'page2.html',
-            ],
-            [
+                'uri'   => 'page2.html'
+            ),
+            array(
                 'label' => 'Page 3',
-                'uri' => 'page3.html',
-            ],
-        ]);
+                'uri'   => 'page3.html'
+            )
+        ));
 
         $container = new Zend_Navigation($argument);
         $this->assertEquals(3, $container->count());
@@ -101,7 +104,7 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
     {
         try {
             $nav = new Zend_Navigation('ok');
-            $this->fail('An invalid argument was given to the constructor, '.
+            $this->fail('An invalid argument was given to the constructor, ' .
                         'but a Zend_Navigation_Exception was not thrown');
         } catch (Zend_Navigation_Exception $e) {
             $this->assertContains('Invalid argument: $pages', $e->getMessage());
@@ -109,7 +112,7 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
 
         try {
             $nav = new Zend_Navigation(1337);
-            $this->fail('An invalid argument was given to the constructor, '.
+            $this->fail('An invalid argument was given to the constructor, ' .
                         'but a Zend_Navigation_Exception was not thrown');
         } catch (Zend_Navigation_Exception $e) {
             $this->assertContains('Invalid argument: $pages', $e->getMessage());
@@ -117,7 +120,7 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
 
         try {
             $nav = new Zend_Navigation(new stdClass());
-            $this->fail('An invalid argument was given to the constructor, '.
+            $this->fail('An invalid argument was given to the constructor, ' .
                         'but a Zend_Navigation_Exception was not thrown');
         } catch (Zend_Navigation_Exception $e) {
             $this->assertContains('Invalid argument: $pages', $e->getMessage());
@@ -126,33 +129,33 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
 
     public function testIterationShouldBeOrderAware()
     {
-        $nav = new Zend_Navigation([
-            [
+        $nav = new Zend_Navigation(array(
+            array(
                 'label' => 'Page 1',
-                'uri' => '#',
-            ],
-            [
+                'uri' => '#'
+            ),
+            array(
                 'label' => 'Page 2',
                 'uri' => '#',
-                'order' => -1,
-            ],
-            [
+                'order' => -1
+            ),
+            array(
                 'label' => 'Page 3',
-                'uri' => '#',
-            ],
-            [
+                'uri' => '#'
+            ),
+            array(
                 'label' => 'Page 4',
                 'uri' => '#',
-                'order' => 100,
-            ],
-            [
+                'order' => 100
+            ),
+            array(
                 'label' => 'Page 5',
-                'uri' => '#',
-            ],
-        ]);
+                'uri' => '#'
+            )
+        ));
 
-        $expected = ['Page 2', 'Page 1', 'Page 3', 'Page 5', 'Page 4'];
-        $actual = [];
+        $expected = array('Page 2', 'Page 1', 'Page 3', 'Page 5', 'Page 4');
+        $actual = array();
         foreach ($nav as $page) {
             $actual[] = $page->getLabel();
         }
@@ -161,49 +164,49 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
 
     public function testRecursiveIteration()
     {
-        $nav = new Zend_Navigation([
-            [
+        $nav = new Zend_Navigation(array(
+            array(
                 'label' => 'Page 1',
                 'uri' => '#',
-                'pages' => [
-                    [
+                'pages' => array(
+                    array(
                         'label' => 'Page 1.1',
                         'uri' => '#',
-                        'pages' => [
-                            [
+                        'pages' => array(
+                            array(
                                 'label' => 'Page 1.1.1',
-                                'uri' => '#',
-                            ],
-                            [
+                                'uri' => '#'
+                            ),
+                            array(
                                 'label' => 'Page 1.1.2',
-                                'uri' => '#',
-                            ],
-                        ],
-                    ],
-                    [
+                                'uri' => '#'
+                            )
+                        )
+                    ),
+                    array(
                         'label' => 'Page 1.2',
-                        'uri' => '#',
-                    ],
-                ],
-            ],
-            [
+                        'uri' => '#'
+                    )
+                )
+            ),
+            array(
                 'label' => 'Page 2',
                 'uri' => '#',
-                'pages' => [
-                    [
+                'pages' => array(
+                    array(
                         'label' => 'Page 2.1',
-                        'uri' => '#',
-                    ],
-                ],
-            ],
-            [
+                        'uri' => '#'
+                    )
+                )
+            ),
+            array(
                 'label' => 'Page 3',
-                'uri' => '#',
-            ],
-        ]);
+                'uri' => '#'
+            )
+        ));
 
-        $actual = [];
-        $expected = [
+        $actual = array();
+        $expected = array(
             'Page 1',
             'Page 1.1',
             'Page 1.1.1',
@@ -211,8 +214,8 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
             'Page 1.2',
             'Page 2',
             'Page 2.1',
-            'Page 3',
-        ];
+            'Page 3'
+        );
 
         $iterator = new RecursiveIteratorIterator($nav,
             RecursiveIteratorIterator::SELF_FIRST);
@@ -224,33 +227,33 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
 
     public function testSettingPageOrderShouldUpdateContainerOrder()
     {
-        $nav = new Zend_Navigation([
-            [
+        $nav = new Zend_Navigation(array(
+            array(
                 'label' => 'Page 1',
-                'uri' => '#',
-            ],
-            [
+                'uri' => '#'
+            ),
+            array(
                 'label' => 'Page 2',
-                'uri' => '#',
-            ],
-        ]);
+                'uri' => '#'
+            )
+        ));
 
-        $page3 = Zend_Navigation_Page::factory([
+        $page3 = Zend_Navigation_Page::factory(array(
             'label' => 'Page 3',
-            'uri' => '#',
-        ]);
+            'uri' => '#'
+        ));
 
         $nav->addPage($page3);
 
-        $expected = [
-            'before' => ['Page 1', 'Page 2', 'Page 3'],
-            'after' => ['Page 3', 'Page 1', 'Page 2'],
-        ];
+        $expected = array(
+            'before' => array('Page 1', 'Page 2', 'Page 3'),
+            'after'  => array('Page 3', 'Page 1', 'Page 2')
+        );
 
-        $actual = [
-            'before' => [],
-            'after' => [],
-        ];
+        $actual = array(
+            'before' => array(),
+            'after'  => array()
+        );
 
         foreach ($nav as $page) {
             $actual['before'][] = $page->getLabel();
@@ -267,10 +270,10 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
 
     public function testAddPageShouldWorkWithArray()
     {
-        $pageOptions = [
+        $pageOptions = array(
             'label' => 'From array',
-            'uri' => '#array',
-        ];
+            'uri' => '#array'
+        );
 
         $nav = new Zend_Navigation();
         $nav->addPage($pageOptions);
@@ -280,10 +283,10 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
 
     public function testAddPageShouldWorkWithConfig()
     {
-        $pageOptions = [
+        $pageOptions = array(
             'label' => 'From config',
-            'uri' => '#config',
-        ];
+            'uri' => '#config'
+        );
 
         $pageOptions = new Zend_Config($pageOptions);
 
@@ -295,12 +298,12 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
 
     public function testAddPageShouldWorkWithPageInstance()
     {
-        $pageOptions = [
+        $pageOptions = array(
             'label' => 'From array 1',
-            'uri' => '#array',
-        ];
+            'uri' => '#array'
+        );
 
-        $nav = new Zend_Navigation([$pageOptions]);
+        $nav = new Zend_Navigation(array($pageOptions));
 
         $page = Zend_Navigation_Page::factory($pageOptions);
         $nav->addPage($page);
@@ -311,62 +314,62 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
     public function testAddPagesShouldWorkWithArray()
     {
         $nav = new Zend_Navigation();
-        $nav->addPages([
-            [
+        $nav->addPages(array(
+            array(
                 'label' => 'Page 1',
-                'uri' => '#',
-            ],
-            [
+                'uri' => '#'
+            ),
+            array(
                 'label' => 'Page 2',
                 'action' => 'index',
-                'controller' => 'index',
-            ],
-        ]);
+                'controller' => 'index'
+            )
+        ));
 
         $this->assertEquals(2, count($nav),
-            'Expected 2 pages, found '.count($nav));
+                            'Expected 2 pages, found ' . count($nav));
     }
 
     public function testAddPagesShouldWorkWithConfig()
     {
         $nav = new Zend_Navigation();
-        $nav->addPages(new Zend_Config([
-            [
+        $nav->addPages(new Zend_Config(array(
+            array(
                 'label' => 'Page 1',
-                'uri' => '#',
-            ],
-            [
+                'uri' => '#'
+            ),
+            array(
                 'label' => 'Page 2',
                 'action' => 'index',
-                'controller' => 'index',
-            ],
-        ]));
+                'controller' => 'index'
+            )
+        )));
 
         $this->assertEquals(2, count($nav),
-            'Expected 2 pages, found '.count($nav));
+                            'Expected 2 pages, found ' . count($nav));
     }
 
     public function testAddPagesShouldWorkWithMixedArray()
     {
         $nav = new Zend_Navigation();
-        $nav->addPages(new Zend_Config([
-            [
+        $nav->addPages(new Zend_Config(array(
+            array(
                 'label' => 'Page 1',
-                'uri' => '#',
-            ],
-            new Zend_Config([
+                'uri' => '#'
+            ),
+            new Zend_Config(array(
                 'label' => 'Page 2',
                 'action' => 'index',
-                'controller' => 'index',
-            ]),
-            Zend_Navigation_Page::factory([
+                'controller' => 'index'
+            )),
+            Zend_Navigation_Page::factory(array(
                 'label' => 'Page 3',
-                'uri' => '#',
-            ]),
-        ]));
+                'uri' => '#'
+            ))
+        )));
 
         $this->assertEquals(3, count($nav),
-            'Expected 3 pages, found '.count($nav));
+                            'Expected 3 pages, found ' . count($nav));
     }
 
     /**
@@ -378,7 +381,7 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
         $nav->addPages($this->_getFindByNavigation());
 
         $this->assertEquals(3, count($nav),
-            'Expected 3 pages, found '.count($nav));
+                            'Expected 3 pages, found ' . count($nav));
 
         $this->assertEquals($nav->toArray(), $this->_getFindByNavigation()->toArray());
     }
@@ -389,7 +392,7 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
 
         try {
             $nav->addPages('this is a string');
-            $this->fail('An invalid argument was given to addPages(), '.
+            $this->fail('An invalid argument was given to addPages(), ' .
                         'but a Zend_Navigation_Exception was not thrown');
         } catch (Zend_Navigation_Exception $e) {
             $this->assertContains('Invalid argument: $pages must be', $e->getMessage());
@@ -402,7 +405,7 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
 
         try {
             $nav->addPages($pages = new stdClass());
-            $this->fail('An invalid argument was given to addPages(), '.
+            $this->fail('An invalid argument was given to addPages(), ' .
                         'but a Zend_Navigation_Exception was not thrown');
         } catch (Zend_Navigation_Exception $e) {
             $this->assertContains('Invalid argument: $pages must be', $e->getMessage());
@@ -412,70 +415,70 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
     public function testRemovingAllPages()
     {
         $nav = new Zend_Navigation();
-        $nav->addPages([
-            [
+        $nav->addPages(array(
+            array(
                 'label' => 'Page 1',
-                'uri' => '#',
-            ],
-            [
+                'uri' => '#'
+            ),
+            array(
                 'label' => 'Page 2',
-                'uri' => '#',
-            ],
-        ]);
+                'uri' => '#'
+            )
+        ));
 
         $nav->removePages();
 
         $this->assertEquals(0, count($nav),
-            'Expected 0 pages, found '.count($nav));
+                            'Expected 0 pages, found ' . count($nav));
     }
 
     public function testSettingPages()
     {
         $nav = new Zend_Navigation();
-        $nav->addPages([
-            [
+        $nav->addPages(array(
+            array(
                 'label' => 'Page 1',
-                'uri' => '#',
-            ],
-            [
+                'uri' => '#'
+            ),
+            array(
                 'label' => 'Page 2',
-                'uri' => '#',
-            ],
-        ]);
+                'uri' => '#'
+            )
+        ));
 
-        $nav->setPages([
-            [
+        $nav->setPages(array(
+            array(
                 'label' => 'Page 3',
-                'uri' => '#',
-            ],
-        ]);
+                'uri' => '#'
+            )
+        ));
 
         $this->assertEquals(1, count($nav),
-            'Expected 1 page, found '.count($nav));
+                            'Expected 1 page, found ' . count($nav));
     }
 
     public function testGetPagesShouldReturnAnArrayOfPages()
     {
-        $nav = new Zend_Navigation([
-            [
-                'uri' => 'Page 1',
-            ],
-            [
-                'uri' => 'Page 2',
-            ],
-        ]);
+        $nav = new Zend_Navigation(array(
+            array(
+                'uri' => 'Page 1'
+            ),
+            array(
+                'uri' => 'Page 2'
+            )
+        ));
 
         $pages = $nav->getPages();
 
-        $expected = [
+        $expected = array(
             'type' => 'array',
-            'count' => 2,
-        ];
+            'count' => 2
+        );
 
-        $actual = [
+        $actual = array(
             'type' => gettype($pages),
-            'count' => count($pages),
-        ];
+            'count' => count($pages)
+        );
 
         $this->assertEquals($expected, $actual);
         $this->assertContainsOnly('Zend_Navigation_Page_Uri', $pages, false);
@@ -483,33 +486,33 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
 
     public function testGetPagesShouldReturnUnorderedPages()
     {
-        $nav = new Zend_Navigation([
-            [
+        $nav = new Zend_Navigation(array(
+            array(
                 'label' => 'Page 2',
                 'uri' => '#',
-                'order' => -1,
-            ],
-            [
+                'order' => -1
+            ),
+            array(
                 'label' => 'Page 4',
                 'uri' => '#',
-                'order' => 100,
-            ],
-            [
+                'order' => 100
+            ),
+            array(
                 'label' => 'Page 1',
-                'uri' => '#',
-            ],
-            [
+                'uri' => '#'
+            ),
+            array(
                 'label' => 'Page 5',
-                'uri' => '#',
-            ],
-            [
+                'uri' => '#'
+            ),
+            array(
                 'label' => 'Page 3',
-                'uri' => '#',
-            ],
-        ]);
+                'uri' => '#'
+            )
+        ));
 
-        $expected = ['Page 2', 'Page 4', 'Page 1', 'Page 5', 'Page 3'];
-        $actual = [];
+        $expected = array('Page 2', 'Page 4', 'Page 1', 'Page 5', 'Page 3');
+        $actual = array();
         foreach ($nav->getPages() as $page) {
             $actual[] = $page->getLabel();
         }
@@ -518,64 +521,64 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
 
     public function testRemovingPageByOrder()
     {
-        $nav = new Zend_Navigation([
-            [
+        $nav = new Zend_Navigation(array(
+            array(
                 'label' => 'Page 1',
-                'uri' => '#',
-            ],
-            [
+                'uri' => '#'
+            ),
+            array(
                 'label' => 'Page 2',
                 'uri' => '#',
-                'order' => 32,
-            ],
-            [
+                'order' => 32
+            ),
+            array(
                 'label' => 'Page 3',
-                'uri' => '#',
-            ],
-            [
+                'uri' => '#'
+            ),
+            array(
                 'label' => 'Page 4',
-                'uri' => '#',
-            ],
-        ]);
+                'uri' => '#'
+            )
+        ));
 
-        $expected = [
-            'remove0' => true,
-            'remove32' => true,
+        $expected = array(
+            'remove0'      => true,
+            'remove32'     => true,
             'remove0again' => true,
-            'remove1000' => false,
-            'count' => 1,
-            'current' => 'Page 4',
-        ];
+            'remove1000'   => false,
+            'count'        => 1,
+            'current'      => 'Page 4'
+        );
 
-        $actual = [
-            'remove0' => $nav->removePage(0),
-            'remove32' => $nav->removePage(32),
+        $actual = array(
+            'remove0'      => $nav->removePage(0),
+            'remove32'     => $nav->removePage(32),
             'remove0again' => $nav->removePage(0),
-            'remove1000' => $nav->removePage(1000),
-            'count' => $nav->count(),
-            'current' => $nav->current()->getLabel(),
-        ];
+            'remove1000'   => $nav->removePage(1000),
+            'count'        => $nav->count(),
+            'current'      => $nav->current()->getLabel()
+        );
 
         $this->assertEquals($expected, $actual);
     }
 
     public function testRemovingPageByInstance()
     {
-        $nav = new Zend_Navigation([
-            [
+        $nav = new Zend_Navigation(array(
+            array(
                 'label' => 'Page 1',
-                'uri' => '#',
-            ],
-            [
+                'uri' => '#'
+            ),
+            array(
                 'label' => 'Page 2',
-                'uri' => '#',
-            ],
-        ]);
+                'uri' => '#'
+            )
+        ));
 
-        $page3 = Zend_Navigation_Page::factory([
+        $page3 = Zend_Navigation_Page::factory(array(
             'label' => 'Page 3',
-            'uri' => '#',
-        ]);
+            'uri' => '#'
+        ));
 
         $nav->addPage($page3);
 
@@ -584,87 +587,87 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
 
     public function testRemovingPageByInstanceShouldReturnFalseIfPageIsNotInContainer()
     {
-        $nav = new Zend_Navigation([
-            [
+        $nav = new Zend_Navigation(array(
+            array(
                 'label' => 'Page 1',
-                'uri' => '#',
-            ],
-            [
+                'uri' => '#'
+            ),
+            array(
                 'label' => 'Page 2',
-                'uri' => '#',
-            ],
-        ]);
+                'uri' => '#'
+            )
+        ));
 
-        $page = Zend_Navigation_Page::factory([
+        $page = Zend_Navigation_Page::factory(array(
             'label' => 'Page lol',
-            'uri' => '#',
-        ]);
+            'uri' => '#'
+        ));
 
         $this->assertEquals(false, $nav->removePage($page));
     }
 
     public function testHasPage()
     {
-        $page0 = Zend_Navigation_Page::factory([
+        $page0 = Zend_Navigation_Page::factory(array(
             'label' => 'Page 0',
-            'uri' => '#',
-        ]);
+            'uri' => '#'
+        ));
 
-        $page1 = Zend_Navigation_Page::factory([
+        $page1 = Zend_Navigation_Page::factory(array(
             'label' => 'Page 1',
-            'uri' => '#',
-        ]);
+            'uri' => '#'
+        ));
 
-        $page1_1 = Zend_Navigation_Page::factory([
+        $page1_1 = Zend_Navigation_Page::factory(array(
             'label' => 'Page 1.1',
-            'uri' => '#',
-        ]);
+            'uri' => '#'
+        ));
 
-        $page1_2 = Zend_Navigation_Page::factory([
+        $page1_2 = Zend_Navigation_Page::factory(array(
             'label' => 'Page 1.2',
-            'uri' => '#',
-        ]);
+            'uri' => '#'
+        ));
 
-        $page1_2_1 = Zend_Navigation_Page::factory([
+        $page1_2_1 = Zend_Navigation_Page::factory(array(
             'label' => 'Page 1.2.1',
-            'uri' => '#',
-        ]);
+            'uri' => '#'
+        ));
 
-        $page1_3 = Zend_Navigation_Page::factory([
+        $page1_3 = Zend_Navigation_Page::factory(array(
             'label' => 'Page 1.3',
-            'uri' => '#',
-        ]);
+            'uri' => '#'
+        ));
 
-        $page2 = Zend_Navigation_Page::factory([
+        $page2 = Zend_Navigation_Page::factory(array(
             'label' => 'Page 2',
-            'uri' => '#',
-        ]);
+            'uri' => '#'
+        ));
 
-        $page3 = Zend_Navigation_Page::factory([
+        $page3 = Zend_Navigation_Page::factory(array(
             'label' => 'Page 3',
-            'uri' => '#',
-        ]);
+            'uri' => '#'
+        ));
 
-        $nav = new Zend_Navigation([$page1, $page2, $page3]);
+        $nav = new Zend_Navigation(array($page1, $page2, $page3));
 
         $page1->addPage($page1_1);
         $page1->addPage($page1_2);
         $page1_2->addPage($page1_2_1);
         $page1->addPage($page1_3);
 
-        $expected = [
-            'haspage0' => false,
-            'haspage2' => true,
-            'haspage1_1' => false,
-            'haspage1_1recursive' => true,
-        ];
+        $expected = array(
+            'haspage0'            => false,
+            'haspage2'            => true,
+            'haspage1_1'          => false,
+            'haspage1_1recursive' => true
+        );
 
-        $actual = [
-            'haspage0' => $nav->hasPage($page0),
-            'haspage2' => $nav->hasPage($page2),
-            'haspage1_1' => $nav->hasPage($page1_1),
-            'haspage1_1recursive' => $nav->hasPage($page1_1, true),
-        ];
+        $actual = array(
+            'haspage0'            => $nav->hasPage($page0),
+            'haspage2'            => $nav->hasPage($page2),
+            'haspage1_1'          => $nav->hasPage($page1_1),
+            'haspage1_1recursive' => $nav->hasPage($page1_1, true)
+        );
 
         $this->assertEquals($expected, $actual);
     }
@@ -673,62 +676,62 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
     {
         $nav1 = new Zend_Navigation();
         $nav2 = new Zend_Navigation();
-        $nav2->addPage([
+        $nav2->addPage(array(
             'label' => 'Page 1',
-            'uri' => '#',
-        ]);
+            'uri' => '#'
+        ));
 
-        $expected = [
+        $expected = array(
             'empty' => false,
-            'notempty' => true,
-        ];
+            'notempty' => true
+        );
 
-        $actual = [
+        $actual = array(
             'empty' => $nav1->hasPages(),
-            'notempty' => $nav2->hasPages(),
-        ];
+            'notempty' => $nav2->hasPages()
+        );
 
         $this->assertEquals($expected, $actual);
     }
 
     public function testSetParentShouldWorkWithPage()
     {
-        $page1 = Zend_Navigation_Page::factory([
+        $page1 = Zend_Navigation_Page::factory(array(
             'label' => 'Page 1',
-            'uri' => '#',
-        ]);
+            'uri' => '#'
+        ));
 
-        $page2 = Zend_Navigation_Page::factory([
+        $page2 = Zend_Navigation_Page::factory(array(
             'label' => 'Page 2',
-            'uri' => '#',
-        ]);
+            'uri' => '#'
+        ));
 
         $page2->setParent($page1);
 
-        $expected = [
+        $expected = array(
             'parent' => 'Page 1',
-            'hasPages' => true,
-        ];
+            'hasPages' => true
+        );
 
-        $actual = [
+        $actual = array(
             'parent' => $page2->getParent()->getLabel(),
-            'hasPages' => $page1->hasPages(),
-        ];
+            'hasPages' => $page1->hasPages()
+        );
 
         $this->assertEquals($expected, $actual);
     }
 
     public function testSetParentShouldWorkWithNull()
     {
-        $page1 = Zend_Navigation_Page::factory([
+        $page1 = Zend_Navigation_Page::factory(array(
             'label' => 'Page 1',
-            'uri' => '#',
-        ]);
+            'uri' => '#'
+        ));
 
-        $page2 = Zend_Navigation_Page::factory([
+        $page2 = Zend_Navigation_Page::factory(array(
             'label' => 'Page 2',
-            'uri' => '#',
-        ]);
+            'uri' => '#'
+        ));
 
         $page2->setParent($page1);
         $page2->setParent(null);
@@ -738,28 +741,28 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
 
     public function testSetParentShouldRemoveFromOldParentPage()
     {
-        $page1 = Zend_Navigation_Page::factory([
+        $page1 = Zend_Navigation_Page::factory(array(
             'label' => 'Page 1',
-            'uri' => '#',
-        ]);
+            'uri' => '#'
+        ));
 
-        $page2 = Zend_Navigation_Page::factory([
+        $page2 = Zend_Navigation_Page::factory(array(
             'label' => 'Page 2',
-            'uri' => '#',
-        ]);
+            'uri' => '#'
+        ));
 
         $page2->setParent($page1);
         $page2->setParent(null);
 
-        $expected = [
+        $expected = array(
             'parent' => null,
-            'haspages' => false,
-        ];
+            'haspages' => false
+        );
 
-        $actual = [
+        $actual = array(
             'parent' => $page2->getParent(),
-            'haspages' => $page2->hasPages(),
-        ];
+            'haspages' => $page2->hasPages()
+        );
 
         $this->assertEquals($expected, $actual);
     }
@@ -849,8 +852,8 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
         // Find all
         $found = $nav->findBy('title', '/(The){1}.*(given){1}/', true, true);
 
-        $expected = ['Page 1.1', 'Page 1.2', 'Page 1.3'];
-        $actual = [];
+        $expected = array('Page 1.1', 'Page 1.2', 'Page 1.3');
+        $actual   = array();
 
         foreach ($found as $page) {
             $actual[] = $page->getLabel();
@@ -866,8 +869,8 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
         $found = $nav->findAllBy('id', 'page_2_and_3');
         $this->assertContainsOnly('Zend_Navigation_Page', $found, false);
 
-        $expected = ['Page 2', 'Page 3'];
-        $actual = [];
+        $expected = array('Page 2', 'Page 3');
+        $actual = array();
 
         foreach ($found as $page) {
             $actual[] = $page->getLabel();
@@ -881,8 +884,8 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
         $nav = $this->_getFindByNavigation();
         $found = $nav->findAllBy('id', 'non-existant');
 
-        $expected = ['type' => 'array', 'count' => 0];
-        $actual = ['type' => gettype($found), 'count' => count($found)];
+        $expected = array('type' => 'array', 'count' => 0);
+        $actual = array('type' => gettype($found), 'count' => count($found));
         $this->assertEquals($expected, $actual);
     }
 
@@ -895,8 +898,8 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
 
         $found = $nav->findAllBy('title', '/(The){1}.*(given){1}/', true);
 
-        $expected = ['Page 1.1', 'Page 1.2', 'Page 1.3'];
-        $actual = [];
+        $expected = array('Page 1.1', 'Page 1.2', 'Page 1.3');
+        $actual = array();
 
         foreach ($found as $page) {
             $actual[] = $page->getLabel();
@@ -915,8 +918,8 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
         // Strict is true
         $found = $nav->findAllBy('rel', 'Example.org');
 
-        $expected = ['Page 1.2', 'Page 1.3'];
-        $actual = [];
+        $expected = array('Page 1.2', 'Page 1.3');
+        $actual   = array();
 
         foreach ($found as $page) {
             $actual[] = $page->getLabel();
@@ -935,8 +938,8 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
         // Test 1
         $found = $nav->findAllBy('rel', '#Example(.*)#', true);
 
-        $expected = ['Page 1.2', 'Page 1.3'];
-        $actual = [];
+        $expected = array('Page 1.2', 'Page 1.3');
+        $actual   = array();
 
         foreach ($found as $page) {
             $actual[] = $page->getLabel();
@@ -947,7 +950,7 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
         // Test 2
         $found = $nav->findAllBy('rel', '?Ex([a-z]*)?', true);
 
-        $actual = [];
+        $actual = array();
 
         foreach ($found as $page) {
             $actual[] = $page->getLabel();
@@ -989,8 +992,8 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
         $found = $nav->findAllById('page_2_and_3');
         $this->assertContainsOnly('Zend_Navigation_Page', $found, false);
 
-        $expected = ['Page 2', 'Page 3'];
-        $actual = [];
+        $expected = array('Page 2', 'Page 3');
+        $actual = array();
         foreach ($found as $page) {
             $actual[] = $page->getLabel();
         }
@@ -1005,8 +1008,8 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
         $found = $nav->findAllByAction('about');
         $this->assertContainsOnly('Zend_Navigation_Page', $found, false);
 
-        $expected = ['Page 3'];
-        $actual = [];
+        $expected = array('Page 3');
+        $actual = array();
         foreach ($found as $page) {
             $actual[] = $page->getLabel();
         }
@@ -1021,8 +1024,8 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
         $found = $nav->findAllByaction('about');
         $this->assertContainsOnly('Zend_Navigation_Page', $found, false);
 
-        $expected = ['Page 1.3', 'Page 3'];
-        $actual = [];
+        $expected = array('Page 1.3', 'Page 3');
+        $actual = array();
         foreach ($found as $page) {
             $actual[] = $page->getLabel();
         }
@@ -1045,7 +1048,7 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
 
         try {
             $found = $nav->findSomeById('page_2_and_3');
-            $this->fail('An invalid magic finder method was used, '.
+            $this->fail('An invalid magic finder method was used, ' .
                         'but a Zend_Navigation_Exception was not thrown');
         } catch (Zend_Navigation_Exception $e) {
             $this->assertContains('Bad method call', $e->getMessage());
@@ -1058,7 +1061,7 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
 
         try {
             $found = $nav->getPagez();
-            $this->fail('An invalid magic finder method was used, '.
+            $this->fail('An invalid magic finder method was used, ' .
                         'but a Zend_Navigation_Exception was not thrown');
         } catch (Zend_Navigation_Exception $e) {
             $this->assertContains('Bad method call', $e->getMessage());
@@ -1080,8 +1083,8 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
         $found = $nav->findAllById('/page_2_/', true);
         $this->assertContainsOnly('Zend_Navigation_Page', $found, false);
 
-        $expected = ['Page 2', 'Page 3'];
-        $actual = [];
+        $expected = array('Page 2', 'Page 3');
+        $actual = array();
         foreach ($found as $page) {
             $actual[] = $page->getLabel();
         }
@@ -1114,7 +1117,7 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
         $found = $nav->findOneByClass('/bar/', '0');
         $this->assertNull($found);
 
-        $found = $nav->findOneByClass('/bar/', []);
+        $found = $nav->findOneByClass('/bar/', array());
         $this->assertNull($found);
     }
 
@@ -1125,76 +1128,76 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
         // findOneById('page_2_and_3') // Page 2
         // findAllById('page_2_and_3') // Page 2, Page 3
         // findAllByAction('about')    // Page 1.3, Page 3
-        return new Zend_Navigation([
-            [
+        return new Zend_Navigation(array(
+            array(
                 'label' => 'Page 1',
-                'uri' => 'page-1',
-                'foo' => 'bar',
-                'pages' => [
-                    [
+                'uri'   => 'page-1',
+                'foo'   => 'bar',
+                'pages' => array(
+                    array(
                         'label' => 'Page 1.1',
-                        'uri' => 'page-1.1',
-                        'foo' => 'bar',
+                        'uri'   => 'page-1.1',
+                        'foo'   => 'bar',
                         'title' => 'The given title',
-                    ],
-                    [
+                    ),
+                    array(
                         'label' => 'Page 1.2',
-                        'uri' => 'page-1.2',
+                        'uri'   => 'page-1.2',
                         'title' => 'The given title',
-                        'rel' => [
-                            'alternate' => [
+                        'rel'   => array(
+                            'alternate' => array(
                                 'label' => 'Example.org',
-                                'uri' => 'http://www.example.org/',
-                            ],
-                        ],
-                    ],
-                    [
-                        'type' => 'uri',
-                        'label' => 'Page 1.3',
-                        'uri' => 'page-1.3',
-                        'title' => 'The given title',
+                                'uri'   => 'http://www.example.org/',
+                            ),
+                        ),
+                    ),
+                    array(
+                        'type'   => 'uri',
+                        'label'  => 'Page 1.3',
+                        'uri'    => 'page-1.3',
+                        'title'  => 'The given title',
                         'action' => 'about',
-                        'class' => 'foo bar',
-                        'rel' => [
-                            'alternate' => [
+                        'class'  => 'foo bar',
+                        'rel'    => array(
+                            'alternate' => array(
                                 'label' => 'Example.org',
-                                'uri' => 'http://www.example.org/',
-                            ],
-                        ],
-                    ],
-                ],
-            ],
-            [
-                'id' => 'page_2_and_3',
-                'label' => 'Page 2',
-                'module' => 'page2',
+                                'uri'   => 'http://www.example.org/',
+                            ),
+                        ),
+                    )
+                )
+            ),
+            array(
+                'id'         => 'page_2_and_3',
+                'label'      => 'Page 2',
+                'module'     => 'page2',
                 'controller' => 'index',
-                'action' => 'page1',
-                'page2' => 'page2',
-            ],
-            [
-                'id' => 'page_2_and_3',
-                'label' => 'Page 3',
-                'module' => 'page3',
+                'action'     => 'page1',
+                'page2'      => 'page2',
+            ),
+            array(
+                'id'         => 'page_2_and_3',
+                'label'      => 'Page 3',
+                'module'     => 'page3',
                 'controller' => 'index',
-                'action' => 'about',
-            ],
-        ]);
+                'action'     => 'about',
+            )
+        ));
     }
 
     public function testCurrent()
     {
-        $container = new Zend_Navigation([
-            [
+        $container = new Zend_Navigation(array(
+            array(
                 'label' => 'Page 2',
-                'type' => 'uri',
-            ],
-            [
+                'type'  => 'uri'
+            ),
+            array(
                 'label' => 'Page 1',
-                'type' => 'uri',
-                'order' => -1,
-            ],
-        ]);
+                'type'  => 'uri',
+                'order' => -1
+            )
+        ));
 
         $page = $container->current();
         $this->assertEquals('Page 1', $page->getLabel());
@@ -1202,22 +1205,22 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
 
     public function testCurrentShouldThrowExceptionIfIndexIsInvalid()
     {
-        require_once __DIR__.'/_files/My/Container.php';
-        $container = new My_Container([
-            [
+        require_once __DIR__ . '/_files/My/Container.php';
+        $container = new My_Container(array(
+            array(
                 'label' => 'Page 2',
-                'type' => 'uri',
-            ],
-            [
+                'type'  => 'uri'
+            ),
+            array(
                 'label' => 'Page 1',
-                'type' => 'uri',
-                'order' => -1,
-            ],
-        ]);
+                'type'  => 'uri',
+                'order' => -1
+            )
+        ));
 
         try {
             $page = $container->current();
-            $this->fail('Container index is invalid, '.
+            $this->fail('Container index is invalid, ' .
                         'but a Zend_Navigation_Exception was not thrown');
         } catch (Zend_Navigation_Exception $e) {
             $this->assertContains('Corruption detected', $e->getMessage());
@@ -1233,9 +1236,9 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
     public function testKeyShouldReturnCurrentPageHash()
     {
         $container = new Zend_Navigation();
-        $page = Zend_Navigation_Page::factory([
-            'type' => 'uri',
-        ]);
+        $page = Zend_Navigation_Page::factory(array(
+            'type' => 'uri'
+        ));
         $container->addPage($page);
 
         $this->assertEquals($page->hashCode(), $container->key());
@@ -1244,9 +1247,9 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
     public function testGetChildrenShouldReturnTheCurrentPage()
     {
         $container = new Zend_Navigation();
-        $page = Zend_Navigation_Page::factory([
-            'type' => 'uri',
-        ]);
+        $page = Zend_Navigation_Page::factory(array(
+            'type' => 'uri'
+        ));
         $container->addPage($page);
 
         $this->assertEquals($page, $container->getChildren());
@@ -1261,21 +1264,21 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
 
     public function testRemovePageRecursively()
     {
-        $container = new Zend_Navigation([
-            [
+        $container = new Zend_Navigation(array(
+            array(
                 'route' => 'foo',
-                'pages' => [
-                    [
+                'pages' => array(
+                    array(
                         'route' => 'bar',
-                        'pages' => [
-                            [
+                        'pages' => array(
+                            array(
                                 'route' => 'baz',
-                            ],
-                        ],
-                    ],
-                ],
-            ],
-        ]);
+                            ),
+                        ),
+                    )
+                )
+            ),
+        ));
 
         $container->removePage($container->findOneBy('route', 'baz'), true);
         $this->assertNull($container->findOneBy('route', 'baz'));

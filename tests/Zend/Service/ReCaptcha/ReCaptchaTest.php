@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Service_ReCaptcha
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -31,10 +31,10 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Service_ReCaptcha
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Service
  * @group      Zend_Service_ReCaptcha
  */
@@ -43,15 +43,13 @@ class Zend_Service_ReCaptcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
 {
     protected $_publicKey = TESTS_ZEND_SERVICE_RECAPTCHA_PUBLIC_KEY;
     protected $_privateKey = TESTS_ZEND_SERVICE_RECAPTCHA_PRIVATE_KEY;
-    protected $_reCaptcha;
+    protected $_reCaptcha = null;
 
-    public function setUp()
-    {
+    public function setUp()  {
         $this->_reCaptcha = new Zend_Service_ReCaptcha();
     }
 
-    public function testSetAndGet()
-    {
+    public function testSetAndGet() {
         /* Set and get IP address */
         $ip = '127.0.0.1';
         $this->_reCaptcha->setIp($ip);
@@ -66,8 +64,7 @@ class Zend_Service_ReCaptcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
         $this->assertSame($this->_privateKey, $this->_reCaptcha->getPrivateKey());
     }
 
-    public function testSingleParam()
-    {
+    public function testSingleParam() {
         $key = 'ssl';
         $value = true;
 
@@ -75,18 +72,16 @@ class Zend_Service_ReCaptcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
         $this->assertSame($value, $this->_reCaptcha->getParam($key));
     }
 
-    public function tetsGetNonExistingParam()
-    {
+    public function tetsGetNonExistingParam() {
         $this->assertNull($this->_reCaptcha->getParam('foobar'));
     }
 
-    public function testMultipleParams()
-    {
-        $params = [
+    public function testMultipleParams() {
+        $params = array(
             'ssl' => true,
             'error' => 'errorMsg',
             'xhtml' => true,
-        ];
+        );
 
         $this->_reCaptcha->setParams($params);
         $_params = $this->_reCaptcha->getParams();
@@ -96,8 +91,7 @@ class Zend_Service_ReCaptcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
         $this->assertSame($params['xhtml'], $_params['xhtml']);
     }
 
-    public function testSingleOption()
-    {
+    public function testSingleOption() {
         $key = 'theme';
         $value = 'black';
 
@@ -105,17 +99,15 @@ class Zend_Service_ReCaptcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
         $this->assertSame($value, $this->_reCaptcha->getOption($key));
     }
 
-    public function tetsGetNonExistingOption()
-    {
+    public function tetsGetNonExistingOption() {
         $this->assertNull($this->_reCaptcha->getOption('foobar'));
     }
 
-    public function testMultipleOptions()
-    {
-        $options = [
+    public function testMultipleOptions() {
+        $options = array(
             'theme' => 'black',
             'lang' => 'no',
-        ];
+        );
 
         $this->_reCaptcha->setOptions($options);
         $_options = $this->_reCaptcha->getOptions();
@@ -124,13 +116,12 @@ class Zend_Service_ReCaptcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
         $this->assertSame($options['lang'], $_options['lang']);
     }
 
-    public function testSetMultipleParamsFromZendConfig()
-    {
-        $params = [
+    public function testSetMultipleParamsFromZendConfig() {
+        $params = array(
             'ssl' => true,
             'error' => 'errorMsg',
             'xhtml' => true,
-        ];
+        );
 
         $config = new Zend_Config($params);
 
@@ -142,19 +133,17 @@ class Zend_Service_ReCaptcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
         $this->assertSame($params['xhtml'], $_params['xhtml']);
     }
 
-    public function testSetInvalidParams()
-    {
+    public function testSetInvalidParams() {
         $this->setExpectedException('Zend_Service_ReCaptcha_Exception');
         $var = 'string';
         $this->_reCaptcha->setParams($var);
     }
 
-    public function testSetMultipleOptionsFromZendConfig()
-    {
-        $options = [
+    public function testSetMultipleOptionsFromZendConfig() {
+        $options = array(
             'theme' => 'black',
             'lang' => 'no',
-        ];
+        );
 
         $config = new Zend_Config($options);
 
@@ -165,25 +154,23 @@ class Zend_Service_ReCaptcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
         $this->assertSame($options['lang'], $_options['lang']);
     }
 
-    public function testSetInvalidOptions()
-    {
+    public function testSetInvalidOptions() {
         $this->setExpectedException('Zend_Service_ReCaptcha_Exception');
         $var = 'string';
         $this->_reCaptcha->setOptions($var);
     }
 
-    public function testConstructor()
-    {
-        $params = [
+    public function testConstructor() {
+        $params = array(
             'ssl' => true,
             'error' => 'errorMsg',
             'xhtml' => true,
-        ];
+        );
 
-        $options = [
+        $options = array(
             'theme' => 'black',
             'lang' => 'no',
-        ];
+        );
 
         $ip = '127.0.0.1';
 
@@ -202,8 +189,7 @@ class Zend_Service_ReCaptcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
         $this->assertSame($ip, $reCaptcha->getIp());
     }
 
-    public function testConstructorWithNoIp()
-    {
+    public function testConstructorWithNoIp() {
         // Fake the _SERVER value
         $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
 
@@ -214,23 +200,21 @@ class Zend_Service_ReCaptcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
         unset($_SERVER['REMOTE_ADDR']);
     }
 
-    public function testGetHtmlWithNoPublicKey()
-    {
+    public function testGetHtmlWithNoPublicKey() {
         $this->setExpectedException('Zend_Service_ReCaptcha_Exception');
 
         $html = $this->_reCaptcha->getHtml();
     }
 
-    public function testVerify()
-    {
+    public function testVerify() {
         $this->_reCaptcha->setPublicKey($this->_publicKey);
         $this->_reCaptcha->setPrivateKey($this->_privateKey);
         $this->_reCaptcha->setIp('127.0.0.1');
 
         $adapter = new Zend_Http_Client_Adapter_Test();
-        $client = new Zend_Http_Client(null, [
-            'adapter' => $adapter,
-        ]);
+        $client = new Zend_Http_Client(null, array(
+            'adapter' => $adapter
+        ));
 
         Zend_Service_ReCaptcha::setHttpClient($client);
 
@@ -244,8 +228,7 @@ class Zend_Service_ReCaptcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($resp->getStatus());
     }
 
-    public function testGetHtml()
-    {
+    public function testGetHtml() {
         $this->_reCaptcha->setPublicKey($this->_publicKey);
         $errorMsg = 'errorMsg';
         $this->_reCaptcha->setParam('ssl', true);
@@ -258,7 +241,7 @@ class Zend_Service_ReCaptcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
         $this->assertNotSame(false, strstr((string) $html, 'var RecaptchaOptions = {"theme":"red","lang":"en"};'));
 
         // See if the js/iframe src is correct
-        $this->assertNotSame(false, strstr((string) $html, 'src="'.Zend_Service_ReCaptcha::API_SECURE_SERVER.'/challenge?k='.$this->_publicKey.'&error='.$errorMsg.'"'));
+        $this->assertNotSame(false, strstr((string) $html, 'src="' . Zend_Service_ReCaptcha::API_SECURE_SERVER . '/challenge?k=' . $this->_publicKey . '&error=' . $errorMsg . '"'));
     }
 
     /** @group ZF-10991 */
@@ -270,31 +253,27 @@ class Zend_Service_ReCaptcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
         $this->assertContains('contact[recaptcha_response_field]', $html);
     }
 
-    public function testVerifyWithMissingPrivateKey()
-    {
+    public function testVerifyWithMissingPrivateKey() {
         $this->setExpectedException('Zend_Service_ReCaptcha_Exception');
 
         $this->_reCaptcha->verify('challenge', 'response');
     }
 
-    public function testVerifyWithMissingIp()
-    {
+    public function testVerifyWithMissingIp() {
         $this->setExpectedException('Zend_Service_ReCaptcha_Exception');
 
         $this->_reCaptcha->setPrivateKey($this->_privateKey);
         $this->_reCaptcha->verify('challenge', 'response');
     }
 
-    public function testVerifyWithMissingChallengeField()
-    {
+    public function testVerifyWithMissingChallengeField() {
         $this->_reCaptcha->setPrivateKey($this->_privateKey);
         $this->_reCaptcha->setIp('127.0.0.1');
         $response = $this->_reCaptcha->verify('', 'response');
         $this->assertFalse($response->getStatus());
     }
 
-    public function testVerifyWithMissingResponseField()
-    {
+    public function testVerifyWithMissingResponseField() {
         $this->_reCaptcha->setPrivateKey($this->_privateKey);
         $this->_reCaptcha->setIp('127.0.0.1');
         $response = $this->_reCaptcha->verify('challenge', '');

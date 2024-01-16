@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,23 +13,23 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Server
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version $Id$
  */
 
 // require_once 'Zend/Server/Reflection/Parameter.php';
 
 /**
- * Test case for Zend_Server_Reflection_Parameter.
+ * Test case for Zend_Server_Reflection_Parameter
  *
  * @category   Zend
- *
+ * @package    Zend_Server
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Server
  */
 #[AllowDynamicProperties]
@@ -39,12 +39,11 @@ class Zend_Server_Reflection_ParameterTest extends PHPUnit_Framework_TestCase
     {
         $method = new ReflectionMethod('Zend_Server_Reflection_Parameter', 'setType');
         $parameters = $method->getParameters();
-
         return $parameters[0];
     }
 
     /**
-     * __construct() test.
+     * __construct() test
      *
      * Call as method call
      *
@@ -55,7 +54,7 @@ class Zend_Server_Reflection_ParameterTest extends PHPUnit_Framework_TestCase
      *
      * Returns: void
      */
-    public function testConstruct()
+    public function test__construct()
     {
         $parameter = $this->_getParameter();
 
@@ -64,7 +63,7 @@ class Zend_Server_Reflection_ParameterTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * __call() test.
+     * __call() test
      *
      * Call as method call
      *
@@ -74,7 +73,7 @@ class Zend_Server_Reflection_ParameterTest extends PHPUnit_Framework_TestCase
      *
      * Returns: mixed
      */
-    public function testCall()
+    public function test__call()
     {
         $r = new Zend_Server_Reflection_Parameter($this->_getParameter());
 
@@ -84,7 +83,7 @@ class Zend_Server_Reflection_ParameterTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * get/setType() test.
+     * get/setType() test
      */
     public function testGetSetType()
     {
@@ -96,7 +95,7 @@ class Zend_Server_Reflection_ParameterTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * get/setDescription() test.
+     * get/setDescription() test
      */
     public function testGetDescription()
     {
@@ -108,7 +107,7 @@ class Zend_Server_Reflection_ParameterTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * get/setPosition() test.
+     * get/setPosition() test
      */
     public function testSetPosition()
     {

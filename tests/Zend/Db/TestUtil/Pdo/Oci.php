@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Db
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -25,15 +25,20 @@
  */
 require_once 'Zend/Db/TestUtil/Pdo/Common.php';
 
+
+
+
 /**
  * @category   Zend
- *
+ * @package    Zend_Db
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Zend_Db_TestUtil_Pdo_Oci extends Zend_Db_TestUtil_Pdo_Common
 {
+
     public function setUp(Zend_Db_Adapter_Abstract $db)
     {
         $this->_db = $db;
@@ -42,81 +47,75 @@ class Zend_Db_TestUtil_Pdo_Oci extends Zend_Db_TestUtil_Pdo_Common
         parent::setUp($db);
     }
 
-    public function getParams(array $constants = [])
+    public function getParams(array $constants = array())
     {
-        $constants = [
-            'host' => 'TESTS_ZEND_DB_ADAPTER_ORACLE_HOSTNAME',
+        $constants = array (
+            'host'     => 'TESTS_ZEND_DB_ADAPTER_ORACLE_HOSTNAME',
             'username' => 'TESTS_ZEND_DB_ADAPTER_ORACLE_USERNAME',
             'password' => 'TESTS_ZEND_DB_ADAPTER_ORACLE_PASSWORD',
-            'dbname' => 'TESTS_ZEND_DB_ADAPTER_ORACLE_SID',
-        ];
-
+            'dbname'   => 'TESTS_ZEND_DB_ADAPTER_ORACLE_SID'
+        );
         return parent::getParams($constants);
     }
 
     public function getSqlType($type)
     {
         if (preg_match('/VARCHAR(.*)/', $type, $matches)) {
-            return 'VARCHAR2'.$matches[1];
+            return 'VARCHAR2' . $matches[1];
         }
-        if ('IDENTITY' == $type) {
+        if ($type == 'IDENTITY') {
             return 'NUMBER(11) PRIMARY KEY';
         }
-        if ('INTEGER' == $type) {
+        if ($type == 'INTEGER') {
             return 'NUMBER(11)';
         }
-        if ('DATETIME' == $type) {
+        if ($type == 'DATETIME') {
             return 'TIMESTAMP';
         }
-
         return $type;
     }
 
     protected function _getSqlCreateTable($tableName)
     {
         $tableList = $this->_db->fetchCol('SELECT UPPER(TABLE_NAME) FROM ALL_TABLES '
-            .$this->_db->quoteInto(' WHERE UPPER(TABLE_NAME) = UPPER(?)', $tableName)
+            . $this->_db->quoteInto(' WHERE UPPER(TABLE_NAME) = UPPER(?)', $tableName)
         );
         if (in_array(strtoupper((string) $tableName), $tableList)) {
             return null;
         }
-
-        return 'CREATE TABLE '.$this->_db->quoteIdentifier($tableName, true);
+        return 'CREATE TABLE ' . $this->_db->quoteIdentifier($tableName, true);
     }
 
     protected function _getSqlDropTable($tableName)
     {
         $tableList = $this->_db->fetchCol('SELECT UPPER(TABLE_NAME) FROM ALL_TABLES '
-            .$this->_db->quoteInto(' WHERE UPPER(TABLE_NAME) = UPPER(?)', $tableName)
+            . $this->_db->quoteInto(' WHERE UPPER(TABLE_NAME) = UPPER(?)', $tableName)
         );
         if (in_array(strtoupper((string) $tableName), $tableList)) {
-            return 'DROP TABLE '.$this->_db->quoteIdentifier($tableName, true);
+            return 'DROP TABLE ' . $this->_db->quoteIdentifier($tableName, true);
         }
-
         return null;
     }
 
     protected function _getSqlCreateSequence($sequenceName)
     {
         $seqList = $this->_db->fetchCol('SELECT UPPER(SEQUENCE_NAME) FROM ALL_SEQUENCES '
-            .$this->_db->quoteInto(' WHERE UPPER(SEQUENCE_NAME) = UPPER(?)', $sequenceName)
+            . $this->_db->quoteInto(' WHERE UPPER(SEQUENCE_NAME) = UPPER(?)', $sequenceName)
         );
         if (in_array(strtoupper((string) $sequenceName), $seqList)) {
             return null;
         }
-
-        return 'CREATE SEQUENCE '.$this->_db->quoteIdentifier($sequenceName, true);
+        return 'CREATE SEQUENCE ' . $this->_db->quoteIdentifier($sequenceName, true);
     }
 
     protected function _getSqlDropSequence($sequenceName)
     {
         $seqList = $this->_db->fetchCol('SELECT UPPER(SEQUENCE_NAME) FROM ALL_SEQUENCES '
-            .$this->_db->quoteInto(' WHERE UPPER(SEQUENCE_NAME) = UPPER(?)', $sequenceName)
+            . $this->_db->quoteInto(' WHERE UPPER(SEQUENCE_NAME) = UPPER(?)', $sequenceName)
         );
         if (in_array(strtoupper((string) $sequenceName), $seqList)) {
-            return 'DROP SEQUENCE '.$this->_db->quoteIdentifier($sequenceName, true);
+            return 'DROP SEQUENCE ' . $this->_db->quoteIdentifier($sequenceName, true);
         }
-
         return null;
     }
 
@@ -128,7 +127,6 @@ class Zend_Db_TestUtil_Pdo_Oci extends Zend_Db_TestUtil_Pdo_Common
             $row['created_on'] = new Zend_Db_Expr($this->_db->quoteInto('DATE ?', $row['created_on']));
             $row['updated_on'] = new Zend_Db_Expr($this->_db->quoteInto('DATE ?', $row['updated_on']));
         }
-
         return $data;
     }
 
@@ -140,8 +138,8 @@ class Zend_Db_TestUtil_Pdo_Oci extends Zend_Db_TestUtil_Pdo_Common
             $hex = bin2hex($row['doc_clob']);
             $row['doc_clob'] = new Zend_Db_Expr("TO_CLOB($quoted)");
             $row['doc_blob'] = new Zend_Db_Expr("TO_BLOB(HEXTORAW('$hex'))");
-        }
 
+        }
         return $data;
     }
 
@@ -151,26 +149,24 @@ class Zend_Db_TestUtil_Pdo_Oci extends Zend_Db_TestUtil_Pdo_Common
         foreach ($data as &$row) {
             $row['product_id'] = new Zend_Db_Expr($this->_db->quoteIdentifier('zfproducts_seq', true).'.NEXTVAL');
         }
-
         return $data;
     }
 
     protected function _getSqlCreateView($viewName)
     {
-        return 'CREATE OR REPLACE VIEW '.$this->_db->quoteIdentifier($viewName, true);
+        return 'CREATE OR REPLACE VIEW ' . $this->_db->quoteIdentifier($viewName, true);
     }
 
     /**
      * ZF-4330: schemas on Oracle are specifics:
      * "A schema is owned by a database user and has the same name as that user."
      * http://download-east.oracle.com/docs/cd/B19306_01/server.102/b14220/intro.htm#sthref69
-     *
      * @return string
      */
     public function getSchema()
     {
         $param = $this->getParams();
-
         return $param['username'];
     }
+
 }

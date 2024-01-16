@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Tool
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -24,14 +24,18 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Tool
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
-class Zend_Tool_Framework_EmptyClient extends Zend_Tool_Framework_Client_Abstract implements Zend_Tool_Framework_Registry_EnabledInterface
+class Zend_Tool_Framework_EmptyClient
+    extends Zend_Tool_Framework_Client_Abstract
+    implements Zend_Tool_Framework_Registry_EnabledInterface
 {
-    protected $_registry;
+
+    protected $_registry = null;
 
     public function getName()
     {
@@ -47,4 +51,5 @@ class Zend_Tool_Framework_EmptyClient extends Zend_Tool_Framework_Client_Abstrac
     {
         $this->_registry = $registry;
     }
+
 }

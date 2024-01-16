@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Queue
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -39,26 +39,25 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Queue
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Queue
  */
 #[AllowDynamicProperties]
-class Zend_Queue_Stomp_Connection_Mock extends Zend_Queue_Stomp_Client_Connection
+class Zend_Queue_Stomp_Connection_Mock
+    extends Zend_Queue_Stomp_Client_Connection
 {
     /**
-     * open() opens a socket to the Stomp server.
+     * open() opens a socket to the Stomp server
      *
+     * @param array $config ('scheme', 'host', 'port')
      * @return true;
      */
-    public function open($scheme, $host, $port, array $options = [])
+    public function open($scheme, $host, $port, array $options = array())
     {
-        if (0 == $port) {
-            return false;
-        }
-
+        if ( $port == 0 )  return false;
         return true;
     }
 
@@ -67,10 +66,9 @@ class Zend_Queue_Stomp_Connection_Mock extends Zend_Queue_Stomp_Client_Connectio
     }
 
     /**
-     * Check whether we are connected to the server.
+     * Check whether we are connected to the server
      *
      * @return true
-     *
      * @throws Zend_Queue_Exception
      */
     public function ping()
@@ -79,12 +77,11 @@ class Zend_Queue_Stomp_Connection_Mock extends Zend_Queue_Stomp_Client_Connectio
     }
 
     /**
-     * write a frame to the stomp server.
+     * write a frame to the stomp server
      *
      * @example $response = $client->write($frame)->read();
      *
      * @param Zend_Queue_Stom_Frame $frame
-     *
      * @return $this
      */
     public function write(Zend_Queue_Stomp_FrameInterface $frame)
@@ -93,7 +90,7 @@ class Zend_Queue_Stomp_Connection_Mock extends Zend_Queue_Stomp_Client_Connectio
     }
 
     /**
-     * tests the socket to see if there is data for us.
+     * tests the socket to see if there is data for us
      */
     public function canRead()
     {
@@ -104,25 +101,21 @@ class Zend_Queue_Stomp_Connection_Mock extends Zend_Queue_Stomp_Client_Connectio
      * reads in a frame from the socket or returns false.
      *
      * @return Zend_Queue_Stomp_Frame|false
-     *
      * @throws Zend_Queue_Exception
      */
     public function read()
     {
-        if (!$this->canRead()) {
-            return false;
-        }
-
+        if (! $this->canRead()) return false;
         return array_shift($this->_buffer);
     }
 }
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Queue
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Queue
  */
 #[AllowDynamicProperties]
@@ -159,7 +152,7 @@ class Zend_Queue_Stomp_ClientTest extends PHPUnit_Framework_TestCase
     {
         $frame = new Zend_Queue_Stomp_Frame();
         $frame->setCommand('testing');
-        $frame->setHeader('testing', 1);
+        $frame->setHeader('testing',1);
         $frame->setBody('hello world');
 
         $client = new Zend_Queue_Stomp_Client();

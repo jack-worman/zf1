@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Filter
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -27,24 +27,24 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Filter
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Filter
  */
 #[AllowDynamicProperties]
 class Zend_Filter_NullTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_Filter_Null object.
+     * Zend_Filter_Null object
      *
      * @var Zend_Filter_Null
      */
     protected $_filter;
 
     /**
-     * Creates a new Zend_Filter_Null object for each test method.
+     * Creates a new Zend_Filter_Null object for each test method
      *
      * @return void
      */
@@ -54,7 +54,7 @@ class Zend_Filter_NullTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that the filter follows expected behavior.
+     * Ensures that the filter follows expected behavior
      *
      * @return void
      */
@@ -63,14 +63,14 @@ class Zend_Filter_NullTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $this->_filter->filter('0'));
         $this->assertEquals(null, $this->_filter->filter(''));
         $this->assertEquals(null, $this->_filter->filter(0));
-        $this->assertEquals(null, $this->_filter->filter([]));
+        $this->assertEquals(null, $this->_filter->filter(array()));
         $this->assertEquals(null, $this->_filter->filter(false));
         $this->assertEquals('test', $this->_filter->filter('test'));
         $this->assertEquals(true, $this->_filter->filter(true));
     }
 
     /**
-     * Ensures that the filter follows expected behavior.
+     * Ensures that the filter follows expected behavior
      *
      * @return void
      */
@@ -80,14 +80,14 @@ class Zend_Filter_NullTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('0', $this->_filter->filter('0'));
         $this->assertEquals('', $this->_filter->filter(''));
         $this->assertEquals(0, $this->_filter->filter(0));
-        $this->assertEquals([], $this->_filter->filter([]));
+        $this->assertEquals(array(), $this->_filter->filter(array()));
         $this->assertEquals(null, $this->_filter->filter(false));
         $this->assertEquals('test', $this->_filter->filter('test'));
         $this->assertEquals(true, $this->_filter->filter(true));
     }
 
     /**
-     * Ensures that the filter follows expected behavior.
+     * Ensures that the filter follows expected behavior
      *
      * @return void
      */
@@ -97,14 +97,14 @@ class Zend_Filter_NullTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('0', $this->_filter->filter('0'));
         $this->assertEquals('', $this->_filter->filter(''));
         $this->assertEquals(null, $this->_filter->filter(0));
-        $this->assertEquals([], $this->_filter->filter([]));
+        $this->assertEquals(array(), $this->_filter->filter(array()));
         $this->assertEquals(false, $this->_filter->filter(false));
         $this->assertEquals('test', $this->_filter->filter('test'));
         $this->assertEquals(true, $this->_filter->filter(true));
     }
 
     /**
-     * Ensures that the filter follows expected behavior.
+     * Ensures that the filter follows expected behavior
      *
      * @return void
      */
@@ -114,14 +114,14 @@ class Zend_Filter_NullTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('0', $this->_filter->filter('0'));
         $this->assertEquals('', $this->_filter->filter(''));
         $this->assertEquals(0, $this->_filter->filter(0));
-        $this->assertEquals(null, $this->_filter->filter([]));
+        $this->assertEquals(null, $this->_filter->filter(array()));
         $this->assertEquals(false, $this->_filter->filter(false));
         $this->assertEquals('test', $this->_filter->filter('test'));
         $this->assertEquals(true, $this->_filter->filter(true));
     }
 
     /**
-     * Ensures that the filter follows expected behavior.
+     * Ensures that the filter follows expected behavior
      *
      * @return void
      */
@@ -131,14 +131,14 @@ class Zend_Filter_NullTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('0', $this->_filter->filter('0'));
         $this->assertEquals(null, $this->_filter->filter(''));
         $this->assertEquals(0, $this->_filter->filter(0));
-        $this->assertEquals([], $this->_filter->filter([]));
+        $this->assertEquals(array(), $this->_filter->filter(array()));
         $this->assertEquals(false, $this->_filter->filter(false));
         $this->assertEquals('test', $this->_filter->filter('test'));
         $this->assertEquals(true, $this->_filter->filter(true));
     }
 
     /**
-     * Ensures that the filter follows expected behavior.
+     * Ensures that the filter follows expected behavior
      *
      * @return void
      */
@@ -148,64 +148,64 @@ class Zend_Filter_NullTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $this->_filter->filter('0'));
         $this->assertEquals('', $this->_filter->filter(''));
         $this->assertEquals(0, $this->_filter->filter(0));
-        $this->assertEquals([], $this->_filter->filter([]));
+        $this->assertEquals(array(), $this->_filter->filter(array()));
         $this->assertEquals(false, $this->_filter->filter(false));
         $this->assertEquals('test', $this->_filter->filter('test'));
         $this->assertEquals(true, $this->_filter->filter(true));
     }
 
     /**
-     * Ensures that the filter follows expected behavior.
+     * Ensures that the filter follows expected behavior
      *
      * @return void
      */
     public function testArrayConstantNotation()
     {
         $filter = new Zend_Filter_Null(
-            [
+            array(
                 Zend_Filter_Null::ZERO,
                 Zend_Filter_Null::STRING,
-                Zend_Filter_Null::BOOLEAN,
-            ]
+                Zend_Filter_Null::BOOLEAN
+            )
         );
 
         $this->assertEquals(null, $filter->filter('0'));
         $this->assertEquals(null, $filter->filter(''));
         $this->assertEquals(0, $filter->filter(0));
-        $this->assertEquals([], $filter->filter([]));
+        $this->assertEquals(array(), $filter->filter(array()));
         $this->assertEquals(null, $filter->filter(false));
         $this->assertEquals('test', $filter->filter('test'));
         $this->assertEquals(true, $filter->filter(true));
     }
 
     /**
-     * Ensures that the filter follows expected behavior.
+     * Ensures that the filter follows expected behavior
      *
      * @return void
      */
     public function testArrayConfigNotation()
     {
         $filter = new Zend_Filter_Null(
-            [
-                'type' => [
+            array(
+                'type' => array(
                     Zend_Filter_Null::ZERO,
                     Zend_Filter_Null::STRING,
-                    Zend_Filter_Null::BOOLEAN],
-                'test' => false,
-            ]
+                    Zend_Filter_Null::BOOLEAN),
+                'test' => false
+            )
         );
 
         $this->assertEquals(null, $filter->filter('0'));
         $this->assertEquals(null, $filter->filter(''));
         $this->assertEquals(0, $filter->filter(0));
-        $this->assertEquals([], $filter->filter([]));
+        $this->assertEquals(array(), $filter->filter(array()));
         $this->assertEquals(null, $filter->filter(false));
         $this->assertEquals('test', $filter->filter('test'));
         $this->assertEquals(true, $filter->filter(true));
     }
 
     /**
-     * Ensures that the filter follows expected behavior.
+     * Ensures that the filter follows expected behavior
      *
      * @return void
      */
@@ -218,36 +218,36 @@ class Zend_Filter_NullTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $filter->filter('0'));
         $this->assertEquals(null, $filter->filter(''));
         $this->assertEquals(0, $filter->filter(0));
-        $this->assertEquals([], $filter->filter([]));
+        $this->assertEquals(array(), $filter->filter(array()));
         $this->assertEquals(null, $filter->filter(false));
         $this->assertEquals('test', $filter->filter('test'));
         $this->assertEquals(true, $filter->filter(true));
     }
 
     /**
-     * Ensures that the filter follows expected behavior.
+     * Ensures that the filter follows expected behavior
      *
      * @return void
      */
     public function testStringNotation()
     {
         $filter = new Zend_Filter_Null(
-            [
-                'zero', 'string', 'boolean',
-            ]
+            array(
+                'zero', 'string', 'boolean'
+            )
         );
 
         $this->assertEquals(null, $filter->filter('0'));
         $this->assertEquals(null, $filter->filter(''));
         $this->assertEquals(0, $filter->filter(0));
-        $this->assertEquals([], $filter->filter([]));
+        $this->assertEquals(array(), $filter->filter(array()));
         $this->assertEquals(null, $filter->filter(false));
         $this->assertEquals('test', $filter->filter('test'));
         $this->assertEquals(true, $filter->filter(true));
     }
 
     /**
-     * Ensures that the filter follows expected behavior.
+     * Ensures that the filter follows expected behavior
      *
      * @return void
      */
@@ -260,14 +260,14 @@ class Zend_Filter_NullTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('0', $filter->filter('0'));
         $this->assertEquals(null, $filter->filter(''));
         $this->assertEquals(0, $filter->filter(0));
-        $this->assertEquals([], $filter->filter([]));
+        $this->assertEquals(array(), $filter->filter(array()));
         $this->assertEquals(false, $filter->filter(false));
         $this->assertEquals('test', $filter->filter('test'));
         $this->assertEquals(true, $filter->filter(true));
     }
 
     /**
-     * Ensures that the filter follows expected behavior.
+     * Ensures that the filter follows expected behavior
      *
      * @return void
      */
@@ -282,7 +282,7 @@ class Zend_Filter_NullTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that the filter follows expected behavior.
+     * Ensures that the filter follows expected behavior
      *
      * @return void
      */

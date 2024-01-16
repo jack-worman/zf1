@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,16 +13,18 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Application
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Application_Resource_UseragentTest::main');
 }
 
 /**
- * Zend_Loader_Autoloader.
+ * Zend_Loader_Autoloader
  */
 // require_once 'Zend/Loader/Autoloader.php';
 // require_once 'Zend/Application/Resource/ResourceAbstract.php';
@@ -30,10 +32,10 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Application
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Application
  */
 #[AllowDynamicProperties]
@@ -41,7 +43,7 @@ class Zend_Application_Resource_UseragentTest extends PHPUnit_Framework_TestCase
 {
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite(__CLASS__);
+        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -52,7 +54,7 @@ class Zend_Application_Resource_UseragentTest extends PHPUnit_Framework_TestCase
         if (!is_array($this->loaders)) {
             // spl_autoload_functions does not return empty array when no
             // autoloaders registered...
-            $this->loaders = [];
+            $this->loaders = array();
         }
 
         Zend_Loader_Autoloader::resetInstance();
@@ -60,7 +62,7 @@ class Zend_Application_Resource_UseragentTest extends PHPUnit_Framework_TestCase
 
         $this->application = new Zend_Application('testing');
 
-        require_once __DIR__.'/../_files/ZfAppBootstrap.php';
+        require_once __DIR__ . '/../_files/ZfAppBootstrap.php';
         $this->bootstrap = new ZfAppBootstrap($this->application);
 
         Zend_Controller_Action_HelperBroker::resetHelpers();
@@ -84,7 +86,7 @@ class Zend_Application_Resource_UseragentTest extends PHPUnit_Framework_TestCase
 
     public function testInitializationInitializesUserAgentObject()
     {
-        $resource = new Zend_Application_Resource_Useragent([]);
+        $resource = new Zend_Application_Resource_Useragent(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
         $this->assertTrue($resource->getUserAgent() instanceof Zend_Http_UserAgent);
@@ -92,25 +94,25 @@ class Zend_Application_Resource_UseragentTest extends PHPUnit_Framework_TestCase
 
     public function testOptionsPassedToResourceAreUsedToSetUserAgentState()
     {
-        $options = [
-            'storage' => ['adapter' => 'NonPersistent'],
-        ];
+        $options = array(
+            'storage' => array('adapter' => 'NonPersistent'),
+        );
         $resource = new Zend_Application_Resource_Useragent($options);
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
-        $ua = $resource->getUserAgent();
+        $ua      = $resource->getUserAgent();
         $storage = $ua->getStorage();
         $this->assertTrue($storage instanceof Zend_Http_UserAgent_Storage_NonPersistent);
     }
 
     public function testInjectsUserAgentIntoViewHelperWhenViewResourcePresent()
     {
-        $this->bootstrap->registerPluginResource('view', []);
-        $resource = new Zend_Application_Resource_Useragent([]);
+        $this->bootstrap->registerPluginResource('view', array());
+        $resource = new Zend_Application_Resource_Useragent(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
 
-        $view = $this->bootstrap->getResource('view');
+        $view   = $this->bootstrap->getResource('view');
         $helper = $view->getHelper('userAgent');
 
         $expected = $resource->getUserAgent();

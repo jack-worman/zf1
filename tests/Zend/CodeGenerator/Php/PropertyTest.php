@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_CodeGenerator
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id $
  */
 
@@ -26,7 +26,8 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_CodeGenerator
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
@@ -36,10 +37,11 @@
 #[AllowDynamicProperties]
 class Zend_CodeGenerator_Php_PropertyTest extends PHPUnit_Framework_TestCase
 {
+
     public function setup()
     {
         if (!class_exists('Zend_CodeGenerator_Php_TestClassWithManyProperties')) {
-            require_once __DIR__.'/_files/TestClassWithManyProperties.php';
+            require_once __DIR__ . '/_files/TestClassWithManyProperties.php';
         }
     }
 
@@ -51,20 +53,20 @@ class Zend_CodeGenerator_Php_PropertyTest extends PHPUnit_Framework_TestCase
 
     public function testPropertyReturnsSimpleValue()
     {
-        $codeGenProperty = new Zend_CodeGenerator_Php_Property(['name' => 'someVal', 'defaultValue' => 'some string value']);
+        $codeGenProperty = new Zend_CodeGenerator_Php_Property(array('name' => 'someVal', 'defaultValue' => 'some string value'));
         $this->assertEquals('    public $someVal = \'some string value\';', $codeGenProperty->generate());
     }
 
     public function testPropertyMultilineValue()
     {
-        $targetValue = [
+        $targetValue = array(
             5,
             'one' => 1,
             'two' => '2',
             'null' => null,
             'true' => true,
             "bar's" => "bar's",
-            ];
+            );
 
         $expectedSource = <<<EOS
     public \$myFoo = array(
@@ -77,10 +79,10 @@ class Zend_CodeGenerator_Php_PropertyTest extends PHPUnit_Framework_TestCase
         );
 EOS;
 
-        $property = new Zend_CodeGenerator_Php_Property([
+        $property = new Zend_CodeGenerator_Php_Property(array(
             'name' => 'myFoo',
-            'defaultValue' => $targetValue,
-            ]);
+            'defaultValue' => $targetValue
+            ));
 
         $targetSource = $property->generate();
         $targetSource = str_replace((string) "\r", '', $targetSource);
@@ -90,13 +92,13 @@ EOS;
 
     public function testPropertyCanProduceContstantModifier()
     {
-        $codeGenProperty = new Zend_CodeGenerator_Php_Property(['name' => 'someVal', 'defaultValue' => 'some string value', 'const' => true]);
+        $codeGenProperty = new Zend_CodeGenerator_Php_Property(array('name' => 'someVal', 'defaultValue' => 'some string value', 'const' => true));
         $this->assertEquals('    const someVal = \'some string value\';', $codeGenProperty->generate());
     }
 
     public function testPropertyCanProduceStaticModifier()
     {
-        $codeGenProperty = new Zend_CodeGenerator_Php_Property(['name' => 'someVal', 'defaultValue' => 'some string value', 'static' => true]);
+        $codeGenProperty = new Zend_CodeGenerator_Php_Property(array('name' => 'someVal', 'defaultValue' => 'some string value', 'static' => true));
         $this->assertEquals('    public static $someVal = \'some string value\';', $codeGenProperty->generate());
     }
 
@@ -113,10 +115,11 @@ EOS;
         $cgProp = Zend_CodeGenerator_Php_Property::fromReflection($reflProp);
 
         $this->assertEquals('_bazProperty', $cgProp->getName());
-        $this->assertEquals([true, false, true], $cgProp->getDefaultValue()->getValue());
+        $this->assertEquals(array(true, false, true), $cgProp->getDefaultValue()->getValue());
         $this->assertEquals('private', $cgProp->getVisibility());
 
         $reflProp = $reflectionClass->getProperty('_bazStaticProperty');
+
 
         // test property 2
         $cgProp = Zend_CodeGenerator_Php_Property::fromReflection($reflProp);
@@ -132,12 +135,12 @@ EOS;
      */
     public function testPropertyWillEmitStaticModifier()
     {
-        $codeGenProperty = new Zend_CodeGenerator_Php_Property([
+        $codeGenProperty = new Zend_CodeGenerator_Php_Property(array(
             'name' => 'someVal',
             'static' => true,
             'visibility' => 'protected',
-            'defaultValue' => 'some string value',
-            ]);
+            'defaultValue' => 'some string value'
+            ));
         $this->assertEquals('    protected static $someVal = \'some string value\';', $codeGenProperty->generate());
     }
 
@@ -146,13 +149,13 @@ EOS;
      */
     public function testPropertyCanHaveDocblock()
     {
-        $codeGenProperty = new Zend_CodeGenerator_Php_Property([
+        $codeGenProperty = new Zend_CodeGenerator_Php_Property(array(
             'name' => 'someVal',
             'static' => true,
             'visibility' => 'protected',
             'defaultValue' => 'some string value',
-            'docblock' => '@var string $someVal This is some val',
-            ]);
+            'docblock' => '@var string $someVal This is some val'
+            ));
 
         $expected = <<<EOS
     /**
@@ -165,37 +168,37 @@ EOS;
 
     public function testOtherTypesThrowExceptionOnGenerate()
     {
-        $codeGenProperty = new Zend_CodeGenerator_Php_Property([
+        $codeGenProperty = new Zend_CodeGenerator_Php_Property(array(
             'name' => 'someVal',
             'defaultValue' => new stdClass(),
-        ]);
+        ));
 
-        $this->setExpectedException('Zend_CodeGenerator_Php_Exception');
+        $this->setExpectedException("Zend_CodeGenerator_Php_Exception");
 
         $codeGenProperty->generate();
     }
 
-    public static function dataSetTypeSetValueGenerate()
+    static public function dataSetTypeSetValueGenerate()
     {
-        return [
-            ['string', 'foo', "'foo';"],
-            ['int', 1, '1;'],
-            ['integer', 1, '1;'],
-            ['bool', true, 'true;'],
-            ['bool', false, 'false;'],
-            ['boolean', true, 'true;'],
-            ['number', 1, '1;'],
-            ['float', 1.23, '1.23;'],
-            ['double', 1.23, '1.23;'],
-            ['constant', 'FOO', 'FOO;'],
-            ['null', null, 'null;'],
-        ];
+        return array(
+            array('string', 'foo', "'foo';"),
+            array('int', 1, "1;"),
+            array('integer', 1, "1;"),
+            array('bool', true, "true;"),
+            array('bool', false, "false;"),
+            array('boolean', true, "true;"),
+            array('number', 1, '1;'),
+            array('float', 1.23, '1.23;'),
+            array('double', 1.23, '1.23;'),
+            array('constant', 'FOO', 'FOO;'),
+            array('null', null, 'null;'),
+        );
     }
 
     /**
      * @dataProvider dataSetTypeSetValueGenerate
-     *
      * @param string $type
+     * @param mixed $value
      * @param string $code
      */
     public function testSetTypeSetValueGenerate($type, $value, $code)
@@ -210,18 +213,18 @@ EOS;
 
     /**
      * @dataProvider dataSetTypeSetValueGenerate
-     *
      * @param string $type
+     * @param mixed $value
      * @param string $code
      */
     public function testSetBogusTypeSetValueGenerateUseAutoDetection($type, $value, $code)
     {
-        if ('constant' == $type) {
+        if($type == 'constant') {
             return; // constant can only be detected explicitly
         }
 
         $defaultValue = new Zend_CodeGenerator_Php_Property_DefaultValue();
-        $defaultValue->setType('bogus');
+        $defaultValue->setType("bogus");
         $defaultValue->setValue($value);
 
         $this->assertEquals($code, $defaultValue->generate());
@@ -232,11 +235,11 @@ EOS;
      */
     public function testZF8849()
     {
-        $property = new Zend_CodeGenerator_Php_Property([
-            'defaultValue' => ['value' => 1.337, 'type' => 'string'],
-            'name' => 'ZF8849',
-            'const' => true,
-        ]);
+        $property = new Zend_CodeGenerator_Php_Property(array(
+            'defaultValue' => array('value' => 1.337, 'type' => 'string'),
+            'name'         => 'ZF8849',
+            'const'        => true
+        ));
 
         $this->assertEquals(
             $property->generate(),

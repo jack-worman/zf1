@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Validate
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -27,10 +27,10 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Validate
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Validate
  */
 #[AllowDynamicProperties]
@@ -38,12 +38,12 @@ class Zend_Validate_FloatTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Constant for Non-breaking space UTF-8 encoded value.
-     * https://en.wikipedia.org/wiki/Non-breaking_space.
+     * https://en.wikipedia.org/wiki/Non-breaking_space
      */
-    public const NBSP = "\xC2\xA0";
+    const NBSP = "\xC2\xA0";
 
     /**
-     * Zend_Validate_Float object.
+     * Zend_Validate_Float object
      *
      * @var Zend_Validate_Float
      */
@@ -55,13 +55,13 @@ class Zend_Validate_FloatTest extends PHPUnit_Framework_TestCase
     private $_locale;
 
     /**
-     * Creates a new Zend_Validate_Float object for each test method.
+     * Creates a new Zend_Validate_Float object for each test method
      *
      * @return void
      */
     public function setUp()
     {
-        $this->_locale = setlocale(LC_ALL, 0); // backup locale
+        $this->_locale = setlocale(LC_ALL, 0); //backup locale
 
         // require_once 'Zend/Registry.php';
         if (Zend_Registry::isRegistered('Zend_Locale')) {
@@ -73,51 +73,50 @@ class Zend_Validate_FloatTest extends PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        // restore locale
+        //restore locale
         if (is_string($this->_locale) && strpos((string) $this->_locale, ';')) {
-            $locales = [];
+            $locales = array();
             foreach (explode(';', $this->_locale) as $l) {
                 $tmp = explode('=', $l);
                 $locales[$tmp[0]] = $tmp[1];
             }
             setlocale(LC_ALL, $locales);
-
             return;
         }
         setlocale(LC_ALL, $this->_locale);
     }
 
     /**
-     * Ensures that the validator follows expected behavior.
+     * Ensures that the validator follows expected behavior
      *
      * @return void
      */
     public function testBasic()
     {
-        $valuesExpected = [
-            [1.00, true],
-            [0.01, true],
-            [-0.1, true],
-            [1, true],
-            ['not a float', false],
-            ];
+        $valuesExpected = array(
+            array(1.00, true),
+            array(0.01, true),
+            array(-0.1, true),
+            array(1, true),
+            array('not a float', false),
+            );
         foreach ($valuesExpected as $element) {
             $this->assertEquals($element[1], $this->_validator->isValid($element[0]));
         }
     }
 
     /**
-     * Ensures that getMessages() returns expected default value.
+     * Ensures that getMessages() returns expected default value
      *
      * @return void
      */
     public function testGetMessages()
     {
-        $this->assertEquals([], $this->_validator->getMessages());
+        $this->assertEquals(array(), $this->_validator->getMessages());
     }
 
     /**
-     * Ensures that set/getLocale() works.
+     * Ensures that set/getLocale() works
      */
     public function testSettingLocales()
     {
@@ -131,7 +130,7 @@ class Zend_Validate_FloatTest extends PHPUnit_Framework_TestCase
      */
     public function testNonStringValidation()
     {
-        $this->assertFalse($this->_validator->isValid([1 => 1]));
+        $this->assertFalse($this->_validator->isValid(array(1 => 1)));
     }
 
     /**
@@ -229,7 +228,7 @@ class Zend_Validate_FloatTest extends PHPUnit_Framework_TestCase
         $valid = new Zend_Validate_Float('fr_FR');
         $this->assertTrue($valid->isValid('1,3'));
         $this->assertTrue($valid->isValid('1000,3'));
-        $this->assertTrue($valid->isValid('1'.self::NBSP.'000,3'));
+        $this->assertTrue($valid->isValid('1' . self::NBSP . '000,3'));
         $this->assertFalse($valid->isValid('1.3'));
         $this->assertFalse($valid->isValid('1000.3'));
         $this->assertFalse($valid->isValid('1,000.3'));

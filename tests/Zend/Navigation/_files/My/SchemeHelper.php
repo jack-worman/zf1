@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Navigation
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id: UrlHelper.php 24593 2012-01-05 20:35:02Z matthew $
  */
 
@@ -24,14 +24,15 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Navigation
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class My_SchemeHelper extends Zend_View_Helper_ServerUrl
 {
-    public const RETURN_URL = 'spotify:track:2nd6CTjR9zjHGT0QtpfLHe';
+    const RETURN_URL = 'spotify:track:2nd6CTjR9zjHGT0QtpfLHe';
 
     public function serverUrl($requestUri = null)
     {

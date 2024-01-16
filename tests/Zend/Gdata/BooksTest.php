@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Gdata_Books
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id $
  */
 
@@ -25,16 +25,17 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Gdata_Books
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Books
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_BooksTest extends PHPUnit_Framework_TestCase
 {
+
     public function setUp()
     {
         $this->gdata = new Zend_Gdata_Books(new Zend_Http_Client());
@@ -44,4 +45,5 @@ class Zend_Gdata_BooksTest extends PHPUnit_Framework_TestCase
     {
         $this->assertTrue(true);
     }
+
 }

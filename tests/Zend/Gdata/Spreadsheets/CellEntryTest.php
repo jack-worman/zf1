@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Gdata_Spreadsheets
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id $
  */
 
@@ -25,16 +25,17 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Gdata_Spreadsheets
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Spreadsheets
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_Spreadsheets_CellEntryTest extends PHPUnit_Framework_TestCase
 {
+
     public function setUp()
     {
         $this->cellEntry = new Zend_Gdata_Spreadsheets_CellEntry();
@@ -43,11 +44,11 @@ class Zend_Gdata_Spreadsheets_CellEntryTest extends PHPUnit_Framework_TestCase
     public function testToAndFromString()
     {
         $this->cellEntry->setCell(new Zend_Gdata_Spreadsheets_Extension_Cell('my cell', '1', '2', 'input value', 'numeric value'));
-        $this->assertTrue('my cell' == $this->cellEntry->getCell()->getText());
-        $this->assertTrue('1' == $this->cellEntry->getCell()->getRow());
-        $this->assertTrue('2' == $this->cellEntry->getCell()->getColumn());
-        $this->assertTrue('input value' == $this->cellEntry->getCell()->getInputValue());
-        $this->assertTrue('numeric value' == $this->cellEntry->getCell()->getNumericValue());
+        $this->assertTrue($this->cellEntry->getCell()->getText() == 'my cell');
+        $this->assertTrue($this->cellEntry->getCell()->getRow() == '1');
+        $this->assertTrue($this->cellEntry->getCell()->getColumn() == '2');
+        $this->assertTrue($this->cellEntry->getCell()->getInputValue() == 'input value');
+        $this->assertTrue($this->cellEntry->getCell()->getNumericValue() == 'numeric value');
 
         $newCellEntry = new Zend_Gdata_Spreadsheets_CellEntry();
         $doc = new DOMDocument();
@@ -60,4 +61,5 @@ class Zend_Gdata_Spreadsheets_CellEntryTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->cellEntry->getCell()->getInputValue() == $newCellEntry->getCell()->getInputValue());
         $this->assertTrue($this->cellEntry->getCell()->getNumericValue() == $newCellEntry->getCell()->getNumericValue());
     }
+
 }

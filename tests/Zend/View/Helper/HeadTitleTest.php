@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,16 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_View
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
 // Call Zend_View_Helper_HeadTitleTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_View_Helper_HeadTitleTest::main');
+if (!defined("PHPUnit_MAIN_METHOD")) {
+    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_HeadTitleTest::main");
 }
 
 /** Zend_View_Helper_HeadTitle */
@@ -38,10 +38,10 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * Test class for Zend_View_Helper_HeadTitle.
  *
  * @category   Zend
- *
+ * @package    Zend_View
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
@@ -65,7 +65,7 @@ class Zend_View_Helper_HeadTitleTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend_View_Helper_HeadTitleTest');
+        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_HeadTitleTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -82,7 +82,7 @@ class Zend_View_Helper_HeadTitleTest extends PHPUnit_Framework_TestCase
             $registry = Zend_Registry::getInstance();
             unset($registry[$regKey]);
         }
-        $this->basePath = __DIR__.'/_files/modules';
+        $this->basePath = __DIR__ . '/_files/modules';
         $this->helper = new Zend_View_Helper_HeadTitle();
     }
 
@@ -179,13 +179,13 @@ class Zend_View_Helper_HeadTitleTest extends PHPUnit_Framework_TestCase
         $this->helper->headTitle()->setAutoEscape(false);
         $this->assertFalse($this->helper->headTitle()->getAutoEscape());
 
+
         $this->assertEquals('<title>Some Title &copyright;</title>', $this->helper->toString());
     }
 
     /**
      * @group ZF-2918
-     *
-     * @see http://framework.zend.com/issues/browse/ZF-2918
+     * @link http://framework.zend.com/issues/browse/ZF-2918
      */
     public function testZF2918()
     {
@@ -198,8 +198,7 @@ class Zend_View_Helper_HeadTitleTest extends PHPUnit_Framework_TestCase
 
     /**
      * @group ZF-3577
-     *
-     * @see http://framework.zend.com/issues/browse/ZF-3577
+     * @link http://framework.zend.com/issues/browse/ZF-3577
      */
     public function testZF3577()
     {
@@ -215,16 +214,16 @@ class Zend_View_Helper_HeadTitleTest extends PHPUnit_Framework_TestCase
     {
         // require_once 'Zend/Translate/Adapter/Ini.php';
         // require_once 'Zend/Registry.php';
-        $adapter = new Zend_Translate_Adapter_Ini(__DIR__.'/../../Translate/Adapter/_files/translation_en.ini', 'en');
+        $adapter = new Zend_Translate_Adapter_Ini(__DIR__ . '/../../Translate/Adapter/_files/translation_en.ini', 'en');
         Zend_Registry::set('Zend_Translate', $adapter);
         $this->helper->enableTranslation();
         $this->helper->headTitle('Message_1');
         $this->assertEquals('<title>Message 1 (en)</title>', $this->helper->toString());
     }
 
-    /**
-     * @group ZF-8036
-     */
+   /**
+    * @group ZF-8036
+    */
     public function testHeadTitleZero()
     {
         $this->helper->headTitle('0');
@@ -244,12 +243,12 @@ class Zend_View_Helper_HeadTitleTest extends PHPUnit_Framework_TestCase
      */
     public function testReturnTypeDefaultAttachOrder()
     {
-        $this->assertTrue($this->helper->setDefaultAttachOrder('PREPEND') instanceof Zend_View_Helper_HeadTitle);
+        $this->assertTrue($this->helper->setDefaultAttachOrder('PREPEND') instanceof  Zend_View_Helper_HeadTitle);
         $this->assertEquals('PREPEND', $this->helper->getDefaultAttachOrder());
     }
 }
 
 // Call Zend_View_Helper_HeadTitleTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_View_Helper_HeadTitleTest::main') {
+if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_HeadTitleTest::main") {
     Zend_View_Helper_HeadTitleTest::main();
 }

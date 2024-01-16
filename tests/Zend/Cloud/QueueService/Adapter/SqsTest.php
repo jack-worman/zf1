@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,14 +13,15 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Cloud_QueueService
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 // Call Zend_Cloud_QueueService_Adapter_SqsTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Cloud_QueueService_Adapter_SqsTest::main');
+if (!defined("PHPUnit_MAIN_METHOD")) {
+    define("PHPUnit_MAIN_METHOD", "Zend_Cloud_QueueService_Adapter_SqsTest::main");
 }
 
 /**
@@ -35,7 +36,8 @@ require_once 'Zend/Cloud/QueueService/TestCase.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Cloud
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -44,26 +46,27 @@ class Zend_Cloud_QueueService_Adapter_SqsTest extends Zend_Cloud_QueueService_Te
 {
     /**
      * Period to wait for propagation in seconds
-     * Should be set by adapter.
+     * Should be set by adapter
      *
      * @var int
      */
     protected $_waitPeriod = 10;
-    protected $_clientType = 'Zend_Service_Amazon_Sqs';
+	protected $_clientType = 'Zend_Service_Amazon_Sqs';
 
-    /**
+	/**
      * Runs the test methods of this class.
      *
+     * @access public
      * @static
      */
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite(__CLASS__);
+        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     /**
-     * Sets up this test case.
+     * Sets up this test case
      *
      * @return void
      */
@@ -97,9 +100,9 @@ class Zend_Cloud_QueueService_Adapter_SqsTest extends Zend_Cloud_QueueService_Te
             $this->_wait(30);
 
             $queues = $this->_commonQueue->listQueues();
-            $errorMessage = 'Final queues are ';
+            $errorMessage = "Final queues are ";
             foreach ($queues as $queue) {
-                $errorMessage .= $queue.', ';
+                $errorMessage .= $queue . ', ';
             }
             $errorMessage .= "\nHave queue URLs $queueURL1 and $queueURL2\n";
             $this->assertEquals(2, count($queues), $errorMessage);
@@ -111,7 +114,7 @@ class Zend_Cloud_QueueService_Adapter_SqsTest extends Zend_Cloud_QueueService_Te
 
             $this->_commonQueue->deleteQueue($queueURL1);
             $this->_commonQueue->deleteQueue($queueURL2);
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             if (isset($queueURL1)) {
                 $this->_commonQueue->deleteQueue($queueURL1);
             }
@@ -122,8 +125,7 @@ class Zend_Cloud_QueueService_Adapter_SqsTest extends Zend_Cloud_QueueService_Te
         }
     }
 
-    public function testStoreQueueMetadata()
-    {
+    public function testStoreQueueMetadata() {
         $this->markTestSkipped('SQS does not currently support storing metadata');
     }
 
@@ -134,14 +136,14 @@ class Zend_Cloud_QueueService_Adapter_SqsTest extends Zend_Cloud_QueueService_Te
             || !defined('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID')
             || !defined('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY')
         ) {
-            $this->markTestSkipped('Amazon SQS access not configured, skipping test');
+            $this->markTestSkipped("Amazon SQS access not configured, skipping test");
         }
 
-        $config = new Zend_Config([
+        $config = new Zend_Config(array(
             Zend_Cloud_QueueService_Factory::QUEUE_ADAPTER_KEY => 'Zend_Cloud_QueueService_Adapter_Sqs',
             Zend_Cloud_QueueService_Adapter_Sqs::AWS_ACCESS_KEY => constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'),
             Zend_Cloud_QueueService_Adapter_Sqs::AWS_SECRET_KEY => constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY'),
-            ]);
+            ));
 
         return $config;
     }

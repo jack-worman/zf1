@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,30 +13,31 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Rest
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
-/* Zend_Rest_Controller */
+/** Zend_Rest_Controller */
 // require_once 'Zend/Rest/Controller.php';
 
-/* Zend_Controller_Request_HttpTestCase */
+/** Zend_Controller_Request_HttpTestCase */
 // require_once 'Zend/Controller/Request/HttpTestCase.php';
 
-/* Zend_Controller_Response_HttpTestCase */
+/** Zend_Controller_Response_HttpTestCase */
 // require_once 'Zend/Controller/Response/HttpTestCase.php';
 
 // Call Zend_Rest_ControllerTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Rest_ControllerTest::main');
+if (!defined("PHPUnit_MAIN_METHOD")) {
+    define("PHPUnit_MAIN_METHOD", "Zend_Rest_ControllerTest::main");
 }
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Rest
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -44,50 +45,44 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 class Zend_Rest_TestController extends Zend_Rest_Controller
 {
     public $testValue = '';
-
     public function __construct(Zend_Controller_Request_Abstract $request,
-        Zend_Controller_Response_Abstract $response,
-        array $invokeArgs = [])
+                                Zend_Controller_Response_Abstract $response,
+                                array $invokeArgs = array())
     {
         $this->testValue = '';
     }
-
     public function indexAction()
     {
         $this->testValue = 'indexAction';
     }
-
     public function getAction()
     {
         $this->testValue = 'getAction';
     }
-
     public function headAction()
     {
         $this->testValue = 'headAction';
     }
-
     public function postAction()
     {
         $this->testValue = 'postAction';
     }
-
     public function putAction()
     {
         $this->testValue = 'putAction';
     }
-
     public function deleteAction()
     {
         $this->testValue = 'deleteAction';
     }
+
 }
 /**
  * @category   Zend
- *
+ * @package    Zend_Rest
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Rest
  */
 #[AllowDynamicProperties]
@@ -98,11 +93,13 @@ class Zend_Rest_ControllerTest extends PHPUnit_Framework_TestCase
     /**
      * Runs the test methods of this class.
      *
+     * @access public
      * @static
      */
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend_Rest_ControllerTest');
+
+        $suite  = new PHPUnit_Framework_TestSuite("Zend_Rest_ControllerTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -113,7 +110,7 @@ class Zend_Rest_ControllerTest extends PHPUnit_Framework_TestCase
         $this->_testController = new Zend_Rest_TestController($request, $response);
     }
 
-    public function testActionMethods()
+    public function test_action_methods()
     {
         $this->_testController->indexAction();
         $this->assertEquals('indexAction', $this->_testController->testValue);
@@ -131,6 +128,6 @@ class Zend_Rest_ControllerTest extends PHPUnit_Framework_TestCase
 }
 
 // Call Zend_Rest_ControllerTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_Rest_ControllerTest::main') {
+if (PHPUnit_MAIN_METHOD == "Zend_Rest_ControllerTest::main") {
     Zend_Rest_ControllerTest::main();
 }

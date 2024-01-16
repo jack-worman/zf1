@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,16 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_View
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
 // Call Zend_View_Helper_FormFileTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_View_Helper_FormFileTest::main');
+if (!defined("PHPUnit_MAIN_METHOD")) {
+    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_FormFileTest::main");
 }
 
 // require_once 'Zend/View.php';
@@ -30,15 +30,15 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 // require_once 'Zend/Registry.php';
 
 /**
- * Zend_View_Helper_FormFileTest.
+ * Zend_View_Helper_FormFileTest
  *
  * Tests formFile helper
  *
  * @category   Zend
- *
+ * @package    Zend_View
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
@@ -58,17 +58,20 @@ class Zend_View_Helper_FormFileTest extends PHPUnit_Framework_TestCase
     /**
      * Runs the test methods of this class.
      *
+     * @access public
      * @static
      */
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend_View_Helper_FormFileTest');
+        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_FormFileTest");
         PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
+     *
+     * @access protected
      */
     protected function setUp()
     {
@@ -82,45 +85,46 @@ class Zend_View_Helper_FormFileTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * ZF-1666.
+     * ZF-1666
      */
     public function testCanDisableElement()
     {
-        $html = $this->helper->formFile([
-            'name' => 'foo',
-            'attribs' => ['disable' => true],
-        ]);
+        $html = $this->helper->formFile(array(
+            'name'    => 'foo',
+            'attribs' => array('disable' => true)
+        ));
 
         $this->assertRegexp('/<input[^>]*?(disabled="disabled")/', $html);
     }
 
     /**
-     * ZF-1666.
+     * ZF-1666
      */
     public function testDisablingElementDoesNotRenderHiddenElements()
     {
-        $html = $this->helper->formFile([
-            'name' => 'foo',
-            'attribs' => ['disable' => true],
-        ]);
+        $html = $this->helper->formFile(array(
+            'name'    => 'foo',
+            'attribs' => array('disable' => true)
+        ));
 
         $this->assertNotRegexp('/<input[^>]*?(type="hidden")/', $html);
     }
 
+
     public function testRendersAsHtmlByDefault()
     {
-        $test = $this->helper->formFile([
+        $test = $this->helper->formFile(array(
             'name' => 'foo',
-        ]);
+        ));
         $this->assertNotContains(' />', $test);
     }
 
     public function testCanRendersAsXHtml()
     {
         $this->view->doctype('XHTML1_STRICT');
-        $test = $this->helper->formFile([
+        $test = $this->helper->formFile(array(
             'name' => 'foo',
-        ]);
+        ));
         $this->assertContains(' />', $test);
     }
 
@@ -131,10 +135,10 @@ class Zend_View_Helper_FormFileTest extends PHPUnit_Framework_TestCase
     {
         $test = $this->helper->formFile(
             'foo',
-            [
+            array(
                  'data-image-old' => 100,
                  'data-image-new' => 200,
-            ]
+            )
         );
         $this->assertEquals(
             '<input type="file" name="foo" id="foo" data-image-old="100" data-image-new="200">',
@@ -144,6 +148,6 @@ class Zend_View_Helper_FormFileTest extends PHPUnit_Framework_TestCase
 }
 
 // Call Zend_View_Helper_FormFileTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_View_Helper_FormFileTest::main') {
+if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_FormFileTest::main") {
     Zend_View_Helper_FormFileTest::main();
 }

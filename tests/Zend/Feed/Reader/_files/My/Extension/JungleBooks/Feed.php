@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Feed
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -24,24 +24,25 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Feed
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class My_FeedReader_Extension_JungleBooks_Feed extends Zend_Feed_Reader_Extension_FeedAbstract
 {
+
     public function getDaysPopularBookLink()
     {
         if (isset($this->_data['dayPopular'])) {
             return $this->_data['dayPopular'];
         }
-        $dayPopular = $this->_xpath->evaluate('string('.$this->getXpathPrefix().'/jungle:dayPopular)');
+        $dayPopular = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/jungle:dayPopular)');
         if (!$dayPopular) {
             $dayPopular = null;
         }
         $this->_data['dayPopular'] = $dayPopular;
-
         return $this->_data['dayPopular'];
     }
 

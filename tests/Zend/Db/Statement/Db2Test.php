@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,35 +13,37 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Db
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id $
  */
 
 require_once 'Zend/Db/Statement/TestCommon.php';
 
+
 /**
  * @category   Zend
- *
+ * @package    Zend_Db
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Db
  * @group      Zend_Db_Statement
  */
 #[AllowDynamicProperties]
 class Zend_Db_Statement_Db2Test extends Zend_Db_Statement_TestCommon
 {
+
     public function testStatementErrorCodeKeyViolation()
     {
-        $this->markTestIncomplete($this->getDriver().' does not return error codes correctly.');
+        $this->markTestIncomplete($this->getDriver() . ' does not return error codes correctly.');
     }
 
     public function testStatementErrorInfoKeyViolation()
     {
-        $this->markTestIncomplete($this->getDriver().' does not return error codes correctly.');
+        $this->markTestIncomplete($this->getDriver() . ' does not return error codes correctly.');
     }
 
     public function testStatementColumnCountForSelect()
@@ -67,7 +69,7 @@ class Zend_Db_Statement_Db2Test extends Zend_Db_Statement_TestCommon
 
     public function testStatementBindParamByPosition()
     {
-        $this->markTestIncomplete($this->getDriver().' is having trouble with binding params');
+        $this->markTestIncomplete($this->getDriver() . ' is having trouble with binding params');
     }
 
     public function testStatementBindParamByName()
@@ -76,7 +78,7 @@ class Zend_Db_Statement_Db2Test extends Zend_Db_Statement_TestCommon
         $product_id = $this->_db->quoteIdentifier('product_id');
         $product_name = $this->_db->quoteIdentifier('product_name');
 
-        $productIdValue = 4;
+        $productIdValue   = 4;
         $productNameValue = 'AmigaOS';
 
         try {
@@ -95,7 +97,7 @@ class Zend_Db_Statement_Db2Test extends Zend_Db_Statement_TestCommon
 
     public function testStatementBindValueByPosition()
     {
-        $this->markTestIncomplete($this->getDriver().' is having trouble with binding params');
+        $this->markTestIncomplete($this->getDriver() . ' is having trouble with binding params');
     }
 
     public function testStatementBindValueByName()
@@ -104,7 +106,7 @@ class Zend_Db_Statement_Db2Test extends Zend_Db_Statement_TestCommon
         $product_id = $this->_db->quoteIdentifier('product_id');
         $product_name = $this->_db->quoteIdentifier('product_name');
 
-        $productIdValue = 4;
+        $productIdValue   = 4;
         $productNameValue = 'AmigaOS';
 
         try {
@@ -123,11 +125,12 @@ class Zend_Db_Statement_Db2Test extends Zend_Db_Statement_TestCommon
 
     public function testStatementGetColumnMeta()
     {
-        $this->markTestIncomplete($this->getDriver().' has not implemented getColumnMeta() yet [ZF-1424]');
+        $this->markTestIncomplete($this->getDriver() . ' has not implemented getColumnMeta() yet [ZF-1424]');
     }
 
     public function getDriver()
     {
         return 'Db2';
     }
+
 }

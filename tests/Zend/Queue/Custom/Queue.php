@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Queue
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -36,7 +36,8 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Queue
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -44,7 +45,7 @@
 class Custom_Queue extends Zend_Queue
 {
     /**
-     * Constructor.
+     * Constructor
      *
      * Can be called as
      * $queue = new Zend_Queue($config);
@@ -52,29 +53,30 @@ class Custom_Queue extends Zend_Queue
      * $queue = new Zend_Queue('array', $config);
      * - or -
      * $queue = new Zend_Queue(null, $config); // Zend_Queue->createQueue();
+     *
+     * @param Zend_Queue_Adapter_Abstract|string $adapter adapter object or class name
+     * @param Zend_Config|array  $config Zend_Config or an configuration array
      */
     public function __construct()
     {
         $args = func_get_args();
-        call_user_func_array([$this, 'parent::__construct'], $args);
+        call_user_func_array(array($this, 'parent::__construct'), $args);
 
         $this->setMessageClass('Custom_Message');
         $this->setMessageSetClass('Custom_Messages');
     }
 
     /**
-     * Send a message to the queue.
+     * Send a message to the queue
      *
-     * @param Custom_Message|Custom_Messages $message message
-     *
+     * @param  Custom_Message|Custom_Messages $message message
      * @return $this
-     *
      * @throws Zend_Queue_Exception
      */
     public function send($message)
     {
-        if (!($message instanceof Custom_Message || $message instanceof Custom_Messages)) {
-            /*
+        if (! ($message instanceof Custom_Message || $message instanceof Custom_Messages) ) {
+            /**
              * @see Zend_Queue_Exception
              */
             // require_once 'Zend/Queue/Exception.php';
@@ -83,7 +85,7 @@ class Custom_Queue extends Zend_Queue
         if ($message instanceof Custom_Message) {
             $response = parent::send($message->__toString());
         } else {
-            foreach ($message as $i => $one) {
+            foreach($message as $i => $one) {
                 $response = parent::send($one->__toString());
             }
         }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,27 +13,28 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Application
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id: LayoutTest.php 17667 2009-08-18 21:40:09Z mikaelkael $
  */
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Application_Resource_DojoTest::main');
 }
 
 /**
- * Zend_Loader_Autoloader.
+ * Zend_Loader_Autoloader
  */
 // require_once 'Zend/Loader/Autoloader.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Application
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Application
  */
 #[AllowDynamicProperties]
@@ -41,7 +42,7 @@ class Zend_Application_Resource_DojoTest extends PHPUnit_Framework_TestCase
 {
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite(__CLASS__);
+        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -52,7 +53,7 @@ class Zend_Application_Resource_DojoTest extends PHPUnit_Framework_TestCase
         if (!is_array($this->loaders)) {
             // spl_autoload_functions does not return empty array when no
             // autoloaders registered...
-            $this->loaders = [];
+            $this->loaders = array();
         }
 
         Zend_Loader_Autoloader::resetInstance();
@@ -84,7 +85,7 @@ class Zend_Application_Resource_DojoTest extends PHPUnit_Framework_TestCase
 
     public function testInitializationInitializesDojoContainer()
     {
-        $resource = new Zend_Application_Resource_Dojo([]);
+        $resource = new Zend_Application_Resource_Dojo(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
         $this->assertTrue($resource->getDojo() instanceof Zend_Dojo_View_Helper_Dojo_Container);
@@ -92,7 +93,7 @@ class Zend_Application_Resource_DojoTest extends PHPUnit_Framework_TestCase
 
     public function testInitializationReturnsDojoContainer()
     {
-        $resource = new Zend_Application_Resource_Dojo([]);
+        $resource = new Zend_Application_Resource_Dojo(array());
         $resource->setBootstrap($this->bootstrap);
         $test = $resource->init();
         $this->assertTrue($test instanceof Zend_Dojo_View_Helper_Dojo_Container);
@@ -100,10 +101,10 @@ class Zend_Application_Resource_DojoTest extends PHPUnit_Framework_TestCase
 
     public function testOptionsPassedToResourceAreUsedToSetDojosContainerState()
     {
-        $options = [
-            'requireModules' => ['DojoTest'],
-            'localPath' => '/ofc/ZF/Rules/',
-        ];
+        $options = array(
+            'requireModules'     => array('DojoTest'),
+            'localPath'          => '/ofc/ZF/Rules/',
+        );
 
         $resource = new Zend_Application_Resource_Dojo($options);
         $resource->setBootstrap($this->bootstrap);
@@ -111,10 +112,10 @@ class Zend_Application_Resource_DojoTest extends PHPUnit_Framework_TestCase
         $resource->getBootstrap()->bootstrap('view');
         $dojo = $resource->getBootstrap()->view->dojo();
 
-        $test = [
+        $test = array(
             'requireModules' => $dojo->getModules(),
-            'localPath' => $dojo->getLocalPath(),
-        ];
+            'localPath'      => $dojo->getLocalPath()
+        );
         $this->assertEquals($options, $test);
     }
 }

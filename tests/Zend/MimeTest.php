@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Mime
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id $
  */
 
@@ -28,10 +28,10 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Mime
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Mime
  */
 #[AllowDynamicProperties]
@@ -48,14 +48,15 @@ class Zend_MimeTest extends PHPUnit_Framework_TestCase
         $myBoundary = 'mySpecificBoundary';
         $m3 = new Zend_Mime($myBoundary);
         $this->assertEquals($m3->boundary(), $myBoundary);
+
     }
 
-    public function testIsPrintableNotPrintable()
+    public function testIsPrintable_notPrintable()
     {
         $this->assertFalse(Zend_Mime::isPrintable('Test with special chars: �����'));
     }
 
-    public function testIsPrintableIsPrintable()
+    public function testIsPrintable_isPrintable()
     {
         $this->assertTrue(Zend_Mime::isPrintable('Test without special chars'));
     }
@@ -63,11 +64,11 @@ class Zend_MimeTest extends PHPUnit_Framework_TestCase
     public function testQP()
     {
         $text = "This is a cool Test Text with special chars: ����\n"
-              .'and with multiple lines���� some of the Lines are long, long'
-              .', long, long, long, long, long, long, long, long, long, long'
-              .', long, long, long, long, long, long, long, long, long, long'
-              .', long, long, long, long, long, long, long, long, long, long'
-              .', long, long, long, long and with ����';
+              . "and with multiple lines���� some of the Lines are long, long"
+              . ", long, long, long, long, long, long, long, long, long, long"
+              . ", long, long, long, long, long, long, long, long, long, long"
+              . ", long, long, long, long, long, long, long, long, long, long"
+              . ", long, long, long, long and with ����";
 
         $qp = Zend_Mime::encodeQuotedPrintable($text);
         $this->assertEquals(quoted_printable_decode($qp), $text);
@@ -78,7 +79,7 @@ class Zend_MimeTest extends PHPUnit_Framework_TestCase
      */
     public function testEncodeQuotedPrintableWhenTextHasZeroAtTheEnd()
     {
-        $raw = str_repeat('x', 72).'0';
+        $raw = str_repeat('x',72) . '0';
         $quoted = Zend_Mime::encodeQuotedPrintable($raw, 72);
         $expected = quoted_printable_decode($quoted);
         $this->assertEquals($expected, $raw);
@@ -109,7 +110,6 @@ class Zend_MimeTest extends PHPUnit_Framework_TestCase
 
     /**
      * @group ZF-1688
-     *
      * @dataProvider dataTestEncodeMailHeaderQuotedPrintable
      */
     public function testEncodeMailHeaderQuotedPrintable($str, $charset, $result)
@@ -119,20 +119,19 @@ class Zend_MimeTest extends PHPUnit_Framework_TestCase
 
     public static function dataTestEncodeMailHeaderQuotedPrintable()
     {
-        return [
-            ['äöü', 'UTF-8', '=?UTF-8?Q?=C3=A4=C3=B6=C3=BC?='],
-            ['äöü ', 'UTF-8', '=?UTF-8?Q?=C3=A4=C3=B6=C3=BC?='],
-            ['Gimme more €', 'UTF-8', '=?UTF-8?Q?Gimme=20more=20=E2=82=AC?='],
-            ['Alle meine Entchen schwimmen in dem See, schwimmen in dem See, Köpfchen in das Wasser, Schwänzchen in die Höh!', 'UTF-8', '=?UTF-8?Q?Alle=20meine=20Entchen=20schwimmen=20in=20dem=20See=2C=20?=
+        return array(
+            array("äöü", "UTF-8", "=?UTF-8?Q?=C3=A4=C3=B6=C3=BC?="),
+            array("äöü ", "UTF-8", "=?UTF-8?Q?=C3=A4=C3=B6=C3=BC?="),
+            array("Gimme more €", "UTF-8", "=?UTF-8?Q?Gimme=20more=20=E2=82=AC?="),
+            array("Alle meine Entchen schwimmen in dem See, schwimmen in dem See, Köpfchen in das Wasser, Schwänzchen in die Höh!", "UTF-8", "=?UTF-8?Q?Alle=20meine=20Entchen=20schwimmen=20in=20dem=20See=2C=20?=
  =?UTF-8?Q?schwimmen=20in=20dem=20See=2C=20K=C3=B6pfchen=20in=20das=20?=
- =?UTF-8?Q?Wasser=2C=20Schw=C3=A4nzchen=20in=20die=20H=C3=B6h!?='],
-            ['ääääääääääääääääääääääääääääääääää', 'UTF-8', '=?UTF-8?Q?=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4?='],
-        ];
+ =?UTF-8?Q?Wasser=2C=20Schw=C3=A4nzchen=20in=20die=20H=C3=B6h!?="),
+            array("ääääääääääääääääääääääääääääääääää", "UTF-8", "=?UTF-8?Q?=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4?="),
+        );
     }
 
     /**
      * @group ZF-1688
-     *
      * @dataProvider dataTestEncodeMailHeaderBase64
      */
     public function testEncodeMailHeaderBase64($str, $charset, $result)
@@ -142,12 +141,12 @@ class Zend_MimeTest extends PHPUnit_Framework_TestCase
 
     public static function dataTestEncodeMailHeaderBase64()
     {
-        return [
-            ['äöü', 'UTF-8', '=?UTF-8?B?w6TDtsO8?='],
-            ['Alle meine Entchen schwimmen in dem See, schwimmen in dem See, Köpfchen in das Wasser, Schwänzchen in die Höh!', 'UTF-8', '=?UTF-8?B?QWxsZSBtZWluZSBFbnRjaGVuIHNjaHdpbW1lbiBpbiBkZW0gU2VlLCBzY2h3?=
+        return array(
+            array("äöü", "UTF-8", "=?UTF-8?B?w6TDtsO8?="),
+            array("Alle meine Entchen schwimmen in dem See, schwimmen in dem See, Köpfchen in das Wasser, Schwänzchen in die Höh!", "UTF-8", "=?UTF-8?B?QWxsZSBtZWluZSBFbnRjaGVuIHNjaHdpbW1lbiBpbiBkZW0gU2VlLCBzY2h3?=
  =?UTF-8?B?aW1tZW4gaW4gZGVtIFNlZSwgS8O2cGZjaGVuIGluIGRhcyBXYXNzZXIsIFNj?=
- =?UTF-8?B?aHfDpG56Y2hlbiBpbiBkaWUgSMO2aCE=?='],
-        ];
+ =?UTF-8?B?aHfDpG56Y2hlbiBpbiBkaWUgSMO2aCE=?="),
+        );
     }
 
     /**
@@ -155,17 +154,17 @@ class Zend_MimeTest extends PHPUnit_Framework_TestCase
      */
     public function testLineLengthInQuotedPrintableHeaderEncoding()
     {
-        $subject = 'Alle meine Entchen schwimmen in dem See, schwimmen in dem See, Köpfchen in das Wasser, Schwänzchen in die Höh!';
-        $encoded = Zend_Mime::encodeQuotedPrintableHeader($subject, 'UTF-8', 100);
-        foreach (explode(Zend_Mime::LINEEND, $encoded) as $line) {
-            if (strlen((string) $line) > 100) {
-                $this->fail("Line '".$line."' is ".strlen((string) $line).' chars long, only 100 allowed.');
+        $subject = "Alle meine Entchen schwimmen in dem See, schwimmen in dem See, Köpfchen in das Wasser, Schwänzchen in die Höh!";
+        $encoded = Zend_Mime::encodeQuotedPrintableHeader($subject, "UTF-8", 100);
+        foreach(explode(Zend_Mime::LINEEND, $encoded) AS $line ) {
+            if(strlen((string) $line) > 100) {
+                $this->fail("Line '".$line."' is ".strlen((string) $line)." chars long, only 100 allowed.");
             }
         }
-        $encoded = Zend_Mime::encodeQuotedPrintableHeader($subject, 'UTF-8', 40);
-        foreach (explode(Zend_Mime::LINEEND, $encoded) as $line) {
-            if (strlen((string) $line) > 40) {
-                $this->fail("Line '".$line."' is ".strlen((string) $line).' chars long, only 40 allowed.');
+        $encoded = Zend_Mime::encodeQuotedPrintableHeader($subject, "UTF-8", 40);
+        foreach(explode(Zend_Mime::LINEEND, $encoded) AS $line ) {
+            if(strlen((string) $line) > 40) {
+                $this->fail("Line '".$line."' is ".strlen((string) $line)." chars long, only 40 allowed.");
             }
         }
     }

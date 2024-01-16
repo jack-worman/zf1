@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,12 +13,13 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Log
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Log_Filter_ChainingTest::main');
 }
@@ -31,10 +32,10 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Log
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Log
  */
 #[AllowDynamicProperties]
@@ -42,7 +43,7 @@ class Zend_Log_Filter_ChainingTest extends PHPUnit_Framework_TestCase
 {
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite(__CLASS__);
+        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -64,7 +65,7 @@ class Zend_Log_Filter_ChainingTest extends PHPUnit_Framework_TestCase
         $this->logger->addFilter(Zend_Log::WARN);
 
         $this->logger->info($ignored = 'info-message-ignored');
-        $this->logger->warn($logged = 'warn-message-logged');
+        $this->logger->warn($logged  = 'warn-message-logged');
 
         rewind($this->log);
         $logdata = stream_get_contents($this->log);

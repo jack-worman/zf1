@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,16 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_View
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
 // Call Zend_View_Helper_ActionTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_View_Helper_ActionTest::main');
+if (!defined("PHPUnit_MAIN_METHOD")) {
+    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_ActionTest::main");
 }
 
 /** Zend_View_Helper_Action */
@@ -44,10 +44,10 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * Test class for Zend_View_Helper_Action.
  *
  * @category   Zend
- *
+ * @package    Zend_View
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
@@ -61,7 +61,7 @@ class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend_View_Helper_ActionTest');
+        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_ActionTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -74,22 +74,22 @@ class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->_origServer = $_SERVER;
-        $_SERVER = [
+        $_SERVER = array(
             'SCRIPT_FILENAME' => __FILE__,
-            'PHP_SELF' => __FILE__,
-        ];
+            'PHP_SELF'        => __FILE__,
+        );
 
         $front = Zend_Controller_Front::getInstance();
         $front->resetInstance();
 
-        $this->request = new Zend_Controller_Request_Http('http://framework.zend.com/action-foo');
+        $this->request  = new Zend_Controller_Request_Http('http://framework.zend.com/action-foo');
         $this->response = new Zend_Controller_Response_Http();
         $this->response->headersSentThrowsException = false;
         $front->setRequest($this->request)
               ->setResponse($this->response)
-              ->addModuleDirectory(__DIR__.'/_files/modules');
+              ->addModuleDirectory(__DIR__ . '/_files/modules');
 
-        $this->view = new Zend_View();
+        $this->view   = new Zend_View();
         $this->helper = new Zend_View_Helper_Action();
         $this->helper->setView($this->view);
     }
@@ -124,7 +124,7 @@ class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
     public function testInitialStateHasDefaultModuleName()
     {
         $dispatcher = Zend_Controller_Front::getInstance()->getDispatcher();
-        $module = $dispatcher->getDefaultModule();
+        $module     = $dispatcher->getDefaultModule();
         $this->assertEquals($module, $this->helper->defaultModule);
 
         $dispatcher->setDefaultModule('foo');
@@ -161,7 +161,7 @@ class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
         $this->helper->response->setHeader('X-Foo', 'Bar')
                                ->setRawHeader('HTTP/1.1');
         $this->helper->resetObjects();
-        $headers = $this->helper->response->getHeaders();
+        $headers    = $this->helper->response->getHeaders();
         $rawHeaders = $this->helper->response->getRawHeaders();
         $this->assertTrue(empty($headers));
         $this->assertTrue(empty($rawHeaders));
@@ -190,7 +190,7 @@ class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
      */
     public function testActionReturnsContentReflectingPassedParams()
     {
-        $value = $this->helper->action('baz', 'action-foo', null, ['bat' => 'This is my message']);
+        $value = $this->helper->action('baz', 'action-foo', null, array('bat' => 'This is my message'));
         $this->assertNotContains('BOGUS', $value, var_export($this->helper->request->getUserParams(), 1));
         $this->assertContains('This is my message', $value);
     }
@@ -222,7 +222,7 @@ class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
         try {
             $helper = new Zend_View_Helper_Action();
             $this->fail('Empty front controller should cause action helper to throw exception');
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
         }
     }
 
@@ -237,11 +237,11 @@ class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
         $response = new Zend_Controller_Response_Http();
         $response->headersSentThrowsException = false;
         $front->setResponse($response)
-              ->addModuleDirectory(__DIR__.'/_files/modules');
+              ->addModuleDirectory(__DIR__ . '/_files/modules');
         try {
             $helper = new Zend_View_Helper_Action();
             $this->fail('No request in front controller should cause action helper to throw exception');
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
         }
     }
 
@@ -255,11 +255,11 @@ class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
 
         $request = new Zend_Controller_Request_Http('http://framework.zend.com/foo');
         $front->setRequest($this->request)
-              ->addModuleDirectory(__DIR__.'/_files/modules');
+              ->addModuleDirectory(__DIR__ . '/_files/modules');
         try {
             $helper = new Zend_View_Helper_Action();
             $this->fail('No response in front controller should cause action helper to throw exception');
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
         }
     }
 
@@ -286,7 +286,7 @@ class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
     {
         // require_once 'Zend/View/Helper/Partial.php';
         $partial = new Zend_View_Helper_Partial();
-        $this->view->setScriptPath(__DIR__.'/_files/modules/default/views/scripts/');
+        $this->view->setScriptPath(__DIR__ . '/_files/modules/default/views/scripts/');
         $partial->setView($this->view);
 
         Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->view = $this->view;
@@ -294,6 +294,7 @@ class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
         $partial->partial('partialActionCall.phtml');
 
         $this->assertSame($this->view, Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->view);
+
     }
 
     /**
@@ -321,7 +322,8 @@ class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Multiple call state issue.
+     * Multiple call state issue
+     *
      *
      * @group ZF-3456
      */
@@ -333,6 +335,6 @@ class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
 }
 
 // Call Zend_View_Helper_ActionTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_View_Helper_ActionTest::main') {
+if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_ActionTest::main") {
     Zend_View_Helper_ActionTest::main();
 }

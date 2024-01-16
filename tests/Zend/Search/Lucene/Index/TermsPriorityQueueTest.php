@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,34 +13,34 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Search_Lucene
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
 /**
- * Zend_Search_Lucene_Storage_Directory_Filesystem.
+ * Zend_Search_Lucene_Storage_Directory_Filesystem
  */
 // require_once 'Zend/Search/Lucene/Storage/Directory/Filesystem.php';
 
 /**
- * Zend_Search_Lucene_Index_SegmentInfo.
+ * Zend_Search_Lucene_Index_SegmentInfo
  */
 // require_once 'Zend/Search/Lucene/Index/SegmentInfo.php';
 
 /**
- * Zend_Search_Lucene_Index_TermsPriorityQueue.
+ * Zend_Search_Lucene_Index_TermsPriorityQueue
  */
 // require_once 'Zend/Search/Lucene/Index/TermsPriorityQueue.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Search_Lucene
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Search_Lucene
  */
 #[AllowDynamicProperties]
@@ -48,8 +48,8 @@ class Zend_Search_Lucene_Index_TermsPriorityQueueTest extends PHPUnit_Framework_
 {
     public function testQueue()
     {
-        $directory = new Zend_Search_Lucene_Storage_Directory_Filesystem(__DIR__.'/_source/_files');
-        $segmentsList = ['_0', '_1', '_2', '_3', '_4'];
+        $directory = new Zend_Search_Lucene_Storage_Directory_Filesystem(__DIR__ . '/_source/_files');
+        $segmentsList = array('_0', '_1', '_2', '_3', '_4');
 
         $segmentInfoQueue = new Zend_Search_Lucene_Index_TermsPriorityQueue();
 
@@ -58,15 +58,15 @@ class Zend_Search_Lucene_Index_TermsPriorityQueueTest extends PHPUnit_Framework_
             $segmentInfo->resetTermsStream();
 
             // Skip "empty" segments
-            if (null !== $segmentInfo->currentTerm()) {
+            if ($segmentInfo->currentTerm() !== null) {
                 $segmentInfoQueue->put($segmentInfo);
             }
         }
 
-        $result = [];
+        $result = array();
         while (($segmentInfo = $segmentInfoQueue->pop()) !== null) {
-            if (null === $segmentInfoQueue->top()
-                || $segmentInfoQueue->top()->currentTerm()->key() !=
+            if ($segmentInfoQueue->top() === null ||
+                $segmentInfoQueue->top()->currentTerm()->key() !=
                             $segmentInfo->currentTerm()->key()) {
                 // We got new term
                 $result[] = $segmentInfo->currentTerm();
@@ -74,14 +74,14 @@ class Zend_Search_Lucene_Index_TermsPriorityQueueTest extends PHPUnit_Framework_
 
             $segmentInfo->nextTerm();
             // check, if segment dictionary is finished
-            if (null !== $segmentInfo->currentTerm()) {
+            if ($segmentInfo->currentTerm() !== null) {
                 // Put segment back into the priority queue
                 $segmentInfoQueue->put($segmentInfo);
             }
         }
 
         $this->assertTrue($result ==
-                          [new Zend_Search_Lucene_Index_Term('a', 'contents'),
+                          array(new Zend_Search_Lucene_Index_Term('a', 'contents'),
                                 new Zend_Search_Lucene_Index_Term('about', 'contents'),
                                 new Zend_Search_Lucene_Index_Term('above', 'contents'),
                                 new Zend_Search_Lucene_Index_Term('absolutely', 'contents'),
@@ -687,7 +687,9 @@ class Zend_Search_Lucene_Index_TermsPriorityQueueTest extends PHPUnit_Framework_
                                 new Zend_Search_Lucene_Index_Term('newpackage', 'path'),
                                 new Zend_Search_Lucene_Index_Term('patches', 'path'),
                                 new Zend_Search_Lucene_Index_Term('pear', 'path'),
-                                new Zend_Search_Lucene_Index_Term('wishlist', 'path'),
-                               ]);
+                                new Zend_Search_Lucene_Index_Term('wishlist', 'path')
+                               ));
+
     }
 }
+

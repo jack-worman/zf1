@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Service_SlideShare
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -27,10 +27,10 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Service_SlideShare
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Service
  * @group      Zend_Service_SlideShare
  */
@@ -38,7 +38,7 @@
 class Zend_Service_SlideShareTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * The Slide share object instance.
+     * The Slide share object instance
      *
      * @var Zend_Service_SlideShare
      */
@@ -62,11 +62,11 @@ class Zend_Service_SlideShareTest extends PHPUnit_Framework_TestCase
         $cache = Zend_Cache::factory(
             'Core',
             'File',
-            [
-                 'lifetime' => 0,
-                 'automatic_serialization' => true,
-            ],
-            ['cache_dir' => __DIR__.'/SlideShare/_files']
+            array(
+                 'lifetime'                => 0,
+                 'automatic_serialization' => true
+            ),
+            array('cache_dir' => __DIR__ . "/SlideShare/_files")
         );
         $ss->setCacheObject($cache);
 
@@ -75,28 +75,28 @@ class Zend_Service_SlideShareTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        if (!defined('TESTS_ZEND_SERVICE_SLIDESHARE_APIKEY')
-            || !defined('TESTS_ZEND_SERVICE_SLIDESHARE_SHAREDSECRET')
-            || !defined('TESTS_ZEND_SERVICE_SLIDESHARE_USERNAME')
-            || !defined('TESTS_ZEND_SERVICE_SLIDESHARE_PASSWORD')
-            || (TESTS_ZEND_SERVICE_SLIDESHARE_APIKEY == '')
-            || (TESTS_ZEND_SERVICE_SLIDESHARE_SHAREDSECRET == '')
-            || (TESTS_ZEND_SERVICE_SLIDESHARE_USERNAME == '')
-            || (TESTS_ZEND_SERVICE_SLIDESHARE_PASSWORD == '')
+        if (!defined("TESTS_ZEND_SERVICE_SLIDESHARE_APIKEY")
+            || !defined("TESTS_ZEND_SERVICE_SLIDESHARE_SHAREDSECRET")
+            || !defined("TESTS_ZEND_SERVICE_SLIDESHARE_USERNAME")
+            || !defined("TESTS_ZEND_SERVICE_SLIDESHARE_PASSWORD")
+            || (TESTS_ZEND_SERVICE_SLIDESHARE_APIKEY == "")
+            || (TESTS_ZEND_SERVICE_SLIDESHARE_SHAREDSECRET == "")
+            || (TESTS_ZEND_SERVICE_SLIDESHARE_USERNAME == "")
+            || (TESTS_ZEND_SERVICE_SLIDESHARE_PASSWORD == "")
         ) {
             $this->markTestSkipped(
-                'You must configure an account for slideshare to run these tests'
+                "You must configure an account for slideshare to run these tests"
             );
         }
     }
 
     public function testGetSlideShow()
     {
-        if (!defined('TESTS_ZEND_SERVICE_SLIDESHARE_SLIDESHOWID')
+        if (!defined("TESTS_ZEND_SERVICE_SLIDESHARE_SLIDESHOWID")
             || (TESTS_ZEND_SERVICE_SLIDESHARE_SLIDESHOWID <= 0)
         ) {
             $this->markTestSkipped(
-                'You must provide a Slideshow ID to retrieve to perform this test'
+                "You must provide a Slideshow ID to retrieve to perform this test"
             );
         }
 
@@ -104,8 +104,8 @@ class Zend_Service_SlideShareTest extends PHPUnit_Framework_TestCase
         try {
             $result =
                 $ss->getSlideShow(TESTS_ZEND_SERVICE_SLIDESHARE_SLIDESHOWID);
-        } catch (Throwable $e) {
-            $this->fail('Exception Caught retrieving Slideshow');
+        } catch (\Throwable $e) {
+            $this->fail("Exception Caught retrieving Slideshow");
         }
 
         $this->assertTrue($result instanceof Zend_Service_SlideShare_SlideShow);
@@ -113,16 +113,17 @@ class Zend_Service_SlideShareTest extends PHPUnit_Framework_TestCase
 
     public function testGetSlideShowByTag()
     {
+
         $ss = $this->_getSSObject();
 
         try {
             $results = $ss->getSlideShowsByTag('zend', 0, 1);
-        } catch (Throwable $e) {
-            $this->fail('Exception Caught retrieving Slideshow List (tag)');
+        } catch (\Throwable $e) {
+            $this->fail("Exception Caught retrieving Slideshow List (tag)");
         }
 
         $this->assertTrue(is_array($results));
-        $this->assertTrue(1 == count($results));
+        $this->assertTrue(count($results) == 1);
         $this->assertTrue(
             $results[0] instanceof Zend_Service_SlideShare_SlideShow
         );
@@ -134,19 +135,19 @@ class Zend_Service_SlideShareTest extends PHPUnit_Framework_TestCase
 
         try {
             $results = $ss->getSlideShowsByTag(
-                [
+                array(
                      'zend',
-                     'php',
-                ], 0, 1
+                     'php'
+                ), 0, 1
             );
-        } catch (Throwable $e) {
-            $this->fail('Exception Caught retrieving Slideshow List (tag)');
+        } catch (\Throwable $e) {
+            $this->fail("Exception Caught retrieving Slideshow List (tag)");
         }
 
         $this->assertTrue(is_array($results));
 
         if (!empty($results)) {
-            $this->assertTrue(1 == count($results));
+            $this->assertTrue(count($results) == 1);
             $this->assertTrue(
                 $results[0] instanceof Zend_Service_SlideShare_SlideShow
             );
@@ -161,12 +162,12 @@ class Zend_Service_SlideShareTest extends PHPUnit_Framework_TestCase
             $results = $ss->getSlideShowsByUsername(
                 TESTS_ZEND_SERVICE_SLIDESHARE_USERNAME, 0, 1
             );
-        } catch (Throwable $e) {
-            $this->fail('Exception Caught retrieving Slideshow List (tag)');
+        } catch (\Throwable $e) {
+            $this->fail("Exception Caught retrieving Slideshow List (tag)");
         }
 
         $this->assertTrue(is_array($results));
-        $this->assertTrue(1 == count($results));
+        $this->assertTrue(count($results) == 1);
         $this->assertTrue(
             $results[0] instanceof Zend_Service_SlideShare_SlideShow
         );
@@ -176,21 +177,22 @@ class Zend_Service_SlideShareTest extends PHPUnit_Framework_TestCase
     {
         $ss = $this->_getSSObject();
 
-        $title = 'Unit Test for ZF SlideShare Component';
-        $ppt_file = __DIR__.'/SlideShare/_files/demo.ppt';
+        $title    = "Unit Test for ZF SlideShare Component";
+        $ppt_file = __DIR__ . "/SlideShare/_files/demo.ppt";
 
         $show = new Zend_Service_SlideShare_SlideShow();
         $show->setFilename($ppt_file);
-        $show->setDescription('Unit Test');
+        $show->setDescription("Unit Test");
         $show->setTitle($title);
-        $show->setTags(['unittest']);
+        $show->setTags(array('unittest'));
         $show->setID(0);
 
         try {
             $result = $ss->uploadSlideShow($show, false);
-        } catch (Throwable $e) {
-            if (Zend_Service_SlideShare::SERVICE_ERROR_NOT_SOURCEOBJ
-                == $e->getCode()
+        } catch (\Throwable $e) {
+
+            if ($e->getCode()
+                == Zend_Service_SlideShare::SERVICE_ERROR_NOT_SOURCEOBJ
             ) {
                 // We ignore this exception, the web service sometimes throws this
                 // error code because it seems to be buggy. Unfortunately it seems
@@ -198,7 +200,7 @@ class Zend_Service_SlideShareTest extends PHPUnit_Framework_TestCase
                 // test a success
                 return;
             } else {
-                $this->fail('Exception Caught uploading slideshow');
+                $this->fail("Exception Caught uploading slideshow");
             }
         }
 
@@ -211,46 +213,46 @@ class Zend_Service_SlideShareTest extends PHPUnit_Framework_TestCase
     {
         $ss = new Zend_Service_SlideShare_SlideShow();
 
-        $ss->setDescription('Foo');
-        $ss->setEmbedCode('Bar');
-        $ss->setFilename('Baz');
+        $ss->setDescription("Foo");
+        $ss->setEmbedCode("Bar");
+        $ss->setFilename("Baz");
         $ss->setId(123);
-        $ss->setLocation('Somewhere');
+        $ss->setLocation("Somewhere");
         $ss->setNumViews(4432);
-        $ss->setPermaLink('nowhere');
+        $ss->setPermaLink("nowhere");
         $ss->setStatus(124);
-        $ss->setStatusDescription('Boo');
+        $ss->setStatusDescription("Boo");
         $ss->setTags(
-            [
+            array(
                  'bar',
-                 'baz',
-            ]
+                 'baz'
+            )
         );
         $ss->addTag('fon');
         $ss->setThumbnailUrl('asdf');
         $ss->setTitle('title');
         $ss->setTranscript('none');
 
-        $this->assertEquals($ss->getDescription(), 'Foo');
-        $this->assertEquals($ss->getEmbedCode(), 'Bar');
-        $this->assertEquals($ss->getFilename(), 'Baz');
+        $this->assertEquals($ss->getDescription(), "Foo");
+        $this->assertEquals($ss->getEmbedCode(), "Bar");
+        $this->assertEquals($ss->getFilename(), "Baz");
         $this->assertEquals($ss->getId(), 123);
-        $this->assertEquals($ss->getLocation(), 'Somewhere');
+        $this->assertEquals($ss->getLocation(), "Somewhere");
         $this->assertEquals($ss->getNumViews(), 4432);
-        $this->assertEquals($ss->getPermaLink(), 'nowhere');
+        $this->assertEquals($ss->getPermaLink(), "nowhere");
         $this->assertEquals($ss->getStatus(), 124);
-        $this->assertEquals($ss->getStatusDescription(), 'Boo');
+        $this->assertEquals($ss->getStatusDescription(), "Boo");
         $this->assertEquals(
             $ss->getTags(),
-            [
+            array(
                  'bar',
                  'baz',
-                 'fon',
-            ]
+                 'fon'
+            )
         );
-        $this->assertEquals($ss->getThumbnailUrl(), 'asdf');
-        $this->assertEquals($ss->getTitle(), 'title');
-        $this->assertEquals($ss->getTranscript(), 'none');
+        $this->assertEquals($ss->getThumbnailUrl(), "asdf");
+        $this->assertEquals($ss->getTitle(), "title");
+        $this->assertEquals($ss->getTranscript(), "none");
     }
 
     /**

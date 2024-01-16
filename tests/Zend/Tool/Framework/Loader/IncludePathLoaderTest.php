@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Tool
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -27,7 +27,8 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Tool
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
@@ -38,13 +39,15 @@
 #[AllowDynamicProperties]
 class Zend_Tool_Framework_Loader_IncludePathLoaderTest extends PHPUnit_Framework_TestCase
 {
+
     /**
      * @var Zend_Tool_Framework_Registry
      */
-    protected $_registry;
+    protected $_registry = null;
 
     public function setUp()
     {
+
     }
 
     public function tearDown()
@@ -52,28 +55,29 @@ class Zend_Tool_Framework_Loader_IncludePathLoaderTest extends PHPUnit_Framework
         Zend_Tool_Framework_Registry::resetInstance();
     }
 
-    /* running these tests need to happen in separate process */
-    /*
-     *
-     *
-     * public function testLoaderFindsIncludePathFilesAreFound()
-     * {
-     * $loader = new Zend_Tool_Framework_Loader_IncludePathLoader();
-     * $loader->load();
-     * $files = $loader->getLoadRetrievedFiles();
-     * foreach ($files as $index => $file) {
-     * $files[$index] = substr((string) $file, strpos((string) $file, 'Zend'));
-     * }
-     * $this->assertContains('Zend/Tool/Framework/System/Manifest.php', $files);
-     * }
-     *
-     * public function testLoaderFindsIncludePathFilesAreLoaded()
-     * {
-     * $loader = new Zend_Tool_Framework_Loader_IncludePathLoader();
-     * $loader->load();
-     * $classes = $loader->getLoadLoadedClasses();
-     * $this->assertContains('Zend_Tool_Framework_System_Manifest', $classes);
-     * }
-     *
-     */
+    /** running these tests need to happen in separate process */
+    /**
+
+
+    public function testLoaderFindsIncludePathFilesAreFound()
+    {
+        $loader = new Zend_Tool_Framework_Loader_IncludePathLoader();
+        $loader->load();
+        $files = $loader->getLoadRetrievedFiles();
+        foreach ($files as $index => $file) {
+            $files[$index] = substr((string) $file, strpos((string) $file, 'Zend'));
+        }
+        $this->assertContains('Zend/Tool/Framework/System/Manifest.php', $files);
+    }
+
+    public function testLoaderFindsIncludePathFilesAreLoaded()
+    {
+        $loader = new Zend_Tool_Framework_Loader_IncludePathLoader();
+        $loader->load();
+        $classes = $loader->getLoadLoadedClasses();
+        $this->assertContains('Zend_Tool_Framework_System_Manifest', $classes);
+    }
+
+    */
+
 }

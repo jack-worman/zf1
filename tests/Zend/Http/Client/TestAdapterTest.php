@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Http_Client
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -24,13 +24,13 @@
 // require_once 'Zend/Http/Client/Adapter/Test.php';
 
 /**
- * Exercises Zend_Http_Client_Adapter_Test.
+ * Exercises Zend_Http_Client_Adapter_Test
  *
  * @category   Zend
- *
+ * @package    Zend_Http_Client
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Http
  * @group      Zend_Http_Client
  */
@@ -38,14 +38,15 @@
 class Zend_Http_Client_TestAdapterTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Test adapter.
+     * Test adapter
      *
      * @var Zend_Http_Client_Adapter_Test
      */
     protected $adapter;
 
     /**
-     * Set up the test adapter before running the test.
+     * Set up the test adapter before running the test
+     *
      */
     public function setUp()
     {
@@ -53,7 +54,8 @@ class Zend_Http_Client_TestAdapterTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tear down the test adapter after running the test.
+     * Tear down the test adapter after running the test
+     *
      */
     public function tearDown()
     {
@@ -61,9 +63,9 @@ class Zend_Http_Client_TestAdapterTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Make sure an exception is thrown on invalid cofiguration.
+     * Make sure an exception is thrown on invalid cofiguration
      *
-     * @expectedException \Zend_Http_Client_Adapter_Exception
+     * @expectedException Zend_Http_Client_Adapter_Exception
      */
     public function testSetConfigThrowsOnInvalidConfig()
     {
@@ -72,7 +74,7 @@ class Zend_Http_Client_TestAdapterTest extends PHPUnit_Framework_TestCase
 
     public function testSetConfigReturnsQuietly()
     {
-        $this->adapter->setConfig(['foo' => 'bar']);
+        $this->adapter->setConfig(array('foo' => 'bar'));
     }
 
     public function testConnectReturnsQuietly()
@@ -115,8 +117,8 @@ class Zend_Http_Client_TestAdapterTest extends PHPUnit_Framework_TestCase
 
     public function testReadingResponseCycles()
     {
-        $expected = ["HTTP/1.1 200 OK\r\n\r\n",
-                          "HTTP/1.1 302 Moved Temporarily\r\n\r\n"];
+        $expected = array("HTTP/1.1 200 OK\r\n\r\n",
+                          "HTTP/1.1 302 Moved Temporarily\r\n\r\n");
 
         $this->adapter->setResponse($expected[0]);
         $this->adapter->addResponse($expected[1]);
@@ -127,7 +129,7 @@ class Zend_Http_Client_TestAdapterTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test that responses could be added as strings.
+     * Test that responses could be added as strings
      *
      * @dataProvider validHttpResponseProvider
      */
@@ -140,10 +142,9 @@ class Zend_Http_Client_TestAdapterTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test that responses could be added as objects (ZF-7009).
+     * Test that responses could be added as objects (ZF-7009)
      *
-     * @see http://framework.zend.com/issues/browse/ZF-7009
-     *
+     * @link http://framework.zend.com/issues/browse/ZF-7009
      * @dataProvider validHttpResponseProvider
      */
     public function testAddResponseAsObject($testResponse)
@@ -158,8 +159,8 @@ class Zend_Http_Client_TestAdapterTest extends PHPUnit_Framework_TestCase
 
     public function testReadingResponseCyclesWhenSetByArray()
     {
-        $expected = ["HTTP/1.1 200 OK\r\n\r\n",
-                          "HTTP/1.1 302 Moved Temporarily\r\n\r\n"];
+        $expected = array("HTTP/1.1 200 OK\r\n\r\n",
+                          "HTTP/1.1 302 Moved Temporarily\r\n\r\n");
 
         $this->adapter->setResponse($expected);
 
@@ -170,9 +171,9 @@ class Zend_Http_Client_TestAdapterTest extends PHPUnit_Framework_TestCase
 
     public function testSettingNextResponseByIndex()
     {
-        $expected = ["HTTP/1.1 200 OK\r\n\r\n",
+        $expected = array("HTTP/1.1 200 OK\r\n\r\n",
                           "HTTP/1.1 302 Moved Temporarily\r\n\r\n",
-                          "HTTP/1.1 404 Not Found\r\n\r\n"];
+                          "HTTP/1.1 404 Not Found\r\n\r\n");
 
         $this->adapter->setResponse($expected);
         $this->assertEquals($expected[0], $this->adapter->read());
@@ -185,12 +186,12 @@ class Zend_Http_Client_TestAdapterTest extends PHPUnit_Framework_TestCase
 
     public function testSettingNextResponseToAnInvalidIndex()
     {
-        $indexes = [-1, 1];
+        $indexes = array(-1, 1);
         foreach ($indexes as $i) {
             try {
                 $this->adapter->setResponseIndex($i);
                 $this->fail();
-            } catch (Throwable $e) {
+            } catch (\Throwable $e) {
                 $class = 'Zend_Http_Client_Adapter_Exception';
                 $this->assertTrue($e instanceof $class);
                 $this->assertRegexp('/out of range/i', $e->getMessage());
@@ -207,34 +208,34 @@ class Zend_Http_Client_TestAdapterTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Data Providers.
+     * Data Providers
      */
 
     /**
-     * Provide valid HTTP responses as string.
+     * Provide valid HTTP responses as string
      *
      * @return array
      */
-    public static function validHttpResponseProvider()
+    static public function validHttpResponseProvider()
     {
-        return [
-           ["HTTP/1.1 200 OK\r\n\r\n"],
-           ["HTTP/1.1 302 Moved Temporarily\r\nLocation: http://example.com/baz\r\n\r\n"],
-           ["HTTP/1.1 404 Not Found\r\n".
-                 "Date: Sun, 14 Jun 2009 10:40:06 GMT\r\n".
-                 "Server: Apache/2.2.3 (CentOS)\r\n".
-                 "Content-length: 281\r\n".
-                 "Connection: close\r\n".
-                 "Content-type: text/html; charset=iso-8859-1\r\n\r\n".
-                 "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n".
-                 "<html><head>\n".
-                 "<title>404 Not Found</title>\n".
-                 "</head><body>\n".
-                 "<h1>Not Found</h1>\n".
-                 "<p>The requested URL /foo/bar was not found on this server.</p>\n".
-                 "<hr>\n".
-                 "<address>Apache/2.2.3 (CentOS) Server at example.com Port 80</address>\n".
-                 '</body></html>'],
-        ];
+        return array(
+           array("HTTP/1.1 200 OK\r\n\r\n"),
+           array("HTTP/1.1 302 Moved Temporarily\r\nLocation: http://example.com/baz\r\n\r\n"),
+           array("HTTP/1.1 404 Not Found\r\n" .
+                 "Date: Sun, 14 Jun 2009 10:40:06 GMT\r\n" .
+                 "Server: Apache/2.2.3 (CentOS)\r\n" .
+                 "Content-length: 281\r\n" .
+                 "Connection: close\r\n" .
+                 "Content-type: text/html; charset=iso-8859-1\r\n\r\n" .
+                 "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n" .
+                 "<html><head>\n" .
+                 "<title>404 Not Found</title>\n" .
+                 "</head><body>\n" .
+                 "<h1>Not Found</h1>\n" .
+                 "<p>The requested URL /foo/bar was not found on this server.</p>\n" .
+                 "<hr>\n" .
+                 "<address>Apache/2.2.3 (CentOS) Server at example.com Port 80</address>\n" .
+                 "</body></html>")
+        );
     }
 }

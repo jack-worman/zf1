@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Service_Amazon
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -28,10 +28,10 @@
  * Zend_Service_Amazon_Ec2_CloudWatch test case.
  *
  * @category   Zend
- *
+ * @package    Zend_Service_Amazon
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_Ec2
@@ -39,6 +39,7 @@
 #[AllowDynamicProperties]
 class Zend_Service_Amazon_Ec2_CloudWatchTest extends PHPUnit_Framework_TestCase
 {
+
     /**
      * @var Zend_Service_Amazon_Ec2_CloudWatch
      */
@@ -52,9 +53,9 @@ class Zend_Service_Amazon_Ec2_CloudWatchTest extends PHPUnit_Framework_TestCase
         parent::setUp();
         $this->Zend_Service_Amazon_Ec2_CloudWatch = new Zend_Service_Amazon_Ec2_CloudWatch('access_key', 'secret_access_key');
         $adapter = new Zend_Http_Client_Adapter_Test();
-        $client = new Zend_Http_Client(null, [
-            'adapter' => $adapter,
-        ]);
+        $client = new Zend_Http_Client(null, array(
+            'adapter' => $adapter
+        ));
         $this->adapter = $adapter;
         Zend_Service_Amazon_Ec2_CloudWatch::setHttpClient($client);
     }
@@ -71,19 +72,19 @@ class Zend_Service_Amazon_Ec2_CloudWatchTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Zend_Service_Amazon_Ec2_CloudWatch->getMetricStatistics().
+     * Tests Zend_Service_Amazon_Ec2_CloudWatch->getMetricStatistics()
      */
     public function testGetMetricStatistics()
     {
         $rawHttpResponse = "HTTP/1.1 200 OK\r\n"
-                    ."Date: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
-                    ."Server: hi\r\n"
-                    ."Last-modified: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
-                    ."Status: 200 OK\r\n"
-                    ."Content-type: application/xml; charset=utf-8\r\n"
-                    ."Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
-                    ."Connection: close\r\n"
-                    ."\r\n"
+                    . "Date: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
+                    . "Server: hi\r\n"
+                    . "Last-modified: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
+                    . "Status: 200 OK\r\n"
+                    . "Content-type: application/xml; charset=utf-8\r\n"
+                    . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
+                    . "Connection: close\r\n"
+                    . "\r\n"
                     ."<GetMetricStatisticsResponse xmlns=\"http://monitoring.amazonaws.com/doc/2009-05-15/\">\r\n"
                     ."  <GetMetricStatisticsResult>\r\n"
                     ."    <Datapoints>\r\n"
@@ -100,48 +101,49 @@ class Zend_Service_Amazon_Ec2_CloudWatchTest extends PHPUnit_Framework_TestCase
                     ."        <Average>18251.0</Average>\r\n"
                     ."      </member>\r\n"
                     ."    </Datapoints>\r\n"
-                    .'    <Label>NetworkIn</Label>'
+                    ."    <Label>NetworkIn</Label>"
                     ."  </GetMetricStatisticsResult>\r\n"
                     ."</GetMetricStatisticsResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_CloudWatch->getMetricStatistics(['MeasureName' => 'NetworkIn', 'Statistics' => ['Average']]);
+        $return = $this->Zend_Service_Amazon_Ec2_CloudWatch->getMetricStatistics(array('MeasureName' => 'NetworkIn', 'Statistics' => array('Average')));
 
-        $arrReturn = [
-            'label' => 'NetworkIn',
-            'datapoints' => [
-                [
-                    'Timestamp' => '2009-06-16T23:57:00Z',
-                    'Unit' => 'Bytes',
-                    'Samples' => '1.0',
-                    'Average' => '14838.0',
-                ],
-                [
-                    'Timestamp' => '2009-06-17T00:16:00Z',
-                    'Unit' => 'Bytes',
-                    'Samples' => '1.0',
-                    'Average' => '18251.0',
-                ],
-            ],
-        ];
+        $arrReturn = array(
+            'label'         => 'NetworkIn',
+            'datapoints'    => array(
+                array(
+                    'Timestamp'     => '2009-06-16T23:57:00Z',
+                    'Unit'          => 'Bytes',
+                    'Samples'       => '1.0',
+                    'Average'       => '14838.0',
+                ),
+                array(
+                    'Timestamp'     => '2009-06-17T00:16:00Z',
+                    'Unit'          => 'Bytes',
+                    'Samples'       => '1.0',
+                    'Average'       => '18251.0',
+                )
+            )
+        );
 
         $this->assertSame($arrReturn, $return);
+
     }
 
     /**
-     * Tests Zend_Service_Amazon_Ec2_CloudWatch->listMetrics().
+     * Tests Zend_Service_Amazon_Ec2_CloudWatch->listMetrics()
      */
     public function testListMetrics()
     {
         $rawHttpResponse = "HTTP/1.1 200 OK\r\n"
-                    ."Date: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
-                    ."Server: hi\r\n"
-                    ."Last-modified: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
-                    ."Status: 200 OK\r\n"
-                    ."Content-type: application/xml; charset=utf-8\r\n"
-                    ."Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
-                    ."Connection: close\r\n"
-                    ."\r\n"
+                    . "Date: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
+                    . "Server: hi\r\n"
+                    . "Last-modified: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
+                    . "Status: 200 OK\r\n"
+                    . "Content-type: application/xml; charset=utf-8\r\n"
+                    . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
+                    . "Connection: close\r\n"
+                    . "\r\n"
                     ."<ListMetricsResponse xmlns=\"http://monitoring.amazonaws.com/doc/2009-05-15/\">\r\n"
                     ."  <ListMetricsResult>\r\n"
                     ."    <Metrics>\r\n"
@@ -177,44 +179,45 @@ class Zend_Service_Amazon_Ec2_CloudWatchTest extends PHPUnit_Framework_TestCase
 
         $return = $this->Zend_Service_Amazon_Ec2_CloudWatch->listMetrics();
 
-        $arrReturn = [
-            [
-                'MeasureName' => 'NetworkIn',
-                'Namespace' => 'AWS/EC2',
-                'Deminsions' => [
-                    'name' => 'InstanceId',
-                    'value' => 'i-bec576d7',
-                ],
-            ],
-            [
-                'MeasureName' => 'CPUUtilization',
-                'Namespace' => 'AWS/EC2',
-                'Deminsions' => [
-                    'name' => 'InstanceId',
-                    'value' => 'i-bec576d7',
-                ],
-            ],
-            [
-                'MeasureName' => 'NetworkIn',
-                'Namespace' => 'AWS/EC2',
-                'Deminsions' => [],
-            ],
-        ];
+        $arrReturn = array(
+            array(
+                'MeasureName'   => 'NetworkIn',
+                'Namespace'     => 'AWS/EC2',
+                'Deminsions'    => array(
+                    'name'      => 'InstanceId',
+                    'value'     => 'i-bec576d7'
+                )
+            ),
+            array(
+                'MeasureName'   => 'CPUUtilization',
+                'Namespace'     => 'AWS/EC2',
+                'Deminsions'    => array(
+                    'name'      => 'InstanceId',
+                    'value'     => 'i-bec576d7'
+                )
+            ),
+            array(
+                'MeasureName'   => 'NetworkIn',
+                'Namespace'     => 'AWS/EC2',
+                'Deminsions'    => array()
+            )
+        );
 
         $this->assertSame($arrReturn, $return);
     }
 
     public function testZF8149()
     {
+
         $rawHttpResponse = "HTTP/1.1 200 OK\r\n"
-                    ."Date: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
-                    ."Server: hi\r\n"
-                    ."Last-modified: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
-                    ."Status: 200 OK\r\n"
-                    ."Content-type: application/xml; charset=utf-8\r\n"
-                    ."Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
-                    ."Connection: close\r\n"
-                    ."\r\n"
+                    . "Date: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
+                    . "Server: hi\r\n"
+                    . "Last-modified: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
+                    . "Status: 200 OK\r\n"
+                    . "Content-type: application/xml; charset=utf-8\r\n"
+                    . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
+                    . "Connection: close\r\n"
+                    . "\r\n"
                     ."<GetMetricStatisticsResponse xmlns=\"http://monitoring.amazonaws.com/doc/2009-05-15/\">\r\n"
                     ."  <GetMetricStatisticsResult>\r\n"
                     ."    <Datapoints>\r\n"
@@ -254,55 +257,63 @@ class Zend_Service_Amazon_Ec2_CloudWatchTest extends PHPUnit_Framework_TestCase
                     ."  <ResponseMetadata>\r\n"
                     ."    <RequestId>6fb864fd-d557-11de-ac37-475775222f21</RequestId>\r\n"
                     ."  </ResponseMetadata>\r\n"
-                    .'</GetMetricStatisticsResponse>';
+                    ."</GetMetricStatisticsResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
         $return = $this->Zend_Service_Amazon_Ec2_CloudWatch->getMetricStatistics(
-            [
-                'MeasureName' => 'CPUUtilization',
-                 'Statistics' => ['Average'],
-                 'Dimensions' => ['InstanceId' => 'i-93ba31fa'],
-                 'StartTime' => '2009-11-19T21:51:57+00:00',
-                 'EndTime' => '2009-11-19T21:56:57+00:00',
-           ]
+            array(
+            	'MeasureName' => 'CPUUtilization',
+             	'Statistics' =>  array('Average'),
+             	'Dimensions'=>   array('InstanceId'=>'i-93ba31fa'),
+             	'StartTime'=>    '2009-11-19T21:51:57+00:00',
+             	'EndTime'=>      '2009-11-19T21:56:57+00:00'
+           )
         );
 
-        $arrReturn = [
+        $arrReturn = array (
           'label' => 'CPUUtilization',
-          'datapoints' => [
-            0 => [
+          'datapoints' =>
+          array (
+            0 =>
+            array (
               'Timestamp' => '2009-11-19T21:52:00Z',
               'Unit' => 'Percent',
               'Samples' => '1.0',
               'Average' => '0.09',
-            ],
-            1 => [
+            ),
+            1 =>
+            array (
               'Timestamp' => '2009-11-19T21:55:00Z',
               'Unit' => 'Percent',
               'Samples' => '1.0',
               'Average' => '0.18',
-            ],
-            2 => [
+            ),
+            2 =>
+            array (
               'Timestamp' => '2009-11-19T21:54:00Z',
               'Unit' => 'Percent',
               'Samples' => '1.0',
               'Average' => '0.09',
-            ],
-            3 => [
+            ),
+            3 =>
+            array (
               'Timestamp' => '2009-11-19T21:51:00Z',
               'Unit' => 'Percent',
               'Samples' => '1.0',
               'Average' => '0.18',
-            ],
-            4 => [
+            ),
+            4 =>
+            array (
               'Timestamp' => '2009-11-19T21:53:00Z',
               'Unit' => 'Percent',
               'Samples' => '1.0',
               'Average' => '0.09',
-            ],
-          ],
-        ];
+            ),
+          ),
+        );
 
         $this->assertSame($arrReturn, $return);
     }
+
 }
+

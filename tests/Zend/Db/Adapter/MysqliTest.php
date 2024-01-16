@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Db
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -32,38 +32,39 @@ require_once 'Zend/Db/Adapter/TestCommon.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Db
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Db
  * @group      Zend_Db_Adapter
  */
 #[AllowDynamicProperties]
 class Zend_Db_Adapter_MysqliTest extends Zend_Db_Adapter_TestCommon
 {
-    protected $_numericDataTypes = [
-        Zend_Db::INT_TYPE => Zend_Db::INT_TYPE,
+
+    protected $_numericDataTypes = array(
+        Zend_Db::INT_TYPE    => Zend_Db::INT_TYPE,
         Zend_Db::BIGINT_TYPE => Zend_Db::BIGINT_TYPE,
-        Zend_Db::FLOAT_TYPE => Zend_Db::FLOAT_TYPE,
-        'INT' => Zend_Db::INT_TYPE,
-        'INTEGER' => Zend_Db::INT_TYPE,
-        'MEDIUMINT' => Zend_Db::INT_TYPE,
-        'SMALLINT' => Zend_Db::INT_TYPE,
-        'TINYINT' => Zend_Db::INT_TYPE,
-        'BIGINT' => Zend_Db::BIGINT_TYPE,
-        'SERIAL' => Zend_Db::BIGINT_TYPE,
-        'DEC' => Zend_Db::FLOAT_TYPE,
-        'DECIMAL' => Zend_Db::FLOAT_TYPE,
-        'DOUBLE' => Zend_Db::FLOAT_TYPE,
-        'DOUBLE PRECISION' => Zend_Db::FLOAT_TYPE,
-        'FIXED' => Zend_Db::FLOAT_TYPE,
-        'FLOAT' => Zend_Db::FLOAT_TYPE,
-    ];
+        Zend_Db::FLOAT_TYPE  => Zend_Db::FLOAT_TYPE,
+        'INT'                => Zend_Db::INT_TYPE,
+        'INTEGER'            => Zend_Db::INT_TYPE,
+        'MEDIUMINT'          => Zend_Db::INT_TYPE,
+        'SMALLINT'           => Zend_Db::INT_TYPE,
+        'TINYINT'            => Zend_Db::INT_TYPE,
+        'BIGINT'             => Zend_Db::BIGINT_TYPE,
+        'SERIAL'             => Zend_Db::BIGINT_TYPE,
+        'DEC'                => Zend_Db::FLOAT_TYPE,
+        'DECIMAL'            => Zend_Db::FLOAT_TYPE,
+        'DOUBLE'             => Zend_Db::FLOAT_TYPE,
+        'DOUBLE PRECISION'   => Zend_Db::FLOAT_TYPE,
+        'FIXED'              => Zend_Db::FLOAT_TYPE,
+        'FLOAT'              => Zend_Db::FLOAT_TYPE
+    );
 
     /**
      * Test AUTO_QUOTE_IDENTIFIERS option
-     * Case: Zend_Db::AUTO_QUOTE_IDENTIFIERS = true.
+     * Case: Zend_Db::AUTO_QUOTE_IDENTIFIERS = true
      *
      * MySQL actually allows delimited identifiers to remain
      * case-insensitive, so this test overrides its parent.
@@ -72,9 +73,9 @@ class Zend_Db_Adapter_MysqliTest extends Zend_Db_Adapter_TestCommon
     {
         $params = $this->_util->getParams();
 
-        $params['options'] = [
-            Zend_Db::AUTO_QUOTE_IDENTIFIERS => true,
-        ];
+        $params['options'] = array(
+            Zend_Db::AUTO_QUOTE_IDENTIFIERS => true
+        );
         $db = Zend_Db::factory($this->getDriver(), $params);
         $db->getConnection();
 
@@ -100,7 +101,7 @@ class Zend_Db_Adapter_MysqliTest extends Zend_Db_Adapter_TestCommon
 
     public function testAdapterInsertSequence()
     {
-        $this->markTestSkipped($this->getDriver().' does not support sequences');
+        $this->markTestSkipped($this->getDriver() . ' does not support sequences');
     }
 
     /**
@@ -110,8 +111,8 @@ class Zend_Db_Adapter_MysqliTest extends Zend_Db_Adapter_TestCommon
      */
     public function testAdapterQuoteColumnAs()
     {
-        $string = 'foo';
-        $alias = 'bar';
+        $string = "foo";
+        $alias = "bar";
         $value = $this->_db->quoteColumnAs($string, $alias);
         $this->assertEquals('`foo` AS `bar`', $value);
     }
@@ -145,7 +146,7 @@ class Zend_Db_Adapter_MysqliTest extends Zend_Db_Adapter_TestCommon
      */
     public function testAdapterQuoteIdentifierArray()
     {
-        $array = ['foo', 'bar'];
+        $array = array('foo', 'bar');
         $value = $this->_db->quoteIdentifier($array);
         $this->assertEquals('`foo`.`bar`', $value);
     }
@@ -158,7 +159,7 @@ class Zend_Db_Adapter_MysqliTest extends Zend_Db_Adapter_TestCommon
     public function testAdapterQuoteIdentifierArrayDbExpr()
     {
         $expr = new Zend_Db_Expr('*');
-        $array = ['foo', $expr];
+        $array = array('foo', $expr);
         $value = $this->_db->quoteIdentifier($array);
         $this->assertEquals('`foo`.*', $value);
     }
@@ -217,32 +218,30 @@ class Zend_Db_Adapter_MysqliTest extends Zend_Db_Adapter_TestCommon
      */
     public function testAdapterQuoteTableAs()
     {
-        $string = 'foo';
-        $alias = 'bar';
+        $string = "foo";
+        $alias = "bar";
         $value = $this->_db->quoteTableAs($string, $alias);
         $this->assertEquals('`foo` AS `bar`', $value);
     }
 
     /**
-     * test that describeTable() returns correct types.
-     *
+     * test that describeTable() returns correct types
      * @group ZF-3624
+     *
      */
     public function testAdapterDescribeTableAttributeColumnFloat()
     {
         $desc = $this->_db->describeTable('zfprice');
-        $this->assertEquals('zfprice', $desc['price']['TABLE_NAME']);
+        $this->assertEquals('zfprice',  $desc['price']['TABLE_NAME']);
         $this->assertRegExp('/float/i', $desc['price']['DATA_TYPE']);
     }
 
     /**
      * Ensures that the PDO Buffered Query does not throw the error
-     * 2014 General error.
+     * 2014 General error
      *
      * @group  ZF-2101
-     *
-     * @see   http://framework.zend.com/issues/browse/ZF-2101
-     *
+     * @link   http://framework.zend.com/issues/browse/ZF-2101
      * @return void
      */
     public function testAdapterToEnsurePdoBufferedQueryThrowsNoError()
@@ -278,9 +277,9 @@ class Zend_Db_Adapter_MysqliTest extends Zend_Db_Adapter_TestCommon
     public function testMySqliInitCommand()
     {
         $params = $this->_util->getParams();
-        $params['driver_options'] = [
-            'mysqli_init_command' => 'SET AUTOCOMMIT=0;',
-        ];
+        $params['driver_options'] = array(
+            'mysqli_init_command' => 'SET AUTOCOMMIT=0;'
+        );
 
         $db = Zend_Db::factory($this->getDriver(), $params);
 
@@ -295,4 +294,5 @@ class Zend_Db_Adapter_MysqliTest extends Zend_Db_Adapter_TestCommon
     {
         return 'Mysqli';
     }
+
 }

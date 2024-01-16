@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,16 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Form
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
 // Call Zend_Form_Element_NoteTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Form_Element_NoteTest::main');
+if (!defined("PHPUnit_MAIN_METHOD")) {
+    define("PHPUnit_MAIN_METHOD", "Zend_Form_Element_NoteTest::main");
 }
 
 // require_once __DIR__ . '/../../../TestHelper.php';
@@ -30,13 +30,13 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 // require_once 'Zend/Form/Element/Note.php';
 
 /**
- * Test class for Zend_Form_Element_Text.
+ * Test class for Zend_Form_Element_Text
  *
  * @category   Zend
- *
+ * @package    Zend_Form
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Form
  */
 #[AllowDynamicProperties]
@@ -49,7 +49,7 @@ class Zend_Form_Element_NoteTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend_Form_Element_NoteTest');
+        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Element_NoteTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -106,105 +106,105 @@ class Zend_Form_Element_NoteTest extends PHPUnit_Framework_TestCase
         $this->element->setRequired(false);
 
         // Examining various validators
-        $validators = [
-            [
-                'options' => ['Alnum'],
-                'value' => 'aa11?? ',
-            ],
-            [
-                'options' => ['Alpha'],
-                'value' => 'aabb11',
-            ],
-            [
-                'options' => [
+        $validators = array(
+            array(
+                'options' => array('Alnum'),
+                'value'   => 'aa11?? ',
+            ),
+            array(
+                'options' => array('Alpha'),
+                'value'   => 'aabb11',
+            ),
+            array(
+                'options' => array(
                     'Between',
                     false,
-                    [
+                    array(
                         'min' => 0,
                         'max' => 10,
-                    ],
-                ],
-                'value' => '11',
-            ],
-            [
-                'options' => ['Date'],
-                'value' => '10.10.2000',
-            ],
-            [
-                'options' => ['Digits'],
-                'value' => '1122aa',
-            ],
-            [
-                'options' => ['EmailAddress'],
-                'value' => 'foo',
-            ],
-            [
-                'options' => ['Float'],
-                'value' => '10a01',
-            ],
-            [
-                'options' => [
+                    )
+                ),
+                'value'   => '11',
+            ),
+            array(
+                'options' => array('Date'),
+                'value'   => '10.10.2000',
+            ),
+            array(
+                'options' => array('Digits'),
+                'value'   => '1122aa',
+            ),
+            array(
+                'options' => array('EmailAddress'),
+                'value'   => 'foo',
+            ),
+            array(
+                'options' => array('Float'),
+                'value'   => '10a01',
+            ),
+            array(
+                'options' => array(
                     'GreaterThan',
                     false,
-                    ['min' => 10],
-                ],
-                'value' => '9',
-            ],
-            [
-                'options' => ['Hex'],
-                'value' => '123ABCDEFGH',
-            ],
-            [
-                'options' => [
+                    array('min' => 10),
+                ),
+                'value'   => '9',
+            ),
+            array(
+                'options' => array('Hex'),
+                'value'   => '123ABCDEFGH',
+            ),
+            array(
+                'options' => array(
                     'InArray',
                     false,
-                    [
-                        'key' => 'value',
+                    array(
+                        'key'      => 'value',
                         'otherkey' => 'othervalue',
-                    ],
-                ],
-                'value' => 'foo',
-            ],
-            [
-                'options' => ['Int'],
-                'value' => '1234.5',
-            ],
-            [
-                'options' => [
+                    )
+                ),
+                'value'   => 'foo',
+            ),
+            array(
+                'options' => array('Int'),
+                'value'   => '1234.5',
+            ),
+            array(
+                'options' => array(
                     'LessThan',
                     false,
-                    ['max' => 10],
-                ],
-                'value' => '11',
-            ],
-            [
-                'options' => ['NotEmpty'],
-                'value' => '',
-            ],
-            [
-                'options' => [
+                    array('max' => 10),
+                ),
+                'value'   => '11',
+            ),
+            array(
+                'options' => array('NotEmpty'),
+                'value'   => '',
+            ),
+            array(
+                'options' => array(
                     'Regex',
                     false,
-                    ['pattern' => '/^Test/'],
-                ],
-                'value' => 'Pest',
-            ],
-            [
-                'options' => [
+                    array('pattern' => '/^Test/'),
+                ),
+                'value'   => 'Pest',
+            ),
+            array(
+                'options' => array(
                     'StringLength',
                     false,
-                    [
+                    array(
                         6,
                         20,
-                    ],
-                ],
-                'value' => 'foo',
-            ],
-        ];
+                    )
+                ),
+                'value'   => 'foo',
+            ),
+        );
 
         foreach ($validators as $validator) {
             // Add validator
-            $this->element->addValidators([$validator['options']]);
+            $this->element->addValidators(array($validator['options']));
 
             // Testing
             $this->assertTrue($this->element->isValid($validator['value']));
@@ -216,6 +216,6 @@ class Zend_Form_Element_NoteTest extends PHPUnit_Framework_TestCase
 }
 
 // Call Zend_Form_Element_NoteTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_Form_Element_NoteTest::main') {
+if (PHPUnit_MAIN_METHOD == "Zend_Form_Element_NoteTest::main") {
     Zend_Form_Element_NoteTest::main();
 }

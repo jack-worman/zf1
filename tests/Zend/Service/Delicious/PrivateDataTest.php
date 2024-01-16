@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Service_Delicious
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -25,25 +25,26 @@
  */
 // require_once 'Zend/Service/Delicious.php';
 
+
 /**
  * @category   Zend_Service
- *
+ * @package    Zend_Service_Delicious
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Service
  * @group      Zend_Service_Delicious
  */
 #[AllowDynamicProperties]
 class Zend_Service_Delicious_PrivateDataTest extends PHPUnit_Framework_TestCase
 {
-    public const TEST_UNAME = 'zfTestUser';
-    public const TEST_PASS = 'zfuser';
+    const TEST_UNAME = 'zfTestUser';
+    const TEST_PASS  = 'zfuser';
 
-    private static $TEST_POST_TITLE = 'test - title';
-    private static $TEST_POST_URL = 'http://zfdev.com/unittests/delicious/test_url_1';
-    private static $TEST_POST_NOTES = 'test - note';
-    private static $TEST_POST_TAGS = ['testTag1', 'testTag2'];
+    private static $TEST_POST_TITLE  = 'test - title';
+    private static $TEST_POST_URL    = 'http://zfdev.com/unittests/delicious/test_url_1';
+    private static $TEST_POST_NOTES  = 'test - note';
+    private static $TEST_POST_TAGS   = array('testTag1','testTag2');
     private static $TEST_POST_SHARED = false;
 
     /**
@@ -52,21 +53,23 @@ class Zend_Service_Delicious_PrivateDataTest extends PHPUnit_Framework_TestCase
     protected $_delicious;
 
     /**
+     *
      * @return void
      */
     public function setUp()
     {
         $httpClient = new Zend_Http_Client();
-        $httpClient->setConfig([
+        $httpClient->setConfig(array(
                 'useragent' => 'Zend_Service_Delicious - Unit tests/0.1',
-                'keepalive' => true,
-        ]);
+                'keepalive' => true
+        ));
         Zend_Rest_Client::setHttpClient($httpClient);
 
         $this->_delicious = new Zend_Service_Delicious(self::TEST_UNAME, self::TEST_PASS);
     }
 
     /**
+     *
      * @return void
      */
     public function testLastUpdate()
@@ -75,6 +78,7 @@ class Zend_Service_Delicious_PrivateDataTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     *
      * @return void
      */
     public function testTagsAndBundles()
@@ -127,6 +131,7 @@ class Zend_Service_Delicious_PrivateDataTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     *
      * @return void
      */
     public function _testAddDeletePost()
@@ -185,7 +190,7 @@ class Zend_Service_Delicious_PrivateDataTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that getAllPosts() provides expected behavior.
+     * Ensures that getAllPosts() provides expected behavior
      *
      * @return void
      */
@@ -200,7 +205,7 @@ class Zend_Service_Delicious_PrivateDataTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that getRecentPosts() provides expected behavior.
+     * Ensures that getRecentPosts() provides expected behavior
      *
      * @return void
      */
@@ -216,7 +221,7 @@ class Zend_Service_Delicious_PrivateDataTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that getPosts() provides expected behavior.
+     * Ensures that getPosts() provides expected behavior
      *
      * @return void
      */
@@ -232,6 +237,7 @@ class Zend_Service_Delicious_PrivateDataTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     *
      * @return void
      */
     public function testDates()

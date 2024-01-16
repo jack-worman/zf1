@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,28 +13,33 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Controller
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
+
+
+
 
 // require_once 'Zend/Controller/Action.php';
 
 /**
- * Mock file for testbed.
+ * Mock file for testbed
  *
  * @category   Zend
- *
+ * @package    Zend_Controller
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Bar_IndexController extends Zend_Controller_Action
 {
+
     /**
-     * Test Function for indexAction.
+     * Test Function for indexAction
      *
      * @return void
      */
@@ -44,11 +49,12 @@ class Bar_IndexController extends Zend_Controller_Action
     }
 
     /**
-     * Test Function for testAction.
+     * Test Function for testAction
      *
      * @return void
      */
     public function testAction()
     {
     }
+
 }

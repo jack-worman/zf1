@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,16 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Dojo
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
 // Call Zend_Dojo_View_Helper_CheckBoxTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Dojo_View_Helper_CheckBoxTest::main');
+if (!defined("PHPUnit_MAIN_METHOD")) {
+    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_View_Helper_CheckBoxTest::main");
 }
 
 /** Zend_Dojo_View_Helper_CheckBox */
@@ -41,10 +41,10 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * Test class for Zend_Dojo_View_Helper_CheckBox.
  *
  * @category   Zend
- *
+ * @package    Zend_Dojo
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Dojo
  * @group      Zend_Dojo_View
  */
@@ -58,7 +58,7 @@ class Zend_Dojo_View_Helper_CheckBoxTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend_Dojo_View_Helper_CheckBoxTest');
+        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_View_Helper_CheckBoxTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -73,7 +73,7 @@ class Zend_Dojo_View_Helper_CheckBoxTest extends PHPUnit_Framework_TestCase
         Zend_Registry::_unsetInstance();
         Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
 
-        $this->view = $this->getView();
+        $this->view   = $this->getView();
         $this->helper = new Zend_Dojo_View_Helper_CheckBox();
         $this->helper->setView($this->view);
     }
@@ -93,7 +93,6 @@ class Zend_Dojo_View_Helper_CheckBoxTest extends PHPUnit_Framework_TestCase
         // require_once 'Zend/View.php';
         $view = new Zend_View();
         $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
-
         return $view;
     }
 
@@ -102,12 +101,12 @@ class Zend_Dojo_View_Helper_CheckBoxTest extends PHPUnit_Framework_TestCase
         return $this->helper->checkBox(
             'elementId',
             'foo',
-            [],
-            [],
-            [
-                'checked' => 'foo',
+            array(),
+            array(),
+            array(
+                'checked'   => 'foo',
                 'unChecked' => 'bar',
-            ]
+            )
         );
     }
 
@@ -138,7 +137,7 @@ class Zend_Dojo_View_Helper_CheckBoxTest extends PHPUnit_Framework_TestCase
     {
         $html = $this->getElement();
         if (!preg_match('/(<input[^>]*(type="checkbox")[^>]*>)/s', $html, $m)) {
-            $this->fail('Missing checkbox element: '.$html);
+            $this->fail('Missing checkbox element: ' . $html);
         }
         $this->assertContains('checked="checked"', $m[1]);
     }
@@ -148,12 +147,12 @@ class Zend_Dojo_View_Helper_CheckBoxTest extends PHPUnit_Framework_TestCase
      */
     public function testElementShouldUseCheckedValueForCheckboxInput()
     {
-        $html = $this->helper->checkBox('foo', '0', [], [], [
-            'checkedValue' => '1',
+        $html = $this->helper->checkBox('foo', '0', array(), array(), array(
+            'checkedValue'   => '1',
             'unCheckedValue' => '0',
-        ]);
+        ));
         if (!preg_match('#(<input[^>]*(?:type="checkbox")[^>]*>)#s', $html, $matches)) {
-            $this->fail('Did not find checkbox in html: '.$html);
+            $this->fail('Did not find checkbox in html: ' . $html);
         }
         $this->assertContains('value="1"', $matches[1]);
         $this->assertNotContains('checked', $matches[1]);
@@ -170,6 +169,6 @@ class Zend_Dojo_View_Helper_CheckBoxTest extends PHPUnit_Framework_TestCase
 }
 
 // Call Zend_Dojo_View_Helper_CheckBoxTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_Dojo_View_Helper_CheckBoxTest::main') {
+if (PHPUnit_MAIN_METHOD == "Zend_Dojo_View_Helper_CheckBoxTest::main") {
     Zend_Dojo_View_Helper_CheckBoxTest::main();
 }

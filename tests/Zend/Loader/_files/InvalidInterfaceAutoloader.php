@@ -1,5 +1,4 @@
 <?php
-
 #[AllowDynamicProperties]
 class InvalidInterfaceAutoloader
 {

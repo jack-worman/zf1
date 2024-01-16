@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,42 +13,41 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Currency
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id:$
  */
 
 /**
- * Zend_Date.
+ * Zend_Date
  */
 // require_once 'Zend/Currency/CurrencyInterface.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Currency
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Currency
  */
 #[AllowDynamicProperties]
 class ExchangeTest implements Zend_Currency_CurrencyInterface
 {
     /**
-     * Test method for exchange rate.
+     * Test method for exchange rate
      *
      * @param string $from
      * @param string $to
-     *
      * @return float
      */
     public function getRate($from, $to)
     {
-        if ('RUB' == $from) {
+        if ($from == "RUB") {
             return 2;
-        } elseif ('USD' == $from) {
+        } else if ($from == "USD") {
             return 0.5;
         } else {
             return 1;

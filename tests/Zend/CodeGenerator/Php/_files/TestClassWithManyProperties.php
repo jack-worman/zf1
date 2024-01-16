@@ -3,9 +3,10 @@
 #[AllowDynamicProperties]
 class Zend_CodeGenerator_Php_TestClassWithManyProperties
 {
-    public const FOO = 'foo';
 
-    public static $fooStaticProperty;
+    const FOO = 'foo';
+
+    public static $fooStaticProperty = null;
 
     public $fooProperty = true;
 
@@ -15,16 +16,17 @@ class Zend_CodeGenerator_Php_TestClassWithManyProperties
 
     private static $_bazStaticProperty = self::FOO;
 
-    private $_bazProperty = [true, false, true];
+    private $_bazProperty = array(true, false, true);
 
-    protected $_complexType = [
+    protected $_complexType = array(
         5,
         'one' => 1,
         'two' => '2',
-        [
+        array(
             'bar',
             'baz',
-            // PHP_EOL
-            ],
-        ];
+            //PHP_EOL
+            )
+        );
+
 }

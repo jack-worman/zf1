@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Tool
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -32,7 +32,8 @@ require_once '_files/ProviderAltName.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Tool
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
@@ -43,10 +44,11 @@ require_once '_files/ProviderAltName.php';
 #[AllowDynamicProperties]
 class Zend_Tool_Framework_Provider_RepositoryTest extends PHPUnit_Framework_TestCase
 {
+
     /**
      * @var Zend_Tool_Framework_Provider_Repository
      */
-    protected $_repository;
+    protected $_repository = null;
 
     public function setup()
     {
@@ -88,7 +90,7 @@ class Zend_Tool_Framework_Provider_RepositoryTest extends PHPUnit_Framework_Test
     }
 
     /**
-     * @expectedException \Zend_Tool_Framework_Provider_Exception
+     * @expectedException Zend_Tool_Framework_Provider_Exception
      */
     public function testAddProviderThrowsExceptionOnDuplicateName()
     {
@@ -116,6 +118,7 @@ class Zend_Tool_Framework_Provider_RepositoryTest extends PHPUnit_Framework_Test
         foreach ($this->_repository->getProviders() as $provider) {
             $this->assertTrue($provider instanceof Zend_Tool_Framework_Provider_Interface);
         }
+
     }
 
     public function testGetProviderSignaturesReturnsProviderSignatures()
@@ -127,11 +130,12 @@ class Zend_Tool_Framework_Provider_RepositoryTest extends PHPUnit_Framework_Test
         foreach ($this->_repository->getProviderSignatures() as $providerSignature) {
             $this->assertTrue($providerSignature instanceof Zend_Tool_Framework_Provider_Signature);
         }
+
     }
 
     public function testHasProviderReturnsCorrectValues()
     {
-        $this->_repository->addProvider($providerOne = new Zend_Tool_Framework_Provider_ProviderOne());
+        $this->_repository->addProvider(($providerOne = new Zend_Tool_Framework_Provider_ProviderOne()));
         $this->_repository->addProvider(new Zend_Tool_Framework_Provider_ProviderTwo());
 
         $this->assertTrue($this->_repository->hasProvider('Zend_Tool_Framework_Provider_ProviderOne', false));
@@ -154,6 +158,7 @@ class Zend_Tool_Framework_Provider_RepositoryTest extends PHPUnit_Framework_Test
         $this->assertTrue($this->_repository->getProvider('ProviderOne') instanceof Zend_Tool_Framework_Provider_Interface);
     }
 
+
     public function testRepositoryIsCountable()
     {
         $this->assertTrue($this->_repository instanceof Countable);
@@ -166,4 +171,5 @@ class Zend_Tool_Framework_Provider_RepositoryTest extends PHPUnit_Framework_Test
             $this->assertTrue(true);
         }
     }
+
 }

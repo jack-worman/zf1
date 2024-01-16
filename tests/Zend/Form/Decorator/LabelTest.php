@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,16 +13,17 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Form
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
+
 // Call Zend_Form_Decorator_LabelTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Form_Decorator_LabelTest::main');
+if (!defined("PHPUnit_MAIN_METHOD")) {
+    define("PHPUnit_MAIN_METHOD", "Zend_Form_Decorator_LabelTest::main");
 }
 
 // require_once 'Zend/Form/Decorator/Label.php';
@@ -32,13 +33,13 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 // require_once 'Zend/View.php';
 
 /**
- * Test class for Zend_Form_Decorator_Label.
+ * Test class for Zend_Form_Decorator_Label
  *
  * @category   Zend
- *
+ * @package    Zend_Form
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Form
  */
 #[AllowDynamicProperties]
@@ -51,7 +52,8 @@ class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend_Form_Decorator_LabelTest');
+
+        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Decorator_LabelTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -79,8 +81,7 @@ class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
     public function getView()
     {
         $view = new Zend_View();
-        $view->addHelperPath(__DIR__.'/../../../../library/Zend/View/Helper');
-
+        $view->addHelperPath(__DIR__ . '/../../../../library/Zend/View/Helper');
         return $view;
     }
 
@@ -127,7 +128,7 @@ class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
         $test = $this->decorator->render($content);
         $this->assertRegexp('/<label[^>]*?class="[^"]*optional/', $test, $test);
 
-        $element->class = 'bar';
+        $element->class = "bar";
         $this->decorator->setOption('class', 'foo');
         $test = $this->decorator->render($content);
         $this->assertNotRegexp('/<label[^>]*?class="[^"]*bar/', $test, $test);
@@ -146,7 +147,7 @@ class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
         $test = $this->decorator->render($content);
         $this->assertRegexp('/<label[^>]*?class="[^"]*required/', $test, $test);
 
-        $element->class = 'bar';
+        $element->class = "bar";
         $this->decorator->setOption('class', 'foo');
         $test = $this->decorator->render($content);
         $this->assertNotRegexp('/<label[^>]*?class="[^"]*bar/', $test, $test);
@@ -171,12 +172,12 @@ class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
     public function testRenderUtilizesOptionalSuffixesAndPrefixesWhenRequested()
     {
         $element = new Zend_Form_Element('foo');
-        $element->setAttribs([
+        $element->setAttribs(array(
                     'optionalPrefix' => '-opt-prefix-',
                     'optionalSuffix' => '-opt-suffix-',
                     'requiredPrefix' => '-req-prefix-',
                     'requiredSuffix' => '-req-suffix-',
-                  ])
+                  ))
                 ->setView($this->getView())
                 ->setLabel('My Label');
         $this->decorator->setElement($element);
@@ -192,12 +193,12 @@ class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
     public function testRenderUtilizesRequiredSuffixesAndPrefixesWhenRequested()
     {
         $element = new Zend_Form_Element('foo');
-        $element->setAttribs([
+        $element->setAttribs(array(
                     'optionalPrefix' => '-opt-prefix-',
                     'optionalSuffix' => '-opt-suffix-',
                     'requiredPrefix' => '-req-prefix-',
                     'requiredSuffix' => '-req-suffix-',
-                  ])
+                  ))
                 ->setRequired(true)
                 ->setView($this->getView())
                 ->setLabel('My Label');
@@ -246,10 +247,10 @@ class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
         $element->setView($this->getView())
                 ->setLabel('My Label');
         $this->decorator->setElement($element)
-                        ->setOptions(['placement' => 'APPEND']);
+                        ->setOptions(array('placement' => 'APPEND'));
         $content = 'test content';
         $test = $this->decorator->render($content);
-        $this->assertRegexp('#'.$content.'.*?<label#s', $test);
+        $this->assertRegexp('#' . $content . '.*?<label#s', $test);
     }
 
     public function testCanChooseNotToEscapeLabel()
@@ -258,7 +259,7 @@ class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
         $element->setView($this->getView())
                 ->setLabel('<b>My Label</b>');
         $this->decorator->setElement($element)
-                        ->setOptions(['escape' => false]);
+                        ->setOptions(array('escape' => false));
         $test = $this->decorator->render('');
         $this->assertContains($element->getLabel(), $test);
     }
@@ -266,7 +267,7 @@ class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
     public function testRetrievingLabelRetrievesLabelWithTranslationAndPrefixAndSuffix()
     {
         // require_once 'Zend/Translate.php';
-        $translate = new Zend_Translate('array', ['My Label' => 'Translation'], 'en');
+        $translate = new Zend_Translate('array', array('My Label' => 'Translation'), 'en');
         $translate->setLocale('en');
 
         $element = new Zend_Form_Element('foo');
@@ -274,12 +275,12 @@ class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
                 ->setLabel('My Label')
                 ->setTranslator($translate);
         $this->decorator->setElement($element)
-                        ->setOptions([
+                        ->setOptions(array(
                             'optionalPrefix' => '> ',
                             'optionalSuffix' => ':',
                             'requiredPrefix' => '! ',
                             'requiredSuffix' => '*:',
-                        ]);
+                        ));
         $label = $this->decorator->getLabel();
         $this->assertEquals('> Translation:', $label);
 
@@ -290,7 +291,7 @@ class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
 
     public function testSettingTagToEmptyValueShouldDisableTag()
     {
-        $element = new Zend_Form_Element_Text('foo', ['label' => 'Foo']);
+        $element = new Zend_Form_Element_Text('foo', array('label' => 'Foo'));
         $this->decorator->setElement($element)
                         ->setTag('');
         $content = $this->decorator->render('');
@@ -302,25 +303,26 @@ class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
      */
     public function testSettingTagToEmptyValueShouldSetTagToNull()
     {
-        $element = new Zend_Form_Element_Text('foo', ['label' => 'Foo']);
+        $element = new Zend_Form_Element_Text('foo', array('label' => 'Foo'));
         $this->decorator->setElement($element)
-                        ->setOptions(['tag' => 'dt']);
+                        ->setOptions(array('tag' => 'dt'));
         $this->decorator->setTag('');
         $tag = $this->decorator->getTag();
-        $this->assertTrue(null === $tag, $tag);
+        $this->assertTrue( NULL === $tag, $tag );
     }
+
 
     /**
      * @group ZF-4841
      */
     public function testSettingTagClassToEmptyValueShouldSetTagClassToNull()
     {
-        $element = new Zend_Form_Element_Text('foo', ['label' => 'Foo']);
+        $element = new Zend_Form_Element_Text('foo', array('label' => 'Foo'));
         $this->decorator->setElement($element)
-                        ->setOptions(['tag' => 'dt']);
+                        ->setOptions(array('tag' => 'dt'));
         $this->decorator->setTagClass('');
         $tagClass = $this->decorator->getTagClass();
-        $this->assertTrue(null === $tagClass, $tagClass);
+        $this->assertTrue( NULL === $tagClass, $tagClass );
     }
 
     /**
@@ -334,14 +336,14 @@ class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
 
         $this->decorator->setElement($element)
                         ->setOptions(
-                            [
+                            array(
                                 'placement' => 'IMPLICIT',
                                 'separator' => ' ',
-                            ]
+                            )
                         );
 
         $content = 'test content';
-        $actual = $this->decorator->render($content);
+        $actual  = $this->decorator->render($content);
 
         $expected = '<label class="optional">My Label test content</label>';
 
@@ -359,14 +361,14 @@ class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
 
         $this->decorator->setElement($element)
                         ->setOptions(
-                            [
+                            array(
                                 'placement' => 'IMPLICIT_PREPEND',
                                 'separator' => ' ',
-                            ]
+                            )
                         );
 
         $content = 'test content';
-        $actual = $this->decorator->render($content);
+        $actual  = $this->decorator->render($content);
 
         $expected = '<label class="optional">My Label test content</label>';
 
@@ -384,14 +386,14 @@ class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
 
         $this->decorator->setElement($element)
                         ->setOptions(
-                            [
+                            array(
                                 'placement' => 'IMPLICIT_APPEND',
                                 'separator' => ' ',
-                            ]
+                            )
                         );
 
         $content = 'test content';
-        $actual = $this->decorator->render($content);
+        $actual  = $this->decorator->render($content);
 
         $expected = '<label class="optional">test content My Label</label>';
 
@@ -406,14 +408,14 @@ class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
         // Init translator
         // require_once 'Zend/Translate.php';
         $translate = new Zend_Translate(
-            [
+            array(
                  'adapter' => 'array',
-                 'content' => [
-                     'firstLabel' => 'secondLabel',
+                 'content' => array(
+                     'firstLabel'  => 'secondLabel',
                      'secondLabel' => 'thirdLabel',
-                 ],
-                 'locale' => 'en',
-            ]
+                 ),
+                 'locale'  => 'en'
+            )
         );
 
         // Create element
@@ -430,6 +432,6 @@ class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
 }
 
 // Call Zend_Form_Decorator_LabelTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_Form_Decorator_LabelTest::main') {
+if (PHPUnit_MAIN_METHOD == "Zend_Form_Decorator_LabelTest::main") {
     Zend_Form_Decorator_LabelTest::main();
 }

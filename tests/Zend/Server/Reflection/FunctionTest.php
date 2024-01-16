@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,29 +13,29 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Server
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version $Id$
  */
 
 // require_once 'Zend/Server/Reflection/Function.php';
 
 /**
- * Test case for Zend_Server_Reflection_Function.
+ * Test case for Zend_Server_Reflection_Function
  *
  * @category   Zend
- *
+ * @package    Zend_Server
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Server
  */
 #[AllowDynamicProperties]
 class Zend_Server_Reflection_FunctionTest extends PHPUnit_Framework_TestCase
 {
-    public function testConstruct()
+    public function test__construct()
     {
         $function = new ReflectionFunction('Zend_Server_Reflection_FunctionTest_function');
         $r = new Zend_Server_Reflection_Function($function);
@@ -45,14 +45,14 @@ class Zend_Server_Reflection_FunctionTest extends PHPUnit_Framework_TestCase
         try {
             $r = new Zend_Server_Reflection_Function($params[0]);
             $this->fail('Should not be able to construct with non-function');
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             // do nothing
         }
 
         $r = new Zend_Server_Reflection_Function($function, 'namespace');
         $this->assertEquals('namespace', $r->getNamespace());
 
-        $argv = ['string1', 'string2'];
+        $argv = array('string1', 'string2');
         $r = new Zend_Server_Reflection_Function($function, 'namespace', $argv);
         $this->assertInternalType('array', $r->getInvokeArguments());
         $this->assertSame($argv, $r->getInvokeArguments());
@@ -62,7 +62,7 @@ class Zend_Server_Reflection_FunctionTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(0 < count($prototypes));
     }
 
-    public function testGetSet()
+    public function test__getSet()
     {
         $function = new ReflectionFunction('Zend_Server_Reflection_FunctionTest_function');
         $r = new Zend_Server_Reflection_Function($function);
@@ -70,6 +70,7 @@ class Zend_Server_Reflection_FunctionTest extends PHPUnit_Framework_TestCase
         $r->system = true;
         $this->assertTrue($r->system);
     }
+
 
     public function testNamespace()
     {
@@ -119,6 +120,7 @@ class Zend_Server_Reflection_FunctionTest extends PHPUnit_Framework_TestCase
         }
     }
 
+
     public function testGetInvokeArguments()
     {
         $function = new ReflectionFunction('Zend_Server_Reflection_FunctionTest_function');
@@ -127,7 +129,7 @@ class Zend_Server_Reflection_FunctionTest extends PHPUnit_Framework_TestCase
         $this->assertInternalType('array', $args);
         $this->assertCount(0, $args);
 
-        $argv = ['string1', 'string2'];
+        $argv = array('string1', 'string2');
         $r = new Zend_Server_Reflection_Function($function, null, $argv);
         $args = $r->getInvokeArguments();
         $this->assertInternalType('array', $args);
@@ -135,7 +137,7 @@ class Zend_Server_Reflection_FunctionTest extends PHPUnit_Framework_TestCase
         $this->assertSame($argv, $args);
     }
 
-    public function testWakeup()
+    public function test__wakeup()
     {
         $function = new ReflectionFunction('Zend_Server_Reflection_FunctionTest_function');
         $r = new Zend_Server_Reflection_Function($function);
@@ -174,30 +176,29 @@ class Zend_Server_Reflection_FunctionTest extends PHPUnit_Framework_TestCase
         $r = new Zend_Server_Reflection_Function($function);
 
         $prototypes = $r->getPrototypes();
-        $prototype = $prototypes[0];
+        $prototype  = $prototypes[0];
         $params = $prototype->getParameters();
-        $param = $params[0];
+        $param  = $params[0];
         $this->assertContains('Some description', $param->getDescription(), var_export($param, 1));
     }
 }
 
 /**
- * Zend_Server_Reflection_FunctionTest_function.
+ * Zend_Server_Reflection_FunctionTest_function
  *
  * Test function for reflection unit tests
  *
- * @param string       $var1 Some description
+ * @param string $var1 Some description
  * @param string|array $var2
- * @param array        $var3
- *
- * @return array|null
+ * @param array $var3
+ * @return null|array
  */
 function Zend_Server_Reflection_FunctionTest_function($var1, $var2, $var3 = null)
 {
 }
 
 /**
- * Zend_Server_Reflection_FunctionTest_function2.
+ * Zend_Server_Reflection_FunctionTest_function2
  *
  * Test function for reflection unit tests; test what happens when no return
  * value or params specified in docblock.
@@ -207,10 +208,9 @@ function Zend_Server_Reflection_FunctionTest_function2()
 }
 
 /**
- * Zend_Server_Reflection_FunctionTest_function3.
+ * Zend_Server_Reflection_FunctionTest_function3
  *
- * @param string $var1
- *
+ * @param  string $var1
  * @return void
  */
 function Zend_Server_Reflection_FunctionTest_function3($var1)

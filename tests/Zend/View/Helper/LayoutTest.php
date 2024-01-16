@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,16 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_View
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
 // Call Zend_LayoutTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_View_Helper_LayoutTest::main');
+if (!defined("PHPUnit_MAIN_METHOD")) {
+    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_LayoutTest::main");
 }
 
 // require_once 'Zend/View/Helper/Layout.php';
@@ -31,13 +31,13 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 // require_once 'Zend/Controller/Action/HelperBroker.php';
 
 /**
- * Test class for Zend_View_Helper_Layout.
+ * Test class for Zend_View_Helper_Layout
  *
  * @category   Zend
- *
+ * @package    Zend_View
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
@@ -51,7 +51,8 @@ class Zend_View_Helper_LayoutTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend_View_Helper_LayoutTest');
+
+        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_LayoutTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -122,7 +123,7 @@ class Zend_View_Helper_LayoutTest extends PHPUnit_Framework_TestCase
 }
 
 /**
- * Zend_Layout extension to allow resetting MVC instance.
+ * Zend_Layout extension to allow resetting MVC instance
  */
 #[AllowDynamicProperties]
 class Zend_View_Helper_LayoutTest_Layout extends Zend_Layout
@@ -134,6 +135,6 @@ class Zend_View_Helper_LayoutTest_Layout extends Zend_Layout
 }
 
 // Call Zend_View_Helper_LayoutTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_View_Helper_LayoutTest::main') {
+if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_LayoutTest::main") {
     Zend_View_Helper_LayoutTest::main();
 }

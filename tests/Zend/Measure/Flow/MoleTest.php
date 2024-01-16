@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,24 +13,24 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Measure
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
 /**
- * Zend_Measure_Flow_Mole.
+ * Zend_Measure_Flow_Mole
  */
 // require_once 'Zend/Measure/Flow/Mole.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Measure
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Measure
  */
 #[AllowDynamicProperties]
@@ -38,325 +38,352 @@ class Zend_Measure_Flow_MoleTest extends PHPUnit_Framework_TestCase
 {
     /**
      * test for mole initialisation
-     * expected instance.
+     * expected instance
      */
     public function testMoleInit()
     {
-        $value = new Zend_Measure_Flow_Mole('100', Zend_Measure_Flow_Mole::STANDARD, 'de');
-        $this->assertTrue($value instanceof Zend_Measure_Flow_Mole, 'Zend_Measure_Flow_Mole Object not returned');
+        $value = new Zend_Measure_Flow_Mole('100',Zend_Measure_Flow_Mole::STANDARD,'de');
+        $this->assertTrue($value instanceof Zend_Measure_Flow_Mole,'Zend_Measure_Flow_Mole Object not returned');
     }
+
 
     /**
      * test for exception unknown type
-     * expected exception.
+     * expected exception
      */
-    public function testFlowMoleUnknownType()
+    public function testFlow_MoleUnknownType()
     {
         try {
-            $value = new Zend_Measure_Flow_Mole('100', 'Flow_Mole::UNKNOWN', 'de');
+            $value = new Zend_Measure_Flow_Mole('100','Flow_Mole::UNKNOWN','de');
             $this->fail('Exception expected because of unknown type');
         } catch (Zend_Measure_Exception $e) {
             // success
         }
     }
 
+
     /**
      * test for exception unknown value
-     * expected exception.
+     * expected exception
      */
-    public function testFlowMoleUnknownValue()
+    public function testFlow_MoleUnknownValue()
     {
         try {
-            $value = new Zend_Measure_Flow_Mole('novalue', Zend_Measure_Flow_Mole::STANDARD, 'de');
+            $value = new Zend_Measure_Flow_Mole('novalue',Zend_Measure_Flow_Mole::STANDARD,'de');
             $this->fail('Exception expected because of empty value');
         } catch (Zend_Measure_Exception $e) {
             // success
         }
     }
 
+
     /**
      * test for exception unknown locale
-     * expected root value.
+     * expected root value
      */
-    public function testFlowMoleUnknownLocale()
+    public function testFlow_MoleUnknownLocale()
     {
         try {
-            $value = new Zend_Measure_Flow_Mole('100', Zend_Measure_Flow_Mole::STANDARD, 'nolocale');
+            $value = new Zend_Measure_Flow_Mole('100',Zend_Measure_Flow_Mole::STANDARD,'nolocale');
             $this->fail('Exception expected because of unknown locale');
         } catch (Zend_Measure_Exception $e) {
             // success
         }
     }
+
 
     /**
      * test for standard locale
-     * expected integer.
+     * expected integer
      */
-    public function testFlowMoleNoLocale()
+    public function testFlow_MoleNoLocale()
     {
-        $value = new Zend_Measure_Flow_Mole('100', Zend_Measure_Flow_Mole::STANDARD);
-        $this->assertEquals(100, $value->getValue(), 'Zend_Measure_Flow_Mole value expected');
+        $value = new Zend_Measure_Flow_Mole('100',Zend_Measure_Flow_Mole::STANDARD);
+        $this->assertEquals(100, $value->getValue(),'Zend_Measure_Flow_Mole value expected');
     }
+
 
     /**
      * test for positive value
-     * expected integer.
+     * expected integer
      */
-    public function testFlowMoleValuePositive()
+    public function testFlow_MoleValuePositive()
     {
-        $value = new Zend_Measure_Flow_Mole('100', Zend_Measure_Flow_Mole::STANDARD, 'de');
+        $value = new Zend_Measure_Flow_Mole('100',Zend_Measure_Flow_Mole::STANDARD,'de');
         $this->assertEquals(100, $value->getValue(), 'Zend_Measure_Flow_Mole value expected to be a positive integer');
     }
 
+
     /**
      * test for negative value
-     * expected integer.
+     * expected integer
      */
-    public function testFlowMoleValueNegative()
+    public function testFlow_MoleValueNegative()
     {
-        $value = new Zend_Measure_Flow_Mole('-100', Zend_Measure_Flow_Mole::STANDARD, 'de');
+        $value = new Zend_Measure_Flow_Mole('-100',Zend_Measure_Flow_Mole::STANDARD,'de');
         $this->assertEquals(-100, $value->getValue(), 'Zend_Measure_Flow_Mole value expected to be a negative integer');
     }
 
+
     /**
      * test for decimal value
-     * expected float.
+     * expected float
      */
-    public function testFlowMoleValueDecimal()
+    public function testFlow_MoleValueDecimal()
     {
-        $value = new Zend_Measure_Flow_Mole('-100,200', Zend_Measure_Flow_Mole::STANDARD, 'de');
+        $value = new Zend_Measure_Flow_Mole('-100,200',Zend_Measure_Flow_Mole::STANDARD,'de');
         $this->assertEquals(-100.200, $value->getValue(), 'Zend_Measure_Flow_Mole value expected to be a decimal value');
     }
 
+
     /**
      * test for decimal seperated value
-     * expected float.
+     * expected float
      */
-    public function testFlowMoleValueDecimalSeperated()
+    public function testFlow_MoleValueDecimalSeperated()
     {
-        $value = new Zend_Measure_Flow_Mole('-100.100,200', Zend_Measure_Flow_Mole::STANDARD, 'de');
-        $this->assertEquals(-100100.200, $value->getValue(), 'Zend_Measure_Flow_Mole Object not returned');
+        $value = new Zend_Measure_Flow_Mole('-100.100,200',Zend_Measure_Flow_Mole::STANDARD,'de');
+        $this->assertEquals(-100100.200, $value->getValue(),'Zend_Measure_Flow_Mole Object not returned');
     }
+
 
     /**
      * test for string with integrated value
-     * expected float.
+     * expected float
      */
-    public function testFlowMoleValueString()
+    public function testFlow_MoleValueString()
     {
-        $value = new Zend_Measure_Flow_Mole('-100.100,200', Zend_Measure_Flow_Mole::STANDARD, 'de');
-        $this->assertEquals(-100100.200, $value->getValue(), 'Zend_Measure_Flow_Mole Object not returned');
+        $value = new Zend_Measure_Flow_Mole('-100.100,200',Zend_Measure_Flow_Mole::STANDARD,'de');
+        $this->assertEquals(-100100.200, $value->getValue(),'Zend_Measure_Flow_Mole Object not returned');
     }
+
 
     /**
      * test for equality
-     * expected true.
+     * expected true
      */
-    public function testFlowMoleEquality()
+    public function testFlow_MoleEquality()
     {
-        $value = new Zend_Measure_Flow_Mole('-100.100,200', Zend_Measure_Flow_Mole::STANDARD, 'de');
-        $newvalue = new Zend_Measure_Flow_Mole('-100.100,200', Zend_Measure_Flow_Mole::STANDARD, 'de');
-        $this->assertTrue($value->equals($newvalue), 'Zend_Measure_Flow_Mole Object should be equal');
+        $value = new Zend_Measure_Flow_Mole('-100.100,200',Zend_Measure_Flow_Mole::STANDARD,'de');
+        $newvalue = new Zend_Measure_Flow_Mole('-100.100,200',Zend_Measure_Flow_Mole::STANDARD,'de');
+        $this->assertTrue($value->equals($newvalue),'Zend_Measure_Flow_Mole Object should be equal');
     }
+
 
     /**
      * test for no equality
-     * expected false.
+     * expected false
      */
-    public function testFlowMoleNoEquality()
+    public function testFlow_MoleNoEquality()
     {
-        $value = new Zend_Measure_Flow_Mole('-100.100,200', Zend_Measure_Flow_Mole::STANDARD, 'de');
-        $newvalue = new Zend_Measure_Flow_Mole('-100,200', Zend_Measure_Flow_Mole::STANDARD, 'de');
-        $this->assertFalse($value->equals($newvalue), 'Zend_Measure_Flow_Mole Object should be not equal');
+        $value = new Zend_Measure_Flow_Mole('-100.100,200',Zend_Measure_Flow_Mole::STANDARD,'de');
+        $newvalue = new Zend_Measure_Flow_Mole('-100,200',Zend_Measure_Flow_Mole::STANDARD,'de');
+        $this->assertFalse($value->equals($newvalue),'Zend_Measure_Flow_Mole Object should be not equal');
     }
+
 
     /**
      * test for set positive value
-     * expected integer.
+     * expected integer
      */
-    public function testFlowMoleSetPositive()
+    public function testFlow_MoleSetPositive()
     {
-        $value = new Zend_Measure_Flow_Mole('100', Zend_Measure_Flow_Mole::STANDARD, 'de');
-        $value->setValue('200', Zend_Measure_Flow_Mole::STANDARD, 'de');
+        $value = new Zend_Measure_Flow_Mole('100',Zend_Measure_Flow_Mole::STANDARD,'de');
+        $value->setValue('200',Zend_Measure_Flow_Mole::STANDARD,'de');
         $this->assertEquals(200, $value->getValue(), 'Zend_Measure_Flow_Mole value expected to be a positive integer');
     }
 
+
     /**
      * test for set negative value
-     * expected integer.
+     * expected integer
      */
-    public function testFlowMoleSetNegative()
+    public function testFlow_MoleSetNegative()
     {
-        $value = new Zend_Measure_Flow_Mole('-100', Zend_Measure_Flow_Mole::STANDARD, 'de');
-        $value->setValue('-200', Zend_Measure_Flow_Mole::STANDARD, 'de');
+        $value = new Zend_Measure_Flow_Mole('-100',Zend_Measure_Flow_Mole::STANDARD,'de');
+        $value->setValue('-200',Zend_Measure_Flow_Mole::STANDARD,'de');
         $this->assertEquals(-200, $value->getValue(), 'Zend_Measure_Flow_Mole value expected to be a negative integer');
     }
 
+
     /**
      * test for set decimal value
-     * expected float.
+     * expected float
      */
-    public function testFlowMoleSetDecimal()
+    public function testFlow_MoleSetDecimal()
     {
-        $value = new Zend_Measure_Flow_Mole('-100,200', Zend_Measure_Flow_Mole::STANDARD, 'de');
-        $value->setValue('-200,200', Zend_Measure_Flow_Mole::STANDARD, 'de');
+        $value = new Zend_Measure_Flow_Mole('-100,200',Zend_Measure_Flow_Mole::STANDARD,'de');
+        $value->setValue('-200,200',Zend_Measure_Flow_Mole::STANDARD,'de');
         $this->assertEquals(-200.200, $value->getValue(), 'Zend_Measure_Flow_Mole value expected to be a decimal value');
     }
 
+
     /**
      * test for set decimal seperated value
-     * expected float.
+     * expected float
      */
-    public function testFlowMoleSetDecimalSeperated()
+    public function testFlow_MoleSetDecimalSeperated()
     {
-        $value = new Zend_Measure_Flow_Mole('-100.100,200', Zend_Measure_Flow_Mole::STANDARD, 'de');
-        $value->setValue('-200.200,200', Zend_Measure_Flow_Mole::STANDARD, 'de');
-        $this->assertEquals(-200200.200, $value->getValue(), 'Zend_Measure_Flow_Mole Object not returned');
+        $value = new Zend_Measure_Flow_Mole('-100.100,200',Zend_Measure_Flow_Mole::STANDARD,'de');
+        $value->setValue('-200.200,200',Zend_Measure_Flow_Mole::STANDARD,'de');
+        $this->assertEquals(-200200.200, $value->getValue(),'Zend_Measure_Flow_Mole Object not returned');
     }
+
 
     /**
      * test for set string with integrated value
-     * expected float.
+     * expected float
      */
-    public function testFlowMoleSetString()
+    public function testFlow_MoleSetString()
     {
-        $value = new Zend_Measure_Flow_Mole('-100.100,200', Zend_Measure_Flow_Mole::STANDARD, 'de');
-        $value->setValue('-200.200,200', Zend_Measure_Flow_Mole::STANDARD, 'de');
-        $this->assertEquals(-200200.200, $value->getValue(), 'Zend_Measure_Flow_Mole Object not returned');
+        $value = new Zend_Measure_Flow_Mole('-100.100,200',Zend_Measure_Flow_Mole::STANDARD,'de');
+        $value->setValue('-200.200,200',Zend_Measure_Flow_Mole::STANDARD,'de');
+        $this->assertEquals(-200200.200, $value->getValue(),'Zend_Measure_Flow_Mole Object not returned');
     }
+
 
     /**
      * test for exception unknown type
-     * expected exception.
+     * expected exception
      */
-    public function testFlowMoleSetUnknownType()
+    public function testFlow_MoleSetUnknownType()
     {
         try {
-            $value = new Zend_Measure_Flow_Mole('100', Zend_Measure_Flow_Mole::STANDARD, 'de');
-            $value->setValue('-200.200,200', 'Flow_Mole::UNKNOWN', 'de');
+            $value = new Zend_Measure_Flow_Mole('100',Zend_Measure_Flow_Mole::STANDARD,'de');
+            $value->setValue('-200.200,200','Flow_Mole::UNKNOWN','de');
             $this->fail('Exception expected because of unknown type');
         } catch (Zend_Measure_Exception $e) {
             // success
         }
     }
 
+
     /**
      * test for exception unknown value
-     * expected exception.
+     * expected exception
      */
-    public function testFlowMoleSetUnknownValue()
+    public function testFlow_MoleSetUnknownValue()
     {
         try {
-            $value = new Zend_Measure_Flow_Mole('100', Zend_Measure_Flow_Mole::STANDARD, 'de');
-            $value->setValue('novalue', Zend_Measure_Flow_Mole::STANDARD, 'de');
+            $value = new Zend_Measure_Flow_Mole('100',Zend_Measure_Flow_Mole::STANDARD,'de');
+            $value->setValue('novalue',Zend_Measure_Flow_Mole::STANDARD,'de');
             $this->fail('Exception expected because of empty value');
         } catch (Zend_Measure_Exception $e) {
             // success
         }
     }
 
+
     /**
      * test for exception unknown locale
-     * expected exception.
+     * expected exception
      */
-    public function testFlowMoleSetUnknownLocale()
+    public function testFlow_MoleSetUnknownLocale()
     {
         try {
-            $value = new Zend_Measure_Flow_Mole('100', Zend_Measure_Flow_Mole::STANDARD, 'de');
-            $value->setValue('200', Zend_Measure_Flow_Mole::STANDARD, 'nolocale');
+            $value = new Zend_Measure_Flow_Mole('100',Zend_Measure_Flow_Mole::STANDARD,'de');
+            $value->setValue('200',Zend_Measure_Flow_Mole::STANDARD,'nolocale');
             $this->fail('Exception expected because of unknown locale');
         } catch (Zend_Measure_Exception $e) {
             // success
         }
     }
 
+
     /**
      * test for exception unknown locale
-     * expected exception.
+     * expected exception
      */
-    public function testFlowMoleSetWithNoLocale()
+    public function testFlow_MoleSetWithNoLocale()
     {
         $value = new Zend_Measure_Flow_Mole('100', Zend_Measure_Flow_Mole::STANDARD, 'de');
         $value->setValue('200', Zend_Measure_Flow_Mole::STANDARD);
         $this->assertEquals(200, $value->getValue(), 'Zend_Measure_Flow_Mole value expected to be a positive integer');
     }
 
+
     /**
      * test setting type
-     * expected new type.
+     * expected new type
      */
-    public function testFlowMoleSetType()
+    public function testFlow_MoleSetType()
     {
-        $value = new Zend_Measure_Flow_Mole('-100', Zend_Measure_Flow_Mole::STANDARD, 'de');
+        $value = new Zend_Measure_Flow_Mole('-100',Zend_Measure_Flow_Mole::STANDARD,'de');
         $value->setType(Zend_Measure_Flow_Mole::MILLIMOLE_PER_DAY);
         $this->assertEquals(Zend_Measure_Flow_Mole::MILLIMOLE_PER_DAY, $value->getType(), 'Zend_Measure_Flow_Mole type expected');
     }
 
+
     /**
      * test setting computed type
-     * expected new type.
+     * expected new type
      */
-    public function testFlowMoleSetComputedType1()
+    public function testFlow_MoleSetComputedType1()
     {
-        $value = new Zend_Measure_Flow_Mole('-100', Zend_Measure_Flow_Mole::STANDARD, 'de');
+        $value = new Zend_Measure_Flow_Mole('-100',Zend_Measure_Flow_Mole::STANDARD,'de');
         $value->setType(Zend_Measure_Flow_Mole::MILLIMOLE_PER_DAY);
         $this->assertEquals(Zend_Measure_Flow_Mole::MILLIMOLE_PER_DAY, $value->getType(), 'Zend_Measure_Flow_Mole type expected');
     }
 
+
     /**
      * test setting computed type
-     * expected new type.
+     * expected new type
      */
-    public function testFlowMoleSetComputedType2()
+    public function testFlow_MoleSetComputedType2()
     {
-        $value = new Zend_Measure_Flow_Mole('-100', Zend_Measure_Flow_Mole::MILLIMOLE_PER_DAY, 'de');
+        $value = new Zend_Measure_Flow_Mole('-100',Zend_Measure_Flow_Mole::MILLIMOLE_PER_DAY,'de');
         $value->setType(Zend_Measure_Flow_Mole::STANDARD);
         $this->assertEquals(Zend_Measure_Flow_Mole::STANDARD, $value->getType(), 'Zend_Measure_Flow_Mole type expected');
     }
 
+
     /**
      * test setting unknown type
-     * expected new type.
+     * expected new type
      */
-    public function testFlowMoleSetTypeFailed()
+    public function testFlow_MoleSetTypeFailed()
     {
         try {
-            $value = new Zend_Measure_Flow_Mole('-100', Zend_Measure_Flow_Mole::STANDARD, 'de');
+            $value = new Zend_Measure_Flow_Mole('-100',Zend_Measure_Flow_Mole::STANDARD,'de');
             $value->setType('Flow_Mole::UNKNOWN');
             $this->fail('Exception expected because of unknown type');
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             // success
         }
     }
 
+
     /**
      * test toString
-     * expected string.
+     * expected string
      */
-    public function testFlowMoleToString()
+    public function testFlow_MoleToString()
     {
-        $value = new Zend_Measure_Flow_Mole('-100', Zend_Measure_Flow_Mole::STANDARD, 'de');
+        $value = new Zend_Measure_Flow_Mole('-100',Zend_Measure_Flow_Mole::STANDARD,'de');
         $this->assertEquals('-100 mol/s', $value->toString(), 'Value -100 mol/s expected');
     }
 
+
     /**
      * test __toString
-     * expected string.
+     * expected string
      */
-    public function testFlowMoleToString()
+    public function testFlow_Mole_ToString()
     {
-        $value = new Zend_Measure_Flow_Mole('-100', Zend_Measure_Flow_Mole::STANDARD, 'de');
+        $value = new Zend_Measure_Flow_Mole('-100',Zend_Measure_Flow_Mole::STANDARD,'de');
         $this->assertEquals('-100 mol/s', $value->__toString(), 'Value -100 mol/s expected');
     }
 
+
     /**
      * test getConversionList
-     * expected array.
+     * expected array
      */
-    public function testFlowMoleConversionList()
+    public function testFlow_MoleConversionList()
     {
-        $value = new Zend_Measure_Flow_Mole('-100', Zend_Measure_Flow_Mole::STANDARD, 'de');
-        $unit = $value->getConversionList();
+        $value = new Zend_Measure_Flow_Mole('-100',Zend_Measure_Flow_Mole::STANDARD,'de');
+        $unit  = $value->getConversionList();
         $this->assertTrue(is_array($unit), 'Array expected');
     }
 }

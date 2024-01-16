@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Feed
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -24,29 +24,30 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Feed
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Feed
  * @group      Zend_Feed_Reader
  */
 #[AllowDynamicProperties]
 class Zend_Feed_Reader_Integration_HOnlineComAtom10Test extends PHPUnit_Framework_TestCase
 {
-    protected $_feedSamplePath;
+
+    protected $_feedSamplePath = null;
 
     public function setup()
     {
         Zend_Feed_Reader::reset();
-        $this->_feedSamplePath = __DIR__.'/_files/h-online.com-atom10.xml';
+        $this->_feedSamplePath = __DIR__ . '/_files/h-online.com-atom10.xml';
         $this->_options = Zend_Date::setOptions();
-        foreach ($this->_options as $k => $v) {
+        foreach($this->_options as $k=>$v) {
             if (is_null($v)) {
                 unset($this->_options[$k]);
             }
         }
-        Zend_Date::setOptions(['format_type' => 'iso']);
+        Zend_Date::setOptions(array('format_type'=>'iso'));
     }
 
     public function teardown()
@@ -67,7 +68,7 @@ class Zend_Feed_Reader_Integration_HOnlineComAtom10Test extends PHPUnit_Framewor
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
-        $this->assertEquals([['name' => 'The H']], (array) $feed->getAuthors());
+        $this->assertEquals(array(array('name'=>'The H')), (array) $feed->getAuthors());
     }
 
     public function testGetsSingleAuthor()
@@ -75,7 +76,7 @@ class Zend_Feed_Reader_Integration_HOnlineComAtom10Test extends PHPUnit_Framewor
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
-        $this->assertEquals(['name' => 'The H'], $feed->getAuthor());
+        $this->assertEquals(array('name'=>'The H'), $feed->getAuthor());
     }
 
     public function testGetsCopyright()
@@ -127,8 +128,9 @@ class Zend_Feed_Reader_Integration_HOnlineComAtom10Test extends PHPUnit_Framewor
     }
 
     /**
-     * Entry level testing.
+     * Entry level testing
      */
+
     public function testGetsEntryId()
     {
         $feed = Zend_Feed_Reader::importString(
@@ -153,7 +155,7 @@ class Zend_Feed_Reader_Integration_HOnlineComAtom10Test extends PHPUnit_Framewor
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals([['name' => 'The H']], (array) $entry->getAuthors());
+        $this->assertEquals(array(array('name'=>'The H')), (array) $entry->getAuthors());
     }
 
     public function testGetsEntrySingleAuthor()
@@ -162,7 +164,7 @@ class Zend_Feed_Reader_Integration_HOnlineComAtom10Test extends PHPUnit_Framewor
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals(['name' => 'The H'], $entry->getAuthor());
+        $this->assertEquals(array('name'=>'The H'), $entry->getAuthor());
     }
 
     public function testGetsEntryDescription()
@@ -171,7 +173,7 @@ class Zend_Feed_Reader_Integration_HOnlineComAtom10Test extends PHPUnit_Framewor
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
-        /*
+        /**
          * Note: "’" is not the same as "'" - don't replace in error
          */
         $this->assertEquals('A McAfee signature update is currently causing system failures and a lot of overtime for administrators', $entry->getDescription());
@@ -192,7 +194,7 @@ class Zend_Feed_Reader_Integration_HOnlineComAtom10Test extends PHPUnit_Framewor
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals(['http://www.h-online.com/security/McAfee-update-brings-systems-down-again--/news/113689/from/rss'], $entry->getLinks());
+        $this->assertEquals(array('http://www.h-online.com/security/McAfee-update-brings-systems-down-again--/news/113689/from/rss'), $entry->getLinks());
     }
 
     public function testGetsEntryLink()
@@ -222,4 +224,5 @@ class Zend_Feed_Reader_Integration_HOnlineComAtom10Test extends PHPUnit_Framewor
         $entry = $feed->current();
         $this->assertEquals('UTF-8', $entry->getEncoding());
     }
+
 }

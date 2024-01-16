@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,28 +13,31 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Cache
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
+
+
+
 /**
  * @category   Zend
- *
+ * @package    Zend_Cache
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Cache
  */
-abstract class Zend_Cache_CommonBackendTest extends PHPUnit_Framework_TestCase
-{
+abstract class Zend_Cache_CommonBackendTest extends PHPUnit_Framework_TestCase {
+
     protected $_instance;
     protected $_className;
     protected $_root;
 
-    public function __construct($name = null, array $data = [], $dataName = '')
+    public function __construct($name = null, array $data = array(), $dataName = '')
     {
         $this->_className = $name;
         $this->_root = __DIR__;
@@ -45,15 +48,15 @@ abstract class Zend_Cache_CommonBackendTest extends PHPUnit_Framework_TestCase
     public function setUp($notag = false)
     {
         $this->mkdir();
-        $this->_instance->setDirectives(['logging' => true]);
+        $this->_instance->setDirectives(array('logging' => true));
         if ($notag) {
             $this->_instance->save('bar : data to cache', 'bar');
             $this->_instance->save('bar2 : data to cache', 'bar2');
             $this->_instance->save('bar3 : data to cache', 'bar3');
         } else {
-            $this->_instance->save('bar : data to cache', 'bar', ['tag3', 'tag4']);
-            $this->_instance->save('bar2 : data to cache', 'bar2', ['tag3', 'tag1']);
-            $this->_instance->save('bar3 : data to cache', 'bar3', ['tag2', 'tag3']);
+            $this->_instance->save('bar : data to cache', 'bar', array('tag3', 'tag4'));
+            $this->_instance->save('bar2 : data to cache', 'bar2', array('tag3', 'tag1'));
+            $this->_instance->save('bar3 : data to cache', 'bar3', array('tag2', 'tag3'));
         }
     }
 
@@ -77,12 +80,12 @@ abstract class Zend_Cache_CommonBackendTest extends PHPUnit_Framework_TestCase
             $suffix = date('mdyHis');
         }
         if (is_writable($this->_root)) {
-            return $this->_root.DIRECTORY_SEPARATOR.'zend_cache_tmp_dir_'.$suffix;
+            return $this->_root . DIRECTORY_SEPARATOR . 'zend_cache_tmp_dir_' . $suffix;
         } else {
-            if (getenv('TMPDIR')) {
-                return getenv('TMPDIR').DIRECTORY_SEPARATOR.'zend_cache_tmp_dir_'.$suffix;
+            if (getenv('TMPDIR')){
+                return getenv('TMPDIR') . DIRECTORY_SEPARATOR . 'zend_cache_tmp_dir_' . $suffix;
             } else {
-                exit('no writable tmpdir found');
+                die("no writable tmpdir found");
             }
         }
     }
@@ -104,7 +107,7 @@ abstract class Zend_Cache_CommonBackendTest extends PHPUnit_Framework_TestCase
     {
         try {
             $class = $this->_className;
-            $test = new $class([1 => 'bar']);
+            $test = new $class(array(1 => 'bar'));
         } catch (Zend_Cache_Exception $e) {
             return;
         }
@@ -113,7 +116,7 @@ abstract class Zend_Cache_CommonBackendTest extends PHPUnit_Framework_TestCase
 
     public function testSetDirectivesCorrectCall()
     {
-        $this->_instance->setDirectives(['lifetime' => 3600, 'logging' => true]);
+        $this->_instance->setDirectives(array('lifetime' => 3600, 'logging' => true));
     }
 
     public function testSetDirectivesBadArgument()
@@ -130,13 +133,13 @@ abstract class Zend_Cache_CommonBackendTest extends PHPUnit_Framework_TestCase
     {
         // A bad directive (not known by a specific backend) is possible
         // => so no exception here
-        $this->_instance->setDirectives(['foo' => true, 'lifetime' => 3600]);
+        $this->_instance->setDirectives(array('foo' => true, 'lifetime' => 3600));
     }
 
     public function testSetDirectivesBadDirective2()
     {
         try {
-            $this->_instance->setDirectives(['foo' => true, 12 => 3600]);
+            $this->_instance->setDirectives(array('foo' => true, 12 => 3600));
         } catch (Zend_Cache_Exception $e) {
             return;
         }
@@ -145,21 +148,21 @@ abstract class Zend_Cache_CommonBackendTest extends PHPUnit_Framework_TestCase
 
     public function testSaveCorrectCall()
     {
-        $res = $this->_instance->save('data to cache', 'foo', ['tag1', 'tag2']);
+        $res = $this->_instance->save('data to cache', 'foo', array('tag1', 'tag2'));
         $this->assertTrue($res);
     }
 
     public function testSaveWithNullLifeTime()
     {
-        $this->_instance->setDirectives(['lifetime' => null]);
-        $res = $this->_instance->save('data to cache', 'foo', ['tag1', 'tag2']);
+        $this->_instance->setDirectives(array('lifetime' => null));
+        $res = $this->_instance->save('data to cache', 'foo', array('tag1', 'tag2'));
         $this->assertTrue($res);
     }
 
     public function testSaveWithSpecificLifeTime()
     {
-        $this->_instance->setDirectives(['lifetime' => 3600]);
-        $res = $this->_instance->save('data to cache', 'foo', ['tag1', 'tag2'], 10);
+        $this->_instance->setDirectives(array('lifetime' => 3600));
+        $res = $this->_instance->save('data to cache', 'foo', array('tag1', 'tag2'), 10);
         $this->assertTrue($res);
     }
 
@@ -180,7 +183,6 @@ abstract class Zend_Cache_CommonBackendTest extends PHPUnit_Framework_TestCase
         if (!($res > 999999)) {
             $this->fail('test() return an incorrect integer');
         }
-
         return;
     }
 
@@ -191,7 +193,7 @@ abstract class Zend_Cache_CommonBackendTest extends PHPUnit_Framework_TestCase
 
     public function testTestWithAnExistingCacheIdAndANullLifeTime()
     {
-        $this->_instance->setDirectives(['lifetime' => null]);
+        $this->_instance->setDirectives(array('lifetime' => null));
         $res = $this->_instance->test('bar');
         if (!$res) {
             $this->fail('test() return false');
@@ -199,7 +201,6 @@ abstract class Zend_Cache_CommonBackendTest extends PHPUnit_Framework_TestCase
         if (!($res > 999999)) {
             $this->fail('test() return an incorrect integer');
         }
-
         return;
     }
 
@@ -215,7 +216,7 @@ abstract class Zend_Cache_CommonBackendTest extends PHPUnit_Framework_TestCase
 
     public function testGetWithAnExistingCacheIdAndUTFCharacters()
     {
-        $data = '"""""'."'".'\nééééé';
+        $data = '"""""' . "'" . '\n' . 'ééééé';
         $this->_instance->save($data, 'foo');
         $this->assertEquals($data, $this->_instance->load('foo'));
     }
@@ -223,7 +224,7 @@ abstract class Zend_Cache_CommonBackendTest extends PHPUnit_Framework_TestCase
     public function testGetWithAnExpiredCacheId()
     {
         $this->_instance->___expire('bar');
-        $this->_instance->setDirectives(['lifetime' => -1]);
+        $this->_instance->setDirectives(array('lifetime' => -1));
         $this->assertFalse($this->_instance->load('bar'));
         $this->assertEquals('bar : data to cache', $this->_instance->load('bar', true));
     }
@@ -253,35 +254,35 @@ abstract class Zend_Cache_CommonBackendTest extends PHPUnit_Framework_TestCase
 
     public function testCleanModeMatchingTags()
     {
-        $this->assertTrue($this->_instance->clean('matchingTag', ['tag3']));
+        $this->assertTrue($this->_instance->clean('matchingTag', array('tag3')));
         $this->assertFalse($this->_instance->test('bar'));
         $this->assertFalse($this->_instance->test('bar2'));
     }
 
     public function testCleanModeMatchingTags2()
     {
-        $this->assertTrue($this->_instance->clean('matchingTag', ['tag3', 'tag4']));
+        $this->assertTrue($this->_instance->clean('matchingTag', array('tag3', 'tag4')));
         $this->assertFalse($this->_instance->test('bar'));
         $this->assertTrue($this->_instance->test('bar2') > 999999);
     }
 
     public function testCleanModeNotMatchingTags()
     {
-        $this->assertTrue($this->_instance->clean('notMatchingTag', ['tag3']));
+        $this->assertTrue($this->_instance->clean('notMatchingTag', array('tag3')));
         $this->assertTrue($this->_instance->test('bar') > 999999);
         $this->assertTrue($this->_instance->test('bar2') > 999999);
     }
 
     public function testCleanModeNotMatchingTags2()
     {
-        $this->assertTrue($this->_instance->clean('notMatchingTag', ['tag4']));
+        $this->assertTrue($this->_instance->clean('notMatchingTag', array('tag4')));
         $this->assertTrue($this->_instance->test('bar') > 999999);
         $this->assertFalse($this->_instance->test('bar2'));
     }
 
     public function testCleanModeNotMatchingTags3()
     {
-        $this->assertTrue($this->_instance->clean('notMatchingTag', ['tag4', 'tag1']));
+        $this->assertTrue($this->_instance->clean('notMatchingTag', array('tag4', 'tag1')));
         $this->assertTrue($this->_instance->test('bar') > 999999);
         $this->assertTrue($this->_instance->test('bar2') > 999999);
         $this->assertFalse($this->_instance->test('bar3'));

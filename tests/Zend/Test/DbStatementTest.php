@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Test
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -25,10 +25,10 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Test
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Test
  */
 #[AllowDynamicProperties]
@@ -49,7 +49,7 @@ class Zend_Test_DbStatementTest extends PHPUnit_Framework_TestCase
 
     public function testCreateSelectStatementWithRows()
     {
-        $rows = ['foo', 'bar'];
+        $rows = array("foo", "bar");
 
         $stmt = Zend_Test_DbStatement::createSelectStatement($rows);
 
@@ -83,7 +83,7 @@ class Zend_Test_DbStatementTest extends PHPUnit_Framework_TestCase
 
     public function testSetFetchRow()
     {
-        $row = ['foo'];
+        $row = array("foo");
 
         $stmt = new Zend_Test_DbStatement();
         $stmt->append($row);
@@ -97,16 +97,16 @@ class Zend_Test_DbStatementTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($stmt->fetch());
     }
 
-    public function testFetchResultFromEmptyResultStack()
+    public function testFetchResult_FromEmptyResultStack()
     {
-        $row = ['foo'];
+        $row = array("foo");
 
         $stmt = new Zend_Test_DbStatement();
         $stmt->append($row);
         $stmt->append($row);
 
-        $this->assertTrue(false !== $stmt->fetch());
-        $this->assertTrue(false !== $stmt->fetch());
+        $this->assertTrue($stmt->fetch() !== false);
+        $this->assertTrue($stmt->fetch() !== false);
         $this->assertFalse($stmt->fetch());
     }
 
@@ -118,19 +118,19 @@ class Zend_Test_DbStatementTest extends PHPUnit_Framework_TestCase
 
     public function testFetchColumn()
     {
-        $row = ['foo' => 'bar', 'bar' => 'baz'];
+        $row = array("foo" => "bar", "bar" => "baz");
 
         $stmt = new Zend_Test_DbStatement();
         $stmt->append($row);
 
-        $this->assertEquals('baz', $stmt->fetchColumn(1));
+        $this->assertEquals("baz", $stmt->fetchColumn(1));
     }
 
-    public function testFetchColumnOutOfBounds()
+    public function testFetchColumn_OutOfBounds()
     {
-        $this->setExpectedException('Zend_Db_Statement_Exception');
+        $this->setExpectedException("Zend_Db_Statement_Exception");
 
-        $row = ['foo' => 'bar', 'bar' => 'baz'];
+        $row = array("foo" => "bar", "bar" => "baz");
 
         $stmt = new Zend_Test_DbStatement();
         $stmt->append($row);
@@ -140,7 +140,7 @@ class Zend_Test_DbStatementTest extends PHPUnit_Framework_TestCase
 
     public function testFetchObject()
     {
-        $row = ['foo' => 'bar', 'bar' => 'baz'];
+        $row = array("foo" => "bar", "bar" => "baz");
 
         $stmt = new Zend_Test_DbStatement();
         $stmt->append($row);
@@ -151,15 +151,15 @@ class Zend_Test_DbStatementTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('baz', $object->bar);
     }
 
-    public function testFetchObjectClassNotExistsThrowsException()
+    public function testFetchObject_ClassNotExists_ThrowsException()
     {
-        $this->setExpectedException('Zend_Db_Statement_Exception');
+        $this->setExpectedException("Zend_Db_Statement_Exception");
 
-        $row = ['foo' => 'bar', 'bar' => 'baz'];
+        $row = array("foo" => "bar", "bar" => "baz");
 
         $stmt = new Zend_Test_DbStatement();
         $stmt->append($row);
 
-        $object = $stmt->fetchObject('anInvalidClassName');
+        $object = $stmt->fetchObject("anInvalidClassName");
     }
 }

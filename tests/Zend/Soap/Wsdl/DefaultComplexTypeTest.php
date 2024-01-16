@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Soap
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -25,10 +25,10 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Soap
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Soap
  * @group      Zend_Soap_Wsdl
  */
@@ -48,7 +48,7 @@ class Zend_Soap_Wsdl_DefaultComplexTypeTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->strategy = new Zend_Soap_Wsdl_Strategy_DefaultComplexType();
-        $this->wsdl = new Zend_Soap_Wsdl('TestService', 'http://framework.zend.com/soap/unittests');
+        $this->wsdl = new Zend_Soap_Wsdl("TestService", "http://framework.zend.com/soap/unittests");
         $this->wsdl->setComplexTypeStrategy($this->strategy);
         $this->strategy->setContext($this->wsdl);
     }
@@ -58,19 +58,19 @@ class Zend_Soap_Wsdl_DefaultComplexTypeTest extends PHPUnit_Framework_TestCase
      */
     public function testOnlyPublicPropertiesAreDiscoveredByStrategy()
     {
-        $this->strategy->addComplexType('Zend_Soap_Wsdl_DefaultComplexTypeTest_PublicPrivateProtected');
+        $this->strategy->addComplexType("Zend_Soap_Wsdl_DefaultComplexTypeTest_PublicPrivateProtected");
 
         $xml = $this->wsdl->toXML();
-        $this->assertNotContains(Zend_Soap_Wsdl_DefaultComplexTypeTest_PublicPrivateProtected::PROTECTED_VAR_NAME, $xml);
-        $this->assertNotContains(Zend_Soap_Wsdl_DefaultComplexTypeTest_PublicPrivateProtected::PRIVATE_VAR_NAME, $xml);
+        $this->assertNotContains( Zend_Soap_Wsdl_DefaultComplexTypeTest_PublicPrivateProtected::PROTECTED_VAR_NAME, $xml);
+        $this->assertNotContains( Zend_Soap_Wsdl_DefaultComplexTypeTest_PublicPrivateProtected::PRIVATE_VAR_NAME, $xml);
     }
 }
 
 #[AllowDynamicProperties]
 class Zend_Soap_Wsdl_DefaultComplexTypeTest_PublicPrivateProtected
 {
-    public const PROTECTED_VAR_NAME = 'bar';
-    public const PRIVATE_VAR_NAME = 'baz';
+    const PROTECTED_VAR_NAME = 'bar';
+    const PRIVATE_VAR_NAME = 'baz';
 
     /**
      * @var string

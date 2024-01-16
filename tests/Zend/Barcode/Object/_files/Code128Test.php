@@ -1,5 +1,4 @@
 <?php
-
 // require_once 'Zend/Barcode/Object/Code128.php';
 
 #[AllowDynamicProperties]

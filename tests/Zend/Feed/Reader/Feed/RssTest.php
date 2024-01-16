@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Feed
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -25,23 +25,24 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Feed
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Feed
  * @group      Zend_Feed_Reader
  */
 #[AllowDynamicProperties]
 class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
 {
-    protected $_feedSamplePath;
 
-    protected $_expectedCats = [];
+    protected $_feedSamplePath = null;
 
-    protected $_expectedCatsRdf = [];
+    protected $_expectedCats = array();
 
-    protected $_expectedCatsAtom = [];
+    protected $_expectedCatsRdf = array();
+
+    protected $_expectedCatsAtom = array();
 
     public function setup()
     {
@@ -50,60 +51,60 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
             $registry = Zend_Registry::getInstance();
             unset($registry['Zend_Locale']);
         }
-        $this->_feedSamplePath = __DIR__.'/_files/Rss';
+        $this->_feedSamplePath = __DIR__ . '/_files/Rss';
         $this->_options = Zend_Date::setOptions();
-        foreach ($this->_options as $k => $v) {
+        foreach($this->_options as $k=>$v) {
             if (is_null($v)) {
                 unset($this->_options[$k]);
             }
         }
-        Zend_Date::setOptions(['format_type' => 'iso']);
-        $this->_expectedCats = [
-            [
+        Zend_Date::setOptions(array('format_type'=>'iso'));
+        $this->_expectedCats = array(
+            array(
                 'term' => 'topic1',
                 'scheme' => 'http://example.com/schema1',
-                'label' => 'topic1',
-            ],
-            [
+                'label' => 'topic1'
+            ),
+            array(
                 'term' => 'topic1',
                 'scheme' => 'http://example.com/schema2',
-                'label' => 'topic1',
-            ],
-            [
+                'label' => 'topic1'
+            ),
+            array(
                 'term' => 'topic2',
                 'scheme' => 'http://example.com/schema1',
-                'label' => 'topic2',
-            ],
-        ];
-        $this->_expectedCatsRdf = [
-            [
+                'label' => 'topic2'
+            )
+        );
+        $this->_expectedCatsRdf = array(
+            array(
                 'term' => 'topic1',
                 'scheme' => null,
-                'label' => 'topic1',
-            ],
-            [
+                'label' => 'topic1'
+            ),
+            array(
                 'term' => 'topic2',
                 'scheme' => null,
-                'label' => 'topic2',
-            ],
-        ];
-        $this->_expectedCatsAtom = [
-            [
+                'label' => 'topic2'
+            )
+        );
+        $this->_expectedCatsAtom = array(
+            array(
                 'term' => 'topic1',
                 'scheme' => 'http://example.com/schema1',
-                'label' => 'topic1',
-            ],
-            [
+                'label' => 'topic1'
+            ),
+            array(
                 'term' => 'topic1',
                 'scheme' => 'http://example.com/schema2',
-                'label' => 'topic1',
-            ],
-            [
+                'label' => 'topic1'
+            ),
+            array(
                 'term' => 'cat_dog',
                 'scheme' => 'http://example.com/schema1',
-                'label' => 'Cat & Dog',
-            ],
-        ];
+                'label' => 'Cat & Dog'
+            )
+        );
     }
 
     public function teardown()
@@ -112,7 +113,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Get Title (Unencoded Text).
+     * Get Title (Unencoded Text)
      */
     public function testGetsTitleFromRss20()
     {
@@ -172,7 +173,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
 
     // DC 1.0
 
-    public function testGetsTitleFromRss20Dc10()
+    public function testGetsTitleFromRss20_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/title/plain/dc10/rss20.xml')
@@ -180,7 +181,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss094Dc10()
+    public function testGetsTitleFromRss094_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/title/plain/dc10/rss094.xml')
@@ -188,7 +189,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss093Dc10()
+    public function testGetsTitleFromRss093_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/title/plain/dc10/rss093.xml')
@@ -196,7 +197,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss092Dc10()
+    public function testGetsTitleFromRss092_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/title/plain/dc10/rss092.xml')
@@ -204,7 +205,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss091Dc10()
+    public function testGetsTitleFromRss091_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/title/plain/dc10/rss091.xml')
@@ -212,7 +213,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss10Dc10()
+    public function testGetsTitleFromRss10_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/title/plain/dc10/rss10.xml')
@@ -220,7 +221,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss090Dc10()
+    public function testGetsTitleFromRss090_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/title/plain/dc10/rss090.xml')
@@ -230,7 +231,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
 
     // DC 1.1
 
-    public function testGetsTitleFromRss20Dc11()
+    public function testGetsTitleFromRss20_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/title/plain/dc11/rss20.xml')
@@ -238,7 +239,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss094Dc11()
+    public function testGetsTitleFromRss094_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/title/plain/dc11/rss094.xml')
@@ -246,7 +247,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss093Dc11()
+    public function testGetsTitleFromRss093_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/title/plain/dc11/rss093.xml')
@@ -254,7 +255,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss092Dc11()
+    public function testGetsTitleFromRss092_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/title/plain/dc11/rss092.xml')
@@ -262,7 +263,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss091Dc11()
+    public function testGetsTitleFromRss091_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/title/plain/dc11/rss091.xml')
@@ -270,7 +271,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss10Dc11()
+    public function testGetsTitleFromRss10_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/title/plain/dc11/rss10.xml')
@@ -278,7 +279,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss090Dc11()
+    public function testGetsTitleFromRss090_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/title/plain/dc11/rss090.xml')
@@ -288,7 +289,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
 
     // Atom 1.0
 
-    public function testGetsTitleFromRss20Atom10()
+    public function testGetsTitleFromRss20_atom10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/title/plain/atom10/rss20.xml')
@@ -296,7 +297,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss094Atom10()
+    public function testGetsTitleFromRss094_atom10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/title/plain/atom10/rss094.xml')
@@ -304,7 +305,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss093Atom10()
+    public function testGetsTitleFromRss093_atom10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/title/plain/atom10/rss093.xml')
@@ -312,7 +313,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss092Atom10()
+    public function testGetsTitleFromRss092_atom10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/title/plain/atom10/rss092.xml')
@@ -320,7 +321,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss091Atom10()
+    public function testGetsTitleFromRss091_atom10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/title/plain/atom10/rss091.xml')
@@ -328,7 +329,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss10Atom10()
+    public function testGetsTitleFromRss10_atom10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/title/plain/atom10/rss10.xml')
@@ -336,7 +337,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss090Atom10()
+    public function testGetsTitleFromRss090_atom10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/title/plain/atom10/rss090.xml')
@@ -346,7 +347,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
 
     // Missing Title
 
-    public function testGetsTitleFromRss20None()
+    public function testGetsTitleFromRss20_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/title/plain/none/rss20.xml')
@@ -354,7 +355,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss094None()
+    public function testGetsTitleFromRss094_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/title/plain/none/rss094.xml')
@@ -362,7 +363,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss093None()
+    public function testGetsTitleFromRss093_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/title/plain/none/rss093.xml')
@@ -370,7 +371,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss092None()
+    public function testGetsTitleFromRss092_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/title/plain/none/rss092.xml')
@@ -378,7 +379,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss091None()
+    public function testGetsTitleFromRss091_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/title/plain/none/rss091.xml')
@@ -386,7 +387,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss10None()
+    public function testGetsTitleFromRss10_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/title/plain/none/rss10.xml')
@@ -394,7 +395,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss090None()
+    public function testGetsTitleFromRss090_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/title/plain/none/rss090.xml')
@@ -403,18 +404,18 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Get Authors (Unencoded Text).
+     * Get Authors (Unencoded Text)
      */
     public function testGetsAuthorArrayFromRss20()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/rss20.xml')
         );
-        $this->assertEquals([
-            ['email' => 'joe@example.com', 'name' => 'Joe Bloggs'],
-            ['email' => 'jane@example.com', 'name' => 'Jane Bloggs'],
-        ], (array) $feed->getAuthors());
-        $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
+        $this->assertEquals(array(
+            array('email'=>'joe@example.com','name'=>'Joe Bloggs'),
+            array('email'=>'jane@example.com','name'=>'Jane Bloggs')
+        ), (array) $feed->getAuthors());
+        $this->assertEquals(array('Joe Bloggs','Jane Bloggs'), $feed->getAuthors()->getValues());
     }
 
     public function testGetsAuthorArrayFromRss094()
@@ -422,11 +423,11 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/rss094.xml')
         );
-        $this->assertEquals([
-            ['email' => 'joe@example.com', 'name' => 'Joe Bloggs'],
-            ['email' => 'jane@example.com', 'name' => 'Jane Bloggs'],
-        ], (array) $feed->getAuthors());
-        $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
+        $this->assertEquals(array(
+            array('email'=>'joe@example.com','name'=>'Joe Bloggs'),
+            array('email'=>'jane@example.com','name'=>'Jane Bloggs')
+        ), (array) $feed->getAuthors());
+        $this->assertEquals(array('Joe Bloggs','Jane Bloggs'), $feed->getAuthors()->getValues());
     }
 
     public function testGetsAuthorArrayFromRss093()
@@ -434,11 +435,11 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/rss093.xml')
         );
-        $this->assertEquals([
-            ['email' => 'joe@example.com', 'name' => 'Joe Bloggs'],
-            ['email' => 'jane@example.com', 'name' => 'Jane Bloggs'],
-        ], (array) $feed->getAuthors());
-        $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
+        $this->assertEquals(array(
+            array('email'=>'joe@example.com','name'=>'Joe Bloggs'),
+            array('email'=>'jane@example.com','name'=>'Jane Bloggs')
+        ), (array) $feed->getAuthors());
+        $this->assertEquals(array('Joe Bloggs','Jane Bloggs'), $feed->getAuthors()->getValues());
     }
 
     public function testGetsAuthorArrayFromRss092()
@@ -446,11 +447,11 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/rss092.xml')
         );
-        $this->assertEquals([
-            ['email' => 'joe@example.com', 'name' => 'Joe Bloggs'],
-            ['email' => 'jane@example.com', 'name' => 'Jane Bloggs'],
-        ], (array) $feed->getAuthors());
-        $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
+        $this->assertEquals(array(
+            array('email'=>'joe@example.com','name'=>'Joe Bloggs'),
+            array('email'=>'jane@example.com','name'=>'Jane Bloggs')
+        ), (array) $feed->getAuthors());
+        $this->assertEquals(array('Joe Bloggs','Jane Bloggs'), $feed->getAuthors()->getValues());
     }
 
     public function testGetsAuthorArrayFromRss091()
@@ -458,11 +459,11 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/rss091.xml')
         );
-        $this->assertEquals([
-            ['email' => 'joe@example.com', 'name' => 'Joe Bloggs'],
-            ['email' => 'jane@example.com', 'name' => 'Jane Bloggs'],
-        ], (array) $feed->getAuthors());
-        $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
+        $this->assertEquals(array(
+            array('email'=>'joe@example.com','name'=>'Joe Bloggs'),
+            array('email'=>'jane@example.com','name'=>'Jane Bloggs')
+        ), (array) $feed->getAuthors());
+        $this->assertEquals(array('Joe Bloggs','Jane Bloggs'), $feed->getAuthors()->getValues());
     }
 
     public function testGetsAuthorArrayFromRss10()
@@ -470,11 +471,11 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/rss10.xml')
         );
-        $this->assertEquals([
-            ['email' => 'joe@example.com', 'name' => 'Joe Bloggs'],
-            ['email' => 'jane@example.com', 'name' => 'Jane Bloggs'],
-        ], (array) $feed->getAuthors());
-        $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
+        $this->assertEquals(array(
+            array('email'=>'joe@example.com','name'=>'Joe Bloggs'),
+            array('email'=>'jane@example.com','name'=>'Jane Bloggs')
+        ), (array) $feed->getAuthors());
+        $this->assertEquals(array('Joe Bloggs','Jane Bloggs'), $feed->getAuthors()->getValues());
     }
 
     public function testGetsAuthorArrayFromRss090()
@@ -482,253 +483,253 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/rss090.xml')
         );
-        $this->assertEquals([
-            ['email' => 'joe@example.com', 'name' => 'Joe Bloggs'],
-            ['email' => 'jane@example.com', 'name' => 'Jane Bloggs'],
-        ], (array) $feed->getAuthors());
-        $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
+        $this->assertEquals(array(
+            array('email'=>'joe@example.com','name'=>'Joe Bloggs'),
+            array('email'=>'jane@example.com','name'=>'Jane Bloggs')
+        ), (array) $feed->getAuthors());
+        $this->assertEquals(array('Joe Bloggs','Jane Bloggs'), $feed->getAuthors()->getValues());
     }
 
     // DC 1.0
 
-    public function testGetsAuthorArrayFromRss20Dc10()
+    public function testGetsAuthorArrayFromRss20_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/dc10/rss20.xml')
         );
-        $this->assertEquals([
-            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs'],
-        ], (array) $feed->getAuthors());
-        $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
+        $this->assertEquals(array(
+            array('name'=>'Joe Bloggs'), array('name'=>'Jane Bloggs')
+        ), (array) $feed->getAuthors());
+        $this->assertEquals(array('Joe Bloggs','Jane Bloggs'), $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss094Dc10()
+    public function testGetsAuthorArrayFromRss094_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/dc10/rss094.xml')
         );
-        $this->assertEquals([
-            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs'],
-        ], (array) $feed->getAuthors());
-        $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
+        $this->assertEquals(array(
+            array('name'=>'Joe Bloggs'), array('name'=>'Jane Bloggs')
+        ), (array) $feed->getAuthors());
+        $this->assertEquals(array('Joe Bloggs','Jane Bloggs'), $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss093Dc10()
+    public function testGetsAuthorArrayFromRss093_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/dc10/rss093.xml')
         );
-        $this->assertEquals([
-            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs'],
-        ], (array) $feed->getAuthors());
-        $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
+        $this->assertEquals(array(
+            array('name'=>'Joe Bloggs'), array('name'=>'Jane Bloggs')
+        ), (array) $feed->getAuthors());
+        $this->assertEquals(array('Joe Bloggs','Jane Bloggs'), $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss092Dc10()
+    public function testGetsAuthorArrayFromRss092_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/dc10/rss092.xml')
         );
-        $this->assertEquals([
-            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs'],
-        ], (array) $feed->getAuthors());
-        $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
+        $this->assertEquals(array(
+            array('name'=>'Joe Bloggs'), array('name'=>'Jane Bloggs')
+        ), (array) $feed->getAuthors());
+        $this->assertEquals(array('Joe Bloggs','Jane Bloggs'), $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss091Dc10()
+    public function testGetsAuthorArrayFromRss091_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/dc10/rss091.xml')
         );
-        $this->assertEquals([
-            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs'],
-        ], (array) $feed->getAuthors());
-        $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
+        $this->assertEquals(array(
+            array('name'=>'Joe Bloggs'), array('name'=>'Jane Bloggs')
+        ), (array) $feed->getAuthors());
+        $this->assertEquals(array('Joe Bloggs','Jane Bloggs'), $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss10Dc10()
+    public function testGetsAuthorArrayFromRss10_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/dc10/rss10.xml')
         );
-        $this->assertEquals([
-            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs'],
-        ], (array) $feed->getAuthors());
-        $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
+        $this->assertEquals(array(
+            array('name'=>'Joe Bloggs'), array('name'=>'Jane Bloggs')
+        ), (array) $feed->getAuthors());
+        $this->assertEquals(array('Joe Bloggs','Jane Bloggs'), $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss090Dc10()
+    public function testGetsAuthorArrayFromRss090_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/dc10/rss090.xml')
         );
-        $this->assertEquals([
-            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs'],
-        ], (array) $feed->getAuthors());
-        $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
+        $this->assertEquals(array(
+            array('name'=>'Joe Bloggs'), array('name'=>'Jane Bloggs')
+        ), (array) $feed->getAuthors());
+        $this->assertEquals(array('Joe Bloggs','Jane Bloggs'), $feed->getAuthors()->getValues());;
     }
 
     // DC 1.1
 
-    public function testGetsAuthorArrayFromRss20Dc11()
+    public function testGetsAuthorArrayFromRss20_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/dc11/rss20.xml')
         );
-        $this->assertEquals([
-            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs'],
-        ], (array) $feed->getAuthors());
-        $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
+        $this->assertEquals(array(
+            array('name'=>'Joe Bloggs'), array('name'=>'Jane Bloggs')
+        ), (array) $feed->getAuthors());
+        $this->assertEquals(array('Joe Bloggs','Jane Bloggs'), $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss094Dc11()
+    public function testGetsAuthorArrayFromRss094_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/dc11/rss094.xml')
         );
-        $this->assertEquals([
-            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs'],
-        ], (array) $feed->getAuthors());
-        $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
+        $this->assertEquals(array(
+            array('name'=>'Joe Bloggs'), array('name'=>'Jane Bloggs')
+        ), (array) $feed->getAuthors());
+        $this->assertEquals(array('Joe Bloggs','Jane Bloggs'), $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss093Dc11()
+    public function testGetsAuthorArrayFromRss093_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/dc11/rss093.xml')
         );
-        $this->assertEquals([
-            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs'],
-        ], (array) $feed->getAuthors());
-        $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
+        $this->assertEquals(array(
+            array('name'=>'Joe Bloggs'), array('name'=>'Jane Bloggs')
+        ), (array) $feed->getAuthors());
+        $this->assertEquals(array('Joe Bloggs','Jane Bloggs'), $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss092Dc11()
+    public function testGetsAuthorArrayFromRss092_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/dc11/rss092.xml')
         );
-        $this->assertEquals([
-            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs'],
-        ], (array) $feed->getAuthors());
-        $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
+        $this->assertEquals(array(
+            array('name'=>'Joe Bloggs'), array('name'=>'Jane Bloggs')
+        ), (array) $feed->getAuthors());
+        $this->assertEquals(array('Joe Bloggs','Jane Bloggs'), $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss091Dc11()
+    public function testGetsAuthorArrayFromRss091_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/dc11/rss091.xml')
         );
-        $this->assertEquals([
-            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs'],
-        ], (array) $feed->getAuthors());
-        $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
+        $this->assertEquals(array(
+            array('name'=>'Joe Bloggs'), array('name'=>'Jane Bloggs')
+        ), (array) $feed->getAuthors());
+        $this->assertEquals(array('Joe Bloggs','Jane Bloggs'), $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss10Dc11()
+    public function testGetsAuthorArrayFromRss10_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/dc11/rss10.xml')
         );
-        $this->assertEquals([
-            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs'],
-        ], (array) $feed->getAuthors());
-        $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
+        $this->assertEquals(array(
+            array('name'=>'Joe Bloggs'), array('name'=>'Jane Bloggs')
+        ), (array) $feed->getAuthors());
+        $this->assertEquals(array('Joe Bloggs','Jane Bloggs'), $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss090Dc11()
+    public function testGetsAuthorArrayFromRss090_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/dc11/rss090.xml')
         );
-        $this->assertEquals([
-            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs'],
-        ], (array) $feed->getAuthors());
-        $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
+        $this->assertEquals(array(
+            array('name'=>'Joe Bloggs'), array('name'=>'Jane Bloggs')
+        ), (array) $feed->getAuthors());
+        $this->assertEquals(array('Joe Bloggs','Jane Bloggs'), $feed->getAuthors()->getValues());
     }
 
     // Atom 1.0
 
-    public function testGetsAuthorArrayFromRss20Atom10()
+    public function testGetsAuthorArrayFromRss20_Atom10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/atom10/rss20.xml')
         );
-        $this->assertEquals([
-            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs'],
-        ], (array) $feed->getAuthors());
-        $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
+        $this->assertEquals(array(
+            array('name'=>'Joe Bloggs'), array('name'=>'Jane Bloggs')
+        ), (array) $feed->getAuthors());
+        $this->assertEquals(array('Joe Bloggs','Jane Bloggs'), $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss094Atom10()
+    public function testGetsAuthorArrayFromRss094_Atom10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/atom10/rss094.xml')
         );
-        $this->assertEquals([
-            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs'],
-        ], (array) $feed->getAuthors());
-        $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
+        $this->assertEquals(array(
+            array('name'=>'Joe Bloggs'), array('name'=>'Jane Bloggs')
+        ), (array) $feed->getAuthors());
+        $this->assertEquals(array('Joe Bloggs','Jane Bloggs'), $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss093Atom10()
+    public function testGetsAuthorArrayFromRss093_Atom10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/atom10/rss093.xml')
         );
-        $this->assertEquals([
-            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs'],
-        ], (array) $feed->getAuthors());
-        $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
+        $this->assertEquals(array(
+            array('name'=>'Joe Bloggs'), array('name'=>'Jane Bloggs')
+        ), (array) $feed->getAuthors());
+        $this->assertEquals(array('Joe Bloggs','Jane Bloggs'), $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss092Atom10()
+    public function testGetsAuthorArrayFromRss092_Atom10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/atom10/rss092.xml')
         );
-        $this->assertEquals([
-            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs'],
-        ], (array) $feed->getAuthors());
-        $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
+        $this->assertEquals(array(
+            array('name'=>'Joe Bloggs'), array('name'=>'Jane Bloggs')
+        ), (array) $feed->getAuthors());
+        $this->assertEquals(array('Joe Bloggs','Jane Bloggs'), $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss091Atom10()
+    public function testGetsAuthorArrayFromRss091_Atom10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/atom10/rss091.xml')
         );
-        $this->assertEquals([
-            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs'],
-        ], (array) $feed->getAuthors());
-        $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
+        $this->assertEquals(array(
+            array('name'=>'Joe Bloggs'), array('name'=>'Jane Bloggs')
+        ), (array) $feed->getAuthors());
+        $this->assertEquals(array('Joe Bloggs','Jane Bloggs'), $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss10Atom10()
+    public function testGetsAuthorArrayFromRss10_Atom10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/atom10/rss10.xml')
         );
-        $this->assertEquals([
-            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs'],
-        ], (array) $feed->getAuthors());
-        $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
+        $this->assertEquals(array(
+            array('name'=>'Joe Bloggs'), array('name'=>'Jane Bloggs')
+        ), (array) $feed->getAuthors());
+        $this->assertEquals(array('Joe Bloggs','Jane Bloggs'), $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss090Atom10()
+    public function testGetsAuthorArrayFromRss090_Atom10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/atom10/rss090.xml')
         );
-        $this->assertEquals([
-            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs'],
-        ], (array) $feed->getAuthors());
-        $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
+        $this->assertEquals(array(
+            array('name'=>'Joe Bloggs'), array('name'=>'Jane Bloggs')
+        ), (array) $feed->getAuthors());
+        $this->assertEquals(array('Joe Bloggs','Jane Bloggs'), $feed->getAuthors()->getValues());
     }
 
     // Missing Authors
 
-    public function testGetsAuthorArrayFromRss20None()
+    public function testGetsAuthorArrayFromRss20_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/none/rss20.xml')
@@ -736,7 +737,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getAuthors());
     }
 
-    public function testGetsAuthorArrayFromRss094None()
+    public function testGetsAuthorArrayFromRss094_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/none/rss094.xml')
@@ -744,7 +745,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getAuthors());
     }
 
-    public function testGetsAuthorArrayFromRss093None()
+    public function testGetsAuthorArrayFromRss093_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/none/rss093.xml')
@@ -752,7 +753,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getAuthors());
     }
 
-    public function testGetsAuthorArrayFromRss092None()
+    public function testGetsAuthorArrayFromRss092_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/none/rss092.xml')
@@ -760,7 +761,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getAuthors());
     }
 
-    public function testGetsAuthorArrayFromRss091None()
+    public function testGetsAuthorArrayFromRss091_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/none/rss091.xml')
@@ -768,7 +769,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getAuthors());
     }
 
-    public function testGetsAuthorArrayFromRss10None()
+    public function testGetsAuthorArrayFromRss10_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/none/rss10.xml')
@@ -776,7 +777,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getAuthors());
     }
 
-    public function testGetsAuthorArrayFromRss090None()
+    public function testGetsAuthorArrayFromRss090_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/none/rss090.xml')
@@ -785,14 +786,14 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Get Single Author (Unencoded Text).
+     * Get Single Author (Unencoded Text)
      */
     public function testGetsSingleAuthorFromRss20()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/rss20.xml')
         );
-        $this->assertEquals(['name' => 'Joe Bloggs', 'email' => 'joe@example.com'], $feed->getAuthor());
+        $this->assertEquals(array('name'=>'Joe Bloggs','email'=>'joe@example.com'), $feed->getAuthor());
     }
 
     public function testGetsSingleAuthorFromRss094()
@@ -800,7 +801,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/rss094.xml')
         );
-        $this->assertEquals(['name' => 'Joe Bloggs', 'email' => 'joe@example.com'], $feed->getAuthor());
+        $this->assertEquals(array('name'=>'Joe Bloggs','email'=>'joe@example.com'), $feed->getAuthor());
     }
 
     public function testGetsSingleAuthorFromRss093()
@@ -808,7 +809,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/rss093.xml')
         );
-        $this->assertEquals(['name' => 'Joe Bloggs', 'email' => 'joe@example.com'], $feed->getAuthor());
+        $this->assertEquals(array('name'=>'Joe Bloggs','email'=>'joe@example.com'), $feed->getAuthor());
     }
 
     public function testGetsSingleAuthorFromRss092()
@@ -816,7 +817,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/rss092.xml')
         );
-        $this->assertEquals(['name' => 'Joe Bloggs', 'email' => 'joe@example.com'], $feed->getAuthor());
+        $this->assertEquals(array('name'=>'Joe Bloggs','email'=>'joe@example.com'), $feed->getAuthor());
     }
 
     public function testGetsSingleAuthorFromRss091()
@@ -824,7 +825,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/rss091.xml')
         );
-        $this->assertEquals(['name' => 'Joe Bloggs', 'email' => 'joe@example.com'], $feed->getAuthor());
+        $this->assertEquals(array('name'=>'Joe Bloggs','email'=>'joe@example.com'), $feed->getAuthor());
     }
 
     public function testGetsSingleAuthorFromRss10()
@@ -832,7 +833,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/rss10.xml')
         );
-        $this->assertEquals(['name' => 'Joe Bloggs', 'email' => 'joe@example.com'], $feed->getAuthor());
+        $this->assertEquals(array('name'=>'Joe Bloggs','email'=>'joe@example.com'), $feed->getAuthor());
     }
 
     public function testGetsSingleAuthorFromRss090()
@@ -840,128 +841,128 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/rss090.xml')
         );
-        $this->assertEquals(['name' => 'Joe Bloggs', 'email' => 'joe@example.com'], $feed->getAuthor());
+        $this->assertEquals(array('name'=>'Joe Bloggs','email'=>'joe@example.com'), $feed->getAuthor());
     }
 
     // DC 1.0
 
-    public function testGetsSingleAuthorFromRss20Dc10()
+    public function testGetsSingleAuthorFromRss20_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/dc10/rss20.xml')
         );
-        $this->assertEquals(['name' => 'Joe Bloggs'], $feed->getAuthor());
+        $this->assertEquals(array('name'=>'Joe Bloggs'), $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss094Dc10()
+    public function testGetsSingleAuthorFromRss094_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/dc10/rss094.xml')
         );
-        $this->assertEquals(['name' => 'Joe Bloggs'], $feed->getAuthor());
+        $this->assertEquals(array('name'=>'Joe Bloggs'), $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss093Dc10()
+    public function testGetsSingleAuthorFromRss093_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/dc10/rss093.xml')
         );
-        $this->assertEquals(['name' => 'Joe Bloggs'], $feed->getAuthor());
+        $this->assertEquals(array('name'=>'Joe Bloggs'), $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss092Dc10()
+    public function testGetsSingleAuthorFromRss092_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/dc10/rss092.xml')
         );
-        $this->assertEquals(['name' => 'Joe Bloggs'], $feed->getAuthor());
+        $this->assertEquals(array('name'=>'Joe Bloggs'), $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss091Dc10()
+    public function testGetsSingleAuthorFromRss091_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/dc10/rss091.xml')
         );
-        $this->assertEquals(['name' => 'Joe Bloggs'], $feed->getAuthor());
+        $this->assertEquals(array('name'=>'Joe Bloggs'), $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss10Dc10()
+    public function testGetsSingleAuthorFromRss10_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/dc10/rss10.xml')
         );
-        $this->assertEquals(['name' => 'Joe Bloggs'], $feed->getAuthor());
+        $this->assertEquals(array('name'=>'Joe Bloggs'), $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss090Dc10()
+    public function testGetsSingleAuthorFromRss090_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/dc10/rss090.xml')
         );
-        $this->assertEquals(['name' => 'Joe Bloggs'], $feed->getAuthor());
+        $this->assertEquals(array('name'=>'Joe Bloggs'), $feed->getAuthor());
     }
 
     // DC 1.1
 
-    public function testGetsSingleAuthorFromRss20Dc11()
+    public function testGetsSingleAuthorFromRss20_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/dc11/rss20.xml')
         );
-        $this->assertEquals(['name' => 'Joe Bloggs'], $feed->getAuthor());
+        $this->assertEquals(array('name'=>'Joe Bloggs'), $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss094Dc11()
+    public function testGetsSingleAuthorFromRss094_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/dc11/rss094.xml')
         );
-        $this->assertEquals(['name' => 'Joe Bloggs'], $feed->getAuthor());
+        $this->assertEquals(array('name'=>'Joe Bloggs'), $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss093Dc11()
+    public function testGetsSingleAuthorFromRss093_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/dc11/rss093.xml')
         );
-        $this->assertEquals(['name' => 'Joe Bloggs'], $feed->getAuthor());
+        $this->assertEquals(array('name'=>'Joe Bloggs'), $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss092Dc11()
+    public function testGetsSingleAuthorFromRss092_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/dc11/rss092.xml')
         );
-        $this->assertEquals(['name' => 'Joe Bloggs'], $feed->getAuthor());
+        $this->assertEquals(array('name'=>'Joe Bloggs'), $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss091Dc11()
+    public function testGetsSingleAuthorFromRss091_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/dc11/rss091.xml')
         );
-        $this->assertEquals(['name' => 'Joe Bloggs'], $feed->getAuthor());
+        $this->assertEquals(array('name'=>'Joe Bloggs'), $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss10Dc11()
+    public function testGetsSingleAuthorFromRss10_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/dc11/rss10.xml')
         );
-        $this->assertEquals(['name' => 'Joe Bloggs'], $feed->getAuthor());
+        $this->assertEquals(array('name'=>'Joe Bloggs'), $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss090Dc11()
+    public function testGetsSingleAuthorFromRss090_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/dc11/rss090.xml')
         );
-        $this->assertEquals(['name' => 'Joe Bloggs'], $feed->getAuthor());
+        $this->assertEquals(array('name'=>'Joe Bloggs'), $feed->getAuthor());
     }
 
     // Missing Author
 
-    public function testGetsSingleAuthorFromRss20None()
+    public function testGetsSingleAuthorFromRss20_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/none/rss20.xml')
@@ -969,7 +970,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss094None()
+    public function testGetsSingleAuthorFromRss094_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/none/rss094.xml')
@@ -977,7 +978,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss093None()
+    public function testGetsSingleAuthorFromRss093_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/none/rss093.xml')
@@ -985,7 +986,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss092None()
+    public function testGetsSingleAuthorFromRss092_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/none/rss092.xml')
@@ -993,7 +994,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss091None()
+    public function testGetsSingleAuthorFromRss091_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/none/rss091.xml')
@@ -1001,7 +1002,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss10None()
+    public function testGetsSingleAuthorFromRss10_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/none/rss10.xml')
@@ -1009,7 +1010,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss090None()
+    public function testGetsSingleAuthorFromRss090_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/author/plain/none/rss090.xml')
@@ -1018,7 +1019,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Get Copyright (Unencoded Text).
+     * Get Copyright (Unencoded Text)
      */
     public function testGetsCopyrightFromRss20()
     {
@@ -1078,7 +1079,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
 
     // DC 1.0
 
-    public function testGetsCopyrightFromRss20Dc10()
+    public function testGetsCopyrightFromRss20_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/copyright/plain/dc10/rss20.xml')
@@ -1086,7 +1087,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Copyright 2008', $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss094Dc10()
+    public function testGetsCopyrightFromRss094_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/copyright/plain/dc10/rss094.xml')
@@ -1094,7 +1095,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Copyright 2008', $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss093Dc10()
+    public function testGetsCopyrightFromRss093_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/copyright/plain/dc10/rss093.xml')
@@ -1102,7 +1103,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Copyright 2008', $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss092Dc10()
+    public function testGetsCopyrightFromRss092_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/copyright/plain/dc10/rss092.xml')
@@ -1110,7 +1111,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Copyright 2008', $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss091Dc10()
+    public function testGetsCopyrightFromRss091_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/copyright/plain/dc10/rss091.xml')
@@ -1118,7 +1119,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Copyright 2008', $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss10Dc10()
+    public function testGetsCopyrightFromRss10_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/copyright/plain/dc10/rss10.xml')
@@ -1126,7 +1127,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Copyright 2008', $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss090Dc10()
+    public function testGetsCopyrightFromRss090_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/copyright/plain/dc10/rss090.xml')
@@ -1136,7 +1137,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
 
     // DC 1.1
 
-    public function testGetsCopyrightFromRss20Dc11()
+    public function testGetsCopyrightFromRss20_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/copyright/plain/dc11/rss20.xml')
@@ -1144,7 +1145,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Copyright 2008', $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss094Dc11()
+    public function testGetsCopyrightFromRss094_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/copyright/plain/dc11/rss094.xml')
@@ -1152,7 +1153,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Copyright 2008', $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss093Dc11()
+    public function testGetsCopyrightFromRss093_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/copyright/plain/dc11/rss093.xml')
@@ -1160,7 +1161,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Copyright 2008', $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss092Dc11()
+    public function testGetsCopyrightFromRss092_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/copyright/plain/dc11/rss092.xml')
@@ -1168,7 +1169,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Copyright 2008', $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss091Dc11()
+    public function testGetsCopyrightFromRss091_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/copyright/plain/dc11/rss091.xml')
@@ -1176,7 +1177,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Copyright 2008', $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss10Dc11()
+    public function testGetsCopyrightFromRss10_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/copyright/plain/dc11/rss10.xml')
@@ -1184,7 +1185,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Copyright 2008', $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss090Dc11()
+    public function testGetsCopyrightFromRss090_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/copyright/plain/dc11/rss090.xml')
@@ -1194,7 +1195,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
 
     // Missing Copyright
 
-    public function testGetsCopyrightFromRss20None()
+    public function testGetsCopyrightFromRss20_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/copyright/plain/none/rss20.xml')
@@ -1202,7 +1203,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss094None()
+    public function testGetsCopyrightFromRss094_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/copyright/plain/none/rss094.xml')
@@ -1210,7 +1211,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss093None()
+    public function testGetsCopyrightFromRss093_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/copyright/plain/none/rss093.xml')
@@ -1218,7 +1219,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss092None()
+    public function testGetsCopyrightFromRss092_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/copyright/plain/none/rss092.xml')
@@ -1226,7 +1227,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss091None()
+    public function testGetsCopyrightFromRss091_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/copyright/plain/none/rss091.xml')
@@ -1234,7 +1235,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss10None()
+    public function testGetsCopyrightFromRss10_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/copyright/plain/none/rss10.xml')
@@ -1242,7 +1243,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss090None()
+    public function testGetsCopyrightFromRss090_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/copyright/plain/none/rss090.xml')
@@ -1251,7 +1252,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Get Description (Unencoded Text).
+     * Get Description (Unencoded Text)
      */
     public function testGetsDescriptionFromRss20()
     {
@@ -1311,7 +1312,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
 
     // DC 1.0
 
-    public function testGetsDescriptionFromRss20Dc10()
+    public function testGetsDescriptionFromRss20_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/description/plain/dc10/rss20.xml')
@@ -1319,7 +1320,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('My Description', $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss094Dc10()
+    public function testGetsDescriptionFromRss094_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/description/plain/dc10/rss094.xml')
@@ -1327,7 +1328,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('My Description', $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss093Dc10()
+    public function testGetsDescriptionFromRss093_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/description/plain/dc10/rss093.xml')
@@ -1335,7 +1336,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('My Description', $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss092Dc10()
+    public function testGetsDescriptionFromRss092_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/description/plain/dc10/rss092.xml')
@@ -1343,7 +1344,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('My Description', $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss091Dc10()
+    public function testGetsDescriptionFromRss091_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/description/plain/dc10/rss091.xml')
@@ -1351,7 +1352,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('My Description', $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss10Dc10()
+    public function testGetsDescriptionFromRss10_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/description/plain/dc10/rss10.xml')
@@ -1359,7 +1360,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('My Description', $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss090Dc10()
+    public function testGetsDescriptionFromRss090_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/description/plain/dc10/rss090.xml')
@@ -1369,7 +1370,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
 
     // DC 1.1
 
-    public function testGetsDescriptionFromRss20Dc11()
+    public function testGetsDescriptionFromRss20_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/description/plain/dc11/rss20.xml')
@@ -1377,7 +1378,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('My Description', $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss094Dc11()
+    public function testGetsDescriptionFromRss094_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/description/plain/dc11/rss094.xml')
@@ -1385,7 +1386,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('My Description', $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss093Dc11()
+    public function testGetsDescriptionFromRss093_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/description/plain/dc11/rss093.xml')
@@ -1393,7 +1394,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('My Description', $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss092Dc11()
+    public function testGetsDescriptionFromRss092_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/description/plain/dc11/rss092.xml')
@@ -1401,7 +1402,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('My Description', $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss091Dc11()
+    public function testGetsDescriptionFromRss091_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/description/plain/dc11/rss091.xml')
@@ -1409,7 +1410,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('My Description', $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss10Dc11()
+    public function testGetsDescriptionFromRss10_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/description/plain/dc11/rss10.xml')
@@ -1417,7 +1418,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('My Description', $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss090Dc11()
+    public function testGetsDescriptionFromRss090_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/description/plain/dc11/rss090.xml')
@@ -1427,7 +1428,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
 
     // Missing Description
 
-    public function testGetsDescriptionFromRss20None()
+    public function testGetsDescriptionFromRss20_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/description/plain/none/rss20.xml')
@@ -1435,7 +1436,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss094None()
+    public function testGetsDescriptionFromRss094_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/description/plain/none/rss094.xml')
@@ -1443,7 +1444,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss093None()
+    public function testGetsDescriptionFromRss093_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/description/plain/none/rss093.xml')
@@ -1451,7 +1452,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss092None()
+    public function testGetsDescriptionFromRss092_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/description/plain/none/rss092.xml')
@@ -1459,7 +1460,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss091None()
+    public function testGetsDescriptionFromRss091_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/description/plain/none/rss091.xml')
@@ -1467,7 +1468,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss10None()
+    public function testGetsDescriptionFromRss10_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/description/plain/none/rss10.xml')
@@ -1475,7 +1476,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss090None()
+    public function testGetsDescriptionFromRss090_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/description/plain/none/rss090.xml')
@@ -1484,7 +1485,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Get Language (Unencoded Text).
+     * Get Language (Unencoded Text)
      */
     public function testGetsLanguageFromRss20()
     {
@@ -1544,7 +1545,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
 
     // DC 1.0
 
-    public function testGetsLanguageFromRss20Dc10()
+    public function testGetsLanguageFromRss20_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/language/plain/dc10/rss20.xml')
@@ -1552,7 +1553,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('en-GB', $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss094Dc10()
+    public function testGetsLanguageFromRss094_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/language/plain/dc10/rss094.xml')
@@ -1560,7 +1561,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('en-GB', $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss093Dc10()
+    public function testGetsLanguageFromRss093_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/language/plain/dc10/rss093.xml')
@@ -1568,7 +1569,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('en-GB', $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss092Dc10()
+    public function testGetsLanguageFromRss092_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/language/plain/dc10/rss092.xml')
@@ -1576,7 +1577,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('en-GB', $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss091Dc10()
+    public function testGetsLanguageFromRss091_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/language/plain/dc10/rss091.xml')
@@ -1584,7 +1585,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('en-GB', $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss10Dc10()
+    public function testGetsLanguageFromRss10_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/language/plain/dc10/rss10.xml')
@@ -1592,7 +1593,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('en-GB', $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss090Dc10()
+    public function testGetsLanguageFromRss090_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/language/plain/dc10/rss090.xml')
@@ -1602,7 +1603,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
 
     // DC 1.1
 
-    public function testGetsLanguageFromRss20Dc11()
+    public function testGetsLanguageFromRss20_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/language/plain/dc11/rss20.xml')
@@ -1610,7 +1611,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('en-GB', $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss094Dc11()
+    public function testGetsLanguageFromRss094_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/language/plain/dc11/rss094.xml')
@@ -1618,7 +1619,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('en-GB', $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss093Dc11()
+    public function testGetsLanguageFromRss093_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/language/plain/dc11/rss093.xml')
@@ -1626,7 +1627,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('en-GB', $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss092Dc11()
+    public function testGetsLanguageFromRss092_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/language/plain/dc11/rss092.xml')
@@ -1634,7 +1635,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('en-GB', $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss091Dc11()
+    public function testGetsLanguageFromRss091_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/language/plain/dc11/rss091.xml')
@@ -1642,7 +1643,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('en-GB', $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss10Dc11()
+    public function testGetsLanguageFromRss10_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/language/plain/dc11/rss10.xml')
@@ -1650,7 +1651,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('en-GB', $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss090Dc11()
+    public function testGetsLanguageFromRss090_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/language/plain/dc11/rss090.xml')
@@ -1660,7 +1661,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
 
     // Other
 
-    public function testGetsLanguageFromRss10XmlLang()
+    public function testGetsLanguageFromRss10_XmlLang()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/language/plain/rdf/rss10.xml')
@@ -1670,7 +1671,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
 
     // Missing Language
 
-    public function testGetsLanguageFromRss20None()
+    public function testGetsLanguageFromRss20_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/language/plain/none/rss20.xml')
@@ -1678,7 +1679,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss094None()
+    public function testGetsLanguageFromRss094_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/language/plain/none/rss094.xml')
@@ -1686,7 +1687,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss093None()
+    public function testGetsLanguageFromRss093_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/language/plain/none/rss093.xml')
@@ -1694,7 +1695,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss092None()
+    public function testGetsLanguageFromRss092_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/language/plain/none/rss092.xml')
@@ -1702,7 +1703,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss091None()
+    public function testGetsLanguageFromRss091_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/language/plain/none/rss091.xml')
@@ -1710,7 +1711,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss10None()
+    public function testGetsLanguageFromRss10_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/language/plain/none/rss10.xml')
@@ -1718,7 +1719,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss090None()
+    public function testGetsLanguageFromRss090_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/language/plain/none/rss090.xml')
@@ -1727,7 +1728,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Get Link (Unencoded Text).
+     * Get Link (Unencoded Text)
      */
     public function testGetsLinkFromRss20()
     {
@@ -1787,7 +1788,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
 
     // Missing Link
 
-    public function testGetsLinkFromRss20None()
+    public function testGetsLinkFromRss20_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/link/plain/none/rss20.xml')
@@ -1795,7 +1796,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getLink());
     }
 
-    public function testGetsLinkFromRss094None()
+    public function testGetsLinkFromRss094_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/link/plain/none/rss094.xml')
@@ -1803,7 +1804,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getLink());
     }
 
-    public function testGetsLinkFromRss093None()
+    public function testGetsLinkFromRss093_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/link/plain/none/rss093.xml')
@@ -1811,7 +1812,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getLink());
     }
 
-    public function testGetsLinkFromRss092None()
+    public function testGetsLinkFromRss092_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/link/plain/none/rss092.xml')
@@ -1819,7 +1820,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getLink());
     }
 
-    public function testGetsLinkFromRss091None()
+    public function testGetsLinkFromRss091_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/link/plain/none/rss091.xml')
@@ -1827,7 +1828,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getLink());
     }
 
-    public function testGetsLinkFromRss10None()
+    public function testGetsLinkFromRss10_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/link/plain/none/rss10.xml')
@@ -1835,7 +1836,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getLink());
     }
 
-    public function testGetsLinkFromRss090None()
+    public function testGetsLinkFromRss090_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/link/plain/none/rss090.xml')
@@ -1844,8 +1845,9 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Implements Countable.
+     * Implements Countable
      */
+
     public function testCountableInterface()
     {
         $feed = Zend_Feed_Reader::importString(
@@ -1855,7 +1857,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Get Feed Link (Unencoded Text).
+     * Get Feed Link (Unencoded Text)
      */
     public function testGetsFeedLinkFromRss20()
     {
@@ -1924,7 +1926,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
 
     // Missing Feed Link
 
-    public function testGetsFeedLinkFromRss20None()
+    public function testGetsFeedLinkFromRss20_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/feedlink/plain/none/rss20.xml')
@@ -1932,7 +1934,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getFeedLink());
     }
 
-    public function testGetsFeedLinkFromRss094None()
+    public function testGetsFeedLinkFromRss094_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/feedlink/plain/none/rss094.xml')
@@ -1940,7 +1942,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getFeedLink());
     }
 
-    public function testGetsFeedLinkFromRss093None()
+    public function testGetsFeedLinkFromRss093_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/feedlink/plain/none/rss093.xml')
@@ -1948,7 +1950,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getFeedLink());
     }
 
-    public function testGetsFeedLinkFromRss092None()
+    public function testGetsFeedLinkFromRss092_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/feedlink/plain/none/rss092.xml')
@@ -1956,7 +1958,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getFeedLink());
     }
 
-    public function testGetsFeedLinkFromRss091None()
+    public function testGetsFeedLinkFromRss091_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/feedlink/plain/none/rss091.xml')
@@ -1964,7 +1966,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getFeedLink());
     }
 
-    public function testGetsFeedLinkFromRss10None()
+    public function testGetsFeedLinkFromRss10_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/feedlink/plain/none/rss10.xml')
@@ -1972,7 +1974,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getFeedLink());
     }
 
-    public function testGetsFeedLinkFromRss090None()
+    public function testGetsFeedLinkFromRss090_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/feedlink/plain/none/rss090.xml')
@@ -1981,7 +1983,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Get Generator (Unencoded Text).
+     * Get Generator (Unencoded Text)
      */
     public function testGetsGeneratorFromRss20()
     {
@@ -2041,7 +2043,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
 
     // Missing Generator
 
-    public function testGetsGeneratorFromRss20None()
+    public function testGetsGeneratorFromRss20_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/generator/plain/none/rss20.xml')
@@ -2049,7 +2051,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getGenerator());
     }
 
-    public function testGetsGeneratorFromRss094None()
+    public function testGetsGeneratorFromRss094_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/generator/plain/none/rss094.xml')
@@ -2057,7 +2059,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getGenerator());
     }
 
-    public function testGetsGeneratorFromRss093None()
+    public function testGetsGeneratorFromRss093_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/generator/plain/none/rss093.xml')
@@ -2065,7 +2067,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getGenerator());
     }
 
-    public function testGetsGeneratorFromRss092None()
+    public function testGetsGeneratorFromRss092_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/generator/plain/none/rss092.xml')
@@ -2073,7 +2075,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getGenerator());
     }
 
-    public function testGetsGeneratorFromRss091None()
+    public function testGetsGeneratorFromRss091_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/generator/plain/none/rss091.xml')
@@ -2081,7 +2083,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getGenerator());
     }
 
-    public function testGetsGeneratorFromRss10None()
+    public function testGetsGeneratorFromRss10_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/generator/plain/none/rss10.xml')
@@ -2089,7 +2091,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getGenerator());
     }
 
-    public function testGetsGeneratorFromRss090None()
+    public function testGetsGeneratorFromRss090_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/generator/plain/none/rss090.xml')
@@ -2098,19 +2100,19 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Get Last Build Date (Unencoded Text).
+     * Get Last Build Date (Unencoded Text)
      */
     public function testGetsLastBuildDateFromRss20()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/lastbuilddate/plain/rss20.xml')
         );
-        $edate = new Zend_Date();
+        $edate = new Zend_Date;
         $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
         $this->assertTrue($edate->equals($feed->getLastBuildDate()));
     }
 
-    public function testGetsLastBuildDateFromRss20None()
+    public function testGetsLastBuildDateFromRss20_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/lastbuilddate/plain/none/rss20.xml')
@@ -2119,14 +2121,14 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Get Date Modified (Unencoded Text).
+     * Get Date Modified (Unencoded Text)
      */
     public function testGetsDateModifiedFromRss20()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/rss20.xml')
         );
-        $edate = new Zend_Date();
+        $edate = new Zend_Date;
         $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
         $this->assertTrue($edate->equals($feed->getDateModified()));
     }
@@ -2142,7 +2144,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/rss20_en_US.xml')
         );
         $fdate = $feed->getDateModified();
-        $edate = new Zend_Date();
+        $edate = new Zend_Date;
         $edate->set('2010-01-04T02:14:00-0600', Zend_Date::ISO_8601);
         Zend_Registry::getInstance()->offsetUnset('Zend_Locale');
         $this->assertTrue($edate->equals($fdate));
@@ -2150,223 +2152,223 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
 
     // DC 1.0
 
-    public function testGetsDateModifiedFromRss20Dc10()
+    public function testGetsDateModifiedFromRss20_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc10/rss20.xml')
         );
-        $edate = new Zend_Date();
+        $edate = new Zend_Date;
         $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
         $this->assertTrue($edate->equals($feed->getDateModified()));
     }
 
-    public function testGetsDateModifiedFromRss094Dc10()
+    public function testGetsDateModifiedFromRss094_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc10/rss094.xml')
         );
-        $edate = new Zend_Date();
+        $edate = new Zend_Date;
         $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
         $this->assertTrue($edate->equals($feed->getDateModified()));
     }
 
-    public function testGetsDateModifiedFromRss093Dc10()
+    public function testGetsDateModifiedFromRss093_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc10/rss093.xml')
         );
-        $edate = new Zend_Date();
+        $edate = new Zend_Date;
         $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
         $this->assertTrue($edate->equals($feed->getDateModified()));
     }
 
-    public function testGetsDateModifiedFromRss092Dc10()
+    public function testGetsDateModifiedFromRss092_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc10/rss092.xml')
         );
-        $edate = new Zend_Date();
+        $edate = new Zend_Date;
         $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
         $this->assertTrue($edate->equals($feed->getDateModified()));
     }
 
-    public function testGetsDateModifiedFromRss091Dc10()
+    public function testGetsDateModifiedFromRss091_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc10/rss091.xml')
         );
-        $edate = new Zend_Date();
+        $edate = new Zend_Date;
         $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
         $this->assertTrue($edate->equals($feed->getDateModified()));
     }
 
-    public function testGetsDateModifiedFromRss10Dc10()
+    public function testGetsDateModifiedFromRss10_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc10/rss10.xml')
         );
-        $edate = new Zend_Date();
+        $edate = new Zend_Date;
         $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
         $this->assertTrue($edate->equals($feed->getDateModified()));
     }
 
-    public function testGetsDateModifiedFromRss090Dc10()
+    public function testGetsDateModifiedFromRss090_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc10/rss090.xml')
         );
-        $edate = new Zend_Date();
+        $edate = new Zend_Date;
         $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
         $this->assertTrue($edate->equals($feed->getDateModified()));
     }
 
     // DC 1.1
 
-    public function testGetsDateModifiedFromRss20Dc11()
+    public function testGetsDateModifiedFromRss20_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc11/rss20.xml')
         );
-        $edate = new Zend_Date();
+        $edate = new Zend_Date;
         $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
         $this->assertTrue($edate->equals($feed->getDateModified()));
     }
 
-    public function testGetsDateModifiedFromRss094Dc11()
+    public function testGetsDateModifiedFromRss094_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc11/rss094.xml')
         );
-        $edate = new Zend_Date();
+        $edate = new Zend_Date;
         $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
         $this->assertTrue($edate->equals($feed->getDateModified()));
     }
 
-    public function testGetsDateModifiedFromRss093Dc11()
+    public function testGetsDateModifiedFromRss093_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc11/rss093.xml')
         );
-        $edate = new Zend_Date();
+        $edate = new Zend_Date;
         $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
         $this->assertTrue($edate->equals($feed->getDateModified()));
     }
 
-    public function testGetsDateModifiedFromRss092Dc11()
+    public function testGetsDateModifiedFromRss092_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc11/rss092.xml')
         );
-        $edate = new Zend_Date();
+        $edate = new Zend_Date;
         $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
         $this->assertTrue($edate->equals($feed->getDateModified()));
     }
 
-    public function testGetsDateModifiedFromRss091Dc11()
+    public function testGetsDateModifiedFromRss091_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc11/rss091.xml')
         );
-        $edate = new Zend_Date();
+        $edate = new Zend_Date;
         $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
         $this->assertTrue($edate->equals($feed->getDateModified()));
     }
 
-    public function testGetsDateModifiedFromRss10Dc11()
+    public function testGetsDateModifiedFromRss10_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc11/rss10.xml')
         );
-        $edate = new Zend_Date();
+        $edate = new Zend_Date;
         $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
         $this->assertTrue($edate->equals($feed->getDateModified()));
     }
 
-    public function testGetsDateModifiedFromRss090Dc11()
+    public function testGetsDateModifiedFromRss090_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc11/rss090.xml')
         );
-        $edate = new Zend_Date();
+        $edate = new Zend_Date;
         $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
         $this->assertTrue($edate->equals($feed->getDateModified()));
     }
 
     // Atom 1.0
 
-    public function testGetsDateModifiedFromRss20Atom10()
+    public function testGetsDateModifiedFromRss20_atom10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/atom10/rss20.xml')
         );
-        $edate = new Zend_Date();
+        $edate = new Zend_Date;
         $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
         $this->assertTrue($edate->equals($feed->getDateModified()));
     }
 
-    public function testGetsDateModifiedFromRss094Atom10()
+    public function testGetsDateModifiedFromRss094_atom10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/atom10/rss094.xml')
         );
-        $edate = new Zend_Date();
+        $edate = new Zend_Date;
         $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
         $this->assertTrue($edate->equals($feed->getDateModified()));
     }
 
-    public function testGetsDateModifiedFromRss093Atom10()
+    public function testGetsDateModifiedFromRss093_atom10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/atom10/rss093.xml')
         );
-        $edate = new Zend_Date();
+        $edate = new Zend_Date;
         $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
         $this->assertTrue($edate->equals($feed->getDateModified()));
     }
 
-    public function testGetsDateModifiedFromRss092Atom10()
+    public function testGetsDateModifiedFromRss092_atom10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/atom10/rss092.xml')
         );
-        $edate = new Zend_Date();
+        $edate = new Zend_Date;
         $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
         $this->assertTrue($edate->equals($feed->getDateModified()));
     }
 
-    public function testGetsDateModifiedFromRss091Atom10()
+    public function testGetsDateModifiedFromRss091_atom10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/atom10/rss091.xml')
         );
-        $edate = new Zend_Date();
+        $edate = new Zend_Date;
         $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
         $this->assertTrue($edate->equals($feed->getDateModified()));
     }
 
-    public function testGetsDateModifiedFromRss10Atom10()
+    public function testGetsDateModifiedFromRss10_atom10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/atom10/rss10.xml')
         );
-        $edate = new Zend_Date();
+        $edate = new Zend_Date;
         $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
         $this->assertTrue($edate->equals($feed->getDateModified()));
     }
 
-    public function testGetsDateModifiedFromRss090Atom10()
+    public function testGetsDateModifiedFromRss090_atom10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/atom10/rss090.xml')
         );
-        $edate = new Zend_Date();
+        $edate = new Zend_Date;
         $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
         $this->assertTrue($edate->equals($feed->getDateModified()));
     }
 
     // Missing DateModified
 
-    public function testGetsDateModifiedFromRss20None()
+    public function testGetsDateModifiedFromRss20_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/none/rss20.xml')
@@ -2374,7 +2376,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getDateModified());
     }
 
-    public function testGetsDateModifiedFromRss094None()
+    public function testGetsDateModifiedFromRss094_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/none/rss094.xml')
@@ -2382,7 +2384,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getDateModified());
     }
 
-    public function testGetsDateModifiedFromRss093None()
+    public function testGetsDateModifiedFromRss093_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/none/rss093.xml')
@@ -2390,7 +2392,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getDateModified());
     }
 
-    public function testGetsDateModifiedFromRss092None()
+    public function testGetsDateModifiedFromRss092_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/none/rss092.xml')
@@ -2398,7 +2400,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getDateModified());
     }
 
-    public function testGetsDateModifiedFromRss091None()
+    public function testGetsDateModifiedFromRss091_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/none/rss091.xml')
@@ -2406,7 +2408,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getDateModified());
     }
 
-    public function testGetsDateModifiedFromRss10None()
+    public function testGetsDateModifiedFromRss10_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/none/rss10.xml')
@@ -2414,7 +2416,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getDateModified());
     }
 
-    public function testGetsDateModifiedFromRss090None()
+    public function testGetsDateModifiedFromRss090_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/none/rss090.xml')
@@ -2423,17 +2425,17 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Get Hubs (Unencoded Text).
+     * Get Hubs (Unencoded Text)
      */
     public function testGetsHubsFromRss20()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/hubs/plain/atom10/rss20.xml')
         );
-        $this->assertEquals([
+        $this->assertEquals(array(
             'http://www.example.com/hub1',
-            'http://www.example.com/hub2',
-        ], $feed->getHubs());
+            'http://www.example.com/hub2'
+        ), $feed->getHubs());
     }
 
     public function testGetsHubsFromRss094()
@@ -2441,10 +2443,10 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/hubs/plain/atom10/rss094.xml')
         );
-        $this->assertEquals([
+        $this->assertEquals(array(
             'http://www.example.com/hub1',
-            'http://www.example.com/hub2',
-        ], $feed->getHubs());
+            'http://www.example.com/hub2'
+        ), $feed->getHubs());
     }
 
     public function testGetsHubsFromRss093()
@@ -2452,10 +2454,10 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/hubs/plain/atom10/rss093.xml')
         );
-        $this->assertEquals([
+        $this->assertEquals(array(
             'http://www.example.com/hub1',
-            'http://www.example.com/hub2',
-        ], $feed->getHubs());
+            'http://www.example.com/hub2'
+        ), $feed->getHubs());
     }
 
     public function testGetsHubsFromRss092()
@@ -2463,10 +2465,10 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/hubs/plain/atom10/rss092.xml')
         );
-        $this->assertEquals([
+        $this->assertEquals(array(
             'http://www.example.com/hub1',
-            'http://www.example.com/hub2',
-        ], $feed->getHubs());
+            'http://www.example.com/hub2'
+        ), $feed->getHubs());
     }
 
     public function testGetsHubsFromRss091()
@@ -2474,10 +2476,10 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/hubs/plain/atom10/rss091.xml')
         );
-        $this->assertEquals([
+        $this->assertEquals(array(
             'http://www.example.com/hub1',
-            'http://www.example.com/hub2',
-        ], $feed->getHubs());
+            'http://www.example.com/hub2'
+        ), $feed->getHubs());
     }
 
     public function testGetsHubsFromRss10()
@@ -2485,10 +2487,10 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/hubs/plain/atom10/rss10.xml')
         );
-        $this->assertEquals([
+        $this->assertEquals(array(
             'http://www.example.com/hub1',
-            'http://www.example.com/hub2',
-        ], $feed->getHubs());
+            'http://www.example.com/hub2'
+        ), $feed->getHubs());
     }
 
     public function testGetsHubsFromRss090()
@@ -2496,15 +2498,15 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/hubs/plain/atom10/rss090.xml')
         );
-        $this->assertEquals([
+        $this->assertEquals(array(
             'http://www.example.com/hub1',
-            'http://www.example.com/hub2',
-        ], $feed->getHubs());
+            'http://www.example.com/hub2'
+        ), $feed->getHubs());
     }
 
     // Missing Hubs
 
-    public function testGetsHubsFromRss20None()
+    public function testGetsHubsFromRss20_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/hubs/plain/none/rss20.xml')
@@ -2512,7 +2514,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getHubs());
     }
 
-    public function testGetsHubsFromRss094None()
+    public function testGetsHubsFromRss094_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/hubs/plain/none/rss094.xml')
@@ -2520,7 +2522,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getHubs());
     }
 
-    public function testGetsHubsFromRss093None()
+    public function testGetsHubsFromRss093_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/hubs/plain/none/rss093.xml')
@@ -2528,7 +2530,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getHubs());
     }
 
-    public function testGetsHubsFromRss092None()
+    public function testGetsHubsFromRss092_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/hubs/plain/none/rss092.xml')
@@ -2536,7 +2538,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getHubs());
     }
 
-    public function testGetsHubsFromRss091None()
+    public function testGetsHubsFromRss091_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/hubs/plain/none/rss091.xml')
@@ -2544,7 +2546,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getHubs());
     }
 
-    public function testGetsHubsFromRss10None()
+    public function testGetsHubsFromRss10_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/hubs/plain/none/rss10.xml')
@@ -2552,7 +2554,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getHubs());
     }
 
-    public function testGetsHubsFromRss090None()
+    public function testGetsHubsFromRss090_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/hubs/plain/none/rss090.xml')
@@ -2561,7 +2563,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Get category data.
+     * Get category data
      */
 
     // RSS 2.0
@@ -2572,258 +2574,258 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
             file_get_contents($this->_feedSamplePath.'/category/plain/rss20.xml')
         );
         $this->assertEquals($this->_expectedCats, (array) $feed->getCategories());
-        $this->assertEquals(['topic1', 'topic2'], array_values($feed->getCategories()->getValues()));
+        $this->assertEquals(array('topic1','topic2'), array_values($feed->getCategories()->getValues()));
     }
 
     // DC 1.0
 
-    public function testGetsCategoriesFromRss090Dc10()
+    public function testGetsCategoriesFromRss090_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/category/plain/dc10/rss090.xml')
         );
         $this->assertEquals($this->_expectedCatsRdf, (array) $feed->getCategories());
-        $this->assertEquals(['topic1', 'topic2'], array_values($feed->getCategories()->getValues()));
+        $this->assertEquals(array('topic1','topic2'), array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss091Dc10()
+    public function testGetsCategoriesFromRss091_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/category/plain/dc10/rss091.xml')
         );
         $this->assertEquals($this->_expectedCatsRdf, (array) $feed->getCategories());
-        $this->assertEquals(['topic1', 'topic2'], array_values($feed->getCategories()->getValues()));
+        $this->assertEquals(array('topic1','topic2'), array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss092Dc10()
+    public function testGetsCategoriesFromRss092_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/category/plain/dc10/rss092.xml')
         );
         $this->assertEquals($this->_expectedCatsRdf, (array) $feed->getCategories());
-        $this->assertEquals(['topic1', 'topic2'], array_values($feed->getCategories()->getValues()));
+        $this->assertEquals(array('topic1','topic2'), array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss093Dc10()
+    public function testGetsCategoriesFromRss093_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/category/plain/dc10/rss093.xml')
         );
         $this->assertEquals($this->_expectedCatsRdf, (array) $feed->getCategories());
-        $this->assertEquals(['topic1', 'topic2'], array_values($feed->getCategories()->getValues()));
+        $this->assertEquals(array('topic1','topic2'), array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss094Dc10()
+    public function testGetsCategoriesFromRss094_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/category/plain/dc10/rss094.xml')
         );
         $this->assertEquals($this->_expectedCatsRdf, (array) $feed->getCategories());
-        $this->assertEquals(['topic1', 'topic2'], array_values($feed->getCategories()->getValues()));
+        $this->assertEquals(array('topic1','topic2'), array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss10Dc10()
+    public function testGetsCategoriesFromRss10_Dc10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/category/plain/dc10/rss10.xml')
         );
         $this->assertEquals($this->_expectedCatsRdf, (array) $feed->getCategories());
-        $this->assertEquals(['topic1', 'topic2'], array_values($feed->getCategories()->getValues()));
+        $this->assertEquals(array('topic1','topic2'), array_values($feed->getCategories()->getValues()));
     }
 
     // DC 1.1
 
-    public function testGetsCategoriesFromRss090Dc11()
+    public function testGetsCategoriesFromRss090_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/category/plain/dc11/rss090.xml')
         );
         $this->assertEquals($this->_expectedCatsRdf, (array) $feed->getCategories());
-        $this->assertEquals(['topic1', 'topic2'], array_values($feed->getCategories()->getValues()));
+        $this->assertEquals(array('topic1','topic2'), array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss091Dc11()
+    public function testGetsCategoriesFromRss091_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/category/plain/dc11/rss091.xml')
         );
         $this->assertEquals($this->_expectedCatsRdf, (array) $feed->getCategories());
-        $this->assertEquals(['topic1', 'topic2'], array_values($feed->getCategories()->getValues()));
+        $this->assertEquals(array('topic1','topic2'), array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss092Dc11()
+    public function testGetsCategoriesFromRss092_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/category/plain/dc11/rss092.xml')
         );
         $this->assertEquals($this->_expectedCatsRdf, (array) $feed->getCategories());
-        $this->assertEquals(['topic1', 'topic2'], array_values($feed->getCategories()->getValues()));
+        $this->assertEquals(array('topic1','topic2'), array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss093Dc11()
+    public function testGetsCategoriesFromRss093_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/category/plain/dc11/rss093.xml')
         );
         $this->assertEquals($this->_expectedCatsRdf, (array) $feed->getCategories());
-        $this->assertEquals(['topic1', 'topic2'], array_values($feed->getCategories()->getValues()));
+        $this->assertEquals(array('topic1','topic2'), array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss094Dc11()
+    public function testGetsCategoriesFromRss094_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/category/plain/dc11/rss094.xml')
         );
         $this->assertEquals($this->_expectedCatsRdf, (array) $feed->getCategories());
-        $this->assertEquals(['topic1', 'topic2'], array_values($feed->getCategories()->getValues()));
+        $this->assertEquals(array('topic1','topic2'), array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss10Dc11()
+    public function testGetsCategoriesFromRss10_Dc11()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/category/plain/dc11/rss10.xml')
         );
         $this->assertEquals($this->_expectedCatsRdf, (array) $feed->getCategories());
-        $this->assertEquals(['topic1', 'topic2'], array_values($feed->getCategories()->getValues()));
+        $this->assertEquals(array('topic1','topic2'), array_values($feed->getCategories()->getValues()));
     }
 
     // Atom 1.0
 
-    public function testGetsCategoriesFromRss090Atom10()
+    public function testGetsCategoriesFromRss090_Atom10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/category/plain/atom10/rss090.xml')
         );
         $this->assertEquals($this->_expectedCatsAtom, (array) $feed->getCategories());
-        $this->assertEquals(['topic1', 'Cat & Dog'], array_values($feed->getCategories()->getValues()));
+        $this->assertEquals(array('topic1','Cat & Dog'), array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss091Atom10()
+    public function testGetsCategoriesFromRss091_Atom10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/category/plain/atom10/rss091.xml')
         );
         $this->assertEquals($this->_expectedCatsAtom, (array) $feed->getCategories());
-        $this->assertEquals(['topic1', 'Cat & Dog'], array_values($feed->getCategories()->getValues()));
+        $this->assertEquals(array('topic1','Cat & Dog'), array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss092Atom10()
+    public function testGetsCategoriesFromRss092_Atom10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/category/plain/atom10/rss092.xml')
         );
         $this->assertEquals($this->_expectedCatsAtom, (array) $feed->getCategories());
-        $this->assertEquals(['topic1', 'Cat & Dog'], array_values($feed->getCategories()->getValues()));
+        $this->assertEquals(array('topic1','Cat & Dog'), array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss093Atom10()
+    public function testGetsCategoriesFromRss093_Atom10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/category/plain/atom10/rss093.xml')
         );
         $this->assertEquals($this->_expectedCatsAtom, (array) $feed->getCategories());
-        $this->assertEquals(['topic1', 'Cat & Dog'], array_values($feed->getCategories()->getValues()));
+        $this->assertEquals(array('topic1','Cat & Dog'), array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss094Atom10()
+    public function testGetsCategoriesFromRss094_Atom10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/category/plain/atom10/rss094.xml')
         );
         $this->assertEquals($this->_expectedCatsAtom, (array) $feed->getCategories());
-        $this->assertEquals(['topic1', 'Cat & Dog'], array_values($feed->getCategories()->getValues()));
+        $this->assertEquals(array('topic1','Cat & Dog'), array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss10Atom10()
+    public function testGetsCategoriesFromRss10_Atom10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/category/plain/atom10/rss10.xml')
         );
         $this->assertEquals($this->_expectedCatsAtom, (array) $feed->getCategories());
-        $this->assertEquals(['topic1', 'Cat & Dog'], array_values($feed->getCategories()->getValues()));
+        $this->assertEquals(array('topic1','Cat & Dog'), array_values($feed->getCategories()->getValues()));
     }
 
     // No Categories In Entry
 
-    public function testGetsCategoriesFromRss20None()
+    public function testGetsCategoriesFromRss20_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/category/plain/none/rss20.xml')
         );
-        $this->assertEquals([], (array) $feed->getCategories());
-        $this->assertEquals([], array_values($feed->getCategories()->getValues()));
+        $this->assertEquals(array(), (array) $feed->getCategories());
+        $this->assertEquals(array(), array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss090None()
+    public function testGetsCategoriesFromRss090_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/category/plain/none/rss090.xml')
         );
-        $this->assertEquals([], (array) $feed->getCategories());
-        $this->assertEquals([], array_values($feed->getCategories()->getValues()));
+        $this->assertEquals(array(), (array) $feed->getCategories());
+        $this->assertEquals(array(), array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss091None()
+    public function testGetsCategoriesFromRss091_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/category/plain/none/rss091.xml')
         );
-        $this->assertEquals([], (array) $feed->getCategories());
-        $this->assertEquals([], array_values($feed->getCategories()->getValues()));
+        $this->assertEquals(array(), (array) $feed->getCategories());
+        $this->assertEquals(array(), array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss092None()
+    public function testGetsCategoriesFromRss092_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/category/plain/none/rss092.xml')
         );
-        $this->assertEquals([], (array) $feed->getCategories());
-        $this->assertEquals([], array_values($feed->getCategories()->getValues()));
+        $this->assertEquals(array(), (array) $feed->getCategories());
+        $this->assertEquals(array(), array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss093None()
+    public function testGetsCategoriesFromRss093_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/category/plain/none/rss093.xml')
         );
-        $this->assertEquals([], (array) $feed->getCategories());
-        $this->assertEquals([], array_values($feed->getCategories()->getValues()));
+        $this->assertEquals(array(), (array) $feed->getCategories());
+        $this->assertEquals(array(), array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss094None()
+    public function testGetsCategoriesFromRss094_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/category/plain/none/rss094.xml')
         );
-        $this->assertEquals([], (array) $feed->getCategories());
-        $this->assertEquals([], array_values($feed->getCategories()->getValues()));
+        $this->assertEquals(array(), (array) $feed->getCategories());
+        $this->assertEquals(array(), array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss10None()
+    public function testGetsCategoriesFromRss10_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/category/plain/none/rss10.xml')
         );
-        $this->assertEquals([], (array) $feed->getCategories());
-        $this->assertEquals([], array_values($feed->getCategories()->getValues()));
+        $this->assertEquals(array(), (array) $feed->getCategories());
+        $this->assertEquals(array(), array_values($feed->getCategories()->getValues()));
     }
 
     /**
-     * Get Image data (Unencoded Text).
+     * Get Image data (Unencoded Text)
      */
     public function testGetsImageFromRss20()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/image/plain/rss20.xml')
         );
-        $this->assertEquals([
+        $this->assertEquals(array(
             'uri' => 'http://www.example.com/image.gif',
             'link' => 'http://www.example.com',
             'title' => 'Image title',
             'height' => '55',
             'width' => '50',
-            'description' => 'Image description',
-        ], $feed->getImage());
+            'description' => 'Image description'
+        ), $feed->getImage());
     }
 
     public function testGetsImageFromRss094()
@@ -2831,14 +2833,14 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/image/plain/rss094.xml')
         );
-        $this->assertEquals([
+        $this->assertEquals(array(
             'uri' => 'http://www.example.com/image.gif',
             'link' => 'http://www.example.com',
             'title' => 'Image title',
             'height' => '55',
             'width' => '50',
-            'description' => 'Image description',
-        ], $feed->getImage());
+            'description' => 'Image description'
+        ), $feed->getImage());
     }
 
     public function testGetsImageFromRss093()
@@ -2846,14 +2848,14 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/image/plain/rss093.xml')
         );
-        $this->assertEquals([
+        $this->assertEquals(array(
             'uri' => 'http://www.example.com/image.gif',
             'link' => 'http://www.example.com',
             'title' => 'Image title',
             'height' => '55',
             'width' => '50',
-            'description' => 'Image description',
-        ], $feed->getImage());
+            'description' => 'Image description'
+        ), $feed->getImage());
     }
 
     public function testGetsImageFromRss092()
@@ -2861,14 +2863,14 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/image/plain/rss092.xml')
         );
-        $this->assertEquals([
+        $this->assertEquals(array(
             'uri' => 'http://www.example.com/image.gif',
             'link' => 'http://www.example.com',
             'title' => 'Image title',
             'height' => '55',
             'width' => '50',
-            'description' => 'Image description',
-        ], $feed->getImage());
+            'description' => 'Image description'
+        ), $feed->getImage());
     }
 
     public function testGetsImageFromRss091()
@@ -2876,14 +2878,14 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/image/plain/rss091.xml')
         );
-        $this->assertEquals([
+        $this->assertEquals(array(
             'uri' => 'http://www.example.com/image.gif',
             'link' => 'http://www.example.com',
             'title' => 'Image title',
             'height' => '55',
             'width' => '50',
-            'description' => 'Image description',
-        ], $feed->getImage());
+            'description' => 'Image description'
+        ), $feed->getImage());
     }
 
     /*public function testGetsImageFromRss10()
@@ -2917,9 +2919,9 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
     }*/
 
     /**
-     * Get Image data (Unencoded Text) Missing.
+     * Get Image data (Unencoded Text) Missing
      */
-    public function testGetsImageFromRss20None()
+    public function testGetsImageFromRss20_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/image/plain/none/rss20.xml')
@@ -2927,7 +2929,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getImage());
     }
 
-    public function testGetsImageFromRss094None()
+    public function testGetsImageFromRss094_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/image/plain/none/rss094.xml')
@@ -2935,7 +2937,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getImage());
     }
 
-    public function testGetsImageFromRss093None()
+    public function testGetsImageFromRss093_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/image/plain/none/rss093.xml')
@@ -2943,7 +2945,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getImage());
     }
 
-    public function testGetsImageFromRss092None()
+    public function testGetsImageFromRss092_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/image/plain/none/rss092.xml')
@@ -2951,7 +2953,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getImage());
     }
 
-    public function testGetsImageFromRss091None()
+    public function testGetsImageFromRss091_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/image/plain/none/rss091.xml')
@@ -2959,7 +2961,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getImage());
     }
 
-    public function testGetsImageFromRss10None()
+    public function testGetsImageFromRss10_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/image/plain/none/rss10.xml')
@@ -2967,11 +2969,12 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getImage());
     }
 
-    public function testGetsImageFromRss090None()
+    public function testGetsImageFromRss090_None()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/image/plain/none/rss090.xml')
         );
         $this->assertEquals(null, $feed->getImage());
     }
+
 }

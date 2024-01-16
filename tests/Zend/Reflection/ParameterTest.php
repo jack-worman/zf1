@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Reflection
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -27,22 +27,23 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Reflection
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Reflection
  * @group      Zend_Reflection_Parameter
  */
 #[AllowDynamicProperties]
 class Zend_Reflection_ParameterTest extends PHPUnit_Framework_TestCase
 {
-    protected static $_sampleClassFileRequired = false;
+
+    static protected $_sampleClassFileRequired = false;
 
     public function setup()
     {
-        if (false === self::$_sampleClassFileRequired) {
-            $fileToRequire = __DIR__.'/_files/TestSampleClass.php';
+        if (self::$_sampleClassFileRequired === false) {
+            $fileToRequire = __DIR__ . '/_files/TestSampleClass.php';
             require_once $fileToRequire;
             self::$_sampleClassFileRequired = true;
         }
@@ -50,20 +51,20 @@ class Zend_Reflection_ParameterTest extends PHPUnit_Framework_TestCase
 
     public function testDeclaringClassReturn()
     {
-        $parameter = new Zend_Reflection_Parameter(['Zend_Reflection_TestSampleClass2', 'getProp2'], 0);
+        $parameter = new Zend_Reflection_Parameter(array('Zend_Reflection_TestSampleClass2', 'getProp2'), 0);
         $this->assertEquals(get_class($parameter->getDeclaringClass()), 'Zend_Reflection_Class');
     }
 
-    public function testClassReturnNoClassGivenReturnsNull()
+    public function testClassReturn_NoClassGiven_ReturnsNull()
     {
-        $parameter = new Zend_Reflection_Parameter(['Zend_Reflection_TestSampleClass2', 'getProp2'], 'param1');
+        $parameter = new Zend_Reflection_Parameter(array('Zend_Reflection_TestSampleClass2', 'getProp2'), 'param1');
 
         $this->assertNull($parameter->getClass());
     }
 
     public function testClassReturn()
     {
-        $parameter = new Zend_Reflection_Parameter(['Zend_Reflection_TestSampleClass2', 'getProp2'], 'param2');
+        $parameter = new Zend_Reflection_Parameter(array('Zend_Reflection_TestSampleClass2', 'getProp2'), 'param2');
         $this->assertEquals(get_class($parameter->getClass()), 'Zend_Reflection_Class');
     }
 
@@ -72,16 +73,17 @@ class Zend_Reflection_ParameterTest extends PHPUnit_Framework_TestCase
      */
     public function testTypeReturn($param, $type)
     {
-        $parameter = new Zend_Reflection_Parameter(['Zend_Reflection_TestSampleClass5', 'doSomething'], $param);
+        $parameter = new Zend_Reflection_Parameter(array('Zend_Reflection_TestSampleClass5', 'doSomething'), $param);
         $this->assertEquals($parameter->getType(), $type);
     }
 
     public function paramTypeTestProvider()
     {
-        return [
-            ['one', 'int'],
-            ['two', 'int'],
-            ['three', 'string'],
-        ];
+        return array(
+            array('one','int'),
+            array('two','int'),
+            array('three','string'),
+        );
     }
 }
+

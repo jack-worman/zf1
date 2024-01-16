@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,29 +13,30 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Form
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
 // Call Zend_Form_Decorator_FormTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Form_Decorator_FormTest::main');
+if (!defined("PHPUnit_MAIN_METHOD")) {
+    define("PHPUnit_MAIN_METHOD", "Zend_Form_Decorator_FormTest::main");
 }
 
 // require_once 'Zend/Form/Decorator/Form.php';
 // require_once 'Zend/Form.php';
 
+
 /**
- * Test class for Zend_Form_Decorator_Form.
+ * Test class for Zend_Form_Decorator_Form
  *
  * @category   Zend
- *
+ * @package    Zend_Form
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Form
  */
 #[AllowDynamicProperties]
@@ -48,7 +49,7 @@ class Zend_Form_Decorator_FormTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend_Form_Decorator_FormTest');
+        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Decorator_FormTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -77,8 +78,7 @@ class Zend_Form_Decorator_FormTest extends PHPUnit_Framework_TestCase
     {
         // require_once 'Zend/View.php';
         $view = new Zend_View();
-        $view->addHelperPath(__DIR__.'/../../../../library/Zend/View/Helper');
-
+        $view->addHelperPath(__DIR__ . '/../../../../library/Zend/View/Helper');
         return $view;
     }
 
@@ -95,12 +95,12 @@ class Zend_Form_Decorator_FormTest extends PHPUnit_Framework_TestCase
 
         // require_once 'Zend/Form/DisplayGroup.php';
         // require_once 'Zend/Loader/PluginLoader.php';
-        $attribs = [
+        $attribs = array(
             'enctype' => 'ascii',
-            'charset' => 'us-ascii',
-        ];
-        $loader = new Zend_Loader_PluginLoader(['Zend_Form_Decorator' => 'Zend/Form/Decorator/']);
-        $displayGroup = new Zend_Form_DisplayGroup('foo', $loader, ['attribs' => $attribs]);
+            'charset' => 'us-ascii'
+        );
+        $loader = new Zend_Loader_PluginLoader(array('Zend_Form_Decorator' => 'Zend/Form/Decorator/'));
+        $displayGroup = new Zend_Form_DisplayGroup('foo', $loader, array('attribs' => $attribs));
         $this->decorator->setElement($displayGroup);
         $options = $this->decorator->getOptions();
         $this->assertTrue(isset($options['enctype']));
@@ -136,6 +136,6 @@ class Zend_Form_Decorator_FormTest extends PHPUnit_Framework_TestCase
 }
 
 // Call Zend_Form_Decorator_FormTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_Form_Decorator_FormTest::main') {
+if (PHPUnit_MAIN_METHOD == "Zend_Form_Decorator_FormTest::main") {
     Zend_Form_Decorator_FormTest::main();
 }

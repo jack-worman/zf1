@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Queue
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -26,14 +26,15 @@
 // require_once 'Zend/Queue/Adapter/Db.php';
 
 /**
- * Class for using connecting to a Zend_Db-based queuing system.
+ * Class for using connecting to a Zend_Db-based queuing system
  *
  * $config['options'][Zend_Db_Select::FOR_UPDATE] is a new feature that was
  * written after this code was written.  However, this will still serve as a
  * good example adapter
  *
  * @category   Zend
- *
+ * @package    Zend_Queue
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -41,26 +42,26 @@
 class Custom_DbForUpdate extends Zend_Queue_Adapter_Db
 {
     /**
-     * Return the first element in the queue.
+     * Return the first element in the queue
      *
-     * @param int $maxMessages
-     * @param int $timeout
-     *
+     * @param  integer    $maxMessages
+     * @param  integer    $timeout
+     * @param  Zend_Queue $queue
      * @return Zend_Queue_Message_Iterator
      */
-    public function receive($maxMessages = null, $timeout = null, Zend_Queue $queue = null)
+    public function receive($maxMessages=null, $timeout=null, Zend_Queue $queue=null)
     {
-        if (null === $maxMessages) {
+        if ($maxMessages === null) {
             $maxMessages = 1;
         }
-        if (null === $timeout) {
+        if ($timeout === null) {
             $timeout = self::RECEIVE_TIMEOUT_DEFAULT;
         }
-        if (null === $queue) {
+        if ($queue === null) {
             $queue = $this->_queue;
         }
 
-        $msgs = [];
+        $msgs = array();
 
         $info = $this->_msg_table->info();
 
@@ -74,22 +75,22 @@ class Custom_DbForUpdate extends Zend_Queue_Adapter_Db
 
             // changes: added forUpdate
             $query = $db->select()->forUpdate();
-            $query->from($info['name'], ['*']);
+            $query->from($info['name'], array('*'));
             $query->where('queue_id=?', $this->getQueueId($queue->getName()));
-            $query->where('handle IS NULL OR timeout+'.(int) $timeout.' < '.(int) $microtime);
+            $query->where('handle IS NULL OR timeout+' . (int)$timeout . ' < ' . (int)$microtime);
             $query->limit($maxMessages);
 
             foreach ($db->fetchAll($query) as $data) {
                 // setup our changes to the message
                 $data['handle'] = md5((string) uniqid(rand(), true));
 
-                $update = [
-                    'handle' => $data['handle'],
-                    'timeout' => $microtime,
-                ];
+                $update = array(
+                    'handle'  => $data['handle'],
+                    'timeout' => $microtime
+                );
 
                 // update the database
-                $where = [];
+                $where = array();
                 $where[] = $db->quoteInto('message_id=?', $data['message_id']);
 
                 $count = $db->update($info['name'], $update, $where);
@@ -101,24 +102,23 @@ class Custom_DbForUpdate extends Zend_Queue_Adapter_Db
                 }
             }
             $db->commit();
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $db->rollBack();
-            /*
+            /**
              * @see Zend_Queue_Exception
              */
             // require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception($e->getMessage(), $e->getCode());
         }
 
-        $config = [
-            'queue' => $queue,
-            'data' => $msgs,
-            'messageClass' => $queue->getMessageClass(),
-        ];
+        $config = array(
+            'queue'    => $queue,
+            'data'     => $msgs,
+            'messageClass' => $queue->getMessageClass()
+        );
 
         $classname = $queue->getMessageSetClass();
         Zend_Loader::loadClass($classname);
-
         return new $classname($config);
     }
 }

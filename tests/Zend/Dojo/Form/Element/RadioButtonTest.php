@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,16 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Dojo
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
 // Call Zend_Dojo_Form_Element_RadioButtonTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Dojo_Form_Element_RadioButtonTest::main');
+if (!defined("PHPUnit_MAIN_METHOD")) {
+    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_Form_Element_RadioButtonTest::main");
 }
 
 /** Zend_Dojo_Form_Element_RadioButton */
@@ -41,10 +41,10 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * Test class for Zend_Dojo_Form_Element_RadioButton.
  *
  * @category   Zend
- *
+ * @package    Zend_Dojo
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Dojo
  * @group      Zend_Dojo_Form
  */
@@ -58,7 +58,7 @@ class Zend_Dojo_Form_Element_RadioButtonTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend_Dojo_Form_Element_RadioButtonTest');
+        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_Form_Element_RadioButtonTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -73,7 +73,7 @@ class Zend_Dojo_Form_Element_RadioButtonTest extends PHPUnit_Framework_TestCase
         Zend_Registry::_unsetInstance();
         Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
 
-        $this->view = $this->getView();
+        $this->view    = $this->getView();
         $this->element = $this->getElement();
         $this->element->setView($this->view);
     }
@@ -93,7 +93,6 @@ class Zend_Dojo_Form_Element_RadioButtonTest extends PHPUnit_Framework_TestCase
         // require_once 'Zend/View.php';
         $view = new Zend_View();
         $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
-
         return $view;
     }
 
@@ -101,19 +100,18 @@ class Zend_Dojo_Form_Element_RadioButtonTest extends PHPUnit_Framework_TestCase
     {
         $element = new Zend_Dojo_Form_Element_RadioButton(
             'foo',
-            [
+            array(
                 'value' => 'bar',
                 'label' => 'RadioButton',
                 'class' => 'someclass',
                 'style' => 'width: 100px;',
-                'multiOptions' => [
+                'multiOptions' => array(
                     'foo' => 'Foo',
                     'bar' => 'Bar',
                     'baz' => 'Baz',
-                ],
-            ]
+                ),
+            )
         );
-
         return $element;
     }
 
@@ -132,10 +130,10 @@ class Zend_Dojo_Form_Element_RadioButtonTest extends PHPUnit_Framework_TestCase
 
     public function testAddMultiOptionsShouldPassKeyValueArraysAsIndividualOptions()
     {
-        $this->element->addMultiOptions([
-            ['key' => 'foo', 'value' => 'bar'],
-            ['key' => 'bar', 'value' => 'baz'],
-        ]);
+        $this->element->addMultiOptions(array(
+            array('key' => 'foo', 'value' => 'bar'),
+            array('key' => 'bar', 'value' => 'baz'),
+        ));
         $this->assertEquals('bar', $this->element->getMultiOption('foo'));
         $this->assertEquals('baz', $this->element->getMultiOption('bar'));
     }
@@ -149,19 +147,19 @@ class Zend_Dojo_Form_Element_RadioButtonTest extends PHPUnit_Framework_TestCase
     public function testOptionsShouldBeTranslatable()
     {
         // require_once 'Zend/Translate.php';
-        $translations = [
+        $translations = array(
             'Foo' => 'This is Foo',
             'Bar' => 'This is Bar',
             'Baz' => 'This is Baz',
-        ];
+        );
         $translate = new Zend_Translate('array', $translations, 'en');
         $this->element->setTranslator($translate);
 
-        $this->element->setMultiOptions([
+        $this->element->setMultiOptions(array(
             'foo' => 'Foo',
             'bar' => 'Bar',
             'baz' => 'Baz',
-        ]);
+        ));
 
         $html = $this->element->render();
         foreach ($translations as $string) {
@@ -203,11 +201,11 @@ class Zend_Dojo_Form_Element_RadioButtonTest extends PHPUnit_Framework_TestCase
 
     public function testInArrayValidatorShouldBeRegisteredAfterValidation()
     {
-        $options = [
+        $options = array(
             'foo' => 'Foo Value',
             'bar' => 'Bar Value',
             'baz' => 'Baz Value',
-        ];
+        );
         $this->element->setMultiOptions($options);
         $this->assertFalse($this->element->getValidator('InArray'));
         $this->element->isValid('test');
@@ -217,11 +215,11 @@ class Zend_Dojo_Form_Element_RadioButtonTest extends PHPUnit_Framework_TestCase
 
     public function testShouldNotValidateIfValueIsNotInArray()
     {
-        $options = [
+        $options = array(
             'foo' => 'Foo Value',
             'bar' => 'Bar Value',
             'baz' => 'Baz Value',
-        ];
+        );
         $this->element->setMultiOptions($options);
         $this->assertFalse($this->element->getValidator('InArray'));
         $this->assertFalse($this->element->isValid('test'));
@@ -230,6 +228,6 @@ class Zend_Dojo_Form_Element_RadioButtonTest extends PHPUnit_Framework_TestCase
 }
 
 // Call Zend_Dojo_Form_Element_RadioButtonTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_Dojo_Form_Element_RadioButtonTest::main') {
+if (PHPUnit_MAIN_METHOD == "Zend_Dojo_Form_Element_RadioButtonTest::main") {
     Zend_Dojo_Form_Element_RadioButtonTest::main();
 }

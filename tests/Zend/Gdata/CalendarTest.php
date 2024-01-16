@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Gdata_Calendar
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id $
  */
 
@@ -27,10 +27,10 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Gdata_Calendar
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Calendar
  */
@@ -40,35 +40,31 @@ class Zend_Gdata_CalendarTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->eventFeedText = file_get_contents(
-            'Zend/Gdata/Calendar/_files/TestDataEventFeedSample1.xml',
-            true);
+                'Zend/Gdata/Calendar/_files/TestDataEventFeedSample1.xml',
+                true);
         $this->eventFeed = new Zend_Gdata_Calendar_EventFeed();
     }
 
-    public function testEmptyEventFeedShouldHaveNoExtensionElements()
-    {
+    public function testEmptyEventFeedShouldHaveNoExtensionElements() {
         $this->assertTrue(is_array($this->eventFeed->extensionElements));
-        $this->assertTrue(0 == count($this->eventFeed->extensionElements));
+        $this->assertTrue(count($this->eventFeed->extensionElements) == 0);
     }
 
-    public function testEmptyEventFeedShouldHaveNoExtensionAttributes()
-    {
+    public function testEmptyEventFeedShouldHaveNoExtensionAttributes() {
         $this->assertTrue(is_array($this->eventFeed->extensionAttributes));
-        $this->assertTrue(0 == count($this->eventFeed->extensionAttributes));
+        $this->assertTrue(count($this->eventFeed->extensionAttributes) == 0);
     }
 
-    public function testSampleEventFeedShouldHaveNoExtensionElements()
-    {
+    public function testSampleEventFeedShouldHaveNoExtensionElements() {
         $this->eventFeed->transferFromXML($this->eventFeedText);
         $this->assertTrue(is_array($this->eventFeed->extensionElements));
-        $this->assertTrue(0 == count($this->eventFeed->extensionElements));
+        $this->assertTrue(count($this->eventFeed->extensionElements) == 0);
     }
 
-    public function testSampleEventFeedShouldHaveNoExtensionAttributes()
-    {
+    public function testSampleEventFeedShouldHaveNoExtensionAttributes() {
         $this->eventFeed->transferFromXML($this->eventFeedText);
         $this->assertTrue(is_array($this->eventFeed->extensionAttributes));
-        $this->assertTrue(0 == count($this->eventFeed->extensionAttributes));
+        $this->assertTrue(count($this->eventFeed->extensionAttributes) == 0);
     }
 
     public function testEventFeedToAndFromString()
@@ -76,17 +72,17 @@ class Zend_Gdata_CalendarTest extends PHPUnit_Framework_TestCase
         $this->eventFeed->transferFromXML($this->eventFeedText);
         $entryCount = 0;
         foreach ($this->eventFeed as $entry) {
-            ++$entryCount;
+            $entryCount++;
             $this->assertTrue($entry instanceof Zend_Gdata_Calendar_EventEntry);
         }
         $this->assertTrue($entryCount > 0);
 
         /* Grab XML from $this->eventFeed and convert back to objects */
         $newEventFeed = new Zend_Gdata_Calendar_EventFeed(
-            $this->eventFeed->saveXML());
+                $this->eventFeed->saveXML());
         $newEntryCount = 0;
         foreach ($newEventFeed as $entry) {
-            ++$newEntryCount;
+            $newEntryCount++;
             $this->assertTrue($entry instanceof Zend_Gdata_Calendar_EventEntry);
         }
         $this->assertEquals($entryCount, $newEntryCount);
@@ -95,12 +91,13 @@ class Zend_Gdata_CalendarTest extends PHPUnit_Framework_TestCase
     public function testEntryCount()
     {
         $this->eventFeed->transferFromXML($this->eventFeedText);
-        // TODO feeds implementing ArrayAccess would be helpful here
+        //TODO feeds implementing ArrayAccess would be helpful here
         $entryCount = 0;
         foreach ($this->eventFeed as $entry) {
-            ++$entryCount;
+            $entryCount++;
         }
         $this->assertEquals($entryCount, 10);
         $this->assertEquals($entryCount, $this->eventFeed->totalResults->text);
     }
+
 }

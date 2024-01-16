@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Registry
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -27,10 +27,10 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Registry
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Registry
  */
 #[AllowDynamicProperties]
@@ -97,7 +97,7 @@ class Zend_RegistryTest extends PHPUnit_Framework_TestCase
     {
         Zend_Registry::set('foo', 'bar');
         $registry1 = Zend_Registry::getInstance();
-        $registry2 = new Zend_Registry(['foo' => 'bar']);
+        $registry2 = new Zend_Registry(array('foo' => 'bar'));
         $this->assertEquals($registry1, $registry2);
         $this->assertNotSame($registry1, $registry2);
     }
@@ -105,7 +105,7 @@ class Zend_RegistryTest extends PHPUnit_Framework_TestCase
     public function testRegistryUnequalContents()
     {
         $registry1 = Zend_Registry::getInstance();
-        $registry2 = new Zend_Registry(['foo' => 'bar']);
+        $registry2 = new Zend_Registry(array('foo' => 'bar'));
         $this->assertNotEquals($registry1, $registry2);
         $this->assertNotSame($registry1, $registry2);
     }
@@ -131,7 +131,7 @@ class Zend_RegistryTest extends PHPUnit_Framework_TestCase
 
     public function testRegistryArrayAsProps()
     {
-        $registry = new Zend_Registry([], ArrayObject::ARRAY_AS_PROPS);
+        $registry = new Zend_Registry(array(), ArrayObject::ARRAY_AS_PROPS);
         $registry->foo = 'bar';
         $this->assertTrue(isset($registry->foo));
         $this->assertEquals('bar', $registry->foo);
@@ -140,7 +140,7 @@ class Zend_RegistryTest extends PHPUnit_Framework_TestCase
     public function testRegistryExceptionInvalidClassname()
     {
         try {
-            $registry = Zend_Registry::setClassName(new stdClass());
+            $registry = Zend_Registry::setClassName(new StdClass());
             $this->fail('Expected exception, because setClassName() wants a string');
         } catch (Zend_Exception $e) {
             $this->assertContains('Argument is not a class name', $e->getMessage());
@@ -153,6 +153,7 @@ class Zend_RegistryTest extends PHPUnit_Framework_TestCase
      * Zend_Registry::setInstance() method. Type-hinting violations throw
      * an error, not an exception, so it cannot be caught in a unit test.
      */
+
     public function testRegistryExceptionNoEntry()
     {
         try {
@@ -194,7 +195,7 @@ class Zend_RegistryTest extends PHPUnit_Framework_TestCase
     public function testDefaultRegistryArrayAsPropsZF4654()
     {
         $registry = Zend_Registry::getInstance();
-        $registry->bar = 'baz';
+        $registry->bar = "baz";
         $this->assertEquals('baz', Zend_Registry::get('bar'));
     }
 }

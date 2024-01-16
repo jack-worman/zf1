@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Test
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -25,7 +25,7 @@
 /**
  * @see Zend_Test_PHPUnit_Db_DataSet_DataSetTestCase
  */
-require_once 'Zend/Test/PHPUnit/Db/DataSet/DataSetTestCase.php';
+require_once "Zend/Test/PHPUnit/Db/DataSet/DataSetTestCase.php";
 
 /**
  * @see Zend_Test_PHPUnit_Db_DataSet_QueryTable
@@ -36,10 +36,10 @@ require_once 'Zend/Test/PHPUnit/Db/DataSet/DataSetTestCase.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Test
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Test
  */
 #[AllowDynamicProperties]
@@ -60,10 +60,10 @@ class Zend_Test_PHPUnit_Db_DataSet_QueryDataSetTest extends Zend_Test_PHPUnit_Db
 
     public function testAddTableWithoutQueryParameterCreatesSelectWildcardAll()
     {
-        $fixtureTableName = 'foo';
+        $fixtureTableName = "foo";
 
         $adapterMock = $this->getMock('Zend_Test_DbAdapter');
-        $selectMock = $this->getMock('Zend_Db_Select', [], [$adapterMock]);
+        $selectMock = $this->getMock('Zend_Db_Select', array(), array($adapterMock));
 
         $adapterMock->expects($this->once())
                     ->method('select')

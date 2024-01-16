@@ -1,18 +1,17 @@
 <?php
-
 #[AllowDynamicProperties]
 class EmployeeService
 {
     public static $employee;
 
     /**
+     * @param Employee $item
      * @return string
      */
     public function createEmployee(Employee $item)
     {
-        $item->id = uniqid();
+        $item->id       = uniqid();
         self::$employee = $item;
-
         return $item->id;
     }
 }

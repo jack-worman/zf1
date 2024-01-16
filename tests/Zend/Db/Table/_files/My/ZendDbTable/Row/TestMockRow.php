@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,62 +13,68 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Db
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
+
 
 /**
  * @see Zend_Db_Table_Row_Abstract
  */
 // require_once 'Zend/Db/Table/Row/Abstract.php';
 
+
+
+
 /**
  * @category   Zend
- *
+ * @package    Zend_Db
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class My_ZendDbTable_Row_TestMockRow extends Zend_Db_Table_Row_Abstract
 {
-    public $parentTable;
-    public $dependentTable;
-    public $ruleKey;
 
-    public $matchTable;
-    public $intersectionTable;
-    public $callerRefRuleKey;
-    public $matchRefRuleKey;
+    public $parentTable       = null;
+    public $dependentTable    = null;
+    public $ruleKey           = null;
+
+    public $matchTable        = null;
+    public $intersectionTable = null;
+    public $callerRefRuleKey  = null;
+    public $matchRefRuleKey   = null;
 
     public function findDependentRowset($dependentTable, $ruleKey = null, Zend_Db_Table_Select $select = null)
     {
-        $this->dependentTable = $dependentTable;
-        $this->ruleKey = $ruleKey;
+        $this->dependentTable    = $dependentTable;
+        $this->ruleKey           = $ruleKey;
     }
 
     public function findParentRow($parentTable, $ruleKey = null, Zend_Db_Table_Select $select = null)
     {
-        $this->parentTable = $parentTable;
-        $this->ruleKey = $ruleKey;
+        $this->parentTable       = $parentTable;
+        $this->ruleKey           = $ruleKey;
     }
 
     public function findManyToManyRowset($matchTable, $intersectionTable, $callerRefRule = null,
-        $matchRefRule = null, Zend_Db_Table_Select $select = null)
+                                         $matchRefRule = null, Zend_Db_Table_Select $select = null)
     {
-        $this->matchTable = $matchTable;
+        $this->matchTable        = $matchTable;
         $this->intersectionTable = $intersectionTable;
-        $this->callerRefRuleKey = $callerRefRule;
-        $this->matchRefRuleKey = $matchRefRule;
+        $this->callerRefRuleKey  = $callerRefRule;
+        $this->matchRefRuleKey   = $matchRefRule;
     }
 
     protected function _transformColumn($columnName)
     {
         // convert 'columnFoo' to 'column_foo'
         $columnName = strtolower((string) preg_replace('/([A-Z])/', '_$1', $columnName));
-
         return $columnName;
     }
+
 }

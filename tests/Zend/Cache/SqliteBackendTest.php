@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,39 +13,39 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Cache
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
 /**
- * Zend_Cache.
+ * Zend_Cache
  */
 // require_once 'Zend/Cache.php';
 // require_once 'Zend/Cache/Backend/Sqlite.php';
 
 /**
- * Common tests for backends.
+ * Common tests for backends
  */
 require_once 'CommonExtendedBackendTest.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Cache
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Cache
  */
 #[AllowDynamicProperties]
-class Zend_Cache_sqliteBackendTest extends Zend_Cache_CommonExtendedBackendTest
-{
+class Zend_Cache_sqliteBackendTest extends Zend_Cache_CommonExtendedBackendTest {
+
     protected $_instance;
     private $_cache_dir;
 
-    public function __construct($name = null, array $data = [], $dataName = '')
+    public function __construct($name = null, array $data = array(), $dataName = '')
     {
         parent::__construct('Zend_Cache_Backend_Sqlite', $data, $dataName);
     }
@@ -53,10 +53,10 @@ class Zend_Cache_sqliteBackendTest extends Zend_Cache_CommonExtendedBackendTest
     public function setUp($notag = false)
     {
         @mkdir($this->getTmpDir());
-        $this->_cache_dir = $this->getTmpDir().DIRECTORY_SEPARATOR;
-        $this->_instance = new Zend_Cache_Backend_Sqlite([
-            'cache_db_complete_path' => $this->_cache_dir.'cache.db',
-        ]);
+        $this->_cache_dir = $this->getTmpDir() . DIRECTORY_SEPARATOR;
+        $this->_instance = new Zend_Cache_Backend_Sqlite(array(
+            'cache_db_complete_path' => $this->_cache_dir . 'cache.db'
+        ));
         parent::setUp($notag);
     }
 
@@ -64,19 +64,19 @@ class Zend_Cache_sqliteBackendTest extends Zend_Cache_CommonExtendedBackendTest
     {
         parent::tearDown();
         unset($this->_instance);
-        @unlink($this->_cache_dir.'cache.db');
+        @unlink($this->_cache_dir . 'cache.db');
         $this->rmdir();
     }
 
     public function testConstructorCorrectCall()
     {
-        $test = new Zend_Cache_Backend_Sqlite(['cache_db_complete_path' => $this->_cache_dir.'cache.db']);
+        $test = new Zend_Cache_Backend_Sqlite(array('cache_db_complete_path' => $this->_cache_dir . 'cache.db'));
     }
 
     public function testConstructorWithABadDBPath()
     {
         try {
-            $test = new Zend_Cache_Backend_Sqlite(['cache_db_complete_path' => '/foo/bar/lfjlqsdjfklsqd/cache.db']);
+            $test = new Zend_Cache_Backend_Sqlite(array('cache_db_complete_path' => '/foo/bar/lfjlqsdjfklsqd/cache.db'));
         } catch (Zend_Cache_Exception $e) {
             return;
         }
@@ -85,10 +85,10 @@ class Zend_Cache_sqliteBackendTest extends Zend_Cache_CommonExtendedBackendTest
 
     public function testCleanModeAllWithVacuum()
     {
-        $this->_instance = new Zend_Cache_Backend_Sqlite([
-            'cache_db_complete_path' => $this->_cache_dir.'cache.db',
-            'automatic_vacuum_factor' => 1,
-        ]);
+        $this->_instance = new Zend_Cache_Backend_Sqlite(array(
+            'cache_db_complete_path' => $this->_cache_dir . 'cache.db',
+            'automatic_vacuum_factor' => 1
+        ));
         parent::setUp();
         $this->assertTrue($this->_instance->clean('all'));
         $this->assertFalse($this->_instance->test('bar'));
@@ -97,10 +97,10 @@ class Zend_Cache_sqliteBackendTest extends Zend_Cache_CommonExtendedBackendTest
 
     public function testRemoveCorrectCallWithVacuum()
     {
-        $this->_instance = new Zend_Cache_Backend_Sqlite([
-            'cache_db_complete_path' => $this->_cache_dir.'cache.db',
-            'automatic_vacuum_factor' => 1,
-        ]);
+        $this->_instance = new Zend_Cache_Backend_Sqlite(array(
+            'cache_db_complete_path' => $this->_cache_dir . 'cache.db',
+            'automatic_vacuum_factor' => 1
+        ));
         parent::setUp();
 
         $this->assertTrue($this->_instance->remove('bar'));
@@ -114,10 +114,10 @@ class Zend_Cache_sqliteBackendTest extends Zend_Cache_CommonExtendedBackendTest
      */
     public function testRemoveCorrectCallWithVacuumOnMemoryDb()
     {
-        $this->_instance = new Zend_Cache_Backend_Sqlite([
-            'cache_db_complete_path' => ':memory:',
-            'automatic_vacuum_factor' => 1,
-        ]);
+        $this->_instance = new Zend_Cache_Backend_Sqlite(array(
+            'cache_db_complete_path'  => ':memory:',
+            'automatic_vacuum_factor' => 1
+        ));
         parent::setUp();
 
         $this->assertGreaterThan(0, $this->_instance->test('bar2'));
@@ -127,4 +127,7 @@ class Zend_Cache_sqliteBackendTest extends Zend_Cache_CommonExtendedBackendTest
 
         $this->assertGreaterThan(0, $this->_instance->test('bar2'));
     }
+
 }
+
+

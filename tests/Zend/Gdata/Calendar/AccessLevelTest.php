@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Gdata_Calendar
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id $
  */
 
@@ -25,60 +25,55 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Gdata_Calendar
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Calendar
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_Calendar_AccessLevelTest extends PHPUnit_Framework_TestCase
 {
-    public function setUp()
-    {
+
+    public function setUp() {
         $this->accessLevelText = file_get_contents(
-            'Zend/Gdata/Calendar/_files/AccessLevelElementSample1.xml',
-            true);
+                'Zend/Gdata/Calendar/_files/AccessLevelElementSample1.xml',
+                true);
         $this->accessLevel = new Zend_Gdata_Calendar_Extension_AccessLevel();
     }
 
-    public function testEmptyAccessLevelShouldHaveNoExtensionElements()
-    {
+    public function testEmptyAccessLevelShouldHaveNoExtensionElements() {
         $this->assertTrue(is_array($this->accessLevel->extensionElements));
-        $this->assertTrue(0 == count($this->accessLevel->extensionElements));
+        $this->assertTrue(count($this->accessLevel->extensionElements) == 0);
     }
 
-    public function testEmptyAccessLevelShouldHaveNoExtensionAttributes()
-    {
+    public function testEmptyAccessLevelShouldHaveNoExtensionAttributes() {
         $this->assertTrue(is_array($this->accessLevel->extensionAttributes));
-        $this->assertTrue(0 == count($this->accessLevel->extensionAttributes));
+        $this->assertTrue(count($this->accessLevel->extensionAttributes) == 0);
     }
 
-    public function testSampleAccessLevelShouldHaveNoExtensionElements()
-    {
+    public function testSampleAccessLevelShouldHaveNoExtensionElements() {
         $this->accessLevel->transferFromXML($this->accessLevelText);
         $this->assertTrue(is_array($this->accessLevel->extensionElements));
-        $this->assertTrue(0 == count($this->accessLevel->extensionElements));
+        $this->assertTrue(count($this->accessLevel->extensionElements) == 0);
     }
 
-    public function testSampleAccessLevelShouldHaveNoExtensionAttributes()
-    {
+    public function testSampleAccessLevelShouldHaveNoExtensionAttributes() {
         $this->accessLevel->transferFromXML($this->accessLevelText);
         $this->assertTrue(is_array($this->accessLevel->extensionAttributes));
-        $this->assertTrue(0 == count($this->accessLevel->extensionAttributes));
+        $this->assertTrue(count($this->accessLevel->extensionAttributes) == 0);
     }
 
-    public function testNormalAccessLevelShouldHaveNoExtensionElements()
-    {
+    public function testNormalAccessLevelShouldHaveNoExtensionElements() {
         $this->accessLevel->value = 'freebusy';
         $this->assertEquals($this->accessLevel->value, 'freebusy');
         $this->assertEquals(count($this->accessLevel->extensionElements), 0);
         $newAccessLevel = new Zend_Gdata_Calendar_Extension_AccessLevel();
         $newAccessLevel->transferFromXML($this->accessLevel->saveXML());
         $this->assertEquals(count($newAccessLevel->extensionElements), 0);
-        $newAccessLevel->extensionElements = [
-                new Zend_Gdata_App_Extension_Element('foo', 'atom', null, 'bar')];
+        $newAccessLevel->extensionElements = array(
+                new Zend_Gdata_App_Extension_Element('foo', 'atom', null, 'bar'));
         $this->assertEquals(count($newAccessLevel->extensionElements), 1);
         $this->assertEquals($newAccessLevel->value, 'freebusy');
 
@@ -90,8 +85,7 @@ class Zend_Gdata_Calendar_AccessLevelTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($newAccessLevel2->value, 'freebusy');
     }
 
-    public function testEmptyAccessLevelToAndFromStringShouldMatch()
-    {
+    public function testEmptyAccessLevelToAndFromStringShouldMatch() {
         $accessLevelXml = $this->accessLevel->saveXML();
         $newAccessLevel = new Zend_Gdata_Calendar_Extension_AccessLevel();
         $newAccessLevel->transferFromXML($accessLevelXml);
@@ -99,8 +93,7 @@ class Zend_Gdata_Calendar_AccessLevelTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($accessLevelXml == $newAccessLevelXml);
     }
 
-    public function testAccessLevelWithValueToAndFromStringShouldMatch()
-    {
+    public function testAccessLevelWithValueToAndFromStringShouldMatch() {
         $this->accessLevel->value = 'freebusy';
         $accessLevelXml = $this->accessLevel->saveXML();
         $newAccessLevel = new Zend_Gdata_Calendar_Extension_AccessLevel();
@@ -110,11 +103,10 @@ class Zend_Gdata_Calendar_AccessLevelTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('freebusy', $newAccessLevel->value);
     }
 
-    public function testExtensionAttributes()
-    {
+    public function testExtensionAttributes() {
         $extensionAttributes = $this->accessLevel->extensionAttributes;
-        $extensionAttributes['foo1'] = ['name' => 'foo1', 'value' => 'bar'];
-        $extensionAttributes['foo2'] = ['name' => 'foo2', 'value' => 'rab'];
+        $extensionAttributes['foo1'] = array('name'=>'foo1', 'value'=>'bar');
+        $extensionAttributes['foo2'] = array('name'=>'foo2', 'value'=>'rab');
         $this->accessLevel->extensionAttributes = $extensionAttributes;
         $this->assertEquals('bar', $this->accessLevel->extensionAttributes['foo1']['value']);
         $this->assertEquals('rab', $this->accessLevel->extensionAttributes['foo2']['value']);
@@ -125,9 +117,9 @@ class Zend_Gdata_Calendar_AccessLevelTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('rab', $newAccessLevel->extensionAttributes['foo2']['value']);
     }
 
-    public function testConvertFullAccessLevelToAndFromString()
-    {
+    public function testConvertFullAccessLevelToAndFromString() {
         $this->accessLevel->transferFromXML($this->accessLevelText);
         $this->assertEquals($this->accessLevel->value, 'owner');
     }
+
 }

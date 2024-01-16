@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Serializer
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -27,13 +27,15 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Serializer
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Zend_Serializer_Adapter_Amf3Test extends PHPUnit_Framework_TestCase
 {
+
     private $_adapter;
 
     public function setUp()
@@ -48,11 +50,11 @@ class Zend_Serializer_Adapter_Amf3Test extends PHPUnit_Framework_TestCase
 
     /**
      * Simple test to serialize a value using Zend_Amf_Parser_Amf3_Serializer
-     * -> This only tests the usage of Zend_Amf @see Zend_Amf_AllTests.
+     * -> This only tests the usage of Zend_Amf @see Zend_Amf_AllTests
      */
     public function testSerialize()
     {
-        $value = true;
+        $value    = true;
         $expected = "\x03"; // Amf3 -> true
 
         $data = $this->_adapter->serialize($value);
@@ -61,14 +63,15 @@ class Zend_Serializer_Adapter_Amf3Test extends PHPUnit_Framework_TestCase
 
     /**
      * Simple test to unserialize a value using Zend_Amf_Parser_Amf3_Deserializer
-     * -> This only tests the usage of Zend_Amf @see Zend_Amf_AllTests.
+     * -> This only tests the usage of Zend_Amf @see Zend_Amf_AllTests
      */
     public function testUnserialize()
     {
-        $expected = true;
-        $value = "\x03"; // Amf3 -> true
+        $expected   = true;
+        $value      = "\x03"; // Amf3 -> true
 
         $data = $this->_adapter->unserialize($value);
         $this->assertEquals($expected, $data);
     }
+
 }

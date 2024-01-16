@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Mobile
+ * @subpackage Push
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id $
  */
 
@@ -25,14 +25,15 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Mobile
+ * @subpackage Push
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Mobile
  * @group      Zend_Mobile_Push
  * @group      Zend_Mobile_Push_Abstract
  */
+
 #[AllowDynamicProperties]
 class Zend_Mobile_Push_AbstractTest extends PHPUnit_Framework_TestCase
 {
@@ -66,9 +67,11 @@ class Zend_Mobile_Push_AbstractTest extends PHPUnit_Framework_TestCase
 #[AllowDynamicProperties]
 class Zend_Mobile_Push_AbstractProxy extends Zend_Mobile_Push_Abstract
 {
+
 }
 
 #[AllowDynamicProperties]
 class Zend_Mobile_Push_AbstractProxy_Message extends Zend_Mobile_Push_Message_Abstract
 {
+
 }

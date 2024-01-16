@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Gdata_Spreadsheets
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id $
  */
 
@@ -25,27 +25,29 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Gdata_Spreadsheets
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Spreadsheets
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_Spreadsheets_SpreadsheetFeedTest extends PHPUnit_Framework_TestCase
 {
+
     public function setUp()
     {
         $this->sprFeed = new Zend_Gdata_Spreadsheets_SpreadsheetFeed(
-            file_get_contents(__DIR__.'/_files/TestDataSpreadsheetFeedSample1.xml'),
-            true);
+                file_get_contents(__DIR__ . '/_files/TestDataSpreadsheetFeedSample1.xml'),
+                true);
     }
 
     public function testToAndFromString()
     {
-        $this->assertTrue(1 == count($this->sprFeed->entries));
-        foreach ($this->sprFeed->entries as $entry) {
+        $this->assertTrue(count($this->sprFeed->entries) == 1);
+        foreach($this->sprFeed->entries as $entry)
+        {
             $this->assertTrue($entry instanceof Zend_Gdata_Spreadsheets_SpreadsheetEntry);
         }
 
@@ -54,9 +56,11 @@ class Zend_Gdata_Spreadsheets_SpreadsheetFeedTest extends PHPUnit_Framework_Test
         $doc->loadXML($this->sprFeed->saveXML());
         $newSprFeed->transferFromDom($doc->documentElement);
 
-        $this->assertTrue(1 == count($newSprFeed->entries));
-        foreach ($newSprFeed->entries as $entry) {
+        $this->assertTrue(count($newSprFeed->entries) == 1);
+        foreach($newSprFeed->entries as $entry)
+        {
             $this->assertTrue($entry instanceof Zend_Gdata_Spreadsheets_SpreadsheetEntry);
         }
     }
+
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,29 +13,29 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_XmlRpc
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version $Id$
  */
 
 // Call Zend_XmlRpc_Request_HttpTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_XmlRpc_Request_HttpTest::main');
+if (!defined("PHPUnit_MAIN_METHOD")) {
+    define("PHPUnit_MAIN_METHOD", "Zend_XmlRpc_Request_HttpTest::main");
 }
 
 require_once 'Zend/AllTests/StreamWrapper/PhpInput.php';
 // require_once 'Zend/XmlRpc/Request/Http.php';
 
 /**
- * Test case for Zend_XmlRpc_Request_Http.
+ * Test case for Zend_XmlRpc_Request_Http
  *
  * @category   Zend
- *
+ * @package    Zend_XmlRpc
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_XmlRpc
  */
 #[AllowDynamicProperties]
@@ -48,16 +48,16 @@ class Zend_XmlRpc_Request_HttpTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend_XmlRpc_Request_HttpTest');
+        $suite  = new PHPUnit_Framework_TestSuite("Zend_XmlRpc_Request_HttpTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     /**
-     * Setup environment.
+     * Setup environment
      */
     public function setUp()
     {
-        $this->xml = <<<EOX
+        $this->xml =<<<EOX
 <?xml version="1.0" encoding="UTF-8"?>
 <methodCall>
     <methodName>test.userUpdate</methodName>
@@ -97,15 +97,15 @@ EOX;
                 unset($_SERVER[$key]);
             }
         }
-        $_SERVER['HTTP_USER_AGENT'] = 'Zend_XmlRpc_Client';
-        $_SERVER['HTTP_HOST'] = 'localhost';
-        $_SERVER['HTTP_CONTENT_TYPE'] = 'text/xml';
+        $_SERVER['HTTP_USER_AGENT']     = 'Zend_XmlRpc_Client';
+        $_SERVER['HTTP_HOST']           = 'localhost';
+        $_SERVER['HTTP_CONTENT_TYPE']   = 'text/xml';
         $_SERVER['HTTP_CONTENT_LENGTH'] = strlen((string) $this->xml) + 1;
         Zend_AllTests_StreamWrapper_PhpInput::mockInput($this->xml);
     }
 
     /**
-     * Teardown environment.
+     * Teardown environment
      */
     public function tearDown()
     {
@@ -121,18 +121,18 @@ EOX;
 
     public function testGetHeaders()
     {
-        $expected = [
-            'User-Agent' => 'Zend_XmlRpc_Client',
-            'Host' => 'localhost',
-            'Content-Type' => 'text/xml',
-            'Content-Length' => 958,
-        ];
+        $expected = array(
+            'User-Agent'     => 'Zend_XmlRpc_Client',
+            'Host'           => 'localhost',
+            'Content-Type'   => 'text/xml',
+            'Content-Length' => 958
+        );
         $this->assertEquals($expected, $this->request->getHeaders());
     }
 
     public function testGetFullRequest()
     {
-        $expected = <<<EOT
+        $expected =<<<EOT
 User-Agent: Zend_XmlRpc_Client
 Host: localhost
 Content-Type: text/xml
@@ -147,8 +147,8 @@ EOT;
     public function testCanPassInMethodAndParams()
     {
         try {
-            $request = new Zend_XmlRpc_Request_Http('foo', ['bar', 'baz']);
-        } catch (Throwable $e) {
+            $request = new Zend_XmlRpc_Request_Http('foo', array('bar', 'baz'));
+        } catch (\Throwable $e) {
             $this->fail('Should be able to pass in methods and params to request');
         }
     }
@@ -156,19 +156,19 @@ EOT;
     public function testExtendingClassShouldBeAbleToReceiveMethodAndParams()
     {
         try {
-            $request = new Zend_XmlRpc_Request_HttpTest_Extension('foo', ['bar', 'baz']);
-        } catch (Throwable $e) {
+            $request = new Zend_XmlRpc_Request_HttpTest_Extension('foo', array('bar', 'baz'));
+        } catch (\Throwable $e) {
             $this->fail('Should be able to pass in methods and params to request');
         }
         $this->assertEquals('foo', $request->method);
-        $this->assertEquals(['bar', 'baz'], $request->params);
+        $this->assertEquals(array('bar', 'baz'), $request->params);
     }
 
     public function testHttpRequestReadsFromPhpInput()
     {
         $this->assertNull(Zend_AllTests_StreamWrapper_PhpInput::argumentsPassedTo('stream_open'));
         $request = new Zend_XmlRpc_Request_Http();
-        list($path, $mode) = Zend_AllTests_StreamWrapper_PhpInput::argumentsPassedTo('stream_open');
+        list($path, $mode,) = Zend_AllTests_StreamWrapper_PhpInput::argumentsPassedTo('stream_open');
         $this->assertSame('php://input', $path);
         $this->assertSame('rb', $mode);
         $this->assertSame($this->xml, $request->getRawRequest());
@@ -194,6 +194,6 @@ class Zend_XmlRpc_Request_HttpTest_Extension extends Zend_XmlRpc_Request_Http
 }
 
 // Call Zend_XmlRpc_Request_HttpTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_XmlRpc_Request_HttpTest::main') {
+if (PHPUnit_MAIN_METHOD == "Zend_XmlRpc_Request_HttpTest::main") {
     Zend_XmlRpc_Request_HttpTest::main();
 }

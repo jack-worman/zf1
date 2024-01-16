@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Db
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id $
  */
 
@@ -24,7 +24,7 @@ require_once 'Zend/Db/Statement/TestCommon.php';
 // require_once 'Zend/Db/Statement/Mysqli.php';
 
 /**
- * Wrapper class for test protected function _stripQuoted.
+ * Wrapper class for test protected function _stripQuoted
  */
 #[AllowDynamicProperties]
 class Zend_Db_Statement_Mysqli_Test_Class extends Zend_Db_Statement_Mysqli
@@ -37,24 +37,23 @@ class Zend_Db_Statement_Mysqli_Test_Class extends Zend_Db_Statement_Mysqli
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Db
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Db
  * @group      Zend_Db_Statement
  */
 #[AllowDynamicProperties]
 class Zend_Db_Statement_MysqliTest extends Zend_Db_Statement_TestCommon
 {
-    protected $_Zend_Db_Statement_Mysqli_Test_Class;
-
+    protected $_Zend_Db_Statement_Mysqli_Test_Class = null;
     /**
      * @group ZF-7911
      */
     public function testStripQuoted()
     {
-        $this->_Zend_Db_Statement_Mysqli_Test_Class = new Zend_Db_Statement_Mysqli_Test_Class($this->_db, 'SELECT 1');
+        $this->_Zend_Db_Statement_Mysqli_Test_Class = new Zend_Db_Statement_Mysqli_Test_Class($this->_db, "SELECT 1");
 
         $input = <<<INPUT
 in: [SELECT * FROM `strange`table1`]
@@ -144,12 +143,12 @@ INPUT;
                 continue;
             }
 
-            ++$count;
+            $count++;
             $io = explode('out:', $ioLine);
-            $in = str_replace(['[', ']'], '', \trim((string) $io[0]));
-            $out = str_replace(['[', ']'], '', \trim((string) $io[1]));
+            $in = str_replace(array('[', ']'),'', \trim((string) $io[0]));
+            $out = str_replace(array('[', ']'),'', \trim((string) $io[1]));
             $actual = $this->_Zend_Db_Statement_Mysqli_Test_Class->stripQuoted($in);
-            $this->assertSame($out, $actual, $count.' - unexpected output');
+            $this->assertSame($out, $actual, $count . ' - unexpected output');
         }
     }
 
@@ -179,7 +178,7 @@ INPUT;
         $product_id = $this->_db->quoteIdentifier('product_id');
         $product_name = $this->_db->quoteIdentifier('product_name');
 
-        $productIdValue = 4;
+        $productIdValue   = 4;
         $productNameValue = 'AmigaOS';
 
         try {
@@ -202,7 +201,7 @@ INPUT;
         $product_id = $this->_db->quoteIdentifier('product_id');
         $product_name = $this->_db->quoteIdentifier('product_name');
 
-        $productIdValue = 4;
+        $productIdValue   = 4;
         $productNameValue = 'AmigaOS';
 
         try {
@@ -221,18 +220,17 @@ INPUT;
 
     public function testStatementGetColumnMeta()
     {
-        $this->markTestIncomplete($this->getDriver().' has not implemented getColumnMeta() yet [ZF-1424]');
+        $this->markTestIncomplete($this->getDriver() . ' has not implemented getColumnMeta() yet [ZF-1424]');
     }
 
     /**
      * Tests ZF-3216, that the statement object throws exceptions that
-     * contain the numerica MySQL SQLSTATE error code.
-     *
+     * contain the numerica MySQL SQLSTATE error code
      * @group ZF-3216
      */
     public function testStatementExceptionShouldContainErrorCode()
     {
-        $sql = 'SELECT * FROM *';
+        $sql = "SELECT * FROM *";
         try {
             $stmt = $this->_db->query($sql);
             $this->fail('Expected to catch Zend_Db_Statement_Exception');
@@ -251,51 +249,50 @@ INPUT;
     }
 
     /**
-     * Tests that the statement returns FALSE when no records are found.
-     *
+     * Tests that the statement returns FALSE when no records are found
      * @group ZF-5675
      */
     public function testStatementReturnsFalseOnEmpty()
     {
         $products = $this->_db->quoteIdentifier('zfproducts');
-        $sql = 'SELECT * FROM '.$products.' WHERE 1=2';
+        $sql = 'SELECT * FROM ' . $products . ' WHERE 1=2';
         $stmt = $this->_db->query($sql);
         $result = $stmt->fetch();
         $this->assertFalse($result);
     }
 
-    /**
-     * Test to verify valid report of issue.
-     *
+	/**
+	 * Test to verify valid report of issue
+	 *
      * @group ZF-8986
      */
     public function testNumberOfBoundParamsDoesNotMatchNumberOfTokens()
     {
-        $this->_util->createTable('zf_objects', [
-            'object_id' => 'INTEGER NOT NULL',
-            'object_type' => 'INTEGER NOT NULL',
-            'object_status' => 'INTEGER NOT NULL',
-            'object_lati' => 'REAL',
-            'object_long' => 'REAL',
-        ]);
+    	$this->_util->createTable('zf_objects', array(
+            'object_id'		=> 'INTEGER NOT NULL',
+    		'object_type'	=> 'INTEGER NOT NULL',
+    		'object_status' => 'INTEGER NOT NULL',
+    		'object_lati'   => 'REAL',
+    		'object_long'   => 'REAL',
+        ));
         $tableName = $this->_util->getTableName('zf_objects');
 
-        $numRows = $this->_db->insert($tableName, [
-            'object_id' => 1,
-            'object_type' => 1,
-            'object_status' => 1,
-            'object_lati' => 1.12345,
-            'object_long' => 1.54321,
-        ]);
+        $numRows = $this->_db->insert($tableName, array (
+        	'object_id' => 1,
+        	'object_type' => 1,
+        	'object_status' => 1,
+        	'object_lati' => 1.12345,
+        	'object_long' => 1.54321,
+        ));
 
         $sql = 'SELECT object_id, object_type, object_status,'
-             .' object_lati, object_long FROM '.$tableName
-             .' WHERE object_id = ?';
+             . ' object_lati, object_long FROM ' . $tableName
+             . ' WHERE object_id = ?';
 
         try {
-            $stmt = $this->_db->query($sql, 1);
-        } catch (Throwable $e) {
-            $this->fail('Bounding params failed: '.$e->getMessage());
+        	$stmt = $this->_db->query($sql, 1);
+        } catch (\Throwable $e) {
+        	$this->fail('Bounding params failed: ' . $e->getMessage());
         }
         $result = $stmt->fetch();
         $this->assertTrue(is_array($result));
@@ -307,8 +304,10 @@ INPUT;
         $this->assertEquals(1.54321, $result['object_long']);
     }
 
+
     public function getDriver()
     {
         return 'Mysqli';
     }
+
 }

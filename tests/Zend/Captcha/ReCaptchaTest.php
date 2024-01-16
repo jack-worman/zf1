@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,16 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Captcha
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
 // Call Zend_Captcha_ReCaptchaTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Captcha_ReCaptchaTest::main');
+if (!defined("PHPUnit_MAIN_METHOD")) {
+    define("PHPUnit_MAIN_METHOD", "Zend_Captcha_ReCaptchaTest::main");
 }
 
 // require_once 'Zend/Form/Element/Captcha.php';
@@ -30,10 +30,10 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Captcha
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Captcha
  */
 #[AllowDynamicProperties]
@@ -46,7 +46,7 @@ class Zend_Captcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend_Captcha_ReCaptchaTest');
+        $suite  = new PHPUnit_Framework_TestSuite("Zend_Captcha_ReCaptchaTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -64,14 +64,14 @@ class Zend_Captcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
 
         $this->element = new Zend_Form_Element_Captcha(
             'captchaR',
-            [
-                'captcha' => [
+            array(
+                'captcha' => array(
                     'ReCaptcha',
-                    'sessionClass' => 'Zend_Captcha_ReCaptchaTest_SessionContainer',
-                ],
-            ]
+                    'sessionClass' => 'Zend_Captcha_ReCaptchaTest_SessionContainer'
+                )
+            )
         );
-        $this->captcha = $this->element->getCaptcha();
+        $this->captcha =  $this->element->getCaptcha();
     }
 
     /**
@@ -86,20 +86,20 @@ class Zend_Captcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
 
     public function testConstructorShouldSetOptions()
     {
-        $options = [
+        $options = array(
             'privKey' => 'privateKey',
-            'pubKey' => 'publicKey',
-            'ssl' => true,
-            'xhtml' => true,
-        ];
+            'pubKey'  => 'publicKey',
+            'ssl'     => true,
+            'xhtml'   => true,
+        );
         $captcha = new Zend_Captcha_ReCaptcha($options);
-        $test = $captcha->getOptions();
-        $compare = ['privKey' => $options['privKey'], 'pubKey' => $options['pubKey']];
+        $test    = $captcha->getOptions();
+        $compare = array('privKey' => $options['privKey'], 'pubKey' => $options['pubKey']);
         $this->assertEquals($compare, $test);
 
         $service = $captcha->getService();
         $test = $service->getParams();
-        $compare = ['ssl' => $options['ssl'], 'xhtml' => $options['xhtml']];
+        $compare = array('ssl' => $options['ssl'], 'xhtml' => $options['xhtml']);
         foreach ($compare as $key => $value) {
             $this->assertTrue(array_key_exists($key, $test));
             $this->assertSame($value, $test[$key]);
@@ -109,7 +109,7 @@ class Zend_Captcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
     public function testShouldAllowSpecifyingServiceObject()
     {
         $captcha = new Zend_Captcha_ReCaptcha();
-        $try = new Zend_Service_ReCaptcha();
+        $try     = new Zend_Service_ReCaptcha();
         $this->assertNotSame($captcha->getService(), $try);
         $captcha->setService($try);
         $this->assertSame($captcha->getService(), $try);
@@ -133,7 +133,7 @@ class Zend_Captcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
     /** @group ZF-7654 */
     public function testConstructorShouldAllowSettingLangOptionOnServiceObject()
     {
-        $options = ['lang' => 'fr'];
+        $options = array('lang'=>'fr');
         $captcha = new Zend_Captcha_ReCaptcha($options);
         $this->assertEquals('fr', $captcha->getService()->getOption('lang'));
     }
@@ -141,7 +141,7 @@ class Zend_Captcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
     /** @group ZF-7654 */
     public function testConstructorShouldAllowSettingThemeOptionOnServiceObject()
     {
-        $options = ['theme' => 'black'];
+        $options = array('theme'=>'black');
         $captcha = new Zend_Captcha_ReCaptcha($options);
         $this->assertEquals('black', $captcha->getService()->getOption('theme'));
     }
@@ -149,7 +149,7 @@ class Zend_Captcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
     /** @group ZF-7654 */
     public function testAllowsSettingLangOptionOnServiceObject()
     {
-        $captcha = new Zend_Captcha_ReCaptcha();
+        $captcha = new Zend_Captcha_ReCaptcha;
         $captcha->setOption('lang', 'fr');
         $this->assertEquals('fr', $captcha->getService()->getOption('lang'));
     }
@@ -157,7 +157,7 @@ class Zend_Captcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
     /** @group ZF-7654 */
     public function testAllowsSettingThemeOptionOnServiceObject()
     {
-        $captcha = new Zend_Captcha_ReCaptcha();
+        $captcha = new Zend_Captcha_ReCaptcha;
         $captcha->setOption('theme', 'black');
         $this->assertEquals('black', $captcha->getService()->getOption('theme'));
     }
@@ -165,15 +165,15 @@ class Zend_Captcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
     /** @group ZF-10991 */
     public function testRenderWillUseElementNameWhenRenderingNoScriptFields()
     {
-        $captcha = new Zend_Captcha_ReCaptcha();
-        $pubKey = 'pubKey';
+        $captcha = new Zend_Captcha_ReCaptcha;
+        $pubKey  = 'pubKey';
         $privKey = 'privKey';
         $captcha->setPubkey($pubKey)
                 ->setPrivkey($privKey);
-        $element = new Zend_Form_Element_Captcha('captcha', [
-            'captcha' => $captcha,
+        $element = new Zend_Form_Element_Captcha('captcha', array(
+            'captcha'   => $captcha,
             'belongsTo' => 'contact',
-        ]);
+        ));
         $view = new Zend_View();
         $html = $captcha->render($view, $element);
         $this->assertContains('contact[recaptcha_challenge_field]', $html);
@@ -183,7 +183,7 @@ class Zend_Captcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
     /** @group ZF-10991 */
     public function testUsesReCaptchaSpecificDecorator()
     {
-        $captcha = new Zend_Captcha_ReCaptcha();
+        $captcha = new Zend_Captcha_ReCaptcha;
         $this->assertEquals('Captcha_ReCaptcha', $captcha->getDecorator());
     }
 
@@ -192,12 +192,12 @@ class Zend_Captcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
      */
     public function testAllowsSettingCustomTranslationsOptionOnServiceObject()
     {
-        $options = [
+        $options = array(
             'instructions_visual' => 'Wpisz dwa wyrazy:',
-            'instructions_audio' => 'Wpisz uslyszany tekst:',
-        ];
+            'instructions_audio'  => 'Wpisz uslyszany tekst:'
+        );
 
-        $captcha = new Zend_Captcha_ReCaptcha();
+        $captcha = new Zend_Captcha_ReCaptcha;
         $captcha->setOption('custom_translations', $options);
         $this->assertEquals(
             $options,
@@ -231,7 +231,7 @@ class Zend_Captcha_ReCaptchaTest_SessionContainer
 
     public function __isset($name)
     {
-        if (('word' == $name) && (null !== self::$_word)) {
+        if (('word' == $name) && (null !== self::$_word))  {
             return true;
         }
 
@@ -251,6 +251,6 @@ class Zend_Captcha_ReCaptchaTest_SessionContainer
 }
 
 // Call Zend_Captcha_ReCaptchaTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_Captcha_ReCaptchaTest::main') {
+if (PHPUnit_MAIN_METHOD == "Zend_Captcha_ReCaptchaTest::main") {
     Zend_Captcha_ReCaptchaTest::main();
 }

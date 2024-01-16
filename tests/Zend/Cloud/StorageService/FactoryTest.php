@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,14 +13,15 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Cloud
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 // Call Zend_Cloud_StorageService_FactoryTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Cloud_StorageService_FactoryTest::main');
+if (!defined("PHPUnit_MAIN_METHOD")) {
+    define("PHPUnit_MAIN_METHOD", "Zend_Cloud_StorageService_FactoryTest::main");
 }
 
 /**
@@ -42,13 +43,13 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 // require_once 'Zend/Http/Client/Adapter/Test.php';
 
 /**
- * Test class for Zend_Cloud_StorageService_Factory.
+ * Test class for Zend_Cloud_StorageService_Factory
  *
  * @category   Zend
- *
+ * @package    Zend_Cloud
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Cloud
  */
 #[AllowDynamicProperties]
@@ -61,7 +62,7 @@ class Zend_Cloud_StorageService_FactoryTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite(__CLASS__);
+        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -75,31 +76,31 @@ class Zend_Cloud_StorageService_FactoryTest extends PHPUnit_Framework_TestCase
         $httptest = new Zend_Http_Client_Adapter_Test();
 
         // S3 adapter
-        $s3Config = new Zend_Config_Ini(realpath(__DIR__.'/_files/config/s3.ini'));
+        $s3Config = new Zend_Config_Ini(realpath(__DIR__ . '/_files/config/s3.ini'));
         $s3Adapter = Zend_Cloud_StorageService_Factory::getAdapter($s3Config);
         $this->assertEquals('Zend_Cloud_StorageService_Adapter_S3', get_class($s3Adapter));
 
         // file system adapter
-        $fileSystemConfig = new Zend_Config_Ini(realpath(__DIR__.'/_files/config/filesystem.ini'));
+        $fileSystemConfig = new Zend_Config_Ini(realpath(__DIR__ . '/_files/config/filesystem.ini'));
         $fileSystemAdapter = Zend_Cloud_StorageService_Factory::getAdapter($fileSystemConfig);
         $this->assertEquals('Zend_Cloud_StorageService_Adapter_FileSystem', get_class($fileSystemAdapter));
 
         // Azure adapter
-        $azureConfig = new Zend_Config_Ini(realpath(__DIR__.'/_files/config/windowsazure.ini'));
-        $azureConfig = $azureConfig->toArray();
+        $azureConfig    = new Zend_Config_Ini(realpath(__DIR__ . '/_files/config/windowsazure.ini'));
+        $azureConfig    = $azureConfig->toArray();
         $azureContainer = $azureConfig[Zend_Cloud_StorageService_Adapter_WindowsAzure::CONTAINER];
         $azureConfig[Zend_Cloud_StorageService_Adapter_WindowsAzure::HTTP_ADAPTER] = $httptest;
-        $q = '?';
+        $q = "?";
 
         $doc = new DOMDocument('1.0', 'utf-8');
         $root = $doc->createElement('EnumerationResults');
         $acctName = $doc->createAttribute('AccountName');
         $acctName->value = 'http://myaccount.blob.core.windows.net';
         $root->appendChild($acctName);
-        $maxResults = $doc->createElement('MaxResults', 1);
-        $containers = $doc->createElement('Containers');
-        $container = $doc->createElement('Container');
-        $containerName = $doc->createElement('Name', $azureContainer);
+        $maxResults     = $doc->createElement('MaxResults', 1);
+        $containers     = $doc->createElement('Containers');
+        $container      = $doc->createElement('Container');
+        $containerName  = $doc->createElement('Name', $azureContainer);
         $container->appendChild($containerName);
         $containers->appendChild($container);
         $root->appendChild($maxResults);
@@ -107,7 +108,7 @@ class Zend_Cloud_StorageService_FactoryTest extends PHPUnit_Framework_TestCase
         $doc->appendChild($root);
         $body = $doc->saveXML();
 
-        $resp = new Zend_Http_Response(200, ['x-ms-request-id' => 0], $body);
+        $resp = new Zend_Http_Response(200, array('x-ms-request-id' => 0), $body);
         $httptest->setResponse($resp);
         $azureAdapter = Zend_Cloud_StorageService_Factory::getAdapter($azureConfig);
         $this->assertEquals('Zend_Cloud_StorageService_Adapter_WindowsAzure', get_class($azureAdapter));
@@ -116,16 +117,16 @@ class Zend_Cloud_StorageService_FactoryTest extends PHPUnit_Framework_TestCase
     public function testGetAdapterWithArray()
     {
         // No need to overdo it; we'll test the array config with just one adapter.
-        $fileSystemConfig = [
-            Zend_Cloud_StorageService_Factory::STORAGE_ADAPTER_KEY => 'Zend_Cloud_StorageService_Adapter_FileSystem',
-            Zend_Cloud_StorageService_Adapter_FileSystem::LOCAL_DIRECTORY => __DIR__.'/_files/data',
-        ];
+        $fileSystemConfig = array(
+            Zend_Cloud_StorageService_Factory::STORAGE_ADAPTER_KEY        => 'Zend_Cloud_StorageService_Adapter_FileSystem',
+            Zend_Cloud_StorageService_Adapter_FileSystem::LOCAL_DIRECTORY => __DIR__ ."/_files/data",
+        );
         $fileSystemAdapter = Zend_Cloud_StorageService_Factory::getAdapter($fileSystemConfig);
         $this->assertEquals('Zend_Cloud_StorageService_Adapter_FileSystem', get_class($fileSystemAdapter));
     }
 }
 
 // Call Zend_Cloud_StorageService_FactoryTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_Cloud_StorageService_FactoryTest::main') {
+if (PHPUnit_MAIN_METHOD == "Zend_Cloud_StorageService_FactoryTest::main") {
     Zend_Cloud_StorageService_FactoryTest::main();
 }

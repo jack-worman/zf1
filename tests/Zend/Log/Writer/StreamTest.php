@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,12 +13,13 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Log
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Log_Writer_StreamTest::main');
 }
@@ -31,10 +32,10 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Log
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Log
  */
 #[AllowDynamicProperties]
@@ -42,7 +43,7 @@ class Zend_Log_Writer_StreamTest extends PHPUnit_Framework_TestCase
 {
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite(__CLASS__);
+        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -52,7 +53,7 @@ class Zend_Log_Writer_StreamTest extends PHPUnit_Framework_TestCase
         try {
             new Zend_Log_Writer_Stream($resource);
             $this->fail();
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->assertTrue($e instanceof Zend_Log_Exception);
             $this->assertRegExp('/not a stream/i', $e->getMessage());
         }
@@ -76,7 +77,7 @@ class Zend_Log_Writer_StreamTest extends PHPUnit_Framework_TestCase
         try {
             new Zend_Log_Writer_Stream($stream, 'w+');
             $this->fail();
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->assertTrue($e instanceof Zend_Log_Exception);
             $this->assertRegExp('/existing stream/i', $e->getMessage());
         }
@@ -87,7 +88,7 @@ class Zend_Log_Writer_StreamTest extends PHPUnit_Framework_TestCase
         try {
             new Zend_Log_Writer_Stream('');
             $this->fail();
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->assertTrue($e instanceof Zend_Log_Exception);
             $this->assertRegExp('/cannot be opened/i', $e->getMessage());
         }
@@ -96,7 +97,7 @@ class Zend_Log_Writer_StreamTest extends PHPUnit_Framework_TestCase
     public function testWrite()
     {
         $stream = fopen('php://memory', 'w+');
-        $fields = ['message' => 'message-to-log'];
+        $fields = array('message' => 'message-to-log');
 
         $writer = new Zend_Log_Writer_Stream($stream);
         $writer->write($fields);
@@ -115,9 +116,9 @@ class Zend_Log_Writer_StreamTest extends PHPUnit_Framework_TestCase
         fclose($stream);
 
         try {
-            $writer->write(['message' => 'foo']);
+            $writer->write(array('message' => 'foo'));
             $this->fail();
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->assertTrue($e instanceof Zend_Log_Exception);
             $this->assertRegExp('/unable to write/i', $e->getMessage());
         }
@@ -126,14 +127,14 @@ class Zend_Log_Writer_StreamTest extends PHPUnit_Framework_TestCase
     public function testShutdownClosesStreamResource()
     {
         $writer = new Zend_Log_Writer_Stream('php://memory', 'w+');
-        $writer->write(['message' => 'this write should succeed']);
+        $writer->write(array('message' => 'this write should succeed'));
 
         $writer->shutdown();
 
         try {
-            $writer->write(['message' => 'this write should fail']);
+            $writer->write(array('message' => 'this write should fail'));
             $this->fail();
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->assertTrue($e instanceof Zend_Log_Exception);
             $this->assertRegExp('/unable to write/i', $e->getMessage());
         }
@@ -148,7 +149,7 @@ class Zend_Log_Writer_StreamTest extends PHPUnit_Framework_TestCase
         $formatter = new Zend_Log_Formatter_Simple($expected);
         $writer->setFormatter($formatter);
 
-        $writer->write(['bar' => 'baz']);
+        $writer->write(array('bar'=>'baz'));
         rewind($stream);
         $contents = stream_get_contents($stream);
         fclose($stream);
@@ -158,13 +159,13 @@ class Zend_Log_Writer_StreamTest extends PHPUnit_Framework_TestCase
 
     public function testFactoryStream()
     {
-        $cfg = ['log' => ['memory' => [
-            'writerName' => 'Mock',
-            'writerParams' => [
+        $cfg = array('log' => array('memory' => array(
+            'writerName'   => "Mock",
+            'writerParams' => array(
                 'stream' => 'php://memory',
-                'mode' => 'a',
-            ],
-        ]]];
+                'mode'   => 'a'
+            )
+        )));
 
         $logger = Zend_Log::factory($cfg['log']);
         $this->assertTrue($logger instanceof Zend_Log);
@@ -172,13 +173,13 @@ class Zend_Log_Writer_StreamTest extends PHPUnit_Framework_TestCase
 
     public function testFactoryUrl()
     {
-        $cfg = ['log' => ['memory' => [
-            'writerName' => 'Mock',
-            'writerParams' => [
-                'url' => 'http://localhost',
-                'mode' => 'a',
-            ],
-        ]]];
+        $cfg = array('log' => array('memory' => array(
+            'writerName'   => "Mock",
+            'writerParams' => array(
+                'url'  => 'http://localhost',
+                'mode' => 'a'
+            )
+        )));
 
         $logger = Zend_Log::factory($cfg['log']);
         $this->assertTrue($logger instanceof Zend_Log);

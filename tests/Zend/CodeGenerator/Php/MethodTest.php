@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_CodeGenerator
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id $
  */
 
@@ -30,7 +30,8 @@ require_once '_files/TestSampleSingleClass.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_CodeGenerator
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
@@ -40,10 +41,12 @@ require_once '_files/TestSampleSingleClass.php';
 #[AllowDynamicProperties]
 class Zend_CodeGenerator_Php_MethodTest extends PHPUnit_Framework_TestCase
 {
+
+
     /**
      * @var Zend_CodeGenerator_Php_Method
      */
-    protected $_method;
+    protected $_method = null;
 
     public function setup()
     {
@@ -64,9 +67,9 @@ class Zend_CodeGenerator_Php_MethodTest extends PHPUnit_Framework_TestCase
     public function testMethodParameterAccessors()
     {
         $codeGen = new Zend_CodeGenerator_Php_Method();
-        $codeGen->setParameters([
-            ['name' => 'one'],
-            ]);
+        $codeGen->setParameters(array(
+            array('name' => 'one')
+            ));
         $params = $codeGen->getParameters();
         $param = array_shift($params);
         $this->assertTrue($param instanceof Zend_CodeGenerator_Php_Parameter, 'Failed because $param was not instance of Zend_CodeGenerator_Php_Property');
@@ -85,6 +88,7 @@ class Zend_CodeGenerator_Php_MethodTest extends PHPUnit_Framework_TestCase
         $this->_method->setDocblock($d);
         $this->assertTrue($d === $this->_method->getDocblock());
     }
+
 
     public function testMethodFromReflection()
     {
@@ -113,9 +117,9 @@ EOS;
     {
         $codeGen = new Zend_CodeGenerator_Php_Method();
         $codeGen->setName('foo');
-        $codeGen->setParameters([
-            ['name' => 'one'],
-            ]);
+        $codeGen->setParameters(array(
+            array('name' => 'one')
+            ));
         $codeGen->setStatic(true);
 
         $expected = <<<EOS
@@ -135,9 +139,9 @@ EOS;
     {
         $codeGen = new Zend_CodeGenerator_Php_Method();
         $codeGen->setName('foo');
-        $codeGen->setParameters([
-            ['name' => 'one'],
-            ]);
+        $codeGen->setParameters(array(
+            array('name' => 'one')
+            ));
         $codeGen->setFinal(true);
 
         $expected = <<<EOS
@@ -156,9 +160,9 @@ EOS;
     {
         $codeGen = new Zend_CodeGenerator_Php_Method();
         $codeGen->setName('foo');
-        $codeGen->setParameters([
-            ['name' => 'one'],
-            ]);
+        $codeGen->setParameters(array(
+            array('name' => 'one')
+            ));
         $codeGen->setFinal(true);
         $codeGen->setAbstract(true);
 
@@ -176,12 +180,12 @@ EOS;
      */
     public function testMethodCanHaveDocblock()
     {
-        $codeGenProperty = new Zend_CodeGenerator_Php_Method([
+        $codeGenProperty = new Zend_CodeGenerator_Php_Method(array(
             'name' => 'someFoo',
             'static' => true,
             'visibility' => 'protected',
-            'docblock' => '@var string $someVal This is some val',
-            ]);
+            'docblock' => '@var string $someVal This is some val'
+            ));
 
         $expected = <<<EOS
     /**
@@ -194,4 +198,5 @@ EOS;
 EOS;
         $this->assertEquals($expected, $codeGenProperty->generate());
     }
+
 }

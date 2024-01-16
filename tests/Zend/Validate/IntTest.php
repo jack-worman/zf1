@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Validate
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -25,26 +25,27 @@
  */
 // require_once 'Zend/Validate/Int.php';
 
+
 /**
  * @category   Zend
- *
+ * @package    Zend_Validate
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Validate
  */
 #[AllowDynamicProperties]
 class Zend_Validate_IntTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_Validate_Int object.
+     * Zend_Validate_Int object
      *
      * @var Zend_Validate_Int
      */
     protected $_validator;
 
     /**
-     * Creates a new Zend_Validate_Int object for each test method.
+     * Creates a new Zend_Validate_Int object for each test method
      *
      * @return void
      */
@@ -54,44 +55,44 @@ class Zend_Validate_IntTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that the validator follows expected behavior.
+     * Ensures that the validator follows expected behavior
      *
      * @return void
      */
     public function testBasic()
     {
         $this->_validator->setLocale('en');
-        $valuesExpected = [
-            [1.00, true],
-            [0.00, true],
-            [0.01, false],
-            [-0.1, false],
-            [-1, true],
-            ['10', true],
-            [1, true],
-            ['not an int', false],
-            [true, false],
-            [false, false],
-            ];
+        $valuesExpected = array(
+            array(1.00, true),
+            array(0.00, true),
+            array(0.01, false),
+            array(-0.1, false),
+            array(-1, true),
+            array('10', true),
+            array(1, true),
+            array('not an int', false),
+            array(true, false),
+            array(false, false),
+            );
 
         foreach ($valuesExpected as $element) {
             $this->assertEquals($element[1], $this->_validator->isValid($element[0]),
-                'Test failed with '.var_export($element, 1));
+                'Test failed with ' . var_export($element, 1));
         }
     }
 
     /**
-     * Ensures that getMessages() returns expected default value.
+     * Ensures that getMessages() returns expected default value
      *
      * @return void
      */
     public function testGetMessages()
     {
-        $this->assertEquals([], $this->_validator->getMessages());
+        $this->assertEquals(array(), $this->_validator->getMessages());
     }
 
     /**
-     * Ensures that set/getLocale() works.
+     * Ensures that set/getLocale() works
      */
     public function testSettingLocales()
     {
@@ -106,7 +107,7 @@ class Zend_Validate_IntTest extends PHPUnit_Framework_TestCase
      */
     public function testNonStringValidation()
     {
-        $this->assertFalse($this->_validator->isValid([1 => 1]));
+        $this->assertFalse($this->_validator->isValid(array(1 => 1)));
     }
 
     /**

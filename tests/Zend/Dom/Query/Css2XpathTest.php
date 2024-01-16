@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Dom
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -26,10 +26,10 @@
  * Test class for Css2Xpath.
  *
  * @category   Zend
- *
+ * @package    Zend_Dom
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Dom
  */
 #[AllowDynamicProperties]
@@ -73,10 +73,10 @@ class Zend_Dom_Query_Css2XpathTest extends PHPUnit_Framework_TestCase
     {
         $test = Zend_Dom_Query_Css2Xpath::transform('div#foo .bar');
         $this->assertContains('|', $test);
-        $expected = [
+        $expected = array(
             "//div[@id='foo']//*[contains(concat(' ', normalize-space(@class), ' '), ' bar ')]",
             "//div[@id='foo'][contains(concat(' ', normalize-space(@class), ' '), ' bar ')]",
-        ];
+        );
         foreach ($expected as $path) {
             $this->assertContains($path, $test);
         }
@@ -96,11 +96,11 @@ class Zend_Dom_Query_Css2XpathTest extends PHPUnit_Framework_TestCase
         $test = Zend_Dom_Query_Css2Xpath::transform('div#foo span.bar, #bar li.baz a');
         $this->assertTrue(is_string($test));
         $this->assertContains('|', $test);
-        $actual = explode('|', $test);
-        $expected = [
+        $actual   = explode('|', $test);
+        $expected = array(
             "//div[@id='foo']//span[contains(concat(' ', normalize-space(@class), ' '), ' bar ')]",
             "//*[@id='bar']//li[contains(concat(' ', normalize-space(@class), ' '), ' baz ')]//a",
-        ];
+        );
         $this->assertEquals(count($expected), count($actual));
         foreach ($actual as $path) {
             $this->assertContains($path, $expected);
@@ -111,12 +111,12 @@ class Zend_Dom_Query_Css2XpathTest extends PHPUnit_Framework_TestCase
     {
         $test = Zend_Dom_Query_Css2Xpath::transform('div.foo .bar a .baz span');
         $this->assertContains('|', $test);
-        $segments = [
+        $segments = array(
             "//div[contains(concat(' ', normalize-space(@class), ' '), ' foo ')]//*[contains(concat(' ', normalize-space(@class), ' '), ' bar ')]//a//*[contains(concat(' ', normalize-space(@class), ' '), ' baz ')]//span",
             "//div[contains(concat(' ', normalize-space(@class), ' '), ' foo ')]//*[contains(concat(' ', normalize-space(@class), ' '), ' bar ')]//a[contains(concat(' ', normalize-space(@class), ' '), ' baz ')]//span",
             "//div[contains(concat(' ', normalize-space(@class), ' '), ' foo ')][contains(concat(' ', normalize-space(@class), ' '), ' bar ')]//a//*[contains(concat(' ', normalize-space(@class), ' '), ' baz ')]//span",
             "//div[contains(concat(' ', normalize-space(@class), ' '), ' foo ')][contains(concat(' ', normalize-space(@class), ' '), ' bar ')]//a[contains(concat(' ', normalize-space(@class), ' '), ' baz ')]//span",
-        ];
+        );
         foreach ($segments as $xpath) {
             $this->assertContains($xpath, $test);
         }
@@ -161,7 +161,7 @@ class Zend_Dom_Query_Css2XpathTest extends PHPUnit_Framework_TestCase
     public function testShouldAllowWhitespaceInDescendentSelectorExpressions()
     {
         $test = Zend_Dom_Query_Css2Xpath::transform('child > leaf');
-        $this->assertEquals('//child/leaf', $test);
+        $this->assertEquals("//child/leaf", $test);
     }
 
     /**

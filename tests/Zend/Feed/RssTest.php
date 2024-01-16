@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,14 +13,14 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Feed
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
-require_once __DIR__.'/AbstractFeedTest.php';
+require_once __DIR__ . '/AbstractFeedTest.php';
 
 /**
  * @see Zend_Feed_Rss
@@ -29,21 +29,21 @@ require_once __DIR__.'/AbstractFeedTest.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Feed
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Feed
  */
 #[AllowDynamicProperties]
 class Zend_Feed_RssTest extends Zend_Feed_AbstractFeedTest
 {
-    public $remoteFeedNames = ['zend_feed_rss_xxe.remote.xml'];
+    public $remoteFeedNames = array('zend_feed_rss_xxe.remote.xml');
 
     public function testPreventsXxeAttacksOnParsing()
     {
-        $uri = $this->baseUri.'/'.$this->prepareFeed('zend_feed_rss_xxe.xml');
+        $uri   = $this->baseUri . '/' . $this->prepareFeed('zend_feed_rss_xxe.xml');
         $this->setExpectedException('Zend_Feed_Exception', 'parse');
-        $feed = new Zend_Feed_Rss($uri);
+        $feed  = new Zend_Feed_Rss($uri);
     }
 }

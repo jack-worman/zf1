@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Gdata
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id $
  */
 
@@ -25,10 +25,10 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Gdata
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_AuthSub
  */
@@ -36,11 +36,11 @@
 class Zend_Gdata_AuthSubTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Dummy token used during testing.
-     *
+     * Dummy token used during testing
      * @var type string
      */
     protected $token = 'DQAAFPHOW7DCTN';
+
 
     public function setUp()
     {
@@ -49,32 +49,32 @@ class Zend_Gdata_AuthSubTest extends PHPUnit_Framework_TestCase
     public function testNormalGetAuthSubTokenUri()
     {
         $uri = Zend_Gdata_AuthSub::getAuthSubTokenUri(
-            'http://www.example.com/foo.php', // next
-            'http://www.google.com/calendar/feeds', // scope
-            0, // secure
-            1); // session
+                'http://www.example.com/foo.php', //next
+                'http://www.google.com/calendar/feeds', //scope
+                0, //secure
+                1); //session
 
         // Note: the scope here is not encoded.  It should be encoded,
         // but the method getAuthSubTokenUri calls urldecode($scope).
         // This currently works (no reported bugs) as web browsers will
         // handle the encoding in most cases.
-        $this->assertEquals('https://www.google.com/accounts/AuthSubRequest?next=http%3A%2F%2Fwww.example.com%2Ffoo.php&scope=http://www.google.com/calendar/feeds&secure=0&session=1', $uri);
+       $this->assertEquals('https://www.google.com/accounts/AuthSubRequest?next=http%3A%2F%2Fwww.example.com%2Ffoo.php&scope=http://www.google.com/calendar/feeds&secure=0&session=1', $uri);
     }
 
     public function testGetAuthSubTokenUriModifiedBase()
     {
         $uri = Zend_Gdata_AuthSub::getAuthSubTokenUri(
-            'http://www.example.com/foo.php', // next
-            'http://www.google.com/calendar/feeds', // scope
-            0, // secure
-            1, // session
-            'http://www.otherauthservice.com/accounts/AuthSubRequest');
+                'http://www.example.com/foo.php', //next
+                'http://www.google.com/calendar/feeds', //scope
+                0, //secure
+                1, //session
+                'http://www.otherauthservice.com/accounts/AuthSubRequest');
 
         // Note: the scope here is not encoded.  It should be encoded,
         // but the method getAuthSubTokenUri calls urldecode($scope).
         // This currently works (no reported bugs) as web browsers will
         // handle the encoding in most cases.
-        $this->assertEquals('http://www.otherauthservice.com/accounts/AuthSubRequest?next=http%3A%2F%2Fwww.example.com%2Ffoo.php&scope=http://www.google.com/calendar/feeds&secure=0&session=1', $uri);
+       $this->assertEquals('http://www.otherauthservice.com/accounts/AuthSubRequest?next=http%3A%2F%2Fwww.example.com%2Ffoo.php&scope=http://www.google.com/calendar/feeds&secure=0&session=1', $uri);
     }
 
     public function testSecureAuthSubSigning()
@@ -83,19 +83,19 @@ class Zend_Gdata_AuthSubTest extends PHPUnit_Framework_TestCase
             $this->markTestSkipped('The openssl extension is not available');
         } else {
             $c = new Zend_Gdata_HttpClient();
-            $c->setAuthSubPrivateKeyFile('Zend/Gdata/_files/RsaKey.pem',
-                null, true);
+            $c->setAuthSubPrivateKeyFile("Zend/Gdata/_files/RsaKey.pem",
+                                         null, true);
             $c->setAuthSubToken('abcdefg');
             $requestData = $c->filterHttpRequest('POST',
-                'http://www.example.com/feed',
-                [],
-                'foo bar',
-                'text/plain');
+                                                 'http://www.example.com/feed',
+                                                  array(),
+                                                  'foo bar',
+                                                  'text/plain');
 
             $authHeaderCheckPassed = false;
             $headers = $requestData['headers'];
             foreach ($headers as $headerName => $headerValue) {
-                if ('authorization' == strtolower((string) $headerName)) {
+                if (strtolower((string) $headerName) == 'authorization') {
                     preg_match('/data="([^"]*)"/', $headerValue, $matches);
                     $dataToSign = $matches[1];
                     preg_match('/sig="([^"]*)"/', $headerValue, $matches);
@@ -109,17 +109,17 @@ class Zend_Gdata_AuthSubTest extends PHPUnit_Framework_TestCase
                         fclose($fp);
                         $pubkeyid = openssl_get_publickey($cert);
                         $verified = openssl_verify($dataToSign,
-                            base64_decode($sig), $pubkeyid);
+                                               base64_decode($sig), $pubkeyid);
                         $this->assertEquals(
                             1, $verified,
-                            'The generated signature was unable '.
+                            'The generated signature was unable ' .
                             'to be verified.');
                         $authHeaderCheckPassed = true;
                     }
                 }
             }
             $this->assertEquals(true, $authHeaderCheckPassed,
-                'Auth header not found for sig verification.');
+                                'Auth header not found for sig verification.');
         }
     }
 
@@ -131,7 +131,7 @@ class Zend_Gdata_AuthSubTest extends PHPUnit_Framework_TestCase
             $this->markTestSkipped('The openssl extension is not available');
         } else {
             $c = new Zend_Gdata_HttpClient();
-            $c->setAuthSubPrivateKeyFile('zendauthsubfilenotfound', null, true);
+            $c->setAuthSubPrivateKeyFile("zendauthsubfilenotfound",  null, true);
         }
     }
 
@@ -149,7 +149,7 @@ class Zend_Gdata_AuthSubTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Zend_Gdata_App_AuthException
+     * @expectedException Zend_Gdata_App_AuthException
      */
     public function testAuthSubSessionTokenCatchesFailedResult()
     {
@@ -164,7 +164,7 @@ class Zend_Gdata_AuthSubTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Zend_Gdata_App_HttpException
+     * @expectedException Zend_Gdata_App_HttpException
      */
     public function testAuthSubSessionTokenCatchesHttpClientException()
     {
@@ -181,7 +181,7 @@ class Zend_Gdata_AuthSubTest extends PHPUnit_Framework_TestCase
     public function testAuthSubRevokeTokenReceivesSuccessfulResult()
     {
         $adapter = new Zend_Http_Client_Adapter_Test();
-        $adapter->setResponse('HTTP/1.1 200 OK');
+        $adapter->setResponse("HTTP/1.1 200 OK");
 
         $client = new Zend_Gdata_HttpClient();
         $client->setUri('http://example.com/AuthSub');
@@ -194,7 +194,7 @@ class Zend_Gdata_AuthSubTest extends PHPUnit_Framework_TestCase
     public function testAuthSubRevokeTokenCatchesFailedResult()
     {
         $adapter = new Zend_Http_Client_Adapter_Test();
-        $adapter->setResponse('HTTP/1.1 500 Not Successful');
+        $adapter->setResponse("HTTP/1.1 500 Not Successful");
 
         $client = new Zend_Gdata_HttpClient();
         $client->setUri('http://example.com/AuthSub');
@@ -205,7 +205,7 @@ class Zend_Gdata_AuthSubTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Zend_Gdata_App_HttpException
+     * @expectedException Zend_Gdata_App_HttpException
      */
     public function testAuthSubRevokeTokenCatchesHttpClientException()
     {
@@ -231,13 +231,13 @@ class Zend_Gdata_AuthSubTest extends PHPUnit_Framework_TestCase
 
         $respBody = Zend_Gdata_AuthSub::getAuthSubTokenInfo($this->token, $client);
 
-        $this->assertContains('Target=http://example.com', $respBody);
-        $this->assertContains('Scope=http://example.com', $respBody);
-        $this->assertContains('Secure=false', $respBody);
+        $this->assertContains("Target=http://example.com", $respBody);
+        $this->assertContains("Scope=http://example.com", $respBody);
+        $this->assertContains("Secure=false", $respBody);
     }
 
     /**
-     * @expectedException \Zend_Gdata_App_HttpException
+     * @expectedException Zend_Gdata_App_HttpException
      */
     public function testGetAuthSubTokenInfoCatchesHttpClientException()
     {
@@ -254,14 +254,13 @@ class Zend_Gdata_AuthSubTest extends PHPUnit_Framework_TestCase
     public function testGetHttpClientProvidesNewClientWhenNullPassed()
     {
         $client = Zend_Gdata_AuthSub::getHttpClient($this->token);
-        $this->assertTrue($client instanceof Zend_Gdata_HttpClient);
+        $this->assertTrue($client instanceof Zend_Gdata_HttpClient );
         $this->assertEquals($this->token, $client->getAuthSubToken());
     }
 
     /**
      * @group ZF-11351
-     *
-     * @expectedException \Zend_Gdata_App_HttpException
+     * @expectedException Zend_Gdata_App_HttpException
      */
     public function testAuthSubGetHttpClientShouldThrowExceptionOnVanillaHttpClient()
     {
@@ -270,4 +269,5 @@ class Zend_Gdata_AuthSubTest extends PHPUnit_Framework_TestCase
         $gdclient = Zend_Gdata_AuthSub::getHttpClient('FakeToken', $client);
         $this->fail('Expected exception Zend_Gdata_App_HttpException not raised!');
     }
+
 }

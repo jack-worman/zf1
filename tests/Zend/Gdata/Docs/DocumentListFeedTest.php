@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Gdata_Docs
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id $
  */
 
@@ -25,29 +25,31 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Gdata_Docs
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Docs
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_Docs_DocumentListFeedTest extends PHPUnit_Framework_TestCase
 {
+
     public function setUp()
     {
         $this->docFeed = new Zend_Gdata_Docs_DocumentListFeed(
-            file_get_contents(__DIR__.'/_files/TestDataDocumentListFeedSample.xml'),
-            true);
+                file_get_contents(__DIR__ . '/_files/TestDataDocumentListFeedSample.xml'),
+                true);
     }
 
     public function testToAndFromString()
     {
         // There should be 2 entries in the feed.
-        $this->assertTrue(2 == count($this->docFeed->entries));
-        $this->assertTrue(2 == $this->docFeed->entries->count());
-        foreach ($this->docFeed->entries as $entry) {
+        $this->assertTrue(count($this->docFeed->entries) == 2);
+        $this->assertTrue($this->docFeed->entries->count() == 2);
+        foreach($this->docFeed->entries as $entry)
+        {
             $this->assertTrue($entry instanceof Zend_Gdata_Docs_DocumentListEntry);
         }
 
@@ -57,8 +59,10 @@ class Zend_Gdata_Docs_DocumentListFeedTest extends PHPUnit_Framework_TestCase
         $newDocFeed->transferFromDom($doc->documentElement);
 
         $this->assertTrue(count($newDocFeed->entries) == count($this->docFeed->entries));
-        foreach ($newDocFeed->entries as $entry) {
+        foreach($newDocFeed->entries as $entry)
+        {
             $this->assertTrue($entry instanceof Zend_Gdata_Docs_DocumentListEntry);
         }
     }
+
 }

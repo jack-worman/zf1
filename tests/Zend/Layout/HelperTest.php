@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,16 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Layout
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
 // Call Zend_LayoutTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Layout_HelperTest::main');
+if (!defined("PHPUnit_MAIN_METHOD")) {
+    define("PHPUnit_MAIN_METHOD", "Zend_Layout_HelperTest::main");
 }
 
 // require_once 'Zend/Layout/Controller/Action/Helper/Layout.php';
@@ -31,13 +31,13 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 // require_once 'Zend/Controller/Action/HelperBroker.php';
 
 /**
- * Test class for Zend_Layout_Controller_Action_Helper_Layout.
+ * Test class for Zend_Layout_Controller_Action_Helper_Layout
  *
  * @category   Zend
- *
+ * @package    Zend_Layout
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Layout
  */
 #[AllowDynamicProperties]
@@ -50,7 +50,8 @@ class Zend_Layout_HelperTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend_Layout_HelperTest');
+
+        $suite  = new PHPUnit_Framework_TestSuite("Zend_Layout_HelperTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -130,19 +131,19 @@ class Zend_Layout_HelperTest extends PHPUnit_Framework_TestCase
         $layout = Zend_Layout::startMvc();
         $helper = new Zend_Layout_Controller_Action_Helper_Layout();
 
-        $helper->setOptions([
-            'layout' => 'foo.phtml',
-            'layoutPath' => __DIR__.'/_files/layouts',
-            'contentKey' => 'foo',
-        ]);
+        $helper->setOptions(array(
+            'layout'     => 'foo.phtml',
+            'layoutPath' => __DIR__ . '/_files/layouts',
+            'contentKey' => 'foo'
+        ));
         $this->assertEquals('foo.phtml', $helper->getLayout());
-        $this->assertEquals(__DIR__.'/_files/layouts', $helper->getLayoutPath());
+        $this->assertEquals(__DIR__ . '/_files/layouts', $helper->getLayoutPath());
         $this->assertEquals('foo', $helper->getContentKey());
     }
 }
 
 /**
- * Zend_Layout extension to allow resetting MVC instance.
+ * Zend_Layout extension to allow resetting MVC instance
  */
 #[AllowDynamicProperties]
 class Zend_Layout_HelperTest_Layout extends Zend_Layout
@@ -154,6 +155,6 @@ class Zend_Layout_HelperTest_Layout extends Zend_Layout
 }
 
 // Call Zend_Layout_HelperTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_Layout_HelperTest::main') {
+if (PHPUnit_MAIN_METHOD == "Zend_Layout_HelperTest::main") {
     Zend_Layout_HelperTest::main();
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,28 +13,29 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Barcode
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
-require_once __DIR__.'/TestCommon.php';
+require_once __DIR__ . '/TestCommon.php';
 
 // require_once 'Zend/Barcode/Object/Code39.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Barcode
+ * @subpackage UnitTests
  * @group      Zend_Barcode
- *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Zend_Barcode_Object_Code39Test extends Zend_Barcode_Object_TestCommon
 {
+
     protected function _getBarcodeObject($options = null)
     {
         return new Zend_Barcode_Object_Code39($options);
@@ -94,7 +95,7 @@ class Zend_Barcode_Object_Code39Test extends Zend_Barcode_Object_TestCommon
     }
 
     /**
-     * @expectedException \Zend_Barcode_Object_Exception
+     * @expectedException Zend_Barcode_Object_Exception
      */
     public function testBadTextDetectedIfChecksumWished()
     {
@@ -110,7 +111,7 @@ class Zend_Barcode_Object_Code39Test extends Zend_Barcode_Object_TestCommon
     }
 
     /**
-     * @expectedException \Zend_Barcode_Object_Exception
+     * @expectedException Zend_Barcode_Object_Exception
      */
     public function testCheckParamsWithLowRatio()
     {
@@ -121,7 +122,7 @@ class Zend_Barcode_Object_Code39Test extends Zend_Barcode_Object_TestCommon
     }
 
     /**
-     * @expectedException \Zend_Barcode_Object_Exception
+     * @expectedException Zend_Barcode_Object_Exception
      */
     public function testCheckParamsWithHighRatio()
     {
@@ -153,7 +154,7 @@ class Zend_Barcode_Object_Code39Test extends Zend_Barcode_Object_TestCommon
         $this->_object->setStretchText(true);
         $this->_object->draw();
         $instructions = $this->loadInstructionsFile(
-            'Code39_0123456789_stretchtext_instructions');
+                'Code39_0123456789_stretchtext_instructions');
         $this->assertEquals($instructions, $this->_object->getInstructions());
     }
 
@@ -163,7 +164,7 @@ class Zend_Barcode_Object_Code39Test extends Zend_Barcode_Object_TestCommon
         $this->_object->setWithBorder(true);
         $this->_object->draw();
         $instructions = $this->loadInstructionsFile(
-            'Code39_0123456789_border_instructions');
+                'Code39_0123456789_border_instructions');
         $this->assertEquals($instructions, $this->_object->getInstructions());
     }
 
@@ -173,7 +174,7 @@ class Zend_Barcode_Object_Code39Test extends Zend_Barcode_Object_TestCommon
         $this->_object->setOrientation(60);
         $this->_object->draw();
         $instructions = $this->loadInstructionsFile(
-            'Code39_0123456789_oriented_instructions');
+                'Code39_0123456789_oriented_instructions');
         $this->assertEquals($instructions, $this->_object->getInstructions());
     }
 
@@ -184,7 +185,7 @@ class Zend_Barcode_Object_Code39Test extends Zend_Barcode_Object_TestCommon
         $this->_object->setStretchText(true);
         $this->_object->draw();
         $instructions = $this->loadInstructionsFile(
-            'Code39_0123456789_stretchtext_oriented_instructions');
+                'Code39_0123456789_stretchtext_oriented_instructions');
         $this->assertEquals($instructions, $this->_object->getInstructions());
     }
 
@@ -195,7 +196,7 @@ class Zend_Barcode_Object_Code39Test extends Zend_Barcode_Object_TestCommon
         $this->_object->setWithBorder(true);
         $this->_object->draw();
         $instructions = $this->loadInstructionsFile(
-            'Code39_0123456789_border_oriented_instructions');
+                'Code39_0123456789_border_oriented_instructions');
         $this->assertEquals($instructions, $this->_object->getInstructions());
     }
 }

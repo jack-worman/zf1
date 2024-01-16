@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,12 +13,13 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Service_WindowsAzure
+ * @subpackage UnitTests
  * @version    $Id$
- *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+
 date_default_timezone_set('UTC');
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
@@ -26,28 +27,28 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 }
 
 /**
- * Test helpers.
+ * Test helpers
  */
 // require_once __DIR__ . '/../../../../TestHelper.php';
-require_once __DIR__.'/../../../../TestConfiguration.dist.php';
+require_once __DIR__ . '/../../../../TestConfiguration.dist.php';
 
 /** Zend_Service_WindowsAzure_Management_Client */
 // require_once 'Zend/Service/WindowsAzure/Management/Client.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Service_WindowsAzure
+ * @subpackage UnitTests
  * @version    $Id$
- *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Zend_Service_WindowsAzure_Management_ManagementClientTest extends PHPUnit_Framework_TestCase
 {
-    public static $path;
-    public static $debug = true;
-    protected $packageUrl;
+	static $path;
+	static $debug = true;
+	protected $packageUrl;
 
     public function __construct()
     {
@@ -57,31 +58,31 @@ class Zend_Service_WindowsAzure_Management_ManagementClientTest extends PHPUnit_
     public static function main()
     {
         if (TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_RUNTESTS) {
-            $suite = new PHPUnit_Framework_TestSuite('Zend_Service_WindowsAzure_Management_ManagementClientTest');
+            $suite  = new PHPUnit_Framework_TestSuite("Zend_Service_WindowsAzure_Management_ManagementClientTest");
             $result = PHPUnit_TextUI_TestRunner::run($suite);
         }
     }
 
     /**
-     * Test setup.
+     * Test setup
      */
     protected function setUp()
     {
-        // Upload sample package to Windows Azure
-        $storageClient = $this->createStorageInstance();
-        $storageClient->createContainerIfNotExists(TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_CONTAINER);
-        $storageClient->putBlob(TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_CONTAINER, 'PhpOnAzure.cspkg', self::$path.'PhpOnAzure.cspkg');
+    	// Upload sample package to Windows Azure
+    	$storageClient = $this->createStorageInstance();
+    	$storageClient->createContainerIfNotExists(TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_CONTAINER);
+    	$storageClient->putBlob(TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_CONTAINER, 'PhpOnAzure.cspkg', self::$path . 'PhpOnAzure.cspkg');
 
-        $this->packageUrl = $storageClient->listBlobs(TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_CONTAINER);
+    	$this->packageUrl = $storageClient->listBlobs(TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_CONTAINER);
         $this->packageUrl = $this->packageUrl[0]->Url;
     }
 
     /**
-     * Test teardown.
+     * Test teardown
      */
     protected function tearDown()
     {
-        // Clean up storage
+    	// Clean up storage
         $storageClient = $this->createStorageInstance();
         $storageClient->deleteContainer(TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_CONTAINER);
 
@@ -89,29 +90,14 @@ class Zend_Service_WindowsAzure_Management_ManagementClientTest extends PHPUnit_
         $managementClient = $this->createManagementClient();
 
         // Remove deployment
-        try {
-            $managementClient->updateDeploymentStatusBySlot(TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_SERVICENAME, 'production', 'suspended');
-            $managementClient->waitForOperation();
-        } catch (Throwable $ex) {
-        }
-        try {
-            $managementClient->deleteDeploymentBySlot(TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_SERVICENAME, 'production');
-            $managementClient->waitForOperation();
-        } catch (Throwable $ex) {
-        }
+        try { $managementClient->updateDeploymentStatusBySlot(TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_SERVICENAME, 'production', 'suspended'); $managementClient->waitForOperation(); } catch (\Throwable $ex) { }
+		try { $managementClient->deleteDeploymentBySlot(TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_SERVICENAME, 'production'); $managementClient->waitForOperation(); } catch (\Throwable $ex) { }
 
-        // Remove hosted service
-        try {
-            $managementClient->deleteHostedService(TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_SERVICENAME);
-            $managementClient->waitForOperation();
-        } catch (Throwable $ex) {
-        }
+		// Remove hosted service
+        try { $managementClient->deleteHostedService(TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_SERVICENAME); $managementClient->waitForOperation(); } catch (\Throwable $ex) { }
 
         // Remove affinity group
-        try {
-            $managementClient->deleteAffinityGroup('test');
-        } catch (Throwable $ex) {
-        }
+        try { $managementClient->deleteAffinityGroup('test'); } catch (\Throwable $ex) { }
     }
 
     protected function createStorageInstance()
@@ -121,76 +107,76 @@ class Zend_Service_WindowsAzure_Management_ManagementClientTest extends PHPUnit_
 
     protected function createManagementClient()
     {
-        return new Zend_Service_WindowsAzure_Management_Client(
-            TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_SUBSCRIPTIONID, self::$path.'/management.pem', TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_CERTIFICATEPASSWORD);
+    	return new Zend_Service_WindowsAzure_Management_Client(
+	            TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_SUBSCRIPTIONID, self::$path . '/management.pem', TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_CERTIFICATEPASSWORD);
     }
 
     protected function log($message)
     {
-        if (self::$debug) {
-            echo date('Y-m-d H:i:s').' - '.$message."\r\n";
-        }
+    	if (self::$debug) {
+    		echo date('Y-m-d H:i:s') . ' - ' . $message . "\r\n";
+    	}
     }
 
     /**
-     * Test hosted service.
+     * Test hosted service
      */
     public function testHostedService()
     {
         if (TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_RUNTESTS) {
-            // Create a deployment name
-            $deploymentName = 'deployment'.time();
+        	// Create a deployment name
+        	$deploymentName = 'deployment' . time();
 
             // Create a management client
             $managementClient = $this->createManagementClient();
 
-            // ** Step 1: create an affinity group
-            $this->log('Creating affinity group...');
+             // ** Step 1: create an affinity group
+	        $this->log('Creating affinity group...');
             $managementClient->createAffinityGroup('test', 'test', 'A test affinity group.', 'North Central US');
             $this->log('Created affinity group.');
 
-            // ** Step 2: create a hosted service
-            $this->log('Creating hosted service...');
-            $managementClient->createHostedService(TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_SERVICENAME, TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_SERVICENAME, TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_SERVICENAME, null, 'test');
-            $managementClient->waitForOperation();
-            $this->log('Created hosted service.');
+	        // ** Step 2: create a hosted service
+	        $this->log('Creating hosted service...');
+	        $managementClient->createHostedService(TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_SERVICENAME, TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_SERVICENAME, TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_SERVICENAME, null, 'test');
+	        $managementClient->waitForOperation();
+	        $this->log('Created hosted service.');
 
-            // ** Step 3: create a new deployment
-            $this->log('Creating staging deployment...');
-            $managementClient->createDeployment(TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_SERVICENAME, 'staging', $deploymentName, $deploymentName, $this->packageUrl, self::$path.'ServiceConfiguration.cscfg', false, false);
-            $managementClient->waitForOperation();
-            $this->log('Created staging deployment.');
+	        // ** Step 3: create a new deployment
+	        $this->log('Creating staging deployment...');
+	        $managementClient->createDeployment(TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_SERVICENAME, 'staging', $deploymentName, $deploymentName, $this->packageUrl, self::$path . 'ServiceConfiguration.cscfg', false, false);
+	        $managementClient->waitForOperation();
+	        $this->log('Created staging deployment.');
 
-            // ** Step 4: Run the deployment
-            $this->log('Changing status of staging deployment to running...');
-            $managementClient->updateDeploymentStatusBySlot(TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_SERVICENAME, 'staging', 'running');
-            $managementClient->waitForOperation();
-            $this->log('Changed status of staging deployment to running.');
+	        // ** Step 4: Run the deployment
+	        $this->log('Changing status of staging deployment to running...');
+	        $managementClient->updateDeploymentStatusBySlot(TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_SERVICENAME, 'staging', 'running');
+	        $managementClient->waitForOperation();
+	        $this->log('Changed status of staging deployment to running.');
 
-            // ** Step 5: Swap production <-> staging
-            $this->log('Performing VIP swap...');
-            $result = $managementClient->getHostedServiceProperties(TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_SERVICENAME);
-            $managementClient->swapDeployment(TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_SERVICENAME, $deploymentName, $result->Deployments[0]->Name);
-            $managementClient->waitForOperation();
-            $this->log('Performed VIP swap.');
+			// ** Step 5: Swap production <-> staging
+	        $this->log('Performing VIP swap...');
+			$result = $managementClient->getHostedServiceProperties(TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_SERVICENAME);
+			$managementClient->swapDeployment(TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_SERVICENAME, $deploymentName, $result->Deployments[0]->Name);
+	        $managementClient->waitForOperation();
+	        $this->log('Performed VIP swap.');
 
-            // ** Step 6: Scale to two instances
-            $this->log('Scaling out...');
-            $managementClient->setInstanceCountBySlot(TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_SERVICENAME, 'production', 'PhpOnAzure.Web', 2);
-            $managementClient->waitForOperation();
-            $this->log('Scaled out.');
+	        // ** Step 6: Scale to two instances
+	        $this->log('Scaling out...');
+			$managementClient->setInstanceCountBySlot(TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_SERVICENAME, 'production', 'PhpOnAzure.Web', 2);
+	        $managementClient->waitForOperation();
+	        $this->log('Scaled out.');
 
-            // ** Step 7: Scale back
-            $this->log('Scaling in...');
-            $managementClient->setInstanceCountBySlot(TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_SERVICENAME, 'production', 'PhpOnAzure.Web', 1);
-            $managementClient->waitForOperation();
-            $this->log('Scaled in.');
+	        // ** Step 7: Scale back
+	        $this->log('Scaling in...');
+			$managementClient->setInstanceCountBySlot(TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_SERVICENAME, 'production', 'PhpOnAzure.Web', 1);
+	        $managementClient->waitForOperation();
+	        $this->log('Scaled in.');
 
-            // ** Step 8: Reboot
-            $this->log('Rebooting...');
-            $managementClient->rebootRoleInstanceBySlot(TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_SERVICENAME, 'production', 'PhpOnAzure.Web_IN_0');
-            $managementClient->waitForOperation();
-            $this->log('Rebooted.');
+			// ** Step 8: Reboot
+	        $this->log('Rebooting...');
+			$managementClient->rebootRoleInstanceBySlot(TESTS_ZEND_SERVICE_WINDOWSAZURE_MANAGEMENT_SERVICENAME, 'production', 'PhpOnAzure.Web_IN_0');
+	        $managementClient->waitForOperation();
+	        $this->log('Rebooted.');
 
             // Dumb assertion...
             $this->assertTrue(true);
@@ -199,6 +185,6 @@ class Zend_Service_WindowsAzure_Management_ManagementClientTest extends PHPUnit_
 }
 
 // Call Zend_Service_WindowsAzure_Management_ManagementClientTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_Service_WindowsAzure_Management_ManagementClientTest::main') {
+if (PHPUnit_MAIN_METHOD == "Zend_Service_WindowsAzure_Management_ManagementClientTest::main") {
     Zend_Service_WindowsAzure_Management_ManagementClientTest::main();
 }

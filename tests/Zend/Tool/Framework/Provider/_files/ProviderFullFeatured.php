@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Tool
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -24,14 +24,16 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Tool
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Zend_Tool_Framework_Provider_ProviderFullFeatured extends Zend_Tool_Framework_Provider_Abstract
 {
-    protected $_specialties = ['Hi', 'BloodyMurder', 'ForYourTeam'];
+
+    protected $_specialties = array('Hi', 'BloodyMurder', 'ForYourTeam');
 
     public function getName()
     {
@@ -40,30 +42,38 @@ class Zend_Tool_Framework_Provider_ProviderFullFeatured extends Zend_Tool_Framew
 
     public function say($what)
     {
+
     }
 
     public function scream($what = 'HELLO')
     {
+
     }
 
     public function sayHi()
     {
+
     }
 
     public function screamBloodyMurder()
     {
+
     }
 
     public function screamForYourTeam()
     {
+
     }
 
     protected function _iAmNotCallable()
     {
+
     }
 
     public function _testReturnInternals()
     {
-        return [$this->_registry->getRequest(), $this->_registry->getResponse()];
+        return array($this->_registry->getRequest(), $this->_registry->getResponse());
     }
+
 }
+

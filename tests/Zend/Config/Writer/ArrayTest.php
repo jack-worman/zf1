@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,29 +13,29 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Config
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
 /**
- * Zend_Config.
+ * Zend_Config
  */
 // require_once 'Zend/Config.php';
 
 /**
- * Zend_Config_Writer_Array.
+ * Zend_Config_Writer_Array
  */
 // require_once 'Zend/Config/Writer/Array.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Config
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Config
  */
 #[AllowDynamicProperties]
@@ -45,7 +45,7 @@ class Zend_Config_Writer_ArrayTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_tempName = @tempnam(__DIR__.'/temp', 'tmp');
+        $this->_tempName = @tempnam(__DIR__ . '/temp', 'tmp');
     }
 
     public function tearDown()
@@ -55,7 +55,7 @@ class Zend_Config_Writer_ArrayTest extends PHPUnit_Framework_TestCase
 
     public function testNoFilenameSet()
     {
-        $writer = new Zend_Config_Writer_Array(['config' => new Zend_Config([])]);
+        $writer = new Zend_Config_Writer_Array(array('config' => new Zend_Config(array())));
 
         try {
             $writer->write();
@@ -67,7 +67,7 @@ class Zend_Config_Writer_ArrayTest extends PHPUnit_Framework_TestCase
 
     public function testNoConfigSet()
     {
-        $writer = new Zend_Config_Writer_Array(['filename' => $this->_tempName]);
+        $writer = new Zend_Config_Writer_Array(array('filename' => $this->_tempName));
 
         try {
             $writer->write();
@@ -79,7 +79,7 @@ class Zend_Config_Writer_ArrayTest extends PHPUnit_Framework_TestCase
 
     public function testFileNotWritable()
     {
-        $writer = new Zend_Config_Writer_Array(['config' => new Zend_Config([]), 'filename' => '/../../../']);
+        $writer = new Zend_Config_Writer_Array(array('config' => new Zend_Config(array()), 'filename' => '/../../../'));
 
         try {
             $writer->write();
@@ -91,9 +91,9 @@ class Zend_Config_Writer_ArrayTest extends PHPUnit_Framework_TestCase
 
     public function testWriteAndRead()
     {
-        $config = new Zend_Config(['test' => 'foo']);
+        $config = new Zend_Config(array('test' => 'foo'));
 
-        $writer = new Zend_Config_Writer_Array(['config' => $config, 'filename' => $this->_tempName]);
+        $writer = new Zend_Config_Writer_Array(array('config' => $config, 'filename' => $this->_tempName));
         $writer->write();
 
         $config = new Zend_Config(include $this->_tempName);
@@ -103,7 +103,7 @@ class Zend_Config_Writer_ArrayTest extends PHPUnit_Framework_TestCase
 
     public function testArgumentOverride()
     {
-        $config = new Zend_Config(['test' => 'foo']);
+        $config = new Zend_Config(array('test' => 'foo'));
 
         $writer = new Zend_Config_Writer_Array();
         $writer->write($this->_tempName, $config);
@@ -118,10 +118,11 @@ class Zend_Config_Writer_ArrayTest extends PHPUnit_Framework_TestCase
      */
     public function testRender()
     {
-        $config = new Zend_Config(['test' => 'foo', 'bar' => [0 => 'baz', 1 => 'foo']]);
+        $config = new Zend_Config(array('test' => 'foo', 'bar' => array(0 => 'baz', 1 => 'foo')));
 
         $writer = new Zend_Config_Writer_Array();
         $configString = $writer->setConfig($config)->render();
+
 
         // build string line by line as we are trailing-whitespace sensitive.
         $expected = "<?php\n";

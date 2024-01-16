@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,17 +13,18 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Navigation
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 // require_once 'Zend/Navigation/Container.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Navigation
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -33,6 +34,6 @@ class My_Container extends Zend_Navigation_Container
     public function addPage($page)
     {
         parent::addPage($page);
-        $this->_pages = [];
+        $this->_pages = array();
     }
 }

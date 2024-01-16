@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,12 +13,13 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Log
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Log_Formatter_FirebugTest::main');
 }
@@ -28,10 +29,10 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Log
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Log
  */
 #[AllowDynamicProperties]
@@ -39,18 +40,18 @@ class Zend_Log_Formatter_FirebugTest extends PHPUnit_Framework_TestCase
 {
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite(__CLASS__);
+        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     public function testFormat()
     {
-        $event = [
+        $event = array(
             'timestamp' => date('c'),
-            'message' => 'tottakai',
+        	'message' => 'tottakai',
             'priority' => 2,
-            'priorityName' => 'CRIT',
-        ];
+        	'priorityName' => 'CRIT'
+        );
         $formatter = new Zend_Log_Formatter_Firebug();
         $output = $formatter->format($event);
 
@@ -62,7 +63,7 @@ class Zend_Log_Formatter_FirebugTest extends PHPUnit_Framework_TestCase
      */
     public function testFactory()
     {
-        $options = [];
+        $options = array();
         $formatter = Zend_Log_Formatter_Firebug::factory($options);
         $this->assertTrue($formatter instanceof Zend_Log_Formatter_Firebug);
     }

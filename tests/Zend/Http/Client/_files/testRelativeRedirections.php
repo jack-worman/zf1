@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,26 +13,25 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Http
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
-if (!isset($_GET['redirect'])) {
-    $_GET['redirect'] = null;
-}
+
+if (! isset($_GET['redirect'])) $_GET['redirect'] = null;
 
 switch ($_GET['redirect']) {
     case 'abpath':
-        header('Location: /path/to/fake/file.ext?redirect=abpath');
+        header("Location: /path/to/fake/file.ext?redirect=abpath");
         break;
 
     case 'relpath':
-        header('Location: path/to/fake/file.ext?redirect=relpath');
+        header("Location: path/to/fake/file.ext?redirect=relpath");
         break;
 
     default:
-        echo 'Redirections done.';
+        echo "Redirections done.";
         break;
 }

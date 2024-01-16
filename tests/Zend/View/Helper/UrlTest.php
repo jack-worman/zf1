@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,16 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_View
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version $Id$
  */
 
 // Call Zend_View_Helper_UrlTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_View_Helper_UrlTest::main');
+if (!defined("PHPUnit_MAIN_METHOD")) {
+    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_UrlTest::main");
 }
 
 // require_once 'Zend/View.php';
@@ -34,15 +34,15 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 // require_once 'Zend/Controller/Request/Http.php';
 
 /**
- * Zend_View_Helper_UrlTest.
+ * Zend_View_Helper_UrlTest
  *
  * Tests formText helper, including some common functionality of all form helpers
  *
  * @category   Zend
- *
+ * @package    Zend_View
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
@@ -52,17 +52,21 @@ class Zend_View_Helper_UrlTest extends PHPUnit_Framework_TestCase
     /**
      * Runs the test methods of this class.
      *
+     * @access public
      * @static
      */
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend_View_Helper_UrlTest');
+
+        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_UrlTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
+     *
+     * @access protected
      */
     protected function setUp()
     {
@@ -82,12 +86,13 @@ class Zend_View_Helper_UrlTest extends PHPUnit_Framework_TestCase
 
     public function testDefault()
     {
-        $url = $this->helper->url(['controller' => 'ctrl', 'action' => 'act']);
+        $url = $this->helper->url(array('controller' => 'ctrl', 'action' => 'act'));
         $this->assertEquals('/ctrl/act', $url);
     }
+
 }
 
 // Call Zend_View_Helper_UrlTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_View_Helper_UrlTest::main') {
+if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_UrlTest::main") {
     Zend_View_Helper_UrlTest::main();
 }

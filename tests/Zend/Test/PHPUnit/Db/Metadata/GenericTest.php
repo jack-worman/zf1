@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Test
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -25,62 +25,62 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Test
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Test
  */
 #[AllowDynamicProperties]
 class Zend_Test_PHPUnit_Db_Metadata_GenericTest extends PHPUnit_Framework_TestCase
 {
-    private $adapterMock;
+    private $adapterMock = null;
 
-    private $metadata;
+    private $metadata = null;
 
     public function setUp()
     {
         $this->adapterMock = $this->getMock('Zend_Test_DbAdapter');
-        $this->metadata = new Zend_Test_PHPUnit_Db_Metadata_Generic($this->adapterMock, 'schema');
+        $this->metadata = new Zend_Test_PHPUnit_Db_Metadata_Generic($this->adapterMock, "schema");
     }
 
     public function testGetSchema()
     {
-        $this->assertEquals('schema', $this->metadata->getSchema());
+        $this->assertEquals("schema", $this->metadata->getSchema());
     }
 
     public function testGetColumnNames()
     {
-        $fixtureTableName = 'foo';
+        $fixtureTableName = "foo";
 
         $this->adapterMock->expects($this->once())
                           ->method('describeTable')
                           ->with($fixtureTableName)
-                          ->will($this->returnValue(['foo' => 1, 'bar' => 2]));
+                          ->will($this->returnValue(array("foo" => 1, "bar" => 2)));
         $data = $this->metadata->getTableColumns($fixtureTableName);
 
-        $this->assertEquals(['foo', 'bar'], $data);
+        $this->assertEquals(array("foo", "bar"), $data);
     }
 
     public function testGetTableNames()
     {
         $this->adapterMock->expects($this->once())
                           ->method('listTables')
-                          ->will($this->returnValue(['foo']));
+                          ->will($this->returnValue(array("foo")));
         $tables = $this->metadata->getTableNames();
 
-        $this->assertEquals(['foo'], $tables);
+        $this->assertEquals(array("foo"), $tables);
     }
 
     public function testGetTablePrimaryKey()
     {
-        $fixtureTableName = 'foo';
+        $fixtureTableName = "foo";
 
-        $tableMeta = [
-            ['PRIMARY' => false, 'COLUMN_NAME' => 'foo'],
-            ['PRIMARY' => true, 'COLUMN_NAME' => 'bar'],
-            ['PRIMARY' => true, 'COLUMN_NAME' => 'baz'],
-        ];
+        $tableMeta = array(
+            array('PRIMARY' => false, 'COLUMN_NAME' => 'foo'),
+            array('PRIMARY' => true, 'COLUMN_NAME' => 'bar'),
+            array('PRIMARY' => true, 'COLUMN_NAME' => 'baz'),
+        );
 
         $this->adapterMock->expects($this->once())
                           ->method('describeTable')
@@ -88,7 +88,7 @@ class Zend_Test_PHPUnit_Db_Metadata_GenericTest extends PHPUnit_Framework_TestCa
                           ->will($this->returnValue($tableMeta));
 
         $primaryKey = $this->metadata->getTablePrimaryKeys($fixtureTableName);
-        $this->assertEquals(['bar', 'baz'], $primaryKey);
+        $this->assertEquals(array("bar", "baz"), $primaryKey);
     }
 
     public function testGetAllowCascading()
@@ -98,7 +98,7 @@ class Zend_Test_PHPUnit_Db_Metadata_GenericTest extends PHPUnit_Framework_TestCa
 
     public function testQuoteIdentifierIsDelegated()
     {
-        $fixtureValue = 'foo';
+        $fixtureValue = "foo";
 
         $this->adapterMock->expects($this->once())
                           ->method('quoteIdentifier')

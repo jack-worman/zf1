@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Gdata_Spreadsheets
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id $
  */
 
@@ -25,16 +25,17 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Gdata_Spreadsheets
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Spreadsheets
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_Spreadsheets_ColCountTest extends PHPUnit_Framework_TestCase
 {
+
     public function setUp()
     {
         $this->colCount = new Zend_Gdata_Spreadsheets_Extension_ColCount();
@@ -43,11 +44,12 @@ class Zend_Gdata_Spreadsheets_ColCountTest extends PHPUnit_Framework_TestCase
     public function testToAndFromString()
     {
         $this->colCount->setText('20');
-        $this->assertTrue('20' == $this->colCount->getText());
+        $this->assertTrue($this->colCount->getText() == '20');
         $newColCount = new Zend_Gdata_Spreadsheets_Extension_ColCount();
         $doc = new DOMDocument();
         $doc->loadXML($this->colCount->saveXML());
         $newColCount->transferFromDom($doc->documentElement);
         $this->assertTrue($this->colCount->getText() == $newColCount->getText());
     }
+
 }

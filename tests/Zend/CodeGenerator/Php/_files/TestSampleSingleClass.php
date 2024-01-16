@@ -1,15 +1,20 @@
 <?php
 /**
- * File header here.
+ * File header here
  *
  * @author Ralph Schindler <ralph.schindler@zend.com>
  */
 
+
+
 /**
- * class docblock.
+ * class docblock
+ *
+ * @package Zend_Reflection_TestSampleSingleClass
  */
 class Zend_Reflection_TestSampleSingleClass
 {
+
     /**
      * Enter description here...
      *
@@ -19,4 +24,6 @@ class Zend_Reflection_TestSampleSingleClass
     {
         /* test test */
     }
+
 }
+

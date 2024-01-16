@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,16 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Form
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
 // Call Zend_Form_Decorator_AbstractTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Form_Decorator_AbstractTest::main');
+if (!defined("PHPUnit_MAIN_METHOD")) {
+    define("PHPUnit_MAIN_METHOD", "Zend_Form_Decorator_AbstractTest::main");
 }
 
 // require_once 'Zend/Form/Decorator/Errors.php';
@@ -34,15 +34,15 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 // require_once 'Zend/Loader/PluginLoader.php';
 
 /**
- * Test class for Zend_Form_Decorator_Abstract.
+ * Test class for Zend_Form_Decorator_Abstract
  *
  * Uses Zend_Form_Decorator_Errors as a concrete implementation
  *
  * @category   Zend
- *
+ * @package    Zend_Form
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Form
  */
 #[AllowDynamicProperties]
@@ -55,7 +55,8 @@ class Zend_Form_Decorator_AbstractTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend_Form_Decorator_AbstractTest');
+
+        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Decorator_AbstractTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -82,12 +83,11 @@ class Zend_Form_Decorator_AbstractTest extends PHPUnit_Framework_TestCase
 
     public function getOptions()
     {
-        $options = [
+        $options = array(
             'foo' => 'fooval',
             'bar' => 'barval',
-            'baz' => 'bazval',
-        ];
-
+            'baz' => 'bazval'
+        );
         return $options;
     }
 
@@ -121,15 +121,15 @@ class Zend_Form_Decorator_AbstractTest extends PHPUnit_Framework_TestCase
 
     public function testSetElementAllowsDisplayGroups()
     {
-        $loader = new Zend_Loader_PluginLoader(['Zend_Form_Decorator' => 'Zend/Form/Decorator']);
-        $group = new Zend_Form_DisplayGroup('foo', $loader);
+        $loader = new Zend_Loader_PluginLoader(array('Zend_Form_Decorator' => 'Zend/Form/Decorator'));
+        $group  = new Zend_Form_DisplayGroup('foo', $loader);
         $this->decorator->setElement($group);
         $this->assertSame($group, $this->decorator->getElement());
     }
 
     public function testSetElementThrowsExceptionWithInvalidElementTypes()
     {
-        $config = new Zend_Config([]);
+        $config = new Zend_Config(array());
         try {
             $this->decorator->setElement($config);
             $this->fail('Invalid element type should raise exception');
@@ -146,7 +146,7 @@ class Zend_Form_Decorator_AbstractTest extends PHPUnit_Framework_TestCase
     public function testCanSetPlacementViaPlacementOption()
     {
         $this->testPlacementDefaultsToAppend();
-        $this->decorator->setOptions(['placement' => 'PREPEND']);
+        $this->decorator->setOptions(array('placement' => 'PREPEND'));
         $this->assertEquals(Zend_Form_Decorator_Abstract::PREPEND, $this->decorator->getPlacement());
     }
 
@@ -158,7 +158,7 @@ class Zend_Form_Decorator_AbstractTest extends PHPUnit_Framework_TestCase
     public function testCanSetSeparatorViaSeparatorOption()
     {
         $this->testSeparatorDefaultsToPhpEol();
-        $this->decorator->setOptions(['separator' => '<br />']);
+        $this->decorator->setOptions(array('separator' => '<br />'));
         $this->assertEquals('<br />', $this->decorator->getSeparator());
     }
 
@@ -183,16 +183,16 @@ class Zend_Form_Decorator_AbstractTest extends PHPUnit_Framework_TestCase
         $this->assertNull($this->decorator->getOption('foo'));
         $this->assertNull($this->decorator->getOption('bar'));
         $this->assertNull($this->decorator->getOption('baz'));
-        $options = ['foo' => 'bar', 'bar' => 'baz', 'baz' => 'bat'];
+        $options = array('foo' => 'bar', 'bar' => 'baz', 'baz' => 'bat');
         $this->decorator->setOptions($options);
         $received = $this->decorator->getOptions();
         $this->assertEquals($options, $received);
         $this->decorator->clearOptions();
-        $this->assertEquals([], $this->decorator->getOptions());
+        $this->assertEquals(array(), $this->decorator->getOptions());
     }
 }
 
 // Call Zend_Form_Decorator_AbstractTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_Form_Decorator_AbstractTest::main') {
+if (PHPUnit_MAIN_METHOD == "Zend_Form_Decorator_AbstractTest::main") {
     Zend_Form_Decorator_AbstractTest::main();
 }

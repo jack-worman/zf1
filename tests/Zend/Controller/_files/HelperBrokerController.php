@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,28 +13,33 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Controller
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
+
+
+
 
 // require_once 'Zend/Controller/Action.php';
 
 /**
- * Mock file for testbed.
+ * Mock file for testbed
  *
  * @category   Zend
- *
+ * @package    Zend_Controller
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class HelperBrokerController extends Zend_Controller_Action
 {
+
     /**
-     * Test Function for testGetRedirectorAction.
+     * Test Function for testGetRedirectorAction
      *
      * @return void
      */
@@ -45,7 +50,7 @@ class HelperBrokerController extends Zend_Controller_Action
     }
 
     /**
-     * Test Function for testHelperViaMagicGetAction.
+     * Test Function for testHelperViaMagicGetAction
      *
      * @return void
      */
@@ -56,7 +61,7 @@ class HelperBrokerController extends Zend_Controller_Action
     }
 
     /**
-     * Test Function for testHelperViaMagicCallAction.
+     * Test Function for testHelperViaMagicCallAction
      *
      * @return void
      */
@@ -66,7 +71,7 @@ class HelperBrokerController extends Zend_Controller_Action
     }
 
     /**
-     * Test Function for testBadHelperAction.
+     * Test Function for testBadHelperAction
      *
      * @return void
      */
@@ -74,13 +79,13 @@ class HelperBrokerController extends Zend_Controller_Action
     {
         try {
             $this->_helper->getHelper('NonExistentHelper');
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->getResponse()->appendBody($e->getMessage());
         }
     }
 
     /**
-     * Test Function for testCustomHelperAction.
+     * Test Function for testCustomHelperAction
      *
      * @return void
      */
@@ -94,7 +99,7 @@ class HelperBrokerController extends Zend_Controller_Action
         try {
             $helper = $this->_helper->getHelper('NamespacedHelper');
             $this->getResponse()->appendBody(get_class($helper));
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->getResponse()->appendBody($e->getMessage());
         }
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Service_Audioscrobbler
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -28,10 +28,10 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Service_Audioscrobbler
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Service
  * @group      Zend_Service_Audioscrobbler
  */
@@ -41,23 +41,23 @@ class Zend_Service_Audioscrobbler_AudioscrobblerTestCase extends PHPUnit_Framewo
     /**
      * @var Zend_Http_Client
      */
-    private $_httpClient;
+    private $_httpClient = null;
 
     /**
      * @var Zend_Http_Client_Adapter_Test
      */
-    private $_httpTestAdapter;
+    private $_httpTestAdapter = null;
 
     /**
      * @var Zend_Service_Audioscrobbler
      */
-    private $_asService;
+    private $_asService = null;
 
     public function setUp()
     {
         $this->_httpTestAdapter = new Zend_Http_Client_Adapter_Test();
         $this->_httpClient = new Zend_Http_Client();
-        $this->_httpClient->setConfig(['adapter' => $this->_httpTestAdapter]);
+        $this->_httpClient->setConfig(array('adapter' => $this->_httpTestAdapter));
         $this->_asService = new Zend_Service_Audioscrobbler();
         $this->_asService->setHttpClient($this->_httpClient);
     }

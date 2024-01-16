@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,12 +13,13 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Db
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
+
 
 /**
  * @see Zend_Db_Table_Abstract
@@ -27,36 +28,42 @@
 
 /**
  * require other test files needed, this will
- * ensure that Zend_Loader::loadClass is not called.
+ * ensure that Zend_Loader::loadClass is not called
  */
 require_once 'TableBugs.php';
 require_once 'TableProducts.php';
 
+
+
+
+
 /**
  * @category   Zend
- *
+ * @package    Zend_Db
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class My_ZendDbTable_TableBugsProducts extends Zend_Db_Table_Abstract
 {
-    protected $_name = 'zfbugs_products';
+    protected $_name    = 'zfbugs_products';
 
-    protected $_referenceMap = [
-        'Bug' => [
-            'columns' => 'bug_id', // Deliberate non-array value
-            'refTableClass' => 'My_ZendDbTable_TableBugs',
-            'refColumns' => ['bug_id'],
-            'onDelete' => -1, // Deliberate false value
-            'onUpdate' => -1, // Deliberate false value
-        ],
-        'Product' => [
-            'columns' => ['product_id'],
-            'refTableClass' => 'My_ZendDbTable_TableProducts',
-            'refColumns' => ['product_id'],
-            'onDelete' => self::CASCADE,
-            'onUpdate' => self::CASCADE,
-        ],
-    ];
+    protected $_referenceMap    = array(
+        'Bug' => array(
+            'columns'           => 'bug_id', // Deliberate non-array value
+            'refTableClass'     => 'My_ZendDbTable_TableBugs',
+            'refColumns'        => array('bug_id'),
+            'onDelete'          => -1, // Deliberate false value
+            'onUpdate'          => -1 // Deliberate false value
+        ),
+        'Product' => array(
+            'columns'           => array('product_id'),
+            'refTableClass'     => 'My_ZendDbTable_TableProducts',
+            'refColumns'        => array('product_id'),
+            'onDelete'          => self::CASCADE,
+            'onUpdate'          => self::CASCADE
+        )
+    );
+
 }

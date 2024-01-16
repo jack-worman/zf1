@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,37 +13,36 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_XmlRpc
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version $Id$
  */
 
 // require_once 'Zend/XmlRpc/Fault.php';
 
 /**
- * Test case for Zend_XmlRpc_Fault.
+ * Test case for Zend_XmlRpc_Fault
  *
  * @category   Zend
- *
+ * @package    Zend_XmlRpc
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_XmlRpc
  */
 #[AllowDynamicProperties]
 class Zend_XmlRpc_FaultTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_XmlRpc_Fault object.
-     *
+     * Zend_XmlRpc_Fault object
      * @var Zend_XmlRpc_Fault
      */
     protected $_fault;
 
     /**
-     * Setup environment.
+     * Setup environment
      */
     public function setUp()
     {
@@ -51,7 +50,7 @@ class Zend_XmlRpc_FaultTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Teardown environment.
+     * Teardown environment
      */
     public function tearDown()
     {
@@ -59,7 +58,7 @@ class Zend_XmlRpc_FaultTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * __construct() test.
+     * __construct() test
      */
     public function testConstructor()
     {
@@ -69,7 +68,7 @@ class Zend_XmlRpc_FaultTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * get/setCode() test.
+     * get/setCode() test
      */
     public function testCode()
     {
@@ -78,7 +77,7 @@ class Zend_XmlRpc_FaultTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * get/setMessage() test.
+     * get/setMessage() test
      */
     public function testMessage()
     {
@@ -90,19 +89,19 @@ class Zend_XmlRpc_FaultTest extends PHPUnit_Framework_TestCase
     {
         $dom = new DOMDocument('1.0', 'UTF-8');
         $response = $dom->appendChild($dom->createElement('methodResponse'));
-        $fault = $response->appendChild($dom->createElement('fault'));
-        $value = $fault->appendChild($dom->createElement('value'));
+        $fault  = $response->appendChild($dom->createElement('fault'));
+        $value  = $fault->appendChild($dom->createElement('value'));
         $struct = $value->appendChild($dom->createElement('struct'));
 
         $member1 = $struct->appendChild($dom->createElement('member'));
-        $member1->appendChild($dom->createElement('name', 'faultCode'));
-        $value1 = $member1->appendChild($dom->createElement('value'));
-        $value1->appendChild($dom->createElement('int', 1000));
+            $member1->appendChild($dom->createElement('name', 'faultCode'));
+            $value1 = $member1->appendChild($dom->createElement('value'));
+            $value1->appendChild($dom->createElement('int', 1000));
 
         $member2 = $struct->appendChild($dom->createElement('member'));
-        $member2->appendChild($dom->createElement('name', 'faultString'));
-        $value2 = $member2->appendChild($dom->createElement('value'));
-        $value2->appendChild($dom->createElement('string', 'Error string'));
+            $member2->appendChild($dom->createElement('name', 'faultString'));
+            $value2 = $member2->appendChild($dom->createElement('value'));
+            $value2->appendChild($dom->createElement('string', 'Error string'));
 
         return $dom->saveXml();
     }
@@ -111,24 +110,24 @@ class Zend_XmlRpc_FaultTest extends PHPUnit_Framework_TestCase
     {
         $dom = new DOMDocument('1.0', 'UTF-8');
         $response = $dom->appendChild($dom->createElement('methodResponse'));
-        $fault = $response->appendChild($dom->createElement('fault'));
-        $value = $fault->appendChild($dom->createElement('value'));
+        $fault  = $response->appendChild($dom->createElement('fault'));
+        $value  = $fault->appendChild($dom->createElement('value'));
         $struct = $value->appendChild($dom->createElement('struct'));
 
         $member1 = $struct->appendChild($dom->createElement('member'));
-        $member1->appendChild($dom->createElement('name', 'faultCode'));
-        $value1 = $member1->appendChild($dom->createElement('value'));
-        $value1->appendChild($dom->createElement('int', 1000));
+            $member1->appendChild($dom->createElement('name', 'faultCode'));
+            $value1 = $member1->appendChild($dom->createElement('value'));
+            $value1->appendChild($dom->createElement('int', 1000));
 
         $member2 = $struct->appendChild($dom->createElement('member'));
-        $member2->appendChild($dom->createElement('name', 'faultString'));
-        $value2 = $member2->appendChild($dom->createElement('value', 'Error string'));
+            $member2->appendChild($dom->createElement('name', 'faultString'));
+            $value2 = $member2->appendChild($dom->createElement('value', 'Error string'));
 
         return $dom->saveXml();
     }
 
     /**
-     * loadXml() test.
+     * loadXml() test
      */
     public function testLoadXml()
     {
@@ -136,8 +135,8 @@ class Zend_XmlRpc_FaultTest extends PHPUnit_Framework_TestCase
 
         try {
             $parsed = $this->_fault->loadXml($xml);
-        } catch (Throwable $e) {
-            $this->fail('Failed to parse XML: '.$e->getMessage());
+        } catch (\Throwable $e) {
+            $this->fail('Failed to parse XML: ' . $e->getMessage());
         }
         $this->assertTrue($parsed, $xml);
 
@@ -177,19 +176,19 @@ class Zend_XmlRpc_FaultTest extends PHPUnit_Framework_TestCase
         }
 
         $this->_fault->loadXml('<methodResponse><fault><value><struct>'
-                .'<member><name>faultString</name><value><string>str</string></value></member>'
-                .'</struct></value></fault></methodResponse>');
+                . '<member><name>faultString</name><value><string>str</string></value></member>'
+                . '</struct></value></fault></methodResponse>');
         $this->assertSame(404, $this->_fault->getCode(), 'If no fault code is given, use 404 as a default');
 
         $this->_fault->loadXml('<methodResponse><fault><value><struct>'
-                .'<member><name>faultCode</name><value><int>610</int></value></member>'
-                .'</struct></value></fault></methodResponse>');
+                . '<member><name>faultCode</name><value><int>610</int></value></member>'
+                . '</struct></value></fault></methodResponse>');
         $this->assertSame(
             'Invalid method class', $this->_fault->getMessage(), 'If empty fault string is given, resolve the code');
 
         $this->_fault->loadXml('<methodResponse><fault><value><struct>'
-                .'<member><name>faultCode</name><value><int>1234</int></value></member>'
-                .'</struct></value></fault></methodResponse>');
+                . '<member><name>faultCode</name><value><int>1234</int></value></member>'
+                . '</struct></value></fault></methodResponse>');
         $this->assertSame(
             'Unknown Error',
             $this->_fault->getMessage(),
@@ -198,7 +197,7 @@ class Zend_XmlRpc_FaultTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Zend_XmlRpc_Fault::isFault() test.
+     * Zend_XmlRpc_Fault::isFault() test
      */
     public function testIsFault()
     {
@@ -206,21 +205,20 @@ class Zend_XmlRpc_FaultTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue(Zend_XmlRpc_Fault::isFault($xml), $xml);
         $this->assertFalse(Zend_XmlRpc_Fault::isFault('foo'));
-        $this->assertFalse(Zend_XmlRpc_Fault::isFault(['foo']));
+        $this->assertFalse(Zend_XmlRpc_Fault::isFault(array('foo')));
     }
 
     /**
-     * helper for saveXml() and __toString() tests.
+     * helper for saveXml() and __toString() tests
      *
      * @param string $xml
-     *
      * @return void
      */
     protected function _testXmlFault($xml)
     {
         try {
             $sx = new SimpleXMLElement($xml);
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->fail('Unable to parse generated XML');
         }
 
@@ -229,7 +227,7 @@ class Zend_XmlRpc_FaultTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($sx->fault->value->struct ? true : false, $xml);
         $count = 0;
         foreach ($sx->fault->value->struct->member as $member) {
-            ++$count;
+            $count++;
             $this->assertTrue($member->name ? true : false, $xml);
             $this->assertTrue($member->value ? true : false, $xml);
             if ('faultCode' == (string) $member->name) {
@@ -246,7 +244,7 @@ class Zend_XmlRpc_FaultTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * saveXml() test.
+     * saveXml() test
      */
     public function testSaveXML()
     {
@@ -257,9 +255,9 @@ class Zend_XmlRpc_FaultTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * __toString() test.
+     * __toString() test
      */
-    public function testToString()
+    public function test__toString()
     {
         $this->_fault->setCode(1000);
         $this->_fault->setMessage('Fault message');
@@ -268,7 +266,7 @@ class Zend_XmlRpc_FaultTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test encoding settings.
+     * Test encoding settings
      */
     public function testSetGetEncoding()
     {
@@ -292,8 +290,8 @@ class Zend_XmlRpc_FaultTest extends PHPUnit_Framework_TestCase
 
         try {
             $parsed = $this->_fault->loadXml($xml);
-        } catch (Throwable $e) {
-            $this->fail('Failed to parse XML: '.$e->getMessage());
+        } catch (\Throwable $e) {
+            $this->fail('Failed to parse XML: ' . $e->getMessage());
         }
         $this->assertTrue($parsed, $xml);
 

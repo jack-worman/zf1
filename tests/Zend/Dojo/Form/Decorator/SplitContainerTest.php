@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,16 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Dojo
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
 // Call Zend_Dojo_Form_Decorator_SplitContainerTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Dojo_Form_Decorator_SplitContainerTest::main');
+if (!defined("PHPUnit_MAIN_METHOD")) {
+    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_Form_Decorator_SplitContainerTest::main");
 }
 
 /** Zend_Dojo_Form_Decorator_SplitContainer */
@@ -44,10 +44,10 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * Test class for Zend_Dojo_Form_Decorator_SplitContainer.
  *
  * @category   Zend
- *
+ * @package    Zend_Dojo
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Dojo
  * @group      Zend_Dojo_Form
  */
@@ -61,7 +61,7 @@ class Zend_Dojo_Form_Decorator_SplitContainerTest extends PHPUnit_Framework_Test
      */
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend_Dojo_Form_Decorator_SplitContainerTest');
+        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_Form_Decorator_SplitContainerTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -76,9 +76,9 @@ class Zend_Dojo_Form_Decorator_SplitContainerTest extends PHPUnit_Framework_Test
         Zend_Registry::_unsetInstance();
         Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
 
-        $this->view = $this->getView();
+        $this->view   = $this->getView();
         $this->decorator = new Zend_Dojo_Form_Decorator_SplitContainer();
-        $this->element = $this->getElement();
+        $this->element   = $this->getElement();
         $this->element->setView($this->view);
         $this->decorator->setElement($this->element);
     }
@@ -98,23 +98,21 @@ class Zend_Dojo_Form_Decorator_SplitContainerTest extends PHPUnit_Framework_Test
         // require_once 'Zend/View.php';
         $view = new Zend_View();
         $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
-
         return $view;
     }
 
     public function getElement()
     {
         $element = new Zend_Dojo_Form();
-        $element->setAttribs([
-            'name' => 'foo',
-            'style' => 'width: 300px; height: 500px;',
-            'class' => 'someclass',
-            'dijitParams' => [
+        $element->setAttribs(array(
+            'name'   => 'foo',
+            'style'  => 'width: 300px; height: 500px;',
+            'class'  => 'someclass',
+            'dijitParams' => array(
                 'labelAttr' => 'foobar',
-                'typeAttr' => 'barbaz',
-            ],
-        ]);
-
+                'typeAttr'  => 'barbaz',
+            ),
+        ));
         return $element;
     }
 
@@ -132,6 +130,6 @@ class Zend_Dojo_Form_Decorator_SplitContainerTest extends PHPUnit_Framework_Test
 }
 
 // Call Zend_Dojo_Form_Decorator_SplitContainerTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_Dojo_Form_Decorator_SplitContainerTest::main') {
+if (PHPUnit_MAIN_METHOD == "Zend_Dojo_Form_Decorator_SplitContainerTest::main") {
     Zend_Dojo_Form_Decorator_SplitContainerTest::main();
 }

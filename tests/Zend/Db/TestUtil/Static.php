@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Db
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -25,21 +25,25 @@
  */
 require_once 'Zend/Db/TestUtil/Common.php';
 
+
+
+
 /**
  * @category   Zend
- *
+ * @package    Zend_Db
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Zend_Db_TestUtil_Static extends Zend_Db_TestUtil_Common
 {
-    public function getParams(array $constants = [])
-    {
-        $constants = [
-            'dbname' => 'dummy',
-        ];
 
+    public function getParams(array $constants = array())
+    {
+        $constants = array(
+            'dbname'   => 'dummy',
+        );
         return $constants;
     }
 
@@ -47,4 +51,5 @@ class Zend_Db_TestUtil_Static extends Zend_Db_TestUtil_Common
     {
         // no-op
     }
+
 }

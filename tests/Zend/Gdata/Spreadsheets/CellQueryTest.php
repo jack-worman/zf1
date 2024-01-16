@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Gdata_Spreadsheets
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id $
  */
 
@@ -25,16 +25,17 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Gdata_Spreadsheets
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Spreadsheets
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_Spreadsheets_CellQueryTest extends PHPUnit_Framework_TestCase
 {
+
     public function setUp()
     {
         $this->docQuery = new Zend_Gdata_Spreadsheets_CellQuery();
@@ -42,96 +43,97 @@ class Zend_Gdata_Spreadsheets_CellQueryTest extends PHPUnit_Framework_TestCase
 
     public function testMinRow()
     {
-        $this->assertTrue(null == $this->docQuery->getMinRow());
+        $this->assertTrue($this->docQuery->getMinRow() == null);
         $this->docQuery->setMinRow('1');
-        $this->assertTrue('1' == $this->docQuery->getMinRow());
-        $this->assertTrue('?min-row=1' == $this->docQuery->getQueryString());
+        $this->assertTrue($this->docQuery->getMinRow() == '1');
+        $this->assertTrue($this->docQuery->getQueryString() == '?min-row=1');
         $this->docQuery->setMinRow(null);
-        $this->assertTrue(null == $this->docQuery->getMinRow());
+        $this->assertTrue($this->docQuery->getMinRow() == null);
     }
 
     public function testMaxRow()
     {
-        $this->assertTrue(null == $this->docQuery->getMaxRow());
+        $this->assertTrue($this->docQuery->getMaxRow() == null);
         $this->docQuery->setMaxRow('2');
-        $this->assertTrue('2' == $this->docQuery->getMaxRow());
-        $this->assertTrue('?max-row=2' == $this->docQuery->getQueryString());
+        $this->assertTrue($this->docQuery->getMaxRow() == '2');
+        $this->assertTrue($this->docQuery->getQueryString() == '?max-row=2');
         $this->docQuery->setMaxRow(null);
-        $this->assertTrue(null == $this->docQuery->getMaxRow());
+        $this->assertTrue($this->docQuery->getMaxRow() == null);
     }
 
     public function testMinCol()
     {
-        $this->assertTrue(null == $this->docQuery->getMinCol());
+        $this->assertTrue($this->docQuery->getMinCol() == null);
         $this->docQuery->setMinCol('3');
-        $this->assertTrue('3' == $this->docQuery->getMinCol());
-        $this->assertTrue('?min-col=3' == $this->docQuery->getQueryString());
+        $this->assertTrue($this->docQuery->getMinCol() == '3');
+        $this->assertTrue($this->docQuery->getQueryString() == '?min-col=3');
         $this->docQuery->setMinCol(null);
-        $this->assertTrue(null == $this->docQuery->getMinCol());
+        $this->assertTrue($this->docQuery->getMinCol() == null);
     }
 
     public function testMaxCol()
     {
-        $this->assertTrue(null == $this->docQuery->getMaxCol());
+        $this->assertTrue($this->docQuery->getMaxCol() == null);
         $this->docQuery->setMaxCol('4');
-        $this->assertTrue('4' == $this->docQuery->getMaxCol());
-        $this->assertTrue('?max-col=4' == $this->docQuery->getQueryString());
+        $this->assertTrue($this->docQuery->getMaxCol() == '4');
+        $this->assertTrue($this->docQuery->getQueryString() == '?max-col=4');
         $this->docQuery->setMaxCol(null);
-        $this->assertTrue(null == $this->docQuery->getMaxCol());
+        $this->assertTrue($this->docQuery->getMaxCol() == null);
     }
 
     public function testRange()
     {
-        $this->assertTrue(null == $this->docQuery->getRange());
+        $this->assertTrue($this->docQuery->getRange() == null);
         $this->docQuery->setRange('A1:B4');
-        $this->assertTrue('A1:B4' == $this->docQuery->getRange());
-        $this->assertTrue('?range=A1%3AB4' == $this->docQuery->getQueryString());
+        $this->assertTrue($this->docQuery->getRange() == 'A1:B4');
+        $this->assertTrue($this->docQuery->getQueryString() == '?range=A1%3AB4');
         $this->docQuery->setRange(null);
-        $this->assertTrue(null == $this->docQuery->getRange());
+        $this->assertTrue($this->docQuery->getRange() == null);
     }
 
     public function testReturnEmpty()
     {
-        $this->assertTrue(null == $this->docQuery->getReturnEmpty());
+        $this->assertTrue($this->docQuery->getReturnEmpty() == null);
         $this->docQuery->setReturnEmpty('false');
-        $this->assertTrue('false' == $this->docQuery->getReturnEmpty());
-        $this->assertTrue('?return-empty=false' == $this->docQuery->getQueryString());
+        $this->assertTrue($this->docQuery->getReturnEmpty() == 'false');
+        $this->assertTrue($this->docQuery->getQueryString() == '?return-empty=false');
         $this->docQuery->setReturnEmpty(null);
-        $this->assertTrue(null == $this->docQuery->getReturnEmpty());
+        $this->assertTrue($this->docQuery->getReturnEmpty() == null);
     }
 
     public function testWorksheetId()
     {
-        $this->assertTrue('default' == $this->docQuery->getWorksheetId());
+        $this->assertTrue($this->docQuery->getWorksheetId() == 'default');
         $this->docQuery->setWorksheetId('123');
-        $this->assertTrue('123' == $this->docQuery->getWorksheetId());
+        $this->assertTrue($this->docQuery->getWorksheetId() == '123');
     }
 
     public function testSpreadsheetKey()
     {
-        $this->assertTrue(null == $this->docQuery->getSpreadsheetKey());
+        $this->assertTrue($this->docQuery->getSpreadsheetKey() == null);
         $this->docQuery->setSpreadsheetKey('abc');
-        $this->assertTrue('abc' == $this->docQuery->getSpreadsheetKey());
+        $this->assertTrue($this->docQuery->getSpreadsheetKey() == 'abc');
     }
 
     public function testCellId()
     {
-        $this->assertTrue(null == $this->docQuery->getCellId());
+        $this->assertTrue($this->docQuery->getCellId() == null);
         $this->docQuery->setCellId('xyz');
-        $this->assertTrue('xyz' == $this->docQuery->getCellId());
+        $this->assertTrue($this->docQuery->getCellId() == 'xyz');
     }
 
     public function testProjection()
     {
-        $this->assertTrue('full' == $this->docQuery->getProjection());
+        $this->assertTrue($this->docQuery->getProjection() == 'full');
         $this->docQuery->setProjection('abc');
-        $this->assertTrue('abc' == $this->docQuery->getProjection());
+        $this->assertTrue($this->docQuery->getProjection() == 'abc');
     }
 
     public function testVisibility()
     {
-        $this->assertTrue('private' == $this->docQuery->getVisibility());
+        $this->assertTrue($this->docQuery->getVisibility() == 'private');
         $this->docQuery->setVisibility('xyz');
-        $this->assertTrue('xyz' == $this->docQuery->getVisibility());
+        $this->assertTrue($this->docQuery->getVisibility() == 'xyz');
     }
+
 }

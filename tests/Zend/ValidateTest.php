@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Validate
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -37,24 +37,24 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Validate
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Validate
  */
 #[AllowDynamicProperties]
 class Zend_ValidateTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_Validate object.
+     * Zend_Validate object
      *
      * @var Zend_Validate
      */
     protected $_validator;
 
     /**
-     * Creates a new Zend_Validate object for each test method.
+     * Creates a new Zend_Validate object for each test method
      *
      * @return void
      */
@@ -64,30 +64,30 @@ class Zend_ValidateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Resets the default namespaces.
+     * Resets the default namespaces
      *
      * @return void
      */
     public function tearDown()
     {
-        Zend_Validate::setDefaultNamespaces([]);
+        Zend_Validate::setDefaultNamespaces(array());
     }
 
     /**
-     * Ensures expected results from empty validator chain.
+     * Ensures expected results from empty validator chain
      *
      * @return void
      */
     public function testEmpty()
     {
-        $this->assertEquals([], $this->_validator->getMessages());
-        $this->assertEquals([], $this->_validator->getErrors());
+        $this->assertEquals(array(), $this->_validator->getMessages());
+        $this->assertEquals(array(), $this->_validator->getErrors());
         $this->assertTrue($this->_validator->isValid('something'));
-        $this->assertEquals([], $this->_validator->getErrors());
+        $this->assertEquals(array(), $this->_validator->getErrors());
     }
 
     /**
-     * Ensures expected behavior from a validator known to succeed.
+     * Ensures expected behavior from a validator known to succeed
      *
      * @return void
      */
@@ -95,12 +95,12 @@ class Zend_ValidateTest extends PHPUnit_Framework_TestCase
     {
         $this->_validator->addValidator(new Zend_ValidateTest_True());
         $this->assertTrue($this->_validator->isValid(null));
-        $this->assertEquals([], $this->_validator->getMessages());
-        $this->assertEquals([], $this->_validator->getErrors());
+        $this->assertEquals(array(), $this->_validator->getMessages());
+        $this->assertEquals(array(), $this->_validator->getErrors());
     }
 
     /**
-     * Ensures expected behavior from a validator known to fail.
+     * Ensures expected behavior from a validator known to fail
      *
      * @return void
      */
@@ -108,11 +108,11 @@ class Zend_ValidateTest extends PHPUnit_Framework_TestCase
     {
         $this->_validator->addValidator(new Zend_ValidateTest_False());
         $this->assertFalse($this->_validator->isValid(null));
-        $this->assertEquals(['error' => 'validation failed'], $this->_validator->getMessages());
+        $this->assertEquals(array('error' => 'validation failed'), $this->_validator->getMessages());
     }
 
     /**
-     * Ensures that a validator may break the chain.
+     * Ensures that a validator may break the chain
      *
      * @return void
      */
@@ -121,7 +121,7 @@ class Zend_ValidateTest extends PHPUnit_Framework_TestCase
         $this->_validator->addValidator(new Zend_ValidateTest_False(), true)
                          ->addValidator(new Zend_ValidateTest_False());
         $this->assertFalse($this->_validator->isValid(null));
-        $this->assertEquals(['error' => 'validation failed'], $this->_validator->getMessages());
+        $this->assertEquals(array('error' => 'validation failed'), $this->_validator->getMessages());
     }
 
     /**
@@ -141,8 +141,8 @@ class Zend_ValidateTest extends PHPUnit_Framework_TestCase
      */
     public function testStaticFactoryWithConstructorArguments()
     {
-        $this->assertTrue(Zend_Validate::is('12', 'Between', ['min' => 1, 'max' => 12]));
-        $this->assertFalse(Zend_Validate::is('24', 'Between', ['min' => 1, 'max' => 12]));
+        $this->assertTrue(Zend_Validate::is('12', 'Between', array('min' => 1, 'max' => 12)));
+        $this->assertFalse(Zend_Validate::is('24', 'Between', array('min' => 1, 'max' => 12)));
     }
 
     /**
@@ -152,10 +152,8 @@ class Zend_ValidateTest extends PHPUnit_Framework_TestCase
      * Refactored to conform with ZF-2724.
      *
      * @group  ZF-2724
-     *
      * @return void
-     *
-     * @expectedException \Zend_Validate_Exception
+     * @expectedException Zend_Validate_Exception
      */
     public function testStaticFactoryClassNotFound()
     {
@@ -163,41 +161,41 @@ class Zend_ValidateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Testing Namespaces.
+     * Testing Namespaces
      *
      * @return void
      */
     public function testNamespaces()
     {
-        $this->assertEquals([], Zend_Validate::getDefaultNamespaces());
+        $this->assertEquals(array(), Zend_Validate::getDefaultNamespaces());
         $this->assertFalse(Zend_Validate::hasDefaultNamespaces());
 
         Zend_Validate::setDefaultNamespaces('TestDir');
-        $this->assertEquals(['TestDir'], Zend_Validate::getDefaultNamespaces());
+        $this->assertEquals(array('TestDir'), Zend_Validate::getDefaultNamespaces());
 
         Zend_Validate::setDefaultNamespaces('OtherTestDir');
-        $this->assertEquals(['OtherTestDir'], Zend_Validate::getDefaultNamespaces());
+        $this->assertEquals(array('OtherTestDir'), Zend_Validate::getDefaultNamespaces());
 
         $this->assertTrue(Zend_Validate::hasDefaultNamespaces());
 
-        Zend_Validate::setDefaultNamespaces([]);
+        Zend_Validate::setDefaultNamespaces(array());
 
-        $this->assertEquals([], Zend_Validate::getDefaultNamespaces());
+        $this->assertEquals(array(), Zend_Validate::getDefaultNamespaces());
         $this->assertFalse(Zend_Validate::hasDefaultNamespaces());
 
-        Zend_Validate::addDefaultNamespaces(['One', 'Two']);
-        $this->assertEquals(['One', 'Two'], Zend_Validate::getDefaultNamespaces());
+        Zend_Validate::addDefaultNamespaces(array('One', 'Two'));
+        $this->assertEquals(array('One', 'Two'), Zend_Validate::getDefaultNamespaces());
 
         Zend_Validate::addDefaultNamespaces('Three');
-        $this->assertEquals(['One', 'Two', 'Three'], Zend_Validate::getDefaultNamespaces());
+        $this->assertEquals(array('One', 'Two', 'Three'), Zend_Validate::getDefaultNamespaces());
 
-        Zend_Validate::setDefaultNamespaces([]);
+        Zend_Validate::setDefaultNamespaces(array());
     }
 
     public function testIsValidWithParameters()
     {
-        $this->assertTrue(Zend_Validate::is(5, 'Between', [1, 10]));
-        $this->assertTrue(Zend_Validate::is(5, 'Between', ['min' => 1, 'max' => 10]));
+        $this->assertTrue(Zend_Validate::is(5, 'Between', array(1, 10)));
+        $this->assertTrue(Zend_Validate::is(5, 'Between', array('min' => 1, 'max' => 10)));
     }
 
     public function testSetGetMessageLengthLimitation()
@@ -213,21 +211,19 @@ class Zend_ValidateTest extends PHPUnit_Framework_TestCase
 
     public function testSetGetDefaultTranslator()
     {
-        set_error_handler([$this, 'errorHandlerIgnore']);
-        $translator = new Zend_Translate('array', [], 'en');
+        set_error_handler(array($this, 'errorHandlerIgnore'));
+        $translator = new Zend_Translate('array', array(), 'en');
         restore_error_handler();
         Zend_Validate_Abstract::setDefaultTranslator($translator);
         $this->assertSame($translator->getAdapter(), Zend_Validate_Abstract::getDefaultTranslator());
     }
 
     /**
-     * Handle file not found errors.
+     * Handle file not found errors
      *
      * @group  ZF-2724
-     *
-     * @param int    $errnum
-     * @param string $errstr
-     *
+     * @param  int $errnum
+     * @param  string $errstr
      * @return void
      */
     public function handleNotFoundError($errnum, $errstr)
@@ -238,20 +234,21 @@ class Zend_ValidateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred.
+     * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred
      *
-     * @param int    $errno
-     * @param string $errstr
-     * @param string $errfile
-     * @param int    $errline
-     *
+     * @param  integer $errno
+     * @param  string  $errstr
+     * @param  string  $errfile
+     * @param  integer $errline
+     * @param  array   $errcontext
      * @return void
      */
-    public function errorHandlerIgnore($errno, $errstr, $errfile, $errline, array $errcontext = [])
+    public function errorHandlerIgnore($errno, $errstr, $errfile, $errline, array $errcontext = array())
     {
         $this->_errorOccurred = true;
     }
 }
+
 
 /**
  * Validator to return true to any input.
@@ -265,6 +262,7 @@ class Zend_ValidateTest_True extends Zend_Validate_Abstract
     }
 }
 
+
 /**
  * Validator to return false to any input.
  */
@@ -273,8 +271,7 @@ class Zend_ValidateTest_False extends Zend_Validate_Abstract
 {
     public function isValid($value)
     {
-        $this->_messages = ['error' => 'validation failed'];
-
+        $this->_messages = array('error' => 'validation failed');
         return false;
     }
 }

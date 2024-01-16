@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,12 +13,13 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Xml_Security
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Xml_SecurityTest::main');
 }
@@ -35,10 +36,10 @@ require_once 'Zend/Xml/TestAsset/Security.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Xml_Security
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Xml
  * @group      ZF2015-06
  */
@@ -47,18 +48,18 @@ class Zend_Xml_MultibyteTest extends PHPUnit_Framework_TestCase
 {
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite(__CLASS__);
+        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     public function multibyteEncodings()
     {
-        return [
-            'UTF-16LE' => ['UTF-16LE', pack('CC', 0xFF, 0xFE), 3],
-            'UTF-16BE' => ['UTF-16BE', pack('CC', 0xFE, 0xFF), 3],
-            'UTF-32LE' => ['UTF-32LE', pack('CCCC', 0xFF, 0xFE, 0x00, 0x00), 4],
-            'UTF-32BE' => ['UTF-32BE', pack('CCCC', 0x00, 0x00, 0xFE, 0xFF), 4],
-        ];
+        return array(
+            'UTF-16LE' => array('UTF-16LE', pack('CC', 0xff, 0xfe), 3),
+            'UTF-16BE' => array('UTF-16BE', pack('CC', 0xfe, 0xff), 3),
+            'UTF-32LE' => array('UTF-32LE', pack('CCCC', 0xff, 0xfe, 0x00, 0x00), 4),
+            'UTF-32BE' => array('UTF-32BE', pack('CCCC', 0x00, 0x00, 0xfe, 0xff), 4),
+        );
     }
 
     public function getXmlWithXXE()
@@ -78,9 +79,7 @@ XML;
      * Invoke Zend_Xml_Security::heuristicScan with the provided XML.
      *
      * @param string $xml
-     *
      * @return void
-     *
      * @throws Zend_Xml_Exception
      */
     public function invokeHeuristicScan($xml)
@@ -90,7 +89,6 @@ XML;
 
     /**
      * @dataProvider multibyteEncodings
-     *
      * @group heuristicDetection
      */
     public function testDetectsMultibyteXXEVectorsUnderFPMWithEncodedStringMissingBOM($encoding, $bom, $bomLength)
@@ -108,10 +106,10 @@ XML;
      */
     public function testDetectsMultibyteXXEVectorsUnderFPMWithEncodedStringUsingBOM($encoding, $bom)
     {
-        $xml = $this->getXmlWithXXE();
-        $xml = str_replace((string) '{ENCODING}', $encoding, $xml);
+        $xml  = $this->getXmlWithXXE();
+        $xml  = str_replace((string) '{ENCODING}', $encoding, $xml);
         $orig = iconv('UTF-8', $encoding, $xml);
-        $xml = $bom.$orig;
+        $xml  = $bom . $orig;
         $this->setExpectedException('Zend_Xml_Exception', 'ENTITY');
         $this->invokeHeuristicScan($xml);
     }
@@ -137,14 +135,13 @@ XML;
         try {
             $result = $this->invokeHeuristicScan($xml);
             $this->assertNull($result);
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->fail('Security scan raised exception when it should not have');
         }
     }
 
     /**
      * @dataProvider multibyteEncodings
-     *
      * @group mixedEncoding
      */
     public function testDetectsXXEWhenXMLDocumentEncodingDiffersFromFileEncoding($encoding, $bom)
@@ -152,12 +149,12 @@ XML;
         $xml = $this->getXmlWithXXE();
         $xml = str_replace((string) '{ENCODING}', 'UTF-8', $xml);
         $xml = iconv('UTF-8', $encoding, $xml);
-        $xml = $bom.$xml;
+        $xml = $bom . $xml;
         $this->setExpectedException('Zend_Xml_Exception', 'ENTITY');
         $this->invokeHeuristicScan($xml);
     }
 }
 
-if (PHPUnit_MAIN_METHOD == 'Zend_Xml_MultibyteTest::main') {
+if (PHPUnit_MAIN_METHOD == "Zend_Xml_MultibyteTest::main") {
     Zend_Xml_MultibyteTest::main();
 }

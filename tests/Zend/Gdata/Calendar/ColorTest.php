@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Gdata_Calendar
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id $
  */
 
@@ -25,60 +25,55 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Gdata_Calendar
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Calendar
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_Calendar_ColorTest extends PHPUnit_Framework_TestCase
 {
-    public function setUp()
-    {
+
+    public function setUp() {
         $this->colorText = file_get_contents(
-            'Zend/Gdata/Calendar/_files/ColorElementSample1.xml',
-            true);
+                'Zend/Gdata/Calendar/_files/ColorElementSample1.xml',
+                true);
         $this->color = new Zend_Gdata_Calendar_Extension_Color();
     }
 
-    public function testEmptyColorShouldHaveNoExtensionElements()
-    {
+    public function testEmptyColorShouldHaveNoExtensionElements() {
         $this->assertTrue(is_array($this->color->extensionElements));
-        $this->assertTrue(0 == count($this->color->extensionElements));
+        $this->assertTrue(count($this->color->extensionElements) == 0);
     }
 
-    public function testEmptyColorShouldHaveNoExtensionAttributes()
-    {
+    public function testEmptyColorShouldHaveNoExtensionAttributes() {
         $this->assertTrue(is_array($this->color->extensionAttributes));
-        $this->assertTrue(0 == count($this->color->extensionAttributes));
+        $this->assertTrue(count($this->color->extensionAttributes) == 0);
     }
 
-    public function testSampleColorShouldHaveNoExtensionElements()
-    {
+    public function testSampleColorShouldHaveNoExtensionElements() {
         $this->color->transferFromXML($this->colorText);
         $this->assertTrue(is_array($this->color->extensionElements));
-        $this->assertTrue(0 == count($this->color->extensionElements));
+        $this->assertTrue(count($this->color->extensionElements) == 0);
     }
 
-    public function testSampleColorShouldHaveNoExtensionAttributes()
-    {
+    public function testSampleColorShouldHaveNoExtensionAttributes() {
         $this->color->transferFromXML($this->colorText);
         $this->assertTrue(is_array($this->color->extensionAttributes));
-        $this->assertTrue(0 == count($this->color->extensionAttributes));
+        $this->assertTrue(count($this->color->extensionAttributes) == 0);
     }
 
-    public function testNormalColorShouldHaveNoExtensionElements()
-    {
+    public function testNormalColorShouldHaveNoExtensionElements() {
         $this->color->value = '#abcdef';
         $this->assertEquals($this->color->value, '#abcdef');
         $this->assertEquals(count($this->color->extensionElements), 0);
         $newColor = new Zend_Gdata_Calendar_Extension_Color();
         $newColor->transferFromXML($this->color->saveXML());
         $this->assertEquals(count($newColor->extensionElements), 0);
-        $newColor->extensionElements = [
-                new Zend_Gdata_App_Extension_Element('foo', 'atom', null, 'bar')];
+        $newColor->extensionElements = array(
+                new Zend_Gdata_App_Extension_Element('foo', 'atom', null, 'bar'));
         $this->assertEquals(count($newColor->extensionElements), 1);
         $this->assertEquals($newColor->value, '#abcdef');
 
@@ -90,8 +85,7 @@ class Zend_Gdata_Calendar_ColorTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($newColor2->value, '#abcdef');
     }
 
-    public function testEmptyColorToAndFromStringShouldMatch()
-    {
+    public function testEmptyColorToAndFromStringShouldMatch() {
         $colorXml = $this->color->saveXML();
         $newColor = new Zend_Gdata_Calendar_Extension_Color();
         $newColor->transferFromXML($colorXml);
@@ -99,8 +93,7 @@ class Zend_Gdata_Calendar_ColorTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($colorXml == $newColorXml);
     }
 
-    public function testColorWithValueToAndFromStringShouldMatch()
-    {
+    public function testColorWithValueToAndFromStringShouldMatch() {
         $this->color->value = '#abcdef';
         $colorXml = $this->color->saveXML();
         $newColor = new Zend_Gdata_Calendar_Extension_Color();
@@ -110,11 +103,10 @@ class Zend_Gdata_Calendar_ColorTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('#abcdef', $newColor->value);
     }
 
-    public function testExtensionAttributes()
-    {
+    public function testExtensionAttributes() {
         $extensionAttributes = $this->color->extensionAttributes;
-        $extensionAttributes['foo1'] = ['name' => 'foo1', 'value' => 'bar'];
-        $extensionAttributes['foo2'] = ['name' => 'foo2', 'value' => 'rab'];
+        $extensionAttributes['foo1'] = array('name'=>'foo1', 'value'=>'bar');
+        $extensionAttributes['foo2'] = array('name'=>'foo2', 'value'=>'rab');
         $this->color->extensionAttributes = $extensionAttributes;
         $this->assertEquals('bar', $this->color->extensionAttributes['foo1']['value']);
         $this->assertEquals('rab', $this->color->extensionAttributes['foo2']['value']);
@@ -125,9 +117,9 @@ class Zend_Gdata_Calendar_ColorTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('rab', $newColor->extensionAttributes['foo2']['value']);
     }
 
-    public function testConvertFullColorToAndFromString()
-    {
+    public function testConvertFullColorToAndFromString() {
         $this->color->transferFromXML($this->colorText);
         $this->assertEquals($this->color->value, '#5A6986');
     }
+
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,28 +13,29 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Barcode
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id: Code25Test.php 21667 2010-03-28 17:45:14Z mikaelkael $
  */
 
-require_once __DIR__.'/TestCommon.php';
+require_once __DIR__ . '/TestCommon.php';
 
 // require_once 'Zend/Barcode/Object/Code128.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Barcode
+ * @subpackage UnitTests
  * @group      Zend_Barcode
- *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Zend_Barcode_Object_Code128Test extends Zend_Barcode_Object_TestCommon
 {
+
     protected function _getBarcodeObject($options = null)
     {
         return new Zend_Barcode_Object_Code128($options);
@@ -48,16 +49,16 @@ class Zend_Barcode_Object_Code128Test extends Zend_Barcode_Object_TestCommon
     public function testChecksum()
     {
         $this->assertSame(33, $this->_object->getChecksum('BarCode 1'));
-        $this->assertSame(47, $this->_object->getChecksum('CODE-128'));
+    	$this->assertSame(47, $this->_object->getChecksum('CODE-128'));
         $this->assertSame(32, $this->_object->getChecksum('FRAMEWORK-ZEND-COM'));
     }
 
     public function testKnownBarcodeConversion()
     {
-        require_once __DIR__.'/_files/Code128Test.php';
-        $barcode = new Code128Test();
-        $this->assertSame([104, 13, 17, 18, 19], $barcode->_convertToBarcodeChars(-123));
-        $this->assertSame([104, 40, 41, 99, 34, 56, 78], $barcode->_convertToBarcodeChars('HI345678'));
+        require_once __DIR__ . '/_files/Code128Test.php';
+    	$barcode = new Code128Test();
+    	$this->assertSame(array(104, 13, 17, 18, 19), $barcode->_convertToBarcodeChars(-123));
+    	$this->assertSame(array(104, 40, 41, 99, 34, 56, 78), $barcode->_convertToBarcodeChars('HI345678'));
     }
 
     public function testSetText()
@@ -117,7 +118,7 @@ class Zend_Barcode_Object_Code128Test extends Zend_Barcode_Object_TestCommon
         $this->_object->setStretchText(true);
         $this->_object->draw();
         $instructions = $this->loadInstructionsFile(
-            'Code128_HI345678_stretchtext_instructions');
+                'Code128_HI345678_stretchtext_instructions');
         $this->assertEquals($instructions, $this->_object->getInstructions());
     }
 
@@ -127,7 +128,7 @@ class Zend_Barcode_Object_Code128Test extends Zend_Barcode_Object_TestCommon
         $this->_object->setWithBorder(true);
         $this->_object->draw();
         $instructions = $this->loadInstructionsFile(
-            'Code128_HI345678_border_instructions');
+                'Code128_HI345678_border_instructions');
         $this->assertEquals($instructions, $this->_object->getInstructions());
     }
 
@@ -137,7 +138,7 @@ class Zend_Barcode_Object_Code128Test extends Zend_Barcode_Object_TestCommon
         $this->_object->setOrientation(60);
         $this->_object->draw();
         $instructions = $this->loadInstructionsFile(
-            'Code128_HI345678_oriented_instructions');
+                'Code128_HI345678_oriented_instructions');
         $this->assertEquals($instructions, $this->_object->getInstructions());
     }
 
@@ -148,7 +149,7 @@ class Zend_Barcode_Object_Code128Test extends Zend_Barcode_Object_TestCommon
         $this->_object->setStretchText(true);
         $this->_object->draw();
         $instructions = $this->loadInstructionsFile(
-            'Code128_HI345678_stretchtext_oriented_instructions');
+                'Code128_HI345678_stretchtext_oriented_instructions');
         $this->assertEquals($instructions, $this->_object->getInstructions());
     }
 
@@ -159,7 +160,7 @@ class Zend_Barcode_Object_Code128Test extends Zend_Barcode_Object_TestCommon
         $this->_object->setWithBorder(true);
         $this->_object->draw();
         $instructions = $this->loadInstructionsFile(
-            'Code128_HI345678_border_oriented_instructions');
+                'Code128_HI345678_border_oriented_instructions');
         $this->assertEquals($instructions, $this->_object->getInstructions());
     }
 }

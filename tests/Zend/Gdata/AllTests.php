@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,28 +13,32 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Gdata
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id $
  */
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Gdata_AllTests::main');
 }
 
 /**
- * Tests of the authentication URL generator.
+ * Tests of the authentication URL generator
  */
 require_once 'Zend/Gdata/AuthSubTest.php';
 
+/**
+ *
+ */
 require_once 'Zend/Gdata/Analytics/AccountFeedTest.php';
 require_once 'Zend/Gdata/Analytics/AccountQueryTest.php';
 require_once 'Zend/Gdata/Analytics/DataFeedTest.php';
 require_once 'Zend/Gdata/Analytics/DataQueryTest.php';
 
 /**
- * Tests that do not require online access to servers.
+ * Tests that do not require online access to servers
  */
 require_once 'Zend/Gdata/AppTest.php';
 require_once 'Zend/Gdata/App/UtilTest.php';
@@ -158,7 +162,7 @@ require_once 'Zend/Gdata/Books/VolumeEntryTest.php';
 
 /**
  * Tests that do require online access to servers
- * and authentication credentials.
+ * and authentication credentials
  */
 require_once 'Zend/Gdata/GdataOnlineTest.php';
 require_once 'Zend/Gdata/CalendarOnlineTest.php';
@@ -171,15 +175,16 @@ require_once 'Zend/Gdata/SkipTests.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Gdata
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Gdata
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_AllTests
 {
+
     public static function main()
     {
         PHPUnit_TextUI_TestRunner::run(self::suite());
@@ -189,12 +194,12 @@ class Zend_Gdata_AllTests
     {
         $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Gdata');
 
-        /*
+        /**
          * Tests of the authentication URL generator
          */
         $suite->addTestSuite('Zend_Gdata_AuthSubTest');
 
-        /*
+        /**
          * Tests that do not require online access to servers
          */
         $suite->addTestSuite('Zend_Gdata_AppTest');
@@ -318,63 +323,63 @@ class Zend_Gdata_AllTests
         $suite->addTestSuite('Zend_Gdata_Books_VolumeFeedTest');
 
         $skippingOnlineTests = true;
-        if (defined('TESTS_ZEND_GDATA_ONLINE_ENABLED')
-            && true == constant('TESTS_ZEND_GDATA_ONLINE_ENABLED')
-            && defined('TESTS_ZEND_GDATA_CLIENTLOGIN_ENABLED')
-            && true == constant('TESTS_ZEND_GDATA_CLIENTLOGIN_ENABLED')) {
+        if (defined('TESTS_ZEND_GDATA_ONLINE_ENABLED') &&
+            constant('TESTS_ZEND_GDATA_ONLINE_ENABLED') == true &&
+            defined('TESTS_ZEND_GDATA_CLIENTLOGIN_ENABLED') &&
+            constant('TESTS_ZEND_GDATA_CLIENTLOGIN_ENABLED') == true) {
             /**
              * Tests that do require online access to servers
-             * and authentication credentials.
+             * and authentication credentials
              */
             $skippingOnlineTests = false;
-            if (defined('TESTS_ZEND_GDATA_BLOGGER_ONLINE_ENABLED')
-            && true == constant('TESTS_ZEND_GDATA_BLOGGER_ONLINE_ENABLED')) {
+            if (defined('TESTS_ZEND_GDATA_BLOGGER_ONLINE_ENABLED') &&
+            constant('TESTS_ZEND_GDATA_BLOGGER_ONLINE_ENABLED') == true) {
                 $suite->addTestSuite('Zend_Gdata_GdataOnlineTest');
             }
 
-            if (defined('TESTS_ZEND_GDATA_CALENDAR_ONLINE_ENABLED')
-            && true == constant('TESTS_ZEND_GDATA_CALENDAR_ONLINE_ENABLED')) {
+            if (defined('TESTS_ZEND_GDATA_CALENDAR_ONLINE_ENABLED') &&
+            constant('TESTS_ZEND_GDATA_CALENDAR_ONLINE_ENABLED') == true) {
                 $suite->addTestSuite('Zend_Gdata_CalendarOnlineTest');
             }
 
-            if (defined('TESTS_ZEND_GDATA_SPREADSHEETS_ONLINE_ENABLED')
-            && true == constant('TESTS_ZEND_GDATA_SPREADSHEETS_ONLINE_ENABLED')) {
+            if (defined('TESTS_ZEND_GDATA_SPREADSHEETS_ONLINE_ENABLED') &&
+            constant('TESTS_ZEND_GDATA_SPREADSHEETS_ONLINE_ENABLED') == true) {
                 $suite->addTestSuite('Zend_Gdata_SpreadsheetsOnlineTest');
             }
 
-            if (defined('TESTS_ZEND_GDATA_DOCS_ONLINE_ENABLED')
-            && true == constant('TESTS_ZEND_GDATA_DOCS_ONLINE_ENABLED')) {
+            if (defined('TESTS_ZEND_GDATA_DOCS_ONLINE_ENABLED') &&
+            constant('TESTS_ZEND_GDATA_DOCS_ONLINE_ENABLED') == true) {
                 $suite->addTestSuite('Zend_Gdata_DocsOnlineTest');
             }
 
-            if (defined('TESTS_ZEND_GDATA_PHOTOS_ONLINE_ENABLED')
-            && true == constant('TESTS_ZEND_GDATA_PHOTOS_ONLINE_ENABLED')) {
+            if (defined('TESTS_ZEND_GDATA_PHOTOS_ONLINE_ENABLED') &&
+            constant('TESTS_ZEND_GDATA_PHOTOS_ONLINE_ENABLED') == true) {
                 $suite->addTestSuite('Zend_Gdata_PhotosOnlineTest');
             }
 
-            if (defined('TESTS_ZEND_GDATA_BOOKS_ONLINE_ENABLED')
-            && true == constant('TESTS_ZEND_GDATA_BOOKS_ONLINE_ENABLED')) {
+            if (defined('TESTS_ZEND_GDATA_BOOKS_ONLINE_ENABLED') &&
+            constant('TESTS_ZEND_GDATA_BOOKS_ONLINE_ENABLED') == true) {
                 $suite->addTestSuite('Zend_Gdata_BooksOnlineTest');
             }
         }
-        if (defined('TESTS_ZEND_GDATA_ONLINE_ENABLED')
-                   && true == constant('TESTS_ZEND_GDATA_ONLINE_ENABLED')) {
+        if (defined('TESTS_ZEND_GDATA_ONLINE_ENABLED') &&
+                   constant('TESTS_ZEND_GDATA_ONLINE_ENABLED') == true) {
             /**
              * Tests that do require online access to servers, but
-             * don't require the standard authentication credentials.
+             * don't require the standard authentication credentials
              */
             $skippingOnlineTests = false;
-            if (defined('TESTS_ZEND_GDATA_GAPPS_ONLINE_ENABLED')
-            && true == constant('TESTS_ZEND_GDATA_GAPPS_ONLINE_ENABLED')) {
+            if (defined('TESTS_ZEND_GDATA_GAPPS_ONLINE_ENABLED') &&
+            constant('TESTS_ZEND_GDATA_GAPPS_ONLINE_ENABLED') == true) {
                 $suite->addTestSuite('Zend_Gdata_GappsOnlineTest');
             }
         }
         if ($skippingOnlineTests) {
             $suite->addTestSuite('Zend_Gdata_SkipOnlineTest');
         }
-
         return $suite;
     }
+
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Gdata_AllTests::main') {

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Queue
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -33,10 +33,10 @@ require_once 'Zend/Queue/QueueBaseTest.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Queue
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Queue
  */
 #[AllowDynamicProperties]
@@ -47,9 +47,9 @@ class Zend_Queue_Queue1Test extends Zend_Queue_QueueBaseTest
         date_default_timezone_set('GMT');
 
         // Test Zend_Config
-        $this->config = [
-            'name' => 'queue1',
-        ];
+        $this->config = array(
+            'name'      => 'queue1'
+        );
 
         $this->queue = new Zend_Queue('Array', $this->config);
     }

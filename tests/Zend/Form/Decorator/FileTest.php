@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,16 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Form
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
 // Call Zend_Form_Decorator_FileTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Form_Decorator_FileTest::main');
+if (!defined("PHPUnit_MAIN_METHOD")) {
+    define("PHPUnit_MAIN_METHOD", "Zend_Form_Decorator_FileTest::main");
 }
 
 // require_once 'Zend/Form/Decorator/File.php';
@@ -32,13 +32,13 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 // require_once 'Zend/View/Helper/FormElement.php';
 
 /**
- * Test class for Zend_Form_Decorator_Errors.
+ * Test class for Zend_Form_Decorator_Errors
  *
  * @category   Zend
- *
+ * @package    Zend_Form
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Form
  */
 #[AllowDynamicProperties]
@@ -51,7 +51,8 @@ class Zend_Form_Decorator_FileTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend_Form_Decorator_FileTest');
+
+        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Decorator_FileTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -87,8 +88,7 @@ class Zend_Form_Decorator_FileTest extends PHPUnit_Framework_TestCase
     public function getView()
     {
         $view = new Zend_View();
-        $view->addHelperPath(__DIR__.'/../../../../library/Zend/View/Helper');
-
+        $view->addHelperPath(__DIR__ . '/../../../../library/Zend/View/Helper');
         return $view;
     }
 
@@ -144,7 +144,7 @@ class Zend_Form_Decorator_FileTest extends PHPUnit_Framework_TestCase
         $this->setupElementWithMaxFileSize();
         $test = $this->decorator->render(null);
         $this->assertRegexp('#MAX_FILE_SIZE#s', $test);
-        $this->assertRegexp('#'.$max.'#s', $test);
+        $this->assertRegexp('#' . $max . '#s', $test);
     }
 
     public function testPlacementInitiallyAppends()
@@ -184,7 +184,7 @@ class Zend_Form_Decorator_FileTest extends PHPUnit_Framework_TestCase
         $defaultOutput = $element->render();
 
         // Get output using mock view helper
-        $element->helper = 'formFileMock';
+        $element->helper = "formFileMock";
         $mockOutput = $element->render();
 
         // Ensure the view helper was changed
@@ -196,36 +196,36 @@ class Zend_Form_Decorator_FileTest extends PHPUnit_Framework_TestCase
     {
         if (!is_numeric($setting)) {
             $type = strtoupper((string) substr((string) $setting, -1));
-            $setting = (int) substr((string) $setting, 0, -1);
+            $setting = (integer) substr((string) $setting, 0, -1);
 
             switch ($type) {
-                case 'M':
+                case 'M' :
                     $setting *= 1024;
                     break;
 
-                case 'G':
+                case 'G' :
                     $setting *= 1024 * 1024;
                     break;
 
-                default:
+                default :
                     break;
             }
         }
 
-        return (int) $setting;
+        return (integer) $setting;
     }
 }
 
 #[AllowDynamicProperties]
 class Zend_View_Helper_FormFileMock extends Zend_View_Helper_FormElement
 {
-    public function formFileMock($name, $attribs = null)
+    public function formFileMock($name, $attribs=NULL)
     {
-        return 'FormFileMock';
+        return "FormFileMock";
     }
 }
 
 // Call Zend_Form_Decorator_FileTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_Form_Decorator_FileTest::main') {
+if (PHPUnit_MAIN_METHOD == "Zend_Form_Decorator_FileTest::main") {
     Zend_Form_Decorator_FileTest::main();
 }

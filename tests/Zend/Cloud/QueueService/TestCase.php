@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,7 +13,8 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Cloud
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -38,14 +39,15 @@
  * Zend_Cloud_QueueService.
  *
  * @category   Zend
- *
+ * @package    Zend_Cloud
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Cloud_QueueService_TestCase extends PHPUnit_Framework_TestCase
 {
     /**
-     * Reference to queue adapter to test.
+     * Reference to queue adapter to test
      *
      * @var Zend_Cloud_QueueService
      */
@@ -53,17 +55,18 @@ abstract class Zend_Cloud_QueueService_TestCase extends PHPUnit_Framework_TestCa
     protected $_dummyNamePrefix = '/TestItem';
     protected $_dummyDataPrefix = 'TestData';
     protected $_clientType = 'stdClass';
-
+    
     /**
-     * Config object.
+     * Config object
      *
      * @var Zend_Config
      */
+
     protected $_config;
 
     /**
      * Period to wait for propagation in seconds
-     * Should be set by adapter.
+     * Should be set by adapter
      *
      * @var int
      */
@@ -77,7 +80,7 @@ abstract class Zend_Cloud_QueueService_TestCase extends PHPUnit_Framework_TestCa
 
     public function testGetClient()
     {
-        $this->assertTrue($this->_commonQueue->getClient() instanceof $this->_clientType);
+    	$this->assertTrue($this->_commonQueue->getClient() instanceof $this->_clientType);
     }
 
     public function testCreateQueue()
@@ -90,10 +93,8 @@ abstract class Zend_Cloud_QueueService_TestCase extends PHPUnit_Framework_TestCa
             $this->assertNotNull($queueURL);
             $this->assertLessThan(30, $endTime - $startTime);
             $this->_commonQueue->deleteQueue($queueURL);
-        } catch (Throwable $e) {
-            if (isset($queueURL)) {
-                $this->_commonQueue->deleteQueue($queueURL);
-            }
+        } catch (\Throwable $e) {
+            if(isset($queueURL)) $this->_commonQueue->deleteQueue($queueURL);
             throw $e;
         }
     }
@@ -111,17 +112,14 @@ abstract class Zend_Cloud_QueueService_TestCase extends PHPUnit_Framework_TestCa
             $this->_wait();
             try {
                 $messages = $this->_commonQueue->receiveMessages($queueURL);
-                $this->fail('An exception should have been thrown if the queue has been deleted; received '.var_export($messages, 1));
-            } catch (Zend_Cloud_QueueService_Exception $e) {
+                $this->fail('An exception should have been thrown if the queue has been deleted; received ' . var_export($messages, 1));
+            } catch(Zend_Cloud_QueueService_Exception $e) {
                 $this->assertTrue(true);
                 $this->_commonQueue->deleteQueue($queueURL);
-
                 return;
             }
-        } catch (Throwable $e) {
-            if (isset($queueURL)) {
-                $this->_commonQueue->deleteQueue($queueURL);
-            }
+        } catch (\Throwable $e) {
+            if(isset($queueURL)) $this->_commonQueue->deleteQueue($queueURL);
             throw $e;
         }
     }
@@ -147,9 +145,9 @@ abstract class Zend_Cloud_QueueService_TestCase extends PHPUnit_Framework_TestCa
             $this->_wait();
 
             $queues = $this->_commonQueue->listQueues();
-            $errorMessage = 'Final queues are ';
+            $errorMessage = "Final queues are ";
             foreach ($queues as $queue) {
-                $errorMessage .= $queue.', ';
+                $errorMessage .= $queue . ', ';
             }
             $errorMessage .= "\nHave queue URLs $queueURL1 and $queueURL2\n";
             $this->assertEquals(2, count($queues), $errorMessage);
@@ -161,7 +159,7 @@ abstract class Zend_Cloud_QueueService_TestCase extends PHPUnit_Framework_TestCa
 
             $this->_commonQueue->deleteQueue($queueURL1);
             $this->_commonQueue->deleteQueue($queueURL2);
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             if (isset($queueURL1)) {
                 $this->_commonQueue->deleteQueue($queueURL1);
             }
@@ -178,13 +176,13 @@ abstract class Zend_Cloud_QueueService_TestCase extends PHPUnit_Framework_TestCa
             $queueURL = $this->_commonQueue->createQueue('test-fetch-queue-metadata');
             $this->assertNotNull($queueURL);
             $this->_wait();
-            $this->_commonQueue->storeQueueMetadata($queueURL, ['purpose' => 'test']);
+            $this->_commonQueue->storeQueueMetadata($queueURL, array('purpose' => 'test'));
             $this->_wait();
             $metadata = $this->_commonQueue->fetchQueueMetadata($queueURL);
             $this->assertTrue(is_array($metadata));
             $this->assertGreaterThan(0, count($metadata));
             $this->_commonQueue->deleteQueue($queueURL);
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             if (isset($queueURL)) {
                 $this->_commonQueue->deleteQueue($queueURL);
             }
@@ -208,10 +206,8 @@ abstract class Zend_Cloud_QueueService_TestCase extends PHPUnit_Framework_TestCa
                 $this->assertEquals($message, $m->getBody());
             }
             $this->_commonQueue->deleteQueue($queueURL);
-        } catch (Throwable $e) {
-            if (isset($queueURL)) {
-                $this->_commonQueue->deleteQueue($queueURL);
-            }
+        } catch (\Throwable $e) {
+            if(isset($queueURL)) $this->_commonQueue->deleteQueue($queueURL);
             throw $e;
         }
     }
@@ -259,16 +255,16 @@ abstract class Zend_Cloud_QueueService_TestCase extends PHPUnit_Framework_TestCa
             $this->assertTrue($receivedMessages2 instanceof Zend_Cloud_QueueService_MessageSet);
             $this->assertEquals(2, count($receivedMessages2));
 
-            $tests = [];
+            $tests = array();
             foreach ($receivedMessages2 as $message) {
                 $tests[] = $message;
             }
-            $texts = [$tests[0]->getBody(), $tests[1]->getBody()];
+            $texts = array($tests[0]->getBody(), $tests[1]->getBody());
             $this->assertContains($message1, $texts);
             $this->assertContains($message2, $texts);
 
             $this->_commonQueue->deleteQueue($queueURL);
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             if (isset($queueURL)) {
                 $this->_commonQueue->deleteQueue($queueURL);
             }
@@ -305,10 +301,8 @@ abstract class Zend_Cloud_QueueService_TestCase extends PHPUnit_Framework_TestCa
             $this->assertEquals(0, count($receivedMessages2));
 
             $this->_commonQueue->deleteQueue($queueURL);
-        } catch (Throwable $e) {
-            if (isset($queueURL)) {
-                $this->_commonQueue->deleteQueue($queueURL);
-            }
+        } catch (\Throwable $e) {
+            if(isset($queueURL)) $this->_commonQueue->deleteQueue($queueURL);
             throw $e;
         }
     }
@@ -335,10 +329,8 @@ abstract class Zend_Cloud_QueueService_TestCase extends PHPUnit_Framework_TestCa
             }
 
             $this->_commonQueue->deleteQueue($queueURL);
-        } catch (Throwable $e) {
-            if (isset($queueURL)) {
-                $this->_commonQueue->deleteQueue($queueURL);
-            }
+        } catch (\Throwable $e) {
+            if(isset($queueURL)) $this->_commonQueue->deleteQueue($queueURL);
             throw $e;
         }
     }
@@ -352,7 +344,7 @@ abstract class Zend_Cloud_QueueService_TestCase extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * Get adapter configuration for concrete test.
+     * Get adapter configuration for concrete test
      *
      * @returns Zend_Config
      */

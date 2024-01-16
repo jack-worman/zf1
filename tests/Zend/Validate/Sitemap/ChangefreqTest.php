@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,37 +13,37 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Validate
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
 // require_once 'Zend/Validate/Sitemap/Changefreq.php';
 
 /**
- * Tests Zym_Validate_Sitemap_Changefreq.
+ * Tests Zym_Validate_Sitemap_Changefreq
  *
  * @category   Zend
- *
+ * @package    Zend_Validate
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Validate
  */
 #[AllowDynamicProperties]
 class Zend_Validate_Sitemap_ChangefreqTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Validator.
+     * Validator
      *
      * @var Zend_Validate_Sitemap_Changefreq
      */
     protected $_validator;
 
     /**
-     * Prepares the environment before running a test.
+     * Prepares the environment before running a test
      */
     protected function setUp()
     {
@@ -51,7 +51,7 @@ class Zend_Validate_Sitemap_ChangefreqTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Cleans up the environment after running a test.
+     * Cleans up the environment after running a test
      */
     protected function tearDown()
     {
@@ -59,14 +59,15 @@ class Zend_Validate_Sitemap_ChangefreqTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests valid change frequencies.
+     * Tests valid change frequencies
+     *
      */
     public function testValidChangefreqs()
     {
-        $values = [
+        $values = array(
             'always',  'hourly', 'daily', 'weekly',
-            'monthly', 'yearly', 'never',
-        ];
+            'monthly', 'yearly', 'never'
+        );
 
         foreach ($values as $value) {
             $this->assertSame(true, $this->_validator->isValid($value));
@@ -74,15 +75,16 @@ class Zend_Validate_Sitemap_ChangefreqTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests strings that should be invalid.
+     * Tests strings that should be invalid
+     *
      */
     public function testInvalidStrings()
     {
-        $values = [
+        $values = array(
             'alwayz',  '_hourly', 'Daily', 'wEekly',
             'mönthly ', ' yearly ', 'never ', 'rofl',
             'yesterday',
-        ];
+        );
 
         foreach ($values as $value) {
             $this->assertSame(false, $this->_validator->isValid($value));
@@ -92,13 +94,14 @@ class Zend_Validate_Sitemap_ChangefreqTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests values that are not strings.
+     * Tests values that are not strings
+     *
      */
     public function testNotString()
     {
-        $values = [
-            1, 1.4, null, new stdClass(), true, false,
-        ];
+        $values = array(
+            1, 1.4, null, new stdClass(), true, false
+        );
 
         foreach ($values as $value) {
             $this->assertSame(false, $this->_validator->isValid($value));

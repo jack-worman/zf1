@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,40 +13,40 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Search_Lucene
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
 /**
- * Zend_Search_Lucene.
+ * Zend_Search_Lucene
  */
 // require_once 'Zend/Search/Lucene.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Search_Lucene
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Search_Lucene
  */
 #[AllowDynamicProperties]
 class Zend_Search_Lucene_SearchHighlightTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Wildcard pattern minimum preffix.
+     * Wildcard pattern minimum preffix
      *
-     * @var int
+     * @var integer
      */
     protected $_wildcardMinPrefix;
 
     /**
-     * Fuzzy search default preffix length.
+     * Fuzzy search default preffix length
      *
-     * @var int
+     * @var integer
      */
     protected $_defaultPrefixLength;
 
@@ -67,6 +67,7 @@ class Zend_Search_Lucene_SearchHighlightTest extends PHPUnit_Framework_TestCase
         Zend_Search_Lucene_Search_Query_Fuzzy::setDefaultPrefixLength($this->_defaultPrefixLength);
     }
 
+
     public function testHtmlFragmentHighlightMatches()
     {
         $query = Zend_Search_Lucene_Search_QueryParser::parse('title:"The Right Way" AND text:go');
@@ -74,50 +75,50 @@ class Zend_Search_Lucene_SearchHighlightTest extends PHPUnit_Framework_TestCase
         $highlightedHtmlFragment = $query->htmlFragmentHighlightMatches('Text highlighting using Zend_Search_Lucene is the right way to go!');
 
         $this->assertEquals($highlightedHtmlFragment,
-            'Text highlighting using Zend_Search_Lucene is <b style="color:black;background-color:#66ffff">the</b> <b style="color:black;background-color:#66ffff">right</b> <b style="color:black;background-color:#66ffff">way</b> to <b style="color:black;background-color:#ff66ff">go</b>!');
+                            'Text highlighting using Zend_Search_Lucene is <b style="color:black;background-color:#66ffff">the</b> <b style="color:black;background-color:#66ffff">right</b> <b style="color:black;background-color:#66ffff">way</b> to <b style="color:black;background-color:#ff66ff">go</b>!');
     }
 
-    //    public function testHtmlFragmentHighlightMatchesCyrillic()
-    //    {
-    //        $query = Zend_Search_Lucene_Search_QueryParser::parse('title:"некоторый текст" AND text:поехали');
-    //
-    //        $highlightedHtmlFragment = $query->htmlFragmentHighlightMatches('Подсвечиваем некоторый текст с использованием Zend_Search_Lucene. Поехали!');
-    //
-    //        $this->assertEquals($highlightedHtmlFragment,
-    //                            'Text highlighting using Zend_Search_Lucene is <b style="color:black;background-color:#66ffff">the</b> <b style="color:black;background-color:#66ffff">right</b> <b style="color:black;background-color:#66ffff">way</b> to <b style="color:black;background-color:#ff66ff">go</b>!');
-    //    }
-    //
-    //    public function testHtmlFragmentHighlightMatchesCyrillicWindows()
-    //    {
-    //        $query = Zend_Search_Lucene_Search_QueryParser::parse('title:"Некоторый текст" AND text:поехали');
-    //
-    //        $highlightedHtmlFragment =
-    //                $query->htmlFragmentHighlightMatches(iconv('UTF-8',
-    //                                                           'Windows-1251',
-    //                                                           'Подсвечиваем некоторый текст с использованием Zend_Search_Lucene. Поехали!'),
-    //                                                     'Windows-1251');
-    //
-    //        $this->assertEquals($highlightedHtmlFragment,
-    //                            'Text highlighting using Zend_Search_Lucene is <b style="color:black;background-color:#66ffff">the</b> <b style="color:black;background-color:#66ffff">right</b> <b style="color:black;background-color:#66ffff">way</b> to <b style="color:black;background-color:#ff66ff">go</b>!');
-    //    }
+//    public function testHtmlFragmentHighlightMatchesCyrillic()
+//    {
+//        $query = Zend_Search_Lucene_Search_QueryParser::parse('title:"некоторый текст" AND text:поехали');
+//
+//        $highlightedHtmlFragment = $query->htmlFragmentHighlightMatches('Подсвечиваем некоторый текст с использованием Zend_Search_Lucene. Поехали!');
+//
+//        $this->assertEquals($highlightedHtmlFragment,
+//                            'Text highlighting using Zend_Search_Lucene is <b style="color:black;background-color:#66ffff">the</b> <b style="color:black;background-color:#66ffff">right</b> <b style="color:black;background-color:#66ffff">way</b> to <b style="color:black;background-color:#ff66ff">go</b>!');
+//    }
+//
+//    public function testHtmlFragmentHighlightMatchesCyrillicWindows()
+//    {
+//        $query = Zend_Search_Lucene_Search_QueryParser::parse('title:"Некоторый текст" AND text:поехали');
+//
+//        $highlightedHtmlFragment =
+//                $query->htmlFragmentHighlightMatches(iconv('UTF-8',
+//                                                           'Windows-1251',
+//                                                           'Подсвечиваем некоторый текст с использованием Zend_Search_Lucene. Поехали!'),
+//                                                     'Windows-1251');
+//
+//        $this->assertEquals($highlightedHtmlFragment,
+//                            'Text highlighting using Zend_Search_Lucene is <b style="color:black;background-color:#66ffff">the</b> <b style="color:black;background-color:#66ffff">right</b> <b style="color:black;background-color:#66ffff">way</b> to <b style="color:black;background-color:#ff66ff">go</b>!');
+//    }
 
     public function testHighlightPhrasePlusTerm()
     {
         $query = Zend_Search_Lucene_Search_QueryParser::parse('title:"The Right Way" AND text:go');
 
         $html = '<HTML>'
-                .'<HEAD><TITLE>Page title</TITLE></HEAD>'
-                .'<BODY>'
-                .'Text highlighting using Zend_Search_Lucene is the right way to go!'
-                .'</BODY>'
-              .'</HTML>';
+                . '<HEAD><TITLE>Page title</TITLE></HEAD>'
+                . '<BODY>'
+                .   'Text highlighting using Zend_Search_Lucene is the right way to go!'
+                . '</BODY>'
+              . '</HTML>';
 
         $highlightedHTML = $query->highlightMatches($html);
 
-        $this->assertTrue(false !== strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">the</b>'));
-        $this->assertTrue(false !== strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">right</b>'));
-        $this->assertTrue(false !== strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">way</b>'));
-        $this->assertTrue(false !== strpos((string) $highlightedHTML, '<b style="color:black;background-color:#ff66ff">go</b>'));
+        $this->assertTrue(strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">the</b>') !== false);
+        $this->assertTrue(strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">right</b>') !== false);
+        $this->assertTrue(strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">way</b>') !== false);
+        $this->assertTrue(strpos((string) $highlightedHTML, '<b style="color:black;background-color:#ff66ff">go</b>') !== false);
     }
 
     public function testHighlightMultitermWithProhibitedTerms()
@@ -125,18 +126,18 @@ class Zend_Search_Lucene_SearchHighlightTest extends PHPUnit_Framework_TestCase
         $query = Zend_Search_Lucene_Search_QueryParser::parse('+text +highlighting -using -right +go');
 
         $html = '<HTML>'
-                .'<HEAD><TITLE>Page title</TITLE></HEAD>'
-                .'<BODY>'
-                .'Text highlighting using Zend_Search_Lucene is the right way to go!'
-                .'</BODY>'
-              .'</HTML>';
+                . '<HEAD><TITLE>Page title</TITLE></HEAD>'
+                . '<BODY>'
+                .   'Text highlighting using Zend_Search_Lucene is the right way to go!'
+                . '</BODY>'
+              . '</HTML>';
 
         $highlightedHTML = $query->highlightMatches($html);
 
-        $this->assertTrue(false !== strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">Text</b>'));
-        $this->assertTrue(false !== strpos((string) $highlightedHTML, '<b style="color:black;background-color:#ff66ff">highlighting</b>'));
-        $this->assertTrue(false !== strpos((string) $highlightedHTML, 'using Zend_Search_Lucene is the right way to'));
-        $this->assertTrue(false !== strpos((string) $highlightedHTML, '<b style="color:black;background-color:#ffff66">go</b>'));
+        $this->assertTrue(strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">Text</b>') !== false);
+        $this->assertTrue(strpos((string) $highlightedHTML, '<b style="color:black;background-color:#ff66ff">highlighting</b>') !== false);
+        $this->assertTrue(strpos((string) $highlightedHTML, 'using Zend_Search_Lucene is the right way to') !== false);
+        $this->assertTrue(strpos((string) $highlightedHTML, '<b style="color:black;background-color:#ffff66">go</b>') !== false);
     }
 
     public function testHighlightWildcard1()
@@ -144,18 +145,18 @@ class Zend_Search_Lucene_SearchHighlightTest extends PHPUnit_Framework_TestCase
         $query = Zend_Search_Lucene_Search_QueryParser::parse('te?t');
 
         $html = '<HTML>'
-                .'<HEAD><TITLE>Page title</TITLE></HEAD>'
-                .'<BODY>'
-                .'Test of text highlighting using wildcard query with question mark. Testing...'
-                .'</BODY>'
-              .'</HTML>';
+                . '<HEAD><TITLE>Page title</TITLE></HEAD>'
+                . '<BODY>'
+                .   'Test of text highlighting using wildcard query with question mark. Testing...'
+                . '</BODY>'
+              . '</HTML>';
 
         $highlightedHTML = $query->highlightMatches($html);
 
-        $this->assertTrue(false !== strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">Test</b>'));
-        $this->assertTrue(false !== strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">text</b>'));
+        $this->assertTrue(strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">Test</b>') !== false);
+        $this->assertTrue(strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">text</b>') !== false);
         // Check that 'Testing' word is not highlighted
-        $this->assertTrue(false !== strpos((string) $highlightedHTML, 'mark. Testing...'));
+        $this->assertTrue(strpos((string) $highlightedHTML, 'mark. Testing...') !== false);
     }
 
     public function testHighlightWildcard2()
@@ -163,18 +164,18 @@ class Zend_Search_Lucene_SearchHighlightTest extends PHPUnit_Framework_TestCase
         $query = Zend_Search_Lucene_Search_QueryParser::parse('te?t*');
 
         $html = '<HTML>'
-                .'<HEAD><TITLE>Page title</TITLE></HEAD>'
-                .'<BODY>'
-                .'Test of text highlighting using wildcard query with question mark. Testing...'
-                .'</BODY>'
-              .'</HTML>';
+                . '<HEAD><TITLE>Page title</TITLE></HEAD>'
+                . '<BODY>'
+                .   'Test of text highlighting using wildcard query with question mark. Testing...'
+                . '</BODY>'
+              . '</HTML>';
 
         $highlightedHTML = $query->highlightMatches($html);
 
-        $this->assertTrue(false !== strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">Test</b>'));
-        $this->assertTrue(false !== strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">text</b>'));
+        $this->assertTrue(strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">Test</b>') !== false);
+        $this->assertTrue(strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">text</b>') !== false);
         // Check that 'Testing' word is also highlighted
-        $this->assertTrue(false !== strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">Testing</b>'));
+        $this->assertTrue(strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">Testing</b>') !== false);
     }
 
     public function testHighlightFuzzy1()
@@ -182,20 +183,20 @@ class Zend_Search_Lucene_SearchHighlightTest extends PHPUnit_Framework_TestCase
         $query = Zend_Search_Lucene_Search_QueryParser::parse('test~');
 
         $html = '<HTML>'
-                .'<HEAD><TITLE>Page title</TITLE></HEAD>'
-                .'<BODY>'
-                .'Test of text fuzzy search terms highlighting. '
-                .'Words: test, text, latest, left, list, next, ...'
-                .'</BODY>'
-              .'</HTML>';
+                . '<HEAD><TITLE>Page title</TITLE></HEAD>'
+                . '<BODY>'
+                .   'Test of text fuzzy search terms highlighting. '
+                .   'Words: test, text, latest, left, list, next, ...'
+                . '</BODY>'
+              . '</HTML>';
 
         $highlightedHTML = $query->highlightMatches($html);
 
-        $this->assertTrue(false !== strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">Test</b>'));
-        $this->assertTrue(false !== strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">test</b>'));
-        $this->assertTrue(false !== strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">text</b>'));
+        $this->assertTrue(strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">Test</b>') !== false);
+        $this->assertTrue(strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">test</b>') !== false);
+        $this->assertTrue(strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">text</b>') !== false);
         // Check that other words are not highlighted
-        $this->assertTrue(false !== strpos((string) $highlightedHTML, 'latest, left, list, next, ...'));
+        $this->assertTrue(strpos((string) $highlightedHTML, 'latest, left, list, next, ...') !== false);
     }
 
     public function testHighlightFuzzy2()
@@ -203,23 +204,23 @@ class Zend_Search_Lucene_SearchHighlightTest extends PHPUnit_Framework_TestCase
         $query = Zend_Search_Lucene_Search_QueryParser::parse('test~0.4');
 
         $html = '<HTML>'
-                .'<HEAD><TITLE>Page title</TITLE></HEAD>'
-                .'<BODY>'
-                .'Test of text fuzzy search terms highlighting. '
-                .'Words: test, text, latest, left, list, next, ...'
-                .'</BODY>'
-              .'</HTML>';
+                . '<HEAD><TITLE>Page title</TITLE></HEAD>'
+                . '<BODY>'
+                .   'Test of text fuzzy search terms highlighting. '
+                .   'Words: test, text, latest, left, list, next, ...'
+                . '</BODY>'
+              . '</HTML>';
 
         $highlightedHTML = $query->highlightMatches($html);
 
-        $this->assertTrue(false !== strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">Test</b>'));
-        $this->assertTrue(false !== strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">test</b>'));
+        $this->assertTrue(strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">Test</b>') !== false);
+        $this->assertTrue(strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">test</b>') !== false);
         // Check that other words are also highlighted
-        $this->assertTrue(false !== strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">text</b>'));
-        $this->assertTrue(false !== strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">latest</b>'));
-        $this->assertTrue(false !== strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">left</b>'));
-        $this->assertTrue(false !== strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">list</b>'));
-        $this->assertTrue(false !== strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">next</b>'));
+        $this->assertTrue(strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">text</b>') !== false);
+        $this->assertTrue(strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">latest</b>') !== false);
+        $this->assertTrue(strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">left</b>') !== false);
+        $this->assertTrue(strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">list</b>') !== false);
+        $this->assertTrue(strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">next</b>') !== false);
     }
 
     public function testHighlightRangeInclusive()
@@ -227,21 +228,21 @@ class Zend_Search_Lucene_SearchHighlightTest extends PHPUnit_Framework_TestCase
         $query = Zend_Search_Lucene_Search_QueryParser::parse('[business TO by]');
 
         $html = '<HTML>'
-                .'<HEAD><TITLE>Page title</TITLE></HEAD>'
-                .'<BODY>'
-                .'Test of text using range query. '
-                .'It has to match "business", "by", "buss" and "but" words, but has to skip "bus"'
-                .'</BODY>'
-              .'</HTML>';
+                . '<HEAD><TITLE>Page title</TITLE></HEAD>'
+                . '<BODY>'
+                .   'Test of text using range query. '
+                .   'It has to match "business", "by", "buss" and "but" words, but has to skip "bus"'
+                . '</BODY>'
+              . '</HTML>';
 
         $highlightedHTML = $query->highlightMatches($html);
 
-        $this->assertTrue(false !== strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">business</b>'));
-        $this->assertTrue(false !== strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">by</b>'));
-        $this->assertTrue(false !== strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">buss</b>'));
-        $this->assertTrue(false !== strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">but</b>'));
+        $this->assertTrue(strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">business</b>') !== false);
+        $this->assertTrue(strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">by</b>') !== false);
+        $this->assertTrue(strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">buss</b>') !== false);
+        $this->assertTrue(strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">but</b>') !== false);
         // Check that "bus" word is skipped
-        $this->assertTrue(false !== strpos((string) $highlightedHTML, 'has to skip "bus"'));
+        $this->assertTrue(strpos((string) $highlightedHTML, 'has to skip "bus"') !== false);
     }
 
     public function testHighlightRangeNonInclusive()
@@ -249,18 +250,18 @@ class Zend_Search_Lucene_SearchHighlightTest extends PHPUnit_Framework_TestCase
         $query = Zend_Search_Lucene_Search_QueryParser::parse('{business TO by}');
 
         $html = '<HTML>'
-                .'<HEAD><TITLE>Page title</TITLE></HEAD>'
-                .'<BODY>'
-                .'Test of text using range query. '
-                .'It has to match "buss" and "but" words, but has to skip "business", "by" and "bus"'
-                .'</BODY>'
-              .'</HTML>';
+                . '<HEAD><TITLE>Page title</TITLE></HEAD>'
+                . '<BODY>'
+                .   'Test of text using range query. '
+                .   'It has to match "buss" and "but" words, but has to skip "business", "by" and "bus"'
+                . '</BODY>'
+              . '</HTML>';
 
         $highlightedHTML = $query->highlightMatches($html);
 
-        $this->assertTrue(false !== strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">buss</b>'));
-        $this->assertTrue(false !== strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">but</b>'));
+        $this->assertTrue(strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">buss</b>') !== false);
+        $this->assertTrue(strpos((string) $highlightedHTML, '<b style="color:black;background-color:#66ffff">but</b>') !== false);
         // Check that "bus" word is skipped
-        $this->assertTrue(false !== strpos((string) $highlightedHTML, 'has to skip "business", "by" and "bus"'));
+        $this->assertTrue(strpos((string) $highlightedHTML, 'has to skip "business", "by" and "bus"') !== false);
     }
 }

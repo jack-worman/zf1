@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,21 +13,24 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Db
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id $
  */
 
 require_once 'Zend/Db/Table/Row/TestCommon.php';
 
+
+
+
 /**
  * @category   Zend
- *
+ * @package    Zend_Db
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Db
  * @group      Zend_Db_Table
  * @group      Zend_Db_Table_Row
@@ -35,22 +38,24 @@ require_once 'Zend/Db/Table/Row/TestCommon.php';
 #[AllowDynamicProperties]
 class Zend_Db_Table_Row_Pdo_OciTest extends Zend_Db_Table_Row_TestCommon
 {
+
     public function testTableRowSaveInsert()
     {
-        $this->markTestSkipped($this->getDriver().' does not support auto-increment keys.');
+        $this->markTestSkipped($this->getDriver() . ' does not support auto-increment keys.');
     }
 
     /**
-     * ZF-4330: Oracle need sequence.
+     * ZF-4330: Oracle need sequence
      */
     protected function _testTableRowSetReadOnlyGetTableBugs()
     {
         return $this->_getTable('My_ZendDbTable_TableBugs',
-            [Zend_Db_Table_Abstract::SEQUENCE => 'zfbugs_seq']);
+                                array(Zend_Db_Table_Abstract::SEQUENCE => 'zfbugs_seq'));
     }
 
     public function getDriver()
     {
         return 'Pdo_Oci';
     }
+
 }

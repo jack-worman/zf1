@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Zend Framework
  *
  * LICENSE
@@ -20,7 +20,10 @@
  * @version    $Id$
  */
 
-/*
+
+
+
+/**
  * Empty file that is used in unit testing by ZendTest::testLoadClassNonexistent()
  *
  * @category   Zend

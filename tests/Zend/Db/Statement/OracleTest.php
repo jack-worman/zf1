@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,45 +13,47 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Db
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id $
  */
 
 require_once 'Zend/Db/Statement/TestCommon.php';
 
+
 /**
  * @category   Zend
- *
+ * @package    Zend_Db
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Db
  * @group      Zend_Db_Statement
  */
 #[AllowDynamicProperties]
 class Zend_Db_Statement_OracleTest extends Zend_Db_Statement_TestCommon
 {
+
     public function testStatementBindParamByPosition()
     {
-        $this->markTestSkipped($this->getDriver().' does not support bound parameters by position');
+        $this->markTestSkipped($this->getDriver() . ' does not support bound parameters by position');
     }
 
     public function testStatementBindValueByPosition()
     {
-        $this->markTestSkipped($this->getDriver().' does not support bound parameters by position');
+        $this->markTestSkipped($this->getDriver() . ' does not support bound parameters by position');
     }
 
     public function testStatementErrorCodeKeyViolation()
     {
-        $this->markTestIncomplete($this->getDriver().' does not return error codes correctly.');
+        $this->markTestIncomplete($this->getDriver() . ' does not return error codes correctly.');
     }
 
     public function testStatementErrorInfoKeyViolation()
     {
-        $this->markTestIncomplete($this->getDriver().' does not return error codes correctly.');
+        $this->markTestIncomplete($this->getDriver() . ' does not return error codes correctly.');
     }
 
     public function testStatementExecuteWithParams()
@@ -61,7 +63,7 @@ class Zend_Db_Statement_OracleTest extends Zend_Db_Statement_TestCommon
         $product_name = $this->_db->quoteIdentifier('product_name');
 
         $stmt = $this->_db->prepare("INSERT INTO $products ($product_id, $product_name) VALUES (:product_id, :product_name)");
-        $stmt->execute(['product_id' => 4, 'product_name' => 'Solaris']);
+        $stmt->execute(array('product_id' => 4, 'product_name' => 'Solaris'));
 
         $select = $this->_db->select()
             ->from('zfproducts')
@@ -69,17 +71,17 @@ class Zend_Db_Statement_OracleTest extends Zend_Db_Statement_TestCommon
         $result = $this->_db->fetchAll($select);
         $stmt->closeCursor();
 
-        $this->assertEquals([['product_id' => 4, 'product_name' => 'Solaris']], $result);
+        $this->assertEquals(array(array('product_id'=>4, 'product_name'=>'Solaris')), $result);
     }
 
     public function testStatementFetchAllStyleBoth()
     {
-        $this->markTestIncomplete($this->getDriver().' driver does not support fetchAll(FETCH_BOTH)');
+        $this->markTestIncomplete($this->getDriver() . ' driver does not support fetchAll(FETCH_BOTH)');
     }
 
     public function testStatementGetColumnMeta()
     {
-        $this->markTestIncomplete($this->getDriver().' has not implemented getColumnMeta() yet [ZF-1424]');
+        $this->markTestIncomplete($this->getDriver() . ' has not implemented getColumnMeta() yet [ZF-1424]');
     }
 
     public function testStatementNextRowset()
@@ -108,7 +110,7 @@ class Zend_Db_Statement_OracleTest extends Zend_Db_Statement_TestCommon
         $product_name = $this->_db->quoteIdentifier('product_name');
 
         $stmt = $this->_db->prepare("INSERT INTO $products ($product_id, $product_name) VALUES (:product_id, :product_name)");
-        $stmt->execute(['product_id' => 4, 'product_name' => null]);
+        $stmt->execute(array('product_id' => 4, 'product_name' => null));
 
         $select = $this->_db->select()
                        ->from('zfproducts')
@@ -122,7 +124,7 @@ class Zend_Db_Statement_OracleTest extends Zend_Db_Statement_TestCommon
 
     public function testStatementSetFetchModeBoth()
     {
-        $this->markTestIncomplete($this->getDriver().' does not implement FETCH_BOTH correctly.');
+        $this->markTestIncomplete($this->getDriver() . ' does not implement FETCH_BOTH correctly.');
     }
 
     public function getDriver()

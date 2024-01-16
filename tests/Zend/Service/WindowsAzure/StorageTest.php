@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,30 +13,31 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Service_WindowsAzure
+ * @subpackage UnitTests
  * @version    $Id$
- *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Service_WindowsAzure_StorageTest::main');
 }
 
 /**
- * Test helpers.
+ * Test helpers
  */
 // require_once __DIR__ . '/../../../TestHelper.php';
-require_once __DIR__.'/../../../TestConfiguration.dist.php';
+require_once __DIR__ . '/../../../TestConfiguration.dist.php';
 
 /** Zend_Service_WindowsAzure_Storage */
 // require_once 'Zend/Service/WindowsAzure/Storage.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Service_WindowsAzure
+ * @subpackage UnitTests
  * @version    $Id$
- *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -45,12 +46,12 @@ class Zend_Service_WindowsAzure_StorageTest extends PHPUnit_Framework_TestCase
 {
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend_Service_WindowsAzure_BlobStorageTest');
+        $suite  = new PHPUnit_Framework_TestSuite("Zend_Service_WindowsAzure_BlobStorageTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     /**
-     * Test constructor for devstore.
+     * Test constructor for devstore
      */
     public function testConstructorForDevstore()
     {
@@ -59,7 +60,7 @@ class Zend_Service_WindowsAzure_StorageTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test constructor for production.
+     * Test constructor for production
      */
     public function testConstructorForProduction()
     {
@@ -69,6 +70,6 @@ class Zend_Service_WindowsAzure_StorageTest extends PHPUnit_Framework_TestCase
 }
 
 // Call Zend_Service_WindowsAzure_StorageTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_Service_WindowsAzure_StorageTest::main') {
+if (PHPUnit_MAIN_METHOD == "Zend_Service_WindowsAzure_StorageTest::main") {
     Zend_Service_WindowsAzure_StorageTest::main();
 }

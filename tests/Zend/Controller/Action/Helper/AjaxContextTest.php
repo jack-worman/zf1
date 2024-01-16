@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,17 +13,18 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Controller
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
 // Call Zend_Controller_Action_Helper_AjaxContextTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Controller_Action_Helper_AjaxContextTest::main');
+if (!defined("PHPUnit_MAIN_METHOD")) {
+    define("PHPUnit_MAIN_METHOD", "Zend_Controller_Action_Helper_AjaxContextTest::main");
 }
+
 
 // require_once 'Zend/Controller/Action/Helper/AjaxContext.php';
 
@@ -36,14 +37,15 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 // require_once 'Zend/Layout.php';
 // require_once 'Zend/View.php';
 
+
 /**
  * Test class for Zend_Controller_Action_Helper_AjaxContext.
  *
  * @category   Zend
- *
+ * @package    Zend_Controller
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Controller
  * @group      Zend_Controller_Action
  * @group      Zend_Controller_Action_Helper
@@ -54,11 +56,13 @@ class Zend_Controller_Action_Helper_AjaxContextTest extends PHPUnit_Framework_Te
     /**
      * Runs the test methods of this class.
      *
+     * @access public
      * @static
      */
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend_Controller_Action_Helper_AjaxContextTest');
+
+        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Action_Helper_AjaxContextTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -66,10 +70,9 @@ class Zend_Controller_Action_Helper_AjaxContextTest extends PHPUnit_Framework_Te
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
      *
-     * @return void
-     *
      * @throws Zend_Controller_Exception
      * @throws Zend_Controller_Request_Exception
+     * @return void
      */
     public function setUp()
     {
@@ -82,7 +85,7 @@ class Zend_Controller_Action_Helper_AjaxContextTest extends PHPUnit_Framework_Te
 
         $this->front = Zend_Controller_Front::getInstance();
         $this->front->resetInstance();
-        $this->front->addModuleDirectory(__DIR__.'/../../_files/modules');
+        $this->front->addModuleDirectory(__DIR__ . '/../../_files/modules');
 
         $this->layout = Zend_Layout::startMvc();
 
@@ -93,14 +96,14 @@ class Zend_Controller_Action_Helper_AjaxContextTest extends PHPUnit_Framework_Te
 
         $this->front->setRequest($this->request)->setResponse($this->response);
         $this->view = new Zend_View();
-        $this->view->addHelperPath(__DIR__.'/../../../../../library/Zend/View/Helper/');
+        $this->view->addHelperPath(__DIR__ . '/../../../../../library/Zend/View/Helper/');
         $this->viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
         $this->viewRenderer->setView($this->view);
 
         $this->controller = new Zend_Controller_Action_Helper_AjaxContextTestController(
             $this->request,
             $this->response,
-            []
+            array()
         );
         $this->helper->setActionController($this->controller);
     }
@@ -167,7 +170,7 @@ class Zend_Controller_Action_Helper_AjaxContextTest extends PHPUnit_Framework_Te
         $this->assertEquals('xml.phtml', $this->viewRenderer->getViewSuffix());
 
         $headers = $this->response->getHeaders();
-        $found = false;
+        $found   = false;
         foreach ($headers as $header) {
             if ('Content-Type' == $header['name']) {
                 $found = true;
@@ -210,18 +213,18 @@ class Zend_Controller_Action_Helper_AjaxContextTest extends PHPUnit_Framework_Te
         $helper = new Zend_Controller_Action_Helper_AjaxContext();
 
         $helper->setActionController(
-            new Zend_Controller_Action_Helper_AjaxContextTestController(
-                $request,
-                $this->response,
-                []
-            )
+                    new Zend_Controller_Action_Helper_AjaxContextTestController(
+                        $request,
+                        $this->response,
+                        array()
+                    )
         );
 
         try {
             $helper->initContext();
             $this->assertTrue(true);
-        } catch (Throwable $e) {
-            if ('test testAjaxContextIsRequestDependent failed' == $e->getMessage()) {
+        } catch (\Throwable $e) {
+            if($e->getMessage() == 'test testAjaxContextIsRequestDependent failed' ) {
                 $this->fail();
             } else {
                 throw $e;
@@ -231,26 +234,26 @@ class Zend_Controller_Action_Helper_AjaxContextTest extends PHPUnit_Framework_Te
 }
 
 #[AllowDynamicProperties]
-class ZendTest_Controller_Request_SimpleMock_AjaxTest extends Zend_Controller_Request_Simple
+class ZendTest_Controller_Request_SimpleMock_AjaxTest
+    extends Zend_Controller_Request_Simple
 {
-    public function __call($method, $args)
-    {
-        if ('isXmlHttpRequest' == $method) {
-            throw new Exception('test testAjaxContextIsRequestDependent failed');
-        }
+         public function __call($method, $args) {
+             if($method == 'isXmlHttpRequest') {
+                 throw new exception('test testAjaxContextIsRequestDependent failed');
+             }
 
-        return parent::__call($method, $args);
-    }
+             return parent::__call($method, $args);
+         }
 }
 
 #[AllowDynamicProperties]
 class Zend_Controller_Action_Helper_AjaxContextTestController extends Zend_Controller_Action
 {
-    public $ajaxable = [
-        'foo' => ['xml'],
-        'bar' => ['xml', 'json'],
-        'baz' => [],
-    ];
+    public $ajaxable = array(
+        'foo' => array('xml'),
+        'bar' => array('xml', 'json'),
+        'baz' => array(),
+    );
 }
 
 #[AllowDynamicProperties]
@@ -263,6 +266,6 @@ class Zend_Controller_Action_Helper_AjaxContextTest_LayoutOverride extends Zend_
 }
 
 // Call Zend_Controller_Action_Helper_AjaxContextTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_Controller_Action_Helper_AjaxContextTest::main') {
+if (PHPUnit_MAIN_METHOD == "Zend_Controller_Action_Helper_AjaxContextTest::main") {
     Zend_Controller_Action_Helper_AjaxContextTest::main();
 }

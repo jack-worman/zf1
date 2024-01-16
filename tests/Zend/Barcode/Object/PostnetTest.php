@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,28 +13,29 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Barcode
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
-require_once __DIR__.'/TestCommon.php';
+require_once __DIR__ . '/TestCommon.php';
 
 // require_once 'Zend/Barcode/Object/Postnet.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Barcode
+ * @subpackage UnitTests
  * @group      Zend_Barcode
- *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Zend_Barcode_Object_PostnetTest extends Zend_Barcode_Object_TestCommon
 {
+
     protected function _getBarcodeObject($options = null)
     {
         return new Zend_Barcode_Object_Postnet($options);
@@ -60,7 +61,7 @@ class Zend_Barcode_Object_PostnetTest extends Zend_Barcode_Object_TestCommon
     }
 
     /**
-     * @expectedException \Zend_Barcode_Object_Exception
+     * @expectedException Zend_Barcode_Object_Exception
      */
     public function testSetTextWithoutGoodNumberOfCharacters()
     {
@@ -95,7 +96,7 @@ class Zend_Barcode_Object_PostnetTest extends Zend_Barcode_Object_TestCommon
     }
 
     /**
-     * @expectedException \Zend_Barcode_Object_Exception
+     * @expectedException Zend_Barcode_Object_Exception
      */
     public function testBadTextDetectedIfChecksumWished()
     {
@@ -109,6 +110,7 @@ class Zend_Barcode_Object_PostnetTest extends Zend_Barcode_Object_TestCommon
         $this->_object->setText('012345');
         $this->assertTrue($this->_object->checkParams());
     }
+
 
     public function testGetKnownWidthWithoutOrientation()
     {
@@ -132,7 +134,7 @@ class Zend_Barcode_Object_PostnetTest extends Zend_Barcode_Object_TestCommon
         $this->_object->setWithBorder(true);
         $this->_object->draw();
         $instructions = $this->loadInstructionsFile(
-            'Postnet_012345_border_instructions');
+                'Postnet_012345_border_instructions');
         $this->assertEquals($instructions, $this->_object->getInstructions());
     }
 
@@ -142,7 +144,7 @@ class Zend_Barcode_Object_PostnetTest extends Zend_Barcode_Object_TestCommon
         $this->_object->setOrientation(60);
         $this->_object->draw();
         $instructions = $this->loadInstructionsFile(
-            'Postnet_012345_oriented_instructions');
+                'Postnet_012345_oriented_instructions');
         $this->assertEquals($instructions, $this->_object->getInstructions());
     }
 
@@ -153,7 +155,7 @@ class Zend_Barcode_Object_PostnetTest extends Zend_Barcode_Object_TestCommon
         $this->_object->setWithBorder(true);
         $this->_object->draw();
         $instructions = $this->loadInstructionsFile(
-            'Postnet_012345_border_oriented_instructions');
+                'Postnet_012345_border_oriented_instructions');
         $this->assertEquals($instructions, $this->_object->getInstructions());
     }
 

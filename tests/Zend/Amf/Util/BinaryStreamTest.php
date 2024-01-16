@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,12 +13,13 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Amf
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Amf_Util_BinaryStreamTest::main');
 }
@@ -26,13 +27,13 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 // require_once 'Zend/Amf/Util/BinaryStream.php';
 
 /**
- * Test case for Zend_Amf_Util_BinaryStream.
+ * Test case for Zend_Amf_Util_BinaryStream
  *
  * @category   Zend
- *
+ * @package    Zend_Amf
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Amf
  */
 #[AllowDynamicProperties]
@@ -45,36 +46,36 @@ class Zend_Amf_Util_BinaryStreamTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend_Amf_Util_BinaryStreamTest');
+        $suite  = new PHPUnit_Framework_TestSuite("Zend_Amf_Util_BinaryStreamTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     /**
-     * @expectedException \Zend_Amf_Exception
+     * @expectedException Zend_Amf_Exception
      */
     public function testConstructorShouldThrowExceptionForInvalidStream()
     {
-        $test = new Zend_Amf_Util_BinaryStream(['foo', 'bar']);
+        $test = new Zend_Amf_Util_BinaryStream(array('foo', 'bar'));
     }
 
     /**
-     * @expectedException \Zend_Amf_Exception
+     * @expectedException Zend_Amf_Exception
      */
     public function testReadBytesShouldRaiseExceptionForBufferUnderrun()
     {
         $string = 'this is a short stream';
         $stream = new Zend_Amf_Util_BinaryStream($string);
         $length = strlen((string) $string);
-        $test = $stream->readBytes(10 * $length);
+        $test   = $stream->readBytes(10 * $length);
     }
 
     public function testReadBytesShouldReturnSubsetOfStringFromCurrentNeedle()
     {
         $string = 'this is a short stream';
         $stream = new Zend_Amf_Util_BinaryStream($string);
-        $test = $stream->readBytes(4);
+        $test   = $stream->readBytes(4);
         $this->assertEquals('this', $test);
-        $test = $stream->readBytes(5);
+        $test   = $stream->readBytes(5);
         $this->assertEquals(' is a', $test);
     }
 

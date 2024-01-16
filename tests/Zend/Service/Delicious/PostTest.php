@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Service_Delicious
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -30,37 +30,38 @@
  */
 // require_once 'Zend/Service/Delicious/Post.php';
 
+
 /**
  * @category   Zend_Service
- *
+ * @package    Zend_Service_Delicious
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Service
  * @group      Zend_Service_Delicious
  */
 #[AllowDynamicProperties]
 class Zend_Service_Delicious_PostTest extends PHPUnit_Framework_TestCase
 {
-    public const UNAME = 'zfTestUser';
-    public const PASS = 'zfuser';
+    const UNAME = 'zfTestUser';
+    const PASS  = 'zfuser';
 
     /**
-     * Service consumer object.
+     * Service consumer object
      *
      * @var Zend_Service_Delicious
      */
     protected $_delicious;
 
     /**
-     * Post object.
+     * Post object
      *
      * @var Zend_Service_Delicious_Post
      */
     protected $_post;
 
     /**
-     * Creates an instance of Zend_Service_Delicious for each test method.
+     * Creates an instance of Zend_Service_Delicious for each test method
      *
      * @return void
      */
@@ -68,22 +69,22 @@ class Zend_Service_Delicious_PostTest extends PHPUnit_Framework_TestCase
     {
         $this->_delicious = new Zend_Service_Delicious(self::UNAME, self::PASS);
 
-        $values = [
+        $values = array(
             'title' => 'anything',
-            'url' => 'anything',
-            ];
+            'url'   => 'anything'
+            );
         $this->_post = new Zend_Service_Delicious_Post($this->_delicious, $values);
     }
 
     /**
-     * Ensures that the constructor throws an exception when the title is missing from the values.
+     * Ensures that the constructor throws an exception when the title is missing from the values
      *
      * @return void
      */
     public function testConstructExceptionValuesTitleMissing()
     {
         try {
-            $post = new Zend_Service_Delicious_Post($this->_delicious, ['url' => 'anything']);
+            $post = new Zend_Service_Delicious_Post($this->_delicious, array('url' => 'anything'));
             $this->fail('Expected Zend_Service_Delicious_Exception not thrown');
         } catch (Zend_Service_Delicious_Exception $e) {
             $this->assertContains("'url' and 'title'", $e->getMessage());
@@ -91,14 +92,14 @@ class Zend_Service_Delicious_PostTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that the constructor throws an exception when the URL is missing from the values.
+     * Ensures that the constructor throws an exception when the URL is missing from the values
      *
      * @return void
      */
     public function testConstructExceptionValuesUrlMissing()
     {
         try {
-            $post = new Zend_Service_Delicious_Post($this->_delicious, ['title' => 'anything']);
+            $post = new Zend_Service_Delicious_Post($this->_delicious, array('title' => 'anything'));
             $this->fail('Expected Zend_Service_Delicious_Exception not thrown');
         } catch (Zend_Service_Delicious_Exception $e) {
             $this->assertContains("'url' and 'title'", $e->getMessage());
@@ -106,17 +107,17 @@ class Zend_Service_Delicious_PostTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that the constructor throws an exception when the date value is not an instance of Zend_Date.
+     * Ensures that the constructor throws an exception when the date value is not an instance of Zend_Date
      *
      * @return void
      */
     public function testConstructExceptionValuesDateInvalid()
     {
-        $values = [
+        $values = array(
             'title' => 'anything',
-            'url' => 'anything',
-            'date' => 'invalid',
-            ];
+            'url'   => 'anything',
+            'date'  => 'invalid'
+            );
         try {
             $post = new Zend_Service_Delicious_Post($this->_delicious, $values);
             $this->fail('Expected Zend_Service_Delicious_Exception not thrown');
@@ -126,7 +127,7 @@ class Zend_Service_Delicious_PostTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that setTitle() provides a fluent interface.
+     * Ensures that setTitle() provides a fluent interface
      *
      * @return void
      */
@@ -136,7 +137,7 @@ class Zend_Service_Delicious_PostTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that setNotes() provides a fluent interface.
+     * Ensures that setNotes() provides a fluent interface
      *
      * @return void
      */
@@ -146,17 +147,17 @@ class Zend_Service_Delicious_PostTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that setTags() provides a fluent interface.
+     * Ensures that setTags() provides a fluent interface
      *
      * @return void
      */
     public function testSetTagsFluent()
     {
-        $this->assertSame($this->_post, $this->_post->setTags(['something']));
+        $this->assertSame($this->_post, $this->_post->setTags(array('something')));
     }
 
     /**
-     * Ensures that addTag() provides a fluent interface.
+     * Ensures that addTag() provides a fluent interface
      *
      * @return void
      */
@@ -166,7 +167,7 @@ class Zend_Service_Delicious_PostTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that removeTag() provides a fluent interface.
+     * Ensures that removeTag() provides a fluent interface
      *
      * @return void
      */
@@ -176,7 +177,7 @@ class Zend_Service_Delicious_PostTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that getDate() provides expected behavior.
+     * Ensures that getDate() provides expected behavior
      *
      * @return void
      */
@@ -186,7 +187,7 @@ class Zend_Service_Delicious_PostTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that getOthers() provides expected behavior.
+     * Ensures that getOthers() provides expected behavior
      *
      * @return void
      */
@@ -196,7 +197,7 @@ class Zend_Service_Delicious_PostTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that getHash() provides expected behavior.
+     * Ensures that getHash() provides expected behavior
      *
      * @return void
      */
@@ -206,7 +207,7 @@ class Zend_Service_Delicious_PostTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that getShared() provides expected behavior.
+     * Ensures that getShared() provides expected behavior
      *
      * @return void
      */
@@ -216,7 +217,7 @@ class Zend_Service_Delicious_PostTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that setShared() provides a fluent interface.
+     * Ensures that setShared() provides a fluent interface
      *
      * @return void
      */

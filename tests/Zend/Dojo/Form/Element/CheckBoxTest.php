@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,16 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Dojo
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
 // Call Zend_Dojo_Form_Element_CheckBoxTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Dojo_Form_Element_CheckBoxTest::main');
+if (!defined("PHPUnit_MAIN_METHOD")) {
+    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_Form_Element_CheckBoxTest::main");
 }
 
 /** Zend_Dojo_Form_Element_CheckBox */
@@ -41,10 +41,10 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * Test class for Zend_Dojo_Form_Element_Checkbox.
  *
  * @category   Zend
- *
+ * @package    Zend_Dojo
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Dojo
  * @group      Zend_Dojo_Form
  */
@@ -58,7 +58,7 @@ class Zend_Dojo_Form_Element_CheckBoxTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend_Dojo_Form_Element_CheckBoxTest');
+        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_Form_Element_CheckBoxTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -73,7 +73,7 @@ class Zend_Dojo_Form_Element_CheckBoxTest extends PHPUnit_Framework_TestCase
         Zend_Registry::_unsetInstance();
         Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
 
-        $this->view = $this->getView();
+        $this->view    = $this->getView();
         $this->element = $this->getElement();
         $this->element->setView($this->view);
     }
@@ -93,7 +93,6 @@ class Zend_Dojo_Form_Element_CheckBoxTest extends PHPUnit_Framework_TestCase
         // require_once 'Zend/View.php';
         $view = new Zend_View();
         $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
-
         return $view;
     }
 
@@ -101,13 +100,12 @@ class Zend_Dojo_Form_Element_CheckBoxTest extends PHPUnit_Framework_TestCase
     {
         $element = new Zend_Dojo_Form_Element_CheckBox(
             'foo',
-            [
-                'label' => 'CheckBox',
-                'class' => 'someclass',
-                'style' => 'width: 100px;',
-            ]
+            array(
+                'label'          => 'CheckBox',
+                'class'          => 'someclass',
+                'style'          => 'width: 100px;',
+            )
         );
-
         return $element;
     }
 
@@ -210,10 +208,10 @@ class Zend_Dojo_Form_Element_CheckBoxTest extends PHPUnit_Framework_TestCase
 
     public function testSetOptionsSetsInitialValueAccordingToCheckedAndUncheckedValues()
     {
-        $options = [
-            'checkedValue' => 'foo',
+        $options = array(
+            'checkedValue'   => 'foo',
             'uncheckedValue' => 'bar',
-        ];
+        );
 
         $element = new Zend_Dojo_Form_Element_CheckBox('test', $options);
         $this->assertEquals($options['uncheckedValue'], $element->getValue());
@@ -221,18 +219,18 @@ class Zend_Dojo_Form_Element_CheckBoxTest extends PHPUnit_Framework_TestCase
 
     public function testSetOptionsSetsInitialValueAccordingToSubmittedValues()
     {
-        $options = [
-            'test1' => [
-                'value' => 'foo',
-                'checkedValue' => 'foo',
+        $options = array(
+            'test1' => array(
+                'value'          => 'foo',
+                'checkedValue'   => 'foo',
                 'uncheckedValue' => 'bar',
-            ],
-            'test2' => [
-                'value' => 'bar',
-                'checkedValue' => 'foo',
+            ),
+            'test2' => array(
+                'value'          => 'bar',
+                'checkedValue'   => 'foo',
                 'uncheckedValue' => 'bar',
-            ],
-        ];
+            ),
+        );
 
         foreach ($options as $current) {
             $element = new Zend_Dojo_Form_Element_CheckBox('test', $current);
@@ -262,10 +260,10 @@ class Zend_Dojo_Form_Element_CheckBoxTest extends PHPUnit_Framework_TestCase
      */
     public function testCheckedValuesCanBePassedInConstructor()
     {
-        $element = new Zend_Dojo_Form_Element_CheckBox('myCheckbox', [
+        $element = new Zend_Dojo_Form_Element_CheckBox('myCheckbox',    array(
                     'checkedValue' => 'checkedVal',
                     'unCheckedValue' => 'UNCHECKED',
-                ]);
+                ));
         $element->setView(new Zend_View());
         $html = $element->render();
         $this->assertContains('value="checkedVal"', $html, $html);
@@ -273,6 +271,6 @@ class Zend_Dojo_Form_Element_CheckBoxTest extends PHPUnit_Framework_TestCase
 }
 
 // Call Zend_Dojo_Form_Element_CheckBoxTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_Dojo_Form_Element_CheckBoxTest::main') {
+if (PHPUnit_MAIN_METHOD == "Zend_Dojo_Form_Element_CheckBoxTest::main") {
     Zend_Dojo_Form_Element_CheckBoxTest::main();
 }

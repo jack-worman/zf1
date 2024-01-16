@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Gdata_Spreadsheets
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id $
  */
 
@@ -25,16 +25,17 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Gdata_Spreadsheets
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Spreadsheets
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_Spreadsheets_WorksheetEntryTest extends PHPUnit_Framework_TestCase
 {
+
     public function setUp()
     {
         $this->wksEntry = new Zend_Gdata_Spreadsheets_WorksheetEntry();
@@ -43,9 +44,9 @@ class Zend_Gdata_Spreadsheets_WorksheetEntryTest extends PHPUnit_Framework_TestC
     public function testToAndFromString()
     {
         $this->wksEntry->setRowCount(new Zend_Gdata_Spreadsheets_Extension_RowCount('20'));
-        $this->assertTrue('20' == $this->wksEntry->getRowCount()->getText());
+        $this->assertTrue($this->wksEntry->getRowCount()->getText() == '20');
         $this->wksEntry->setColumnCount(new Zend_Gdata_Spreadsheets_Extension_ColCount('40'));
-        $this->assertTrue('40' == $this->wksEntry->getColumnCount()->getText());
+        $this->assertTrue($this->wksEntry->getColumnCount()->getText() == '40');
         $newWksEntry = new Zend_Gdata_Spreadsheets_WorksheetEntry();
         $doc = new DOMDocument();
         $doc->loadXML($this->wksEntry->saveXML());
@@ -53,4 +54,5 @@ class Zend_Gdata_Spreadsheets_WorksheetEntryTest extends PHPUnit_Framework_TestC
         $this->assertTrue($this->wksEntry->getRowCount()->getText() == $newWksEntry->getRowCount()->getText());
         $this->assertTrue($this->wksEntry->getColumnCount()->getText() == $newWksEntry->getColumnCount()->getText());
     }
+
 }

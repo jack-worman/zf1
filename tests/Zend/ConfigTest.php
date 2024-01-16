@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,24 +13,24 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Config
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
 /**
- * Zend_Config.
+ * Zend_Config
  */
 // require_once 'Zend/Config.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Config
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Config
  */
 #[AllowDynamicProperties]
@@ -42,46 +42,47 @@ class Zend_ConfigTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         // Arrays representing common config configurations
-        $this->_all = [
+        $this->_all = array(
             'hostname' => 'all',
             'name' => 'thisname',
-            'db' => [
+            'db' => array(
                 'host' => '127.0.0.1',
                 'user' => 'username',
                 'pass' => 'password',
-                'name' => 'live',
-                ],
-            'one' => [
-                'two' => [
-                    'three' => 'multi',
-                    ],
-                ],
-            ];
+                'name' => 'live'
+                ),
+            'one' => array(
+                'two' => array(
+                    'three' => 'multi'
+                    )
+                )
+            );
 
-        $this->_numericData = [
+        $this->_numericData = array(
              0 => 34,
              1 => 'test',
-            ];
+            );
 
-        $this->_menuData1 = [
-            'button' => [
-                'b0' => [
+        $this->_menuData1 = array(
+            'button' => array(
+                'b0' => array(
                     'L1' => 'button0-1',
                     'L2' => 'button0-2',
-                    'L3' => 'button0-3',
-                ],
-                'b1' => [
+                    'L3' => 'button0-3'
+                ),
+                'b1' => array(
                     'L1' => 'button1-1',
-                    'L2' => 'button1-2',
-                ],
-                'b2' => [
-                    'L1' => 'button2-1',
-                    ],
-                ],
-            ];
+                    'L2' => 'button1-2'
+                ),
+                'b2' => array(
+                    'L1' => 'button2-1'
+                    )
+                )
+            );
 
-        $this->_leadingdot = ['.test' => 'dot-test'];
-        $this->_invalidkey = [' ' => 'test', '' => 'test2'];
+        $this->_leadingdot = array('.test' => 'dot-test');
+        $this->_invalidkey = array(' ' => 'test', ''=>'test2');
+
     }
 
     public function testLoadSingleSection()
@@ -118,8 +119,9 @@ class Zend_ConfigTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('anothername', $config->one->two->three);
 
         // create a new multi-level key
-        $config->does = ['not' => ['exist' => 'yet']];
+        $config->does = array('not'=> array('exist' => 'yet'));
         $this->assertEquals('yet', $config->does->not->exist);
+
     }
 
     public function testNoModifications()
@@ -129,7 +131,6 @@ class Zend_ConfigTest extends PHPUnit_Framework_TestCase
             $config->hostname = 'test';
         } catch (Zend_Config_Exception $expected) {
             $this->assertContains('is read only', $expected->getMessage());
-
             return;
         }
         $this->fail('An expected Zend_Config_Exception has not been raised');
@@ -142,7 +143,6 @@ class Zend_ConfigTest extends PHPUnit_Framework_TestCase
             $config->db->host = 'test';
         } catch (Zend_Config_Exception $expected) {
             $this->assertContains('is read only', $expected->getMessage());
-
             return;
         }
         $this->fail('An expected Zend_Config_Exception has not been raised');
@@ -166,7 +166,7 @@ class Zend_ConfigTest extends PHPUnit_Framework_TestCase
         // top level
         $config = new Zend_Config($this->_all);
         $var = '';
-        foreach ($config as $key => $value) {
+        foreach ($config as $key=>$value) {
             if (is_string($value)) {
                 $var .= "\nkey = $key, value = $value";
             }
@@ -175,7 +175,7 @@ class Zend_ConfigTest extends PHPUnit_Framework_TestCase
 
         // 1 nest
         $var = '';
-        foreach ($config->db as $key => $value) {
+        foreach ($config->db as $key=>$value) {
             $var .= "\nkey = $key, value = $value";
         }
         $this->assertContains('key = host, value = 127.0.0.1', $var);
@@ -183,7 +183,7 @@ class Zend_ConfigTest extends PHPUnit_Framework_TestCase
         // 2 nests
         $config = new Zend_Config($this->_menuData1);
         $var = '';
-        foreach ($config->button->b1 as $key => $value) {
+        foreach ($config->button->b1 as $key=>$value) {
             $var .= "\nkey = $key, value = $value";
         }
         $this->assertContains('key = L1, value = button1-1', $var);
@@ -209,7 +209,6 @@ class Zend_ConfigTest extends PHPUnit_Framework_TestCase
             $config->test = '32';
         } catch (Zend_Config_Exception $expected) {
             $this->assertContains('read only', $expected->getMessage());
-
             return;
         }
 
@@ -218,49 +217,49 @@ class Zend_ConfigTest extends PHPUnit_Framework_TestCase
 
     public function testZF343()
     {
-        $config_array = [
-            'controls' => [
-                'visible' => [
+        $config_array = array(
+            'controls' => array(
+                'visible' => array(
                     'name' => 'visible',
                     'type' => 'checkbox',
-                    'attribs' => [], // empty array
-                ],
-            ],
-        ];
+                    'attribs' => array(), // empty array
+                ),
+            ),
+        );
         $form_config = new Zend_Config($config_array, true);
-        $this->assertSame([], $form_config->controls->visible->attribs->toArray());
+        $this->assertSame(array(), $form_config->controls->visible->attribs->toArray());
     }
 
     public function testZF402()
     {
-        $configArray = [
-            'data1' => 'someValue',
-            'data2' => 'someValue',
+        $configArray = array(
+            'data1'  => 'someValue',
+            'data2'  => 'someValue',
             'false1' => false,
-            'data3' => 'someValue',
-            ];
+            'data3'  => 'someValue'
+            );
         $config = new Zend_Config($configArray);
         $this->assertTrue(count($config) === count($configArray));
         $count = 0;
         foreach ($config as $key => $value) {
-            if ('false1' === $key) {
-                $this->assertTrue(false === $value);
+            if ($key === 'false1') {
+                $this->assertTrue($value === false);
             } else {
-                $this->assertTrue('someValue' === $value);
+                $this->assertTrue($value === 'someValue');
             }
-            ++$count;
+            $count++;
         }
-        $this->assertTrue(4 === $count);
+        $this->assertTrue($count === 4);
     }
 
-    public function testZf1019HandlingInvalidKeyNames()
+    public function testZf1019_HandlingInvalidKeyNames()
     {
         $config = new Zend_Config($this->_leadingdot);
         $array = $config->toArray();
         $this->assertContains('dot-test', $array['.test']);
     }
 
-    public function testZF1019EmptyKeys()
+    public function testZF1019_EmptyKeys()
     {
         $config = new Zend_Config($this->_invalidkey);
         $array = $config->toArray();
@@ -268,12 +267,13 @@ class Zend_ConfigTest extends PHPUnit_Framework_TestCase
         $this->assertContains('test', $array['']);
     }
 
-    public function testZF1417DefaultValues()
+    public function testZF1417_DefaultValues()
     {
         $config = new Zend_Config($this->_all);
         $value = $config->get('notthere', 'default');
-        $this->assertTrue('default' === $value);
-        $this->assertTrue(null === $config->notThere);
+        $this->assertTrue($value === 'default');
+        $this->assertTrue($config->notThere === null);
+
     }
 
     public function testUnsetException()
@@ -287,12 +287,10 @@ class Zend_ConfigTest extends PHPUnit_Framework_TestCase
             unset($config->hostname);
         } catch (Zend_Config_Exception $expected) {
             $this->assertContains('is read only', $expected->getMessage());
-
             return;
         }
         $this->fail('Expected read only exception has not been raised.');
     }
-
     public function testUnset()
     {
         // allow modifications is on
@@ -306,28 +304,29 @@ class Zend_ConfigTest extends PHPUnit_Framework_TestCase
 
         $this->assertFalse(isset($config->hostname));
         $this->assertFalse(isset($config->db->name));
+
     }
 
     public function testMerge()
     {
-        $stdArray = [
+        $stdArray = array(
             'test_feature' => false,
-            'some_files' => [
-                'foo' => 'dir/foo.xml',
-                'bar' => 'dir/bar.xml',
-            ],
+            'some_files' => array(
+                'foo'=>'dir/foo.xml',
+                'bar'=>'dir/bar.xml',
+            ),
             2 => 123,
-        ];
+        );
         $stdConfig = new Zend_Config($stdArray, true);
 
-        $devArray = [
-            'test_feature' => true,
-            'some_files' => [
+        $devArray = array(
+            'test_feature'=>true,
+            'some_files' => array(
                'bar' => 'myDir/bar.xml',
                'baz' => 'myDir/baz.xml',
-            ],
+            ),
             2 => 456,
-        ];
+        );
         $devConfig = new Zend_Config($devArray);
 
         $stdConfig->merge($devConfig);
@@ -337,22 +336,23 @@ class Zend_ConfigTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('myDir/baz.xml', $stdConfig->some_files->baz);
         $this->assertEquals('dir/foo.xml', $stdConfig->some_files->foo);
         $this->assertEquals(456, $stdConfig->{2});
+
     }
 
     /**
-     * Ensures that toArray() supports objects of types other than Zend_Config.
+     * Ensures that toArray() supports objects of types other than Zend_Config
      *
      * @return void
      */
     public function testToArraySupportsObjects()
     {
-        $configData = [
+        $configData = array(
             'a' => new stdClass(),
-            'b' => [
+            'b' => array(
                 'c' => new stdClass(),
-                'd' => new stdClass(),
-                ],
-            ];
+                'd' => new stdClass()
+                )
+            );
         $config = new Zend_Config($configData);
         $this->assertEquals($config->toArray(), $configData);
         $this->assertTrue($config->a instanceof stdClass);
@@ -361,13 +361,14 @@ class Zend_ConfigTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * ensure that modification is not allowed after calling setReadOnly().
+     * ensure that modification is not allowed after calling setReadOnly()
+     *
      */
     public function testSetReadOnly()
     {
-        $configData = [
-            'a' => 'a',
-            ];
+        $configData = array(
+            'a' => 'a'
+            );
         $config = new Zend_Config($configData, true);
         $config->b = 'b';
 
@@ -376,74 +377,78 @@ class Zend_ConfigTest extends PHPUnit_Framework_TestCase
             $config->c = 'c';
         } catch (Zend_Config_Exception $expected) {
             $this->assertContains('is read only', $expected->getMessage());
-
             return;
         }
         $this->fail('Expected read only exception has not been raised.');
     }
 
-    public function testZF3408CountNotDecreasingOnUnset()
+    public function testZF3408_countNotDecreasingOnUnset()
     {
-        $configData = [
+        $configData = array(
             'a' => 'a',
             'b' => 'b',
             'c' => 'c',
-            ];
+            );
         $config = new Zend_Config($configData, true);
         $this->assertEquals(count($config), 3);
         unset($config->b);
         $this->assertEquals(count($config), 2);
     }
 
-    public function testZF4107EnsureCloneDoesNotKeepNestedReferences()
+    public function testZF4107_ensureCloneDoesNotKeepNestedReferences()
     {
-        $parent = new Zend_Config(['key' => ['nested' => 'parent']], true);
+        $parent = new Zend_Config(array('key' => array('nested' => 'parent')), true);
         $newConfig = clone $parent;
-        $newConfig->merge(new Zend_Config(['key' => ['nested' => 'override']], true));
+        $newConfig->merge(new Zend_Config(array('key' => array('nested' => 'override')), true));
 
         $this->assertEquals('override', $newConfig->key->nested, '$newConfig is not overridden');
         $this->assertEquals('parent', $parent->key->nested, '$parent has been overridden');
+
     }
 
     /**
      * @group ZF-3575
+     *
      */
     public function testMergeHonoursAllowModificationsFlagAtAllLevels()
     {
-        $config = new Zend_Config(['key' => ['nested' => 'yes'], 'key2' => 'yes'], false);
-        $config2 = new Zend_Config([], true);
+        $config = new Zend_Config(array('key' => array('nested' => 'yes'), 'key2'=>'yes'), false);
+        $config2 = new Zend_Config(array(), true);
 
         $config2->merge($config);
         try {
             $config2->key2 = 'no';
-        } catch (Zend_Config_Exception $e) {
-            $this->fail('Unexpected exception at top level has been raised: '.$e->getMessage());
+        }  catch (Zend_Config_Exception $e) {
+            $this->fail('Unexpected exception at top level has been raised: ' . $e->getMessage());
         }
         $this->assertEquals('no', $config2->key2);
 
         try {
             $config2->key->nested = 'no';
-        } catch (Zend_Config_Exception $e) {
-            $this->fail('Unexpected exception on nested object has been raised: '.$e->getMessage());
+        }  catch (Zend_Config_Exception $e) {
+            $this->fail('Unexpected exception on nested object has been raised: ' . $e->getMessage());
         }
         $this->assertEquals('no', $config2->key->nested);
+
     }
 
     /**
      * @group ZF-5771a
+     *
      */
     public function testUnsettingFirstElementDuringForeachDoesNotSkipAnElement()
     {
-        $config = new Zend_Config([
-            'first' => [1],
-            'second' => [2],
-            'third' => [3],
-        ], true);
+        $config = new Zend_Config(array(
+            'first'  => array(1),
+            'second' => array(2),
+            'third'  => array(3)
+        ), true);
 
-        $keyList = [];
-        foreach ($config as $key => $value) {
+        $keyList = array();
+        foreach ($config as $key => $value)
+        {
             $keyList[] = $key;
-            if ('first' == $key) {
+            if ($key == 'first') {
                 unset($config->$key); // uses magic Zend_Config::__unset() method
             }
         }
@@ -455,19 +460,21 @@ class Zend_ConfigTest extends PHPUnit_Framework_TestCase
 
     /**
      * @group ZF-5771
+     *
      */
     public function testUnsettingAMiddleElementDuringForeachDoesNotSkipAnElement()
     {
-        $config = new Zend_Config([
-            'first' => [1],
-            'second' => [2],
-            'third' => [3],
-        ], true);
+        $config = new Zend_Config(array(
+            'first'  => array(1),
+            'second' => array(2),
+            'third'  => array(3)
+        ), true);
 
-        $keyList = [];
-        foreach ($config as $key => $value) {
+        $keyList = array();
+        foreach ($config as $key => $value)
+        {
             $keyList[] = $key;
-            if ('second' == $key) {
+            if ($key == 'second') {
                 unset($config->$key); // uses magic Zend_Config::__unset() method
             }
         }
@@ -479,19 +486,21 @@ class Zend_ConfigTest extends PHPUnit_Framework_TestCase
 
     /**
      * @group ZF-5771
+     *
      */
     public function testUnsettingLastElementDuringForeachDoesNotSkipAnElement()
     {
-        $config = new Zend_Config([
-            'first' => [1],
-            'second' => [2],
-            'third' => [3],
-        ], true);
+        $config = new Zend_Config(array(
+            'first'  => array(1),
+            'second' => array(2),
+            'third'  => array(3)
+        ), true);
 
-        $keyList = [];
-        foreach ($config as $key => $value) {
+        $keyList = array();
+        foreach ($config as $key => $value)
+        {
             $keyList[] = $key;
-            if ('third' == $key) {
+            if ($key == 'third') {
                 unset($config->$key); // uses magic Zend_Config::__unset() method
             }
         }
@@ -503,6 +512,7 @@ class Zend_ConfigTest extends PHPUnit_Framework_TestCase
 
     /**
      * @group ZF-4728
+     *
      */
     public function testSetReadOnlyAppliesToChildren()
     {
@@ -514,9 +524,9 @@ class Zend_ConfigTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($config->one->two->readOnly(), 'Second level children are writable');
     }
 
-    public function testZF6995ToArrayDoesNotDisturbInternalIterator()
+    public function testZF6995_toArrayDoesNotDisturbInternalIterator()
     {
-        $config = new Zend_Config(range(1, 10));
+        $config = new Zend_Config(range(1,10));
         $config->rewind();
         $this->assertEquals(1, $config->current());
 
@@ -524,3 +534,4 @@ class Zend_ConfigTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, $config->current());
     }
 }
+

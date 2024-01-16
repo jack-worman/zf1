@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,12 +13,13 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Form
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Form_FormTest::main');
 }
@@ -40,10 +41,10 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Form
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Form
  */
 #[AllowDynamicProperties]
@@ -56,7 +57,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend_Form_FormTest');
+        $suite  = new PHPUnit_Framework_TestSuite('Zend_Form_FormTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -95,13 +96,12 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
     public function getOptions()
     {
-        $options = [
-            'name' => 'foo',
-            'class' => 'someform',
+        $options = array(
+            'name'   => 'foo',
+            'class'  => 'someform',
             'action' => '/foo/bar',
             'method' => 'put',
-        ];
-
+        );
         return $options;
     }
 
@@ -128,8 +128,8 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testSetOptionsSkipsCallsToSetOptionsAndSetConfig()
     {
         $options = $this->getOptions();
-        $config = new Zend_Config($options);
-        $options['config'] = $config;
+        $config  = new Zend_Config($options);
+        $options['config']  = $config;
         $options['options'] = $config->toArray();
         $this->form->setOptions($options);
     }
@@ -138,10 +138,10 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     {
         $options = $this->getOptions();
         $options['pluginLoader'] = true;
-        $options['view'] = true;
-        $options['translator'] = true;
-        $options['default'] = true;
-        $options['attrib'] = true;
+        $options['view']         = true;
+        $options['translator']   = true;
+        $options['default']      = true;
+        $options['attrib']       = true;
         $this->form->setOptions($options);
     }
 
@@ -149,12 +149,12 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     {
         $attribs = $this->getOptions();
         unset($attribs['action'], $attribs['method']);
-        $options = [
-            'name' => 'MYFORM',
-            'action' => '/bar/baz',
-            'method' => 'GET',
+        $options = array(
+            'name'    => 'MYFORM',
+            'action'  => '/bar/baz',
+            'method'  => 'GET',
             'attribs' => $attribs,
-        ];
+        );
         $form = new Zend_Form($options);
         $this->assertEquals($options['name'], $form->getName());
         $this->assertEquals($options['action'], $form->getAction());
@@ -163,24 +163,23 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
     public function getElementOptions()
     {
-        $elements = [
+        $elements = array(
             'foo' => 'text',
-            ['text', 'bar', ['class' => 'foobar']],
-            [
-                'options' => ['class' => 'barbaz'],
-                'type' => 'text',
-                'name' => 'baz',
-            ],
-            'bat' => [
-                'options' => ['class' => 'bazbat'],
-                'type' => 'text',
-            ],
-            'lol' => [
+            array('text', 'bar', array('class' => 'foobar')),
+            array(
+                'options' => array('class' => 'barbaz'),
+                'type'    => 'text',
+                'name'    => 'baz',
+            ),
+            'bat' => array(
+                'options' => array('class' => 'bazbat'),
+                'type'    => 'text',
+            ),
+            'lol' => array(
                 'text',
-                ['class' => 'lolcat'],
-            ],
-        ];
-
+                array('class' => 'lolcat'),
+            )
+        );
         return $elements;
     }
 
@@ -213,10 +212,10 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testSetOptionsSetsDefaultValues()
     {
         $options = $this->getOptions();
-        $options['defaults'] = [
+        $options['defaults'] = array(
             'bar' => 'barvalue',
             'bat' => 'batvalue',
-        ];
+        );
         $options['elements'] = $this->getElementOptions();
         $this->form->setOptions($options);
 
@@ -229,7 +228,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->_checkZf2794();
 
         $options = $this->getOptions();
-        $options['decorators'] = ['label', 'errors'];
+        $options['decorators'] = array('label', 'errors');
         $this->form->setOptions($options);
         $this->assertFalse($this->form->getDecorator('form'));
 
@@ -244,10 +243,10 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->_checkZf2794();
 
         $options = $this->getOptions();
-        $options['decorators'] = [
-            ['label', ['id' => 'mylabel']],
-            ['errors', ['id' => 'errors']],
-        ];
+        $options['decorators'] = array(
+            array('label', array('id' => 'mylabel')),
+            array('errors', array('id' => 'errors')),
+        );
         $this->form->setOptions($options);
         $this->assertFalse($this->form->getDecorator('form'));
 
@@ -267,16 +266,16 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->_checkZf2794();
 
         $options = $this->getOptions();
-        $options['decorators'] = [
-            [
-                'options' => ['id' => 'mylabel'],
+        $options['decorators'] = array(
+            array(
+                'options'   => array('id' => 'mylabel'),
                 'decorator' => 'label',
-            ],
-            [
-                'options' => ['id' => 'errors'],
+            ),
+            array(
+                'options'   => array('id' => 'errors'),
                 'decorator' => 'errors',
-            ],
-        ];
+            ),
+        );
         $this->form->setOptions($options);
         $this->assertFalse($this->form->getDecorator('form'));
 
@@ -294,16 +293,16 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testSetOptionsSetsGlobalPrefixPaths()
     {
         $options = $this->getOptions();
-        $options['prefixPath'] = [
+        $options['prefixPath'] = array(
             'prefix' => 'Zend_Foo',
-            'path' => 'Zend/Foo/',
-        ];
+            'path'   => 'Zend/Foo/'
+        );
         $this->form->setOptions($options);
 
-        foreach (['element', 'decorator'] as $type) {
+        foreach (array('element', 'decorator') as $type) {
             $loader = $this->form->getPluginLoader($type);
-            $paths = $loader->getPaths('Zend_Foo_'.ucfirst($type));
-            $this->assertTrue(is_array($paths), "Failed for type $type: ".var_export($paths, 1));
+            $paths = $loader->getPaths('Zend_Foo_' . ucfirst($type));
+            $this->assertTrue(is_array($paths), "Failed for type $type: " . var_export($paths, 1));
             $this->assertFalse(empty($paths));
             $this->assertContains('Foo', $paths[0]);
         }
@@ -312,9 +311,9 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testSetOptionsSetsIndividualPrefixPathsFromKeyedArrays()
     {
         $options = $this->getOptions();
-        $options['prefixPath'] = [
-            'element' => ['prefix' => 'Zend_Foo', 'path' => 'Zend/Foo/'],
-        ];
+        $options['prefixPath'] = array(
+            'element' => array('prefix' => 'Zend_Foo', 'path' => 'Zend/Foo/')
+        );
         $this->form->setOptions($options);
 
         $loader = $this->form->getPluginLoader('element');
@@ -327,9 +326,9 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testSetOptionsSetsIndividualPrefixPathsFromUnKeyedArrays()
     {
         $options = $this->getOptions();
-        $options['prefixPath'] = [
-            ['type' => 'decorator', 'prefix' => 'Zend_Foo', 'path' => 'Zend/Foo/'],
-        ];
+        $options['prefixPath'] = array(
+            array('type' => 'decorator', 'prefix' => 'Zend_Foo', 'path' => 'Zend/Foo/')
+        );
         $this->form->setOptions($options);
 
         $loader = $this->form->getPluginLoader('decorator');
@@ -342,16 +341,16 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testSetOptionsSetsDisplayGroups()
     {
         $options = $this->getOptions();
-        $options['displayGroups'] = [
-            'barbat' => [['bar', 'bat'], ['order' => 20]],
-            [['foo', 'baz'], 'foobaz', ['order' => 10]],
-            [
-                'name' => 'ghiabc',
-                'elements' => ['ghi', 'abc'],
-                'options' => ['order' => 15],
-            ],
-        ];
-        $options['elements'] = [
+        $options['displayGroups'] = array(
+            'barbat' => array(array('bar', 'bat'), array('order' => 20)),
+            array(array('foo', 'baz'), 'foobaz', array('order' => 10)),
+            array(
+                'name'     => 'ghiabc',
+                'elements' => array('ghi', 'abc'),
+                'options'  => array('order' => 15),
+            ),
+        );
+        $options['elements'] = array(
             'foo' => 'text',
             'bar' => 'text',
             'baz' => 'text',
@@ -360,24 +359,24 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
             'ghi' => 'text',
             'jkl' => 'text',
             'mno' => 'text',
-        ];
+        );
         $this->form->setOptions($options);
 
         $this->assertTrue(isset($this->form->barbat));
         $elements = $this->form->barbat->getElements();
-        $expected = ['bar', 'bat'];
+        $expected = array('bar', 'bat');
         $this->assertEquals($expected, array_keys($elements));
         $this->assertEquals(20, $this->form->barbat->getOrder());
 
         $this->assertTrue(isset($this->form->foobaz));
         $elements = $this->form->foobaz->getElements();
-        $expected = ['foo', 'baz'];
+        $expected = array('foo', 'baz');
         $this->assertEquals($expected, array_keys($elements));
         $this->assertEquals(10, $this->form->foobaz->getOrder());
 
         $this->assertTrue(isset($this->form->ghiabc));
         $elements = $this->form->ghiabc->getElements();
-        $expected = ['ghi', 'abc'];
+        $expected = array('ghi', 'abc');
         $this->assertEquals($expected, array_keys($elements));
         $this->assertEquals(15, $this->form->ghiabc->getOrder());
     }
@@ -388,7 +387,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testDisplayGroupOrderInConfigShouldNotMatter()
     {
         // require_once 'Zend/Config/Xml.php';
-        $config = new Zend_Config_Xml(__DIR__.'/_files/config/zf3250.xml', 'sitearea', true);
+        $config = new Zend_Config_Xml(__DIR__ . '/_files/config/zf3250.xml', 'sitearea', true);
         $form = new Zend_Form($config->test);
         // no assertions needed; throws error if order matters
     }
@@ -398,18 +397,18 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
      */
     public function testSetOptionsShouldCreateDisplayGroupsLast()
     {
-        $options = [];
-        $options['displayGroups'] = [
-            'barbat' => [['bar', 'bat'], ['order' => 20]],
-            [['foo', 'baz'], 'foobaz', ['order' => 10]],
-            [
-                'name' => 'ghiabc',
-                'elements' => ['ghi', 'abc'],
-                'options' => ['order' => 15],
-            ],
-        ];
+        $options = array();
+        $options['displayGroups'] = array(
+            'barbat' => array(array('bar', 'bat'), array('order' => 20)),
+            array(array('foo', 'baz'), 'foobaz', array('order' => 10)),
+            array(
+                'name'     => 'ghiabc',
+                'elements' => array('ghi', 'abc'),
+                'options'  => array('order' => 15),
+            ),
+        );
         $options = array_merge($options, $this->getOptions());
-        $options['elements'] = [
+        $options['elements'] = array(
             'foo' => 'text',
             'bar' => 'text',
             'baz' => 'text',
@@ -418,24 +417,24 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
             'ghi' => 'text',
             'jkl' => 'text',
             'mno' => 'text',
-        ];
+        );
         $this->form = new Zend_Form($options);
 
         $this->assertTrue(isset($this->form->barbat));
         $elements = $this->form->barbat->getElements();
-        $expected = ['bar', 'bat'];
+        $expected = array('bar', 'bat');
         $this->assertEquals($expected, array_keys($elements));
         $this->assertEquals(20, $this->form->barbat->getOrder());
 
         $this->assertTrue(isset($this->form->foobaz));
         $elements = $this->form->foobaz->getElements();
-        $expected = ['foo', 'baz'];
+        $expected = array('foo', 'baz');
         $this->assertEquals($expected, array_keys($elements));
         $this->assertEquals(10, $this->form->foobaz->getOrder());
 
         $this->assertTrue(isset($this->form->ghiabc));
         $elements = $this->form->ghiabc->getElements();
-        $expected = ['ghi', 'abc'];
+        $expected = array('ghi', 'abc');
         $this->assertEquals($expected, array_keys($elements));
         $this->assertEquals(15, $this->form->ghiabc->getOrder());
     }
@@ -459,6 +458,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('/foo/bar', $form->getAction());
         $this->assertEquals('put', $form->getMethod());
     }
+
 
     // Attribs:
 
@@ -485,25 +485,25 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     {
         $this->form->setAttrib('foo', 'bar');
         $this->assertEquals('bar', $this->form->getAttrib('foo'));
-        $this->form->addAttribs([
+        $this->form->addAttribs(array(
             'bar' => 'baz',
             'baz' => 'bat',
-            'bat' => 'foo',
-        ]);
+            'bat' => 'foo'
+        ));
         $test = $this->form->getAttribs();
-        $attribs = [
+        $attribs = array(
             'foo' => 'bar',
             'bar' => 'baz',
             'baz' => 'bat',
-            'bat' => 'foo',
-        ];
+            'bat' => 'foo'
+        );
         $this->assertSame($attribs, $test);
     }
 
     public function testSetAttribsOverwritesExistingAttribs()
     {
         $this->testCanAddAndRetrieveMultipleAttribs();
-        $array = ['bogus' => 'value', 'not' => 'real'];
+        $array = array('bogus' => 'value', 'not' => 'real');
         $this->form->setAttribs($array);
         $this->assertSame($array, $this->form->getAttribs());
     }
@@ -583,11 +583,11 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     {
         $this->testActionDefaultsToEmptyString();
         $this->form->setAction('/foo.php?bar')
-                   ->setView(new Zend_View());
+                   ->setView(new Zend_View);
         $html = $this->form->render();
 
         $this->assertContains('action="/foo.php?bar"', $html);
-        $this->assertEquals('/foo.php?bar', $this->form->getAction());
+    $this->assertEquals('/foo.php?bar', $this->form->getAction());
     }
 
     public function testMethodDefaultsToPost()
@@ -604,7 +604,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
     public function testMethodLimitedToGetPostPutAndDelete()
     {
-        foreach (['get', 'post', 'put', 'delete'] as $method) {
+        foreach (array('get', 'post', 'put', 'delete') as $method) {
             $this->form->setMethod($method);
             $this->assertEquals($method, $this->form->getMethod());
         }
@@ -636,7 +636,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testCanSetLegend()
     {
         $this->testLegendInitiallyNull();
-        $legend = 'This is a legend';
+        $legend = "This is a legend";
         $this->form->setLegend($legend);
         $this->assertEquals($legend, $this->form->getLegend());
     }
@@ -649,7 +649,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testCanSetDescription()
     {
         $this->testDescriptionInitiallyNull();
-        $description = 'This is a description';
+        $description = "This is a description";
         $this->form->setDescription($description);
         $this->assertEquals($description, $this->form->getDescription());
     }
@@ -722,14 +722,14 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $foo = new Zend_Form_Element_Text('foo');
         $this->form->addElement($foo);
         $loader = $foo->getPluginLoader('decorator');
-        $paths = $loader->getPaths('Zend_Foo');
+        $paths  = $loader->getPaths('Zend_Foo');
         $this->assertTrue(is_array($paths));
         $this->assertContains('Foo', $paths[0]);
 
         $this->form->addElement('text', 'bar');
         $bar = $this->form->bar;
         $loader = $bar->getPluginLoader('decorator');
-        $paths = $loader->getPaths('Zend_Foo');
+        $paths  = $loader->getPaths('Zend_Foo');
         $this->assertTrue(is_array($paths));
         $this->assertContains('Foo', $paths[0]);
     }
@@ -739,9 +739,9 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $loader = $this->form->getPluginLoader('decorator');
         $this->form->addPrefixPath('Zend_Foo', 'Zend/Foo/', 'decorator');
         $this->setupElements();
-        $foo = $this->form->foo;
+        $foo    = $this->form->foo;
         $loader = $foo->getPluginLoader('decorator');
-        $paths = $loader->getPaths('Zend_Foo');
+        $paths  = $loader->getPaths('Zend_Foo');
         $this->assertTrue(is_array($paths));
         $this->assertContains('Foo', $paths[0]);
     }
@@ -752,7 +752,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->form->addPrefixPath('Zend_Foo', 'Zend/Foo/', 'decorator');
         $this->setupSubForm();
         $loader = $this->form->sub->getPluginLoader('decorator');
-        $paths = $loader->getPaths('Zend_Foo');
+        $paths  = $loader->getPaths('Zend_Foo');
         $this->assertTrue(is_array($paths));
         $this->assertContains('Foo', $paths[0]);
     }
@@ -788,7 +788,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testAddAllPluginLoaderPrefixPathsSimultaneously()
     {
         $decoratorLoader = new Zend_Loader_PluginLoader();
-        $elementLoader = new Zend_Loader_PluginLoader();
+        $elementLoader   = new Zend_Loader_PluginLoader();
         $this->form->setPluginLoader($decoratorLoader, 'decorator')
                    ->setPluginLoader($elementLoader, 'element')
                    ->addPrefixPath('Zend', 'Zend/');
@@ -850,14 +850,14 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
     public function testCanAddAndRetrieveMultipleElements()
     {
-        $this->form->addElements([
+        $this->form->addElements(array(
             'foo' => 'text',
-            ['text', 'bar'],
-            ['text', 'baz', ['foo' => 'bar']],
+            array('text', 'bar'),
+            array('text', 'baz', array('foo' => 'bar')),
             new Zend_Form_Element_Text('bat'),
-        ]);
+        ));
         $elements = $this->form->getElements();
-        $names = ['foo', 'bar', 'baz', 'bat'];
+        $names = array('foo', 'bar', 'baz', 'bat');
         $this->assertEquals($names, array_keys($elements));
         $foo = $elements['foo'];
         $this->assertTrue($foo instanceof Zend_Form_Element_Text);
@@ -873,11 +873,11 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testSetElementsOverwritesExistingElements()
     {
         $this->testCanAddAndRetrieveMultipleElements();
-        $this->form->setElements([
-            'bogus' => 'text',
-        ]);
+        $this->form->setElements(array(
+            'bogus' => 'text'
+        ));
         $elements = $this->form->getElements();
-        $names = ['bogus'];
+        $names = array('bogus');
         $this->assertEquals($names, array_keys($elements));
     }
 
@@ -910,16 +910,16 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testCanSetElementDefaultValues()
     {
         $this->testCanAddAndRetrieveMultipleElements();
-        $values = [
+        $values = array(
             'foo' => 'foovalue',
             'bar' => 'barvalue',
             'baz' => 'bazvalue',
-            'bat' => 'batvalue',
-        ];
+            'bat' => 'batvalue'
+        );
         $this->form->setDefaults($values);
         $elements = $this->form->getElements();
         foreach (array_keys($values) as $name) {
-            $this->assertEquals($name.'value', $elements[$name]->getValue(), var_export($elements[$name], 1));
+            $this->assertEquals($name . 'value', $elements[$name]->getValue(), var_export($elements[$name], 1));
         }
     }
 
@@ -928,10 +928,10 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->testCanAddAndRetrieveMultipleElements();
         $this->form->baz->setValue('testing');
         $this->form->bar->setValue('testing');
-        $values = [
+        $values = array(
             'foo' => 'foovalue',
-            'bat' => 'batvalue',
-        ];
+            'bat' => 'batvalue'
+        );
         $this->form->setDefaults($values);
         $this->assertEquals('foovalue', $this->form->foo->getValue());
         $this->assertEquals('batvalue', $this->form->bat->getValue());
@@ -941,21 +941,21 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
     public function testCanRetrieveSingleElementValue()
     {
-        $this->form->addElement('text', 'foo', ['value' => 'foovalue']);
+        $this->form->addElement('text', 'foo', array('value' => 'foovalue'));
         $this->assertEquals('foovalue', $this->form->getValue('foo'));
     }
 
     public function testCanRetrieveAllElementValues()
     {
         $this->testCanAddAndRetrieveMultipleElements();
-        $values = [
+        $values = array(
             'foo' => 'foovalue',
             'bar' => 'barvalue',
             'baz' => 'bazvalue',
-            'bat' => 'batvalue',
-        ];
+            'bat' => 'batvalue'
+        );
         $this->form->setDefaults($values);
-        $test = $this->form->getValues();
+        $test     = $this->form->getValues();
         $elements = $this->form->getElements();
         foreach (array_keys($values) as $name) {
             $this->assertEquals($values[$name], $test[$name]);
@@ -964,16 +964,16 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
     public function testRetrievingAllElementValuesSkipsThoseFlaggedAsIgnore()
     {
-        $this->form->addElements([
+        $this->form->addElements(array(
             'foo' => 'text',
             'bar' => 'text',
-            'baz' => 'text',
-        ]);
-        $this->form->setDefaults([
+            'baz' => 'text'
+        ));
+        $this->form->setDefaults(array(
             'foo' => 'Foo Value',
             'bar' => 'Bar Value',
             'baz' => 'Baz Value',
-        ]);
+        ));
         $this->form->bar->setIgnore(true);
         $test = $this->form->getValues();
         $this->assertFalse(array_key_exists('bar', $test));
@@ -999,11 +999,11 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $bar = new Zend_Form_Element_Text('bar');
         $bar->addFilter('StringToUpper')
             ->setValue('barvalue');
-        $this->form->addElements([$foo, $bar]);
-        $values = $this->form->getValues();
+        $this->form->addElements(array($foo, $bar));
+        $values     = $this->form->getValues();
         $unfiltered = $this->form->getUnfilteredValues();
-        foreach (['foo', 'bar'] as $key) {
-            $value = $key.'value';
+        foreach (array('foo', 'bar') as $key) {
+            $value = $key . 'value';
             $this->assertEquals(strtoupper((string) $value), $values[$key]);
             $this->assertEquals($value, $unfiltered[$key]);
         }
@@ -1040,7 +1040,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         }
 
         try {
-            $this->form->foo = new Zend_Config([]);
+            $this->form->foo = new Zend_Config(array());
             $this->fail('Overloading should not allow arbitrary object types');
         } catch (Zend_Form_Exception $e) {
             $this->assertContains('Only form elements and groups may be overloaded', $e->getMessage());
@@ -1150,34 +1150,34 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testElementsInDisplayGroupsShouldInheritFormElementsBelongToSetting()
     {
         $subForm = new Zend_Form_SubForm();
-        $subForm->addElements([
+        $subForm->addElements(array(
                     new Zend_Form_Element_Text('foo'),
                     new Zend_Form_Element_Text('bar'),
                     new Zend_Form_Element_Text('baz'),
                     new Zend_Form_Element_Text('bat'),
-                ])
-                ->addDisplayGroup(['bar', 'baz'], 'barbaz');
+                ))
+                ->addDisplayGroup(array('bar', 'baz'), 'barbaz');
         $this->form->addSubForm($subForm, 'sub')
                    ->setElementsBelongTo('myform')
-                   ->setView(new Zend_View());
+                   ->setView(new Zend_View);
         $html = $this->form->render();
-        foreach (['foo', 'bar', 'baz', 'bat'] as $test) {
-            $this->assertContains('id="myform-sub-'.$test.'"', $html);
-            $this->assertContains('name="myform[sub]['.$test.']"', $html);
+        foreach (array('foo', 'bar', 'baz', 'bat') as $test) {
+            $this->assertContains('id="myform-sub-' . $test . '"', $html);
+            $this->assertContains('name="myform[sub][' . $test . ']"', $html);
         }
     }
 
     public function testIsValidWithOneLevelElementsBelongTo()
     {
         $this->form->addElement('text', 'test')->test
-            ->addValidator('Identical', false, ['Test Value']);
+            ->addValidator('Identical', false, array('Test Value'));
         $this->form->setElementsBelongTo('foo');
 
-        $data = [
-            'foo' => [
+        $data = array(
+            'foo' => array(
                 'test' => 'Test Value',
-            ],
-        ];
+            ),
+        );
 
         $this->assertTrue($this->form->isValid($data));
     }
@@ -1185,18 +1185,18 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testIsValidWithMultiLevelElementsBelongTo()
     {
         $this->form->addElement('text', 'test')->test
-            ->addValidator('Identical', false, ['Test Value']);
+            ->addValidator('Identical', false, array('Test Value'));
         $this->form->setElementsBelongTo('foo[bar][zot]');
 
-        $data = [
-            'foo' => [
-                'bar' => [
-                    'zot' => [
+        $data = array(
+            'foo' => array(
+                'bar' => array(
+                    'zot' => array(
                         'test' => 'Test Value',
-                    ],
-                ],
-            ],
-        ];
+                    ),
+                ),
+            ),
+        );
 
         $this->assertTrue($this->form->isValid($data));
     }
@@ -1205,8 +1205,8 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
     public function testCanAddAndRetrieveSingleSubForm()
     {
-        $subForm = new Zend_Form_SubForm();
-        $subForm->addElements(['foo' => 'text', 'bar' => 'text']);
+        $subForm = new Zend_Form_SubForm;
+        $subForm->addElements(array('foo' => 'text', 'bar' => 'text'));
         $this->form->addSubForm($subForm, 'page1');
         $test = $this->form->getSubForm('page1');
         $this->assertSame($subForm, $test);
@@ -1214,20 +1214,21 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
     public function testAddingSubFormSetsSubFormName()
     {
-        $subForm = new Zend_Form_SubForm();
-        $subForm->addElements(['foo' => 'text', 'bar' => 'text']);
+        $subForm = new Zend_Form_SubForm;
+        $subForm->addElements(array('foo' => 'text', 'bar' => 'text'));
         $this->form->addSubForm($subForm, 'page1');
         $this->assertEquals('page1', $subForm->getName());
     }
 
     public function testAddingSubFormResetsBelongsToWithDifferentSubFormName()
     {
-        $subForm = new Zend_Form_SubForm();
+        $subForm = new Zend_Form_SubForm;
         $subForm->setName('quo')
                 ->addElement('text', 'foo');
         $this->form->addSubForm($subForm, 'bar');
         $this->assertEquals('bar', $subForm->foo->getBelongsTo());
     }
+
 
     public function testGetSubFormReturnsNullForUnregisteredSubForm()
     {
@@ -1239,13 +1240,13 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $page1 = new Zend_Form_SubForm();
         $page2 = new Zend_Form_SubForm();
         $page3 = new Zend_Form_SubForm();
-        $this->form->addSubForms([
+        $this->form->addSubForms(array(
             'page1' => $page1,
-            [$page2, 'page2'],
-            [$page3, 'page3', 3],
-        ]);
+            array($page2, 'page2'),
+            array($page3, 'page3', 3)
+        ));
         $subforms = $this->form->getSubForms();
-        $keys = ['page1', 'page2', 'page3'];
+        $keys = array('page1', 'page2', 'page3');
         $this->assertEquals($keys, array_keys($subforms));
         $this->assertSame($page1, $subforms['page1']);
         $this->assertSame($page2, $subforms['page2']);
@@ -1256,9 +1257,9 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     {
         $this->testCanAddAndRetrieveMultipleSubForms();
         $foo = new Zend_Form_SubForm();
-        $this->form->setSubForms(['foo' => $foo]);
+        $this->form->setSubForms(array('foo' => $foo));
         $subforms = $this->form->getSubForms();
-        $keys = ['foo'];
+        $keys = array('foo');
         $this->assertEquals($keys, array_keys($subforms));
         $this->assertSame($foo, $subforms['foo']);
     }
@@ -1286,7 +1287,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
     public function testOverloadingSubForms()
     {
-        $foo = new Zend_Form_SubForm();
+        $foo = new Zend_Form_SubForm;
         $this->form->addSubForm($foo, 'foo');
         $this->assertTrue(isset($this->form->foo));
         $subform = $this->form->foo;
@@ -1303,11 +1304,11 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
     public function testCanSetDefaultsForSubFormElementsFromForm()
     {
-        $subForm = new Zend_Form_SubForm();
-        $subForm->addElements(['foo' => 'text', 'bar' => 'text']);
+        $subForm = new Zend_Form_SubForm;
+        $subForm->addElements(array('foo' => 'text', 'bar' => 'text'));
         $this->form->addSubForm($subForm, 'page1');
 
-        $data = ['foo' => 'foo value', 'bar' => 'bar value'];
+        $data = array('foo' => 'foo value', 'bar' => 'bar value');
         $this->form->setDefaults($data);
         $this->assertEquals($data['foo'], $subForm->foo->getValue());
         $this->assertEquals($data['bar'], $subForm->bar->getValue());
@@ -1315,14 +1316,14 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
     public function testCanSetDefaultsForSubFormElementsFromFormWithArray()
     {
-        $subForm = new Zend_Form_SubForm();
-        $subForm->addElements(['foo' => 'text', 'bar' => 'text']);
+        $subForm = new Zend_Form_SubForm;
+        $subForm->addElements(array('foo' => 'text', 'bar' => 'text'));
         $this->form->addSubForm($subForm, 'page1');
 
-        $data = ['page1' => [
+        $data = array( 'page1' => array(
             'foo' => 'foo value',
-            'bar' => 'bar value',
-        ]];
+            'bar' => 'bar value'
+        ));
         $this->form->setDefaults($data);
         $this->assertEquals($data['page1']['foo'], $subForm->foo->getValue());
         $this->assertEquals($data['page1']['bar'], $subForm->bar->getValue());
@@ -1330,8 +1331,8 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
     public function testGetValuesReturnsSubFormValues()
     {
-        $subForm = new Zend_Form_SubForm();
-        $subForm->addElements(['foo' => 'text', 'bar' => 'text']);
+        $subForm = new Zend_Form_SubForm;
+        $subForm->addElements(array('foo' => 'text', 'bar' => 'text'));
         $subForm->foo->setValue('foo value');
         $subForm->bar->setValue('bar value');
         $this->form->addSubForm($subForm, 'page1');
@@ -1346,8 +1347,8 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
     public function testGetValuesReturnsSubFormValuesFromArrayToWhichElementsBelong()
     {
-        $subForm = new Zend_Form_SubForm();
-        $subForm->addElements(['foo' => 'text', 'bar' => 'text'])
+        $subForm = new Zend_Form_SubForm;
+        $subForm->addElements(array('foo' => 'text', 'bar' => 'text'))
                 ->setElementsBelongTo('subform');
         $subForm->foo->setValue('foo value');
         $subForm->bar->setValue('bar value');
@@ -1387,20 +1388,21 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $subForm->addSubForm($subSubForm, 'subSub');
 
         $form->addSubForm($subForm, 'sub')
-             ->addElement('submit', 'save', ['value' => 'submit', 'ignore' => true]);
+             ->addElement('submit', 'save', array('value' => 'submit', 'ignore' => true));
 
-        $data = ['foobar' => [
+
+        $data = array('foobar' => array(
             'firstName' => 'Mabel',
-            'lastName' => 'Cow',
-            'baz' => [
-                'quux' => [
+            'lastName'  => 'Cow',
+            'baz'    => array(
+                'quux' => array(
                     'email' => 'mabel@cow.org',
-                    'bat' => [
+                    'bat'   => array(
                         'home' => 1,
-                    ],
-                ],
-            ],
-        ]];
+                    )
+                ),
+            )
+        ));
         $this->assertTrue($form->isValid($data));
 
         $values = $form->getValues();
@@ -1409,8 +1411,8 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
     public function testGetValueCanReturnSubFormValues()
     {
-        $subForm = new Zend_Form_SubForm();
-        $subForm->addElements(['foo' => 'text', 'bar' => 'text']);
+        $subForm = new Zend_Form_SubForm;
+        $subForm->addElements(array('foo' => 'text', 'bar' => 'text'));
         $subForm->foo->setValue('foo value');
         $subForm->bar->setValue('bar value');
         $this->form->addSubForm($subForm, 'page1');
@@ -1424,8 +1426,8 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
     public function testGetValueCanReturnSubFormValuesFromArrayToWhichElementsBelong()
     {
-        $subForm = new Zend_Form_SubForm();
-        $subForm->addElements(['foo' => 'text', 'bar' => 'text'])
+        $subForm = new Zend_Form_SubForm;
+        $subForm->addElements(array('foo' => 'text', 'bar' => 'text'))
                 ->setElementsBelongTo('subform');
         $subForm->foo->setValue('foo value');
         $subForm->bar->setValue('bar value');
@@ -1442,23 +1444,23 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     {
         $subForm = new Zend_Form_SubForm();
         $subForm->addElement('text', 'test')->test
-            ->setRequired(true)->addValidator('Identical', false, ['Test Value']);
+            ->setRequired(true)->addValidator('Identical', false, array('Test Value'));
         $this->form->addSubForm($subForm, 'sub');
 
         $this->form->setElementsBelongTo('foo[bar]');
         $subForm->setElementsBelongTo('my[subform]');
 
-        $data = [
-            'foo' => [
-                'bar' => [
-                    'my' => [
-                        'subform' => [
+        $data = array(
+            'foo' => array(
+                'bar' => array(
+                    'my' => array(
+                        'subform' => array(
                             'test' => 'Test Value',
-                        ],
-                    ],
-                ],
-            ],
-        ];
+                        ),
+                    ),
+                ),
+            ),
+        );
 
         $this->assertTrue($this->form->isValid($data));
     }
@@ -1467,33 +1469,33 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     {
         $subForm = new Zend_Form_SubForm();
         $subForm->addElement('text', 'test1')->test1
-            ->setRequired(true)->addValidator('Identical', false, ['Test1 Value']);
+            ->setRequired(true)->addValidator('Identical', false, array('Test1 Value'));
         $this->form->addSubForm($subForm, 'sub');
 
         $subSubForm = new Zend_Form_SubForm();
         $subSubForm->addElement('text', 'test2')->test2
-            ->setRequired(true)->addValidator('Identical', false, ['Test2 Value']);
+            ->setRequired(true)->addValidator('Identical', false, array('Test2 Value'));
         $subForm->addSubForm($subSubForm, 'subSub');
 
         $this->form->setElementsBelongTo('form[first]');
         // Notice we skipped subForm, to mix manual and auto elementsBelongTo.
         $subSubForm->setElementsBelongTo('subsubform[first]');
 
-        $data = [
-            'form' => [
-                'first' => [
-                    'sub' => [
+        $data = array(
+            'form' => array(
+                'first' => array(
+                    'sub' => array(
                         'test1' => 'Test1 Value',
 
-                        'subsubform' => [
-                            'first' => [
+                        'subsubform' => array(
+                            'first' => array(
                                 'test2' => 'Test2 Value',
-                            ],
-                        ],
-                    ],
-                ],
-            ],
-        ];
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        );
 
         $this->assertTrue($this->form->isValid($data));
     }
@@ -1509,7 +1511,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
                         ->foo->setAllowEmpty(true)
                              ->addValidator('Identical', true, '');
 
-        $this->assertTrue($this->form->isValid(['foo' => 'foo Value']));
+        $this->assertTrue($this->form->isValid(array('foo' => 'foo Value')));
     }
 
     /**
@@ -1521,7 +1523,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->form->addSubForm(new Zend_Form_SubForm(), 'bar')
                    ->bar->addElement('text', 'foo');
 
-        $this->form->populate(['foo' => 'foo Value']);
+        $this->form->populate(array('foo' => 'foo Value'));
         $html = $this->form->setView($this->getView())
                            ->render();
         $this->assertEquals(1, preg_match_all('/foo Value/', $html, $matches));
@@ -1535,8 +1537,8 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
                         ->foo->setIsArray(false)
                              ->addElement('text', 'foo')             // foo[foo][foo][foo]
                              ->foo->addValidator('Identical',
-                                 false,
-                                 ['foo Value']);
+                                                 false,
+                                                 array('foo Value'));
 
         $this->form->foo->addSubForm(new Zend_Form_SubForm(), 'baz') // foo[foo][baz]
                    ->baz->setIsArray(false)
@@ -1544,8 +1546,8 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
                         ->baz->setElementsBelongTo('baz[baz]')       // foo[foo][baz][baz][baz]
                              ->addElement('text', 'baz')             // foo[foo][baz][baz][baz][baz]
                              ->baz->addValidator('Identical',
-                                 false,
-                                 ['baz Value']);
+                                                 false,
+                                                 array('baz Value'));
 
         // This is appending a different named SubForm and setting
         // elementsBelongTo to a !isArray() Subform name from same level
@@ -1553,8 +1555,8 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
                         ->quo->setElementsBelongTo('foo')            // foo[foo][foo] !!!!
                              ->addElement('text', 'quo')             // foo[foo][foo][quo]
                              ->quo->addValidator('Identical',
-                                 false,
-                                 ['quo Value']);
+                                                 false,
+                                                 array('quo Value'));
 
         // This is setting elementsBelongTo point into the middle of
         // a chain of another SubForms elementsBelongTo
@@ -1562,8 +1564,8 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
                    ->duh->setElementsBelongTo('foo[zoo]')            // foo[zoo] !!!!
                         ->addElement('text', 'zoo')                  // foo[zoo][zoo]
                         ->zoo->addValidator('Identical',
-                            false,
-                            ['zoo Value']);
+                                            false,
+                                            array('zoo Value'));
 
         // This is !isArray SubForms Name equal to the last segment
         // of another SubForms elementsBelongTo
@@ -1573,23 +1575,43 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
                         ->zoo->setIsArray(false)
                              ->addElement('text', 'iek')             // foo[zoo][iek]
                              ->iek->addValidator('Identical',
-                                 false,
-                                 ['iek Value']);
+                                                 false,
+                                                 array('iek Value'));
 
-        $data = ['valid' => ['foo' => ['foo' => ['foo' => ['foo' => 'foo Value',
-                                                           'quo' => 'quo Value'],
-                                                     'baz' => ['baz' => ['baz' => ['baz' => 'baz Value']]]],
-                                               'zoo' => ['zoo' => 'zoo Value',
-                                                     'iek' => 'iek Value']]],
-                      'invalid' => ['foo' => ['foo' => ['foo' => ['foo' => 'foo Invalid',
-                                                           'quo' => 'quo Value'],
-                                                     'baz' => ['baz' => ['baz' => ['baz' => 'baz Value']]]],
-                                               'zoo' => ['zoo' => 'zoo Value',
-                                                     'iek' => 'iek Invalid']]],
-                      'partial' => ['foo' => ['foo' => ['baz' => ['baz' => ['baz' => ['baz' => 'baz Value']]],
-                                                    'foo' => ['quo' => 'quo Value']],
-                                               'zoo' => ['zoo' => 'zoo Value']]]];
-
+        $data = array('valid'   => array('foo' =>
+                                         array('foo' =>
+                                               array('foo' =>
+                                                     array('foo' => 'foo Value',
+                                                           'quo' => 'quo Value'),
+                                                     'baz' =>
+                                                     array('baz' =>
+                                                           array('baz' =>
+                                                                 array('baz' => 'baz Value')))),
+                                               'zoo' =>
+                                               array('zoo' => 'zoo Value',
+                                                     'iek' => 'iek Value'))),
+                      'invalid' => array('foo' =>
+                                         array('foo' =>
+                                               array('foo' =>
+                                                     array('foo' => 'foo Invalid',
+                                                           'quo' => 'quo Value'),
+                                                     'baz' =>
+                                                     array('baz' =>
+                                                           array('baz' =>
+                                                                 array('baz' => 'baz Value')))),
+                                               'zoo' =>
+                                               array('zoo' => 'zoo Value',
+                                                     'iek' => 'iek Invalid'))),
+                      'partial' => array('foo' =>
+                                         array('foo' =>
+                                               array('baz' =>
+                                                     array('baz' =>
+                                                           array('baz' =>
+                                                                 array('baz' => 'baz Value'))),
+                                                    'foo' =>
+                                                     array('quo' => 'quo Value')),
+                                               'zoo' =>
+                                               array('zoo' => 'zoo Value'))));
         return $data;
     }
 
@@ -1658,21 +1680,29 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
                    ->$sub0->setElementsBelongTo('f[2]')
                           ->addElement('text', 'foo')
                           ->foo->addValidator('Identical',
-                              false,
-                              ['foo Value']);
+                                              false,
+                                              array('foo Value'));
 
         $this->form->$sub0->addSubForm(new Zend_Form_SubForm(), $sub0)
                           ->$sub0->addElement('text', 'quo')
                                  ->quo->addValidator('Identical',
-                                     false,
-                                     ['quo Value']);
+                                                     false,
+                                                     array('quo Value'));
 
-        $data = ['valid' => ['f' => [2 => ['foo' => 'foo Value',
-                                                   0 => ['quo' => 'quo Value']]]],
-                      'invalid' => ['f' => [2 => ['foo' => 'foo Invalid',
-                                                     0 => ['quo' => 'quo Value']]]],
-                      'partial' => ['f' => [2 => [0 => ['quo' => 'quo Value']]]]];
-
+        $data = array('valid' => array('f' =>
+                                       array(2 =>
+                                             array('foo' => 'foo Value',
+                                                   0 =>
+                                                   array('quo' => 'quo Value')))),
+                      'invalid' => array('f' =>
+                                         array(2 =>
+                                               array('foo' => 'foo Invalid',
+                                                     0 =>
+                                                     array('quo' => 'quo Value')))),
+                      'partial' => array('f' =>
+                                         array(2 =>
+                                               array(0 =>
+                                                     array('quo' => 'quo Value')))));
         return $data;
     }
 
@@ -1711,21 +1741,26 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
                    ->foo->setBelongsTo('bar[quo]')
                         ->setRequired(true)
                         ->addValidator('Identical',
-                            false,
-                            'foo Value');
+                                       false,
+                                       'foo Value');
 
         $this->form->addElement('text', 'quo')
                    ->quo->setBelongsTo('bar[quo]')
                         ->addValidator('Identical',
-                            false,
-                            'quo Value');
+                                       false,
+                                       'quo Value');
 
-        $data = ['valid' => ['bar' => ['quo' => ['foo' => 'foo Value',
-                                                   'quo' => 'quo Value']]],
-                      'invalid' => ['bar' => ['quo' => ['foo' => 'foo Invalid',
-                                                     'quo' => 'quo Value']]],
-                      'partial' => ['bar' => ['quo' => ['quo' => 'quo Value']]]];
-
+        $data = array('valid' => array('bar' =>
+                                       array('quo' =>
+                                             array('foo' => 'foo Value',
+                                                   'quo' => 'quo Value'))),
+                      'invalid' => array('bar' =>
+                                         array('quo' =>
+                                               array('foo' => 'foo Invalid',
+                                                     'quo' => 'quo Value'))),
+                      'partial' => array('bar' =>
+                                         array('quo' =>
+                                               array('quo' => 'quo Value'))));
         return $data;
     }
 
@@ -1762,30 +1797,30 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->assertSame($data['partial'], $this->form->getValidValues($data['invalid']));
     }
 
-    public function testZF9788NumericArrayIndex()
+    public function testZF9788_NumericArrayIndex()
     {
         $s = 2;
         $e = 4;
         $this->form->setName('f')
                    ->setIsArray(true)
-                   ->addElement('text', (string) $e)
+                   ->addElement('text', (string)$e)
                    ->$e->setRequired(true);
         $this->form->addSubForm(new Zend_Form_SubForm(), $s)
-                   ->$s->addElement('text', (string) $e)
+                   ->$s->addElement('text', (string)$e)
                    ->$e->setRequired(true);
 
-        $valid = ['f' => [$e => 1,
-                                    $s => [$e => 1]]];
+        $valid = array('f' => array($e => 1,
+                                    $s => array($e => 1)));
 
         $this->form->populate($valid);
 
         $this->assertEquals($valid, $this->form->getValues());
 
-        $vv = $this->form->getValidValues(['f' => [$e => 1,
-                                                             $s => [$e => 1]]]);
+        $vv = $this->form->getValidValues(array('f' => array($e => 1,
+                                                             $s => array($e => 1))));
         $this->assertEquals($valid, $vv);
 
-        $this->form->isValid([]);
+        $this->form->isValid(array());
 
         $err = $this->form->getErrors();
         $msg = $this->form->getMessages();
@@ -1799,18 +1834,18 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testCanAddAndRetrieveSingleDisplayGroups()
     {
         $this->testCanAddAndRetrieveMultipleElements();
-        $this->form->addDisplayGroup(['bar', 'bat'], 'barbat');
+        $this->form->addDisplayGroup(array('bar', 'bat'), 'barbat');
         $group = $this->form->getDisplayGroup('barbat');
         $this->assertTrue($group instanceof Zend_Form_DisplayGroup);
         $elements = $group->getElements();
-        $expected = ['bar' => $this->form->bar, 'bat' => $this->form->bat];
+        $expected = array('bar' => $this->form->bar, 'bat' => $this->form->bat);
         $this->assertEquals($expected, $elements);
     }
 
     public function testDisplayGroupsMustContainAtLeastOneElement()
     {
         try {
-            $this->form->addDisplayGroup([], 'foo');
+            $this->form->addDisplayGroup(array(), 'foo');
             $this->fail('Empty display group should raise exception');
         } catch (Zend_Form_Exception $e) {
             $this->assertContains('No valid elements', $e->getMessage());
@@ -1820,15 +1855,15 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testCanAddAndRetrieveMultipleDisplayGroups()
     {
         $this->testCanAddAndRetrieveMultipleElements();
-        $this->form->addDisplayGroups([
-            [['bar', 'bat'], 'barbat'],
-            'foobaz' => ['baz', 'foo'],
-        ]);
+        $this->form->addDisplayGroups(array(
+            array(array('bar', 'bat'), 'barbat'),
+            'foobaz' => array('baz', 'foo')
+        ));
         $groups = $this->form->getDisplayGroups();
-        $expected = [
-            'barbat' => ['bar' => $this->form->bar, 'bat' => $this->form->bat],
-            'foobaz' => ['baz' => $this->form->baz, 'foo' => $this->form->foo],
-        ];
+        $expected = array(
+            'barbat' => array('bar' => $this->form->bar, 'bat' => $this->form->bat),
+            'foobaz' => array('baz' => $this->form->baz, 'foo' => $this->form->foo),
+        );
         foreach ($groups as $group) {
             $this->assertTrue($group instanceof Zend_Form_DisplayGroup);
         }
@@ -1839,9 +1874,9 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testSetDisplayGroupsOverwritesExistingDisplayGroups()
     {
         $this->testCanAddAndRetrieveMultipleDisplayGroups();
-        $this->form->setDisplayGroups(['foobar' => ['bar', 'foo']]);
+        $this->form->setDisplayGroups(array('foobar' => array('bar', 'foo')));
         $groups = $this->form->getDisplayGroups();
-        $expected = ['bar' => $this->form->bar, 'foo' => $this->form->foo];
+        $expected = array('bar' => $this->form->bar, 'foo' => $this->form->foo);
         $this->assertEquals(1, count($groups));
         $this->assertTrue(isset($groups['foobar']));
         $this->assertEquals($expected, $groups['foobar']->getElements());
@@ -1871,18 +1906,18 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testOverloadingDisplayGroups()
     {
         $this->testCanAddAndRetrieveMultipleElements();
-        $this->form->addDisplayGroup(['foo', 'bar'], 'foobar');
+        $this->form->addDisplayGroup(array('foo', 'bar'), 'foobar');
         $this->assertTrue(isset($this->form->foobar));
         $group = $this->form->foobar;
-        $expected = ['foo' => $this->form->foo, 'bar' => $this->form->bar];
+        $expected = array('foo' => $this->form->foo, 'bar' => $this->form->bar);
         $this->assertEquals($expected, $group->getElements());
         unset($this->form->foobar);
         $this->assertFalse(isset($this->form->foobar));
 
-        $this->form->barbaz = ['bar', 'baz'];
+        $this->form->barbaz = array('bar', 'baz');
         $this->assertTrue(isset($this->form->barbaz));
         $group = $this->form->barbaz;
-        $expected = ['bar' => $this->form->bar, 'baz' => $this->form->baz];
+        $expected = array('bar' => $this->form->bar, 'baz' => $this->form->baz);
         $this->assertSame($expected, $group->getElements());
     }
 
@@ -1902,7 +1937,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     {
         $this->form->setDefaultDisplayGroupClass('Zend_Form_FormTest_DisplayGroup');
         $this->setupElements();
-        $this->form->addDisplayGroup(['foo', 'bar'], 'foobar');
+        $this->form->addDisplayGroup(array('foo', 'bar'), 'foobar');
         $displayGroup = $this->form->getDisplayGroup('foobar');
         $this->assertTrue($displayGroup instanceof Zend_Form_FormTest_DisplayGroup);
     }
@@ -1910,7 +1945,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testCanPassDisplayGroupClassWhenAddingDisplayGroup()
     {
         $this->setupElements();
-        $this->form->addDisplayGroup(['foo', 'bar'], 'foobar', ['displayGroupClass' => 'Zend_Form_FormTest_DisplayGroup']);
+        $this->form->addDisplayGroup(array('foo', 'bar'), 'foobar', array('displayGroupClass' => 'Zend_Form_FormTest_DisplayGroup'));
         $this->assertTrue($this->form->foobar instanceof Zend_Form_FormTest_DisplayGroup);
     }
 
@@ -1920,7 +1955,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testAddingDisplayGroupShouldPassOptions()
     {
         $this->testCanAddAndRetrieveMultipleElements();
-        $this->form->addDisplayGroup(['bar', 'bat'], 'barbat', ['disableLoadDefaultDecorators' => true]);
+        $this->form->addDisplayGroup(array('bar', 'bat'), 'barbat', array('disableLoadDefaultDecorators' => true));
         $group = $this->form->getDisplayGroup('barbat');
         $this->assertTrue($group instanceof Zend_Form_DisplayGroup);
         $decorators = $group->getDecorators();
@@ -1933,14 +1968,14 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testPopulateProxiesToSetDefaults()
     {
         $this->testCanAddAndRetrieveMultipleElements();
-        $values = [
+        $values = array(
             'foo' => 'foovalue',
             'bar' => 'barvalue',
             'baz' => 'bazvalue',
-            'bat' => 'batvalue',
-        ];
+            'bat' => 'batvalue'
+        );
         $this->form->populate($values);
-        $test = $this->form->getValues();
+        $test     = $this->form->getValues();
         $elements = $this->form->getElements();
         foreach (array_keys($values) as $name) {
             $this->assertEquals($values[$name], $test[$name]);
@@ -1958,12 +1993,12 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $baz = new Zend_Form_Element_Text('baz');
         $baz->addValidator('NotEmpty')
             ->addValidator('Alnum');
-        $this->form->addElements([$foo, $bar, $baz]);
-        $this->elementValues = [
+        $this->form->addElements(array($foo, $bar, $baz));
+        $this->elementValues = array(
             'foo' => 'fooBarBAZ',
             'bar' => '123456789',
             'baz' => 'foo123BAR',
-        ];
+        );
     }
 
     public function testIsValidShouldThrowExceptionWithNonArrayArgument()
@@ -1980,11 +2015,11 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     {
         $this->setupElements();
         $this->assertTrue($this->form->isValid($this->elementValues));
-        $values = [
+        $values = array(
             'foo' => '12345',
             'bar' => 'abc',
-            'baz' => 'abc-123',
-        ];
+            'baz' => 'abc-123'
+        );
         $this->assertFalse($this->form->isValid($values));
 
         $validator = $this->form->foo->getValidator('alpha');
@@ -2003,16 +2038,16 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
         $this->setupElements();
 
-        $this->assertTrue($this->form->isValid([]));
+        $this->assertTrue($this->form->isValid(array()));
 
         $this->form->getElement('foo')->setRequired(true);
-        $this->assertTrue($this->form->isValid([
+        $this->assertTrue($this->form->isValid(array(
             'foo' => 'abc',
-            'baz' => 'abc123',
-        ]));
-        $this->assertFalse($this->form->isValid([
-            'baz' => 'abc123',
-        ]));
+            'baz' => 'abc123'
+        )));
+        $this->assertFalse($this->form->isValid(array(
+            'baz' => 'abc123'
+        )));
     }
 
     public function testCanValidatePartialFormContainingOnlyElements()
@@ -2023,26 +2058,26 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->form->getElement('foo')->setRequired(true);
         $this->form->getElement('bar')->setRequired(true);
         $this->form->getElement('baz')->setRequired(true);
-        $this->assertTrue($this->form->isValidPartial([
+        $this->assertTrue($this->form->isValidPartial(array(
             'foo' => 'abc',
-            'baz' => 'abc123',
-        ]));
-        $this->assertFalse($this->form->isValidPartial([
+            'baz' => 'abc123'
+        )));
+        $this->assertFalse($this->form->isValidPartial(array(
             'foo' => '123',
-            'baz' => 'abc-123',
-        ]));
+            'baz' => 'abc-123'
+        )));
     }
 
     public function setupSubForm()
     {
         $subForm = new Zend_Form_SubForm();
         $foo = new Zend_Form_Element_Text('subfoo');
-        $foo->addValidators(['NotEmpty', 'Alpha'])->setRequired(true);
+        $foo->addValidators(array('NotEmpty', 'Alpha'))->setRequired(true);
         $bar = new Zend_Form_Element_Text('subbar');
-        $bar->addValidators(['NotEmpty', 'Digits']);
+        $bar->addValidators(array('NotEmpty', 'Digits'));
         $baz = new Zend_Form_Element_Text('subbaz');
-        $baz->addValidators(['NotEmpty', 'Alnum'])->setRequired(true);
-        $subForm->addElements([$foo, $bar, $baz]);
+        $baz->addValidators(array('NotEmpty', 'Alnum'))->setRequired(true);
+        $subForm->addElements(array($foo, $bar, $baz));
         $this->form->addSubForm($subForm, 'sub');
     }
 
@@ -2052,42 +2087,42 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
         $this->setupElements();
         $this->setupSubForm();
-        $data = [
-            'foo' => 'abcdef',
-            'bar' => '123456',
-            'baz' => '123abc',
+        $data = array(
+            'foo'    => 'abcdef',
+            'bar'    => '123456',
+            'baz'    => '123abc',
             'subfoo' => 'abcdef',
             'subbar' => '123456',
             'subbaz' => '123abc',
-        ];
+        );
         $this->assertTrue($this->form->isValid($data));
 
-        $data = [
-            'foo' => 'abcdef',
-            'bar' => '123456',
-            'baz' => '123abc',
+        $data = array(
+            'foo'    => 'abcdef',
+            'bar'    => '123456',
+            'baz'    => '123abc',
             'subfoo' => '123',
             'subbar' => 'abc',
             'subbaz' => '123-abc',
-        ];
+        );
         $this->assertFalse($this->form->isValid($data));
 
-        $data = [
-            'foo' => 'abcdef',
-            'bar' => '123456',
-            'baz' => '123abc',
+        $data = array(
+            'foo'    => 'abcdef',
+            'bar'    => '123456',
+            'baz'    => '123abc',
             'subfoo' => 'abc',
             'subbaz' => '123abc',
-        ];
+        );
         $this->assertTrue($this->form->isValid($data));
 
-        $data = [
-            'foo' => 'abcdef',
-            'bar' => '123456',
-            'baz' => '123abc',
+        $data = array(
+            'foo'    => 'abcdef',
+            'bar'    => '123456',
+            'baz'    => '123abc',
             'subbar' => '123',
             'subbaz' => '123abc',
-        ];
+        );
         $this->assertFalse($this->form->isValid($data));
     }
 
@@ -2097,50 +2132,50 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
         $this->setupElements();
         $this->setupSubForm();
-        $data = [
-            'foo' => 'abcdef',
-            'bar' => '123456',
-            'baz' => '123abc',
-            'sub' => [
+        $data = array(
+            'foo'    => 'abcdef',
+            'bar'    => '123456',
+            'baz'    => '123abc',
+            'sub'    => array(
                 'subfoo' => 'abcdef',
                 'subbar' => '123456',
                 'subbaz' => '123abc',
-            ],
-        ];
+            ),
+        );
         $this->assertTrue($this->form->isValid($data));
 
-        $data = [
-            'foo' => 'abcdef',
-            'bar' => '123456',
-            'baz' => '123abc',
-            'sub' => [
+        $data = array(
+            'foo'    => 'abcdef',
+            'bar'    => '123456',
+            'baz'    => '123abc',
+            'sub'    => array(
                 'subfoo' => '123',
                 'subbar' => 'abc',
                 'subbaz' => '123-abc',
-            ],
-        ];
+            )
+        );
         $this->assertFalse($this->form->isValid($data));
 
-        $data = [
-            'foo' => 'abcdef',
-            'bar' => '123456',
-            'baz' => '123abc',
-            'sub' => [
+        $data = array(
+            'foo'    => 'abcdef',
+            'bar'    => '123456',
+            'baz'    => '123abc',
+            'sub'    => array(
                 'subfoo' => 'abc',
                 'subbaz' => '123abc',
-            ],
-        ];
+            )
+        );
         $this->assertTrue($this->form->isValid($data));
 
-        $data = [
-            'foo' => 'abcdef',
-            'bar' => '123456',
-            'baz' => '123abc',
-            'sub' => [
+        $data = array(
+            'foo'    => 'abcdef',
+            'bar'    => '123456',
+            'baz'    => '123abc',
+            'sub'    => array(
                 'subbar' => '123',
                 'subbaz' => '123abc',
-            ],
-        ];
+            )
+        );
         $this->assertFalse($this->form->isValid($data));
     }
 
@@ -2170,18 +2205,19 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $subForm->addSubForm($subSubForm, 'subSub');
 
         $form->addSubForm($subForm, 'sub')
-             ->addElement('submit', 'save', ['value' => 'submit']);
+             ->addElement('submit', 'save', array('value' => 'submit'));
 
-        $data = ['foobar' => [
+
+        $data = array('foobar' => array(
             'firstName' => 'Mabel',
-            'lastName' => 'Cow',
-            'baz' => [
+            'lastName'  => 'Cow',
+            'baz'    => array(
                 'email' => 'mabel@cow.org',
-                'bat' => [
+                'bat'   => array(
                     'home' => 1,
-                ],
-            ],
-        ]];
+                )
+            )
+        ));
         $this->assertTrue($form->isValid($data));
         $this->assertEquals('Mabel', $form->firstName->getValue());
         $this->assertEquals('Cow', $form->lastName->getValue());
@@ -2196,29 +2232,29 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->setupElements();
         $this->setupSubForm();
 
-        $data = [
+        $data = array(
             'subfoo' => 'abcdef',
             'subbar' => '123456',
-        ];
+        );
         $this->assertTrue($this->form->isValidPartial($data));
 
-        $data = [
-            'foo' => 'abcdef',
-            'baz' => '123abc',
-            'sub' => [
+        $data = array(
+            'foo'    => 'abcdef',
+            'baz'    => '123abc',
+            'sub'    => array(
                 'subbar' => '123',
-            ],
-        ];
+            )
+        );
         $this->assertTrue($this->form->isValidPartial($data));
 
-        $data = [
-            'foo' => 'abcdef',
-            'bar' => '123456',
-            'baz' => '123abc',
-            'sub' => [
+        $data = array(
+            'foo'    => 'abcdef',
+            'bar'    => '123456',
+            'baz'    => '123abc',
+            'sub'    => array(
                 'subfoo' => '123',
-            ],
-        ];
+            )
+        );
         $this->assertFalse($this->form->isValidPartial($data));
     }
 
@@ -2249,27 +2285,28 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $subSubForm->addElement('checkbox', 'home')
                    ->getElement('home')
                    ->setRequired(true)
-                   ->addValidator('InArray', false, [['1']]);
+                   ->addValidator('InArray', false, array(array('1')));
 
         $subForm->addSubForm($subSubForm, 'subSub');
 
         $form->addSubForm($subForm, 'sub')
-             ->addElement('submit', 'save', ['value' => 'submit']);
+             ->addElement('submit', 'save', array('value' => 'submit'));
 
-        $data = ['foobar' => [
-            'lastName' => 'Cow',
-        ]];
+
+        $data = array('foobar' => array(
+            'lastName'  => 'Cow',
+        ));
         $this->assertTrue($form->isValidPartial($data));
         $this->assertEquals('Cow', $form->lastName->getValue());
         $firstName = $form->firstName->getValue();
-        $email = $form->sub->email->getValue();
-        $home = $form->sub->subSub->home->getValue();
+        $email     = $form->sub->email->getValue();
+        $home      = $form->sub->subSub->home->getValue();
         $this->assertTrue(empty($firstName));
         $this->assertTrue(empty($email));
         $this->assertTrue(empty($home));
 
-        $form->sub->subSub->home->addValidator('StringLength', false, [4, 6]);
-        $data['foobar']['baz'] = ['bat' => ['home' => 'ab']];
+        $form->sub->subSub->home->addValidator('StringLength', false, array(4, 6));
+        $data['foobar']['baz'] = array('bat' => array('home' => 'ab'));
 
         $this->assertFalse($form->isValidPartial($data), var_export($data, 1));
         $this->assertEquals('0', $form->sub->subSub->home->getValue());
@@ -2306,29 +2343,30 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $subSubForm->addElement('checkbox', 'home')
                    ->getElement('home')
                    ->setRequired(true)
-                   ->addValidator('InArray', false, [['1']]);
+                   ->addValidator('InArray', false, array(array('1')));
 
         $subForm->addSubForm($subSubForm, 'subSub');
 
         $form->addSubForm($subForm, 'sub')
-             ->addElement('submit', 'save', ['value' => 'submit']);
+             ->addElement('submit', 'save', array('value' => 'submit'));
 
-        $data = ['foo' => [
-            'bar' => [
-                'lastName' => 'Cow',
-            ],
-        ]];
+
+        $data = array('foo' => array(
+            'bar' => array(
+                'lastName'  => 'Cow',
+            ),
+        ));
         $this->assertTrue($form->isValidPartial($data));
         $this->assertEquals('Cow', $form->lastName->getValue());
         $firstName = $form->firstName->getValue();
-        $email = $form->sub->email->getValue();
-        $home = $form->sub->subSub->home->getValue();
+        $email     = $form->sub->email->getValue();
+        $home      = $form->sub->subSub->home->getValue();
         $this->assertTrue(empty($firstName));
         $this->assertTrue(empty($email));
         $this->assertTrue(empty($home));
 
-        $form->sub->subSub->home->addValidator('StringLength', false, [4, 6]);
-        $data['foo']['bar']['baz'] = ['bat' => ['quux' => ['home' => 'ab']]];
+        $form->sub->subSub->home->addValidator('StringLength', false, array(4, 6));
+        $data['foo']['bar']['baz'] = array('bat' => array('quux' => array('home' => 'ab')));
 
         $this->assertFalse($form->isValidPartial($data), var_export($data, 1));
         $this->assertEquals('0', $form->sub->subSub->home->getValue());
@@ -2361,21 +2399,23 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $subSubForm->addElement('checkbox', 'home')
                    ->getElement('home')
                    ->setRequired(true)
-                   ->addValidator('InArray', false, [['1']]);
+                   ->addValidator('InArray', false, array(array('1')));
 
         $subForm->addSubForm($subSubForm, 'subSub');
 
         $form->addSubForm($subForm, 'sub')
-             ->addElement('submit', 'save', ['value' => 'submit']);
+             ->addElement('submit', 'save', array('value' => 'submit'));
 
-        $data = ['foo' => [
-            'bar' => [
-                'lastName' => 'Cow',
-            ],
-        ]];
 
-        $form->sub->subSub->home->addValidator('StringLength', false, [4, 6]);
-        $data['foo']['bar']['baz'] = ['bat' => ['quux' => ['home' => 'ab']]];
+        $data = array('foo' => array(
+            'bar' => array(
+                'lastName'  => 'Cow',
+            ),
+        ));
+
+
+        $form->sub->subSub->home->addValidator('StringLength', false, array(4, 6));
+        $data['foo']['bar']['baz'] = array('bat' => array('quux' => array('home' => 'ab')));
 
         $form->isValidPartial($data);
 
@@ -2388,27 +2428,27 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testValidatingFormWithDisplayGroupsDoesSameAsWithout()
     {
         $this->setupElements();
-        $this->form->addDisplayGroup(['foo', 'baz'], 'foobaz');
+        $this->form->addDisplayGroup(array('foo', 'baz'), 'foobaz');
         $this->assertTrue($this->form->isValid($this->elementValues));
-        $this->assertFalse($this->form->isValid([
+        $this->assertFalse($this->form->isValid(array(
             'foo' => '123',
             'bar' => 'abc',
-            'baz' => 'abc-123',
-        ]));
+            'baz' => 'abc-123'
+        )));
     }
 
     public function testValidatePartialFormWithDisplayGroupsDoesSameAsWithout()
     {
         $this->setupElements();
-        $this->form->addDisplayGroup(['foo', 'baz'], 'foobaz');
-        $this->assertTrue($this->form->isValid([
+        $this->form->addDisplayGroup(array('foo', 'baz'), 'foobaz');
+        $this->assertTrue($this->form->isValid(array(
             'foo' => 'abc',
-            'baz' => 'abc123',
-        ]));
-        $this->assertFalse($this->form->isValid([
+            'baz' => 'abc123'
+        )));
+        $this->assertFalse($this->form->isValid(array(
             'foo' => '123',
-            'baz' => 'abc-123',
-        ]));
+            'baz' => 'abc-123'
+        )));
     }
 
     public function testProcessAjaxReturnsJsonTrueForValidForm()
@@ -2421,7 +2461,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testProcessAjaxReturnsJsonTrueForValidPartialForm()
     {
         $this->setupElements();
-        $data = ['foo' => 'abcdef', 'baz' => 'abc123'];
+        $data = array('foo' => 'abcdef', 'baz' => 'abc123');
         $return = $this->form->processAjax($data);
         $this->assertTrue(Zend_Json::decode($return));
     }
@@ -2429,7 +2469,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testProcessAjaxReturnsJsonWithAllErrorMessagesForInvalidForm()
     {
         $this->setupElements();
-        $data = ['foo' => '123456', 'bar' => 'abcdef', 'baz' => 'abc-123'];
+        $data = array('foo' => '123456', 'bar' => 'abcdef', 'baz' => 'abc-123');
         $return = Zend_Json::decode($this->form->processAjax($data));
         $this->assertTrue(is_array($return));
         $this->assertEquals(array_keys($data), array_keys($return));
@@ -2438,7 +2478,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testProcessAjaxReturnsJsonWithAllErrorMessagesForInvalidPartialForm()
     {
         $this->setupElements();
-        $data = ['baz' => 'abc-123'];
+        $data = array('baz' => 'abc-123');
         $return = Zend_Json::decode($this->form->processAjax($data));
         $this->assertTrue(is_array($return));
         $this->assertEquals(array_keys($data), array_keys($return), var_export($return, 1));
@@ -2471,7 +2511,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
         $this->testCanValidateFullFormContainingOnlyElements();
         $codes = $this->form->getErrors();
-        $keys = ['foo', 'bar', 'baz'];
+        $keys = array('foo', 'bar', 'baz');
         $this->assertEquals($keys, array_keys($codes));
     }
 
@@ -2480,10 +2520,10 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->_checkZf2794();
 
         $this->testCanValidateFullFormContainingOnlyElements();
-        $codes = $this->form->getErrors();
-        $keys = ['foo', 'bar', 'baz'];
+        $codes  = $this->form->getErrors();
+        $keys   = array('foo', 'bar', 'baz');
         $errors = $this->form->getErrors('foo');
-        $foo = $this->form->foo;
+        $foo    = $this->form->foo;
         $this->assertEquals($foo->getErrors(), $errors);
     }
 
@@ -2493,7 +2533,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
         $this->testCanValidateFullFormContainingOnlyElements();
         $codes = $this->form->getMessages();
-        $keys = ['foo', 'bar', 'baz'];
+        $keys = array('foo', 'bar', 'baz');
         $this->assertEquals($keys, array_keys($codes));
     }
 
@@ -2502,10 +2542,10 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->_checkZf2794();
 
         $this->testCanValidateFullFormContainingOnlyElements();
-        $codes = $this->form->getMessages();
-        $keys = ['foo', 'bar', 'baz'];
+        $codes    = $this->form->getMessages();
+        $keys     = array('foo', 'bar', 'baz');
         $messages = $this->form->getMessages('foo');
-        $foo = $this->form->foo;
+        $foo      = $this->form->foo;
         $this->assertEquals($foo->getMessages(), $messages);
     }
 
@@ -2514,10 +2554,10 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->_checkZf2794();
 
         $this->testFullDataArrayUsedToValidateSubFormByDefault();
-        $codes = $this->form->getErrors();
+        $codes    = $this->form->getErrors();
         $this->assertTrue(array_key_exists('sub', $codes));
         $this->assertTrue(is_array($codes['sub']));
-        $keys = ['subfoo', 'subbar', 'subbaz'];
+        $keys     = array('subfoo', 'subbar', 'subbaz');
         $this->assertEquals($keys, array_keys($codes['sub']));
     }
 
@@ -2526,10 +2566,10 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->_checkZf2794();
 
         $this->testFullDataArrayUsedToValidateSubFormByDefault();
-        $codes = $this->form->getErrors('sub');
+        $codes    = $this->form->getErrors('sub');
         $this->assertTrue(is_array($codes));
         $this->assertFalse(empty($codes));
-        $keys = ['subfoo', 'subbar', 'subbaz'];
+        $keys     = array('subfoo', 'subbar', 'subbaz');
         $this->assertEquals($keys, array_keys($codes));
     }
 
@@ -2544,11 +2584,11 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
         $this->form->addSubForm($subForm, 'sub');
 
-        $data = ['foo' => [
-            'bar' => [
+        $data = array('foo' => array(
+            'bar' => array(
                 'test' => '',
-            ],
-        ]];
+            ),
+        ));
 
         $this->form->isValid($data);
         $codes = $this->form->getErrors();
@@ -2560,20 +2600,20 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->_checkZf2794();
 
         $this->testFullDataArrayUsedToValidateSubFormByDefault();
-        $data = [
-            'foo' => 'abcdef',
-            'bar' => '123456',
-            'baz' => '123abc',
+        $data = array(
+            'foo'    => 'abcdef',
+            'bar'    => '123456',
+            'baz'    => '123abc',
             'subfoo' => '123',
             'subbar' => 'abc',
             'subbaz' => '123-abc',
-        ];
+        );
         $this->assertFalse($this->form->isValid($data));
 
-        $codes = $this->form->getMessages();
+        $codes    = $this->form->getMessages();
         $this->assertTrue(array_key_exists('sub', $codes));
         $this->assertTrue(is_array($codes['sub']));
-        $keys = ['subfoo', 'subbar', 'subbaz'];
+        $keys     = array('subfoo', 'subbar', 'subbaz');
         $this->assertEquals($keys, array_keys($codes['sub']));
     }
 
@@ -2582,20 +2622,20 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->_checkZf2794();
 
         $this->testFullDataArrayUsedToValidateSubFormByDefault();
-        $data = [
-            'foo' => 'abcdef',
-            'bar' => '123456',
-            'baz' => '123abc',
+        $data = array(
+            'foo'    => 'abcdef',
+            'bar'    => '123456',
+            'baz'    => '123abc',
             'subfoo' => '123',
             'subbar' => 'abc',
             'subbaz' => '123-abc',
-        ];
+        );
 
         $this->assertFalse($this->form->isValid($data));
-        $codes = $this->form->getMessages('sub');
+        $codes    = $this->form->getMessages('sub');
         $this->assertTrue(is_array($codes));
         $this->assertFalse(empty($codes));
-        $keys = ['subfoo', 'subbar', 'subbaz'];
+        $keys     = array('subfoo', 'subbar', 'subbaz');
         $this->assertEquals($keys, array_keys($codes), var_export($codes, 1));
     }
 
@@ -2603,32 +2643,32 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     {
         $this->_checkZf2794();
 
-        $translations = include __DIR__.'/_files/locale/array.php';
+        $translations = include __DIR__ . '/_files/locale/array.php';
         $translate = new Zend_Translate('array', $translations, 'en');
         $translate->setLocale('en');
 
-        $this->form->addElements([
-            'foo' => [
+        $this->form->addElements(array(
+            'foo' => array(
                 'type' => 'text',
-                'options' => [
-                    'required' => true,
-                    'validators' => ['NotEmpty'],
-                ],
-            ],
-            'bar' => [
+                'options' => array(
+                    'required'   => true,
+                    'validators' => array('NotEmpty')
+                )
+            ),
+            'bar' => array(
                 'type' => 'text',
-                'options' => [
-                    'required' => true,
-                    'validators' => ['Digits'],
-                ],
-            ],
-        ])
+                'options' => array(
+                    'required'   => true,
+                    'validators' => array('Digits')
+                )
+            ),
+        ))
         ->setTranslator($translate);
 
-        $data = [
+        $data = array(
             'foo' => '',
             'bar' => 'abc',
-        ];
+        );
         if ($this->form->isValid($data)) {
             $this->fail('Form should not validate');
         }
@@ -2641,14 +2681,14 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
             if (array_key_exists($key, $translations)) {
                 $this->assertEquals($translations[$key], $message);
             } else {
-                $this->fail('Translation for '.$key.' does not exist?');
+                $this->fail('Translation for ' . $key . ' does not exist?');
             }
         }
         foreach ($messages['bar'] as $key => $message) {
             if (array_key_exists($key, $translations)) {
                 $this->assertEquals($translations[$key], $message);
             } else {
-                $this->fail('Translation for '.$key.' does not exist?');
+                $this->fail('Translation for ' . $key . ' does not exist?');
             }
         }
     }
@@ -2657,31 +2697,31 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     {
         $this->_checkZf2794();
 
-        $translations = include __DIR__.'/_files/locale/array.php';
+        $translations = include __DIR__ . '/_files/locale/array.php';
         $translate = new Zend_Translate('array', $translations, 'en');
         $translate->setLocale('en');
 
-        $this->form->addElements([
-            'foo' => [
+        $this->form->addElements(array(
+            'foo' => array(
                 'type' => 'text',
-                'options' => [
-                    'required' => true,
-                    'validators' => ['NotEmpty'],
-                ],
-            ],
-            'bar' => [
+                'options' => array(
+                    'required'   => true,
+                    'validators' => array('NotEmpty')
+                )
+            ),
+            'bar' => array(
                 'type' => 'text',
-                'options' => [
-                    'required' => true,
-                    'validators' => ['Digits'],
-                ],
-            ],
-        ])
+                'options' => array(
+                    'required'   => true,
+                    'validators' => array('Digits')
+                )
+            ),
+        ))
         ->setTranslator($translate);
 
-        $data = [
+        $data = array(
             'foo' => '',
-        ];
+        );
         if ($this->form->isValidPartial($data)) {
             $this->fail('Form should not validate');
         }
@@ -2694,7 +2734,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
             if (array_key_exists($key, $translations)) {
                 $this->assertEquals($translations[$key], $message);
             } else {
-                $this->fail('Translation for '.$key.' does not exist?');
+                $this->fail('Translation for ' . $key . ' does not exist?');
             }
         }
     }
@@ -2703,31 +2743,31 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     {
         $this->_checkZf2794();
 
-        $translations = include __DIR__.'/_files/locale/array.php';
+        $translations = include __DIR__ . '/_files/locale/array.php';
         $translate = new Zend_Translate('array', $translations, 'en');
         $translate->setLocale('en');
 
-        $this->form->addElements([
-            'foo' => [
+        $this->form->addElements(array(
+            'foo' => array(
                 'type' => 'text',
-                'options' => [
-                    'required' => true,
-                    'validators' => ['NotEmpty'],
-                ],
-            ],
-            'bar' => [
+                'options' => array(
+                    'required'   => true,
+                    'validators' => array('NotEmpty')
+                )
+            ),
+            'bar' => array(
                 'type' => 'text',
-                'options' => [
-                    'required' => true,
-                    'validators' => ['Digits'],
-                ],
-            ],
-        ])
+                'options' => array(
+                    'required'   => true,
+                    'validators' => array('Digits')
+                )
+            ),
+        ))
         ->setTranslator($translate);
 
-        $data = [
+        $data = array(
             'foo' => '',
-        ];
+        );
         $return = $this->form->processAjax($data);
         $messages = Zend_Json::decode($return);
         $this->assertTrue(is_array($messages));
@@ -2739,19 +2779,19 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
             if (array_key_exists($key, $translations)) {
                 $this->assertEquals($translations[$key], $message);
             } else {
-                $this->fail('Translation for '.$key.' does not exist?');
+                $this->fail('Translation for ' . $key . ' does not exist?');
             }
         }
     }
 
-    /**
-     * @Group ZF-9697
-     */
+   /**
+    * @Group ZF-9697
+    */
     public function _setup9697()
     {
-        $callback = function ($value, $options) {
-            return isset($options['bar']['quo']['foo'])
-                && 'foo Value' === $options['bar']['quo']['foo'];
+        $callback = function($value, $options) {
+            return (isset($options["bar"]["quo"]["foo"]) &&
+                "foo Value" === $options["bar"]["quo"]["foo"]);
         };
 
         $this->form->addElement('text', 'foo')
@@ -2760,11 +2800,11 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->form->addElement('text', 'quo')
                    ->quo->setBelongsTo('bar[quo]')
                         ->addValidator('Callback',
-                            false,
-                            $callback);
+                                       false,
+                                       $callback);
 
-        return ['bar' => ['quo' => ['foo' => 'foo Value',
-                                                   'quo' => 'quo Value']]];
+        return array('bar' => array('quo' => array('foo' => 'foo Value',
+                                                   'quo' => 'quo Value')));
     }
 
     public function testIsValidKeepsContext()
@@ -2790,9 +2830,9 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
      */
     public function testSettingErrorMessageShouldOverrideValidationErrorMessages()
     {
-        $this->form->addElement('text', 'foo', ['validators' => ['Alpha']]);
+        $this->form->addElement('text', 'foo', array('validators' => array('Alpha')));
         $this->form->addErrorMessage('Invalid values entered');
-        $this->assertFalse($this->form->isValid(['foo' => 123]));
+        $this->assertFalse($this->form->isValid(array('foo' => 123)));
         $messages = $this->form->getMessages();
         $this->assertEquals(1, count($messages));
         $this->assertEquals('Invalid values entered', array_shift($messages));
@@ -2800,13 +2840,13 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
     public function testCustomErrorMessagesShouldBeManagedInAStack()
     {
-        $this->form->addElement('text', 'foo', ['validators' => ['Alpha']]);
+        $this->form->addElement('text', 'foo', array('validators' => array('Alpha')));
         $this->form->addErrorMessage('Invalid values entered');
         $this->form->addErrorMessage('Really, they are not valid');
         $messages = $this->form->getErrorMessages();
         $this->assertEquals(2, count($messages));
 
-        $this->assertFalse($this->form->isValid(['foo' => 123]));
+        $this->assertFalse($this->form->isValid(array('foo' => 123)));
         $messages = $this->form->getMessages();
         $this->assertEquals(2, count($messages));
         $this->assertEquals('Invalid values entered', array_shift($messages));
@@ -2815,15 +2855,15 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
     public function testShouldAllowSettingMultipleErrorMessagesAtOnce()
     {
-        $set1 = ['foo', 'bar', 'baz'];
+        $set1 = array('foo', 'bar', 'baz');
         $this->form->addErrorMessages($set1);
         $this->assertSame($set1, $this->form->getErrorMessages());
     }
 
     public function testSetErrorMessagesShouldOverwriteMessages()
     {
-        $set1 = ['foo', 'bar', 'baz'];
-        $set2 = ['bat', 'cat'];
+        $set1 = array('foo', 'bar', 'baz');
+        $set2 = array('bat', 'cat');
         $this->form->addErrorMessages($set1);
         $this->assertSame($set1, $this->form->getErrorMessages());
         $this->form->setErrorMessages($set2);
@@ -2840,14 +2880,14 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
     public function testCustomErrorMessagesShouldBeTranslated()
     {
-        $translations = [
+        $translations = array(
             'foo' => 'Foo message',
-        ];
+        );
         $translate = new Zend_Translate('array', $translations);
-        $this->form->addElement('text', 'foo', ['validators' => ['Alpha']]);
+        $this->form->addElement('text', 'foo', array('validators' => array('Alpha')));
         $this->form->setTranslator($translate)
                       ->addErrorMessage('foo');
-        $this->assertFalse($this->form->isValid(['foo' => 123]));
+        $this->assertFalse($this->form->isValid(array('foo' => 123)));
         $messages = $this->form->getMessages();
         $this->assertEquals(1, count($messages));
         $this->assertEquals('Foo message', array_shift($messages));
@@ -2867,14 +2907,14 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testShouldAllowPushingErrorsOntoErrorStackWithErrorMessages()
     {
         $this->assertFalse($this->form->hasErrors());
-        $this->form->setErrors(['Error 1', 'Error 2'])
+        $this->form->setErrors(array('Error 1', 'Error 2'))
                    ->addError('Error 3')
-                   ->addErrors(['Error 4', 'Error 5']);
+                   ->addErrors(array('Error 4', 'Error 5'));
         $this->assertTrue($this->form->hasErrors());
         $messages = $this->form->getMessages();
         $this->assertEquals(5, count($messages));
         foreach (range(1, 5) as $id) {
-            $message = 'Error '.$id;
+            $message = 'Error ' . $id;
             $this->assertContains($message, $messages);
         }
     }
@@ -2886,7 +2926,6 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function getView()
     {
         $view = new Zend_View();
-
         return $view;
     }
 
@@ -2925,9 +2964,9 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
     public function testCanDisableRegisteringFormDecoratorsDuringInitialization()
     {
-        $form = new Zend_Form(['disableLoadDefaultDecorators' => true]);
+        $form = new Zend_Form(array('disableLoadDefaultDecorators' => true));
         $decorators = $form->getDecorators();
-        $this->assertEquals([], $decorators);
+        $this->assertEquals(array(), $decorators);
     }
 
     public function testCanAddSingleDecoratorAsString()
@@ -2952,7 +2991,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->form->clearDecorators();
         $this->assertFalse($this->form->getDecorator('viewHelper'));
 
-        $decorator = new Zend_Form_Decorator_ViewHelper();
+        $decorator = new Zend_Form_Decorator_ViewHelper;
         $this->form->addDecorator($decorator);
         $test = $this->form->getDecorator('Zend_Form_Decorator_ViewHelper');
         $this->assertSame($decorator, $test);
@@ -2965,7 +3004,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->form->clearDecorators();
         $this->assertFalse($this->form->getDecorator('viewHelper'));
 
-        $decorator = new Zend_Form_Decorator_ViewHelper();
+        $decorator = new Zend_Form_Decorator_ViewHelper;
         $this->form->addDecorator($decorator);
         $test = $this->form->getDecorator('viewHelper');
         $this->assertSame($decorator, $test);
@@ -2978,11 +3017,11 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->form->clearDecorators();
         $this->assertFalse($this->form->getDecorator('viewHelper'));
 
-        $testDecorator = new Zend_Form_Decorator_Errors();
-        $this->form->addDecorators([
+        $testDecorator = new Zend_Form_Decorator_Errors;
+        $this->form->addDecorators(array(
             'ViewHelper',
-            $testDecorator,
-        ]);
+            $testDecorator
+        ));
 
         $viewHelper = $this->form->getDecorator('viewHelper');
         $this->assertTrue($viewHelper instanceof Zend_Form_Decorator_ViewHelper);
@@ -3012,11 +3051,11 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testRemovingNamedDecoratorShouldWork()
     {
         $this->_checkZf2794();
-        $this->form->setDecorators([
+        $this->form->setDecorators(array(
             'FormElements',
-            [['div' => 'HtmlTag'], ['tag' => 'div']],
-            [['fieldset' => 'HtmlTag'], ['tag' => 'fieldset']],
-        ]);
+            array(array('div' => 'HtmlTag'), array('tag' => 'div')),
+            array(array('fieldset' => 'HtmlTag'), array('tag' => 'fieldset')),
+        ));
         $decorators = $this->form->getDecorators();
         $this->assertTrue(array_key_exists('div', $decorators));
         $this->assertTrue(array_key_exists('fieldset', $decorators));
@@ -3040,10 +3079,10 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     {
         $this->_checkZf2794();
 
-        $this->form->setDecorators([
-            ['HtmlTag', ['tag' => 'div']],
-            ['decorator' => ['FooBar' => 'HtmlTag'], 'options' => ['tag' => 'dd']],
-        ]);
+        $this->form->setDecorators(array(
+            array('HtmlTag', array('tag' => 'div')),
+            array('decorator' => array('FooBar' => 'HtmlTag'), 'options' => array('tag' => 'dd')),
+        ));
         $decorator = $this->form->getDecorator('FooBar');
         $this->assertTrue($decorator instanceof Zend_Form_Decorator_HtmlTag);
         $this->assertEquals('dd', $decorator->getOption('tag'));
@@ -3055,17 +3094,17 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
     public function testRetrievingNamedDecoratorShouldNotReorderDecorators()
     {
-        $this->form->setDecorators([
+        $this->form->setDecorators(array(
             'FormElements',
-            [['div' => 'HtmlTag'], ['tag' => 'div']],
-            [['fieldset' => 'HtmlTag'], ['tag' => 'fieldset']],
+            array(array('div' => 'HtmlTag'), array('tag' => 'div')),
+            array(array('fieldset' => 'HtmlTag'), array('tag' => 'fieldset')),
             'Form',
-        ]);
+        ));
 
-        $decorator = $this->form->getDecorator('fieldset');
+        $decorator  = $this->form->getDecorator('fieldset');
         $decorators = $this->form->getDecorators();
-        $i = 0;
-        $order = [];
+        $i          = 0;
+        $order      = array();
 
         foreach (array_keys($decorators) as $name) {
             $order[$name] = $i;
@@ -3080,8 +3119,8 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     {
         $this->assertFalse(empty($html));
         $this->assertContains('<form', $html);
-        $this->assertRegexp('/<form[^>]+action="'.$this->form->getAction().'"/', $html);
-        $this->assertRegexp('/<form[^>]+method="'.$this->form->getMethod().'"/i', $html);
+        $this->assertRegexp('/<form[^>]+action="' . $this->form->getAction() . '"/', $html);
+        $this->assertRegexp('/<form[^>]+method="' . $this->form->getMethod() . '"/i', $html);
         $this->assertRegexp('#<form[^>]+enctype="application/x-www-form-urlencoded"#', $html);
         $this->assertContains('</form>', $html);
     }
@@ -3101,7 +3140,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
             $this->assertFalse(empty($key));
             $this->assertFalse(is_numeric($key));
             $this->assertContains('<input', $html);
-            $this->assertRegexp('/<input type="text" name="'.$key.'"/', $html);
+            $this->assertRegexp('/<input type="text" name="' . $key . '"/', $html);
         }
     }
 
@@ -3117,15 +3156,15 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
             $this->assertFalse(empty($key));
             $this->assertFalse(is_numeric($key));
             $this->assertContains('<input', $html);
-            $pattern = '/<input type="text" name="sub\['.$key.'\]"/';
-            $this->assertRegexp($pattern, $html, 'Pattern: '.$pattern."\nHTML:\n".$html);
+            $pattern = '/<input type="text" name="sub\[' . $key . '\]"/';
+            $this->assertRegexp($pattern, $html, 'Pattern: ' . $pattern . "\nHTML:\n" . $html);
         }
     }
 
     public function testRenderReturnsMarkupContainingDisplayGroups()
     {
         $this->setupElements();
-        $this->form->addDisplayGroup(['foo', 'baz'], 'foobaz', ['legend' => 'Display Group']);
+        $this->form->addDisplayGroup(array('foo', 'baz'), 'foobaz', array('legend' => 'Display Group'));
         $this->form->setView($this->getView());
         $html = $this->html = $this->form->render();
         $this->assertRegexp('/<fieldset/', $html);
@@ -3153,7 +3192,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
                     $this->assertEquals('baz', $nameNode->nodeValue);
                     break;
                 default:
-                    $this->fail('There should only be two input nodes in this display group: '.$html);
+                    $this->fail('There should only be two input nodes in this display group: ' . $html);
             }
         }
     }
@@ -3162,7 +3201,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     {
         $this->testRenderReturnsMarkupContainingDisplayGroups();
         if (!preg_match_all('#<input[^>]+name="foo"#', $this->html, $matches)) {
-            $this->fail('Should find foo element in rendered form');
+            $this->fail("Should find foo element in rendered form");
         }
         $this->assertEquals(1, count($matches));
         $this->assertEquals(1, count($matches[0]));
@@ -3238,20 +3277,20 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         throw new Exception('Raising exception in decorator callback');
     }
 
-    public function handleDecoratorErrors($errno, $errstr, $errfile = '', $errline = 0, array $errcontext = [])
+    public function handleDecoratorErrors($errno, $errstr, $errfile = '', $errline = 0, array $errcontext = array())
     {
         $this->error = $errstr;
     }
 
     public function testToStringRaisesErrorWhenExceptionCaught()
     {
-        $this->form->setDecorators([
-            [
+        $this->form->setDecorators(array(
+            array(
                 'decorator' => 'Callback',
-                'options' => ['callback' => [$this, 'raiseDecoratorException']],
-            ],
-        ]);
-        $origErrorHandler = set_error_handler([$this, 'handleDecoratorErrors'], E_USER_WARNING);
+                'options'   => array('callback' => array($this, 'raiseDecoratorException'))
+            ),
+        ));
+        $origErrorHandler = set_error_handler(array($this, 'handleDecoratorErrors'), E_USER_WARNING);
 
         $text = $this->form->__toString();
 
@@ -3263,26 +3302,26 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * ZF-2718.
+     * ZF-2718
      */
     public function testHiddenElementsGroupedWhenRendered()
     {
         $this->markTestIncomplete('Scheduling for future release');
-        $this->form->addElements([
-            ['type' => 'hidden', 'name' => 'first', 'options' => ['value' => 'first value']],
-            ['type' => 'text', 'name' => 'testone'],
-            ['type' => 'hidden', 'name' => 'second', 'options' => ['value' => 'second value']],
-            ['type' => 'text', 'name' => 'testtwo'],
-            ['type' => 'hidden', 'name' => 'third', 'options' => ['value' => 'third value']],
-            ['type' => 'text', 'name' => 'testthree'],
-        ]);
+        $this->form->addElements(array(
+            array('type' => 'hidden', 'name' => 'first', 'options' => array('value' => 'first value')),
+            array('type' => 'text', 'name' => 'testone'),
+            array('type' => 'hidden', 'name' => 'second', 'options' => array('value' => 'second value')),
+            array('type' => 'text', 'name' => 'testtwo'),
+            array('type' => 'hidden', 'name' => 'third', 'options' => array('value' => 'third value')),
+            array('type' => 'text', 'name' => 'testthree'),
+        ));
         $html = $this->form->render($this->getView());
         if (!preg_match('#(<input type="hidden" name="[^>].*>\s*){3}#', $html, $matches)) {
             $this->fail('Hidden elements should be grouped');
         }
-        foreach (['first', 'second', 'third'] as $which) {
-            $this->assertRegexp('#<input[^]*name="'.$which.'"#', $matches[0]);
-            $this->assertRegexp('#<input[^]*value="'.$which.' value"#', $matches[0]);
+        foreach (array('first', 'second', 'third') as $which) {
+            $this->assertRegexp('#<input[^]*name="' . $which . '"#', $matches[0]);
+            $this->assertRegexp('#<input[^]*value="' . $which . ' value"#', $matches[0]);
         }
     }
 
@@ -3296,7 +3335,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testCanSetTranslator()
     {
         // require_once 'Zend/Translate/Adapter/Array.php';
-        $translator = new Zend_Translate('array', ['foo' => 'bar']);
+        $translator = new Zend_Translate('array', array('foo' => 'bar'));
         $this->form->setTranslator($translator);
         $received = $this->form->getTranslator($translator);
         $this->assertSame($translator->getAdapter(), $received);
@@ -3305,7 +3344,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testCanSetDefaultGlobalTranslator()
     {
         $this->assertNull($this->form->getTranslator());
-        $translator = new Zend_Translate('array', ['foo' => 'bar']);
+        $translator = new Zend_Translate('array', array('foo' => 'bar'));
         Zend_Form::setDefaultTranslator($translator);
 
         $received = Zend_Form::getDefaultTranslator();
@@ -3322,13 +3361,13 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testLocalTranslatorPreferredOverDefaultGlobalTranslator()
     {
         $this->assertNull($this->form->getTranslator());
-        $translatorDefault = new Zend_Translate('array', ['foo' => 'bar']);
+        $translatorDefault = new Zend_Translate('array', array('foo' => 'bar'));
         Zend_Form::setDefaultTranslator($translatorDefault);
 
         $received = $this->form->getTranslator();
         $this->assertSame($translatorDefault->getAdapter(), $received);
 
-        $translator = new Zend_Translate('array', ['foo' => 'bar']);
+        $translator = new Zend_Translate('array', array('foo' => 'bar'));
         $this->form->setTranslator($translator);
         $received = $this->form->getTranslator();
         $this->assertNotSame($translatorDefault->getAdapter(), $received);
@@ -3338,7 +3377,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testTranslatorFromRegistryUsedWhenNoneRegistered()
     {
         $this->assertNull($this->form->getTranslator());
-        $translator = new Zend_Translate('array', ['foo' => 'bar']);
+        $translator = new Zend_Translate('array', array('foo' => 'bar'));
         Zend_Registry::set('Zend_Translate', $translator);
 
         $received = Zend_Form::getDefaultTranslator();
@@ -3364,8 +3403,8 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testFormObjectIsIterableAndIteratesElements()
     {
         $this->setupElements();
-        $expected = ['foo', 'bar', 'baz'];
-        $received = [];
+        $expected = array('foo', 'bar', 'baz');
+        $received = array();
         foreach ($this->form as $key => $value) {
             $received[] = $key;
         }
@@ -3375,9 +3414,9 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testFormObjectIteratesElementsInExpectedOrder()
     {
         $this->setupElements();
-        $this->form->addElement('text', 'checkorder', ['order' => 2]);
-        $expected = ['foo', 'bar', 'checkorder', 'baz'];
-        $received = [];
+        $this->form->addElement('text', 'checkorder', array('order' => 2));
+        $expected = array('foo', 'bar', 'checkorder', 'baz');
+        $received = array();
         foreach ($this->form as $key => $value) {
             $received[] = $key;
             $this->assertTrue($value instanceof Zend_Form_Element);
@@ -3391,8 +3430,8 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->form->addElement('text', 'name')->name->setLabel('Name')->setOrder(10);
         $this->form->addElement('text', 'email')->email->setLabel('E-mail')->setOrder(20);
 
-        $expected = ['name', 'email', 'submit'];
-        $received = [];
+        $expected = array('name', 'email', 'submit');
+        $received = array();
         foreach ($this->form as $key => $value) {
             $received[] = $key;
             $this->assertTrue($value instanceof Zend_Form_Element);
@@ -3402,30 +3441,30 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
     public function testFormObjectIteratesElementsInExpectedOrderWhenFirstElementHasNoOrderSpecified()
     {
-        $this->form->addElement(new Zend_Form_Element('a', ['label' => 'a']))
-                   ->addElement(new Zend_Form_Element('b', ['label' => 'b', 'order' => 0]))
-                   ->addElement(new Zend_Form_Element('c', ['label' => 'c', 'order' => 1]))
+        $this->form->addElement(new Zend_Form_Element('a',array('label'=>'a')))
+                   ->addElement(new Zend_Form_Element('b',array('label'=>'b', 'order' => 0)))
+                   ->addElement(new Zend_Form_Element('c',array('label'=>'c', 'order' => 1)))
                    ->setView($this->getView());
         $test = $this->form->render();
         $this->assertContains('name="a"', $test);
         if (!preg_match_all('/(<input[^>]+>)/', $test, $matches)) {
             $this->fail('Expected markup not found');
         }
-        $order = [];
+        $order = array();
         foreach ($matches[1] as $element) {
             if (preg_match('/name="(a|b|c)"/', $element, $m)) {
                 $order[] = $m[1];
             }
         }
-        $this->assertSame(['b', 'c', 'a'], $order);
+        $this->assertSame(array('b', 'c', 'a'), $order);
     }
 
     public function testFormObjectIteratesElementsAndSubforms()
     {
         $this->setupElements();
         $this->setupSubForm();
-        $expected = ['foo', 'bar', 'baz', 'sub'];
-        $received = [];
+        $expected = array('foo', 'bar', 'baz', 'sub');
+        $received = array();
         foreach ($this->form as $key => $value) {
             $received[] = $key;
             $this->assertTrue(($value instanceof Zend_Form_Element)
@@ -3437,9 +3476,9 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testFormObjectIteratesDisplayGroupsButSkipsDisplayGroupElements()
     {
         $this->setupElements();
-        $this->form->addDisplayGroup(['foo', 'baz'], 'foobaz');
-        $expected = ['bar', 'foobaz'];
-        $received = [];
+        $this->form->addDisplayGroup(array('foo', 'baz'), 'foobaz');
+        $expected = array('bar', 'foobaz');
+        $received = array();
         foreach ($this->form as $key => $value) {
             $received[] = $key;
             $this->assertTrue(($value instanceof Zend_Form_Element)
@@ -3457,41 +3496,41 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         try {
             foreach ($this->form as $item) {
             }
-        } catch (Throwable $e) {
-            $this->fail('Exceptions should not be raised by iterator when elements are removed; error message: '.$e->getMessage());
+        } catch (\Throwable $e) {
+            $this->fail('Exceptions should not be raised by iterator when elements are removed; error message: ' . $e->getMessage());
         }
 
         $this->form->addElement($bar);
-        $this->form->addDisplayGroup(['baz', 'bar'], 'bazbar');
+        $this->form->addDisplayGroup(array('baz', 'bar'), 'bazbar');
         $this->form->removeDisplayGroup('bazbar');
 
         try {
             foreach ($this->form as $item) {
             }
-        } catch (Throwable $e) {
-            $this->fail('Exceptions should not be raised by iterator when elements are removed; error message: '.$e->getMessage());
+        } catch (\Throwable $e) {
+            $this->fail('Exceptions should not be raised by iterator when elements are removed; error message: ' . $e->getMessage());
         }
 
-        $subForm = new Zend_Form_SubForm();
-        $subForm->addElements(['foo' => 'text', 'bar' => 'text']);
+        $subForm = new Zend_Form_SubForm;
+        $subForm->addElements(array('foo' => 'text', 'bar' => 'text'));
         $this->form->addSubForm($subForm, 'page1');
         $this->form->removeSubForm('page1');
 
         try {
             foreach ($this->form as $item) {
             }
-        } catch (Throwable $e) {
-            $this->fail('Exceptions should not be raised by iterator when elements are removed; error message: '.$e->getMessage());
+        } catch (\Throwable $e) {
+            $this->fail('Exceptions should not be raised by iterator when elements are removed; error message: ' . $e->getMessage());
         }
     }
 
     public function testClearingAttachedItemsShouldNotCauseIterationToRaiseExceptions()
     {
         $form = new Zend_Form();
-        $form->addElements([
+        $form->addElements(array(
             'username' => 'text',
             'password' => 'text',
-        ]);
+        ));
         $form->clearElements();
 
         try {
@@ -3499,15 +3538,15 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
             }
         } catch (Zend_Form_Exception $e) {
             $message = "Clearing elements prior to iteration should not cause iteration to fail;\n"
-                     .$e->getMessage();
+                     . $e->getMessage();
             $this->fail($message);
         }
 
-        $form->addElements([
+        $form->addElements(array(
                  'username' => 'text',
                  'password' => 'text',
-             ])
-             ->addDisplayGroup(['username', 'password'], 'login');
+             ))
+             ->addDisplayGroup(array('username', 'password'), 'login');
         $form->clearDisplayGroups();
 
         try {
@@ -3515,7 +3554,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
             }
         } catch (Zend_Form_Exception $e) {
             $message = "Clearing display groups prior to iteration should not cause iteration to fail;\n"
-                     .$e->getMessage();
+                     . $e->getMessage();
             $this->fail($message);
         }
 
@@ -3528,7 +3567,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
             }
         } catch (Zend_Form_Exception $e) {
             $message = "Clearing sub forms prior to iteration should not cause iteration to fail;\n"
-                     .$e->getMessage();
+                     . $e->getMessage();
             $this->fail($message);
         }
     }
@@ -3551,7 +3590,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testCountingFormCountsDisplayGroupsButOmitsElementsInDisplayGroups()
     {
         $this->testCountingFormObjectCountsSubForms();
-        $this->form->addDisplayGroup(['foo', 'baz'], 'foobaz');
+        $this->form->addDisplayGroup(array('foo', 'baz'), 'foobaz');
         $this->assertEquals(3, count($this->form));
     }
 
@@ -3562,11 +3601,11 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->_checkZf2794();
 
         $this->setupElements();
-        $this->form->setElementDecorators([
-            ['ViewHelper'],
-            ['Label'],
-            ['Fieldset'],
-        ]);
+        $this->form->setElementDecorators(array(
+            array('ViewHelper'),
+            array('Label'),
+            array('Fieldset'),
+        ));
         foreach ($this->form->getElements() as $element) {
             $this->assertFalse($element->getDecorator('Errors'));
             $this->assertFalse($element->getDecorator('HtmlTag'));
@@ -3584,23 +3623,23 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
      */
     public function testSettingElementDecoratorsWithConcreteDecoratorShouldHonorOrder()
     {
-        $this->form->setDecorators([
+        $this->form->setDecorators(array(
             'FormElements',
-            ['HtmlTag', ['tag' => 'table']],
+            array('HtmlTag', array('tag' => 'table')),
             'Form',
-        ]);
-        $this->form->addElementPrefixPath('My_Decorator', __DIR__.'/_files/decorators/', 'decorator');
-        $this->form->addElement('text', 'test', [
-            'label' => 'Foo',
+        ));
+        $this->form->addElementPrefixPath('My_Decorator', __DIR__ . '/_files/decorators/', 'decorator');
+        $this->form->addElement('text', 'test', array(
+            'label'       => 'Foo',
             'description' => 'sample description',
-        ]);
+        ));
 
-        require_once __DIR__.'/_files/decorators/TableRow.php';
+        require_once __DIR__ . '/_files/decorators/TableRow.php';
         $decorator = new My_Decorator_TableRow();
-        $this->form->setElementDecorators([
+        $this->form->setElementDecorators(array(
             'ViewHelper',
             $decorator,
-        ]);
+        ));
         $html = $this->form->render($this->getView());
         $this->assertRegexp('#<tr><td>Foo</td><td>.*?<input[^>]+>.*?</td><td>sample description</td></tr>#s', $html, $html);
     }
@@ -3614,14 +3653,14 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
         $this->setupElements();
         $this->form->setElementDecorators(
-            [
+            array(
                 'Description',
                 'Form',
                 'Fieldset',
-            ],
-            [
+            ),
+            array(
                 'bar',
-            ]
+            )
         );
 
         $element = $this->form->bar;
@@ -3636,7 +3675,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $decorator = $element->getDecorator('Fieldset');
         $this->assertTrue($decorator instanceof Zend_Form_Decorator_Fieldset);
 
-        foreach (['foo', 'baz'] as $name) {
+        foreach (array('foo', 'baz') as $name) {
             $element = $this->form->$name;
             $this->assertFalse($element->getDecorator('Form'));
             $this->assertFalse($element->getDecorator('Fieldset'));
@@ -3649,15 +3688,15 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
         $this->setupElements();
         $this->form->setElementDecorators(
-            [
+            array(
                 'Description',
                 'Form',
                 'Fieldset',
-            ],
-            [
+            ),
+            array(
                 'foo',
                 'baz',
-            ],
+            ),
             false
         );
 
@@ -3673,7 +3712,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $decorator = $element->getDecorator('Fieldset');
         $this->assertTrue($decorator instanceof Zend_Form_Decorator_Fieldset);
 
-        foreach (['foo', 'baz'] as $name) {
+        foreach (array('foo', 'baz') as $name) {
             $element = $this->form->$name;
             $this->assertFalse($element->getDecorator('Form'));
             $this->assertFalse($element->getDecorator('Fieldset'));
@@ -3686,10 +3725,10 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->_checkZf2794();
 
         $this->setupElements();
-        $this->form->setElementFilters([
+        $this->form->setElementFilters(array(
             'Alnum',
-            'StringToLower',
-        ]);
+            'StringToLower'
+        ));
         foreach ($this->form->getElements() as $element) {
             $filter = $element->getFilter('Alnum');
             $this->assertTrue($filter instanceof Zend_Filter_Alnum);
@@ -3705,8 +3744,8 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->form->addElement('text', 'prefixTest');
         foreach ($this->form->getElements() as $element) {
             $loader = $element->getPluginLoader('validate');
-            $paths = $loader->getPaths('Zend_Foo_Validate');
-            $this->assertFalse(empty($paths), $element->getName().':'.var_export($loader->getPaths(), 1));
+            $paths  = $loader->getPaths('Zend_Foo_Validate');
+            $this->assertFalse(empty($paths), $element->getName() . ':' . var_export($loader->getPaths(), 1));
             $this->assertContains('Foo', $paths[0]);
             $this->assertContains('Validate', $paths[0]);
 
@@ -3726,10 +3765,10 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     {
         $this->_checkZf2794();
 
-        $this->form->addElementPrefixPath('My_Decorator', __DIR__.'/_files/decorators', 'decorator');
+        $this->form->addElementPrefixPath('My_Decorator', __DIR__ . '/_files/decorators', 'decorator');
         $this->form->addElement('text', 'prefixTest');
         $element = $this->form->prefixTest;
-        $label = $element->getDecorator('Label');
+        $label   = $element->getDecorator('Label');
         $this->assertTrue($label instanceof My_Decorator_Label, get_class($label));
     }
 
@@ -3756,7 +3795,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->form->addElement('text', 'prefixTest');
         foreach ($this->form->getElements() as $element) {
             $loader = $element->getPluginLoader('validate');
-            $paths = $loader->getPaths('Zend_Foo');
+            $paths  = $loader->getPaths('Zend_Foo');
             $this->assertFalse(empty($paths));
             $this->assertContains('Foo', $paths[0]);
             $this->assertNotContains('Validate', $paths[0]);
@@ -3770,7 +3809,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->form->addElement('text', 'prefixTest');
         foreach ($this->form->getElements() as $element) {
             $loader = $element->getPluginLoader('filter');
-            $paths = $loader->getPaths('Zend_Foo');
+            $paths  = $loader->getPaths('Zend_Foo');
             $this->assertFalse(empty($paths));
             $this->assertContains('Foo', $paths[0]);
             $this->assertNotContains('Filter', $paths[0]);
@@ -3784,7 +3823,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->form->addElement('text', 'prefixTest');
         foreach ($this->form->getElements() as $element) {
             $loader = $element->getPluginLoader('decorator');
-            $paths = $loader->getPaths('Zend_Foo');
+            $paths  = $loader->getPaths('Zend_Foo');
             $this->assertFalse(empty($paths));
             $this->assertContains('Foo', $paths[0]);
             $this->assertNotContains('Decorator', $paths[0]);
@@ -3796,14 +3835,14 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function setupDisplayGroups()
     {
         $this->testCanAddAndRetrieveMultipleElements();
-        $this->form->addElements([
+        $this->form->addElements(array(
             'test1' => 'text',
             'test2' => 'text',
             'test3' => 'text',
-            'test4' => 'text',
-        ]);
-        $this->form->addDisplayGroup(['bar', 'bat'], 'barbat');
-        $this->form->addDisplayGroup(['foo', 'baz'], 'foobaz');
+            'test4' => 'text'
+        ));
+        $this->form->addDisplayGroup(array('bar', 'bat'), 'barbat');
+        $this->form->addDisplayGroup(array('foo', 'baz'), 'foobaz');
     }
 
     public function testCanSetAllDisplayGroupDecoratorsAtOnce()
@@ -3811,9 +3850,9 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->_checkZf2794();
 
         $this->setupDisplayGroups();
-        $this->form->setDisplayGroupDecorators([
-            ['Callback', ['callback' => 'strip_tags']],
-        ]);
+        $this->form->setDisplayGroupDecorators(array(
+            array('Callback', array('callback' => 'strip_tags')),
+        ));
         foreach ($this->form->getDisplayGroups() as $element) {
             $this->assertFalse($element->getDecorator('FormElements'));
             $this->assertFalse($element->getDecorator('HtmlTag'));
@@ -3829,10 +3868,10 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     {
         $this->setupDisplayGroups();
         $this->form->addDisplayGroupPrefixPath('Zend_Foo', 'Zend/Foo/');
-        $this->form->addDisplayGroup(['test1', 'test2'], 'testgroup');
+        $this->form->addDisplayGroup(array('test1', 'test2'), 'testgroup');
         foreach ($this->form->getDisplayGroups() as $group) {
             $loader = $group->getPluginLoader();
-            $paths = $loader->getPaths('Zend_Foo');
+            $paths  = $loader->getPaths('Zend_Foo');
             $this->assertFalse(empty($paths));
             $this->assertContains('Foo', $paths[0]);
         }
@@ -3844,11 +3883,11 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testShouldAllowSettingDisplayGroupPrefixPathViaConfigOptions()
     {
         // require_once 'Zend/Config/Ini.php';
-        $config = new Zend_Config_Ini(__DIR__.'/_files/config/zf3213.ini', 'form');
-        $form = new Zend_Form($config);
-        $dg = $form->foofoo;
-        $paths = $dg->getPluginLoader()->getPaths('My_Decorator');
-        $this->assertTrue(false !== $paths);
+        $config = new Zend_Config_Ini(__DIR__ . '/_files/config/zf3213.ini', 'form');
+        $form   = new Zend_Form($config);
+        $dg     = $form->foofoo;
+        $paths  = $dg->getPluginLoader()->getPaths('My_Decorator');
+        $this->assertTrue($paths !== false);
     }
 
     // Subform decorators
@@ -3858,9 +3897,9 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->_checkZf2794();
 
         $this->setupSubForm();
-        $this->form->setSubFormDecorators([
-            ['Callback', ['callback' => 'strip_tags']],
-        ]);
+        $this->form->setSubFormDecorators(array(
+            array('Callback', array('callback' => 'strip_tags')),
+        ));
         foreach ($this->form->getSubForms() as $subForm) {
             $this->assertFalse($subForm->getDecorator('FormElements'));
             $this->assertFalse($subForm->getDecorator('HtmlTag'));
@@ -3889,17 +3928,17 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testCloningShouldCloneAllChildren()
     {
         $form = new Zend_Form();
-        $foo = new Zend_Form_SubForm([
+        $foo = new Zend_Form_SubForm(array(
             'name' => 'foo',
-            'elements' => [
+            'elements' => array(
                 'one' => 'text',
                 'two' => 'text',
-            ],
-        ]);
+            ),
+        ));
         $form->addElement('text', 'bar')
              ->addElement('text', 'baz')
              ->addElement('text', 'bat')
-             ->addDisplayGroup(['bar', 'bat'], 'barbat')
+             ->addDisplayGroup(array('bar', 'bat'), 'barbat')
              ->addSubForm($foo, 'foo');
         $bar = $form->bar;
         $baz = $form->baz;
@@ -3974,7 +4013,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->form->setView($this->getView());
         $html = $this->form->renderFormElements();
         foreach ($this->form->getElements() as $element) {
-            $this->assertContains('id="'.$element->getFullyQualifiedName().'"', $html, 'Received: '.$html);
+            $this->assertContains('id="' . $element->getFullyQualifiedName() . '"', $html, 'Received: ' . $html);
         }
         $this->assertNotContains('<dl', $html);
         $this->assertNotContains('<form', $html);
@@ -3987,8 +4026,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
     /**
      * @group ZF-3217
-     *
-     * @expectedException \Zend_Form_Exception
+     * @expectedException Zend_Form_Exception
      */
     public function testOverloadingToInvalidMethodsShouldThrowAnException()
     {
@@ -4066,7 +4104,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $subForm = new Zend_Form_SubForm();
         $subForm->addElement('file', 'txt');
         $this->form->addSubForm($subForm, 'page1')
-                   ->setView(new Zend_View());
+                   ->setView(new Zend_View);
         $html = $this->form->render();
 
         $this->assertContains('id="txt"', $html);
@@ -4080,8 +4118,8 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testEnctypeDefaultsToMultipartWhenFileElementIsAttachedToDisplayGroup()
     {
         $this->form->addElement('file', 'txt')
-                   ->addDisplayGroup(['txt'], 'txtdisplay')
-                   ->setView(new Zend_View());
+                   ->addDisplayGroup(array('txt'), 'txtdisplay')
+                   ->setView(new Zend_View);
         $html = $this->form->render();
 
         $this->assertContains('id="txt"', $html);
@@ -4094,26 +4132,26 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
      */
     public function testIndividualElementDecoratorsShouldOverrideGlobalElementDecorators()
     {
-        $this->form->setOptions([
-            'elementDecorators' => [
+        $this->form->setOptions(array(
+            'elementDecorators' => array(
                 'ViewHelper',
                 'Label',
-            ],
-            'elements' => [
-                'foo' => [
+            ),
+            'elements' => array(
+                'foo' => array(
                     'type' => 'text',
-                    'options' => [
-                        'decorators' => [
+                    'options' => array(
+                        'decorators' => array(
                             'Errors',
                             'ViewHelper',
-                        ],
-                    ],
-                ],
-            ],
-        ]);
-        $element = $this->form->getElement('foo');
-        $expected = ['Zend_Form_Decorator_Errors', 'Zend_Form_Decorator_ViewHelper'];
-        $actual = [];
+                        ),
+                    ),
+                ),
+            ),
+        ));
+        $element    = $this->form->getElement('foo');
+        $expected   = array('Zend_Form_Decorator_Errors', 'Zend_Form_Decorator_ViewHelper');
+        $actual     = array();
         foreach ($element->getDecorators() as $decorator) {
             $actual[] = get_class($decorator);
         }
@@ -4126,7 +4164,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testIsValidShouldFailIfAddErrorHasBeenCalled()
     {
         $this->form->addError('Error');
-        $this->assertFalse($this->form->isValid([]));
+        $this->assertFalse($this->form->isValid(array()));
     }
 
     /**
@@ -4134,11 +4172,11 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
      */
     public function testGetValidValues()
     {
-        $data = ['valid' => 1234, 'invalid' => 'invalid', 'noElement' => 'noElement'];
+        $data = array('valid' => 1234, 'invalid' => 'invalid', 'noElement' => 'noElement');
 
         // require_once "Zend/Validate/Int.php";
 
-        $validElement = new Zend_Form_Element('valid');
+        $validElement = new Zend_Form_Element("valid");
         $validElement->addValidator(new Zend_Validate_Int());
         $this->form->addElement($validElement);
 
@@ -4146,7 +4184,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $invalidElement->addValidator(new Zend_Validate_Int());
         $this->form->addElement($invalidElement);
 
-        $this->assertEquals(['valid' => 1234], $this->form->getValidValues($data));
+        $this->assertEquals(array('valid' => 1234), $this->form->getValidValues($data));
     }
 
     /**
@@ -4154,12 +4192,12 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
      */
     public function testGetValidSubFormValues()
     {
-        $data = ['sub' => ['valid' => 1234, 'invalid' => 'invalid', 'noElement' => 'noElement']];
+        $data = array('sub' => array('valid' => 1234, 'invalid' => 'invalid', 'noElement' => 'noElement'));
 
         // require_once "Zend/Validate/Int.php";
 
         $subForm = new Zend_Form_SubForm();
-        $validElement = new Zend_Form_Element('valid');
+        $validElement = new Zend_Form_Element("valid");
         $validElement->addValidator(new Zend_Validate_Int());
         $subForm->addElement($validElement);
 
@@ -4169,39 +4207,39 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
         $this->form->addSubForm($subForm, 'sub');
 
-        $this->assertEquals(['sub' => ['valid' => 1234]], $this->form->getValidValues($data));
+        $this->assertEquals(array('sub' => array('valid' => 1234)), $this->form->getValidValues($data));
     }
 
-    /**
+     /**
      * @group ZF-9275
      */
     public function testElementTranslatorNotOverriddenbyGlobalTranslatorDuringValidation()
     {
-        $translator = new Zend_Translate('array', ['foo' => 'bar']);
+        $translator = new Zend_Translate('array', array('foo' => 'bar'));
         Zend_Registry::set('Zend_Translate', $translator);
 
         $this->form->addElement('text', 'foo');
-        $this->form->isValid([]);
+        $this->form->isValid(array());
 
         $received = $this->form->foo->hasTranslator();
         $this->assertSame(false, $received);
     }
 
-    /**
+     /**
      * @group ZF-9275
      */
     public function testZendValidateDefaultTranslatorOverridesZendTranslateDefaultTranslator()
     {
-        $translate = new Zend_Translate('array', ['isEmpty' => 'translate']);
+        $translate = new Zend_Translate('array', array('isEmpty' => 'translate'));
         Zend_Registry::set('Zend_Translate', $translate);
 
-        $translateValidate = new Zend_Translate('array', ['isEmpty' => 'validate']);
+        $translateValidate = new Zend_Translate('array', array('isEmpty' => 'validate'));
         Zend_Validate_Abstract::setDefaultTranslator($translateValidate);
 
-        $this->form->addElement('text', 'foo', ['required' => 1]);
-        $this->form->isValid([]);
+        $this->form->addElement('text', 'foo', array('required'=>1));
+        $this->form->isValid(array());
 
-        $this->assertSame(['isEmpty' => 'validate'], $this->form->foo->getMessages());
+        $this->assertSame(array('isEmpty' => 'validate'), $this->form->foo->getMessages());
     }
 
     /**
@@ -4209,17 +4247,17 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
      */
     public function testElementTranslatorNotOveriddenbyFormTranslator()
     {
-        $translations = [
+        $translations = array(
             'isEmpty' => 'Element message',
-        ];
+        );
         $translate = new Zend_Translate('array', $translations);
-        $this->form->addElement('text', 'foo', ['required' => true, 'translator' => $translate]);
-        $this->assertFalse($this->form->isValid(['foo' => '']));
+        $this->form->addElement('text', 'foo', array('required'=>true, 'translator'=>$translate));
+        $this->assertFalse($this->form->isValid(array('foo'=>'')));
         $messages = $this->form->getMessages();
         $this->assertEquals(1, count($messages));
         $this->assertEquals('Element message', $messages['foo']['isEmpty']);
 
-        $this->assertFalse($this->form->isValidPartial(['foo' => '']));
+        $this->assertFalse($this->form->isValidPartial(array('foo'=>'')));
         $messages = $this->form->getMessages();
         $this->assertEquals(1, count($messages));
         $this->assertEquals('Element message', $messages['foo']['isEmpty']);
@@ -4230,25 +4268,25 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
      */
     public function testElementTranslatorPreferredOverFormTranslator()
     {
-        $formTanslations = [
+        $formTanslations = array(
             'isEmpty' => 'Form message',
-        ];
-        $elementTanslations = [
+        );
+        $elementTanslations = array(
             'isEmpty' => 'Element message',
-        ];
+        );
         $formTranslate = new Zend_Translate('array', $formTanslations);
         $elementTranslate = new Zend_Translate('array', $elementTanslations);
         $this->form->setTranslator($formTranslate);
-        $this->form->addElement('text', 'foo', ['required' => true, 'translator' => $elementTranslate]);
-        $this->form->addElement('text', 'bar', ['required' => true]);
+        $this->form->addElement('text', 'foo', array('required'=>true, 'translator'=>$elementTranslate));
+        $this->form->addElement('text', 'bar', array('required'=>true));
 
-        $this->assertFalse($this->form->isValid(['foo' => '', 'bar' => '']));
+        $this->assertFalse($this->form->isValid(array('foo'=>'', 'bar'=>'')));
         $messages = $this->form->getMessages();
         $this->assertEquals(2, count($messages));
         $this->assertEquals('Element message', $messages['foo']['isEmpty']);
         $this->assertEquals('Form message', $messages['bar']['isEmpty']);
 
-        $this->assertFalse($this->form->isValidPartial(['foo' => '', 'bar' => '']));
+        $this->assertFalse($this->form->isValidPartial(array('foo'=>'', 'bar'=>'')));
         $messages = $this->form->getMessages();
         $this->assertEquals(2, count($messages));
         $this->assertEquals('Element message', $messages['foo']['isEmpty']);
@@ -4260,31 +4298,31 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
      */
     public function testElementTranslatorPreferredOverDefaultTranslator()
     {
-        $defaultTranslations = [
+        $defaultTranslations = array(
             'isEmpty' => 'Default message',
-        ];
-        $formTranslations = [
+        );
+        $formTranslations = array(
             'isEmpty' => 'Form message',
-        ];
-        $elementTranslations = [
+        );
+        $elementTranslations = array(
             'isEmpty' => 'Element message',
-        ];
+        );
         $defaultTranslate = new Zend_Translate('array', $defaultTranslations);
         $formTranslate = new Zend_Translate('array', $formTranslations);
         $elementTranslate = new Zend_Translate('array', $elementTranslations);
 
         Zend_Registry::set('Zend_Translate', $defaultTranslate);
         $this->form->setTranslator($formTranslate);
-        $this->form->addElement('text', 'foo', ['required' => true, 'translator' => $elementTranslate]);
-        $this->form->addElement('text', 'bar', ['required' => true]);
+        $this->form->addElement('text', 'foo', array('required'=>true, 'translator'=>$elementTranslate));
+        $this->form->addElement('text', 'bar', array('required'=>true));
 
-        $this->assertFalse($this->form->isValid(['foo' => '', 'bar' => '']));
+        $this->assertFalse($this->form->isValid(array('foo'=>'', 'bar'=>'')));
         $messages = $this->form->getMessages();
         $this->assertEquals(2, count($messages));
         $this->assertEquals('Element message', $messages['foo']['isEmpty']);
         $this->assertEquals('Form message', $messages['bar']['isEmpty']);
 
-        $this->assertFalse($this->form->isValidPartial(['foo' => '', 'bar' => '']));
+        $this->assertFalse($this->form->isValidPartial(array('foo'=>'', 'bar'=>'')));
         $messages = $this->form->getMessages();
         $this->assertEquals(2, count($messages));
         $this->assertEquals('Element message', $messages['foo']['isEmpty']);
@@ -4296,8 +4334,8 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
      */
     public function testSubFormTranslatorPreferredOverDefaultTranslator()
     {
-        $defaultTranslations = ['isEmpty' => 'Default message'];
-        $subformTranslations = ['isEmpty' => 'SubForm message'];
+        $defaultTranslations = array('isEmpty' => 'Default message');
+        $subformTranslations = array('isEmpty' => 'SubForm message');
 
         $defaultTranslate = new Zend_Translate('array', $defaultTranslations);
         $subformTranslate = new Zend_Translate('array', $subformTranslations);
@@ -4305,13 +4343,13 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         Zend_Registry::set('Zend_Translate', $defaultTranslate);
         $this->form->addSubForm(new Zend_Form_SubForm(), 'subform');
         $this->form->subform->setTranslator($subformTranslate);
-        $this->form->subform->addElement('text', 'foo', ['required' => true]);
+        $this->form->subform->addElement('text', 'foo', array('required'=>true));
 
-        $this->assertFalse($this->form->isValid(['subform' => ['foo' => '']]));
+        $this->assertFalse($this->form->isValid(array('subform' => array('foo'=>''))));
         $messages = $this->form->getMessages();
         $this->assertEquals('SubForm message', $messages['subform']['foo']['isEmpty']);
 
-        $this->assertFalse($this->form->isValidPartial(['subform' => ['foo' => '']]));
+        $this->assertFalse($this->form->isValidPartial(array('subform' => array('foo'=>''))));
         $messages = $this->form->getMessages();
         $this->assertEquals('SubForm message', $messages['subform']['foo']['isEmpty']);
     }
@@ -4325,9 +4363,9 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->form->setTranslator(
             new Zend_Translate(
                 'array',
-                [
+                array(
                     'labelText' => 'Foo',
-                ]
+                )
             )
         );
 
@@ -4335,25 +4373,25 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->form->addElement(
             'text',
             'foo',
-            [
-                 'label' => 'labelText',
+            array(
+                 'label'      => 'labelText',
                  'translator' => new Zend_Translate(
                      'array',
-                     [
+                     array(
                          'labelText' => 'Bar',
-                     ]
+                     )
                  ),
-                 'decorators' => [
+                 'decorators' => array(
                      'Label',
-                 ],
-            ]
+                 ),
+            )
         );
 
-        $this->form->setDecorators(['FormElements']);
+        $this->form->setDecorators(array('FormElements'));
 
         // Test
         $this->assertSame(
-            PHP_EOL.'<label for="foo" class="optional">Bar</label>'.PHP_EOL,
+            PHP_EOL . '<label for="foo" class="optional">Bar</label>' . PHP_EOL,
             $this->form->render(new Zend_View())
         );
     }
@@ -4372,8 +4410,8 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         );
 
         $expected = '<form id="foo" method="get" action="">'
-                  .PHP_EOL
-                  .'</form>';
+                  . PHP_EOL
+                  . '</form>';
 
         $this->assertSame(
             $expected,
@@ -4388,54 +4426,54 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     {
         // Create form
         $form = new Zend_Form(
-            [
-                'subForms' => [
-                    [
-                        'form' => [
-                            'elements' => [
-                                'foo' => [
+            array(
+                'subForms' => array(
+                    array(
+                        'form' => array(
+                            'elements' => array(
+                                'foo' => array(
                                     'text',
-                                    [
-                                        'label' => 'Foo',
-                                        'decorators' => [
+                                    array(
+                                        'label'      => 'Foo',
+                                        'decorators' => array(
                                             'ViewHelper',
                                             'Label',
-                                        ],
-                                    ],
-                                ],
-                            ],
-                            'id' => 'subform1',
-                            'decorators' => [
+                                        ),
+                                    ),
+                                ),
+                            ),
+                            'id'       => 'subform1',
+                            'decorators' => array(
                                 'FormElements',
-                            ],
-                        ],
-                        'name' => 'subform1',
+                            ),
+                        ),
+                        'name'  => 'subform1',
                         'order' => 2,
-                    ],
-                    [
-                        'form' => [
-                            'elements' => [
-                                'bar' => [
+                    ),
+                    array(
+                        'form' => array(
+                            'elements' => array(
+                                'bar' => array(
                                     'text',
-                                    [
-                                        'label' => 'Bar',
-                                        'decorators' => [
+                                    array(
+                                        'label'      => 'Bar',
+                                        'decorators' => array(
                                             'ViewHelper',
                                             'Label',
-                                        ],
-                                    ],
-                                ],
-                            ],
-                            'id' => 'subform2',
-                            'decorators' => [
+                                        ),
+                                    ),
+                                ),
+                            ),
+                            'id'       => 'subform2',
+                            'decorators' => array(
                                 'FormElements',
-                            ],
-                        ],
-                        'name' => 'subform2',
+                            ),
+                        ),
+                        'name'  => 'subform2',
                         'order' => 1,
-                    ],
-                ],
-            ]
+                    ),
+                ),
+            )
         );
         $form->removeDecorator('HtmlTag');
 
@@ -4445,39 +4483,38 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $subForm2 = next($subForms);
 
         $this->assertSame(
-            [
+            array(
                  'subform1',
                  'subform2',
-            ],
-            [
+            ),
+            array(
                  $subForm1->getName(),
                  $subForm2->getName(),
-            ]
+            )
         );
 
         $expected = '<form enctype="application/x-www-form-urlencoded" action="" method="post">'
-                  .PHP_EOL
-                  .PHP_EOL
-                  .'<label for="subform2-bar" class="optional">Bar</label>'
-                  .PHP_EOL
-                  .PHP_EOL
-                  .'<input type="text" name="subform2[bar]" id="subform2-bar" value="" />'
-                  .PHP_EOL
-                  .PHP_EOL
-                  .'<label for="subform1-foo" class="optional">Foo</label>'
-                  .PHP_EOL
-                  .PHP_EOL
-                  .'<input type="text" name="subform1[foo]" id="subform1-foo" value="" />'
-                  .'</form>';
+                  . PHP_EOL
+                  . PHP_EOL
+                  . '<label for="subform2-bar" class="optional">Bar</label>'
+                  . PHP_EOL
+                  . PHP_EOL
+                  . '<input type="text" name="subform2[bar]" id="subform2-bar" value="" />'
+                  . PHP_EOL
+                  . PHP_EOL
+                  . '<label for="subform1-foo" class="optional">Foo</label>'
+                  . PHP_EOL
+                  . PHP_EOL
+                  . '<input type="text" name="subform1[foo]" id="subform1-foo" value="" />'
+                  . '</form>';
 
         $this->assertSame($expected, $form->render($this->getView()));
     }
 
     /**
-     * Used by test methods susceptible to ZF-2794, marks a test as incomplete.
+     * Used by test methods susceptible to ZF-2794, marks a test as incomplete
      *
-     * @see   http://framework.zend.com/issues/browse/ZF-2794
-     *
+     * @link   http://framework.zend.com/issues/browse/ZF-2794
      * @return void
      */
     protected function _checkZf2794()
@@ -4485,10 +4522,9 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Prove the fluent interface on Zend_Form::loadDefaultDecorators.
+     * Prove the fluent interface on Zend_Form::loadDefaultDecorators
      *
-     * @see http://framework.zend.com/issues/browse/ZF-9913
-     *
+     * @link http://framework.zend.com/issues/browse/ZF-9913
      * @return void
      */
     public function testFluentInterfaceOnLoadDefaultDecorators()
@@ -4501,11 +4537,11 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
      */
     public function testAddDecoratorsKeepsNonNumericKeyNames()
     {
-        $this->form->addDecorators([[['td' => 'HtmlTag'],
-                                               ['tag' => 'td']],
-                                         [['tr' => 'HtmlTag'],
-                                               ['tag' => 'tr']],
-                                         ['HtmlTag', ['tag' => 'baz']]]);
+        $this->form->addDecorators(array(array(array('td'  => 'HtmlTag'),
+                                               array('tag' => 'td')),
+                                         array(array('tr'  => 'HtmlTag'),
+                                               array('tag' => 'tr')),
+                                         array('HtmlTag', array('tag' => 'baz'))));
         $t1 = $this->form->getDecorators();
         $this->form->setDecorators($t1);
         $t2 = $this->form->getDecorators();
@@ -4532,8 +4568,8 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $element = new Zend_Form_Element_Text('foo');
         $elementTwo = new Zend_Form_Element_Text('baz-----');
 
-        $this->form->addElements([$element, $elementTwo]);
-        $this->form->addDisplayGroup([$element, $elementTwo], 'bar');
+        $this->form->addElements(array($element, $elementTwo));
+        $this->form->addDisplayGroup(array($element, $elementTwo), 'bar');
 
         $displayGroup = $this->form->getDisplayGroup('bar');
         $this->assertNotNull($displayGroup->getElement('foo'));
@@ -4543,7 +4579,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->form->clearDisplayGroups()
                    ->clearElements();
 
-        $this->form->addDisplayGroup([$element, $elementTwo], 'bar');
+        $this->form->addDisplayGroup(array($element, $elementTwo), 'bar');
         $displayGroup = $this->form->getDisplayGroup('bar');
         $this->assertNotNull($displayGroup->getElement('foo'));
         $this->assertNotNull($displayGroup->getElement('baz'));
@@ -4555,17 +4591,18 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testIfViewIsSetInTime()
     {
         try {
-            $form = new Zend_Form(['view' => new MyTestView()]);
+            $form = new Zend_Form(array('view' => new MyTestView()));
             $this->assertTrue($form->getView() instanceof MyTestView);
 
-            $form = new Zend_Form(['view' => new stdClass()]);
+            $form = new Zend_Form(array('view' => new StdClass()));
             $this->assertNull($form->getView());
 
             $result = $form->render();
-        } catch (Zend_Form_Exception $e) {
+        }
+        catch (Zend_Form_Exception $e) {
             $this->fail('Setting a view object using the options array should not throw an exception');
         }
-        $this->assertNotEquals($result, '');
+        $this->assertNotEquals($result,'');
     }
 
     /**
@@ -4590,8 +4627,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
     /**
      * @group ZF-10865
-     *
-     * @expectedException \Zend_Form_Exception
+     * @expectedException Zend_Form_Exception
      */
     public function testExceptionThrownWhenAddElementsIsGivenNullValue()
     {
@@ -4605,13 +4641,13 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testDashSeparatedElementsInDisplayGroupsShouldNotRenderOutsideDisplayGroup()
     {
         $form = new Zend_Form();
-        $form->addElement('text', 'random-element-name', [
+        $form->addElement('text', 'random-element-name', array(
             'label' => 'This is weird',
             'value' => 'think its a bug',
-        ]);
-        $form->addDisplayGroup(['random-element-name'], 'foobar', [
+        ));
+        $form->addDisplayGroup(array('random-element-name'), 'foobar', array(
             'legend' => 'foobar',
-        ]);
+        ));
         $html = $form->render($this->getView());
         $count = substr_count($html, 'randomelementname-element');
         $this->assertEquals(1, $count, $html);
@@ -4623,41 +4659,41 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testElementsOfSubFormReceiveCorrectDefaultTranslator()
     {
         // Global default translator
-        $trDefault = new Zend_Translate([
+        $trDefault = new Zend_Translate(array(
             'adapter' => 'array',
-            'content' => [
-                Zend_Validate_NotEmpty::IS_EMPTY => 'Default',
-            ],
-            'locale' => 'en',
-        ]);
+            'content' => array(
+                Zend_Validate_NotEmpty::IS_EMPTY => 'Default'
+            ),
+            'locale' => 'en'
+        ));
         Zend_Registry::set('Zend_Translate', $trDefault);
 
         // Translator to use for elements
-        $trElement = new Zend_Translate([
+        $trElement = new Zend_Translate(array(
             'adapter' => 'array',
-            'content' => [
-                Zend_Validate_NotEmpty::IS_EMPTY => 'Element',
-            ],
-            'locale' => 'en',
-        ]);
+            'content' => array(
+                Zend_Validate_NotEmpty::IS_EMPTY =>'Element'
+            ),
+            'locale' => 'en'
+        ));
         Zend_Validate_Abstract::setDefaultTranslator($trElement);
 
         // Change the form's translator
         $form = new Zend_Form();
-        $form->addElement(new Zend_Form_Element_Text('foo', [
-            'required' => true,
-            'validators' => ['NotEmpty'],
-        ]));
+        $form->addElement(new Zend_Form_Element_Text('foo', array(
+            'required'   => true,
+            'validators' => array('NotEmpty')
+        )));
 
         // Create a subform with it's own validator
         $sf1 = new Zend_Form_SubForm();
-        $sf1->addElement(new Zend_Form_Element_Text('foosub', [
-            'required' => true,
-            'validators' => ['NotEmpty'],
-        ]));
+        $sf1->addElement(new Zend_Form_Element_Text('foosub', array(
+            'required'   => true,
+            'validators' => array('NotEmpty')
+        )));
         $form->addSubForm($sf1, 'Test1');
 
-        $form->isValid([]);
+        $form->isValid(array());
 
         $messages = $form->getMessages();
         $this->assertEquals(
@@ -4679,10 +4715,10 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     {
         $form = new Zend_Form();
         $form->addPrefixPath('Zf\Foo', 'Zf/Foo');
-        foreach (['element', 'decorator'] as $type) {
+        foreach (array('element', 'decorator') as $type) {
             $loader = $form->getPluginLoader($type);
-            $paths = $loader->getPaths('Zf\Foo\\'.ucfirst($type));
-            $this->assertTrue(is_array($paths), "Failed for type $type: ".var_export($paths, 1));
+            $paths = $loader->getPaths('Zf\Foo\\' . ucfirst($type));
+            $this->assertTrue(is_array($paths), "Failed for type $type: " . var_export($paths, 1));
             $this->assertFalse(empty($paths));
             $this->assertContains('Foo', $paths[0]);
         }
@@ -4696,20 +4732,20 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         // Init form
         $form = new Zend_Form();
         $form->setElementDecorators(
-            [
+            array(
                  new Zend_Form_Decorator_ViewHelper(),
                  new Zend_Form_Decorator_Label(),
-            ]
+            )
         );
         $element = $form->createElement('text', 'foo');
 
         //  Test
-        $expected = [
+        $expected = array(
             'Zend_Form_Decorator_ViewHelper',
             'Zend_Form_Decorator_Label',
-        ];
+        );
 
-        $actual = [];
+        $actual = array();
         foreach ($element->getDecorators() as $decorator) {
             $actual[] = get_class($decorator);
         }
@@ -4725,23 +4761,23 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         // Init form
         $form = new Zend_Form();
         $form->setElementDecorators(
-            [
+            array(
                  new Zend_Form_Decorator_ViewHelper(),
                  new Zend_Form_Decorator_Label(),
-            ]
+            )
         );
 
         $element = new Zend_Form_Element_Text('foo');
-        $element->setDecorators(['Errors', 'Description']);
+        $element->setDecorators(array('Errors', 'Description'));
         $form->addElement($element);
 
         // Test
-        $expected = [
+        $expected = array(
             'Zend_Form_Decorator_Errors',
             'Zend_Form_Decorator_Description',
-        ];
+        );
 
-        $actual = [];
+        $actual = array();
         foreach ($form->getElement('foo')->getDecorators() as $decorator) {
             $actual[] = get_class($decorator);
         }
@@ -4757,26 +4793,26 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         // Init form
         $form = new Zend_Form();
         $form->setElementDecorators(
-            [
+            array(
                  new Zend_Form_Decorator_ViewHelper(),
                  new Zend_Form_Decorator_Label(),
-            ]
+            )
         );
 
         // Add element
         $element = new Zend_Form_Element_Text(
             'foo',
-            ['disableLoadDefaultDecorators' => true]
+            array('disableLoadDefaultDecorators' => true)
         );
         $form->addElement($element);
 
         // Test
-        $expected = [
+        $expected = array(
             'Zend_Form_Decorator_ViewHelper',
             'Zend_Form_Decorator_Label',
-        ];
+        );
 
-        $actual = [];
+        $actual = array();
         foreach ($form->getElement('foo')->getDecorators() as $decorator) {
             $actual[] = get_class($decorator);
         }
@@ -4790,7 +4826,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testHasErrorsMethodShouldCheckAlsoElements()
     {
         // Init form
-        $form = new Zend_Form();
+        $form    = new Zend_Form();
         $element = new Zend_Form_Element_Text('foo');
         $form->addElement($element);
 
@@ -4798,7 +4834,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
         // Test form
         $this->assertTrue($form->hasErrors());
-        $this->assertFalse($form->isValid(['foo' => 1]));
+        $this->assertFalse($form->isValid(array('foo' => 1)));
 
         // Test element
         $this->assertTrue($element->hasErrors());
@@ -4811,7 +4847,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testHasErrorsMethodShouldCheckAlsoSubForms()
     {
         // Init form
-        $form = new Zend_Form();
+        $form    = new Zend_Form();
         $subForm = new Zend_Form_SubForm();
         $element = new Zend_Form_Element_Text('foo');
         $subForm->addElement($element);
@@ -4821,7 +4857,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
         // Test form
         $this->assertTrue($form->hasErrors());
-        $this->assertFalse($form->isValid(['foo' => 1]));
+        $this->assertFalse($form->isValid(array('foo' => 1)));
 
         // Test element
         $this->assertTrue($element->hasErrors());
@@ -4848,13 +4884,13 @@ class Zend_Form_FormTest_WithDisplayGroup extends Zend_Form
 {
     public function init()
     {
-        $this->addElement('text', 'el1', [
-            'label' => 'Title',
+        $this->addElement('text', 'el1', array(
+            'label'    => 'Title',
             'required' => true,
-        ]);
-        $this->addDisplayGroup(['el1'], 'group1', [
+        ));
+        $this->addDisplayGroup(array('el1'), 'group1', array(
             'legend' => 'legend 1',
-        ]);
+        ));
     }
 }
 
@@ -4864,9 +4900,9 @@ class Zend_Form_FormTest_AddToDisplayGroup extends Zend_Form_FormTest_WithDispla
     public function init()
     {
         parent::init();
-        $element = new Zend_Form_Element_Text('el2', [
+        $element = new Zend_Form_Element_Text('el2', array(
             'label' => 'Customer Type',
-        ]);
+        ));
 
         $this->addElement($element);
         $this->group1->addElement($element);
@@ -4876,6 +4912,7 @@ class Zend_Form_FormTest_AddToDisplayGroup extends Zend_Form_FormTest_WithDispla
 #[AllowDynamicProperties]
 class MyTestView extends Zend_View
 {
+
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Form_FormTest::main') {

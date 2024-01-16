@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Gdata
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id $
  */
 
@@ -24,15 +24,16 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Gdata
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Gdata
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_MediaMimeStreamTest extends PHPUnit_Framework_TestCase
 {
+
     public function setUp()
     {
         $this->locationOfFakeBinary =
@@ -54,7 +55,7 @@ class Zend_Gdata_MediaMimeStreamTest extends PHPUnit_Framework_TestCase
         } catch (Zend_Gdata_App_IOException $e) {
             $exceptionThrown = true;
         }
-        $this->assertTrue($exceptionThrown, 'Was expecting an exception on '.
+        $this->assertTrue($exceptionThrown, 'Was expecting an exception on ' .
             'attempting to read an unreadable or non-existant file');
     }
 
@@ -89,7 +90,7 @@ class Zend_Gdata_MediaMimeStreamTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals($this->exceptedLenOfMimeMessage,
             $this->mediaMimeStream->getTotalSize());
-        $outputArray = [];
+        $outputArray = array();
         while ($this->mediaMimeStream->hasData()) {
             $outputArray = explode("\r\n", $this->mediaMimeStream->read(400));
         }
@@ -123,8 +124,8 @@ class Zend_Gdata_MediaMimeStreamTest extends PHPUnit_Framework_TestCase
      */
     public function testReadVariousBufferSizes()
     {
-        $bufferSizesToTest = [2, 20, 33, 44, 88, 100, 201];
-        foreach ($bufferSizesToTest as $sizeToTest) {
+        $bufferSizesToTest = array(2, 20, 33, 44, 88, 100, 201);
+        foreach($bufferSizesToTest as $sizeToTest) {
             $mediaMimeStream = new Zend_Gdata_MediaMimeStream(
                 $this->smallXMLString, $this->locationOfFakeBinary,
                 $this->testMediaType);
@@ -182,4 +183,5 @@ class Zend_Gdata_MediaMimeStreamTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->exceptedLenOfMimeMessage,
             strlen((string) $outputString));
     }
+
 }

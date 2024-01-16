@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,34 +13,35 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Navigation
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id:$
  */
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_NavigationTest::main');
 }
 
 /**
- * Zend_Navigation.
+ * Zend_Navigation
  */
 // require_once 'Zend/Navigation.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Navigation
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Navigation
  */
 #[AllowDynamicProperties]
 class Zend_NavigationTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend_Navigation
+     * @var     Zend_Navigation
      */
     private $_navigation;
 
@@ -55,7 +56,6 @@ class Zend_NavigationTest extends PHPUnit_Framework_TestCase
         $this->_navigation = null;
         parent::tearDown();
     }
-
     /**
      * Runs the test methods of this class.
      *
@@ -63,12 +63,12 @@ class Zend_NavigationTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend_NavigationTest');
+        $suite  = new PHPUnit_Framework_TestSuite("Zend_NavigationTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     /**
-     * Testing that navigation order is done correctly.
+     * Testing that navigation order is done correctly
      *
      * @group   ZF-8337
      * @group   ZF-8313
@@ -76,11 +76,11 @@ class Zend_NavigationTest extends PHPUnit_Framework_TestCase
     public function testNavigationArraySortsCorrectly()
     {
         // require_once 'Zend/Navigation/Page/Uri.php';
-        $page1 = new Zend_Navigation_Page_Uri(['uri' => 'page1']);
-        $page2 = new Zend_Navigation_Page_Uri(['uri' => 'page2']);
-        $page3 = new Zend_Navigation_Page_Uri(['uri' => 'page3']);
+        $page1 = new Zend_Navigation_Page_Uri(array('uri' => 'page1'));
+        $page2 = new Zend_Navigation_Page_Uri(array('uri' => 'page2'));
+        $page3 = new Zend_Navigation_Page_Uri(array('uri' => 'page3'));
 
-        $this->_navigation->setPages([$page1, $page2, $page3]);
+        $this->_navigation->setPages(array($page1, $page2, $page3));
 
         $page1->setOrder(1);
         $page3->setOrder(0);
@@ -92,4 +92,5 @@ class Zend_NavigationTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('page1', $pages[1]['uri']);
         $this->assertEquals('page2', $pages[2]['uri']);
     }
+
 }

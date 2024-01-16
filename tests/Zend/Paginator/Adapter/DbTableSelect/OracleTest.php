@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Paginator
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -25,12 +25,13 @@
  */
 require_once 'Zend/Paginator/Adapter/DbSelect/OracleTest.php';
 
+
 /**
  * @category   Zend
- *
+ * @package    Zend_Paginator
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Paginator
  */
 #[AllowDynamicProperties]
@@ -41,9 +42,9 @@ class Zend_Paginator_Adapter_DbTableSelect_OracleTest extends Zend_Paginator_Ada
      */
     public function testSelectDoesReturnZendDbTableRowset()
     {
-        $query = $this->_table->select();
+        $query   = $this->_table->select();
         $adapter = new Zend_Paginator_Adapter_DbTableSelect($query);
-        $items = $adapter->getItems(0, 10);
+        $items   = $adapter->getItems(0, 10);
 
         $this->assertTrue($items instanceof Zend_Db_Table_Rowset);
     }

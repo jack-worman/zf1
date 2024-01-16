@@ -1,9 +1,9 @@
 <?php
-
 #[AllowDynamicProperties]
 class MyBarcode2 extends Zend_Validate_Barcode_AdapterAbstract
 {
-    protected $_length = [1, 3, 6];
+    protected $_length     = array(1,3,6);
     protected $_characters = 128;
-    protected $_checksum = '_mod10';
+    protected $_checksum   = '_mod10';
 }
+?>

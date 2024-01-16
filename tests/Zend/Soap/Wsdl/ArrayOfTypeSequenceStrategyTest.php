@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,11 +13,15 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Soap
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
+ */
+
+/**
+ * @package Zend_Soap
+ * @subpackage UnitTests
  */
 
 /** Zend_Soap_Wsdl */
@@ -27,10 +31,10 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Soap
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Soap
  * @group      Zend_Soap_Wsdl
  */
@@ -73,7 +77,7 @@ class Zend_Soap_Wsdl_ArrayOfTypeSequenceStrategyTest extends PHPUnit_Framework_T
     public function testFunctionReturningNestedArrayOfString()
     {
         $return = $this->wsdl->addComplexType('string[][]');
-        $this->assertEquals('tns:ArrayOfArrayOfString', $return);
+        $this->assertEquals("tns:ArrayOfArrayOfString", $return);
 
         $wsdl = $this->wsdl->toXML();
 
@@ -92,7 +96,7 @@ class Zend_Soap_Wsdl_ArrayOfTypeSequenceStrategyTest extends PHPUnit_Framework_T
     public function testFunctionReturningMultipleNestedArrayOfType()
     {
         $return = $this->wsdl->addComplexType('string[][][]');
-        $this->assertEquals('tns:ArrayOfArrayOfArrayOfString', $return);
+        $this->assertEquals("tns:ArrayOfArrayOfArrayOfString", $return);
 
         $wsdl = $this->wsdl->toXML();
 
@@ -113,11 +117,12 @@ class Zend_Soap_Wsdl_ArrayOfTypeSequenceStrategyTest extends PHPUnit_Framework_T
         );
     }
 
+
     public function testAddComplexTypeObject()
     {
         $return = $this->wsdl->addComplexType('Zend_Soap_Wsdl_SequenceTest');
 
-        $this->assertEquals('tns:Zend_Soap_Wsdl_SequenceTest', $return);
+        $this->assertEquals("tns:Zend_Soap_Wsdl_SequenceTest", $return);
 
         $wsdl = $this->wsdl->toXML();
 
@@ -129,26 +134,27 @@ class Zend_Soap_Wsdl_ArrayOfTypeSequenceStrategyTest extends PHPUnit_Framework_T
 
     public function testAddComplexTypeArrayOfObject()
     {
-        $return = $this->wsdl->addComplexType('Zend_Soap_Wsdl_SequenceTest[]');
 
-        $this->assertEquals('tns:ArrayOfZend_soap_wsdl_sequencetest', $return);
+         $return = $this->wsdl->addComplexType('Zend_Soap_Wsdl_SequenceTest[]');
 
-        $wsdl = $this->wsdl->toXML();
+         $this->assertEquals("tns:ArrayOfZend_soap_wsdl_sequencetest", $return);
 
-        $this->assertContains(
+         $wsdl = $this->wsdl->toXML();
+
+         $this->assertContains(
             '<xsd:complexType name="Zend_Soap_Wsdl_SequenceTest"><xsd:all><xsd:element name="var" type="xsd:int"/></xsd:all></xsd:complexType>',
             $wsdl
-        );
+         );
 
-        $this->assertContains(
+         $this->assertContains(
             '<xsd:complexType name="ArrayOfZend_soap_wsdl_sequencetest"><xsd:sequence><xsd:element name="item" type="tns:Zend_Soap_Wsdl_SequenceTest" minOccurs="0" maxOccurs="unbounded"/></xsd:sequence></xsd:complexType>',
             $wsdl
-        );
+         );
     }
 
     public function testAddComplexTypeOfNonExistingClassThrowsException()
     {
-        $this->setExpectedException('Zend_Soap_Wsdl_Exception');
+        $this->setExpectedException("Zend_Soap_Wsdl_Exception");
 
         $this->wsdl->addComplexType('Zend_Soap_Wsdl_UnknownClass[]');
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Feed
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -24,29 +24,30 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Feed
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Feed
  * @group      Zend_Feed_Reader
  */
 #[AllowDynamicProperties]
 class Zend_Feed_Reader_Integration_PodcastRss2Test extends PHPUnit_Framework_TestCase
 {
-    protected $_feedSamplePath;
+
+    protected $_feedSamplePath = null;
 
     public function setup()
     {
         Zend_Feed_Reader::reset();
-        $this->_feedSamplePath = __DIR__.'/_files/podcast.xml';
+        $this->_feedSamplePath = __DIR__ . '/_files/podcast.xml';
         $this->_options = Zend_Date::setOptions();
-        foreach ($this->_options as $k => $v) {
+        foreach($this->_options as $k=>$v) {
             if (is_null($v)) {
                 unset($this->_options[$k]);
             }
         }
-        Zend_Date::setOptions(['format_type' => 'iso']);
+        Zend_Date::setOptions(array('format_type'=>'iso'));
     }
 
     public function teardown()
@@ -55,8 +56,9 @@ class Zend_Feed_Reader_Integration_PodcastRss2Test extends PHPUnit_Framework_Tes
     }
 
     /**
-     * Feed level testing.
+     * Feed level testing
      */
+
     public function testGetsNewFeedUrl()
     {
         $feed = Zend_Feed_Reader::importString(
@@ -182,8 +184,9 @@ class Zend_Feed_Reader_Integration_PodcastRss2Test extends PHPUnit_Framework_Tes
     */
 
     /**
-     * Entry level testing.
+     * Entry level testing
      */
+
     public function testGetsEntryBlock()
     {
         $feed = Zend_Feed_Reader::importString(
@@ -287,9 +290,9 @@ class Zend_Feed_Reader_Integration_PodcastRss2Test extends PHPUnit_Framework_Tes
         $entry = $feed->current();
 
         $expected = new stdClass();
-        $expected->url = 'http://example.com/podcasts/everything/AllAboutEverythingEpisode3.m4a';
+        $expected->url    = 'http://example.com/podcasts/everything/AllAboutEverythingEpisode3.m4a';
         $expected->length = '8727310';
-        $expected->type = 'audio/x-m4a';
+        $expected->type   = 'audio/x-m4a';
 
         $this->assertEquals($expected, $entry->getEnclosure());
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Service_Amazon
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -28,10 +28,10 @@
  * Zend_Service_Amazon_Ec2_Availabilityzones test case.
  *
  * @category   Zend
- *
+ * @package    Zend_Service_Amazon
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_Ec2
@@ -39,6 +39,7 @@
 #[AllowDynamicProperties]
 class Zend_Service_Amazon_Ec2_AvailabilityzonesTest extends PHPUnit_Framework_TestCase
 {
+
     /**
      * @var Zend_Service_Amazon_Ec2_Availabilityzones
      */
@@ -54,11 +55,12 @@ class Zend_Service_Amazon_Ec2_AvailabilityzonesTest extends PHPUnit_Framework_Te
         $this->Zend_Service_Amazon_Ec2_Availabilityzones = new Zend_Service_Amazon_Ec2_Availabilityzones('access_key', 'secret_access_key');
 
         $adapter = new Zend_Http_Client_Adapter_Test();
-        $client = new Zend_Http_Client(null, [
-            'adapter' => $adapter,
-        ]);
+        $client = new Zend_Http_Client(null, array(
+            'adapter' => $adapter
+        ));
         $this->adapter = $adapter;
         Zend_Service_Amazon_Ec2_Availabilityzones::setHttpClient($client);
+
     }
 
     /**
@@ -76,22 +78,22 @@ class Zend_Service_Amazon_Ec2_AvailabilityzonesTest extends PHPUnit_Framework_Te
     public function testDescribeSingleAvailabilityZone()
     {
         $rawHttpResponse = "HTTP/1.1 200 OK\r\n"
-                    ."Date: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
-                    ."Server: hi\r\n"
-                    ."Last-modified: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
-                    ."Status: 200 OK\r\n"
-                    ."Content-type: application/xml; charset=utf-8\r\n"
-                    ."Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
-                    ."Connection: close\r\n"
-                    ."\r\n"
-                    ."<DescribeAvailabilityZonesResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
-                    ."  <availabilityZoneInfo>\r\n"
-                    ."    <item>\r\n"
-                    ."      <zoneName>us-east-1a</zoneName>\r\n"
-                    ."      <zoneState>available</zoneState>\r\n"
-                    ."    </item>\r\n"
-                    ."  </availabilityZoneInfo>\r\n"
-                    .'</DescribeAvailabilityZonesResponse>';
+                    . "Date: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
+                    . "Server: hi\r\n"
+                    . "Last-modified: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
+                    . "Status: 200 OK\r\n"
+                    . "Content-type: application/xml; charset=utf-8\r\n"
+                    . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
+                    . "Connection: close\r\n"
+                    . "\r\n"
+                    . "<DescribeAvailabilityZonesResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
+                    . "  <availabilityZoneInfo>\r\n"
+                    . "    <item>\r\n"
+                    . "      <zoneName>us-east-1a</zoneName>\r\n"
+                    . "      <zoneState>available</zoneState>\r\n"
+                    . "    </item>\r\n"
+                    . "  </availabilityZoneInfo>\r\n"
+                    . "</DescribeAvailabilityZonesResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
         $response = $this->Zend_Service_Amazon_Ec2_Availabilityzones->describe('us-east-1a');
@@ -103,39 +105,40 @@ class Zend_Service_Amazon_Ec2_AvailabilityzonesTest extends PHPUnit_Framework_Te
     public function testDescribeMultipleAvailabilityZones()
     {
         $rawHttpResponse = "HTTP/1.1 200 OK\r\n"
-                    ."Date: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
-                    ."Server: hi\r\n"
-                    ."Last-modified: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
-                    ."Status: 200 OK\r\n"
-                    ."Content-type: application/xml; charset=utf-8\r\n"
-                    ."Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
-                    ."Connection: close\r\n"
-                    ."\r\n"
-                    ."<DescribeAvailabilityZonesResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
-                    ."  <availabilityZoneInfo>\r\n"
-                    ."    <item>\r\n"
-                    ."      <zoneName>us-east-1a</zoneName>\r\n"
-                    ."      <zoneState>available</zoneState>\r\n"
-                    ."    </item>\r\n"
-                    ."    <item>\r\n"
-                    ."      <zoneName>us-east-1b</zoneName>\r\n"
-                    ."      <zoneState>available</zoneState>\r\n"
-                    ."    </item>\r\n"
-                    ."    <item>\r\n"
-                    ."      <zoneName>us-east-1c</zoneName>\r\n"
-                    ."      <zoneState>available</zoneState>\r\n"
-                    ."    </item>\r\n"
-                    ."  </availabilityZoneInfo>\r\n"
-                    .'</DescribeAvailabilityZonesResponse>';
+                    . "Date: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
+                    . "Server: hi\r\n"
+                    . "Last-modified: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
+                    . "Status: 200 OK\r\n"
+                    . "Content-type: application/xml; charset=utf-8\r\n"
+                    . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
+                    . "Connection: close\r\n"
+                    . "\r\n"
+                    . "<DescribeAvailabilityZonesResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
+                    . "  <availabilityZoneInfo>\r\n"
+                    . "    <item>\r\n"
+                    . "      <zoneName>us-east-1a</zoneName>\r\n"
+                    . "      <zoneState>available</zoneState>\r\n"
+                    . "    </item>\r\n"
+                    . "    <item>\r\n"
+                    . "      <zoneName>us-east-1b</zoneName>\r\n"
+                    . "      <zoneState>available</zoneState>\r\n"
+                    . "    </item>\r\n"
+                    . "    <item>\r\n"
+                    . "      <zoneName>us-east-1c</zoneName>\r\n"
+                    . "      <zoneState>available</zoneState>\r\n"
+                    . "    </item>\r\n"
+                    . "  </availabilityZoneInfo>\r\n"
+                    . "</DescribeAvailabilityZonesResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
         $response = $this->Zend_Service_Amazon_Ec2_Availabilityzones->describe();
 
         $this->assertTrue(is_array($response));
 
-        $arrExpected = ['us-east-1a', 'us-east-1b', 'us-east-1c'];
+        $arrExpected = array('us-east-1a', 'us-east-1b', 'us-east-1c');
         foreach ($response as $k => $node) {
             $this->assertEquals($arrExpected[$k], $node['zoneName']);
         }
     }
 }
+

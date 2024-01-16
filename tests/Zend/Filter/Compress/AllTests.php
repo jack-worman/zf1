@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,12 +13,13 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Filter
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id: AllTests.php 16225 2009-06-21 20:34:55Z thomas $
  */
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Filter_Compress_AllTests::main');
 }
@@ -32,9 +33,9 @@ require_once 'Zend/Filter/Compress/ZipTest.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Filter
+ * @subpackage UnitTests
  * @group      Zend_Filter
- *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -42,7 +43,7 @@ require_once 'Zend/Filter/Compress/ZipTest.php';
 class Zend_Filter_Compress_AllTests
 {
     /**
-     * Runs this test suite.
+     * Runs this test suite
      *
      * @return void
      */
@@ -52,7 +53,7 @@ class Zend_Filter_Compress_AllTests
     }
 
     /**
-     * Creates and returns this test suite.
+     * Creates and returns this test suite
      *
      * @return PHPUnit_Framework_TestSuite
      */

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Feed
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -25,17 +25,18 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Feed
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Feed
  * @group      Zend_Feed_Reader
  */
 #[AllowDynamicProperties]
 class Zend_Feed_Reader_Feed_CommonTest extends PHPUnit_Framework_TestCase
 {
-    protected $_feedSamplePath;
+
+    protected $_feedSamplePath = null;
 
     public function setup()
     {
@@ -44,11 +45,11 @@ class Zend_Feed_Reader_Feed_CommonTest extends PHPUnit_Framework_TestCase
             $registry = Zend_Registry::getInstance();
             unset($registry['Zend_Locale']);
         }
-        $this->_feedSamplePath = __DIR__.'/_files/Common';
+        $this->_feedSamplePath = __DIR__ . '/_files/Common';
     }
 
     /**
-     * Check DOM Retrieval and Information Methods.
+     * Check DOM Retrieval and Information Methods
      */
     public function testGetsDomDocumentObject()
     {
@@ -71,7 +72,7 @@ class Zend_Feed_Reader_Feed_CommonTest extends PHPUnit_Framework_TestCase
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/atom.xml')
         );
-        $this->assertTrue('/atom:feed' == $feed->getXpathPrefix());
+        $this->assertTrue($feed->getXpathPrefix() == '/atom:feed');
     }
 
     public function testGetsDomElementObject()
@@ -127,4 +128,6 @@ class Zend_Feed_Reader_Feed_CommonTest extends PHPUnit_Framework_TestCase
         );
         $this->assertEquals('UTF-8', $feed->getEncoding());
     }
+
+
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,12 +13,13 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Log
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Log_Writer_ZendMonitorTest::main');
 }
@@ -28,10 +29,10 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Log
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Log
  */
 #[AllowDynamicProperties]
@@ -39,7 +40,7 @@ class Zend_Log_Writer_ZendMonitorTest extends PHPUnit_Framework_TestCase
 {
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite(__CLASS__);
+        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -49,12 +50,12 @@ class Zend_Log_Writer_ZendMonitorTest extends PHPUnit_Framework_TestCase
     public function testWrite()
     {
         $writer = new Zend_Log_Writer_ZendMonitor();
-        $writer->write(['message' => 'my mess', 'priority' => 1]);
+        $writer->write(array('message' => 'my mess', 'priority' => 1));
     }
 
     public function testFactory()
     {
-        $cfg = [];
+        $cfg = array();
 
         $writer = Zend_Log_Writer_ZendMonitor::factory($cfg);
         $this->assertTrue($writer instanceof Zend_Log_Writer_ZendMonitor);

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Test
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -27,10 +27,10 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Test
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Test
  */
 #[AllowDynamicProperties]
@@ -41,9 +41,9 @@ class Zend_Test_PHPUnit_Db_SimpleTesterTest extends PHPUnit_Framework_TestCase
         $testAdapter = $this->getMock('Zend_Test_DbAdapter');
         $testAdapter->expects($this->any())
                     ->method('delete')
-                    ->will($this->throwException(new Exception()));
+                    ->will($this->throwException(new Exception));
 
-        $connection = new Zend_Test_PHPUnit_Db_Connection($testAdapter, 'schema');
+        $connection = new Zend_Test_PHPUnit_Db_Connection($testAdapter, "schema");
 
         $databaseTester = new Zend_Test_PHPUnit_Db_SimpleTester($connection);
 
@@ -55,9 +55,9 @@ class Zend_Test_PHPUnit_Db_SimpleTesterTest extends PHPUnit_Framework_TestCase
         $testAdapter = $this->getMock('Zend_Test_DbAdapter');
         $testAdapter->expects($this->any())
                     ->method('delete')
-                    ->will($this->throwException(new Exception()));
+                    ->will($this->throwException(new Exception));
 
-        $connection = new Zend_Test_PHPUnit_Db_Connection($testAdapter, 'schema');
+        $connection = new Zend_Test_PHPUnit_Db_Connection($testAdapter, "schema");
 
         $databaseTester = new Zend_Test_PHPUnit_Db_SimpleTester($connection);
 
@@ -73,7 +73,7 @@ class Zend_Test_PHPUnit_Db_SimpleTesterTest extends PHPUnit_Framework_TestCase
 
     public function testInvalidConnectionGivenThrowsException()
     {
-        $this->setExpectedException('Zend_Test_PHPUnit_Db_Exception');
+        $this->setExpectedException("Zend_Test_PHPUnit_Db_Exception");
 
         $connection = $this->getMock('PHPUnit_Extensions_Database_DB_IDatabaseConnection');
 

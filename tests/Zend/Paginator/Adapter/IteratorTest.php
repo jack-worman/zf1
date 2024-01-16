@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Paginator
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -31,10 +31,10 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Paginator
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Paginator
  */
 #[AllowDynamicProperties]
@@ -48,17 +48,16 @@ class Zend_Paginator_Adapter_IteratorTest extends PHPUnit_Framework_TestCase
     /**
      * Prepares the environment before running a test.
      */
-    protected function setUp()
+    protected function setUp ()
     {
         parent::setUp();
         $iterator = new ArrayIterator(range(1, 101));
         $this->_adapter = new Zend_Paginator_Adapter_Iterator($iterator);
     }
-
     /**
      * Cleans up the environment after running a test.
      */
-    protected function tearDown()
+    protected function tearDown ()
     {
         $this->_adapter = null;
         parent::tearDown();
@@ -72,7 +71,7 @@ class Zend_Paginator_Adapter_IteratorTest extends PHPUnit_Framework_TestCase
         $i = 1;
         foreach ($actual as $item) {
             $this->assertEquals($i, $item);
-            ++$i;
+            $i++;
         }
     }
 
@@ -84,7 +83,7 @@ class Zend_Paginator_Adapter_IteratorTest extends PHPUnit_Framework_TestCase
         $i = 11;
         foreach ($actual as $item) {
             $this->assertEquals($i, $item);
-            ++$i;
+            $i++;
         }
     }
 
@@ -99,7 +98,7 @@ class Zend_Paginator_Adapter_IteratorTest extends PHPUnit_Framework_TestCase
 
         try {
             new Zend_Paginator_Adapter_Iterator($iterator);
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->assertTrue($e instanceof Zend_Paginator_Exception);
             $this->assertEquals('Iterator must implement Countable', $e->getMessage());
         }
@@ -110,11 +109,10 @@ class Zend_Paginator_Adapter_IteratorTest extends PHPUnit_Framework_TestCase
      */
     public function testDoesNotThrowOutOfBoundsExceptionIfIteratorIsEmpty()
     {
-        $this->_paginator = Zend_Paginator::factory(new ArrayIterator([]));
+        $this->_paginator = Zend_Paginator::factory(new ArrayIterator(array()));
         $items = $this->_paginator->getCurrentItems();
         try {
-            foreach ($items as $item) {
-            }
+            foreach ($items as $item);
         } catch (OutOfBoundsException $e) {
             $this->fail('Empty iterator caused in an OutOfBoundsException');
         }
@@ -123,22 +121,20 @@ class Zend_Paginator_Adapter_IteratorTest extends PHPUnit_Framework_TestCase
     /**
      * @group ZF-8084
      */
-    public function testGetItemsSerializable()
-    {
+    public function testGetItemsSerializable() {
         $items = $this->_adapter->getItems(0, 1);
         $innerIterator = $items->getInnerIterator();
         $items = unserialize(serialize($items));
-        $this->assertTrue($items->getInnerIterator() == $innerIterator, 'getItems has to be serializable to use caching');
+        $this->assertTrue( ($items->getInnerIterator() == $innerIterator), 'getItems has to be serializable to use caching');
     }
 
     /**
      * @group ZF-4151
      */
-    public function testEmptySet()
-    {
-        $iterator = new ArrayIterator([]);
+    public function testEmptySet() {
+        $iterator = new ArrayIterator(array());
         $this->_adapter = new Zend_Paginator_Adapter_Iterator($iterator);
         $actual = $this->_adapter->getItems(0, 10);
-        $this->assertEquals([], $actual);
+        $this->assertEquals(array(), $actual);
     }
 }

@@ -1,27 +1,25 @@
 <?php
-
 // require_once 'Zend/Barcode/Object/ObjectAbstract.php';
 
 #[AllowDynamicProperties]
 class Zend_Barcode_Object_Test extends Zend_Barcode_Object_ObjectAbstract
 {
+
     protected function _calculateBarcodeWidth()
     {
         return 1;
     }
 
     public function validateText($value)
-    {
-    }
+    {}
 
     protected function _prepareBarcode()
     {
-        return [];
+        return array();
     }
 
     protected function _checkParams()
-    {
-    }
+    {}
 
     public function addInstruction(array $instruction)
     {

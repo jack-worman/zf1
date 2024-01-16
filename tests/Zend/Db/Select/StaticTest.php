@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,24 +13,26 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Db
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
+
 
 /**
  * @see Zend_Db_Select_TestCommon
  */
 require_once 'Zend/Db/Select/TestCommon.php';
 
+
 /**
  * @category   Zend
- *
+ * @package    Zend_Db
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Db
  * @group      Zend_Db_Select
  */
@@ -70,7 +72,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     public function testSelectQueryWithBinds()
     {
         $select = $this->_select()->where('product_id = :product_id')
-                                  ->bind([':product_id' => 1]);
+                                  ->bind(array(':product_id' => 1));
 
         $sql = preg_replace('/\\s+/', ' ', $select->__toString());
         $this->assertEquals('SELECT "zfproducts".* FROM "zfproducts" WHERE (product_id = :product_id)', $sql);
@@ -81,7 +83,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     }
 
     /**
-     * Test Zend_Db_Select specifying columns.
+     * Test Zend_Db_Select specifying columns
      *
      * @return void
      */
@@ -93,7 +95,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     }
 
     /**
-     * Test Zend_Db_Select specifying columns.
+     * Test Zend_Db_Select specifying columns
      *
      * @return void
      */
@@ -146,8 +148,9 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
      * Test support for automatic conversion of SQL functions to
      * Zend_Db_Expr, e.g. from('table', array('COUNT(*)'))
      * should generate the same result as
-     * from('table', array(new Zend_Db_Expr('COUNT(*)'))).
+     * from('table', array(new Zend_Db_Expr('COUNT(*)')))
      */
+
     public function testSelectColumnsAutoExpr()
     {
         $select = $this->_selectColumnsAutoExpr();
@@ -158,6 +161,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     /**
      * Test adding the DISTINCT query modifier to a Zend_Db_Select object.
      */
+
     public function testSelectDistinctModifier()
     {
         $select = $this->_selectDistinctModifier();
@@ -169,6 +173,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
      * Test support for schema-qualified table names in from()
      * e.g. from('schema.table').
      */
+
     public function testSelectFromQualified()
     {
         $select = $this->_selectFromQualified();
@@ -188,7 +193,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     public function testSelectFromForUpdate()
     {
         $select = $this->_db->select()
-            ->from('zfproducts')
+            ->from("zfproducts")
             ->forUpdate();
         $sql = preg_replace('/\\s+/', ' ', $select->__toString());
         $this->assertEquals('SELECT "zfproducts".* FROM "zfproducts" FOR UPDATE', $sql);
@@ -197,6 +202,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     /**
      * Test adding a JOIN to a Zend_Db_Select object.
      */
+
     public function testSelectJoin()
     {
         $select = $this->_selectJoin();
@@ -208,6 +214,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
      * Test adding an INNER JOIN to a Zend_Db_Select object.
      * This should be exactly the same as the plain JOIN clause.
      */
+
     public function testSelectJoinWithCorrelationName()
     {
         $select = $this->_selectJoinWithCorrelationName();
@@ -219,6 +226,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
      * Test adding an INNER JOIN to a Zend_Db_Select object.
      * This should be exactly the same as the plain JOIN clause.
      */
+
     public function testSelectJoinInner()
     {
         $select = $this->_selectJoinInner();
@@ -229,6 +237,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     /**
      * Test adding an outer join to a Zend_Db_Select object.
      */
+
     public function testSelectJoinLeft()
     {
         $select = $this->_selectJoinLeft();
@@ -239,6 +248,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     /**
      * Test adding an outer join to a Zend_Db_Select object.
      */
+
     public function testSelectJoinRight()
     {
         $select = $this->_selectJoinRight();
@@ -249,6 +259,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     /**
      * Test adding a cross join to a Zend_Db_Select object.
      */
+
     public function testSelectJoinCross()
     {
         $select = $this->_selectJoinCross();
@@ -258,8 +269,9 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
 
     /**
      * Test support for schema-qualified table names in join(),
-     * e.g. join('schema.table', 'condition').
+     * e.g. join('schema.table', 'condition')
      */
+
     public function testSelectJoinQualified()
     {
         $select = $this->_selectJoinQualified();
@@ -270,6 +282,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     /**
      * Test adding a JOIN USING to a Zend_Db_Select object.
      */
+
     public function testSelectJoinUsing()
     {
         $select = $this->_selectJoinUsing();
@@ -280,6 +293,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     /**
      * Test adding a JOIN INNER USING to a Zend_Db_Select object.
      */
+
     public function testSelectJoinInnerUsing()
     {
         $select = $this->_selectJoinInnerUsing();
@@ -297,6 +311,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     /**
      * Test adding a WHERE clause to a Zend_Db_Select object.
      */
+
     public function testSelectWhere()
     {
         $select = $this->_selectWhere();
@@ -307,6 +322,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     /**
      * Test adding an array in the WHERE clause to a Zend_Db_Select object.
      */
+
     public function testSelectWhereArray()
     {
         $select = $this->_selectWhereArray();
@@ -318,6 +334,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
      * test adding more WHERE conditions,
      * which should be combined with AND by default.
      */
+
     public function testSelectWhereAnd()
     {
         $select = $this->_selectWhereAnd();
@@ -329,6 +346,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
      * Test support for where() with a parameter,
      * e.g. where('id = ?', 1).
      */
+
     public function testSelectWhereWithParameter()
     {
         $select = $this->_selectWhereWithParameter();
@@ -340,6 +358,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
      * Test support for where() with a parameter,
      * e.g. where('id = ?', 1).
      */
+
     public function testSelectWhereWithType()
     {
         $select = $this->_selectWhereWithType();
@@ -351,6 +370,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
      * Test support for where() with a float parameter,
      * e.g. where('id = ?', 1).
      */
+
     public function testSelectWhereWithTypeFloat()
     {
         $select = $this->_selectWhereWithTypeFloat();
@@ -361,6 +381,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     /**
      *      * Test adding an OR WHERE clause to a Zend_Db_Select object.
      */
+
     public function testSelectWhereOr()
     {
         $select = $this->_selectWhereOr();
@@ -372,6 +393,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
      * Test support for where() with a parameter,
      * e.g. orWhere('id = ?', 2).
      */
+
     public function testSelectWhereOrWithParameter()
     {
         $select = $this->_selectWhereOrWithParameter();
@@ -382,6 +404,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     /**
      * Test adding a GROUP BY clause to a Zend_Db_Select object.
      */
+
     public function testSelectGroupBy()
     {
         $select = $this->_selectGroupBy();
@@ -393,6 +416,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
      * Test support for qualified table in group(),
      * e.g. group('schema.table').
      */
+
     public function testSelectGroupByQualified()
     {
         $select = $this->_selectGroupByQualified();
@@ -402,8 +426,9 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
 
     /**
      * Test support for Zend_Db_Expr in group(),
-     * e.g. group(new Zend_Db_Expr('id+1')).
+     * e.g. group(new Zend_Db_Expr('id+1'))
      */
+
     public function testSelectGroupByExpr()
     {
         $select = $this->_selectGroupByExpr();
@@ -417,6 +442,8 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
      * e.g.  group('LOWER(title)') should give the same
      * result as group(new Zend_Db_Expr('LOWER(title)')).
      */
+
+
     public function testSelectGroupByAutoExpr()
     {
         $select = $this->_selectGroupByAutoExpr();
@@ -427,12 +454,14 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     /**
      * Test adding a HAVING clause to a Zend_Db_Select object.
      */
+
     public function testSelectHaving()
     {
         $select = $this->_selectHaving();
         $sql = preg_replace('/\\s+/', ' ', $select->__toString());
         $this->assertEquals('SELECT "zfbugs_products"."bug_id", COUNT(*) AS "thecount" FROM "zfbugs_products" GROUP BY "bug_id" HAVING (COUNT(*) > 1) ORDER BY "bug_id" ASC', $sql);
     }
+
 
     public function testSelectHavingAnd()
     {
@@ -445,6 +474,8 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
      * Test support for parameter in having(),
      * e.g. having('count(*) > ?', 1).
      */
+
+
     public function testSelectHavingWithParameter()
     {
         $select = $this->_selectHavingWithParameter();
@@ -455,6 +486,8 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     /**
      * Test adding a HAVING clause to a Zend_Db_Select object.
      */
+
+
     public function testSelectHavingOr()
     {
         $select = $this->_selectHavingOr();
@@ -466,6 +499,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
      * Test support for parameter in orHaving(),
      * e.g. orHaving('count(*) > ?', 1).
      */
+
     public function testSelectHavingOrWithParameter()
     {
         $select = $this->_selectHavingOrWithParameter();
@@ -473,98 +507,98 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
         $this->assertEquals('SELECT "zfbugs_products"."bug_id", COUNT(*) AS "thecount" FROM "zfbugs_products" GROUP BY "bug_id" HAVING (COUNT(*) > 1) OR (COUNT(*) = 1) ORDER BY "bug_id" ASC', $sql);
     }
 
-    /**
-     * Test if the quotation type could be passed.
-     *
-     * @group ZF-10000
-     */
-    public function testSelectHavingQuoteBySpecificType()
-    {
-        $select = $this->_select()
-            ->columns(['count' => 'COUNT(*)'])
-            ->group('bug_id');
+	/**
+	 * Test if the quotation type could be passed
+	 *
+	 * @group ZF-10000
+	 */
+	public function testSelectHavingQuoteBySpecificType()
+	{
+		$select = $this->_select()
+			->columns(array('count' => 'COUNT(*)'))
+			->group('bug_id');
 
-        $select->having('COUNT(*) > ?', '1', Zend_Db::INT_TYPE);
-        $this->assertEquals('SELECT "zfproducts".*, COUNT(*) AS "count" FROM "zfproducts" GROUP BY "bug_id" HAVING (COUNT(*) > 1)', $select->__toString());
-    }
+		$select->having('COUNT(*) > ?', '1', Zend_Db::INT_TYPE);
+		$this->assertEquals('SELECT "zfproducts".*, COUNT(*) AS "count" FROM "zfproducts" GROUP BY "bug_id" HAVING (COUNT(*) > 1)', $select->__toString());
+	}
 
-    /**
-     * Test if the quotation is done for int.
-     *
-     * @group ZF-10000
-     */
-    public function testSelectHavingQuoteAsIntAutomatically()
-    {
-        $select = $this->_select()
-            ->columns(['count' => 'COUNT(*)'])
-            ->group('bug_id');
+	/**
+	 * Test if the quotation is done for int
+	 *
+	 * @group ZF-10000
+	 */
+	public function testSelectHavingQuoteAsIntAutomatically()
+	{
+		$select = $this->_select()
+			->columns(array('count' => 'COUNT(*)'))
+			->group('bug_id');
 
-        $select->having('COUNT(*) > ?', 1);
-        $this->assertEquals('SELECT "zfproducts".*, COUNT(*) AS "count" FROM "zfproducts" GROUP BY "bug_id" HAVING (COUNT(*) > 1)', $select->__toString());
-    }
+		$select->having('COUNT(*) > ?', 1);
+		$this->assertEquals('SELECT "zfproducts".*, COUNT(*) AS "count" FROM "zfproducts" GROUP BY "bug_id" HAVING (COUNT(*) > 1)', $select->__toString());
+	}
 
-    /**
-     * Test if the quotation is done for string.
-     *
-     * @group ZF-10000
-     */
-    public function testSelectHavingQuoteAsStringAutomatically()
-    {
-        $select = $this->_select()
-            ->columns(['count' => 'COUNT(*)'])
-            ->group('bug_id');
+	/**
+	 * Test if the quotation is done for string
+	 *
+	 * @group ZF-10000
+	 */
+	public function testSelectHavingQuoteAsStringAutomatically()
+	{
+		$select = $this->_select()
+			->columns(array('count' => 'COUNT(*)'))
+			->group('bug_id');
 
-        $select->having('COUNT(*) > ?', '1');
-        $this->assertEquals('SELECT "zfproducts".*, COUNT(*) AS "count" FROM "zfproducts" GROUP BY "bug_id" HAVING (COUNT(*) > \'1\')', $select->__toString());
-    }
+		$select->having('COUNT(*) > ?', '1');
+		$this->assertEquals('SELECT "zfproducts".*, COUNT(*) AS "count" FROM "zfproducts" GROUP BY "bug_id" HAVING (COUNT(*) > \'1\')', $select->__toString());
+	}
 
-    /**
-     * Test if the quotation type could be passed.
-     *
-     * @group ZF-10000
-     */
-    public function testSelectOrHavingQuoteBySpecificType()
-    {
-        $select = $this->_select()
-            ->columns(['count' => 'COUNT(*)'])
-            ->group('bug_id');
+	/**
+	 * Test if the quotation type could be passed
+	 *
+	 * @group ZF-10000
+	 */
+	public function testSelectOrHavingQuoteBySpecificType()
+	{
+		$select = $this->_select()
+			->columns(array('count' => 'COUNT(*)'))
+			->group('bug_id');
 
-        $select->having('COUNT(*) > ?', '1', Zend_Db::INT_TYPE);
-        $select->orHaving('COUNT(*) = ?', '2', Zend_Db::INT_TYPE);
-        $this->assertEquals('SELECT "zfproducts".*, COUNT(*) AS "count" FROM "zfproducts" GROUP BY "bug_id" HAVING (COUNT(*) > 1) OR (COUNT(*) = 2)', $select->__toString());
-    }
+		$select->having('COUNT(*) > ?', '1', Zend_Db::INT_TYPE);
+		$select->orHaving('COUNT(*) = ?', '2', Zend_Db::INT_TYPE);
+		$this->assertEquals('SELECT "zfproducts".*, COUNT(*) AS "count" FROM "zfproducts" GROUP BY "bug_id" HAVING (COUNT(*) > 1) OR (COUNT(*) = 2)', $select->__toString());
+	}
 
-    /**
-     * Test if the quotation is done for int.
-     *
-     * @group ZF-10000
-     */
-    public function testSelectOrHavingQuoteAsIntAutomatically()
-    {
-        $select = $this->_select()
-            ->columns(['count' => 'COUNT(*)'])
-            ->group('bug_id');
+	/**
+	 * Test if the quotation is done for int
+	 *
+	 * @group ZF-10000
+	 */
+	public function testSelectOrHavingQuoteAsIntAutomatically()
+	{
+		$select = $this->_select()
+			->columns(array('count' => 'COUNT(*)'))
+			->group('bug_id');
 
-        $select->having('COUNT(*) > ?', 1);
-        $select->orHaving('COUNT(*) = ?', 2);
-        $this->assertEquals('SELECT "zfproducts".*, COUNT(*) AS "count" FROM "zfproducts" GROUP BY "bug_id" HAVING (COUNT(*) > 1) OR (COUNT(*) = 2)', $select->__toString());
-    }
+		$select->having('COUNT(*) > ?', 1);
+		$select->orHaving('COUNT(*) = ?', 2);
+		$this->assertEquals('SELECT "zfproducts".*, COUNT(*) AS "count" FROM "zfproducts" GROUP BY "bug_id" HAVING (COUNT(*) > 1) OR (COUNT(*) = 2)', $select->__toString());
+	}
 
-    /**
-     * Test if the quotation is done for string.
-     *
-     * @group ZF-10000
-     */
-    public function testSelectOrHavingQuoteAsStringAutomatically()
-    {
-        $select = $this->_select()
-            ->columns(['count' => 'COUNT(*)'])
-            ->group('bug_id');
+	/**
+	 * Test if the quotation is done for string
+	 *
+	 * @group ZF-10000
+	 */
+	public function testSelectOrHavingQuoteAsStringAutomatically()
+	{
+		$select = $this->_select()
+			->columns(array('count' => 'COUNT(*)'))
+			->group('bug_id');
 
-        $select->having('COUNT(*) > ?', '1');
-        $select->orHaving('COUNT(*) = ?', '2');
-        $this->assertEquals('SELECT "zfproducts".*, COUNT(*) AS "count" FROM "zfproducts" GROUP BY "bug_id" HAVING (COUNT(*) > \'1\') OR (COUNT(*) = \'2\')', $select->__toString());
-    }
+		$select->having('COUNT(*) > ?', '1');
+		$select->orHaving('COUNT(*) = ?', '2');
+		$this->assertEquals('SELECT "zfproducts".*, COUNT(*) AS "count" FROM "zfproducts" GROUP BY "bug_id" HAVING (COUNT(*) > \'1\') OR (COUNT(*) = \'2\')', $select->__toString());
+	}
 
     /**
      * @group ZF-10589
@@ -572,7 +606,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     public function testHavingZero()
     {
         $select = $this->_select()
-                       ->columns(['count' => 'COUNT(*)'])
+                       ->columns(array('count' => 'COUNT(*)'))
                        ->group('bug_id');
 
         $select->having('COUNT(*) > ?', 0);
@@ -582,12 +616,14 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     /**
      * Test adding an ORDER BY clause to a Zend_Db_Select object.
      */
+
     public function testSelectOrderBy()
     {
         $select = $this->_selectOrderBy();
         $sql = preg_replace('/\\s+/', ' ', $select->__toString());
         $this->assertEquals('SELECT "zfproducts".* FROM "zfproducts" ORDER BY "product_id" ASC', $sql);
     }
+
 
     public function testSelectOrderByArray()
     {
@@ -596,12 +632,14 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
         $this->assertEquals('SELECT "zfproducts".* FROM "zfproducts" ORDER BY "product_name" ASC, "product_id" ASC', $sql);
     }
 
+
     public function testSelectOrderByAsc()
     {
         $select = $this->_selectOrderByAsc();
         $sql = preg_replace('/\\s+/', ' ', $select->__toString());
         $this->assertEquals('SELECT "zfproducts".* FROM "zfproducts" ORDER BY "product_id" ASC', $sql);
     }
+
 
     public function testSelectOrderByDesc()
     {
@@ -614,6 +652,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
      * Test support for qualified table in order(),
      * e.g. order('schema.table').
      */
+
     public function testSelectOrderByQualified()
     {
         $select = $this->_selectOrderByQualified();
@@ -625,6 +664,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
      * Test support for Zend_Db_Expr in order(),
      * e.g. order(new Zend_Db_Expr('id+1')).
      */
+
     public function testSelectOrderByExpr()
     {
         $select = $this->_selectOrderByExpr();
@@ -638,6 +678,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
      * should give the same result as
      * order(new Zend_Db_Expr('LOWER(title)')).
      */
+
     public function testSelectOrderByAutoExpr()
     {
         $select = $this->_selectOrderByAutoExpr();
@@ -650,6 +691,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
      * See ZF-1822, which says that the regexp matching
      * ASC|DESC fails when string is multi-line.
      */
+
     public function testSelectOrderByMultiLine()
     {
         $select = $this->_selectOrderByMultiLine();
@@ -660,6 +702,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     /**
      * Test adding a LIMIT clause to a Zend_Db_Select object.
      */
+
     public function testSelectLimit()
     {
         $select = $this->_selectLimit();
@@ -668,13 +711,11 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     }
 
     /**
-     * Not applicable in static test.
-     *
+     * Not applicable in static test
      * @group ZF-5263
      */
     public function testSelectLimitFetchCol()
-    {
-    }
+    {}
 
     public function testSelectLimitNone()
     {
@@ -682,6 +723,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
         $sql = preg_replace('/\\s+/', ' ', $select->__toString());
         $this->assertEquals('SELECT "zfproducts".* FROM "zfproducts" ORDER BY "product_id" ASC', $sql);
     }
+
 
     public function testSelectLimitOffset()
     {
@@ -693,12 +735,14 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     /**
      * Test the limitPage() method of a Zend_Db_Select object.
      */
+
     public function testSelectLimitPageOne()
     {
         $select = $this->_selectLimitPageOne();
         $sql = preg_replace('/\\s+/', ' ', $select->__toString());
         $this->assertEquals('SELECT "zfproducts".* FROM "zfproducts" ORDER BY "product_id" ASC LIMIT 1 OFFSET 0', $sql);
     }
+
 
     public function testSelectLimitPageTwo()
     {
@@ -753,9 +797,9 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     {
         $select = $this->_db->select();
         $select->from('table1', '*');
-        $select->joinLeft(['table2'], 'table1.id=table2.id');
+        $select->joinLeft(array('table2'), 'table1.id=table2.id');
         $target = 'SELECT "table1".*, "table2".* FROM "table1"'
-                ."\n".' LEFT JOIN "table2" ON table1.id=table2.id';
+                . "\n" . ' LEFT JOIN "table2" ON table1.id=table2.id';
         $this->assertEquals($target, $select->assemble());
     }
 
@@ -766,7 +810,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     {
         $select = $this->_db->select();
         $select->from('table1')->limit(0, 5);
-        $target = 'SELECT "table1".* FROM "table1" LIMIT '.PHP_INT_MAX.' OFFSET 5';
+        $target = 'SELECT "table1".* FROM "table1" LIMIT ' . PHP_INT_MAX . ' OFFSET 5';
         $this->assertEquals($target, $select->assemble());
     }
 
@@ -778,49 +822,49 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     public function testSqlInjectionWithOrder()
     {
         $select = $this->_db->select();
-        $select->from(['p' => 'products'])->order('MD5(1);select');
+        $select->from(array('p' => 'products'))->order('MD5(1);select');
         $this->assertEquals('SELECT "p".* FROM "products" AS "p" ORDER BY "MD5(1);select" ASC', $select->assemble());
 
         $select = $this->_db->select();
-        $select->from(['p' => 'products'])->order('name;select;MD5(1)');
+        $select->from(array('p' => 'products'))->order('name;select;MD5(1)');
         $this->assertEquals('SELECT "p".* FROM "products" AS "p" ORDER BY "name;select;MD5(1)" ASC', $select->assemble());
 
         $select = $this->_db->select();
-        $select->from(['p' => 'products'])->order('MD5(1);drop table products; -- )');
+        $select->from(array('p' => 'products'))->order('MD5(1);drop table products; -- )');
         $this->assertEquals('SELECT "p".* FROM "products" AS "p" ORDER BY "MD5(1);drop table products; -- )" ASC', $select->assemble());
 
         $select = $this->_db->select();
-        $select->from('p')->order('MD5(";(");DELETE FROM p2; SELECT 1 #)');
+        $select->from('p')->order("MD5(\";(\");DELETE FROM p2; SELECT 1 #)");
         $this->assertEquals('SELECT "p".* FROM "p" ORDER BY "MD5("";("");DELETE FROM p2; SELECT 1 #)" ASC', $select->assemble());
 
         $select = $this->_db->select();
-        $select->from('p')->order('MD5("a(");DELETE FROM p2; #)');
+        $select->from('p')->order("MD5(\"a(\");DELETE FROM p2; #)");
         $this->assertEquals('SELECT "p".* FROM "p" ORDER BY "MD5(""a("");DELETE FROM p2; #)" ASC', $select->assemble());
     }
 
     public function testSqlInjectionWithGroup()
     {
         $select = $this->_db->select();
-        $select->from(['p' => 'products'])->group('ABS("weight")');
+        $select->from(array('p' => 'products'))->group('ABS("weight")');
         $this->assertEquals('SELECT "p".* FROM "products" AS "p" GROUP BY ABS("weight")', $select->assemble());
 
         $select = $this->_db->select();
-        $select->from(['p' => 'products'])->group('MD5(1); drop table products; -- )');
+        $select->from(array('p' => 'products'))->group('MD5(1); drop table products; -- )');
         $this->assertEquals('SELECT "p".* FROM "products" AS "p" GROUP BY "MD5(1); drop table products; -- )"', $select->assemble());
 
         $select = $this->_db->select();
-        $select->from('p')->group('MD5(";(");DELETE FROM p2; SELECT 1 #)');
+        $select->from('p')->group("MD5(\";(\");DELETE FROM p2; SELECT 1 #)");
         $this->assertEquals('SELECT "p".* FROM "p" GROUP BY "MD5("";("");DELETE FROM p2; SELECT 1 #)"', $select->assemble());
 
         $select = $this->_db->select();
-        $select->from('p')->group('MD5("a(");DELETE FROM p2; #)');
+        $select->from('p')->group("MD5(\"a(\");DELETE FROM p2; #)");
         $this->assertEquals('SELECT "p".* FROM "p" GROUP BY "MD5(""a("");DELETE FROM p2; #)"', $select->assemble());
     }
 
     public function testSqlInjectionInColumn()
     {
         $select = $this->_db->select();
-        $select->from(['p' => 'products'], ['MD5(1); drop table products; -- )']);
+        $select->from(array('p' => 'products'), array('MD5(1); drop table products; -- )'));
         $this->assertEquals('SELECT "p"."MD5(1); drop table products; -- )" FROM "products" AS "p"', $select->assemble());
     }
 
@@ -828,9 +872,9 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     {
         $select = $this->_db->select();
         $select->from('table1', '*');
-        $select->join(['table2'],
-            'table1.id = table2.id',
-            ['bar' => 'IF(table2.id IS NOT NULL, 1, 0)']);
+        $select->join(array('table2'),
+                      'table1.id = table2.id',
+                      array('bar' => 'IF(table2.id IS NOT NULL, 1, 0)'));
         $this->assertEquals("SELECT \"table1\".*, IF(table2.id IS NOT NULL, 1, 0) AS \"bar\" FROM \"table1\"\n INNER JOIN \"table2\" ON table1.id = table2.id", $select->assemble());
     }
 
@@ -838,9 +882,9 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     {
         $select = $this->_db->select();
         $select->from('table1', '*');
-        $select->join(['table2'],
+        $select->join(array('table2'),
             'table1.id = table2.id',
-            ['bar' => 'IF(table2.id IS NOT NULL, IF(table2.id2 IS NOT NULL, 1, 2), 0)']);
+            array('bar' => 'IF(table2.id IS NOT NULL, IF(table2.id2 IS NOT NULL, 1, 2), 0)'));
         $this->assertEquals("SELECT \"table1\".*, IF(table2.id IS NOT NULL, IF(table2.id2 IS NOT NULL, 1, 2), 0) AS \"bar\" FROM \"table1\"\n INNER JOIN \"table2\" ON table1.id = table2.id", $select->assemble());
     }
 
@@ -848,9 +892,9 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     {
         $select = $this->_db->select();
         $select->from('table1', '*');
-        $select->join(['table2'],
+        $select->join(array('table2'),
             'table1.id = table2.id',
-            ['bar' => 'IF(table2.id IS NOT NULL, IF(table2.id2 IS NOT NULL, SUM(1), 2), 0)']);
+            array('bar' => 'IF(table2.id IS NOT NULL, IF(table2.id2 IS NOT NULL, SUM(1), 2), 0)'));
         $this->assertEquals("SELECT \"table1\".*, IF(table2.id IS NOT NULL, IF(table2.id2 IS NOT NULL, SUM(1), 2), 0) AS \"bar\" FROM \"table1\"\n INNER JOIN \"table2\" ON table1.id = table2.id", $select->assemble());
     }
 
@@ -858,16 +902,16 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     {
         $select = $this->_db->select();
         $select->from('table1', '*');
-        $select->join(['table2'],
+        $select->join(array('table2'),
             'table1.id = table2.id',
-            ['bar' => 'IF(SUM()']);
+            array('bar' => 'IF(SUM()'));
         $this->assertEquals("SELECT \"table1\".*, \"table2\".\"IF(SUM()\" AS \"bar\" FROM \"table1\"\n INNER JOIN \"table2\" ON table1.id = table2.id", $select->assemble());
     }
 
     public function testNestedIfInGroup()
     {
         $select = $this->_db->select();
-        $select->from(['p' => 'product'])
+        $select->from(array ('p' => 'product'))
             ->group('IF(p.id IS NOT NULL, IF(p.id2 IS NOT NULL, SUM(1), 2), 0)');
 
         $expected = 'SELECT "p".* FROM "product" AS "p" GROUP BY IF(p.id IS NOT NULL, IF(p.id2 IS NOT NULL, SUM(1), 2), 0)';
@@ -877,7 +921,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     public function testUnbalancedParenthesesInGroup()
     {
         $select = $this->_db->select();
-        $select->from(['p' => 'product'])
+        $select->from(array ('p' => 'product'))
             ->group('IF(SUM() ASC');
 
         $expected = 'SELECT "p".* FROM "product" AS "p" GROUP BY "IF(SUM() ASC"';
@@ -890,7 +934,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     public function testOrderOfSingleFieldWithDirection()
     {
         $select = $this->_db->select();
-        $select->from(['p' => 'product'])
+        $select->from(array ('p' => 'product'))
             ->order('productId DESC');
 
         $expected = 'SELECT "p".* FROM "product" AS "p" ORDER BY "productId" DESC';
@@ -904,8 +948,8 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     public function testOrderOfMultiFieldWithDirection()
     {
         $select = $this->_db->select();
-        $select->from(['p' => 'product'])
-            ->order(['productId DESC', 'userId ASC']);
+        $select->from(array ('p' => 'product'))
+            ->order(array ('productId DESC', 'userId ASC'));
 
         $expected = 'SELECT "p".* FROM "product" AS "p" ORDER BY "productId" DESC, "userId" ASC';
         $this->assertEquals($expected, $select->assemble(),
@@ -918,8 +962,8 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     public function testOrderOfMultiFieldButOnlyOneWithDirection()
     {
         $select = $this->_db->select();
-        $select->from(['p' => 'product'])
-            ->order(['productId', 'userId DESC']);
+        $select->from(array ('p' => 'product'))
+            ->order(array ('productId', 'userId DESC'));
 
         $expected = 'SELECT "p".* FROM "product" AS "p" ORDER BY "productId" ASC, "userId" DESC';
         $this->assertEquals($expected, $select->assemble(),
@@ -933,7 +977,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     public function testOrderOfConditionalFieldWithDirection()
     {
         $select = $this->_db->select();
-        $select->from(['p' => 'product'])
+        $select->from(array ('p' => 'product'))
             ->order('IF("productId" > 5,1,0) ASC');
 
         $expected = 'SELECT "p".* FROM "product" AS "p" ORDER BY IF("productId" > 5,1,0) ASC';
@@ -944,7 +988,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     public function testOrderOfDeepConditionalField()
     {
         $select = $this->_db->select();
-        $select->from(['p' => 'product'])
+        $select->from(array ('p' => 'product'))
             ->order('IF(p.id IS NOT NULL, IF(p.id2 IS NOT NULL, SUM(1), 2), 0)');
 
         $expected = 'SELECT "p".* FROM "product" AS "p" ORDER BY IF(p.id IS NOT NULL, IF(p.id2 IS NOT NULL, SUM(1), 2), 0) ASC';
@@ -954,7 +998,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     public function testOrderOfDeepUnbalancedConditionalField()
     {
         $select = $this->_db->select();
-        $select->from(['p' => 'product'])
+        $select->from(array ('p' => 'product'))
             ->order('IF(SUM()');
 
         $expected = 'SELECT "p".* FROM "product" AS "p" ORDER BY "IF(SUM()" ASC';
@@ -964,7 +1008,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     public function testOrderOfDeepConditionalFieldWithDirection()
     {
         $select = $this->_db->select();
-        $select->from(['p' => 'product'])
+        $select->from(array ('p' => 'product'))
             ->order('IF(p.id IS NOT NULL, IF(p.id2 IS NOT NULL, SUM(1), 2), 0) ASC');
 
         $expected = 'SELECT "p".* FROM "product" AS "p" ORDER BY IF(p.id IS NOT NULL, IF(p.id2 IS NOT NULL, SUM(1), 2), 0) ASC';
@@ -974,7 +1018,7 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     public function testOrderOfDeepUnbalancedConditionalFieldWithDirection()
     {
         $select = $this->_db->select();
-        $select->from(['p' => 'product'])
+        $select->from(array ('p' => 'product'))
             ->order('IF(SUM() ASC');
 
         $expected = 'SELECT "p".* FROM "product" AS "p" ORDER BY "IF(SUM()" ASC';
@@ -982,46 +1026,44 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
     }
 
     /**
-     * Test a problem with assembling subqueries with joins in SELECT block. That problem is caused by "new line" char which brakes regexp detection of "AS"-case.
+     * Test a problem with assembling subqueries with joins in SELECT block. That problem is caused by "new line" char which brakes regexp detection of "AS"-case
      */
-    public function testAssembleQueryWithSubqueryInSelectBlock()
-    {
+    public function testAssembleQueryWithSubqueryInSelectBlock() {
         $subSelect = $this->_db->select();
-        $subSelect->from(['st1' => 'subTable1'], 'col1')
-                  ->join(['st2' => 'subTable2'], 'st1.fk_id=st2.fk_id', 'col2');
+        $subSelect->from(array('st1' => 'subTable1'), 'col1')
+                  ->join(array('st2' => 'subTable2'), 'st1.fk_id=st2.fk_id', 'col2');
 
-        $columns[] = '('.$subSelect->assemble().') as subInSelect';
+        $columns[] = '('.$subSelect->assemble() . ') as subInSelect';
         $select = $this->_db->select();
-        $select->from(['t' => 'table1'], $columns);
+        $select->from(array('t' => 'table1'), $columns);
 
         $expected = 'SELECT (SELECT "st1"."col1", "st2"."col2" FROM "subTable1" AS "st1"  INNER JOIN "subTable2" AS "st2" ON st1.fk_id=st2.fk_id) AS "subInSelect" FROM "table1" AS "t"';
 
         $this->assertEquals($expected, $select->assemble(),
-            'Assembling query with subquery with join failed');
+                            'Assembling query with subquery with join failed');
     }
 
-    public function testAssembleQueryWithRawSubqueryInSelectBlock()
-    {
+    public function testAssembleQueryWithRawSubqueryInSelectBlock() {
         $columns[] = '(SELECT *
 FROM tb2) as subInSelect2';
         $select = $this->_db->select();
-        $select->from(['t' => 'table1'], $columns);
+        $select->from(array('t' => 'table1'), $columns);
 
         $expected = 'SELECT (SELECT * FROM tb2) AS "subInSelect2" FROM "table1" AS "t"';
 
         $this->assertEquals($expected, $select->assemble(),
-            'Assembling query with raw subquery with "new line" char failed');
+                            'Assembling query with raw subquery with "new line" char failed');
     }
 
-    public function testAssembleQueryWithExpressionInSelectBlock()
-    {
+    public function testAssembleQueryWithExpressionInSelectBlock() {
         $columns[] = ' DISTINCT (*) as expr';
         $select = $this->_db->select();
-        $select->from(['t' => 'table1'], $columns);
+        $select->from(array('t' => 'table1'), $columns);
 
         $expected = 'SELECT DISTINCT (*) AS "expr" FROM "table1" AS "t"';
 
         $this->assertEquals($expected, $select->assemble(),
-            'Assembling query with raw subquery with "new line" char failed');
+                            'Assembling query with raw subquery with "new line" char failed');
     }
+
 }

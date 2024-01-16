@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Gdata_Calendar
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id $
  */
 
@@ -25,60 +25,55 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Gdata_Calendar
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Calendar
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_Calendar_HiddenTest extends PHPUnit_Framework_TestCase
 {
-    public function setUp()
-    {
+
+    public function setUp() {
         $this->hiddenText = file_get_contents(
-            'Zend/Gdata/Calendar/_files/HiddenElementSample1.xml',
-            true);
+                'Zend/Gdata/Calendar/_files/HiddenElementSample1.xml',
+                true);
         $this->hidden = new Zend_Gdata_Calendar_Extension_Hidden();
     }
 
-    public function testEmptyHiddenShouldHaveNoExtensionElements()
-    {
+    public function testEmptyHiddenShouldHaveNoExtensionElements() {
         $this->assertTrue(is_array($this->hidden->extensionElements));
-        $this->assertTrue(0 == count($this->hidden->extensionElements));
+        $this->assertTrue(count($this->hidden->extensionElements) == 0);
     }
 
-    public function testEmptyHiddenShouldHaveNoExtensionAttributes()
-    {
+    public function testEmptyHiddenShouldHaveNoExtensionAttributes() {
         $this->assertTrue(is_array($this->hidden->extensionAttributes));
-        $this->assertTrue(0 == count($this->hidden->extensionAttributes));
+        $this->assertTrue(count($this->hidden->extensionAttributes) == 0);
     }
 
-    public function testSampleHiddenShouldHaveNoExtensionElements()
-    {
+    public function testSampleHiddenShouldHaveNoExtensionElements() {
         $this->hidden->transferFromXML($this->hiddenText);
         $this->assertTrue(is_array($this->hidden->extensionElements));
-        $this->assertTrue(0 == count($this->hidden->extensionElements));
+        $this->assertTrue(count($this->hidden->extensionElements) == 0);
     }
 
-    public function testSampleHiddenShouldHaveNoExtensionAttributes()
-    {
+    public function testSampleHiddenShouldHaveNoExtensionAttributes() {
         $this->hidden->transferFromXML($this->hiddenText);
         $this->assertTrue(is_array($this->hidden->extensionAttributes));
-        $this->assertTrue(0 == count($this->hidden->extensionAttributes));
+        $this->assertTrue(count($this->hidden->extensionAttributes) == 0);
     }
 
-    public function testNormalHiddenShouldHaveNoExtensionElements()
-    {
+    public function testNormalHiddenShouldHaveNoExtensionElements() {
         $this->hidden->value = true;
         $this->assertEquals($this->hidden->value, true);
         $this->assertEquals(count($this->hidden->extensionElements), 0);
         $newHidden = new Zend_Gdata_Calendar_Extension_Hidden();
         $newHidden->transferFromXML($this->hidden->saveXML());
         $this->assertEquals(count($newHidden->extensionElements), 0);
-        $newHidden->extensionElements = [
-                new Zend_Gdata_App_Extension_Element('foo', 'atom', null, 'bar')];
+        $newHidden->extensionElements = array(
+                new Zend_Gdata_App_Extension_Element('foo', 'atom', null, 'bar'));
         $this->assertEquals(count($newHidden->extensionElements), 1);
         $this->assertEquals($newHidden->value, true);
 
@@ -90,8 +85,7 @@ class Zend_Gdata_Calendar_HiddenTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($newHidden2->value, true);
     }
 
-    public function testEmptyHiddenToAndFromStringShouldMatch()
-    {
+    public function testEmptyHiddenToAndFromStringShouldMatch() {
         $hiddenXml = $this->hidden->saveXML();
         $newHidden = new Zend_Gdata_Calendar_Extension_Hidden();
         $newHidden->transferFromXML($hiddenXml);
@@ -99,8 +93,7 @@ class Zend_Gdata_Calendar_HiddenTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($hiddenXml == $newHiddenXml);
     }
 
-    public function testHiddenWithValueToAndFromStringShouldMatch()
-    {
+    public function testHiddenWithValueToAndFromStringShouldMatch() {
         $this->hidden->value = true;
         $hiddenXml = $this->hidden->saveXML();
         $newHidden = new Zend_Gdata_Calendar_Extension_Hidden();
@@ -110,11 +103,10 @@ class Zend_Gdata_Calendar_HiddenTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(true, $newHidden->value);
     }
 
-    public function testExtensionAttributes()
-    {
+    public function testExtensionAttributes() {
         $extensionAttributes = $this->hidden->extensionAttributes;
-        $extensionAttributes['foo1'] = ['name' => 'foo1', 'value' => 'bar'];
-        $extensionAttributes['foo2'] = ['name' => 'foo2', 'value' => 'rab'];
+        $extensionAttributes['foo1'] = array('name'=>'foo1', 'value'=>'bar');
+        $extensionAttributes['foo2'] = array('name'=>'foo2', 'value'=>'rab');
         $this->hidden->extensionAttributes = $extensionAttributes;
         $this->assertEquals('bar', $this->hidden->extensionAttributes['foo1']['value']);
         $this->assertEquals('rab', $this->hidden->extensionAttributes['foo2']['value']);
@@ -125,9 +117,9 @@ class Zend_Gdata_Calendar_HiddenTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('rab', $newHidden->extensionAttributes['foo2']['value']);
     }
 
-    public function testConvertFullHiddenToAndFromString()
-    {
+    public function testConvertFullHiddenToAndFromString() {
         $this->hidden->transferFromXML($this->hiddenText);
         $this->assertEquals($this->hidden->value, false);
     }
+
 }

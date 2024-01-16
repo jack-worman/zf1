@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,28 +13,29 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Db
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
+
 /**
- * PHPUnit_Framework_TestCase.
+ * PHPUnit_Framework_TestCase
  */
 
 /**
  * @see Zend_Db_Table_Row_TestMockRow
  */
-require_once __DIR__.'/../_files/My/ZendDbTable/Row/TestMockRow.php';
+require_once __DIR__ . '/../_files/My/ZendDbTable/Row/TestMockRow.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Db
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Db
  * @group      Zend_Db_Table
  * @group      Zend_Db_Table_Relationships
@@ -42,6 +43,7 @@ require_once __DIR__.'/../_files/My/ZendDbTable/Row/TestMockRow.php';
 #[AllowDynamicProperties]
 class Zend_Db_Table_Relationships_StaticTest extends PHPUnit_Framework_TestCase
 {
+
     public function testTableRelationshipsFindDependentMagic()
     {
         $row = new My_ZendDbTable_Row_TestMockRow();
@@ -106,4 +108,5 @@ class Zend_Db_Table_Relationships_StaticTest extends PHPUnit_Framework_TestCase
     {
         return 'Static';
     }
+
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Service_Amazon
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -37,10 +37,10 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Service_Amazon
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
  */
@@ -48,34 +48,34 @@
 class Zend_Service_Amazon_OnlineTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Reference to Amazon service consumer object.
+     * Reference to Amazon service consumer object
      *
      * @var Zend_Service_Amazon
      */
     protected $_amazon;
 
     /**
-     * Reference to Amazon query API object.
+     * Reference to Amazon query API object
      *
      * @var Zend_Service_Amazon_Query
      */
     protected $_query;
 
     /**
-     * Socket based HTTP client adapter.
+     * Socket based HTTP client adapter
      *
      * @var Zend_Http_Client_Adapter_Socket
      */
     protected $_httpClientAdapterSocket;
 
     /**
-     * Sets up this test case.
+     * Sets up this test case
      *
      * @return void
      */
     public function setUp()
     {
-        if (!defined('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID') || !defined('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY')) {
+        if(!defined('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID') || !defined('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY')) {
             $this->markTestSkipped('Constants AccessKeyId and SecretKey have to be set.');
         }
 
@@ -102,20 +102,18 @@ class Zend_Service_Amazon_OnlineTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that itemSearch() works as expected when searching for PHP books.
-     *
+     * Ensures that itemSearch() works as expected when searching for PHP books
      * @group ItemSearchPhp
-     *
      * @return void
      */
     public function testItemSearchBooksPhp()
     {
-        $resultSet = $this->_amazon->itemSearch([
-            'SearchIndex' => 'Books',
-            'Keywords' => 'php',
+        $resultSet = $this->_amazon->itemSearch(array(
+            'SearchIndex'   => 'Books',
+            'Keywords'      => 'php',
             'ResponseGroup' => 'Small,ItemAttributes,Images,SalesRank,Reviews,EditorialReview,Similarities,'
-                             .'ListmaniaLists',
-            ]);
+                             . 'ListmaniaLists'
+            ));
 
         $this->assertTrue(10 < $resultSet->totalResults());
         $this->assertTrue(1 < $resultSet->totalPages());
@@ -145,17 +143,17 @@ class Zend_Service_Amazon_OnlineTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that itemSearch() works as expected when searching for music with keyword of Mozart.
+     * Ensures that itemSearch() works as expected when searching for music with keyword of Mozart
      *
      * @return void
      */
     public function testItemSearchMusicMozart()
     {
-        $resultSet = $this->_amazon->itemSearch([
-            'SearchIndex' => 'Music',
-            'Keywords' => 'Mozart',
-            'ResponseGroup' => 'Small,Tracks,Offers',
-            ]);
+        $resultSet = $this->_amazon->itemSearch(array(
+            'SearchIndex'   => 'Music',
+            'Keywords'      => 'Mozart',
+            'ResponseGroup' => 'Small,Tracks,Offers'
+            ));
 
         foreach ($resultSet as $item) {
             $this->assertTrue($item instanceof Zend_Service_Amazon_Item);
@@ -163,17 +161,17 @@ class Zend_Service_Amazon_OnlineTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that itemSearch() works as expected when searching for digital cameras.
+     * Ensures that itemSearch() works as expected when searching for digital cameras
      *
      * @return void
      */
     public function testItemSearchElectronicsDigitalCamera()
     {
-        $resultSet = $this->_amazon->itemSearch([
-            'SearchIndex' => 'Electronics',
-            'Keywords' => 'digital camera',
-            'ResponseGroup' => 'Accessories',
-            ]);
+        $resultSet = $this->_amazon->itemSearch(array(
+            'SearchIndex'   => 'Electronics',
+            'Keywords'      => 'digital camera',
+            'ResponseGroup' => 'Accessories'
+            ));
 
         foreach ($resultSet as $item) {
             $this->assertTrue($item instanceof Zend_Service_Amazon_Item);
@@ -181,17 +179,17 @@ class Zend_Service_Amazon_OnlineTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that itemSearch() works as expected when sorting.
+     * Ensures that itemSearch() works as expected when sorting
      *
      * @return void
      */
     public function testItemSearchBooksPHPSort()
     {
-        $resultSet = $this->_amazon->itemSearch([
+        $resultSet = $this->_amazon->itemSearch(array(
             'SearchIndex' => 'Books',
-            'Keywords' => 'php',
-            'Sort' => '-titlerank',
-            ]);
+            'Keywords'    => 'php',
+            'Sort'        => '-titlerank'
+            ));
 
         foreach ($resultSet as $item) {
             $this->assertTrue($item instanceof Zend_Service_Amazon_Item);
@@ -199,25 +197,25 @@ class Zend_Service_Amazon_OnlineTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that itemSearch() throws an exception when provided an invalid city.
+     * Ensures that itemSearch() throws an exception when provided an invalid city
      *
      * @return void
      */
     public function testItemSearchExceptionCityInvalid()
     {
         try {
-            $this->_amazon->itemSearch([
+            $this->_amazon->itemSearch(array(
                 'SearchIndex' => 'Restaurants',
-                'Keywords' => 'seafood',
-                'City' => 'Des Moines',
-                ]);
+                'Keywords'    => 'seafood',
+                'City'        => 'Des Moines'
+                ));
             $this->fail('Expected Zend_Service_Exception not thrown');
         } catch (Zend_Service_Exception $e) {
         }
     }
 
     /**
-     * Ensures that itemLookup() works as expected.
+     * Ensures that itemLookup() works as expected
      *
      * @return void
      */
@@ -228,7 +226,7 @@ class Zend_Service_Amazon_OnlineTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that itemLookup() throws an exception when provided an invalid ASIN.
+     * Ensures that itemLookup() throws an exception when provided an invalid ASIN
      *
      * @return void
      */
@@ -243,7 +241,7 @@ class Zend_Service_Amazon_OnlineTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that itemLookup() works as expected when provided multiple ASINs.
+     * Ensures that itemLookup() works as expected when provided multiple ASINs
      *
      * @return void
      */
@@ -254,21 +252,21 @@ class Zend_Service_Amazon_OnlineTest extends PHPUnit_Framework_TestCase
         $count = 0;
         foreach ($resultSet as $item) {
             $this->assertTrue($item instanceof Zend_Service_Amazon_Item);
-            ++$count;
+            $count++;
         }
 
         $this->assertEquals(2, $count);
     }
 
     /**
-     * Ensures that itemLookup() throws an exception when given a SearchIndex.
+     * Ensures that itemLookup() throws an exception when given a SearchIndex
      *
      * @return void
      */
     public function testItemLookupExceptionSearchIndex()
     {
         try {
-            $this->_amazon->itemLookup('oops', ['SearchIndex' => 'Books']);
+            $this->_amazon->itemLookup('oops', array('SearchIndex' => 'Books'));
             $this->fail('Expected Zend_Service_Exception not thrown');
         } catch (Zend_Service_Exception $e) {
             $this->assertContains('restricted parameter combination', $e->getMessage());
@@ -276,7 +274,7 @@ class Zend_Service_Amazon_OnlineTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that the query API works as expected when searching for PHP books.
+     * Ensures that the query API works as expected when searching for PHP books
      *
      * @return void
      */
@@ -290,7 +288,7 @@ class Zend_Service_Amazon_OnlineTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that the query API throws an exception when a category is not first provided.
+     * Ensures that the query API throws an exception when a category is not first provided
      *
      * @return void
      */
@@ -305,7 +303,7 @@ class Zend_Service_Amazon_OnlineTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that the query API throws an exception when the category is invalid.
+     * Ensures that the query API throws an exception when the category is invalid
      *
      * @return void
      */
@@ -320,7 +318,7 @@ class Zend_Service_Amazon_OnlineTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that the query API works as expected when searching by ASIN.
+     * Ensures that the query API works as expected when searching by ASIN
      *
      * @return void
      */
@@ -331,12 +329,13 @@ class Zend_Service_Amazon_OnlineTest extends PHPUnit_Framework_TestCase
     }
 }
 
+
 /**
  * @category   Zend
- *
+ * @package    Zend_Service_Amazon
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
  */
@@ -346,7 +345,7 @@ class Zend_Service_Amazon_OnlineTest_Skip extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->markTestSkipped('Zend_Service_Amazon online tests not enabled with an access key ID in '
-                             .'TestConfiguration.php');
+                             . 'TestConfiguration.php');
     }
 
     public function testNothing()

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,16 +13,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Amf
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
 // Call Zend_Controller_Action_Helper_MultiPageFormTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Amf_Adobe_IntrospectorTest::main');
+if (!defined("PHPUnit_MAIN_METHOD")) {
+    define("PHPUnit_MAIN_METHOD", "Zend_Amf_Adobe_IntrospectorTest::main");
 }
 
 /**
@@ -32,10 +32,10 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Amf
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Amf
  */
 #[AllowDynamicProperties]
@@ -43,7 +43,7 @@ class Zend_Amf_Adobe_IntrospectorTest extends PHPUnit_Framework_TestCase
 {
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite(__CLASS__);
+        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
         PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -96,10 +96,10 @@ class Zend_Amf_Adobe_IntrospectorTest extends PHPUnit_Framework_TestCase
 
     public function testPassingDirectoriesOptionShouldResolveServiceClassAndType()
     {
-        require_once __DIR__.'/_files/ZendAmfAdobeIntrospectorTestType.php';
-        $xml = $this->introspector->introspect('ZendAmfAdobeIntrospectorTest', [
-            'directories' => [__DIR__.'/_files'],
-        ]);
+        require_once __DIR__ . '/_files/ZendAmfAdobeIntrospectorTestType.php';
+        $xml = $this->introspector->introspect('ZendAmfAdobeIntrospectorTest', array(
+            'directories' => array(__DIR__ . '/_files'),
+        ));
         $this->assertRegexp('/<operation[^>]*(name="foo")/', $xml, $xml);
         $this->assertRegexp('/<type[^>]*(name="ZendAmfAdobeIntrospectorTestType")/', $xml, $xml);
         $this->assertRegexp('/<property[^>]*(name="bar")/', $xml, $xml);
@@ -136,7 +136,7 @@ class Zend_Amf_Adobe_IntrospectorTest extends PHPUnit_Framework_TestCase
      */
     public function testArgumentsWithArrayTypeHintsReflectedInReturnedXml()
     {
-        require_once __DIR__.'/TestAsset/ParameterHints.php';
+        require_once __DIR__ . '/TestAsset/ParameterHints.php';
         $xml = $this->introspector->introspect('Zend.Amf.Adobe.TestAsset.ParameterHints');
         $this->assertRegexp('/<argument[^>]*(name="arg1")[^>]*(type="Unknown\[\]")/', $xml, $xml);
         $this->assertRegexp('/<argument[^>]*(name="arg2")[^>]*(type="Unknown\[\]")/', $xml, $xml);
@@ -147,7 +147,7 @@ class Zend_Amf_Adobe_IntrospectorTest extends PHPUnit_Framework_TestCase
 class com_zend_framework_IntrospectorTest
 {
     /**
-     * Constructor.
+     * Constructor
      *
      * @return void
      */
@@ -156,25 +156,24 @@ class com_zend_framework_IntrospectorTest
     }
 
     /**
-     * Overloading: get properties.
+     * Overloading: get properties
      *
-     * @param string $name
+     * @param  string $name
+     * @return mixed
      */
     public function __get($name)
     {
-        $prop = '_'.$name;
+        $prop = '_' . $name;
         if (!isset($this->$prop)) {
             return null;
         }
-
         return $this->$prop;
     }
 
     /**
-     * Foobar.
+     * Foobar
      *
-     * @param string|int $arg
-     *
+     * @param  string|int $arg
      * @return string|stdClass
      */
     public function foobar($arg)
@@ -182,18 +181,17 @@ class com_zend_framework_IntrospectorTest
     }
 
     /**
-     * Barbaz.
+     * Barbaz
      *
-     * @param com_zend_framework_IntrospectorTestCustomType $arg
-     *
-     * @return bool
+     * @param  com_zend_framework_IntrospectorTestCustomType $arg
+     * @return boolean
      */
     public function barbaz($arg)
     {
     }
 
     /**
-     * Bazbat.
+     * Bazbat
      *
      * @return com_zend_framework_IntrospectorTestExplicitType
      */
@@ -213,7 +211,7 @@ class com_zend_framework_IntrospectorTestCustomType
     public $baz;
 
     /**
-     * Docblock without an annotation.
+     * Docblock without an annotation
      */
     public $bat;
 
@@ -229,7 +227,8 @@ class com_zend_framework_IntrospectorTestExplicitType
     public $_explicitType = 'explicit';
 }
 
+
 // Call Zend_Amf_Adobe_IntrospectorTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_Amf_Adobe_IntrospectorTest::main') {
+if (PHPUnit_MAIN_METHOD == "Zend_Amf_Adobe_IntrospectorTest::main") {
     Zend_Amf_Adobe_IntrospectorTest::main();
 }

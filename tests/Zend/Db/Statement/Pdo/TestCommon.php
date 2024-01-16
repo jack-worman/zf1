@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,14 +13,15 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Db
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id $
  */
 
 require_once 'Zend/Db/Statement/TestCommon.php';
+
 
 /*
  * @category   Zend
@@ -33,6 +34,7 @@ require_once 'Zend/Db/Statement/TestCommon.php';
  */
 abstract class Zend_Db_Statement_Pdo_TestCommon extends Zend_Db_Statement_TestCommon
 {
+
     public function testStatementConstruct()
     {
         $select = $this->_db->select()
@@ -84,7 +86,7 @@ abstract class Zend_Db_Statement_Pdo_TestCommon extends Zend_Db_Statement_TestCo
 
     public function testStatementConstructExceptionBadSql()
     {
-        $sql = 'SELECT * FROM *';
+        $sql = "SELECT * FROM *";
         try {
             $stmt = $this->_db->query($sql);
             $this->fail('Expected to catch Zend_Db_Statement_Exception');
@@ -97,6 +99,7 @@ abstract class Zend_Db_Statement_Pdo_TestCommon extends Zend_Db_Statement_TestCo
     }
 
     /**
+     *
      * @group ZF-5868
      */
     public function testStatementWillPersistBindParamsInQueryProfilerAfterExecute()
@@ -112,7 +115,9 @@ abstract class Zend_Db_Statement_Pdo_TestCommon extends Zend_Db_Statement_TestCo
 
         $params = $this->_db->getProfiler()->getLastQueryProfile()->getQueryParams();
 
-        $target = [':product_id' => 1];
+        $target = array(':product_id' => 1);
         $this->assertEquals($target, $params);
+
     }
+
 }

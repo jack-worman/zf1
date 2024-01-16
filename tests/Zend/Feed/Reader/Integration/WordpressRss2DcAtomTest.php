@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Feed
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -24,27 +24,29 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Feed
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Feed
  * @group      Zend_Feed_Reader
  */
 #[AllowDynamicProperties]
 class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Framework_TestCase
 {
-    protected $_feedSamplePath;
+
+    protected $_feedSamplePath = null;
 
     public function setup()
     {
         Zend_Feed_Reader::reset();
-        $this->_feedSamplePath = __DIR__.'/_files/wordpress-rss2-dc-atom.xml';
+        $this->_feedSamplePath = __DIR__ . '/_files/wordpress-rss2-dc-atom.xml';
     }
 
     /**
-     * Feed level testing.
+     * Feed level testing
      */
+
     public function testGetsTitle()
     {
         $feed = Zend_Feed_Reader::importString(
@@ -58,9 +60,9 @@ class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Frame
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
-        $this->assertEquals([
-            ['name' => 'norm2782'],
-        ], (array) $feed->getAuthors());
+        $this->assertEquals(array(
+            array('name'=>'norm2782')
+        ), (array) $feed->getAuthors());
     }
 
     public function testGetsSingleAuthor()
@@ -68,7 +70,7 @@ class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Frame
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
-        $this->assertEquals(['name' => 'norm2782'], $feed->getAuthor());
+        $this->assertEquals(array('name'=>'norm2782'), $feed->getAuthor());
     }
 
     public function testGetsCopyright()
@@ -120,8 +122,9 @@ class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Frame
     }
 
     /**
-     * Entry level testing.
+     * Entry level testing
      */
+
     public function testGetsEntryId()
     {
         $feed = Zend_Feed_Reader::importString(
@@ -137,7 +140,7 @@ class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Frame
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
-        /*
+        /**
          * Note: The three dots below is actually a single Unicode character
          * called the "three dot leader". Don't replace in error!
          */
@@ -150,7 +153,7 @@ class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Frame
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals([['name' => 'norm2782']], (array) $entry->getAuthors());
+        $this->assertEquals(array(array('name'=>'norm2782')), (array) $entry->getAuthors());
     }
 
     public function testGetsEntrySingleAuthor()
@@ -159,7 +162,7 @@ class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Frame
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals(['name' => 'norm2782'], $entry->getAuthor());
+        $this->assertEquals(array('name'=>'norm2782'), $entry->getAuthor());
     }
 
     public function testGetsEntryDescription()
@@ -168,7 +171,7 @@ class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Frame
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
-        /*
+        /**
          * Note: "’" is not the same as "'" - don't replace in error
          */
         $this->assertEquals('Being in New Zealand does strange things to a person. Everybody who knows me, knows I don&#8217;t much like that crazy invention called a Book. However, being here I&#8217;ve already finished 4 books, all of which I can highly recommend.'."\n\n".'Agile Software Development with Scrum, by Ken Schwaber and Mike Beedle'."\n".'Domain-Driven Design: Tackling Complexity in the [...]', $entry->getDescription());
@@ -189,7 +192,7 @@ class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Frame
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals(['http://www.norm2782.com/2009/03/wth-reading-books/'], $entry->getLinks());
+        $this->assertEquals(array('http://www.norm2782.com/2009/03/wth-reading-books/'), $entry->getLinks());
     }
 
     public function testGetsEntryLink()
@@ -219,4 +222,5 @@ class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Frame
         $entry = $feed->current();
         $this->assertEquals('UTF-8', $entry->getEncoding());
     }
+
 }

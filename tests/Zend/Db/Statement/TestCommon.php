@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Db
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -24,20 +24,25 @@ require_once 'Zend/Db/TestSetup.php';
 
 // require_once 'Zend/Db/Statement/Exception.php';
 
+
+
+
+
 /**
  * @category   Zend
- *
+ * @package    Zend_Db
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Db
  * @group      Zend_Db_Statement
  */
 abstract class Zend_Db_Statement_TestCommon extends Zend_Db_TestSetup
 {
+
     public function testStatementConstruct()
     {
-        $statementClass = 'Zend_Db_Statement_'.$this->getDriver();
+        $statementClass = 'Zend_Db_Statement_' . $this->getDriver();
 
         $select = $this->_db->select()
             ->from('zfproducts');
@@ -50,7 +55,7 @@ abstract class Zend_Db_Statement_TestCommon extends Zend_Db_TestSetup
 
     public function testStatementConstructWithSelectObject()
     {
-        $statementClass = 'Zend_Db_Statement_'.$this->getDriver();
+        $statementClass = 'Zend_Db_Statement_' . $this->getDriver();
 
         $select = $this->_db->select()
             ->from('zfproducts');
@@ -88,7 +93,7 @@ abstract class Zend_Db_Statement_TestCommon extends Zend_Db_TestSetup
 
     public function testStatementConstructExceptionBadSql()
     {
-        $sql = 'SELECT * FROM *';
+        $sql = "SELECT * FROM *";
         try {
             $stmt = $this->_db->query($sql);
             $this->fail('Expected to catch Zend_Db_Statement_Exception');
@@ -161,7 +166,7 @@ abstract class Zend_Db_Statement_TestCommon extends Zend_Db_TestSetup
         $product_name = $this->_db->quoteIdentifier('product_name');
 
         $stmt = $this->_db->prepare("INSERT INTO $products ($product_id, $product_name) VALUES (?, ?)");
-        $stmt->execute([4, 'Solaris']);
+        $stmt->execute(array(4, 'Solaris'));
 
         $select = $this->_db->select()
             ->from('zfproducts')
@@ -169,7 +174,7 @@ abstract class Zend_Db_Statement_TestCommon extends Zend_Db_TestSetup
         $result = $this->_db->fetchAll($select);
         $stmt->closeCursor();
 
-        $this->assertEquals([['product_id' => 4, 'product_name' => 'Solaris']], $result);
+        $this->assertEquals(array(array('product_id'=>4, 'product_name'=>'Solaris')), $result);
     }
 
     public function testStatementErrorCodeKeyViolation()
@@ -181,8 +186,8 @@ abstract class Zend_Db_Statement_TestCommon extends Zend_Db_TestSetup
         $stmt = $this->_db->prepare("INSERT INTO $products ($product_id, $product_name) VALUES (?, ?)");
         try {
             // INSERT a value that results in a key violation
-            $retval = $stmt->execute([1, 'Solaris']);
-            if (false === $retval) {
+            $retval = $stmt->execute(array(1, 'Solaris'));
+            if ($retval === false) {
                 throw new Zend_Db_Statement_Exception('dummy');
             }
             $this->fail('Expected to catch Zend_Db_Statement_Exception');
@@ -203,8 +208,8 @@ abstract class Zend_Db_Statement_TestCommon extends Zend_Db_TestSetup
         $stmt = $this->_db->prepare("INSERT INTO $products ($product_id, $product_name) VALUES (?, ?)");
         try {
             // INSERT a value that results in a key violation
-            $retval = $stmt->execute([1, 'Solaris']);
-            if (false === $retval) {
+            $retval = $stmt->execute(array(1, 'Solaris'));
+            if ($retval === false) {
                 throw new Zend_Db_Statement_Exception('dummy');
             }
             $this->fail('Expected to catch Zend_Db_Statement_Exception');
@@ -323,7 +328,7 @@ abstract class Zend_Db_Statement_TestCommon extends Zend_Db_TestSetup
         } catch (Zend_Exception $e) {
             $this->assertTrue($e instanceof Zend_Db_Statement_Exception,
                 'Expecting object of type Zend_Db_Statement_Exception, got '.get_class($e));
-            if (PHP_VERSION_ID >= 80000 && 'Pdo_' === substr((string) $this->getDriver(), 0, 4)) {
+            if (PHP_VERSION_ID >= 80000 && substr((string) $this->getDriver(), 0, 4) === 'Pdo_') {
                 // PDO on PHP 8.0+ throws different error message on invalid arguments
                 $this->assertContains('must be a bitmask of PDO::FETCH_* constants', $e->getMessage());
             } else {
@@ -596,7 +601,7 @@ abstract class Zend_Db_Statement_TestCommon extends Zend_Db_TestSetup
         $product_id = $this->_db->quoteIdentifier('product_id');
         $product_name = $this->_db->quoteIdentifier('product_name');
 
-        $productIdValue = 4;
+        $productIdValue   = 4;
         $productNameValue = 'AmigaOS';
 
         $stmt = $this->_db->prepare("INSERT INTO $products ($product_id, $product_name) VALUES (?, ?)");
@@ -604,7 +609,7 @@ abstract class Zend_Db_Statement_TestCommon extends Zend_Db_TestSetup
         $this->assertTrue($stmt->bindParam(2, $productNameValue), 'Expected bindParam(2) to return true');
 
         // we should be able to set the values after binding them
-        $productIdValue = 4;
+        $productIdValue   = 4;
         $productNameValue = 'Solaris';
 
         // no params as args to execute()
@@ -615,7 +620,7 @@ abstract class Zend_Db_Statement_TestCommon extends Zend_Db_TestSetup
             ->where("$product_id = 4");
         $result = $this->_db->fetchAll($select);
 
-        $this->assertEquals([['product_id' => $productIdValue, 'product_name' => $productNameValue]], $result);
+        $this->assertEquals(array(array('product_id' => $productIdValue, 'product_name' => $productNameValue)), $result);
     }
 
     public function testStatementBindParamByName()
@@ -624,7 +629,7 @@ abstract class Zend_Db_Statement_TestCommon extends Zend_Db_TestSetup
         $product_id = $this->_db->quoteIdentifier('product_id');
         $product_name = $this->_db->quoteIdentifier('product_name');
 
-        $productIdValue = 4;
+        $productIdValue   = 4;
         $productNameValue = 'AmigaOS';
 
         $stmt = $this->_db->prepare("INSERT INTO $products ($product_id, $product_name) VALUES (:id, :name)");
@@ -634,7 +639,7 @@ abstract class Zend_Db_Statement_TestCommon extends Zend_Db_TestSetup
         $this->assertTrue($stmt->bindParam('name', $productNameValue), 'Expected bindParam(\'name\') to return true');
 
         // we should be able to set the values after binding them
-        $productIdValue = 4;
+        $productIdValue   = 4;
         $productNameValue = 'Solaris';
 
         // no params as args to execute()
@@ -646,7 +651,7 @@ abstract class Zend_Db_Statement_TestCommon extends Zend_Db_TestSetup
         $result = $this->_db->fetchAll($select);
         $stmt->closeCursor();
 
-        $this->assertEquals([['product_id' => $productIdValue, 'product_name' => $productNameValue]], $result);
+        $this->assertEquals(array(array('product_id' => $productIdValue, 'product_name' => $productNameValue)), $result);
     }
 
     public function testStatementBindValueByPosition()
@@ -655,7 +660,7 @@ abstract class Zend_Db_Statement_TestCommon extends Zend_Db_TestSetup
         $product_id = $this->_db->quoteIdentifier('product_id');
         $product_name = $this->_db->quoteIdentifier('product_name');
 
-        $productIdValue = 4;
+        $productIdValue   = 4;
         $productNameValue = 'AmigaOS';
 
         $stmt = $this->_db->prepare("INSERT INTO $products ($product_id, $product_name) VALUES (?, ?)");
@@ -663,7 +668,7 @@ abstract class Zend_Db_Statement_TestCommon extends Zend_Db_TestSetup
         $this->assertTrue($stmt->bindValue(2, $productNameValue), 'Expected bindValue(2) to return true');
 
         // we should be able to change the values without changing what gets inserted
-        $productIdValue = 5;
+        $productIdValue   = 5;
         $productNameValue = 'Solaris';
 
         // no params as args to execute()
@@ -675,7 +680,7 @@ abstract class Zend_Db_Statement_TestCommon extends Zend_Db_TestSetup
         $result = $this->_db->fetchAll($select);
         $stmt->closeCursor();
 
-        $this->assertEquals([['product_id' => '4', 'product_name' => 'AmigaOS']], $result);
+        $this->assertEquals(array(array('product_id' => '4', 'product_name' => 'AmigaOS')), $result);
     }
 
     public function testStatementBindValueByName()
@@ -684,7 +689,7 @@ abstract class Zend_Db_Statement_TestCommon extends Zend_Db_TestSetup
         $product_id = $this->_db->quoteIdentifier('product_id');
         $product_name = $this->_db->quoteIdentifier('product_name');
 
-        $productIdValue = 4;
+        $productIdValue   = 4;
         $productNameValue = 'AmigaOS';
 
         $stmt = $this->_db->prepare("INSERT INTO $products ($product_id, $product_name) VALUES (:id, :name)");
@@ -694,7 +699,7 @@ abstract class Zend_Db_Statement_TestCommon extends Zend_Db_TestSetup
         $this->assertTrue($stmt->bindValue('name', $productNameValue), 'Expected bindValue(\'name\') to return true');
 
         // we should be able to change the values without changing what gets inserted
-        $productIdValue = 5;
+        $productIdValue   = 5;
         $productNameValue = 'Solaris';
 
         // no params as args to execute()
@@ -706,7 +711,7 @@ abstract class Zend_Db_Statement_TestCommon extends Zend_Db_TestSetup
         $result = $this->_db->fetchAll($select);
         $stmt->closeCursor();
 
-        $this->assertEquals([['product_id' => '4', 'product_name' => 'AmigaOS']], $result);
+        $this->assertEquals(array(array('product_id' => '4', 'product_name' => 'AmigaOS')), $result);
     }
 
     public function testStatementBindColumnByPosition()
@@ -793,9 +798,9 @@ abstract class Zend_Db_Statement_TestCommon extends Zend_Db_TestSetup
         $stmt->closeCursor();
     }
 
-    protected $_getColumnMetaKeys = [
-        'native_type', 'flags', 'table', 'name', 'len', 'precision', 'pdo_type',
-    ];
+    protected $_getColumnMetaKeys = array(
+        'native_type', 'flags', 'table', 'name', 'len', 'precision', 'pdo_type'
+    );
 
     public function testStatementGetColumnMeta()
     {
@@ -845,19 +850,18 @@ abstract class Zend_Db_Statement_TestCommon extends Zend_Db_TestSetup
             $this->assertEquals($value, $stmt->getAttribute(1234), "Expected '$value' #1");
         } catch (Zend_Exception $e) {
             $this->assertContains('driver doesn\'t support getting', $e->getMessage());
-
             return;
         }
 
-        $valueArray = ['value1', 'value2'];
+        $valueArray = array('value1', 'value2');
         $stmt->setAttribute(1235, $valueArray);
-        $this->assertEquals($valueArray, $stmt->getAttribute(1235), 'Expected array #1');
+        $this->assertEquals($valueArray, $stmt->getAttribute(1235), "Expected array #1");
         $this->assertEquals($value, $stmt->getAttribute(1234), "Expected '$value' #2");
 
         $valueObject = new stdClass();
         $stmt->setAttribute(1236, $valueObject);
-        $this->assertSame($valueObject, $stmt->getAttribute(1236), 'Expected object');
-        $this->assertEquals($valueArray, $stmt->getAttribute(1235), 'Expected array #2');
+        $this->assertSame($valueObject, $stmt->getAttribute(1236), "Expected object");
+        $this->assertEquals($valueArray, $stmt->getAttribute(1235), "Expected array #2");
         $this->assertEquals($value, $stmt->getAttribute(1234), "Expected '$value' #2");
     }
 
@@ -869,7 +873,6 @@ abstract class Zend_Db_Statement_TestCommon extends Zend_Db_TestSetup
         $products = $this->_db->quoteIdentifier('zfproducts');
         $statement = $this->_db->query("SELECT * FROM $products");
         $this->assertNotNull($statement->getDriverStatement());
-
         return $statement;
     }
 }

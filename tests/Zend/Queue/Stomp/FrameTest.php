@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Queue
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -33,21 +33,22 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Queue
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Queue
  */
 #[AllowDynamicProperties]
 class Zend_Queue_Stomp_FrameTest extends PHPUnit_Framework_TestCase
 {
+
     protected $body = 'hello world'; // 11 characters
 
-    public function testToFromFrame()
+    public function test_to_fromFrame()
     {
-        $correct = 'SEND'.Zend_Queue_Stomp_Frame::EOL;
-        $correct .= 'content-length: 11'.Zend_Queue_Stomp_Frame::EOL;
+        $correct = 'SEND' . Zend_Queue_Stomp_Frame::EOL;
+        $correct .= 'content-length: 11' . Zend_Queue_Stomp_Frame::EOL;
         $correct .= Zend_Queue_Stomp_Frame::EOL;
         $correct .= $this->body;
         $correct .= Zend_Queue_Stomp_Frame::END_OF_FRAME;
@@ -65,86 +66,87 @@ class Zend_Queue_Stomp_FrameTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($frame->toFrame(), "$frame");
 
         // fromFrame, but no body
-        $correct = 'SEND'.Zend_Queue_Stomp_Frame::EOL;
-        $correct .= 'testing: 11'.Zend_Queue_Stomp_Frame::EOL;
+        $correct = 'SEND' . Zend_Queue_Stomp_Frame::EOL;
+        $correct .= 'testing: 11' . Zend_Queue_Stomp_Frame::EOL;
         $correct .= Zend_Queue_Stomp_Frame::EOL;
         $correct .= Zend_Queue_Stomp_Frame::END_OF_FRAME;
         $frame->fromFrame($correct);
         $this->assertEquals($frame->getHeader('testing'), 11);
     }
 
-    public function testSetHeaders()
+    public function test_setHeaders()
     {
         $frame = new Zend_Queue_Stomp_Frame();
-        $frame->setHeaders(['testing' => 1]);
+        $frame->setHeaders(array('testing' => 1));
         $this->assertEquals(1, $frame->getHeader('testing'));
     }
 
-    public function testParameters()
+    public function test_parameters()
     {
         $frame = new Zend_Queue_Stomp_Frame();
 
         try {
-            $frame->setAutoContentLength([]);
+            $frame->setAutoContentLength(array());
             $this->fail('Exception should have been thrown');
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->assertTrue(true);
         }
 
         try {
-            $frame->setHeader([], 1);
+            $frame->setHeader(array(), 1);
             $this->fail('Exception should have been thrown');
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->assertTrue(true);
         }
 
         try {
-            $frame->setHeader('testing', []);
+            $frame->setHeader('testing', array());
             $this->fail('Exception should have been thrown');
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->assertTrue(true);
         }
 
         try {
-            $frame->getHeader([]);
+            $frame->getHeader(array());
             $this->fail('Exception should have been thrown');
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->assertTrue(true);
         }
 
         try {
-            $frame->setBody([]);
+            $frame->setBody(array());
             $this->fail('Exception should have been thrown');
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->assertTrue(true);
         }
 
         try {
-            $frame->setCommand([]);
+            $frame->setCommand(array());
             $this->fail('Exception should have been thrown');
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->assertTrue(true);
         }
 
         try {
             $frame->toFrame();
             $this->fail('Exception should have been thrown');
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->assertTrue(true);
         }
 
         try {
-            $frame->fromFrame([]);
+            $frame->fromFrame(array());
             $this->fail('Exception should have been thrown');
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->assertTrue(true);
         }
     }
 
-    public function testConstant()
+    public function test_constant()
     {
         $this->assertTrue(is_string(Zend_Queue_Stomp_Frame::END_OF_FRAME));
         $this->assertTrue(is_string(Zend_Queue_Stomp_Frame::CONTENT_LENGTH));
         $this->assertTrue(is_string(Zend_Queue_Stomp_Frame::EOL));
     }
+
 }

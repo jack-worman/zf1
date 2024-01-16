@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Paginator
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -30,14 +30,14 @@
  */
 // require_once 'Zend/Paginator.php';
 
-require_once __DIR__.'/DbSelectTest.php';
+require_once __DIR__ . '/DbSelectTest.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Paginator
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Paginator
  */
 #[AllowDynamicProperties]
@@ -48,16 +48,16 @@ class Zend_Paginator_Adapter_DbTableSelectTest extends Zend_Paginator_Adapter_Db
      */
     public function testSelectDoesReturnZendDbTableRowset()
     {
-        $query = $this->_table->select();
+        $query   = $this->_table->select();
         $adapter = new Zend_Paginator_Adapter_DbTableSelect($query);
-        $items = $adapter->getItems(0, 10);
+        $items   = $adapter->getItems(0, 10);
 
         $this->assertTrue($items instanceof Zend_Db_Table_Rowset);
     }
 
     public function testToJsonWithRowset()
     {
-        $query = $this->_table->select();
+        $query   = $this->_table->select();
         $paginator = new Zend_Paginator(new Zend_Paginator_Adapter_DbTableSelect($query));
         $this->assertGreaterThan(2, strlen((string) $paginator->toJson()));
     }

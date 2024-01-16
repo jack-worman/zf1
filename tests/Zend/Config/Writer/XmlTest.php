@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,34 +13,34 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Config
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
 /**
- * Zend_Config.
+ * Zend_Config
  */
 // require_once 'Zend/Config.php';
 
 /**
- * Zend_Config_Xml.
+ * Zend_Config_Xml
  */
 // require_once 'Zend/Config/Xml.php';
 
 /**
- * Zend_Config_Writer_Xml.
+ * Zend_Config_Writer_Xml
  */
 // require_once 'Zend/Config/Writer/Xml.php';
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Config
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Config
  */
 #[AllowDynamicProperties]
@@ -50,7 +50,7 @@ class Zend_Config_Writer_XmlTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_tempName = @tempnam(__DIR__.'/temp', 'tmp');
+        $this->_tempName = @tempnam(__DIR__ . '/temp', 'tmp');
     }
 
     public function tearDown()
@@ -60,7 +60,7 @@ class Zend_Config_Writer_XmlTest extends PHPUnit_Framework_TestCase
 
     public function testNoFilenameSet()
     {
-        $writer = new Zend_Config_Writer_Xml(['config' => new Zend_Config([])]);
+        $writer = new Zend_Config_Writer_Xml(array('config' => new Zend_Config(array())));
 
         try {
             $writer->write();
@@ -72,7 +72,7 @@ class Zend_Config_Writer_XmlTest extends PHPUnit_Framework_TestCase
 
     public function testNoConfigSet()
     {
-        $writer = new Zend_Config_Writer_Xml(['filename' => $this->_tempName]);
+        $writer = new Zend_Config_Writer_Xml(array('filename' => $this->_tempName));
 
         try {
             $writer->write();
@@ -84,7 +84,7 @@ class Zend_Config_Writer_XmlTest extends PHPUnit_Framework_TestCase
 
     public function testFileNotWritable()
     {
-        $writer = new Zend_Config_Writer_Xml(['config' => new Zend_Config([]), 'filename' => '/../../../']);
+        $writer = new Zend_Config_Writer_Xml(array('config' => new Zend_Config(array()), 'filename' => '/../../../'));
 
         try {
             $writer->write();
@@ -96,9 +96,9 @@ class Zend_Config_Writer_XmlTest extends PHPUnit_Framework_TestCase
 
     public function testWriteAndRead()
     {
-        $config = new Zend_Config(['default' => ['test' => 'foo']]);
+        $config = new Zend_Config(array('default' => array('test' => 'foo')));
 
-        $writer = new Zend_Config_Writer_Xml(['config' => $config, 'filename' => $this->_tempName]);
+        $writer = new Zend_Config_Writer_Xml(array('config' => $config, 'filename' => $this->_tempName));
         $writer->write();
 
         $config = new Zend_Config_Xml($this->_tempName, null);
@@ -108,9 +108,9 @@ class Zend_Config_Writer_XmlTest extends PHPUnit_Framework_TestCase
 
     public function testNoSection()
     {
-        $config = new Zend_Config(['test' => 'foo', 'test2' => ['test3' => 'bar']]);
+        $config = new Zend_Config(array('test' => 'foo', 'test2' => array('test3' => 'bar')));
 
-        $writer = new Zend_Config_Writer_Xml(['config' => $config, 'filename' => $this->_tempName]);
+        $writer = new Zend_Config_Writer_Xml(array('config' => $config, 'filename' => $this->_tempName));
         $writer->write();
 
         $config = new Zend_Config_Xml($this->_tempName, null);
@@ -121,23 +121,23 @@ class Zend_Config_Writer_XmlTest extends PHPUnit_Framework_TestCase
 
     public function testWriteAndReadOriginalFile()
     {
-        $config = new Zend_Config_Xml(__DIR__.'/files/allsections.xml', null, ['skipExtends' => true]);
+        $config = new Zend_Config_Xml(__DIR__ . '/files/allsections.xml', null, array('skipExtends' => true));
 
-        $writer = new Zend_Config_Writer_Xml(['config' => $config, 'filename' => $this->_tempName]);
+        $writer = new Zend_Config_Writer_Xml(array('config' => $config, 'filename' => $this->_tempName));
         $writer->write();
 
         $config = new Zend_Config_Xml($this->_tempName, null);
         $this->assertEquals('multi', $config->staging->one->two->three);
 
-        $config = new Zend_Config_Xml($this->_tempName, null, ['skipExtends' => true]);
+        $config = new Zend_Config_Xml($this->_tempName, null, array('skipExtends' => true));
         $this->assertFalse(isset($config->staging->one));
     }
 
     public function testWriteAndReadSingleSection()
     {
-        $config = new Zend_Config_Xml(__DIR__.'/files/allsections.xml', 'staging', ['skipExtends' => true]);
+        $config = new Zend_Config_Xml(__DIR__ . '/files/allsections.xml', 'staging', array('skipExtends' => true));
 
-        $writer = new Zend_Config_Writer_Xml(['config' => $config, 'filename' => $this->_tempName]);
+        $writer = new Zend_Config_Writer_Xml(array('config' => $config, 'filename' => $this->_tempName));
         $writer->write();
 
         $config = new Zend_Config_Xml($this->_tempName, null);
@@ -152,28 +152,28 @@ class Zend_Config_Writer_XmlTest extends PHPUnit_Framework_TestCase
      */
     public function testWriteMultidimensionalArrayWithNumericKeys()
     {
-        $writer = new Zend_Config_Writer_Xml();
-        $writer->write($this->_tempName, new Zend_Config([
-            'notification' => [
-                'adress' => [
-                    0 => [
+        $writer = new Zend_Config_Writer_Xml;
+        $writer->write($this->_tempName, new Zend_Config(array(
+            'notification' => array(
+                'adress' => array(
+                    0 => array(
                         'name' => 'Matthew',
-                        'mail' => 'matthew@example.com',
-                    ],
-                    1 => [
+                        'mail' => 'matthew@example.com'
+                    ),
+                    1 => array(
                         'name' => 'Thomas',
-                        'mail' => 'thomas@example.com',
-                    ],
-                ],
-            ],
-        ]));
+                        'mail' => 'thomas@example.com'
+                    )
+                )
+            )
+        )));
     }
 
     public function testNumericArray()
     {
-        $config = new Zend_Config(['foo' => ['bar' => [1 => 'a', 2 => 'b', 5 => 'c']]]);
+        $config = new Zend_Config(array('foo' => array('bar' => array(1 => 'a', 2 => 'b', 5 => 'c'))));
 
-        $writer = new Zend_Config_Writer_Xml(['config' => $config, 'filename' => $this->_tempName]);
+        $writer = new Zend_Config_Writer_Xml(array('config' => $config, 'filename' => $this->_tempName));
         $writer->write();
 
         $config = new Zend_Config_Xml($this->_tempName, null);
@@ -185,10 +185,10 @@ class Zend_Config_Writer_XmlTest extends PHPUnit_Framework_TestCase
 
     public function testMixedArrayFailure()
     {
-        $config = new Zend_Config(['foo' => ['bar' => ['a', 'b', 'c' => 'd']]]);
+        $config = new Zend_Config(array('foo' => array('bar' => array('a', 'b', 'c' => 'd'))));
 
         try {
-            $writer = new Zend_Config_Writer_Xml(['config' => $config, 'filename' => $this->_tempName]);
+            $writer = new Zend_Config_Writer_Xml(array('config' => $config, 'filename' => $this->_tempName));
             $writer->write();
             $this->fail('Expected Zend_Config_Exception not raised');
         } catch (Zend_Config_Exception $e) {
@@ -198,7 +198,7 @@ class Zend_Config_Writer_XmlTest extends PHPUnit_Framework_TestCase
 
     public function testArgumentOverride()
     {
-        $config = new Zend_Config(['default' => ['test' => 'foo']]);
+        $config = new Zend_Config(array('default' => array('test' => 'foo')));
 
         $writer = new Zend_Config_Writer_Xml();
         $writer->write($this->_tempName, $config);
@@ -213,7 +213,7 @@ class Zend_Config_Writer_XmlTest extends PHPUnit_Framework_TestCase
      */
     public function testRender()
     {
-        $config = new Zend_Config(['test' => 'foo', 'bar' => [0 => 'baz', 1 => 'foo']]);
+        $config = new Zend_Config(array('test' => 'foo', 'bar' => array(0 => 'baz', 1 => 'foo')));
 
         $writer = new Zend_Config_Writer_Xml();
         $configString = $writer->setConfig($config)->render();

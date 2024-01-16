@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,9 +13,9 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Feed
+ * @subpackage UnitTests
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -26,11 +26,12 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Feed
+ * @subpackage UnitTests
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Feed
  */
+
 #[AllowDynamicProperties]
 class AtomTest extends PHPUnit_Framework_TestCase
 {
@@ -38,7 +39,7 @@ class AtomTest extends PHPUnit_Framework_TestCase
     {
         try {
             new Zend_Feed_Entry_Rss(null, 'foo');
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             self::assertInstanceOf('Zend_Feed_Exception', $e);
             self::assertContains('message not available', $e->getMessage());
 

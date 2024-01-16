@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Gdata_Spreadsheets
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id $
  */
 
@@ -25,27 +25,29 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Gdata_Spreadsheets
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Gdata
  * @group      Zend_Gdata_Spreadsheets
  */
 #[AllowDynamicProperties]
 class Zend_Gdata_Spreadsheets_WorksheetFeedTest extends PHPUnit_Framework_TestCase
 {
+
     public function setUp()
     {
         $this->wksFeed = new Zend_Gdata_Spreadsheets_WorksheetFeed(
-            file_get_contents(__DIR__.'/_files/TestDataWorksheetFeedSample1.xml'),
-            true);
+                file_get_contents(__DIR__ . '/_files/TestDataWorksheetFeedSample1.xml'),
+                true);
     }
 
     public function testToAndFromString()
     {
-        $this->assertTrue(1 == count($this->wksFeed->entries));
-        foreach ($this->wksFeed->entries as $entry) {
+        $this->assertTrue(count($this->wksFeed->entries) == 1);
+        foreach($this->wksFeed->entries as $entry)
+        {
             $this->assertTrue($entry instanceof Zend_Gdata_Spreadsheets_WorksheetEntry);
         }
 
@@ -54,9 +56,11 @@ class Zend_Gdata_Spreadsheets_WorksheetFeedTest extends PHPUnit_Framework_TestCa
         $doc->loadXML($this->wksFeed->saveXML());
         $newWksFeed->transferFromDom($doc->documentElement);
 
-        $this->assertTrue(1 == count($newWksFeed->entries));
-        foreach ($newWksFeed->entries as $entry) {
+        $this->assertTrue(count($newWksFeed->entries) == 1);
+        foreach($newWksFeed->entries as $entry)
+        {
             $this->assertTrue($entry instanceof Zend_Gdata_Spreadsheets_WorksheetEntry);
         }
     }
+
 }

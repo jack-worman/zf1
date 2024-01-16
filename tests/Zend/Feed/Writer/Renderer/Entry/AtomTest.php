@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Feed
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -26,22 +26,23 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Feed
+ * @subpackage UnitTests
  * @group      Zend_Feed
  * @group      Zend_Feed_Writer
- *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Zend_Feed_Writer_Renderer_Entry_AtomTest extends PHPUnit_Framework_TestCase
 {
-    protected $_validWriter;
-    protected $_validEntry;
+
+    protected $_validWriter = null;
+    protected $_validEntry = null;
 
     public function setUp()
     {
-        $this->_validWriter = new Zend_Feed_Writer_Feed();
+        $this->_validWriter = new Zend_Feed_Writer_Feed;
 
         $this->_validWriter->setType('atom');
 
@@ -104,7 +105,7 @@ class Zend_Feed_Writer_Renderer_Entry_AtomTest extends PHPUnit_Framework_TestCas
     }
 
     /**
-     * @expectedException \Zend_Feed_Exception
+     * @expectedException Zend_Feed_Exception
      */
     public function testFeedTitleIfMissingThrowsException()
     {
@@ -124,7 +125,7 @@ class Zend_Feed_Writer_Renderer_Entry_AtomTest extends PHPUnit_Framework_TestCas
     /**
      * @group ZFWATOMCONTENT
      */
-    public function testEntryContentHasBeenSetXhtml()
+    public function testEntryContentHasBeenSet_Xhtml()
     {
         $renderer = new Zend_Feed_Writer_Renderer_Feed_Atom($this->_validWriter);
         $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
@@ -133,7 +134,7 @@ class Zend_Feed_Writer_Renderer_Entry_AtomTest extends PHPUnit_Framework_TestCas
     }
 
     /**
-     * @expectedException \Zend_Feed_Exception
+     * @expectedException Zend_Feed_Exception
      */
     public function testFeedContentIfMissingThrowsExceptionIfThereIsNoLink()
     {
@@ -152,7 +153,7 @@ class Zend_Feed_Writer_Renderer_Entry_AtomTest extends PHPUnit_Framework_TestCas
     }
 
     /**
-     * @expectedException \Zend_Feed_Exception
+     * @expectedException Zend_Feed_Exception
      */
     public function testFeedUpdatedDateIfMissingThrowsException()
     {
@@ -171,7 +172,7 @@ class Zend_Feed_Writer_Renderer_Entry_AtomTest extends PHPUnit_Framework_TestCas
 
     public function testEntryIncludesLinkToHtmlVersionOfFeed()
     {
-        $renderer = new Zend_Feed_Writer_Renderer_Feed_Atom($this->_validWriter);
+        $renderer= new Zend_Feed_Writer_Renderer_Feed_Atom($this->_validWriter);
         $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $this->assertEquals('http://www.example.com/1', $entry->getLink());
@@ -183,20 +184,20 @@ class Zend_Feed_Writer_Renderer_Entry_AtomTest extends PHPUnit_Framework_TestCas
         $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $author = $entry->getAuthor();
-        $this->assertEquals([
-            'name' => 'Jane',
-            'email' => 'jane@example.com',
-            'uri' => 'http://www.example.com/jane'], $entry->getAuthor());
+        $this->assertEquals(array(
+            'name'=>'Jane',
+            'email'=>'jane@example.com',
+            'uri'=>'http://www.example.com/jane'), $entry->getAuthor());
     }
 
     public function testEntryHoldsAnyEnclosureAdded()
     {
         $renderer = new Zend_Feed_Writer_Renderer_Feed_Atom($this->_validWriter);
-        $this->_validEntry->setEnclosure([
+        $this->_validEntry->setEnclosure(array(
             'type' => 'audio/mpeg',
             'length' => '1337',
-            'uri' => 'http://example.com/audio.mp3',
-        ]);
+            'uri' => 'http://example.com/audio.mp3'
+        ));
         $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $enc = $entry->getEnclosure();
@@ -241,7 +242,7 @@ class Zend_Feed_Writer_Renderer_Entry_AtomTest extends PHPUnit_Framework_TestCas
     }
 
     /**
-     * @expectedException \Zend_Feed_Exception
+     * @expectedException Zend_Feed_Exception
      */
     public function testFeedIdIfMissingThrowsException()
     {
@@ -252,7 +253,7 @@ class Zend_Feed_Writer_Renderer_Entry_AtomTest extends PHPUnit_Framework_TestCas
     }
 
     /**
-     * @expectedException \Zend_Feed_Exception
+     * @expectedException Zend_Feed_Exception
      */
     public function testFeedIdThrowsExceptionIfNotUri()
     {
@@ -283,32 +284,33 @@ class Zend_Feed_Writer_Renderer_Entry_AtomTest extends PHPUnit_Framework_TestCas
 
     public function testCategoriesCanBeSet()
     {
-        $this->_validEntry->addCategories([
-            ['term' => 'cat_dog', 'label' => 'Cats & Dogs', 'scheme' => 'http://example.com/schema1'],
-            ['term' => 'cat_dog2'],
-        ]);
+        $this->_validEntry->addCategories(array(
+            array('term'=>'cat_dog', 'label' => 'Cats & Dogs', 'scheme' => 'http://example.com/schema1'),
+            array('term'=>'cat_dog2')
+        ));
         $atomFeed = new Zend_Feed_Writer_Renderer_Feed_Atom($this->_validWriter);
         $atomFeed->render();
         $feed = Zend_Feed_Reader::importString($atomFeed->saveXml());
         $entry = $feed->current();
-        $expected = [
-            ['term' => 'cat_dog', 'label' => 'Cats & Dogs', 'scheme' => 'http://example.com/schema1'],
-            ['term' => 'cat_dog2', 'label' => 'cat_dog2', 'scheme' => null],
-        ];
+        $expected = array(
+            array('term'=>'cat_dog', 'label' => 'Cats & Dogs', 'scheme' => 'http://example.com/schema1'),
+            array('term'=>'cat_dog2', 'label' => 'cat_dog2', 'scheme' => null)
+        );
         $this->assertEquals($expected, (array) $entry->getCategories());
     }
 
     public function testCommentFeedLinksRendered()
     {
         $renderer = new Zend_Feed_Writer_Renderer_Feed_Atom($this->_validWriter);
-        $this->_validEntry->setCommentFeedLinks([
-            ['uri' => 'http://www.example.com/atom/id/1', 'type' => 'atom'],
-            ['uri' => 'http://www.example.com/rss/id/1', 'type' => 'rss'],
-        ]);
+        $this->_validEntry->setCommentFeedLinks(array(
+            array('uri'=>'http://www.example.com/atom/id/1','type'=>'atom'),
+            array('uri'=>'http://www.example.com/rss/id/1','type'=>'rss'),
+        ));
         $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         // Skipped over due to ZFR bug (detects Atom in error when RSS requested)
-        // $this->assertEquals('http://www.example.com/rss/id/1', $entry->getCommentFeedLink('rss'));
+        //$this->assertEquals('http://www.example.com/rss/id/1', $entry->getCommentFeedLink('rss'));
         $this->assertEquals('http://www.example.com/atom/id/1', $entry->getCommentFeedLink('atom'));
     }
+
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Validate
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -30,19 +30,20 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  */
 // require_once 'Zend/Validate/StringLength.php';
 
+
 /**
  * @category   Zend
- *
+ * @package    Zend_Validate
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Validate
  */
 #[AllowDynamicProperties]
 class Zend_Validate_MessageTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Default instance created for all test methods.
+     * Default instance created for all test methods
      *
      * @var Zend_Validate_StringLength
      */
@@ -50,12 +51,12 @@ class Zend_Validate_MessageTest extends PHPUnit_Framework_TestCase
 
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite(__CLASS__);
+        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     /**
-     * Creates a new Zend_Validate_StringLength object for each test method.
+     * Creates a new Zend_Validate_StringLength object for each test method
      *
      * @return void
      */
@@ -185,7 +186,7 @@ class Zend_Validate_MessageTest extends PHPUnit_Framework_TestCase
             $this->fail('Expected to catch Zend_Validate_Exception');
         } catch (Zend_Exception $e) {
             $this->assertTrue($e instanceof Zend_Validate_Exception,
-                'Expected exception of type Zend_Validate_Exception, got '.get_class($e));
+                'Expected exception of type Zend_Validate_Exception, got ' . get_class($e));
             $this->assertEquals("No message template exists for key '$keyInvalid'", $e->getMessage());
         }
     }
@@ -200,10 +201,10 @@ class Zend_Validate_MessageTest extends PHPUnit_Framework_TestCase
     public function testSetMessages()
     {
         $this->_validator->setMessages(
-            [
-                Zend_Validate_StringLength::TOO_LONG => 'Your value is too long',
-                Zend_Validate_StringLength::TOO_SHORT => 'Your value is too short',
-            ]
+            array(
+                Zend_Validate_StringLength::TOO_LONG  => 'Your value is too long',
+                Zend_Validate_StringLength::TOO_SHORT => 'Your value is too short'
+            )
         );
 
         $this->assertFalse($this->_validator->isValid('abcdefghij'));
@@ -263,7 +264,7 @@ class Zend_Validate_MessageTest extends PHPUnit_Framework_TestCase
             $this->fail('Expected to catch Zend_Validate_Exception');
         } catch (Zend_Exception $e) {
             $this->assertTrue($e instanceof Zend_Validate_Exception,
-                'Expected exception of type Zend_Validate_Exception, got '.get_class($e));
+                'Expected exception of type Zend_Validate_Exception, got ' . get_class($e));
             $this->assertEquals("No property exists by the name 'unknownProperty'", $e->getMessage());
         }
     }
@@ -296,7 +297,7 @@ class Zend_Validate_MessageTest extends PHPUnit_Framework_TestCase
         $vars = $this->_validator->getMessageVariables();
 
         $this->assertTrue(is_array($vars));
-        $this->assertEquals(['min', 'max'], $vars);
+        $this->assertEquals(array('min', 'max'), $vars);
         $message = 'variables: %notvar% ';
         foreach ($vars as $var) {
             $message .= "%$var% ";
@@ -307,6 +308,7 @@ class Zend_Validate_MessageTest extends PHPUnit_Framework_TestCase
         $messages = $this->_validator->getMessages();
         $this->assertEquals('variables: %notvar% 4 8 ', current($messages));
     }
+
 }
 
 // Call Zend_Validate_MessageTest::main() if this source file is executed directly.

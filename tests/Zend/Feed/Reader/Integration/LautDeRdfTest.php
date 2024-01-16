@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework.
+ * Zend Framework
  *
  * LICENSE
  *
@@ -13,10 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- *
+ * @package    Zend_Feed
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @version    $Id$
  */
 
@@ -24,29 +24,30 @@
 
 /**
  * @category   Zend
- *
+ * @package    Zend_Feed
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Feed
  * @group      Zend_Feed_Reader
  */
 #[AllowDynamicProperties]
 class Zend_Feed_Reader_Integration_LautDeRdfTest extends PHPUnit_Framework_TestCase
 {
-    protected $_feedSamplePath;
+
+    protected $_feedSamplePath = null;
 
     public function setup()
     {
         Zend_Feed_Reader::reset();
-        $this->_feedSamplePath = __DIR__.'/_files/laut.de-rdf.xml';
+        $this->_feedSamplePath = __DIR__ . '/_files/laut.de-rdf.xml';
         $this->_options = Zend_Date::setOptions();
-        foreach ($this->_options as $k => $v) {
+        foreach($this->_options as $k=>$v) {
             if (is_null($v)) {
                 unset($this->_options[$k]);
             }
         }
-        Zend_Date::setOptions(['format_type' => 'iso']);
+        Zend_Date::setOptions(array('format_type'=>'iso'));
     }
 
     public function teardown()
@@ -55,8 +56,9 @@ class Zend_Feed_Reader_Integration_LautDeRdfTest extends PHPUnit_Framework_TestC
     }
 
     /**
-     * Feed level testing.
+     * Feed level testing
      */
+
     public function testGetsTitle()
     {
         $feed = Zend_Feed_Reader::importString(
@@ -70,7 +72,7 @@ class Zend_Feed_Reader_Integration_LautDeRdfTest extends PHPUnit_Framework_TestC
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
-        $this->assertEquals([['name' => 'laut.de']], (array) $feed->getAuthors());
+        $this->assertEquals(array(array('name'=>'laut.de')), (array) $feed->getAuthors());
     }
 
     public function testGetsSingleAuthor()
@@ -78,7 +80,7 @@ class Zend_Feed_Reader_Integration_LautDeRdfTest extends PHPUnit_Framework_TestC
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
-        $this->assertEquals(['name' => 'laut.de'], $feed->getAuthor());
+        $this->assertEquals(array('name'=>'laut.de'), $feed->getAuthor());
     }
 
     public function testGetsCopyright()
@@ -121,9 +123,12 @@ class Zend_Feed_Reader_Integration_LautDeRdfTest extends PHPUnit_Framework_TestC
         $this->assertEquals('ISO-8859-1', $feed->getEncoding());
     }
 
+
+
     /**
-     * Entry level testing.
+     * Entry level testing
      */
+
     public function testGetsEntryId()
     {
         $feed = Zend_Feed_Reader::importString(
@@ -148,7 +153,7 @@ class Zend_Feed_Reader_Integration_LautDeRdfTest extends PHPUnit_Framework_TestC
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals([['name' => 'laut.de']], (array) $entry->getAuthors());
+        $this->assertEquals(array(array('name'=>'laut.de')), (array) $entry->getAuthors());
     }
 
     public function testGetsEntrySingleAuthor()
@@ -157,7 +162,7 @@ class Zend_Feed_Reader_Integration_LautDeRdfTest extends PHPUnit_Framework_TestC
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals(['name' => 'laut.de'], $entry->getAuthor());
+        $this->assertEquals(array('name'=>'laut.de'), $entry->getAuthor());
     }
 
     // Technically, the next two tests should not pass. However the source feed has an encoding
@@ -189,7 +194,7 @@ class Zend_Feed_Reader_Integration_LautDeRdfTest extends PHPUnit_Framework_TestC
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals(['http://www.laut.de/vorlaut/news/2009/07/04/22426/index.htm'], $entry->getLinks());
+        $this->assertEquals(array('http://www.laut.de/vorlaut/news/2009/07/04/22426/index.htm'), $entry->getLinks());
     }
 
     public function testGetsEntryLink()
@@ -219,4 +224,5 @@ class Zend_Feed_Reader_Integration_LautDeRdfTest extends PHPUnit_Framework_TestC
         $entry = $feed->current();
         $this->assertEquals('ISO-8859-1', $entry->getEncoding());
     }
+
 }
