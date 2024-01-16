@@ -39,7 +39,6 @@ parameters:
         packages/zend-locale: 'https://github.com/zf1s/zend-locale.git'
         packages/zend-log: 'https://github.com/zf1s/zend-log.git'
         packages/zend-mail: 'https://github.com/zf1s/zend-mail.git'
-        packages/zend-markup: 'https://github.com/zf1s/zend-markup.git'
         packages/zend-measure: 'https://github.com/zf1s/zend-measure.git'
         packages/zend-memory: 'https://github.com/zf1s/zend-memory.git'
         packages/zend-mime: 'https://github.com/zf1s/zend-mime.git'
