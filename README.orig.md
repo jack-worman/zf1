@@ -89,19 +89,6 @@ Microsoft (Mpns).
 
 Zend_Mobile_Push was contributed by Mike Willbanks.
 
-Zend_Gdata_Analytics
---------------------
-
-Zend_Gdata_Analytics is an extension to Zend_Gdata to allow interaction
-with Google’s Analytics Data Export API. This extension does not
-encompass any major changes in the overall operation of Zend_Gdata
-components.
-
-Zend_Gdata_Analytics was contributed by Daniel Hartmann.
-
-Removed features
-================
-
 Zend_Http_UserAgent_Features_Adapter_WurflApi
 ---------------------------------------------
 

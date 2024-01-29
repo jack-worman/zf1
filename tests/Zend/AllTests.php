@@ -198,7 +198,6 @@ class Zend_AllTests
         $suite->addTestSuite('Zend_FilterTest');
         $suite->addTest(Zend_Filter_AllTests::suite());
         $suite->addTest(Zend_Form_AllTests::suite());
-        $suite->addTest(Zend_Gdata_AllTests::suite());
         $suite->addTest(Zend_Http_AllTests::suite());
         $suite->addTestSuite('Zend_JsonTest');
         $suite->addTest(Zend_Json_AllTests::suite());
@@ -232,7 +231,6 @@ class Zend_AllTests
         $suite->addTest(Zend_Tag_AllTests::suite());
         $suite->addTest(Zend_Test_AllTests::suite());
         $suite->addTest(Zend_Text_AllTests::suite());
-        $suite->addTest(Zend_Tool_AllTests::suite());
         $suite->addTestSuite('Zend_TimeSyncTest');
         $suite->addTestSuite('Zend_TranslateTest');
         $suite->addTest(Zend_Translate_Adapter_AllTests::suite());
