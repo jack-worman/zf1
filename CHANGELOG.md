@@ -179,8 +179,6 @@
   - php 7.2 compatibility fixes
 - zend-filter
   - fix auto-loading compress adapters
-- zend-gdata
-  - fix constructing GData-Version header
 - zend-loader
   - zend-loader and autoloader overhaul
     - ensure full compatibility with composer autoloader
@@ -221,8 +219,6 @@
   + portability fixes for loading xml files in tests
 - zend-timesync
   - fix microtime() usage
-- zend-tool
-  - php 7.2 compatibility fixes
 - zend-validate
   - idn_to_ascii: use INTL_IDNA_VARIANT_UTS46 contant, if available
   + file size calculation fixed for php 7.x
