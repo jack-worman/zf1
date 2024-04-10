@@ -42,7 +42,7 @@ interface Zend_View_Helper_Navigation_Helper
      * @return Zend_View_Helper_Navigation_Helper fluent interface, returns
      *                                            self
      */
-    public function setContainer(Zend_Navigation_Container $container = null);
+    public function setContainer(?Zend_Navigation_Container $container = null);
 
     /**
      * Returns the navigation container the helper operates on by default.
@@ -80,7 +80,7 @@ interface Zend_View_Helper_Navigation_Helper
      * @return Zend_View_Helper_Navigation_Helper fluent interface, returns
      *                                            self
      */
-    public function setAcl(Zend_Acl $acl = null);
+    public function setAcl(?Zend_Acl $acl = null);
 
     /**
      * Returns ACL or null if it isn't set using {@link setAcl()} or
@@ -217,5 +217,5 @@ interface Zend_View_Helper_Navigation_Helper
      *
      * @throws Zend_View_Exception if unable to render
      */
-    public function render(Zend_Navigation_Container $container = null);
+    public function render(?Zend_Navigation_Container $container = null);
 }

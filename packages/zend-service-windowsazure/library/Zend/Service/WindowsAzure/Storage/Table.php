@@ -89,7 +89,7 @@ class Zend_Service_WindowsAzure_Storage_Table extends Zend_Service_WindowsAzure_
      * @param bool                                                      $usePathStyleUri Use path-style URI's
      * @param Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract $retryPolicy     Retry policy to use when making requests
      */
-    public function __construct($host = Zend_Service_WindowsAzure_Storage::URL_DEV_TABLE, $accountName = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_ACCOUNT, $accountKey = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_KEY, $usePathStyleUri = false, Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract $retryPolicy = null)
+    public function __construct($host = Zend_Service_WindowsAzure_Storage::URL_DEV_TABLE, $accountName = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_ACCOUNT, $accountKey = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_KEY, $usePathStyleUri = false, ?Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract $retryPolicy = null)
     {
         parent::__construct($host, $accountName, $accountKey, $usePathStyleUri, $retryPolicy);
 
@@ -304,7 +304,7 @@ class Zend_Service_WindowsAzure_Storage_Table extends Zend_Service_WindowsAzure_
      *
      * @throws Zend_Service_WindowsAzure_Exception
      */
-    public function insertEntity($tableName = '', Zend_Service_WindowsAzure_Storage_TableEntity $entity = null)
+    public function insertEntity($tableName = '', ?Zend_Service_WindowsAzure_Storage_TableEntity $entity = null)
     {
         if ('' === $tableName) {
             // require_once 'Zend/Service/WindowsAzure/Exception.php';
@@ -379,7 +379,7 @@ class Zend_Service_WindowsAzure_Storage_Table extends Zend_Service_WindowsAzure_
      *
      * @throws Zend_Service_WindowsAzure_Exception
      */
-    public function deleteEntity($tableName = '', Zend_Service_WindowsAzure_Storage_TableEntity $entity = null, $verifyEtag = false)
+    public function deleteEntity($tableName = '', ?Zend_Service_WindowsAzure_Storage_TableEntity $entity = null, $verifyEtag = false)
     {
         if ('' === $tableName) {
             // require_once 'Zend/Service/WindowsAzure/Exception.php';
@@ -660,7 +660,7 @@ class Zend_Service_WindowsAzure_Storage_Table extends Zend_Service_WindowsAzure_
      *
      * @throws Zend_Service_WindowsAzure_Exception
      */
-    public function updateEntity($tableName = '', Zend_Service_WindowsAzure_Storage_TableEntity $entity = null, $verifyEtag = false)
+    public function updateEntity($tableName = '', ?Zend_Service_WindowsAzure_Storage_TableEntity $entity = null, $verifyEtag = false)
     {
         return $this->_changeEntity(Zend_Http_Client::PUT, $tableName, $entity, $verifyEtag);
     }
@@ -675,7 +675,7 @@ class Zend_Service_WindowsAzure_Storage_Table extends Zend_Service_WindowsAzure_
      *
      * @throws Zend_Service_WindowsAzure_Exception
      */
-    public function mergeEntity($tableName = '', Zend_Service_WindowsAzure_Storage_TableEntity $entity = null, $verifyEtag = false, $properties = [])
+    public function mergeEntity($tableName = '', ?Zend_Service_WindowsAzure_Storage_TableEntity $entity = null, $verifyEtag = false, $properties = [])
     {
         $mergeEntity = null;
         if (is_array($properties) && count($properties) > 0) {
@@ -727,7 +727,7 @@ class Zend_Service_WindowsAzure_Storage_Table extends Zend_Service_WindowsAzure_
      *
      * @throws Zend_Service_WindowsAzure_Exception
      */
-    protected function _changeEntity($httpVerb = Zend_Http_Client::PUT, $tableName = '', Zend_Service_WindowsAzure_Storage_TableEntity $entity = null, $verifyEtag = false)
+    protected function _changeEntity($httpVerb = Zend_Http_Client::PUT, $tableName = '', ?Zend_Service_WindowsAzure_Storage_TableEntity $entity = null, $verifyEtag = false)
     {
         if ('' === $tableName) {
             // require_once 'Zend/Service/WindowsAzure/Exception.php';
@@ -834,7 +834,7 @@ class Zend_Service_WindowsAzure_Storage_Table extends Zend_Service_WindowsAzure_
      *
      * @return string
      */
-    protected function _generateAzureRepresentation(Zend_Service_WindowsAzure_Storage_TableEntity $entity = null)
+    protected function _generateAzureRepresentation(?Zend_Service_WindowsAzure_Storage_TableEntity $entity = null)
     {
         // Generate Azure representation from entity
         $azureRepresentation = [];

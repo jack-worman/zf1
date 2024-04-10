@@ -109,7 +109,7 @@ class Zend_OpenId_Consumer
      * @param bool                         $dumbMode Enables or disables consumer to use association
      *                                               with server based on Diffie-Hellman key agreement
      */
-    public function __construct(Zend_OpenId_Consumer_Storage $storage = null,
+    public function __construct(?Zend_OpenId_Consumer_Storage $storage = null,
         $dumbMode = false)
     {
         if (null === $storage) {
@@ -138,7 +138,7 @@ class Zend_OpenId_Consumer
      * @return bool
      */
     public function login($id, $returnTo = null, $root = null, $extensions = null,
-        Zend_Controller_Response_Abstract $response = null)
+        ?Zend_Controller_Response_Abstract $response = null)
     {
         return $this->_checkId(
             false,
@@ -166,7 +166,7 @@ class Zend_OpenId_Consumer
      * @return bool
      */
     public function check($id, $returnTo = null, $root = null, $extensions = null,
-        Zend_Controller_Response_Abstract $response = null)
+        ?Zend_Controller_Response_Abstract $response = null)
     {
         return $this->_checkId(
             true,
@@ -900,7 +900,7 @@ class Zend_OpenId_Consumer
      * @return bool
      */
     protected function _checkId($immediate, $id, $returnTo = null, $root = null,
-        $extensions = null, Zend_Controller_Response_Abstract $response = null)
+        $extensions = null, ?Zend_Controller_Response_Abstract $response = null)
     {
         $this->_setError('');
 

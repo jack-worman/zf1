@@ -159,7 +159,7 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb extends Zend_Cloud_DocumentSer
      *
      * @return Zend_Cloud_DocumentService_DocumentSet
      */
-    public function listDocuments($collectionName, array $options = null)
+    public function listDocuments($collectionName, ?array $options = null)
     {
         $query = $this->select('*')->from($collectionName);
         $items = $this->query($collectionName, $query, $options);

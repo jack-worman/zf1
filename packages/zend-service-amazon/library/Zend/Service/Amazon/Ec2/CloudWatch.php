@@ -109,9 +109,9 @@ class Zend_Service_Amazon_Ec2_CloudWatch extends Zend_Service_Amazon_Ec2_Abstrac
      * @var array
      */
     protected $_validMetrics = ['CPUUtilization', 'NetworkIn', 'NetworkOut',
-                                    'DiskWriteOps', 'DiskReadBytes', 'DiskReadOps',
-                                    'DiskWriteBytes', 'Latency', 'RequestCount',
-                                    'HealthyHostCount', 'UnHealthyHostCount'];
+        'DiskWriteOps', 'DiskReadBytes', 'DiskReadOps',
+        'DiskWriteBytes', 'Latency', 'RequestCount',
+        'HealthyHostCount', 'UnHealthyHostCount'];
 
     /**
      * Amazon CloudWatch not only aggregates the raw data coming in, it also computes
@@ -181,7 +181,7 @@ class Zend_Service_Amazon_Ec2_CloudWatch extends Zend_Service_Amazon_Ec2_Abstrac
      * @var array
      */
     protected $_validDimensionsKeys = ['ImageId', 'AvailabilityZone', 'AutoScalingGroupName',
-                                            'InstanceId', 'InstanceType', 'LoadBalancerName'];
+        'InstanceId', 'InstanceType', 'LoadBalancerName'];
 
     /**
      * Returns data for one or more statistics of given a metric.

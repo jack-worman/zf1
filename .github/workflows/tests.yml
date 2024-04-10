@@ -15,7 +15,6 @@ jobs:
         experimental:
           - false
         php:
-          - "8.2"
           - "8.3"
 
     env:

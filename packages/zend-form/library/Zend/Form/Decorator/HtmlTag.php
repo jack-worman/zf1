@@ -166,7 +166,7 @@ class Zend_Form_Decorator_HtmlTag extends Zend_Form_Decorator_Abstract
      *
      * @return string
      */
-    protected function _getOpenTag($tag, array $attribs = null)
+    protected function _getOpenTag($tag, ?array $attribs = null)
     {
         $html = '<'.$tag;
         if (null !== $attribs) {

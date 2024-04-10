@@ -37,13 +37,13 @@ class Zend_Locale_Format
     public const STANDARD = 'auto';
 
     private static $_options = ['date_format' => null,
-                                     'number_format' => null,
-                                     'format_type' => 'iso',
-                                     'fix_date' => false,
-                                     'locale' => null,
-                                     'cache' => null,
-                                     'disableCache' => null,
-                                     'precision' => null];
+        'number_format' => null,
+        'format_type' => 'iso',
+        'fix_date' => false,
+        'locale' => null,
+        'cache' => null,
+        'disableCache' => null,
+        'precision' => null];
 
     /**
      * Sets class wide options, if no option was given, the actual set options will be returned
@@ -845,7 +845,7 @@ class Zend_Locale_Format
 
         $options = self::_checkOptions($options) + self::$_options;
         $test = ['h', 'H', 'm', 's', 'y', 'Y', 'M', 'd', 'D', 'E', 'S', 'l', 'B', 'I',
-                       'X', 'r', 'U', 'G', 'w', 'e', 'a', 'A', 'Z', 'z', 'v'];
+            'X', 'r', 'U', 'G', 'w', 'e', 'a', 'A', 'Z', 'z', 'v'];
 
         $format = $options['date_format'];
         $number = $date; // working copy

@@ -163,7 +163,7 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract extends Zend_View_Help
      * @return Zend_View_Helper_Navigation_HelperAbstract fluent interface,
      *                                                    returns self
      */
-    public function setContainer(Zend_Navigation_Container $container = null)
+    public function setContainer(?Zend_Navigation_Container $container = null)
     {
         $this->_container = $container;
 
@@ -454,7 +454,7 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract extends Zend_View_Help
      * @return Zend_View_Helper_Navigation_HelperAbstract fluent interface,
      *                                                    returns self
      */
-    public function setAcl(Zend_Acl $acl = null)
+    public function setAcl(?Zend_Acl $acl = null)
     {
         $this->_acl = $acl;
 
@@ -974,7 +974,7 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract extends Zend_View_Help
      *
      * @return void
      */
-    public static function setDefaultAcl(Zend_Acl $acl = null)
+    public static function setDefaultAcl(?Zend_Acl $acl = null)
     {
         self::$_defaultAcl = $acl;
     }

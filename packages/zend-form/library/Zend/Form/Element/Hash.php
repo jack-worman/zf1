@@ -219,7 +219,7 @@ class Zend_Form_Element_Hash extends Zend_Form_Element_Xhtml
     /**
      * Override getLabel() to always be empty.
      */
-    public function getLabel(): string|null
+    public function getLabel(): ?string
     {
         return null;
     }
@@ -242,7 +242,7 @@ class Zend_Form_Element_Hash extends Zend_Form_Element_Xhtml
      *
      * @return string
      */
-    public function render(Zend_View_Interface $view = null)
+    public function render(?Zend_View_Interface $view = null)
     {
         $this->initCsrfToken();
 

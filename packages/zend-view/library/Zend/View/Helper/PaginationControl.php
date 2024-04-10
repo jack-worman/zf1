@@ -90,7 +90,7 @@ class Zend_View_Helper_PaginationControl
      *
      * @throws Zend_View_Exception
      */
-    public function paginationControl(Zend_Paginator $paginator = null, $scrollingStyle = null, $partial = null, $params = null)
+    public function paginationControl(?Zend_Paginator $paginator = null, $scrollingStyle = null, $partial = null, $params = null)
     {
         if (null === $paginator) {
             if (isset($this->view->paginator) and null !== $this->view->paginator and $this->view->paginator instanceof Zend_Paginator) {

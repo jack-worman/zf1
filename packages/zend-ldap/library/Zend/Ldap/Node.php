@@ -93,7 +93,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
      *
      * @throws Zend_Ldap_Exception
      */
-    protected function __construct(Zend_Ldap_Dn $dn, array $data, $fromDataSource, Zend_Ldap $ldap = null)
+    protected function __construct(Zend_Ldap_Dn $dn, array $data, $fromDataSource, ?Zend_Ldap $ldap = null)
     {
         parent::__construct($dn, $data, $fromDataSource);
         if (null !== $ldap) {
@@ -430,7 +430,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
      *
      * @throws Zend_Ldap_Exception
      */
-    public function update(Zend_Ldap $ldap = null)
+    public function update(?Zend_Ldap $ldap = null)
     {
         if (null !== $ldap) {
             $this->attachLdap($ldap);
@@ -966,7 +966,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
      *
      * @throws Zend_Ldap_Exception
      */
-    public function exists(Zend_Ldap $ldap = null)
+    public function exists(?Zend_Ldap $ldap = null)
     {
         if (null !== $ldap) {
             $this->attachLdap($ldap);
@@ -985,7 +985,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
      *
      * @throws Zend_Ldap_Exception
      */
-    public function reload(Zend_Ldap $ldap = null)
+    public function reload(?Zend_Ldap $ldap = null)
     {
         if (null !== $ldap) {
             $this->attachLdap($ldap);
@@ -1128,7 +1128,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
      *
      * @throws Zend_Ldap_Exception
      */
-    public function getParent(Zend_Ldap $ldap = null)
+    public function getParent(?Zend_Ldap $ldap = null)
     {
         if (null !== $ldap) {
             $this->attachLdap($ldap);

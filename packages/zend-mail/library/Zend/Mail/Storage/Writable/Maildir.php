@@ -490,7 +490,7 @@ class Zend_Mail_Storage_Writable_Maildir extends Zend_Mail_Storage_Folder_Maildi
         }
 
         return ['dirname' => $this->_rootdir.'.'.$folder, 'uniq' => $uniq, 'filename' => $tmpdir.$uniq,
-                     'handle' => $fh];
+            'handle' => $fh];
     }
 
     /**
@@ -608,8 +608,8 @@ class Zend_Mail_Storage_Writable_Maildir extends Zend_Mail_Storage_Folder_Maildi
         }
 
         $this->_files[] = ['uniq' => $temp_file['uniq'],
-                                'flags' => $flags,
-                                'filename' => $new_filename];
+            'flags' => $flags,
+            'filename' => $new_filename];
         if ($this->_quota) {
             $this->_addQuotaEntry((int) $size, 1);
         }
@@ -687,8 +687,8 @@ class Zend_Mail_Storage_Writable_Maildir extends Zend_Mail_Storage_Folder_Maildi
         if ($folder->getGlobalName() == $this->_currentFolder
             || ('INBOX' == $this->_currentFolder && '/' == $folder->getGlobalName())) {
             $this->_files[] = ['uniq' => $temp_file['uniq'],
-                                    'flags' => $flags,
-                                    'filename' => $new_file];
+                'flags' => $flags,
+                'filename' => $new_file];
         }
 
         if ($this->_quota) {

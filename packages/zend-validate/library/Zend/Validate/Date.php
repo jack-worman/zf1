@@ -220,8 +220,8 @@ class Zend_Validate_Date extends Zend_Validate_Abstract
         try {
             // require_once 'Zend/Locale/Format.php';
             $parsed = Zend_Locale_Format::getDate($value, [
-                                                  'date_format' => $this->_format, 'format_type' => 'iso',
-                                                  'fix_date' => false]);
+                'date_format' => $this->_format, 'format_type' => 'iso',
+                'fix_date' => false]);
             if (isset($parsed['year']) and ((false !== strpos((string) strtoupper((string) $this->_format), 'YY'))
                 and (false === strpos((string) strtoupper((string) $this->_format), 'YYYY')))) {
                 $parsed['year'] = Zend_Date::getFullYear($parsed['year']);

@@ -108,7 +108,7 @@ class Zend_Ldap
      * @return bool true if the DN was successfully parsed or false if the string is
      *              not a valid DN
      */
-    public static function explodeDn($dn, array &$keys = null, array &$vals = null)
+    public static function explodeDn($dn, ?array &$keys = null, ?array &$vals = null)
     {
         /*
          * @see Zend_Ldap_Dn
@@ -193,7 +193,7 @@ class Zend_Ldap
      *
      * @return string
      */
-    public function getLastError(&$errorCode = null, array &$errorMessages = null)
+    public function getLastError(&$errorCode = null, ?array &$errorMessages = null)
     {
         $errorCode = $this->getLastErrorCode();
         $errorMessages = [];
@@ -664,7 +664,7 @@ class Zend_Ldap
      *
      * @throws Zend_Ldap_Exception
      */
-    protected function _getAccount($acctname, array $attrs = null)
+    protected function _getAccount($acctname, ?array $attrs = null)
     {
         $baseDn = $this->getBaseDn();
         if (!$baseDn) {

@@ -60,11 +60,11 @@ class Zend_Service_Amazon
      * @var array
      */
     protected $_baseUriList = ['US' => 'http://webservices.amazon.com',
-                                    'UK' => 'http://webservices.amazon.co.uk',
-                                    'DE' => 'http://webservices.amazon.de',
-                                    'JP' => 'http://webservices.amazon.co.jp',
-                                    'FR' => 'http://webservices.amazon.fr',
-                                    'CA' => 'http://webservices.amazon.ca'];
+        'UK' => 'http://webservices.amazon.co.uk',
+        'DE' => 'http://webservices.amazon.de',
+        'JP' => 'http://webservices.amazon.co.jp',
+        'FR' => 'http://webservices.amazon.fr',
+        'CA' => 'http://webservices.amazon.ca'];
 
     /**
      * Reference to REST client object.

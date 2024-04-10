@@ -80,7 +80,7 @@ class Zend_Filter_NormalizedToLocalized implements Zend_Filter_Interface
      *
      * @return Zend_Filter_NormalizedToLocalized
      */
-    public function setOptions(array $options = null)
+    public function setOptions(?array $options = null)
     {
         $this->_options = $options + $this->_options;
 

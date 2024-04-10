@@ -48,13 +48,13 @@ class Zend_Log_Writer_Firebug extends Zend_Log_Writer_Abstract
      * @var array
      */
     protected $_priorityStyles = [Zend_Log::EMERG => Zend_Wildfire_Plugin_FirePhp::ERROR,
-                                       Zend_Log::ALERT => Zend_Wildfire_Plugin_FirePhp::ERROR,
-                                       Zend_Log::CRIT => Zend_Wildfire_Plugin_FirePhp::ERROR,
-                                       Zend_Log::ERR => Zend_Wildfire_Plugin_FirePhp::ERROR,
-                                       Zend_Log::WARN => Zend_Wildfire_Plugin_FirePhp::WARN,
-                                       Zend_Log::NOTICE => Zend_Wildfire_Plugin_FirePhp::INFO,
-                                       Zend_Log::INFO => Zend_Wildfire_Plugin_FirePhp::INFO,
-                                       Zend_Log::DEBUG => Zend_Wildfire_Plugin_FirePhp::LOG];
+        Zend_Log::ALERT => Zend_Wildfire_Plugin_FirePhp::ERROR,
+        Zend_Log::CRIT => Zend_Wildfire_Plugin_FirePhp::ERROR,
+        Zend_Log::ERR => Zend_Wildfire_Plugin_FirePhp::ERROR,
+        Zend_Log::WARN => Zend_Wildfire_Plugin_FirePhp::WARN,
+        Zend_Log::NOTICE => Zend_Wildfire_Plugin_FirePhp::INFO,
+        Zend_Log::INFO => Zend_Wildfire_Plugin_FirePhp::INFO,
+        Zend_Log::DEBUG => Zend_Wildfire_Plugin_FirePhp::LOG];
 
     /**
      * The default logging style for un-mapped priorities.
@@ -208,6 +208,6 @@ class Zend_Log_Writer_Firebug extends Zend_Log_Writer_Abstract
             $label,
             $type,
             ['traceOffset' => 4,
-                  'fixZendLogOffsetIfApplicable' => true]);
+                'fixZendLogOffsetIfApplicable' => true]);
     }
 }

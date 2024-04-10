@@ -77,7 +77,7 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
      *
      * @return void
      */
-    public function __construct($options, Zend_Queue $queue = null)
+    public function __construct($options, ?Zend_Queue $queue = null)
     {
         parent::__construct($options, $queue);
 
@@ -294,7 +294,7 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
      * @throws Zend_Queue_Exception
      */
     #[ReturnTypeWillChange]
-    public function count(Zend_Queue $queue = null)
+    public function count(?Zend_Queue $queue = null)
     {
         if (null === $queue) {
             $queue = $this->_queue;
@@ -323,7 +323,7 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
      *
      * @throws Zend_Queue_Exception - database error
      */
-    public function send($message, Zend_Queue $queue = null)
+    public function send($message, ?Zend_Queue $queue = null)
     {
         if (null === $this->_messageRow) {
             $this->_messageRow = $this->_messageTable->createRow();
@@ -383,7 +383,7 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
      *
      * @throws Zend_Queue_Exception - database error
      */
-    public function receive($maxMessages = null, $timeout = null, Zend_Queue $queue = null)
+    public function receive($maxMessages = null, $timeout = null, ?Zend_Queue $queue = null)
     {
         if (null === $maxMessages) {
             $maxMessages = 1;

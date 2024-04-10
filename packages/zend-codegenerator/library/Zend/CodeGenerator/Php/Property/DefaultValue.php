@@ -107,7 +107,7 @@ class Zend_CodeGenerator_Php_Property_DefaultValue extends Zend_CodeGenerator_Ph
             self::TYPE_STRING,
             self::TYPE_CONSTANT,
             self::TYPE_NULL,
-            ];
+        ];
 
         return in_array($type, $scalarTypes);
     }

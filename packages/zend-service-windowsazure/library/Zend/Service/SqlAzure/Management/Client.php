@@ -124,7 +124,7 @@ class Zend_Service_SqlAzure_Management_Client
         $subscriptionId,
         $certificatePath,
         $certificatePassphrase,
-        Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract $retryPolicy = null
+        ?Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract $retryPolicy = null
     ) {
         $this->_subscriptionId = $subscriptionId;
         $this->_certificatePath = $certificatePath;
@@ -146,8 +146,8 @@ class Zend_Service_SqlAzure_Management_Client
         if (function_exists('curl_init')) {
             // Set cURL options if cURL is used afterwards
             $options['curloptions'] = [
-                    CURLOPT_FOLLOWLOCATION => true,
-                    CURLOPT_TIMEOUT => 120,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_TIMEOUT => 120,
             ];
         }
         $this->_httpClientChannel = new Zend_Http_Client(null, $options);
@@ -277,7 +277,7 @@ class Zend_Service_SqlAzure_Management_Client
      *
      * @throws Zend_Service_WindowsAzure_Exception
      */
-    protected function _parseResponse(Zend_Http_Response $response = null)
+    protected function _parseResponse(?Zend_Http_Response $response = null)
     {
         if (is_null($response)) {
             // require_once 'Zend/Service/SqlAzure/Exception.php';

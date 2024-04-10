@@ -54,7 +54,7 @@ class Zend_Validate_Barcode_Royalmail extends Zend_Validate_Barcode_AdapterAbstr
         'I' => 4, 'J' => 4, 'K' => 4, 'L' => 4, 'M' => 4, 'N' => 4,
         'O' => 5, 'P' => 5, 'Q' => 5, 'R' => 5, 'S' => 5, 'T' => 5,
         'U' => 0, 'V' => 0, 'W' => 0, 'X' => 0, 'Y' => 0, 'Z' => 0,
-     ];
+    ];
 
     protected $_columns = [
         '0' => 1, '1' => 2, '2' => 3, '3' => 4, '4' => 5, '5' => 0,

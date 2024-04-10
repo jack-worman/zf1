@@ -690,7 +690,7 @@ class Zend_Service_Audioscrobbler
             'errfile' => $errfile,
             'errline' => $errline,
             'errcontext' => $errcontext,
-            ];
+        ];
     }
 
     /**

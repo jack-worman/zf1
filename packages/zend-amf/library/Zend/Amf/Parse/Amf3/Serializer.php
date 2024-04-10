@@ -487,10 +487,10 @@ class Zend_Amf_Parse_Amf3_Serializer extends Zend_Amf_Parse_Serializer
             }
 
             $this->_referenceDefinitions[$className] = [
-                        'id' => count($this->_referenceDefinitions),
-                        'encoding' => $encoding,
-                        'propertyNames' => $propertyNames,
-                    ];
+                'id' => count($this->_referenceDefinitions),
+                'encoding' => $encoding,
+                'propertyNames' => $propertyNames,
+            ];
 
             $traitsInfo = Zend_Amf_Constants::AMF3_OBJECT_ENCODING;
             $traitsInfo |= $encoding << 2;

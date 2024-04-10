@@ -37,7 +37,7 @@ class Zend_Reflection_Docblock_Tag implements Reflector
     protected static $_tagClasses = [
         'param' => 'Zend_Reflection_Docblock_Tag_Param',
         'return' => 'Zend_Reflection_Docblock_Tag_Return',
-        ];
+    ];
 
     /**
      * @var string

@@ -47,7 +47,7 @@ class Zend_Queue_Adapter_PlatformJobQueue extends Zend_Queue_Adapter_AdapterAbst
      *
      * @return void
      */
-    public function __construct($options, Zend_Queue $queue = null)
+    public function __construct($options, ?Zend_Queue $queue = null)
     {
         parent::__construct($options, $queue);
 
@@ -157,7 +157,7 @@ class Zend_Queue_Adapter_PlatformJobQueue extends Zend_Queue_Adapter_AdapterAbst
      * @return int
      */
     #[ReturnTypeWillChange]
-    public function count(Zend_Queue $queue = null)
+    public function count(?Zend_Queue $queue = null)
     {
         if (null !== $queue) {
             // require_once 'Zend/Queue/Exception.php';
@@ -181,7 +181,7 @@ class Zend_Queue_Adapter_PlatformJobQueue extends Zend_Queue_Adapter_AdapterAbst
      *
      * @throws Zend_Queue_Exception
      */
-    public function send($message, Zend_Queue $queue = null)
+    public function send($message, ?Zend_Queue $queue = null)
     {
         if (null !== $queue) {
             // require_once 'Zend/Queue/Exception.php';
@@ -227,7 +227,7 @@ class Zend_Queue_Adapter_PlatformJobQueue extends Zend_Queue_Adapter_AdapterAbst
      *
      * @throws Zend_Queue_Exception
      */
-    public function receive($maxMessages = null, $timeout = null, Zend_Queue $queue = null)
+    public function receive($maxMessages = null, $timeout = null, ?Zend_Queue $queue = null)
     {
         if (null === $maxMessages) {
             $maxMessages = 1;
@@ -302,14 +302,14 @@ class Zend_Queue_Adapter_PlatformJobQueue extends Zend_Queue_Adapter_AdapterAbst
     public function getCapabilities()
     {
         return [
-           'create' => false,
-           'delete' => false,
-           'getQueues' => false,
-           'isExists' => false,
-           'count' => true,
-           'send' => true,
-           'receive' => true,
-           'deleteMessage' => true,
+            'create' => false,
+            'delete' => false,
+            'getQueues' => false,
+            'isExists' => false,
+            'count' => true,
+            'send' => true,
+            'receive' => true,
+            'deleteMessage' => true,
         ];
     }
 

@@ -217,7 +217,7 @@ class Zend_Wildfire_Protocol_JsonStream
                                                .$structure_index.'-'
                                                .$plugin_index.'-'
                                                .$message_index,
-                                               $msg];
+                                $msg];
 
                             ++$message_index;
 

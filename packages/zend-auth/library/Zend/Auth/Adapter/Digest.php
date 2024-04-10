@@ -199,9 +199,9 @@ class Zend_Auth_Adapter_Digest implements Zend_Auth_Adapter_Interface
             'identity' => [
                 'realm' => $this->_realm,
                 'username' => $this->_username,
-                ],
+            ],
             'messages' => [],
-            ];
+        ];
 
         while ($line = \trim((string) fgets($fileHandle))) {
             if (substr((string) $line, 0, $idLength) === $id) {

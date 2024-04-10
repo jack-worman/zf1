@@ -138,19 +138,19 @@ class Zend_Search_Lucene_Index_Writer
      * @var array
      */
     private static $_indexExtensions = ['.cfs' => '.cfs',
-                                             '.cfx' => '.cfx',
-                                             '.fnm' => '.fnm',
-                                             '.fdx' => '.fdx',
-                                             '.fdt' => '.fdt',
-                                             '.tis' => '.tis',
-                                             '.tii' => '.tii',
-                                             '.frq' => '.frq',
-                                             '.prx' => '.prx',
-                                             '.tvx' => '.tvx',
-                                             '.tvd' => '.tvd',
-                                             '.tvf' => '.tvf',
-                                             '.del' => '.del',
-                                             '.sti' => '.sti'];
+        '.cfx' => '.cfx',
+        '.fnm' => '.fnm',
+        '.fdx' => '.fdx',
+        '.fdt' => '.fdt',
+        '.tis' => '.tis',
+        '.tii' => '.tii',
+        '.frq' => '.frq',
+        '.prx' => '.prx',
+        '.tvx' => '.tvx',
+        '.tvd' => '.tvd',
+        '.tvf' => '.tvf',
+        '.del' => '.del',
+        '.sti' => '.sti'];
 
     /**
      * Create empty index.
@@ -472,8 +472,8 @@ class Zend_Search_Lucene_Index_Writer
                             $docStoreIsCompoundFile = $segmentsFile->readByte();
 
                             $docStoreOptions = ['offset' => $docStoreOffset,
-                                                     'segment' => $docStoreSegment,
-                                                     'isCompound' => (1 == $docStoreIsCompoundFile)];
+                                'segment' => $docStoreSegment,
+                                'isCompound' => (1 == $docStoreIsCompoundFile)];
                         } else {
                             $docStoreOptions = null;
                         }

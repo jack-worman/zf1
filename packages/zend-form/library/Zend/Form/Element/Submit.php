@@ -68,7 +68,7 @@ class Zend_Form_Element_Submit extends Zend_Form_Element_Xhtml
      *
      * If a translator is present, returns the translated label.
      */
-    public function getLabel(): string|null
+    public function getLabel(): ?string
     {
         $value = parent::getLabel();
 

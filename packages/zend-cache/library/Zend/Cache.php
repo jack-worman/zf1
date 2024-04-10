@@ -39,7 +39,7 @@ abstract class Zend_Cache
      * @var array
      */
     public static $standardBackends = ['File', 'Sqlite', 'Memcached', 'Libmemcached', 'Apc', 'ZendPlatform',
-                                            'Xcache', 'TwoLevels', 'WinCache', 'ZendServer_Disk', 'ZendServer_ShMem'];
+        'Xcache', 'TwoLevels', 'WinCache', 'ZendServer_Disk', 'ZendServer_ShMem'];
 
     /**
      * Standard backends which implement the ExtendedInterface.
@@ -211,7 +211,7 @@ abstract class Zend_Cache
      *
      * @throws Zend_Cache_Exception
      */
-    public static function throwException($msg, Throwable $e = null)
+    public static function throwException($msg, ?Throwable $e = null)
     {
         // For perfs reasons, we use this dynamic inclusion
         // require_once 'Zend/Cache/Exception.php';

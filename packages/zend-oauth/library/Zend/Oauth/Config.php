@@ -304,8 +304,8 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
     {
         $method = strtoupper((string) $method);
         if (!in_array($method, [
-                'HMAC-SHA1', 'HMAC-SHA256', 'RSA-SHA1', 'PLAINTEXT',
-            ])
+            'HMAC-SHA1', 'HMAC-SHA256', 'RSA-SHA1', 'PLAINTEXT',
+        ])
         ) {
             // require_once 'Zend/Oauth/Exception.php';
             throw new Zend_Oauth_Exception('Unsupported signature method: '.$method.'. Supported are HMAC-SHA1, RSA-SHA1, PLAINTEXT and HMAC-SHA256');
@@ -338,10 +338,10 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
     {
         $scheme = strtolower((string) $scheme);
         if (!in_array($scheme, [
-                Zend_Oauth::REQUEST_SCHEME_HEADER,
-                Zend_Oauth::REQUEST_SCHEME_POSTBODY,
-                Zend_Oauth::REQUEST_SCHEME_QUERYSTRING,
-            ])
+            Zend_Oauth::REQUEST_SCHEME_HEADER,
+            Zend_Oauth::REQUEST_SCHEME_POSTBODY,
+            Zend_Oauth::REQUEST_SCHEME_QUERYSTRING,
+        ])
         ) {
             // require_once 'Zend/Oauth/Exception.php';
             throw new Zend_Oauth_Exception('\''.$scheme.'\' is an unsupported request scheme');
@@ -599,12 +599,12 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
     {
         $method = strtoupper((string) $method);
         if (!in_array($method, [
-                Zend_Oauth::GET,
-                Zend_Oauth::POST,
-                Zend_Oauth::PUT,
-                Zend_Oauth::DELETE,
-                Zend_Oauth::OPTIONS,
-            ])
+            Zend_Oauth::GET,
+            Zend_Oauth::POST,
+            Zend_Oauth::PUT,
+            Zend_Oauth::DELETE,
+            Zend_Oauth::OPTIONS,
+        ])
         ) {
             // require_once 'Zend/Oauth/Exception.php';
             throw new Zend_Oauth_Exception('Invalid method: '.$method);

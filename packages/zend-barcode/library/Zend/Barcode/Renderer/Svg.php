@@ -149,8 +149,8 @@ class Zend_Barcode_Renderer_Svg extends Zend_Barcode_Renderer_RendererAbstract
 
         $backgroundColor = $this->_barcode->getBackgroundColor();
         $imageBackgroundColor = 'rgb('.implode(', ', [($backgroundColor & 0xFF0000) >> 16,
-                                                             ($backgroundColor & 0x00FF00) >> 8,
-                                                             $backgroundColor & 0x0000FF]).')';
+            ($backgroundColor & 0x00FF00) >> 8,
+            $backgroundColor & 0x0000FF]).')';
 
         $width = $barcodeWidth;
         $height = $barcodeHeight;
@@ -181,10 +181,10 @@ class Zend_Barcode_Renderer_Svg extends Zend_Barcode_Renderer_RendererAbstract
 
         $this->_appendRootElement('rect',
             ['x' => $this->_leftOffset,
-                  'y' => $this->_topOffset,
-                  'width' => ($this->_leftOffset + $barcodeWidth - 1),
-                  'height' => ($this->_topOffset + $barcodeHeight - 1),
-                  'fill' => $imageBackgroundColor]);
+                'y' => $this->_topOffset,
+                'width' => ($this->_leftOffset + $barcodeWidth - 1),
+                'height' => ($this->_topOffset + $barcodeHeight - 1),
+                'fill' => $imageBackgroundColor]);
     }
 
     protected function _readRootElement()
@@ -317,8 +317,8 @@ class Zend_Barcode_Renderer_Svg extends Zend_Barcode_Renderer_RendererAbstract
     protected function _drawPolygon($points, $color, $filled = true)
     {
         $color = 'rgb('.implode(', ', [($color & 0xFF0000) >> 16,
-                                              ($color & 0x00FF00) >> 8,
-                                              $color & 0x0000FF]).')';
+            ($color & 0x00FF00) >> 8,
+            $color & 0x0000FF]).')';
         $orientation = $this->getBarcode()->getOrientation();
         $newPoints = [
             $points[0][0] + $this->_leftOffset,
@@ -350,8 +350,8 @@ class Zend_Barcode_Renderer_Svg extends Zend_Barcode_Renderer_RendererAbstract
     protected function _drawText($text, $size, $position, $font, $color, $alignment = 'center', $orientation = 0)
     {
         $color = 'rgb('.implode(', ', [($color & 0xFF0000) >> 16,
-                                              ($color & 0x00FF00) >> 8,
-                                              $color & 0x0000FF]).')';
+            ($color & 0x00FF00) >> 8,
+            $color & 0x0000FF]).')';
         $attributes['x'] = $position[0] + $this->_leftOffset;
         $attributes['y'] = $position[1] + $this->_topOffset;
         // $attributes['font-family'] = $font;

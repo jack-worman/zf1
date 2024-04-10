@@ -83,7 +83,7 @@ class Zend_XmlRpc_Client_ServerIntrospection
         $multicallParams = [];
         foreach ($methods as $method) {
             $multicallParams[] = ['methodName' => 'system.methodSignature',
-                                       'params' => [$method]];
+                'params' => [$method]];
         }
 
         $serverSignatures = $this->_system->multicall($multicallParams);
