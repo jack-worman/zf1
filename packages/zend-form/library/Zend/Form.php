@@ -1139,8 +1139,9 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
      *     $type is 'select' ? Zend_Form_Element_Select
      *     : ($type is 'multiselect' ? Zend_Form_Element_Multiselect
      *     : ($type is 'text' ? Zend_Form_Element_Text
+     *     : ($type is 'radio' ? Zend_Form_Element_Radio
      *     : Zend_Form_Element
-     * )))
+     * ))))
      */
     public function createElement(string $type, string $name, $options = null): Zend_Form_Element
     {
