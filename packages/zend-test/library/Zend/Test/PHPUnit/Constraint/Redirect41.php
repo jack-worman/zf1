@@ -188,7 +188,7 @@ class Zend_Test_PHPUnit_Constraint_Redirect41 extends PHPUnit_Framework_Constrai
      *                                                      NOTE 2:
      *                                                      Interface changed again in PHPUnit 4.1.0 because of refactoring to SebastianBergmann\Comparator
      */
-    public function fail($other, $description, SebastianBergmann\Comparator\ComparisonFailure $cannot_be_used = null)
+    public function fail($other, $description, ?SebastianBergmann\Comparator\ComparisonFailure $cannot_be_used = null)
     {
         // require_once 'Zend/Test/PHPUnit/Constraint/Exception.php';
         switch ($this->_assertType) {

@@ -87,7 +87,7 @@ class Zend_Xml_Security
      *
      * @throws Zend_Xml_Exception
      */
-    public static function scan($xml, DOMDocument $dom = null)
+    public static function scan($xml, ?DOMDocument $dom = null)
     {
         // If running with PHP-FPM we perform an heuristic scan
         // We cannot use libxml_disable_entity_loader because of this bug
@@ -162,7 +162,7 @@ class Zend_Xml_Security
      *
      * @throws Zend_Xml_Exception
      */
-    public static function scanFile($file, DOMDocument $dom = null)
+    public static function scanFile($file, ?DOMDocument $dom = null)
     {
         if (!file_exists((string) $file)) {
             // require_once 'Exception.php';

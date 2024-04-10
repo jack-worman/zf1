@@ -877,7 +877,7 @@ class Zend_Db_Select
                 'schema' => $schema,
                 'tableName' => $tableName,
                 'joinCondition' => $cond,
-                ];
+            ];
             while ($tmpFromParts) {
                 $currentCorrelationName = key($tmpFromParts);
                 $this->_parts[self::FROM][$currentCorrelationName] = array_shift($tmpFromParts);

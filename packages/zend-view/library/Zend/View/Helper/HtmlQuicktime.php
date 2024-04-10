@@ -54,7 +54,7 @@ class Zend_View_Helper_HtmlQuicktime extends Zend_View_Helper_HtmlObject
      * @var array
      */
     protected $_attribs = ['classid' => self::ATTRIB_CLASSID,
-                                'codebase' => self::ATTRIB_CODEBASE];
+        'codebase' => self::ATTRIB_CODEBASE];
 
     /**
      * Output a quicktime movie object tag.

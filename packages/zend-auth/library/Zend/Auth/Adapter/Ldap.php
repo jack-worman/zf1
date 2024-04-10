@@ -423,7 +423,7 @@ class Zend_Auth_Adapter_Ldap implements Zend_Auth_Adapter_Interface
                     case 'groupScope':
                         $value = (int) $value;
                         if (in_array($value, [Zend_Ldap::SEARCH_SCOPE_BASE,
-                                Zend_Ldap::SEARCH_SCOPE_ONE, Zend_Ldap::SEARCH_SCOPE_SUB], true)) {
+                            Zend_Ldap::SEARCH_SCOPE_ONE, Zend_Ldap::SEARCH_SCOPE_SUB], true)) {
                             $adapterOptions[$key] = $value;
                         }
                         break;

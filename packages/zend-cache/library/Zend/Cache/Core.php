@@ -475,10 +475,10 @@ class Zend_Cache_Core
             return true;
         }
         if (!in_array($mode, [Zend_Cache::CLEANING_MODE_ALL,
-                                   Zend_Cache::CLEANING_MODE_OLD,
-                                   Zend_Cache::CLEANING_MODE_MATCHING_TAG,
-                                   Zend_Cache::CLEANING_MODE_NOT_MATCHING_TAG,
-                                   Zend_Cache::CLEANING_MODE_MATCHING_ANY_TAG])) {
+            Zend_Cache::CLEANING_MODE_OLD,
+            Zend_Cache::CLEANING_MODE_MATCHING_TAG,
+            Zend_Cache::CLEANING_MODE_NOT_MATCHING_TAG,
+            Zend_Cache::CLEANING_MODE_MATCHING_ANY_TAG])) {
             Zend_Cache::throwException('Invalid cleaning mode');
         }
         $this->_validateTagsArray($tags);

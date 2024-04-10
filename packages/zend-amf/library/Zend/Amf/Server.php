@@ -457,10 +457,10 @@ class Zend_Amf_Server implements Zend_Server_Interface
         switch ($objectEncoding) {
             case Zend_Amf_Constants::AMF0_OBJECT_ENCODING:
                 return [
-                        'description' => ($this->isProduction()) ? '' : $description,
-                        'detail' => ($this->isProduction()) ? '' : $detail,
-                        'line' => ($this->isProduction()) ? 0 : $line,
-                        'code' => $code,
+                    'description' => ($this->isProduction()) ? '' : $description,
+                    'detail' => ($this->isProduction()) ? '' : $detail,
+                    'line' => ($this->isProduction()) ? 0 : $line,
+                    'code' => $code,
                 ];
             case Zend_Amf_Constants::AMF3_OBJECT_ENCODING:
                 // require_once 'Zend/Amf/Value/Messaging/ErrorMessage.php';
@@ -922,7 +922,7 @@ class Zend_Amf_Server implements Zend_Server_Interface
      *
      * Unimplemented
      *
-     * @param string|\Throwable $fault
+     * @param string|Throwable $fault
      *
      * @return void
      */

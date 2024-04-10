@@ -341,7 +341,7 @@ class Zend_Session_SaveHandler_DbTable extends Zend_Db_Table_Abstract implements
     public function write($id, $data)
     {
         $data = [$this->_modifiedColumn => time(),
-                      $this->_dataColumn => (string) $data];
+            $this->_dataColumn => (string) $data];
 
         $rows = call_user_func_array([&$this, 'find'], $this->_getPrimary($id));
 

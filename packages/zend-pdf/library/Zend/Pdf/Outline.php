@@ -156,11 +156,11 @@ abstract class Zend_Pdf_Outline implements RecursiveIterator, Countable
     public function getOptions()
     {
         return ['title' => $this->_title,
-                     'open' => $this->_open,
-                     'color' => $this->_color,
-                     'italic' => $this->_italic,
-                     'bold' => $this->_bold,
-                     'target' => $this->_target];
+            'open' => $this->_open,
+            'color' => $this->_color,
+            'italic' => $this->_italic,
+            'bold' => $this->_bold,
+            'target' => $this->_target];
     }
 
     /**
@@ -238,7 +238,7 @@ abstract class Zend_Pdf_Outline implements RecursiveIterator, Countable
             }
 
             return new Zend_Pdf_Outline_Created(['title' => $param1,
-                                                      'target' => $param2]);
+                'target' => $param2]);
         } else {
             if (!is_array($param1) || null !== $param2) {
                 // require_once 'Zend/Pdf/Exception.php';
@@ -285,8 +285,8 @@ abstract class Zend_Pdf_Outline implements RecursiveIterator, Countable
     abstract public function dumpOutline(Zend_Pdf_ElementFactory_Interface $factory,
         $updateNavigation,
         Zend_Pdf_Element $parent,
-        Zend_Pdf_Element $prev = null,
-        SplObjectStorage $processedOutlines = null);
+        ?Zend_Pdf_Element $prev = null,
+        ?SplObjectStorage $processedOutlines = null);
 
     // //////////////////////////////////////////////////////////////////////
     //  RecursiveIterator interface methods

@@ -356,8 +356,8 @@ class Zend_Feed_Builder_Header extends ArrayObject
             $uri->setPort(80);
         }
         $this->offsetSet('cloud', ['uri' => $uri,
-                                        'procedure' => $procedure,
-                                        'protocol' => $protocol]);
+            'procedure' => $procedure,
+            'protocol' => $protocol]);
 
         return $this;
     }
@@ -376,9 +376,9 @@ class Zend_Feed_Builder_Header extends ArrayObject
     public function setTextInput($title, $description, $name, $link)
     {
         $this->offsetSet('textInput', ['title' => $title,
-                                            'description' => $description,
-                                            'name' => $name,
-                                            'link' => $link]);
+            'description' => $description,
+            'name' => $name,
+            'link' => $link]);
 
         return $this;
     }

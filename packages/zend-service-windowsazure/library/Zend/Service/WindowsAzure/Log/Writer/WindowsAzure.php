@@ -142,9 +142,9 @@ class Zend_Service_WindowsAzure_Log_Writer_WindowsAzure extends Zend_Log_Writer_
         $config = self::_parseConfig($config);
         $config = array_merge(
             [
-                 'connection' => null,
-                 'tableName' => null,
-                 'createTable' => true,
+                'connection' => null,
+                'tableName' => null,
+                'createTable' => true,
             ], $config
         );
 

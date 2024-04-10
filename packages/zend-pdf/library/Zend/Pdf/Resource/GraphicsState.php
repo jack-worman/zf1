@@ -46,7 +46,7 @@ class Zend_Pdf_Resource_GraphicsState extends Zend_Pdf_Resource
      *
      * @throws Zend_Pdf_Exception
      */
-    public function __construct(Zend_Pdf_Element_Object $extGStateObject = null)
+    public function __construct(?Zend_Pdf_Element_Object $extGStateObject = null)
     {
         if (null == $extGStateObject) {
             // Create new Graphics State object
@@ -87,7 +87,7 @@ class Zend_Pdf_Resource_GraphicsState extends Zend_Pdf_Resource
     public function setAlpha($alpha, $mode = 'Normal')
     {
         if (!in_array($mode, ['Normal', 'Multiply', 'Screen', 'Overlay', 'Darken', 'Lighten', 'ColorDodge',
-                                   'ColorBurn', 'HardLight', 'SoftLight', 'Difference', 'Exclusion'])) {
+            'ColorBurn', 'HardLight', 'SoftLight', 'Difference', 'Exclusion'])) {
             // require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Unsupported transparency mode.');
         }

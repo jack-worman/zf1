@@ -86,12 +86,12 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract implements Zend_
      * @var array
      */
     protected static $_knownFlags = ['\Passed' => Zend_Mail_Storage::FLAG_PASSED,
-                                          '\Answered' => Zend_Mail_Storage::FLAG_ANSWERED,
-                                          '\Seen' => Zend_Mail_Storage::FLAG_SEEN,
-                                          '\Unseen' => Zend_Mail_Storage::FLAG_UNSEEN,
-                                          '\Deleted' => Zend_Mail_Storage::FLAG_DELETED,
-                                          '\Draft' => Zend_Mail_Storage::FLAG_DRAFT,
-                                          '\Flagged' => Zend_Mail_Storage::FLAG_FLAGGED];
+        '\Answered' => Zend_Mail_Storage::FLAG_ANSWERED,
+        '\Seen' => Zend_Mail_Storage::FLAG_SEEN,
+        '\Unseen' => Zend_Mail_Storage::FLAG_UNSEEN,
+        '\Deleted' => Zend_Mail_Storage::FLAG_DELETED,
+        '\Draft' => Zend_Mail_Storage::FLAG_DRAFT,
+        '\Flagged' => Zend_Mail_Storage::FLAG_FLAGGED];
 
     /**
      * map flags to search criterias.
@@ -99,12 +99,12 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract implements Zend_
      * @var array
      */
     protected static $_searchFlags = ['\Recent' => 'RECENT',
-                                           '\Answered' => 'ANSWERED',
-                                           '\Seen' => 'SEEN',
-                                           '\Unseen' => 'UNSEEN',
-                                           '\Deleted' => 'DELETED',
-                                           '\Draft' => 'DRAFT',
-                                           '\Flagged' => 'FLAGGED'];
+        '\Answered' => 'ANSWERED',
+        '\Seen' => 'SEEN',
+        '\Unseen' => 'UNSEEN',
+        '\Deleted' => 'DELETED',
+        '\Draft' => 'DRAFT',
+        '\Flagged' => 'FLAGGED'];
 
     /**
      * Count messages all messages in current box.

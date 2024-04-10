@@ -302,8 +302,8 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
     /**
      * Raise an xmlrpc server fault.
      *
-     * @param string|\Throwable $fault
-     * @param int               $code
+     * @param string|Throwable $fault
+     * @param int              $code
      *
      * @return Zend_XmlRpc_Server_Fault
      */

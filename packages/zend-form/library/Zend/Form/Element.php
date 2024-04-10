@@ -668,7 +668,7 @@ class Zend_Form_Element implements Zend_Validate_Interface
         return $this;
     }
 
-    public function getLabel(): string|null
+    public function getLabel(): ?string
     {
         $translator = $this->getTranslator();
         if (null !== $translator) {
@@ -1898,7 +1898,7 @@ class Zend_Form_Element implements Zend_Validate_Interface
      *
      * @return static
      */
-    public function setView(Zend_View_Interface $view = null)
+    public function setView(?Zend_View_Interface $view = null)
     {
         $this->_view = $view;
 
@@ -2142,7 +2142,7 @@ class Zend_Form_Element implements Zend_Validate_Interface
      *
      * @return string
      */
-    public function render(Zend_View_Interface $view = null)
+    public function render(?Zend_View_Interface $view = null)
     {
         if ($this->_isPartialRendering) {
             return '';

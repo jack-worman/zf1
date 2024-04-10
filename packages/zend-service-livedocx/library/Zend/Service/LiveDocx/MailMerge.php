@@ -1133,10 +1133,10 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
                     $date2 = new Zend_Date($o->string[1], Zend_Date::RFC_1123);
 
                     $ret[] = [
-                         'filename' => $o->string[0],
-                         'fileSize' => (int) $o->string[2],
-                         'createTime' => (int) $date1->get(Zend_Date::TIMESTAMP),
-                         'modifyTime' => (int) $date2->get(Zend_Date::TIMESTAMP),
+                        'filename' => $o->string[0],
+                        'fileSize' => (int) $o->string[2],
+                        'createTime' => (int) $date1->get(Zend_Date::TIMESTAMP),
+                        'modifyTime' => (int) $date2->get(Zend_Date::TIMESTAMP),
                     ];
                 }
             }

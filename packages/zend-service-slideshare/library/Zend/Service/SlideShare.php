@@ -153,8 +153,8 @@ class Zend_Service_SlideShare
             $client = new Zend_Http_Client();
             $client->setConfig(
                 [
-                     'maxredirects' => 2,
-                     'timeout' => 5,
+                    'maxredirects' => 2,
+                    'timeout' => 5,
                 ]
             );
 

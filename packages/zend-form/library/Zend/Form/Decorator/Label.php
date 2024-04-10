@@ -446,11 +446,11 @@ class Zend_Form_Decorator_Label extends Zend_Form_Decorator_Abstract
             $decorator = new Zend_Form_Decorator_HtmlTag();
             if (null !== $this->_tagClass) {
                 $decorator->setOptions(['tag' => $tag,
-                                             'id' => $id.'-label',
-                                             'class' => $tagClass]);
+                    'id' => $id.'-label',
+                    'class' => $tagClass]);
             } else {
                 $decorator->setOptions(['tag' => $tag,
-                                             'id' => $id.'-label']);
+                    'id' => $id.'-label']);
             }
 
             $label = $decorator->render($label);

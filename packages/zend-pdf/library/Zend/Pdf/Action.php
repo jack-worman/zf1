@@ -110,7 +110,7 @@ abstract class Zend_Pdf_Action extends Zend_Pdf_Target implements RecursiveItera
      *
      * @throws Zend_Pdf_Exception
      */
-    public static function load(Zend_Pdf_Element $dictionary, SplObjectStorage $processedActions = null)
+    public static function load(Zend_Pdf_Element $dictionary, ?SplObjectStorage $processedActions = null)
     {
         if (null === $processedActions) {
             $processedActions = new SplObjectStorage();
@@ -253,7 +253,7 @@ abstract class Zend_Pdf_Action extends Zend_Pdf_Target implements RecursiveItera
      *
      * @return Zend_Pdf_Element_Object|Zend_Pdf_Element_Reference Dictionary indirect object
      */
-    public function dumpAction(Zend_Pdf_ElementFactory_Interface $factory, SplObjectStorage $processedActions = null)
+    public function dumpAction(Zend_Pdf_ElementFactory_Interface $factory, ?SplObjectStorage $processedActions = null)
     {
         if (null === $processedActions) {
             $processedActions = new SplObjectStorage();

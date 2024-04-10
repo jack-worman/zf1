@@ -137,8 +137,8 @@ class Zend_Db_Profiler_Firebug extends Zend_Db_Profiler
         $this->_totalElapsedTime += $profile->getElapsedSecs();
 
         $this->_message->addRow([(string) round($profile->getElapsedSecs(), 5),
-                                      $profile->getQuery(),
-                                      ($params = $profile->getQueryParams()) ? $params : null]);
+            $profile->getQuery(),
+            ($params = $profile->getQueryParams()) ? $params : null]);
 
         $this->updateMessageLabel();
     }
@@ -154,11 +154,11 @@ class Zend_Db_Profiler_Firebug extends Zend_Db_Profiler
             return;
         }
         $this->_message->setLabel(str_replace(['%label%',
-                                                    '%totalCount%',
-                                                    '%totalDuration%'],
+            '%totalCount%',
+            '%totalDuration%'],
             [$this->_label,
-                  $this->getTotalNumQueries(),
-                  (string) round($this->_totalElapsedTime, 5)],
+                $this->getTotalNumQueries(),
+                (string) round($this->_totalElapsedTime, 5)],
             $this->_label_template));
     }
 }

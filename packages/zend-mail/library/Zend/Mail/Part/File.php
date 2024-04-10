@@ -196,6 +196,6 @@ class Zend_Mail_Part_File extends Zend_Mail_Part
         }
 
         return new self(['file' => $this->_fh, 'startPos' => $this->_partPos[$num][0],
-                              'endPos' => $this->_partPos[$num][1]]);
+            'endPos' => $this->_partPos[$num][1]]);
     }
 }

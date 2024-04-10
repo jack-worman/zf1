@@ -37,9 +37,9 @@ class Zend_Service_StrikeIron_USAddressVerification extends Zend_Service_StrikeI
      * @param array
      */
     protected $_options = ['username' => null,
-                                'password' => null,
-                                'client' => null,
-                                'options' => null,
-                                'headers' => null,
-                                'wsdl' => 'http://ws.strikeiron.com/zf1.StrikeIron/USAddressVerification4_0?WSDL'];
+        'password' => null,
+        'client' => null,
+        'options' => null,
+        'headers' => null,
+        'wsdl' => 'http://ws.strikeiron.com/zf1.StrikeIron/USAddressVerification4_0?WSDL'];
 }

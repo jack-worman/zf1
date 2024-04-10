@@ -102,7 +102,7 @@ class Zend_Acl_Role_Registry
             'instance' => $role,
             'parents' => $roleParents,
             'children' => [],
-            ];
+        ];
 
         return $this;
     }

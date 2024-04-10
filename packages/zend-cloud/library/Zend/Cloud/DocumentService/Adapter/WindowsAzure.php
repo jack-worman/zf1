@@ -274,7 +274,7 @@ class Zend_Cloud_DocumentService_Adapter_WindowsAzure extends Zend_Cloud_Documen
      *
      * @return array
      */
-    public function listDocuments($collectionName, array $options = null)
+    public function listDocuments($collectionName, ?array $options = null)
     {
         $select = $this->select()->from($collectionName);
 

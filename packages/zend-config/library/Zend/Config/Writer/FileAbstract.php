@@ -82,7 +82,7 @@ class Zend_Config_Writer_FileAbstract extends Zend_Config_Writer
      *
      * @return void
      */
-    public function write($filename = null, Zend_Config $config = null, $exclusiveLock = null)
+    public function write($filename = null, ?Zend_Config $config = null, $exclusiveLock = null)
     {
         if (null !== $filename) {
             $this->setFilename($filename);

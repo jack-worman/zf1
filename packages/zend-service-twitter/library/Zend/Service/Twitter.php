@@ -140,7 +140,7 @@ class Zend_Service_Twitter
      *
      * @param array|Zend_Config|null $options
      */
-    public function __construct($options = null, Zend_Oauth_Consumer $consumer = null, Zend_Http_Client $httpClient = null)
+    public function __construct($options = null, ?Zend_Oauth_Consumer $consumer = null, ?Zend_Http_Client $httpClient = null)
     {
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();

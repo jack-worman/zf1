@@ -136,7 +136,7 @@ abstract class Zend_Db_Table_Rowset_Abstract implements SeekableIterator, Counta
     public function __sleep()
     {
         return ['_data', '_tableClass', '_rowClass', '_pointer', '_count', '_rows', '_stored',
-                     '_readOnly'];
+            '_readOnly'];
     }
 
     /**

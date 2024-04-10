@@ -137,7 +137,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
      * @param bool                                                      $usePathStyleUri Use path-style URI's
      * @param Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract $retryPolicy     Retry policy to use when making requests
      */
-    public function __construct($host = Zend_Service_WindowsAzure_Storage::URL_DEV_BLOB, $accountName = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_ACCOUNT, $accountKey = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_KEY, $usePathStyleUri = false, Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract $retryPolicy = null)
+    public function __construct($host = Zend_Service_WindowsAzure_Storage::URL_DEV_BLOB, $accountName = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_ACCOUNT, $accountKey = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_KEY, $usePathStyleUri = false, ?Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract $retryPolicy = null)
     {
         parent::__construct($host, $accountName, $accountKey, $usePathStyleUri, $retryPolicy);
 
@@ -912,11 +912,11 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 
         // Generate block list request
         $fileContents = mb_convert_encoding(implode("\n", [
-                '<?xml version="1.0" encoding="utf-8"?>',
-                '<BlockList>',
-                $blocks,
-                '</BlockList>',
-            ]), 'UTF-8', 'ISO-8859-1');
+            '<?xml version="1.0" encoding="utf-8"?>',
+            '<BlockList>',
+            $blocks,
+            '</BlockList>',
+        ]), 'UTF-8', 'ISO-8859-1');
 
         // Create metadata headers
         $headers = [];

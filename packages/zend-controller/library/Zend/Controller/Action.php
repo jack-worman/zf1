@@ -567,7 +567,7 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
      *
      * @return Zend_Controller_Response_Abstract
      */
-    public function run(Zend_Controller_Request_Abstract $request = null, Zend_Controller_Response_Abstract $response = null)
+    public function run(?Zend_Controller_Request_Abstract $request = null, ?Zend_Controller_Response_Abstract $response = null)
     {
         if (null !== $request) {
             $this->setRequest($request);
@@ -736,7 +736,7 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
      * @deprecated Deprecated as of Zend Framework 1.7. Use
      *             forward() instead.
      */
-    final protected function _forward($action, $controller = null, $module = null, array $params = null)
+    final protected function _forward($action, $controller = null, $module = null, ?array $params = null)
     {
         $this->forward($action, $controller, $module, $params);
     }
@@ -767,7 +767,7 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
      *
      * @return void
      */
-    final public function forward($action, $controller = null, $module = null, array $params = null)
+    final public function forward($action, $controller = null, $module = null, ?array $params = null)
     {
         $request = $this->getRequest();
 

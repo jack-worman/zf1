@@ -37,9 +37,9 @@ class Zend_Service_StrikeIron_SalesUseTaxBasic extends Zend_Service_StrikeIron_B
      * @param array
      */
     protected $_options = ['username' => null,
-                                'password' => null,
-                                'client' => null,
-                                'options' => null,
-                                'headers' => null,
-                                'wsdl' => 'http://ws.strikeiron.com/zf1.StrikeIron/taxdatabasic4?WSDL'];
+        'password' => null,
+        'client' => null,
+        'options' => null,
+        'headers' => null,
+        'wsdl' => 'http://ws.strikeiron.com/zf1.StrikeIron/taxdatabasic4?WSDL'];
 }

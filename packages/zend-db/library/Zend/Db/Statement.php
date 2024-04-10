@@ -300,7 +300,7 @@ abstract class Zend_Db_Statement implements Zend_Db_Statement_Interface
      *
      * @return bool
      */
-    public function execute(array $params = null)
+    public function execute(?array $params = null)
     {
         /*
          * Simple case - no query profiler to manage.

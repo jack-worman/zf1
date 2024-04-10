@@ -422,8 +422,8 @@ abstract class Zend_Db_Table_Abstract
         $onDelete = null, $onUpdate = null)
     {
         $reference = [self::COLUMNS => (array) $columns,
-                           self::REF_TABLE_CLASS => $refTableClass,
-                           self::REF_COLUMNS => (array) $refColumns];
+            self::REF_TABLE_CLASS => $refTableClass,
+            self::REF_COLUMNS => (array) $refColumns];
 
         if (!empty($onDelete)) {
             $reference[self::ON_DELETE] = $onDelete;
@@ -1615,7 +1615,7 @@ abstract class Zend_Db_Table_Abstract
      *
      * @throws Zend_Db_Table_Row_Exception
      */
-    public static function getTableFromString($tableName, Zend_Db_Table_Abstract $referenceTable = null)
+    public static function getTableFromString($tableName, ?Zend_Db_Table_Abstract $referenceTable = null)
     {
         if ($referenceTable instanceof Zend_Db_Table_Abstract) {
             $tableDefinition = $referenceTable->getDefinition();

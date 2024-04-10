@@ -408,7 +408,7 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
      *
      * @return Zend_Navigation_Page_Mvc fluent interface, returns self
      */
-    public function setParams(array $params = null)
+    public function setParams(?array $params = null)
     {
         $this->clearParams();
 
@@ -697,14 +697,14 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
         return array_merge(
             parent::toArray(),
             [
-                 'action' => $this->getAction(),
-                 'controller' => $this->getController(),
-                 'module' => $this->getModule(),
-                 'params' => $this->getParams(),
-                 'route' => $this->getRoute(),
-                 'reset_params' => $this->getResetParams(),
-                 'encodeUrl' => $this->getEncodeUrl(),
-                 'scheme' => $this->getScheme(),
+                'action' => $this->getAction(),
+                'controller' => $this->getController(),
+                'module' => $this->getModule(),
+                'params' => $this->getParams(),
+                'route' => $this->getRoute(),
+                'reset_params' => $this->getResetParams(),
+                'encodeUrl' => $this->getEncodeUrl(),
+                'scheme' => $this->getScheme(),
             ]
         );
     }

@@ -479,9 +479,9 @@ HTML;
         $httpClient->resetParameters(true);
 
         $postParams = ['privatekey' => $this->_privateKey,
-                            'remoteip' => $this->_ip,
-                            'challenge' => $challengeField,
-                            'response' => $responseField];
+            'remoteip' => $this->_ip,
+            'challenge' => $challengeField,
+            'response' => $responseField];
 
         /* Make the POST and return the response */
         return $httpClient->setUri(self::VERIFY_SERVER)

@@ -133,20 +133,20 @@ class Zend_Db_Adapter_Pdo_Ibm_Db2
             }
 
             $desc[$this->_adapter->foldCase($row[$colname])] = [
-            'SCHEMA_NAME' => $this->_adapter->foldCase($row[$tabschema]),
-            'TABLE_NAME' => $this->_adapter->foldCase($row[$tabname]),
-            'COLUMN_NAME' => $this->_adapter->foldCase($row[$colname]),
-            'COLUMN_POSITION' => $row[$colno] + 1,
-            'DATA_TYPE' => $row[$typename],
-            'DEFAULT' => $row[$default],
-            'NULLABLE' => (bool) ('Y' == $row[$nulls]),
-            'LENGTH' => $row[$length],
-            'SCALE' => $row[$scale],
-            'PRECISION' => ('DECIMAL' == $row[$typename] ? $row[$length] : 0),
-            'UNSIGNED' => false,
-            'PRIMARY' => $primary,
-            'PRIMARY_POSITION' => $primaryPosition,
-            'IDENTITY' => $identity,
+                'SCHEMA_NAME' => $this->_adapter->foldCase($row[$tabschema]),
+                'TABLE_NAME' => $this->_adapter->foldCase($row[$tabname]),
+                'COLUMN_NAME' => $this->_adapter->foldCase($row[$colname]),
+                'COLUMN_POSITION' => $row[$colno] + 1,
+                'DATA_TYPE' => $row[$typename],
+                'DEFAULT' => $row[$default],
+                'NULLABLE' => (bool) ('Y' == $row[$nulls]),
+                'LENGTH' => $row[$length],
+                'SCALE' => $row[$scale],
+                'PRECISION' => ('DECIMAL' == $row[$typename] ? $row[$length] : 0),
+                'UNSIGNED' => false,
+                'PRIMARY' => $primary,
+                'PRIMARY_POSITION' => $primaryPosition,
+                'IDENTITY' => $identity,
             ];
         }
 

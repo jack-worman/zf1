@@ -326,8 +326,8 @@ abstract class Zend_Pdf_FileParser_Font_OpenType extends Zend_Pdf_FileParser_Fon
              * will prevail since it is processed last.
              */
             $nameRecords[$nameID][$languageCode] = ['platform' => $platformID,
-                                                         'offset' => $nameOffset,
-                                                         'length' => $nameLength];
+                'offset' => $nameOffset,
+                'length' => $nameLength];
         }
 
         /* Now go back and extract the interesting strings.

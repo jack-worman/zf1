@@ -78,7 +78,7 @@ class Zend_Amf_Adobe_Auth extends Zend_Amf_Auth_Abstract
             $this->_acl->addRole(new Zend_Acl_Role((string) $role['id']));
             foreach ($role->user as $user) {
                 $this->_users[(string) $user['name']] = ['password' => (string) $user['password'],
-                                                             'role' => (string) $role['id']];
+                    'role' => (string) $role['id']];
             }
         }
     }

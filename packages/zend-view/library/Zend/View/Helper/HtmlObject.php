@@ -48,7 +48,7 @@ class Zend_View_Helper_HtmlObject extends Zend_View_Helper_HtmlElement
     {
         // Merge data and type
         $attribs = array_merge(['data' => $data,
-                                     'type' => $type], $attribs);
+            'type' => $type], $attribs);
 
         // Params
         $paramHtml = [];

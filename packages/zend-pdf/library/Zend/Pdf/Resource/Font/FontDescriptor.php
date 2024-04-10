@@ -112,9 +112,9 @@ class Zend_Pdf_Resource_Font_FontDescriptor
         $fontDescriptor->Flags = new Zend_Pdf_Element_Numeric($flags);
 
         $fontBBox = [new Zend_Pdf_Element_Numeric($font->toEmSpace($fontParser->xMin)),
-                          new Zend_Pdf_Element_Numeric($font->toEmSpace($fontParser->yMin)),
-                          new Zend_Pdf_Element_Numeric($font->toEmSpace($fontParser->xMax)),
-                          new Zend_Pdf_Element_Numeric($font->toEmSpace($fontParser->yMax))];
+            new Zend_Pdf_Element_Numeric($font->toEmSpace($fontParser->yMin)),
+            new Zend_Pdf_Element_Numeric($font->toEmSpace($fontParser->xMax)),
+            new Zend_Pdf_Element_Numeric($font->toEmSpace($fontParser->yMax))];
         $fontDescriptor->FontBBox = new Zend_Pdf_Element_Array($fontBBox);
 
         $fontDescriptor->ItalicAngle = new Zend_Pdf_Element_Numeric($fontParser->italicAngle);

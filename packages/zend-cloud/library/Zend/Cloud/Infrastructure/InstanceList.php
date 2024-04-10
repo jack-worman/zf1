@@ -38,7 +38,7 @@ class Zend_Cloud_Infrastructure_InstanceList implements Countable, Iterator, Arr
      *
      * @return void
      */
-    public function __construct($adapter, array $instances = null)
+    public function __construct($adapter, ?array $instances = null)
     {
         if (!($adapter instanceof Zend_Cloud_Infrastructure_Adapter)) {
             // require_once 'Zend/Cloud/Infrastructure/Exception.php';

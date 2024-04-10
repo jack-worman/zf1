@@ -441,8 +441,8 @@ class Zend_Search_Lucene implements Zend_Search_Lucene_Interface
                     $docStoreIsCompoundFile = $segmentsFile->readByte();
 
                     $docStoreOptions = ['offset' => $docStoreOffset,
-                                             'segment' => $docStoreSegment,
-                                             'isCompound' => (1 == $docStoreIsCompoundFile)];
+                        'segment' => $docStoreSegment,
+                        'isCompound' => (1 == $docStoreIsCompoundFile)];
                 } else {
                     $docStoreOptions = null;
                 }

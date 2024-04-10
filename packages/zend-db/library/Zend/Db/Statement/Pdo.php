@@ -234,7 +234,7 @@ class Zend_Db_Statement_Pdo extends Zend_Db_Statement implements IteratorAggrega
      *
      * @throws Zend_Db_Statement_Exception
      */
-    public function _execute(array $params = null)
+    public function _execute(?array $params = null)
     {
         try {
             if (null !== $params) {
