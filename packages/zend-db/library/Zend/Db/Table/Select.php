@@ -84,10 +84,8 @@ class Zend_Db_Table_Select extends Zend_Db_Select
 
     /**
      * Sets the primary table name and retrieves the table schema.
-     *
-     * @return Zend_Db_Select this Zend_Db_Select object
      */
-    public function setTable(Zend_Db_Table_Abstract $table)
+    public function setTable(Zend_Db_Table_Abstract $table): static
     {
         $this->_adapter = $table->getAdapter();
         $this->_info = $table->info();
@@ -101,10 +99,8 @@ class Zend_Db_Table_Select extends Zend_Db_Select
      *
      * Setting this flag to false skips the checks for table joins, allowing
      * 'hybrid' table rows to be created.
-     *
-     * @return Zend_Db_Select this Zend_Db_Select object
      */
-    public function setIntegrityCheck($flag = true)
+    public function setIntegrityCheck($flag = true): static
     {
         $this->_integrityCheck = $flag;
 
@@ -159,10 +155,8 @@ class Zend_Db_Table_Select extends Zend_Db_Select
      *                                                                 name
      * @param array|string|Zend_Db_Expr                        $cols   the columns to select from this table
      * @param string                                           $schema the schema name to specify, if any
-     *
-     * @return Zend_Db_Table_Select this Zend_Db_Table_Select object
      */
-    public function from($name, $cols = self::SQL_WILDCARD, $schema = null)
+    public function from($name, $cols = self::SQL_WILDCARD, $schema = null): static
     {
         if ($name instanceof Zend_Db_Table_Abstract) {
             $info = $name->info();
