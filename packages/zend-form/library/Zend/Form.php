@@ -1135,15 +1135,16 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
      *
      * @param array|Zend_Config|null $options
      *
-     * @psalm-return (
-     *     $type is 'select' ? Zend_Form_Element_Select
+     * @psalm-return ($type is 'select' ? Zend_Form_Element_Select
      *     : ($type is 'multiselect' ? Zend_Form_Element_Multiselect
      *     : ($type is 'text' ? Zend_Form_Element_Text
      *     : ($type is 'radio' ? Zend_Form_Element_Radio
      *     : ($type is 'file' ? Zend_Form_Element_File
      *     : ($type is 'multiCheckbox' ? Zend_Form_Element_MultiCheckbox
+     *     : ($type is 'hidden' ? Zend_Form_Element_Hidden
+     *     : ($type is 'textarea' ? Zend_Form_Element_Textarea
      *     : Zend_Form_Element
-     * ))))))
+     * ))))))))
      */
     public function createElement(string $type, string $name, $options = null): Zend_Form_Element
     {
