@@ -1133,26 +1133,16 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
      * settings as specified in the form object (including plugin loader
      * prefix paths, default decorators, etc.).
      *
-     * @param string            $type
-     * @param string            $name
      * @param array|Zend_Config $options
-     *
-     * @return Zend_Form_Element
-     *
-     * @throws Zend_Form_Exception
+     * @psalm-return (
+     *     $type is 'select' ? Zend_Form_Element_Select
+     *     : ($type is 'multiselect' ? Zend_Form_Element_Multiselect
+     *     : ($type is 'text' ? Zend_Form_Element_Text
+     *     : Zend_Form_Element
+     * )))
      */
-    public function createElement($type, $name, $options = null)
+    public function createElement(string $type, string $name, $options = null): Zend_Form_Element
     {
-        if (!is_string($type)) {
-            // require_once 'Zend/Form/Exception.php';
-            throw new Zend_Form_Exception('Element type must be a string indicating type');
-        }
-
-        if (!is_string($name)) {
-            // require_once 'Zend/Form/Exception.php';
-            throw new Zend_Form_Exception('Element name must be a string');
-        }
-
         $prefixPaths = [];
         $prefixPaths['decorator'] = $this->getPluginLoader('decorator')->getPaths();
         if (!empty($this->_elementPrefixPaths)) {
