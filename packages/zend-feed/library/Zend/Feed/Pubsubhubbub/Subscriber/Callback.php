@@ -92,7 +92,7 @@ class Zend_Feed_Pubsubhubbub_Subscriber_Callback extends Zend_Feed_Pubsubhubbub_
      *
      * @return void
      */
-    public function handle(array $httpGetData = null, $sendResponseNow = false)
+    public function handle(?array $httpGetData = null, $sendResponseNow = false)
     {
         if (null === $httpGetData) {
             $httpGetData = $_GET;
@@ -240,7 +240,7 @@ class Zend_Feed_Pubsubhubbub_Subscriber_Callback extends Zend_Feed_Pubsubhubbub_
      *
      * @return bool
      */
-    protected function _hasValidVerifyToken(array $httpGetData = null, $checkValue = true)
+    protected function _hasValidVerifyToken(?array $httpGetData = null, $checkValue = true)
     {
         $verifyTokenKey = $this->_detectVerifyTokenKey($httpGetData);
         if (empty($verifyTokenKey)) {
@@ -271,7 +271,7 @@ class Zend_Feed_Pubsubhubbub_Subscriber_Callback extends Zend_Feed_Pubsubhubbub_
      *
      * @return false|string
      */
-    protected function _detectVerifyTokenKey(array $httpGetData = null)
+    protected function _detectVerifyTokenKey(?array $httpGetData = null)
     {
         /*
          * Available when sub keys encoding in Callback URL path

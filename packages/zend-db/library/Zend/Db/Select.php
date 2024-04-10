@@ -194,7 +194,7 @@ class Zend_Db_Select
     /**
      * Set bind variables.
      *
-     * @return Zend_Db_Select
+     * @return static
      */
     public function bind($bind)
     {
@@ -208,7 +208,7 @@ class Zend_Db_Select
      *
      * @param bool $flag whether or not the SELECT is DISTINCT (default true)
      *
-     * @return Zend_Db_Select this Zend_Db_Select object
+     * @return static this Zend_Db_Select object
      */
     public function distinct($flag = true)
     {
@@ -240,7 +240,7 @@ class Zend_Db_Select
      * @param array|string|Zend_Db_Expr $cols   the columns to select from this table
      * @param string                    $schema the schema name to specify, if any
      *
-     * @return Zend_Db_Select this Zend_Db_Select object
+     * @return static this Zend_Db_Select object
      */
     public function from($name, $cols = '*', $schema = null)
     {
@@ -256,7 +256,7 @@ class Zend_Db_Select
      * @param array|string|Zend_Db_Expr $cols            the columns to select from this table
      * @param string                    $correlationName Correlation name of target table. OPTIONAL
      *
-     * @return Zend_Db_Select this Zend_Db_Select object
+     * @return static this Zend_Db_Select object
      */
     public function columns($cols = '*', $correlationName = null)
     {
@@ -294,7 +294,7 @@ class Zend_Db_Select
      *
      * @param array $select array of select clauses for the union
      *
-     * @return Zend_Db_Select this Zend_Db_Select object
+     * @return static this Zend_Db_Select object
      */
     public function union($select = [], $type = self::SQL_UNION)
     {
@@ -326,7 +326,7 @@ class Zend_Db_Select
      * @param array|string              $cols   the columns to select from the joined table
      * @param string                    $schema the database name to specify, if any
      *
-     * @return Zend_Db_Select this Zend_Db_Select object
+     * @return static this Zend_Db_Select object
      */
     public function join($name, $cond, $cols = self::SQL_WILDCARD, $schema = null)
     {
@@ -348,7 +348,7 @@ class Zend_Db_Select
      * @param array|string              $cols   the columns to select from the joined table
      * @param string                    $schema the database name to specify, if any
      *
-     * @return Zend_Db_Select this Zend_Db_Select object
+     * @return static this Zend_Db_Select object
      */
     public function joinInner($name, $cond, $cols = self::SQL_WILDCARD, $schema = null)
     {
@@ -370,7 +370,7 @@ class Zend_Db_Select
      * @param array|string              $cols   the columns to select from the joined table
      * @param string                    $schema the database name to specify, if any
      *
-     * @return Zend_Db_Select this Zend_Db_Select object
+     * @return static this Zend_Db_Select object
      */
     public function joinLeft($name, $cond, $cols = self::SQL_WILDCARD, $schema = null)
     {
@@ -393,7 +393,7 @@ class Zend_Db_Select
      * @param array|string              $cols   the columns to select from the joined table
      * @param string                    $schema the database name to specify, if any
      *
-     * @return Zend_Db_Select this Zend_Db_Select object
+     * @return static this Zend_Db_Select object
      */
     public function joinRight($name, $cond, $cols = self::SQL_WILDCARD, $schema = null)
     {
@@ -416,7 +416,7 @@ class Zend_Db_Select
      * @param array|string              $cols   the columns to select from the joined table
      * @param string                    $schema the database name to specify, if any
      *
-     * @return Zend_Db_Select this Zend_Db_Select object
+     * @return static this Zend_Db_Select object
      */
     public function joinFull($name, $cond, $cols = self::SQL_WILDCARD, $schema = null)
     {
@@ -434,7 +434,7 @@ class Zend_Db_Select
      * @param array|string              $cols   the columns to select from the joined table
      * @param string                    $schema the database name to specify, if any
      *
-     * @return Zend_Db_Select this Zend_Db_Select object
+     * @return static this Zend_Db_Select object
      */
     public function joinCross($name, $cols = self::SQL_WILDCARD, $schema = null)
     {
@@ -455,7 +455,7 @@ class Zend_Db_Select
      * @param array|string              $cols   the columns to select from the joined table
      * @param string                    $schema the database name to specify, if any
      *
-     * @return Zend_Db_Select this Zend_Db_Select object
+     * @return static this Zend_Db_Select object
      */
     public function joinNatural($name, $cols = self::SQL_WILDCARD, $schema = null)
     {
@@ -493,7 +493,7 @@ class Zend_Db_Select
      * @param mixed  $value OPTIONAL The value to quote into the condition
      * @param int    $type  OPTIONAL The type of the given value
      *
-     * @return Zend_Db_Select this Zend_Db_Select object
+     * @return static this Zend_Db_Select object
      */
     public function where($cond, $value = null, $type = null)
     {
@@ -511,7 +511,7 @@ class Zend_Db_Select
      * @param mixed  $value OPTIONAL The value to quote into the condition
      * @param int    $type  OPTIONAL The type of the given value
      *
-     * @return Zend_Db_Select this Zend_Db_Select object
+     * @return static this Zend_Db_Select object
      *
      * @see where()
      */
@@ -527,7 +527,7 @@ class Zend_Db_Select
      *
      * @param array|string $spec the column(s) to group by
      *
-     * @return Zend_Db_Select this Zend_Db_Select object
+     * @return static this Zend_Db_Select object
      */
     public function group($spec)
     {
@@ -558,7 +558,7 @@ class Zend_Db_Select
      * @param mixed  $value OPTIONAL The value to quote into the condition
      * @param int    $type  OPTIONAL The type of the given value
      *
-     * @return Zend_Db_Select this Zend_Db_Select object
+     * @return static this Zend_Db_Select object
      */
     public function having($cond, $value = null, $type = null)
     {
@@ -584,7 +584,7 @@ class Zend_Db_Select
      * @param mixed  $value OPTIONAL The value to quote into the condition
      * @param int    $type  OPTIONAL The type of the given value
      *
-     * @return Zend_Db_Select this Zend_Db_Select object
+     * @return static this Zend_Db_Select object
      *
      * @see having()
      */
@@ -608,7 +608,7 @@ class Zend_Db_Select
      *
      * @param mixed $spec the column(s) and direction to order by
      *
-     * @return Zend_Db_Select this Zend_Db_Select object
+     * @return static this Zend_Db_Select object
      */
     public function order($spec)
     {
@@ -651,7 +651,7 @@ class Zend_Db_Select
      * @param int $count  OPTIONAL The number of rows to return
      * @param int $offset OPTIONAL Start returning after this many rows
      *
-     * @return Zend_Db_Select this Zend_Db_Select object
+     * @return static this Zend_Db_Select object
      */
     public function limit($count = null, $offset = null)
     {
@@ -667,7 +667,7 @@ class Zend_Db_Select
      * @param int $page     limit results to this page number
      * @param int $rowCount use this many rows per page
      *
-     * @return Zend_Db_Select this Zend_Db_Select object
+     * @return static this Zend_Db_Select object
      */
     public function limitPage($page, $rowCount)
     {
@@ -684,7 +684,7 @@ class Zend_Db_Select
      *
      * @param bool $flag whether or not the SELECT is FOR UPDATE (default true)
      *
-     * @return Zend_Db_Select this Zend_Db_Select object
+     * @return static this Zend_Db_Select object
      */
     public function forUpdate($flag = true)
     {
@@ -757,7 +757,7 @@ class Zend_Db_Select
      *
      * @param string $part OPTIONAL
      *
-     * @return Zend_Db_Select
+     * @return static
      */
     public function reset($part = null)
     {
@@ -795,7 +795,7 @@ class Zend_Db_Select
      * @param array|string              $cols   The columns to select from the joined table
      * @param string                    $schema the database name to specify, if any
      *
-     * @return Zend_Db_Select This Zend_Db_Select object
+     * @return static This Zend_Db_Select object
      *
      * @throws Zend_Db_Select_Exception
      */
@@ -877,7 +877,7 @@ class Zend_Db_Select
                 'schema' => $schema,
                 'tableName' => $tableName,
                 'joinCondition' => $cond,
-                ];
+            ];
             while ($tmpFromParts) {
                 $currentCorrelationName = key($tmpFromParts);
                 $this->_parts[self::FROM][$currentCorrelationName] = array_shift($tmpFromParts);
@@ -916,7 +916,7 @@ class Zend_Db_Select
      * * joinRightUsing
      * * joinLeftUsing
      *
-     * @return Zend_Db_Select this Zend_Db_Select object
+     * @return static this Zend_Db_Select object
      */
     public function _joinUsing($type, $name, $cond, $cols = '*', $schema = null)
     {
@@ -1366,7 +1366,7 @@ class Zend_Db_Select
      * @param string $method
      * @param array  $args   OPTIONAL Zend_Db_Table_Select query modifier
      *
-     * @return Zend_Db_Select
+     * @return static
      *
      * @throws Zend_Db_Select_Exception if an invalid method is called
      */

@@ -371,7 +371,7 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
      *
      * @return Zend_Controller_Dispatcher_Abstract
      */
-    public function setResponse(Zend_Controller_Response_Abstract $response = null)
+    public function setResponse(?Zend_Controller_Response_Abstract $response = null)
     {
         $this->_response = $response;
 

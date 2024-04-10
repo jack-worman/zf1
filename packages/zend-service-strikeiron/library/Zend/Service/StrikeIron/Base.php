@@ -39,11 +39,11 @@ class Zend_Service_StrikeIron_Base
      * @param array
      */
     protected $_options = ['username' => null,
-                                'password' => null,
-                                'client' => null,
-                                'options' => null,
-                                'headers' => null,
-                                'wsdl' => null];
+        'password' => null,
+        'client' => null,
+        'options' => null,
+        'headers' => null,
+        'wsdl' => null];
 
     /**
      * Output headers returned by the last call to SOAPClient->__soapCall().
@@ -168,7 +168,7 @@ class Zend_Service_StrikeIron_Base
             $this->_options['headers'][] = new SoapHeader('http://ws.strikeiron.com',
                 'LicenseInfo',
                 ['RegisteredUser' => ['UserID' => $this->_options['username'],
-                                                'Password' => $this->_options['password']]]);
+                    'Password' => $this->_options['password']]]);
         }
     }
 

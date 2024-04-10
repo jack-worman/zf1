@@ -54,6 +54,6 @@ interface Zend_Acl_Assert_Interface
      *
      * @return bool
      */
-    public function assert(Zend_Acl $acl, Zend_Acl_Role_Interface $role = null, Zend_Acl_Resource_Interface $resource = null,
+    public function assert(Zend_Acl $acl, ?Zend_Acl_Role_Interface $role = null, ?Zend_Acl_Resource_Interface $resource = null,
         $privilege = null);
 }

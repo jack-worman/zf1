@@ -78,7 +78,7 @@ class Zend_Validate implements Zend_Validate_Interface
         $this->_validators[] = [
             'instance' => $validator,
             'breakChainOnFailure' => (bool) $breakChainOnFailure,
-            ];
+        ];
 
         return $this;
     }

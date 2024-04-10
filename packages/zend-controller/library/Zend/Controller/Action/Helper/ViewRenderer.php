@@ -190,7 +190,7 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
      *
      * @return void
      */
-    public function __construct(Zend_View_Interface $view = null, array $options = [])
+    public function __construct(?Zend_View_Interface $view = null, array $options = [])
     {
         if (null !== $view) {
             $this->setView($view);
@@ -403,7 +403,7 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
             'module' => (($moduleName = $request->getModuleName()) != '') ? $dispatcher->formatModuleName($moduleName) : $moduleName,
             'controller' => $request->getControllerName(),
             'action' => $dispatcher->formatActionName($request->getActionName()),
-            ];
+        ];
 
         $path = $inflector->filter($parts);
 

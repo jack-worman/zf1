@@ -1193,9 +1193,9 @@ class Zend_Mail extends Zend_Mime_Message
     public function addHeader($name, $value, $append = false)
     {
         $prohibit = ['to', 'cc', 'bcc', 'from', 'subject',
-                          'reply-to', 'return-path',
-                          'date', 'message-id',
-                         ];
+            'reply-to', 'return-path',
+            'date', 'message-id',
+        ];
         if (in_array(strtolower((string) $name), $prohibit)) {
             /*
              * @see Zend_Mail_Exception
@@ -1268,12 +1268,12 @@ class Zend_Mail extends Zend_Mime_Message
     protected function _filterEmail($email)
     {
         $rule = ["\r" => '',
-                      "\n" => '',
-                      "\t" => '',
-                      '"' => '',
-                      ',' => '',
-                      '<' => '',
-                      '>' => '',
+            "\n" => '',
+            "\t" => '',
+            '"' => '',
+            ',' => '',
+            '<' => '',
+            '>' => '',
         ];
 
         return strtr((string) $email, $rule);
@@ -1289,11 +1289,11 @@ class Zend_Mail extends Zend_Mime_Message
     protected function _filterName($name)
     {
         $rule = ["\r" => '',
-                      "\n" => '',
-                      "\t" => '',
-                      '"' => "'",
-                      '<' => '[',
-                      '>' => ']',
+            "\n" => '',
+            "\t" => '',
+            '"' => "'",
+            '<' => '[',
+            '>' => ']',
         ];
 
         return \trim((string) strtr((string) $name, $rule));
@@ -1309,8 +1309,8 @@ class Zend_Mail extends Zend_Mime_Message
     protected function _filterOther($data)
     {
         $rule = ["\r" => '',
-                      "\n" => '',
-                      "\t" => '',
+            "\n" => '',
+            "\t" => '',
         ];
 
         return strtr((string) $data, $rule);

@@ -94,34 +94,34 @@ class Zend_Search_Lucene_Search_BooleanExpressionRecognizer extends Zend_Search_
     public function __construct()
     {
         parent::__construct([self::ST_START,
-                                   self::ST_LITERAL,
-                                   self::ST_NOT_OPERATOR,
-                                   self::ST_AND_OPERATOR,
-                                   self::ST_OR_OPERATOR],
+            self::ST_LITERAL,
+            self::ST_NOT_OPERATOR,
+            self::ST_AND_OPERATOR,
+            self::ST_OR_OPERATOR],
             [self::IN_LITERAL,
-                  self::IN_NOT_OPERATOR,
-                  self::IN_AND_OPERATOR,
-                  self::IN_OR_OPERATOR]);
+                self::IN_NOT_OPERATOR,
+                self::IN_AND_OPERATOR,
+                self::IN_OR_OPERATOR]);
 
         $emptyOperatorAction = new Zend_Search_Lucene_FSMAction($this, 'emptyOperatorAction');
         $emptyNotOperatorAction = new Zend_Search_Lucene_FSMAction($this, 'emptyNotOperatorAction');
 
         $this->addRules([[self::ST_START,        self::IN_LITERAL,        self::ST_LITERAL],
-                               [self::ST_START,        self::IN_NOT_OPERATOR,   self::ST_NOT_OPERATOR],
+            [self::ST_START,        self::IN_NOT_OPERATOR,   self::ST_NOT_OPERATOR],
 
-                               [self::ST_LITERAL,      self::IN_AND_OPERATOR,   self::ST_AND_OPERATOR],
-                               [self::ST_LITERAL,      self::IN_OR_OPERATOR,    self::ST_OR_OPERATOR],
-                               [self::ST_LITERAL,      self::IN_LITERAL,        self::ST_LITERAL,      $emptyOperatorAction],
-                               [self::ST_LITERAL,      self::IN_NOT_OPERATOR,   self::ST_NOT_OPERATOR, $emptyNotOperatorAction],
+            [self::ST_LITERAL,      self::IN_AND_OPERATOR,   self::ST_AND_OPERATOR],
+            [self::ST_LITERAL,      self::IN_OR_OPERATOR,    self::ST_OR_OPERATOR],
+            [self::ST_LITERAL,      self::IN_LITERAL,        self::ST_LITERAL,      $emptyOperatorAction],
+            [self::ST_LITERAL,      self::IN_NOT_OPERATOR,   self::ST_NOT_OPERATOR, $emptyNotOperatorAction],
 
-                               [self::ST_NOT_OPERATOR, self::IN_LITERAL,        self::ST_LITERAL],
+            [self::ST_NOT_OPERATOR, self::IN_LITERAL,        self::ST_LITERAL],
 
-                               [self::ST_AND_OPERATOR, self::IN_LITERAL,        self::ST_LITERAL],
-                               [self::ST_AND_OPERATOR, self::IN_NOT_OPERATOR,   self::ST_NOT_OPERATOR],
+            [self::ST_AND_OPERATOR, self::IN_LITERAL,        self::ST_LITERAL],
+            [self::ST_AND_OPERATOR, self::IN_NOT_OPERATOR,   self::ST_NOT_OPERATOR],
 
-                               [self::ST_OR_OPERATOR,  self::IN_LITERAL,        self::ST_LITERAL],
-                               [self::ST_OR_OPERATOR,  self::IN_NOT_OPERATOR,   self::ST_NOT_OPERATOR],
-                             ]);
+            [self::ST_OR_OPERATOR,  self::IN_LITERAL,        self::ST_LITERAL],
+            [self::ST_OR_OPERATOR,  self::IN_NOT_OPERATOR,   self::ST_NOT_OPERATOR],
+        ]);
 
         $notOperatorAction = new Zend_Search_Lucene_FSMAction($this, 'notOperatorAction');
         $orOperatorAction = new Zend_Search_Lucene_FSMAction($this, 'orOperatorAction');

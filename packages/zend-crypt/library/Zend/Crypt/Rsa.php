@@ -65,7 +65,7 @@ class Zend_Crypt_Rsa
      *
      * @throws Zend_Crypt_Rsa_Exception
      */
-    public function __construct(array $options = null)
+    public function __construct(?array $options = null)
     {
         if (!extension_loaded('openssl')) {
             // require_once 'Zend/Crypt/Rsa/Exception.php';
@@ -123,7 +123,7 @@ class Zend_Crypt_Rsa
      *
      * @return string
      */
-    public function sign($data, Zend_Crypt_Rsa_Key_Private $privateKey = null, $format = null)
+    public function sign($data, ?Zend_Crypt_Rsa_Key_Private $privateKey = null, $format = null)
     {
         $signature = '';
         if (isset($privateKey)) {
@@ -209,7 +209,7 @@ class Zend_Crypt_Rsa
      *
      * @throws Zend_Crypt_Rsa_Exception
      */
-    public function generateKeys(array $configargs = null)
+    public function generateKeys(?array $configargs = null)
     {
         $config = null;
         $passPhrase = null;
@@ -233,8 +233,8 @@ class Zend_Crypt_Rsa
         $details = openssl_pkey_get_details($resource);
         $publicKey = new Zend_Crypt_Rsa_Key_Public($details['key']);
         $return = new ArrayObject([
-           'privateKey' => $privateKey,
-           'publicKey' => $publicKey,
+            'privateKey' => $privateKey,
+            'publicKey' => $publicKey,
         ], ArrayObject::ARRAY_AS_PROPS);
 
         return $return;
@@ -322,7 +322,7 @@ class Zend_Crypt_Rsa
         return $this->_hashAlgorithm;
     }
 
-    protected function _parseConfigArgs(array $config = null)
+    protected function _parseConfigArgs(?array $config = null)
     {
         $configs = [];
         if (isset($config['private_key_bits'])) {

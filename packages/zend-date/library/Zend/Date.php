@@ -518,17 +518,17 @@ class Zend_Date extends Zend_Date_DateObject
     public function toArray()
     {
         return ['day' => $this->toString(self::DAY_SHORT, 'iso'),
-                     'month' => $this->toString(self::MONTH_SHORT, 'iso'),
-                     'year' => $this->toString(self::YEAR, 'iso'),
-                     'hour' => $this->toString(self::HOUR_SHORT, 'iso'),
-                     'minute' => $this->toString(self::MINUTE_SHORT, 'iso'),
-                     'second' => $this->toString(self::SECOND_SHORT, 'iso'),
-                     'timezone' => $this->toString(self::TIMEZONE, 'iso'),
-                     'timestamp' => $this->toString(self::TIMESTAMP, 'iso'),
-                     'weekday' => $this->toString(self::WEEKDAY_8601, 'iso'),
-                     'dayofyear' => $this->toString(self::DAY_OF_YEAR, 'iso'),
-                     'week' => $this->toString(self::WEEK, 'iso'),
-                     'gmtsecs' => $this->toString(self::TIMEZONE_SECS, 'iso')];
+            'month' => $this->toString(self::MONTH_SHORT, 'iso'),
+            'year' => $this->toString(self::YEAR, 'iso'),
+            'hour' => $this->toString(self::HOUR_SHORT, 'iso'),
+            'minute' => $this->toString(self::MINUTE_SHORT, 'iso'),
+            'second' => $this->toString(self::SECOND_SHORT, 'iso'),
+            'timezone' => $this->toString(self::TIMEZONE, 'iso'),
+            'timestamp' => $this->toString(self::TIMESTAMP, 'iso'),
+            'weekday' => $this->toString(self::WEEKDAY_8601, 'iso'),
+            'dayofyear' => $this->toString(self::DAY_OF_YEAR, 'iso'),
+            'week' => $this->toString(self::WEEK, 'iso'),
+            'gmtsecs' => $this->toString(self::TIMEZONE_SECS, 'iso')];
     }
 
     /**
@@ -5001,8 +5001,8 @@ class Zend_Date extends Zend_Date_DateObject
         if (!is_array($date)) {
             try {
                 $parsed = Zend_Locale_Format::getDate($date, ['locale' => $locale,
-                                                      'date_format' => $format, 'format_type' => 'iso',
-                                                      'fix_date' => false]);
+                    'date_format' => $format, 'format_type' => 'iso',
+                    'fix_date' => false]);
             } catch (Zend_Locale_Exception $e) {
                 // Date can not be parsed
                 return false;

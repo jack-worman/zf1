@@ -89,8 +89,8 @@ class Zend_ProgressBar_Adapter_Console extends Zend_ProgressBar_Adapter
      * @var array
      */
     protected $_elements = [self::ELEMENT_PERCENT,
-                                 self::ELEMENT_BAR,
-                                 self::ELEMENT_ETA];
+        self::ELEMENT_BAR,
+        self::ELEMENT_ETA];
 
     /**
      * Which action to do at finish call.
@@ -273,9 +273,9 @@ class Zend_ProgressBar_Adapter_Console extends Zend_ProgressBar_Adapter
     public function setElements(array $elements)
     {
         $allowedElements = [self::ELEMENT_PERCENT,
-                                 self::ELEMENT_BAR,
-                                 self::ELEMENT_ETA,
-                                 self::ELEMENT_TEXT];
+            self::ELEMENT_BAR,
+            self::ELEMENT_ETA,
+            self::ELEMENT_TEXT];
 
         if (count(array_diff($elements, $allowedElements)) > 0) {
             // require_once 'Zend/ProgressBar/Adapter/Exception.php';
@@ -383,8 +383,8 @@ class Zend_ProgressBar_Adapter_Console extends Zend_ProgressBar_Adapter
     public function setFinishAction($action)
     {
         $allowedActions = [self::FINISH_ACTION_CLEAR_LINE,
-                                self::FINISH_ACTION_EOL,
-                                self::FINISH_ACTION_NONE];
+            self::FINISH_ACTION_EOL,
+            self::FINISH_ACTION_NONE];
 
         if (!in_array($action, $allowedActions)) {
             // require_once 'Zend/ProgressBar/Adapter/Exception.php';

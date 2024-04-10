@@ -65,11 +65,11 @@ class Zend_Mail_Storage_Maildir extends Zend_Mail_Storage_Abstract
      * @var array
      */
     protected static $_knownFlags = ['D' => Zend_Mail_Storage::FLAG_DRAFT,
-                                          'F' => Zend_Mail_Storage::FLAG_FLAGGED,
-                                          'P' => Zend_Mail_Storage::FLAG_PASSED,
-                                          'R' => Zend_Mail_Storage::FLAG_ANSWERED,
-                                          'S' => Zend_Mail_Storage::FLAG_SEEN,
-                                          'T' => Zend_Mail_Storage::FLAG_DELETED];
+        'F' => Zend_Mail_Storage::FLAG_FLAGGED,
+        'P' => Zend_Mail_Storage::FLAG_PASSED,
+        'R' => Zend_Mail_Storage::FLAG_ANSWERED,
+        'S' => Zend_Mail_Storage::FLAG_SEEN,
+        'T' => Zend_Mail_Storage::FLAG_DELETED];
 
     // TODO: getFlags($id) for fast access if headers are not needed (i.e. just setting flags)?
 
@@ -184,11 +184,11 @@ class Zend_Mail_Storage_Maildir extends Zend_Mail_Storage_Abstract
         // TODO that's ugly, would be better to let the message class decide
         if ('zend_mail_message_file' == strtolower((string) $this->_messageClass) || is_subclass_of($this->_messageClass, 'zend_mail_message_file')) {
             return new $this->_messageClass(['file' => $this->_getFileData($id, 'filename'),
-                                                  'flags' => $this->_getFileData($id, 'flags')]);
+                'flags' => $this->_getFileData($id, 'flags')]);
         }
 
         return new $this->_messageClass(['handler' => $this, 'id' => $id, 'headers' => $this->getRawHeader($id),
-                                              'flags' => $this->_getFileData($id, 'flags')]);
+            'flags' => $this->_getFileData($id, 'flags')]);
     }
 
     /*
@@ -392,9 +392,9 @@ class Zend_Mail_Storage_Maildir extends Zend_Mail_Storage_Abstract
             }
 
             $data = ['uniq' => $uniq,
-                          'flags' => $named_flags,
-                          'flaglookup' => array_flip($named_flags),
-                          'filename' => $dirname.$entry];
+                'flags' => $named_flags,
+                'flaglookup' => array_flip($named_flags),
+                'filename' => $dirname.$entry];
             if (null !== $size) {
                 $data['size'] = (int) $size;
             }

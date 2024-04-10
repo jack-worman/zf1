@@ -113,13 +113,13 @@ class Zend_Acl
                 'allPrivileges' => [
                     'type' => self::TYPE_DENY,
                     'assert' => null,
-                    ],
-                'byPrivilegeId' => [],
                 ],
-            'byRoleId' => [],
+                'byPrivilegeId' => [],
             ],
+            'byRoleId' => [],
+        ],
         'byResourceId' => [],
-        ];
+    ];
 
     /**
      * Adds a Role having an identifier unique to the registry.
@@ -326,7 +326,7 @@ class Zend_Acl
             'instance' => $resource,
             'parent' => $resourceParent,
             'children' => [],
-            ];
+        ];
 
         return $this;
     }
@@ -515,7 +515,7 @@ class Zend_Acl
      *
      * @return Zend_Acl Provides a fluent interface
      */
-    public function allow($roles = null, $resources = null, $privileges = null, Zend_Acl_Assert_Interface $assert = null)
+    public function allow($roles = null, $resources = null, $privileges = null, ?Zend_Acl_Assert_Interface $assert = null)
     {
         return $this->setRule(self::OP_ADD, self::TYPE_ALLOW, $roles, $resources, $privileges, $assert);
     }
@@ -531,7 +531,7 @@ class Zend_Acl
      *
      * @return Zend_Acl Provides a fluent interface
      */
-    public function deny($roles = null, $resources = null, $privileges = null, Zend_Acl_Assert_Interface $assert = null)
+    public function deny($roles = null, $resources = null, $privileges = null, ?Zend_Acl_Assert_Interface $assert = null)
     {
         return $this->setRule(self::OP_ADD, self::TYPE_DENY, $roles, $resources, $privileges, $assert);
     }
@@ -623,7 +623,7 @@ class Zend_Acl
      * @uses   Zend_Acl::get()
      */
     public function setRule($operation, $type, $roles = null, $resources = null, $privileges = null,
-        Zend_Acl_Assert_Interface $assert = null)
+        ?Zend_Acl_Assert_Interface $assert = null)
     {
         // ensure that the rule type is valid; normalize input to uppercase
         $type = strtoupper((string) $type);
@@ -737,9 +737,9 @@ class Zend_Acl
                                             'allPrivileges' => [
                                                 'type' => self::TYPE_DENY,
                                                 'assert' => null,
-                                                ],
+                                            ],
                                             'byPrivilegeId' => [],
-                                            ];
+                                        ];
                                     }
                                     continue;
                                 }
@@ -778,9 +778,9 @@ class Zend_Acl
                                             'allPrivileges' => [
                                                 'type' => self::TYPE_DENY,
                                                 'assert' => null,
-                                                ],
+                                            ],
                                             'byPrivilegeId' => [],
-                                            ];
+                                        ];
                                     }
                                     continue;
                                 }
@@ -935,12 +935,12 @@ class Zend_Acl
      *
      * @return bool|null
      */
-    protected function _roleDFSAllPrivileges(Zend_Acl_Role_Interface $role, Zend_Acl_Resource_Interface $resource = null)
+    protected function _roleDFSAllPrivileges(Zend_Acl_Role_Interface $role, ?Zend_Acl_Resource_Interface $resource = null)
     {
         $dfs = [
             'visited' => [],
             'stack' => [],
-            ];
+        ];
 
         if (null !== ($result = $this->_roleDFSVisitAllPrivileges($role, $resource, $dfs))) {
             return $result;
@@ -971,7 +971,7 @@ class Zend_Acl
      *
      * @throws Zend_Acl_Exception
      */
-    protected function _roleDFSVisitAllPrivileges(Zend_Acl_Role_Interface $role, Zend_Acl_Resource_Interface $resource = null,
+    protected function _roleDFSVisitAllPrivileges(Zend_Acl_Role_Interface $role, ?Zend_Acl_Resource_Interface $resource = null,
         &$dfs = null)
     {
         if (null === $dfs) {
@@ -1014,7 +1014,7 @@ class Zend_Acl
      *
      * @throws Zend_Acl_Exception
      */
-    protected function _roleDFSOnePrivilege(Zend_Acl_Role_Interface $role, Zend_Acl_Resource_Interface $resource = null,
+    protected function _roleDFSOnePrivilege(Zend_Acl_Role_Interface $role, ?Zend_Acl_Resource_Interface $resource = null,
         $privilege = null)
     {
         if (null === $privilege) {
@@ -1028,7 +1028,7 @@ class Zend_Acl
         $dfs = [
             'visited' => [],
             'stack' => [],
-            ];
+        ];
 
         if (null !== ($result = $this->_roleDFSVisitOnePrivilege($role, $resource, $privilege, $dfs))) {
             return $result;
@@ -1060,7 +1060,7 @@ class Zend_Acl
      *
      * @throws Zend_Acl_Exception
      */
-    protected function _roleDFSVisitOnePrivilege(Zend_Acl_Role_Interface $role, Zend_Acl_Resource_Interface $resource = null,
+    protected function _roleDFSVisitOnePrivilege(Zend_Acl_Role_Interface $role, ?Zend_Acl_Resource_Interface $resource = null,
         $privilege = null, &$dfs = null)
     {
         if (null === $privilege) {
@@ -1113,7 +1113,7 @@ class Zend_Acl
      *
      * @return string|null
      */
-    protected function _getRuleType(Zend_Acl_Resource_Interface $resource = null, Zend_Acl_Role_Interface $role = null,
+    protected function _getRuleType(?Zend_Acl_Resource_Interface $resource = null, ?Zend_Acl_Role_Interface $role = null,
         $privilege = null)
     {
         // get the rules for the $resource and $role
@@ -1168,7 +1168,7 @@ class Zend_Acl
      *
      * @return array|null
      */
-    protected function &_getRules(Zend_Acl_Resource_Interface $resource = null, Zend_Acl_Role_Interface $role = null,
+    protected function &_getRules(?Zend_Acl_Resource_Interface $resource = null, ?Zend_Acl_Role_Interface $role = null,
         $create = false)
     {
         // create a reference to null

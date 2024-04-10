@@ -55,7 +55,7 @@ class Zend_View_Helper_FormErrors extends Zend_View_Helper_FormElement
      *
      * @return string
      */
-    public function formErrors($errors, array $options = null)
+    public function formErrors($errors, ?array $options = null)
     {
         $escape = true;
         if (isset($options['escape'])) {

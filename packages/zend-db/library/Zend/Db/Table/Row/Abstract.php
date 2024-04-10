@@ -354,7 +354,7 @@ abstract class Zend_Db_Table_Row_Abstract implements ArrayAccess, IteratorAggreg
      *
      * @throws Zend_Db_Table_Row_Exception
      */
-    public function setTable(Zend_Db_Table_Abstract $table = null)
+    public function setTable(?Zend_Db_Table_Abstract $table = null)
     {
         if (null == $table) {
             $this->_table = null;
@@ -909,7 +909,7 @@ abstract class Zend_Db_Table_Row_Abstract implements ArrayAccess, IteratorAggreg
      *
      * @throws Zend_Db_Table_Row_Exception if $dependentTable is not a table or is not loadable
      */
-    public function findDependentRowset($dependentTable, $ruleKey = null, Zend_Db_Table_Select $select = null)
+    public function findDependentRowset($dependentTable, $ruleKey = null, ?Zend_Db_Table_Select $select = null)
     {
         $db = $this->_getTable()->getAdapter();
 
@@ -967,7 +967,7 @@ abstract class Zend_Db_Table_Row_Abstract implements ArrayAccess, IteratorAggreg
      *
      * @throws Zend_Db_Table_Row_Exception if $parentTable is not a table or is not loadable
      */
-    public function findParentRow($parentTable, $ruleKey = null, Zend_Db_Table_Select $select = null)
+    public function findParentRow($parentTable, $ruleKey = null, ?Zend_Db_Table_Select $select = null)
     {
         $db = $this->_getTable()->getAdapter();
 
@@ -1036,7 +1036,7 @@ abstract class Zend_Db_Table_Row_Abstract implements ArrayAccess, IteratorAggreg
      * @throws Zend_Db_Table_Row_Exception if $matchTable or $intersectionTable is not a table class or is not loadable
      */
     public function findManyToManyRowset($matchTable, $intersectionTable, $callerRefRule = null,
-        $matchRefRule = null, Zend_Db_Table_Select $select = null)
+        $matchRefRule = null, ?Zend_Db_Table_Select $select = null)
     {
         $db = $this->_getTable()->getAdapter();
 

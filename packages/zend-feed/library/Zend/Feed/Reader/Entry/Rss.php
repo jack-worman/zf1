@@ -270,7 +270,7 @@ class Zend_Feed_Reader_Entry_Rss extends Zend_Feed_Reader_EntryAbstract implemen
                     $date = new Zend_Date($dateModifiedParsed);
                 } else {
                     $dateStandards = [Zend_Date::RSS, Zend_Date::RFC_822,
-                    Zend_Date::RFC_2822, Zend_Date::DATES];
+                        Zend_Date::RFC_2822, Zend_Date::DATES];
                     $date = new Zend_Date();
                     foreach ($dateStandards as $standard) {
                         try {

@@ -818,17 +818,17 @@ abstract class Zend_Date_DateObject
         } else {
             $dayofweek = self::dayOfWeek($year, $month, $numberdays);
             $array = [
-                    'seconds' => $seconds,
-                    'minutes' => $minutes,
-                    'hours' => $hours,
-                    'mday' => $numberdays,
-                    'wday' => $dayofweek,
-                    'mon' => $month,
-                    'year' => $year,
-                    'yday' => floor($secondsPerYear / 86400),
-                    'weekday' => gmdate('l', 86400 * (3 + $dayofweek)),
-                    'month' => gmdate('F', mktime(0, 0, 0, $month, 1, 1971)),
-                    0 => $otimestamp,
+                'seconds' => $seconds,
+                'minutes' => $minutes,
+                'hours' => $hours,
+                'mday' => $numberdays,
+                'wday' => $dayofweek,
+                'mon' => $month,
+                'year' => $year,
+                'yday' => floor($secondsPerYear / 86400),
+                'weekday' => gmdate('l', 86400 * (3 + $dayofweek)),
+                'month' => gmdate('F', mktime(0, 0, 0, $month, 1, 1971)),
+                0 => $otimestamp,
             ];
         }
 

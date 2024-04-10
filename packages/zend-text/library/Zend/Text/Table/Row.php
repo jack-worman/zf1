@@ -51,7 +51,7 @@ class Zend_Text_Table_Row
      *
      * @return Zend_Text_Table_Row
      */
-    public function createColumn($content, array $options = null)
+    public function createColumn($content, ?array $options = null)
     {
         $align = null;
         $colSpan = null;

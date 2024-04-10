@@ -55,8 +55,8 @@ class Zend_Pdf_Canvas extends Zend_Pdf_Canvas_Abstract
     protected $_height;
 
     protected $_resources = ['Font' => [],
-                                  'XObject' => [],
-                                  'ExtGState' => []];
+        'XObject' => [],
+        'ExtGState' => []];
 
     /**
      * Object constructor.

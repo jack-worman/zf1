@@ -251,8 +251,8 @@ class Zend_Pdf_Outline_Created extends Zend_Pdf_Outline
     public function dumpOutline(Zend_Pdf_ElementFactory_Interface $factory,
         $updateNavigation,
         Zend_Pdf_Element $parent,
-        Zend_Pdf_Element $prev = null,
-        SplObjectStorage $processedOutlines = null)
+        ?Zend_Pdf_Element $prev = null,
+        ?SplObjectStorage $processedOutlines = null)
     {
         if (null === $processedOutlines) {
             $processedOutlines = new SplObjectStorage();
@@ -279,8 +279,8 @@ class Zend_Pdf_Outline_Created extends Zend_Pdf_Outline
         if (null !== $color) {
             $components = $color->getComponents();
             $colorComponentElements = [new Zend_Pdf_Element_Numeric($components[0]),
-                                            new Zend_Pdf_Element_Numeric($components[1]),
-                                            new Zend_Pdf_Element_Numeric($components[2])];
+                new Zend_Pdf_Element_Numeric($components[1]),
+                new Zend_Pdf_Element_Numeric($components[2])];
             $outlineDictionary->C = new Zend_Pdf_Element_Array($colorComponentElements);
         }
 

@@ -70,9 +70,9 @@ class Zend_Search_Lucene_Document_Html extends Zend_Search_Lucene_Document
      * @var array
      */
     private $_inlineTags = ['a', 'abbr', 'acronym', 'dfn', 'em', 'strong', 'code',
-                                'samp', 'kbd', 'var', 'b', 'i', 'big', 'small', 'strike',
-                                'tt', 'u', 'font', 'span', 'bdo', 'cite', 'del', 'ins',
-                                'q', 'sub', 'sup'];
+        'samp', 'kbd', 'var', 'b', 'i', 'big', 'small', 'strike',
+        'tt', 'u', 'font', 'span', 'bdo', 'cite', 'del', 'ins',
+        'q', 'sub', 'sup'];
 
     /**
      * Object constructor.

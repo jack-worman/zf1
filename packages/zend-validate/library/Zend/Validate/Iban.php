@@ -234,9 +234,9 @@ class Zend_Validate_Iban extends Zend_Validate_Abstract
         $format = substr((string) $value, 4).substr((string) $value, 0, 4);
         $format = str_replace(
             ['A',  'B',  'C',  'D',  'E',  'F',  'G',  'H',  'I',  'J',  'K',  'L',  'M',
-                  'N',  'O',  'P',  'Q',  'R',  'S',  'T',  'U',  'V',  'W',  'X',  'Y',  'Z'],
+                'N',  'O',  'P',  'Q',  'R',  'S',  'T',  'U',  'V',  'W',  'X',  'Y',  'Z'],
             ['10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22',
-                  '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35'],
+                '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35'],
             $format);
 
         $temp = intval(substr((string) $format, 0, 1));

@@ -153,7 +153,7 @@ class Zend_Mail_Storage_Mbox extends Zend_Mail_Storage_Abstract
             $messagePos = $this->_getPos($id);
 
             return new $this->_messageClass(['file' => $this->_fh, 'startPos' => $messagePos['start'],
-                                                  'endPos' => $messagePos['end']]);
+                'endPos' => $messagePos['end']]);
         }
 
         $bodyLines = 0; // TODO: need a way to change that

@@ -156,7 +156,7 @@ class Zend_Pdf_Resource_Image_Png extends Zend_Pdf_Resource_Image
                         case Zend_Pdf_Resource_Image_Png::PNG_CHANNEL_GRAY:
                             $baseColor = ord((string) substr((string) $trnsData, 1, 1));
                             $transparencyData = [new Zend_Pdf_Element_Numeric($baseColor),
-                                                      new Zend_Pdf_Element_Numeric($baseColor)];
+                                new Zend_Pdf_Element_Numeric($baseColor)];
                             break;
 
                         case Zend_Pdf_Resource_Image_Png::PNG_CHANNEL_RGB:
@@ -164,18 +164,18 @@ class Zend_Pdf_Resource_Image_Png extends Zend_Pdf_Resource_Image
                             $green = ord((string) substr((string) $trnsData, 3, 1));
                             $blue = ord((string) substr((string) $trnsData, 5, 1));
                             $transparencyData = [new Zend_Pdf_Element_Numeric($red),
-                                                      new Zend_Pdf_Element_Numeric($red),
-                                                      new Zend_Pdf_Element_Numeric($green),
-                                                      new Zend_Pdf_Element_Numeric($green),
-                                                      new Zend_Pdf_Element_Numeric($blue),
-                                                      new Zend_Pdf_Element_Numeric($blue)];
+                                new Zend_Pdf_Element_Numeric($red),
+                                new Zend_Pdf_Element_Numeric($green),
+                                new Zend_Pdf_Element_Numeric($green),
+                                new Zend_Pdf_Element_Numeric($blue),
+                                new Zend_Pdf_Element_Numeric($blue)];
                             break;
 
                         case Zend_Pdf_Resource_Image_Png::PNG_CHANNEL_INDEXED:
                             // Find the first transparent color in the index, we will mask that. (This is a bit of a hack. This should be a SMask and mask all entries values).
                             if (($trnsIdx = strpos((string) $trnsData, "\0")) !== false) {
                                 $transparencyData = [new Zend_Pdf_Element_Numeric($trnsIdx),
-                                                          new Zend_Pdf_Element_Numeric($trnsIdx)];
+                                    new Zend_Pdf_Element_Numeric($trnsIdx)];
                             }
                             break;
 

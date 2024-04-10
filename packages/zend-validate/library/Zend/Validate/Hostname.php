@@ -1600,7 +1600,7 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
      *
      * @return Zend_Validate_Hostname
      */
-    public function setIpValidator(Zend_Validate_Ip $ipValidator = null)
+    public function setIpValidator(?Zend_Validate_Ip $ipValidator = null)
     {
         if (null === $ipValidator) {
             $ipValidator = new Zend_Validate_Ip();

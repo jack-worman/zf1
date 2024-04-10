@@ -199,7 +199,7 @@ class Zend_Feed_Builder_Entry extends ArrayObject
     public function setSource($title, $url)
     {
         $this->offsetSet('source', ['title' => $title,
-                                         'url' => $url]);
+            'url' => $url]);
 
         return $this;
     }
@@ -311,8 +311,8 @@ class Zend_Feed_Builder_Entry extends ArrayObject
             $enclosure = $this->offsetGet('enclosure');
         }
         $enclosure[] = ['url' => $url,
-                             'type' => $type,
-                             'length' => $length];
+            'type' => $type,
+            'length' => $length];
         $this->offsetSet('enclosure', $enclosure);
 
         return $this;

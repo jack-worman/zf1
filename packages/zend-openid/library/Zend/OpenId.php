@@ -440,7 +440,7 @@ class Zend_OpenId
      * @param string $method redirection method ('GET' or 'POST')
      */
     public static function redirect($url, $params = null,
-        Zend_Controller_Response_Abstract $response = null, $method = 'GET')
+        ?Zend_Controller_Response_Abstract $response = null, $method = 'GET')
     {
         $url = Zend_OpenId::absoluteUrl($url);
         $body = '';
@@ -645,9 +645,9 @@ class Zend_OpenId
     {
         if (function_exists('openssl_dh_compute_key')) {
             $dh_details = [
-                    'p' => $p,
-                    'g' => $g,
-                ];
+                'p' => $p,
+                'g' => $g,
+            ];
             if (null !== $priv_key) {
                 $dh_details['priv_key'] = $priv_key;
             }

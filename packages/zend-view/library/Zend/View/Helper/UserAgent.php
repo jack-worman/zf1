@@ -41,7 +41,7 @@ class Zend_View_Helper_UserAgent extends Zend_View_Helper_Abstract
      *
      * @return Zend_Http_UserAgent
      */
-    public function userAgent(Zend_Http_UserAgent $userAgent = null)
+    public function userAgent(?Zend_Http_UserAgent $userAgent = null)
     {
         if (null !== $userAgent) {
             $this->setUserAgent($userAgent);

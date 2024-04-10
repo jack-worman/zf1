@@ -421,11 +421,11 @@ class Zend_Wildfire_Plugin_FirePhp implements Zend_Wildfire_Plugin_Interface
             $eTrace = array_splice($eTrace, 0, $options['maxTraceDepth']);
 
             $var = ['Class' => get_class($var),
-                         'Message' => $var->getMessage(),
-                         'File' => $var->getFile(),
-                         'Line' => $var->getLine(),
-                         'Type' => 'throw',
-                         'Trace' => $firephp->_encodeTrace($eTrace)];
+                'Message' => $var->getMessage(),
+                'File' => $var->getFile(),
+                'Line' => $var->getLine(),
+                'Type' => 'throw',
+                'Trace' => $firephp->_encodeTrace($eTrace)];
 
             $meta['Type'] = self::EXCEPTION;
 
@@ -442,13 +442,13 @@ class Zend_Wildfire_Plugin_FirePhp implements Zend_Wildfire_Plugin_Interface
             }
 
             $var = ['Class' => $trace[0]['class'],
-                         'Type' => $trace[0]['type'],
-                         'Function' => $trace[0]['function'],
-                         'Message' => $label,
-                         'File' => isset($trace[0]['file']) ? $trace[0]['file'] : '',
-                         'Line' => isset($trace[0]['line']) ? $trace[0]['line'] : '',
-                         'Args' => isset($trace[0]['args']) ? $firephp->_encodeObject($trace[0]['args']) : '',
-                         'Trace' => $firephp->_encodeTrace(array_splice($trace, 1))];
+                'Type' => $trace[0]['type'],
+                'Function' => $trace[0]['function'],
+                'Message' => $label,
+                'File' => isset($trace[0]['file']) ? $trace[0]['file'] : '',
+                'Line' => isset($trace[0]['line']) ? $trace[0]['line'] : '',
+                'Args' => isset($trace[0]['args']) ? $firephp->_encodeObject($trace[0]['args']) : '',
+                'Trace' => $firephp->_encodeTrace(array_splice($trace, 1))];
 
             $skipFinalEncode = true;
         } elseif (self::TABLE == $meta['Type']) {
@@ -507,12 +507,12 @@ class Zend_Wildfire_Plugin_FirePhp implements Zend_Wildfire_Plugin_Interface
         if (self::DUMP == $meta['Type']) {
             return $firephp->_recordMessage(self::STRUCTURE_URI_DUMP,
                 ['key' => $meta['Label'],
-                      'data' => $var],
+                    'data' => $var],
                 $skipFinalEncode);
         } else {
             return $firephp->_recordMessage(self::STRUCTURE_URI_FIREBUGCONSOLE,
                 ['data' => $var,
-                      'meta' => $meta],
+                    'meta' => $meta],
                 $skipFinalEncode);
         }
     }
@@ -605,7 +605,7 @@ class Zend_Wildfire_Plugin_FirePhp implements Zend_Wildfire_Plugin_Interface
                            recordMessage($this,
                                $structure,
                                [$data['meta'],
-                                     $value]);
+                                   $value]);
 
             default:
                 // require_once 'Zend/Wildfire/Exception.php';

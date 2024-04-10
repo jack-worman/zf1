@@ -1133,13 +1133,20 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
      * settings as specified in the form object (including plugin loader
      * prefix paths, default decorators, etc.).
      *
-     * @param string            $type
-     * @param string            $name
-     * @param array|Zend_Config $options
+     * @param string                 $type
+     * @param string                 $name
+     * @param array|Zend_Config|null $options
      *
-     * @return Zend_Form_Element
-     *
-     * @throws Zend_Form_Exception
+     * @psalm-return ($type is 'select' ? Zend_Form_Element_Select
+     *     : ($type is 'multiselect' ? Zend_Form_Element_Multiselect
+     *     : ($type is 'text' ? Zend_Form_Element_Text
+     *     : ($type is 'radio' ? Zend_Form_Element_Radio
+     *     : ($type is 'file' ? Zend_Form_Element_File
+     *     : ($type is 'multiCheckbox' ? Zend_Form_Element_MultiCheckbox
+     *     : ($type is 'hidden' ? Zend_Form_Element_Hidden
+     *     : ($type is 'textarea' ? Zend_Form_Element_Textarea
+     *     : Zend_Form_Element
+     * ))))))))
      */
     public function createElement($type, $name, $options = null)
     {
@@ -2772,7 +2779,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
      *
      * @return Zend_Form
      */
-    public function setView(Zend_View_Interface $view = null)
+    public function setView(?Zend_View_Interface $view = null)
     {
         $this->_view = $view;
 
@@ -3023,7 +3030,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
      *
      * @return Zend_Form
      */
-    public function setElementDecorators(array $decorators, array $elements = null, $include = true)
+    public function setElementDecorators(array $decorators, ?array $elements = null, $include = true)
     {
         if (is_array($elements)) {
             if ($include) {
@@ -3090,7 +3097,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
      *
      * @return string
      */
-    public function render(Zend_View_Interface $view = null)
+    public function render(?Zend_View_Interface $view = null)
     {
         if (null !== $view) {
             $this->setView($view);
