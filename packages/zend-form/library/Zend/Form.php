@@ -1134,6 +1134,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
      * prefix paths, default decorators, etc.).
      *
      * @param array|Zend_Config|null $options
+     *
      * @psalm-return (
      *     $type is 'select' ? Zend_Form_Element_Select
      *     : ($type is 'multiselect' ? Zend_Form_Element_Multiselect
