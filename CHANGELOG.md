@@ -175,8 +175,6 @@
   - borrowed a few fixes fixes for zend-date tests from [diablomedia/zf1-date](https://github.com/diablomedia/zf1-date) (thanks!)
   - Fixing DateTest on servers with more recent timezone files [diablomedia/zf1-date@ef47f4](https://github.com/diablomedia/zf1-date/commit/ef47f4f3bde9c175c32e4b73ac779bd88a33799e)
   - sunrise/sunset calculation differences in php >= 7.2 [diablomedia/zf1-date@f69aca](https://github.com/diablomedia/zf1-date/commit/f69acaf6bc563af898144abd0a8aa1bbbf0e0308)
-- zend-feed
-  - php 7.2 compatibility fixes
 - zend-filter
   - fix auto-loading compress adapters
 - zend-loader
@@ -251,8 +249,6 @@
     - Zend_Date::setTime fix for DST change [zendframework/zf1#682](https://github.com/zendframework/zf1/issues/682)
 - zend-db
     - Fixed Warning: count(): Parameter must be an array or an object that implements Countable when $keyValuesCount is not an array ([zf1s/zend-db#1](https://github.com/zf1s/zend-db/pull/1))
-- zend-feed
-    - removed uses of deprecated function create_function() ([zf1s/zend-feed#1](https://github.com/zf1s/zend-feed/pull/1))
 - zend-filter
     - fixed handling of namespaced classes
 - zend-form

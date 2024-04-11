@@ -185,22 +185,6 @@ defined('TESTS_ZEND_DB_ADAPTER_SQLSRV_PASSWORD') || define('TESTS_ZEND_DB_ADAPTE
 defined('TESTS_ZEND_DB_ADAPTER_SQLSRV_DATABASE') || define('TESTS_ZEND_DB_ADAPTER_SQLSRV_DATABASE', 'test');
 
 /**
- * Zend_Feed_Rss/Zend_Feed_Atom online tests
- *
- * Set the BASEURI to a vhost pointed at the tests/Zend/Feed/_files
- * subdirectory to enable these tests.
- */
-defined('TESTS_ZEND_FEED_IMPORT_ONLINE_BASEURI') || define('TESTS_ZEND_FEED_IMPORT_ONLINE_BASEURI', false);
-
-/**
- * Zend_Feed_Reader tests
- *
- * If the ONLINE_ENABLED property is false, only tests that can be executed
- * without network connectivity are run; when enabled, all tests will run.
- */
-defined('TESTS_ZEND_FEED_READER_ONLINE_ENABLED') || define('TESTS_ZEND_FEED_READER_ONLINE_ENABLED', false);
-
-/**
  * Zend_Http_Client tests
  *
  * To enable the dynamic Zend_Http_Client tests, you will need to symbolically

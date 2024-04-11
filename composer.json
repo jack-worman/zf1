@@ -30,7 +30,6 @@
             "Zend_Amf": "packages/zend-amf/library/",
             "Zend_Application": "packages/zend-application/library/",
             "Zend_Auth": "packages/zend-auth/library/",
-            "Zend_Barcode": "packages/zend-barcode/library/",
             "Zend_Cache": "packages/zend-cache/library/",
             "Zend_Captcha": "packages/zend-captcha/library/",
             "Zend_Cloud": "packages/zend-cloud/library/",
@@ -47,7 +46,6 @@
             "Zend_Dom": "packages/zend-dom/library/",
             "Zend_EventManager": "packages/zend-eventmanager/library/",
             "Zend_Exception": "packages/zend-exception/library/",
-            "Zend_Feed": "packages/zend-feed/library/",
             "Zend_File": "packages/zend-file/library/",
             "Zend_File_Transfer": "packages/zend-file-transfer/library/",
             "Zend_Filter": "packages/zend-filter/library/",
@@ -117,7 +115,6 @@
         "zf1s/zend-amf": "self.version",
         "zf1s/zend-application": "self.version",
         "zf1s/zend-auth": "self.version",
-        "zf1s/zend-barcode": "self.version",
         "zf1s/zend-cache": "self.version",
         "zf1s/zend-captcha": "self.version",
         "zf1s/zend-cloud": "self.version",
@@ -134,7 +131,6 @@
         "zf1s/zend-dom": "self.version",
         "zf1s/zend-eventmanager": "self.version",
         "zf1s/zend-exception": "self.version",
-        "zf1s/zend-feed": "self.version",
         "zf1s/zend-file": "self.version",
         "zf1s/zend-file-transfer": "self.version",
         "zf1s/zend-filter": "self.version",
@@ -200,7 +196,8 @@
     "scripts": {
         "lint": "parallel-lint --exclude vendor --exclude tests/Zend/Loader/_files/ParseError.php .",
         "lint.checkstyle": "@lint --checkstyle",
-        "test": "phpunit"
+        "test": "phpunit",
+        "php-cs-fixer": "vendor/bin/php-cs-fixer fix"
     },
     "config": {
         "sort-packages": true
