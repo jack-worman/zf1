@@ -20,12 +20,12 @@
  * @version    $Id$
  */
 
-/**
+/*
  * @see Zend_Mail_Storage_Folder_Maildir
  */
 // require_once 'Zend/Mail/Storage/Folder/Maildir.php';
 
-/**
+/*
  * @see Zend_Mail_Storage_Writable_Interface
  */
 // require_once 'Zend/Mail/Storage/Writable/Interface.php';
@@ -541,7 +541,7 @@ class Zend_Mail_Storage_Writable_Maildir extends Zend_Mail_Storage_Folder_Maildi
     /**
      * append a new message to mail storage.
      *
-     * @param string|stream                        $message message as string or stream resource
+     * @param string|Stream                        $message message as string or stream resource
      * @param string|Zend_Mail_Storage_Folder|null $folder  folder for new message, else current folder is taken
      * @param array|null                           $flags   set flags for new message, else a default set is used
      * @param bool                                 $recent  handle this mail as if recent flag has been set,

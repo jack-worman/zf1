@@ -329,7 +329,7 @@ class Zend_Dojo_BuildLayer
      * Add a single build profile option.
      *
      * @param string $key
-     * @param value  $value
+     * @param Value  $value
      *
      * @return Zend_Dojo_BuildLayer
      */
