@@ -88,8 +88,8 @@ jobs:
         run: |
           composer lint.checkstyle | cs2pr
 
-#      - name: php-cs-fixer
-#        run: vendor/bin/php-cs-fixer fix --dry-run
+      - name: php-cs-fixer
+        run: vendor/bin/php-cs-fixer fix --dry-run
 
       - name: Setup environment for PHPUnit
         run: |
