@@ -189,7 +189,6 @@
   - format+math+phpmath overhaul
     - untangled normalization - removed when value is expected in already normalized form
     - fix for issues with locales where e.g. thousand separator is a dot (e.g. german), i.a. [zendframework/zf1#706](https://github.com/zendframework/zf1/issues/706)
-    - apart from zend-currency, it will also have a big impact on zend-measure package (fixing calculations)
   - iconv_substr php 7.0.11+ compatibility fixes - borrowed from [axot/zf1@4c6400](https://github.com/axot/zf1/commit/4c6400ad28f1f7a3448492f9d444aff1080c6) (thanks!)
 - zend-mail 
   - php 7.2 compatibility fixes
