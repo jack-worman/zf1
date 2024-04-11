@@ -22,6 +22,8 @@
 
 namespace Zend\UnusualNamespace;
 
+use AllowDynamicProperties;
+
 /**
  * @category   Zend
  * @package    Loader

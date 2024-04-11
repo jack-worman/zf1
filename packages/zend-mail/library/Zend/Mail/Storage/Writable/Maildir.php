@@ -29,6 +29,7 @@
  * @see Zend_Mail_Storage_Writable_Interface
  */
 // require_once 'Zend/Mail/Storage/Writable/Interface.php';
+use http\Encoding\Stream;
 
 /**
  * @category   Zend

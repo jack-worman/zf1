@@ -21,6 +21,10 @@
 
 namespace ZendTest\Loader\TestAsset;
 
+use AllowDynamicProperties;
+use IteratorAggregate;
+use Traversable;
+
 /**
  * @package    Zend_Loader
  * @subpackage UnitTests

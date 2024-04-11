@@ -2,6 +2,8 @@
 
 namespace Zend\Http;
 
+use AllowDynamicProperties;
+
 #[AllowDynamicProperties]
 class StreamObject
 {

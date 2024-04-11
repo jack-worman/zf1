@@ -21,6 +21,8 @@
 
 namespace Zend\JsonTest\ZF11356;
 
+use AllowDynamicProperties;
+
 /**
  * Namespaced Class for use in Zend_JsonTest::testEncoderEscapesNamespacedClassNamesProperly
  *

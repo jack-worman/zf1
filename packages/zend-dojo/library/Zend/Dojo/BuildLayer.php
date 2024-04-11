@@ -20,6 +20,8 @@
  * @version    $Id$
  */
 
+use Cassandra\Value;
+
 /**
  * Dojo module layer and custom build profile generation support.
  *

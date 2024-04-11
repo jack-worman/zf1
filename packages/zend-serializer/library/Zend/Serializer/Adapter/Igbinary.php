@@ -22,6 +22,7 @@
 
 /** @see Zend_Serializer_Adapter_AdapterAbstract */
 // require_once 'Zend/Serializer/Adapter/AdapterAbstract.php';
+use MongoDB\BSON\Binary;
 
 /**
  * @category   Zend
