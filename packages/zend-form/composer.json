@@ -17,7 +17,6 @@
         }
     },
     "suggest": {
-        "zf1s/zend-captcha": "Used in special situations or with special adapters",
         "zf1s/zend-controller": "Used in special situations or with special adapters",
         "zf1s/zend-json": "Used in special situations or with special adapters",
         "zf1s/zend-loader": "Used in special situations or with special adapters",

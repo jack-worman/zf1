@@ -128,8 +128,6 @@
 ### 1.13.2 - 2020-05-25
 - zend-search-lucene
   - fixed "Trying to access array offset on value of type int" when passed a non-string value to `Zend_Search_Lucene_Index_Term` ([#19](https://github.com/zf1s/zf1/pull/19))
-- zend-service-rackspace
-  - restore back `array_key_exists` in place of `isset` - reverted unnecessary changes from [#16](https://github.com/zf1s/zf1/pull/16/files#diff-7d8cdc4dbd5afcd88fca225eaf9a353f)
 
 ### 1.13.1 - 2019-12-16
 - general
@@ -163,8 +161,6 @@
     - portability adjustments - mainly for windows & winux (wsl)
     - added missing stdlib and xml tests to Zend/AllTests
   - composer: fill ext-* dependencies ([#6](https://github.com/zf1s/zf1/pull/6))
-- zend-cloud
-  - fix lettercase of loaded class Zend_Service_Amazon_Ec2_Availabilityzones
 - zend-codegenerator
   - fix output of Zend_CodeGenerator_Php_File
   - restore commented require_once
@@ -261,8 +257,6 @@
     - optimize loading plugins - use only composer autoloader
 - zend-json
     - merged [zendframework/zf1#680](https://github.com/zendframework/zf1/pull/680) to fix "Zend_Json::decode null or empty string throw Zend_Json_Exception on PHP7"
-- zend-rest
-    - updated assemble signature ([zf1s/zend-rest#1](https://github.com/zf1s/zend-rest/pull/1))
 - zend-validate
     - Added null check to avoid errors with passing null to a count parameter ([zf1s/zend-validate#1](https://github.com/zf1s/zend-validate/pull/1))
     - fixed invalid assignment $this->_messages = null causing "Warning: count(): Parameter must be an array or an object that implements Countable"
