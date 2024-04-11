@@ -128,8 +128,6 @@
 ### 1.13.2 - 2020-05-25
 - zend-search-lucene
   - fixed "Trying to access array offset on value of type int" when passed a non-string value to `Zend_Search_Lucene_Index_Term` ([#19](https://github.com/zf1s/zf1/pull/19))
-- zend-service-rackspace
-  - restore back `array_key_exists` in place of `isset` - reverted unnecessary changes from [#16](https://github.com/zf1s/zf1/pull/16/files#diff-7d8cdc4dbd5afcd88fca225eaf9a353f)
 
 ### 1.13.1 - 2019-12-16
 - general
@@ -163,8 +161,6 @@
     - portability adjustments - mainly for windows & winux (wsl)
     - added missing stdlib and xml tests to Zend/AllTests
   - composer: fill ext-* dependencies ([#6](https://github.com/zf1s/zf1/pull/6))
-- zend-cloud
-  - fix lettercase of loaded class Zend_Service_Amazon_Ec2_Availabilityzones
 - zend-codegenerator
   - fix output of Zend_CodeGenerator_Php_File
   - restore commented require_once
@@ -175,8 +171,6 @@
   - borrowed a few fixes fixes for zend-date tests from [diablomedia/zf1-date](https://github.com/diablomedia/zf1-date) (thanks!)
   - Fixing DateTest on servers with more recent timezone files [diablomedia/zf1-date@ef47f4](https://github.com/diablomedia/zf1-date/commit/ef47f4f3bde9c175c32e4b73ac779bd88a33799e)
   - sunrise/sunset calculation differences in php >= 7.2 [diablomedia/zf1-date@f69aca](https://github.com/diablomedia/zf1-date/commit/f69acaf6bc563af898144abd0a8aa1bbbf0e0308)
-- zend-feed
-  - php 7.2 compatibility fixes
 - zend-filter
   - fix auto-loading compress adapters
 - zend-loader
@@ -195,7 +189,6 @@
   - format+math+phpmath overhaul
     - untangled normalization - removed when value is expected in already normalized form
     - fix for issues with locales where e.g. thousand separator is a dot (e.g. german), i.a. [zendframework/zf1#706](https://github.com/zendframework/zf1/issues/706)
-    - apart from zend-currency, it will also have a big impact on zend-measure package (fixing calculations)
   - iconv_substr php 7.0.11+ compatibility fixes - borrowed from [axot/zf1@4c6400](https://github.com/axot/zf1/commit/4c6400ad28f1f7a3448492f9d444aff1080c6) (thanks!)
 - zend-mail 
   - php 7.2 compatibility fixes
@@ -251,8 +244,6 @@
     - Zend_Date::setTime fix for DST change [zendframework/zf1#682](https://github.com/zendframework/zf1/issues/682)
 - zend-db
     - Fixed Warning: count(): Parameter must be an array or an object that implements Countable when $keyValuesCount is not an array ([zf1s/zend-db#1](https://github.com/zf1s/zend-db/pull/1))
-- zend-feed
-    - removed uses of deprecated function create_function() ([zf1s/zend-feed#1](https://github.com/zf1s/zend-feed/pull/1))
 - zend-filter
     - fixed handling of namespaced classes
 - zend-form
@@ -265,8 +256,6 @@
     - optimize loading plugins - use only composer autoloader
 - zend-json
     - merged [zendframework/zf1#680](https://github.com/zendframework/zf1/pull/680) to fix "Zend_Json::decode null or empty string throw Zend_Json_Exception on PHP7"
-- zend-rest
-    - updated assemble signature ([zf1s/zend-rest#1](https://github.com/zf1s/zend-rest/pull/1))
 - zend-validate
     - Added null check to avoid errors with passing null to a count parameter ([zf1s/zend-validate#1](https://github.com/zf1s/zend-validate/pull/1))
     - fixed invalid assignment $this->_messages = null causing "Warning: count(): Parameter must be an array or an object that implements Countable"

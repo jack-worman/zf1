@@ -21,6 +21,8 @@
  */
 namespace Zend\Form\Element\FileTest\Adapter;
 
+use AllowDynamicProperties;
+
 /**
  * @category   Zend
  * @package    Zend_Form

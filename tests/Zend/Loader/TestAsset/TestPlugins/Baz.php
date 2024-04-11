@@ -21,6 +21,8 @@
 
 namespace ZendTest\Loader\TestAsset\TestPlugins;
 
+use AllowDynamicProperties;
+
 /**
  * @package    Zend_Loader
  * @subpackage UnitTests

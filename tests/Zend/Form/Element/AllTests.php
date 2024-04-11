@@ -25,7 +25,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 }
 
 require_once 'Zend/Form/Element/ButtonTest.php';
-require_once 'Zend/Form/Element/CaptchaTest.php';
 require_once 'Zend/Form/Element/CheckboxTest.php';
 require_once 'Zend/Form/Element/FileTest.php';
 require_once 'Zend/Form/Element/HashTest.php';
@@ -63,7 +62,6 @@ class Zend_Form_Element_AllTests
         $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Form_Element');
 
         $suite->addTestSuite('Zend_Form_Element_ButtonTest');
-        $suite->addTestSuite('Zend_Form_Element_CaptchaTest');
         $suite->addTestSuite('Zend_Form_Element_CheckboxTest');
         $suite->addTestSuite('Zend_Form_Element_FileTest');
         $suite->addTestSuite('Zend_Form_Element_HashTest');

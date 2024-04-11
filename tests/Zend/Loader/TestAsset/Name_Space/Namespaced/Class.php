@@ -21,6 +21,8 @@
 
 namespace ZendTest\UnusualNamespace\Name_Space;
 
+use AllowDynamicProperties;
+
 /**
  * @package    Zend_Loader
  * @subpackage UnitTests

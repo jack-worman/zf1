@@ -20,11 +20,12 @@
  * @version    $Id$
  */
 
-/** Zend_Log_Writer_Abstract */
+/* Zend_Log_Writer_Abstract */
 // require_once 'Zend/Log/Writer/Abstract.php';
 
-/** Zend_Log_Formatter_Simple */
+/* Zend_Log_Formatter_Simple */
 // require_once 'Zend/Log/Formatter/Simple.php';
+use http\Encoding\Stream;
 
 /**
  * @category   Zend
@@ -39,7 +40,7 @@ class Zend_Log_Writer_Stream extends Zend_Log_Writer_Abstract
     /**
      * Holds the PHP stream to log to.
      *
-     * @var stream|null
+     * @var Stream|null
      */
     protected $_stream;
 

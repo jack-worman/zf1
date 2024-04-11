@@ -20,8 +20,9 @@
  * @version    $Id$
  */
 
-/** @see Zend_Serializer_Adapter_AdapterAbstract */
+/* @see Zend_Serializer_Adapter_AdapterAbstract */
 // require_once 'Zend/Serializer/Adapter/AdapterAbstract.php';
+use MongoDB\BSON\Binary;
 
 /**
  * @category   Zend
@@ -81,7 +82,7 @@ class Zend_Serializer_Adapter_Igbinary extends Zend_Serializer_Adapter_AdapterAb
     /**
      * Deserialize igbinary string to PHP value.
      *
-     * @param string|binary $serialized
+     * @param string|Binary $serialized
      *
      * @throws Zend_Serializer_Exception on igbinary error
      */
