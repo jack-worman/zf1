@@ -36,9 +36,6 @@ class Zend_Oauth_Token_AuthorizedRequest extends Zend_Oauth_Token
      */
     protected $_data = [];
 
-    /**
-     * Constructor.
-     */
     public function __construct(?array $data = null, ?Zend_Oauth_Http_Utility $utility = null)
     {
         if (null !== $data) {

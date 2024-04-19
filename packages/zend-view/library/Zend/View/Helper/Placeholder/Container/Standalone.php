@@ -60,9 +60,6 @@ abstract class Zend_View_Helper_Placeholder_Container_Standalone extends Zend_Vi
      */
     protected $_autoEscape = true;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->setRegistry(Zend_View_Helper_Placeholder_Registry::getRegistry());

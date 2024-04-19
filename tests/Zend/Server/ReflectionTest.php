@@ -142,7 +142,6 @@ class Zend_Server_Reflection_testClass
      * This shouldn't be reflected
      *
      * @param mixed $arg
-     * @return void
      */
     public function __construct($arg = null)
     {

@@ -51,9 +51,6 @@ class Zend_Ldap_Collection implements Iterator, Countable
      */
     protected $_cache = [];
 
-    /**
-     * Constructor.
-     */
     public function __construct(Zend_Ldap_Collection_Iterator_Default $iterator)
     {
         $this->_iterator = $iterator;

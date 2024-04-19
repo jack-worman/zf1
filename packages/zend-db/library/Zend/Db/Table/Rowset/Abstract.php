@@ -96,9 +96,6 @@ abstract class Zend_Db_Table_Rowset_Abstract implements SeekableIterator, Counta
      */
     protected $_readOnly = false;
 
-    /**
-     * Constructor.
-     */
     public function __construct(array $config)
     {
         if (isset($config['table'])) {

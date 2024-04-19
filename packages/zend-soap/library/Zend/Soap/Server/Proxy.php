@@ -30,9 +30,6 @@ class Zend_Soap_Server_Proxy
      */
     protected $_className;
 
-    /**
-     * Constructor.
-     */
     public function __construct($className, $classArgs = [])
     {
         $class = new ReflectionClass($className);

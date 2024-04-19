@@ -47,9 +47,6 @@ class Zend_Log_Writer_ZendMonitor extends Zend_Log_Writer_Abstract
      */
     protected $_isZendServer = false;
 
-    /**
-     * @return void
-     */
     public function __construct()
     {
         if (!function_exists('monitor_custom_event')) {

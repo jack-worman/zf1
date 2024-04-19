@@ -40,9 +40,6 @@ class Zend_Application_Resource_Modules extends Zend_Application_Resource_Resour
      */
     protected $_bootstraps;
 
-    /**
-     * Constructor.
-     */
     public function __construct($options = null)
     {
         $this->_bootstraps = new ArrayObject([], ArrayObject::ARRAY_AS_PROPS);

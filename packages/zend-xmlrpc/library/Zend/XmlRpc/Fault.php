@@ -100,9 +100,6 @@ class Zend_XmlRpc_Fault
         653 => 'Invalid XMLRPC value in response',
     ];
 
-    /**
-     * Constructor.
-     */
     public function __construct($code = 404, $message = '')
     {
         $this->setCode($code);

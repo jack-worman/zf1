@@ -248,9 +248,6 @@ class Zend_Controller_Action_HelperBroker
         return self::$_stack;
     }
 
-    /**
-     * Constructor.
-     */
     public function __construct(Zend_Controller_Action $actionController)
     {
         $this->_actionController = $actionController;

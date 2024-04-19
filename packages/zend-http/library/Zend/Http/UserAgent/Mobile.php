@@ -318,9 +318,6 @@ class Zend_Http_UserAgent_Mobile extends Zend_Http_UserAgent_AbstractDevice
         return in_array($mobile_ua, self::$_uaBegin);
     }
 
-    /**
-     * Constructor.
-     */
     public function __construct($userAgent = null, array $server = [], array $config = [])
     {
         // For mobile detection, an adapter must be defined

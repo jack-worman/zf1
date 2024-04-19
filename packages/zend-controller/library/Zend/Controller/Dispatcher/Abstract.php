@@ -88,9 +88,6 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
      */
     protected $_wordDelimiter = ['-', '.'];
 
-    /**
-     * Constructor.
-     */
     public function __construct(array $params = [])
     {
         $this->setParams($params);

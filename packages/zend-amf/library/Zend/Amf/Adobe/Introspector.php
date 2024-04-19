@@ -62,9 +62,6 @@ class Zend_Amf_Adobe_Introspector
      */
     protected $_xml;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->_xml = new DOMDocument('1.0', 'utf-8');

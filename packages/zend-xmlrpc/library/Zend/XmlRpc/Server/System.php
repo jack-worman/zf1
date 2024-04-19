@@ -35,9 +35,6 @@ class Zend_XmlRpc_Server_System
      */
     protected $_server;
 
-    /**
-     * Constructor.
-     */
     public function __construct(Zend_XmlRpc_Server $server)
     {
         $this->_server = $server;
