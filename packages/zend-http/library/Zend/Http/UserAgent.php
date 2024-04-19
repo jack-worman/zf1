@@ -155,8 +155,6 @@ class Zend_Http_UserAgent implements Serializable
      * Constructor.
      *
      * @param array|Zend_Config|ArrayAccess|null $options
-     *
-     * @return void
      */
     public function __construct($options = null)
     {

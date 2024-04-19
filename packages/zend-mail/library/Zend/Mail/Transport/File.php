@@ -55,8 +55,6 @@ class Zend_Mail_Transport_File extends Zend_Mail_Transport_Abstract
      * Constructor.
      *
      * @param array|Zend_Config $options OPTIONAL (Default: null)
-     *
-     * @return void
      */
     public function __construct($options = null)
     {

@@ -76,8 +76,6 @@ class Zend_Queue_Message_Iterator implements Iterator, Countable
      * Constructor.
      *
      * @param array $options ('queue', 'messageClass', 'data'=>array());
-     *
-     * @return void
      */
     public function __construct(array $options = [])
     {

@@ -105,8 +105,6 @@ class Zend_Auth_Adapter_Http_AuthTest extends PHPUnit_Framework_TestCase
 
     /**
      * Set up test configuration
-     *
-     * @return void
      */
     public function __construct()
     {

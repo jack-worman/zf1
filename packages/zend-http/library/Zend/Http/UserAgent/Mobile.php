@@ -320,8 +320,6 @@ class Zend_Http_UserAgent_Mobile extends Zend_Http_UserAgent_AbstractDevice
 
     /**
      * Constructor.
-     *
-     * @return void
      */
     public function __construct($userAgent = null, array $server = [], array $config = [])
     {

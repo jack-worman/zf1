@@ -52,8 +52,6 @@ class Zend_Auth_Adapter_DigestTest extends PHPUnit_Framework_TestCase
 
     /**
      * Sets the path to test files
-     *
-     * @return void
      */
     public function __construct()
     {

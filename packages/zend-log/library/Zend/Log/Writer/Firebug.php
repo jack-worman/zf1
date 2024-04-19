@@ -72,8 +72,6 @@ class Zend_Log_Writer_Firebug extends Zend_Log_Writer_Abstract
 
     /**
      * Class constructor.
-     *
-     * @return void
      */
     public function __construct()
     {

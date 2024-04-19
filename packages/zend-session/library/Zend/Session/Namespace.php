@@ -98,8 +98,6 @@ class Zend_Session_Namespace extends Zend_Session_Abstract implements IteratorAg
      *
      * @param string $namespace      - programmatic name of the requested namespace
      * @param bool   $singleInstance - prevent creation of additional accessor instance objects for this namespace
-     *
-     * @return void
      */
     public function __construct($namespace = 'Default', $singleInstance = false)
     {

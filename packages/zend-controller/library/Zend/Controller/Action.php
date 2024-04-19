@@ -129,8 +129,6 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
      * constructor to customize an action controller's instantiation.
      *
      * @param array $invokeArgs Any additional invocation arguments
-     *
-     * @return void
      */
     public function __construct(Zend_Controller_Request_Abstract $request, Zend_Controller_Response_Abstract $response, array $invokeArgs = [])
     {

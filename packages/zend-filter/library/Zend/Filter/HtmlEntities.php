@@ -56,8 +56,6 @@ class Zend_Filter_HtmlEntities implements Zend_Filter_Interface
 
     /**
      * Sets filter options.
-     *
-     * @return void
      */
     public function __construct($options = [])
     {

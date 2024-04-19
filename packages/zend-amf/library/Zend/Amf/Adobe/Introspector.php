@@ -64,8 +64,6 @@ class Zend_Amf_Adobe_Introspector
 
     /**
      * Constructor.
-     *
-     * @return void
      */
     public function __construct()
     {

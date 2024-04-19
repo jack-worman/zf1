@@ -64,8 +64,6 @@ class Zend_Loader_Autoloader_Resource implements Zend_Loader_Autoloader_Interfac
      * Constructor.
      *
      * @param array|Zend_Config $options Configuration options for resource autoloader
-     *
-     * @return void
      */
     public function __construct($options)
     {

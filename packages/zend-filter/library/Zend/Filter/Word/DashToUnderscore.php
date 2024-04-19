@@ -35,8 +35,6 @@ class Zend_Filter_Word_DashToUnderscore extends Zend_Filter_Word_SeparatorToSepa
 {
     /**
      * Constructor.
-     *
-     * @return void
      */
     public function __construct()
     {

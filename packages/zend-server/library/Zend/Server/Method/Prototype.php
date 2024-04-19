@@ -49,8 +49,6 @@ class Zend_Server_Method_Prototype
      * Constructor.
      *
      * @param array|null $options
-     *
-     * @return void
      */
     public function __construct($options = null)
     {

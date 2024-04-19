@@ -98,8 +98,6 @@ class Zend_Controller_Plugin_ErrorHandler extends Zend_Controller_Plugin_Abstrac
      * - module
      * - controller
      * - action
-     *
-     * @return void
      */
     public function __construct(array $options = [])
     {

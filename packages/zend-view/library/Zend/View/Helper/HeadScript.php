@@ -103,8 +103,6 @@ class Zend_View_Helper_HeadScript extends Zend_View_Helper_Placeholder_Container
      * Constructor.
      *
      * Set separator to PHP_EOL.
-     *
-     * @return void
      */
     public function __construct()
     {

@@ -53,8 +53,6 @@ class Zend_Log_Formatter_Xml extends Zend_Log_Formatter_Abstract
      * (the default encoding is UTF-8).
      *
      * @param array|Zend_Config $options
-     *
-     * @return void
      */
     public function __construct($options = [])
     {

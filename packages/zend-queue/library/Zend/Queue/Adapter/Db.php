@@ -74,8 +74,6 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
      * Constructor.
      *
      * @param array|Zend_Config $options
-     *
-     * @return void
      */
     public function __construct($options, ?Zend_Queue $queue = null)
     {

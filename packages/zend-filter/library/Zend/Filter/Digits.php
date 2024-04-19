@@ -44,8 +44,6 @@ class Zend_Filter_Digits implements Zend_Filter_Interface
      * Class constructor.
      *
      * Checks if PCRE is compiled with UTF-8 and Unicode support
-     *
-     * @return void
      */
     public function __construct()
     {

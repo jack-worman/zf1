@@ -79,8 +79,6 @@ class Zend_Test_PHPUnit_Constraint_Redirect41 extends PHPUnit_Framework_Constrai
 
     /**
      * Constructor; setup constraint state.
-     *
-     * @return void
      */
     public function __construct()
     {

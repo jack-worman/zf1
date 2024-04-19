@@ -54,8 +54,6 @@ class Zend_View_Helper_Placeholder extends Zend_View_Helper_Abstract
      * Constructor.
      *
      * Retrieve container registry from Zend_Registry, or create new one and register it.
-     *
-     * @return void
      */
     public function __construct()
     {

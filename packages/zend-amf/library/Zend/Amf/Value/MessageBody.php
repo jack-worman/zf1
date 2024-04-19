@@ -83,8 +83,6 @@ class Zend_Amf_Value_MessageBody
      * @param string $targetUri
      * @param string $responseUri
      * @param string $data
-     *
-     * @return void
      */
     public function __construct($targetUri, $responseUri, $data)
     {

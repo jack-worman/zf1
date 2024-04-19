@@ -245,8 +245,6 @@ abstract class Zend_Db_Table_Abstract
      * - metadataCache   = cache for information from adapter describeTable().
      *
      * @param mixed $config array of user-specified config options, or just the Db Adapter
-     *
-     * @return void
      */
     public function __construct($config = [])
     {

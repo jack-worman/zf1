@@ -70,7 +70,7 @@
  * @method string                                          htmlQuicktime($data, array $attribs = array(), array $params = array(), $content = null)
  * @method Zend_View_Helper_InlineScript                   inlineScript($mode = Zend_View_Helper_HeadScript::FILE, $spec = null, $placement = 'APPEND', array $attrs = array(), $type = 'text/javascript')
  * @method string|void                                     json($data, $keepLayouts = false, $encodeData = true)
- * @method Zend_View_Helper_Layout                         layout()
+ * @method Zend_Layout                                     layout()
  * @method Zend_View_Helper_Navigation                     navigation(Zend_Navigation_Container $container = null)
  * @method string                                          paginationControl(Zend_Paginator $paginator = null, $scrollingStyle = null, $partial = null, $params = null)
  * @method string                                          partial($name = null, $module = null, $model = null)
@@ -104,8 +104,6 @@ class Zend_View extends Zend_View_Abstract
      * Register Zend_View_Stream stream wrapper if short tags are disabled.
      *
      * @param array $config
-     *
-     * @return void
      */
     public function __construct($config = [])
     {

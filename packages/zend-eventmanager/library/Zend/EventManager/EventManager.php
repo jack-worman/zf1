@@ -72,8 +72,6 @@ class Zend_EventManager_EventManager implements Zend_EventManager_EventCollectio
      * StaticEventManager.
      *
      * @param string|int|array|Traversable|null $identifiers
-     *
-     * @return void
      */
     public function __construct($identifiers = null)
     {

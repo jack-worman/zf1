@@ -129,8 +129,6 @@ class Zend_Form_DisplayGroup implements Iterator, Countable
      *
      * @param string            $name
      * @param array|Zend_Config $options
-     *
-     * @return void
      */
     public function __construct($name, Zend_Loader_PluginLoader $loader, $options = null)
     {

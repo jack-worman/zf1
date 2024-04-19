@@ -44,8 +44,6 @@ class Zend_Queue_Adapter_PlatformJobQueue extends Zend_Queue_Adapter_AdapterAbst
      * Constructor.
      *
      * @param array|Zend_Config $options
-     *
-     * @return void
      */
     public function __construct($options, ?Zend_Queue $queue = null)
     {

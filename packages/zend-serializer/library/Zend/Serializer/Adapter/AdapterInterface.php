@@ -32,8 +32,6 @@ interface Zend_Serializer_Adapter_AdapterInterface
      * Constructor.
      *
      * @param array|Zend_Config $opts Serializer options
-     *
-     * @return void
      */
     public function __construct($opts = []);
 

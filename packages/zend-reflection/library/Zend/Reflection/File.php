@@ -83,8 +83,6 @@ class Zend_Reflection_File implements Reflector
      * Constructor.
      *
      * @param string $file
-     *
-     * @return void
      */
     public function __construct($file)
     {

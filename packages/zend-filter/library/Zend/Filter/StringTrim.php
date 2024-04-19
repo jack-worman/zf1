@@ -47,8 +47,6 @@ class Zend_Filter_StringTrim implements Zend_Filter_Interface
      * Sets filter options.
      *
      * @param string|array|Zend_Config $options
-     *
-     * @return void
      */
     public function __construct($options = null)
     {

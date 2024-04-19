@@ -41,8 +41,6 @@ class Zend_EventManager_FilterChain implements Zend_EventManager_Filter
      * Constructor.
      *
      * Initializes Zend_EventManager_Filter_FilterIterator in which filters will be aggregated
-     *
-     * @return void
      */
     public function __construct()
     {

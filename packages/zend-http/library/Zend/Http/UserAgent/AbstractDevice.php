@@ -97,8 +97,6 @@ abstract class Zend_Http_UserAgent_AbstractDevice implements Zend_Http_UserAgent
      * Constructor.
      *
      * @param string|array|null $userAgent If array, restores from serialized version
-     *
-     * @return void
      */
     public function __construct($userAgent = null, array $server = [], array $config = [])
     {

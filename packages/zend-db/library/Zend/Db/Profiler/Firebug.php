@@ -71,8 +71,6 @@ class Zend_Db_Profiler_Firebug extends Zend_Db_Profiler
      * Constructor.
      *
      * @param string $label OPTIONAL Label for the profiling info
-     *
-     * @return void
      */
     public function __construct($label = null)
     {

@@ -64,8 +64,6 @@ class Zend_Loader_StandardAutoloader implements Zend_Loader_SplAutoloader
      * Constructor.
      *
      * @param array|Traversable|null $options
-     *
-     * @return void
      */
     public function __construct($options = null)
     {

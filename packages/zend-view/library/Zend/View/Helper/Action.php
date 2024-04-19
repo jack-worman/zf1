@@ -56,8 +56,6 @@ class Zend_View_Helper_Action extends Zend_View_Helper_Abstract
      * Constructor.
      *
      * Grab local copies of various MVC objects
-     *
-     * @return void
      */
     public function __construct()
     {

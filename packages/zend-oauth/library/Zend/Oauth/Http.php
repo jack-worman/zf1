@@ -74,8 +74,6 @@ class Zend_Oauth_Http
 
     /**
      * Constructor.
-     *
-     * @return void
      */
     public function __construct(
         Zend_Oauth_Consumer $consumer,

@@ -55,8 +55,6 @@ class Zend_Stdlib_CallbackHandler
      * Constructor.
      *
      * @param string|array|object $callback PHP callback
-     *
-     * @return void
      */
     public function __construct($callback, array $metadata = [])
     {

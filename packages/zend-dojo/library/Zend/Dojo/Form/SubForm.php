@@ -44,8 +44,6 @@ class Zend_Dojo_Form_SubForm extends Zend_Form_SubForm
      * Constructor.
      *
      * @param array|Zend_Config|null $options
-     *
-     * @return void
      */
     public function __construct($options = null)
     {

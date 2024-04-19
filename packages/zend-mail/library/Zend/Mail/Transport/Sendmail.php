@@ -67,8 +67,6 @@ class Zend_Mail_Transport_Sendmail extends Zend_Mail_Transport_Abstract
      * Constructor.
      *
      * @param string|array|Zend_Config $parameters OPTIONAL (Default: null)
-     *
-     * @return void
      */
     public function __construct($parameters = null)
     {

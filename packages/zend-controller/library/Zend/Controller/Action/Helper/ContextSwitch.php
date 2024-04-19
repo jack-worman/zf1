@@ -134,8 +134,6 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
      * Constructor.
      *
      * @param array|Zend_Config $options
-     *
-     * @return void
      */
     public function __construct($options = null)
     {

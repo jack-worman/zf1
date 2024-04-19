@@ -51,8 +51,6 @@ class Zend_Loader_ClassMapAutoloader implements Zend_Loader_SplAutoloader
      * Create a new instance, and optionally configure the autoloader.
      *
      * @param array|Traversable|null $options
-     *
-     * @return void
      */
     public function __construct($options = null)
     {

@@ -55,8 +55,6 @@ class Zend_Mail_Protocol_Smtp_Auth_Plain extends Zend_Mail_Protocol_Smtp
      * @param string $host   (Default: 127.0.0.1)
      * @param int    $port   (Default: null)
      * @param array  $config Auth-specific parameters
-     *
-     * @return void
      */
     public function __construct($host = '127.0.0.1', $port = null, $config = null)
     {

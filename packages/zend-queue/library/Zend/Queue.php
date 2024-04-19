@@ -88,8 +88,6 @@ class Zend_Queue implements Countable
      *
      * @param  string|Zend_Queue_Adapter|array|Zend_Config|null String or adapter instance, or options array or Zend_Config instance
      * @param Zend_Config|array $options Zend_Config or a configuration array
-     *
-     * @return void
      */
     public function __construct($spec, $options = [])
     {

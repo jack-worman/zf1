@@ -73,8 +73,6 @@ class Zend_View_Helper_HeadLink extends Zend_View_Helper_Placeholder_Container_S
      * Constructor.
      *
      * Use PHP_EOL as separator
-     *
-     * @return void
      */
     public function __construct()
     {

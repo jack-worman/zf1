@@ -68,8 +68,6 @@ class Zend_Cache_Backend_Test extends Zend_Cache_Backend implements Zend_Cache_B
      * Constructor.
      *
      * @param array $options associative array of options
-     *
-     * @return void
      */
     public function __construct($options = [])
     {

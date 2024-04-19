@@ -57,8 +57,6 @@ class Zend_Amf_Value_Messaging_RemotingMessage extends Zend_Amf_Value_Messaging_
 
     /**
      * Create a new Remoting Message.
-     *
-     * @return void
      */
     public function __construct()
     {

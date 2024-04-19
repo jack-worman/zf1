@@ -66,14 +66,7 @@ class Zend_View_Helper_Layout extends Zend_View_Helper_Abstract
         return $this;
     }
 
-    /**
-     * Return layout object.
-     *
-     * Usage: $this->layout()->setLayout('alternate');
-     *
-     * @return Zend_Layout
-     */
-    public function layout()
+    public function layout(): Zend_Layout
     {
         return $this->getLayout();
     }

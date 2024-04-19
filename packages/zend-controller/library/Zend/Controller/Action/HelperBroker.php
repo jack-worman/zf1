@@ -250,8 +250,6 @@ class Zend_Controller_Action_HelperBroker
 
     /**
      * Constructor.
-     *
-     * @return void
      */
     public function __construct(Zend_Controller_Action $actionController)
     {

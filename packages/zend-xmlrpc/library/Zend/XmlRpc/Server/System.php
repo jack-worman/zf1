@@ -37,8 +37,6 @@ class Zend_XmlRpc_Server_System
 
     /**
      * Constructor.
-     *
-     * @return void
      */
     public function __construct(Zend_XmlRpc_Server $server)
     {

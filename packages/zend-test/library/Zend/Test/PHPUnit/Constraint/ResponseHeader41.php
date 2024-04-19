@@ -89,8 +89,6 @@ class Zend_Test_PHPUnit_Constraint_ResponseHeader41 extends PHPUnit_Framework_Co
 
     /**
      * Constructor; setup constraint state.
-     *
-     * @return void
      */
     public function __construct()
     {

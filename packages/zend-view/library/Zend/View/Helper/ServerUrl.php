@@ -46,8 +46,6 @@ class Zend_View_Helper_ServerUrl
 
     /**
      * Constructor.
-     *
-     * @return void
      */
     public function __construct()
     {

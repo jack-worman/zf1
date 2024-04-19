@@ -62,8 +62,6 @@ class Zend_Dojo_View_Helper_Dojo
      *
      * Retrieve container from registry or create new container and store in
      * registry.
-     *
-     * @return void
      */
     public function __construct()
     {

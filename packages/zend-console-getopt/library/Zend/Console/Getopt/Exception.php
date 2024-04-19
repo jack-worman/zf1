@@ -45,8 +45,6 @@ class Zend_Console_Getopt_Exception extends Zend_Exception
      *
      * @param string $message
      * @param string $usage
-     *
-     * @return void
      */
     public function __construct($message, $usage = '')
     {

@@ -44,8 +44,6 @@ class Zend_Ldap_Node_ChildrenIterator implements Iterator, Countable, RecursiveI
 
     /**
      * Constructor.
-     *
-     * @return void
      */
     public function __construct(array $data)
     {

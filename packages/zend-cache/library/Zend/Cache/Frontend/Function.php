@@ -55,8 +55,6 @@ class Zend_Cache_Frontend_Function extends Zend_Cache_Core
      * Constructor.
      *
      * @param array $options Associative array of options
-     *
-     * @return void
      */
     public function __construct(array $options = [])
     {

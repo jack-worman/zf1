@@ -102,8 +102,6 @@ class Zend_XmlRpc_Fault
 
     /**
      * Constructor.
-     *
-     * @return void
      */
     public function __construct($code = 404, $message = '')
     {
