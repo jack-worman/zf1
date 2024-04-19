@@ -62,11 +62,6 @@ class Zend_XmlRpc_Server_Fault extends Zend_XmlRpc_Fault
      */
     protected static $_observers = [];
 
-    /**
-     * Constructor.
-     *
-     * @return void
-     */
     public function __construct(Throwable $e)
     {
         $this->_exception = $e;

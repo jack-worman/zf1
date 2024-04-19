@@ -74,8 +74,6 @@ class Zend_Auth_Adapter_Http_Resolver_FileTest extends PHPUnit_Framework_TestCas
     /**
      * Sets the paths to files used in this test, and creates a shared resolver instance
      * having a valid path.
-     *
-     * @return void
      */
     public function __construct()
     {

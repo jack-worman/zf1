@@ -106,8 +106,6 @@ class Zend_Test_PHPUnit_Constraint_DomQuery34 extends PHPUnit_Framework_Constrai
      * Constructor; setup constraint state.
      *
      * @param string $path CSS selector path
-     *
-     * @return void
      */
     public function __construct($path)
     {

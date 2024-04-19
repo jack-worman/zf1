@@ -191,8 +191,6 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
      * Constructor.
      *
      * Creates system.* methods.
-     *
-     * @return void
      */
     public function __construct()
     {

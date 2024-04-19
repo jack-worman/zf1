@@ -44,11 +44,6 @@ class Zend_View_Helper_ServerUrl
      */
     protected $_host;
 
-    /**
-     * Constructor.
-     *
-     * @return void
-     */
     public function __construct()
     {
         switch (true) {

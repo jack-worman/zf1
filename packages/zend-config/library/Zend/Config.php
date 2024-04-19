@@ -97,8 +97,6 @@ class Zend_Config implements Countable, Iterator
      * facilitate easy access to the data.
      *
      * @param bool $allowModifications
-     *
-     * @return void
      */
     public function __construct(array $array, $allowModifications = false)
     {

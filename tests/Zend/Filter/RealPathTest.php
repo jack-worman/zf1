@@ -45,8 +45,6 @@ class Zend_Filter_RealPathTest extends PHPUnit_Framework_TestCase
 
     /**
      * Sets the path to test files
-     *
-     * @return void
      */
     public function __construct()
     {

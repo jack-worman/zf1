@@ -36,8 +36,6 @@ interface Zend_Form_Decorator_Interface
      * Accept options during initialization.
      *
      * @param array|Zend_Config $options
-     *
-     * @return void
      */
     public function __construct($options = null);
 

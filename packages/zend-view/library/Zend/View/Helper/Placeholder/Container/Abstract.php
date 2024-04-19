@@ -101,8 +101,6 @@ abstract class Zend_View_Helper_Placeholder_Container_Abstract extends ArrayObje
 
     /**
      * Constructor - This is needed so that we can attach a class member as the ArrayObject container.
-     *
-     * @return void
      */
     public function __construct()
     {

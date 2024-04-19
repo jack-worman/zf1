@@ -98,8 +98,6 @@ class Zend_Log_Writer_Syslog extends Zend_Log_Writer_Abstract
      * Class constructor.
      *
      * @param array $params Array of options; may include "application" and "facility" keys
-     *
-     * @return void
      */
     public function __construct(array $params = [])
     {

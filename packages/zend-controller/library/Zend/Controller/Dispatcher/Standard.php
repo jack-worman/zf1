@@ -57,8 +57,6 @@ class Zend_Controller_Dispatcher_Standard extends Zend_Controller_Dispatcher_Abs
 
     /**
      * Constructor: Set current module to default value.
-     *
-     * @return void
      */
     public function __construct(array $params = [])
     {

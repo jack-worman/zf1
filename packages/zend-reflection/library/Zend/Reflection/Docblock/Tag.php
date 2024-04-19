@@ -111,8 +111,6 @@ class Zend_Reflection_Docblock_Tag implements Reflector
      * Constructor.
      *
      * @param string $tagDocblockLine
-     *
-     * @return void
      */
     public function __construct($tagDocblockLine)
     {

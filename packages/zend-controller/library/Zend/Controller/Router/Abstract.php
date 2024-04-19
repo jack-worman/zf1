@@ -54,9 +54,6 @@ abstract class Zend_Controller_Router_Abstract implements Zend_Controller_Router
      */
     protected $_invokeParams = [];
 
-    /**
-     * Constructor.
-     */
     public function __construct(array $params = [])
     {
         $this->setParams($params);

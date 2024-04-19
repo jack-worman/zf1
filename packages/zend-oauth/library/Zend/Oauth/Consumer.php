@@ -75,8 +75,6 @@ class Zend_Oauth_Consumer extends Zend_Oauth
      * instance containing initialising options.
      *
      * @param array|Zend_Config $options
-     *
-     * @return void
      */
     public function __construct($options = null)
     {

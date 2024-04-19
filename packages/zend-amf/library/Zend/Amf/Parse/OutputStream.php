@@ -38,8 +38,6 @@ class Zend_Amf_Parse_OutputStream extends Zend_Amf_Util_BinaryStream
 {
     /**
      * Constructor.
-     *
-     * @return void
      */
     public function __construct()
     {

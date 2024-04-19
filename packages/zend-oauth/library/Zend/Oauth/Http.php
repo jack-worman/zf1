@@ -72,11 +72,6 @@ class Zend_Oauth_Http
      */
     protected $_httpUtility;
 
-    /**
-     * Constructor.
-     *
-     * @return void
-     */
     public function __construct(
         Zend_Oauth_Consumer $consumer,
         ?array $parameters = null,

@@ -44,8 +44,6 @@ class Zend_Json_Server_Request_Http extends Zend_Json_Server_Request
      * Constructor.
      *
      * Pull JSON request from raw POST body and use to populate request.
-     *
-     * @return void
      */
     public function __construct()
     {

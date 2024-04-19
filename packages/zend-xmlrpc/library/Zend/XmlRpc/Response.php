@@ -81,8 +81,6 @@ class Zend_XmlRpc_Response
      * return value can be set via {@link setReturnValue()}.
      *
      * @param string $type
-     *
-     * @return void
      */
     public function __construct($return = null, $type = null)
     {

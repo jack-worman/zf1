@@ -74,8 +74,6 @@ class Zend_Server_Reflection_Class
      * {@link Zend_Server_Reflection_Method}. Sets reflection object property.
      *
      * @param string $namespace
-     *
-     * @return void
      */
     public function __construct(ReflectionClass $reflection, $namespace = null, $argv = false)
     {

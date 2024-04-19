@@ -50,8 +50,6 @@ interface Zend_Controller_Action_Interface
      * constructor to customize an action controller's instantiation.
      *
      * @param array $invokeArgs Any additional invocation arguments
-     *
-     * @return void
      */
     public function __construct(Zend_Controller_Request_Abstract $request,
         Zend_Controller_Response_Abstract $response,

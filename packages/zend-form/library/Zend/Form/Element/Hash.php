@@ -75,8 +75,6 @@ class Zend_Form_Element_Hash extends Zend_Form_Element_Xhtml
      *
      * @param string|array|Zend_Config $spec
      * @param array|Zend_Config        $options
-     *
-     * @return void
      */
     public function __construct($spec, $options = null)
     {

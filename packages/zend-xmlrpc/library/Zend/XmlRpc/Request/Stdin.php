@@ -52,8 +52,6 @@ class Zend_XmlRpc_Request_Stdin extends Zend_XmlRpc_Request
      * Attempts to read from php://stdin to get raw POST request; if an error
      * occurs in doing so, or if the XML is invalid, the request is declared a
      * fault.
-     *
-     * @return void
      */
     public function __construct()
     {

@@ -74,8 +74,6 @@ class Zend_Search_Lucene_Search_Query_Boolean extends Zend_Search_Lucene_Search_
      *
      * @param array $subqueries Array of Zend_Search_Search_Query objects
      * @param array $signs      Array of signs.  Sign is boolean|null.
-     *
-     * @return void
      */
     public function __construct($subqueries = null, $signs = null)
     {

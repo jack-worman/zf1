@@ -51,11 +51,6 @@ class Zend_Layout_Controller_Action_Helper_Layout extends Zend_Controller_Action
      */
     protected $_isActionControllerSuccessful = false;
 
-    /**
-     * Constructor.
-     *
-     * @return void
-     */
     public function __construct(?Zend_Layout $layout = null)
     {
         if (null !== $layout) {

@@ -38,9 +38,6 @@ abstract class Zend_Ldap_Node_Schema_Item implements ArrayAccess, Countable
      */
     protected $_data;
 
-    /**
-     * Constructor.
-     */
     public function __construct(array $data)
     {
         $this->setData($data);

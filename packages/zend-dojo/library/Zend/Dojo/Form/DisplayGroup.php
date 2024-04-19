@@ -38,8 +38,6 @@ class Zend_Dojo_Form_DisplayGroup extends Zend_Form_DisplayGroup
      *
      * @param string                 $name
      * @param array|Zend_Config|null $options
-     *
-     * @return void
      */
     public function __construct($name, Zend_Loader_PluginLoader $loader, $options = null)
     {

@@ -40,8 +40,6 @@ class Zend_Filter_Word_SeparatorToSeparator extends Zend_Filter_PregReplace
      * Constructor.
      *
      * @param string $searchSeparator Seperator to search for
-     *
-     * @return void
      */
     public function __construct($searchSeparator = ' ', $replacementSeparator = '-')
     {

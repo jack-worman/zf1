@@ -148,8 +148,6 @@ class com_zend_framework_IntrospectorTest
 {
     /**
      * Constructor
-     *
-     * @return void
      */
     public function __construct()
     {

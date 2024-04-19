@@ -73,8 +73,6 @@ class Zend_Oauth_Client extends Zend_Http_Client
      * @param array|Zend_Config $oauthOptions
      * @param string            $uri
      * @param array|Zend_Config $config
-     *
-     * @return void
      */
     public function __construct($oauthOptions, $uri = null, $config = null)
     {

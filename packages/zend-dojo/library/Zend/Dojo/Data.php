@@ -66,8 +66,6 @@ class Zend_Dojo_Data implements ArrayAccess, Iterator, Countable
      * @param string|null            $identifier
      * @param array|Traversable|null $items
      * @param string|null            $label
-     *
-     * @return void
      */
     public function __construct($identifier = null, $items = null, $label = null)
     {

@@ -35,12 +35,7 @@ class Zend_View_Helper_Layout extends Zend_View_Helper_Abstract
     /** @var Zend_Layout */
     protected $_layout;
 
-    /**
-     * Get layout object.
-     *
-     * @return Zend_Layout
-     */
-    public function getLayout()
+    public function getLayout(): Zend_Layout
     {
         if (null === $this->_layout) {
             // require_once 'Zend/Layout.php';
@@ -66,14 +61,7 @@ class Zend_View_Helper_Layout extends Zend_View_Helper_Abstract
         return $this;
     }
 
-    /**
-     * Return layout object.
-     *
-     * Usage: $this->layout()->setLayout('alternate');
-     *
-     * @return Zend_Layout
-     */
-    public function layout()
+    public function layout(): Zend_Layout
     {
         return $this->getLayout();
     }

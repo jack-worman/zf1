@@ -78,8 +78,6 @@ class Zend_Filter_StripTags implements Zend_Filter_Interface
      *     'allowComments' => Are comments allowed ?
      *
      * @param string|array|Zend_Config $options
-     *
-     * @return void
      */
     public function __construct($options = null)
     {

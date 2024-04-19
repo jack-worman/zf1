@@ -187,8 +187,6 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
      * Constructor.
      *
      * Optionally set view object and options.
-     *
-     * @return void
      */
     public function __construct(?Zend_View_Interface $view = null, array $options = [])
     {

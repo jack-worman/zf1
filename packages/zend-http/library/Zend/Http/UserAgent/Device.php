@@ -36,8 +36,6 @@ interface Zend_Http_UserAgent_Device extends Serializable
      * the device object is being seeded with cached values from serialization.
      *
      * @param string|array|null $userAgent
-     *
-     * @return void
      */
     public function __construct($userAgent = null, array $server = [], array $config = []);
 

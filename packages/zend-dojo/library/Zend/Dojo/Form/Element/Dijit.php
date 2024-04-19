@@ -51,8 +51,6 @@ abstract class Zend_Dojo_Form_Element_Dijit extends Zend_Form_Element
      * Constructor.
      *
      * @todo Should we set dojo view helper paths here?
-     *
-     * @return void
      */
     public function __construct($spec, $options = null)
     {

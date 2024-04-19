@@ -55,8 +55,6 @@ class Zend_Amf_Value_TraitsInfo
      * @param bool   $dynamic
      * @param bool   $externalizable
      * @param bool   $properties
-     *
-     * @return void
      */
     public function __construct($className, $dynamic = false, $externalizable = false, $properties = null)
     {

@@ -43,11 +43,6 @@ abstract class Zend_Amf_Parse_Serializer
      */
     protected $mbStringFunctionsOverloaded;
 
-    /**
-     * Constructor.
-     *
-     * @return void
-     */
     public function __construct(Zend_Amf_Parse_OutputStream $stream)
     {
         $this->_stream = $stream;

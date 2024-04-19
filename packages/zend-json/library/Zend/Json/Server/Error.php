@@ -73,8 +73,6 @@ class Zend_Json_Server_Error
      *
      * @param string $message
      * @param int    $code
-     *
-     * @return void
      */
     public function __construct($message = null, $code = -32000, $data = null)
     {

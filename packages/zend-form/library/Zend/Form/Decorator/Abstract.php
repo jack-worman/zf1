@@ -70,8 +70,6 @@ abstract class Zend_Form_Decorator_Abstract implements Zend_Form_Decorator_Inter
      * Constructor.
      *
      * @param array|Zend_Config $options
-     *
-     * @return void
      */
     public function __construct($options = null)
     {

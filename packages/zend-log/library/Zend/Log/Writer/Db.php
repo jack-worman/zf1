@@ -60,8 +60,6 @@ class Zend_Log_Writer_Db extends Zend_Log_Writer_Abstract
      * @param Zend_Db_Adapter $db        Database adapter instance
      * @param string          $table     Log table in database
      * @param array           $columnMap
-     *
-     * @return void
      */
     public function __construct($db, $table, $columnMap = null)
     {

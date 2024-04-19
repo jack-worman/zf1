@@ -36,8 +36,6 @@ interface Zend_Loader_SplAutoloader
      * Allow configuration of the autoloader via the constructor.
      *
      * @param array|Traversable|null $options
-     *
-     * @return void
      */
     public function __construct($options = null);
 

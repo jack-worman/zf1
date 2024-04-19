@@ -99,8 +99,6 @@ class Zend_Auth_Adapter_Http_ProxyTest extends PHPUnit_Framework_TestCase
 
     /**
      * Sets up test configuration
-     *
-     * @return void
      */
     public function __construct()
     {

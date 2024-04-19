@@ -68,8 +68,6 @@ class Zend_View_Helper_HeadMeta extends Zend_View_Helper_Placeholder_Container_S
      * Constructor.
      *
      * Set separator to PHP_EOL
-     *
-     * @return void
      */
     public function __construct()
     {

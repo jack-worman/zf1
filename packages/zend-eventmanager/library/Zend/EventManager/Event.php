@@ -61,8 +61,6 @@ class Zend_EventManager_Event implements Zend_EventManager_EventDescription
      * @param string            $name   Event name
      * @param string|object     $target
      * @param array|ArrayAccess $params
-     *
-     * @return void
      */
     public function __construct($name = null, $target = null, $params = null)
     {

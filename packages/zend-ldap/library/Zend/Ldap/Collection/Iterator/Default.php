@@ -74,8 +74,6 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
      * Constructor.
      *
      * @param resource $resultId
-     *
-     * @return void
      */
     public function __construct(Zend_Ldap $ldap, $resultId)
     {

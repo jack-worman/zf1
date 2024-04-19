@@ -65,9 +65,6 @@ class Zend_Queue_Stomp_Frame implements Zend_Queue_Stomp_FrameInterface
      */
     protected $_autoContentLength;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->setHeaders([]);

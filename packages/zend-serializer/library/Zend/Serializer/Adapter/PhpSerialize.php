@@ -40,8 +40,6 @@ class Zend_Serializer_Adapter_PhpSerialize extends Zend_Serializer_Adapter_Adapt
      * Constructor.
      *
      * @param array|Zend_Config $opts
-     *
-     * @return void
      */
     public function __construct($opts = [])
     {

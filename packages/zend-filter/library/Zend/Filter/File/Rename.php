@@ -48,8 +48,6 @@ class Zend_Filter_File_Rename implements Zend_Filter_Interface
      * 'overwrite' => Shall existing files be overwritten ?
      *
      * @param string|array $options Target file or directory to be renamed
-     *
-     * @return void
      */
     public function __construct($options)
     {

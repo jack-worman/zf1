@@ -46,8 +46,6 @@ class Zend_Server_Definition implements Countable, Iterator
      * Constructor.
      *
      * @param array|null $methods
-     *
-     * @return void
      */
     public function __construct($methods = null)
     {

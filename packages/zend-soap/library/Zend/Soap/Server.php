@@ -178,8 +178,6 @@ class Zend_Soap_Server implements Zend_Server_Interface
      * options are specified, they are passed on to {@link setOptions()}.
      *
      * @param string $wsdl
-     *
-     * @return void
      */
     public function __construct($wsdl = null, ?array $options = null)
     {

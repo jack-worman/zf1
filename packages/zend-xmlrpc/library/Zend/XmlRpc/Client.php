@@ -137,8 +137,6 @@ class Zend_XmlRpc_Client
      * @param string           $server     Full address of the XML-RPC service
      *                                     (e.g. http://time.xmlrpc.com/RPC2)
      * @param Zend_Http_Client $httpClient HTTP Client to use for requests
-     *
-     * @return void
      */
     public function __construct($server, ?Zend_Http_Client $httpClient = null)
     {

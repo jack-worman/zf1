@@ -71,8 +71,6 @@ class Zend_Db_Profiler_Query
      *
      * @param string $query
      * @param int    $queryType
-     *
-     * @return void
      */
     public function __construct($query, $queryType)
     {

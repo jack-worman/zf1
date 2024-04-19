@@ -58,8 +58,6 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
 
     /**
      * Initializes instance data
-     *
-     * @return void
      */
     public function __construct($name = NULL, array $data = array(), $dataName = '')
     {

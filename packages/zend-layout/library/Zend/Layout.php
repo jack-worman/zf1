@@ -152,8 +152,6 @@ class Zend_Layout
      * plugin.
      *
      * @param string|array|Zend_Config $options
-     *
-     * @return void
      */
     public function __construct($options = null, $initMvc = false)
     {

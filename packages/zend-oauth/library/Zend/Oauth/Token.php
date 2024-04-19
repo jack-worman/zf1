@@ -60,8 +60,6 @@ abstract class Zend_Oauth_Token
 
     /**
      * Constructor; basic setup for any Token subclass.
-     *
-     * @return void
      */
     public function __construct(
         ?Zend_Http_Response $response = null,

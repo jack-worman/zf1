@@ -88,8 +88,6 @@ class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_
      * Constructor.
      *
      * Set separator to PHP_EOL.
-     *
-     * @return void
      */
     public function __construct()
     {

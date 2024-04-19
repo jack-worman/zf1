@@ -48,8 +48,6 @@ class Zend_Controller_Action_Helper_AjaxContext extends Zend_Controller_Action_H
      * Constructor.
      *
      * Add HTML context
-     *
-     * @return void
      */
     public function __construct()
     {
