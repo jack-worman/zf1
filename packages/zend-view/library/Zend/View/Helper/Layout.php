@@ -52,7 +52,7 @@ class Zend_View_Helper_Layout extends Zend_View_Helper_Abstract
     /**
      * Set layout object.
      *
-     * @return Zend_View_Helper_Layout
+     * @return static
      */
     public function setLayout(Zend_Layout $layout)
     {

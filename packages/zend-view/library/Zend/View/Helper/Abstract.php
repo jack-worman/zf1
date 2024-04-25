@@ -43,7 +43,7 @@ abstract class Zend_View_Helper_Abstract implements Zend_View_Helper_Interface
     /**
      * Set the View object.
      *
-     * @return Zend_View_Helper_Abstract
+     * @return static
      */
     public function setView(Zend_View_Interface $view)
     {

@@ -78,7 +78,7 @@ abstract class Zend_Dojo_View_Helper_Dijit extends Zend_View_Helper_HtmlElement
      *
      * Set view and enable dojo
      *
-     * @return Zend_Dojo_View_Helper_Dijit
+     * @return static
      */
     public function setView(Zend_View_Interface $view)
     {
