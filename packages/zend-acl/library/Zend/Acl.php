@@ -87,20 +87,9 @@ class Zend_Acl
      */
     protected $_resources = [];
 
-    /**
-     * @var Zend_Acl_Role_Interface
-     */
-    protected $_isAllowedRole;
-
-    /**
-     * @var Zend_Acl_Resource_Interface
-     */
-    protected $_isAllowedResource;
-
-    /**
-     * @var string
-     */
-    protected $_isAllowedPrivilege;
+    private Zend_Acl_Role_Interface|null $_isAllowedRole = null;
+    private Zend_Acl_Resource_Interface|null $_isAllowedResource = null;
+    private string|null $_isAllowedPrivilege = null;
 
     /**
      * ACL rules; whitelist (deny everything to all) by default.
@@ -829,23 +818,27 @@ class Zend_Acl
      * The highest priority parent (i.e., the parent most recently added) is checked first,
      * and its respective parents are checked similarly before the lower-priority parents of
      * the Role are checked.
-     *
-     * @param Zend_Acl_Role_Interface|string     $role
-     * @param Zend_Acl_Resource_Interface|string $resource
-     * @param string                             $privilege
-     *
-     * @uses   Zend_Acl::get()
-     * @uses   Zend_Acl_Role_Registry::get()
-     *
-     * @return bool
      */
-    public function isAllowed($role = null, $resource = null, $privilege = null)
-    {
-        // reset role & resource to null
-        $this->_isAllowedRole = null;
-        $this->_isAllowedResource = null;
-        $this->_isAllowedPrivilege = null;
+    public function isAllowed(
+        Zend_Acl_Role_Interface|string|null $role = null,
+        Zend_Acl_Resource_Interface|string|null $resource = null,
+        string|null $privilege = null,
+    ): bool {
+        try {
+            return $this->doIsAllowed($role, $resource, $privilege);
+        } finally {
+            $this->_isAllowedRole = null;
+            $this->_isAllowedResource = null;
+            $this->_isAllowedPrivilege = null;
+        }
+    }
 
+
+    private function doIsAllowed(
+        Zend_Acl_Role_Interface|string|null $role = null,
+        Zend_Acl_Resource_Interface|string|null $resource = null,
+        string|null $privilege = null,
+    ): bool {
         if (null !== $role) {
             // keep track of originally called role
             $this->_isAllowedRole = $role;
