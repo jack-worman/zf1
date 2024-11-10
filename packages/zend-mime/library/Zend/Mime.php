@@ -426,7 +426,7 @@ class Zend_Mime
     public static function encodeQuotedPrintable(
         $str,
         $lineLength = self::LINELENGTH,
-        $lineEnd = self::LINEEND
+        $lineEnd = self::LINEEND,
     ) {
         $out = '';
         $str = self::_encodeQuotedPrintable($str);
@@ -489,7 +489,7 @@ class Zend_Mime
      * @return string
      */
     public static function encodeQuotedPrintableHeader(
-        $str, $charset, $lineLength = self::LINELENGTH, $lineEnd = self::LINEEND
+        $str, $charset, $lineLength = self::LINELENGTH, $lineEnd = self::LINEEND,
     ) {
         // Reduce line-length by the length of the required delimiter, charsets and encoding
         $prefix = sprintf('=?%s?Q?', $charset);
@@ -567,7 +567,7 @@ class Zend_Mime
      * @return string
      */
     public static function encodeBase64Header(
-        $str, $charset, $lineLength = self::LINELENGTH, $lineEnd = self::LINEEND
+        $str, $charset, $lineLength = self::LINELENGTH, $lineEnd = self::LINEEND,
     ) {
         $prefix = '=?'.$charset.'?B?';
         $suffix = '?=';
@@ -593,7 +593,7 @@ class Zend_Mime
      * @return string
      */
     public static function encodeBase64(
-        $str, $lineLength = self::LINELENGTH, $lineEnd = self::LINEEND
+        $str, $lineLength = self::LINELENGTH, $lineEnd = self::LINEEND,
     ) {
         return rtrim((string) chunk_split(base64_encode($str), $lineLength, $lineEnd));
     }

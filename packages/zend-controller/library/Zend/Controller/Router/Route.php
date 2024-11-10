@@ -167,7 +167,7 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
      * @param mixed|null     $locale
      */
     public function __construct(
-        $route, $defaults = [], $reqs = [], ?Zend_Translate $translator = null, $locale = null
+        $route, $defaults = [], $reqs = [], ?Zend_Translate $translator = null, $locale = null,
     ) {
         $route = \trim((string) $route, $this->_urlDelimiter);
         $this->_defaults = (array) $defaults;

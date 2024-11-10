@@ -88,7 +88,7 @@ abstract class Zend_View_Helper_FormElement extends Zend_View_Helper_HtmlElement
      *               attribs, options, listsep, disable, and escape
      */
     protected function _getInfo($name, $value = null, $attribs = null,
-        $options = null, $listsep = null
+        $options = null, $listsep = null,
     ) {
         // the baseline info.  note that $name serves a dual purpose;
         // if an array, it's an element info array that will override
