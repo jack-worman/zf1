@@ -63,7 +63,7 @@ abstract class Zend_Oauth_Token
      */
     public function __construct(
         ?Zend_Http_Response $response = null,
-        ?Zend_Oauth_Http_Utility $utility = null
+        ?Zend_Oauth_Http_Utility $utility = null,
     ) {
         if (null !== $response) {
             $this->_response = $response;

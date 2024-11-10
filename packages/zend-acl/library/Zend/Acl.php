@@ -87,9 +87,9 @@ class Zend_Acl
      */
     protected $_resources = [];
 
-    private Zend_Acl_Role_Interface|null $_isAllowedRole = null;
-    private Zend_Acl_Resource_Interface|null $_isAllowedResource = null;
-    private string|null $_isAllowedPrivilege = null;
+    private Zend_Acl_Role_Interface|string|null $_isAllowedRole = null;
+    private Zend_Acl_Resource_Interface|string|null $_isAllowedResource = null;
+    private ?string $_isAllowedPrivilege = null;
 
     /**
      * ACL rules; whitelist (deny everything to all) by default.
@@ -822,7 +822,7 @@ class Zend_Acl
     public function isAllowed(
         Zend_Acl_Role_Interface|string|null $role = null,
         Zend_Acl_Resource_Interface|string|null $resource = null,
-        string|null $privilege = null,
+        ?string $privilege = null,
     ): bool {
         try {
             return $this->doIsAllowed($role, $resource, $privilege);
@@ -833,11 +833,10 @@ class Zend_Acl
         }
     }
 
-
     private function doIsAllowed(
         Zend_Acl_Role_Interface|string|null $role = null,
         Zend_Acl_Resource_Interface|string|null $resource = null,
-        string|null $privilege = null,
+        ?string $privilege = null,
     ): bool {
         if (null !== $role) {
             // keep track of originally called role

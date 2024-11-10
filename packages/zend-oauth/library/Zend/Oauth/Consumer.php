@@ -100,7 +100,7 @@ class Zend_Oauth_Consumer extends Zend_Oauth
     public function getRequestToken(
         ?array $customServiceParameters = null,
         $httpMethod = null,
-        ?Zend_Oauth_Http_RequestToken $request = null
+        ?Zend_Oauth_Http_RequestToken $request = null,
     ) {
         if (null === $request) {
             $request = new Zend_Oauth_Http_RequestToken($this, $customServiceParameters);
@@ -130,7 +130,7 @@ class Zend_Oauth_Consumer extends Zend_Oauth
     public function getRedirectUrl(
         ?array $customServiceParameters = null,
         ?Zend_Oauth_Token_Request $token = null,
-        ?Zend_Oauth_Http_UserAuthorization $redirect = null
+        ?Zend_Oauth_Http_UserAuthorization $redirect = null,
     ) {
         if (null === $redirect) {
             $redirect = new Zend_Oauth_Http_UserAuthorization($this, $customServiceParameters);
@@ -155,7 +155,7 @@ class Zend_Oauth_Consumer extends Zend_Oauth
     public function redirect(
         ?array $customServiceParameters = null,
         ?Zend_Oauth_Token_Request $token = null,
-        ?Zend_Oauth_Http_UserAuthorization $request = null
+        ?Zend_Oauth_Http_UserAuthorization $request = null,
     ) {
         if ($token instanceof Zend_Oauth_Http_UserAuthorization) {
             $request = $token;
@@ -182,7 +182,7 @@ class Zend_Oauth_Consumer extends Zend_Oauth
         $queryData,
         Zend_Oauth_Token_Request $token,
         $httpMethod = null,
-        ?Zend_Oauth_Http_AccessToken $request = null
+        ?Zend_Oauth_Http_AccessToken $request = null,
     ) {
         $authorizedToken = new Zend_Oauth_Token_AuthorizedRequest($queryData);
         if (!$authorizedToken->isValid()) {

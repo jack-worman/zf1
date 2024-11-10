@@ -75,7 +75,7 @@ class Zend_Oauth_Http
     public function __construct(
         Zend_Oauth_Consumer $consumer,
         ?array $parameters = null,
-        ?Zend_Oauth_Http_Utility $utility = null
+        ?Zend_Oauth_Http_Utility $utility = null,
     ) {
         $this->_consumer = $consumer;
         $this->_preferredRequestScheme = $this->_consumer->getRequestScheme();

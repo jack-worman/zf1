@@ -242,7 +242,7 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
     protected function _addChainRoutesFromConfig(
         $name,
         Zend_Controller_Router_Route_Interface $route,
-        Zend_Config $childRoutesInfo
+        Zend_Config $childRoutesInfo,
     ) {
         foreach ($childRoutesInfo as $childRouteName => $childRouteInfo) {
             if (is_string($childRouteInfo)) {
