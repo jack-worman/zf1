@@ -20,7 +20,7 @@
  * @version    $Id$
  */
 
-error_reporting( E_ALL | E_STRICT ); // now required for each test suite
+error_reporting( E_ALL ); // now required for each test suite
 
 /**
  * Zend_Json

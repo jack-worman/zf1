@@ -669,7 +669,7 @@ class Zend_ViewTest extends \PHPUnit\Framework\TestCase
 
     public function testZf995UndefinedPropertiesReturnNull()
     {
-        error_reporting(E_ALL | E_STRICT);
+        error_reporting(E_ALL);
         ini_set('display_errors', true);
         $view = new Zend_View();
         $view->setScriptPath(__DIR__ . '/View/_templates');
