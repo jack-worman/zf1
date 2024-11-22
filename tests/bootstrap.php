@@ -2,7 +2,8 @@
 /*
  * Set error reporting to the level to which Zend Framework code must comply.
  */
-error_reporting(E_ALL | E_STRICT);
+error_reporting(E_ALL);
+error_reporting(E_ALL & ~E_DEPRECATED);
 
 $rootDir = dirname(__DIR__);
 
