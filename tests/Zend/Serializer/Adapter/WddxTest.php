@@ -204,7 +204,7 @@ class Zend_Serializer_Adapter_WddxTest extends \PHPUnit\Framework\TestCase
     public function testUnserialzeInvalid()
     {
         $value = 'not a serialized string';
-        $this->setExpectedException('Zend_Serializer_Exception');
+        $this->expectException('Zend_Serializer_Exception');
         $this->_adapter->unserialize($value);
     }
 
@@ -229,7 +229,7 @@ class Zend_Serializer_Adapter_WddxTest extends \PHPUnit\Framework\TestCase
         }
 
         $value = 'not a serialized string';
-        $this->setExpectedException(
+        $this->expectException(
             'Zend_Serializer_Exception',
             'Can\'t unserialize wddx string'
         );
@@ -241,7 +241,7 @@ class Zend_Serializer_Adapter_WddxTest extends \PHPUnit\Framework\TestCase
         $value    = '<!DOCTYPE>'
                   . '<wddxPacket version=\'1.0\'><header/>'
                   . '<data><string>test</string></data></wddxPacket>';
-        $this->setExpectedException("Zend_Serializer_Exception");
+        $this->expectException("Zend_Serializer_Exception");
         $data = $this->_adapter->unserialize($value);
     }
 }

@@ -64,7 +64,7 @@ class Zend_Log_Writer_DbTest extends \PHPUnit\Framework\TestCase
             $this->fail();
         } catch (\Throwable $e) {
             $this->assertTrue($e instanceof Zend_Log_Exception);
-            $this->assertRegExp('/does not support formatting/i', $e->getMessage());
+            $this->assertMatchesRegularExpression('/does not support formatting/i', $e->getMessage());
         }
     }
 
@@ -77,7 +77,7 @@ class Zend_Log_Writer_DbTest extends \PHPUnit\Framework\TestCase
         $this->writer->write($fields);
 
         // insert should be called once...
-        $this->assertContains('insert', array_keys($this->db->calls));
+        $this->assertStringContainsString('insert', array_keys($this->db->calls));
         $this->assertEquals(1, count($this->db->calls['insert']));
 
         // ...with the correct table and binds for the database
@@ -99,7 +99,7 @@ class Zend_Log_Writer_DbTest extends \PHPUnit\Framework\TestCase
         $this->writer->write(array('message' => $message, 'priority' => $priority));
 
         // insert should be called once...
-        $this->assertContains('insert', array_keys($this->db->calls));
+        $this->assertStringContainsString('insert', array_keys($this->db->calls));
         $this->assertEquals(1, count($this->db->calls['insert']));
 
         // ...with the correct table and binds for the database
@@ -151,7 +151,7 @@ class Zend_Log_Writer_DbTest extends \PHPUnit\Framework\TestCase
             $this->writer->setFormatter(new StdClass());
         } catch (\Throwable $e) {
             $this->assertTrue($e instanceof \PHPUnit\Framework\AssertionFailedError);
-            $this->assertContains('must implement interface', $e->getMessage());
+            $this->assertStringContainsString('must implement interface', $e->getMessage());
         }
     }
 

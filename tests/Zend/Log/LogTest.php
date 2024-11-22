@@ -71,7 +71,7 @@ class Zend_Log_LogTest extends \PHPUnit\Framework\TestCase
         $logger->log($message = 'message-to-log', Zend_Log::INFO);
 
         rewind($this->log);
-        $this->assertContains($message, stream_get_contents($this->log));
+        $this->assertStringContainsString($message, stream_get_contents($this->log));
     }
 
     public function testAddWriter()
@@ -81,7 +81,7 @@ class Zend_Log_LogTest extends \PHPUnit\Framework\TestCase
         $logger->log($message = 'message-to-log', Zend_Log::INFO);
 
         rewind($this->log);
-        $this->assertContains($message, stream_get_contents($this->log));
+        $this->assertStringContainsString($message, stream_get_contents($this->log));
     }
 
     public function testAddWriterAddsMultipleWriters()
@@ -103,9 +103,9 @@ class Zend_Log_LogTest extends \PHPUnit\Framework\TestCase
 
         // verify both writers were called by the logger
         rewind($log1);
-        $this->assertContains($message, stream_get_contents($log1));
+        $this->assertStringContainsString($message, stream_get_contents($log1));
         rewind($log2);
-        $this->assertContains($message, stream_get_contents($log2));
+        $this->assertStringContainsString($message, stream_get_contents($log2));
 
         // prove the two memory streams are different
         // and both writers were indeed called
@@ -120,7 +120,7 @@ class Zend_Log_LogTest extends \PHPUnit\Framework\TestCase
             $logger->log('message', Zend_Log::INFO);
             $this->fail();
         } catch (Zend_Log_Exception $e) {
-            $this->assertRegexp('/no writer/i', $e->getMessage());
+            $this->assertMatchesRegularExpression('/no writer/i', $e->getMessage());
         }
     }
 
@@ -152,7 +152,7 @@ class Zend_Log_LogTest extends \PHPUnit\Framework\TestCase
             $this->fail();
         } catch (\Throwable $e) {
             $this->assertTrue($e instanceof Zend_Log_Exception);
-            $this->assertRegExp('/bad log priority/i', $e->getMessage());
+            $this->assertMatchesRegularExpression('/bad log priority/i', $e->getMessage());
         }
     }
 
@@ -164,7 +164,7 @@ class Zend_Log_LogTest extends \PHPUnit\Framework\TestCase
             $this->fail();
         } catch (\Throwable $e) {
             $this->assertTrue($e instanceof Zend_Log_Exception);
-            $this->assertRegExp('/bad log priority/i', $e->getMessage());
+            $this->assertMatchesRegularExpression('/bad log priority/i', $e->getMessage());
         }
     }
 
@@ -176,7 +176,7 @@ class Zend_Log_LogTest extends \PHPUnit\Framework\TestCase
             $this->fail();
         } catch (\Throwable $e) {
             $this->assertTrue($e instanceof Zend_Log_Exception);
-            $this->assertRegExp('/existing priorities/i', $e->getMessage());
+            $this->assertMatchesRegularExpression('/existing priorities/i', $e->getMessage());
         }
 
     }
@@ -190,8 +190,8 @@ class Zend_Log_LogTest extends \PHPUnit\Framework\TestCase
 
         rewind($this->log);
         $logdata = stream_get_contents($this->log);
-        $this->assertContains((string)$priority, $logdata);
-        $this->assertContains($message, $logdata);
+        $this->assertStringContainsString((string)$priority, $logdata);
+        $this->assertStringContainsString($message, $logdata);
     }
 
     // Fields
@@ -228,7 +228,7 @@ class Zend_Log_LogTest extends \PHPUnit\Framework\TestCase
         $logger = new Zend_Log($mock = new Zend_Log_Writer_Mock);
         $logger->info('foo', array('content' => 'nonesuch'));
         $event = array_shift($mock->events);
-        $this->assertContains('content', array_keys($event));
+        $this->assertStringContainsString('content', array_keys($event));
         $this->assertEquals('nonesuch', $event['content']);
     }
 
@@ -240,9 +240,9 @@ class Zend_Log_LogTest extends \PHPUnit\Framework\TestCase
         $logger = new Zend_Log($mock = new Zend_Log_Writer_Mock);
         $logger->info('foo', array('content' => 'nonesuch', 'bar'));
         $event = array_shift($mock->events);
-        $this->assertContains('content', array_keys($event));
-        $this->assertContains('info', array_keys($event));
-        $this->assertContains('bar', $event['info']);
+        $this->assertStringContainsString('content', array_keys($event));
+        $this->assertStringContainsString('info', array_keys($event));
+        $this->assertStringContainsString('bar', $event['info']);
     }
 
     /**
@@ -253,9 +253,9 @@ class Zend_Log_LogTest extends \PHPUnit\Framework\TestCase
         $logger = new Zend_Log($mock = new Zend_Log_Writer_Mock);
         $logger->info('foo', 'nonesuch');
         $event = array_shift($mock->events);
-        $this->assertContains('info', array_keys($event));
+        $this->assertStringContainsString('info', array_keys($event));
         $info = $event['info'];
-        $this->assertContains('nonesuch', $info);
+        $this->assertStringContainsString('nonesuch', $info);
     }
 
     // Factory
@@ -395,7 +395,7 @@ class Zend_Log_LogTest extends \PHPUnit\Framework\TestCase
             $logger->addWriter($writer);
         } catch (\Throwable $e) {
             $this->assertTrue($e instanceof Zend_Log_Exception);
-            $this->assertRegExp('#^(Zend_Log_Writer_NotExtendedWriterAbstract|The\sspecified\swriter)#', $e->getMessage());
+            $this->assertMatchesRegularExpression('#^(Zend_Log_Writer_NotExtendedWriterAbstract|The\sspecified\swriter)#', $e->getMessage());
         }
     }
 
@@ -410,7 +410,7 @@ class Zend_Log_LogTest extends \PHPUnit\Framework\TestCase
             $logger->addFilter($filter);
         } catch (\Throwable $e) {
             $this->assertTrue($e instanceof Zend_Log_Exception);
-            $this->assertRegExp('#^(Zend_Log_Filter_NotImplementsFilterInterface|The\sspecified\sfilter)#', $e->getMessage());
+            $this->assertMatchesRegularExpression('#^(Zend_Log_Filter_NotImplementsFilterInterface|The\sspecified\sfilter)#', $e->getMessage());
         }
     }
 

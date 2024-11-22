@@ -131,7 +131,7 @@ class Zend_Dojo_Form_Element_SubmitButtonTest extends \PHPUnit\Framework\TestCas
         $decorator = $this->element->getDecorator('DijitElement');
         $decorator->setElement($this->element);
         $html = $decorator->render('');
-        $this->assertRegexp('/<(input|button)[^>]*?(value="Submit Button")/', $html, 'Label: ' . $this->element->getLabel() . "\nHTML: " . $html);
+        $this->assertMatchesRegularExpression('/<(input|button)[^>]*?(value="Submit Button")/', $html, 'Label: ' . $this->element->getLabel() . "\nHTML: " . $html);
     }
 
     public function testConstructorSetsLabelToNameIfNoLabelProvided()
@@ -179,13 +179,13 @@ class Zend_Dojo_Form_Element_SubmitButtonTest extends \PHPUnit\Framework\TestCas
     public function testShouldRenderButtonDijit()
     {
         $html = $this->element->render();
-        $this->assertContains('dojoType="dijit.form.Button"', $html);
+        $this->assertStringContainsString('dojoType="dijit.form.Button"', $html);
     }
 
     public function testShouldRenderSubmitInput()
     {
         $html = $this->element->render();
-        $this->assertContains('type="submit"', $html);
+        $this->assertStringContainsString('type="submit"', $html);
     }
 
     /**
@@ -195,7 +195,7 @@ class Zend_Dojo_Form_Element_SubmitButtonTest extends \PHPUnit\Framework\TestCas
     {
         $this->element->setLabel('Label!');
         $html = $this->element->render();
-        $this->assertRegexp('/<input[^>]*(value="Label!")/', $html, $html);
+        $this->assertMatchesRegularExpression('/<input[^>]*(value="Label!")/', $html, $html);
     }
 }
 

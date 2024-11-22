@@ -115,7 +115,7 @@ class Zend_Dojo_View_Helper_PasswordTextBoxTest extends \PHPUnit\Framework\TestC
     public function testShouldAllowDeclarativeDijitCreation()
     {
         $html = $this->getElement();
-        $this->assertRegexp('/<input[^>]*(dojoType="dijit.form.ValidationTextBox")/', $html, $html);
+        $this->assertMatchesRegularExpression('/<input[^>]*(dojoType="dijit.form.ValidationTextBox")/', $html, $html);
     }
 
     public function testShouldAllowProgrammaticDijitCreation()
@@ -129,7 +129,7 @@ class Zend_Dojo_View_Helper_PasswordTextBoxTest extends \PHPUnit\Framework\TestC
     public function testShouldCreatePasswordInput()
     {
         $html = $this->getElement();
-        $this->assertRegexp('/<input[^>]*(type="password")/', $html);
+        $this->assertMatchesRegularExpression('/<input[^>]*(type="password")/', $html);
     }
 }
 

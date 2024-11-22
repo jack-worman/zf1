@@ -224,7 +224,7 @@ class Zend_Filter_Compress_RarTest extends \PHPUnit\Framework\TestCase
             $filter->setTarget('/unknown/path/to/file.txt');
             $this->fails('Exception expected');
         } catch(Zend_Filter_Exception $e) {
-            $this->assertContains('does not exist', $e->getMessage());
+            $this->assertStringContainsString('does not exist', $e->getMessage());
         }
     }
 
@@ -241,14 +241,14 @@ class Zend_Filter_Compress_RarTest extends \PHPUnit\Framework\TestCase
             $filter->compress('test.txt');
             $this->fails('Exception expected');
         } catch (\Throwable $e) {
-            $this->assertContains('No compression callback', $e->getMessage());
+            $this->assertStringContainsString('No compression callback', $e->getMessage());
         }
 
         try {
             $filter->setCallback('invalidCallback');
             $this->fails('Exception expected');
         } catch (\Throwable $e) {
-            $this->assertContains('Callback can not be accessed', $e->getMessage());
+            $this->assertStringContainsString('Callback can not be accessed', $e->getMessage());
         }
 
         $callback = array('Zend_Filter_Compress_RarTest', 'rarCompress');

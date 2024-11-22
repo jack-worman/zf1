@@ -406,11 +406,11 @@ class Zend_Filter_InflectorTest extends \PHPUnit\Framework\TestCase
         $rules = $inflector->getRules();
         foreach (array_values($options['rules'][':controller']) as $key => $rule) {
             $class = get_class($rules['controller'][$key]);
-            $this->assertContains($rule, $class);
+            $this->assertStringContainsString($rule, $class);
         }
         foreach (array_values($options['rules'][':action']) as $key => $rule) {
             $class = get_class($rules['action'][$key]);
-            $this->assertContains($rule, $class);
+            $this->assertStringContainsString($rule, $class);
         }
         $this->assertEquals($options['rules']['suffix'], $rules['suffix']);
     }

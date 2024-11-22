@@ -86,8 +86,8 @@ class Zend_View_Helper_HtmlFlashTest extends \PHPUnit\Framework\TestCase
 
         $objectStartElement = '<object data="/path/to/flash.swf" type="application/x-shockwave-flash">';
 
-        $this->assertContains($objectStartElement, $htmlFlash);
-        $this->assertContains('</object>', $htmlFlash);
+        $this->assertStringContainsString($objectStartElement, $htmlFlash);
+        $this->assertStringContainsString('</object>', $htmlFlash);
     }
 }
 

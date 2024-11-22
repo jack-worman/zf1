@@ -114,7 +114,7 @@ class Zend_Dojo_View_Helper_SplitContainerTest extends \PHPUnit\Framework\TestCa
     public function testShouldAllowDeclarativeDijitCreation()
     {
         $html = $this->getContainer();
-        $this->assertRegexp('/<div[^>]*(dojoType="dijit.layout.SplitContainer")/', $html, $html);
+        $this->assertMatchesRegularExpression('/<div[^>]*(dojoType="dijit.layout.SplitContainer")/', $html, $html);
     }
 
     public function testShouldAllowProgrammaticDijitCreation()

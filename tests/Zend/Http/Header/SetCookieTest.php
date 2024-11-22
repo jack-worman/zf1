@@ -236,7 +236,7 @@ class Zend_Http_Header_SetCookieTest extends \PHPUnit\Framework\TestCase
         $response = new Zend_Controller_Response_HttpTestCase();
         $cookie = Zend_Http_Header_SetCookie::fromString($cStr);
         $response->setRawHeader($cookie);
-        $this->assertContains((string)$cookie, $response->sendHeaders());
+        $this->assertStringContainsString((string)$cookie, $response->sendHeaders());
     }
 
     /**
@@ -390,7 +390,7 @@ class Zend_Http_Header_SetCookieTest extends \PHPUnit\Framework\TestCase
     public function testDoesNotAllowCRLFAttackVectorsViaSetters($setter, $value)
     {
         $cookie = new Zend_Http_Header_SetCookie();
-        $this->setExpectedException('Zend_Http_Header_Exception_InvalidArgumentException');
+        $this->expectException('Zend_Http_Header_Exception_InvalidArgumentException');
         $cookie->{$setter}($value);
     }
 }

@@ -167,7 +167,7 @@ class Zend_Ldap_ConverterTest extends \PHPUnit\Framework\TestCase
 
     public function testFromLdapUnserializeThrowsException ()
     {
-        $this->setExpectedException('UnexpectedValueException');
+        $this->expectException('UnexpectedValueException');
         Zend_Ldap_Converter::fromLdapUnserialize('--');
     }
 
@@ -183,7 +183,7 @@ class Zend_Ldap_ConverterTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertTrue(Zend_Ldap_Converter::fromLdapBoolean('TRUE'));
         $this->assertFalse(Zend_Ldap_Converter::fromLdapBoolean('FALSE'));
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
         Zend_Ldap_Converter::fromLdapBoolean('test');
     }
 

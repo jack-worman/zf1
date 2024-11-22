@@ -202,7 +202,7 @@ class Zend_Filter_Compress_ZipTest extends \PHPUnit\Framework\TestCase
             $filter->setTarget('/unknown/path/to/file.txt');
             $this->fails('Exception expected');
         } catch(Zend_Filter_Exception $e) {
-            $this->assertContains('does not exist', $e->getMessage());
+            $this->assertStringContainsString('does not exist', $e->getMessage());
         }
     }
 

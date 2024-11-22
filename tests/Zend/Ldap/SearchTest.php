@@ -63,7 +63,7 @@ class Zend_Ldap_SearchTest extends Zend_Ldap_OnlineTestCase
         $entry=$this->_getLdap()->getEntry($dn);
         $this->assertEquals($dn, $entry["dn"]);
         $this->assertArrayHasKey('ou', $entry);
-        $this->assertContains('Test1', $entry['ou']);
+        $this->assertStringContainsString('Test1', $entry['ou']);
         $this->assertEquals(1, count($entry['ou']));
     }
 
@@ -312,7 +312,7 @@ class Zend_Ldap_SearchTest extends Zend_Ldap_OnlineTestCase
                 'This_Class_Does_Not_Exist');
             $this->fail('Expected exception not thrown');
         } catch (Zend_Ldap_Exception $zle) {
-            $this->assertContains("Class 'This_Class_Does_Not_Exist' can not be found",
+            $this->assertStringContainsString("Class 'This_Class_Does_Not_Exist' can not be found",
                 $zle->getMessage());
         }
     }
@@ -325,7 +325,7 @@ class Zend_Ldap_SearchTest extends Zend_Ldap_OnlineTestCase
                 'Zend_Ldap_SearchTest_CollectionClassNotSubclassingZendLdapCollection');
             $this->fail('Expected exception not thrown');
         } catch (Zend_Ldap_Exception $zle) {
-            $this->assertContains(
+            $this->assertStringContainsString(
                 "Class 'Zend_Ldap_SearchTest_CollectionClassNotSubclassingZendLdapCollection' must subclass 'Zend_Ldap_Collection'",
                 $zle->getMessage());
         }

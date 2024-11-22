@@ -21,6 +21,8 @@
  */
 
 // Call Zend_XmlRpc_Request_HttpTest::main() if this source file is executed directly.
+use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
+
 if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_XmlRpc_Request_HttpTest::main");
 }
@@ -148,6 +150,7 @@ EOT;
         $this->assertEquals($expected, $this->request->getFullRequest());
     }
 
+    #[DoesNotPerformAssertions]
     public function testCanPassInMethodAndParams()
     {
         try {

@@ -277,7 +277,7 @@ class Zend_Filter_NullTest extends \PHPUnit\Framework\TestCase
             $this->_filter->setType(true);
             $this->fail();
         } catch (Zend_Exception $e) {
-            $this->assertContains('Unknown', $e->getMessage());
+            $this->assertStringContainsString('Unknown', $e->getMessage());
         }
     }
 

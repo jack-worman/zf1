@@ -92,7 +92,7 @@ class Zend_View_Helper_FormResetTest extends \PHPUnit\Framework\TestCase
             'name'    => 'foo',
             'value'   => 'Reset',
         ));
-        $this->assertRegexp('/<input[^>]*?(type="reset")/', $html);
+        $this->assertMatchesRegularExpression('/<input[^>]*?(type="reset")/', $html);
     }
 
     /**
@@ -105,20 +105,20 @@ class Zend_View_Helper_FormResetTest extends \PHPUnit\Framework\TestCase
             'value'   => 'Reset',
             'attribs' => array('disable' => true)
         ));
-        $this->assertRegexp('/<input[^>]*?(disabled="disabled")/', $html);
+        $this->assertMatchesRegularExpression('/<input[^>]*?(disabled="disabled")/', $html);
     }
 
     public function testShouldRenderAsHtmlByDefault()
     {
         $test = $this->helper->formReset('foo', 'bar');
-        $this->assertNotContains(' />', $test);
+        $this->assertStringNotContainsString(' />', $test);
     }
 
     public function testShouldAllowRenderingAsXHtml()
     {
         $this->view->doctype('XHTML1_STRICT');
         $test = $this->helper->formReset('foo', 'bar');
-        $this->assertContains(' />', $test);
+        $this->assertStringContainsString(' />', $test);
     }
 }
 

@@ -148,7 +148,7 @@ class Zend_Filter_CompressTest extends \PHPUnit\Framework\TestCase
             $filter->setBlocksize(15);
             $this->fail('Exception expected');
         } catch(Zend_Filter_Exception $e) {
-            $this->assertContains('must be between', $e->getMessage());
+            $this->assertStringContainsString('must be between', $e->getMessage());
         }
     }
 
@@ -233,7 +233,7 @@ class Zend_Filter_CompressTest extends \PHPUnit\Framework\TestCase
             $adapter = $filter->getAdapter();
             $this->fail('Invalid adapter should fail when retrieved');
         } catch (Zend_Filter_Exception $e) {
-            $this->assertContains('does not implement', $e->getMessage());
+            $this->assertStringContainsString('does not implement', $e->getMessage());
         }
     }
 
@@ -268,7 +268,7 @@ class Zend_Filter_CompressTest extends \PHPUnit\Framework\TestCase
             $filter->invalidMethod();
             $this->fail('Exception expected');
         } catch (Zend_Exception $e) {
-            $this->assertContains('Unknown method', $e->getMessage());
+            $this->assertStringContainsString('Unknown method', $e->getMessage());
         }
     }
 }

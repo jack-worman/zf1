@@ -129,7 +129,7 @@ class Zend_Dojo_Form_Decorator_DijitFormTest extends \PHPUnit\Framework\TestCase
     public function testRenderingShouldCreateDijit()
     {
         $html = $this->decorator->render('');
-        $this->assertContains('dojoType="dijit.form.Form"', $html);
+        $this->assertStringContainsString('dojoType="dijit.form.Form"', $html);
     }
 
     public function testRenderingShouldEnforceFormName()
@@ -148,7 +148,7 @@ class Zend_Dojo_Form_Decorator_DijitFormTest extends \PHPUnit\Framework\TestCase
         $decorator->setElement($element);
 
         $html = $decorator->render('');
-        $this->assertRegexp('/id=".{1,}"/', $html, $html);
+        $this->assertMatchesRegularExpression('/id=".{1,}"/', $html, $html);
     }
 }
 

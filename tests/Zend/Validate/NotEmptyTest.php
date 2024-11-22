@@ -520,7 +520,7 @@ class Zend_Validate_NotEmptyTest extends \PHPUnit\Framework\TestCase
             $this->_validator->setType(true);
             $this->fail();
         } catch (Zend_Exception $e) {
-            $this->assertContains('Unknown', $e->getMessage());
+            $this->assertStringContainsString('Unknown', $e->getMessage());
         }
     }
 
@@ -573,7 +573,7 @@ class Zend_Validate_NotEmptyTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($valid->isValid(''));
         $messages = $valid->getMessages();
         $this->assertTrue(array_key_exists('isEmpty', $messages));
-        $this->assertContains("can't be empty", $messages['isEmpty']);
+        $this->assertStringContainsString("can't be empty", $messages['isEmpty']);
     }
 
     /**

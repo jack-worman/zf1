@@ -120,7 +120,7 @@ class Zend_Filter_File_EncryptTest extends \PHPUnit\Framework\TestCase
             $filter->filter(__DIR__.'/../_files/nofile.txt');
             $this->fail();
         } catch (Zend_Filter_Exception $e) {
-            $this->assertContains('not found', $e->getMessage());
+            $this->assertStringContainsString('not found', $e->getMessage());
         }
     }
 

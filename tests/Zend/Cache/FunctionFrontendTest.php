@@ -197,7 +197,7 @@ class Zend_Cache_FunctionFrontendTest extends \PHPUnit\Framework\TestCase {
 
     public function testCallClosureThrowsException()
     {
-        $this->setExpectedException('Zend_Cache_Exception');
+        $this->expectException('Zend_Cache_Exception');
         eval('$closure = function () {};'); // no parse error on php < 5.3
         $this->_instance->call($closure);
     }

@@ -85,7 +85,7 @@ class Zend_Cache_FileBackendTest extends Zend_Cache_CommonExtendedBackendTest {
                 throw $e;
             }
 
-            $this->assertContains('hashed_directory_umask', $e->getMessage());
+            $this->assertStringContainsString('hashed_directory_umask', $e->getMessage());
         }
     }
 
@@ -102,7 +102,7 @@ class Zend_Cache_FileBackendTest extends Zend_Cache_CommonExtendedBackendTest {
                 throw $e;
             }
 
-            $this->assertContains('cache_file_umask', $e->getMessage());
+            $this->assertStringContainsString('cache_file_umask', $e->getMessage());
         }
     }
 

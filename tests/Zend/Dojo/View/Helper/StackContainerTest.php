@@ -114,7 +114,7 @@ class Zend_Dojo_View_Helper_StackContainerTest extends \PHPUnit\Framework\TestCa
     public function testShouldAllowDeclarativeDijitCreation()
     {
         $html = $this->getContainer();
-        $this->assertRegexp('/<div[^>]*(dojoType="dijit.layout.StackContainer")/', $html, $html);
+        $this->assertMatchesRegularExpression('/<div[^>]*(dojoType="dijit.layout.StackContainer")/', $html, $html);
     }
 
     public function testShouldAllowProgrammaticDijitCreation()

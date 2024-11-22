@@ -88,7 +88,7 @@ class Zend_Controller_Plugin_BrokerTest extends \PHPUnit\Framework\TestCase
             $broker->registerPlugin($plugin);
             $this->fail('Duplicate registry of plugin object should be disallowed');
         } catch (\Throwable $expected) {
-            $this->assertContains('already', $expected->getMessage());
+            $this->assertStringContainsString('already', $expected->getMessage());
         }
     }
 

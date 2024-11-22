@@ -86,7 +86,7 @@ class Zend_View_Helper_FormTextareaTest extends \PHPUnit\Framework\TestCase
             'attribs' => array('disable' => true)
         ));
 
-        $this->assertRegexp('/<textarea[^>]*?(disabled="disabled")/', $html);
+        $this->assertMatchesRegularExpression('/<textarea[^>]*?(disabled="disabled")/', $html);
     }
 
     /**

@@ -95,7 +95,7 @@ class Zend_Loader_StandardAutoloaderTest extends \PHPUnit\Framework\TestCase
                 $loader->setOptions(true);
                 $this->fail('Setting options with invalid type should fail');
             } catch (Zend_Loader_Exception_InvalidArgumentException $e) {
-                $this->assertContains('array or Traversable', $e->getMessage());
+                $this->assertStringContainsString('array or Traversable', $e->getMessage());
             }
         }
     }

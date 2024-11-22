@@ -141,8 +141,8 @@ class Zend_Controller_Action_Helper_AutoCompleteTest extends \PHPUnit\Framework\
         $data = array('foo', 'bar', 'baz');
         $encoded = $dojo->direct($data, false);
         $decoded = Zend_Json::decode($encoded);
-        $this->assertContains('items', array_keys($decoded));
-        $this->assertContains('identifier', array_keys($decoded));
+        $this->assertStringContainsString('items', array_keys($decoded));
+        $this->assertStringContainsString('identifier', array_keys($decoded));
         $this->assertEquals('name', $decoded['identifier']);
 
         $test = array();
@@ -217,7 +217,7 @@ class Zend_Controller_Action_Helper_AutoCompleteTest extends \PHPUnit\Framework\
             $encoded = $scriptaculous->encodeJson($data);
             $this->fail('Objects should be considered invalid');
         } catch (Zend_Controller_Action_Exception $e) {
-            $this->assertContains('Invalid data', $e->getMessage());
+            $this->assertStringContainsString('Invalid data', $e->getMessage());
         }
     }
 
@@ -227,11 +227,11 @@ class Zend_Controller_Action_Helper_AutoCompleteTest extends \PHPUnit\Framework\
         $scriptaculous->suppressExit = true;
         $data = array('foo', 'bar', 'baz');
         $formatted = $scriptaculous->direct($data);
-        $this->assertContains('<ul>', $formatted);
+        $this->assertStringContainsString('<ul>', $formatted);
         foreach ($data as $value) {
-            $this->assertContains('<li>' . $value . '</li>', $formatted);
+            $this->assertStringContainsString('<li>' . $value . '</li>', $formatted);
         }
-        $this->assertContains('</ul>', $formatted);
+        $this->assertStringContainsString('</ul>', $formatted);
     }
 
     public function testScriptaculousHelperSendsResponseByDefault()

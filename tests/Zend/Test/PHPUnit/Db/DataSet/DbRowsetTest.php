@@ -66,7 +66,7 @@ class Zend_Test_PHPUnit_Db_DataSet_DbRowsetTest extends \PHPUnit\Framework\TestC
 
     public function testRowset_ConstructWithDisconnectedRowset_NoTableName_ThrowsException()
     {
-        $this->setExpectedException("Zend_Test_PHPUnit_Db_Exception");
+        $this->expectException("Zend_Test_PHPUnit_Db_Exception");
 
         $rowset = $this->getMock('Zend_Db_Table_Rowset_Abstract', array(), array(), '', false);
         $rowset->expects($this->once())

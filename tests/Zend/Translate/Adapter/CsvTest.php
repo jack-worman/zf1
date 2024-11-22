@@ -67,7 +67,7 @@ class Zend_Translate_Adapter_CsvTest extends \PHPUnit\Framework\TestCase
             $adapter = new Zend_Translate_Adapter_Csv(__DIR__ . '/_files/nofile.csv', 'en');
             $this->fail("exception expected");
         } catch (Zend_Translate_Exception $e) {
-            $this->assertContains('Error opening translation file', $e->getMessage());
+            $this->assertStringContainsString('Error opening translation file', $e->getMessage());
         }
 
         set_error_handler(array($this, 'errorHandlerIgnore'));
@@ -114,7 +114,7 @@ class Zend_Translate_Adapter_CsvTest extends \PHPUnit\Framework\TestCase
             $adapter->addTranslation(__DIR__ . '/_files/translation_en.csv', 'xx');
             $this->fail("exception expected");
         } catch (Zend_Translate_Exception $e) {
-            $this->assertContains('does not exist', $e->getMessage());
+            $this->assertStringContainsString('does not exist', $e->getMessage());
         }
 
         $adapter->addTranslation(__DIR__ . '/_files/translation_en2.csv', 'de', array('clear' => true));
@@ -175,7 +175,7 @@ class Zend_Translate_Adapter_CsvTest extends \PHPUnit\Framework\TestCase
             $adapter->setLocale('nolocale');
             $this->fail("exception expected");
         } catch (Zend_Translate_Exception $e) {
-            $this->assertContains('does not exist', $e->getMessage());
+            $this->assertStringContainsString('does not exist', $e->getMessage());
         }
 
         set_error_handler(array($this, 'errorHandlerIgnore'));

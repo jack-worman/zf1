@@ -161,8 +161,8 @@ class Zend_Validate_AbstractTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($this->validator->isValid('bar'));
         $messages = $this->validator->getMessages();
         $this->assertTrue(array_key_exists('fooMessage', $messages));
-        $this->assertContains('bar', $messages['fooMessage']);
-        $this->assertContains('This is the translated message for ', $messages['fooMessage']);
+        $this->assertStringContainsString('bar', $messages['fooMessage']);
+        $this->assertStringContainsString('This is the translated message for ', $messages['fooMessage']);
     }
 
     public function testCanTranslateMessagesInsteadOfKeys()
@@ -176,8 +176,8 @@ class Zend_Validate_AbstractTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($this->validator->isValid('bar'));
         $messages = $this->validator->getMessages();
         $this->assertTrue(array_key_exists('fooMessage', $messages));
-        $this->assertContains('bar', $messages['fooMessage']);
-        $this->assertContains('This is the translated message for ', $messages['fooMessage']);
+        $this->assertStringContainsString('bar', $messages['fooMessage']);
+        $this->assertStringContainsString('This is the translated message for ', $messages['fooMessage']);
     }
 
     public function testObscureValueFlagFalseByDefault()
@@ -201,8 +201,8 @@ class Zend_Validate_AbstractTest extends \PHPUnit\Framework\TestCase
         $messages = $this->validator->getMessages();
         $this->assertTrue(isset($messages['fooMessage']));
         $message = $messages['fooMessage'];
-        $this->assertNotContains('foobar', $message);
-        $this->assertContains('******', $message);
+        $this->assertStringNotContainsString('foobar', $message);
+        $this->assertStringContainsString('******', $message);
     }
 
     /**
@@ -238,8 +238,8 @@ class Zend_Validate_AbstractTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($this->validator->isValid('bar'));
         $messages = $this->validator->getMessages();
         $this->assertTrue(array_key_exists('fooMessage', $messages));
-        $this->assertContains('bar', $messages['fooMessage']);
-        $this->assertContains('This is the translated message for ', $messages['fooMessage']);
+        $this->assertStringContainsString('bar', $messages['fooMessage']);
+        $this->assertStringContainsString('This is the translated message for ', $messages['fooMessage']);
 
         $this->validator->setDisableTranslator(true);
         $this->assertTrue($this->validator->translatorIsDisabled());
@@ -247,8 +247,8 @@ class Zend_Validate_AbstractTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($this->validator->isValid('bar'));
         $messages = $this->validator->getMessages();
         $this->assertTrue(array_key_exists('fooMessage', $messages));
-        $this->assertContains('bar', $messages['fooMessage']);
-        $this->assertContains('bar was passed', $messages['fooMessage']);
+        $this->assertStringContainsString('bar', $messages['fooMessage']);
+        $this->assertStringContainsString('bar was passed', $messages['fooMessage']);
     }
 
     public function testGetMessageTemplates()

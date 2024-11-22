@@ -92,7 +92,7 @@ class Zend_View_Helper_FormSubmitTest extends \PHPUnit\Framework\TestCase
             'name'    => 'foo',
             'value'   => 'Submit!',
         ));
-        $this->assertRegexp('/<input[^>]*?(type="submit")/', $html);
+        $this->assertMatchesRegularExpression('/<input[^>]*?(type="submit")/', $html);
     }
 
     /**
@@ -105,7 +105,7 @@ class Zend_View_Helper_FormSubmitTest extends \PHPUnit\Framework\TestCase
             'value'   => 'Submit!',
             'attribs' => array('disable' => true)
         ));
-        $this->assertRegexp('/<input[^>]*?(disabled="disabled")/', $html);
+        $this->assertMatchesRegularExpression('/<input[^>]*?(disabled="disabled")/', $html);
     }
 
     /**
@@ -117,20 +117,20 @@ class Zend_View_Helper_FormSubmitTest extends \PHPUnit\Framework\TestCase
             'name'    => 'foo',
             'value'   => '',
         ));
-        $this->assertRegexp('/<input[^>]*?(value="")/', $html);
+        $this->assertMatchesRegularExpression('/<input[^>]*?(value="")/', $html);
     }
 
     public function testRendersAsHtmlByDefault()
     {
         $test = $this->helper->formSubmit('foo', 'bar');
-        $this->assertNotContains(' />', $test);
+        $this->assertStringNotContainsString(' />', $test);
     }
 
     public function testCanRendersAsXHtml()
     {
         $this->view->doctype('XHTML1_STRICT');
         $test = $this->helper->formSubmit('foo', 'bar');
-        $this->assertContains(' />', $test);
+        $this->assertStringContainsString(' />', $test);
     }
 
     /**
@@ -139,7 +139,7 @@ class Zend_View_Helper_FormSubmitTest extends \PHPUnit\Framework\TestCase
     public function testDoesNotOutputEmptyId()
     {
         $test = $this->helper->formSubmit('', 'bar');
-        $this->assertNotContains('id=""', $test);
+        $this->assertStringNotContainsString('id=""', $test);
     }
 }
 

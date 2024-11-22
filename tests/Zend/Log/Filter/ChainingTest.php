@@ -74,8 +74,8 @@ class Zend_Log_Filter_ChainingTest extends \PHPUnit\Framework\TestCase
         rewind($this->log);
         $logdata = stream_get_contents($this->log);
 
-        $this->assertNotContains($ignored, $logdata);
-        $this->assertContains($logged, $logdata);
+        $this->assertStringNotContainsString($ignored, $logdata);
+        $this->assertStringContainsString($logged, $logdata);
     }
 
     public function testFilterOnSpecificWriter()
@@ -91,13 +91,13 @@ class Zend_Log_Filter_ChainingTest extends \PHPUnit\Framework\TestCase
 
         rewind($this->log);
         $logdata = stream_get_contents($this->log);
-        $this->assertContains($warn, $logdata);
-        $this->assertContains($err, $logdata);
+        $this->assertStringContainsString($warn, $logdata);
+        $this->assertStringContainsString($err, $logdata);
 
         rewind($log2);
         $logdata = stream_get_contents($log2);
-        $this->assertContains($err, $logdata);
-        $this->assertNotContains($warn, $logdata);
+        $this->assertStringContainsString($err, $logdata);
+        $this->assertStringNotContainsString($warn, $logdata);
     }
 }
 

@@ -263,7 +263,7 @@ bK22CwD/l7SMBOz4M9XH0Jb0OhNxLza4XMDu0ANMIpnkn1KOcmQ4gB8fmAbBt');
             $filter->setAdapter('TestAdapter');
             $this->fail('Exception expected on setting a non adapter');
         } catch (Zend_Filter_Exception $e) {
-            $this->assertContains('does not implement Zend_Filter_Encrypt_Interface', $e->getMessage());
+            $this->assertStringContainsString('does not implement Zend_Filter_Encrypt_Interface', $e->getMessage());
         }
     }
 
@@ -281,7 +281,7 @@ bK22CwD/l7SMBOz4M9XH0Jb0OhNxLza4XMDu0ANMIpnkn1KOcmQ4gB8fmAbBt');
             $filter->getUnknownMethod();
             $this->fail('Exception expected on calling a non existing method');
         } catch (Zend_Filter_Exception $e) {
-            $this->assertContains('Unknown method', $e->getMessage());
+            $this->assertStringContainsString('Unknown method', $e->getMessage());
         }
     }
 }

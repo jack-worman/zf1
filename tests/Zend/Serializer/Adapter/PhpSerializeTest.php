@@ -141,7 +141,7 @@ class Zend_Serializer_Adapter_PhpSerializeTest extends \PHPUnit\Framework\TestCa
     public function testUnserialzeInvalid()
     {
         $value = 'not a serialized string';
-        $this->setExpectedException('Zend_Serializer_Exception');
+        $this->expectException('Zend_Serializer_Exception');
         $this->_adapter->unserialize($value);
     }
 

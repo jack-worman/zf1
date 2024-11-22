@@ -117,7 +117,7 @@ class Zend_Dojo_View_Helper_RadioButtonTest extends \PHPUnit\Framework\TestCase
     public function testShouldAllowDeclarativeDijitCreation()
     {
         $html = $this->getElement();
-        $this->assertRegexp('/<input[^>]*(dojoType="dijit.form.RadioButton")/', $html, $html);
+        $this->assertMatchesRegularExpression('/<input[^>]*(dojoType="dijit.form.RadioButton")/', $html, $html);
     }
 
     public function testShouldAllowProgrammaticDijitCreation()

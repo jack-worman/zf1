@@ -61,8 +61,8 @@ class Zend_Soap_Wsdl_DefaultComplexTypeTest extends \PHPUnit\Framework\TestCase
         $this->strategy->addComplexType("Zend_Soap_Wsdl_DefaultComplexTypeTest_PublicPrivateProtected");
 
         $xml = $this->wsdl->toXML();
-        $this->assertNotContains( Zend_Soap_Wsdl_DefaultComplexTypeTest_PublicPrivateProtected::PROTECTED_VAR_NAME, $xml);
-        $this->assertNotContains( Zend_Soap_Wsdl_DefaultComplexTypeTest_PublicPrivateProtected::PRIVATE_VAR_NAME, $xml);
+        $this->assertStringNotContainsString( Zend_Soap_Wsdl_DefaultComplexTypeTest_PublicPrivateProtected::PROTECTED_VAR_NAME, $xml);
+        $this->assertStringNotContainsString( Zend_Soap_Wsdl_DefaultComplexTypeTest_PublicPrivateProtected::PRIVATE_VAR_NAME, $xml);
     }
 }
 

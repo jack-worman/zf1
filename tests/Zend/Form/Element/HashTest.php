@@ -143,7 +143,7 @@ class Zend_Form_Element_HashTest extends \PHPUnit\Framework\TestCase
     {
         $this->testGetHashReturnsHashValue();
         $this->assertEquals(32, strlen((string) $this->hash));
-        $this->assertRegexp('/^[a-f0-9]{32}$/', $this->hash);
+        $this->assertMatchesRegularExpression('/^[a-f0-9]{32}$/', $this->hash);
     }
 
     public function testLabelIsNull()
@@ -154,8 +154,8 @@ class Zend_Form_Element_HashTest extends \PHPUnit\Framework\TestCase
     public function testSessionNameContainsSaltAndName()
     {
         $sessionName = $this->element->getSessionName();
-        $this->assertContains($this->element->getSalt(), $sessionName);
-        $this->assertContains($this->element->getName(), $sessionName);
+        $this->assertStringContainsString($this->element->getSalt(), $sessionName);
+        $this->assertStringContainsString($this->element->getName(), $sessionName);
     }
 
     public function getView()
@@ -189,13 +189,13 @@ class Zend_Form_Element_HashTest extends \PHPUnit\Framework\TestCase
     public function testHashTokenIsRendered()
     {
         $html = $this->element->render($this->getView());
-        $this->assertContains($this->element->getHash(), $html);
+        $this->assertStringContainsString($this->element->getHash(), $html);
     }
 
     public function testHiddenInputRenderedByDefault()
     {
         $html = $this->element->render($this->getView());
-        $this->assertRegexp('/<input[^>]*?type="hidden"/', $html, $html);
+        $this->assertMatchesRegularExpression('/<input[^>]*?type="hidden"/', $html, $html);
     }
 
     /**
@@ -205,7 +205,7 @@ class Zend_Form_Element_HashTest extends \PHPUnit\Framework\TestCase
     {
         $this->element->setView($this->getView());
         $html = $this->element->renderViewHelper();
-        $this->assertContains($this->element->getHash(), $html, 'Html is: ' . $html);
+        $this->assertStringContainsString($this->element->getHash(), $html, 'Html is: ' . $html);
     }
 }
 

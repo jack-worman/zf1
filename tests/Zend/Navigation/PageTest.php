@@ -158,7 +158,7 @@ class Zend_Navigation_PageTest extends \PHPUnit\Framework\TestCase
                 $this->fail('An invalid value was set, but a ' .
                             'Zend_Navigation_Exception was not thrown');
             } catch (Zend_Navigation_Exception $e) {
-                $this->assertContains('Invalid argument: $label', $e->getMessage());
+                $this->assertStringContainsString('Invalid argument: $label', $e->getMessage());
             }
         }
     }
@@ -185,7 +185,7 @@ class Zend_Navigation_PageTest extends \PHPUnit\Framework\TestCase
                 $this->fail('An invalid value was set, but a ' .
                             'Zend_Navigation_Exception was not thrown');
             } catch (Zend_Navigation_Exception $e) {
-                $this->assertContains(
+                $this->assertStringContainsString(
                     'Invalid argument: $fragment', $e->getMessage()
                 );
             }
@@ -211,7 +211,7 @@ class Zend_Navigation_PageTest extends \PHPUnit\Framework\TestCase
                 $this->fail('An invalid value was set, but a ' .
                             'Zend_Navigation_Exception was not thrown');
             } catch (Zend_Navigation_Exception $e) {
-                $this->assertContains('Invalid argument: $id', $e->getMessage());
+                $this->assertStringContainsString('Invalid argument: $id', $e->getMessage());
             }
         }
     }
@@ -245,7 +245,7 @@ class Zend_Navigation_PageTest extends \PHPUnit\Framework\TestCase
                 $this->fail('An invalid value was set, but a ' .
                             'Zend_Navigation_Exception was not thrown');
             } catch (Zend_Navigation_Exception $e) {
-                $this->assertContains('Invalid argument: $class', $e->getMessage());
+                $this->assertStringContainsString('Invalid argument: $class', $e->getMessage());
             }
         }
     }
@@ -268,7 +268,7 @@ class Zend_Navigation_PageTest extends \PHPUnit\Framework\TestCase
                 $this->fail('An invalid value was set, but a ' .
                             'Zend_Navigation_Exception was not thrown');
             } catch (Zend_Navigation_Exception $e) {
-                $this->assertContains('Invalid argument: $title', $e->getMessage());
+                $this->assertStringContainsString('Invalid argument: $title', $e->getMessage());
             }
         }
     }
@@ -291,7 +291,7 @@ class Zend_Navigation_PageTest extends \PHPUnit\Framework\TestCase
                 $this->fail('An invalid value was set, but a ' .
                             'Zend_Navigation_Exception was not thrown');
             } catch (Zend_Navigation_Exception $e) {
-                $this->assertContains('Invalid argument: $target', $e->getMessage());
+                $this->assertStringContainsString('Invalid argument: $target', $e->getMessage());
             }
         }
     }
@@ -317,7 +317,7 @@ class Zend_Navigation_PageTest extends \PHPUnit\Framework\TestCase
                 $this->fail('An invalid value was set, but a ' .
                             'Zend_Navigation_Exception was not thrown');
             } catch (Zend_Navigation_Exception $e) {
-                $this->assertContains(
+                $this->assertStringContainsString(
                     'Invalid argument: $character',
                     $e->getMessage()
                 );
@@ -440,7 +440,7 @@ class Zend_Navigation_PageTest extends \PHPUnit\Framework\TestCase
                 $this->fail('An invalid value was set, but a ' .
                             'Zend_Navigation_Exception was not thrown');
             } catch (Zend_Navigation_Exception $e) {
-                $this->assertContains('Invalid argument: $order', $e->getMessage());
+                $this->assertStringContainsString('Invalid argument: $order', $e->getMessage());
             }
         }
     }
@@ -506,7 +506,7 @@ class Zend_Navigation_PageTest extends \PHPUnit\Framework\TestCase
             $this->fail('An invalid value was set, but a ' .
                         'Zend_Navigation_Exception was not thrown');
         } catch (Zend_Navigation_Exception $e) {
-            $this->assertContains('Invalid argument: $resource', $e->getMessage());
+            $this->assertStringContainsString('Invalid argument: $resource', $e->getMessage());
         }
     }
 
@@ -522,7 +522,7 @@ class Zend_Navigation_PageTest extends \PHPUnit\Framework\TestCase
             $this->fail('An invalid value was set, but a ' .
                         'Zend_Navigation_Exception was not thrown');
         } catch (Zend_Navigation_Exception $e) {
-            $this->assertContains('Invalid argument: $resource', $e->getMessage());
+            $this->assertStringContainsString('Invalid argument: $resource', $e->getMessage());
         }
     }
 
@@ -784,7 +784,7 @@ class Zend_Navigation_PageTest extends \PHPUnit\Framework\TestCase
             unset($page->uri);
             $this->fail('Should not be possible to unset native properties');
         } catch (Zend_Navigation_Exception $e) {
-            $this->assertContains('Unsetting native property', $e->getMessage());
+            $this->assertStringContainsString('Unsetting native property', $e->getMessage());
         }
     }
 
@@ -1019,7 +1019,7 @@ class Zend_Navigation_PageTest extends \PHPUnit\Framework\TestCase
             $this->fail('An invalid value was set, but a ' .
                         'Zend_Navigation_Exception was not thrown');
         } catch (Zend_Navigation_Exception $e) {
-            $this->assertContains('Invalid argument: $relations', $e->getMessage());
+            $this->assertStringContainsString('Invalid argument: $relations', $e->getMessage());
         }
     }
 
@@ -1077,7 +1077,7 @@ class Zend_Navigation_PageTest extends \PHPUnit\Framework\TestCase
             $this->fail('An invalid value was set, but a ' .
                         'Zend_Navigation_Exception was not thrown');
         } catch (Zend_Navigation_Exception $e) {
-            $this->assertContains('Invalid argument: $relations', $e->getMessage());
+            $this->assertStringContainsString('Invalid argument: $relations', $e->getMessage());
         }
     }
 

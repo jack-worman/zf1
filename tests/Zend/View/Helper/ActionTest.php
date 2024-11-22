@@ -177,7 +177,7 @@ class Zend_View_Helper_ActionTest extends \PHPUnit\Framework\TestCase
     public function testActionReturnsContentFromDefaultModule()
     {
         $value = $this->helper->action('bar', 'action-foo');
-        $this->assertContains('In default module, FooController::barAction()', $value);
+        $this->assertStringContainsString('In default module, FooController::barAction()', $value);
     }
 
     /**
@@ -186,7 +186,7 @@ class Zend_View_Helper_ActionTest extends \PHPUnit\Framework\TestCase
     public function testActionReturnsContentFromSpecifiedModule()
     {
         $value = $this->helper->action('bar', 'foo', 'foo');
-        $this->assertContains('In foo module, Foo_FooController::barAction()', $value);
+        $this->assertStringContainsString('In foo module, Foo_FooController::barAction()', $value);
     }
 
     /**
@@ -195,8 +195,8 @@ class Zend_View_Helper_ActionTest extends \PHPUnit\Framework\TestCase
     public function testActionReturnsContentReflectingPassedParams()
     {
         $value = $this->helper->action('baz', 'action-foo', null, array('bat' => 'This is my message'));
-        $this->assertNotContains('BOGUS', $value, var_export($this->helper->request->getUserParams(), 1));
-        $this->assertContains('This is my message', $value);
+        $this->assertStringNotContainsString('BOGUS', $value, var_export($this->helper->request->getUserParams(), 1));
+        $this->assertStringContainsString('This is my message', $value);
     }
 
     /**
@@ -270,7 +270,7 @@ class Zend_View_Helper_ActionTest extends \PHPUnit\Framework\TestCase
     public function testViewObjectRemainsUnchangedAfterAction()
     {
         $value = $this->helper->action('bar', 'foo', 'foo');
-        $this->assertContains('In foo module, Foo_FooController::barAction()', $value);
+        $this->assertStringContainsString('In foo module, Foo_FooController::barAction()', $value);
         $this->assertNull($this->view->bar);
     }
 
@@ -278,9 +278,9 @@ class Zend_View_Helper_ActionTest extends \PHPUnit\Framework\TestCase
     {
         $html = $this->helper->action('nest', 'foo', 'foo');
         $title = $this->view->headTitle()->toString();
-        $this->assertContains(' - ', $title, $title);
-        $this->assertContains('Foo Nest', $title);
-        $this->assertContains('Nested Stuff', $title);
+        $this->assertStringContainsString(' - ', $title, $title);
+        $this->assertStringContainsString('Foo Nest', $title);
+        $this->assertStringContainsString('Nested Stuff', $title);
     }
 
     /**
@@ -334,7 +334,7 @@ class Zend_View_Helper_ActionTest extends \PHPUnit\Framework\TestCase
     public function testActionCalledWithinActionResetsResponseState()
     {
         $value = $this->helper->action('bar-one', 'baz', 'foo');
-        $this->assertRegexp('/Baz-Three-View-Script\s+Baz-Two-View-Script\s+Baz-One-View-Script/s', $value);
+        $this->assertMatchesRegularExpression('/Baz-Three-View-Script\s+Baz-Two-View-Script\s+Baz-One-View-Script/s', $value);
     }
 }
 

@@ -123,11 +123,11 @@ class Zend_View_Helper_FormErrorsTest extends \PHPUnit\Framework\TestCase
     {
         $errors = array('foo', 'bar', 'baz');
         $html = $this->helper->formErrors($errors);
-        $this->assertContains('<ul', $html);
+        $this->assertStringContainsString('<ul', $html);
         foreach ($errors as $error) {
-            $this->assertContains('<li>' . $error . '</li>', $html);
+            $this->assertStringContainsString('<li>' . $error . '</li>', $html);
         }
-        $this->assertContains('</ul>', $html);
+        $this->assertStringContainsString('</ul>', $html);
     }
 
     public function testFormErrorsRendersWithSpecifiedStrings()
@@ -137,11 +137,11 @@ class Zend_View_Helper_FormErrorsTest extends \PHPUnit\Framework\TestCase
                      ->setElementEnd('</dt></dl>');
         $errors = array('foo', 'bar', 'baz');
         $html = $this->helper->formErrors($errors);
-        $this->assertContains('<dl>', $html);
+        $this->assertStringContainsString('<dl>', $html);
         foreach ($errors as $error) {
-            $this->assertContains('<dt>' . $error . '</dt>', $html);
+            $this->assertStringContainsString('<dt>' . $error . '</dt>', $html);
         }
-        $this->assertContains('</dl>', $html);
+        $this->assertStringContainsString('</dl>', $html);
     }
 
     public function testFormErrorsPreventsXssAttacks()
@@ -150,8 +150,8 @@ class Zend_View_Helper_FormErrorsTest extends \PHPUnit\Framework\TestCase
             'bad' => '\"><script>alert("xss");</script>',
         );
         $html = $this->helper->formErrors($errors);
-        $this->assertNotContains($errors['bad'], $html);
-        $this->assertContains('&', $html);
+        $this->assertStringNotContainsString($errors['bad'], $html);
+        $this->assertStringContainsString('&', $html);
     }
 
     public function testCanDisableEscapingErrorMessages()
@@ -161,8 +161,8 @@ class Zend_View_Helper_FormErrorsTest extends \PHPUnit\Framework\TestCase
             'bar' => '<a href="/help">Please click here for more information</a>'
         );
         $html = $this->helper->formErrors($errors, array('escape' => false));
-        $this->assertContains($errors['foo'], $html);
-        $this->assertContains($errors['bar'], $html);
+        $this->assertStringContainsString($errors['foo'], $html);
+        $this->assertStringContainsString($errors['bar'], $html);
     }
 
     /**

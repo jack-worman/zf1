@@ -113,7 +113,7 @@ class Zend_Dojo_View_Helper_TextareaTest extends \PHPUnit\Framework\TestCase
     public function testShouldAllowDeclarativeDijitCreation()
     {
         $html = $this->getElement();
-        $this->assertRegexp('/<textarea[^>]*(dojoType="dijit.form.Textarea")/', $html, $html);
+        $this->assertMatchesRegularExpression('/<textarea[^>]*(dojoType="dijit.form.Textarea")/', $html, $html);
     }
 
     public function testShouldAllowProgrammaticDijitCreation()
@@ -127,7 +127,7 @@ class Zend_Dojo_View_Helper_TextareaTest extends \PHPUnit\Framework\TestCase
     public function testPassingIdAsAttributeShouldOverrideUsingNameAsId()
     {
         $html = $this->helper->textarea('foo[bar]', '', array(), array('id' => 'foo-bar'));
-        $this->assertContains('id="foo-bar"', $html);
+        $this->assertStringContainsString('id="foo-bar"', $html);
     }
 
     public function testGeneratedMarkupShouldNotIncludeTypeAttribute()

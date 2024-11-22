@@ -145,11 +145,15 @@ class Zend_XmlRpc_ResponseTest extends \PHPUnit\Framework\TestCase
     public function testExceptionIsThrownWhenInvalidXmlIsReturnedByServer()
     {
         set_error_handler(array($this, 'trackError'));
-        $invalidResponse = 'foo';
-        $response = new Zend_XmlRpc_Response();
-        $this->assertFalse($this->_errorOccured);
-        $this->assertFalse($response->loadXml($invalidResponse));
-        $this->assertFalse($this->_errorOccured);
+        try {
+            $invalidResponse = 'foo';
+            $response = new Zend_XmlRpc_Response();
+            $this->assertFalse($this->_errorOccured);
+            $this->assertFalse($response->loadXml($invalidResponse));
+            $this->assertFalse($this->_errorOccured);
+        } finally {
+            restore_error_handler();
+        }
     }
 
     /**
@@ -265,7 +269,7 @@ EOD;
         $value = $this->_response->getReturnValue();
         $this->assertTrue(empty($value));
         if (is_string($value)) {
-            $this->assertNotContains('Local file inclusion', $value);
+            $this->assertStringNotContainsString('Local file inclusion', $value);
         }
     }
 

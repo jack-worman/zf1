@@ -179,7 +179,7 @@ class Zend_Application_ApplicationTest extends \PHPUnit\Framework\TestCase
             ),
         ));
         $namespaces = $this->autoloader->getRegisteredNamespaces();
-        $this->assertContains('Foo', $namespaces);
+        $this->assertStringContainsString('Foo', $namespaces);
     }
 
     public function testPassingIncludePathOptionShouldModifyIncludePath()
@@ -191,7 +191,7 @@ class Zend_Application_ApplicationTest extends \PHPUnit\Framework\TestCase
             ),
         ));
         $test = get_include_path();
-        $this->assertContains($expected, $test);
+        $this->assertStringContainsString($expected, $test);
     }
 
     public function testPassingPhpSettingsSetsIniValues()
@@ -489,7 +489,7 @@ class Zend_Application_ApplicationTest extends \PHPUnit\Framework\TestCase
         ));
         $autoloader = $application->getAutoloader();
         $actual     = $autoloader->getZfPath();
-        $this->assertContains($latest, $actual);
+        $this->assertStringContainsString($latest, $actual);
     }
 
     /**

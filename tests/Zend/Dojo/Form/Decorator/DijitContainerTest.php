@@ -200,7 +200,7 @@ class Zend_Dojo_Form_Decorator_DijitContainerTest extends \PHPUnit\Framework\Tes
     public function testRenderingShouldCreateDijit()
     {
         $html = $this->decorator->render('');
-        $this->assertContains('dojoType="dijit.layout.ContentPane"', $html);
+        $this->assertStringContainsString('dojoType="dijit.layout.ContentPane"', $html);
     }
 
     /**
@@ -244,7 +244,7 @@ class Zend_Dojo_Form_Decorator_DijitContainerTest extends \PHPUnit\Framework\Tes
                 ->setView($this->view);
         $this->decorator->setElement($element);
         $html = $this->decorator->render('');
-        $this->assertContains('FooBar', $html);
+        $this->assertStringContainsString('FooBar', $html);
     }
 }
 

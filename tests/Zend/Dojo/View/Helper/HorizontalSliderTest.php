@@ -186,7 +186,7 @@ class Zend_Dojo_View_Helper_HorizontalSliderTest extends \PHPUnit\Framework\Test
     public function testShouldAllowDeclarativeDijitCreation()
     {
         $html = $this->getElement();
-        $this->assertRegexp('/<div[^>]*(dojoType="dijit.form.HorizontalSlider")/', $html, $html);
+        $this->assertMatchesRegularExpression('/<div[^>]*(dojoType="dijit.form.HorizontalSlider")/', $html, $html);
     }
 
     public function testShouldAllowProgrammaticDijitCreation()
@@ -201,7 +201,7 @@ class Zend_Dojo_View_Helper_HorizontalSliderTest extends \PHPUnit\Framework\Test
     {
         $html = $this->getElement();
         // Note that ' is converted to &#39; in Zend_View_Helper_HtmlElement::_htmlAttribs() (line 116)
-        $this->assertContains('onChange="dojo.byId(&#39;elementId&#39;).value = arguments[0];"', $html, $html);
+        $this->assertStringContainsString('onChange="dojo.byId(&#39;elementId&#39;).value = arguments[0];"', $html, $html);
     }
 
     public function testShouldCreateHiddenElementWithValue()
@@ -210,24 +210,24 @@ class Zend_Dojo_View_Helper_HorizontalSliderTest extends \PHPUnit\Framework\Test
         if (!preg_match('/(<input[^>]*(type="hidden")[^>]*>)/', $html, $m)) {
             $this->fail('No hidden element found');
         }
-        $this->assertContains('id="elementId"', $m[1]);
-        $this->assertContains('value="', $m[1]);
+        $this->assertStringContainsString('id="elementId"', $m[1]);
+        $this->assertStringContainsString('value="', $m[1]);
     }
 
     public function testShouldCreateTopAndBottomDecorationsWhenRequested()
     {
         $html = $this->getElement();
-        $this->assertRegexp('/<div[^>]*(dojoType="dijit.form.HorizontalRule")/', $html, $html);
-        $this->assertRegexp('/<ol[^>]*(dojoType="dijit.form.HorizontalRuleLabels")/', $html, $html);
-        $this->assertContains('topDecoration', $html);
-        $this->assertContains('bottomDecoration', $html);
+        $this->assertMatchesRegularExpression('/<div[^>]*(dojoType="dijit.form.HorizontalRule")/', $html, $html);
+        $this->assertMatchesRegularExpression('/<ol[^>]*(dojoType="dijit.form.HorizontalRuleLabels")/', $html, $html);
+        $this->assertStringContainsString('topDecoration', $html);
+        $this->assertStringContainsString('bottomDecoration', $html);
     }
 
     public function testShouldIgnoreLeftAndRightDecorationsWhenPassed()
     {
         $html = $this->getElement();
-        $this->assertNotContains('leftDecoration', $html);
-        $this->assertNotContains('rightDecoration', $html);
+        $this->assertStringNotContainsString('leftDecoration', $html);
+        $this->assertStringNotContainsString('rightDecoration', $html);
     }
 
     /**
@@ -266,8 +266,8 @@ class Zend_Dojo_View_Helper_HorizontalSliderTest extends \PHPUnit\Framework\Test
                 ),
             )
         );
-        $this->assertContains('required="', $html);
-        $this->assertContains('minimum="', $html);
+        $this->assertStringContainsString('required="', $html);
+        $this->assertStringContainsString('minimum="', $html);
     }
 
     /**
@@ -312,9 +312,9 @@ class Zend_Dojo_View_Helper_HorizontalSliderTest extends \PHPUnit\Framework\Test
         $form->addSubForm($sliderForm, 'slidertab')
              ->setView($this->getView());
         $html = $form->render();
-        $this->assertContains('id="slidertab-slide1-slider"', $html);
-        $this->assertContains('id="slidertab-slide1-slider-topDecoration"', $html);
-        $this->assertContains('id="slidertab-slide1-slider-topDecoration-labels"', $html);
+        $this->assertStringContainsString('id="slidertab-slide1-slider"', $html);
+        $this->assertStringContainsString('id="slidertab-slide1-slider-topDecoration"', $html);
+        $this->assertStringContainsString('id="slidertab-slide1-slider-topDecoration-labels"', $html);
     }
 
     /**
@@ -324,7 +324,7 @@ class Zend_Dojo_View_Helper_HorizontalSliderTest extends \PHPUnit\Framework\Test
     {
         $html = $this->getElement();
         $this->assertNotRegexp('/<div[^>]*(dojoType="dijit.form.HorizontalRuleLabels")[^>]*><\/div>\s*<ol/s', $html, $html);
-        $this->assertRegexp('/<div[^>]*><\/div>\s*<ol[^>]*(dojoType="dijit.form.HorizontalRuleLabels")/s', $html, $html);
+        $this->assertMatchesRegularExpression('/<div[^>]*><\/div>\s*<ol[^>]*(dojoType="dijit.form.HorizontalRuleLabels")/s', $html, $html);
     }
 }
 

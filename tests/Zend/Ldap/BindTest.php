@@ -83,7 +83,7 @@ class Zend_Ldap_BindTest extends \PHPUnit\Framework\TestCase
             $ldap->bind();
             $this->fail('Expected exception for empty options');
         } catch (Zend_Ldap_Exception $zle) {
-            $this->assertContains('A host parameter is required', $zle->getMessage());
+            $this->assertStringContainsString('A host parameter is required', $zle->getMessage());
         }
     }
     public function testAnonymousBind()
@@ -96,7 +96,7 @@ class Zend_Ldap_BindTest extends \PHPUnit\Framework\TestCase
             $ldap->bind();
         } catch (Zend_Ldap_Exception $zle) {
             // or I guess the server doesn't allow unauthenticated binds
-            $this->assertContains('unauthenticated bind', $zle->getMessage());
+            $this->assertStringContainsString('unauthenticated bind', $zle->getMessage());
         }
     }
     public function testNoBaseDnBind()
@@ -110,7 +110,7 @@ class Zend_Ldap_BindTest extends \PHPUnit\Framework\TestCase
             $ldap->bind('invalid', 'ignored');
             $this->fail('Expected exception for baseDn missing');
         } catch (Zend_Ldap_Exception $zle) {
-            $this->assertContains('Base DN not set', $zle->getMessage());
+            $this->assertStringContainsString('Base DN not set', $zle->getMessage());
         }
     }
     public function testNoDomainNameBind()
@@ -125,7 +125,7 @@ class Zend_Ldap_BindTest extends \PHPUnit\Framework\TestCase
             $ldap->bind('invalid', 'ignored');
             $this->fail('Expected exception for missing accountDomainName');
         } catch (Zend_Ldap_Exception $zle) {
-            $this->assertContains('Option required: accountDomainName', $zle->getMessage());
+            $this->assertStringContainsString('Option required: accountDomainName', $zle->getMessage());
         }
     }
     public function testPlainBind()
@@ -164,7 +164,7 @@ class Zend_Ldap_BindTest extends \PHPUnit\Framework\TestCase
             $ldap->bind($this->_altUsername, 'invalid');
             $this->fail('Expected exception not thrown');
         } catch (Zend_Ldap_Exception $zle) {
-            $this->assertContains('Invalid credentials', $zle->getMessage());
+            $this->assertStringContainsString('Invalid credentials', $zle->getMessage());
         }
     }
     public function testRequiresDnWithoutDnBind()
@@ -182,7 +182,7 @@ class Zend_Ldap_BindTest extends \PHPUnit\Framework\TestCase
         } catch (Zend_Ldap_Exception $zle) {
             /* Note that if your server actually allows anonymous binds this test will fail.
              */
-            $this->assertContains('Failed to retrieve DN', $zle->getMessage());
+            $this->assertStringContainsString('Failed to retrieve DN', $zle->getMessage());
         }
     }
 
@@ -195,7 +195,7 @@ class Zend_Ldap_BindTest extends \PHPUnit\Framework\TestCase
             $ldap->bind($this->_altUsername, '');
             $this->fail('Expected exception for empty password');
         } catch (Zend_Ldap_Exception $zle) {
-            $this->assertContains('Empty password not allowed - see allowEmptyPassword option.',
+            $this->assertStringContainsString('Empty password not allowed - see allowEmptyPassword option.',
                 $zle->getMessage());
         }
 
@@ -227,7 +227,7 @@ class Zend_Ldap_BindTest extends \PHPUnit\Framework\TestCase
             $ldap->bind();
             $this->fail('Expected exception for empty password');
         } catch (Zend_Ldap_Exception $zle) {
-            $this->assertContains('Binding requires username in DN form',
+            $this->assertStringContainsString('Binding requires username in DN form',
                 $zle->getMessage());
         }
     }
@@ -268,7 +268,7 @@ class Zend_Ldap_BindTest extends \PHPUnit\Framework\TestCase
     public function testBindWithNullPassword()
     {
         $ldap = new Zend_Ldap($this->_options);
-        $this->setExpectedException('Zend_Ldap_Exception', 'Invalid credentials');
+        $this->expectException('Zend_Ldap_Exception', 'Invalid credentials');
         $ldap->bind($this->_altUsername, "\0invalidpassword");
     }
 }

@@ -538,7 +538,7 @@ class Zend_Mail_MessageTest extends \PHPUnit\Framework\TestCase
     public function testRaisesExceptionWhenProvidedWithHeaderContainingCRLFInjection($name, $value)
     {
         $headers = array($name => $value);
-        $this->setExpectedException('Zend_Mail_Exception', 'valid');
+        $this->expectException('Zend_Mail_Exception', 'valid');
         $message = new Zend_Mail_Message(array(
             'headers' => $headers,
         ));

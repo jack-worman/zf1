@@ -141,14 +141,14 @@ class Zend_Controller_Response_HttpTest extends \PHPUnit\Framework\TestCase
     {
         $this->_response->setRawHeader('HTTP/1.0 404 Not Found');
         $headers = $this->_response->getRawHeaders();
-        $this->assertContains('HTTP/1.0 404 Not Found', $headers);
+        $this->assertStringContainsString('HTTP/1.0 404 Not Found', $headers);
     }
 
     public function testClearRawHeaders()
     {
         $this->_response->setRawHeader('HTTP/1.0 404 Not Found');
         $headers = $this->_response->getRawHeaders();
-        $this->assertContains('HTTP/1.0 404 Not Found', $headers);
+        $this->assertStringContainsString('HTTP/1.0 404 Not Found', $headers);
 
         $this->_response->clearRawHeaders();
         $headers = $this->_response->getRawHeaders();
@@ -305,7 +305,7 @@ class Zend_Controller_Response_HttpTest extends \PHPUnit\Framework\TestCase
         ob_start();
         $this->_response->sendResponse();
         $string = ob_get_clean();
-        $this->assertContains('Test exception rendering', $string);
+        $this->assertStringContainsString('Test exception rendering', $string);
     }
 
     public function testSetResponseCodeThrowsExceptionWithBadCode()
@@ -346,7 +346,7 @@ class Zend_Controller_Response_HttpTest extends \PHPUnit\Framework\TestCase
             $this->fail('canSendHeaders() should throw exception');
         } catch (\Throwable $e) {
             var_dump($e->getMessage());
-            $this->assertRegExp('/headers already sent in .+, line \d+$/', $e->getMessage());
+            $this->assertMatchesRegularExpression('/headers already sent in .+, line \d+$/', $e->getMessage());
         }
     }
 

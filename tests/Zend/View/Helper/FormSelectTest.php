@@ -110,39 +110,39 @@ class Zend_View_Helper_FormSelectTest extends \PHPUnit\Framework\TestCase
     public function testFormSelectWithNameOnlyCreatesEmptySelect()
     {
         $html = $this->helper->formSelect('foo');
-        $this->assertRegExp('#<select[^>]+name="foo"#', $html);
-        $this->assertContains('</select>', $html);
-        $this->assertNotContains('<option', $html);
+        $this->assertMatchesRegularExpression('#<select[^>]+name="foo"#', $html);
+        $this->assertStringContainsString('</select>', $html);
+        $this->assertStringNotContainsString('<option', $html);
     }
 
     public function testFormSelectWithOptionsCreatesPopulatedSelect()
     {
         $html = $this->helper->formSelect('foo', null, null, array('foo' => 'Foobar', 'baz' => 'Bazbat'));
-        $this->assertRegExp('#<select[^>]+name="foo"#', $html);
-        $this->assertContains('</select>', $html);
-        $this->assertRegExp('#<option[^>]+value="foo".*?>Foobar</option>#', $html);
-        $this->assertRegExp('#<option[^>]+value="baz".*?>Bazbat</option>#', $html);
+        $this->assertMatchesRegularExpression('#<select[^>]+name="foo"#', $html);
+        $this->assertStringContainsString('</select>', $html);
+        $this->assertMatchesRegularExpression('#<option[^>]+value="foo".*?>Foobar</option>#', $html);
+        $this->assertMatchesRegularExpression('#<option[^>]+value="baz".*?>Bazbat</option>#', $html);
         $this->assertEquals(2, substr_count($html, '<option'));
     }
 
     public function testFormSelectWithOptionsAndValueSelectsAppropriateValue()
     {
         $html = $this->helper->formSelect('foo', 'baz', null, array('foo' => 'Foobar', 'baz' => 'Bazbat'));
-        $this->assertRegExp('#<option[^>]+value="baz"[^>]*selected.*?>Bazbat</option>#', $html);
+        $this->assertMatchesRegularExpression('#<option[^>]+value="baz"[^>]*selected.*?>Bazbat</option>#', $html);
     }
 
     public function testFormSelectWithMultipleAttributeCreatesMultiSelect()
     {
         $html = $this->helper->formSelect('foo', null, array('multiple' => true), array('foo' => 'Foobar', 'baz' => 'Bazbat'));
-        $this->assertRegExp('#<select[^>]+name="foo\[\]"#', $html);
-        $this->assertRegExp('#<select[^>]+multiple="multiple"#', $html);
+        $this->assertMatchesRegularExpression('#<select[^>]+name="foo\[\]"#', $html);
+        $this->assertMatchesRegularExpression('#<select[^>]+multiple="multiple"#', $html);
     }
 
     public function testFormSelectWithMultipleAttributeAndValuesCreatesMultiSelectWithSelectedValues()
     {
         $html = $this->helper->formSelect('foo', array('foo', 'baz'), array('multiple' => true), array('foo' => 'Foobar', 'baz' => 'Bazbat'));
-        $this->assertRegExp('#<option[^>]+value="foo"[^>]*selected.*?>Foobar</option>#', $html);
-        $this->assertRegExp('#<option[^>]+value="baz"[^>]*selected.*?>Bazbat</option>#', $html);
+        $this->assertMatchesRegularExpression('#<option[^>]+value="foo"[^>]*selected.*?>Foobar</option>#', $html);
+        $this->assertMatchesRegularExpression('#<option[^>]+value="baz"[^>]*selected.*?>Bazbat</option>#', $html);
     }
 
     /**
@@ -152,7 +152,7 @@ class Zend_View_Helper_FormSelectTest extends \PHPUnit\Framework\TestCase
     public function testFormSelectWithZeroValueSelectsValue()
     {
         $html = $this->helper->formSelect('foo', 0, null, array('foo' => 'Foobar', 0 => 'Bazbat'));
-        $this->assertRegExp('#<option[^>]+value="0"[^>]*selected.*?>Bazbat</option>#', $html);
+        $this->assertMatchesRegularExpression('#<option[^>]+value="0"[^>]*selected.*?>Bazbat</option>#', $html);
     }
 
     /**
@@ -170,7 +170,7 @@ class Zend_View_Helper_FormSelectTest extends \PHPUnit\Framework\TestCase
                'disable' => true
             ),
         ));
-        $this->assertRegexp('/<select[^>]*?disabled/', $html, $html);
+        $this->assertMatchesRegularExpression('/<select[^>]*?disabled/', $html, $html);
         $this->assertNotRegexp('/<option[^>]*?disabled="disabled"/', $html, $html);
     }
 
@@ -190,7 +190,7 @@ class Zend_View_Helper_FormSelectTest extends \PHPUnit\Framework\TestCase
             ),
         ));
         $this->assertNotRegexp('/<select[^>]*?disabled/', $html, $html);
-        $this->assertRegexp('/<option value="bar"[^>]*?disabled="disabled"/', $html, $html);
+        $this->assertMatchesRegularExpression('/<option value="bar"[^>]*?disabled="disabled"/', $html, $html);
 
         $html = $this->helper->formSelect(
             'baz',
@@ -204,7 +204,7 @@ class Zend_View_Helper_FormSelectTest extends \PHPUnit\Framework\TestCase
             )
         );
         $this->assertNotRegexp('/<select[^>]*?disabled/', $html, $html);
-        $this->assertRegexp('/<option value="bar"[^>]*?disabled="disabled"/', $html, $html);
+        $this->assertMatchesRegularExpression('/<option value="bar"[^>]*?disabled="disabled"/', $html, $html);
     }
 
     /**
@@ -224,8 +224,8 @@ class Zend_View_Helper_FormSelectTest extends \PHPUnit\Framework\TestCase
             ),
         ));
         $this->assertNotRegexp('/<select[^>]*?disabled/', $html, $html);
-        $this->assertRegexp('/<option value="foo"[^>]*?disabled="disabled"/', $html, $html);
-        $this->assertRegexp('/<option value="baz"[^>]*?disabled="disabled"/', $html, $html);
+        $this->assertMatchesRegularExpression('/<option value="foo"[^>]*?disabled="disabled"/', $html, $html);
+        $this->assertMatchesRegularExpression('/<option value="baz"[^>]*?disabled="disabled"/', $html, $html);
     }
 
     /**
@@ -248,7 +248,7 @@ class Zend_View_Helper_FormSelectTest extends \PHPUnit\Framework\TestCase
             ),
         ));
         $this->assertNotRegexp('/<select[^>]*?disabled/', $html, $html);
-        $this->assertRegexp('/<optgroup[^>]*?disabled="disabled"[^>]*?"bar"[^>]*?/', $html, $html);
+        $this->assertMatchesRegularExpression('/<optgroup[^>]*?disabled="disabled"[^>]*?"bar"[^>]*?/', $html, $html);
         $this->assertNotRegexp('/<option value="1"[^>]*?disabled="disabled"/', $html, $html);
         $this->assertNotRegexp('/<option value="2"[^>]*?disabled="disabled"/', $html, $html);
     }
@@ -275,7 +275,7 @@ class Zend_View_Helper_FormSelectTest extends \PHPUnit\Framework\TestCase
         $this->assertNotRegexp('/<select[^>]*?disabled/', $html, $html);
         $this->assertNotRegexp('/<optgroup[^>]*?disabled="disabled"[^>]*?"bar"[^>]*?/', $html, $html);
         $this->assertNotRegexp('/<option value="1"[^>]*?disabled="disabled"/', $html, $html);
-        $this->assertRegexp('/<option value="2"[^>]*?disabled="disabled"/', $html, $html);
+        $this->assertMatchesRegularExpression('/<option value="2"[^>]*?disabled="disabled"/', $html, $html);
     }
 
     public function testCanSpecifySelectMultipleThroughAttribute()
@@ -291,7 +291,7 @@ class Zend_View_Helper_FormSelectTest extends \PHPUnit\Framework\TestCase
                'multiple' => true
             ),
         ));
-        $this->assertRegexp('/<select[^>]*?(multiple="multiple")/', $html, $html);
+        $this->assertMatchesRegularExpression('/<select[^>]*?(multiple="multiple")/', $html, $html);
     }
 
     public function testSpecifyingSelectMultipleThroughAttributeAppendsNameWithBrackets()
@@ -307,7 +307,7 @@ class Zend_View_Helper_FormSelectTest extends \PHPUnit\Framework\TestCase
                'multiple' => true
             ),
         ));
-        $this->assertRegexp('/<select[^>]*?(name="baz\[\]")/', $html, $html);
+        $this->assertMatchesRegularExpression('/<select[^>]*?(name="baz\[\]")/', $html, $html);
     }
 
     public function testCanSpecifySelectMultipleThroughName()
@@ -320,7 +320,7 @@ class Zend_View_Helper_FormSelectTest extends \PHPUnit\Framework\TestCase
                 'baz' => 'Baz,'
             ),
         ));
-        $this->assertRegexp('/<select[^>]*?(multiple="multiple")/', $html, $html);
+        $this->assertMatchesRegularExpression('/<select[^>]*?(multiple="multiple")/', $html, $html);
     }
 
     /**
@@ -339,7 +339,7 @@ class Zend_View_Helper_FormSelectTest extends \PHPUnit\Framework\TestCase
                'multiple' => false
             ),
         ));
-        $this->assertRegexp('/<select[^>]*?(name="baz\[\]")/', $html, $html);
+        $this->assertMatchesRegularExpression('/<select[^>]*?(name="baz\[\]")/', $html, $html);
         $this->assertNotRegexp('/<select[^>]*?(multiple="multiple")/', $html, $html);
     }
 
@@ -359,7 +359,7 @@ class Zend_View_Helper_FormSelectTest extends \PHPUnit\Framework\TestCase
                 'baz' => 'Baz,'
             )
         ));
-        $this->assertRegexp('/<optgroup[^>]*?id="baz-optgroup-bar"[^>]*?"bar"[^>]*?/', $html, $html);
+        $this->assertMatchesRegularExpression('/<optgroup[^>]*?id="baz-optgroup-bar"[^>]*?"bar"[^>]*?/', $html, $html);
     }
 
     public function testCanApplyOptionClasses()
@@ -378,8 +378,8 @@ class Zend_View_Helper_FormSelectTest extends \PHPUnit\Framework\TestCase
                                         'baz' => 'bazClass')
             ),
         ));
-        $this->assertRegexp('/.*<option[^>]*?(value="foo")?(class="fooClass").*/', $html, $html);
-        $this->assertRegexp('/.*<option[^>]*?(value="bar")?(class="barClass").*/', $html, $html);
+        $this->assertMatchesRegularExpression('/.*<option[^>]*?(value="foo")?(class="fooClass").*/', $html, $html);
+        $this->assertMatchesRegularExpression('/.*<option[^>]*?(value="bar")?(class="barClass").*/', $html, $html);
     }
 }
 

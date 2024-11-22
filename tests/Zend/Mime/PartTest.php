@@ -69,7 +69,7 @@ class Zend_Mime_PartTest extends \PHPUnit\Framework\TestCase
         $actual = $this->part->getHeaders();
 
         foreach ($expectedHeaders as $expected) {
-            $this->assertContains($expected, $actual);
+            $this->assertStringContainsString($expected, $actual);
         }
     }
 

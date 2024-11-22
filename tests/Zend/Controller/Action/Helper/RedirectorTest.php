@@ -503,7 +503,7 @@ class Zend_Controller_Action_Helper_RedirectorTest extends \PHPUnit\Framework\Te
         $this->redirector->gotoUrl('/bar/baz');
         $test = $this->redirector->getRedirectUrl();
 
-        $this->assertNotContains('https://', $test);
+        $this->assertStringNotContainsString('https://', $test);
         $this->assertEquals('http://localhost/bar/baz', $test);
     }
 

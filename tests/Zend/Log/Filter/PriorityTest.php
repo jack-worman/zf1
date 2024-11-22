@@ -78,7 +78,7 @@ class Zend_Log_Filter_PriorityTest extends \PHPUnit\Framework\TestCase
             $this->fail();
         } catch (\Throwable $e) {
             $this->assertTrue($e instanceof Zend_Log_Exception);
-            $this->assertRegExp('/must be an integer/i', $e->getMessage());
+            $this->assertMatchesRegularExpression('/must be an integer/i', $e->getMessage());
         }
     }
 
@@ -104,7 +104,7 @@ class Zend_Log_Filter_PriorityTest extends \PHPUnit\Framework\TestCase
             )));
         } catch (\Throwable $e) {
             $this->assertTrue($e instanceof Zend_Log_Exception);
-            $this->assertRegExp('/must be an integer/', $e->getMessage());
+            $this->assertMatchesRegularExpression('/must be an integer/', $e->getMessage());
         }
     }
 }

@@ -72,7 +72,7 @@ class Zend_Test_PHPUnit_Db_Operation_DeleteAllTest extends \PHPUnit\Framework\Te
 
     public function testDeleteQueryErrorTransformsException()
     {
-        $this->setExpectedException('PHPUnit_Extensions_Database_Operation_Exception');
+        $this->expectException('PHPUnit_Extensions_Database_Operation_Exception');
 
         $dataSet = new PHPUnit_Extensions_Database_DataSet_FlatXmlDataSet(__DIR__."/_files/truncateFixture.xml");
 
@@ -88,7 +88,7 @@ class Zend_Test_PHPUnit_Db_Operation_DeleteAllTest extends \PHPUnit\Framework\Te
 
     public function testInvalidConnectionGivenThrowsException()
     {
-        $this->setExpectedException("Zend_Test_PHPUnit_Db_Exception");
+        $this->expectException("Zend_Test_PHPUnit_Db_Exception");
 
         $dataSet = $this->getMock('PHPUnit_Extensions_Database_DataSet_IDataSet');
         $connection = $this->getMock('PHPUnit_Extensions_Database_DB_IDatabaseConnection');

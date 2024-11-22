@@ -173,7 +173,7 @@ EOS;
             'defaultValue' => new stdClass(),
         ));
 
-        $this->setExpectedException("Zend_CodeGenerator_Php_Exception");
+        $this->expectException("Zend_CodeGenerator_Php_Exception");
 
         $codeGenProperty->generate();
     }

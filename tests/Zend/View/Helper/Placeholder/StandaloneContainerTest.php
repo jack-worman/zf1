@@ -111,9 +111,9 @@ class Zend_View_Helper_Placeholder_StandaloneContainerTest extends \PHPUnit\Fram
         $foo2->append('Bar');
 
         $test = $foo1->toString();
-        $this->assertContains('Foo', $test);
-        $this->assertContains(' - ', $test);
-        $this->assertContains('Bar', $test);
+        $this->assertStringContainsString('Foo', $test);
+        $this->assertStringContainsString(' - ', $test);
+        $this->assertStringContainsString('Bar', $test);
     }
 }
 

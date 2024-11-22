@@ -141,7 +141,7 @@ class Zend_Serializer_Adapter_IgbinaryTest extends \PHPUnit\Framework\TestCase
     public function testUnserialzeInvalid()
     {
         $value = "\0\1\r\n";
-        $this->setExpectedException('Zend_Serializer_Exception');
+        $this->expectException('Zend_Serializer_Exception');
         $this->_adapter->unserialize($value);
     }
 

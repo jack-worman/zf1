@@ -119,7 +119,7 @@ class Zend_Dojo_View_Helper_NumberSpinnerTest extends \PHPUnit\Framework\TestCas
     public function testShouldAllowDeclarativeDijitCreation()
     {
         $html = $this->getElement();
-        $this->assertRegexp('/<input[^>]*(dojoType="dijit.form.NumberSpinner")/', $html, $html);
+        $this->assertMatchesRegularExpression('/<input[^>]*(dojoType="dijit.form.NumberSpinner")/', $html, $html);
     }
 
     public function testShouldAllowProgrammaticDijitCreation()
@@ -133,7 +133,7 @@ class Zend_Dojo_View_Helper_NumberSpinnerTest extends \PHPUnit\Framework\TestCas
     public function testShouldCreateTextInput()
     {
         $html = $this->getElement();
-        $this->assertRegexp('/<input[^>]*(type="text")/', $html);
+        $this->assertMatchesRegularExpression('/<input[^>]*(type="text")/', $html);
     }
 
     public function testShouldJsonEncodeConstraints()
@@ -163,7 +163,7 @@ class Zend_Dojo_View_Helper_NumberSpinnerTest extends \PHPUnit\Framework\TestCas
                 'constraints' => 'bogus',
             )
         );
-        $this->assertNotContains('constraints="', $html);
+        $this->assertStringNotContainsString('constraints="', $html);
     }
 }
 

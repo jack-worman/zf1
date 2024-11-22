@@ -526,7 +526,7 @@ class Zend_XmlRpc_ClientTest extends \PHPUnit\Framework\TestCase
         try {
             $i->getSignatureForEachMethodByMulticall();
         } catch (Zend_XmlRpc_Client_IntrospectException $e) {
-            $this->assertRegexp('/bad number/i', $e->getMessage());
+            $this->assertMatchesRegularExpression('/bad number/i', $e->getMessage());
         }
     }
 
@@ -548,7 +548,7 @@ class Zend_XmlRpc_ClientTest extends \PHPUnit\Framework\TestCase
         try {
             $i->getSignatureForEachMethodByMulticall();
         } catch (Zend_XmlRpc_Client_IntrospectException $e) {
-            $this->assertRegexp('/got integer/i', $e->getMessage());
+            $this->assertMatchesRegularExpression('/got integer/i', $e->getMessage());
         }
     }
 

@@ -365,7 +365,7 @@ class Zend_XmlRpc_RequestTest extends \PHPUnit\Framework\TestCase
         $method = $this->_request->getMethod();
         $this->assertTrue(empty($method));
         if (is_string($method)) {
-            $this->assertNotContains('Local file inclusion', $method);
+            $this->assertStringNotContainsString('Local file inclusion', $method);
         }
     }
 

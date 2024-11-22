@@ -269,7 +269,7 @@ class Zend_TranslateTest extends \PHPUnit\Framework\TestCase
             $lang = new Zend_Translate('Zend_Locale', __DIR__ . '/Translate/_files/test2', null, array('scan' => Zend_Translate::LOCALE_FILENAME));
             $this->fail('Exception due to false adapter class expected');
         } catch (Zend_Translate_Exception $e) {
-            $this->assertContains('does not extend Zend_Translate_Adapter', $e->getMessage());
+            $this->assertStringContainsString('does not extend Zend_Translate_Adapter', $e->getMessage());
         }
     }
 
@@ -332,7 +332,7 @@ class Zend_TranslateTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('ignored', $lang->translate('ignored'));
 
         rewind($stream);
-        $this->assertContains('ignored', stream_get_contents($stream));
+        $this->assertStringContainsString('ignored', stream_get_contents($stream));
     }
 
     public function testSettingUnknownLocaleWithTriggeredError()
@@ -360,7 +360,7 @@ class Zend_TranslateTest extends \PHPUnit\Framework\TestCase
         $lang->setLocale('ru');
 
         rewind($stream);
-        $this->assertContains('has to be added', stream_get_contents($stream));
+        $this->assertStringContainsString('has to be added', stream_get_contents($stream));
     }
 
     public function testSettingNoLogAsLog()
@@ -371,7 +371,7 @@ class Zend_TranslateTest extends \PHPUnit\Framework\TestCase
             $lang->setOptions(array('log' => 'nolog'));
             $this->fail();
         } catch (Zend_Translate_Exception $e) {
-            $this->assertContains('Instance of Zend_Log expected', $e->getMessage());
+            $this->assertStringContainsString('Instance of Zend_Log expected', $e->getMessage());
         }
     }
 
@@ -390,7 +390,7 @@ class Zend_TranslateTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('ignored', $lang->translate('ignored'));
 
         rewind($stream);
-        $this->assertContains('Self defined log message', stream_get_contents($stream));
+        $this->assertStringContainsString('Self defined log message', stream_get_contents($stream));
     }
 
     /**
@@ -612,7 +612,7 @@ class Zend_TranslateTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($lang->isTranslated('ignored'));
 
         rewind($stream);
-        $this->assertNotContains('ignored', stream_get_contents($stream));
+        $this->assertStringNotContainsString('ignored', stream_get_contents($stream));
     }
 
     /**
@@ -891,13 +891,13 @@ class Zend_TranslateTest extends \PHPUnit\Framework\TestCase
         $lang->setLocale('ru');
 
         rewind($stream);
-        $this->assertContains('ERR (3)', stream_get_contents($stream));
+        $this->assertStringContainsString('ERR (3)', stream_get_contents($stream));
 
         $lang->setOptions(array('logPriority' => 1));
         $lang->setLocale('sv');
 
         rewind($stream);
-        $this->assertContains('ALERT (1)', stream_get_contents($stream));
+        $this->assertStringContainsString('ALERT (1)', stream_get_contents($stream));
     }
 
     /**

@@ -247,7 +247,7 @@ class Zend_Filter_HtmlEntitiesTest extends \PHPUnit\Framework\TestCase
         $result = $this->_filter->filter($string);
         restore_error_handler();
 
-        $this->assertContains('&quot;&quot;', $result);
+        $this->assertStringContainsString('&quot;&quot;', $result);
     }
 
     /**

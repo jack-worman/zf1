@@ -20,6 +20,8 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Wildfire_WildfireTest::main');
 }
@@ -190,6 +192,7 @@ class Zend_Wildfire_WildfireTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($channel->isReady());
     }
 
+    #[DoesNotPerformAssertions]
     public function testFirePhpPluginInstanciation()
     {
         $this->_setupWithoutFrontController();
@@ -742,6 +745,7 @@ class Zend_Wildfire_WildfireTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($protocol->getMessages());
     }
 
+    #[DoesNotPerformAssertions]
     public function testChannelInstanciation()
     {
         $this->_setupWithoutFrontController();
@@ -1032,6 +1036,7 @@ class Zend_Wildfire_WildfireTest extends \PHPUnit\Framework\TestCase
     /**
      * @group ZF-10537
      */
+    #[DoesNotPerformAssertions]
     public function testFileLineOffsets()
     {
         $this->_setupWithoutFrontController();

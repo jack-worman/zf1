@@ -69,7 +69,7 @@ class Zend_Log_Writer_AbstractTest extends \PHPUnit\Framework\TestCase
 
         // require_once 'Zend/Log/Formatter/Simple.php';
         $this->_writer->setFormatter(new Zend_Log_Formatter_Simple());
-        $this->setExpectedException('\PHPUnit\Framework\AssertionFailedError');
+        $this->expectException('\PHPUnit\Framework\AssertionFailedError');
         $this->_writer->setFormatter(new StdClass());
     }
 
@@ -78,7 +78,7 @@ class Zend_Log_Writer_AbstractTest extends \PHPUnit\Framework\TestCase
         $this->_writer->addFilter(1);
         // require_once 'Zend/Log/Filter/Message.php';
         $this->_writer->addFilter(new Zend_Log_Filter_Message('/mess/'));
-        $this->setExpectedException('Zend_Log_Exception');
+        $this->expectException('Zend_Log_Exception');
         $this->_writer->addFilter(new StdClass());
     }
 

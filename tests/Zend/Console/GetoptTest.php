@@ -577,7 +577,7 @@ class Zend_Console_GetoptTest extends \PHPUnit\Framework\TestCase
             $opts = new Zend_Console_GetOpt('abp:');
             $this->fail();
         } catch(Zend_Console_GetOpt_Exception $e) {
-            $this->assertContains('$_SERVER["argv"]', $e->getMessage());
+            $this->assertStringContainsString('$_SERVER["argv"]', $e->getMessage());
         }
 
         $_SERVER['argv'] = $argv;

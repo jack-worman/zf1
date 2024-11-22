@@ -102,7 +102,7 @@ class Zend_Validate_CallbackTest extends \PHPUnit\Framework\TestCase
             $valid->setCallback('invalidcallback');
             $this->fail('Exception expected');
         } catch (Zend_Exception $e) {
-            $this->assertContains('Invalid callback given', $e->getMessage());
+            $this->assertStringContainsString('Invalid callback given', $e->getMessage());
         }
     }
 
@@ -126,7 +126,7 @@ class Zend_Validate_CallbackTest extends \PHPUnit\Framework\TestCase
     public function optionsCallback($value)
     {
         $args = func_get_args();
-        $this->assertContains('something', $args);
+        $this->assertStringContainsString('something', $args);
         return $args;
     }
 }

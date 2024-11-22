@@ -440,7 +440,7 @@ class Zend_Loader_PluginLoaderTest extends \PHPUnit\Framework\TestCase
         $cache = file_get_contents($cacheFile);
         if (substr((string) PHP_OS, 0, 3) !== 'WIN') {
             // windows reads an empty string, without any error, if a file is flock-ed...
-            $this->assertContains('CacheTest.php', $cache);
+            $this->assertStringContainsString('CacheTest.php', $cache);
         }
     }
 
@@ -479,7 +479,7 @@ class Zend_Loader_PluginLoaderTest extends \PHPUnit\Framework\TestCase
         }
 
         $classPath = $loader->getClassPath('DeclareVars');
-        $this->assertContains($expected, $classPath);
+        $this->assertStringContainsString($expected, $classPath);
     }
 
     /**
@@ -510,7 +510,7 @@ class Zend_Loader_PluginLoaderTest extends \PHPUnit\Framework\TestCase
             $this->fail();
         } catch (\Throwable $e) {
             $this->assertTrue($e instanceof Zend_Loader_PluginLoader_Exception);
-            $this->assertContains('Prefix My_Namespace_ / Path ZF9721', $e->getMessage());
+            $this->assertStringContainsString('Prefix My_Namespace_ / Path ZF9721', $e->getMessage());
         }
         $this->assertEquals(1, count($loader->getPaths('My_Namespace_')));
     }

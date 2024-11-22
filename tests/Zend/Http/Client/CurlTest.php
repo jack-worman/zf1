@@ -169,8 +169,8 @@ class Zend_Http_Client_CurlTest extends Zend_Http_Client_CommonHttpTests
         $this->assertEquals(3, $this->client->getRedirectionsCount(), 'Redirection counter is not as expected');
 
         // Make sure the body does *not* contain the set parameters
-        $this->assertNotContains('swallow', $res->getBody());
-        $this->assertNotContains('Camelot', $res->getBody());
+        $this->assertStringNotContainsString('swallow', $res->getBody());
+        $this->assertStringNotContainsString('Camelot', $res->getBody());
     }
 
     /**
@@ -245,7 +245,7 @@ class Zend_Http_Client_CurlTest extends Zend_Http_Client_CommonHttpTests
 
     public function testWritingAndNotConnectedWithCurlHandleThrowsException()
     {
-        $this->setExpectedException("Zend_Http_Client_Adapter_Exception", "Trying to write but we are not connected");
+        $this->expectException("Zend_Http_Client_Adapter_Exception", "Trying to write but we are not connected");
 
         $adapter = new Zend_Http_Client_Adapter_Curl();
         $adapter->write("GET", "someUri");
@@ -253,7 +253,7 @@ class Zend_Http_Client_CurlTest extends Zend_Http_Client_CommonHttpTests
 
     public function testSetConfigIsNotArray()
     {
-        $this->setExpectedException("Zend_Http_Client_Adapter_Exception");
+        $this->expectException("Zend_Http_Client_Adapter_Exception");
 
         $adapter = new Zend_Http_Client_Adapter_Curl();
         $adapter->setConfig("foo");

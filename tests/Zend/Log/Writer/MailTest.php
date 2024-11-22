@@ -194,7 +194,7 @@ class Zend_Log_Writer_MailTest extends \PHPUnit\Framework\TestCase
 
         // Expect a Zend_Log_Exception because the subject prepend text cannot
         // be set of the Zend_Mail object already has a subject line set.
-        $this->setExpectedException('Zend_Log_Exception');
+        $this->expectException('Zend_Log_Exception');
 
         // Set a subject line so the setSubjectPrependText() call triggers an
         // exception.
@@ -245,7 +245,7 @@ class Zend_Log_Writer_MailTest extends \PHPUnit\Framework\TestCase
         list(, $writer) = $this->_getSimpleLogger();
 
         // If Zend_Layout is not being used, a formatter cannot be set for it.
-        $this->setExpectedException('Zend_Log_Exception');
+        $this->expectException('Zend_Log_Exception');
         $writer->setLayoutFormatter(new Zend_Log_Formatter_Simple());
     }
 
@@ -336,10 +336,10 @@ class Zend_Log_Writer_MailTest extends \PHPUnit\Framework\TestCase
     	$writer->shutdown();
 
     	$this->assertEquals('admin@domain.com', $this->_transport->recipients);
-    	$this->assertContains('an info message', $this->_transport->body);
-    	$this->assertContains('From: log@test.framework.zend.com', $this->_transport->header);
-    	$this->assertContains('To: admin@domain.com', $this->_transport->header);
-    	$this->assertContains('Subject: [error] exceptions on my application', $this->_transport->header);
+    	$this->assertStringContainsString('an info message', $this->_transport->body);
+    	$this->assertStringContainsString('From: log@test.framework.zend.com', $this->_transport->header);
+    	$this->assertStringContainsString('To: admin@domain.com', $this->_transport->header);
+    	$this->assertStringContainsString('Subject: [error] exceptions on my application', $this->_transport->header);
     }
 
     /**
@@ -355,7 +355,7 @@ class Zend_Log_Writer_MailTest extends \PHPUnit\Framework\TestCase
     	$writer->write($this->_getEvent());
     	$writer->shutdown();
 
-    	$this->assertContains('Subject: [error] exceptions on my application (INFO=1)', $this->_transport->header);
+    	$this->assertStringContainsString('Subject: [error] exceptions on my application (INFO=1)', $this->_transport->header);
     }
 
     /**
@@ -385,7 +385,7 @@ class Zend_Log_Writer_MailTest extends \PHPUnit\Framework\TestCase
     	$writer->write($this->_getEvent());
     	$writer->shutdown();
 
-    	$this->assertContains('Content-Type: text/plain; charset=UTF-8', $this->_transport->header);
+    	$this->assertStringContainsString('Content-Type: text/plain; charset=UTF-8', $this->_transport->header);
     }
 
     /**
@@ -408,14 +408,14 @@ class Zend_Log_Writer_MailTest extends \PHPUnit\Framework\TestCase
     	$writer->write($this->_getEvent());
     	$writer->shutdown();
 
-    	$this->assertContains('admin1@domain.com', $this->_transport->recipients);
-    	$this->assertContains('admin2@domain.com', $this->_transport->recipients);
-    	$this->assertContains('bug@domain.com', $this->_transport->recipients);
-    	$this->assertContains('projectname@domain.com', $this->_transport->recipients);
-    	$this->assertContains('To: John Doe <admin1@domain.com>', $this->_transport->header);
-    	$this->assertContains('admin2@domain.com', $this->_transport->header);
-    	$this->assertContains('Cc: bug@domain.com', $this->_transport->header);
-    	$this->assertContains('project <projectname@domain.com>', $this->_transport->header);
+    	$this->assertStringContainsString('admin1@domain.com', $this->_transport->recipients);
+    	$this->assertStringContainsString('admin2@domain.com', $this->_transport->recipients);
+    	$this->assertStringContainsString('bug@domain.com', $this->_transport->recipients);
+    	$this->assertStringContainsString('projectname@domain.com', $this->_transport->recipients);
+    	$this->assertStringContainsString('To: John Doe <admin1@domain.com>', $this->_transport->header);
+    	$this->assertStringContainsString('admin2@domain.com', $this->_transport->header);
+    	$this->assertStringContainsString('Cc: bug@domain.com', $this->_transport->header);
+    	$this->assertStringContainsString('project <projectname@domain.com>', $this->_transport->header);
     }
 
     /**
@@ -434,11 +434,11 @@ class Zend_Log_Writer_MailTest extends \PHPUnit\Framework\TestCase
     	$writer->shutdown();
 
         $this->assertFalse(empty($this->_transport->boundary));
-        $this->assertContains('Content-Type: multipart/', $this->_transport->header);
-        $this->assertContains('boundary=', $this->_transport->header);
-        $this->assertContains('Content-Type: text/plain', $this->_transport->body);
-        $this->assertContains('Content-Type: text/html', $this->_transport->body);
-        $this->assertContains($this->_transport->boundary, $this->_transport->body);
+        $this->assertStringContainsString('Content-Type: multipart/', $this->_transport->header);
+        $this->assertStringContainsString('boundary=', $this->_transport->header);
+        $this->assertStringContainsString('Content-Type: text/plain', $this->_transport->body);
+        $this->assertStringContainsString('Content-Type: text/html', $this->_transport->body);
+        $this->assertStringContainsString($this->_transport->boundary, $this->_transport->body);
         $this->assertEquals(2, substr_count($this->_transport->body, 'an info message'));
     }
 

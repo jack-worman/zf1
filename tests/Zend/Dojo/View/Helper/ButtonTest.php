@@ -117,7 +117,7 @@ class Zend_Dojo_View_Helper_ButtonTest extends \PHPUnit\Framework\TestCase
     public function testShouldAllowDeclarativeDijitCreation()
     {
         $html = $this->getElement();
-        $this->assertRegexp('/<button[^>]*(dojoType="dijit.form.Button")/', $html, $html);
+        $this->assertMatchesRegularExpression('/<button[^>]*(dojoType="dijit.form.Button")/', $html, $html);
     }
 
     public function testShouldAllowProgrammaticDijitCreation()

@@ -117,7 +117,7 @@ class Zend_Dojo_View_Helper_TextBoxTest extends \PHPUnit\Framework\TestCase
     public function testShouldAllowDeclarativeDijitCreation()
     {
         $html = $this->getElement();
-        $this->assertRegexp('/<input[^>]*(dojoType="dijit.form.TextBox")/', $html, $html);
+        $this->assertMatchesRegularExpression('/<input[^>]*(dojoType="dijit.form.TextBox")/', $html, $html);
     }
 
     public function testShouldAllowProgrammaticDijitCreation()
@@ -131,7 +131,7 @@ class Zend_Dojo_View_Helper_TextBoxTest extends \PHPUnit\Framework\TestCase
     public function testShouldCreateTextInput()
     {
         $html = $this->getElement();
-        $this->assertRegexp('/<input[^>]*(type="text")/', $html);
+        $this->assertMatchesRegularExpression('/<input[^>]*(type="text")/', $html);
     }
 }
 

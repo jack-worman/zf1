@@ -75,7 +75,7 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends \PHPUnit\Framework\TestCa
     public function setUp(): void
     {
         $_SESSION = array();
-        $this->setExpectedException(null);
+        $this->expectException(null);
         $this->testCase = new Zend_Test_PHPUnit_ControllerTestCaseTest_Concrete();
         $this->testCase->reset();
         $this->testCase->bootstrap = array($this, 'bootstrap');
@@ -182,21 +182,21 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends \PHPUnit\Framework\TestCa
             $this->testCase->request = new Zend_Controller_Request_Http();
             $this->fail('Setting request object as public property should raise exception');
         } catch (\Throwable $e) {
-            $this->assertContains('not allow', $e->getMessage());
+            $this->assertStringContainsString('not allow', $e->getMessage());
         }
 
         try {
             $this->testCase->response = new Zend_Controller_Response_Http();
             $this->fail('Setting response object as public property should raise exception');
         } catch (\Throwable $e) {
-            $this->assertContains('not allow', $e->getMessage());
+            $this->assertStringContainsString('not allow', $e->getMessage());
         }
 
         try {
             $this->testCase->frontController = Zend_Controller_Front::getInstance();
             $this->fail('Setting front controller as public property should raise exception');
         } catch (\Throwable $e) {
-            $this->assertContains('not allow', $e->getMessage());
+            $this->assertStringContainsString('not allow', $e->getMessage());
         }
     }
 
@@ -295,7 +295,7 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends \PHPUnit\Framework\TestCa
         $content  = $response->getBody();
         $this->assertEquals('zend-test-php-unit-foo', $request->getControllerName(), $content);
         $this->assertEquals('bar', $request->getActionName());
-        $this->assertContains('FooController::barAction', $content, $content);
+        $this->assertStringContainsString('FooController::barAction', $content, $content);
     }
 
     public function testAssertQueryShouldDoNothingForValidResponseContent()
@@ -495,49 +495,49 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends \PHPUnit\Framework\TestCa
             $this->testCase->assertResponseCode(500);
             $this->fail();
         } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
-            $this->assertContains('Failed', $e->getMessage());
+            $this->assertStringContainsString('Failed', $e->getMessage());
         }
         try {
             $this->testCase->assertNotResponseCode(200);
             $this->fail();
         } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
-            $this->assertContains('Failed', $e->getMessage());
+            $this->assertStringContainsString('Failed', $e->getMessage());
         }
         try {
             $this->testCase->assertNotHeader('Content-Type');
             $this->fail();
         } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
-            $this->assertContains('Failed', $e->getMessage());
+            $this->assertStringContainsString('Failed', $e->getMessage());
         }
         try {
             $this->testCase->assertHeader('X-Bogus');
             $this->fail();
         } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
-            $this->assertContains('Failed', $e->getMessage());
+            $this->assertStringContainsString('Failed', $e->getMessage());
         }
         try {
             $this->testCase->assertNotHeaderContains('Content-Type', 'my-foo');
             $this->fail();
         } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
-            $this->assertContains('Failed', $e->getMessage());
+            $this->assertStringContainsString('Failed', $e->getMessage());
         }
         try {
             $this->testCase->assertHeaderContains('Content-Type', 'my-bar');
             $this->fail();
         } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
-            $this->assertContains('Failed', $e->getMessage());
+            $this->assertStringContainsString('Failed', $e->getMessage());
         }
         try {
             $this->testCase->assertNotHeaderRegex('Content-Type', '#^[a-z-]+/[a-z-]+$#i');
             $this->fail();
         } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
-            $this->assertContains('Failed', $e->getMessage());
+            $this->assertStringContainsString('Failed', $e->getMessage());
         }
         try {
             $this->testCase->assertHeaderRegex('Content-Type', '#^\d+#i');
             $this->fail();
         } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
-            $this->assertContains('Failed', $e->getMessage());
+            $this->assertStringContainsString('Failed', $e->getMessage());
         }
     }
 
@@ -553,7 +553,7 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends \PHPUnit\Framework\TestCa
     {
         $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/zend-test-php-unit-foo/baz');
-        $this->setExpectedException('PHPUnit_Framework_AssertionFailedError');
+        $this->expectException('PHPUnit_Framework_AssertionFailedError');
         $this->testCase->assertModule('zend-test-php-unit-foo');
         $this->testCase->assertNotModule('default');
     }
@@ -570,7 +570,7 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends \PHPUnit\Framework\TestCa
     {
         $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/zend-test-php-unit-foo/baz');
-        $this->setExpectedException('PHPUnit_Framework_AssertionFailedError');
+        $this->expectException('PHPUnit_Framework_AssertionFailedError');
         $this->testCase->assertController('baz');
         $this->testCase->assertNotController('zend-test-php-unit-foo');
     }
@@ -587,7 +587,7 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends \PHPUnit\Framework\TestCa
     {
         $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/foo/baz');
-        $this->setExpectedException('PHPUnit_Framework_AssertionFailedError');
+        $this->expectException('PHPUnit_Framework_AssertionFailedError');
         $this->testCase->assertAction('foo');
         $this->testCase->assertNotAction('baz');
     }
@@ -604,7 +604,7 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends \PHPUnit\Framework\TestCa
     {
         $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/foo/baz');
-        $this->setExpectedException('PHPUnit_Framework_AssertionFailedError');
+        $this->expectException('PHPUnit_Framework_AssertionFailedError');
         $this->testCase->assertRoute('foo');
         $this->testCase->assertNotRoute('default');
     }
@@ -666,7 +666,7 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends \PHPUnit\Framework\TestCa
         $view = new Zend_View();
         $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
         $this->assertFalse($view->dojo()->isEnabled(), 'Dojo is enabled? ', $view->dojo());
-        $this->assertNotContains('Foo', $view->headTitle()->__toString(), 'Head title persisted?');
+        $this->assertStringNotContainsString('Foo', $view->headTitle()->__toString(), 'Head title persisted?');
     }
 
     /**

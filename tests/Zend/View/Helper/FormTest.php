@@ -85,15 +85,15 @@ class Zend_View_Helper_FormTest extends \PHPUnit\Framework\TestCase
     public function testFormWithSaneInput()
     {
         $form = $this->helper->form('foo', array('action' => '/foo', 'method' => 'get'));
-        $this->assertRegexp('/<form[^>]*(id="foo")/', $form);
-        $this->assertRegexp('/<form[^>]*(action="\/foo")/', $form);
-        $this->assertRegexp('/<form[^>]*(method="get")/', $form);
+        $this->assertMatchesRegularExpression('/<form[^>]*(id="foo")/', $form);
+        $this->assertMatchesRegularExpression('/<form[^>]*(action="\/foo")/', $form);
+        $this->assertMatchesRegularExpression('/<form[^>]*(method="get")/', $form);
     }
 
     public function testFormWithInputNeedingEscapesUsesViewEscaping()
     {
         $form = $this->helper->form('<&foo');
-        $this->assertContains($this->view->escape('<&foo'), $form);
+        $this->assertStringContainsString($this->view->escape('<&foo'), $form);
     }
 
     /**
@@ -114,7 +114,7 @@ class Zend_View_Helper_FormTest extends \PHPUnit\Framework\TestCase
     {
         $form = $this->helper->form('OrigName', array('action' => '/foo', 'method' => 'get', 'name' => 'SomeNameAttr'));
         $this->assertNotRegexp('/<form[^>]*(name="OrigName")/', $form);
-        $this->assertRegexp('/<form[^>]*(name="SomeNameAttr")/', $form);
+        $this->assertMatchesRegularExpression('/<form[^>]*(name="SomeNameAttr")/', $form);
     }
 
     /**
@@ -132,7 +132,7 @@ class Zend_View_Helper_FormTest extends \PHPUnit\Framework\TestCase
     public function testSpecifyingFormNameShouldRenderNameAttrib()
     {
         $form = $this->helper->form('FormName', array('action' => '/foo', 'method' => 'get'));
-        $this->assertRegexp('/<form[^>]*(name="FormName")/', $form);
+        $this->assertMatchesRegularExpression('/<form[^>]*(name="FormName")/', $form);
     }
 
     /**
@@ -150,7 +150,7 @@ class Zend_View_Helper_FormTest extends \PHPUnit\Framework\TestCase
     public function testPassingEmptyNameAttributeToNamedFormShouldNotOverrideNameAttrib()
     {
         $form = $this->helper->form('RealName', array('action' => '/foo', 'method' => 'get', 'name' => NULL));
-        $this->assertRegexp('/<form[^>]*(name="RealName")/', $form);
+        $this->assertMatchesRegularExpression('/<form[^>]*(name="RealName")/', $form);
     }
 
     /**

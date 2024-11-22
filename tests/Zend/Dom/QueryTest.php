@@ -158,7 +158,7 @@ class Zend_Dom_QueryTest extends \PHPUnit\Framework\TestCase
             $this->query->query('.foo');
             $this->fail('Querying without registering document should throw exception');
         } catch (Zend_Dom_Exception $e) {
-            $this->assertContains('no document', $e->getMessage());
+            $this->assertStringContainsString('no document', $e->getMessage());
         }
     }
 
@@ -172,7 +172,7 @@ class Zend_Dom_QueryTest extends \PHPUnit\Framework\TestCase
             $this->fail('Querying invalid document should throw exception');
         } catch (Zend_Dom_Exception $e) {
             restore_error_handler();
-            $this->assertContains('Error parsing', $e->getMessage());
+            $this->assertStringContainsString('Error parsing', $e->getMessage());
         }
     }
 
@@ -384,7 +384,7 @@ EOB;
 </results>
 XML;
         $this->query->setDocumentXml($xml);
-        $this->setExpectedException("Zend_Dom_Exception");
+        $this->expectException("Zend_Dom_Exception");
         $this->query->queryXpath('/');
     }
 }

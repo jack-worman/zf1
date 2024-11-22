@@ -118,7 +118,7 @@ class Zend_View_Helper_PartialLoopTest extends \PHPUnit\Framework\TestCase
         $result = $this->helper->partialLoop('partialLoop.phtml', $data);
         foreach ($data as $item) {
             $string = 'This is an iteration: ' . $item['message'];
-            $this->assertContains($string, $result);
+            $this->assertStringContainsString($string, $result);
         }
     }
 
@@ -143,7 +143,7 @@ class Zend_View_Helper_PartialLoopTest extends \PHPUnit\Framework\TestCase
         $result = $this->helper->partialLoop('partialLoop.phtml', $o);
         foreach ($data as $item) {
             $string = 'This is an iteration: ' . $item['message'];
-            $this->assertContains($string, $result);
+            $this->assertStringContainsString($string, $result);
         }
     }
 
@@ -168,7 +168,7 @@ class Zend_View_Helper_PartialLoopTest extends \PHPUnit\Framework\TestCase
         $result = $this->helper->partialLoop('partialLoop.phtml', $rIterator);
         foreach ($rIterator as $item) {
             foreach ($item as $key => $value) {
-                $this->assertContains($value, $result, var_export($value, 1));
+                $this->assertStringContainsString($value, $result, var_export($value, 1));
             }
         }
     }
@@ -219,7 +219,7 @@ class Zend_View_Helper_PartialLoopTest extends \PHPUnit\Framework\TestCase
         $result = $this->helper->partialLoop('partialLoop.phtml', 'foo', $data);
         foreach ($data as $item) {
             $string = 'This is an iteration in the foo module: ' . $item['message'];
-            $this->assertContains($string, $result);
+            $this->assertStringContainsString($string, $result);
         }
     }
 
@@ -247,7 +247,7 @@ class Zend_View_Helper_PartialLoopTest extends \PHPUnit\Framework\TestCase
         $result = $this->helper->partialLoop('partialLoop.phtml', $o);
         foreach ($data as $item) {
             $string = 'This is an iteration: ' . $item['message'];
-            $this->assertContains($string, $result);
+            $this->assertStringContainsString($string, $result);
         }
     }
 
@@ -269,7 +269,7 @@ class Zend_View_Helper_PartialLoopTest extends \PHPUnit\Framework\TestCase
         $result = $this->helper->partialLoop('partialLoop.phtml', $o);
         foreach ($data as $item) {
             $string = 'This is an iteration: ' . $item['message'];
-            $this->assertContains($string, $result, $result);
+            $this->assertStringContainsString($string, $result, $result);
         }
     }
 
@@ -296,7 +296,7 @@ class Zend_View_Helper_PartialLoopTest extends \PHPUnit\Framework\TestCase
         $result = $this->helper->partialLoop('partialLoopObject.phtml', $o);
         foreach ($data as $item) {
             $string = 'This is an iteration: ' . $item->message;
-            $this->assertContains($string, $result, $result);
+            $this->assertStringContainsString($string, $result, $result);
         }
     }
 
@@ -344,7 +344,7 @@ class Zend_View_Helper_PartialLoopTest extends \PHPUnit\Framework\TestCase
         $result = $this->helper->partialLoop('partialLoopCouter.phtml', $data);
         foreach ($data as $key=>$item) {
             $string = 'This is an iteration: ' . $item['message'] . ', pointer at ' . ($key+1);
-            $this->assertContains($string, $result);
+            $this->assertStringContainsString($string, $result);
         }
     }
 
@@ -369,13 +369,13 @@ class Zend_View_Helper_PartialLoopTest extends \PHPUnit\Framework\TestCase
         $result = $this->helper->partialLoop('partialLoopCouter.phtml', $data);
         foreach ($data as $key=>$item) {
             $string = 'This is an iteration: ' . $item['message'] . ', pointer at ' . ($key+1);
-            $this->assertContains($string, $result);
+            $this->assertStringContainsString($string, $result);
         }
 
         $result = $this->helper->partialLoop('partialLoopCouter.phtml', $data);
         foreach ($data as $key=>$item) {
             $string = 'This is an iteration: ' . $item['message'] . ', pointer at ' . ($key+1);
-            $this->assertContains($string, $result);
+            $this->assertStringContainsString($string, $result);
         }
     }
 
@@ -402,7 +402,7 @@ class Zend_View_Helper_PartialLoopTest extends \PHPUnit\Framework\TestCase
         $result = $this->helper->partialLoop('partialLoopCouter.phtml', $data);
         foreach ($data as $key => $item) {
             $string = 'Total count: ' . count($data);
-            $this->assertContains($string, $result);
+            $this->assertStringContainsString($string, $result);
         }
     }
 }

@@ -114,7 +114,7 @@ class Zend_Config_IniTest extends \PHPUnit\Framework\TestCase
             $config = new Zend_Config_Ini($this->_iniFileConfig, 'extendserror');
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('cannot be found', $expected->getMessage());
+            $this->assertStringContainsString('cannot be found', $expected->getMessage());
         }
     }
 
@@ -126,7 +126,7 @@ class Zend_Config_IniTest extends \PHPUnit\Framework\TestCase
                 $config = new Zend_Config_Ini($this->_iniFileConfig, $section);
                 $this->fail('An expected Zend_Config_Exception has not been raised');
             } catch (Zend_Config_Exception $expected) {
-                $this->assertContains('Invalid key', $expected->getMessage());
+                $this->assertStringContainsString('Invalid key', $expected->getMessage());
             }
         }
     }
@@ -137,7 +137,7 @@ class Zend_Config_IniTest extends \PHPUnit\Framework\TestCase
             $config = new Zend_Config_Ini($this->_iniFileConfig, 'zf426');
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('Cannot create sub-key for', $expected->getMessage());
+            $this->assertStringContainsString('Cannot create sub-key for', $expected->getMessage());
         }
     }
 
@@ -178,7 +178,7 @@ class Zend_Config_IniTest extends \PHPUnit\Framework\TestCase
             $config = new Zend_Config_Ini($this->_iniFileCircularConfig, null);
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('circular inheritance', $expected->getMessage());
+            $this->assertStringContainsString('circular inheritance', $expected->getMessage());
         }
     }
 
@@ -188,7 +188,7 @@ class Zend_Config_IniTest extends \PHPUnit\Framework\TestCase
             $config = new Zend_Config_Ini('','');
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('Filename is not set', $expected->getMessage());
+            $this->assertStringContainsString('Filename is not set', $expected->getMessage());
         }
     }
 
@@ -199,7 +199,7 @@ class Zend_Config_IniTest extends \PHPUnit\Framework\TestCase
             zend::dump($config);
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('may not extend multiple sections', $expected->getMessage());
+            $this->assertStringContainsString('may not extend multiple sections', $expected->getMessage());
         }
     }
 
@@ -209,14 +209,14 @@ class Zend_Config_IniTest extends \PHPUnit\Framework\TestCase
             $config = new Zend_Config_Ini($this->_iniFileConfig,array('all', 'notthere'));
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('cannot be found', $expected->getMessage());
+            $this->assertStringContainsString('cannot be found', $expected->getMessage());
         }
 
         try {
             $config = new Zend_Config_Ini($this->_iniFileConfig,'notthere');
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('cannot be found', $expected->getMessage());
+            $this->assertStringContainsString('cannot be found', $expected->getMessage());
         }
 
     }
@@ -246,7 +246,7 @@ class Zend_Config_IniTest extends \PHPUnit\Framework\TestCase
             new Zend_Config_Ini($this->_iniFileInvalid);
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertRegExp('/(Error parsing|parse error|syntax error(, unexpected| in ))|/', $expected->getMessage());
+            $this->assertMatchesRegularExpression('/(Error parsing|parse error|syntax error(, unexpected| in ))|/', $expected->getMessage());
         }
     }
 

@@ -88,8 +88,8 @@ class Zend_View_Helper_HtmlPageTest extends \PHPUnit\Framework\TestCase
                             . ' type="text/html"'
                             . ' classid="clsid:25336920-03F9-11CF-8FD0-00AA00686F13">';
 
-        $this->assertContains($objectStartElement, $htmlPage);
-        $this->assertContains('</object>', $htmlPage);
+        $this->assertStringContainsString($objectStartElement, $htmlPage);
+        $this->assertStringContainsString('</object>', $htmlPage);
     }
 }
 

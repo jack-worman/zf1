@@ -111,7 +111,7 @@ class Zend_Session_SaveHandler_DbTableTest extends \PHPUnit\Framework\TestCase
                 $saveHandler = new Zend_Session_SaveHandler_DbTable(null);
             $this->fail('Expected Zend_Session_SaveHandler_Exception not thrown');
         } catch (Zend_Session_SaveHandler_Exception $e) {
-            $this->assertContains('$config must be', $e->getMessage());
+            $this->assertStringContainsString('$config must be', $e->getMessage());
         }
     }
 
@@ -146,7 +146,7 @@ class Zend_Session_SaveHandler_DbTableTest extends \PHPUnit\Framework\TestCase
 
     public function testPrimaryAssignmentIdNotSet()
     {
-        $this->setExpectedException('Zend_Session_SaveHandler_Exception');
+        $this->expectException('Zend_Session_SaveHandler_Exception');
         $config = $this->_saveHandlerTableConfig;
         $config['primary'] = array('id');
         $config[Zend_Session_SaveHandler_DbTable::PRIMARY_ASSIGNMENT]
@@ -173,7 +173,7 @@ class Zend_Session_SaveHandler_DbTableTest extends \PHPUnit\Framework\TestCase
 
     public function testModifiedColumnNotSet()
     {
-        $this->setExpectedException('Zend_Session_SaveHandler_Exception');
+        $this->expectException('Zend_Session_SaveHandler_Exception');
         $config = $this->_saveHandlerTableConfig;
         unset($config[Zend_Session_SaveHandler_DbTable::MODIFIED_COLUMN]);
         $this->_usedSaveHandlers[] =
@@ -185,7 +185,7 @@ class Zend_Session_SaveHandler_DbTableTest extends \PHPUnit\Framework\TestCase
 
     public function testLifetimeColumnNotSet()
     {
-        $this->setExpectedException('Zend_Session_SaveHandler_Exception');
+        $this->expectException('Zend_Session_SaveHandler_Exception');
         $config = $this->_saveHandlerTableConfig;
         unset($config[Zend_Session_SaveHandler_DbTable::LIFETIME_COLUMN]);
         $this->_usedSaveHandlers[] =
@@ -197,7 +197,7 @@ class Zend_Session_SaveHandler_DbTableTest extends \PHPUnit\Framework\TestCase
 
     public function testDataColumnNotSet()
     {
-        $this->setExpectedException('Zend_Session_SaveHandler_Exception');
+        $this->expectException('Zend_Session_SaveHandler_Exception');
         $config = $this->_saveHandlerTableConfig;
         unset($config[Zend_Session_SaveHandler_DbTable::DATA_COLUMN]);
         $this->_usedSaveHandlers[] =
@@ -548,7 +548,7 @@ class Zend_Session_SaveHandler_DbTableTest extends \PHPUnit\Framework\TestCase
                           ->getLastQueryProfile()
                           ->getQuery();
         $partQueryExpected = "WHERE (id = '$id') AND (save_path = '') AND (name = '')";
-        $this->assertContains($partQueryExpected, $lastQuery);
+        $this->assertStringContainsString($partQueryExpected, $lastQuery);
 
         $configDb = array(
             'options' => array(
@@ -566,7 +566,7 @@ class Zend_Session_SaveHandler_DbTableTest extends \PHPUnit\Framework\TestCase
                           ->getLastQueryProfile()
                           ->getQuery();
         $partQueryExpected = "WHERE (\"id\" = '$id') AND (\"save_path\" = '') AND (\"name\" = '')";
-        $this->assertContains($partQueryExpected, $lastQuery);
+        $this->assertStringContainsString($partQueryExpected, $lastQuery);
     }
 
     /**
@@ -591,7 +591,7 @@ class Zend_Session_SaveHandler_DbTableTest extends \PHPUnit\Framework\TestCase
                           ->getLastQueryProfile()
                           ->getQuery();
         $partQueryExpected = "WHERE (modified + lifetime < ";
-        $this->assertContains($partQueryExpected, $lastQuery);
+        $this->assertStringContainsString($partQueryExpected, $lastQuery);
 
         $configDb = array(
             'options' => array(
@@ -609,7 +609,7 @@ class Zend_Session_SaveHandler_DbTableTest extends \PHPUnit\Framework\TestCase
                           ->getLastQueryProfile()
                           ->getQuery();
         $partQueryExpected = "WHERE (\"modified\" + \"lifetime\" < ";
-        $this->assertContains($partQueryExpected, $lastQuery);
+        $this->assertStringContainsString($partQueryExpected, $lastQuery);
     }
 
     /**

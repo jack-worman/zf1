@@ -136,7 +136,7 @@ class Zend_Filter_Compress_Bz2Test extends \PHPUnit\Framework\TestCase
             $filter->setBlocksize(15);
             $this->fail('Exception expected');
         } catch(Zend_Filter_Exception $e) {
-            $this->assertContains('must be between', $e->getMessage());
+            $this->assertStringContainsString('must be between', $e->getMessage());
         }
     }
 

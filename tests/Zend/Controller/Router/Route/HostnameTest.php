@@ -103,14 +103,14 @@ class Zend_Controller_Router_Route_HostnameTest extends \PHPUnit\Framework\TestC
     {
         $route = $this->_getStaticHostRoute();
 
-        $this->assertRegexp('/[^a-z0-9]?www\.zend\.com$/i', $route->assemble());
+        $this->assertMatchesRegularExpression('/[^a-z0-9]?www\.zend\.com$/i', $route->assemble());
     }
 
     public function testAssembleHost()
     {
         $route = $this->_getHostRoute();
 
-        $this->assertRegexp('/[^a-z0-9]?foo\.zend\.com$/i', $route->assemble(array('subdomain' => 'foo')));
+        $this->assertMatchesRegularExpression('/[^a-z0-9]?foo\.zend\.com$/i', $route->assemble(array('subdomain' => 'foo')));
     }
 
     public function testAssembleHostWithMissingParam()
@@ -121,7 +121,7 @@ class Zend_Controller_Router_Route_HostnameTest extends \PHPUnit\Framework\TestC
             $route->assemble();
             $this->fail('An expected Zend_Controller_Router_Exception has not been raised');
         } catch (Zend_Controller_Router_Exception $expected) {
-            $this->assertContains('subdomain is not specified', $expected->getMessage());
+            $this->assertStringContainsString('subdomain is not specified', $expected->getMessage());
         }
     }
 
@@ -129,7 +129,7 @@ class Zend_Controller_Router_Route_HostnameTest extends \PHPUnit\Framework\TestC
     {
         $route = $this->_getHostRouteWithDefault();
 
-        $this->assertRegexp('/[^a-z0-9]?bar\.zend\.com$/i', $route->assemble());
+        $this->assertMatchesRegularExpression('/[^a-z0-9]?bar\.zend\.com$/i', $route->assemble());
     }
 
     public function testHostGetDefault()

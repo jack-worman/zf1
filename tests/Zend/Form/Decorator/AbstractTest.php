@@ -138,7 +138,7 @@ class Zend_Form_Decorator_AbstractTest extends \PHPUnit\Framework\TestCase
             $this->decorator->setElement($config);
             $this->fail('Invalid element type should raise exception');
         } catch (Zend_Form_Exception $e) {
-            $this->assertContains('Invalid element', $e->getMessage());
+            $this->assertStringContainsString('Invalid element', $e->getMessage());
         }
     }
 

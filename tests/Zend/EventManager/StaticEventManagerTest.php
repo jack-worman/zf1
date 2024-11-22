@@ -83,7 +83,7 @@ class Zend_EventManager_StaticEventManagerTest extends \PHPUnit\Framework\TestCa
     {
         $events = Zend_EventManager_StaticEventManager::getInstance();
         $events->attach('foo', 'bar', array($this, __FUNCTION__));
-        $this->assertContains('bar', $events->getEvents('foo'));
+        $this->assertStringContainsString('bar', $events->getEvents('foo'));
         $expected  = array($this, __FUNCTION__);
         $found     = false;
         $listeners = $events->getListeners('foo', 'bar');
@@ -102,8 +102,8 @@ class Zend_EventManager_StaticEventManagerTest extends \PHPUnit\Framework\TestCa
     {
         $events = Zend_EventManager_StaticEventManager::getInstance();
         $events->attach('bar', array('foo', 'test'), array($this, __FUNCTION__));
-        $this->assertContains('foo', $events->getEvents('bar'));
-        $this->assertContains('test', $events->getEvents('bar'));
+        $this->assertStringContainsString('foo', $events->getEvents('bar'));
+        $this->assertStringContainsString('test', $events->getEvents('bar'));
         $expected = array($this, __FUNCTION__);
         foreach (array('foo', 'test') as $event) {
             $found     = false;
@@ -124,8 +124,8 @@ class Zend_EventManager_StaticEventManagerTest extends \PHPUnit\Framework\TestCa
     {
         $events = Zend_EventManager_StaticEventManager::getInstance();
         $events->attach(array('foo', 'test'), 'bar', array($this, __FUNCTION__));
-        $this->assertContains('bar', $events->getEvents('foo'));
-        $this->assertContains('bar', $events->getEvents('test'));
+        $this->assertStringContainsString('bar', $events->getEvents('foo'));
+        $this->assertStringContainsString('bar', $events->getEvents('test'));
         $expected = array($this, __FUNCTION__);
         foreach (array('foo', 'test') as $id) {
             $found     = false;
@@ -146,8 +146,8 @@ class Zend_EventManager_StaticEventManagerTest extends \PHPUnit\Framework\TestCa
     {
         $events = Zend_EventManager_StaticEventManager::getInstance();
         $events->attach(array('bar', 'baz'), array('foo', 'test'), array($this, __FUNCTION__));
-        $this->assertContains('foo', $events->getEvents('bar'));
-        $this->assertContains('test', $events->getEvents('bar'));
+        $this->assertStringContainsString('foo', $events->getEvents('bar'));
+        $this->assertStringContainsString('test', $events->getEvents('bar'));
         $expected = array($this, __FUNCTION__);
         foreach (array('bar', 'baz') as $resource) {
             foreach (array('foo', 'test') as $event) {
@@ -179,7 +179,7 @@ class Zend_EventManager_StaticEventManagerTest extends \PHPUnit\Framework\TestCa
 
         foreach (array('foo', 'bar', 'baz') as $event) {
             $events->trigger($event);
-            $this->assertContains($event, $this->test->events);
+            $this->assertStringContainsString($event, $this->test->events);
         }
     }
 

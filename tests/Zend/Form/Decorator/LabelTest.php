@@ -119,7 +119,7 @@ class Zend_Form_Decorator_LabelTest extends \PHPUnit\Framework\TestCase
         $this->decorator->setElement($element);
         $content = 'test content';
         $test = $this->decorator->render($content);
-        $this->assertContains('for="foobar"', $test);
+        $this->assertStringContainsString('for="foobar"', $test);
     }
 
     public function testRenderAddsOptionalClassForNonRequiredElements()
@@ -130,14 +130,14 @@ class Zend_Form_Decorator_LabelTest extends \PHPUnit\Framework\TestCase
         $this->decorator->setElement($element);
         $content = 'test content';
         $test = $this->decorator->render($content);
-        $this->assertRegexp('/<label[^>]*?class="[^"]*optional/', $test, $test);
+        $this->assertMatchesRegularExpression('/<label[^>]*?class="[^"]*optional/', $test, $test);
 
         $element->class = "bar";
         $this->decorator->setOption('class', 'foo');
         $test = $this->decorator->render($content);
         $this->assertNotRegexp('/<label[^>]*?class="[^"]*bar/', $test, $test);
-        $this->assertRegexp('/<label[^>]*?class="[^"]*foo/', $test, $test);
-        $this->assertRegexp('/<label[^>]*?class="[^"]*optional/', $test, $test);
+        $this->assertMatchesRegularExpression('/<label[^>]*?class="[^"]*foo/', $test, $test);
+        $this->assertMatchesRegularExpression('/<label[^>]*?class="[^"]*optional/', $test, $test);
     }
 
     public function testRenderAddsRequiredClassForRequiredElements()
@@ -149,14 +149,14 @@ class Zend_Form_Decorator_LabelTest extends \PHPUnit\Framework\TestCase
         $this->decorator->setElement($element);
         $content = 'test content';
         $test = $this->decorator->render($content);
-        $this->assertRegexp('/<label[^>]*?class="[^"]*required/', $test, $test);
+        $this->assertMatchesRegularExpression('/<label[^>]*?class="[^"]*required/', $test, $test);
 
         $element->class = "bar";
         $this->decorator->setOption('class', 'foo');
         $test = $this->decorator->render($content);
         $this->assertNotRegexp('/<label[^>]*?class="[^"]*bar/', $test, $test);
-        $this->assertRegexp('/<label[^>]*?class="[^"]*foo/', $test, $test);
-        $this->assertRegexp('/<label[^>]*?class="[^"]*required/', $test, $test);
+        $this->assertMatchesRegularExpression('/<label[^>]*?class="[^"]*foo/', $test, $test);
+        $this->assertMatchesRegularExpression('/<label[^>]*?class="[^"]*required/', $test, $test);
     }
 
     public function testRenderAppendsRequiredClassToClassProvidedInRequiredElement()
@@ -169,7 +169,7 @@ class Zend_Form_Decorator_LabelTest extends \PHPUnit\Framework\TestCase
         $this->decorator->setElement($element);
         $content = 'test content';
         $test = $this->decorator->render($content);
-        $this->assertRegexp('/<label[^>]*?class="[^"]*required/', $test, $test);
+        $this->assertMatchesRegularExpression('/<label[^>]*?class="[^"]*required/', $test, $test);
         $this->assertNotRegexp('/<label[^>]*?class="[^"]*bazbat/', $test, $test);
     }
 
@@ -187,11 +187,11 @@ class Zend_Form_Decorator_LabelTest extends \PHPUnit\Framework\TestCase
         $this->decorator->setElement($element);
         $content = 'test content';
         $test = $this->decorator->render($content);
-        $this->assertNotContains('-req-prefix-', $test, $test);
-        $this->assertNotContains('-req-suffix-', $test, $test);
-        $this->assertContains('-opt-prefix-', $test, $test);
-        $this->assertContains('-opt-suffix-', $test, $test);
-        $this->assertRegexp('/-opt-prefix-[^-]*?My Label[^-]*-opt-suffix-/s', $test, $test);
+        $this->assertStringNotContainsString('-req-prefix-', $test, $test);
+        $this->assertStringNotContainsString('-req-suffix-', $test, $test);
+        $this->assertStringContainsString('-opt-prefix-', $test, $test);
+        $this->assertStringContainsString('-opt-suffix-', $test, $test);
+        $this->assertMatchesRegularExpression('/-opt-prefix-[^-]*?My Label[^-]*-opt-suffix-/s', $test, $test);
     }
 
     public function testRenderUtilizesRequiredSuffixesAndPrefixesWhenRequested()
@@ -209,11 +209,11 @@ class Zend_Form_Decorator_LabelTest extends \PHPUnit\Framework\TestCase
         $this->decorator->setElement($element);
         $content = 'test content';
         $test = $this->decorator->render($content);
-        $this->assertNotContains('-opt-prefix-', $test, $test);
-        $this->assertNotContains('-opt-suffix-', $test, $test);
-        $this->assertContains('-req-prefix-', $test, $test);
-        $this->assertContains('-req-suffix-', $test, $test);
-        $this->assertRegexp('/-req-prefix-[^-]*?My Label[^-]*-req-suffix-/s', $test, $test);
+        $this->assertStringNotContainsString('-opt-prefix-', $test, $test);
+        $this->assertStringNotContainsString('-opt-suffix-', $test, $test);
+        $this->assertStringContainsString('-req-prefix-', $test, $test);
+        $this->assertStringContainsString('-req-suffix-', $test, $test);
+        $this->assertMatchesRegularExpression('/-req-prefix-[^-]*?My Label[^-]*-req-suffix-/s', $test, $test);
     }
 
     /**
@@ -239,10 +239,10 @@ class Zend_Form_Decorator_LabelTest extends \PHPUnit\Framework\TestCase
         $this->decorator->setElement($element);
         $content = 'test content';
         $test = $this->decorator->render($content);
-        $this->assertContains($content, $test);
-        $this->assertContains($element->getLabel(), $test);
-        $this->assertContains('<label for=', $test);
-        $this->assertContains('</label>', $test);
+        $this->assertStringContainsString($content, $test);
+        $this->assertStringContainsString($element->getLabel(), $test);
+        $this->assertStringContainsString('<label for=', $test);
+        $this->assertStringContainsString('</label>', $test);
     }
 
     public function testRenderAppendsOnRequest()
@@ -254,7 +254,7 @@ class Zend_Form_Decorator_LabelTest extends \PHPUnit\Framework\TestCase
                         ->setOptions(array('placement' => 'APPEND'));
         $content = 'test content';
         $test = $this->decorator->render($content);
-        $this->assertRegexp('#' . $content . '.*?<label#s', $test);
+        $this->assertMatchesRegularExpression('#' . $content . '.*?<label#s', $test);
     }
 
     public function testCanChooseNotToEscapeLabel()
@@ -265,7 +265,7 @@ class Zend_Form_Decorator_LabelTest extends \PHPUnit\Framework\TestCase
         $this->decorator->setElement($element)
                         ->setOptions(array('escape' => false));
         $test = $this->decorator->render('');
-        $this->assertContains($element->getLabel(), $test);
+        $this->assertStringContainsString($element->getLabel(), $test);
     }
 
     public function testRetrievingLabelRetrievesLabelWithTranslationAndPrefixAndSuffix()

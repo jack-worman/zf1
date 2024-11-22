@@ -21,6 +21,8 @@
  */
 
 // Call Zend_View_Helper_HeadStyleTest::main() if this source file is executed directly.
+use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
+
 if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_HeadStyleTest::main");
 }
@@ -227,8 +229,8 @@ class Zend_View_Helper_HeadStyleTest extends \PHPUnit\Framework\TestCase
             'bogus' => 'unused'
         ));
         $value = $this->helper->toString();
-        $this->assertContains('<!--' . PHP_EOL, $value);
-        $this->assertContains(PHP_EOL . '-->', $value);
+        $this->assertStringContainsString('<!--' . PHP_EOL, $value);
+        $this->assertStringContainsString(PHP_EOL . '-->', $value);
     }
 
     public function testRenderedStyleTagsContainsDefaultMedia()
@@ -236,7 +238,7 @@ class Zend_View_Helper_HeadStyleTest extends \PHPUnit\Framework\TestCase
         $this->helper->setStyle('a {}', array(
         ));
         $value = $this->helper->toString();
-        $this->assertRegexp('#<style [^>]*?media="screen"#', $value, $value);
+        $this->assertMatchesRegularExpression('#<style [^>]*?media="screen"#', $value, $value);
     }
 
     /**
@@ -246,7 +248,7 @@ class Zend_View_Helper_HeadStyleTest extends \PHPUnit\Framework\TestCase
     {
         $this->helper->appendStyle('a { }', array('media' => 'screen, projection'));
         $string = $this->helper->toString();
-        $this->assertContains('media="screen,projection"', $string);
+        $this->assertStringContainsString('media="screen,projection"', $string);
     }
 
     public function testHeadStyleProxiesProperly()
@@ -283,9 +285,9 @@ class Zend_View_Helper_HeadStyleTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(3, $styles);
         $styles = substr_count($html, '</style>');
         $this->assertEquals(3, $styles);
-        $this->assertContains($style3, $html);
-        $this->assertContains($style2, $html);
-        $this->assertContains($style1, $html);
+        $this->assertStringContainsString($style3, $html);
+        $this->assertStringContainsString($style2, $html);
+        $this->assertStringContainsString($style1, $html);
     }
 
     public function testCapturingCapturesToObject()
@@ -296,7 +298,7 @@ class Zend_View_Helper_HeadStyleTest extends \PHPUnit\Framework\TestCase
         $values = $this->helper->getArrayCopy();
         $this->assertEquals(1, count($values));
         $item = array_shift($values);
-        $this->assertContains('foobar', $item->content);
+        $this->assertStringContainsString('foobar', $item->content);
     }
 
     public function testOverloadingOffsetSetWritesToSpecifiedIndex()
@@ -306,7 +308,7 @@ class Zend_View_Helper_HeadStyleTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(1, count($values));
         $this->assertTrue(isset($values[100]));
         $item = $values[100];
-        $this->assertContains('foobar', $item->content);
+        $this->assertStringContainsString('foobar', $item->content);
     }
 
     public function testInvalidMethodRaisesException()
@@ -317,6 +319,7 @@ class Zend_View_Helper_HeadStyleTest extends \PHPUnit\Framework\TestCase
         } catch (Zend_View_Exception $e) { }
     }
 
+    #[DoesNotPerformAssertions]
     public function testTooFewArgumentsRaisesException()
     {
         try {
@@ -340,12 +343,12 @@ h1 {
 
         $scripts = substr_count($string, '    <style');
         $this->assertEquals(2, $scripts);
-        $this->assertContains('    <!--', $string);
-        $this->assertContains('    a {', $string);
-        $this->assertContains('    h1 {', $string);
-        $this->assertContains('        display', $string);
-        $this->assertContains('        font-weight', $string);
-        $this->assertContains('    }', $string);
+        $this->assertStringContainsString('    <!--', $string);
+        $this->assertStringContainsString('    a {', $string);
+        $this->assertStringContainsString('    h1 {', $string);
+        $this->assertStringContainsString('        display', $string);
+        $this->assertStringContainsString('        font-weight', $string);
+        $this->assertStringContainsString('    }', $string);
     }
 
     public function testSerialCapturingWorks()
@@ -372,7 +375,7 @@ h1 {
                 $this->fail('Nested capturing should fail');
             } catch (Zend_View_Exception $e) {
                 $this->helper->headStyle()->captureEnd();
-                $this->assertContains('Cannot nest', $e->getMessage());
+                $this->assertStringContainsString('Cannot nest', $e->getMessage());
             }
     }
 
@@ -387,9 +390,9 @@ a {
 
         $scripts = substr_count($string, '    <style');
         $this->assertEquals(1, $scripts);
-        $this->assertContains('    <!--', $string);
-        $this->assertContains('    a {', $string);
-        $this->assertContains(' media="screen,projection"', $string);
+        $this->assertStringContainsString('    <!--', $string);
+        $this->assertStringContainsString('    a {', $string);
+        $this->assertStringContainsString(' media="screen,projection"', $string);
 
     }
 
@@ -404,9 +407,9 @@ a {
 
         $scripts = substr_count($string, '    <style');
         $this->assertEquals(1, $scripts);
-        $this->assertContains('    <!--', $string);
-        $this->assertContains('    a {', $string);
-        $this->assertContains(' media="screen,projection"', $string);
+        $this->assertStringContainsString('    <!--', $string);
+        $this->assertStringContainsString('    a {', $string);
+        $this->assertStringContainsString(' media="screen,projection"', $string);
 
     }
 
@@ -417,7 +420,7 @@ a {
     display: none;
 }', array('media' => 'screen,projection', 'conditional' => 'lt IE 7'));
         $test = $this->helper->toString();
-        $this->assertContains('<!--[if lt IE 7]>', $test);
+        $this->assertStringContainsString('<!--[if lt IE 7]>', $test);
     }
 
     /**
@@ -458,8 +461,8 @@ a {
         ));
         $value = $this->helper->toString();
 
-        $this->assertNotContains('<!--' . PHP_EOL, $value);
-        $this->assertNotContains(PHP_EOL . '-->', $value);
+        $this->assertStringNotContainsString('<!--' . PHP_EOL, $value);
+        $this->assertStringNotContainsString(PHP_EOL . '-->', $value);
     }
 
     /**
@@ -472,8 +475,8 @@ a {
     display: none;
 }', array('media' => 'screen,projection', 'conditional' => '!IE'));
         $test = $this->helper->toString();
-        $this->assertContains('<!--[if !IE]><!--><', $test);
-        $this->assertContains('<!--<![endif]-->', $test);
+        $this->assertStringContainsString('<!--[if !IE]><!--><', $test);
+        $this->assertStringContainsString('<!--<![endif]-->', $test);
     }
 
     /**
@@ -486,8 +489,8 @@ a {
     display: none;
 }', array('media' => 'screen,projection', 'conditional' => '! IE'));
         $test = $this->helper->toString();
-        $this->assertContains('<!--[if ! IE]><!--><', $test);
-        $this->assertContains('<!--<![endif]-->', $test);
+        $this->assertStringContainsString('<!--[if ! IE]><!--><', $test);
+        $this->assertStringContainsString('<!--<![endif]-->', $test);
     }
 }
 

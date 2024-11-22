@@ -89,8 +89,8 @@ class Zend_View_Helper_HtmlObjectTest extends \PHPUnit\Framework\TestCase
     {
         $htmlObject = $this->helper->htmlObject('datastring', 'typestring');
 
-        $this->assertContains('<object data="datastring" type="typestring">', $htmlObject);
-        $this->assertContains('</object>', $htmlObject);
+        $this->assertStringContainsString('<object data="datastring" type="typestring">', $htmlObject);
+        $this->assertStringContainsString('</object>', $htmlObject);
     }
 
     public function testMakeHtmlObjectWithAttribsWithoutParams()
@@ -100,8 +100,8 @@ class Zend_View_Helper_HtmlObjectTest extends \PHPUnit\Framework\TestCase
 
         $htmlObject = $this->helper->htmlObject('datastring', 'typestring', $attribs);
 
-        $this->assertContains('<object data="datastring" type="typestring" attribkey1="attribvalue1" attribkey2="attribvalue2">', $htmlObject);
-        $this->assertContains('</object>', $htmlObject);
+        $this->assertStringContainsString('<object data="datastring" type="typestring" attribkey1="attribvalue1" attribkey2="attribvalue2">', $htmlObject);
+        $this->assertStringContainsString('</object>', $htmlObject);
     }
 
     public function testMakeHtmlObjectWithoutAttribsWithParamsHtml()
@@ -113,13 +113,13 @@ class Zend_View_Helper_HtmlObjectTest extends \PHPUnit\Framework\TestCase
 
         $htmlObject = $this->helper->htmlObject('datastring', 'typestring', array(), $params);
 
-        $this->assertContains('<object data="datastring" type="typestring">', $htmlObject);
-        $this->assertContains('</object>', $htmlObject);
+        $this->assertStringContainsString('<object data="datastring" type="typestring">', $htmlObject);
+        $this->assertStringContainsString('</object>', $htmlObject);
 
         foreach ($params as $key => $value) {
             $param = '<param name="' . $key . '" value="' . $value . '">';
 
-            $this->assertContains($param, $htmlObject);
+            $this->assertStringContainsString($param, $htmlObject);
         }
     }
 
@@ -132,13 +132,13 @@ class Zend_View_Helper_HtmlObjectTest extends \PHPUnit\Framework\TestCase
 
         $htmlObject = $this->helper->htmlObject('datastring', 'typestring', array(), $params);
 
-        $this->assertContains('<object data="datastring" type="typestring">', $htmlObject);
-        $this->assertContains('</object>', $htmlObject);
+        $this->assertStringContainsString('<object data="datastring" type="typestring">', $htmlObject);
+        $this->assertStringContainsString('</object>', $htmlObject);
 
         foreach ($params as $key => $value) {
             $param = '<param name="' . $key . '" value="' . $value . '" />';
 
-            $this->assertContains($param, $htmlObject);
+            $this->assertStringContainsString($param, $htmlObject);
         }
     }
 
@@ -146,9 +146,9 @@ class Zend_View_Helper_HtmlObjectTest extends \PHPUnit\Framework\TestCase
     {
         $htmlObject = $this->helper->htmlObject('datastring', 'typestring', array(), array(), 'testcontent');
 
-        $this->assertContains('<object data="datastring" type="typestring">', $htmlObject);
-        $this->assertContains('testcontent', $htmlObject);
-        $this->assertContains('</object>', $htmlObject);
+        $this->assertStringContainsString('<object data="datastring" type="typestring">', $htmlObject);
+        $this->assertStringContainsString('testcontent', $htmlObject);
+        $this->assertStringContainsString('</object>', $htmlObject);
     }
 }
 

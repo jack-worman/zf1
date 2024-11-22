@@ -215,7 +215,7 @@ class Zend_Validate_File_UploadTest extends \PHPUnit\Framework\TestCase
             $this->assertEquals(array(), $validator->getFiles('test5'));
             $this->fail("Missing exception");
         } catch (Zend_Validate_Exception $e) {
-            $this->assertContains("was not found", $e->getMessage());
+            $this->assertStringContainsString("was not found", $e->getMessage());
         }
     }
 

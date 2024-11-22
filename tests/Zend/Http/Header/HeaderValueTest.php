@@ -111,7 +111,7 @@ class Zend_Http_Header_HeaderValueTest extends \PHPUnit\Framework\TestCase
      */
     public function testAssertValidRaisesExceptionForInvalidValue($value)
     {
-        $this->setExpectedException('Zend_Http_Header_Exception_InvalidArgumentException');
+        $this->expectException('Zend_Http_Header_Exception_InvalidArgumentException');
         Zend_Http_Header_HeaderValue::assertValid($value);
     }
 }

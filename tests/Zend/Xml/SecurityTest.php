@@ -20,6 +20,8 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Xml_SecurityTest::main');
 }
@@ -62,10 +64,11 @@ class Zend_Xml_SecurityTest extends \PHPUnit\Framework\TestCase
 </results>
 XML;
 
-        $this->setExpectedException('Zend_Xml_Exception');
+        $this->expectException('Zend_Xml_Exception');
         $result = Zend_Xml_Security::scan($xml);
     }
 
+    #[DoesNotPerformAssertions]
     public function testScanForXXE()
     {
         $file = tempnam(sys_get_temp_dir(), 'Zend_XML_Security');

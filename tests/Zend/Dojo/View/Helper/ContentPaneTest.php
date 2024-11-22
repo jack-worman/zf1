@@ -108,7 +108,7 @@ class Zend_Dojo_View_Helper_ContentPaneTest extends \PHPUnit\Framework\TestCase
     public function testShouldAllowDeclarativeDijitCreation()
     {
         $html = $this->getContainer();
-        $this->assertRegexp('/<div[^>]*(dojoType="dijit.layout.ContentPane")/', $html, $html);
+        $this->assertMatchesRegularExpression('/<div[^>]*(dojoType="dijit.layout.ContentPane")/', $html, $html);
     }
 
     public function testShouldAllowProgrammaticDijitCreation()
@@ -125,11 +125,11 @@ class Zend_Dojo_View_Helper_ContentPaneTest extends \PHPUnit\Framework\TestCase
     public function testContentPaneMarkupShouldNotContainNameAttribute()
     {
         $html = $this->view->contentPane('pane1', 'This is the pane content', array('id' => 'pane', 'title' => 'Pane 1'));
-        $this->assertNotContains('name="/', $html, $html);
+        $this->assertStringNotContainsString('name="/', $html, $html);
 
         Zend_Dojo_View_Helper_Dojo::setUseProgrammatic();
         $html = $this->view->contentPane('pane1', 'This is the pane content', array('id' => 'pane', 'title' => 'Pane 1'));
-        $this->assertNotContains('name="/', $html, $html);
+        $this->assertStringNotContainsString('name="/', $html, $html);
     }
 
     /**

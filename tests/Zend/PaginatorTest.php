@@ -267,7 +267,7 @@ class Zend_PaginatorTest extends \PHPUnit\Framework\TestCase
             $paginator = Zend_Paginator::factory(new stdClass());
         } catch (\Throwable $e) {
             $this->assertTrue($e instanceof Zend_Paginator_Exception);
-            $this->assertContains('stdClass', $e->getMessage());
+            $this->assertStringContainsString('stdClass', $e->getMessage());
         }
     }
 
@@ -277,7 +277,7 @@ class Zend_PaginatorTest extends \PHPUnit\Framework\TestCase
             $paginator = Zend_Paginator::factory('invalid argument');
         } catch (\Throwable $e) {
             $this->assertTrue($e instanceof Zend_Paginator_Exception);
-            $this->assertContains('string', $e->getMessage());
+            $this->assertStringContainsString('string', $e->getMessage());
         }
     }
 
@@ -644,7 +644,7 @@ class Zend_PaginatorTest extends \PHPUnit\Framework\TestCase
             $paginator->getItem(1);
         } catch (\Throwable $e) {
             $this->assertTrue($e instanceof Zend_Paginator_Exception);
-            $this->assertContains('Page 1 does not exist', $e->getMessage());
+            $this->assertStringContainsString('Page 1 does not exist', $e->getMessage());
         }
     }
 
@@ -654,7 +654,7 @@ class Zend_PaginatorTest extends \PHPUnit\Framework\TestCase
             $this->_paginator->getItem(10, 11);
         } catch (\Throwable $e) {
             $this->assertTrue($e instanceof Zend_Paginator_Exception);
-            $this->assertContains('Page 11 does not contain item number 10', $e->getMessage());
+            $this->assertStringContainsString('Page 11 does not contain item number 10', $e->getMessage());
         }
     }
 
@@ -914,7 +914,7 @@ class Zend_PaginatorTest extends \PHPUnit\Framework\TestCase
 
         $expected = '"0":1,"1":2,"2":3,"3":4,"4":5,"5":6,"6":7,"7":8,"8":9,"9":10';
 
-        $this->assertContains($expected, $json);
+        $this->assertStringContainsString($expected, $json);
     }
 
     // ZF-5519
@@ -1007,7 +1007,7 @@ class Zend_PaginatorTest extends \PHPUnit\Framework\TestCase
      */
     public function testInvalidDataInConstructor_ThrowsException()
     {
-        $this->setExpectedException("Zend_Paginator_Exception");
+        $this->expectException("Zend_Paginator_Exception");
 
         $p = new Zend_Paginator(array());
     }

@@ -145,7 +145,7 @@ class Zend_Http_Client_StaticTest extends \PHPUnit\Framework\TestCase
         $this->_client->setAdapter('Zend_Http_Client_Adapter_Test');
 
         $res = $this->_client->request('GET');
-        $this->assertContains($qstr, $this->_client->getLastRequest(),
+        $this->assertStringContainsString($qstr, $this->_client->getLastRequest(),
             'Request is expected to contain the entire query string');
     }
 
@@ -545,7 +545,7 @@ class Zend_Http_Client_StaticTest extends \PHPUnit\Framework\TestCase
 
             $expected = \trim((string) $expected);
             $got = \trim((string) $got);
-            $this->assertRegExp("/^$expected$/", $got);
+            $this->assertMatchesRegularExpression("/^$expected$/", $got);
         }
     }
 
@@ -568,7 +568,7 @@ class Zend_Http_Client_StaticTest extends \PHPUnit\Framework\TestCase
 
             $expected = \trim((string) $expected);
             $got = \trim((string) $got);
-            $this->assertRegExp("/^$expected$/", $got);
+            $this->assertMatchesRegularExpression("/^$expected$/", $got);
         }
     }
 
@@ -593,7 +593,7 @@ class Zend_Http_Client_StaticTest extends \PHPUnit\Framework\TestCase
 
             $expected = \trim((string) $expected);
             $got = \trim((string) $got);
-            $this->assertRegExp("/^$expected$/", $got);
+            $this->assertMatchesRegularExpression("/^$expected$/", $got);
         }
     }
 

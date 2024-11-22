@@ -85,56 +85,56 @@ class Zend_View_Helper_FormButtonTest extends \PHPUnit\Framework\TestCase
     public function testFormButtonRendersButtonXhtml()
     {
         $button = $this->helper->formButton('foo', 'bar');
-        $this->assertRegexp('/<button[^>]*?value="bar"/', $button);
-        $this->assertRegexp('/<button[^>]*?name="foo"/', $button);
-        $this->assertRegexp('/<button[^>]*?id="foo"/', $button);
-        $this->assertContains('</button>', $button);
+        $this->assertMatchesRegularExpression('/<button[^>]*?value="bar"/', $button);
+        $this->assertMatchesRegularExpression('/<button[^>]*?name="foo"/', $button);
+        $this->assertMatchesRegularExpression('/<button[^>]*?id="foo"/', $button);
+        $this->assertStringContainsString('</button>', $button);
     }
 
     public function testCanPassContentViaContentAttribKey()
     {
         $button = $this->helper->formButton('foo', 'bar', array('content' => 'Display this'));
-        $this->assertContains('>Display this<', $button);
-        $this->assertContains('<button', $button);
-        $this->assertContains('</button>', $button);
+        $this->assertStringContainsString('>Display this<', $button);
+        $this->assertStringContainsString('<button', $button);
+        $this->assertStringContainsString('</button>', $button);
     }
 
     public function testCanDisableContentEscaping()
     {
         $button = $this->helper->formButton('foo', 'bar', array('content' => '<b>Display this</b>', 'escape' => false));
-        $this->assertContains('><b>Display this</b><', $button);
+        $this->assertStringContainsString('><b>Display this</b><', $button);
 
         $button = $this->helper->formButton(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('content' => '<b>Display this</b>', 'escape' => false)));
-        $this->assertContains('><b>Display this</b><', $button);
+        $this->assertStringContainsString('><b>Display this</b><', $button);
 
         $button = $this->helper->formButton(array('name' => 'foo', 'value' => 'bar', 'escape' => false, 'attribs' => array('content' => '<b>Display this</b>')));
-        $this->assertContains('><b>Display this</b><', $button);
-        $this->assertContains('<button', $button);
-        $this->assertContains('</button>', $button);
+        $this->assertStringContainsString('><b>Display this</b><', $button);
+        $this->assertStringContainsString('<button', $button);
+        $this->assertStringContainsString('</button>', $button);
     }
 
     public function testValueUsedForContentWhenNoContentProvided()
     {
         $button = $this->helper->formButton(array('name' => 'foo', 'value' => 'bar'));
-        $this->assertRegexp('#<button[^>]*?value="bar"[^>]*>bar</button>#', $button);
+        $this->assertMatchesRegularExpression('#<button[^>]*?value="bar"[^>]*>bar</button>#', $button);
     }
 
     public function testButtonTypeIsButtonByDefault()
     {
         $button = $this->helper->formButton(array('name' => 'foo', 'value' => 'bar'));
-        $this->assertContains('type="button"', $button);
+        $this->assertStringContainsString('type="button"', $button);
     }
 
     public function testButtonTypeMayOnlyBeValidXhtmlButtonType()
     {
         $button = $this->helper->formButton(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('type' => 'submit')));
-        $this->assertContains('type="submit"', $button);
+        $this->assertStringContainsString('type="submit"', $button);
         $button = $this->helper->formButton(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('type' => 'reset')));
-        $this->assertContains('type="reset"', $button);
+        $this->assertStringContainsString('type="reset"', $button);
         $button = $this->helper->formButton(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('type' => 'button')));
-        $this->assertContains('type="button"', $button);
+        $this->assertStringContainsString('type="button"', $button);
         $button = $this->helper->formButton(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('type' => 'bogus')));
-        $this->assertContains('type="button"', $button);
+        $this->assertStringContainsString('type="button"', $button);
     }
 }
 

@@ -444,7 +444,7 @@ class Zend_Http_ResponseTest extends \PHPUnit\Framework\TestCase
      */
     public function testExtractHeadersRaisesExceptionWhenDetectingCRLFInjection($message)
     {
-        $this->setExpectedException('Zend_Http_Exception', 'Invalid');
+        $this->expectException('Zend_Http_Exception', 'Invalid');
         Zend_Http_Response::extractHeaders($message);
     }
 

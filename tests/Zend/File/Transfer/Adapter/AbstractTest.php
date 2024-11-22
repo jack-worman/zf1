@@ -667,7 +667,7 @@ class Zend_File_Transfer_Adapter_AbstractTest extends \PHPUnit\Framework\TestCas
               . DIRECTORY_SEPARATOR . '_files';
         $this->adapter->setDestination($path);
         $files = $this->adapter->getFileName();
-        $this->assertInternalType('array', $files);
+        $this->assertIsArray($files);
         $this->assertEquals($path . DIRECTORY_SEPARATOR . 'bar.png', $files['bar']);
     }
 
@@ -680,7 +680,7 @@ class Zend_File_Transfer_Adapter_AbstractTest extends \PHPUnit\Framework\TestCas
               . DIRECTORY_SEPARATOR . '_files';
         $this->adapter->setDestination($path);
         $files = $this->adapter->getFileName(null, false);
-        $this->assertInternalType('array', $files);
+        $this->assertIsArray($files);
         $this->assertEquals('bar.png', $files['bar']);
     }
 
@@ -690,7 +690,7 @@ class Zend_File_Transfer_Adapter_AbstractTest extends \PHPUnit\Framework\TestCas
             $this->adapter->getHash('foo', 'unknown_hash');
             $this->fail();
         } catch (Zend_Exception $e) {
-            $this->assertContains('Unknown hash algorithm', $e->getMessage());
+            $this->assertStringContainsString('Unknown hash algorithm', $e->getMessage());
         }
     }
 
@@ -727,7 +727,7 @@ class Zend_File_Transfer_Adapter_AbstractTest extends \PHPUnit\Framework\TestCas
             $this->assertEquals(10, $this->adapter->getFileSize());
             $this->fail();
         } catch (Zend_File_Transfer_Exception $e) {
-            $this->assertContains('does not exist', $e->getMessage());
+            $this->assertStringContainsString('does not exist', $e->getMessage());
         }
     }
 
@@ -755,7 +755,7 @@ class Zend_File_Transfer_Adapter_AbstractTest extends \PHPUnit\Framework\TestCas
             $this->assertEquals('image/jpeg', $this->adapter->getMimeType());
             $this->fail();
         } catch (Zend_File_Transfer_Exception $e) {
-            $this->assertContains('does not exist', $e->getMessage());
+            $this->assertStringContainsString('does not exist', $e->getMessage());
         }
     }
 
@@ -776,13 +776,13 @@ class Zend_File_Transfer_Adapter_AbstractTest extends \PHPUnit\Framework\TestCas
         $this->adapter->addValidator('Count', false, array('min' => 5, 'max' => 5, 'messages' => array(Zend_Validate_File_Count::TOO_FEW => 'Zu wenige')));
         $this->assertFalse($this->adapter->isValid('foo'));
         $message = $this->adapter->getMessages();
-        $this->assertContains('Zu wenige', $message);
+        $this->assertStringContainsString('Zu wenige', $message);
 
         try {
             $this->assertEquals('image/jpeg', $this->adapter->getMimeType());
             $this->fail();
         } catch (Zend_File_Transfer_Exception $e) {
-            $this->assertContains('does not exist', $e->getMessage());
+            $this->assertStringContainsString('does not exist', $e->getMessage());
         }
     }
 
@@ -795,7 +795,7 @@ class Zend_File_Transfer_Adapter_AbstractTest extends \PHPUnit\Framework\TestCas
             $this->assertTrue(is_string($this->adapter->getDestination('reallynonexisting')));
             $this->fail();
         } catch (\Throwable $e) {
-            $this->assertContains('not find', $e->getMessage());
+            $this->assertStringContainsString('not find', $e->getMessage());
         }
     }
 

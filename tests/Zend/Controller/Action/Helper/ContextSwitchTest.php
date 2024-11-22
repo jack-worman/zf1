@@ -130,21 +130,21 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends \PHPUnit\Framework
     public function testSetSuffixModifiesContextSuffix()
     {
         $this->helper->setSuffix('xml', 'foobar');
-        $this->assertContains('foobar', $this->helper->getSuffix('xml'));
+        $this->assertStringContainsString('foobar', $this->helper->getSuffix('xml'));
     }
 
     public function testSetSuffixPrependsToViewRendererSuffixByDefault()
     {
         $this->helper->setSuffix('xml', 'foobar');
         $expected = 'foobar.' . $this->viewRenderer->getViewSuffix();
-        $this->assertContains($expected, $this->helper->getSuffix('xml'));
+        $this->assertStringContainsString($expected, $this->helper->getSuffix('xml'));
     }
 
     public function testCanSetSuffixWithoutViewRendererSuffix()
     {
         $this->helper->setSuffix('xml', 'foobar', false);
         $expected = 'foobar';
-        $this->assertContains($expected, $this->helper->getSuffix('xml'));
+        $this->assertStringContainsString($expected, $this->helper->getSuffix('xml'));
     }
 
     public function testSuffixAccessorsThrowExceptionOnInvalidContextType()
@@ -153,14 +153,14 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends \PHPUnit\Framework
             $this->helper->setSuffix('foobar', 'foobar');
             $this->fail('setSuffix() should throw exception with invalid context type');
         } catch (Zend_Controller_Action_Exception $e) {
-            $this->assertContains('Cannot set suffix', $e->getMessage());
+            $this->assertStringContainsString('Cannot set suffix', $e->getMessage());
         }
 
         try {
             $this->helper->getSuffix('foobar');
             $this->fail('getSuffix() should throw exception with invalid context type');
         } catch (Zend_Controller_Action_Exception $e) {
-            $this->assertContains('Cannot retrieve suffix', $e->getMessage());
+            $this->assertStringContainsString('Cannot retrieve suffix', $e->getMessage());
         }
     }
 
@@ -195,7 +195,7 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends \PHPUnit\Framework
             $this->helper->addHeader('xml', 'Content-Type', 'application/xml');
             $this->fail('addHeader() should raise exception for existing headers');
         } catch (Zend_Controller_Exception $e) {
-            $this->assertContains('already exists', $e->getMessage());
+            $this->assertStringContainsString('already exists', $e->getMessage());
         }
     }
 
@@ -238,56 +238,56 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends \PHPUnit\Framework
             $this->helper->addHeader('foobar', 'foobar', 'baz');
             $this->fail('addHeader() should throw exception with invalid context type');
         } catch (Zend_Controller_Action_Exception $e) {
-            $this->assertContains('does not exist', $e->getMessage());
+            $this->assertStringContainsString('does not exist', $e->getMessage());
         }
 
         try {
             $this->helper->setHeader('foobar', 'foobar', 'baz');
             $this->fail('setHeader() should throw exception with invalid context type');
         } catch (Zend_Controller_Action_Exception $e) {
-            $this->assertContains('does not exist', $e->getMessage());
+            $this->assertStringContainsString('does not exist', $e->getMessage());
         }
 
         try {
             $this->helper->getHeader('foobar', 'Content-Type');
             $this->fail('getHeader() should throw exception with invalid context type');
         } catch (Zend_Controller_Action_Exception $e) {
-            $this->assertContains('does not exist', $e->getMessage());
+            $this->assertStringContainsString('does not exist', $e->getMessage());
         }
 
         try {
             $this->helper->getHeaders('foobar');
             $this->fail('getHeaders() should throw exception with invalid context type');
         } catch (Zend_Controller_Action_Exception $e) {
-            $this->assertContains('does not exist', $e->getMessage());
+            $this->assertStringContainsString('does not exist', $e->getMessage());
         }
 
         try {
             $this->helper->addHeaders('foobar', array('X-Foo' => 'Bar'));
             $this->fail('addHeaders() should throw exception with invalid context type');
         } catch (Zend_Controller_Action_Exception $e) {
-            $this->assertContains('does not exist', $e->getMessage());
+            $this->assertStringContainsString('does not exist', $e->getMessage());
         }
 
         try {
             $this->helper->setHeaders('foobar', array('X-Foo' => 'Bar'));
             $this->fail('setHeaders() should throw exception with invalid context type');
         } catch (Zend_Controller_Action_Exception $e) {
-            $this->assertContains('does not exist', $e->getMessage());
+            $this->assertStringContainsString('does not exist', $e->getMessage());
         }
 
         try {
             $this->helper->removeHeader('foobar', 'X-Foo');
             $this->fail('removeHeader() should throw exception with invalid context type');
         } catch (Zend_Controller_Action_Exception $e) {
-            $this->assertContains('does not exist', $e->getMessage());
+            $this->assertStringContainsString('does not exist', $e->getMessage());
         }
 
         try {
             $this->helper->clearHeaders('foobar');
             $this->fail('clearHeaders() should throw exception with invalid context type');
         } catch (Zend_Controller_Action_Exception $e) {
-            $this->assertContains('does not exist', $e->getMessage());
+            $this->assertStringContainsString('does not exist', $e->getMessage());
         }
     }
 
@@ -338,7 +338,7 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends \PHPUnit\Framework
         $this->assertTrue(isset($context['headers']));
         $this->assertTrue(isset($context['callbacks']));
 
-        $this->assertContains('foo.bar', $context['suffix']);
+        $this->assertStringContainsString('foo.bar', $context['suffix']);
         $this->assertEquals('application/x-foobar', $context['headers']['Content-Type']);
         $this->assertEquals('Bar', $context['headers']['X-Foo']);
     }
@@ -349,7 +349,7 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends \PHPUnit\Framework
             $this->helper->addContext('xml', array());
             $this->fail('Shold not be able to add context if already exists');
         } catch (Zend_Controller_Exception $e) {
-            $this->assertContains('exists', $e->getMessage());
+            $this->assertStringContainsString('exists', $e->getMessage());
         }
     }
 
@@ -399,9 +399,9 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends \PHPUnit\Framework
         $this->assertTrue($this->helper->hasContext('barbaz'));
         $this->assertEquals('xml', $this->helper->getSuffix('xml'));
         $this->assertNotEquals('foo.bar', $this->helper->getSuffix('foobar'));
-        $this->assertContains('foo.bar', $this->helper->getSuffix('foobar'));
+        $this->assertStringContainsString('foo.bar', $this->helper->getSuffix('foobar'));
         $this->assertNotEquals('bar.baz', $this->helper->getSuffix('barbaz'));
-        $this->assertContains('bar.baz', $this->helper->getSuffix('barbaz'));
+        $this->assertStringContainsString('bar.baz', $this->helper->getSuffix('barbaz'));
     }
 
     public function testCanRemoveSingleContext()
@@ -450,7 +450,7 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends \PHPUnit\Framework
             $this->helper->setDefaultContext('foobar');
             $this->fail('setDefaultContext() should raise exception if context does not exist');
         } catch (Zend_Controller_Action_Exception $e) {
-            $this->assertContains('Cannot set default context', $e->getMessage());
+            $this->assertStringContainsString('Cannot set default context', $e->getMessage());
         }
     }
 
@@ -510,13 +510,13 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends \PHPUnit\Framework
                       ->setActionName('all');
         $this->helper->initContext();
         $this->assertEquals('json', $this->helper->getCurrentContext());
-        $this->assertContains('json', $this->viewRenderer->getViewSuffix());
+        $this->assertStringContainsString('json', $this->viewRenderer->getViewSuffix());
 
         $this->request->setParam('format', 'xml')
                       ->setActionName('all');
         $this->helper->initContext();
         $this->assertEquals('xml', $this->helper->getCurrentContext());
-        $this->assertContains('xml', $this->viewRenderer->getViewSuffix());
+        $this->assertStringContainsString('xml', $this->viewRenderer->getViewSuffix());
     }
 
     public function testInitContextDoesNothingIfActionDoesNotHaveContextAndPassedFormatInvalid()
@@ -532,7 +532,7 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends \PHPUnit\Framework
         $this->request->setParam('format', 'xml')
                       ->setActionName('foo');
         $this->helper->initContext();
-        $this->assertContains('xml', $this->viewRenderer->getViewSuffix());
+        $this->assertStringContainsString('xml', $this->viewRenderer->getViewSuffix());
     }
 
     public function testInitContextSetsAppropriateResponseHeader()
@@ -559,7 +559,7 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends \PHPUnit\Framework
                       ->setActionName('foo');
         $this->helper->initContext('json');
 
-        $this->assertContains('json', $this->viewRenderer->getViewSuffix());
+        $this->assertStringContainsString('json', $this->viewRenderer->getViewSuffix());
 
         $headers = $this->response->getHeaders();
 
@@ -579,7 +579,7 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends \PHPUnit\Framework
         $this->request->setActionName('foo');
         $this->helper->initContext('xml');
 
-        $this->assertContains('xml', $this->viewRenderer->getViewSuffix());
+        $this->assertStringContainsString('xml', $this->viewRenderer->getViewSuffix());
 
         $headers = $this->response->getHeaders();
 
@@ -884,7 +884,7 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends \PHPUnit\Framework
         $this->helper->init();
         $this->helper->initContext();
         $suffix = $this->viewRenderer->getViewSuffix();
-        $this->assertNotContains('xml', $suffix, $suffix);
+        $this->assertStringNotContainsString('xml', $suffix, $suffix);
     }
 
     /**
@@ -900,15 +900,15 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends \PHPUnit\Framework
         $this->helper->initContext();
         $this->assertEquals('foo', $this->helper->getCurrentContext());
         $suffix = $this->viewRenderer->getViewSuffix();
-        $this->assertContains('foo', $suffix, $suffix);
+        $this->assertStringContainsString('foo', $suffix, $suffix);
 
         $this->request->setActionName('bar');
         $this->helper->init();
         $this->helper->initContext();
         $this->assertEquals('foo', $this->helper->getCurrentContext());
         $suffix = $this->viewRenderer->getViewSuffix();
-        $this->assertContains('foo', $suffix, $suffix);
-        $this->assertNotContains('foo.foo', $suffix, $suffix);
+        $this->assertStringContainsString('foo', $suffix, $suffix);
+        $this->assertStringNotContainsString('foo.foo', $suffix, $suffix);
     }
 
     /**

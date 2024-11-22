@@ -292,7 +292,7 @@ abstract class Zend_Cache_CommonBackendTest extends \PHPUnit\Framework\TestCase 
     {
         $this->assertTrue(is_numeric($this->_instance->getOption('LifeTime')));
 
-        $this->setExpectedException('Zend_Cache_Exception');
+        $this->expectException('Zend_Cache_Exception');
         $this->_instance->getOption('unknown');
     }
 }

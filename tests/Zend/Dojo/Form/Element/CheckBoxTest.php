@@ -121,14 +121,14 @@ class Zend_Dojo_Form_Element_CheckBoxTest extends \PHPUnit\Framework\TestCase
     public function testCheckedAttributeNotRenderedByDefault()
     {
         $html = $this->element->render();
-        $this->assertNotContains('checked="checked"', $html);
+        $this->assertStringNotContainsString('checked="checked"', $html);
     }
 
     public function testCheckedAttributeRenderedWhenCheckedFlagTrue()
     {
         $this->element->checked = true;
         $html = $this->element->render();
-        $this->assertContains('checked="checked"', $html);
+        $this->assertStringContainsString('checked="checked"', $html);
     }
 
     public function testCheckedValueDefaultsToOne()
@@ -247,7 +247,7 @@ class Zend_Dojo_Form_Element_CheckBoxTest extends \PHPUnit\Framework\TestCase
     public function testShouldRenderCheckBoxDijit()
     {
         $html = $this->element->render();
-        $this->assertContains('dojoType="dijit.form.CheckBox"', $html);
+        $this->assertStringContainsString('dojoType="dijit.form.CheckBox"', $html);
     }
 
     /**
@@ -256,7 +256,7 @@ class Zend_Dojo_Form_Element_CheckBoxTest extends \PHPUnit\Framework\TestCase
     public function testOptionsShouldNotBeRenderedAsElementAttribute()
     {
         $html = $this->element->render();
-        $this->assertNotContains('options="', $html, $html);
+        $this->assertStringNotContainsString('options="', $html, $html);
     }
 
     /**
@@ -270,7 +270,7 @@ class Zend_Dojo_Form_Element_CheckBoxTest extends \PHPUnit\Framework\TestCase
                 ));
         $element->setView(new Zend_View());
         $html = $element->render();
-        $this->assertContains('value="checkedVal"', $html, $html);
+        $this->assertStringContainsString('value="checkedVal"', $html, $html);
     }
 }
 

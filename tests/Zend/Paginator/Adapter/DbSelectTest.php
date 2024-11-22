@@ -150,7 +150,7 @@ class Zend_Paginator_Adapter_DbSelectTest extends \PHPUnit\Framework\TestCase
             $this->_adapter->setRowCount($this->_db->select()->from('test'));
         } catch (\Throwable $e) {
             $this->assertTrue($e instanceof Zend_Paginator_Exception);
-            $this->assertContains('Row count column not found', $e->getMessage());
+            $this->assertStringContainsString('Row count column not found', $e->getMessage());
         }
 
         try {

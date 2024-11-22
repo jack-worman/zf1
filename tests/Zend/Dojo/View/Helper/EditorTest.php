@@ -103,7 +103,7 @@ class Zend_Dojo_View_Helper_EditorTest extends \PHPUnit\Framework\TestCase
     public function testHelperShouldRenderAlteredId()
     {
         $html = $this->helper->editor('foo');
-        $this->assertContains('id="foo-Editor"', $html, $html);
+        $this->assertStringContainsString('id="foo-Editor"', $html, $html);
     }
 
     public function testHelperShouldRenderHiddenElementWithGivenIdentifier()
@@ -112,29 +112,29 @@ class Zend_Dojo_View_Helper_EditorTest extends \PHPUnit\Framework\TestCase
         if (!preg_match('#(<input[^>]*(?:type="hidden")[^>]*>)#', $html, $matches)) {
             $this->fail('No hidden element generated');
         }
-        $this->assertContains('id="foo"', $matches[1]);
+        $this->assertStringContainsString('id="foo"', $matches[1]);
     }
 
     public function testHelperShouldRenderDojoTypeWhenUsedDeclaratively()
     {
         $html = $this->helper->editor('foo');
-        $this->assertContains('dojoType="dijit.Editor"', $html);
+        $this->assertStringContainsString('dojoType="dijit.Editor"', $html);
     }
 
     public function testHelperShouldRegisterDijitModule()
     {
         $html = $this->helper->editor('foo');
         $modules = $this->view->dojo()->getModules();
-        $this->assertContains('dijit.Editor', $modules);
+        $this->assertStringContainsString('dijit.Editor', $modules);
     }
 
     public function testHelperShouldNormalizeArrayId()
     {
         $html = $this->helper->editor('foo[]');
-        $this->assertContains('id="foo-Editor"', $html, $html);
+        $this->assertStringContainsString('id="foo-Editor"', $html, $html);
 
         $html = $this->helper->editor('foo[bar]');
-        $this->assertContains('id="foo-bar-Editor"', $html, $html);
+        $this->assertStringContainsString('id="foo-bar-Editor"', $html, $html);
     }
 
     public function testHelperShouldJsonifyPlugins()
@@ -143,7 +143,7 @@ class Zend_Dojo_View_Helper_EditorTest extends \PHPUnit\Framework\TestCase
         $html = $this->helper->editor('foo', '', array('plugins' => $plugins));
         $pluginsString = Zend_Json::encode($plugins);
         $pluginsString = str_replace((string) '"', "'", $pluginsString);
-        $this->assertContains('plugins="' . $pluginsString . '"', $html);
+        $this->assertStringContainsString('plugins="' . $pluginsString . '"', $html);
     }
 
     public function testHelperShouldCreateJavascriptToConnectEditorToHiddenValue()
@@ -193,7 +193,7 @@ class Zend_Dojo_View_Helper_EditorTest extends \PHPUnit\Framework\TestCase
 
         $dojo = $this->view->dojo()->__toString();
         foreach (array_values($plugins) as $plugin) {
-            $this->assertContains('dojo.require("dijit._editor.plugins.' . $plugin . '")', $dojo, $dojo);
+            $this->assertStringContainsString('dojo.require("dijit._editor.plugins.' . $plugin . '")', $dojo, $dojo);
         }
     }
 
@@ -204,7 +204,7 @@ class Zend_Dojo_View_Helper_EditorTest extends \PHPUnit\Framework\TestCase
     public function testHelperShouldUseDivByDefault()
     {
         $html = $this->helper->editor('foo');
-        $this->assertRegexp('#</?div[^>]*>#', $html, $html);
+        $this->assertMatchesRegularExpression('#</?div[^>]*>#', $html, $html);
     }
 
     /**
@@ -214,7 +214,7 @@ class Zend_Dojo_View_Helper_EditorTest extends \PHPUnit\Framework\TestCase
     public function testHelperShouldOnlyUseTextareaInNoscriptTag()
     {
         $html = $this->helper->editor('foo');
-        $this->assertRegexp('#<noscript><textarea[^>]*>#', $html, $html);
+        $this->assertMatchesRegularExpression('#<noscript><textarea[^>]*>#', $html, $html);
     }
 
     /**
@@ -223,7 +223,7 @@ class Zend_Dojo_View_Helper_EditorTest extends \PHPUnit\Framework\TestCase
     public function testHiddenInputShouldBeRenderedLast()
     {
         $html = $this->helper->editor('foo');
-        $this->assertRegexp('#</noscript><input#', $html, $html);
+        $this->assertMatchesRegularExpression('#</noscript><input#', $html, $html);
     }
 
     /** @group ZF-5711 */
@@ -233,7 +233,7 @@ class Zend_Dojo_View_Helper_EditorTest extends \PHPUnit\Framework\TestCase
         $html = $this->helper->editor('foo', '', array('extraPlugins' => $extraPlugins));
         $pluginsString = Zend_Json::encode($extraPlugins);
         $pluginsString = str_replace((string) '"', "'", $pluginsString);
-        $this->assertContains('extraPlugins="' . $pluginsString . '"', $html);
+        $this->assertStringContainsString('extraPlugins="' . $pluginsString . '"', $html);
     }
 }
 

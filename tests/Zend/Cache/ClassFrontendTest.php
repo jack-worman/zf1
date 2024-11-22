@@ -297,7 +297,7 @@ class Zend_Cache_ClassFrontendTest extends \PHPUnit\Framework\TestCase
      */
     public function testThrowExceptionOnInvalidCallback()
     {
-        $this->setExpectedException('Zend_Cache_Exception');
+        $this->expectException('Zend_Cache_Exception');
         $this->_instance2->unknownMethod();
     }
 }

@@ -66,7 +66,7 @@ class Zend_Config_Writer_IniTest extends \PHPUnit\Framework\TestCase
             $writer->write();
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('No filename was set', $expected->getMessage());
+            $this->assertStringContainsString('No filename was set', $expected->getMessage());
         }
     }
 
@@ -78,7 +78,7 @@ class Zend_Config_Writer_IniTest extends \PHPUnit\Framework\TestCase
             $writer->write();
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('No config was set', $expected->getMessage());
+            $this->assertStringContainsString('No config was set', $expected->getMessage());
         }
     }
 
@@ -90,7 +90,7 @@ class Zend_Config_Writer_IniTest extends \PHPUnit\Framework\TestCase
             $writer->write();
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('Could not write to file', $expected->getMessage());
+            $this->assertStringContainsString('Could not write to file', $expected->getMessage());
         }
     }
 
@@ -239,7 +239,7 @@ ECS;
             $writer->write();
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('Value can not contain double quotes "', $expected->getMessage());
+            $this->assertStringContainsString('Value can not contain double quotes "', $expected->getMessage());
         }
     }
 

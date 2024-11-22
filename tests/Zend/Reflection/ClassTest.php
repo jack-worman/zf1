@@ -143,7 +143,7 @@ EOS;
     public function testGetDeclaringFileReturnsFilename()
     {
         $reflectionClass = new Zend_Reflection_Class('Zend_Reflection_TestSampleClass2');
-        $this->assertContains('TestSampleClass.php', $reflectionClass->getDeclaringFile()->getFileName()); //ns(, $reflectionClass->getDeclaringFile());
+        $this->assertStringContainsString('TestSampleClass.php', $reflectionClass->getDeclaringFile()->getFileName()); //ns(, $reflectionClass->getDeclaringFile());
     }
 
 }
