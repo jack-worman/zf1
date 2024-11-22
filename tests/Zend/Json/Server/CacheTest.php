@@ -40,7 +40,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Json_Server
  */
 #[AllowDynamicProperties]
-class Zend_Json_Server_CacheTest extends PHPUnit_Framework_TestCase
+class Zend_Json_Server_CacheTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -60,7 +60,7 @@ class Zend_Json_Server_CacheTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->server = new Zend_Json_Server();
         $this->server->setClass('Zend_Json_Server_CacheTest_Foo', 'foo');

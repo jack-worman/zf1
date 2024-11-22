@@ -34,7 +34,7 @@
  * @group      Zend_OpenId
  */
 #[AllowDynamicProperties]
-class Zend_OpenId_Consumer_Storage_FileTest extends PHPUnit_Framework_TestCase
+class Zend_OpenId_Consumer_Storage_FileTest extends \PHPUnit\Framework\TestCase
 {
     const URL      = "http://www.myopenid.com/";
     const HANDLE   = "d41d8cd98f00b204e9800998ecf8427e";
@@ -78,7 +78,7 @@ class Zend_OpenId_Consumer_Storage_FileTest extends PHPUnit_Framework_TestCase
         @rmdir($dirName);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->_tmpDir = __DIR__ . "/_files";
 

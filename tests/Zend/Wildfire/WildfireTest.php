@@ -63,7 +63,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Wildfire
  */
 #[AllowDynamicProperties]
-class Zend_Wildfire_WildfireTest extends PHPUnit_Framework_TestCase
+class Zend_Wildfire_WildfireTest extends \PHPUnit\Framework\TestCase
 {
 
     protected $_controller;
@@ -82,7 +82,7 @@ class Zend_Wildfire_WildfireTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         date_default_timezone_set('America/Los_Angeles');
         Zend_Wildfire_Channel_HttpHeaders::destroyInstance();

@@ -38,7 +38,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Validate
  */
 #[AllowDynamicProperties]
-class Zend_Validate_CallbackTest extends PHPUnit_Framework_TestCase
+class Zend_Validate_CallbackTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs this test suite

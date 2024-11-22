@@ -32,7 +32,7 @@
  * @group      Zend_Test
  */
 #[AllowDynamicProperties]
-class Zend_Test_DbStatementTest extends PHPUnit_Framework_TestCase
+class Zend_Test_DbStatementTest extends \PHPUnit\Framework\TestCase
 {
     public function testRowCountDefault()
     {

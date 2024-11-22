@@ -44,7 +44,7 @@
  * @group      Zend_OpenId
  */
 #[AllowDynamicProperties]
-class Zend_OpenId_ProviderTest extends PHPUnit_Framework_TestCase
+class Zend_OpenId_ProviderTest extends \PHPUnit\Framework\TestCase
 {
     const USER     = "http://test_user.myopenid.com/";
     const PASSWORD = "01234567890abcdef";

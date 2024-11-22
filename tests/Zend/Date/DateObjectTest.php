@@ -34,10 +34,10 @@
  * @group      Zend_Date
  */
 #[AllowDynamicProperties]
-class Zend_Date_DateObjectTest extends PHPUnit_Framework_TestCase
+class Zend_Date_DateObjectTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->originalTimezone = date_default_timezone_get();
         date_default_timezone_set('Europe/Paris');

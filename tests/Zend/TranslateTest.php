@@ -39,7 +39,7 @@
  * @group      Zend_Translate
  */
 #[AllowDynamicProperties]
-class Zend_TranslateTest extends PHPUnit_Framework_TestCase
+class Zend_TranslateTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -52,7 +52,7 @@ class Zend_TranslateTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         if (Zend_Translate::hasCache()) {
             Zend_Translate::removeCache();

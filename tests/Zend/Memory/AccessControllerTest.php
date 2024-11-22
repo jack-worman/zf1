@@ -36,7 +36,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Memory
  */
 #[AllowDynamicProperties]
-class Zend_Memory_Container_AccessControllerTest extends PHPUnit_Framework_TestCase
+class Zend_Memory_Container_AccessControllerTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Memory manager, used for tests
@@ -51,7 +51,7 @@ class Zend_Memory_Container_AccessControllerTest extends PHPUnit_Framework_TestC
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $tmpDir = sys_get_temp_dir() . '/zend_memory';
         $this->_removeCacheDir($tmpDir);

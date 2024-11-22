@@ -39,7 +39,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_ProgressBar
  */
 #[AllowDynamicProperties]
-class Zend_ProgressBar_Adapter_jsPushTest extends PHPUnit_Framework_TestCase
+class Zend_ProgressBar_Adapter_jsPushTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.

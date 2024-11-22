@@ -34,14 +34,14 @@
  * @group      Zend_Config
  */
 #[AllowDynamicProperties]
-class Zend_Config_XmlTest extends PHPUnit_Framework_TestCase
+class Zend_Config_XmlTest extends \PHPUnit\Framework\TestCase
 {
     protected $_xmlFileConfig;
     protected $_xmlFileAllSectionsConfig;
     protected $_xmlFileCircularConfig;
     protected $_xmlFileInvalid;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->_xmlFileConfig = __DIR__ . '/_files/config.xml';
         $this->_xmlFileAllSectionsConfig = __DIR__ . '/_files/allsections.xml';

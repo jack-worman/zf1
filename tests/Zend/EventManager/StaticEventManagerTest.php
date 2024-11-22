@@ -35,7 +35,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
-class Zend_EventManager_StaticEventManagerTest extends PHPUnit_Framework_TestCase
+class Zend_EventManager_StaticEventManagerTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -43,7 +43,7 @@ class Zend_EventManager_StaticEventManagerTest extends PHPUnit_Framework_TestCas
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         Zend_EventManager_StaticEventManager::resetInstance();
     }

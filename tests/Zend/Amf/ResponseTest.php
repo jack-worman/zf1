@@ -45,7 +45,7 @@ require_once 'ContactVO.php';
  * @group      Zend_Amf
  */
 #[AllowDynamicProperties]
-class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
+class Zend_Amf_ResponseTest extends \PHPUnit\Framework\TestCase
 {
     // The message response status code.
     public $responseURI = "/2/onResult";
@@ -70,7 +70,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
     /**
      * Setup environment
      */
-    public function setUp()
+    public function setUp(): void
     {
         date_default_timezone_set('America/Chicago');
         Zend_Locale::setDefault('en_US');

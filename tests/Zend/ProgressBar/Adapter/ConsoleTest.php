@@ -41,7 +41,7 @@ require_once 'MockupStream.php';
  * @group      Zend_ProgressBar
  */
 #[AllowDynamicProperties]
-class Zend_ProgressBar_Adapter_ConsoleTest extends PHPUnit_Framework_TestCase
+class Zend_ProgressBar_Adapter_ConsoleTest extends \PHPUnit\Framework\TestCase
 {
 
     protected function setUp()

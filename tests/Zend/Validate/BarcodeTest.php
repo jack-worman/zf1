@@ -35,7 +35,7 @@
  * @group      Zend_Validate
  */
 #[AllowDynamicProperties]
-class Zend_Validate_BarcodeTest extends PHPUnit_Framework_TestCase
+class Zend_Validate_BarcodeTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Test if EAN-13 contains only numeric characters

@@ -22,7 +22,7 @@
 
 
 /**
- * PHPUnit_Framework_TestCase
+ * \PHPUnit\Framework\TestCase
  */
 
 
@@ -59,7 +59,7 @@
  * @group      Zend_Auth
  */
 #[AllowDynamicProperties]
-class Zend_Auth_Adapter_Http_AuthTest extends PHPUnit_Framework_TestCase
+class Zend_Auth_Adapter_Http_AuthTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Path to test files

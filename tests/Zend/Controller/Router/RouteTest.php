@@ -46,7 +46,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Controller_Router
  */
 #[AllowDynamicProperties]
-class Zend_Controller_Router_RouteTest extends PHPUnit_Framework_TestCase
+class Zend_Controller_Router_RouteTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Server backup
@@ -60,7 +60,7 @@ class Zend_Controller_Router_RouteTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         // Backup server array
         $this->_server = $_SERVER;

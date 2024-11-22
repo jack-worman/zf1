@@ -38,7 +38,7 @@
  * @group      Zend_Db_Table
  */
 #[AllowDynamicProperties]
-class Zend_Session_SaveHandler_DbTableTest extends PHPUnit_Framework_TestCase
+class Zend_Session_SaveHandler_DbTableTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var array
@@ -78,7 +78,7 @@ class Zend_Session_SaveHandler_DbTableTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->_setupDb($this->_saveHandlerTableConfig['primary']);
     }
@@ -658,7 +658,7 @@ class Zend_Session_SaveHandler_DbTableTest extends PHPUnit_Framework_TestCase
  * This class is used by Zend_Session_SaveHandler_AllTests to produce one skip message when pdo_sqlite is unavailable
  */
 #[AllowDynamicProperties]
-class Zend_Session_SaveHandler_DbTableTestSkip extends PHPUnit_Framework_TestCase
+class Zend_Session_SaveHandler_DbTableTestSkip extends \PHPUnit\Framework\TestCase
 {
     public function testNothing()
     {

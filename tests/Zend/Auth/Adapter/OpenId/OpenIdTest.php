@@ -22,7 +22,7 @@
 
 
 /**
- * PHPUnit_Framework_TestCase
+ * \PHPUnit\Framework\TestCase
  */
 
 /**
@@ -67,7 +67,7 @@ require_once 'Zend/OpenId/ResponseHelper.php';
  * @group      Zend_Auth
  */
 #[AllowDynamicProperties]
-class Zend_Auth_Adapter_OpenIdTest extends PHPUnit_Framework_TestCase
+class Zend_Auth_Adapter_OpenIdTest extends \PHPUnit\Framework\TestCase
 {
     const ID       = "http://id.myopenid.com/";
     const REAL_ID  = "http://real_id.myopenid.com/";

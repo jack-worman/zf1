@@ -33,7 +33,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
-class Zend_Config_JsonTest extends PHPUnit_Framework_TestCase
+class Zend_Config_JsonTest extends \PHPUnit\Framework\TestCase
 {
     protected $_iniFileConfig;
     protected $_iniFileAllSectionsConfig;
@@ -55,7 +55,7 @@ class Zend_Config_JsonTest extends PHPUnit_Framework_TestCase
      */
     private $_iniFileInvalid;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->_iniFileConfig = __DIR__ . '/_files/config.json';
         $this->_iniFileAllSectionsConfig = __DIR__ . '/_files/allsections.json';

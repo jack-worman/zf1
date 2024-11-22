@@ -33,7 +33,7 @@
  * @group      Zend_Validate
  */
 #[AllowDynamicProperties]
-class Zend_Validate_Sitemap_LastmodTest extends PHPUnit_Framework_TestCase
+class Zend_Validate_Sitemap_LastmodTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Validator

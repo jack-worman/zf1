@@ -39,7 +39,7 @@
  * @group      Zend_Auth
  */
 #[AllowDynamicProperties]
-class Zend_Auth_Adapter_Ldap_OnlineTest extends PHPUnit_Framework_TestCase
+class Zend_Auth_Adapter_Ldap_OnlineTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * LDAP connection options
@@ -53,7 +53,7 @@ class Zend_Auth_Adapter_Ldap_OnlineTest extends PHPUnit_Framework_TestCase
      */
     protected $_names = array();
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->_options = array(
             'host' => TESTS_ZEND_LDAP_HOST,

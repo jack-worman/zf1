@@ -38,7 +38,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
-class Zend_Filter_Compress_TarTest extends PHPUnit_Framework_TestCase
+class Zend_Filter_Compress_TarTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs this test suite
@@ -51,7 +51,7 @@ class Zend_Filter_Compress_TarTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         if (!class_exists('Archive_Tar')) {
             // require_once 'Zend/Loader.php';

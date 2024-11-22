@@ -54,7 +54,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Log
  */
 #[AllowDynamicProperties]
-class Zend_Log_Writer_FirebugTest extends PHPUnit_Framework_TestCase
+class Zend_Log_Writer_FirebugTest extends \PHPUnit\Framework\TestCase
 {
     protected $_controller = null;
     protected $_request = null;
@@ -74,7 +74,7 @@ class Zend_Log_Writer_FirebugTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         date_default_timezone_set('America/Los_Angeles');
 

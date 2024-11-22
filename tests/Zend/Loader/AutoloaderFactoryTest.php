@@ -39,7 +39,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Loader
  */
 #[AllowDynamicProperties]
-class Zend_Loader_AutoloaderFactoryTest extends PHPUnit_Framework_TestCase
+class Zend_Loader_AutoloaderFactoryTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -47,7 +47,7 @@ class Zend_Loader_AutoloaderFactoryTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         // Store original autoloaders
         $this->loaders = spl_autoload_functions();

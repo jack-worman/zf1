@@ -33,12 +33,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
-class Zend_Serializer_Adapter_JsonTest extends PHPUnit_Framework_TestCase
+class Zend_Serializer_Adapter_JsonTest extends \PHPUnit\Framework\TestCase
 {
 
     private $_adapter;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->_adapter = new Zend_Serializer_Adapter_Json();
     }

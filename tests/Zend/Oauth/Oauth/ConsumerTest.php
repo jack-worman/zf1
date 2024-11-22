@@ -31,7 +31,7 @@
  * @group      Zend_Oauth
  */
 #[AllowDynamicProperties]
-class Zend_Oauth_ConsumerTest extends PHPUnit_Framework_TestCase
+class Zend_Oauth_ConsumerTest extends \PHPUnit\Framework\TestCase
 {
 
     public function teardown()

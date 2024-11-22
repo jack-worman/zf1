@@ -34,7 +34,7 @@
  * @group      Zend_Test
  */
 #[AllowDynamicProperties]
-class Zend_Test_PHPUnit_Db_SimpleTesterTest extends PHPUnit_Framework_TestCase
+class Zend_Test_PHPUnit_Db_SimpleTesterTest extends \PHPUnit\Framework\TestCase
 {
     public function testGetConnection()
     {

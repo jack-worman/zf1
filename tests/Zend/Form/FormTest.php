@@ -48,7 +48,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Form
  */
 #[AllowDynamicProperties]
-class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
+class Zend_Form_FormTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_Form
@@ -69,7 +69,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->clearRegistry();
         Zend_Form::setDefaultTranslator(null);

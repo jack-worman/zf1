@@ -42,7 +42,7 @@ require_once 'Zend/Db/TestSetup.php';
 abstract class Zend_Db_Profiler_TestCommon extends Zend_Db_TestSetup
 {
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->_db->getProfiler()->setEnabled(true);

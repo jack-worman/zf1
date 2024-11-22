@@ -41,7 +41,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_XmlRpc
  */
 #[AllowDynamicProperties]
-class Zend_XmlRpc_Server_FaultTest extends PHPUnit_Framework_TestCase
+class Zend_XmlRpc_Server_FaultTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.

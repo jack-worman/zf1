@@ -34,7 +34,7 @@
  * @group      Zend_TimeSync
  */
 #[AllowDynamicProperties]
-class Zend_TimeSyncTest extends PHPUnit_Framework_TestCase
+class Zend_TimeSyncTest extends \PHPUnit\Framework\TestCase
 {
     public $timeservers = array(
         // invalid servers

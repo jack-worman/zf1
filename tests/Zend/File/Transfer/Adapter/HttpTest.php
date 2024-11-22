@@ -44,7 +44,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_File
  */
 #[AllowDynamicProperties]
-class Zend_File_Transfer_Adapter_HttpTest extends PHPUnit_Framework_TestCase
+class Zend_File_Transfer_Adapter_HttpTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -63,7 +63,7 @@ class Zend_File_Transfer_Adapter_HttpTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $_FILES = array(
             'txt' => array(

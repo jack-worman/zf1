@@ -36,7 +36,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 // require_once 'Zend/Paginator/AdapterAggregate.php';
 
 /**
- * @see PHPUnit_Framework_TestCase
+ * @see \PHPUnit\Framework\TestCase
  */
 
 /**
@@ -108,7 +108,7 @@ require_once 'Zend/Paginator/_files/TestTable.php';
  * @group      Zend_Paginator
  */
 #[AllowDynamicProperties]
-class Zend_PaginatorTest extends PHPUnit_Framework_TestCase
+class Zend_PaginatorTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.

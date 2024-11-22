@@ -46,7 +46,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View_Helper
  */
 #[AllowDynamicProperties]
-class Zend_View_Helper_PlaceholderTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_PlaceholderTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_View_Helper_Placeholder
@@ -71,7 +71,7 @@ class Zend_View_Helper_PlaceholderTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->placeholder = new Zend_View_Helper_Placeholder();
     }

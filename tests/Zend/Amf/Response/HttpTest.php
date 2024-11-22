@@ -41,7 +41,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Amf_Response
  */
 #[AllowDynamicProperties]
-class Zend_Amf_Response_HttpTest extends PHPUnit_Framework_TestCase
+class Zend_Amf_Response_HttpTest extends \PHPUnit\Framework\TestCase
 {
 
     /**

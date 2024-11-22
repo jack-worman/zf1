@@ -162,7 +162,7 @@ class Zend_Cache_StaticBackendTest extends Zend_Cache_CommonBackendTest {
         try {
             $this->_instance->setOption('cache_directory_umask', '777');
             $this->fail();
-        } catch (PHPUnit_Framework_Error $e) {
+        } catch (\PHPUnit\Framework\AssertionFailedError $e) {
             $this->assertEquals(
                 "'cache_directory_umask' is deprecated -> please use 'cache_directory_perm' instead",
                 $e->getMessage()
@@ -178,7 +178,7 @@ class Zend_Cache_StaticBackendTest extends Zend_Cache_CommonBackendTest {
         try {
             $this->_instance->setOption('cache_file_umask', '777');
             $this->fail();
-        } catch (PHPUnit_Framework_Error $e) {
+        } catch (\PHPUnit\Framework\AssertionFailedError $e) {
             $this->assertEquals(
                 "'cache_file_umask' is deprecated -> please use 'cache_file_perm' instead",
                 $e->getMessage()

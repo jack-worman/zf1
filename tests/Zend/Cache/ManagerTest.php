@@ -30,10 +30,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
-class Zend_Cache_ManagerTest extends PHPUnit_Framework_TestCase
+class Zend_Cache_ManagerTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->_cache_dir = $this->mkdir();
         $this->_cache = Zend_Cache::factory(

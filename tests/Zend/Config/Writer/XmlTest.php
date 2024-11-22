@@ -44,11 +44,11 @@
  * @group      Zend_Config
  */
 #[AllowDynamicProperties]
-class Zend_Config_Writer_XmlTest extends PHPUnit_Framework_TestCase
+class Zend_Config_Writer_XmlTest extends \PHPUnit\Framework\TestCase
 {
     protected $_tempName;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->_tempName = @tempnam(__DIR__ . '/temp', 'tmp');
     }

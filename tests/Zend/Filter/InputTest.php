@@ -40,7 +40,7 @@
  * @group      Zend_Filter
  */
 #[AllowDynamicProperties]
-class Zend_Filter_InputTest extends PHPUnit_Framework_TestCase
+class Zend_Filter_InputTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @group ZF-11267

@@ -56,7 +56,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Log
  */
 #[AllowDynamicProperties]
-class Zend_Log_Writer_MailTest extends PHPUnit_Framework_TestCase
+class Zend_Log_Writer_MailTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Mock Transport for Zend_Mail
@@ -268,7 +268,7 @@ class Zend_Log_Writer_MailTest extends PHPUnit_Framework_TestCase
         try {
             unset($log);
         } catch (\Throwable $e) {
-            $this->assertTrue($e instanceof PHPUnit_Framework_Error);
+            $this->assertTrue($e instanceof \PHPUnit\Framework\AssertionFailedError);
         }
     }
 
@@ -295,7 +295,7 @@ class Zend_Log_Writer_MailTest extends PHPUnit_Framework_TestCase
         try {
             unset($log);
         } catch (\Throwable $e) {
-            $this->assertTrue($e instanceof PHPUnit_Framework_Error);
+            $this->assertTrue($e instanceof \PHPUnit\Framework\AssertionFailedError);
         }
     }
 

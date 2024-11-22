@@ -52,9 +52,9 @@
  * @group      Zend_Pdf
  */
 #[AllowDynamicProperties]
-class Zend_Pdf_ActionTest extends PHPUnit_Framework_TestCase
+class Zend_Pdf_ActionTest extends \PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         date_default_timezone_set('GMT');
     }

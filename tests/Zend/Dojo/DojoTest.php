@@ -51,7 +51,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Dojo
  */
 #[AllowDynamicProperties]
-class Zend_Dojo_DojoTest extends PHPUnit_Framework_TestCase
+class Zend_Dojo_DojoTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -70,7 +70,7 @@ class Zend_Dojo_DojoTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
     }
 

@@ -41,7 +41,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Controller_Router
  */
 #[AllowDynamicProperties]
-class Zend_Controller_Router_Route_ModuleTest extends PHPUnit_Framework_TestCase
+class Zend_Controller_Router_Route_ModuleTest extends \PHPUnit\Framework\TestCase
 {
 
     protected $_request;
@@ -61,7 +61,7 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $front = Zend_Controller_Front::getInstance();
         $front->resetInstance();

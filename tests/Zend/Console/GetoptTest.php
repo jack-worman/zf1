@@ -34,9 +34,9 @@
  * @group      Zend_Console_Getopt
  */
 #[AllowDynamicProperties]
-class Zend_Console_GetoptTest extends PHPUnit_Framework_TestCase
+class Zend_Console_GetoptTest extends \PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         if(ini_get('register_argc_argv') == false) {
             $this->markTestSkipped("Cannot Test Zend_Console_Getopt without 'register_argc_argv' ini option true.");

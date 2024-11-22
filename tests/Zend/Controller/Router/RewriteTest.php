@@ -59,7 +59,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Controller_Router
  */
 #[AllowDynamicProperties]
-class Zend_Controller_Router_RewriteTest extends PHPUnit_Framework_TestCase
+class Zend_Controller_Router_RewriteTest extends \PHPUnit\Framework\TestCase
 {
     protected $_router;
 
@@ -76,7 +76,7 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp() {
+    public function setUp(): void {
         $this->_router = new Zend_Controller_Router_Rewrite();
         $front = Zend_Controller_Front::getInstance();
         $front->resetInstance();

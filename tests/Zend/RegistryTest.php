@@ -34,9 +34,9 @@
  * @group      Zend_Registry
  */
 #[AllowDynamicProperties]
-class Zend_RegistryTest extends PHPUnit_Framework_TestCase
+class Zend_RegistryTest extends \PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         Zend_Registry::_unsetInstance();
     }

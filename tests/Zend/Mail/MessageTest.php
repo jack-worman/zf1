@@ -44,11 +44,11 @@
  * @group      Zend_Mail
  */
 #[AllowDynamicProperties]
-class Zend_Mail_MessageTest extends PHPUnit_Framework_TestCase
+class Zend_Mail_MessageTest extends \PHPUnit\Framework\TestCase
 {
     protected $_file;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->_file = tempnam(sys_get_temp_dir(), 'zm_');
         $mail = file_get_contents(__DIR__ . '/_files/mail.txt');

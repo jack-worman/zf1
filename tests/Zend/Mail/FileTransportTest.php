@@ -39,13 +39,13 @@
  * @group      Zend_Mail
  */
 #[AllowDynamicProperties]
-class Zend_Mail_FileTransportTest extends PHPUnit_Framework_TestCase
+class Zend_Mail_FileTransportTest extends \PHPUnit\Framework\TestCase
 {
     protected $_params;
     protected $_transport;
     protected $_tmpdir;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->createdTmpDir = false;
 

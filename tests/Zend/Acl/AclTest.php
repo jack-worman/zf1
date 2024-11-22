@@ -34,7 +34,7 @@ require_once __DIR__ . '/_files/MockAssertion.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
-class Zend_Acl_AclTest extends PHPUnit_Framework_TestCase
+class Zend_Acl_AclTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * ACL object for each test method
@@ -48,7 +48,7 @@ class Zend_Acl_AclTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->_acl = new Zend_Acl();
     }
@@ -1175,7 +1175,7 @@ class Zend_Acl_AclTest extends PHPUnit_Framework_TestCase
 
     /**
      * Returns an array of registered roles
-     * @expectedException PHPUnit_Framework_Error
+     * @expectedException \PHPUnit\Framework\AssertionFailedError
      * @group ZF-5638
      */
     public function testGetRegisteredRoles()
@@ -1258,7 +1258,7 @@ class Zend_Acl_AclTest extends PHPUnit_Framework_TestCase
         try {
             $this->_acl->getRegisteredRoles();
             $this->fail('getRegisteredRoles() did not throw an exception');
-        } catch(PHPUnit_Framework_Error $e) {
+        } catch(\PHPUnit\Framework\AssertionFailedError $e) {
             return;
         }
 

@@ -40,10 +40,10 @@
  * @group      Zend_Uri
  */
 #[AllowDynamicProperties]
-class Zend_Uri_HttpTest extends PHPUnit_Framework_TestCase
+class Zend_Uri_HttpTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function setup()
+    public function setUp(): void
     {
         Zend_Uri::setConfig(array('allow_unwise' => false));
     }

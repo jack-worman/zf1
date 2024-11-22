@@ -38,7 +38,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Form
  */
 #[AllowDynamicProperties]
-class Zend_Form_Element_MultiCheckboxTest extends PHPUnit_Framework_TestCase
+class Zend_Form_Element_MultiCheckboxTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -57,7 +57,7 @@ class Zend_Form_Element_MultiCheckboxTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->element = new Zend_Form_Element_MultiCheckbox('foo');
     }

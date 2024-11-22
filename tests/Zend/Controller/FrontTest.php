@@ -53,7 +53,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Controller_Front
  */
 #[AllowDynamicProperties]
-class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
+class Zend_Controller_FrontTest extends \PHPUnit\Framework\TestCase
 {
     protected $_controller = null;
 
@@ -70,7 +70,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->_controller = Zend_Controller_Front::getInstance();
         $this->_controller->resetInstance();

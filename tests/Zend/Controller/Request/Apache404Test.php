@@ -41,7 +41,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Controller_Request
  */
 #[AllowDynamicProperties]
-class Zend_Controller_Request_Apache404Test extends PHPUnit_Framework_TestCase
+class Zend_Controller_Request_Apache404Test extends \PHPUnit\Framework\TestCase
 {
     /**
      * Copy of $_SERVER
@@ -62,7 +62,7 @@ class Zend_Controller_Request_Apache404Test extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->_server = $_SERVER;
     }

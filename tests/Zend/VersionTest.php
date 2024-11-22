@@ -38,7 +38,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Version
  */
 #[AllowDynamicProperties]
-class Zend_VersionTest extends PHPUnit_Framework_TestCase
+class Zend_VersionTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {

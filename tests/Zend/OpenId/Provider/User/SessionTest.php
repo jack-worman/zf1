@@ -35,7 +35,7 @@
  * @group      Zend_OpenId
  */
 #[AllowDynamicProperties]
-class Zend_OpenId_Provider_User_SessionTest extends PHPUnit_Framework_TestCase
+class Zend_OpenId_Provider_User_SessionTest extends \PHPUnit\Framework\TestCase
 {
     const USER1     = "test_user1";
     const USER2     = "test_user2";

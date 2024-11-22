@@ -52,7 +52,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View_Helper
  */
 #[AllowDynamicProperties]
-class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_ActionTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -71,7 +71,7 @@ class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->_origServer = $_SERVER;
         $_SERVER = array(

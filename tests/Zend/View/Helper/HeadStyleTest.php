@@ -46,7 +46,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View_Helper
  */
 #[AllowDynamicProperties]
-class Zend_View_Helper_HeadStyleTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_HeadStyleTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_View_Helper_HeadStyle
@@ -76,7 +76,7 @@ class Zend_View_Helper_HeadStyleTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $regKey = Zend_View_Helper_Placeholder_Registry::REGISTRY_KEY;
         if (Zend_Registry::isRegistered($regKey)) {

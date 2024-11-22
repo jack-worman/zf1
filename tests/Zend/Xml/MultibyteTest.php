@@ -44,7 +44,7 @@ require_once 'Zend/Xml/TestAsset/Security.php';
  * @group      ZF2015-06
  */
 #[AllowDynamicProperties]
-class Zend_Xml_MultibyteTest extends PHPUnit_Framework_TestCase
+class Zend_Xml_MultibyteTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {

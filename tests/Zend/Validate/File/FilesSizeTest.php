@@ -39,7 +39,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Validate
  */
 #[AllowDynamicProperties]
-class Zend_Validate_File_FilesSizeTest extends PHPUnit_Framework_TestCase
+class Zend_Validate_File_FilesSizeTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -52,7 +52,7 @@ class Zend_Validate_File_FilesSizeTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->multipleOptionsDetected = false;
     }

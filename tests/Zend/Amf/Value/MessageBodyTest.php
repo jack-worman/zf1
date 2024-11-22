@@ -37,7 +37,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Amf
  */
 #[AllowDynamicProperties]
-class Zend_Amf_Value_MessageBodyTest extends PHPUnit_Framework_TestCase
+class Zend_Amf_Value_MessageBodyTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -50,7 +50,7 @@ class Zend_Amf_Value_MessageBodyTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->body = new Zend_Amf_Value_MessageBody('/foo', '/bar', 'data');
     }

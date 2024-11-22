@@ -41,7 +41,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View_Helper
  */
 #[AllowDynamicProperties]
-class Zend_View_Helper_FormMultiCheckboxTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_FormMultiCheckboxTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -60,7 +60,7 @@ class Zend_View_Helper_FormMultiCheckboxTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         if (Zend_Registry::isRegistered('Zend_View_Helper_Doctype')) {
             $registry = Zend_Registry::getInstance();

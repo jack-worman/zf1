@@ -47,7 +47,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Form
  */
 #[AllowDynamicProperties]
-class Zend_Form_ElementTest extends PHPUnit_Framework_TestCase
+class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_Form_Element
@@ -60,7 +60,7 @@ class Zend_Form_ElementTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         Zend_Registry::_unsetInstance();
         Zend_Form::setDefaultTranslator(null);

@@ -40,7 +40,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Controller_Request
  */
 #[AllowDynamicProperties]
-class Zend_Controller_Request_SimpleTest extends PHPUnit_Framework_TestCase
+class Zend_Controller_Request_SimpleTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.

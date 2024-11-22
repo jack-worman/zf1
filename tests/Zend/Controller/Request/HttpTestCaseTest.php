@@ -40,7 +40,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Controller_Request
  */
 #[AllowDynamicProperties]
-class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit_Framework_TestCase
+class Zend_Controller_Request_HttpTestCaseTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -59,7 +59,7 @@ class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit_Framework_TestCas
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->request = new Zend_Controller_Request_HttpTestCase();
         $_GET    = array();

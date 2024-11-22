@@ -41,7 +41,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Layout
  */
 #[AllowDynamicProperties]
-class Zend_Layout_HelperTest extends PHPUnit_Framework_TestCase
+class Zend_Layout_HelperTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -61,7 +61,7 @@ class Zend_Layout_HelperTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         Zend_Layout_HelperTest_Layout::resetMvcInstance();
         Zend_Controller_Front::getInstance()->resetInstance();

@@ -26,7 +26,7 @@
 // require_once 'Zend/Mail/Header/HeaderName.php';
 
 #[AllowDynamicProperties]
-class Zend_Mail_Header_HeaderNameTest extends PHPUnit_Framework_TestCase
+class Zend_Mail_Header_HeaderNameTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Data for filter name

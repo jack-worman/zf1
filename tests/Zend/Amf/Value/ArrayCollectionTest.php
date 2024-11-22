@@ -36,7 +36,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Amf
  */
 #[AllowDynamicProperties]
-class Zend_Amf_Value_ArrayCollectionTest extends PHPUnit_Framework_TestCase
+class Zend_Amf_Value_ArrayCollectionTest extends \PHPUnit\Framework\TestCase
 {
 
 
@@ -61,7 +61,7 @@ class Zend_Amf_Value_ArrayCollectionTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $data = array();
         $data[] = array('foo' => 'foo1', 'bar' => 'bar1');

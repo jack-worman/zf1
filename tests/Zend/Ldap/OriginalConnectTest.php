@@ -40,11 +40,11 @@
  * @group      Zend_Ldap
  */
 #[AllowDynamicProperties]
-class Zend_Ldap_OriginalConnectTest extends PHPUnit_Framework_TestCase
+class Zend_Ldap_OriginalConnectTest extends \PHPUnit\Framework\TestCase
 {
     protected $_options = null;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->_options = array('host' => TESTS_ZEND_LDAP_HOST);
         if (defined('TESTS_ZEND_LDAP_PORT') && TESTS_ZEND_LDAP_PORT != 389)

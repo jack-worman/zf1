@@ -33,7 +33,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
-class Zend_Http_UserAgent_Features_Adapter_BrowscapTest extends PHPUnit_Framework_TestCase
+class Zend_Http_UserAgent_Features_Adapter_BrowscapTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -41,7 +41,7 @@ class Zend_Http_UserAgent_Features_Adapter_BrowscapTest extends PHPUnit_Framewor
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $browscap = ini_get('browscap');
         if (empty($browscap) || !file_exists((string) $browscap)) {

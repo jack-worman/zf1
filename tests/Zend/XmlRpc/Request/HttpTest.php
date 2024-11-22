@@ -39,7 +39,7 @@ require_once 'Zend/AllTests/StreamWrapper/PhpInput.php';
  * @group      Zend_XmlRpc
  */
 #[AllowDynamicProperties]
-class Zend_XmlRpc_Request_HttpTest extends PHPUnit_Framework_TestCase
+class Zend_XmlRpc_Request_HttpTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -55,7 +55,7 @@ class Zend_XmlRpc_Request_HttpTest extends PHPUnit_Framework_TestCase
     /**
      * Setup environment
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->xml =<<<EOX
 <?xml version="1.0" encoding="UTF-8"?>

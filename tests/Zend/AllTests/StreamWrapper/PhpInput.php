@@ -26,7 +26,7 @@
  * <code>
  * class ...
  * {
- *     public function setUp()
+ *     public function setUp(): void
  *     {
  *         Zend_AllTests_StreamWrapper_PhpInput::mockInput('expected string');
  *     }

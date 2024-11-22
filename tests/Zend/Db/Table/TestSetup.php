@@ -49,7 +49,7 @@ abstract class Zend_Db_Table_TestSetup extends Zend_Db_TestSetup
 
     protected $_runtimeIncludePath = null;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

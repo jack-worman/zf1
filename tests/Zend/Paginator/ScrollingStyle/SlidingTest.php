@@ -26,7 +26,7 @@
 // require_once 'Zend/Paginator/ScrollingStyle/Sliding.php';
 
 /**
- * @see PHPUnit_Framework_TestCase
+ * @see \PHPUnit\Framework\TestCase
  */
 
 /**
@@ -43,7 +43,7 @@
  * @group      Zend_Paginator
  */
 #[AllowDynamicProperties]
-class Zend_Paginator_ScrollingStyle_SlidingTest extends PHPUnit_Framework_TestCase
+class Zend_Paginator_ScrollingStyle_SlidingTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_Paginator_ScrollingStyle_Sliding

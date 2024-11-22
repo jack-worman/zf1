@@ -44,7 +44,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Controller_Action_Helper
  */
 #[AllowDynamicProperties]
-class Zend_Controller_Action_HelperBrokerTest extends PHPUnit_Framework_TestCase
+class Zend_Controller_Action_HelperBrokerTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_Controller_Front
@@ -64,7 +64,7 @@ class Zend_Controller_Action_HelperBrokerTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->front = Zend_Controller_Front::getInstance();
         $this->front->resetInstance();

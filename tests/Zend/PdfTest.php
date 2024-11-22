@@ -38,7 +38,7 @@
  * @group      Zend_Pdf
  */
 #[AllowDynamicProperties]
-class Zend_PdfTest extends PHPUnit_Framework_TestCase
+class Zend_PdfTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_Pdf = null

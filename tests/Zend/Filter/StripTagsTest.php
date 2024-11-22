@@ -40,7 +40,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Filter
  */
 #[AllowDynamicProperties]
-class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
+class Zend_Filter_StripTagsTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Zend_Filter_StripTags object
@@ -66,7 +66,7 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->_filter = new Zend_Filter_StripTags();
     }

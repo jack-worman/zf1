@@ -34,7 +34,7 @@
  * @group      Zend_Http_CookieJar
  */
 #[AllowDynamicProperties]
-class Zend_Http_CookieJarTest extends PHPUnit_Framework_TestCase
+class Zend_Http_CookieJarTest extends \PHPUnit\Framework\TestCase
 {
     public function loadResponse($filename)
     {

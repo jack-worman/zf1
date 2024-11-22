@@ -48,7 +48,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_View
  */
 #[AllowDynamicProperties]
-class Zend_ViewTest extends PHPUnit_Framework_TestCase
+class Zend_ViewTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -56,7 +56,7 @@ class Zend_ViewTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->notices = array();
         $this->errorReporting = error_reporting();

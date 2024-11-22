@@ -35,7 +35,7 @@
  * @group      Zend_Mime
  */
 #[AllowDynamicProperties]
-class Zend_MimeTest extends PHPUnit_Framework_TestCase
+class Zend_MimeTest extends \PHPUnit\Framework\TestCase
 {
     public function testBoundary()
     {

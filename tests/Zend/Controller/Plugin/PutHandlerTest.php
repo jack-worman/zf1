@@ -42,7 +42,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Controller_Plugin
  */
 #[AllowDynamicProperties]
-class Zend_Controller_Plugin_PutHandlerTest extends PHPUnit_Framework_TestCase
+class Zend_Controller_Plugin_PutHandlerTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Request object

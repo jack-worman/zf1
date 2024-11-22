@@ -41,7 +41,7 @@
  * @group      Zend_Soap_Wsdl
  */
 #[AllowDynamicProperties]
-class Zend_Soap_WsdlTest extends PHPUnit_Framework_TestCase
+class Zend_Soap_WsdlTest extends \PHPUnit\Framework\TestCase
 {
     protected function sanitizeWsdlXmlOutputForOsCompability($xmlstring)
     {

@@ -43,7 +43,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Dojo_Form
  */
 #[AllowDynamicProperties]
-class Zend_Dojo_Form_SubFormTest extends PHPUnit_Framework_TestCase
+class Zend_Dojo_Form_SubFormTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -62,7 +62,7 @@ class Zend_Dojo_Form_SubFormTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->form = new Zend_Dojo_Form_SubForm();
         $this->form->addElement('TextBox', 'foo')

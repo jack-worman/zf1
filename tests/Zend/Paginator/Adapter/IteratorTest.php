@@ -26,7 +26,7 @@
 // require_once 'Zend/Paginator/Adapter/Iterator.php';
 
 /**
- * @see PHPUnit_Framework_TestCase
+ * @see \PHPUnit\Framework\TestCase
  */
 
 /**
@@ -38,7 +38,7 @@
  * @group      Zend_Paginator
  */
 #[AllowDynamicProperties]
-class Zend_Paginator_Adapter_IteratorTest extends PHPUnit_Framework_TestCase
+class Zend_Paginator_Adapter_IteratorTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_Paginator_Adapter_Iterator

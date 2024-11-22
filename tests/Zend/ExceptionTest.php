@@ -31,7 +31,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
-class Zend_ExceptionTest extends PHPUnit_Framework_TestCase
+class Zend_ExceptionTest extends \PHPUnit\Framework\TestCase
 {
     public function testConstructorDefaults()
     {

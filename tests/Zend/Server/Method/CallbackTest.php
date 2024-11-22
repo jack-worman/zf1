@@ -39,7 +39,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Server
  */
 #[AllowDynamicProperties]
-class Zend_Server_Method_CallbackTest extends PHPUnit_Framework_TestCase
+class Zend_Server_Method_CallbackTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -58,7 +58,7 @@ class Zend_Server_Method_CallbackTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->callback = new Zend_Server_Method_Callback();
     }

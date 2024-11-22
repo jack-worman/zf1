@@ -34,7 +34,7 @@
  * @group      Zend_Ldap
  */
 #[AllowDynamicProperties]
-class Zend_Ldap_AttributeTest extends PHPUnit_Framework_TestCase
+class Zend_Ldap_AttributeTest extends \PHPUnit\Framework\TestCase
 {
     protected function _assertLocalDateTimeString($timestamp, $value)
     {

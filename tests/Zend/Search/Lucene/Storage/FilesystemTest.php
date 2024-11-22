@@ -29,7 +29,7 @@
  */
 
 #[AllowDynamicProperties]
-class FilesystemTest extends PHPUnit_Framework_TestCase
+class FilesystemTest extends \PHPUnit\Framework\TestCase
 {
     private $testFile;
 

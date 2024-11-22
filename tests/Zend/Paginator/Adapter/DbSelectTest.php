@@ -33,7 +33,7 @@
 // require_once 'Zend/Db/Adapter/Abstract.php';
 
 /**
- * @see PHPUnit_Framework_TestCase
+ * @see \PHPUnit\Framework\TestCase
  */
 
 require_once __DIR__ . '/../_files/TestTable.php';
@@ -47,7 +47,7 @@ require_once __DIR__ . '/../_files/TestTable.php';
  * @group      Zend_Paginator
  */
 #[AllowDynamicProperties]
-class Zend_Paginator_Adapter_DbSelectTest extends PHPUnit_Framework_TestCase
+class Zend_Paginator_Adapter_DbSelectTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_Paginator_Adapter_DbSelect

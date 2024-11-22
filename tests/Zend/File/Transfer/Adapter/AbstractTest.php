@@ -44,7 +44,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_File
  */
 #[AllowDynamicProperties]
-class Zend_File_Transfer_Adapter_AbstractTest extends PHPUnit_Framework_TestCase
+class Zend_File_Transfer_Adapter_AbstractTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_File_Transfer_Adapter_AbstractTest_MockAdapter
@@ -68,7 +68,7 @@ class Zend_File_Transfer_Adapter_AbstractTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->adapter = new Zend_File_Transfer_Adapter_AbstractTest_MockAdapter();
     }

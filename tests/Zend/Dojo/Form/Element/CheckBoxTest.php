@@ -49,7 +49,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Dojo_Form
  */
 #[AllowDynamicProperties]
-class Zend_Dojo_Form_Element_CheckBoxTest extends PHPUnit_Framework_TestCase
+class Zend_Dojo_Form_Element_CheckBoxTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -68,7 +68,7 @@ class Zend_Dojo_Form_Element_CheckBoxTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         Zend_Registry::_unsetInstance();
         Zend_Dojo_View_Helper_Dojo::setUseDeclarative();

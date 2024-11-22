@@ -35,9 +35,9 @@
  * @group      Zend_Filter
  */
 #[AllowDynamicProperties]
-class Zend_Filter_EncryptTest extends PHPUnit_Framework_TestCase
+class Zend_Filter_EncryptTest extends \PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         if (!extension_loaded('mcrypt') and !extension_loaded('openssl')) {
             $this->markTestSkipped('This filter needs the mcrypt or openssl extension');

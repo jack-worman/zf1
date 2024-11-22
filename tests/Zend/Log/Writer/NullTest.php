@@ -36,7 +36,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Log
  */
 #[AllowDynamicProperties]
-class Zend_Log_Writer_NullTest extends PHPUnit_Framework_TestCase
+class Zend_Log_Writer_NullTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {

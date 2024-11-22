@@ -38,7 +38,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Test
  */
-abstract class Zend_Test_PHPUnit_Db_Integration_AbstractTestCase extends PHPUnit_Framework_TestCase
+abstract class Zend_Test_PHPUnit_Db_Integration_AbstractTestCase extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_Db_Adapter_Abstract
@@ -46,7 +46,7 @@ abstract class Zend_Test_PHPUnit_Db_Integration_AbstractTestCase extends PHPUnit
     protected $dbAdapter;
     private $libxmlDisableEntityLoader;
 
-    public function setUp()
+    public function setUp(): void
     {
         if (LIBXML_VERSION < 20900) {
             $this->libxmlDisableEntityLoader = libxml_disable_entity_loader(false);

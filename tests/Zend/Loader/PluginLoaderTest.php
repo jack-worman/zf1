@@ -38,7 +38,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Loader
  */
 #[AllowDynamicProperties]
-class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
+class Zend_Loader_PluginLoaderTest extends \PHPUnit\Framework\TestCase
 {
     protected $_includeCache;
 
@@ -60,7 +60,7 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         if (file_exists((string) $this->_includeCache)) {
             unlink($this->_includeCache);

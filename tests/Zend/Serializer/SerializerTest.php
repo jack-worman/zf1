@@ -33,10 +33,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
-class Zend_Serializer_SerializerTest extends PHPUnit_Framework_TestCase
+class Zend_Serializer_SerializerTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function setUp()
+    public function setUp(): void
     {
         Zend_Serializer::resetAdapterLoader();
     }

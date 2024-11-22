@@ -46,7 +46,7 @@ require_once 'Zend/Session/SessionHelper.php';
  * @group      Zend_Controller_Action_Helper
  */
 #[AllowDynamicProperties]
-class Zend_Controller_Action_Helper_FlashMessengerTest extends PHPUnit_Framework_TestCase
+class Zend_Controller_Action_Helper_FlashMessengerTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_Controller_Action
@@ -85,7 +85,7 @@ class Zend_Controller_Action_Helper_FlashMessengerTest extends PHPUnit_Framework
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $savePath = ini_get('session.save_path');
         if (strpos((string) $savePath, ';')) {

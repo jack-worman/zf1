@@ -17,7 +17,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * Test class for Zend_Controller_Action_Helper_Cache
  */
 #[AllowDynamicProperties]
-class Zend_Controller_Action_Helper_CacheTest extends PHPUnit_Framework_TestCase
+class Zend_Controller_Action_Helper_CacheTest extends \PHPUnit\Framework\TestCase
 {
 
     protected $_requestUriOld;
@@ -33,7 +33,7 @@ class Zend_Controller_Action_Helper_CacheTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->_requestUriOld =
             isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : null;

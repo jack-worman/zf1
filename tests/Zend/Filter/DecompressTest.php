@@ -38,7 +38,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
-class Zend_Filter_DecompressTest extends PHPUnit_Framework_TestCase
+class Zend_Filter_DecompressTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs this test suite
@@ -51,7 +51,7 @@ class Zend_Filter_DecompressTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         if (!extension_loaded('bz2')) {
             $this->markTestSkipped('This filter is tested with the bz2 extension');

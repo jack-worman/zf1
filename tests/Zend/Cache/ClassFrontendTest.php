@@ -80,12 +80,12 @@ class test
  * @group      Zend_Cache
  */
 #[AllowDynamicProperties]
-class Zend_Cache_ClassFrontendTest extends PHPUnit_Framework_TestCase
+class Zend_Cache_ClassFrontendTest extends \PHPUnit\Framework\TestCase
 {
     private $_instance1;
     private $_instance2;
 
-    public function setUp()
+    public function setUp(): void
     {
         if (!$this->_instance1) {
             $options1 = array(

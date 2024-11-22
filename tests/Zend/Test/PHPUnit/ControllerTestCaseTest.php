@@ -49,7 +49,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Test_PHPUnit
  */
 #[AllowDynamicProperties]
-class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCase
+class Zend_Test_PHPUnit_ControllerTestCaseTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -68,7 +68,7 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $_SESSION = array();
         $this->setExpectedException(null);

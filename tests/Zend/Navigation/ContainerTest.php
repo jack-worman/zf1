@@ -36,7 +36,7 @@
  * @group      Zend_Navigation
  */
 #[AllowDynamicProperties]
-class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
+class Zend_Navigation_ContainerTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Prepares the environment before running a test.

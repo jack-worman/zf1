@@ -35,7 +35,7 @@
  * @group      Zend_Server
  */
 #[AllowDynamicProperties]
-class Zend_Server_Reflection_MethodTest extends PHPUnit_Framework_TestCase
+class Zend_Server_Reflection_MethodTest extends \PHPUnit\Framework\TestCase
 {
     protected $_classRaw;
     protected $_class;

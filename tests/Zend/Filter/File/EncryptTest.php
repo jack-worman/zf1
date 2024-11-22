@@ -35,9 +35,9 @@
  * @group      Zend_Filter
  */
 #[AllowDynamicProperties]
-class Zend_Filter_File_EncryptTest extends PHPUnit_Framework_TestCase
+class Zend_Filter_File_EncryptTest extends \PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         if (!extension_loaded('mcrypt')) {
             $this->markTestSkipped('This filter needs the mcrypt extension');

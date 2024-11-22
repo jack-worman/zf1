@@ -41,7 +41,7 @@ require_once __DIR__ . '/_classes/TagDummy.php';
  * @group      Zend_Tag_Cloud
  */
 #[AllowDynamicProperties]
-class Zend_Tag_Cloud_CloudTest extends PHPUnit_Framework_TestCase
+class Zend_Tag_Cloud_CloudTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {

@@ -38,7 +38,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Navigation
  */
 #[AllowDynamicProperties]
-class Zend_NavigationTest extends PHPUnit_Framework_TestCase
+class Zend_NavigationTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var     Zend_Navigation

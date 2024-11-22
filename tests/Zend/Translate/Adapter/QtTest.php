@@ -34,7 +34,7 @@
  * @group      Zend_Translate
  */
 #[AllowDynamicProperties]
-class Zend_Translate_Adapter_QtTest extends PHPUnit_Framework_TestCase
+class Zend_Translate_Adapter_QtTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.

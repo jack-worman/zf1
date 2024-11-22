@@ -51,7 +51,7 @@
  * @group      Zend_Auth
  */
 #[AllowDynamicProperties]
-class Zend_AuthTest extends PHPUnit_Framework_TestCase
+class Zend_AuthTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Ensures that the Singleton pattern is implemented properly

@@ -36,7 +36,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Memory
  */
 #[AllowDynamicProperties]
-class Zend_Memory_MemoryManagerTest extends PHPUnit_Framework_TestCase
+class Zend_Memory_MemoryManagerTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -44,7 +44,7 @@ class Zend_Memory_MemoryManagerTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $tmpDir = sys_get_temp_dir() . '/zend_memory';
         $this->_removeCacheDir($tmpDir);

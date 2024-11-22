@@ -40,14 +40,14 @@
  * @group      Zend_Ldap
  */
 #[AllowDynamicProperties]
-class Zend_Ldap_BindTest extends PHPUnit_Framework_TestCase
+class Zend_Ldap_BindTest extends \PHPUnit\Framework\TestCase
 {
     protected $_options = null;
     protected $_principalName = TESTS_ZEND_LDAP_PRINCIPAL_NAME;
     protected $_altUsername = TESTS_ZEND_LDAP_ALT_USERNAME;
     protected $_bindRequiresDn = false;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->_options = array(
             'host' => TESTS_ZEND_LDAP_HOST,

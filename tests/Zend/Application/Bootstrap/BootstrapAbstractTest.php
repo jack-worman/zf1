@@ -63,7 +63,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Application
  */
 #[AllowDynamicProperties]
-class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit_Framework_TestCase
+class Zend_Application_Bootstrap_BootstrapAbstractTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -71,7 +71,7 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit_Framework
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         // Store original autoloaders
         $this->loaders = spl_autoload_functions();

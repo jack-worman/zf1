@@ -43,9 +43,9 @@ require_once "_files/commontypes.php";
  * @group      Zend_Soap
  */
 #[AllowDynamicProperties]
-class Zend_Soap_AutoDiscoverTest extends PHPUnit_Framework_TestCase
+class Zend_Soap_AutoDiscoverTest extends \PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         // This has to be done because some CLI setups don't have $_SERVER variables
         // to simuulate that we have an actual webserver.

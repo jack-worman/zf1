@@ -48,7 +48,7 @@ require_once __DIR__ . '/../../_files/modules/bar/controllers/IndexController.ph
  * @group      Zend_Controller_Action_Helper
  */
 #[AllowDynamicProperties]
-class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit_Framework_TestCase
+class Zend_Controller_Action_Helper_ViewRendererTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Base path to controllers, views

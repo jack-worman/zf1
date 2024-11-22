@@ -39,7 +39,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Form
  */
 #[AllowDynamicProperties]
-class Zend_Form_Element_ButtonTest extends PHPUnit_Framework_TestCase
+class Zend_Form_Element_ButtonTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_Form_Element_Button
@@ -64,7 +64,7 @@ class Zend_Form_Element_ButtonTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->element = new Zend_Form_Element_Button('foo');
     }

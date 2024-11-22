@@ -39,7 +39,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Amf
  */
 #[AllowDynamicProperties]
-class Zend_Amf_Adobe_IntrospectorTest extends PHPUnit_Framework_TestCase
+class Zend_Amf_Adobe_IntrospectorTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -47,7 +47,7 @@ class Zend_Amf_Adobe_IntrospectorTest extends PHPUnit_Framework_TestCase
         PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->introspector = new Zend_Amf_Adobe_Introspector();
     }

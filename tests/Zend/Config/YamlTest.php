@@ -34,9 +34,9 @@
  * @group      Zend_Config
  */
 #[AllowDynamicProperties]
-class Zend_Config_YamlTest extends PHPUnit_Framework_TestCase
+class Zend_Config_YamlTest extends \PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->_iniFileConfig             = __DIR__ . '/_files/config.yaml';
         $this->_iniFileAllSectionsConfig  = __DIR__ . '/_files/allsections.yaml';

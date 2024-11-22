@@ -34,7 +34,7 @@
  * @group      Zend_Mime
  */
 #[AllowDynamicProperties]
-class Zend_Mime_PartTest extends PHPUnit_Framework_TestCase
+class Zend_Mime_PartTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * MIME part test object

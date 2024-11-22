@@ -40,10 +40,10 @@ require_once __DIR__ . '/TestAsset/PopulatedStorage.php';
  * @group      Zend_Http_UserAgent
  */
 #[AllowDynamicProperties]
-class Zend_Http_UserAgentTest extends PHPUnit_Framework_TestCase
+class Zend_Http_UserAgentTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->server                         = array();
         $this->server['os']                   = 'Windows_NT';

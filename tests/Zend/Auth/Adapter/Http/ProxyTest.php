@@ -53,7 +53,7 @@
  * @group      Zend_Auth
  */
 #[AllowDynamicProperties]
-class Zend_Auth_Adapter_Http_ProxyTest extends PHPUnit_Framework_TestCase
+class Zend_Auth_Adapter_Http_ProxyTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Path to test files

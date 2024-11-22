@@ -36,7 +36,7 @@
  * @group Zend_CodeGenerator_Php
  */
 #[AllowDynamicProperties]
-class Zend_CodeGenerator_Php_ClassTest extends PHPUnit_Framework_TestCase
+class Zend_CodeGenerator_Php_ClassTest extends \PHPUnit\Framework\TestCase
 {
 
     public function testConstruction()

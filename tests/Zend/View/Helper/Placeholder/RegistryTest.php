@@ -40,7 +40,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View_Helper
  */
 #[AllowDynamicProperties]
-class Zend_View_Helper_Placeholder_RegistryTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_Placeholder_RegistryTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_View_Helper_Placeholder_Registry
@@ -65,7 +65,7 @@ class Zend_View_Helper_Placeholder_RegistryTest extends PHPUnit_Framework_TestCa
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $registry = Zend_Registry::getInstance();
         if (isset($registry[Zend_View_Helper_Placeholder_Registry::REGISTRY_KEY])) {

@@ -39,7 +39,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Validate
  */
 #[AllowDynamicProperties]
-class Zend_Validate_File_SizeTest extends PHPUnit_Framework_TestCase
+class Zend_Validate_File_SizeTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.

@@ -34,7 +34,7 @@
  * @group      Zend_Translate
  */
 #[AllowDynamicProperties]
-class Zend_Translate_Adapter_GettextTest extends PHPUnit_Framework_TestCase
+class Zend_Translate_Adapter_GettextTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -48,7 +48,7 @@ class Zend_Translate_Adapter_GettextTest extends PHPUnit_Framework_TestCase
         Zend_Translate_Adapter_Gettext::removeCache();
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         if (Zend_Translate_Adapter_Gettext::hasCache()) {
             Zend_Translate_Adapter_Gettext::removeCache();

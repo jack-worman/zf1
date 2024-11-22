@@ -42,7 +42,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Form
  */
 #[AllowDynamicProperties]
-class Zend_Form_Element_SubmitTest extends PHPUnit_Framework_TestCase
+class Zend_Form_Element_SubmitTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -62,7 +62,7 @@ class Zend_Form_Element_SubmitTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         Zend_Registry::_unsetInstance();
         Zend_Form::setDefaultTranslator(null);

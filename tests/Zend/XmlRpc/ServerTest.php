@@ -38,7 +38,7 @@
  * @group      Zend_XmlRpc
  */
 #[AllowDynamicProperties]
-class Zend_XmlRpc_ServerTest extends PHPUnit_Framework_TestCase
+class Zend_XmlRpc_ServerTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Zend_XmlRpc_Server object
@@ -49,7 +49,7 @@ class Zend_XmlRpc_ServerTest extends PHPUnit_Framework_TestCase
     /**
      * Setup environment
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->_server = new Zend_XmlRpc_Server();
     }

@@ -42,7 +42,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View_Helper
  */
 #[AllowDynamicProperties]
-class Zend_View_Helper_UserAgentTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_UserAgentTest extends \PHPUnit\Framework\TestCase
 {
 
     /**

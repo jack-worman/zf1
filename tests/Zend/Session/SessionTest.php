@@ -40,7 +40,7 @@ require_once 'Zend/Session/SessionHelper.php';
  * @runTestsInSeparateProcesses
  */
 #[AllowDynamicProperties]
-class Zend_SessionTest extends PHPUnit_Framework_TestCase
+class Zend_SessionTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Helper script invoked via exec()

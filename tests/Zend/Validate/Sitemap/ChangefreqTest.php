@@ -33,7 +33,7 @@
  * @group      Zend_Validate
  */
 #[AllowDynamicProperties]
-class Zend_Validate_Sitemap_ChangefreqTest extends PHPUnit_Framework_TestCase
+class Zend_Validate_Sitemap_ChangefreqTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Validator

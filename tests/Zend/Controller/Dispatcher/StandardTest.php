@@ -42,7 +42,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Controller_Dispatcher
  */
 #[AllowDynamicProperties]
-class Zend_Controller_Dispatcher_StandardTest extends PHPUnit_Framework_TestCase
+class Zend_Controller_Dispatcher_StandardTest extends \PHPUnit\Framework\TestCase
 {
     protected $_dispatcher;
 
@@ -58,7 +58,7 @@ class Zend_Controller_Dispatcher_StandardTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         if (isset($this->error)) {
             unset($this->error);

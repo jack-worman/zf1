@@ -39,7 +39,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Text
  */
 #[AllowDynamicProperties]
-class Zend_Text_MultiByteTest extends PHPUnit_Framework_TestCase
+class Zend_Text_MultiByteTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.

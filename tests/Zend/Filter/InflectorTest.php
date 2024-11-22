@@ -48,7 +48,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Filter
  */
 #[AllowDynamicProperties]
-class Zend_Filter_InflectorTest extends PHPUnit_Framework_TestCase
+class Zend_Filter_InflectorTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -67,7 +67,7 @@ class Zend_Filter_InflectorTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->inflector = new Zend_Filter_Inflector();
         $this->loader    = $this->inflector->getPluginLoader();

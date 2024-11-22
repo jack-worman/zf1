@@ -50,7 +50,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Controller_Plugin
  */
 #[AllowDynamicProperties]
-class Zend_Controller_Plugin_BrokerTest extends PHPUnit_Framework_TestCase
+class Zend_Controller_Plugin_BrokerTest extends \PHPUnit\Framework\TestCase
 {
     public $controller;
 
@@ -67,7 +67,7 @@ class Zend_Controller_Plugin_BrokerTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->controller = Zend_Controller_Front::getInstance();
         $this->controller->resetInstance();

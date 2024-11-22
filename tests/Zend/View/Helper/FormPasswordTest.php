@@ -43,7 +43,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View_Helper
  */
 #[AllowDynamicProperties]
-class Zend_View_Helper_FormPasswordTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_FormPasswordTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.

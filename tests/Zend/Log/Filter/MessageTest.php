@@ -39,7 +39,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Log
  */
 #[AllowDynamicProperties]
-class Zend_Log_Filter_MessageTest extends PHPUnit_Framework_TestCase
+class Zend_Log_Filter_MessageTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {

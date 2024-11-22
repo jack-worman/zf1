@@ -36,7 +36,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Log
  */
 #[AllowDynamicProperties]
-class Zend_Log_Writer_DbTest extends PHPUnit_Framework_TestCase
+class Zend_Log_Writer_DbTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -44,7 +44,7 @@ class Zend_Log_Writer_DbTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->tableName = 'db-table-name';
 
@@ -146,7 +146,7 @@ class Zend_Log_Writer_DbTest extends PHPUnit_Framework_TestCase
         try {
             $this->writer->setFormatter(new StdClass());
         } catch (\Throwable $e) {
-            $this->assertTrue($e instanceof PHPUnit_Framework_Error);
+            $this->assertTrue($e instanceof \PHPUnit\Framework\AssertionFailedError);
             $this->assertContains('must implement interface', $e->getMessage());
         }
     }

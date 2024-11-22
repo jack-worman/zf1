@@ -41,12 +41,12 @@ require_once __DIR__ . '/StreamObject.php';
  * @group      Zend_Http_Response
  */
 #[AllowDynamicProperties]
-class Zend_Http_ResponseTest extends PHPUnit_Framework_TestCase
+class Zend_Http_ResponseTest extends \PHPUnit\Framework\TestCase
 {
     /** @var null|string */
     private $tempFile;
 
-    public function setUp()
+    public function setUp(): void
     { }
 
     public function tearDown()

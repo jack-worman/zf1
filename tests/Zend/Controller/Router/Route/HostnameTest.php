@@ -40,7 +40,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Controller_Router
  */
 #[AllowDynamicProperties]
-class Zend_Controller_Router_Route_HostnameTest extends PHPUnit_Framework_TestCase
+class Zend_Controller_Router_Route_HostnameTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.

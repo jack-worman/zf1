@@ -33,7 +33,7 @@ require_once 'Zend/XmlRpc/TestProvider.php';
  * @group      Zend_XmlRpc
  */
 #[AllowDynamicProperties]
-class Zend_XmlRpc_GeneratorTest extends PHPUnit_Framework_TestCase
+class Zend_XmlRpc_GeneratorTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider Zend_XmlRpc_TestProvider::provideGenerators

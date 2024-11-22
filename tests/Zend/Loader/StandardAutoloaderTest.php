@@ -36,9 +36,9 @@ require_once 'Zend/Loader/TestAsset/StandardAutoloader.php';
  * @group      Loader
  */
 #[AllowDynamicProperties]
-class Zend_Loader_StandardAutoloaderTest extends PHPUnit_Framework_TestCase
+class Zend_Loader_StandardAutoloaderTest extends \PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         // Store original autoloaders
         $this->loaders = spl_autoload_functions();

@@ -32,12 +32,12 @@
  * @group      Zend_Oauth_Http
  */
 #[AllowDynamicProperties]
-class Zend_Oauth_Http_AccessTokenTest extends PHPUnit_Framework_TestCase
+class Zend_Oauth_Http_AccessTokenTest extends \PHPUnit\Framework\TestCase
 {
 
     protected $stubConsumer = null;
 
-    public function setup()
+    public function setUp(): void
     {
         $this->stubConsumer = new Test_Consumer_39745;
         $this->stubHttpUtility = new Test_Http_Utility_39745;

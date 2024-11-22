@@ -46,7 +46,7 @@ require_once 'Zend/XmlRpc/TestProvider.php';
  * @group      Zend_XmlRpc
  */
 #[AllowDynamicProperties]
-class Zend_XmlRpc_ValueTest extends PHPUnit_Framework_TestCase
+class Zend_XmlRpc_ValueTest extends \PHPUnit\Framework\TestCase
 {
     public $xmlRpcDateFormat = 'Ymd\\TH:i:s';
 

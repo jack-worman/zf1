@@ -39,7 +39,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Controller_Action_Helper
  */
 #[AllowDynamicProperties]
-class Zend_Controller_Action_Helper_NamespaceTest extends PHPUnit_Framework_TestCase
+class Zend_Controller_Action_Helper_NamespaceTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.

@@ -39,7 +39,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_XmlRpc
  */
 #[AllowDynamicProperties]
-class Zend_XmlRpc_Server_CacheTest extends PHPUnit_Framework_TestCase
+class Zend_XmlRpc_Server_CacheTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -67,7 +67,7 @@ class Zend_XmlRpc_Server_CacheTest extends PHPUnit_Framework_TestCase
     /**
      * Setup environment
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->_file = realpath(__DIR__) . '/xmlrpc.cache';
         $this->_server = new Zend_XmlRpc_Server();

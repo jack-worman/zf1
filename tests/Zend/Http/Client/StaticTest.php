@@ -39,7 +39,7 @@
  * @group      Zend_Http_Client
  */
 #[AllowDynamicProperties]
-class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
+class Zend_Http_Client_StaticTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Common HTTP client
@@ -52,7 +52,7 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
      * Set up the test suite before each test
      *
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->_client = new Zend_Http_Client_StaticTest_Mock('http://www.example.com');
     }

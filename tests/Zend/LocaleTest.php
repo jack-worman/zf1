@@ -41,7 +41,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Locale
  */
 #[AllowDynamicProperties]
-class Zend_LocaleTest extends PHPUnit_Framework_TestCase
+class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -58,7 +58,7 @@ class Zend_LocaleTest extends PHPUnit_Framework_TestCase
     private $_locale = null;
     private $_httpAcceptLanguage;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->_locale = setlocale(LC_ALL, 0);
         setlocale(LC_ALL, 'de');

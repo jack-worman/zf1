@@ -38,7 +38,7 @@ require_once 'Zend/Stdlib/TestAsset/SignalHandlers/ObjectCallback.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
-class Zend_Stdlib_CallbackHandlerTest extends PHPUnit_Framework_TestCase
+class Zend_Stdlib_CallbackHandlerTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -46,7 +46,7 @@ class Zend_Stdlib_CallbackHandlerTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         if (isset($this->args)) {
             unset($this->args);

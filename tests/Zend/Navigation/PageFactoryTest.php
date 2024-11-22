@@ -34,7 +34,7 @@
  * @group      Zend_Navigation
  */
 #[AllowDynamicProperties]
-class Zend_Navigation_PageFactoryTest extends PHPUnit_Framework_TestCase
+class Zend_Navigation_PageFactoryTest extends \PHPUnit\Framework\TestCase
 {
     protected $_oldIncludePath;
 

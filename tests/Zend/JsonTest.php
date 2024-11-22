@@ -49,11 +49,11 @@
  * @group      Zend_Json
  */
 #[AllowDynamicProperties]
-class Zend_JsonTest extends PHPUnit_Framework_TestCase
+class Zend_JsonTest extends \PHPUnit\Framework\TestCase
 {
     private $_originalUseBuiltinEncoderDecoderValue;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->_originalUseBuiltinEncoderDecoderValue = Zend_Json::$useBuiltinEncoderDecoder;
     }

@@ -54,7 +54,7 @@ require_once 'Zend/OpenId/ResponseHelper.php';
  * @group      Zend_OpenId
  */
 #[AllowDynamicProperties]
-class Zend_OpenId_ConsumerTest extends PHPUnit_Framework_TestCase
+class Zend_OpenId_ConsumerTest extends \PHPUnit\Framework\TestCase
 {
     const ID       = "http://id.myopenid.com/";
     const REAL_ID  = "http://real_id.myopenid.com/";

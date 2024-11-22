@@ -33,7 +33,7 @@
  * @group      Zend_Validate
  */
 #[AllowDynamicProperties]
-class Zend_Validate_Sitemap_PriorityTest extends PHPUnit_Framework_TestCase
+class Zend_Validate_Sitemap_PriorityTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Validator

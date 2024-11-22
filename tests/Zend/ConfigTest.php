@@ -34,12 +34,12 @@
  * @group      Zend_Config
  */
 #[AllowDynamicProperties]
-class Zend_ConfigTest extends PHPUnit_Framework_TestCase
+class Zend_ConfigTest extends \PHPUnit\Framework\TestCase
 {
     protected $_iniFileConfig;
     protected $_iniFileNested;
 
-    public function setUp()
+    public function setUp(): void
     {
         // Arrays representing common config configurations
         $this->_all = array(

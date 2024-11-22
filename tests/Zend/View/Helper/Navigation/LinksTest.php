@@ -55,7 +55,7 @@ class Zend_View_Helper_Navigation_LinksTest
     private $_doctypeHelper;
     private $_oldDoctype;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

@@ -40,7 +40,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Xml
  */
 #[AllowDynamicProperties]
-class Zend_Xml_SecurityTest extends PHPUnit_Framework_TestCase
+class Zend_Xml_SecurityTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {

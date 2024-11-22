@@ -47,7 +47,7 @@ require_once 'Zend/Session/SessionHelper.php';
  * @group      Zend_Amf
  */
 #[AllowDynamicProperties]
-class Zend_Amf_ServerTest extends PHPUnit_Framework_TestCase
+class Zend_Amf_ServerTest extends \PHPUnit\Framework\TestCase
 {
     protected $_server;
 
@@ -57,7 +57,7 @@ class Zend_Amf_ServerTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->_server = new Zend_Amf_Server();
         $this->_server->setProduction(false);

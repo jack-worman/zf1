@@ -48,7 +48,7 @@
  * @group      Zend_Queue
  */
 #[AllowDynamicProperties]
-class Zend_Queue_MessageTest extends PHPUnit_Framework_TestCase
+class Zend_Queue_MessageTest extends \PHPUnit\Framework\TestCase
 {
     protected function setUp()
     {

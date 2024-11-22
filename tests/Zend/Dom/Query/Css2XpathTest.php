@@ -33,7 +33,7 @@
  * @group      Zend_Dom
  */
 #[AllowDynamicProperties]
-class Zend_Dom_Query_Css2XpathTest extends PHPUnit_Framework_TestCase
+class Zend_Dom_Query_Css2XpathTest extends \PHPUnit\Framework\TestCase
 {
     public function testTransformShouldBeCalledStatically()
     {

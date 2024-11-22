@@ -33,7 +33,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  *
  * Tests formTextarea helper
  *
- * @uses PHPUnit_Framework_TestCase
+ * @uses \PHPUnit\Framework\TestCase
  *
  * @category   Zend
  * @package    Zend_View
@@ -44,7 +44,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View_Helper
  */
 #[AllowDynamicProperties]
-class Zend_View_Helper_FormTextareaTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_FormTextareaTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.

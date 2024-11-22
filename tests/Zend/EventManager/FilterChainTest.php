@@ -36,7 +36,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
-class Zend_EventManager_FilterChainTest extends PHPUnit_Framework_TestCase
+class Zend_EventManager_FilterChainTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
@@ -44,7 +44,7 @@ class Zend_EventManager_FilterChainTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         if (isset($this->message)) {
             unset($this->message);

@@ -39,7 +39,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Dom
  */
 #[AllowDynamicProperties]
-class Zend_Dom_QueryTest extends PHPUnit_Framework_TestCase
+class Zend_Dom_QueryTest extends \PHPUnit\Framework\TestCase
 {
     public $html;
 
@@ -60,7 +60,7 @@ class Zend_Dom_QueryTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->query = new Zend_Dom_Query();
     }

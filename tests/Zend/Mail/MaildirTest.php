@@ -39,13 +39,13 @@
  * @group      Zend_Mail
  */
 #[AllowDynamicProperties]
-class Zend_Mail_MaildirTest extends PHPUnit_Framework_TestCase
+class Zend_Mail_MaildirTest extends \PHPUnit\Framework\TestCase
 {
     protected $_originalMaildir;
     protected $_maildir;
     protected $_tmpdir;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->_originalMaildir = __DIR__ . '/_files/test.maildir/';
         if (!is_dir($this->_originalMaildir . '/cur/')) {

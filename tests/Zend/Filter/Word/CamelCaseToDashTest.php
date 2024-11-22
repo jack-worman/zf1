@@ -39,7 +39,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Filter
  */
 #[AllowDynamicProperties]
-class Zend_Filter_Word_CamelCaseToDashTest extends PHPUnit_Framework_TestCase
+class Zend_Filter_Word_CamelCaseToDashTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.

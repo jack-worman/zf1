@@ -40,11 +40,11 @@ require_once 'Zend/OpenId/ResponseHelper.php';
  * @group      Zend_OpenId
  */
 #[AllowDynamicProperties]
-class Zend_OpenIdTest extends PHPUnit_Framework_TestCase
+class Zend_OpenIdTest extends \PHPUnit\Framework\TestCase
 {
     private $_serverVariables;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->_serverVariables = $_SERVER;
     }

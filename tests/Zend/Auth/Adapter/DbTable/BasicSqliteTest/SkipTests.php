@@ -29,12 +29,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
-class Zend_Auth_Adapter_DbTable_BasicSqliteTest_SkipTests extends PHPUnit_Framework_TestCase
+class Zend_Auth_Adapter_DbTable_BasicSqliteTest_SkipTests extends \PHPUnit\Framework\TestCase
 {
 
     public $message = 'Skipped for unspecified reason';
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->markTestSkipped($this->message);
     }

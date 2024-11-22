@@ -33,12 +33,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
-class Zend_Serializer_Adapter_IgbinaryTest extends PHPUnit_Framework_TestCase
+class Zend_Serializer_Adapter_IgbinaryTest extends \PHPUnit\Framework\TestCase
 {
 
     private $_adapter;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->_adapter = new Zend_Serializer_Adapter_Igbinary();
     }
@@ -156,11 +156,11 @@ class Zend_Serializer_Adapter_IgbinaryTest extends PHPUnit_Framework_TestCase
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
-class Zend_Serializer_Adapter_IgbinarySkipTest extends PHPUnit_Framework_TestCase
+class Zend_Serializer_Adapter_IgbinarySkipTest extends \PHPUnit\Framework\TestCase
 {
     public $message = null;
 
-    public function setUp()
+    public function setUp(): void
     {
         $message = 'Skipped Zend_Serializer_Adapter_IgbinaryTest';
         if ($this->message) {

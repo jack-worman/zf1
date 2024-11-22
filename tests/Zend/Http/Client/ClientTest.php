@@ -32,7 +32,7 @@
  * @group      Zend_Http_Client
  */
 #[AllowDynamicProperties]
-class Zend_Http_Client_ClientTest extends PHPUnit_Framework_TestCase
+class Zend_Http_Client_ClientTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Set up the test case

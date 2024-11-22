@@ -33,12 +33,12 @@
  * @group      Zend_Test
  */
 #[AllowDynamicProperties]
-class Zend_Test_PHPUnit_Db_Operation_TruncateTest extends PHPUnit_Framework_TestCase
+class Zend_Test_PHPUnit_Db_Operation_TruncateTest extends \PHPUnit\Framework\TestCase
 {
     private $operation = null;
     private $libxmlDisableEntityLoader;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->operation = new Zend_Test_PHPUnit_Db_Operation_Truncate();
         if (LIBXML_VERSION < 20900) {

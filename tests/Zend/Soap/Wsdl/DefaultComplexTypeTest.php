@@ -33,7 +33,7 @@
  * @group      Zend_Soap_Wsdl
  */
 #[AllowDynamicProperties]
-class Zend_Soap_Wsdl_DefaultComplexTypeTest extends PHPUnit_Framework_TestCase
+class Zend_Soap_Wsdl_DefaultComplexTypeTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_Soap_Wsdl
@@ -45,7 +45,7 @@ class Zend_Soap_Wsdl_DefaultComplexTypeTest extends PHPUnit_Framework_TestCase
      */
     private $strategy;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->strategy = new Zend_Soap_Wsdl_Strategy_DefaultComplexType();
         $this->wsdl = new Zend_Soap_Wsdl("TestService", "http://framework.zend.com/soap/unittests");

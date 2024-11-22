@@ -36,7 +36,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_File
  */
 #[AllowDynamicProperties]
-class Zend_File_ClassFileLocatorTest extends PHPUnit_Framework_TestCase
+class Zend_File_ClassFileLocatorTest extends \PHPUnit\Framework\TestCase
 {
 
     public function testConstructorThrowsInvalidArgumentExceptionForInvalidStringDirectory()

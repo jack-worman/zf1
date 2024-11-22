@@ -49,7 +49,7 @@
  * @group      Zend_Db_Profiler
  */
 #[AllowDynamicProperties]
-class Zend_Db_Profiler_FirebugTest extends PHPUnit_Framework_TestCase
+class Zend_Db_Profiler_FirebugTest extends \PHPUnit\Framework\TestCase
 {
 
     protected $_controller = null;
@@ -71,7 +71,7 @@ class Zend_Db_Profiler_FirebugTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         if (!extension_loaded('pdo_sqlite')) {
             $this->markTestSkipped('Requires PDO_Sqlite extension');

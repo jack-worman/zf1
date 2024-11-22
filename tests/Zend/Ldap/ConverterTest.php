@@ -34,7 +34,7 @@
  * @group      Zend_Ldap
  */
 #[AllowDynamicProperties]
-class Zend_Ldap_ConverterTest extends PHPUnit_Framework_TestCase
+class Zend_Ldap_ConverterTest extends \PHPUnit\Framework\TestCase
 {
     public function testAsc2hex32()
     {

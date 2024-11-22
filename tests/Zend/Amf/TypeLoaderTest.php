@@ -35,7 +35,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Amf
  */
 #[AllowDynamicProperties]
-class Zend_Amf_TypeloaderTest extends PHPUnit_Framework_TestCase
+class Zend_Amf_TypeloaderTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {

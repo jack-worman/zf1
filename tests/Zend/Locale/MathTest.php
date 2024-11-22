@@ -36,14 +36,14 @@
  * @group      Zend_Locale
  */
 #[AllowDynamicProperties]
-class Zend_Locale_MathTest extends PHPUnit_Framework_TestCase
+class Zend_Locale_MathTest extends \PHPUnit\Framework\TestCase
 {
     private static $savedLocale = 'C';
 
     /**
      * setup for tests (BCMath is not designed to normalize localized numbers)
      */
-    public function setUp()
+    public function setUp(): void
     {
         self::$savedLocale = setlocale(LC_NUMERIC, '0');
         if (self::$savedLocale != 'C') {

@@ -35,7 +35,7 @@
  * @group      Zend_Reflection_File
  */
 #[AllowDynamicProperties]
-class Zend_Reflection_FileTest extends PHPUnit_Framework_TestCase
+class Zend_Reflection_FileTest extends \PHPUnit\Framework\TestCase
 {
 
     public function testFileConstructor()

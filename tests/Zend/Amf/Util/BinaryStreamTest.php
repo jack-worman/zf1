@@ -37,7 +37,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_Amf
  */
 #[AllowDynamicProperties]
-class Zend_Amf_Util_BinaryStreamTest extends PHPUnit_Framework_TestCase
+class Zend_Amf_Util_BinaryStreamTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.

@@ -36,7 +36,7 @@
  * @group      Zend_OpenId
  */
 #[AllowDynamicProperties]
-class Zend_OpenId_ExtensionTest extends PHPUnit_Framework_TestCase
+class Zend_OpenId_ExtensionTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * testing forAll

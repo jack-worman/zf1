@@ -34,7 +34,7 @@
  * @group      Zend_Locale
  */
 #[AllowDynamicProperties]
-class Zend_Locale_FormatTest extends PHPUnit_Framework_TestCase
+class Zend_Locale_FormatTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Constant for Non-breaking space UTF-8 encoded value.

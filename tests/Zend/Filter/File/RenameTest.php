@@ -38,7 +38,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Filter
  */
 #[AllowDynamicProperties]
-class Zend_Filter_File_RenameTest extends PHPUnit_Framework_TestCase
+class Zend_Filter_File_RenameTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Path to test files
@@ -112,7 +112,7 @@ class Zend_Filter_File_RenameTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         if (file_exists((string) $this->_origFile)) {
             unlink($this->_origFile);

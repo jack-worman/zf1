@@ -42,7 +42,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Controller_Plugin
  */
 #[AllowDynamicProperties]
-class Zend_Controller_Plugin_ActionStackTest extends PHPUnit_Framework_TestCase
+class Zend_Controller_Plugin_ActionStackTest extends \PHPUnit\Framework\TestCase
 {
     public $key       = 'Zend_Controller_Plugin_ActionStack';
     public $registry;
@@ -66,7 +66,7 @@ class Zend_Controller_Plugin_ActionStackTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->removeRegistryEntry();
         $this->registry = Zend_Registry::getInstance();

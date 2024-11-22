@@ -39,12 +39,12 @@
  * @group      Zend_Soap_Wsdl
  */
 #[AllowDynamicProperties]
-class Zend_Soap_Wsdl_ArrayOfTypeSequenceStrategyTest extends PHPUnit_Framework_TestCase
+class Zend_Soap_Wsdl_ArrayOfTypeSequenceStrategyTest extends \PHPUnit\Framework\TestCase
 {
     private $wsdl;
     private $strategy;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->strategy = new Zend_Soap_Wsdl_Strategy_ArrayOfTypeSequence();
         $this->wsdl = new Zend_Soap_Wsdl('MyService', 'http://localhost/MyService.php', $this->strategy);

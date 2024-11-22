@@ -47,7 +47,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View_Helper
  */
 #[AllowDynamicProperties]
-class Zend_View_Helper_UrlTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_UrlTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.

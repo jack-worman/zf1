@@ -35,7 +35,7 @@
  * @group      Zend_Server
  */
 #[AllowDynamicProperties]
-class Zend_Server_Reflection_ClassTest extends PHPUnit_Framework_TestCase
+class Zend_Server_Reflection_ClassTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * __construct() test

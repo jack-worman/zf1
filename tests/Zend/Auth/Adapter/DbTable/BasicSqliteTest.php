@@ -51,7 +51,7 @@
  * @group      Zend_Db_Table
  */
 #[AllowDynamicProperties]
-class Zend_Auth_Adapter_DbTable_BasicSqliteTest extends PHPUnit_Framework_TestCase
+class Zend_Auth_Adapter_DbTable_BasicSqliteTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Sqlite database connection
@@ -72,7 +72,7 @@ class Zend_Auth_Adapter_DbTable_BasicSqliteTest extends PHPUnit_Framework_TestCa
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->_setupDbAdapter();
         $this->_setupAuthAdapter();
@@ -486,7 +486,7 @@ class Zend_Auth_Adapter_DbTable_BasicSqliteTest extends PHPUnit_Framework_TestCa
 #[AllowDynamicProperties]
 class Zend_Auth_Adapter_DbTable_BasicSqliteTest_Skip extends Zend_Auth_Adapter_DbTable_BasicSqliteTest
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->markTestSkipped('Zend_Auth_Adapter_DbTable Sqlite tests are not enabled in TestConfiguration.php');
     }

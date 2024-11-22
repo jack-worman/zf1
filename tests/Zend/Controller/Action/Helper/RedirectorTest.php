@@ -45,7 +45,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Controller_Action_Helper
  */
 #[AllowDynamicProperties]
-class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit_Framework_TestCase
+class Zend_Controller_Action_Helper_RedirectorTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_Controller_Action_Helper_Redirector
@@ -85,7 +85,7 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit_Framework_Tes
      *
      * Also resets the front controller instance.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $front = Zend_Controller_Front::getInstance();
         $front->resetInstance();

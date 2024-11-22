@@ -37,7 +37,7 @@ error_reporting( E_ALL | E_STRICT ); // now required for each test suite
  * @group      Zend_Json
  */
 #[AllowDynamicProperties]
-class Zend_Json_JsonXMLTest extends PHPUnit_Framework_TestCase
+class Zend_Json_JsonXMLTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * xml2json Test 1

@@ -40,14 +40,14 @@
  * @group      Zend_Mail
  */
 #[AllowDynamicProperties]
-class Zend_Mail_MboxFolderTest extends PHPUnit_Framework_TestCase
+class Zend_Mail_MboxFolderTest extends \PHPUnit\Framework\TestCase
 {
     protected $_params;
     protected $_originalDir;
     protected $_tmpdir;
     protected $_subdirs = array('.', 'subfolder');
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->_originalDir = __DIR__ . '/_files/test.mbox/';
 

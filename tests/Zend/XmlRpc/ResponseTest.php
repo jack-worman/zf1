@@ -33,7 +33,7 @@
  * @group      Zend_XmlRpc
  */
 #[AllowDynamicProperties]
-class Zend_XmlRpc_ResponseTest extends PHPUnit_Framework_TestCase
+class Zend_XmlRpc_ResponseTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Zend_XmlRpc_Response object
@@ -49,7 +49,7 @@ class Zend_XmlRpc_ResponseTest extends PHPUnit_Framework_TestCase
     /**
      * Setup environment
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->_response = new Zend_XmlRpc_Response();
     }
