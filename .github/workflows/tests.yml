@@ -91,6 +91,8 @@ jobs:
 
       - name: php-cs-fixer
         run: vendor/bin/php-cs-fixer fix --dry-run
+        env:
+          PHP_CS_FIXER_IGNORE_ENV: 1
 
       - name: Setup environment for PHPUnit
         run: |
