@@ -1164,17 +1164,13 @@ class Zend_Acl_AclTest extends PHPUnit_Framework_TestCase
 
     }
 
-    /**
-     *
-     * @return Zend_Acl_UseCase1_Acl
-     */
-    protected function _loadUseCase1()
+    protected function _loadUseCase1(): \Zend_Acl_UseCase1_Acl
     {
-        require_once __DIR__ . '/_files/UseCase1/User.php';
-        require_once __DIR__ . '/_files/UseCase1/BlogPost.php';
-        require_once __DIR__ . '/_files/UseCase1/UserIsBlogPostOwnerAssertion.php';
-        require_once __DIR__ . '/_files/UseCase1/Acl.php';
-        return new Zend_Acl_UseCase1_Acl();
+        !class_exists(\Zend_Acl_UseCase1_User::class) && require __DIR__ . '/_files/UseCase1/User.php';
+        !class_exists(\Zend_Acl_UseCase1_BlogPost::class) && require __DIR__ . '/_files/UseCase1/BlogPost.php';
+        !class_exists(\Zend_Acl_UseCase1_UserIsBlogPostOwnerAssertion::class) && require __DIR__ . '/_files/UseCase1/UserIsBlogPostOwnerAssertion.php';
+        !class_exists(\Zend_Acl_UseCase1_Acl::class) && require __DIR__ . '/_files/UseCase1/Acl.php';
+        return new \Zend_Acl_UseCase1_Acl();
     }
 
     /**
