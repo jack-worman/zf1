@@ -53,8 +53,8 @@ class Zend_ProgressBar_ProgressBarTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_ProgressBar_ProgressBarTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_ProgressBar_ProgressBarTest");
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     public function testGreaterMin()

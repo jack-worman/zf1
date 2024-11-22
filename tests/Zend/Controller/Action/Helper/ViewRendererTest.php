@@ -88,8 +88,8 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends \PHPUnit\Framework\
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Action_Helper_ViewRendererTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Controller_Action_Helper_ViewRendererTest");
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     /**
@@ -98,7 +98,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends \PHPUnit\Framework\
      *
      * @access protected
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->basePath = realpath(__DIR__ . str_repeat(DIRECTORY_SEPARATOR . '..', 2));
         $this->request  = new Zend_Controller_Request_Http();
@@ -119,7 +119,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends \PHPUnit\Framework\
      *
      * @access protected
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         Zend_Controller_Action_HelperBroker::resetHelpers();
     }

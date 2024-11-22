@@ -41,7 +41,7 @@ class Zend_Serializer_SerializerTest extends \PHPUnit\Framework\TestCase
         Zend_Serializer::resetAdapterLoader();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
     }
 

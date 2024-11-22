@@ -50,8 +50,8 @@ class Zend_Filter_Word_SeparatorToSeparatorTest extends \PHPUnit\Framework\TestC
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Filter_Word_SeparatorToSeparatorTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Filter_Word_SeparatorToSeparatorTest");
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     public function testFilterSeparatesWordsByDefault()

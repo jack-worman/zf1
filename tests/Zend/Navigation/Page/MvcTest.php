@@ -54,7 +54,7 @@ class Zend_Navigation_Page_MvcTest extends \PHPUnit\Framework\TestCase
      */
     protected $_oldRouter;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->_front = Zend_Controller_Front::getInstance();
         $this->_oldRequest = $this->_front->getRequest();
@@ -68,7 +68,7 @@ class Zend_Navigation_Page_MvcTest extends \PHPUnit\Framework\TestCase
         $this->_front->getRouter()->addDefaultRoutes();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         if (null !== $this->_oldRequest) {
             $this->_front->setRequest($this->_oldRequest);

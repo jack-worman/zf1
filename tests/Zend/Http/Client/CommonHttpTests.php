@@ -89,7 +89,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends \PHPUnit\Framework\TestC
      * Set up the test case
      *
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         if (defined('TESTS_ZEND_HTTP_CLIENT_BASEURI') &&
             Zend_Uri_Http::check(TESTS_ZEND_HTTP_CLIENT_BASEURI)) {
@@ -118,7 +118,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends \PHPUnit\Framework\TestC
      * Clean up the test environment
      *
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->client = null;
         $this->_adapter = null;

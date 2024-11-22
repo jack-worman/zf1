@@ -43,7 +43,7 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends \PHPUnit\Frame
         $this->_adapter = new Zend_Serializer_Adapter_PythonPickle();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->_adapter = null;
     }

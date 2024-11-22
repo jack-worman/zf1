@@ -99,7 +99,7 @@ class Zend_Mail_MaildirWritableTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         foreach (array_reverse($this->_subdirs) as $dir) {
             if (!file_exists((string) $this->_tmpdir . $dir)) {

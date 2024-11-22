@@ -43,7 +43,7 @@ class Zend_Cache_ManagerTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->rmdir();
         $this->_cache = null;

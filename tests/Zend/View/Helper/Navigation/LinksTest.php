@@ -71,7 +71,7 @@ class Zend_View_Helper_Navigation_LinksTest
         }
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->_doctypeHelper->setDoctype($this->_oldDoctype);
     }

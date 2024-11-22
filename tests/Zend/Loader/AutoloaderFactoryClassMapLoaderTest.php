@@ -48,8 +48,8 @@ class Zend_Loader_AutoloaderFactoryClassMapLoaderTest extends \PHPUnit\Framework
 
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty(__CLASS__);
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     public function setUp(): void
@@ -73,7 +73,7 @@ class Zend_Loader_AutoloaderFactoryClassMapLoaderTest extends \PHPUnit\Framework
         $this->_includePath = get_include_path();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         Zend_Loader_AutoloaderFactory::unregisterAutoloaders();
         // Restore original autoloaders

@@ -49,7 +49,7 @@ class Zend_OpenIdTest extends \PHPUnit\Framework\TestCase
         $this->_serverVariables = $_SERVER;
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $_SERVER = $this->_serverVariables;
     }

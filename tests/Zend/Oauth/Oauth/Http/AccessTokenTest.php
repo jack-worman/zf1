@@ -44,7 +44,7 @@ class Zend_Oauth_Http_AccessTokenTest extends \PHPUnit\Framework\TestCase
         Zend_Oauth::setHttpClient(new Test_Client_39745);
     }
 
-    public function teardown()
+    public function tearDown(): void
     {
         Zend_Oauth::clearHttpClient();
     }

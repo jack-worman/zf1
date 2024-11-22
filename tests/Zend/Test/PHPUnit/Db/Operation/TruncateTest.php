@@ -46,7 +46,7 @@ class Zend_Test_PHPUnit_Db_Operation_TruncateTest extends \PHPUnit\Framework\Tes
         }
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         if (LIBXML_VERSION < 20900) {
             libxml_disable_entity_loader($this->libxmlDisableEntityLoader);

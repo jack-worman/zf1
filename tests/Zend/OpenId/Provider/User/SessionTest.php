@@ -42,8 +42,9 @@ class Zend_OpenId_Provider_User_SessionTest extends \PHPUnit\Framework\TestCase
 
     private $_user;
 
-    public function __construct()
+    public function __construct(string $name)
     {
+        parent::__construct($name);
         $this->_user1 = new Zend_OpenId_Provider_User_Session();
         $this->_user2 = new Zend_OpenId_Provider_User_Session(new Zend_Session_Namespace("openid2"));
     }

@@ -115,12 +115,12 @@ class Zend_AllTests
     {
         // Run buffered tests as a separate suite first
         ob_start();
-        PHPUnit_TextUI_TestRunner::run(self::suiteBuffered());
+        \PHPUnit\TextUI\TestRunner::run(self::suiteBuffered());
         if (ob_get_level()) {
             ob_end_flush();
         }
 
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        \PHPUnit\TextUI\TestRunner::run(self::suite());
     }
 
     /**
@@ -129,11 +129,11 @@ class Zend_AllTests
      * These tests require no output be sent prior to running as they rely
      * on internal PHP functions.
      *
-     * @return PHPUnit_Framework_TestSuite
+     * @return \PHPUnit\Framework\TestSuite
      */
     public static function suiteBuffered()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend - Buffered Test Suites');
+        $suite = \PHPUnit\Framework\TestSuite::empty('Zend Framework - Zend - Buffered Test Suites');
 
         // These tests require no output be sent prior to running as they rely
         // on internal PHP functions
@@ -150,11 +150,11 @@ class Zend_AllTests
      *
      * All tests except those that require output buffering.
      *
-     * @return PHPUnit_Framework_TestSuite
+     * @return \PHPUnit\Framework\TestSuite
      */
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend');
+        $suite = \PHPUnit\Framework\TestSuite::empty('Zend Framework - Zend');
 
         // Running this early to ensure that the test suite hasn't used too
         // much memory by the time it gets to this test.

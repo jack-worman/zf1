@@ -103,7 +103,7 @@ class Zend_Mail_MaildirFolderTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         foreach (array_reverse($this->_subdirs) as $dir) {
             foreach (array('cur', 'new') as $subdir) {

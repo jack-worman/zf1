@@ -58,7 +58,7 @@ class Zend_JsonTest extends \PHPUnit\Framework\TestCase
         $this->_originalUseBuiltinEncoderDecoderValue = Zend_Json::$useBuiltinEncoderDecoder;
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         Zend_Json::$useBuiltinEncoderDecoder = $this->_originalUseBuiltinEncoderDecoderValue;
     }

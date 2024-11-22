@@ -58,8 +58,8 @@ class Zend_Controller_Request_HttpTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Request_HttpTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Controller_Request_HttpTest");
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     public function setUp(): void
@@ -74,7 +74,7 @@ class Zend_Controller_Request_HttpTest extends \PHPUnit\Framework\TestCase
         $this->_request = new Zend_Controller_Request_Http('http://framework.zend.com/news/3?var1=val1&var2=val2#anchor');
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->_request);
         $_SERVER = $this->_origServer;

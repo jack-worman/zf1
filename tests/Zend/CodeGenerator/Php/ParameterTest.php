@@ -50,7 +50,7 @@ class Zend_CodeGenerator_Php_ParameterTest extends \PHPUnit\Framework\TestCase
         $this->_parameter = new Zend_CodeGenerator_Php_Parameter();
     }
 
-    public function teardown()
+    public function tearDown(): void
     {
         $this->_parameter = null;
     }

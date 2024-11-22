@@ -49,8 +49,8 @@ class Zend_Controller_Response_HttpTestCaseTest extends \PHPUnit\Framework\TestC
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Response_HttpTestCaseTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Controller_Response_HttpTestCaseTest");
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     /**
@@ -70,7 +70,7 @@ class Zend_Controller_Response_HttpTestCaseTest extends \PHPUnit\Framework\TestC
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
     }
 

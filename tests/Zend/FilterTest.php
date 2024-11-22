@@ -60,7 +60,7 @@ class Zend_FilterTest extends \PHPUnit\Framework\TestCase
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         Zend_Filter::setDefaultNamespaces(array());
     }

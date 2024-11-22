@@ -89,15 +89,16 @@ class Zend_Filter_File_RenameTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Filter_File_RenameTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Filter_File_RenameTest");
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     /**
      * Sets the path to test files
      */
-    public function __construct()
+    public function __construct(string $name)
     {
+        parent::__construct($name);
         $this->_filesPath = __DIR__ . DIRECTORY_SEPARATOR
                           . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR;
         $this->_origFile  = $this->_filesPath . 'original.file';
@@ -134,7 +135,7 @@ class Zend_Filter_File_RenameTest extends \PHPUnit\Framework\TestCase
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         if (!file_exists((string) $this->_oldFile)) {
             copy($this->_origFile, $this->_oldFile);

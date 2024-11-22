@@ -47,8 +47,8 @@ class Zend_Filter_Compress_TarTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite('Zend_Filter_Compress_TarTest');
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty('Zend_Filter_Compress_TarTest');
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     public function setUp(): void
@@ -93,7 +93,7 @@ class Zend_Filter_Compress_TarTest extends \PHPUnit\Framework\TestCase
         }*/
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $files = array(
             __DIR__ . '/../_files/zipextracted.txt',

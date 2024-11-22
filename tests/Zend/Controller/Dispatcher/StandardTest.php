@@ -54,8 +54,8 @@ class Zend_Controller_Dispatcher_StandardTest extends \PHPUnit\Framework\TestCas
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Dispatcher_StandardTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Controller_Dispatcher_StandardTest");
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     public function setUp(): void
@@ -73,7 +73,7 @@ class Zend_Controller_Dispatcher_StandardTest extends \PHPUnit\Framework\TestCas
         ));
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->_dispatcher);
     }

@@ -45,7 +45,7 @@ class Zend_Validate_Sitemap_LastmodTest extends \PHPUnit\Framework\TestCase
     /**
      * Prepares the environment before running a test
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->_validator = new Zend_Validate_Sitemap_Lastmod();
     }
@@ -53,7 +53,7 @@ class Zend_Validate_Sitemap_LastmodTest extends \PHPUnit\Framework\TestCase
     /**
      * Cleans up the environment after running a test
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->_validator = null;
     }

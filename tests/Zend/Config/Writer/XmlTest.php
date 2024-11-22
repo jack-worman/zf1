@@ -53,7 +53,7 @@ class Zend_Config_Writer_XmlTest extends \PHPUnit\Framework\TestCase
         $this->_tempName = @tempnam(__DIR__ . '/temp', 'tmp');
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         @unlink($this->_tempName);
     }

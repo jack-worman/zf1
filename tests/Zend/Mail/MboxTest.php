@@ -75,7 +75,7 @@ class Zend_Mail_MboxTest extends \PHPUnit\Framework\TestCase
         copy($this->_mboxOriginalFile, $this->_mboxFile);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unlink($this->_mboxFile);
     }

@@ -75,8 +75,9 @@ class Zend_Auth_Adapter_Http_Resolver_FileTest extends \PHPUnit\Framework\TestCa
      * Sets the paths to files used in this test, and creates a shared resolver instance
      * having a valid path.
      */
-    public function __construct()
+    public function __construct(string $name)
     {
+        parent::__construct($name);
         $this->_filesPath = dirname(__DIR__) . '/_files';
         $this->_validPath = "$this->_filesPath/htdigest.3";
         $this->_badPath   = 'doesnotexist';

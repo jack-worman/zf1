@@ -50,8 +50,8 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_LocaleTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_LocaleTest");
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     private $_cache  = null;
@@ -75,7 +75,7 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
         putenv("HTTP_ACCEPT_LANGUAGE=,de,en-UK-US;q=0.5,fr_FR;q=0.2");
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->_cache->clean(Zend_Cache::CLEANING_MODE_ALL);
         if (is_string($this->_locale) && strpos((string) $this->_locale, ';')) {

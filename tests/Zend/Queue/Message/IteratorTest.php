@@ -50,7 +50,7 @@
 #[AllowDynamicProperties]
 class Zend_Queue_Message_IteratorTest extends \PHPUnit\Framework\TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         // Test Zend_Config
         $this->options = array(
@@ -98,7 +98,7 @@ class Zend_Queue_Message_IteratorTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
     }
 

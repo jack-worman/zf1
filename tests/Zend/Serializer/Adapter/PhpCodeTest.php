@@ -43,7 +43,7 @@ class Zend_Serializer_Adapter_PhpCodeTest extends \PHPUnit\Framework\TestCase
         $this->_adapter = new Zend_Serializer_Adapter_PhpCode();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->_adapter = null;
     }

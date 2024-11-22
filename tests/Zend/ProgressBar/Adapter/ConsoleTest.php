@@ -44,12 +44,12 @@ require_once 'MockupStream.php';
 class Zend_ProgressBar_Adapter_ConsoleTest extends \PHPUnit\Framework\TestCase
 {
 
-    protected function setUp()
+    protected function setUp(): void
     {
         stream_wrapper_register("zendprogressbaradapterconsole", "Zend_ProgressBar_Adapter_Console_MockupStream");
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         stream_wrapper_unregister('zendprogressbaradapterconsole');
     }
@@ -61,8 +61,8 @@ class Zend_ProgressBar_Adapter_ConsoleTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_ProgressBar_Adapter_ConsoleTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_ProgressBar_Adapter_ConsoleTest");
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     public function testWindowsWidth()

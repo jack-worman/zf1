@@ -50,8 +50,8 @@ class Zend_Filter_Word_UnderscoreToSeparatorTest extends \PHPUnit\Framework\Test
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Filter_Word_UnderscoreToSeparatorTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Filter_Word_UnderscoreToSeparatorTest");
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     public function testFilterSeparatesCamelCasedWordsDefaultSeparator()

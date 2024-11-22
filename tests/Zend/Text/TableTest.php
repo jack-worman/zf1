@@ -49,11 +49,11 @@ class Zend_Text_TableTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Text_TableTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Text_TableTest");
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         Zend_Text_Table::setInputCharset('utf-8');
         Zend_Text_Table::setOutputCharset('utf-8');

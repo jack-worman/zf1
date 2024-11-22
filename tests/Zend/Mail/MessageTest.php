@@ -56,7 +56,7 @@ class Zend_Mail_MessageTest extends \PHPUnit\Framework\TestCase
         file_put_contents($this->_file, $mail);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         if (file_exists((string) $this->_file)) {
             unlink($this->_file);

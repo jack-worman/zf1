@@ -82,7 +82,7 @@ class Zend_Controller_Router_RouteTest extends \PHPUnit\Framework\TestCase
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         // Restore server array
         $_SERVER = $this->_server;

@@ -41,7 +41,7 @@ class Zend_RegistryTest extends \PHPUnit\Framework\TestCase
         Zend_Registry::_unsetInstance();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         Zend_Registry::_unsetInstance();
     }

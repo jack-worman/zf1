@@ -95,7 +95,7 @@ abstract class Zend_Db_TestSetup extends \PHPUnit\Framework\TestCase
      * Subclasses should call parent::tearDown() after
      * doing their own logic, e.g. deleting metadata.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->_util->tearDown();
         $this->_db->closeConnection();

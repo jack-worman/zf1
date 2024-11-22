@@ -41,7 +41,7 @@ class Zend_Navigation_PageTest extends \PHPUnit\Framework\TestCase
      * Prepares the environment before running a test.
      *
      */
-    protected function setUp()
+    protected function setUp(): void
     {
 
     }
@@ -50,7 +50,7 @@ class Zend_Navigation_PageTest extends \PHPUnit\Framework\TestCase
      * Tear down the environment after running a test
      *
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         // setConfig, setOptions
     }

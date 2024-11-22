@@ -58,8 +58,8 @@ class Zend_Dojo_View_Helper_ValidationTextBoxTest extends \PHPUnit\Framework\Tes
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_View_Helper_ValidationTextBoxTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Dojo_View_Helper_ValidationTextBoxTest");
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     /**
@@ -84,7 +84,7 @@ class Zend_Dojo_View_Helper_ValidationTextBoxTest extends \PHPUnit\Framework\Tes
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
     }
 

@@ -61,8 +61,8 @@ class Zend_Dojo_Form_Decorator_AccordionContainerTest extends \PHPUnit\Framework
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_Form_Decorator_AccordionContainerTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Dojo_Form_Decorator_AccordionContainerTest");
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     /**
@@ -89,7 +89,7 @@ class Zend_Dojo_Form_Decorator_AccordionContainerTest extends \PHPUnit\Framework
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
     }
 

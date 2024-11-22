@@ -54,8 +54,8 @@ class Zend_Controller_Response_HttpTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Response_HttpTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Controller_Response_HttpTest");
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     public function setUp(): void
@@ -64,7 +64,7 @@ class Zend_Controller_Response_HttpTest extends \PHPUnit\Framework\TestCase
         $this->_response->headersSentThrowsException = false;
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->_response);
     }

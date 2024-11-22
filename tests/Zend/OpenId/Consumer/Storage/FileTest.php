@@ -87,7 +87,7 @@ class Zend_OpenId_Consumer_Storage_FileTest extends \PHPUnit\Framework\TestCase
         mkdir($this->_tmpDir);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         self::_rmDir($this->_tmpDir);
     }

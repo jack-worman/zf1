@@ -42,7 +42,7 @@ class Zend_Navigation_ContainerTest extends \PHPUnit\Framework\TestCase
      * Prepares the environment before running a test.
      *
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         Zend_Controller_Front::getInstance()->setRequest(
             new Zend_Controller_Request_Http()
@@ -53,7 +53,7 @@ class Zend_Navigation_ContainerTest extends \PHPUnit\Framework\TestCase
      * Tear down the environment after running a test
      *
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
 
     }

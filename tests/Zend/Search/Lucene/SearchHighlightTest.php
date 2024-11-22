@@ -61,7 +61,7 @@ class Zend_Search_Lucene_SearchHighlightTest extends \PHPUnit\Framework\TestCase
         Zend_Search_Lucene_Search_Query_Fuzzy::setDefaultPrefixLength(0);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         Zend_Search_Lucene_Search_Query_Wildcard::setMinPrefixLength($this->_wildcardMinPrefix);
         Zend_Search_Lucene_Search_Query_Fuzzy::setDefaultPrefixLength($this->_defaultPrefixLength);

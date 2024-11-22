@@ -58,8 +58,8 @@ class Zend_Dojo_Form_Element_PasswordTextBoxTest extends \PHPUnit\Framework\Test
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_Form_Element_PasswordTextBoxTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Dojo_Form_Element_PasswordTextBoxTest");
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     /**
@@ -84,7 +84,7 @@ class Zend_Dojo_Form_Element_PasswordTextBoxTest extends \PHPUnit\Framework\Test
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
     }
 

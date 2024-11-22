@@ -48,8 +48,8 @@ class Zend_XmlRpc_Request_HttpTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_XmlRpc_Request_HttpTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_XmlRpc_Request_HttpTest");
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     /**
@@ -107,7 +107,7 @@ EOX;
     /**
      * Teardown environment
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         $_SERVER = $this->server;
         unset($this->request);

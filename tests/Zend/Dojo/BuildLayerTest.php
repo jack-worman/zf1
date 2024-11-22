@@ -42,8 +42,8 @@ class Zend_Dojo_BuildLayerTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty(__CLASS__);
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     /**
@@ -58,7 +58,7 @@ class Zend_Dojo_BuildLayerTest extends \PHPUnit\Framework\TestCase
         Zend_Dojo::enableView($this->view);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->view);
     }

@@ -50,7 +50,7 @@ class Zend_Locale_DataTest extends \PHPUnit\Framework\TestCase
     }
 
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->_cache->clean(Zend_Cache::CLEANING_MODE_ALL);
     }

@@ -67,8 +67,8 @@ class Zend_View_Helper_TranslateTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_TranslateTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_View_Helper_TranslateTest");
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     public function clearRegistry()
@@ -98,7 +98,7 @@ class Zend_View_Helper_TranslateTest extends \PHPUnit\Framework\TestCase
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->helper);
         $this->clearRegistry();

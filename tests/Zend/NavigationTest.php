@@ -45,13 +45,13 @@ class Zend_NavigationTest extends \PHPUnit\Framework\TestCase
      */
     private $_navigation;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->_navigation = new Zend_Navigation();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->_navigation = null;
         parent::tearDown();
@@ -63,8 +63,8 @@ class Zend_NavigationTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_NavigationTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_NavigationTest");
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     /**

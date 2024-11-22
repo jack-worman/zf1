@@ -105,7 +105,7 @@ class Zend_Cache_ClassFrontendTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->_instance1);
         unset($this->_instance2);

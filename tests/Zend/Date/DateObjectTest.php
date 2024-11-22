@@ -48,7 +48,7 @@ class Zend_Date_DateObjectTest extends \PHPUnit\Framework\TestCase
         Zend_Date_DateObjectTestHelper::setOptions(array('cache' => $this->_cache));
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         date_default_timezone_set($this->originalTimezone);
         $this->_cache->clean(Zend_Cache::CLEANING_MODE_ALL);

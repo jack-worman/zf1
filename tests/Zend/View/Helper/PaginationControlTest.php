@@ -57,8 +57,12 @@ class Zend_View_Helper_PaginationControlTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite = new PHPUnit_Framework_TestSuite("Zend_View_Helper_PaginationControlTest");
-        PHPUnit_TextUI_TestRunner::run($suite);
+        $suite = \PHPUnit\Framework\TestSuite::empty("Zend_View_Helper_PaginationControlTest");
+        (new \PHPUnit\TextUI\TestRunner())->run(
+            \PHPUnit\TextUI\Configuration\Registry::get(), 
+            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+            $suite,
+        );
     }
 
     /**
@@ -67,7 +71,7 @@ class Zend_View_Helper_PaginationControlTest extends \PHPUnit\Framework\TestCase
      *
      * @access protected
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $view = new Zend_View();
         $view->addBasePath(__DIR__ . '/_files');
@@ -78,7 +82,7 @@ class Zend_View_Helper_PaginationControlTest extends \PHPUnit\Framework\TestCase
         $this->_paginator = Zend_Paginator::factory(range(1, 101));
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->_viewHelper);
         unset($this->_paginator);

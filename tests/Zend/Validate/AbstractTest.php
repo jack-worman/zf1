@@ -51,8 +51,8 @@ class Zend_Validate_AbstractTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite('Zend_Validate_AbstractTest');
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty('Zend_Validate_AbstractTest');
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     public function clearRegistry()
@@ -75,7 +75,7 @@ class Zend_Validate_AbstractTest extends \PHPUnit\Framework\TestCase
         $this->validator = new Zend_Validate_AbstractTest_Concrete();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->clearRegistry();
         Zend_Validate_Abstract::setDefaultTranslator(null);

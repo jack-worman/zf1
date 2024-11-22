@@ -48,8 +48,8 @@ class Zend_XmlRpc_Server_CacheTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_XmlRpc_Server_CacheTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_XmlRpc_Server_CacheTest");
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     /**
@@ -77,7 +77,7 @@ class Zend_XmlRpc_Server_CacheTest extends \PHPUnit\Framework\TestCase
     /**
      * Teardown environment
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         if (file_exists((string) $this->_file)) {
             unlink($this->_file);

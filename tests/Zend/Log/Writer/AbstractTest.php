@@ -45,11 +45,11 @@ class Zend_Log_Writer_AbstractTest extends \PHPUnit\Framework\TestCase
 
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty(__CLASS__);
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->_writer = new Zend_Log_Writer_AbstractTest_Concrete();
     }

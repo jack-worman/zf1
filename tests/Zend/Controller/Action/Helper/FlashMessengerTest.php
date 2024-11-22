@@ -81,8 +81,8 @@ class Zend_Controller_Action_Helper_FlashMessengerTest extends \PHPUnit\Framewor
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Action_Helper_FlashMessengerTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Controller_Action_Helper_FlashMessengerTest");
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     public function setUp(): void
@@ -112,7 +112,7 @@ class Zend_Controller_Action_Helper_FlashMessengerTest extends \PHPUnit\Framewor
         $this->helper     = new Zend_Controller_Action_Helper_FlashMessenger;
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         Zend_Session_SessionHelper::reset();
     }

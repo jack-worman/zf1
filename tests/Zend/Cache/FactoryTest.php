@@ -54,7 +54,7 @@ class Zend_Cache_FactoryTest extends \PHPUnit\Framework\TestCase
     {
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
     }
 

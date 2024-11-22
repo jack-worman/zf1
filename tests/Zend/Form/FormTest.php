@@ -57,8 +57,8 @@ class Zend_Form_FormTest extends \PHPUnit\Framework\TestCase
 
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite('Zend_Form_FormTest');
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty('Zend_Form_FormTest');
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     public function clearRegistry()
@@ -82,7 +82,7 @@ class Zend_Form_FormTest extends \PHPUnit\Framework\TestCase
         $this->form = new Zend_Form();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->clearRegistry();
     }

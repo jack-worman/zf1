@@ -68,7 +68,7 @@ class Zend_Mail_FileTransportTest extends \PHPUnit\Framework\TestCase
         $this->_cleanDir($this->_tmpdir);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->_cleanDir($this->_tmpdir);
         if ($this->createdTmpDir) {

@@ -55,7 +55,7 @@ require_once 'Iterator2.php';
  */
 abstract class Zend_Queue_Adapter_AdapterTest extends \PHPUnit\Framework\TestCase
 {
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->error = false;
     }

@@ -54,7 +54,7 @@ class Zend_Locale_MathTest extends \PHPUnit\Framework\TestCase
     /**
      * teardown for tests (restore whatever setlocale was previously in place)
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         if (self::$savedLocale != 'C') {
             setlocale(LC_NUMERIC, self::$savedLocale);

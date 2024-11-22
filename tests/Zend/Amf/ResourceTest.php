@@ -51,8 +51,12 @@ class Zend_Amf_ResourceTest extends \PHPUnit\Framework\TestCase
 
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Amf_ResourceTest");
-        PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Amf_ResourceTest");
+        (new \PHPUnit\TextUI\TestRunner())->run(
+            \PHPUnit\TextUI\Configuration\Registry::get(), 
+            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+            $suite,
+        );
     }
 
     public function setUp(): void
@@ -62,7 +66,7 @@ class Zend_Amf_ResourceTest extends \PHPUnit\Framework\TestCase
         Zend_Amf_Parse_TypeLoader::resetMap();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset($this->_server);
     }

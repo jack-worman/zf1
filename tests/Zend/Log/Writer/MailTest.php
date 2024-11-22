@@ -72,11 +72,11 @@ class Zend_Log_Writer_MailTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite = \PHPUnit\Framework\TestSuite::empty(__CLASS__);
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->_transport = $this->getMockForAbstractClass(
             'Zend_Mail_Transport_Abstract',
@@ -85,7 +85,7 @@ class Zend_Log_Writer_MailTest extends \PHPUnit\Framework\TestCase
         Zend_Mail::setDefaultTransport($this->_transport);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         Zend_Mail::clearDefaultTransport();
     }

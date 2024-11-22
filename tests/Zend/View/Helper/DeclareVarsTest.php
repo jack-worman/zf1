@@ -49,8 +49,8 @@ class Zend_View_Helper_DeclareVarsTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_DeclareVarsTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_View_Helper_DeclareVarsTest");
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     public function setUp(): void
@@ -62,7 +62,7 @@ class Zend_View_Helper_DeclareVarsTest extends \PHPUnit\Framework\TestCase
         $this->view = $view;
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->view);
     }

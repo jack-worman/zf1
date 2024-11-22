@@ -49,7 +49,7 @@ class Zend_CodeGenerator_Php_DocblockTest extends \PHPUnit\Framework\TestCase
         $this->_docblock = new Zend_CodeGenerator_Php_Docblock();
     }
 
-    public function teardown()
+    public function tearDown(): void
     {
         $this->_docblock = null;
     }

@@ -50,7 +50,7 @@
  */
 abstract class Zend_Queue_QueueBaseTest extends \PHPUnit\Framework\TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         // Test Zend_Config
         $this->config = array(
@@ -60,7 +60,7 @@ abstract class Zend_Queue_QueueBaseTest extends \PHPUnit\Framework\TestCase
         $this->queue = new Zend_Queue('Null', $this->config);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
     }
 

@@ -65,8 +65,8 @@ class Zend_LoaderTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_LoaderTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_LoaderTest");
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     public function setUp(): void
@@ -87,7 +87,7 @@ class Zend_LoaderTest extends \PHPUnit\Framework\TestCase
         Zend_Loader_Autoloader::resetInstance();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         if ($this->errorHandler !== null) {
             restore_error_handler();

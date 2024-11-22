@@ -49,7 +49,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag_ParamTest extends \PHPUnit\Framework\T
         $this->_tag = new Zend_CodeGenerator_Php_Docblock_Tag_Param();
     }
 
-    public function teardown()
+    public function tearDown(): void
     {
         $this->_tag = null;
     }

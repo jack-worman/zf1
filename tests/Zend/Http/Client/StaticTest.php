@@ -61,7 +61,7 @@ class Zend_Http_Client_StaticTest extends \PHPUnit\Framework\TestCase
      * Clean up after running a test
      *
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->_client = null;
     }

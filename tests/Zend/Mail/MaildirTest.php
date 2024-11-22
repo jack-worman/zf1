@@ -91,7 +91,7 @@ class Zend_Mail_MaildirTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         foreach (array('cur', 'new') as $dir) {
             $dh = opendir($this->_tmpdir . $dir);

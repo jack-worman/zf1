@@ -71,7 +71,7 @@ class Zend_Validate_FloatTest extends \PHPUnit\Framework\TestCase
         $this->_validator = new Zend_Validate_Float();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         //restore locale
         if (is_string($this->_locale) && strpos((string) $this->_locale, ';')) {

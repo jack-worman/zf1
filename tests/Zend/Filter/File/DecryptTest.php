@@ -56,7 +56,7 @@ class Zend_Filter_File_DecryptTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         if (file_exists((string) __DIR__.'/../_files/newencryption.txt')) {
             unlink(__DIR__.'/../_files/newencryption.txt');

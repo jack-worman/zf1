@@ -57,7 +57,7 @@ class Zend_Http_Client_TestAdapterTest extends \PHPUnit\Framework\TestCase
      * Tear down the test adapter after running the test
      *
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->adapter = null;
     }

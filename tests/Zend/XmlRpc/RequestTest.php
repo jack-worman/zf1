@@ -55,7 +55,7 @@ class Zend_XmlRpc_RequestTest extends \PHPUnit\Framework\TestCase
     /**
      * Teardown environment
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->_request);
     }

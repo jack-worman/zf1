@@ -67,8 +67,8 @@ class Zend_Db_Profiler_FirebugTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Db_Profiler_FirebugTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Db_Profiler_FirebugTest");
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     public function setUp(): void
@@ -96,7 +96,7 @@ class Zend_Db_Profiler_FirebugTest extends \PHPUnit\Framework\TestCase
                                             )');
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         if (extension_loaded('pdo_sqlite')) {
             $this->_db->getConnection()->exec('DROP TABLE foo');

@@ -46,8 +46,8 @@ class Zend_Amf_Util_BinaryStreamTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Amf_Util_BinaryStreamTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Amf_Util_BinaryStreamTest");
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     /**

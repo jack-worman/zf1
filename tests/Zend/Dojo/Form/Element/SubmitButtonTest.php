@@ -61,8 +61,8 @@ class Zend_Dojo_Form_Element_SubmitButtonTest extends \PHPUnit\Framework\TestCas
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_Form_Element_SubmitButtonTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Dojo_Form_Element_SubmitButtonTest");
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     /**
@@ -87,7 +87,7 @@ class Zend_Dojo_Form_Element_SubmitButtonTest extends \PHPUnit\Framework\TestCas
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
     }
 

@@ -62,8 +62,8 @@ class Zend_Controller_Action_Helper_AjaxContextTest extends \PHPUnit\Framework\T
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Action_Helper_AjaxContextTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Controller_Action_Helper_AjaxContextTest");
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     /**
@@ -114,7 +114,7 @@ class Zend_Controller_Action_Helper_AjaxContextTest extends \PHPUnit\Framework\T
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
             unset($_SERVER['HTTP_X_REQUESTED_WITH']);

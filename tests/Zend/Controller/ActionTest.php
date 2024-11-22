@@ -53,8 +53,8 @@ class Zend_Controller_ActionTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_ActionTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Controller_ActionTest");
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     public function setUp(): void
@@ -77,7 +77,7 @@ class Zend_Controller_ActionTest extends \PHPUnit\Framework\TestCase
         $redirector->setExit(false);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->_controller);
     }

@@ -117,8 +117,8 @@ class Zend_PaginatorTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty(__CLASS__);
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     /**
@@ -138,7 +138,7 @@ class Zend_PaginatorTest extends \PHPUnit\Framework\TestCase
 
     protected $_adapter = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         if (!extension_loaded('pdo_sqlite')) {
            $this->markTestSkipped('Pdo_Sqlite extension is not loaded');
@@ -167,7 +167,7 @@ class Zend_PaginatorTest extends \PHPUnit\Framework\TestCase
         $this->_restorePaginatorDefaults();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->_dbConn = null;
         $this->_testCollection = null;

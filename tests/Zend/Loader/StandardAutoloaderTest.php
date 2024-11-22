@@ -52,7 +52,7 @@ class Zend_Loader_StandardAutoloaderTest extends \PHPUnit\Framework\TestCase
         $this->includePath = get_include_path();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         // Restore original autoloaders
         $loaders = spl_autoload_functions();

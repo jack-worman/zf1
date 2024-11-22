@@ -44,7 +44,7 @@ class Zend_Mime_PartTest extends \PHPUnit\Framework\TestCase
     protected $part = null;
     protected $testText;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->testText = 'safdsafsa�lg ��gd�� sd�jg�sdjg�ld�gksd�gj�sdfg�dsj�gjsd�gj�dfsjg�dsfj�djs�g kjhdkj '
                        . 'fgaskjfdh gksjhgjkdh gjhfsdghdhgksdjhg';

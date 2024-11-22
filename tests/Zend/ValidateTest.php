@@ -68,7 +68,7 @@ class Zend_ValidateTest extends \PHPUnit\Framework\TestCase
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         Zend_Validate::setDefaultNamespaces(array());
     }

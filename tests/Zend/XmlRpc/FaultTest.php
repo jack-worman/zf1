@@ -52,7 +52,7 @@ class Zend_XmlRpc_FaultTest extends \PHPUnit\Framework\TestCase
     /**
      * Teardown environment
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->_fault);
     }

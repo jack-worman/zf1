@@ -50,8 +50,8 @@ class Zend_Validate_File_ExcludeExtensionTest extends \PHPUnit\Framework\TestCas
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Validate_File_ExcludeExtensionTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Validate_File_ExcludeExtensionTest");
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     /**

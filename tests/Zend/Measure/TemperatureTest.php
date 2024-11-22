@@ -47,8 +47,8 @@ class Zend_Measure_TemperatureTest extends \PHPUnit\Framework\TestCase
 {
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty(__CLASS__);
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     public function setUp(): void
@@ -63,7 +63,7 @@ class Zend_Measure_TemperatureTest extends \PHPUnit\Framework\TestCase
         setlocale(LC_ALL, 'de');
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         if (is_string($this->_locale) && strpos((string) $this->_locale, ';')) {
             $locales = array();

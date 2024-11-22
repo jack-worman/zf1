@@ -48,8 +48,8 @@ class Zend_ProgressBar_Adapter_JsPullTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_ProgressBar_Adapter_JsPullTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_ProgressBar_Adapter_JsPullTest");
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     public function testJson()

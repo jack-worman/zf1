@@ -53,7 +53,7 @@ class Zend_CodeGenerator_Php_MethodTest extends \PHPUnit\Framework\TestCase
         $this->_method = new Zend_CodeGenerator_Php_Method();
     }
 
-    public function teardown()
+    public function tearDown(): void
     {
         $this->_method = null;
     }

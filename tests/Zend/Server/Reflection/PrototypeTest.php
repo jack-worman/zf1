@@ -79,7 +79,7 @@ class Zend_Server_Reflection_PrototypeTest extends \PHPUnit\Framework\TestCase
     /**
      * Teardown environment
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->_r);
         unset($this->_parameters);

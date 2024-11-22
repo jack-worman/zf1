@@ -43,8 +43,8 @@ class Zend_Translate_Adapter_XliffTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Translate_Adapter_XliffTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Translate_Adapter_XliffTest");
+        $result = \PHPUnit\TextUI\TestRunner::run($suite);
     }
 
     public function testCreate()

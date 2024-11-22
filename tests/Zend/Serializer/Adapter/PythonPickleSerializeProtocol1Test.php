@@ -43,7 +43,7 @@ class Zend_Serializer_Adapter_PythonPickleSerializeProtocol1Test extends \PHPUni
         $this->_adapter = new Zend_Serializer_Adapter_PythonPickle(array('protocol' => 1));
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->_adapter = null;
     }

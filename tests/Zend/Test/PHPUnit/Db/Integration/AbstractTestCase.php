@@ -53,7 +53,7 @@ abstract class Zend_Test_PHPUnit_Db_Integration_AbstractTestCase extends \PHPUni
         }
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         if (LIBXML_VERSION < 20900) {
             libxml_disable_entity_loader($this->libxmlDisableEntityLoader);

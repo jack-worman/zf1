@@ -78,7 +78,7 @@ class Zend_Auth_Adapter_DbTable_BasicSqliteTest extends \PHPUnit\Framework\TestC
         $this->_setupAuthAdapter();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->_adapter = null;
         $this->_db->query('DROP TABLE [users]');
