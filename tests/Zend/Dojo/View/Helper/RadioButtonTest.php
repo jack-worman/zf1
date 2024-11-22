@@ -59,7 +59,11 @@ class Zend_Dojo_View_Helper_RadioButtonTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
         $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Dojo_View_Helper_RadioButtonTest");
-        $result = \PHPUnit\TextUI\TestRunner::run($suite);
+        (new \PHPUnit\TextUI\TestRunner())->run(
+            \PHPUnit\TextUI\Configuration\Registry::get(),
+            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+            $suite,
+        );
     }
 
     /**

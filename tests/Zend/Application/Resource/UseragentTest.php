@@ -44,7 +44,11 @@ class Zend_Application_Resource_UseragentTest extends \PHPUnit\Framework\TestCas
     public static function main()
     {
         $suite  = \PHPUnit\Framework\TestSuite::empty(__CLASS__);
-        $result = \PHPUnit\TextUI\TestRunner::run($suite);
+        (new \PHPUnit\TextUI\TestRunner())->run(
+            \PHPUnit\TextUI\Configuration\Registry::get(),
+            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+            $suite,
+        );
     }
 
     public function setUp(): void

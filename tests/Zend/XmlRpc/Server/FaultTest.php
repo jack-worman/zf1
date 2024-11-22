@@ -53,7 +53,11 @@ class Zend_XmlRpc_Server_FaultTest extends \PHPUnit\Framework\TestCase
     {
 
         $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_XmlRpc_Server_FaultTest");
-        $result = \PHPUnit\TextUI\TestRunner::run($suite);
+        (new \PHPUnit\TextUI\TestRunner())->run(
+            \PHPUnit\TextUI\Configuration\Registry::get(),
+            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+            $suite,
+        );
     }
 
     /**

@@ -52,7 +52,11 @@ class Zend_Json_Server_ResponseTest extends \PHPUnit\Framework\TestCase
     {
 
         $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Json_Server_ResponseTest");
-        $result = \PHPUnit\TextUI\TestRunner::run($suite);
+        (new \PHPUnit\TextUI\TestRunner())->run(
+            \PHPUnit\TextUI\Configuration\Registry::get(),
+            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+            $suite,
+        );
     }
 
     /**

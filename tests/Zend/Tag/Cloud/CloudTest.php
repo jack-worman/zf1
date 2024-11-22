@@ -46,7 +46,11 @@ class Zend_Tag_Cloud_CloudTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
         $suite  = \PHPUnit\Framework\TestSuite::empty(__CLASS__);
-        $result = \PHPUnit\TextUI\TestRunner::run($suite);
+        (new \PHPUnit\TextUI\TestRunner())->run(
+            \PHPUnit\TextUI\Configuration\Registry::get(),
+            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+            $suite,
+        );
     }
 
     public function testGetAndSetItemList()

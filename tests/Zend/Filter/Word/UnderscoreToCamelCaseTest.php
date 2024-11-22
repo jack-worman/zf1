@@ -51,7 +51,11 @@ class Zend_Filter_Word_UnderscoreToCamelCaseTest extends \PHPUnit\Framework\Test
     {
 
         $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Filter_Word_UnderscoreToCamelCaseTest");
-        $result = \PHPUnit\TextUI\TestRunner::run($suite);
+        (new \PHPUnit\TextUI\TestRunner())->run(
+            \PHPUnit\TextUI\Configuration\Registry::get(),
+            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+            $suite,
+        );
     }
 
     public function testFilterSeparatesCamelCasedWordsWithDashes()

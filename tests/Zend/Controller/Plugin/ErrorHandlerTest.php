@@ -85,7 +85,11 @@ class Zend_Controller_Plugin_ErrorHandlerTest extends \PHPUnit\Framework\TestCas
     {
 
         $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Controller_Plugin_ErrorHandlerTest");
-        $result = \PHPUnit\TextUI\TestRunner::run($suite);
+        (new \PHPUnit\TextUI\TestRunner())->run(
+            \PHPUnit\TextUI\Configuration\Registry::get(),
+            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+            $suite,
+        );
     }
 
     /**

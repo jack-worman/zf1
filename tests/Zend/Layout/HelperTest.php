@@ -52,7 +52,11 @@ class Zend_Layout_HelperTest extends \PHPUnit\Framework\TestCase
     {
 
         $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Layout_HelperTest");
-        $result = \PHPUnit\TextUI\TestRunner::run($suite);
+        (new \PHPUnit\TextUI\TestRunner())->run(
+            \PHPUnit\TextUI\Configuration\Registry::get(),
+            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+            $suite,
+        );
     }
 
     /**

@@ -64,7 +64,11 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends \PHPUnit\Framework
     {
 
         $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Controller_Action_Helper_ContextSwitchTest");
-        $result = \PHPUnit\TextUI\TestRunner::run($suite);
+        (new \PHPUnit\TextUI\TestRunner())->run(
+            \PHPUnit\TextUI\Configuration\Registry::get(),
+            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+            $suite,
+        );
     }
 
     /**

@@ -89,7 +89,11 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends \PHPUnit\Framework\
     public static function main()
     {
         $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Controller_Action_Helper_ViewRendererTest");
-        $result = \PHPUnit\TextUI\TestRunner::run($suite);
+        (new \PHPUnit\TextUI\TestRunner())->run(
+            \PHPUnit\TextUI\Configuration\Registry::get(),
+            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+            $suite,
+        );
     }
 
     /**

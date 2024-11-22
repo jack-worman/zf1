@@ -56,7 +56,11 @@ class Zend_View_Helper_Placeholder_RegistryTest extends \PHPUnit\Framework\TestC
     {
 
         $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_View_Helper_Placeholder_RegistryTest");
-        $result = \PHPUnit\TextUI\TestRunner::run($suite);
+        (new \PHPUnit\TextUI\TestRunner())->run(
+            \PHPUnit\TextUI\Configuration\Registry::get(),
+            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+            $suite,
+        );
     }
 
     /**

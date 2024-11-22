@@ -54,7 +54,11 @@ class Zend_Form_Decorator_LabelTest extends \PHPUnit\Framework\TestCase
     {
 
         $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Form_Decorator_LabelTest");
-        $result = \PHPUnit\TextUI\TestRunner::run($suite);
+        (new \PHPUnit\TextUI\TestRunner())->run(
+            \PHPUnit\TextUI\Configuration\Registry::get(),
+            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+            $suite,
+        );
     }
 
     /**

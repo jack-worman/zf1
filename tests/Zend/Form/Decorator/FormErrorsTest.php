@@ -52,7 +52,11 @@ class Zend_Form_Decorator_FormErrorsTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
         $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Form_Decorator_FormErrorsTest");
-        $result = \PHPUnit\TextUI\TestRunner::run($suite);
+        (new \PHPUnit\TextUI\TestRunner())->run(
+            \PHPUnit\TextUI\Configuration\Registry::get(),
+            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+            $suite,
+        );
     }
 
     /**

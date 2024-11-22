@@ -53,7 +53,11 @@ class Zend_ViewTest extends \PHPUnit\Framework\TestCase
     public static function main()
     {
         $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_ViewTest");
-        $result = \PHPUnit\TextUI\TestRunner::run($suite);
+        (new \PHPUnit\TextUI\TestRunner())->run(
+            \PHPUnit\TextUI\Configuration\Registry::get(),
+            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+            $suite,
+        );
     }
 
     public function setUp(): void

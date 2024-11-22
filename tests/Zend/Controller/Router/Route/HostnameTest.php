@@ -52,7 +52,11 @@ class Zend_Controller_Router_Route_HostnameTest extends \PHPUnit\Framework\TestC
     {
 
         $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Controller_Router_Route_HostnameTest");
-        $result = \PHPUnit\TextUI\TestRunner::run($suite);
+        (new \PHPUnit\TextUI\TestRunner())->run(
+            \PHPUnit\TextUI\Configuration\Registry::get(),
+            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+            $suite,
+        );
     }
 
     public function testCorrectStaticHostMatch()

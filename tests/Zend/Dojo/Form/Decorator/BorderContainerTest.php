@@ -62,7 +62,11 @@ class Zend_Dojo_Form_Decorator_BorderContainerTest extends \PHPUnit\Framework\Te
     public static function main()
     {
         $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Dojo_Form_Decorator_BorderContainerTest");
-        $result = \PHPUnit\TextUI\TestRunner::run($suite);
+        (new \PHPUnit\TextUI\TestRunner())->run(
+            \PHPUnit\TextUI\Configuration\Registry::get(),
+            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+            $suite,
+        );
     }
 
     /**
