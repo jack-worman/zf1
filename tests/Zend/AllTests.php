@@ -28,7 +28,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 require_once 'Zend/Acl/AclTest.php';
 require_once 'Zend/Amf/AllTests.php';
 require_once 'Zend/Application/AllTests.php';
-require_once 'Zend/AuthTest.php';
 require_once 'Zend/Auth/AllTests.php';
 require_once 'Zend/Cache/AllTests.php';
 require_once 'Zend/CodeGenerator/Php/AllTests.php';
