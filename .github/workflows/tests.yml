@@ -16,6 +16,7 @@ jobs:
           - false
         php:
           - "8.3"
+          - "8.4"
 
     env:
       MYSQL_USER: "zftest"
@@ -104,5 +105,3 @@ jobs:
         env:
           FAILURE_ACTION: "${{ matrix.experimental == true }}"
         run: vendor/bin/phpunit --verbose || $FAILURE_ACTION
-
-# vim:ft=yaml:et:ts=2:sw=2
