@@ -106,4 +106,4 @@ jobs:
       - name: "Run PHPUnit tests (Experimental: ${{ matrix.experimental }})"
         env:
           FAILURE_ACTION: "${{ matrix.experimental == true }}"
-        run: vendor/bin/phpunit --verbose || $FAILURE_ACTION
+        run: vendor/bin/phpunit || $FAILURE_ACTION
