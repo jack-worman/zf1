@@ -43,7 +43,7 @@ class Zend_Http_Client_ClientTest extends \PHPUnit\Framework\TestCase
         $this->client = new Zend_Http_Client();
     }
 
-    public function invalidHeaders()
+    public static function invalidHeaders()
     {
         return array(
             'invalid-name-cr'                      => array("X-Foo-\rBar", 'value'),

@@ -804,7 +804,7 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends \PHPUnit\Framework\TestCa
      * Data provider for testRedirectWorksAsExpectedFromHookMethodsInActionController
      * @return array
      */
-    public function providerRedirectWorksAsExpectedFromHookMethodsInActionController()
+    public static function providerRedirectWorksAsExpectedFromHookMethodsInActionController()
     {
         return array(
             array('/zend-test-redirect-from-init/baz'),
@@ -865,7 +865,7 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends \PHPUnit\Framework\TestCa
      * Data provider for testRedirectWorksAsExpectedFromHookMethodsInFrontControllerPlugin
      * @return array
      */
-    public function providerRedirectWorksAsExpectedFromHookMethodsInFrontControllerPlugin()
+    public static function providerRedirectWorksAsExpectedFromHookMethodsInFrontControllerPlugin()
     {
         return array(
             array('RouteStartup'),

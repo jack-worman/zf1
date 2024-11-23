@@ -373,7 +373,7 @@ class Zend_Http_Header_SetCookieTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function invalidCookieComponentValues()
+    public static function invalidCookieComponentValues()
     {
         return array(
             'setName'   => array('setName', "This\r\nis\nan\revil\r\n\r\nvalue"),

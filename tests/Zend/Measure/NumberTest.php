@@ -279,7 +279,7 @@ class Zend_Measure_NumberTest extends \PHPUnit\Framework\TestCase
      * @group GH-536
      * @return array
      */
-    public function providerConvertingDecimalToRoman()
+    public static function providerConvertingDecimalToRoman()
     {
         return array(
             array(10, 'X'),

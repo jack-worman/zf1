@@ -522,7 +522,7 @@ class Zend_Mail_MessageTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function invalidHeaders()
+    public static function invalidHeaders()
     {
         return array(
             'name'        => array("Fake\r\n\r\rnevilContent", 'value'),

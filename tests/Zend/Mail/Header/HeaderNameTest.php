@@ -31,7 +31,7 @@ class Zend_Mail_Header_HeaderNameTest extends \PHPUnit\Framework\TestCase
     /**
      * Data for filter name
      */
-    public function getFilterNames()
+    public static function getFilterNames()
     {
         return array(
             array('Subject', 'Subject'),
@@ -53,7 +53,7 @@ class Zend_Mail_Header_HeaderNameTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, Zend_Mail_Header_HeaderName::filter($name));
     }
 
-    public function validateNames()
+    public static function validateNames()
     {
         return array(
             array('Subject', 'assertTrue'),
@@ -75,7 +75,7 @@ class Zend_Mail_Header_HeaderNameTest extends \PHPUnit\Framework\TestCase
         $this->{$assertion}(Zend_Mail_Header_HeaderName::isValid($name));
     }
 
-    public function assertNames()
+    public static function assertNames()
     {
         return array(
             array('Subject:'),

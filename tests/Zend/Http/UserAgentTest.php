@@ -278,7 +278,7 @@ class Zend_Http_UserAgentTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($config['storage'], $test['storage']);
     }
 
-    public function invalidConfigs()
+    public static function invalidConfigs()
     {
         return array(
             array(true),
@@ -337,7 +337,7 @@ class Zend_Http_UserAgentTest extends \PHPUnit\Framework\TestCase
         $ua->setPluginLoader('device', 'Zend_Http_TestAsset_InvalidPluginLoader');
     }
 
-    public function invalidLoaders()
+    public static function invalidLoaders()
     {
         return array(
             array(true),

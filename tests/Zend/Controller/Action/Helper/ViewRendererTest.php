@@ -897,7 +897,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends \PHPUnit\Framework\
      * @group ZF-10725
      * @return array
      */
-    public function providerViewScriptNameDoesNotIncludeDisallowedCharacters()
+    public static function providerViewScriptNameDoesNotIncludeDisallowedCharacters()
     {
         return array(
             array('myBar-'),
@@ -934,7 +934,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends \PHPUnit\Framework\
      * @group GH-440
      * @return array
      */
-    public function providerControllerNameDoesNotIncludeDisallowedCharacters()
+    public static function providerControllerNameDoesNotIncludeDisallowedCharacters()
     {
         return array(
             array('!index'),

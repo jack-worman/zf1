@@ -425,7 +425,7 @@ class Zend_Http_ResponseTest extends \PHPUnit\Framework\TestCase
         return preg_replace("#(?<!\r)\n#", "\r\n", $message);
     }
 
-    public function invalidResponseHeaders()
+    public static function invalidResponseHeaders()
     {
         return array(
             'bad-status-line'            => array("HTTP/1.0a 200 OK\r\nHost: example.com\r\n\r\nMessage Body"),

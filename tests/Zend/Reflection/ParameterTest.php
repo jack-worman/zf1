@@ -77,7 +77,7 @@ class Zend_Reflection_ParameterTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($parameter->getType(), $type);
     }
 
-    public function paramTypeTestProvider()
+    public static function paramTypeTestProvider()
     {
         return array(
             array('one','int'),

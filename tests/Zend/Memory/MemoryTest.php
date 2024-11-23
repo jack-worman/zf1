@@ -111,7 +111,7 @@ class Zend_Memory_MemoryTest extends \PHPUnit\Framework\TestCase
     /**
      * @group ZF-9883
      */
-    public function providerCacheBackend()
+    public static function providerCacheBackend()
     {
         return array(
             array('Apc'),

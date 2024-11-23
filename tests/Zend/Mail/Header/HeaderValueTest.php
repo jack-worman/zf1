@@ -31,7 +31,7 @@ class Zend_Mail_Header_HeaderValueTest extends \PHPUnit\Framework\TestCase
     /**
      * Data for filter value
      */
-    public function getFilterValues()
+    public static function getFilterValues()
     {
         return array(
             array("This is a\n test", "This is a test"),
@@ -57,7 +57,7 @@ class Zend_Mail_Header_HeaderValueTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, Zend_Mail_Header_HeaderValue::filter($value));
     }
 
-    public function validateValues()
+    public static function validateValues()
     {
         return array(
             array("This is a\n test", 'assertFalse'),
@@ -83,7 +83,7 @@ class Zend_Mail_Header_HeaderValueTest extends \PHPUnit\Framework\TestCase
         $this->{$assertion}(Zend_Mail_Header_HeaderValue::isValid($value));
     }
 
-    public function assertValues()
+    public static function assertValues()
     {
         return array(
             array("This is a\n test"),

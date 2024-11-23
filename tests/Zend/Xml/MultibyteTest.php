@@ -56,7 +56,7 @@ class Zend_Xml_MultibyteTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function multibyteEncodings()
+    public static function multibyteEncodings()
     {
         return array(
             'UTF-16LE' => array('UTF-16LE', pack('CC', 0xff, 0xfe), 3),

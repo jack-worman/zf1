@@ -444,7 +444,7 @@ class Zend_Controller_Request_HttpTest extends \PHPUnit\Framework\TestCase
      * Dataprovider for testing prefix paths in the base url
      * @group ZF-10040
      */
-    public function prefixProvider()
+    public static function prefixProvider()
     {
         return array (
             array (null),
