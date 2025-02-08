@@ -589,11 +589,12 @@ EOT;
 
     /**
      * @group ZF-11385
-     * @expectedException Zend_Json_Exception
+     *
      * @dataProvider providerNestingDepthIsHandledProperly
      */
     public function testNestingDepthIsHandledProperlyWhenNestingDepthExceedsMaximum($xmlStringContents)
     {
+        $this->expectException(Zend_Json_Exception::class);
         Zend_Json::$maxRecursionDepthAllowed = 1;
         Zend_Json::fromXml($xmlStringContents, true);
     }

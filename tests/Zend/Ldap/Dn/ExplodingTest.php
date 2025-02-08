@@ -209,11 +209,9 @@ class Zend_Ldap_Dn_ExplodingTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, $dnArray);
     }
 
-    /**
-     * @expectedException Zend_Ldap_Exception
-     */
     public function testCreateDnArrayIllegalDn()
     {
+        $this->expectException(Zend_Ldap_Exception::class);
         $dn='name1,cn=name2,dc=example,dc=org';
         $dnArray=Zend_Ldap_Dn::explodeDn($dn);
     }

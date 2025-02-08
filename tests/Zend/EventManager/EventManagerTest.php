@@ -567,10 +567,11 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @group ZF-12185
-     * @expectedException Zend_EventManager_Exception_InvalidArgumentException
+     *
      */
     public function testInvalidArgumentExceptionCanBeThrown()
     {
+        $this->expectException(Zend_EventManager_Exception_InvalidArgumentException::class);
         // require_once "Zend/EventManager/Exception/InvalidArgumentException.php";
         throw new Zend_EventManager_Exception_InvalidArgumentException();
     }

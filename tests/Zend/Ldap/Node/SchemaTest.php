@@ -79,36 +79,28 @@ class Zend_Ldap_Node_SchemaTest extends Zend_Ldap_OnlineTestCase
         }
     }
 
-    /**
-     * @expectedException BadMethodCallException
-     */
     public function testSetterWillThrowException()
     {
-          $this->_schema->objectClass='illegal';
+        $this->expectException(BadMethodCallException::class);
+        $this->_schema->objectClass='illegal';
     }
 
-    /**
-     * @expectedException BadMethodCallException
-     */
     public function testOffsetSetWillThrowException()
     {
-          $this->_schema['objectClass']='illegal';
+        $this->expectException(BadMethodCallException::class);
+        $this->_schema['objectClass']='illegal';
     }
 
-    /**
-     * @expectedException BadMethodCallException
-     */
     public function testUnsetterWillThrowException()
     {
-          unset($this->_schema->objectClass);
+        $this->expectException(BadMethodCallException::class);
+        unset($this->_schema->objectClass);
     }
 
-    /**
-     * @expectedException BadMethodCallException
-     */
     public function testOffsetUnsetWillThrowException()
     {
-          unset($this->_schema['objectClass']);
+        $this->expectException(BadMethodCallException::class);
+        unset($this->_schema['objectClass']);
     }
 
     public function testOpenLdapSchema()

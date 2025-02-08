@@ -100,11 +100,9 @@ class Zend_Application_Bootstrap_BootstrapTest extends \PHPUnit\Framework\TestCa
         $this->assertTrue($this->bootstrap->hasPluginResource('FrontController'));
     }
 
-    /**
-     * @expectedException Zend_Application_Bootstrap_Exception
-     */
     public function testRunShouldRaiseExceptionIfNoControllerDirectoryRegisteredWithFrontController()
     {
+        $this->expectException(Zend_Application_Bootstrap_Exception::class);
         $this->bootstrap->bootstrap();
         $this->bootstrap->run();
     }

@@ -153,11 +153,9 @@ class Zend_Dojo_Form_Element_CurrencyTextBoxTest extends \PHPUnit\Framework\Test
         $this->assertEquals('USD', $this->element->getConstraint('symbol'));
     }
 
-    /**
-     * @expectedException Zend_Form_Element_Exception
-     */
     public function testSymbolMutatorShouldRaiseExceptionWhenFewerThan3CharsProvided()
     {
+        $this->expectException(Zend_Form_Element_Exception::class);
         $this->element->setSymbol('$');
     }
 

@@ -98,11 +98,9 @@ class Zend_Dojo_View_Helper_CustomDijitTest extends \PHPUnit\Framework\TestCase
         return $view;
     }
 
-    /**
-     * @expectedException Zend_Dojo_View_Exception
-     */
     public function testHelperShouldRaiseExceptionIfNoDojoTypePassed()
     {
+        $this->expectException(Zend_Dojo_View_Exception::class);
         $this->view->customDijit('foo');
     }
 

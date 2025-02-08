@@ -107,27 +107,21 @@ class Zend_Loader_Autoloader_ResourceTest extends \PHPUnit\Framework\TestCase
         Zend_Loader_Autoloader::resetInstance();
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
     public function testAutoloaderInstantiationShouldRaiseExceptionWithoutNamespace()
     {
+        $this->expectException(Zend_Loader_Exception::class);
         $loader = new Zend_Loader_Autoloader_Resource(array('basePath' => __DIR__));
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
     public function testAutoloaderInstantiationShouldRaiseExceptionWithoutBasePath()
     {
+        $this->expectException(Zend_Loader_Exception::class);
         $loader = new Zend_Loader_Autoloader_Resource(array('namespace' => 'Foo'));
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
     public function testAutoloaderInstantiationShouldRaiseExceptionWhenInvalidOptionsTypeProvided()
     {
+        $this->expectException(Zend_Loader_Exception::class);
         $loader = new Zend_Loader_Autoloader_Resource('foo');
     }
 
@@ -154,19 +148,15 @@ class Zend_Loader_Autoloader_ResourceTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(empty($resourceTypes));
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
     public function testInitialResourceTypeDefinitionShouldRequireNamespace()
     {
+        $this->expectException(Zend_Loader_Exception::class);
         $this->loader->addResourceType('foo', 'foo');
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
     public function testPassingNonStringPathWhenAddingResourceTypeShouldRaiseAnException()
     {
+        $this->expectException(Zend_Loader_Exception::class);
         $this->loader->addResourceType('foo', array('foo'), 'Foo');
     }
 
@@ -199,19 +189,15 @@ class Zend_Loader_Autoloader_ResourceTest extends \PHPUnit\Framework\TestCase
         $this->assertStringContainsString('form', array_keys($resources));
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
     public function testAddingMultipleResourceTypesShouldRaiseExceptionWhenReceivingNonArrayItem()
     {
+        $this->expectException(Zend_Loader_Exception::class);
         $this->loader->addResourceTypes(array('foo' => 'bar'));
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
     public function testAddingMultipleResourceTypesShouldRaiseExceptionWhenMissingResourcePath()
     {
+        $this->expectException(Zend_Loader_Exception::class);
         $this->loader->addResourceTypes(array('model' => array('namespace' => 'Model')));
     }
 
@@ -275,19 +261,15 @@ class Zend_Loader_Autoloader_ResourceTest extends \PHPUnit\Framework\TestCase
         $this->assertNull($this->loader->getDefaultResourceType());
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
     public function testLoadShouldRaiseExceptionWhenNotTypePassedAndNoDefaultSpecified()
     {
+        $this->expectException(Zend_Loader_Exception::class);
         $this->loader->load('Foo');
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
     public function testLoadShouldRaiseExceptionWhenResourceTypeDoesNotExist()
     {
+        $this->expectException(Zend_Loader_Exception::class);
         $this->loader->load('Foo', 'model');
     }
 
@@ -339,27 +321,21 @@ class Zend_Loader_Autoloader_ResourceTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($this->loader->autoload('FooBar_Baz_Bat'));
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
     public function testMethodOverloadingShouldRaiseExceptionForNonGetterMethodCalls()
     {
+        $this->expectException(Zend_Loader_Exception::class);
         $this->loader->lalalalala();
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
     public function testMethodOverloadingShouldRaiseExceptionWhenRequestedResourceDoesNotExist()
     {
+        $this->expectException(Zend_Loader_Exception::class);
         $this->loader->getModel('Foo');
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
     public function testMethodOverloadingShouldRaiseExceptionWhenNoArgumentPassed()
     {
+        $this->expectException(Zend_Loader_Exception::class);
         $this->loader->addResourceTypes(array(
             'model' => array('path' => 'models', 'namespace' => 'Model'),
         ));

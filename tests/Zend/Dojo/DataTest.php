@@ -86,11 +86,9 @@ class Zend_Dojo_DataTest extends \PHPUnit\Framework\TestCase
         $this->assertSame(2, $this->dojoData->getIdentifier());
     }
 
-    /**
-     * @expectedException Zend_Dojo_Exception
-     */
     public function testSetIdentifierShouldThrowExceptionOnInvalidType()
     {
+        $this->expectException(Zend_Dojo_Exception::class);
         $this->dojoData->setIdentifier(true);
     }
 
@@ -292,11 +290,9 @@ class Zend_Dojo_DataTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($obj->items[2]->toArray(), $this->dojoData->getItem(3));
     }
 
-    /**
-     * @expectedException Zend_Dojo_Exception
-     */
     public function testAddItemsShouldThrowExceptionForInvalidItems()
     {
+        $this->expectException(Zend_Dojo_Exception::class);
         $this->dojoData->addItems('foo');
     }
 
@@ -461,11 +457,9 @@ class Zend_Dojo_DataTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($data, $test);
     }
 
-    /**
-     * @expectedException Zend_Dojo_Exception
-     */
     public function testFromJsonShouldThrowExceptionOnInvalidData()
     {
+        $this->expectException(Zend_Dojo_Exception::class);
         $this->dojoData->fromJson(new stdClass);
     }
 

@@ -808,10 +808,11 @@ EOB;
 
     /**
      * @group ZF-8918
-     * @expectedException Zend_Json_Exception
+     *
      */
     public function testDecodingInvalidJsonShouldRaiseAnException()
     {
+        $this->expectException(Zend_Json_Exception::class);
         Zend_Json::decode(' some string ');
     }
 

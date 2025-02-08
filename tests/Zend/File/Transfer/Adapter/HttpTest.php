@@ -106,19 +106,15 @@ class Zend_File_Transfer_Adapter_HttpTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($test instanceof Zend_Validate_File_Upload);
     }
 
-    /**
-     * @expectedException Zend_File_Transfer_Exception
-     */
     public function testSendingFiles()
     {
+        $this->expectException(Zend_File_Transfer_Exception::class);
         $this->adapter->send();
     }
 
-    /**
-     * @expectedException Zend_File_Transfer_Exception
-     */
     public function testFileIsSent()
     {
+        $this->expectException(Zend_File_Transfer_Exception::class);
         $this->adapter->isSent();
     }
 

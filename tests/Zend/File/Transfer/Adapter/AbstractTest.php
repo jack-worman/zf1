@@ -87,11 +87,9 @@ class Zend_File_Transfer_Adapter_AbstractTest extends \PHPUnit\Framework\TestCas
     {
     }
 
-    /**
-     * @expectedException Zend_File_Transfer_Exception
-     */
     public function testAdapterShouldThrowExceptionWhenRetrievingPluginLoaderOfInvalidType()
     {
+        $this->expectException(Zend_File_Transfer_Exception::class);
         $this->adapter->getPluginLoader('bogus');
     }
 
@@ -108,11 +106,9 @@ class Zend_File_Transfer_Adapter_AbstractTest extends \PHPUnit\Framework\TestCas
         $this->assertSame($loader, $this->adapter->getPluginLoader('filter'));
     }
 
-    /**
-     * @expectedException Zend_File_Transfer_Exception
-     */
     public function testAddingInvalidPluginLoaderTypeToAdapterShouldRaiseException()
     {
+        $this->expectException(Zend_File_Transfer_Exception::class);
         $loader = new Zend_Loader_PluginLoader();
         $this->adapter->setPluginLoader($loader, 'bogus');
     }
@@ -136,11 +132,9 @@ class Zend_File_Transfer_Adapter_AbstractTest extends \PHPUnit\Framework\TestCas
         $this->assertTrue(is_array($paths));
     }
 
-    /**
-     * @expectedException Zend_File_Transfer_Exception
-     */
     public function testPassingInvalidTypeWhenAddingPrefixPathToAdapterShouldThrowException()
     {
+        $this->expectException(Zend_File_Transfer_Exception::class);
         $this->adapter->addPrefixPath('Foo', 'Foo', 'bogus');
     }
 
@@ -194,11 +188,9 @@ class Zend_File_Transfer_Adapter_AbstractTest extends \PHPUnit\Framework\TestCas
         $this->assertTrue($test instanceof Zend_Validate_File_Count);
     }
 
-    /**
-     * @expectedException Zend_File_Transfer_Exception
-     */
     public function testAdapterhShouldRaiseExceptionWhenAddingInvalidValidatorType()
     {
+        $this->expectException(Zend_File_Transfer_Exception::class);
         $this->adapter->addValidator(new Zend_Filter_BaseName);
     }
 
@@ -395,11 +387,9 @@ class Zend_File_Transfer_Adapter_AbstractTest extends \PHPUnit\Framework\TestCas
         $this->assertTrue($test instanceof Zend_Filter_StringTrim);
     }
 
-    /**
-     * @expectedException Zend_File_Transfer_Exception
-     */
     public function testAdapterhShouldRaiseExceptionWhenAddingInvalidFilterType()
     {
+        $this->expectException(Zend_File_Transfer_Exception::class);
         $this->adapter->addFilter(new Zend_Validate_File_Extension('jpg'));
     }
 
@@ -588,51 +578,39 @@ class Zend_File_Transfer_Adapter_AbstractTest extends \PHPUnit\Framework\TestCas
         $this->assertEquals('baz.text', $files['baz']['name']);
     }
 
-    /**
-     * @expectedException Zend_File_Transfer_Exception
-     */
     public function testGetAdditionalFileInfosForUnknownFile()
     {
+        $this->expectException(Zend_File_Transfer_Exception::class);
         $files = $this->adapter->getFileInfo('unknown');
     }
 
-    /**
-     * @expectedException Zend_File_Transfer_Exception
-     */
     public function testGetUnknownOption()
     {
+        $this->expectException(Zend_File_Transfer_Exception::class);
         $this->adapter->setOptions(array('unknownOption' => 'unknown'));
     }
 
-    /**
-     * @expectedException Zend_File_Transfer_Exception
-     */
     public function testGetFileIsNotImplemented()
     {
+        $this->expectException(Zend_File_Transfer_Exception::class);
         $this->adapter->getFile();
     }
 
-    /**
-     * @expectedException Zend_File_Transfer_Exception
-     */
     public function testAddFileIsNotImplemented()
     {
+        $this->expectException(Zend_File_Transfer_Exception::class);
         $this->adapter->addFile('foo');
     }
 
-    /**
-     * @expectedException Zend_File_Transfer_Exception
-     */
     public function testGetTypeIsNotImplemented()
     {
+        $this->expectException(Zend_File_Transfer_Exception::class);
         $this->adapter->getType();
     }
 
-    /**
-     * @expectedException Zend_File_Transfer_Exception
-     */
     public function testAddTypeIsNotImplemented()
     {
+        $this->expectException(Zend_File_Transfer_Exception::class);
         $this->adapter->addType('foo');
     }
 

@@ -46,11 +46,9 @@ class Zend_Reflection_FileTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(get_class($reflectionFile), 'Zend_Reflection_File');
     }
 
-    /**
-     * @expectedException Zend_Reflection_Exception
-     */
     public function testFileConstructorThrowsExceptionOnNonExistentFile()
     {
+        $this->expectException(Zend_Reflection_Exception::class);
         $nonExistentFile = 'Non/Existent/File.php';
         $reflectionFile = new Zend_Reflection_File($nonExistentFile);
         $this->fail('Exception should have been thrown');
@@ -75,11 +73,9 @@ class Zend_Reflection_FileTest extends \PHPUnit\Framework\TestCase
     }
 
 
-    /**
-     * @expectedException Zend_Reflection_Exception
-     */
     public function testFileGetClassThrowsExceptionOnNonExistentClassName()
     {
+        $this->expectException(Zend_Reflection_Exception::class);
         $fileToRequire = __DIR__ . '/_files/TestSampleClass.php';
         require_once $fileToRequire;
         $reflectionFile = new Zend_Reflection_File($fileToRequire);

@@ -144,11 +144,9 @@ class Zend_Server_Method_DefinitionTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($object, $this->definition->getObject());
     }
 
-    /**
-     * @expectedException Zend_Server_Exception
-     */
     public function testSettingObjectToNonObjectShouldThrowException()
     {
+        $this->expectException(Zend_Server_Exception::class);
         $this->definition->setObject('foo');
     }
 

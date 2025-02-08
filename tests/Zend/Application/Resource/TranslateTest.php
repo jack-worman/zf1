@@ -223,10 +223,11 @@ class Zend_Application_Resource_TranslateTest extends \PHPUnit\Framework\TestCas
 
     /**
      * @group ZF-10352
-     * @expectedException Zend_Application_Resource_Exception
+     *
      */
     public function testToUseTheTwoKeysContentAndDataShouldThrowsException()
     {
+        $this->expectException(Zend_Application_Resource_Exception::class);
         $options = array(
             'adapter' => 'array',
             'content' => array(

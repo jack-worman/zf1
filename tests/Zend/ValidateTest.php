@@ -153,10 +153,11 @@ class Zend_ValidateTest extends \PHPUnit\Framework\TestCase
      *
      * @group  ZF-2724
      * @return void
-     * @expectedException Zend_Validate_Exception
+     *
      */
     public function testStaticFactoryClassNotFound()
     {
+        $this->expectException(Zend_Validate_Exception::class);
         Zend_Validate::is('1234', 'UnknownValidator');
     }
 

@@ -230,11 +230,9 @@ class Zend_Dojo_View_Helper_HorizontalSliderTest extends \PHPUnit\Framework\Test
         $this->assertStringNotContainsString('rightDecoration', $html);
     }
 
-    /**
-     * @expectedException Zend_Dojo_View_Exception
-     */
     public function testSliderShouldRaiseExceptionIfMissingRequiredParameters()
     {
+        $this->expectException(Zend_Dojo_View_Exception::class);
         $this->helper->prepareSlider('foo', 4);
     }
 

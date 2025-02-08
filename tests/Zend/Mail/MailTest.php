@@ -911,10 +911,8 @@ class Zend_Mail_MailTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('foo@example.com',$mail->getReplyTo());
     }
 
-    /**
-     * @expectedException Zend_Mail_Exception
-     */
     public function testReplyToCantBeSetTwice() {
+        $this->expectException(Zend_Mail_Exception::class);
         $mail = new Zend_Mail();
         $mail->setReplyTo('user@example.com');
         $mail->setReplyTo('user2@example.com');

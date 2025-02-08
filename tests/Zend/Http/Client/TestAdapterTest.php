@@ -65,10 +65,11 @@ class Zend_Http_Client_TestAdapterTest extends \PHPUnit\Framework\TestCase
     /**
      * Make sure an exception is thrown on invalid cofiguration
      *
-     * @expectedException Zend_Http_Client_Adapter_Exception
+     *
      */
     public function testSetConfigThrowsOnInvalidConfig()
     {
+        $this->expectException(Zend_Http_Client_Adapter_Exception::class);
         $this->adapter->setConfig('foo');
     }
 

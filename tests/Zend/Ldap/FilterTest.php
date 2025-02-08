@@ -123,11 +123,9 @@ class Zend_Ldap_FilterTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('(name=*value)', $f1->toString());
     }
 
-    /**
-     * @expectedException Zend_Ldap_Filter_Exception
-     */
     public function testIllegalGroupingFilter()
     {
+        $this->expectException(Zend_Ldap_Filter_Exception::class);
         $data=array('a', 'b', 5);
         $f=new Zend_Ldap_Filter_And($data);
     }

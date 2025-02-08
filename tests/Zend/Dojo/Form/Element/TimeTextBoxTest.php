@@ -139,11 +139,9 @@ class Zend_Dojo_Form_Element_TimeTextBoxTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('T00:15:00', $this->element->dijitParams['constraints']['clickableIncrement']);
     }
 
-    /**
-     * @expectedException Zend_Form_Element_Exception
-     */
     public function testClickableIncrementMutatorShouldRaiseExceptionOnInvalidFormat()
     {
+        $this->expectException(Zend_Form_Element_Exception::class);
         $this->element->setClickableIncrement('en-US');
     }
 
@@ -157,11 +155,9 @@ class Zend_Dojo_Form_Element_TimeTextBoxTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('T00:15:00', $this->element->dijitParams['constraints']['visibleIncrement']);
     }
 
-    /**
-     * @expectedException Zend_Form_Element_Exception
-     */
     public function testVisibleIncrementMutatorShouldRaiseExceptionOnInvalidFormat()
     {
+        $this->expectException(Zend_Form_Element_Exception::class);
         $this->element->setVisibleIncrement('en-US');
     }
 
@@ -175,11 +171,9 @@ class Zend_Dojo_Form_Element_TimeTextBoxTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('T00:15:00', $this->element->dijitParams['constraints']['visibleRange']);
     }
 
-    /**
-     * @expectedException Zend_Form_Element_Exception
-     */
     public function testVisibleRangeMutatorShouldRaiseExceptionOnInvalidFormat()
     {
+        $this->expectException(Zend_Form_Element_Exception::class);
         $this->element->setVisibleRange('en-US');
     }
 

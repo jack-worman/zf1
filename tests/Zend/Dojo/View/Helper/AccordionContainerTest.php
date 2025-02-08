@@ -147,11 +147,9 @@ class Zend_Dojo_View_Helper_AccordionContainerTest extends \PHPUnit\Framework\Te
         $this->assertStringContainsString('Nested Content', $html);
     }
 
-    /**
-     * @expectedException Zend_Dojo_View_Exception
-     */
     public function testCapturingShouldRaiseErrorWhenDuplicateIdDiscovered()
     {
+        $this->expectException(Zend_Dojo_View_Exception::class);
         $this->helper->captureStart('foo', array(), array('style' => 'height: 200px; width: 100px;'));
         $this->view->accordionPane()->captureStart('bar', array('title' => 'Captured Pane'));
         $this->view->accordionPane()->captureStart('bar', array('title' => 'Captured Pane'));
@@ -161,11 +159,9 @@ class Zend_Dojo_View_Helper_AccordionContainerTest extends \PHPUnit\Framework\Te
         $html = $this->helper->captureEnd('foo');
     }
 
-    /**
-     * @expectedException Zend_Dojo_View_Exception
-     */
     public function testCapturingShouldRaiseErrorWhenNonexistentIdPassedToEnd()
     {
+        $this->expectException(Zend_Dojo_View_Exception::class);
         $this->helper->captureStart('foo', array(), array('style' => 'height: 200px; width: 100px;'));
         $html = $this->helper->captureEnd('bar');
     }

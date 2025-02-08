@@ -128,11 +128,12 @@ class Zend_Http_Client_CurlTest extends Zend_Http_Client_CommonHttpTests
     /**
      * Check that an exception is thrown when trying to set invalid config
      *
-     * @expectedException Zend_Http_Client_Adapter_Exception
+     *
      * @dataProvider invalidConfigProvider
      */
     public function testSetConfigInvalidConfig($config)
     {
+        $this->expectException(Zend_Http_Client_Adapter_Exception::class);
         $this->_adapter->setConfig($config);
     }
 
@@ -142,10 +143,11 @@ class Zend_Http_Client_CurlTest extends Zend_Http_Client_CommonHttpTests
      *
      * This should throw an exception.
      *
-     * @expectedException Zend_Http_Exception
+     *
      */
     public function testSettingInvalidCurlOption()
     {
+        $this->expectException(Zend_Http_Exception::class);
         $config = array(
             'adapter'     => 'Zend_Http_Client_Adapter_Curl',
             'curloptions' => array(CURLOPT_CLOSEPOLICY => true),
@@ -181,10 +183,11 @@ class Zend_Http_Client_CurlTest extends Zend_Http_Client_CommonHttpTests
      * Set CURLOPT_FOLLOWLOCATION = false for this type of request and let the Zend_Http_Client handle redirects
      * in his own loop.
      *
-     * @expectedException Zend_Http_Client_Exception
+     *
      */
     public function testRedirectPostToGetWithCurlFollowLocationOptionLeadsToTimeout()
     {
+        $this->expectException(Zend_Http_Client_Exception::class);
         $adapter = new Zend_Http_Client_Adapter_Curl();
         $this->client->setAdapter($adapter);
         $adapter->setConfig(array(

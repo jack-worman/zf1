@@ -64,10 +64,11 @@ class Zend_Mail_SmtpProtocolTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @depends testEhlo
-     * @expectedException Zend_Mail_Protocol_Exception
+     *
      */
     public function testHeloIsOnlyAllowedOncePerSession()
     {
+        $this->expectException(Zend_Mail_Protocol_Exception::class);
         $this->_connectAndEhlo(); // do it once
         $this->_protocol->helo(); // do it again
     }
@@ -265,10 +266,11 @@ class Zend_Mail_SmtpProtocolTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @depends testMail
-     * @expectedException Zend_Mail_Protocol_Exception
+     *
      */
     public function testRcptThrowsExceptionOnUnexpectedResponse()
     {
+        $this->expectException(Zend_Mail_Protocol_Exception::class);
         $p = $this->_protocol;
         $expectedDialog = $this->_connectAndEhlo();
 
@@ -309,10 +311,11 @@ class Zend_Mail_SmtpProtocolTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @depends testEhlo
-     * @expectedException Zend_Mail_Protocol_Exception
+     *
      */
     public function testDataBeforeRcptThrowsException()
     {
+        $this->expectException(Zend_Mail_Protocol_Exception::class);
         $this->_connectAndEhlo();
 
         $this->_protocol->data('foo');

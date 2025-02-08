@@ -143,11 +143,9 @@ class Zend_Form_Element_FileTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($adapter, $test);
     }
 
-    /**
-     * @expectedException Zend_Form_Element_Exception
-     */
     public function testElementShouldThrowExceptionWhenAddingAdapterOfInvalidType()
     {
+        $this->expectException(Zend_Form_Element_Exception::class);
         $this->element->setTransferAdapter(new stdClass);
     }
 

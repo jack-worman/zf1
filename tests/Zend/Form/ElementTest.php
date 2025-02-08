@@ -1998,10 +1998,11 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @group ZF-3217
-     * @expectedException Zend_Form_Element_Exception
+     *
      */
     public function testOverloadingToInvalidMethodsShouldThrowAnException()
     {
+        $this->expectException(Zend_Form_Element_Exception::class);
         $html = $this->element->bogusMethodCall();
     }
 

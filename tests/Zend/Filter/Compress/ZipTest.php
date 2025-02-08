@@ -304,10 +304,11 @@ class Zend_Filter_Compress_ZipTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @group
-     * @expectedException Zend_Filter_Exception
+     *
      */
     public function testDecompressWillThrowExceptionWhenDecompressingWithNoTarget()
     {
+        $this->expectException(Zend_Filter_Exception::class);
         $filter  = new Zend_Filter_Compress_Zip(
             array(
                 'archive' => __DIR__ . '/../_files/compressed.zip',

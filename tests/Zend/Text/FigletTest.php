@@ -137,11 +137,9 @@ class Zend_Text_FigletTest extends \PHPUnit\Framework\TestCase
         $this->_equalAgainstFile($figlet->render($isoText, 'ISO-8859-15'), 'CorrectEncoding.figlet');
     }
 
-    /**
-     * @expectedException Zend_Text_Figlet_Exception
-     */
     public function testIncorrectEncoding()
     {
+        $this->expectException(Zend_Text_Figlet_Exception::class);
         $this->markTestSkipped('Test case not reproducible on all setups');
         $figlet  = new Zend_Text_Figlet();
 

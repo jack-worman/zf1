@@ -126,10 +126,11 @@ class Zend_UriTest extends \PHPUnit\Framework\TestCase
      * nor Zend_Config is given as first parameter
      *
      * @group ZF-5578
-     * @expectedException Zend_Uri_Exception
+     *
      */
     public function testSetConfigInvalid()
     {
+        $this->expectException(Zend_Uri_Exception::class);
         Zend_Uri::setConfig('This should cause an exception');
     }
 

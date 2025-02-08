@@ -100,27 +100,21 @@ class Zend_Loader_AutoloaderMultiVersionTest extends \PHPUnit\Framework\TestCase
         $this->assertNull($this->autoloader->getZfPath());
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
     public function testSettingZfPathFailsOnInvalidVersionString()
     {
+        $this->expectException(Zend_Loader_Exception::class);
         $this->autoloader->setZfPath($this->path, 'foo.bar.baz.bat');
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
     public function testSettingZfPathFailsWhenBasePathDoesNotExist()
     {
+        $this->expectException(Zend_Loader_Exception::class);
         $this->autoloader->setZfPath('foo.bar.baz.bat', 'latest');
     }
 
-    /**
-     * @expectedException Zend_Loader_Exception
-     */
     public function testSettingZfVersionFailsWhenNoValidInstallsDiscovered()
     {
+        $this->expectException(Zend_Loader_Exception::class);
         $this->autoloader->setZfPath(__DIR__, 'latest');
     }
 

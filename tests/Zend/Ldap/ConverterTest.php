@@ -214,11 +214,12 @@ class Zend_Ldap_ConverterTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @expectedException	InvalidArgumentException
+     *
      * @dataProvider		fromLdapDateTimeException
      */
     public function testFromLdapDateTimeThrowsException ($value)
     {
+        $this->expectException(InvalidArgumentException::class);
         Zend_Ldap_Converter::fromLdapDatetime($value);
     }
 

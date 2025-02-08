@@ -82,10 +82,11 @@ class Zend_Uri_HttpTest extends \PHPUnit\Framework\TestCase
      *
      * @group ZF-4395
      *
-     * @expectedException Zend_Uri_Exception
+     *
      */
     public function testFromStringInvalidScheme()
     {
+        $this->expectException(Zend_Uri_Exception::class);
         Zend_Uri_Http::fromString('ftp://example.com/file');
     }
 

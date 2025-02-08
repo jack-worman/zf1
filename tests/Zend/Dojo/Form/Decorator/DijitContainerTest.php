@@ -203,11 +203,9 @@ class Zend_Dojo_Form_Decorator_DijitContainerTest extends \PHPUnit\Framework\Tes
         $this->assertStringContainsString('dojoType="dijit.layout.ContentPane"', $html);
     }
 
-    /**
-     * @expectedException Zend_Form_Decorator_Exception
-     */
     public function testAbsenceOfHelperShouldRaiseException()
     {
+        $this->expectException(Zend_Form_Decorator_Exception::class);
         $decorator = new Zend_Dojo_Form_Decorator_DijitContainerTest_Example();
         $helper = $decorator->getHelper();
     }

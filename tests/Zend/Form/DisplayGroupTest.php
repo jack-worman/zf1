@@ -741,10 +741,11 @@ class Zend_Form_DisplayGroupTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @group ZF-3217
-     * @expectedException Zend_Form_Exception
+     *
      */
     public function testOverloadingToInvalidMethodsShouldThrowAnException()
     {
+        $this->expectException(Zend_Form_Exception::class);
         $html = $this->group->bogusMethodCall();
     }
 

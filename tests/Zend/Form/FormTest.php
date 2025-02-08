@@ -4030,10 +4030,11 @@ class Zend_Form_FormTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @group ZF-3217
-     * @expectedException Zend_Form_Exception
+     *
      */
     public function testOverloadingToInvalidMethodsShouldThrowAnException()
     {
+        $this->expectException(Zend_Form_Exception::class);
         $html = $this->form->bogusMethodCall();
     }
 
@@ -4631,10 +4632,11 @@ class Zend_Form_FormTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @group ZF-10865
-     * @expectedException Zend_Form_Exception
+     *
      */
     public function testExceptionThrownWhenAddElementsIsGivenNullValue()
     {
+        $this->expectException(Zend_Form_Exception::class);
         $form = new Zend_Form();
         $form->addElement(null);
     }

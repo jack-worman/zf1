@@ -139,10 +139,11 @@ class Zend_FilterTest extends \PHPUnit\Framework\TestCase
      *
      * @group  ZF-2724
      * @return void
-     * @expectedException Zend_Filter_Exception
+     *
      */
     public function testStaticFactoryClassNotFound()
     {
+        $this->expectException(Zend_Filter_Exception::class);
         Zend_Filter::filterStatic('1234', 'UnknownFilter');
     }
 

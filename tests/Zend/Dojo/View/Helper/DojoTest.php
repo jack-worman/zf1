@@ -549,11 +549,9 @@ function() {
         $this->assertEquals('dijit.form.Form', $dijit['params']['dojoType']);
     }
 
-    /**
-     * @expectedException Zend_Dojo_View_Exception
-     */
     public function testAddingDuplicateProgrammaticDijitsShouldRaiseExceptions()
     {
+        $this->expectException(Zend_Dojo_View_Exception::class);
         $this->helper->addDijit('foo', array('dojoType' => 'dijit.form.Form'));
         $this->helper->addDijit('foo', array('dojoType' => 'dijit.form.ComboBox'));
     }
@@ -798,11 +796,9 @@ function() {
         $this->assertSame(array('foo', 'bar'), $found);
     }
 
-    /**
-     * @expectedException Zend_Dojo_View_Exception
-     */
     public function testCallingMethodThatDoesNotExistInContainerShouldRaiseException()
     {
+        $this->expectException(Zend_Dojo_View_Exception::class);
         $dojo = new Zend_Dojo_View_Helper_Dojo();
         $dojo->bogus();
     }

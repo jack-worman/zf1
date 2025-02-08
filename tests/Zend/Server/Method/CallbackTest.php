@@ -125,11 +125,9 @@ class Zend_Server_Method_CallbackTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('instance', $this->callback->getType());
     }
 
-    /**
-     * @expectedException Zend_Server_Exception
-     */
     public function testSettingTypeShouldThrowExceptionWhenInvalidTypeProvided()
     {
+        $this->expectException(Zend_Server_Exception::class);
         $this->callback->setType('bogus');
     }
 

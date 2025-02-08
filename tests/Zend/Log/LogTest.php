@@ -565,11 +565,9 @@ class Zend_Log_LogTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($log instanceof ZLTest_My_Log);
     }
 
-    /**
-     * @expectedException Zend_Log_Exception
-     */
     public function testZendLogThrowsAnExceptionWhenPassingIncorrectClassToFactory()
     {
+        $this->expectException(Zend_Log_Exception::class);
         $writer = new Zend_Log_Writer_Null();
         ZLTest_My_Log::factory(
             array(

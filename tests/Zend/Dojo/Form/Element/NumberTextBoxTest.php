@@ -143,11 +143,9 @@ class Zend_Dojo_Form_Element_NumberTextBoxTest extends \PHPUnit\Framework\TestCa
         $this->assertEquals('percent', $this->element->dijitParams['constraints']['type']);
     }
 
-    /**
-     * @expectedException Zend_Form_Element_Exception
-     */
     public function testTypeMutatorShouldThrowExceptionWithInvalidType()
     {
+        $this->expectException(Zend_Form_Element_Exception::class);
         $this->element->setType('foobar');
     }
 
