@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,30 +14,29 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Mime
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Mime_Message
+ * Zend_Mime_Message.
  */
 // require_once 'Zend/Mime/Message.php';
 
 /**
  * @category   Zend
- * @package    Zend_Mime
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Mime
  */
 #[AllowDynamicProperties]
-class Zend_Mime_MessageTest extends \PHPUnit\Framework\TestCase
+class Zend_Mime_MessageTest extends PHPUnit\Framework\TestCase
 {
-
     public function testMultiPart()
     {
         $msg = new Zend_Mime_Message();  // No Parts
@@ -48,15 +48,15 @@ class Zend_Mime_MessageTest extends \PHPUnit\Framework\TestCase
         $msg = new Zend_Mime_Message();  // No Parts
         $p = $msg->getParts();
         $this->assertTrue(is_array($p));
-        $this->assertTrue(count($p) == 0);
+        $this->assertTrue(0 == count($p));
 
-        $p2 = array();
+        $p2 = [];
         $p2[] = new Zend_Mime_Part('This is a test');
         $p2[] = new Zend_Mime_Part('This is another test');
         $msg->setParts($p2);
         $p = $msg->getParts();
         $this->assertTrue(is_array($p));
-        $this->assertTrue(count($p) == 2);
+        $this->assertTrue(2 == count($p));
     }
 
     public function testGetMime()
@@ -85,20 +85,19 @@ class Zend_Mime_MessageTest extends \PHPUnit\Framework\TestCase
         $boundary = $mime->boundary();
         $p1 = strpos((string) $res, $boundary);
         // $boundary must appear once for every mime part
-        $this->assertTrue($p1 !== false);
+        $this->assertTrue(false !== $p1);
         if ($p1) {
             $p2 = strpos((string) $res, $boundary, $p1 + strlen((string) $boundary));
-            $this->assertTrue($p2 !== false);
+            $this->assertTrue(false !== $p2);
         }
         // check if the two test messages appear:
-        $this->assertTrue(strpos((string) $res, 'This is a test') !== false);
-        $this->assertTrue(strpos((string) $res, 'This is another test') !== false);
+        $this->assertTrue(false !== strpos((string) $res, 'This is a test'));
+        $this->assertTrue(false !== strpos((string) $res, 'This is another test'));
         // ... more in ZMailTest
     }
 
     /**
-     * check if decoding a string into a Zend_Mime_Message object works
-     *
+     * check if decoding a string into a Zend_Mime_Message object works.
      */
     public function testDecodeMimeMessage()
     {

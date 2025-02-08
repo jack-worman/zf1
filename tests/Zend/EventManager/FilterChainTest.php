@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +14,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_EventManager
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id:$
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_EventManager_FilterChainTest::main');
 }
@@ -29,21 +29,21 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 /**
  * @category   Zend
- * @package    Zend_EventManager
- * @subpackage UnitTests
+ *
  * @group      Zend_EventManager
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
-class Zend_EventManager_FilterChainTest extends \PHPUnit\Framework\TestCase
+class Zend_EventManager_FilterChainTest extends PHPUnit\Framework\TestCase
 {
     public static function main()
     {
-        $suite  = \PHPUnit\Framework\TestSuite::empty(__CLASS__);
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty(__CLASS__);
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -53,18 +53,18 @@ class Zend_EventManager_FilterChainTest extends \PHPUnit\Framework\TestCase
         if (isset($this->message)) {
             unset($this->message);
         }
-        $this->filterchain = new Zend_EventManager_FilterChain;
+        $this->filterchain = new Zend_EventManager_FilterChain();
     }
 
     public function testSubscribeShouldReturnCallbackHandler()
     {
-        $handle = $this->filterchain->attach(array( $this, 'testSubscribeShouldReturnCallbackHandler' ));
+        $handle = $this->filterchain->attach([$this, 'testSubscribeShouldReturnCallbackHandler']);
         $this->assertTrue($handle instanceof Zend_Stdlib_CallbackHandler);
     }
 
     public function testSubscribeShouldAddCallbackHandlerToFilters()
     {
-        $handler  = $this->filterchain->attach(array($this, 'testSubscribeShouldAddCallbackHandlerToFilters'));
+        $handler = $this->filterchain->attach([$this, 'testSubscribeShouldAddCallbackHandlerToFilters']);
         $handlers = $this->filterchain->getFilters();
         $this->assertEquals(1, count($handlers));
         $this->assertTrue($handlers->contains($handler));
@@ -72,7 +72,7 @@ class Zend_EventManager_FilterChainTest extends \PHPUnit\Framework\TestCase
 
     public function testDetachShouldRemoveCallbackHandlerFromFilters()
     {
-        $handle = $this->filterchain->attach(array( $this, 'testDetachShouldRemoveCallbackHandlerFromFilters' ));
+        $handle = $this->filterchain->attach([$this, 'testDetachShouldRemoveCallbackHandlerFromFilters']);
         $handles = $this->filterchain->getFilters();
         $this->assertTrue($handles->contains($handle));
         $this->filterchain->detach($handle);
@@ -82,9 +82,9 @@ class Zend_EventManager_FilterChainTest extends \PHPUnit\Framework\TestCase
 
     public function testDetachShouldReturnFalseIfCallbackHandlerDoesNotExist()
     {
-        $handle1 = $this->filterchain->attach(array( $this, 'testDetachShouldReturnFalseIfCallbackHandlerDoesNotExist' ));
+        $handle1 = $this->filterchain->attach([$this, 'testDetachShouldReturnFalseIfCallbackHandlerDoesNotExist']);
         $this->filterchain->clearFilters();
-        $handle2 = $this->filterchain->attach(array( $this, 'handleTestTopic' ));
+        $handle2 = $this->filterchain->attach([$this, 'handleTestTopic']);
         $this->assertFalse($this->filterchain->detach($handle1));
     }
 
@@ -96,17 +96,17 @@ class Zend_EventManager_FilterChainTest extends \PHPUnit\Framework\TestCase
 
     public function testFilterChainShouldReturnLastResponse()
     {
-        $this->filterchain->attach(array($this, 'filterTrim'));
-        $this->filterchain->attach(array($this, 'filterStrRot13'));
-        $value = $this->filterchain->run($this, array('string' => ' foo '));
+        $this->filterchain->attach([$this, 'filterTrim']);
+        $this->filterchain->attach([$this, 'filterStrRot13']);
+        $value = $this->filterchain->run($this, ['string' => ' foo ']);
         $this->assertEquals(str_rot13(\trim((string) ' foo ')), $value);
     }
 
     public function testFilterIsPassedContextAndArguments()
     {
-        $this->filterchain->attach(array( $this, 'filterTestCallback1' ));
-        $obj = (object) array('foo' => 'bar', 'bar' => 'baz');
-        $value = $this->filterchain->run($this, array('object' => $obj));
+        $this->filterchain->attach([$this, 'filterTestCallback1']);
+        $obj = (object) ['foo' => 'bar', 'bar' => 'baz'];
+        $value = $this->filterchain->run($this, ['object' => $obj]);
         $this->assertEquals('filtered', $value);
         $this->assertEquals('filterTestCallback1', $this->message);
         $this->assertEquals('foobarbaz', $obj->foo);
@@ -114,16 +114,16 @@ class Zend_EventManager_FilterChainTest extends \PHPUnit\Framework\TestCase
 
     public function testInterceptingFilterShouldReceiveChain()
     {
-        $this->filterchain->attach(array($this, 'filterReceivalCallback'));
+        $this->filterchain->attach([$this, 'filterReceivalCallback']);
         $this->filterchain->run($this);
     }
 
     public function testFilteringStopsAsSoonAsAFilterFailsToCallNext()
     {
-        $this->filterchain->attach(array($this, 'filterTrim'), 10000);
-        $this->filterchain->attach(array($this, 'filterStrRot13'), 1000);
-        $this->filterchain->attach(array($this, 'filterHashMd5'), 100);
-        $value = $this->filterchain->run($this, array('string' => ' foo '));
+        $this->filterchain->attach([$this, 'filterTrim'], 10000);
+        $this->filterchain->attach([$this, 'filterStrRot13'], 1000);
+        $this->filterchain->attach([$this, 'filterHashMd5'], 100);
+        $value = $this->filterchain->run($this, ['string' => ' foo ']);
         $this->assertEquals(str_rot13(\trim((string) ' foo ')), $value);
     }
 
@@ -138,6 +138,7 @@ class Zend_EventManager_FilterChainTest extends \PHPUnit\Framework\TestCase
         if (isset($params['object']) && is_object($params['object'])) {
             $params['object']->foo = 'foobarbaz';
         }
+
         return 'filtered';
     }
 
@@ -151,19 +152,22 @@ class Zend_EventManager_FilterChainTest extends \PHPUnit\Framework\TestCase
         if (isset($params['string'])) {
             $params['string'] = \trim((string) $params['string']);
         }
-        $return =  $chain->next($context, $params, $chain);
+        $return = $chain->next($context, $params, $chain);
+
         return $return;
     }
 
     public function filterStrRot13($context, array $params)
     {
         $string = isset($params['string']) ? $params['string'] : '';
+
         return str_rot13($string);
     }
 
     public function filterHashMd5($context, $params, $chain)
     {
         $string = isset($params['string']) ? $params['string'] : '';
+
         return hash('md5', $string);
     }
 }

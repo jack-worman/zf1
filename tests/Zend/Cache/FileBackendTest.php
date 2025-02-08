@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,41 +14,41 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Cache
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Cache
+ * Zend_Cache.
  */
 // require_once 'Zend/Cache.php';
 // require_once 'Zend/Cache/Backend/File.php';
 
 /**
- * Zend_Log
+ * Zend_Log.
  */
 // require_once 'Zend/Log.php';
 // require_once 'Zend/Log/Writer/Null.php';
 
 /**
- * Common tests for backends
+ * Common tests for backends.
  */
 require_once 'CommonExtendedBackendTest.php';
 
 /**
  * @category   Zend
- * @package    Zend_Cache
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Cache
  */
 #[AllowDynamicProperties]
-class Zend_Cache_FileBackendTest extends Zend_Cache_CommonExtendedBackendTest {
-
+class Zend_Cache_FileBackendTest extends Zend_Cache_CommonExtendedBackendTest
+{
     protected $_instance;
     protected $_instance2;
     protected $_cache_dir;
@@ -55,13 +56,13 @@ class Zend_Cache_FileBackendTest extends Zend_Cache_CommonExtendedBackendTest {
     public function setUp($notag = false): void
     {
         $this->mkdir();
-        $this->_cache_dir = $this->getTmpDir() . DIRECTORY_SEPARATOR;
-        $this->_instance = new Zend_Cache_Backend_File(array(
+        $this->_cache_dir = $this->getTmpDir().DIRECTORY_SEPARATOR;
+        $this->_instance = new Zend_Cache_Backend_File([
             'cache_dir' => $this->_cache_dir,
-        ));
+        ]);
 
         $logger = new Zend_Log(new Zend_Log_Writer_Null());
-        $this->_instance->setDirectives(array('logger' => $logger));
+        $this->_instance->setDirectives(['logger' => $logger]);
 
         parent::setUp($notag);
     }
@@ -75,13 +76,13 @@ class Zend_Cache_FileBackendTest extends Zend_Cache_CommonExtendedBackendTest {
     public function testSetDeprecatedHashedDirectoryUmask()
     {
         try {
-            $cache = new Zend_Cache_Backend_File(array(
-                'cache_dir'              => $this->_cache_dir,
+            $cache = new Zend_Cache_Backend_File([
+                'cache_dir' => $this->_cache_dir,
                 'hashed_directory_umask' => 0700,
-            ));
-            $this->fail("Missing expected E_USER_NOTICE error");
-        } catch (\PHPUnit\Framework\AssertionFailedError $e) {
-            if ($e->getCode() != E_USER_NOTICE) {
+            ]);
+            $this->fail('Missing expected E_USER_NOTICE error');
+        } catch (PHPUnit\Framework\AssertionFailedError $e) {
+            if (E_USER_NOTICE != $e->getCode()) {
                 throw $e;
             }
 
@@ -92,13 +93,13 @@ class Zend_Cache_FileBackendTest extends Zend_Cache_CommonExtendedBackendTest {
     public function testSetDeprecatedCacheFileUmask()
     {
         try {
-            $cache = new Zend_Cache_Backend_File(array(
-                    'cache_dir'        => $this->_cache_dir,
-                    'cache_file_umask' => 0700,
-            ));
-            $this->fail("Missing expected E_USER_NOTICE error");
-        } catch (\PHPUnit\Framework\AssertionFailedError $e) {
-            if ($e->getCode() != E_USER_NOTICE) {
+            $cache = new Zend_Cache_Backend_File([
+                'cache_dir' => $this->_cache_dir,
+                'cache_file_umask' => 0700,
+            ]);
+            $this->fail('Missing expected E_USER_NOTICE error');
+        } catch (PHPUnit\Framework\AssertionFailedError $e) {
+            if (E_USER_NOTICE != $e->getCode()) {
                 throw $e;
             }
 
@@ -108,15 +109,15 @@ class Zend_Cache_FileBackendTest extends Zend_Cache_CommonExtendedBackendTest {
 
     public function testConstructorCorrectCall()
     {
-        $test = new Zend_Cache_Backend_File(array());
+        $test = new Zend_Cache_Backend_File([]);
     }
 
     public function testConstructorWithABadFileNamePrefix()
     {
         try {
-            $class = new Zend_Cache_Backend_File(array(
-                'file_name_prefix' => 'foo bar'
-            ));
+            $class = new Zend_Cache_Backend_File([
+                'file_name_prefix' => 'foo bar',
+            ]);
         } catch (Zend_Cache_Exception $e) {
             return;
         }
@@ -125,14 +126,14 @@ class Zend_Cache_FileBackendTest extends Zend_Cache_CommonExtendedBackendTest {
 
     public function testGetWithANonExistingCacheIdAndANullLifeTime()
     {
-        $this->_instance->setDirectives(array('lifetime' => null));
+        $this->_instance->setDirectives(['lifetime' => null]);
         $this->assertFalse($this->_instance->load('barbar'));
     }
 
     public function testSaveCorrectCallWithHashedDirectoryStructure()
     {
         $this->_instance->setOption('hashed_directory_level', 2);
-        $res = $this->_instance->save('data to cache', 'foo', array('tag1', 'tag2'));
+        $res = $this->_instance->save('data to cache', 'foo', ['tag1', 'tag2']);
         $this->assertTrue($res);
     }
 
@@ -158,19 +159,19 @@ class Zend_Cache_FileBackendTest extends Zend_Cache_CommonExtendedBackendTest {
     public function testSaveWithABadCacheDir()
     {
         $this->_instance->setOption('cache_dir', '/foo/bar/lfjlqsdjfklsqd/');
-        $res = $this->_instance->save('data to cache', 'foo', array('tag1', 'tag2'));
+        $res = $this->_instance->save('data to cache', 'foo', ['tag1', 'tag2']);
         $this->assertFalse($res);
     }
 
     public function testShouldProperlyCleanCacheNoMatterTheCacheId()
     {
         // the 'zzz' and 'ďťň' keys will be sorted after internal-metadatas file
-        $keys = array(
+        $keys = [
             '9230de5449e0c818ed4804587ed422d5',
             'zzz',
             'Zend_LocaleC_cs_CZ_date_',
-            'ďťň'
-        );
+            'ďťň',
+        ];
 
         foreach ($keys as $key) {
             $this->_instance->save('data to cache', $key);
@@ -180,14 +181,14 @@ class Zend_Cache_FileBackendTest extends Zend_Cache_CommonExtendedBackendTest {
     }
 
     /**
-     * The CLEANING_MODE_ALL should delete also old orphaned metadatafiles
+     * The CLEANING_MODE_ALL should delete also old orphaned metadatafiles.
      */
     public function testShouldDeleteOldMetadataFiles()
     {
         // simulate orphaned metadata file
         $fn = $this->_cache_dir
-            . DIRECTORY_SEPARATOR
-            . 'zend_cache---internal-metadatas---7a38619e110f03740970cbcd5310f33f';
+            .DIRECTORY_SEPARATOR
+            .'zend_cache---internal-metadatas---7a38619e110f03740970cbcd5310f33f';
         $file = fopen($fn, 'a+');
         fclose($file);
 

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +14,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Log
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Log_Writer_SyslogTest::main');
 }
@@ -29,38 +29,38 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 /**
  * @category   Zend
- * @package    Zend_Log
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Log
  */
 #[AllowDynamicProperties]
-class Zend_Log_Writer_SyslogTest extends \PHPUnit\Framework\TestCase
+class Zend_Log_Writer_SyslogTest extends PHPUnit\Framework\TestCase
 {
     public static function main()
     {
-        $suite  = \PHPUnit\Framework\TestSuite::empty(__CLASS__);
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty(__CLASS__);
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
 
     public function testWrite()
     {
-        $fields = array('message' => 'foo', 'priority' => LOG_NOTICE);
+        $fields = ['message' => 'foo', 'priority' => LOG_NOTICE];
         $writer = new Zend_Log_Writer_Syslog();
         $writer->write($fields);
     }
 
     public function testFactory()
     {
-        $cfg = array(
+        $cfg = [
             'application' => 'my app',
-            'facility'    => LOG_USER
-        );
+            'facility' => LOG_USER,
+        ];
 
         $writer = Zend_Log_Writer_Syslog::factory($cfg);
         $this->assertTrue($writer instanceof Zend_Log_Writer_Syslog);
@@ -74,7 +74,7 @@ class Zend_Log_Writer_SyslogTest extends \PHPUnit\Framework\TestCase
         try {
             $writer = new Zend_Log_Writer_Syslog();
             $writer->setFacility(LOG_USER * 1000);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->assertTrue($e instanceof Zend_Log_Exception);
             $this->assertStringContainsString('Invalid log facility provided', $e->getMessage());
         }
@@ -91,7 +91,7 @@ class Zend_Log_Writer_SyslogTest extends \PHPUnit\Framework\TestCase
         try {
             $writer = new Zend_Log_Writer_Syslog();
             $writer->setFacility(LOG_AUTH);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->assertTrue($e instanceof Zend_Log_Exception);
             $this->assertStringContainsString('Only LOG_USER is a valid', $e->getMessage());
         }
@@ -102,7 +102,7 @@ class Zend_Log_Writer_SyslogTest extends \PHPUnit\Framework\TestCase
      */
     public function testFluentInterface()
     {
-        $writer   = new Zend_Log_Writer_Syslog();
+        $writer = new Zend_Log_Writer_Syslog();
         $instance = $writer->setFacility(LOG_USER)
                            ->setApplicationName('my_app');
 
@@ -114,7 +114,7 @@ class Zend_Log_Writer_SyslogTest extends \PHPUnit\Framework\TestCase
      */
     public function testPastFacilityViaConstructor()
     {
-        $writer = new WriterSyslogCustom(array('facility' => LOG_USER));
+        $writer = new WriterSyslogCustom(['facility' => LOG_USER]);
         $this->assertEquals(LOG_USER, $writer->getFacility());
     }
 
@@ -123,12 +123,12 @@ class Zend_Log_Writer_SyslogTest extends \PHPUnit\Framework\TestCase
      */
     public function testWriteWithFormatter()
     {
-        $event = array(
-        	'message' => 'tottakai',
-            'priority' => Zend_Log::ERR
-        );
+        $event = [
+            'message' => 'tottakai',
+            'priority' => Zend_Log::ERR,
+        ];
 
-        $writer = Zend_Log_Writer_Syslog::factory(array());
+        $writer = Zend_Log_Writer_Syslog::factory([]);
         // require_once 'Zend/Log/Formatter/Simple.php';
         $formatter = new Zend_Log_Formatter_Simple('%message% (this is a test)');
         $writer->setFormatter($formatter);

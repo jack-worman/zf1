@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,31 +14,26 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
-
-
-
 /**
- * Mock file for testbed
+ * Mock file for testbed.
  *
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class MyApp_TestHelper extends Zend_Controller_Action_Helper_Abstract
 {
-
     /**
-     * Test Function for direct
+     * Test Function for direct.
      *
      * @return void
      */
@@ -45,5 +41,4 @@ class MyApp_TestHelper extends Zend_Controller_Action_Helper_Abstract
     {
         $this->getResponse()->appendBody('running direct call');
     }
-
 }

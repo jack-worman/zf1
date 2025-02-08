@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Form_Decorator_ViewHelperTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Form_Decorator_ViewHelperTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Form_Decorator_ViewHelperTest::main');
 }
 
 // require_once 'Zend/Form/Decorator/ViewHelper.php';
@@ -32,17 +33,17 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 // require_once 'Zend/View.php';
 
 /**
- * Test class for Zend_Form_Decorator_ViewHelper
+ * Test class for Zend_Form_Decorator_ViewHelper.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Form
  */
 #[AllowDynamicProperties]
-class Zend_Form_Decorator_ViewHelperTest extends \PHPUnit\Framework\TestCase
+class Zend_Form_Decorator_ViewHelperTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -51,11 +52,10 @@ class Zend_Form_Decorator_ViewHelperTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-
-        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Form_Decorator_ViewHelperTest");
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_Form_Decorator_ViewHelperTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -63,8 +63,6 @@ class Zend_Form_Decorator_ViewHelperTest extends \PHPUnit\Framework\TestCase
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @return void
      */
     public function setUp(): void
     {
@@ -74,8 +72,6 @@ class Zend_Form_Decorator_ViewHelperTest extends \PHPUnit\Framework\TestCase
     /**
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
-     *
-     * @return void
      */
     public function tearDown(): void
     {
@@ -84,8 +80,9 @@ class Zend_Form_Decorator_ViewHelperTest extends \PHPUnit\Framework\TestCase
     public function getView()
     {
         $view = new Zend_View();
-        $view->addHelperPath(__DIR__ . '/../../../../library/Zend/View/Helper');
+        $view->addHelperPath(__DIR__.'/../../../../library/Zend/View/Helper');
         $view->doctype('HTML4_STRICT');
+
         return $view;
     }
 
@@ -93,6 +90,7 @@ class Zend_Form_Decorator_ViewHelperTest extends \PHPUnit\Framework\TestCase
     {
         $element = new Zend_Form_Element_Text('foo');
         $this->decorator->setElement($element);
+
         return $element;
     }
 
@@ -113,7 +111,7 @@ class Zend_Form_Decorator_ViewHelperTest extends \PHPUnit\Framework\TestCase
 
     public function testGetHelperWillUseHelperProvidedInOptions()
     {
-        $this->decorator->setOptions(array('helper' => 'formSubmit'));
+        $this->decorator->setOptions(['helper' => 'formSubmit']);
         $this->assertEquals('formSubmit', $this->decorator->getHelper());
     }
 
@@ -133,7 +131,7 @@ class Zend_Form_Decorator_ViewHelperTest extends \PHPUnit\Framework\TestCase
         $element = $this->getElement();
         $element->setIsArray(true);
         $name = $this->decorator->getName();
-        $expect = $element->getName() . '[]';
+        $expect = $element->getName().'[]';
         $this->assertEquals($expect, $name);
     }
 
@@ -164,18 +162,18 @@ class Zend_Form_Decorator_ViewHelperTest extends \PHPUnit\Framework\TestCase
         // require_once 'Zend/Form/Element/Select.php';
         // require_once 'Zend/Translate.php';
         $element = new Zend_Form_Element_Select('foo');
-        $options = array(
+        $options = [
             'foo' => 'This Foo Will Not Be Displayed',
             'bar' => 'This Bar Will Not Be Displayed',
             'baz' => 'This Baz Will Not Be Displayed',
-        );
+        ];
         $element->setMultiOptions($options);
 
-        $translations = array(
+        $translations = [
             'This Foo Will Not Be Displayed' => 'This is the Foo Value',
             'This Bar Will Not Be Displayed' => 'This is the Bar Value',
             'This Baz Will Not Be Displayed' => 'This is the Baz Value',
-        );
+        ];
         $translate = new Zend_Translate('array', $translations, 'en');
         $translate->setLocale('en');
 
@@ -195,22 +193,22 @@ class Zend_Form_Decorator_ViewHelperTest extends \PHPUnit\Framework\TestCase
         // require_once 'Zend/Form/Element/MultiCheckbox.php';
 
         $element = new Zend_Form_Element_MultiCheckbox('foo');
-        $options = array(
+        $options = [
             'foo' => 'Foo',
             'bar' => 'Bar',
-        );
+        ];
         $element->setMultiOptions($options);
         $element->setSeparator('</p><p>');
         $element->setDecorators(
-            array(
-                array('ViewHelper', array('separator' => '')),
-                array('HtmlTag', array('tag' => 'p')),
-            )
+            [
+                ['ViewHelper', ['separator' => '']],
+                ['HtmlTag', ['tag' => 'p']],
+            ]
         );
 
         $expected = '<p><label><input type="checkbox" name="foo[]" id="foo-foo" value="foo">Foo</label></p>'
-                  . '<p><label><input type="checkbox" name="foo[]" id="foo-bar" value="bar">Bar</label></p>';
-        $actual   = $element->render($this->getView());
+                  .'<p><label><input type="checkbox" name="foo[]" id="foo-bar" value="bar">Bar</label></p>';
+        $actual = $element->render($this->getView());
 
         $this->assertEquals($expected, $actual);
     }
@@ -223,22 +221,22 @@ class Zend_Form_Decorator_ViewHelperTest extends \PHPUnit\Framework\TestCase
         // require_once 'Zend/Form/Element/Radio.php';
 
         $element = new Zend_Form_Element_Radio('foo');
-        $options = array(
+        $options = [
             'foo' => 'Foo',
             'bar' => 'Bar',
-        );
+        ];
         $element->setMultiOptions($options);
         $element->setSeparator('</p><p>');
         $element->setDecorators(
-            array(
-                array('ViewHelper', array('separator' => '')),
-                array('HtmlTag', array('tag' => 'p')),
-            )
+            [
+                ['ViewHelper', ['separator' => '']],
+                ['HtmlTag', ['tag' => 'p']],
+            ]
         );
 
         $expected = '<p><label><input type="radio" name="foo" id="foo-foo" value="foo">Foo</label></p>'
-                  . '<p><label><input type="radio" name="foo" id="foo-bar" value="bar">Bar</label></p>';
-        $actual   = $element->render($this->getView());
+                  .'<p><label><input type="radio" name="foo" id="foo-bar" value="bar">Bar</label></p>';
+        $actual = $element->render($this->getView());
 
         $this->assertEquals($expected, $actual);
     }
@@ -255,15 +253,15 @@ class Zend_Form_Decorator_ViewHelperTest extends \PHPUnit\Framework\TestCase
         $element->setValue('bar');
         $element->setLabel('baz');
         $element->setDecorators(
-            array(
-                 'ViewHelper',
-            )
+            [
+                'ViewHelper',
+            ]
         );
 
         // Test
         $this->assertEquals(
             PHP_EOL
-                . '<button name="foo" id="foo" type="button" value="bar">baz</button>',
+                .'<button name="foo" id="foo" type="button" value="bar">baz</button>',
             $element->render($this->getView())
         );
     }
@@ -279,14 +277,14 @@ class Zend_Form_Decorator_ViewHelperTest extends \PHPUnit\Framework\TestCase
         $element = new Zend_Form_Element_Button('foo');
         $element->setAttrib('type', 'submit');
         $element->setDecorators(
-            array(
-                 'ViewHelper',
-            )
+            [
+                'ViewHelper',
+            ]
         );
 
         // Test
         $this->assertEquals(
-            PHP_EOL . '<button name="foo" id="foo" type="submit">foo</button>',
+            PHP_EOL.'<button name="foo" id="foo" type="submit">foo</button>',
             $element->render($this->getView())
         );
     }
@@ -307,6 +305,6 @@ class Zend_Form_Decorator_ViewHelperTest_Textarea extends Zend_Form_Element
 }
 
 // Call Zend_Form_Decorator_ViewHelperTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Form_Decorator_ViewHelperTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Form_Decorator_ViewHelperTest::main') {
     Zend_Form_Decorator_ViewHelperTest::main();
 }

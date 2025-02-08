@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +14,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Memory
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Memory_MemoryTest::main');
 }
@@ -29,28 +29,28 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 /**
  * @category   Zend
- * @package    Zend_Memory
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Memory
  */
 #[AllowDynamicProperties]
-class Zend_Memory_MemoryTest extends \PHPUnit\Framework\TestCase
+class Zend_Memory_MemoryTest extends PHPUnit\Framework\TestCase
 {
     public static function main()
     {
-        $suite  = \PHPUnit\Framework\TestSuite::empty(__CLASS__);
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty(__CLASS__);
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
 
     public function setUp(): void
     {
-        $tmpDir = sys_get_temp_dir() . '/zend_memory';
+        $tmpDir = sys_get_temp_dir().'/zend_memory';
         $this->_removeCacheDir($tmpDir);
         mkdir($tmpDir);
         $this->cacheDir = $tmpDir;
@@ -67,18 +67,17 @@ class Zend_Memory_MemoryTest extends \PHPUnit\Framework\TestCase
         }
 
         foreach (scandir($dir) as $item) {
-            if ($item == '.' || $item == '..') {
+            if ('.' == $item || '..' == $item) {
                 continue;
             }
-            $this->_removeCacheDir($dir . '/' . $item);
+            $this->_removeCacheDir($dir.'/'.$item);
         }
 
         return rmdir($dir);
     }
 
     /**
-     * tests the Memory Manager creation
-     *
+     * tests the Memory Manager creation.
      */
     public function testCreation()
     {
@@ -88,7 +87,7 @@ class Zend_Memory_MemoryTest extends \PHPUnit\Framework\TestCase
         unset($memoryManager);
 
         /** 'File' backend */
-        $backendOptions = array('cache_dir' => $this->cacheDir); // Directory where to put the cache files
+        $backendOptions = ['cache_dir' => $this->cacheDir]; // Directory where to put the cache files
         $memoryManager = Zend_Memory::factory('File', $backendOptions);
         $this->assertTrue($memoryManager instanceof Zend_Memory_Manager);
         unset($memoryManager);
@@ -96,13 +95,14 @@ class Zend_Memory_MemoryTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @group ZF-9883
+     *
      * @dataProvider Zend_Memory_MemoryTest::providerCacheBackend
      */
     public function testFactoryCacheBackendStandards($backend)
     {
         try {
             $memoryManager = Zend_Memory::factory($backend);
-        } catch(Zend_Cache_Exception $exception) {
+        } catch (Zend_Cache_Exception $exception) {
             $this->markTestSkipped($exception->getMessage());
         }
         $this->assertTrue($memoryManager instanceof Zend_Memory_Manager);
@@ -113,18 +113,18 @@ class Zend_Memory_MemoryTest extends \PHPUnit\Framework\TestCase
      */
     public static function providerCacheBackend()
     {
-        return array(
-            array('Apc'),
-            array('File'),
-            array('Libmemcached'),
-            array('Memcached'),
-            array('Sqlite'),
-            array('TwoLevels'),
-            array('Xcache'),
-            array('ZendPlatform'),
-            array('ZendServer_Disk'),
-            array('ZendServer_ShMem')
-        );
+        return [
+            ['Apc'],
+            ['File'],
+            ['Libmemcached'],
+            ['Memcached'],
+            ['Sqlite'],
+            ['TwoLevels'],
+            ['Xcache'],
+            ['ZendPlatform'],
+            ['ZendServer_Disk'],
+            ['ZendServer_ShMem'],
+        ];
     }
 }
 

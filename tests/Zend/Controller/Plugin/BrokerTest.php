@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,26 +14,25 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Controller_Plugin_BrokerTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Controller_Plugin_BrokerTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Controller_Plugin_BrokerTest::main');
 
-    $basePath = realpath(__DIR__ . str_repeat(DIRECTORY_SEPARATOR . '..', 3));
+    $basePath = realpath(__DIR__.str_repeat(DIRECTORY_SEPARATOR.'..', 3));
 
     set_include_path(
-        $basePath . DIRECTORY_SEPARATOR . 'tests'
-        . PATH_SEPARATOR . $basePath . DIRECTORY_SEPARATOR . 'library'
-        . PATH_SEPARATOR . get_include_path()
+        $basePath.DIRECTORY_SEPARATOR.'tests'
+        .PATH_SEPARATOR.$basePath.DIRECTORY_SEPARATOR.'library'
+        .PATH_SEPARATOR.get_include_path()
     );
 }
-
 
 // require_once 'Zend/Controller/Front.php';
 // require_once 'Zend/Controller/Action/HelperBroker.php';
@@ -42,31 +42,29 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 
 /**
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Controller
  * @group      Zend_Controller_Plugin
  */
 #[AllowDynamicProperties]
-class Zend_Controller_Plugin_BrokerTest extends \PHPUnit\Framework\TestCase
+class Zend_Controller_Plugin_BrokerTest extends PHPUnit\Framework\TestCase
 {
     public $controller;
 
     /**
      * Runs the test methods of this class.
      *
-     * @access public
      * @static
      */
     public static function main()
     {
-
-        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Controller_Plugin_BrokerTest");
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_Controller_Plugin_BrokerTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -87,15 +85,14 @@ class Zend_Controller_Plugin_BrokerTest extends \PHPUnit\Framework\TestCase
         try {
             $broker->registerPlugin($plugin);
             $this->fail('Duplicate registry of plugin object should be disallowed');
-        } catch (\Throwable $expected) {
+        } catch (Throwable $expected) {
             $this->assertStringContainsString('already', $expected->getMessage());
         }
     }
 
-
     public function testUsingFrontController()
     {
-        $this->controller->setControllerDirectory(dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files');
+        $this->controller->setControllerDirectory(dirname(__DIR__).DIRECTORY_SEPARATOR.'_files');
         $request = new Zend_Controller_Request_Http('http://framework.zend.com/empty');
         $this->controller->setResponse(new Zend_Controller_Response_Cli());
         $plugin = new Zend_Controller_Plugin_BrokerTest_TestPlugin();
@@ -187,9 +184,9 @@ class Zend_Controller_Plugin_BrokerTest extends \PHPUnit\Framework\TestCase
 
     public function testBrokerCatchesExceptions()
     {
-        $request  = new Zend_Controller_Request_Http('http://framework.zend.com/empty');
+        $request = new Zend_Controller_Request_Http('http://framework.zend.com/empty');
         $response = new Zend_Controller_Response_Cli();
-        $broker   = new Zend_Controller_Plugin_Broker();
+        $broker = new Zend_Controller_Plugin_Broker();
         $broker->setRequest($request);
         $broker->setResponse($response);
         $broker->registerPlugin(new Zend_Controller_Plugin_BrokerTest_ExceptionTestPlugin());
@@ -200,7 +197,7 @@ class Zend_Controller_Plugin_BrokerTest extends \PHPUnit\Framework\TestCase
             $broker->preDispatch($request);
             $broker->postDispatch($request);
             $broker->dispatchLoopShutdown();
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->fail('Broker should catch exceptions');
         }
 
@@ -214,60 +211,61 @@ class Zend_Controller_Plugin_BrokerTest extends \PHPUnit\Framework\TestCase
 
     public function testRegisterPluginStackOrderIsSane()
     {
-        $broker   = new Zend_Controller_Plugin_Broker();
-        $plugin1  = new Zend_Controller_Plugin_BrokerTest_TestPlugin();
-        $plugin2  = new Zend_Controller_Plugin_BrokerTest_ExceptionTestPlugin();
-        $plugin3  = new Zend_Controller_Plugin_BrokerTest_TestPlugin2();
+        $broker = new Zend_Controller_Plugin_Broker();
+        $plugin1 = new Zend_Controller_Plugin_BrokerTest_TestPlugin();
+        $plugin2 = new Zend_Controller_Plugin_BrokerTest_ExceptionTestPlugin();
+        $plugin3 = new Zend_Controller_Plugin_BrokerTest_TestPlugin2();
         $broker->registerPlugin($plugin1, 5);
         $broker->registerPlugin($plugin2, -5);
         $broker->registerPlugin($plugin3, 2);
 
         $plugins = $broker->getPlugins();
-        $expected = array(-5 => $plugin2, 2 => $plugin3, 5 => $plugin1);
+        $expected = [-5 => $plugin2, 2 => $plugin3, 5 => $plugin1];
         $this->assertSame($expected, $plugins);
     }
 
     public function testRegisterPluginThrowsExceptionOnDuplicateStackIndex()
     {
-        $broker   = new Zend_Controller_Plugin_Broker();
-        $plugin1  = new Zend_Controller_Plugin_BrokerTest_TestPlugin();
-        $plugin2  = new Zend_Controller_Plugin_BrokerTest_ExceptionTestPlugin();
+        $broker = new Zend_Controller_Plugin_Broker();
+        $plugin1 = new Zend_Controller_Plugin_BrokerTest_TestPlugin();
+        $plugin2 = new Zend_Controller_Plugin_BrokerTest_ExceptionTestPlugin();
         $broker->registerPlugin($plugin1, 5);
         try {
             $broker->registerPlugin($plugin2, 5);
             $this->fail('Registering plugins with same stack index should raise exception');
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
         }
     }
 
     public function testRegisterPluginStackOrderWithAutmaticNumbersIncrementsCorrectly()
     {
-        $broker   = new Zend_Controller_Plugin_Broker();
-        $plugin1  = new Zend_Controller_Plugin_BrokerTest_TestPlugin();
-        $plugin2  = new Zend_Controller_Plugin_BrokerTest_ExceptionTestPlugin();
-        $plugin3  = new Zend_Controller_Plugin_BrokerTest_TestPlugin2();
+        $broker = new Zend_Controller_Plugin_Broker();
+        $plugin1 = new Zend_Controller_Plugin_BrokerTest_TestPlugin();
+        $plugin2 = new Zend_Controller_Plugin_BrokerTest_ExceptionTestPlugin();
+        $plugin3 = new Zend_Controller_Plugin_BrokerTest_TestPlugin2();
         $broker->registerPlugin($plugin1, 2);
         $broker->registerPlugin($plugin2, 3);
         $broker->registerPlugin($plugin3);
 
         $plugins = $broker->getPlugins();
-        $expected = array(2 => $plugin1, 3 => $plugin2, 4 => $plugin3);
+        $expected = [2 => $plugin1, 3 => $plugin2, 4 => $plugin3];
         $this->assertSame($expected, $plugins);
     }
 
     /**
-     * Test for ZF-2305
+     * Test for ZF-2305.
+     *
      * @return void
      */
     public function testRegisterPluginSetsRequestAndResponse()
     {
-        $broker   = new Zend_Controller_Plugin_Broker();
-        $request  = new Zend_Controller_Request_Simple();
+        $broker = new Zend_Controller_Plugin_Broker();
+        $request = new Zend_Controller_Request_Simple();
         $response = new Zend_Controller_Response_Cli();
         $broker->setRequest($request);
         $broker->setResponse($response);
 
-        $plugin   = new Zend_Controller_Plugin_BrokerTest_TestPlugin();
+        $plugin = new Zend_Controller_Plugin_BrokerTest_TestPlugin();
         $broker->registerPlugin($plugin);
 
         $this->assertSame($request, $plugin->getRequest());
@@ -348,8 +346,7 @@ class Zend_Controller_Plugin_BrokerTest_ExceptionTestPlugin extends Zend_Control
     }
 }
 
-
 // Call Zend_Controller_Plugin_BrokerTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Controller_Plugin_BrokerTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Controller_Plugin_BrokerTest::main') {
     Zend_Controller_Plugin_BrokerTest::main();
 }

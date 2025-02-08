@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +14,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id: TableBugs.php 24593 2012-01-05 20:35:02Z matthew $
  */
-
 
 /**
  * @see Zend_Db_Table_Abstract
@@ -28,27 +28,24 @@
 
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class My_ZendDbTable_TableCascadeRecursive extends Zend_Db_Table_Abstract
 {
-
     protected $_name = 'zfalt_cascade_recursive';
     protected $_primary = 'item_id'; // Deliberate non-array value
 
-    protected $_dependentTables = array('My_ZendDbTable_TableCascadeRecursive');
+    protected $_dependentTables = ['My_ZendDbTable_TableCascadeRecursive'];
 
-    protected $_referenceMap    = array(
-        'Children' => array(
-            'columns'           => array('item_parent'),
-            'refTableClass'     => 'My_ZendDbTable_TableCascadeRecursive',
-            'refColumns'        => array('item_id'),
-            'onDelete'          => self::CASCADE_RECURSE
-        )
-    );
-
+    protected $_referenceMap = [
+        'Children' => [
+            'columns' => ['item_parent'],
+            'refTableClass' => 'My_ZendDbTable_TableCascadeRecursive',
+            'refColumns' => ['item_id'],
+            'onDelete' => self::CASCADE_RECURSE,
+        ],
+    ];
 }

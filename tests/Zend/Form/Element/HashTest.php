@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,32 +14,32 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Form_Element_HashTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Form_Element_HashTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Form_Element_HashTest::main');
 }
 
 // require_once 'Zend/Form/Element/Hash.php';
 
 /**
- * Test class for Zend_Form_Element_Hash
+ * Test class for Zend_Form_Element_Hash.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Form
  */
 #[AllowDynamicProperties]
-class Zend_Form_Element_HashTest extends \PHPUnit\Framework\TestCase
+class Zend_Form_Element_HashTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -47,11 +48,10 @@ class Zend_Form_Element_HashTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-
-        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Form_Element_HashTest");
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_Form_Element_HashTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -59,8 +59,6 @@ class Zend_Form_Element_HashTest extends \PHPUnit\Framework\TestCase
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @return void
      */
     public function setUp(): void
     {
@@ -71,16 +69,14 @@ class Zend_Form_Element_HashTest extends \PHPUnit\Framework\TestCase
         $session = new Zend_Form_Element_HashTest_SessionContainer();
         $session->hash = null;
 
-        $this->element = new Zend_Form_Element_Hash('foo', array(
+        $this->element = new Zend_Form_Element_Hash('foo', [
             'session' => $session,
-        ));
+        ]);
     }
 
     /**
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
-     *
-     * @return void
      */
     public function tearDown(): void
     {
@@ -162,7 +158,8 @@ class Zend_Form_Element_HashTest extends \PHPUnit\Framework\TestCase
     {
         // require_once 'Zend/View.php';
         $view = new Zend_View();
-        $view->addHelperPath(__DIR__ . '/../../../../library/Zend/View/Helper');
+        $view->addHelperPath(__DIR__.'/../../../../library/Zend/View/Helper');
+
         return $view;
     }
 
@@ -170,7 +167,7 @@ class Zend_Form_Element_HashTest extends \PHPUnit\Framework\TestCase
     {
         $session = $this->element->getSession();
         $session->hash = $this->element->getHash();
-        $element = new Zend_Form_Element_Hash('foo', array('session' => $session));
+        $element = new Zend_Form_Element_Hash('foo', ['session' => $session]);
         $validator = $element->getValidator('Identical');
         $this->assertEquals($session->hash, $validator->getToken());
     }
@@ -205,7 +202,7 @@ class Zend_Form_Element_HashTest extends \PHPUnit\Framework\TestCase
     {
         $this->element->setView($this->getView());
         $html = $this->element->renderViewHelper();
-        $this->assertStringContainsString($this->element->getHash(), $html, 'Html is: ' . $html);
+        $this->assertStringContainsString($this->element->getHash(), $html, 'Html is: '.$html);
     }
 }
 
@@ -234,7 +231,7 @@ class Zend_Form_Element_HashTest_SessionContainer
 
     public function __isset($name)
     {
-        if (('hash' == $name) && (null !== self::$_hash))  {
+        if (('hash' == $name) && (null !== self::$_hash)) {
             return true;
         }
 
@@ -254,6 +251,6 @@ class Zend_Form_Element_HashTest_SessionContainer
 }
 
 // Call Zend_Form_Element_HashTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Form_Element_HashTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Form_Element_HashTest::main') {
     Zend_Form_Element_HashTest::main();
 }

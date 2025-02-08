@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_View_Helper_FormResetTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_FormResetTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_View_Helper_FormResetTest::main');
 }
 
 // require_once 'Zend/View/Helper/FormReset.php';
@@ -33,15 +34,15 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * Test class for Zend_View_Helper_FormReset.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
 #[AllowDynamicProperties]
-class Zend_View_Helper_FormResetTest extends \PHPUnit\Framework\TestCase
+class Zend_View_Helper_FormResetTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -50,10 +51,10 @@ class Zend_View_Helper_FormResetTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_View_Helper_FormResetTest");
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_View_Helper_FormResetTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -61,8 +62,6 @@ class Zend_View_Helper_FormResetTest extends \PHPUnit\Framework\TestCase
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @return void
      */
     public function setUp(): void
     {
@@ -70,7 +69,7 @@ class Zend_View_Helper_FormResetTest extends \PHPUnit\Framework\TestCase
             $registry = Zend_Registry::getInstance();
             unset($registry['Zend_View_Helper_Doctype']);
         }
-        $this->view   = new Zend_View();
+        $this->view = new Zend_View();
         $this->helper = new Zend_View_Helper_FormReset();
         $this->helper->setView($this->view);
     }
@@ -78,8 +77,6 @@ class Zend_View_Helper_FormResetTest extends \PHPUnit\Framework\TestCase
     /**
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
-     *
-     * @return void
      */
     public function tearDown(): void
     {
@@ -88,10 +85,10 @@ class Zend_View_Helper_FormResetTest extends \PHPUnit\Framework\TestCase
 
     public function testShouldRenderResetInput()
     {
-        $html = $this->helper->formReset(array(
-            'name'    => 'foo',
-            'value'   => 'Reset',
-        ));
+        $html = $this->helper->formReset([
+            'name' => 'foo',
+            'value' => 'Reset',
+        ]);
         $this->assertMatchesRegularExpression('/<input[^>]*?(type="reset")/', $html);
     }
 
@@ -100,11 +97,11 @@ class Zend_View_Helper_FormResetTest extends \PHPUnit\Framework\TestCase
      */
     public function testShouldAllowDisabling()
     {
-        $html = $this->helper->formReset(array(
-            'name'    => 'foo',
-            'value'   => 'Reset',
-            'attribs' => array('disable' => true)
-        ));
+        $html = $this->helper->formReset([
+            'name' => 'foo',
+            'value' => 'Reset',
+            'attribs' => ['disable' => true],
+        ]);
         $this->assertMatchesRegularExpression('/<input[^>]*?(disabled="disabled")/', $html);
     }
 
@@ -123,6 +120,6 @@ class Zend_View_Helper_FormResetTest extends \PHPUnit\Framework\TestCase
 }
 
 // Call Zend_View_Helper_FormResetTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_FormResetTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_View_Helper_FormResetTest::main') {
     Zend_View_Helper_FormResetTest::main();
 }

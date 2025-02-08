@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_View_Helper_HtmlPageTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_HtmlPageTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_View_Helper_HtmlPageTest::main');
 }
 
 // require_once 'Zend/View.php';
@@ -30,15 +31,15 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 
 /**
  * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
 #[AllowDynamicProperties]
-class Zend_View_Helper_HtmlPageTest extends \PHPUnit\Framework\TestCase
+class Zend_View_Helper_HtmlPageTest extends PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_View_Helper_HtmlPage
@@ -48,16 +49,14 @@ class Zend_View_Helper_HtmlPageTest extends \PHPUnit\Framework\TestCase
     /**
      * Runs the test methods of this class.
      *
-     * @access public
      * @static
      */
     public static function main()
     {
-
-        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_View_Helper_HtmlPageTest");
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(), 
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_View_Helper_HtmlPageTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -65,8 +64,6 @@ class Zend_View_Helper_HtmlPageTest extends \PHPUnit\Framework\TestCase
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @access protected
      */
     protected function setUp(): void
     {
@@ -85,8 +82,8 @@ class Zend_View_Helper_HtmlPageTest extends \PHPUnit\Framework\TestCase
         $htmlPage = $this->helper->htmlPage('/path/to/page.html');
 
         $objectStartElement = '<object data="/path/to/page.html"'
-                            . ' type="text/html"'
-                            . ' classid="clsid:25336920-03F9-11CF-8FD0-00AA00686F13">';
+                            .' type="text/html"'
+                            .' classid="clsid:25336920-03F9-11CF-8FD0-00AA00686F13">';
 
         $this->assertStringContainsString($objectStartElement, $htmlPage);
         $this->assertStringContainsString('</object>', $htmlPage);
@@ -94,6 +91,6 @@ class Zend_View_Helper_HtmlPageTest extends \PHPUnit\Framework\TestCase
 }
 
 // Call Zend_View_Helper_HtmlPageTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_HtmlPageTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_View_Helper_HtmlPageTest::main') {
     Zend_View_Helper_HtmlPageTest::main();
 }

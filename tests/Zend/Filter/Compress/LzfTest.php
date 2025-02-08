@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +14,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id: $
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Filter_Compress_LzfTest::main');
 }
@@ -31,26 +31,26 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 /**
  * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
+ *
  * @group      Zend_Filter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
-class Zend_Filter_Compress_LzfTest extends \PHPUnit\Framework\TestCase
+class Zend_Filter_Compress_LzfTest extends PHPUnit\Framework\TestCase
 {
     /**
-     * Runs this test suite
+     * Runs this test suite.
      *
      * @return void
      */
     public static function main()
     {
-        $suite  = \PHPUnit\Framework\TestSuite::empty('Zend_Filter_Compress_LzfTest');
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_Filter_Compress_LzfTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -63,15 +63,15 @@ class Zend_Filter_Compress_LzfTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Basic usage
+     * Basic usage.
      *
      * @return void
      */
     public function testBasicUsage()
     {
-        $filter  = new Zend_Filter_Compress_Lzf();
+        $filter = new Zend_Filter_Compress_Lzf();
 
-        $text       = 'compress me';
+        $text = 'compress me';
         $compressed = $filter->compress($text);
         $this->assertNotEquals($text, $compressed);
 
@@ -80,7 +80,7 @@ class Zend_Filter_Compress_LzfTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * testing toString
+     * testing toString.
      *
      * @return void
      */

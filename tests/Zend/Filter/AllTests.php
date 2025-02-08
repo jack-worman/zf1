@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +14,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Filter_AllTests::main');
 }
@@ -88,33 +88,33 @@ require_once 'Zend/Filter/Word/AllTests.php';
 
 /**
  * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Filter
  */
 #[AllowDynamicProperties]
 class Zend_Filter_AllTests
 {
     /**
-     * Runs this test suite
+     * Runs this test suite.
      *
      * @return void
      */
     public static function main()
     {
-        \PHPUnit\TextUI\TestRunner::run(self::suite());
+        PHPUnit\TextUI\TestRunner::run(self::suite());
     }
 
     /**
-     * Creates and returns this test suite
+     * Creates and returns this test suite.
      *
-     * @return \PHPUnit\Framework\TestSuite
+     * @return PHPUnit\Framework\TestSuite
      */
     public static function suite()
     {
-        $suite = \PHPUnit\Framework\TestSuite::empty('Zend Framework - Zend_Filter');
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend Framework - Zend_Filter');
 
         $suite->addTestSuite('Zend_Filter_AlnumTest');
         $suite->addTestSuite('Zend_Filter_AlphaTest');
@@ -142,33 +142,33 @@ class Zend_Filter_AllTests
         $suite->addTestSuite('Zend_Filter_StripNewlinesTest');
         $suite->addTestSuite('Zend_Filter_StripTagsTest');
 
-/*
-        $suite->addTestSuite('Zend_Filter_Compress_Bz2Test');
-        $suite->addTestSuite('Zend_Filter_Compress_GzTest');
-        $suite->addTestSuite('Zend_Filter_Compress_LzfTest');
-        $suite->addTestSuite('Zend_Filter_Compress_RarTest');
-        $suite->addTestSuite('Zend_Filter_Compress_TarTest');
-        $suite->addTestSuite('Zend_Filter_Compress_ZipTest');
-        $suite->addTestSuite('Zend_Filter_Encrypt_McryptTest');
-        $suite->addTestSuite('Zend_Filter_Encrypt_OpensslTest');
-        $suite->addTestSuite('Zend_Filter_File_DecryptTest');
-        $suite->addTestSuite('Zend_Filter_File_EncryptTest');
-        $suite->addTestSuite('Zend_Filter_File_LowerCaseTest');
-        $suite->addTestSuite('Zend_Filter_File_RenameTest');
-        $suite->addTestSuite('Zend_Filter_File_UpperCaseTest');
-        $suite->addTestSuite('Zend_Filter_Word_CamelCaseToDashTest');
-        $suite->addTestSuite('Zend_Filter_Word_CamelCaseToSeparatorTest');
-        $suite->addTestSuite('Zend_Filter_Word_CamelCaseToUnderscoreTest');
-        $suite->addTestSuite('Zend_Filter_Word_DashToCamelCaseTest');
-        $suite->addTestSuite('Zend_Filter_Word_DashToSeparatorTest');
-        $suite->addTestSuite('Zend_Filter_Word_DashToUnderscoreTest');
-        $suite->addTestSuite('Zend_Filter_Word_SeparatorToCamelCaseTest');
-        $suite->addTestSuite('Zend_Filter_Word_SeparatorToDashTest');
-        $suite->addTestSuite('Zend_Filter_Word_SeparatorToSeparatorTest');
-        $suite->addTestSuite('Zend_Filter_Word_UnderscoreToCamelCaseTest');
-        $suite->addTestSuite('Zend_Filter_Word_UnderscoreToDashTest');
-        $suite->addTestSuite('Zend_Filter_Word_UnderscoreToSeparatorTest');
-*/
+        /*
+                $suite->addTestSuite('Zend_Filter_Compress_Bz2Test');
+                $suite->addTestSuite('Zend_Filter_Compress_GzTest');
+                $suite->addTestSuite('Zend_Filter_Compress_LzfTest');
+                $suite->addTestSuite('Zend_Filter_Compress_RarTest');
+                $suite->addTestSuite('Zend_Filter_Compress_TarTest');
+                $suite->addTestSuite('Zend_Filter_Compress_ZipTest');
+                $suite->addTestSuite('Zend_Filter_Encrypt_McryptTest');
+                $suite->addTestSuite('Zend_Filter_Encrypt_OpensslTest');
+                $suite->addTestSuite('Zend_Filter_File_DecryptTest');
+                $suite->addTestSuite('Zend_Filter_File_EncryptTest');
+                $suite->addTestSuite('Zend_Filter_File_LowerCaseTest');
+                $suite->addTestSuite('Zend_Filter_File_RenameTest');
+                $suite->addTestSuite('Zend_Filter_File_UpperCaseTest');
+                $suite->addTestSuite('Zend_Filter_Word_CamelCaseToDashTest');
+                $suite->addTestSuite('Zend_Filter_Word_CamelCaseToSeparatorTest');
+                $suite->addTestSuite('Zend_Filter_Word_CamelCaseToUnderscoreTest');
+                $suite->addTestSuite('Zend_Filter_Word_DashToCamelCaseTest');
+                $suite->addTestSuite('Zend_Filter_Word_DashToSeparatorTest');
+                $suite->addTestSuite('Zend_Filter_Word_DashToUnderscoreTest');
+                $suite->addTestSuite('Zend_Filter_Word_SeparatorToCamelCaseTest');
+                $suite->addTestSuite('Zend_Filter_Word_SeparatorToDashTest');
+                $suite->addTestSuite('Zend_Filter_Word_SeparatorToSeparatorTest');
+                $suite->addTestSuite('Zend_Filter_Word_UnderscoreToCamelCaseTest');
+                $suite->addTestSuite('Zend_Filter_Word_UnderscoreToDashTest');
+                $suite->addTestSuite('Zend_Filter_Word_UnderscoreToSeparatorTest');
+        */
 
         $suite->addTest(Zend_Filter_Compress_AllTests::suite());
         $suite->addTest(Zend_Filter_Encrypt_AllTests::suite());

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,28 +14,28 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Translate
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Translate_Adapter_Tmx
+ * Zend_Translate_Adapter_Tmx.
  */
 // require_once 'Zend/Translate/Adapter/Tmx.php';
 
 /**
  * @category   Zend
- * @package    Zend_Translate
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Translate
  */
 #[AllowDynamicProperties]
-class Zend_Translate_Adapter_TmxTest extends \PHPUnit\Framework\TestCase
+class Zend_Translate_Adapter_TmxTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -43,29 +44,29 @@ class Zend_Translate_Adapter_TmxTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Translate_Adapter_TmxTest");
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_Translate_Adapter_TmxTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
 
     public function testCreate()
     {
-        $adapter = new Zend_Translate_Adapter_Tmx(__DIR__ . '/_files/translation_en.tmx', 'en');
+        $adapter = new Zend_Translate_Adapter_Tmx(__DIR__.'/_files/translation_en.tmx', 'en');
         $this->assertTrue($adapter instanceof Zend_Translate_Adapter_Tmx);
 
         try {
-            $adapter = new Zend_Translate_Adapter_Tmx(__DIR__ . '/_files/nofile.tmx', 'en');
-            $this->fail("exception expected");
+            $adapter = new Zend_Translate_Adapter_Tmx(__DIR__.'/_files/nofile.tmx', 'en');
+            $this->fail('exception expected');
         } catch (Zend_Translate_Exception $e) {
             $this->assertStringContainsString('is not readable', $e->getMessage());
         }
 
         try {
-            $adapter = new Zend_Translate_Adapter_Tmx(__DIR__ . '/_files/failed.tmx', 'en');
-            $this->fail("exception expected");
+            $adapter = new Zend_Translate_Adapter_Tmx(__DIR__.'/_files/failed.tmx', 'en');
+            $this->fail('exception expected');
         } catch (Zend_Translate_Exception $e) {
             $this->assertStringContainsString('Mismatched tag at line', $e->getMessage(), '', true);
         }
@@ -77,8 +78,8 @@ class Zend_Translate_Adapter_TmxTest extends \PHPUnit\Framework\TestCase
     public function testErrorOnCreateIncludesFilename()
     {
         try {
-            $adapter = new Zend_Translate_Adapter_Tmx(__DIR__ . '/_files/nofile.tmx', 'en');
-            $this->fail("exception expected");
+            $adapter = new Zend_Translate_Adapter_Tmx(__DIR__.'/_files/nofile.tmx', 'en');
+            $this->fail('exception expected');
         } catch (Zend_Translate_Exception $e) {
             $this->assertStringContainsString('nofile.tmx', $e->getMessage());
         }
@@ -86,13 +87,13 @@ class Zend_Translate_Adapter_TmxTest extends \PHPUnit\Framework\TestCase
 
     public function testToString()
     {
-        $adapter = new Zend_Translate_Adapter_Tmx(__DIR__ . '/_files/translation_en.tmx', 'en');
+        $adapter = new Zend_Translate_Adapter_Tmx(__DIR__.'/_files/translation_en.tmx', 'en');
         $this->assertEquals('Tmx', $adapter->toString());
     }
 
     public function testTranslate()
     {
-        $adapter = new Zend_Translate_Adapter_Tmx(__DIR__ . '/_files/translation_en.tmx', 'en');
+        $adapter = new Zend_Translate_Adapter_Tmx(__DIR__.'/_files/translation_en.tmx', 'en');
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1'));
         $this->assertEquals('Message 1 (en)', $adapter->_('Message 1'));
         $this->assertEquals('Message 6', $adapter->translate('Message 6'));
@@ -102,7 +103,7 @@ class Zend_Translate_Adapter_TmxTest extends \PHPUnit\Framework\TestCase
 
     public function testIsTranslated()
     {
-        $adapter = new Zend_Translate_Adapter_Tmx(__DIR__ . '/_files/translation_en.tmx', 'en');
+        $adapter = new Zend_Translate_Adapter_Tmx(__DIR__.'/_files/translation_en.tmx', 'en');
         $this->assertTrue($adapter->isTranslated('Message 1'));
         $this->assertFalse($adapter->isTranslated('Message 6'));
         $this->assertTrue($adapter->isTranslated('Message 1', true));
@@ -112,7 +113,7 @@ class Zend_Translate_Adapter_TmxTest extends \PHPUnit\Framework\TestCase
 
     public function testLoadTranslationData()
     {
-        $adapter = new Zend_Translate_Adapter_Tmx(__DIR__ . '/_files/translation_en.tmx', 'en');
+        $adapter = new Zend_Translate_Adapter_Tmx(__DIR__.'/_files/translation_en.tmx', 'en');
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1'));
         $this->assertEquals('Message 4 (en)', $adapter->translate('Message 4'));
         $this->assertEquals('Message 2', $adapter->translate('Message 2', 'ru'));
@@ -120,34 +121,34 @@ class Zend_Translate_Adapter_TmxTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1', 'en_US'));
 
         try {
-            $adapter->addTranslation(__DIR__ . '/_files/translation_en.tmx', 'xx');
-            $this->fail("exception expected");
+            $adapter->addTranslation(__DIR__.'/_files/translation_en.tmx', 'xx');
+            $this->fail('exception expected');
         } catch (Zend_Translate_Exception $e) {
             $this->assertStringContainsString('does not exist', $e->getMessage());
         }
 
-        $adapter->addTranslation(__DIR__ . '/_files/translation_en2.tmx', 'de', array('clear' => true));
+        $adapter->addTranslation(__DIR__.'/_files/translation_en2.tmx', 'de', ['clear' => true]);
         $this->assertEquals('Nachricht 1', $adapter->translate('Message 1'));
         $this->assertEquals('Nachricht 8', $adapter->translate('Message 8'));
     }
 
     public function testOptions()
     {
-        $adapter = new Zend_Translate_Adapter_Tmx(__DIR__ . '/_files/translation_en.tmx', 'en');
-        $adapter->setOptions(array('testoption' => 'testkey'));
-        $expected = array(
-            'testoption'      => 'testkey',
-            'clear'           => false,
-            'content'         => __DIR__ . '/_files/translation_en.tmx',
-            'scan'            => null,
-            'locale'          => 'en',
-            'ignore'          => '.',
-            'disableNotices'  => false,
-            'log'             => false,
-            'logMessage'      => 'Untranslated message within \'%locale%\': %message%',
+        $adapter = new Zend_Translate_Adapter_Tmx(__DIR__.'/_files/translation_en.tmx', 'en');
+        $adapter->setOptions(['testoption' => 'testkey']);
+        $expected = [
+            'testoption' => 'testkey',
+            'clear' => false,
+            'content' => __DIR__.'/_files/translation_en.tmx',
+            'scan' => null,
+            'locale' => 'en',
+            'ignore' => '.',
+            'disableNotices' => false,
+            'log' => false,
+            'logMessage' => 'Untranslated message within \'%locale%\': %message%',
             'logUntranslated' => false,
-            'reload'          => false
-        );
+            'reload' => false,
+        ];
         $options = $adapter->getOptions();
 
         foreach ($expected as $key => $value) {
@@ -161,17 +162,17 @@ class Zend_Translate_Adapter_TmxTest extends \PHPUnit\Framework\TestCase
 
     public function testClearing()
     {
-        $adapter = new Zend_Translate_Adapter_Tmx(__DIR__ . '/_files/translation_en.tmx', 'en');
+        $adapter = new Zend_Translate_Adapter_Tmx(__DIR__.'/_files/translation_en.tmx', 'en');
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1'));
         $this->assertEquals('Message 5 (en)', $adapter->translate('Message 5'));
-        $adapter->addTranslation(__DIR__ . '/_files/translation_en2.tmx', 'de', array('clear' => true));
+        $adapter->addTranslation(__DIR__.'/_files/translation_en2.tmx', 'de', ['clear' => true]);
         $this->assertEquals('Nachricht 1', $adapter->translate('Message 1'));
         $this->assertEquals('Message 4', $adapter->translate('Message 4'));
     }
 
     public function testLocale()
     {
-        $adapter = new Zend_Translate_Adapter_Tmx(__DIR__ . '/_files/translation_en.tmx', 'en');
+        $adapter = new Zend_Translate_Adapter_Tmx(__DIR__.'/_files/translation_en.tmx', 'en');
         $this->assertEquals('en', $adapter->getLocale());
         $locale = new Zend_Locale('en');
         $adapter->setLocale($locale);
@@ -179,12 +180,12 @@ class Zend_Translate_Adapter_TmxTest extends \PHPUnit\Framework\TestCase
 
         try {
             $adapter->setLocale('nolocale');
-            $this->fail("exception expected");
+            $this->fail('exception expected');
         } catch (Zend_Translate_Exception $e) {
             $this->assertStringContainsString('does not exist', $e->getMessage());
         }
 
-        set_error_handler(array($this, 'errorHandlerIgnore'));
+        set_error_handler([$this, 'errorHandlerIgnore']);
         $adapter->setLocale('it');
         restore_error_handler();
         $this->assertEquals('it', $adapter->getLocale());
@@ -192,10 +193,10 @@ class Zend_Translate_Adapter_TmxTest extends \PHPUnit\Framework\TestCase
 
     public function testList()
     {
-        $adapter = new Zend_Translate_Adapter_Tmx(__DIR__ . '/_files/translation_en.tmx', 'en');
-        $this->assertEquals(array('en' => 'en', 'fr' => 'fr'), $adapter->getList());
-        $adapter->addTranslation(__DIR__ . '/_files/translation_en2.tmx', 'fr');
-        $this->assertEquals(array('en' => 'en', 'de' => 'de', 'fr' => 'fr'), $adapter->getList());
+        $adapter = new Zend_Translate_Adapter_Tmx(__DIR__.'/_files/translation_en.tmx', 'en');
+        $this->assertEquals(['en' => 'en', 'fr' => 'fr'], $adapter->getList());
+        $adapter->addTranslation(__DIR__.'/_files/translation_en2.tmx', 'fr');
+        $this->assertEquals(['en' => 'en', 'de' => 'de', 'fr' => 'fr'], $adapter->getList());
         $this->assertTrue($adapter->isAvailable('fr'));
         $locale = new Zend_Locale('en');
         $this->assertTrue($adapter->isAvailable($locale));
@@ -205,22 +206,22 @@ class Zend_Translate_Adapter_TmxTest extends \PHPUnit\Framework\TestCase
     public function testOptionLocaleDirectory()
     {
         // require_once 'Zend/Translate.php';
-        $adapter = new Zend_Translate_Adapter_Tmx(__DIR__ . '/_files/testtmx', 'de', array('scan' => Zend_Translate::LOCALE_DIRECTORY));
-        $this->assertEquals(array('de' => 'de', 'en' => 'en', 'fr' => 'fr'), $adapter->getList());
+        $adapter = new Zend_Translate_Adapter_Tmx(__DIR__.'/_files/testtmx', 'de', ['scan' => Zend_Translate::LOCALE_DIRECTORY]);
+        $this->assertEquals(['de' => 'de', 'en' => 'en', 'fr' => 'fr'], $adapter->getList());
         $this->assertEquals('Nachricht 8', $adapter->translate('Message 8'));
     }
 
     public function testOptionLocaleFilename()
     {
         // require_once 'Zend/Translate.php';
-        $adapter = new Zend_Translate_Adapter_Tmx(__DIR__ . '/_files/testtmx', 'de', array('scan' => Zend_Translate::LOCALE_FILENAME));
-        $this->assertEquals(array('de' => 'de', 'en' => 'en', 'fr' => 'fr'), $adapter->getList());
+        $adapter = new Zend_Translate_Adapter_Tmx(__DIR__.'/_files/testtmx', 'de', ['scan' => Zend_Translate::LOCALE_FILENAME]);
+        $this->assertEquals(['de' => 'de', 'en' => 'en', 'fr' => 'fr'], $adapter->getList());
         $this->assertEquals('Nachricht 8', $adapter->translate('Message 8'));
     }
 
     public function testIsoEncoding()
     {
-        $adapter = new Zend_Translate_Adapter_Tmx(__DIR__ . '/_files/translation_en3.tmx', 'en');
+        $adapter = new Zend_Translate_Adapter_Tmx(__DIR__.'/_files/translation_en3.tmx', 'en');
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1'));
         $this->assertEquals('Message 1 (it)', $adapter->_('Message 1', 'it'));
 
@@ -235,7 +236,7 @@ class Zend_Translate_Adapter_TmxTest extends \PHPUnit\Framework\TestCase
 
     public function testWithoutEncoding()
     {
-        $adapter = new Zend_Translate_Adapter_Tmx(__DIR__ . '/_files/translation_withoutencoding.tmx', 'en');
+        $adapter = new Zend_Translate_Adapter_Tmx(__DIR__.'/_files/translation_withoutencoding.tmx', 'en');
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1'));
         $this->assertEquals('Küchen Möbel (en)', $adapter->translate('Cooking furniture'));
         $this->assertEquals('Cooking furniture (en)', $adapter->translate('Küchen Möbel'));
@@ -244,9 +245,9 @@ class Zend_Translate_Adapter_TmxTest extends \PHPUnit\Framework\TestCase
     /**
      * @group ZF-8375
      */
-    public function testTranslate_ZF8375()
+    public function testTranslateZF8375()
     {
-        $adapter = new Zend_Translate_Adapter_Tmx(__DIR__ . '/_files/translation_en_8375.tmx', 'en', array('disableNotices' => true));
+        $adapter = new Zend_Translate_Adapter_Tmx(__DIR__.'/_files/translation_en_8375.tmx', 'en', ['disableNotices' => true]);
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1'));
         $this->assertEquals('Message 1 (en)', $adapter->_('Message 1'));
         $this->assertEquals('Message 6', $adapter->translate('Message 6'));
@@ -258,7 +259,7 @@ class Zend_Translate_Adapter_TmxTest extends \PHPUnit\Framework\TestCase
 
     public function testUseId()
     {
-        $adapter = new Zend_Translate_Adapter_Tmx(__DIR__ . '/_files/translation_en2.tmx', 'en', array('useId' => false));
+        $adapter = new Zend_Translate_Adapter_Tmx(__DIR__.'/_files/translation_en2.tmx', 'en', ['useId' => false]);
         $this->assertEquals(false, $adapter->getOptions('useId'));
         $this->assertEquals('Message 1 (en)', $adapter->translate('Nachricht 1'));
         $this->assertEquals('Message 1 (en)', $adapter->_('Nachricht 1'));
@@ -266,22 +267,22 @@ class Zend_Translate_Adapter_TmxTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred
+     * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred.
      *
-     * @param  integer $errno
-     * @param  string  $errstr
-     * @param  string  $errfile
-     * @param  integer $errline
-     * @param  array   $errcontext
+     * @param int    $errno
+     * @param string $errstr
+     * @param string $errfile
+     * @param int    $errline
+     *
      * @return void
      */
-    public function errorHandlerIgnore($errno, $errstr, $errfile, $errline, array $errcontext = array())
+    public function errorHandlerIgnore($errno, $errstr, $errfile, $errline, array $errcontext = [])
     {
         $this->_errorOccurred = true;
     }
 }
 
 // Call Zend_Translate_Adapter_TmxTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Translate_Adapter_TmxTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Translate_Adapter_TmxTest::main') {
     Zend_Translate_Adapter_TmxTest::main();
 }

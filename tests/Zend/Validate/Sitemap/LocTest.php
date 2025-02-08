@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,37 +14,37 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Translate
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // require_once 'Zend/Validate/Sitemap/Loc.php';
 
 /**
- * Tests Zend_Validate_Sitemap_Loc
+ * Tests Zend_Validate_Sitemap_Loc.
  *
  * @category   Zend
- * @package    Zend_Validate
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Validate
  */
 #[AllowDynamicProperties]
-class Zend_Validate_Sitemap_LocTest extends \PHPUnit\Framework\TestCase
+class Zend_Validate_Sitemap_LocTest extends PHPUnit\Framework\TestCase
 {
     /**
-     * Validator
+     * Validator.
      *
      * @var Zend_Validate_Sitemap_Loc
      */
     protected $_validator;
 
     /**
-     * Prepares the environment before running a test
+     * Prepares the environment before running a test.
      */
     protected function setUp(): void
     {
@@ -51,7 +52,7 @@ class Zend_Validate_Sitemap_LocTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Cleans up the environment after running a test
+     * Cleans up the environment after running a test.
      */
     protected function tearDown(): void
     {
@@ -59,20 +60,19 @@ class Zend_Validate_Sitemap_LocTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Tests valid locations
-     *
+     * Tests valid locations.
      */
     public function testValidLocs()
     {
-        $values = array(
+        $values = [
             'http://www.example.com',
             'http://www.example.com/',
             'http://www.exmaple.lan/',
             'https://www.exmaple.com/?foo=bar',
             'http://www.exmaple.com:8080/foo/bar/',
             'https://user:pass@www.exmaple.com:8080/',
-            'https://www.exmaple.com/?foo=&quot;bar&apos;&amp;bar=&lt;bat&gt;'
-        );
+            'https://www.exmaple.com/?foo=&quot;bar&apos;&amp;bar=&lt;bat&gt;',
+        ];
 
         foreach ($values as $value) {
             $this->assertSame(true, $this->_validator->isValid($value));
@@ -80,18 +80,17 @@ class Zend_Validate_Sitemap_LocTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Tests invalid locations
-     *
+     * Tests invalid locations.
      */
     public function testInvalidLocs()
     {
-        $values = array(
+        $values = [
             'www.example.com',
             '/news/',
             '#',
             'http:/example.com/',
-            'https://www.exmaple.com/?foo="bar\'&bar=<bat>'
-        );
+            'https://www.exmaple.com/?foo="bar\'&bar=<bat>',
+        ];
 
         foreach ($values as $value) {
             $this->assertSame(false, $this->_validator->isValid($value));
@@ -101,14 +100,13 @@ class Zend_Validate_Sitemap_LocTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Tests values that are not strings
-     *
+     * Tests values that are not strings.
      */
     public function testNotStrings()
     {
-        $values = array(
-            1, 1.4, null, new stdClass(), true, false
-        );
+        $values = [
+            1, 1.4, null, new stdClass(), true, false,
+        ];
 
         foreach ($values as $value) {
             $this->assertSame(false, $this->_validator->isValid($value));
@@ -116,5 +114,4 @@ class Zend_Validate_Sitemap_LocTest extends \PHPUnit\Framework\TestCase
             $this->assertStringContainsString('String expected', current($messages));
         }
     }
-
 }

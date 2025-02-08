@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_View_Helper_Placeholder_Container_AbstractTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_Placeholder_ContainerTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_View_Helper_Placeholder_ContainerTest::main');
 }
 
 /** Zend_View_Helper_Placeholder_Container */
@@ -32,15 +33,15 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * Test class for Zend_View_Helper_Placeholder_Container.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
 #[AllowDynamicProperties]
-class Zend_View_Helper_Placeholder_ContainerTest extends \PHPUnit\Framework\TestCase
+class Zend_View_Helper_Placeholder_ContainerTest extends PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_View_Helper_Placeholder_Container
@@ -54,11 +55,10 @@ class Zend_View_Helper_Placeholder_ContainerTest extends \PHPUnit\Framework\Test
      */
     public static function main()
     {
-
-        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_View_Helper_Placeholder_ContainerTest");
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_View_Helper_Placeholder_ContainerTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -66,19 +66,15 @@ class Zend_View_Helper_Placeholder_ContainerTest extends \PHPUnit\Framework\Test
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @return void
      */
     public function setUp(): void
     {
-        $this->container = new Zend_View_Helper_Placeholder_Container(array());
+        $this->container = new Zend_View_Helper_Placeholder_Container([]);
     }
 
     /**
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
-     *
-     * @return void
      */
     public function tearDown(): void
     {
@@ -116,8 +112,8 @@ class Zend_View_Helper_Placeholder_ContainerTest extends \PHPUnit\Framework\Test
     {
         $this->container['foo'] = 'bar';
         $this->container['bar'] = 'baz';
-        $expected = array('foo' => 'bar', 'bar' => 'baz');
-        $return   = $this->container->getValue();
+        $expected = ['foo' => 'bar', 'bar' => 'baz'];
+        $return = $this->container->getValue();
         $this->assertEquals($expected, $return);
     }
 
@@ -226,8 +222,8 @@ class Zend_View_Helper_Placeholder_ContainerTest extends \PHPUnit\Framework\Test
 
         $this->assertEquals($originalCount + 1, count($this->container));
 
-        $value     = $this->container->getValue();
-        $keys      = array_keys($value);
+        $value = $this->container->getValue();
+        $keys = array_keys($value);
         $lastIndex = array_pop($keys);
         $this->assertEquals('foo', $value[$lastIndex - 1]);
         $this->assertStringContainsString('This is content intended for capture', $value[$lastIndex]);
@@ -247,8 +243,8 @@ class Zend_View_Helper_Placeholder_ContainerTest extends \PHPUnit\Framework\Test
 
         $this->assertEquals($originalCount + 1, count($this->container));
 
-        $value     = $this->container->getValue();
-        $keys      = array_keys($value);
+        $value = $this->container->getValue();
+        $keys = array_keys($value);
         $lastIndex = array_pop($keys);
         $this->assertEquals('foo', $value[$lastIndex]);
         $this->assertStringContainsString('This is content intended for capture', $value[$lastIndex - 1]);
@@ -326,10 +322,10 @@ class Zend_View_Helper_Placeholder_ContainerTest extends \PHPUnit\Framework\Test
         $caught = false;
         try {
             $this->container->captureStart('SET');
-                $this->container->captureStart('SET');
-                $this->container->captureEnd();
+            $this->container->captureStart('SET');
             $this->container->captureEnd();
-        } catch (\Throwable $e) {
+            $this->container->captureEnd();
+        } catch (Throwable $e) {
             $this->container->captureEnd();
             $caught = true;
         }
@@ -395,18 +391,18 @@ class Zend_View_Helper_Placeholder_ContainerTest extends \PHPUnit\Framework\Test
         $this->container[] = 'bar';
         $this->container[] = 'baz';
         $this->container->setPrefix('<ul><li>')
-                        ->setSeparator('</li>' . PHP_EOL . '<li>')
+                        ->setSeparator('</li>'.PHP_EOL.'<li>')
                         ->setPostfix('</li></ul>')
                         ->setIndent('    ');
         $value = $this->container->toString();
-        $expectedValue = '    <ul><li>foo</li>' . PHP_EOL . '    <li>bar</li>' . PHP_EOL . '    <li>baz</li></ul>';
+        $expectedValue = '    <ul><li>foo</li>'.PHP_EOL.'    <li>bar</li>'.PHP_EOL.'    <li>baz</li></ul>';
         $this->assertEquals($expectedValue, $value);
     }
 
     /**
      * @return void
      */
-    public function test__toStringProxiesToToString()
+    public function testToStringProxiesToToString()
     {
         $this->container[] = 'foo';
         $this->container[] = 'bar';
@@ -426,7 +422,7 @@ class Zend_View_Helper_Placeholder_ContainerTest extends \PHPUnit\Framework\Test
         $this->container['foo'] = 'bar';
         $this->container->prepend('baz');
 
-        $expected = array('baz', 'foo' => 'bar');
+        $expected = ['baz', 'foo' => 'bar'];
         $array = $this->container->getArrayCopy();
         $this->assertSame($expected, $array);
     }
@@ -470,6 +466,6 @@ class Zend_View_Helper_Placeholder_ContainerTest extends \PHPUnit\Framework\Test
 }
 
 // Call Zend_View_Helper_Placeholder_ContainerTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_Placeholder_ContainerTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_View_Helper_Placeholder_ContainerTest::main') {
     Zend_View_Helper_Placeholder_ContainerTest::main();
 }

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,29 +26,26 @@
  */
 // require_once 'Zend/Filter/BaseName.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Filter
  */
 #[AllowDynamicProperties]
-class Zend_Filter_BaseNameTest extends \PHPUnit\Framework\TestCase
+class Zend_Filter_BaseNameTest extends PHPUnit\Framework\TestCase
 {
     /**
-     * Zend_Filter_BaseName object
+     * Zend_Filter_BaseName object.
      *
      * @var Zend_Filter_BaseName
      */
     protected $_filter;
 
     /**
-     * Creates a new Zend_Filter_BaseName object for each test method
-     *
-     * @return void
+     * Creates a new Zend_Filter_BaseName object for each test method.
      */
     public function setUp(): void
     {
@@ -55,16 +53,16 @@ class Zend_Filter_BaseNameTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Ensures that the filter follows expected behavior
+     * Ensures that the filter follows expected behavior.
      *
      * @return void
      */
     public function testBasic()
     {
-        $valuesExpected = array(
-            '/path/to/filename'     => 'filename',
-            '/path/to/filename.ext' => 'filename.ext'
-            );
+        $valuesExpected = [
+            '/path/to/filename' => 'filename',
+            '/path/to/filename.ext' => 'filename.ext',
+        ];
         foreach ($valuesExpected as $input => $output) {
             $this->assertEquals($output, $this->_filter->filter($input));
         }

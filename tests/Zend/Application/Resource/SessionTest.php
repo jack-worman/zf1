@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Application
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -28,14 +28,14 @@
 
 /**
  * @category   Zend
- * @package    Zend_Application
- * @subpackage UnitTests
+ *
  * @group      Zend_Application
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
-class Zend_Application_Resource_SessionTest extends \PHPUnit\Framework\TestCase
+class Zend_Application_Resource_SessionTest extends PHPUnit\Framework\TestCase
 {
     public $resource;
 
@@ -55,7 +55,7 @@ class Zend_Application_Resource_SessionTest extends \PHPUnit\Framework\TestCase
     public function testSetSaveHandlerString()
     {
         $saveHandlerClassName = 'Zend_Application_Resource_SessionTestHandlerMock1';
-        $saveHandler = $this->getMock('Zend_Session_SaveHandler_Interface', array(), array(), $saveHandlerClassName);
+        $saveHandler = $this->getMock('Zend_Session_SaveHandler_Interface', [], [], $saveHandlerClassName);
 
         $this->resource->setSaveHandler($saveHandlerClassName);
 
@@ -65,9 +65,9 @@ class Zend_Application_Resource_SessionTest extends \PHPUnit\Framework\TestCase
     public function testSetSaveHandlerArray()
     {
         $saveHandlerClassName = 'Zend_Application_Resource_SessionTestHandlerMock2';
-        $saveHandler = $this->getMock('Zend_Session_SaveHandler_Interface', array(), array(), $saveHandlerClassName);
+        $saveHandler = $this->getMock('Zend_Session_SaveHandler_Interface', [], [], $saveHandlerClassName);
 
-        $this->resource->setSaveHandler(array('class' => $saveHandlerClassName));
+        $this->resource->setSaveHandler(['class' => $saveHandlerClassName]);
 
         $this->assertTrue($this->resource->getSaveHandler() instanceof $saveHandlerClassName);
     }
@@ -79,15 +79,15 @@ class Zend_Application_Resource_SessionTest extends \PHPUnit\Framework\TestCase
      */
     public function _testSetOptions()
     {
-        Zend_Session::setOptions(array(
+        Zend_Session::setOptions([
             'use_only_cookies' => false,
             'remember_me_seconds' => 3600,
-        ));
+        ]);
 
-        $this->resource->setOptions(array(
-             'use_only_cookies' => true,
-             'remember_me_seconds' => 7200,
-        ));
+        $this->resource->setOptions([
+            'use_only_cookies' => true,
+            'remember_me_seconds' => 7200,
+        ]);
 
         $this->resource->init();
 

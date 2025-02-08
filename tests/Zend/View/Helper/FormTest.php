@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_View_Helper_FormTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_FormTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_View_Helper_FormTest::main');
 }
 
 // require_once 'Zend/View.php';
@@ -32,29 +33,27 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * Test class for Zend_View_Helper_Form.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
 #[AllowDynamicProperties]
-class Zend_View_Helper_FormTest extends \PHPUnit\Framework\TestCase
+class Zend_View_Helper_FormTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
      *
-     * @access public
      * @static
      */
     public static function main()
     {
-
-        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_View_Helper_FormTest");
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_View_Helper_FormTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -62,8 +61,6 @@ class Zend_View_Helper_FormTest extends \PHPUnit\Framework\TestCase
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @access protected
      */
     protected function setUp(): void
     {
@@ -75,8 +72,6 @@ class Zend_View_Helper_FormTest extends \PHPUnit\Framework\TestCase
     /**
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
-     *
-     * @access protected
      */
     protected function tearDown(): void
     {
@@ -84,7 +79,7 @@ class Zend_View_Helper_FormTest extends \PHPUnit\Framework\TestCase
 
     public function testFormWithSaneInput()
     {
-        $form = $this->helper->form('foo', array('action' => '/foo', 'method' => 'get'));
+        $form = $this->helper->form('foo', ['action' => '/foo', 'method' => 'get']);
         $this->assertMatchesRegularExpression('/<form[^>]*(id="foo")/', $form);
         $this->assertMatchesRegularExpression('/<form[^>]*(action="\/foo")/', $form);
         $this->assertMatchesRegularExpression('/<form[^>]*(method="get")/', $form);
@@ -101,9 +96,9 @@ class Zend_View_Helper_FormTest extends \PHPUnit\Framework\TestCase
      */
     public function testEmptyIdShouldNotRenderIdAttribute()
     {
-        $form = $this->helper->form('', array('action' => '/foo', 'method' => 'get'));
+        $form = $this->helper->form('', ['action' => '/foo', 'method' => 'get']);
         $this->assertNotRegexp('/<form[^>]*(id="")/', $form);
-        $form = $this->helper->form('', array('action' => '/foo', 'method' => 'get', 'id' => null));
+        $form = $this->helper->form('', ['action' => '/foo', 'method' => 'get', 'id' => null]);
         $this->assertNotRegexp('/<form[^>]*(id="")/', $form);
     }
 
@@ -112,7 +107,7 @@ class Zend_View_Helper_FormTest extends \PHPUnit\Framework\TestCase
      */
     public function testPassingNameAsAttributeShouldOverrideFormName()
     {
-        $form = $this->helper->form('OrigName', array('action' => '/foo', 'method' => 'get', 'name' => 'SomeNameAttr'));
+        $form = $this->helper->form('OrigName', ['action' => '/foo', 'method' => 'get', 'name' => 'SomeNameAttr']);
         $this->assertNotRegexp('/<form[^>]*(name="OrigName")/', $form);
         $this->assertMatchesRegularExpression('/<form[^>]*(name="SomeNameAttr")/', $form);
     }
@@ -122,7 +117,7 @@ class Zend_View_Helper_FormTest extends \PHPUnit\Framework\TestCase
      */
     public function testNotSpecifyingFormNameShouldNotRenderNameAttrib()
     {
-        $form = $this->helper->form('', array('action' => '/foo', 'method' => 'get'));
+        $form = $this->helper->form('', ['action' => '/foo', 'method' => 'get']);
         $this->assertNotRegexp('/<form[^>]*(name=".*")/', $form);
     }
 
@@ -131,7 +126,7 @@ class Zend_View_Helper_FormTest extends \PHPUnit\Framework\TestCase
      */
     public function testSpecifyingFormNameShouldRenderNameAttrib()
     {
-        $form = $this->helper->form('FormName', array('action' => '/foo', 'method' => 'get'));
+        $form = $this->helper->form('FormName', ['action' => '/foo', 'method' => 'get']);
         $this->assertMatchesRegularExpression('/<form[^>]*(name="FormName")/', $form);
     }
 
@@ -140,7 +135,7 @@ class Zend_View_Helper_FormTest extends \PHPUnit\Framework\TestCase
      */
     public function testPassingEmptyNameAttributeToUnnamedFormShouldNotRenderNameAttrib()
     {
-        $form = $this->helper->form('', array('action' => '/foo', 'method' => 'get', 'name' => NULL));
+        $form = $this->helper->form('', ['action' => '/foo', 'method' => 'get', 'name' => null]);
         $this->assertNotRegexp('/<form[^>]*(name=".*")/', $form);
     }
 
@@ -149,7 +144,7 @@ class Zend_View_Helper_FormTest extends \PHPUnit\Framework\TestCase
      */
     public function testPassingEmptyNameAttributeToNamedFormShouldNotOverrideNameAttrib()
     {
-        $form = $this->helper->form('RealName', array('action' => '/foo', 'method' => 'get', 'name' => NULL));
+        $form = $this->helper->form('RealName', ['action' => '/foo', 'method' => 'get', 'name' => null]);
         $this->assertMatchesRegularExpression('/<form[^>]*(name="RealName")/', $form);
     }
 
@@ -159,7 +154,7 @@ class Zend_View_Helper_FormTest extends \PHPUnit\Framework\TestCase
     public function testNameAttributeShouldBeOmittedWhenUsingXhtml1Strict()
     {
         $this->view->doctype('XHTML1_STRICT');
-        $form = $this->helper->form('FormName', array('action' => '/foo', 'method' => 'get'));
+        $form = $this->helper->form('FormName', ['action' => '/foo', 'method' => 'get']);
         $this->assertNotRegexp('/<form[^>]*(name="FormName")/', $form);
     }
 
@@ -169,16 +164,16 @@ class Zend_View_Helper_FormTest extends \PHPUnit\Framework\TestCase
     public function testNameAttributeShouldBeOmittedWhenUsingXhtml11()
     {
         $this->view->doctype('XHTML11');
-        $form = $this->helper->form('FormName', array('action' => '/foo', 'method' => 'get'));
+        $form = $this->helper->form('FormName', ['action' => '/foo', 'method' => 'get']);
         $this->assertNotRegexp('/<form[^>]*(name="FormName")/', $form);
     }
 
     public function testEmptyActionShouldNotRenderActionAttributeInHTML5()
     {
         $this->view->doctype(Zend_View_Helper_Doctype::HTML5);
-        $form = $this->helper->form('', array('action' => ''));
+        $form = $this->helper->form('', ['action' => '']);
         $this->assertNotRegexp('/<form[^>]*(action="")/', $form);
-        $form = $this->helper->form('', array('action' => null));
+        $form = $this->helper->form('', ['action' => null]);
         $this->assertNotRegexp('/<form[^>]*(action="")/', $form);
         $form = $this->helper->form('');
         $this->assertNotRegexp('/<form[^>]*(action="")/', $form);
@@ -186,6 +181,6 @@ class Zend_View_Helper_FormTest extends \PHPUnit\Framework\TestCase
 }
 
 // Call Zend_View_Helper_FormTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_FormTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_View_Helper_FormTest::main') {
     Zend_View_Helper_FormTest::main();
 }

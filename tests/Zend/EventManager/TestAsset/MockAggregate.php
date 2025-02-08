@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,8 +14,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_EventManager
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -24,35 +24,34 @@
 
 /**
  * @category   Zend
- * @package    Zend_EventManager
- * @subpackage UnitTests
+ *
  * @group      Zend_EventManager
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Zend_EventManager_TestAsset_MockAggregate implements Zend_EventManager_ListenerAggregate
 {
-
-    protected $listeners = array();
+    protected $listeners = [];
     public $priority;
 
     public function attach(Zend_EventManager_EventCollection $events, $priority = null)
     {
         $this->priority = $priority;
 
-        $listeners = array();
-        $listeners[] = $events->attach('foo.bar', array( $this, 'fooBar' ));
-        $listeners[] = $events->attach('foo.baz', array( $this, 'fooBaz' ));
+        $listeners = [];
+        $listeners[] = $events->attach('foo.bar', [$this, 'fooBar']);
+        $listeners[] = $events->attach('foo.baz', [$this, 'fooBaz']);
 
-        $this->listeners[ spl_object_hash($events) ] = $listeners;
+        $this->listeners[spl_object_hash($events)] = $listeners;
 
         return __METHOD__;
     }
 
     public function detach(Zend_EventManager_EventCollection $events)
     {
-        foreach ($this->listeners[ spl_object_hash($events) ] as $listener) {
+        foreach ($this->listeners[spl_object_hash($events)] as $listener) {
             $events->detach($listener);
         }
 

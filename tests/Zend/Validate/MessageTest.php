@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -30,20 +31,19 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  */
 // require_once 'Zend/Validate/StringLength.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_Validate
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Validate
  */
 #[AllowDynamicProperties]
-class Zend_Validate_MessageTest extends \PHPUnit\Framework\TestCase
+class Zend_Validate_MessageTest extends PHPUnit\Framework\TestCase
 {
     /**
-     * Default instance created for all test methods
+     * Default instance created for all test methods.
      *
      * @var Zend_Validate_StringLength
      */
@@ -51,18 +51,16 @@ class Zend_Validate_MessageTest extends \PHPUnit\Framework\TestCase
 
     public static function main()
     {
-        $suite  = \PHPUnit\Framework\TestSuite::empty(__CLASS__);
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty(__CLASS__);
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
 
     /**
-     * Creates a new Zend_Validate_StringLength object for each test method
-     *
-     * @return void
+     * Creates a new Zend_Validate_StringLength object for each test method.
      */
     public function setUp(): void
     {
@@ -190,7 +188,7 @@ class Zend_Validate_MessageTest extends \PHPUnit\Framework\TestCase
             $this->fail('Expected to catch Zend_Validate_Exception');
         } catch (Zend_Exception $e) {
             $this->assertTrue($e instanceof Zend_Validate_Exception,
-                'Expected exception of type Zend_Validate_Exception, got ' . get_class($e));
+                'Expected exception of type Zend_Validate_Exception, got '.get_class($e));
             $this->assertEquals("No message template exists for key '$keyInvalid'", $e->getMessage());
         }
     }
@@ -205,10 +203,10 @@ class Zend_Validate_MessageTest extends \PHPUnit\Framework\TestCase
     public function testSetMessages()
     {
         $this->_validator->setMessages(
-            array(
-                Zend_Validate_StringLength::TOO_LONG  => 'Your value is too long',
-                Zend_Validate_StringLength::TOO_SHORT => 'Your value is too short'
-            )
+            [
+                Zend_Validate_StringLength::TOO_LONG => 'Your value is too long',
+                Zend_Validate_StringLength::TOO_SHORT => 'Your value is too short',
+            ]
         );
 
         $this->assertFalse($this->_validator->isValid('abcdefghij'));
@@ -268,7 +266,7 @@ class Zend_Validate_MessageTest extends \PHPUnit\Framework\TestCase
             $this->fail('Expected to catch Zend_Validate_Exception');
         } catch (Zend_Exception $e) {
             $this->assertTrue($e instanceof Zend_Validate_Exception,
-                'Expected exception of type Zend_Validate_Exception, got ' . get_class($e));
+                'Expected exception of type Zend_Validate_Exception, got '.get_class($e));
             $this->assertEquals("No property exists by the name 'unknownProperty'", $e->getMessage());
         }
     }
@@ -301,7 +299,7 @@ class Zend_Validate_MessageTest extends \PHPUnit\Framework\TestCase
         $vars = $this->_validator->getMessageVariables();
 
         $this->assertTrue(is_array($vars));
-        $this->assertEquals(array('min', 'max'), $vars);
+        $this->assertEquals(['min', 'max'], $vars);
         $message = 'variables: %notvar% ';
         foreach ($vars as $var) {
             $message .= "%$var% ";
@@ -312,7 +310,6 @@ class Zend_Validate_MessageTest extends \PHPUnit\Framework\TestCase
         $messages = $this->_validator->getMessages();
         $this->assertEquals('variables: %notvar% 4 8 ', current($messages));
     }
-
 }
 
 // Call Zend_Validate_MessageTest::main() if this source file is executed directly.

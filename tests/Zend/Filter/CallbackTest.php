@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,39 +28,39 @@
 
 /**
  * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Filter
  */
 #[AllowDynamicProperties]
-class Zend_Filter_CallbackTest extends \PHPUnit\Framework\TestCase
+class Zend_Filter_CallbackTest extends PHPUnit\Framework\TestCase
 {
     public function testObjectCallback()
     {
-        $filter = new Zend_Filter_Callback(array($this, 'objectCallback'));
+        $filter = new Zend_Filter_Callback([$this, 'objectCallback']);
         $this->assertEquals('objectCallback-test', $filter->filter('test'));
     }
 
     public function testStaticCallback()
     {
         $filter = new Zend_Filter_Callback(
-            array('Zend_Filter_CallbackTest', 'staticCallback')
+            ['Zend_Filter_CallbackTest', 'staticCallback']
         );
         $this->assertEquals('staticCallback-test', $filter->filter('test'));
     }
 
     public function testSettingDefaultOptions()
     {
-        $filter = new Zend_Filter_Callback(array($this, 'objectCallback'), 'options');
+        $filter = new Zend_Filter_Callback([$this, 'objectCallback'], 'options');
         $this->assertEquals('options', $filter->getOptions());
         $this->assertEquals('objectCallback-test', $filter->filter('test'));
     }
 
     public function testSettingDefaultOptionsAfterwards()
     {
-        $filter = new Zend_Filter_Callback(array($this, 'objectCallback'));
+        $filter = new Zend_Filter_Callback([$this, 'objectCallback']);
         $filter->setOptions('options');
         $this->assertEquals('options', $filter->getOptions());
         $this->assertEquals('objectCallback-test', $filter->filter('test'));
@@ -79,11 +80,11 @@ class Zend_Filter_CallbackTest extends \PHPUnit\Framework\TestCase
 
     public function objectCallback($value)
     {
-        return 'objectCallback-' . $value;
+        return 'objectCallback-'.$value;
     }
 
     public static function staticCallback($value)
     {
-        return 'staticCallback-' . $value;
+        return 'staticCallback-'.$value;
     }
 }

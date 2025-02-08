@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +14,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Mail
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Mail_Header_AllTests::main');
 }
@@ -29,10 +29,10 @@ require_once 'Zend/Mail/Header/HeaderValueTest.php';
 
 /**
  * @category   Zend
- * @package    Zend_Mail
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Mail
  */
 #[AllowDynamicProperties]
@@ -40,12 +40,12 @@ class Zend_Mail_Header_AllTests
 {
     public static function main()
     {
-        \PHPUnit\TextUI\TestRunner::run(self::suite());
+        PHPUnit\TextUI\TestRunner::run(self::suite());
     }
 
     public static function suite()
     {
-        $suite = \PHPUnit\Framework\TestSuite::empty('Zend Framework - Zend_Mail_Header');
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend Framework - Zend_Mail_Header');
 
         $suite->addTestSuite('Zend_Mail_Header_HeaderNameTest');
         $suite->addTestSuite('Zend_Mail_Header_HeaderValueTest');

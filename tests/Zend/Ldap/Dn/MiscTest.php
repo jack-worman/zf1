@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,76 +14,76 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Ldap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Ldap_Dn
+ * Zend_Ldap_Dn.
  */
 // require_once 'Zend/Ldap/Dn.php';
 
 /**
  * @category   Zend
- * @package    Zend_Ldap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Ldap
  * @group      Zend_Ldap_Dn
  */
 #[AllowDynamicProperties]
-class Zend_Ldap_Dn_MiscTest extends \PHPUnit\Framework\TestCase
+class Zend_Ldap_Dn_MiscTest extends PHPUnit\Framework\TestCase
 {
     public function testIsChildOfIllegalDn1()
     {
-        $dn1='name1,cn=name2,dc=example,dc=org';
-        $dn2='dc=example,dc=org';
+        $dn1 = 'name1,cn=name2,dc=example,dc=org';
+        $dn2 = 'dc=example,dc=org';
         $this->assertFalse(Zend_Ldap_Dn::isChildOf($dn1, $dn2));
     }
 
     public function testIsChildOfIllegalDn2()
     {
-        $dn1='cn=name1,cn=name2,dc=example,dc=org';
-        $dn2='example,dc=org';
+        $dn1 = 'cn=name1,cn=name2,dc=example,dc=org';
+        $dn2 = 'example,dc=org';
         $this->assertFalse(Zend_Ldap_Dn::isChildOf($dn1, $dn2));
     }
 
     public function testIsChildOfIllegalBothDn()
     {
-        $dn1='name1,cn=name2,dc=example,dc=org';
-        $dn2='example,dc=org';
+        $dn1 = 'name1,cn=name2,dc=example,dc=org';
+        $dn2 = 'example,dc=org';
         $this->assertFalse(Zend_Ldap_Dn::isChildOf($dn1, $dn2));
     }
 
     public function testIsChildOf()
     {
-        $dn1='cb=name1,cn=name2,dc=example,dc=org';
-        $dn2='dc=example,dc=org';
+        $dn1 = 'cb=name1,cn=name2,dc=example,dc=org';
+        $dn2 = 'dc=example,dc=org';
         $this->assertTrue(Zend_Ldap_Dn::isChildOf($dn1, $dn2));
     }
 
     public function testIsChildOfWithDnObjects()
     {
-        $dn1=Zend_Ldap_Dn::fromString('cb=name1,cn=name2,dc=example,dc=org');
-        $dn2=Zend_Ldap_Dn::fromString('dc=example,dc=org');
+        $dn1 = Zend_Ldap_Dn::fromString('cb=name1,cn=name2,dc=example,dc=org');
+        $dn2 = Zend_Ldap_Dn::fromString('dc=example,dc=org');
         $this->assertTrue(Zend_Ldap_Dn::isChildOf($dn1, $dn2));
     }
 
     public function testIsChildOfOtherSubtree()
     {
-        $dn1='cb=name1,cn=name2,dc=example,dc=org';
-        $dn2='dc=example,dc=de';
+        $dn1 = 'cb=name1,cn=name2,dc=example,dc=org';
+        $dn2 = 'dc=example,dc=de';
         $this->assertFalse(Zend_Ldap_Dn::isChildOf($dn1, $dn2));
     }
 
     public function testIsChildOfParentDnLonger()
     {
-        $dn1='dc=example,dc=de';
-        $dn2='cb=name1,cn=name2,dc=example,dc=org';
+        $dn1 = 'dc=example,dc=de';
+        $dn2 = 'cb=name1,cn=name2,dc=example,dc=org';
         $this->assertFalse(Zend_Ldap_Dn::isChildOf($dn1, $dn2));
     }
 }

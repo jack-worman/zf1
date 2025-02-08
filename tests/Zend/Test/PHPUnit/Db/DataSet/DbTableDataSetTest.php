@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Test
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,38 +26,38 @@
 
 /**
  * @category   Zend
- * @package    Zend_Test
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Test
  */
 #[AllowDynamicProperties]
-class Zend_Test_PHPUnit_Db_DataSet_DbTableDataSetTest extends \PHPUnit\Framework\TestCase
+class Zend_Test_PHPUnit_Db_DataSet_DbTableDataSetTest extends PHPUnit\Framework\TestCase
 {
     public function testAddTableAppendedToTableNames()
     {
-        $fixtureTable = "foo";
+        $fixtureTable = 'foo';
 
-        $table = $this->getMock('Zend_Db_Table', array(), array(), '', false);
+        $table = $this->getMock('Zend_Db_Table', [], [], '', false);
         $table->expects($this->at(0))->method('info')->with('name')->will($this->returnValue($fixtureTable));
         $table->expects($this->at(1))->method('info')->with('name')->will($this->returnValue($fixtureTable));
-        $table->expects($this->at(2))->method('info')->with('cols')->will($this->returnValue(array()));
+        $table->expects($this->at(2))->method('info')->with('cols')->will($this->returnValue([]));
 
         $dataSet = new Zend_Test_PHPUnit_Db_DataSet_DbTableDataSet();
         $dataSet->addTable($table);
 
-        $this->assertEquals(array($fixtureTable), $dataSet->getTableNames());
+        $this->assertEquals([$fixtureTable], $dataSet->getTableNames());
     }
 
     public function testAddTableCreatesDbTableInstance()
     {
-        $fixtureTable = "foo";
+        $fixtureTable = 'foo';
 
-        $table = $this->getMock('Zend_Db_Table', array(), array(), '', false);
+        $table = $this->getMock('Zend_Db_Table', [], [], '', false);
         $table->expects($this->at(0))->method('info')->with('name')->will($this->returnValue($fixtureTable));
         $table->expects($this->at(1))->method('info')->with('name')->will($this->returnValue($fixtureTable));
-        $table->expects($this->at(2))->method('info')->with('cols')->will($this->returnValue(array()));
+        $table->expects($this->at(2))->method('info')->with('cols')->will($this->returnValue([]));
 
         $dataSet = new Zend_Test_PHPUnit_Db_DataSet_DbTableDataSet();
         $dataSet->addTable($table);

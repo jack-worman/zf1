@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Pdf
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -29,17 +30,16 @@
 /** Zend_Pdf */
 // require_once 'Zend/Pdf.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_Pdf
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Pdf
  */
 #[AllowDynamicProperties]
-class Zend_Pdf_DestinationTest extends \PHPUnit\Framework\TestCase
+class Zend_Pdf_DestinationTest extends PHPUnit\Framework\TestCase
 {
     public function setUp(): void
     {
@@ -51,7 +51,6 @@ class Zend_Pdf_DestinationTest extends \PHPUnit\Framework\TestCase
         $pdf = new Zend_Pdf();
         $page1 = $pdf->newPage(Zend_Pdf_Page::SIZE_A4);
         $page2 = $pdf->newPage(Zend_Pdf_Page::SIZE_A4);
-
 
         // Zend_Pdf_Destination_Zoom
         $destArray = new Zend_Pdf_Element_Array();
@@ -66,7 +65,6 @@ class Zend_Pdf_DestinationTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($destination instanceof Zend_Pdf_Destination_Zoom);
         $this->assertEquals($destination->getResource()->toString(), '[4 0 R /XYZ 0 842 1 ]');
 
-
         // Zend_Pdf_Destination_Fit
         $destArray = new Zend_Pdf_Element_Array();
         $destArray->items[] = $page2->getPageDictionary();
@@ -76,7 +74,6 @@ class Zend_Pdf_DestinationTest extends \PHPUnit\Framework\TestCase
 
         $this->assertTrue($destination instanceof Zend_Pdf_Destination_Fit);
         $this->assertEquals($destination->getResource()->toString(), '[4 0 R /Fit ]');
-
 
         // Zend_Pdf_Destination_FitHorizontally
         $destArray = new Zend_Pdf_Element_Array();
@@ -89,7 +86,6 @@ class Zend_Pdf_DestinationTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($destination instanceof Zend_Pdf_Destination_FitHorizontally);
         $this->assertEquals($destination->getResource()->toString(), '[4 0 R /FitH 842 ]');
 
-
         // Zend_Pdf_Destination_FitVertically
         $destArray = new Zend_Pdf_Element_Array();
         $destArray->items[] = $page2->getPageDictionary();
@@ -100,7 +96,6 @@ class Zend_Pdf_DestinationTest extends \PHPUnit\Framework\TestCase
 
         $this->assertTrue($destination instanceof Zend_Pdf_Destination_FitVertically);
         $this->assertEquals($destination->getResource()->toString(), '[4 0 R /FitV 0 ]');
-
 
         // Zend_Pdf_Destination_FitRectangle
         $destArray = new Zend_Pdf_Element_Array();
@@ -116,7 +111,6 @@ class Zend_Pdf_DestinationTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($destination instanceof Zend_Pdf_Destination_FitRectangle);
         $this->assertEquals($destination->getResource()->toString(), '[4 0 R /FitR 0 10 595 842 ]');
 
-
         // Zend_Pdf_Destination_FitBoundingBox
         $destArray = new Zend_Pdf_Element_Array();
         $destArray->items[] = $page2->getPageDictionary();
@@ -126,7 +120,6 @@ class Zend_Pdf_DestinationTest extends \PHPUnit\Framework\TestCase
 
         $this->assertTrue($destination instanceof Zend_Pdf_Destination_FitBoundingBox);
         $this->assertEquals($destination->getResource()->toString(), '[4 0 R /FitB ]');
-
 
         // Zend_Pdf_Destination_FitBoundingBoxHorizontally
         $destArray = new Zend_Pdf_Element_Array();
@@ -138,7 +131,6 @@ class Zend_Pdf_DestinationTest extends \PHPUnit\Framework\TestCase
 
         $this->assertTrue($destination instanceof Zend_Pdf_Destination_FitBoundingBoxHorizontally);
         $this->assertEquals($destination->getResource()->toString(), '[4 0 R /FitBH 842 ]');
-
 
         // Zend_Pdf_Destination_FitBoundingBoxVertically
         $destArray = new Zend_Pdf_Element_Array();
@@ -157,7 +149,6 @@ class Zend_Pdf_DestinationTest extends \PHPUnit\Framework\TestCase
         $pdf = new Zend_Pdf();
         $page1 = $pdf->newPage(Zend_Pdf_Page::SIZE_A4);
         $page2 = $pdf->newPage(Zend_Pdf_Page::SIZE_A4);
-
 
         // Zend_Pdf_Destination_Zoom
         $destArray = new Zend_Pdf_Element_Array();
@@ -181,7 +172,6 @@ class Zend_Pdf_DestinationTest extends \PHPUnit\Framework\TestCase
         $destination->setZoomFactor(0.5);
         $this->assertEquals($destination->getZoomFactor(), 0.5);
 
-
         // Zend_Pdf_Destination_FitHorizontally
         $destArray = new Zend_Pdf_Element_Array();
         $destArray->items[] = $page2->getPageDictionary();
@@ -194,7 +184,6 @@ class Zend_Pdf_DestinationTest extends \PHPUnit\Framework\TestCase
         $destination->setTopEdge(825);
         $this->assertEquals($destination->getTopEdge(), 825);
 
-
         // Zend_Pdf_Destination_FitVertically
         $destArray = new Zend_Pdf_Element_Array();
         $destArray->items[] = $page2->getPageDictionary();
@@ -206,7 +195,6 @@ class Zend_Pdf_DestinationTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($destination->getLeftEdge(), 0);
         $destination->setLeftEdge(5);
         $this->assertEquals($destination->getLeftEdge(), 5);
-
 
         // Zend_Pdf_Destination_FitRectangle
         $destArray = new Zend_Pdf_Element_Array();
@@ -235,7 +223,6 @@ class Zend_Pdf_DestinationTest extends \PHPUnit\Framework\TestCase
         $destination->setTopEdge(825);
         $this->assertEquals($destination->getTopEdge(), 825);
 
-
         // Zend_Pdf_Destination_FitBoundingBoxHorizontally
         $destArray = new Zend_Pdf_Element_Array();
         $destArray->items[] = $page2->getPageDictionary();
@@ -247,7 +234,6 @@ class Zend_Pdf_DestinationTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($destination->getTopEdge(), 842);
         $destination->setTopEdge(825);
         $this->assertEquals($destination->getTopEdge(), 825);
-
 
         // Zend_Pdf_Destination_FitBoundingBoxVertically
         $destArray = new Zend_Pdf_Element_Array();

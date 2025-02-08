@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,24 +14,23 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'resources_languages_AllTests::main');
 }
 
-require_once __DIR__ . '/Zend_ValidateTest.php';
+require_once __DIR__.'/Zend_ValidateTest.php';
 
 /**
  * @category   Zend
- * @package    Zend_recource
- * @subpackage UnitTests
+ *
  * @group      Zend
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -39,19 +39,19 @@ class resources_languages_AllTests
 {
     public static function main()
     {
-        \PHPUnit\TextUI\TestRunner::run(self::suite());
+        PHPUnit\TextUI\TestRunner::run(self::suite());
     }
 
     /**
-     * Regular suite
+     * Regular suite.
      *
      * All tests except those that require output buffering.
      *
-     * @return \PHPUnit\Framework\TestSuite
+     * @return PHPUnit\Framework\TestSuite
      */
     public static function suite()
     {
-        $suite = \PHPUnit\Framework\TestSuite::empty('Zend Framework - resources - languages');
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend Framework - resources - languages');
 
         $suite->addTestSuite('resources_languages_Zend_ValidateTest');
 

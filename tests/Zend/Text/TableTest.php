@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Text
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Text_FigletTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Text_TableTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Text_TableTest::main');
 }
 
 // require_once 'Zend/Text/Table.php';
@@ -33,14 +34,14 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 
 /**
  * @category   Zend
- * @package    Zend_Text
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Text
  */
 #[AllowDynamicProperties]
-class Zend_Text_TableTest extends \PHPUnit\Framework\TestCase
+class Zend_Text_TableTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -49,10 +50,10 @@ class Zend_Text_TableTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Text_TableTest");
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_Text_TableTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -79,14 +80,14 @@ class Zend_Text_TableTest extends \PHPUnit\Framework\TestCase
 
     public function testColumnWordwrap()
     {
-        $column = new Zend_Text_Table_Column("foobar");
+        $column = new Zend_Text_Table_Column('foobar');
 
         $this->assertEquals($column->render(3), "foo\nbar");
     }
 
     public function testColumnUnicodeWordwrap()
     {
-        $column = new Zend_Text_Table_Column("Ömläüt");
+        $column = new Zend_Text_Table_Column('Ömläüt');
 
         $this->assertEquals($column->render(3), "Öml\näüt");
     }
@@ -199,7 +200,7 @@ class Zend_Text_TableTest extends \PHPUnit\Framework\TestCase
         $row->appendColumn(new Zend_Text_Table_Column('Eté'));
         $row->appendColumn(new Zend_Text_Table_Column('Ete'));
 
-        $this->assertEquals($row->render(array(10, 10), $decorator), "│Eté       │Ete       │\n");
+        $this->assertEquals($row->render([10, 10], $decorator), "│Eté       │Ete       │\n");
     }
 
     public function testRowColumnsWithColSpan()
@@ -211,7 +212,7 @@ class Zend_Text_TableTest extends \PHPUnit\Framework\TestCase
         $row->appendColumn(new Zend_Text_Table_Column('foobar'));
         $row->appendColumn(new Zend_Text_Table_Column('foobar', null, 2));
 
-        $this->assertEquals($row->render(array(10, 10, 10), $decorator), "│foobar    │foobar               │\n");
+        $this->assertEquals($row->render([10, 10, 10], $decorator), "│foobar    │foobar               │\n");
     }
 
     public function testRowWithNoColumns()
@@ -220,7 +221,7 @@ class Zend_Text_TableTest extends \PHPUnit\Framework\TestCase
 
         $row = new Zend_Text_Table_Row();
 
-        $this->assertEquals($row->render(array(10, 10, 10), $decorator), "│                                │\n");
+        $this->assertEquals($row->render([10, 10, 10], $decorator), "│                                │\n");
     }
 
     public function testRowNotEnoughColumnWidths()
@@ -232,7 +233,7 @@ class Zend_Text_TableTest extends \PHPUnit\Framework\TestCase
         $row->appendColumn(new Zend_Text_Table_Column());
 
         try {
-            $row->render(array(10), $decorator);
+            $row->render([10], $decorator);
             $this->fail('An expected Zend_Text_Table_Exception has not been raised');
         } catch (Zend_Text_Table_Exception $expected) {
             $this->assertStringContainsString('Too many columns', $expected->getMessage());
@@ -258,7 +259,7 @@ class Zend_Text_TableTest extends \PHPUnit\Framework\TestCase
         $row = new Zend_Text_Table_Row();
         $row->appendColumn(new Zend_Text_Table_Column('foobar'));
 
-        $this->assertEquals($row->render(array(10, 10, 10), $decorator), "│foobar    │                     │\n");
+        $this->assertEquals($row->render([10, 10, 10], $decorator), "│foobar    │                     │\n");
     }
 
     public function testRowMultiLine()
@@ -267,9 +268,9 @@ class Zend_Text_TableTest extends \PHPUnit\Framework\TestCase
 
         $row = new Zend_Text_Table_Row();
         $row->appendColumn(new Zend_Text_Table_Column("foo\nbar"));
-        $row->appendColumn(new Zend_Text_Table_Column("foobar"));
+        $row->appendColumn(new Zend_Text_Table_Column('foobar'));
 
-        $this->assertEquals($row->render(array(10, 10), $decorator), "│foo       │foobar    │\n│bar       │          │\n");
+        $this->assertEquals($row->render([10, 10], $decorator), "│foo       │foobar    │\n│bar       │          │\n");
     }
 
     public function testUnicodeRowMultiLine()
@@ -278,15 +279,15 @@ class Zend_Text_TableTest extends \PHPUnit\Framework\TestCase
 
         $row = new Zend_Text_Table_Row();
         $row->appendColumn(new Zend_Text_Table_Column("föö\nbär"));
-        $row->appendColumn(new Zend_Text_Table_Column("fööbär"));
+        $row->appendColumn(new Zend_Text_Table_Column('fööbär'));
 
-        $this->assertEquals($row->render(array(3, 10), $decorator), "│föö│fööbär    │\n│bär│          │\n");
+        $this->assertEquals($row->render([3, 10], $decorator), "│föö│fööbär    │\n│bär│          │\n");
     }
 
     public function testTableConstructInvalidColumnWidths()
     {
         try {
-            $table = new Zend_Text_Table(array('columnWidths' => array()));
+            $table = new Zend_Text_Table(['columnWidths' => []]);
             $this->fail('An expected Zend_Text_Table_Exception has not been raised');
         } catch (Zend_Text_Table_Exception $expected) {
             $this->assertStringContainsString('You must supply at least one column', $expected->getMessage());
@@ -296,7 +297,7 @@ class Zend_Text_TableTest extends \PHPUnit\Framework\TestCase
     public function testTableConstructInvalidColumnWidthsItem()
     {
         try {
-            $table = new Zend_Text_Table(array('columnWidths' => array('foo')));
+            $table = new Zend_Text_Table(['columnWidths' => ['foo']]);
             $this->fail('An expected Zend_Text_Table_Exception has not been raised');
         } catch (Zend_Text_Table_Exception $expected) {
             $this->assertStringContainsString('Column 0 has an invalid column width', $expected->getMessage());
@@ -305,7 +306,7 @@ class Zend_Text_TableTest extends \PHPUnit\Framework\TestCase
 
     public function testTableDecoratorLoaderSimple()
     {
-        $table = new Zend_Text_Table(array('columnWidths' => array(10), 'decorator' => 'ascii'));
+        $table = new Zend_Text_Table(['columnWidths' => [10], 'decorator' => 'ascii']);
 
         $row = new Zend_Text_Table_Row();
         $row->createColumn('foobar');
@@ -318,7 +319,7 @@ class Zend_Text_TableTest extends \PHPUnit\Framework\TestCase
     {
         Zend_Text_Table::setOutputCharset('iso-8859-15');
 
-        $table = new Zend_Text_Table(array('columnWidths' => array(10)));
+        $table = new Zend_Text_Table(['columnWidths' => [10]]);
 
         $row = new Zend_Text_Table_Row();
         $row->createColumn('foobar');
@@ -329,7 +330,7 @@ class Zend_Text_TableTest extends \PHPUnit\Framework\TestCase
 
     public function testTableDecoratorLoaderAdvanced()
     {
-        $table = new Zend_Text_Table(array('columnWidths' => array(10), 'decorator' => new Zend_Text_Table_Decorator_Ascii()));
+        $table = new Zend_Text_Table(['columnWidths' => [10], 'decorator' => new Zend_Text_Table_Decorator_Ascii()]);
 
         $row = new Zend_Text_Table_Row();
         $row->createColumn('foobar');
@@ -340,7 +341,7 @@ class Zend_Text_TableTest extends \PHPUnit\Framework\TestCase
 
     public function testTableSimpleRow()
     {
-        $table = new Zend_Text_Table(array('columnWidths' => array(10)));
+        $table = new Zend_Text_Table(['columnWidths' => [10]]);
 
         $row = new Zend_Text_Table_Row();
         $row->createColumn('foobar');
@@ -351,11 +352,11 @@ class Zend_Text_TableTest extends \PHPUnit\Framework\TestCase
 
     public function testDefaultColumnAlign()
     {
-        $table = new Zend_Text_Table(array('columnWidths' => array(10)));
+        $table = new Zend_Text_Table(['columnWidths' => [10]]);
 
         $table->setDefaultColumnAlign(0, Zend_Text_Table_Column::ALIGN_CENTER);
 
-        $table->appendRow(array('foobar'));
+        $table->appendRow(['foobar']);
 
         $this->assertEquals($table->render(), "┌──────────┐\n│  foobar  │\n└──────────┘\n");
     }
@@ -387,7 +388,7 @@ class Zend_Text_TableTest extends \PHPUnit\Framework\TestCase
 
     public function testTableWithoutRows()
     {
-        $table = new Zend_Text_Table(array('columnWidths' => array(10)));
+        $table = new Zend_Text_Table(['columnWidths' => [10]]);
 
         try {
             $table->render();
@@ -399,7 +400,7 @@ class Zend_Text_TableTest extends \PHPUnit\Framework\TestCase
 
     public function testTableColSpanWithMultipleRows()
     {
-        $table = new Zend_Text_Table(array('columnWidths' => array(10, 10)));
+        $table = new Zend_Text_Table(['columnWidths' => [10, 10]]);
 
         $row = new Zend_Text_Table_Row();
         $row->appendColumn(new Zend_Text_Table_Column('foobar'));
@@ -410,16 +411,16 @@ class Zend_Text_TableTest extends \PHPUnit\Framework\TestCase
         $row->appendColumn(new Zend_Text_Table_Column('foobar', null, 2));
         $table->appendRow($row);
 
-        $this->assertEquals($table->render(),   "┌──────────┬──────────┐\n"
-                                              . "│foobar    │foobar    │\n"
-                                              . "├──────────┴──────────┤\n"
-                                              . "│foobar               │\n"
-                                              . "└─────────────────────┘\n");
+        $this->assertEquals($table->render(), "┌──────────┬──────────┐\n"
+                                              ."│foobar    │foobar    │\n"
+                                              ."├──────────┴──────────┤\n"
+                                              ."│foobar               │\n"
+                                              ."└─────────────────────┘\n");
     }
 
     public function testTableComplex()
     {
-        $table = new Zend_Text_Table(array('columnWidths' => array(10, 10, 10)));
+        $table = new Zend_Text_Table(['columnWidths' => [10, 10, 10]]);
 
         $row = new Zend_Text_Table_Row();
         $row->appendColumn(new Zend_Text_Table_Column('foobar'));
@@ -441,20 +442,20 @@ class Zend_Text_TableTest extends \PHPUnit\Framework\TestCase
         $row->appendColumn(new Zend_Text_Table_Column('foobar'));
         $table->appendRow($row);
 
-        $this->assertEquals($table->render(),   "┌──────────┬─────────────────────┐\n"
-                                              . "│foobar    │foobar               │\n"
-                                              . "├──────────┼─────────────────────┤\n"
-                                              . "│foobar    │foobar               │\n"
-                                              . "├──────────┴─────────────────────┤\n"
-                                              . "│foobar                          │\n"
-                                              . "├──────────┬──────────┬──────────┤\n"
-                                              . "│foobar    │foobar    │foobar    │\n"
-                                              . "└──────────┴──────────┴──────────┘\n");
+        $this->assertEquals($table->render(), "┌──────────┬─────────────────────┐\n"
+                                              ."│foobar    │foobar               │\n"
+                                              ."├──────────┼─────────────────────┤\n"
+                                              ."│foobar    │foobar               │\n"
+                                              ."├──────────┴─────────────────────┤\n"
+                                              ."│foobar                          │\n"
+                                              ."├──────────┬──────────┬──────────┤\n"
+                                              ."│foobar    │foobar    │foobar    │\n"
+                                              ."└──────────┴──────────┴──────────┘\n");
     }
 
     public function testTableMagicToString()
     {
-        $table = new Zend_Text_Table(array('columnWidths' => array(10)));
+        $table = new Zend_Text_Table(['columnWidths' => [10]]);
 
         $row = new Zend_Text_Table_Row();
         $row->appendColumn(new Zend_Text_Table_Column('foobar'));
@@ -468,16 +469,16 @@ class Zend_Text_TableTest extends \PHPUnit\Framework\TestCase
         $decorator = new Zend_Text_Table_Decorator_Unicode();
 
         $chars = $decorator->getBottomLeft()
-               . $decorator->getBottomRight()
-               . $decorator->getCross()
-               . $decorator->getHorizontal()
-               . $decorator->getHorizontalDown()
-               . $decorator->getHorizontalUp()
-               . $decorator->getTopLeft()
-               . $decorator->getTopRight()
-               . $decorator->getVertical()
-               . $decorator->getVerticalLeft()
-               . $decorator->getVerticalRight();
+               .$decorator->getBottomRight()
+               .$decorator->getCross()
+               .$decorator->getHorizontal()
+               .$decorator->getHorizontalDown()
+               .$decorator->getHorizontalUp()
+               .$decorator->getTopLeft()
+               .$decorator->getTopRight()
+               .$decorator->getVertical()
+               .$decorator->getVerticalLeft()
+               .$decorator->getVerticalRight();
 
         $this->assertEquals($chars, '└┘┼─┬┴┌┐│┤├');
     }
@@ -487,22 +488,22 @@ class Zend_Text_TableTest extends \PHPUnit\Framework\TestCase
         $decorator = new Zend_Text_Table_Decorator_Ascii();
 
         $chars = $decorator->getBottomLeft()
-               . $decorator->getBottomRight()
-               . $decorator->getCross()
-               . $decorator->getHorizontal()
-               . $decorator->getHorizontalDown()
-               . $decorator->getHorizontalUp()
-               . $decorator->getTopLeft()
-               . $decorator->getTopRight()
-               . $decorator->getVertical()
-               . $decorator->getVerticalLeft()
-               . $decorator->getVerticalRight();
+               .$decorator->getBottomRight()
+               .$decorator->getCross()
+               .$decorator->getHorizontal()
+               .$decorator->getHorizontalDown()
+               .$decorator->getHorizontalUp()
+               .$decorator->getTopLeft()
+               .$decorator->getTopRight()
+               .$decorator->getVertical()
+               .$decorator->getVerticalLeft()
+               .$decorator->getVerticalRight();
 
         $this->assertEquals($chars, '+++-++++|++');
     }
 }
 
 // Call Zend_Text_TableTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Text_TableTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Text_TableTest::main') {
     Zend_Text_TableTest::main();
 }

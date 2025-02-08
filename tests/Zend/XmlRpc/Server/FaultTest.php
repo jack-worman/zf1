@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,55 +14,52 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version $Id$
  */
 
 // Call Zend_XmlRpc_Server_FaultTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_XmlRpc_Server_FaultTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_XmlRpc_Server_FaultTest::main');
 }
-
 
 // require_once 'Zend/XmlRpc/Server.php';
 // require_once 'Zend/XmlRpc/Server/Fault.php';
 // require_once 'Zend/XmlRpc/Server/Exception.php';
 
 /**
- * Test case for Zend_XmlRpc_Server_Fault
+ * Test case for Zend_XmlRpc_Server_Fault.
  *
  * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_XmlRpc
  */
 #[AllowDynamicProperties]
-class Zend_XmlRpc_Server_FaultTest extends \PHPUnit\Framework\TestCase
+class Zend_XmlRpc_Server_FaultTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
      *
-     * @access public
      * @static
      */
     public static function main()
     {
-
-        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_XmlRpc_Server_FaultTest");
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_XmlRpc_Server_FaultTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
 
     /**
-     * Zend_XmlRpc_Server_Fault::getInstance() test
+     * Zend_XmlRpc_Server_Fault::getInstance() test.
      */
     public function testGetInstance()
     {
@@ -72,7 +70,7 @@ class Zend_XmlRpc_Server_FaultTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Zend_XmlRpc_Server_Fault::attachFaultException() test
+     * Zend_XmlRpc_Server_Fault::attachFaultException() test.
      */
     public function testAttachFaultException()
     {
@@ -83,11 +81,11 @@ class Zend_XmlRpc_Server_FaultTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(411, $fault->getCode());
         Zend_XmlRpc_Server_Fault::detachFaultException('zxrs_fault_test_exception');
 
-        $exceptions = array(
+        $exceptions = [
             'zxrs_fault_test_exception',
             'zxrs_fault_test_exception2',
-            'zxrs_fault_test_exception3'
-        );
+            'zxrs_fault_test_exception3',
+        ];
         Zend_XmlRpc_Server_Fault::attachFaultException($exceptions);
         foreach ($exceptions as $class) {
             $e = new $class('test exception', 411);
@@ -99,7 +97,8 @@ class Zend_XmlRpc_Server_FaultTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Tests ZF-1825
+     * Tests ZF-1825.
+     *
      * @return void
      */
     public function testAttachFaultExceptionAllowsForDerivativeExceptionClasses()
@@ -113,7 +112,7 @@ class Zend_XmlRpc_Server_FaultTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Zend_XmlRpc_Server_Fault::detachFaultException() test
+     * Zend_XmlRpc_Server_Fault::detachFaultException() test.
      */
     public function testDetachFaultException()
     {
@@ -127,12 +126,11 @@ class Zend_XmlRpc_Server_FaultTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('Unknown error', $fault->getMessage());
         $this->assertEquals(404, $fault->getCode());
 
-
-        $exceptions = array(
+        $exceptions = [
             'zxrs_fault_test_exception',
             'zxrs_fault_test_exception2',
-            'zxrs_fault_test_exception3'
-        );
+            'zxrs_fault_test_exception3',
+        ];
         Zend_XmlRpc_Server_Fault::attachFaultException($exceptions);
         foreach ($exceptions as $class) {
             $e = new $class('test exception', 411);
@@ -150,7 +148,7 @@ class Zend_XmlRpc_Server_FaultTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Zend_XmlRpc_Server_Fault::attachObserver() test
+     * Zend_XmlRpc_Server_Fault::attachObserver() test.
      */
     public function testAttachObserver()
     {
@@ -171,7 +169,7 @@ class Zend_XmlRpc_Server_FaultTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Zend_XmlRpc_Server_Fault::detachObserver() test
+     * Zend_XmlRpc_Server_Fault::detachObserver() test.
      */
     public function testDetachObserver()
     {
@@ -190,7 +188,7 @@ class Zend_XmlRpc_Server_FaultTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * getCode() test
+     * getCode() test.
      */
     public function testGetCode()
     {
@@ -201,7 +199,7 @@ class Zend_XmlRpc_Server_FaultTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * getException() test
+     * getException() test.
      */
     public function testGetException()
     {
@@ -212,7 +210,7 @@ class Zend_XmlRpc_Server_FaultTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * getMessage() test
+     * getMessage() test.
      */
     public function testGetMessage()
     {
@@ -223,24 +221,24 @@ class Zend_XmlRpc_Server_FaultTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * __toString() test
+     * __toString() test.
      */
-    public function test__toString()
+    public function testToString()
     {
-        $dom  = new DOMDocument('1.0', 'UTF-8');
-        $r    = $dom->appendChild($dom->createElement('methodResponse'));
-        $f    = $r->appendChild($dom->createElement('fault'));
-        $v    = $f->appendChild($dom->createElement('value'));
-        $s    = $v->appendChild($dom->createElement('struct'));
+        $dom = new DOMDocument('1.0', 'UTF-8');
+        $r = $dom->appendChild($dom->createElement('methodResponse'));
+        $f = $r->appendChild($dom->createElement('fault'));
+        $v = $f->appendChild($dom->createElement('value'));
+        $s = $v->appendChild($dom->createElement('struct'));
 
-        $m1   = $s->appendChild($dom->createElement('member'));
+        $m1 = $s->appendChild($dom->createElement('member'));
         $m1->appendChild($dom->createElement('name', 'faultCode'));
-        $cv   = $m1->appendChild($dom->createElement('value'));
+        $cv = $m1->appendChild($dom->createElement('value'));
         $cv->appendChild($dom->createElement('int', 411));
 
-        $m2   = $s->appendChild($dom->createElement('member'));
+        $m2 = $s->appendChild($dom->createElement('member'));
         $m2->appendChild($dom->createElement('name', 'faultString'));
-        $sv   = $m2->appendChild($dom->createElement('value'));
+        $sv = $m2->appendChild($dom->createElement('value'));
         $sv->appendChild($dom->createElement('string', 'Testing fault'));
 
         $xml = $dom->saveXML();
@@ -254,20 +252,28 @@ class Zend_XmlRpc_Server_FaultTest extends \PHPUnit\Framework\TestCase
 }
 
 #[AllowDynamicProperties]
-class zxrs_fault_test_exception extends Exception {}
+class zxrs_fault_test_exception extends Exception
+{
+}
 #[AllowDynamicProperties]
-class zxrs_fault_test_exception2 extends Exception {}
+class zxrs_fault_test_exception2 extends Exception
+{
+}
 #[AllowDynamicProperties]
-class zxrs_fault_test_exception3 extends Exception {}
+class zxrs_fault_test_exception3 extends Exception
+{
+}
 #[AllowDynamicProperties]
-class zxrs_fault_test_exception4 extends zxrs_fault_test_exception {}
+class zxrs_fault_test_exception4 extends zxrs_fault_test_exception
+{
+}
 
 #[AllowDynamicProperties]
 class zxrs_fault_observer
 {
     private static $_instance = false;
 
-    public $observed = array();
+    public $observed = [];
 
     private function __construct()
     {
@@ -289,7 +295,7 @@ class zxrs_fault_observer
 
     public static function clearObserved()
     {
-        self::getInstance()->observed = array();
+        self::getInstance()->observed = [];
     }
 
     public static function getObserved()
@@ -299,6 +305,6 @@ class zxrs_fault_observer
 }
 
 // Call Zend_XmlRpc_Server_FaultTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_XmlRpc_Server_FaultTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_XmlRpc_Server_FaultTest::main') {
     Zend_XmlRpc_Server_FaultTest::main();
 }

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Reflection
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -24,25 +25,23 @@
 
 /**
  * @category   Zend
- * @package    Zend_Reflection
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Reflection
  * @group      Zend_Reflection_Docblock
  * @group      Zend_Reflection_Docblock_Tag
  */
 #[AllowDynamicProperties]
-class Zend_Reflection_Docblock_TagTest extends \PHPUnit\Framework\TestCase
+class Zend_Reflection_Docblock_TagTest extends PHPUnit\Framework\TestCase
 {
-
-
-    static protected $_sampleClassFileRequired = false;
+    protected static $_sampleClassFileRequired = false;
 
     public function setUp(): void
     {
-        if (self::$_sampleClassFileRequired === false) {
-            $fileToRequire = dirname(__DIR__) . '/_files/TestSampleClass.php';
+        if (false === self::$_sampleClassFileRequired) {
+            $fileToRequire = dirname(__DIR__).'/_files/TestSampleClass.php';
             require_once $fileToRequire;
             self::$_sampleClassFileRequired = true;
         }
@@ -78,8 +77,8 @@ class Zend_Reflection_Docblock_TagTest extends \PHPUnit\Framework\TestCase
 
         $tag = $classReflection->getMethod('doSomething')->getDocblock()->getTag('descriptionTag');
 
-        $expectedString = "Docblock Tag [ * @descriptionTag ]".PHP_EOL;
+        $expectedString = 'Docblock Tag [ * @descriptionTag ]'.PHP_EOL;
 
-        $this->assertEquals($expectedString, (string)$tag);
+        $this->assertEquals($expectedString, (string) $tag);
     }
 }

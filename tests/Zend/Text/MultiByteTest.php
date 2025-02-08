@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,33 +14,33 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Text
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Text_MultiByteTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Text_MultiByteTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Text_MultiByteTest::main');
 }
 
 /**
- * Zend_Text_MultiByte
+ * Zend_Text_MultiByte.
  */
 // require_once 'Zend/Text/MultiByte.php';
 
 /**
  * @category   Zend
- * @package    Zend_Text
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Text
  */
 #[AllowDynamicProperties]
-class Zend_Text_MultiByteTest extends \PHPUnit\Framework\TestCase
+class Zend_Text_MultiByteTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -48,16 +49,16 @@ class Zend_Text_MultiByteTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Text_MultiByteTest");
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_Text_MultiByteTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
 
     /**
-     * Standard cut tests
+     * Standard cut tests.
      */
     public function testWordWrapCutSingleLine()
     {
@@ -84,16 +85,16 @@ class Zend_Text_MultiByteTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Long-Break tests
+     * Long-Break tests.
      */
     public function testWordWrapLongBreak()
     {
-        $line = Zend_Text_MultiByte::wordWrap("Ä very<br>long wöö<br>öööööööö<br>öörd.", 8, '<br>', false);
-        $this->assertEquals("Ä very<br>long wöö<br>öööööööö<br>öörd.", $line);
+        $line = Zend_Text_MultiByte::wordWrap('Ä very<br>long wöö<br>öööööööö<br>öörd.', 8, '<br>', false);
+        $this->assertEquals('Ä very<br>long wöö<br>öööööööö<br>öörd.', $line);
     }
 
     /**
-     * Alternative cut tests
+     * Alternative cut tests.
      */
     public function testWordWrapCutBeginningSingleSpace()
     {
@@ -162,7 +163,7 @@ class Zend_Text_MultiByteTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Break cut tests
+     * Break cut tests.
      */
     public function testWordWrapCutBreakBefore()
     {
@@ -195,7 +196,7 @@ class Zend_Text_MultiByteTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Standard no-cut tests
+     * Standard no-cut tests.
      */
     public function testWordWrapNoCutSingleLine()
     {
@@ -216,7 +217,7 @@ class Zend_Text_MultiByteTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Break no-cut tests
+     * Break no-cut tests.
      */
     public function testWordWrapNoCutBreakBefore()
     {
@@ -249,7 +250,7 @@ class Zend_Text_MultiByteTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Pad tests
+     * Pad tests.
      */
     public function testLeftPad()
     {
@@ -298,6 +299,6 @@ class Zend_Text_MultiByteTest extends \PHPUnit\Framework\TestCase
 }
 
 // Call Zend_Text_MultiByteTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Text_MultiByteTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Text_MultiByteTest::main') {
     Zend_Text_MultiByteTest::main();
 }

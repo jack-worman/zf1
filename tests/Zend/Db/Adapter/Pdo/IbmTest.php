@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,32 +14,29 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /**
  * @see Zend_Db_Adapter_Db2Test
  */
 require_once 'Zend/Db/Adapter/Db2Test.php';
 
-
 /**
  * @see Zend_Db_Adapter_Pdo_Ibm
  */
 // require_once 'Zend/Db/Adapter/Pdo/Ibm.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Db
  * @group      Zend_Db_Adapter
  */
@@ -54,7 +52,7 @@ class Zend_Db_Adapter_Pdo_IbmTest extends Zend_Db_Adapter_Db2Test
     {
         $server = $this->_util->getServer();
 
-        if ($server == 'IDS') {
+        if ('IDS' == $server) {
             $this->markTestIncomplete('IDS needs special consideration for transactions');
         } else {
             parent::testAdapterTransactionCommit();
@@ -65,7 +63,7 @@ class Zend_Db_Adapter_Pdo_IbmTest extends Zend_Db_Adapter_Db2Test
     {
         $server = $this->_util->getServer();
 
-        if ($server == 'IDS') {
+        if ('IDS' == $server) {
             $this->markTestIncomplete('IDS needs special consideration for transactions');
         } else {
             parent::testAdapterTransactionCommit();
@@ -94,15 +92,16 @@ class Zend_Db_Adapter_Pdo_IbmTest extends Zend_Db_Adapter_Db2Test
     /**
      * Used by _testAdapterOptionCaseFoldingNatural()
      * DB2 returns identifiers in uppercase naturally,
-     * while IDS does not
+     * while IDS does not.
      */
     protected function _testAdapterOptionCaseFoldingNaturalIdentifier()
     {
         $server = $this->_util->getServer();
 
-        if ($server == 'DB2') {
+        if ('DB2' == $server) {
             return 'CASE_FOLDED_IDENTIFIER';
         }
+
         return 'case_folded_identifier';
     }
 }

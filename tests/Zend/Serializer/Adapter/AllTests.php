@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +14,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Serializer
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Serializer_Adapter_AllTests::main');
 }
@@ -27,57 +27,56 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 /**
  * @see Zend_Serializer_Adapter_PhpSerializeTest
  */
-require_once __DIR__ . '/PhpSerializeTest.php';
+require_once __DIR__.'/PhpSerializeTest.php';
 
 /**
  * @see Zend_Serializer_Adapter_PhpCodeTest
  */
-require_once __DIR__ . '/PhpCodeTest.php';
+require_once __DIR__.'/PhpCodeTest.php';
 
 /**
  * @see Zend_Serializer_Adapter_JsonTest
  */
-require_once __DIR__ . '/JsonTest.php';
+require_once __DIR__.'/JsonTest.php';
 
 /**
  * @see Zend_Serializer_Adapter_Amf0Test
  */
-require_once __DIR__ . '/Amf0Test.php';
+require_once __DIR__.'/Amf0Test.php';
 
 /**
  * @see Zend_Serializer_Adapter_Amf3Test
  */
-require_once __DIR__ . '/Amf3Test.php';
+require_once __DIR__.'/Amf3Test.php';
 
 /**
  * @see Zend_Serializer_Adapter_WddxTest
  */
-require_once __DIR__ . '/WddxTest.php';
+require_once __DIR__.'/WddxTest.php';
 
 /**
  * @see Zend_Serializer_Adapter_IgbinaryTest
  */
-require_once __DIR__ . '/IgbinaryTest.php';
+require_once __DIR__.'/IgbinaryTest.php';
 
 /**
  * @see Zend_Serializer_Adapter_PythonPickleSerializeProtocol0Test
  */
-require_once __DIR__ . '/PythonPickleSerializeProtocol0Test.php';
+require_once __DIR__.'/PythonPickleSerializeProtocol0Test.php';
 
 /**
  * @see Zend_Serializer_Adapter_PythonPickleSerializeProtocol1Test
  */
-require_once __DIR__ . '/PythonPickleSerializeProtocol1Test.php';
+require_once __DIR__.'/PythonPickleSerializeProtocol1Test.php';
 
 /**
  * @see Zend_Serializer_Adapter_PythonPickleUnserializeTest
  */
-require_once __DIR__ . '/PythonPickleUnserializeTest.php';
+require_once __DIR__.'/PythonPickleUnserializeTest.php';
 
 /**
  * @category   Zend
- * @package    Zend_Serializer
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -86,12 +85,12 @@ class Zend_Serializer_Adapter_AllTests
 {
     public static function main()
     {
-        \PHPUnit\TextUI\TestRunner::run(self::suite());
+        PHPUnit\TextUI\TestRunner::run(self::suite());
     }
 
     public static function suite()
     {
-        $suite = \PHPUnit\Framework\TestSuite::empty('Zend');
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend');
 
         $suite->addTestSuite('Zend_Serializer_Adapter_PhpSerializeTest');
         $suite->addTestSuite('Zend_Serializer_Adapter_PhpCodeTest');

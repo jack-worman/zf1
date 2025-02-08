@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -29,18 +30,19 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 // require_once 'Zend/Validate/Identical.php';
 
 /**
- * Zend_Validate_Identical
+ * Zend_Validate_Identical.
  *
  * @category   Zend
- * @package    Zend
- * @subpackage UnitTests
- * @uses       Zend_Validate_Identical
+ *
+ * @uses       \Zend_Validate_Identical
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Validate
  */
 #[AllowDynamicProperties]
-class Zend_Validate_IdenticalTest extends \PHPUnit\Framework\TestCase
+class Zend_Validate_IdenticalTest extends PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_Validate_Identical
@@ -49,17 +51,17 @@ class Zend_Validate_IdenticalTest extends \PHPUnit\Framework\TestCase
 
     public static function main()
     {
-        $suite  = \PHPUnit\Framework\TestSuite::empty('Zend_Validate_IdenticalTest');
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_Validate_IdenticalTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
 
     public function setUp(): void
     {
-        $this->validator = new Zend_Validate_Identical;
+        $this->validator = new Zend_Validate_Identical();
     }
 
     public function testTokenInitiallyNull()
@@ -129,25 +131,25 @@ class Zend_Validate_IdenticalTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($this->validator->isValid(true));
         $this->assertFalse($this->validator->isValid(1));
 
-        $this->validator->setToken(array('one' => 'two', 'three'));
-        $this->assertTrue($this->validator->isValid(array('one' => 'two', 'three')));
-        $this->assertFalse($this->validator->isValid(array()));
+        $this->validator->setToken(['one' => 'two', 'three']);
+        $this->assertTrue($this->validator->isValid(['one' => 'two', 'three']));
+        $this->assertFalse($this->validator->isValid([]));
     }
 
     public function testValidatingTokenArray()
     {
-        $validator = new Zend_Validate_Identical(array('token' => 123));
+        $validator = new Zend_Validate_Identical(['token' => 123]);
         $this->assertTrue($validator->isValid(123));
-        $this->assertFalse($validator->isValid(array('token' => 123)));
+        $this->assertFalse($validator->isValid(['token' => 123]));
     }
 
     public function testValidatingNonStrictToken()
     {
-        $validator = new Zend_Validate_Identical(array('token' => 123, 'strict' => false));
+        $validator = new Zend_Validate_Identical(['token' => 123, 'strict' => false]);
         $this->assertTrue($validator->isValid('123'));
 
         $validator->setStrict(true);
-        $this->assertFalse($validator->isValid(array('token' => '123')));
+        $this->assertFalse($validator->isValid(['token' => '123']));
     }
 }
 

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Controller_Action_HelperBrokerTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Controller_Action_HelperBrokerTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Controller_Action_HelperBrokerTest::main');
 }
 
 // require_once 'Zend/Controller/Action/HelperBroker.php';
@@ -31,22 +32,21 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 
 /**
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Controller
  * @group      Zend_Controller_Action
  * @group      Zend_Controller_Action_Helper
  */
 #[AllowDynamicProperties]
-class Zend_Controller_Action_HelperBroker_PriorityStackTest extends \PHPUnit\Framework\TestCase
+class Zend_Controller_Action_HelperBroker_PriorityStackTest extends PHPUnit\Framework\TestCase
 {
-
     /**
      * @var Zend_Controller_Action_HelperBroker_PriorityStack
      */
-    public $stack = null;
+    public $stack;
 
     public function setUp(): void
     {
@@ -73,7 +73,6 @@ class Zend_Controller_Action_HelperBroker_PriorityStackTest extends \PHPUnit\Fra
         $this->assertEquals(2, $this->stack->getHighestPriority());
         $this->assertEquals(1, $this->stack->getLowestPriority());
     }
-
 
     public function testStackMaintainsReturnsCorrectNextPriorityWithSetPriorities()
     {
@@ -113,5 +112,4 @@ class Zend_Controller_Action_HelperBroker_PriorityStackTest extends \PHPUnit\Fra
         $this->assertEquals('Zend_Controller_Action_Helper_Redirector', get_class($this->stack->offsetGet('Redirector')));
         $this->assertEquals('Zend_Controller_Action_Helper_Redirector', get_class($this->stack->offsetGet(2)));
     }
-
 }

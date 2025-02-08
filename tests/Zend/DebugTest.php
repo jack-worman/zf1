@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,30 +14,29 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Debug
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
 /**
- * Zend_Debug
+ * Zend_Debug.
  */
 // require_once 'Zend/Debug.php';
 
 /**
  * @category   Zend
- * @package    Zend_Debug
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Debug
  */
 #[AllowDynamicProperties]
-class Zend_DebugTest extends \PHPUnit\Framework\TestCase
+class Zend_DebugTest extends PHPUnit\Framework\TestCase
 {
-
     public function testDebugDefaultSapi()
     {
         $sapi = php_sapi_name();
@@ -51,9 +51,9 @@ class Zend_DebugTest extends \PHPUnit\Framework\TestCase
         Zend_Debug::setSapi('cli');
         $data = 'string';
         $result = Zend_Debug::Dump($data, null, false);
-        $result = str_replace(array(PHP_EOL, "\n"), '_', $result);
+        $result = str_replace([PHP_EOL, "\n"], '_', $result);
         $expected = "__.*string\(6\) \"string\"__";
-        $this->assertMatchesRegularExpression('/^' . $expected . '$/', $result);
+        $this->assertMatchesRegularExpression('/^'.$expected.'$/', $result);
     }
 
     public function testDebugCgi()
@@ -63,7 +63,7 @@ class Zend_DebugTest extends \PHPUnit\Framework\TestCase
         $result = Zend_Debug::Dump($data, null, false);
 
         $this->assertMatchesRegularExpression(
-            '/^<pre>.*string\(6\) ("|&quot;)string("|&quot;)' . "\n" . '<\/pre>$/s',
+            '/^<pre>.*string\(6\) ("|&quot;)string("|&quot;)'."\n".'<\/pre>$/s',
             $result
         );
     }
@@ -87,9 +87,9 @@ class Zend_DebugTest extends \PHPUnit\Framework\TestCase
         $data = 'string';
         $label = 'LABEL';
         $result = Zend_Debug::Dump($data, $label, false);
-        $result = str_replace(array(PHP_EOL, "\n"), '_', $result);
+        $result = str_replace([PHP_EOL, "\n"], '_', $result);
         $expected = "_{$label} .*_string\(6\) \"string\"__";
-        $this->assertMatchesRegularExpression('/^' . $expected . '$/', $result);
+        $this->assertMatchesRegularExpression('/^'.$expected.'$/', $result);
     }
 
     /**
@@ -98,16 +98,15 @@ class Zend_DebugTest extends \PHPUnit\Framework\TestCase
      */
     public function testXdebugEnabledAndNonCliSapiDoesNotEscapeSpecialChars()
     {
-        if(!extension_loaded('xdebug')) {
-            $this->markTestSkipped("This test only works in combination with xdebug.");
+        if (!extension_loaded('xdebug')) {
+            $this->markTestSkipped('This test only works in combination with xdebug.');
         }
 
         Zend_Debug::setSapi('apache');
-        $a = array("a" => "b");
+        $a = ['a' => 'b'];
 
-        $result = Zend_Debug::dump($a, "LABEL", false);
-        $this->assertStringContainsString("<pre>", $result);
-        $this->assertStringContainsString("</pre>", $result);
+        $result = Zend_Debug::dump($a, 'LABEL', false);
+        $this->assertStringContainsString('<pre>', $result);
+        $this->assertStringContainsString('</pre>', $result);
     }
-
 }

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Dojo_View_Helper_VerticalSliderTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_View_Helper_VerticalSliderTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Dojo_View_Helper_VerticalSliderTest::main');
 }
 
 /** Zend_Dojo_View_Helper_VerticalSlider */
@@ -41,15 +42,15 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * Test class for Zend_Dojo_View_Helper_VerticalSlider.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Dojo
  * @group      Zend_Dojo_View
  */
 #[AllowDynamicProperties]
-class Zend_Dojo_View_Helper_VerticalSliderTest extends \PHPUnit\Framework\TestCase
+class Zend_Dojo_View_Helper_VerticalSliderTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -58,10 +59,10 @@ class Zend_Dojo_View_Helper_VerticalSliderTest extends \PHPUnit\Framework\TestCa
      */
     public static function main()
     {
-        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Dojo_View_Helper_VerticalSliderTest");
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_Dojo_View_Helper_VerticalSliderTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -69,15 +70,13 @@ class Zend_Dojo_View_Helper_VerticalSliderTest extends \PHPUnit\Framework\TestCa
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @return void
      */
     public function setUp(): void
     {
         Zend_Registry::_unsetInstance();
         Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
 
-        $this->view   = $this->getView();
+        $this->view = $this->getView();
         $this->helper = new Zend_Dojo_View_Helper_VerticalSlider();
         $this->helper->setView($this->view);
     }
@@ -85,8 +84,6 @@ class Zend_Dojo_View_Helper_VerticalSliderTest extends \PHPUnit\Framework\TestCa
     /**
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
-     *
-     * @return void
      */
     public function tearDown(): void
     {
@@ -97,6 +94,7 @@ class Zend_Dojo_View_Helper_VerticalSliderTest extends \PHPUnit\Framework\TestCa
         // require_once 'Zend/View.php';
         $view = new Zend_View();
         $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
+
         return $view;
     }
 
@@ -105,74 +103,74 @@ class Zend_Dojo_View_Helper_VerticalSliderTest extends \PHPUnit\Framework\TestCa
         return $this->helper->verticalSlider(
             'elementId',
             '',
-            array(
-                'minimum'        => -10,
-                'maximum'        => 10,
+            [
+                'minimum' => -10,
+                'maximum' => 10,
                 'discreteValues' => 11,
-                'topDecoration' => array(
-                    'labels' => array(
+                'topDecoration' => [
+                    'labels' => [
                         ' ',
                         '20%',
                         '40%',
                         '60%',
                         '80%',
                         ' ',
-                    ),
-                    'attribs' => array(
-                        'container' => array(
+                    ],
+                    'attribs' => [
+                        'container' => [
                             'style' => 'height:1.2em; font-size=75%;color:gray;',
-                        ),
-                        'labels' => array(
+                        ],
+                        'labels' => [
                             'style' => 'height:1em; font-size=75%;color:gray;',
-                        ),
-                    ),
+                        ],
+                    ],
                     'dijit' => 'VerticalRuleLabels',
-                ),
-                'bottomDecoration' => array(
-                    'labels' => array(
+                ],
+                'bottomDecoration' => [
+                    'labels' => [
                         '0%',
                         '50%',
                         '100%',
-                    ),
-                    'attribs' => array(
-                        'labels' => array(
+                    ],
+                    'attribs' => [
+                        'labels' => [
                             'style' => 'height:1em; font-size=75%;color:gray;',
-                        ),
-                    ),
-                ),
-                'leftDecoration' => array(
-                    'labels' => array(
+                        ],
+                    ],
+                ],
+                'leftDecoration' => [
+                    'labels' => [
                         ' ',
                         '20%',
                         '40%',
                         '60%',
                         '80%',
                         ' ',
-                    ),
-                    'attribs' => array(
-                        'container' => array(
+                    ],
+                    'attribs' => [
+                        'container' => [
                             'style' => 'height:1.2em; font-size=75%;color:gray;',
-                        ),
-                        'labels' => array(
+                        ],
+                        'labels' => [
                             'style' => 'height:1em; font-size=75%;color:gray;',
-                        ),
-                    ),
+                        ],
+                    ],
                     'dijit' => 'VerticalRuleLabels',
-                ),
-                'rightDecoration' => array(
-                    'labels' => array(
+                ],
+                'rightDecoration' => [
+                    'labels' => [
                         '0%',
                         '50%',
                         '100%',
-                    ),
-                    'attribs' => array(
-                        'labels' => array(
+                    ],
+                    'attribs' => [
+                        'labels' => [
                             'style' => 'height:1em; font-size=75%;color:gray;',
-                        ),
-                    ),
-                ),
-            ),
-            array()
+                        ],
+                    ],
+                ],
+            ],
+            []
         );
     }
 
@@ -225,6 +223,6 @@ class Zend_Dojo_View_Helper_VerticalSliderTest extends \PHPUnit\Framework\TestCa
 }
 
 // Call Zend_Dojo_View_Helper_VerticalSliderTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dojo_View_Helper_VerticalSliderTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Dojo_View_Helper_VerticalSliderTest::main') {
     Zend_Dojo_View_Helper_VerticalSliderTest::main();
 }

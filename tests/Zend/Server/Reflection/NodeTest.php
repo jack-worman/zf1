@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,32 +14,32 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Server
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version $Id$
  */
 
 // require_once 'Zend/Server/Reflection/Node.php';
 
 /**
- * Test case for Zend_Server_Reflection_Node
+ * Test case for Zend_Server_Reflection_Node.
  *
  * @category   Zend
- * @package    Zend_Server
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Server
  */
 #[AllowDynamicProperties]
-class Zend_Server_Reflection_NodeTest extends \PHPUnit\Framework\TestCase
+class Zend_Server_Reflection_NodeTest extends PHPUnit\Framework\TestCase
 {
     /**
-     * __construct() test
+     * __construct() test.
      */
-    public function test__construct()
+    public function testConstruct()
     {
         $node = new Zend_Server_Reflection_Node('string');
         $this->assertTrue($node instanceof Zend_Server_Reflection_Node);
@@ -59,12 +60,12 @@ class Zend_Server_Reflection_NodeTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * setParent() test
+     * setParent() test.
      */
     public function testSetParent()
     {
         $parent = new Zend_Server_Reflection_Node('string');
-        $child  = new Zend_Server_Reflection_Node('array');
+        $child = new Zend_Server_Reflection_Node('array');
 
         $child->setParent($parent);
 
@@ -72,7 +73,7 @@ class Zend_Server_Reflection_NodeTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * createChild() test
+     * createChild() test.
      */
     public function testCreateChild()
     {
@@ -86,12 +87,12 @@ class Zend_Server_Reflection_NodeTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * attachChild() test
+     * attachChild() test.
      */
     public function testAttachChild()
     {
         $parent = new Zend_Server_Reflection_Node('string');
-        $child  = new Zend_Server_Reflection_Node('array');
+        $child = new Zend_Server_Reflection_Node('array');
 
         $parent->attachChild($child);
         $this->assertTrue($parent === $child->getParent());
@@ -100,7 +101,7 @@ class Zend_Server_Reflection_NodeTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * getChildren() test
+     * getChildren() test.
      */
     public function testGetChildren()
     {
@@ -108,7 +109,7 @@ class Zend_Server_Reflection_NodeTest extends \PHPUnit\Framework\TestCase
         $child = $parent->createChild('array');
 
         $children = $parent->getChildren();
-        $types = array();
+        $types = [];
         foreach ($children as $c) {
             $types[] = $c->getValue();
         }
@@ -118,7 +119,7 @@ class Zend_Server_Reflection_NodeTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * hasChildren() test
+     * hasChildren() test.
      */
     public function testHasChildren()
     {
@@ -130,7 +131,7 @@ class Zend_Server_Reflection_NodeTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * getParent() test
+     * getParent() test.
      */
     public function testGetParent()
     {
@@ -142,7 +143,7 @@ class Zend_Server_Reflection_NodeTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * getValue() test
+     * getValue() test.
      */
     public function testGetValue()
     {
@@ -151,7 +152,7 @@ class Zend_Server_Reflection_NodeTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * setValue() test
+     * setValue() test.
      */
     public function testSetValue()
     {
@@ -162,7 +163,7 @@ class Zend_Server_Reflection_NodeTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * getEndPoints() test
+     * getEndPoints() test.
      */
     public function testGetEndPoints()
     {
@@ -177,19 +178,19 @@ class Zend_Server_Reflection_NodeTest extends \PHPUnit\Framework\TestCase
         $child2grand2great2 = $child2grand2->createChild('child2grand2great2');
 
         $endPoints = $root->getEndPoints();
-        $endPointsArray = array();
+        $endPointsArray = [];
         foreach ($endPoints as $endPoint) {
             $endPointsArray[] = $endPoint->getValue();
         }
 
-        $test = array(
+        $test = [
             'child1',
             'child1grand2',
             'child2grand1',
             'child2grand2',
-            'child2grand2great2'
-        );
+            'child2grand2great2',
+        ];
 
-        $this->assertTrue($test === $endPointsArray, 'Test was [' . var_export($test, 1) . ']; endPoints were [' . var_export($endPointsArray, 1) . ']');
+        $this->assertTrue($test === $endPointsArray, 'Test was ['.var_export($test, 1).']; endPoints were ['.var_export($endPointsArray, 1).']');
     }
 }

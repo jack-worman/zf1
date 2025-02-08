@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,12 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Loader
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Loader_AutoloaderFactoryClassMapLoaderTest::main');
 }
@@ -26,16 +25,14 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 // require_once 'Zend/Loader/AutoloaderFactory.php';
 
 /**
- * @package    Zend_Loader
- * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Loader
  */
 #[AllowDynamicProperties]
-class Zend_Loader_AutoloaderFactoryClassMapLoaderTest extends \PHPUnit\Framework\TestCase
+class Zend_Loader_AutoloaderFactoryClassMapLoaderTest extends PHPUnit\Framework\TestCase
 {
-
     /**
      * @var array
      */
@@ -48,10 +45,10 @@ class Zend_Loader_AutoloaderFactoryClassMapLoaderTest extends \PHPUnit\Framework
 
     public static function main()
     {
-        $suite  = \PHPUnit\Framework\TestSuite::empty(__CLASS__);
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty(__CLASS__);
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -63,14 +60,14 @@ class Zend_Loader_AutoloaderFactoryClassMapLoaderTest extends \PHPUnit\Framework
         if (!is_array($this->_loaders)) {
             // spl_autoload_functions does not return empty array when no
             // autoloaders registered...
-            $this->_loaders = array();
+            $this->_loaders = [];
         }
 
         // Clear out other autoloaders to ensure those being tested are at the
         // top of the stack
         foreach ($this->_loaders as $loader) {
             // fix: do not unregister composer autoloader
-            //spl_autoload_unregister($loader);
+            // spl_autoload_unregister($loader);
         }
 
         // Store original include_path
@@ -99,11 +96,11 @@ class Zend_Loader_AutoloaderFactoryClassMapLoaderTest extends \PHPUnit\Framework
     public function testAutoincluding()
     {
         Zend_Loader_AutoloaderFactory::factory(
-            array(
-                'Zend_Loader_ClassMapAutoloader' => array(
-                    __DIR__ . '/_files/goodmap.php',
-                ),
-            )
+            [
+                'Zend_Loader_ClassMapAutoloader' => [
+                    __DIR__.'/_files/goodmap.php',
+                ],
+            ]
         );
         $loader = Zend_Loader_AutoloaderFactory::getRegisteredAutoloader(
             'Zend_Loader_ClassMapAutoloader'

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Form_Decorator_ViewScriptTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Form_Decorator_ViewScriptTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Form_Decorator_ViewScriptTest::main');
 }
 
 // require_once 'Zend/Form/Decorator/ViewScript.php';
@@ -32,17 +33,17 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 // require_once 'Zend/View.php';
 
 /**
- * Test class for Zend_Form_Decorator_ViewScript
+ * Test class for Zend_Form_Decorator_ViewScript.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Form
  */
 #[AllowDynamicProperties]
-class Zend_Form_Decorator_ViewScriptTest extends \PHPUnit\Framework\TestCase
+class Zend_Form_Decorator_ViewScriptTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -51,10 +52,10 @@ class Zend_Form_Decorator_ViewScriptTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Form_Decorator_ViewScriptTest");
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_Form_Decorator_ViewScriptTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -62,8 +63,6 @@ class Zend_Form_Decorator_ViewScriptTest extends \PHPUnit\Framework\TestCase
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @return void
      */
     public function setUp(): void
     {
@@ -73,8 +72,6 @@ class Zend_Form_Decorator_ViewScriptTest extends \PHPUnit\Framework\TestCase
     /**
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
-     *
-     * @return void
      */
     public function tearDown(): void
     {
@@ -83,8 +80,9 @@ class Zend_Form_Decorator_ViewScriptTest extends \PHPUnit\Framework\TestCase
     public function getView()
     {
         $view = new Zend_View();
-        $view->addHelperPath(__DIR__ . '/../../../../library/Zend/View/Helper');
-        $view->addScriptPath(__DIR__ . '/../_files/views/');
+        $view->addHelperPath(__DIR__.'/../../../../library/Zend/View/Helper');
+        $view->addScriptPath(__DIR__.'/../_files/views/');
+
         return $view;
     }
 
@@ -93,6 +91,7 @@ class Zend_Form_Decorator_ViewScriptTest extends \PHPUnit\Framework\TestCase
         $element = new Zend_Form_Element_Text('foo');
         $element->setView($this->getView());
         $this->decorator->setElement($element);
+
         return $element;
     }
 
@@ -177,13 +176,13 @@ class Zend_Form_Decorator_ViewScriptTest extends \PHPUnit\Framework\TestCase
 
     public function testOptionsArePassedToPartialAsVariables()
     {
-        $this->decorator->setOptions(array(
-            'foo'        => 'Foo Value',
-            'bar'        => 'Bar Value',
-            'baz'        => 'Baz Value',
-            'bat'        => 'Bat Value',
+        $this->decorator->setOptions([
+            'foo' => 'Foo Value',
+            'bar' => 'Bar Value',
+            'baz' => 'Baz Value',
+            'bat' => 'Bat Value',
             'viewScript' => 'decorator.phtml',
-        ));
+        ]);
         $this->getElement();
         $test = $this->decorator->render('');
         foreach ($this->decorator->getOptions() as $key => $value) {
@@ -237,14 +236,14 @@ class Zend_Form_Decorator_ViewScriptTest extends \PHPUnit\Framework\TestCase
             ->setElement($this->getElement());
 
         $expected = 'Foo:'
-                  . PHP_EOL
-                  . '<input type="text" name="foo" id="foo" value="">';
+                  .PHP_EOL
+                  .'<input type="text" name="foo" id="foo" value="">';
 
         $this->assertSame($expected, $this->decorator->render('Foo:'));
     }
 }
 
 // Call Zend_Form_Decorator_ViewScriptTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Form_Decorator_ViewScriptTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Form_Decorator_ViewScriptTest::main') {
     Zend_Form_Decorator_ViewScriptTest::main();
 }

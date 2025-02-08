@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,26 +28,24 @@
 
 /**
  * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Filter
  */
 #[AllowDynamicProperties]
-class Zend_Filter_HtmlEntitiesTest extends \PHPUnit\Framework\TestCase
+class Zend_Filter_HtmlEntitiesTest extends PHPUnit\Framework\TestCase
 {
     /**
-     * Zend_Filter_HtmlEntities object
+     * Zend_Filter_HtmlEntities object.
      *
      * @var Zend_Filter_HtmlEntities
      */
     protected $_filter;
 
     /**
-     * Creates a new Zend_Filter_HtmlEntities object for each test method
-     *
-     * @return void
+     * Creates a new Zend_Filter_HtmlEntities object for each test method.
      */
     public function setUp(): void
     {
@@ -54,27 +53,27 @@ class Zend_Filter_HtmlEntitiesTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Ensures that the filter follows expected behavior
+     * Ensures that the filter follows expected behavior.
      *
      * @return void
      */
     public function testBasic()
     {
-        $valuesExpected = array(
+        $valuesExpected = [
             'string' => 'string',
-            '<'      => '&lt;',
-            '>'      => '&gt;',
-            '\''     => '\'',
-            '"'      => '&quot;',
-            '&'      => '&amp;'
-            );
+            '<' => '&lt;',
+            '>' => '&gt;',
+            '\'' => '\'',
+            '"' => '&quot;',
+            '&' => '&amp;',
+        ];
         foreach ($valuesExpected as $input => $output) {
             $this->assertEquals($output, $this->_filter->filter($input));
         }
     }
 
     /**
-     * Ensures that getQuoteStyle() returns expected default value
+     * Ensures that getQuoteStyle() returns expected default value.
      *
      * @return void
      */
@@ -84,7 +83,7 @@ class Zend_Filter_HtmlEntitiesTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Ensures that setQuoteStyle() follows expected behavior
+     * Ensures that setQuoteStyle() follows expected behavior.
      *
      * @return void
      */
@@ -95,9 +94,10 @@ class Zend_Filter_HtmlEntitiesTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Ensures that getCharSet() returns expected default value
+     * Ensures that getCharSet() returns expected default value.
      *
      * @group ZF-8715
+     *
      * @return void
      */
     public function testGetCharSet()
@@ -106,7 +106,7 @@ class Zend_Filter_HtmlEntitiesTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Ensures that setCharSet() follows expected behavior
+     * Ensures that setCharSet() follows expected behavior.
      *
      * @return void
      */
@@ -117,7 +117,7 @@ class Zend_Filter_HtmlEntitiesTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Ensures that getDoubleQuote() returns expected default value
+     * Ensures that getDoubleQuote() returns expected default value.
      *
      * @return void
      */
@@ -127,7 +127,7 @@ class Zend_Filter_HtmlEntitiesTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Ensures that setDoubleQuote() follows expected behavior
+     * Ensures that setDoubleQuote() follows expected behavior.
      *
      * @return void
      */
@@ -138,7 +138,7 @@ class Zend_Filter_HtmlEntitiesTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Ensure that fluent interfaces are supported
+     * Ensure that fluent interfaces are supported.
      *
      * @group ZF-3172
      */
@@ -154,8 +154,8 @@ class Zend_Filter_HtmlEntitiesTest extends \PHPUnit\Framework\TestCase
     public function testConfigObject()
     {
         // require_once 'Zend/Config.php';
-        $options = array('quotestyle' => 5, 'encoding' => 'ISO-8859-1');
-        $config  = new Zend_Config($options);
+        $options = ['quotestyle' => 5, 'encoding' => 'ISO-8859-1'];
+        $config = new Zend_Config($options);
 
         $filter = new Zend_Filter_HtmlEntities(
             $config
@@ -166,14 +166,15 @@ class Zend_Filter_HtmlEntitiesTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Ensures that when ENT_QUOTES is set, the filtered value has both 'single' and "double" quotes encoded
+     * Ensures that when ENT_QUOTES is set, the filtered value has both 'single' and "double" quotes encoded.
      *
      * @group  ZF-8962
+     *
      * @return void
      */
     public function testQuoteStyleQuotesEncodeBoth()
     {
-        $input  = "A 'single' and " . '"double"';
+        $input = "A 'single' and ".'"double"';
         $result = 'A &#039;single&#039; and &quot;double&quot;';
 
         $this->_filter->setQuoteStyle(ENT_QUOTES);
@@ -181,14 +182,15 @@ class Zend_Filter_HtmlEntitiesTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Ensures that when ENT_COMPAT is set, the filtered value has only "double" quotes encoded
+     * Ensures that when ENT_COMPAT is set, the filtered value has only "double" quotes encoded.
      *
      * @group  ZF-8962
+     *
      * @return void
      */
     public function testQuoteStyleQuotesEncodeDouble()
     {
-        $input  = "A 'single' and " . '"double"';
+        $input = "A 'single' and ".'"double"';
         $result = "A 'single' and &quot;double&quot;";
 
         $this->_filter->setQuoteStyle(ENT_COMPAT);
@@ -196,15 +198,16 @@ class Zend_Filter_HtmlEntitiesTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Ensures that when ENT_NOQUOTES is set, the filtered value leaves both "double" and 'single' quotes un-altered
+     * Ensures that when ENT_NOQUOTES is set, the filtered value leaves both "double" and 'single' quotes un-altered.
      *
      * @group  ZF-8962
+     *
      * @return void
      */
     public function testQuoteStyleQuotesEncodeNone()
     {
-        $input  = "A 'single' and " . '"double"';
-        $result = "A 'single' and " . '"double"';
+        $input = "A 'single' and ".'"double"';
+        $result = "A 'single' and ".'"double"';
 
         $this->_filter->setQuoteStyle(ENT_NOQUOTES);
         $this->assertEquals($result, $this->_filter->filter($input));
@@ -219,11 +222,11 @@ class Zend_Filter_HtmlEntitiesTest extends \PHPUnit\Framework\TestCase
             $this->markTestIncomplete('Tested feature ZF-11344 is not available because of PHP bug #63450');
         }
 
-        $string = file_get_contents(__DIR__ . '/_files/latin-1-text.txt');
+        $string = file_get_contents(__DIR__.'/_files/latin-1-text.txt');
 
         // restore_error_handler can emit an E_WARNING; let's ignore that, as
         // we want to test the returned value
-        set_error_handler(array($this, 'errorHandler'), E_NOTICE | E_WARNING);
+        set_error_handler([$this, 'errorHandler'], E_NOTICE | E_WARNING);
         $result = $this->_filter->filter($string);
         restore_error_handler();
 
@@ -239,11 +242,11 @@ class Zend_Filter_HtmlEntitiesTest extends \PHPUnit\Framework\TestCase
             $this->markTestIncomplete('Tested feature ZF-11344 is not available because of PHP bug #63450');
         }
 
-        $string = file_get_contents(__DIR__ . '/_files/latin-1-text.txt');
+        $string = file_get_contents(__DIR__.'/_files/latin-1-text.txt');
 
         // restore_error_handler can emit an E_WARNING; let's ignore that, as
         // we want to test the returned value
-        set_error_handler(array($this, 'errorHandler'), E_NOTICE | E_WARNING);
+        set_error_handler([$this, 'errorHandler'], E_NOTICE | E_WARNING);
         $result = $this->_filter->filter($string);
         restore_error_handler();
 
@@ -255,18 +258,19 @@ class Zend_Filter_HtmlEntitiesTest extends \PHPUnit\Framework\TestCase
      */
     public function testRaisesExceptionIfEncodingMismatchDetectedAndFinalStringIsEmpty()
     {
-        if (strtolower((string) substr((string) PHP_OS, 0, 3)) == 'win') {
+        if ('win' == strtolower((string) substr((string) PHP_OS, 0, 3))) {
             // see ZF-12201
             $this->markTestIncomplete('Exception is not thrown on Windows');
+
             return;
         }
 
-        $string = file_get_contents(__DIR__ . '/_files/latin-1-dash-only.txt');
+        $string = file_get_contents(__DIR__.'/_files/latin-1-dash-only.txt');
 
         // restore_error_handler can emit an E_WARNING; let's ignore that, as
         // we want to test the returned value
         // Also, explicit try, so that we don't mess up PHPUnit error handlers
-        set_error_handler(array($this, 'errorHandler'), E_NOTICE | E_WARNING);
+        set_error_handler([$this, 'errorHandler'], E_NOTICE | E_WARNING);
         try {
             $result = $this->_filter->filter($string);
             $this->fail('Expected exception from single non-utf-8 character');
@@ -277,7 +281,7 @@ class Zend_Filter_HtmlEntitiesTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Null error handler; used when wanting to ignore specific error types
+     * Null error handler; used when wanting to ignore specific error types.
      */
     public function errorHandler($errno, $errstr)
     {

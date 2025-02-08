@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,34 +14,29 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
-
-
-
 // require_once 'Zend/Controller/Action.php';
-require_once __DIR__ . '/../FooController.php';
+require_once __DIR__.'/../FooController.php';
 
 /**
- * Mock file for testbed
+ * Mock file for testbed.
  *
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Admin_FooController extends FooController
 {
-
     /**
-     * Test Function for indexAction
+     * Test Function for indexAction.
      *
      * @return void
      */
@@ -50,7 +46,7 @@ class Admin_FooController extends FooController
     }
 
     /**
-     * Test Function for barAction
+     * Test Function for barAction.
      *
      * @return void
      */
@@ -58,5 +54,4 @@ class Admin_FooController extends FooController
     {
         $this->_response->appendBody("Admin_Foo::bar action called\n");
     }
-
 }

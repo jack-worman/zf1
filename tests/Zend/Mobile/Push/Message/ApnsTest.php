@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Mobile
- * @subpackage Push
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -24,16 +25,16 @@
 
 /**
  * @category   Zend
- * @package    Zend_Mobile
- * @subpackage Push
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Mobile
  * @group      Zend_Mobile_Push
  * @group      Zend_Mobile_Push_Apns
  */
 #[AllowDynamicProperties]
-class Zend_Mobile_Push_Message_ApnsTest extends \PHPUnit\Framework\TestCase
+class Zend_Mobile_Push_Message_ApnsTest extends PHPUnit\Framework\TestCase
 {
     public function setUp(): void
     {
@@ -53,19 +54,19 @@ class Zend_Mobile_Push_Message_ApnsTest extends \PHPUnit\Framework\TestCase
     public function testSetAlertThrowsExceptionOnTextNonString()
     {
         $this->expectException(Zend_Mobile_Push_Message_Exception::class);
-        $this->message->setAlert(array());
+        $this->message->setAlert([]);
     }
 
     public function testSetAlertThrowsExceptionOnActionLocKeyNonString()
     {
         $this->expectException(Zend_Mobile_Push_Message_Exception::class);
-        $this->message->setAlert('text', array());
+        $this->message->setAlert('text', []);
     }
 
     public function testSetAlertThrowsExceptionOnLocKeyNonString()
     {
         $this->expectException(Zend_Mobile_Push_Message_Exception::class);
-        $this->message->setAlert('text', 'button', array());
+        $this->message->setAlert('text', 'button', []);
     }
 
     public function testSetAlertThrowsExceptionOnLocArgsNonArray()
@@ -77,7 +78,7 @@ class Zend_Mobile_Push_Message_ApnsTest extends \PHPUnit\Framework\TestCase
     public function testSetAlertThrowsExceptionOnLaunchImageNonString()
     {
         $this->expectException(Zend_Mobile_Push_Message_Exception::class);
-        $this->message->setAlert('text', 'button', 'action', array('locale'), array());
+        $this->message->setAlert('text', 'button', 'action', ['locale'], []);
     }
 
     public function testSetBadgeReturnsCorrectNumber()
@@ -128,18 +129,18 @@ class Zend_Mobile_Push_Message_ApnsTest extends \PHPUnit\Framework\TestCase
     public function testSetSoundThrowsExceptionOnNonString()
     {
         $this->expectException(Zend_Mobile_Push_Message_Exception::class);
-        $this->message->setSound(array());
+        $this->message->setSound([]);
     }
 
     public function testAddCustomDataReturnsSetData()
     {
         $addKey1 = 'test1';
-        $addValue1 = array('val', 'ue', '1');
+        $addValue1 = ['val', 'ue', '1'];
 
         $addKey2 = 'test2';
         $addValue2 = 'value2';
 
-        $expected = array($addKey1 => $addValue1);
+        $expected = [$addKey1 => $addValue1];
         $this->message->addCustomData($addKey1, $addValue1);
         $this->assertEquals($this->message->getCustomData(), $expected);
 
@@ -151,7 +152,7 @@ class Zend_Mobile_Push_Message_ApnsTest extends \PHPUnit\Framework\TestCase
     public function testAddCustomDataThrowsExceptionOnNonStringKey()
     {
         $this->expectException(Zend_Mobile_Push_Message_Exception::class);
-        $this->message->addCustomData(array('key'), 'val');
+        $this->message->addCustomData(['key'], 'val');
     }
 
     public function testAddCustomDataThrowsExceptionOnReservedKeyAps()
@@ -164,12 +165,12 @@ class Zend_Mobile_Push_Message_ApnsTest extends \PHPUnit\Framework\TestCase
     {
         $this->message->addCustomData('key', 'val');
         $this->message->clearCustomData();
-        $this->assertEquals($this->message->getCustomData(), array());
+        $this->assertEquals($this->message->getCustomData(), []);
     }
 
     public function testSetCustomData()
     {
-        $data = array('key' => 'val', 'key2' => array(1, 2, 3, 4, 5));
+        $data = ['key' => 'val', 'key2' => [1, 2, 3, 4, 5]];
         $this->message->setCustomData($data);
         $this->assertEquals($this->message->getCustomData(), $data);
     }

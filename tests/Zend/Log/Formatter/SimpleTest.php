@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +14,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Log
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Log_Formatter_SimpleTest::main');
 }
@@ -29,21 +29,21 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 /**
  * @category   Zend
- * @package    Zend_Log
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Log
  */
 #[AllowDynamicProperties]
-class Zend_Log_Formatter_SimpleTest extends \PHPUnit\Framework\TestCase
+class Zend_Log_Formatter_SimpleTest extends PHPUnit\Framework\TestCase
 {
     public static function main()
     {
-        $suite  = \PHPUnit\Framework\TestSuite::empty(__CLASS__);
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty(__CLASS__);
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -53,7 +53,7 @@ class Zend_Log_Formatter_SimpleTest extends \PHPUnit\Framework\TestCase
         try {
             new Zend_Log_Formatter_Simple(1);
             $this->fail();
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->assertTrue($e instanceof Zend_Log_Exception);
             $this->assertMatchesRegularExpression('/must be a string/i', $e->getMessage());
         }
@@ -61,25 +61,25 @@ class Zend_Log_Formatter_SimpleTest extends \PHPUnit\Framework\TestCase
 
     public function testDefaultFormat()
     {
-        $fields = array('timestamp'    => 0,
-                        'message'      => 'foo',
-                        'priority'     => 42,
-                        'priorityName' => 'bar');
+        $fields = ['timestamp' => 0,
+            'message' => 'foo',
+            'priority' => 42,
+            'priorityName' => 'bar'];
 
         $f = new Zend_Log_Formatter_Simple();
         $line = $f->format($fields);
 
-        $this->assertStringContainsString((string)$fields['timestamp'], $line);
+        $this->assertStringContainsString((string) $fields['timestamp'], $line);
         $this->assertStringContainsString($fields['message'], $line);
         $this->assertStringContainsString($fields['priorityName'], $line);
-        $this->assertStringContainsString((string)$fields['priority'], $line);
+        $this->assertStringContainsString((string) $fields['priority'], $line);
     }
 
-    function testComplexValues()
+    public function testComplexValues()
     {
-        $fields = array('timestamp'    => 0,
-                        'priority'     => 42,
-                        'priorityName' => 'bar');
+        $fields = ['timestamp' => 0,
+            'priority' => 42,
+            'priorityName' => 'bar'];
 
         $f = new Zend_Log_Formatter_Simple();
 
@@ -89,11 +89,11 @@ class Zend_Log_Formatter_SimpleTest extends \PHPUnit\Framework\TestCase
 
         $fields['message'] = 10;
         $line = $f->format($fields);
-        $this->assertStringContainsString((string)$fields['message'], $line);
+        $this->assertStringContainsString((string) $fields['message'], $line);
 
         $fields['message'] = 10.5;
         $line = $f->format($fields);
-        $this->assertStringContainsString((string)$fields['message'], $line);
+        $this->assertStringContainsString((string) $fields['message'], $line);
 
         $fields['message'] = true;
         $line = $f->format($fields);
@@ -104,7 +104,7 @@ class Zend_Log_Formatter_SimpleTest extends \PHPUnit\Framework\TestCase
         $this->assertStringContainsString('Resource id ', $line);
         fclose($fields['message']);
 
-        $fields['message'] = range(1,10);
+        $fields['message'] = range(1, 10);
         $line = $f->format($fields);
         $this->assertStringContainsString('array', $line);
 
@@ -122,17 +122,17 @@ class Zend_Log_Formatter_SimpleTest extends \PHPUnit\Framework\TestCase
      */
     public function testFactory()
     {
-        $options = array(
-            'format' => '%timestamp% [%priority%]: %message% -- %info%'
-        );
+        $options = [
+            'format' => '%timestamp% [%priority%]: %message% -- %info%',
+        ];
         $formatter = Zend_Log_Formatter_Simple::factory($options);
         $this->assertTrue($formatter instanceof Zend_Log_Formatter_Simple);
     }
 }
 
 #[AllowDynamicProperties]
-class Zend_Log_Formatter_SimpleTest_TestObject1 {
-
+class Zend_Log_Formatter_SimpleTest_TestObject1
+{
     public function __toString()
     {
         return 'Hello World';
@@ -140,7 +140,8 @@ class Zend_Log_Formatter_SimpleTest_TestObject1 {
 }
 
 #[AllowDynamicProperties]
-class Zend_Log_Formatter_SimpleTest_TestObject2 {
+class Zend_Log_Formatter_SimpleTest_TestObject2
+{
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Log_Formatter_SimpleTest::main') {

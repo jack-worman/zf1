@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,14 +14,14 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Http_Client
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
-require_once __DIR__ . '/CommonHttpTests.php';
+require_once __DIR__.'/CommonHttpTests.php';
 
 // require_once 'Zend/Http/Client/Adapter/Socket.php';
 
@@ -38,10 +39,10 @@ require_once __DIR__ . '/CommonHttpTests.php';
  * point to the right place.
  *
  * @category   Zend
- * @package    Zend_Http_Client
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Http
  * @group      Zend_Http_Client
  */
@@ -49,52 +50,53 @@ require_once __DIR__ . '/CommonHttpTests.php';
 class Zend_Http_Client_SocketTest extends Zend_Http_Client_CommonHttpTests
 {
     /**
-     * Configuration array
+     * Configuration array.
      *
      * @var array
      */
-    protected $config = array(
-        'adapter' => 'Zend_Http_Client_Adapter_Socket'
-    );
+    protected $config = [
+        'adapter' => 'Zend_Http_Client_Adapter_Socket',
+    ];
 
     /**
-     * Off-line common adapter tests
+     * Off-line common adapter tests.
      */
 
     /**
-     * Test that we can set a valid configuration array with some options
+     * Test that we can set a valid configuration array with some options.
+     *
      * @group ZHC001
      */
     public function testConfigSetAsArray()
     {
-        $config = array(
-            'timeout'    => 500,
-            'someoption' => 'hasvalue'
-        );
+        $config = [
+            'timeout' => 500,
+            'someoption' => 'hasvalue',
+        ];
 
         $this->_adapter->setConfig($config);
 
         $hasConfig = $this->_adapter->getConfig();
-        foreach($config as $k => $v) {
+        foreach ($config as $k => $v) {
             $this->assertEquals($v, $hasConfig[$k]);
         }
     }
 
     /**
-     * Test that a Zend_Config object can be used to set configuration
+     * Test that a Zend_Config object can be used to set configuration.
      *
-     * @link http://framework.zend.com/issues/browse/ZF-5577
+     * @see http://framework.zend.com/issues/browse/ZF-5577
      */
     public function testConfigSetAsZendConfig()
     {
         // require_once 'Zend/Config.php';
 
-        $config = new Zend_Config(array(
-            'timeout'  => 400,
-            'nested'   => array(
+        $config = new Zend_Config([
+            'timeout' => 400,
+            'nested' => [
                 'item' => 'value',
-            )
-        ));
+            ],
+        ]);
 
         $this->_adapter->setConfig($config);
 
@@ -104,8 +106,7 @@ class Zend_Http_Client_SocketTest extends Zend_Http_Client_CommonHttpTests
     }
 
     /**
-     * Check that an exception is thrown when trying to set invalid config
-     *
+     * Check that an exception is thrown when trying to set invalid config.
      *
      * @dataProvider invalidConfigProvider
      */
@@ -116,12 +117,11 @@ class Zend_Http_Client_SocketTest extends Zend_Http_Client_CommonHttpTests
     }
 
     /**
-     * Stream context related tests
+     * Stream context related tests.
      */
-
     public function testGetNewStreamContext()
     {
-        $adapter = new $this->config['adapter'];
+        $adapter = new $this->config['adapter']();
         $context = $adapter->getStreamContext();
 
         $this->assertEquals('stream-context', get_resource_type($context));
@@ -129,7 +129,7 @@ class Zend_Http_Client_SocketTest extends Zend_Http_Client_CommonHttpTests
 
     public function testSetNewStreamContextResource()
     {
-        $adapter = new $this->config['adapter'];
+        $adapter = new $this->config['adapter']();
         $context = stream_context_create();
 
         $adapter->setStreamContext($context);
@@ -139,16 +139,16 @@ class Zend_Http_Client_SocketTest extends Zend_Http_Client_CommonHttpTests
 
     public function testSetNewStreamContextOptions()
     {
-        $adapter = new $this->config['adapter'];
-        $options = array(
-            'socket' => array(
-                'bindto' => '1.2.3.4:0'
-            ),
-            'ssl' => array(
+        $adapter = new $this->config['adapter']();
+        $options = [
+            'socket' => [
+                'bindto' => '1.2.3.4:0',
+            ],
+            'ssl' => [
                 'verify_peer' => true,
-                'allow_self_signed' => false
-            )
-        );
+                'allow_self_signed' => false,
+            ],
+        ];
 
         $adapter->setStreamContext($options);
 
@@ -156,34 +156,33 @@ class Zend_Http_Client_SocketTest extends Zend_Http_Client_CommonHttpTests
     }
 
     /**
-     * Test that setting invalid options / context causes an exception
+     * Test that setting invalid options / context causes an exception.
      *
      * @dataProvider      invalidContextProvider
-     *
      */
     public function testSetInvalidContextOptions($invalid)
     {
         $this->expectException(Zend_Http_Client_Adapter_Exception::class);
-        $adapter = new $this->config['adapter'];
+        $adapter = new $this->config['adapter']();
         $adapter->setStreamContext($invalid);
     }
 
     public function testSetHttpsStreamContextParam()
     {
-        if ($this->client->getUri()->getScheme() != 'https') {
+        if ('https' != $this->client->getUri()->getScheme()) {
             $this->markTestSkipped();
         }
 
-        $adapter = new $this->config['adapter'];
-        $adapter->setStreamContext(array(
-            'ssl' => array(
+        $adapter = new $this->config['adapter']();
+        $adapter->setStreamContext([
+            'ssl' => [
                 'capture_peer_cert' => true,
-                'capture_peer_chain' => true
-            )
-        ));
+                'capture_peer_chain' => true,
+            ],
+        ]);
 
         $this->client->setAdapter($adapter);
-        $this->client->setUri($this->baseuri . '/testSimpleRequests.php');
+        $this->client->setUri($this->baseuri.'/testSimpleRequests.php');
         $this->client->request();
 
         $opts = stream_context_get_options($adapter->getStreamContext());
@@ -191,20 +190,20 @@ class Zend_Http_Client_SocketTest extends Zend_Http_Client_CommonHttpTests
     }
 
     /**
-     * Test that we get the right exception after a socket timeout
+     * Test that we get the right exception after a socket timeout.
      *
-     * @link http://framework.zend.com/issues/browse/ZF-7309
+     * @see http://framework.zend.com/issues/browse/ZF-7309
      */
     public function testExceptionOnReadTimeout()
     {
         // Set 1 second timeout
-        $this->client->setConfig(array('timeout' => 1));
+        $this->client->setConfig(['timeout' => 1]);
 
         $start = microtime(true);
 
         try {
             $this->client->request();
-            $this->fail("Expected a timeout Zend_Http_Client_Adapter_Exception");
+            $this->fail('Expected a timeout Zend_Http_Client_Adapter_Exception');
         } catch (Zend_Http_Client_Adapter_Exception $e) {
             $this->assertEquals(Zend_Http_Client_Adapter_Exception::READ_TIMEOUT, $e->getCode());
         }
@@ -216,13 +215,13 @@ class Zend_Http_Client_SocketTest extends Zend_Http_Client_CommonHttpTests
     }
 
     /**
-     * Test that a chunked response with multibyte characters is properly read
+     * Test that a chunked response with multibyte characters is properly read.
      *
      * This can fail in various PHP environments - for example, when mbstring
      * overloads substr((string) ) and strlen((string) ), and mbstring's internal encoding is
      * not a single-byte encoding.
      *
-     * @link http://framework.zend.com/issues/browse/ZF-6218
+     * @see http://framework.zend.com/issues/browse/ZF-6218
      */
     public function testMultibyteChunkedResponseZF6218()
     {
@@ -233,21 +232,21 @@ class Zend_Http_Client_SocketTest extends Zend_Http_Client_CommonHttpTests
     }
 
     /**
-     * Data Providers
+     * Data Providers.
      */
 
     /**
-     * Provide invalid context resources / options
+     * Provide invalid context resources / options.
      *
      * @return array
      */
-    static public function invalidContextProvider()
+    public static function invalidContextProvider()
     {
-        return array(
-            array(new stdClass()),
-            array(fopen('data://text/plain,', 'r')),
-            array(false),
-            array(null)
-        );
+        return [
+            [new stdClass()],
+            [fopen('data://text/plain,', 'r')],
+            [false],
+            [null],
+        ];
     }
 }

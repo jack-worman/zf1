@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,34 +14,34 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Json_Server
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Json_Server_CacheTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Json_Server_CacheTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Json_Server_CacheTest::main');
 }
 
 // require_once 'Zend/Json/Server/Cache.php';
 // require_once 'Zend/Json/Server.php';
 
 /**
- * Test class for Zend_Json_Server_Cache
+ * Test class for Zend_Json_Server_Cache.
  *
  * @category   Zend
- * @package    Zend_Json_Server
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Json
  * @group      Zend_Json_Server
  */
 #[AllowDynamicProperties]
-class Zend_Json_Server_CacheTest extends \PHPUnit\Framework\TestCase
+class Zend_Json_Server_CacheTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -49,11 +50,10 @@ class Zend_Json_Server_CacheTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-
-        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Json_Server_CacheTest");
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_Json_Server_CacheTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -61,8 +61,6 @@ class Zend_Json_Server_CacheTest extends \PHPUnit\Framework\TestCase
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @return void
      */
     public function setUp(): void
     {
@@ -83,8 +81,6 @@ class Zend_Json_Server_CacheTest extends \PHPUnit\Framework\TestCase
     /**
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
-     *
-     * @return void
      */
     public function tearDown(): void
     {
@@ -124,26 +120,26 @@ class Zend_Json_Server_CacheTest extends \PHPUnit\Framework\TestCase
 }
 
 /**
- * Class for testing JSON-RPC server caching
+ * Class for testing JSON-RPC server caching.
  */
 #[AllowDynamicProperties]
 class Zend_Json_Server_CacheTest_Foo
 {
     /**
-     * Bar
+     * Bar.
      *
-     * @param  bool $one
-     * @param  string $two
-     * @param  mixed $three
+     * @param bool   $one
+     * @param string $two
+     *
      * @return array
      */
     public function bar($one, $two = 'two', $three = null)
     {
-        return array($one, $two, $three);
+        return [$one, $two, $three];
     }
 
     /**
-     * Baz
+     * Baz.
      *
      * @return void
      */
@@ -153,8 +149,7 @@ class Zend_Json_Server_CacheTest_Foo
     }
 }
 
-
 // Call Zend_Json_Server_CacheTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Json_Server_CacheTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Json_Server_CacheTest::main') {
     Zend_Json_Server_CacheTest::main();
 }

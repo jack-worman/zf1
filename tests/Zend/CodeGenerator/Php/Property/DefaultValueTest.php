@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_CodeGenerator
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -24,8 +25,7 @@
 
 /**
  * @category   Zend
- * @package    Zend_CodeGenerator
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
@@ -33,9 +33,8 @@
  * @group Zend_CodeGenerator_Php
  */
 #[AllowDynamicProperties]
-class Zend_CodeGenerator_Php_Property_DefaultValueTest extends \PHPUnit\Framework\TestCase
+class Zend_CodeGenerator_Php_Property_DefaultValueTest extends PHPUnit\Framework\TestCase
 {
-
     public function testPropertyDefaultValueConstructor()
     {
         $propDefaultValue = new Zend_CodeGenerator_Php_Property_DefaultValue();
@@ -47,7 +46,7 @@ class Zend_CodeGenerator_Php_Property_DefaultValueTest extends \PHPUnit\Framewor
         $propDefaultValue = new Zend_CodeGenerator_Php_Property_DefaultValue();
         $propDefaultValue->setValue('foo');
         $this->assertEquals('foo', $propDefaultValue->getValue());
-        //$this->assertEquals('\'foo\';', $propDefaultValue->generate());
+        // $this->assertEquals('\'foo\';', $propDefaultValue->generate());
     }
 
     public function testPropertyDefaultValueCanHandleStrings()
@@ -60,7 +59,7 @@ class Zend_CodeGenerator_Php_Property_DefaultValueTest extends \PHPUnit\Framewor
     public function testPropertyDefaultValueCanHandleArray()
     {
         $propDefaultValue = new Zend_CodeGenerator_Php_Property_DefaultValue();
-        $propDefaultValue->setValue(array('foo'));
+        $propDefaultValue->setValue(['foo']);
         $this->assertEquals('array(\'foo\');', $propDefaultValue->generate());
     }
 
@@ -82,20 +81,20 @@ class Zend_CodeGenerator_Php_Property_DefaultValueTest extends \PHPUnit\Framewor
 
     public function testPropertyDefaultValueCanHandleComplexArrayOfTypes()
     {
-        $targetValue = array(
+        $targetValue = [
             5,
             'one' => 1,
             'two' => '2',
-            array(
+            [
                 'foo',
                 'bar',
-                array(
+                [
                     'baz1',
-                    'baz2'
-                    )
-                ),
-            new Zend_CodeGenerator_Php_Property_DefaultValue(array('value' => 'PHP_EOL', 'type' => 'constant'))
-            );
+                    'baz2',
+                ],
+            ],
+            new Zend_CodeGenerator_Php_Property_DefaultValue(['value' => 'PHP_EOL', 'type' => 'constant']),
+        ];
 
         $expectedSource = <<<EOS
 array(
@@ -120,8 +119,5 @@ EOS;
         $propDefaultValue->setValue($targetValue);
         $generatedTargetSource = $propDefaultValue->generate();
         $this->assertEquals($expectedSource, $generatedTargetSource);
-
     }
-
-
 }

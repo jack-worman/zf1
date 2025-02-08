@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,33 +14,33 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Form_Element_ButtonTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Form_Element_ButtonTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Form_Element_ButtonTest::main');
 }
 
 // require_once 'Zend/Form/Element/Button.php';
 // require_once 'Zend/Translate.php';
 
 /**
- * Test class for Zend_Form_Element_Button
+ * Test class for Zend_Form_Element_Button.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Form
  */
 #[AllowDynamicProperties]
-class Zend_Form_Element_ButtonTest extends \PHPUnit\Framework\TestCase
+class Zend_Form_Element_ButtonTest extends PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_Form_Element_Button
@@ -53,11 +54,10 @@ class Zend_Form_Element_ButtonTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-
-        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Form_Element_ButtonTest");
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_Form_Element_ButtonTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -65,8 +65,6 @@ class Zend_Form_Element_ButtonTest extends \PHPUnit\Framework\TestCase
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @return void
      */
     public function setUp(): void
     {
@@ -76,8 +74,6 @@ class Zend_Form_Element_ButtonTest extends \PHPUnit\Framework\TestCase
     /**
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
-     *
-     * @return void
      */
     public function tearDown(): void
     {
@@ -87,6 +83,7 @@ class Zend_Form_Element_ButtonTest extends \PHPUnit\Framework\TestCase
     {
         // require_once 'Zend/View.php';
         $view = new Zend_View();
+
         return $view;
     }
 
@@ -121,7 +118,7 @@ class Zend_Form_Element_ButtonTest extends \PHPUnit\Framework\TestCase
 
     public function testGetLabelReturnsTranslatedLabelIfTranslatorIsRegistered()
     {
-        $translations = include __DIR__ . '/../_files/locale/array.php';
+        $translations = include __DIR__.'/../_files/locale/array.php';
         $translate = new Zend_Translate('array', $translations, 'en');
         $this->element->setTranslator($translate)
                       ->setLabel('submit');
@@ -173,26 +170,26 @@ class Zend_Form_Element_ButtonTest extends \PHPUnit\Framework\TestCase
     {
         // Set element options
         $this->element->setOptions(
-            array(
-                 'label'      => 'Foo',
-                 'value'      => 'bar',
-                 'decorators' => array(
-                     'ViewHelper',
-                 ),
-            )
+            [
+                'label' => 'Foo',
+                'value' => 'bar',
+                'decorators' => [
+                    'ViewHelper',
+                ],
+            ]
         );
 
         // Validate
         $this->element->isValid(null);
 
         $this->assertEquals(
-            PHP_EOL . '<button name="foo" id="foo" type="button" value="bar">Foo</button>',
+            PHP_EOL.'<button name="foo" id="foo" type="button" value="bar">Foo</button>',
             $this->element->render($this->getView())
         );
     }
 }
 
 // Call Zend_Form_Element_ButtonTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Form_Element_ButtonTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Form_Element_ButtonTest::main') {
     Zend_Form_Element_ButtonTest::main();
 }

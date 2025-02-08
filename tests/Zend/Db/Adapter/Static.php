@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,67 +14,61 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
-
-
-
 
 /**
  * @see Zend_Db_Adapter_Abstract
  */
 // require_once 'Zend/Db/Adapter/Abstract.php';
 
-
 /**
  * @see Zend_Db_Statement_Static
  */
 require_once 'Zend/Db/Statement/Static.php';
 
-
 /**
  * Class for connecting to SQL databases and performing common operations.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Zend_Db_Adapter_Static extends Zend_Db_Adapter_Abstract
 {
-    public $config = null;
+    public $config;
 
     /**
-     * The number of seconds to sleep upon query execution
+     * The number of seconds to sleep upon query execution.
      *
-     * @var integer
+     * @var int
      */
     protected $_onQuerySleep = 0;
 
     /**
-     * Sets the number of seconds to sleep upon query execution
+     * Sets the number of seconds to sleep upon query execution.
      *
-     * @param  integer $seconds
+     * @param int $seconds
+     *
      * @return Zend_Db_Adapter_Static Provides a fluent interface
      */
     public function setOnQuerySleep($seconds = 0)
     {
-        $this->_onQuerySleep = (integer) $seconds;
+        $this->_onQuerySleep = (int) $seconds;
 
         return $this;
     }
 
     /**
-     * Returns the number of seconds to sleep upon query execution
+     * Returns the number of seconds to sleep upon query execution.
      *
-     * @return integer
+     * @return int
      */
     public function getOnQuerySleep()
     {
@@ -84,13 +79,12 @@ class Zend_Db_Adapter_Static extends Zend_Db_Adapter_Abstract
      * Check for config options that are mandatory.
      * Throw exceptions if any are missing.
      *
-     * @param array $config
      * @throws Zend_Db_Adapter_Exception
      */
     protected function _checkRequiredOptions(array $config)
     {
         // we need at least a dbname
-        if (! array_key_exists('dbname', $config)) {
+        if (!array_key_exists('dbname', $config)) {
             // require_once 'Zend/Db/Adapter/Exception.php';
             throw new Zend_Db_Adapter_Exception("Configuration must have a key for 'dbname' that names the database instance");
         }
@@ -100,11 +94,12 @@ class Zend_Db_Adapter_Static extends Zend_Db_Adapter_Abstract
     /**
      * Prepares and executes a SQL statement with bound data.
      *
-     * @param  string|Zend_Db_Select $sql  The SQL statement with placeholders.
-     * @param  mixed                 $bind An array of data to bind to the placeholders.
+     * @param string|Zend_Db_Select $sql  the SQL statement with placeholders
+     * @param mixed                 $bind an array of data to bind to the placeholders
+     *
      * @return Zend_Db_Statement (may also be PDOStatement in the case of PDO)
      */
-    public function query($sql, $bind = array())
+    public function query($sql, $bind = [])
     {
         // connect to the database if needed
         $this->_connect();
@@ -118,7 +113,7 @@ class Zend_Db_Adapter_Static extends Zend_Db_Adapter_Abstract
         // don't use (array) typecasting because
         // because $bind may be a Zend_Db_Expr object
         if (!is_array($bind)) {
-            $bind = array($bind);
+            $bind = [$bind];
         }
 
         // prepare and execute the statement with profiling
@@ -132,6 +127,7 @@ class Zend_Db_Adapter_Static extends Zend_Db_Adapter_Abstract
 
         // return the results embedded in the prepared statement object
         $stmt->setFetchMode($this->_fetchMode);
+
         return $stmt;
     }
 
@@ -142,7 +138,7 @@ class Zend_Db_Adapter_Static extends Zend_Db_Adapter_Abstract
      */
     public function listTables()
     {
-        return array('dummy');
+        return ['dummy'];
     }
 
     /**
@@ -170,25 +166,26 @@ class Zend_Db_Adapter_Static extends Zend_Db_Adapter_Abstract
      *
      * @param string $tableName
      * @param string $schemaName OPTIONAL
+     *
      * @return array
      */
     public function describeTable($tableName, $schemaName = null)
     {
-        return array(
-            'SCHEMA_NAME'      => $schemaName,
-            'TABLE_NAME'       => $tableName,
-            'COLUMN_NAME'      => null,
-            'COLUMN_POSITION'  => null,
-            'DATA_TYPE'        => null,
-            'DEFAULT'          => null,
-            'NULLABLE'         => null,
-            'LENGTH'           => null,
-            'SCALE'            => null,
-            'PRECISION'        => null,
-            'UNSIGNED'         => null,
-            'PRIMARY'          => null,
+        return [
+            'SCHEMA_NAME' => $schemaName,
+            'TABLE_NAME' => $tableName,
+            'COLUMN_NAME' => null,
+            'COLUMN_POSITION' => null,
+            'DATA_TYPE' => null,
+            'DEFAULT' => null,
+            'NULLABLE' => null,
+            'LENGTH' => null,
+            'SCALE' => null,
+            'PRECISION' => null,
+            'UNSIGNED' => null,
+            'PRIMARY' => null,
             'PRIMARY_POSITION' => null,
-        );
+        ];
     }
 
     /**
@@ -199,17 +196,18 @@ class Zend_Db_Adapter_Static extends Zend_Db_Adapter_Abstract
     protected function _connect()
     {
         $this->_connection = $this;
+
         return;
     }
 
     /**
-     * Test if a connection is active
+     * Test if a connection is active.
      *
-     * @return boolean
+     * @return bool
      */
     public function isConnected()
     {
-        return ((bool) (!is_null($this->_connection)));
+        return (bool) (!is_null($this->_connection));
     }
 
     /**
@@ -225,7 +223,8 @@ class Zend_Db_Adapter_Static extends Zend_Db_Adapter_Abstract
     /**
      * Prepare a statement and return a PDOStatement-like object.
      *
-     * @param  string|Zend_Db_Select $sql SQL query
+     * @param string|Zend_Db_Select $sql SQL query
+     *
      * @return Zend_Db_Statment_Static
      */
     public function prepare($sql)
@@ -243,9 +242,10 @@ class Zend_Db_Adapter_Static extends Zend_Db_Adapter_Abstract
      * returns the last value generated for such a column, and the table name
      * argument is disregarded.
      *
-     * @param string $tableName   OPTIONAL Name of table.
-     * @param string $primaryKey  OPTIONAL Name of primary key column.
-     * @return integer
+     * @param string $tableName  OPTIONAL Name of table
+     * @param string $primaryKey OPTIONAL Name of primary key column
+     *
+     * @return int
      */
     public function lastInsertId($tableName = null, $primaryKey = 'id')
     {
@@ -279,31 +279,33 @@ class Zend_Db_Adapter_Static extends Zend_Db_Adapter_Abstract
     /**
      * Set the fetch mode.
      *
-     * @param integer $mode
+     * @param int $mode
      */
     public function setFetchMode($mode)
     {
         $this->_fetchMode = $mode;
+
         return $this;
     }
 
     /**
      * Adds an adapter-specific LIMIT clause to the SELECT statement.
      *
-     * @param mixed $sql
-     * @param integer $count
-     * @param integer $offset
+     * @param int $count
+     * @param int $offset
+     *
      * @return string
      */
     public function limit($sql, $count, $offset = 0)
     {
-        return $sql . " LIMIT $count OFFSET $offset";
+        return $sql." LIMIT $count OFFSET $offset";
     }
 
     /**
      * Check if the adapter supports real SQL parameters.
      *
      * @param string $type
+     *
      * @return bool
      */
     public function supportsParameters($type)
@@ -312,11 +314,12 @@ class Zend_Db_Adapter_Static extends Zend_Db_Adapter_Abstract
     }
 
     /**
-     * Retrieve server version in PHP style
+     * Retrieve server version in PHP style.
      *
      * @return string
      */
-    public function getServerVersion() {
-        return "5.6.7.8";
+    public function getServerVersion()
+    {
+        return '5.6.7.8';
     }
 }

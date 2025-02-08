@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,42 +14,36 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /**
  * @see Zend_Db_Adapter_TestCommon
  */
 require_once 'Zend/Db/Adapter/TestCommon.php';
 
-
-
-
-
-
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Db_Adapter_Pdo_TestCommon extends Zend_Db_Adapter_TestCommon
 {
-
     public function testAdapterAlternateStatement()
     {
         $this->_testAdapterAlternateStatement('Test_PdoStatement');
     }
 
     /**
-     * Ensures that exec() throws an exception when given a bogus query
+     * Ensures that exec() throws an exception when given a bogus query.
+     *
      * @group ZF-6185
+     *
      * @return void
      */
     public function testAdapterExecBogus()
@@ -58,13 +53,15 @@ abstract class Zend_Db_Adapter_Pdo_TestCommon extends Zend_Db_Adapter_TestCommon
             $this->fail('Expected exception not thrown');
         } catch (Zend_Db_Adapter_Exception $e) {
             $this->assertTrue($e instanceof Zend_Db_Adapter_Exception,
-                'Expecting object of type Zend_Db_Adapter_Exception, got ' . get_class($e));
+                'Expecting object of type Zend_Db_Adapter_Exception, got '.get_class($e));
         }
     }
 
     /**
-     * Ensures that exec() throws an exception when given a bogus table
+     * Ensures that exec() throws an exception when given a bogus table.
+     *
      * @group ZF-6185
+     *
      * @return void
      */
     public function testAdapterExecBogusTable()
@@ -74,30 +71,32 @@ abstract class Zend_Db_Adapter_Pdo_TestCommon extends Zend_Db_Adapter_TestCommon
             $this->fail('Expected exception not thrown');
         } catch (Zend_Db_Adapter_Exception $e) {
             $this->assertTrue($e instanceof Zend_Db_Adapter_Exception,
-                'Expecting object of type Zend_Db_Adapter_Exception, got ' . get_class($e));
+                'Expecting object of type Zend_Db_Adapter_Exception, got '.get_class($e));
         }
     }
 
     /**
-     * Ensures that exec() provides expected behavior when modifying no rows
+     * Ensures that exec() provides expected behavior when modifying no rows.
+     *
      * @group ZF-6185
+     *
      * @return void
      */
     public function testAdapterExecModifiedNone()
     {
-        $affected = $this->_db->exec('DELETE FROM ' . $this->_db->quoteIdentifier('zfbugs') . ' WHERE 1 = -1');
+        $affected = $this->_db->exec('DELETE FROM '.$this->_db->quoteIdentifier('zfbugs').' WHERE 1 = -1');
 
         $this->assertEquals(0, $affected,
             "Expected exec() to return zero affected rows; got $affected");
     }
 
     /**
-     * Test for null byte injection
+     * Test for null byte injection.
      */
     public function testAdapterQuoteNullByteCharacter()
     {
         $string = "1\0";
-        $value  = $this->_db->quote($string);
+        $value = $this->_db->quote($string);
         $this->assertStringNotContainsString("\0", $value);
     }
 }

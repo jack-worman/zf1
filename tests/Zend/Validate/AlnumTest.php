@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,29 +26,26 @@
  */
 // require_once 'Zend/Validate/Alnum.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_Validate
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Validate
  */
 #[AllowDynamicProperties]
-class Zend_Validate_AlnumTest extends \PHPUnit\Framework\TestCase
+class Zend_Validate_AlnumTest extends PHPUnit\Framework\TestCase
 {
     /**
-     * Zend_Validate_Alnum object
+     * Zend_Validate_Alnum object.
      *
      * @var Zend_Validate_Alnum
      */
     protected $_validator;
 
     /**
-     * Creates a new Zend_Validate_Alnum object for each test method
-     *
-     * @return void
+     * Creates a new Zend_Validate_Alnum object for each test method.
      */
     public function setUp(): void
     {
@@ -55,40 +53,40 @@ class Zend_Validate_AlnumTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Ensures that the validator follows expected behavior for basic input values
+     * Ensures that the validator follows expected behavior for basic input values.
      *
      * @return void
      */
     public function testExpectedResultsWithBasicInputValues()
     {
-        $valuesExpected = array(
-            'abc123'  => true,
+        $valuesExpected = [
+            'abc123' => true,
             'abc 123' => false,
-            'abcxyz'  => true,
+            'abcxyz' => true,
             'AZ@#4.3' => false,
-            'aBc123'  => true,
-            ''        => false,
-            ' '       => false,
-            "\n"      => false,
-            'foobar1' => true
-            );
+            'aBc123' => true,
+            '' => false,
+            ' ' => false,
+            "\n" => false,
+            'foobar1' => true,
+        ];
         foreach ($valuesExpected as $input => $result) {
             $this->assertEquals($result, $this->_validator->isValid($input));
         }
     }
 
     /**
-     * Ensures that getMessages() returns expected initial value
+     * Ensures that getMessages() returns expected initial value.
      *
      * @return void
      */
     public function testMessagesEmptyInitially()
     {
-        $this->assertEquals(array(), $this->_validator->getMessages());
+        $this->assertEquals([], $this->_validator->getMessages());
     }
 
     /**
-     * Ensures that the allowWhiteSpace option works as expected
+     * Ensures that the allowWhiteSpace option works as expected.
      *
      * @return void
      */
@@ -96,24 +94,24 @@ class Zend_Validate_AlnumTest extends \PHPUnit\Framework\TestCase
     {
         $this->_validator->setAllowWhiteSpace(true);
 
-        $valuesExpected = array(
-            'abc123'  => true,
+        $valuesExpected = [
+            'abc123' => true,
             'abc 123' => true,
-            'abcxyz'  => true,
+            'abcxyz' => true,
             'AZ@#4.3' => false,
-            'aBc123'  => true,
-            ''        => false,
-            ' '       => true,
-            "\n"      => true,
-            " \t "    => true,
-            'foobar1' => true
-            );
+            'aBc123' => true,
+            '' => false,
+            ' ' => true,
+            "\n" => true,
+            " \t " => true,
+            'foobar1' => true,
+        ];
         foreach ($valuesExpected as $input => $result) {
             $this->assertEquals(
                 $result,
                 $this->_validator->isValid($input),
-                "Expected '$input' to be considered " . ($result ? '' : 'in') . "valid"
-                );
+                "Expected '$input' to be considered ".($result ? '' : 'in').'valid'
+            );
         }
     }
 
@@ -124,23 +122,24 @@ class Zend_Validate_AlnumTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertFalse($this->_validator->isValid(''));
         $messages = $this->_validator->getMessages();
-        $arrayExpected = array(
-            Zend_Validate_Alnum::STRING_EMPTY => '\'\' is an empty string'
-            );
+        $arrayExpected = [
+            Zend_Validate_Alnum::STRING_EMPTY => '\'\' is an empty string',
+        ];
         $this->assertThat($messages, $this->identicalTo($arrayExpected));
     }
 
     /**
      * @return void
+     *
      * @deprecated Since 1.5.0
      */
     public function testEmptyStringValueResultsInProperValidationFailureErrors()
     {
         $this->assertFalse($this->_validator->isValid(''));
         $errors = $this->_validator->getErrors();
-        $arrayExpected = array(
-            Zend_Validate_Alnum::STRING_EMPTY
-            );
+        $arrayExpected = [
+            Zend_Validate_Alnum::STRING_EMPTY,
+        ];
         $this->assertThat($errors, $this->identicalTo($arrayExpected));
     }
 
@@ -151,23 +150,24 @@ class Zend_Validate_AlnumTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertFalse($this->_validator->isValid('#'));
         $messages = $this->_validator->getMessages();
-        $arrayExpected = array(
-            Zend_Validate_Alnum::NOT_ALNUM => '\'#\' contains characters which are non alphabetic and no digits'
-            );
+        $arrayExpected = [
+            Zend_Validate_Alnum::NOT_ALNUM => '\'#\' contains characters which are non alphabetic and no digits',
+        ];
         $this->assertThat($messages, $this->identicalTo($arrayExpected));
     }
 
     /**
      * @return void
+     *
      * @deprecated Since 1.5.0
      */
     public function testInvalidValueResultsInProperValidationFailureErrors()
     {
         $this->assertFalse($this->_validator->isValid('#'));
         $errors = $this->_validator->getErrors();
-        $arrayExpected = array(
-            Zend_Validate_Alnum::NOT_ALNUM
-            );
+        $arrayExpected = [
+            Zend_Validate_Alnum::NOT_ALNUM,
+        ];
         $this->assertThat($errors, $this->identicalTo($arrayExpected));
     }
 
@@ -176,7 +176,7 @@ class Zend_Validate_AlnumTest extends \PHPUnit\Framework\TestCase
      */
     public function testNonStringValidation()
     {
-        $this->assertFalse($this->_validator->isValid(array(1 => 1)));
+        $this->assertFalse($this->_validator->isValid([1 => 1]));
     }
 
     /**

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Mobile
- * @subpackage Push
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -29,18 +30,17 @@
 
 /**
  * @category   Zend
- * @package    Zend_Mobile
- * @subpackage Push
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Mobile
  * @group      Zend_Mobile_Push
  * @group      Zend_Mobile_Push_Mpns
  */
 #[AllowDynamicProperties]
-class Zend_Mobile_Push_MpnsTest extends \PHPUnit\Framework\TestCase
+class Zend_Mobile_Push_MpnsTest extends PHPUnit\Framework\TestCase
 {
-
     public function setUp(): void
     {
         $this->adapter = new Zend_Http_Client_Adapter_Test();
@@ -50,7 +50,8 @@ class Zend_Mobile_Push_MpnsTest extends \PHPUnit\Framework\TestCase
         $this->mpns->setHttpClient($this->client);
     }
 
-    public function getMessage($type) {
+    public function getMessage($type)
+    {
         switch ($type) {
             case 'tile':
                 $message = new Zend_Mobile_Push_Message_Mpns_Tile();
@@ -63,6 +64,7 @@ class Zend_Mobile_Push_MpnsTest extends \PHPUnit\Framework\TestCase
                 $message->setMessage('<w><oa h="" /></w>');
         }
         $message->setToken('http://this.is.a.url.com');
+
         return $message;
     }
 
@@ -90,35 +92,35 @@ class Zend_Mobile_Push_MpnsTest extends \PHPUnit\Framework\TestCase
     public function testSendThrowsExceptionWhenDeviceQuotaExceeded()
     {
         $this->expectException(Zend_Mobile_Push_Exception_DeviceQuotaExceeded::class);
-        $this->adapter->setResponse('HTTP/1.1 200 OK' . "\r\n" . 'NotificationStatus: QueueFull' . "\r\n\r\n");
+        $this->adapter->setResponse('HTTP/1.1 200 OK'."\r\n".'NotificationStatus: QueueFull'."\r\n\r\n");
         $this->mpns->send($this->getMessage('raw'));
     }
 
     public function testSendThrowsExceptionWhenInvalidPayload()
     {
         $this->expectException(Zend_Mobile_Push_Exception_InvalidPayload::class);
-        $this->adapter->setResponse('HTTP/1.1 400 Bad Request' . "\r\n\r\n");
+        $this->adapter->setResponse('HTTP/1.1 400 Bad Request'."\r\n\r\n");
         $this->mpns->send($this->getMessage('raw'));
     }
 
     public function testSendThrowsExceptionWhenInvalidToken()
     {
         $this->expectException(Zend_Mobile_Push_Exception_InvalidToken::class);
-        $this->adapter->setResponse('HTTP/1.1 401 Unauthorized' . "\r\n\r\n");
+        $this->adapter->setResponse('HTTP/1.1 401 Unauthorized'."\r\n\r\n");
         $this->mpns->send($this->getMessage('raw'));
     }
 
     public function testSendThrowsExceptionWhenDeviceNotRegistered()
     {
         $this->expectException(Zend_Mobile_Push_Exception_InvalidToken::class);
-        $this->adapter->setResponse('HTTP/1.1 404 Not Found' . "\r\n\r\n");
+        $this->adapter->setResponse('HTTP/1.1 404 Not Found'."\r\n\r\n");
         $this->mpns->send($this->getMessage('raw'));
     }
 
     public function testSendThrowsExceptionWhenMethodNotPost()
     {
         $this->expectException(Zend_Mobile_Push_Exception::class);
-        $this->adapter->setResponse('HTTP/1.1 405 Method Not Allowed' . "\r\n\r\n");
+        $this->adapter->setResponse('HTTP/1.1 405 Method Not Allowed'."\r\n\r\n");
         $this->mpns->send($this->getMessage('raw'));
     }
 
@@ -132,20 +134,20 @@ class Zend_Mobile_Push_MpnsTest extends \PHPUnit\Framework\TestCase
     public function testSendThrowsExceptionWhenInvalidToken2()
     {
         $this->expectException(Zend_Mobile_Push_Exception_InvalidToken::class);
-        $this->adapter->setResponse('HTTP/1.1 412 Precondition Failed' . "\r\n\r\n");
+        $this->adapter->setResponse('HTTP/1.1 412 Precondition Failed'."\r\n\r\n");
         $this->mpns->send($this->getMessage('raw'));
     }
 
     public function testSendThrowsExceptionWhenServerUnavailable()
     {
         $this->expectException(Zend_Mobile_Push_Exception_ServerUnavailable::class);
-        $this->adapter->setResponse('HTTP/1.1 503 Service Unavailable' . "\r\n\r\n");
+        $this->adapter->setResponse('HTTP/1.1 503 Service Unavailable'."\r\n\r\n");
         $this->mpns->send($this->getMessage('raw'));
     }
 
     public function testAllOk()
     {
-        $this->adapter->setResponse('HTTP/1.1 200 OK' . "\r\n\r\n");
+        $this->adapter->setResponse('HTTP/1.1 200 OK'."\r\n\r\n");
         $this->mpns->send($this->getMessage('raw'));
 
         $toast = $this->getMessage('toast');

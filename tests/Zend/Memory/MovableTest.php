@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Memory
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -24,30 +25,29 @@
 // require_once 'Zend/Memory.php';
 
 /**
- * Memory value container
+ * Memory value container.
  *
  * (Should be presented for value object)
  *
  * @category   Zend
- * @package    Zend_Memory
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Zend_Memory_Manager_Dummy extends Zend_Memory_Manager
 {
-    /** @var boolean */
+    /** @var bool */
     public $processUpdatePassed = false;
 
-    /** @var integer */
+    /** @var int */
     public $processedId;
 
     /** @var Zend_Memory_Container_Movable */
     public $processedObject;
 
     /**
-     * Dummy object constructor
+     * Dummy object constructor.
      */
     public function __construct()
     {
@@ -55,30 +55,29 @@ class Zend_Memory_Manager_Dummy extends Zend_Memory_Manager
     }
 
     /**
-     * Dummy value update callback method
+     * Dummy value update callback method.
      */
     public function processUpdate(Zend_Memory_Container_Movable $container, $id)
     {
         $this->processUpdatePassed = true;
-        $this->processedId         = $id;
-        $this->processedObject     = $container;
+        $this->processedId = $id;
+        $this->processedObject = $container;
     }
 }
 
-
 /**
  * @category   Zend
- * @package    Zend_Memory
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Memory
  */
 #[AllowDynamicProperties]
-class Zend_Memory_Container_MovableTest extends \PHPUnit\Framework\TestCase
+class Zend_Memory_Container_MovableTest extends PHPUnit\Framework\TestCase
 {
     /**
-     * tests the Movable memory container object creation
+     * tests the Movable memory container object creation.
      */
     public function testCreation()
     {
@@ -88,9 +87,8 @@ class Zend_Memory_Container_MovableTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($memObject instanceof Zend_Memory_Container_Movable);
     }
 
-
     /**
-     * tests the value access methods
+     * tests the value access methods.
      */
     public function testValueAccess()
     {
@@ -105,36 +103,35 @@ class Zend_Memory_Container_MovableTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($memObject->getRef(), '012_456789');
 
         // value property
-        $this->assertEquals((string)$memObject->value, '012_456789');
+        $this->assertEquals((string) $memObject->value, '012_456789');
 
         $memObject->value[7] = '_';
-        $this->assertEquals((string)$memObject->value, '012_456_89');
+        $this->assertEquals((string) $memObject->value, '012_456_89');
 
         $memObject->value = 'another value';
         $this->assertTrue($memObject->value instanceof Zend_Memory_Value);
-        $this->assertEquals((string)$memObject->value, 'another value');
+        $this->assertEquals((string) $memObject->value, 'another value');
     }
 
-
     /**
-     * tests lock()/unlock()/isLocked() functions
+     * tests lock()/unlock()/isLocked() functions.
      */
     public function testLock()
     {
         $memoryManager = new Zend_Memory_Manager_Dummy();
         $memObject = new Zend_Memory_Container_Movable($memoryManager, 10, '0123456789');
 
-        $this->assertFalse((boolean)$memObject->isLocked());
+        $this->assertFalse((bool) $memObject->isLocked());
 
         $memObject->lock();
-        $this->assertTrue((boolean)$memObject->isLocked());
+        $this->assertTrue((bool) $memObject->isLocked());
 
         $memObject->unlock();
-        $this->assertFalse((boolean)$memObject->isLocked());
+        $this->assertFalse((bool) $memObject->isLocked());
     }
 
     /**
-     * tests the touch() method
+     * tests the touch() method.
      */
     public function testTouch()
     {
@@ -151,7 +148,7 @@ class Zend_Memory_Container_MovableTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * tests the value update tracing
+     * tests the value update tracing.
      */
     public function testValueUpdateTracing()
     {

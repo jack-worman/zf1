@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -14,13 +14,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_AllTests::main');
 }
@@ -99,9 +98,9 @@ require_once 'Zend/XmlRpc/AllTests.php';
 
 /**
  * @category   Zend
- * @package    Zend
- * @subpackage UnitTests
+ *
  * @group      Zend
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -112,25 +111,25 @@ class Zend_AllTests
     {
         // Run buffered tests as a separate suite first
         ob_start();
-        \PHPUnit\TextUI\TestRunner::run(self::suiteBuffered());
+        PHPUnit\TextUI\TestRunner::run(self::suiteBuffered());
         if (ob_get_level()) {
             ob_end_flush();
         }
 
-        \PHPUnit\TextUI\TestRunner::run(self::suite());
+        PHPUnit\TextUI\TestRunner::run(self::suite());
     }
 
     /**
-     * Buffered test suites
+     * Buffered test suites.
      *
      * These tests require no output be sent prior to running as they rely
      * on internal PHP functions.
      *
-     * @return \PHPUnit\Framework\TestSuite
+     * @return PHPUnit\Framework\TestSuite
      */
     public static function suiteBuffered()
     {
-        $suite = \PHPUnit\Framework\TestSuite::empty('Zend Framework - Zend - Buffered Test Suites');
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend Framework - Zend - Buffered Test Suites');
 
         // These tests require no output be sent prior to running as they rely
         // on internal PHP functions
@@ -141,15 +140,15 @@ class Zend_AllTests
     }
 
     /**
-     * Regular suite
+     * Regular suite.
      *
      * All tests except those that require output buffering.
      *
-     * @return \PHPUnit\Framework\TestSuite
+     * @return PHPUnit\Framework\TestSuite
      */
     public static function suite()
     {
-        $suite = \PHPUnit\Framework\TestSuite::empty('Zend Framework - Zend');
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend Framework - Zend');
 
         // Running this early to ensure that the test suite hasn't used too
         // much memory by the time it gets to this test.

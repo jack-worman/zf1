@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,28 +14,28 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Http_Client
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
  * @category   Zend
- * @package    Zend_Http_Client
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Http
  * @group      Zend_Http_Client
  */
 #[AllowDynamicProperties]
-class Zend_Http_Client_Skip_SocketTest extends \PHPUnit\Framework\TestCase
+class Zend_Http_Client_Skip_SocketTest extends PHPUnit\Framework\TestCase
 {
     public function setUp(): void
     {
-        $this->markTestSkipped("Zend_Http_Client dynamic tests are not enabled in TestConfiguration.php");
+        $this->markTestSkipped('Zend_Http_Client dynamic tests are not enabled in TestConfiguration.php');
     }
 
     public function testSocket()
@@ -45,19 +46,19 @@ class Zend_Http_Client_Skip_SocketTest extends \PHPUnit\Framework\TestCase
 
 /**
  * @category   Zend
- * @package    Zend_Http_Client
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Http
  * @group      Zend_Http_Client
  */
 #[AllowDynamicProperties]
-class Zend_Http_Client_Skip_ProxyAdapterTest extends \PHPUnit\Framework\TestCase
+class Zend_Http_Client_Skip_ProxyAdapterTest extends PHPUnit\Framework\TestCase
 {
     public function setUp(): void
     {
-        $this->markTestSkipped("Zend_Http_Client proxy server tests are not enabled in TestConfiguration.php");
+        $this->markTestSkipped('Zend_Http_Client proxy server tests are not enabled in TestConfiguration.php');
     }
 
     public function testProxyAdapter()

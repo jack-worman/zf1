@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,18 +14,17 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Controller_Action_Helper_AutoCompleteTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Controller_Action_Helper_AutoCompleteTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Controller_Action_Helper_AutoCompleteTest::main');
 }
-
 
 // require_once 'Zend/Controller/Action/Helper/AutoCompleteDojo.php';
 // require_once 'Zend/Controller/Action/Helper/AutoCompleteScriptaculous.php';
@@ -36,35 +36,32 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 // require_once 'Zend/Controller/Response/Cli.php';
 // require_once 'Zend/Layout.php';
 
-
 /**
  * Test class for Zend_Controller_Action_Helper_AutoComplete.
  *
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Controller
  * @group      Zend_Controller_Action
  * @group      Zend_Controller_Action_Helper
  */
 #[AllowDynamicProperties]
-class Zend_Controller_Action_Helper_AutoCompleteTest extends \PHPUnit\Framework\TestCase
+class Zend_Controller_Action_Helper_AutoCompleteTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
      *
-     * @access public
      * @static
      */
     public static function main()
     {
-
-        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Controller_Action_Helper_AutoCompleteTest");
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_Controller_Action_Helper_AutoCompleteTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -72,8 +69,6 @@ class Zend_Controller_Action_Helper_AutoCompleteTest extends \PHPUnit\Framework\
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @return void
      */
     public function setUp(): void
     {
@@ -94,8 +89,6 @@ class Zend_Controller_Action_Helper_AutoCompleteTest extends \PHPUnit\Framework\
     /**
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
-     *
-     * @return void
      */
     public function tearDown(): void
     {
@@ -112,11 +105,11 @@ class Zend_Controller_Action_Helper_AutoCompleteTest extends \PHPUnit\Framework\
 
     public function testEncodeJsonProxiesToJsonActionHelper()
     {
-        $dojo    = new Zend_Controller_Action_Helper_AutoCompleteDojo();
-        $data    = array('foo', 'bar', 'baz');
+        $dojo = new Zend_Controller_Action_Helper_AutoCompleteDojo();
+        $data = ['foo', 'bar', 'baz'];
         $encoded = $dojo->prepareAutoCompletion($data);
         $decoded = Zend_Json::decode($encoded);
-        $test    = array();
+        $test = [];
         foreach ($decoded['items'] as $item) {
             $test[] = $item['name'];
         }
@@ -132,20 +125,20 @@ class Zend_Controller_Action_Helper_AutoCompleteTest extends \PHPUnit\Framework\
                 break;
             }
         }
-        $this->assertTrue($found, "JSON content-type header not found");
+        $this->assertTrue($found, 'JSON content-type header not found');
     }
 
     public function testDojoHelperEncodesToJson()
     {
         $dojo = new Zend_Controller_Action_Helper_AutoCompleteDojo();
-        $data = array('foo', 'bar', 'baz');
+        $data = ['foo', 'bar', 'baz'];
         $encoded = $dojo->direct($data, false);
         $decoded = Zend_Json::decode($encoded);
         $this->assertStringContainsString('items', array_keys($decoded));
         $this->assertStringContainsString('identifier', array_keys($decoded));
         $this->assertEquals('name', $decoded['identifier']);
 
-        $test = array();
+        $test = [];
         foreach ($decoded['items'] as $item) {
             $test[] = $item['label'];
         }
@@ -156,10 +149,10 @@ class Zend_Controller_Action_Helper_AutoCompleteTest extends \PHPUnit\Framework\
     {
         $dojo = new Zend_Controller_Action_Helper_AutoCompleteDojo();
         $dojo->suppressExit = true;
-        $data = array('foo', 'bar', 'baz');
+        $data = ['foo', 'bar', 'baz'];
         $encoded = $dojo->direct($data);
         $decoded = Zend_Json::decode($encoded);
-        $test    = array();
+        $test = [];
         foreach ($decoded['items'] as $item) {
             $test[] = $item['name'];
         }
@@ -172,7 +165,7 @@ class Zend_Controller_Action_Helper_AutoCompleteTest extends \PHPUnit\Framework\
     {
         $dojo = new Zend_Controller_Action_Helper_AutoCompleteDojo();
         $dojo->suppressExit = true;
-        $data = array('foo', 'bar', 'baz');
+        $data = ['foo', 'bar', 'baz'];
         $encoded = $dojo->direct($data);
         $this->assertFalse($this->layout->isEnabled());
         $this->assertTrue($this->viewRenderer->getNoRender());
@@ -182,11 +175,12 @@ class Zend_Controller_Action_Helper_AutoCompleteTest extends \PHPUnit\Framework\
     {
         $dojo = new Zend_Controller_Action_Helper_AutoCompleteDojo();
         $dojo->suppressExit = true;
-        $data = array('foo', 'bar', 'baz');
+        $data = ['foo', 'bar', 'baz'];
         $encoded = $dojo->direct($data, false, true);
         $this->assertTrue($this->layout->isEnabled());
         $this->assertFalse($this->viewRenderer->getNoRender());
     }
+
     /**
      * @group   ZF-9126
      */
@@ -194,11 +188,11 @@ class Zend_Controller_Action_Helper_AutoCompleteTest extends \PHPUnit\Framework\
     {
         $dojo = new Zend_Controller_Action_Helper_AutoCompleteDojo();
         $dojo->suppressExit = true;
-        $data = array ('garçon', 'schließen', 'Helgi Þormar Þorbjörnsson');
+        $data = ['garçon', 'schließen', 'Helgi Þormar Þorbjörnsson'];
         $encoded = $dojo->direct($data);
         $body = $this->response->getBody();
         $decoded = Zend_Json::decode($encoded);
-        $test = array ();
+        $test = [];
         foreach ($decoded['items'] as $item) {
             $test[] = $item['name'];
         }
@@ -210,7 +204,7 @@ class Zend_Controller_Action_Helper_AutoCompleteTest extends \PHPUnit\Framework\
     {
         $scriptaculous = new Zend_Controller_Action_Helper_AutoCompleteScriptaculous();
 
-        $data = new stdClass;
+        $data = new stdClass();
         $data->foo = 'bar';
         $data->bar = 'baz';
         try {
@@ -225,11 +219,11 @@ class Zend_Controller_Action_Helper_AutoCompleteTest extends \PHPUnit\Framework\
     {
         $scriptaculous = new Zend_Controller_Action_Helper_AutoCompleteScriptaculous();
         $scriptaculous->suppressExit = true;
-        $data = array('foo', 'bar', 'baz');
+        $data = ['foo', 'bar', 'baz'];
         $formatted = $scriptaculous->direct($data);
         $this->assertStringContainsString('<ul>', $formatted);
         foreach ($data as $value) {
-            $this->assertStringContainsString('<li>' . $value . '</li>', $formatted);
+            $this->assertStringContainsString('<li>'.$value.'</li>', $formatted);
         }
         $this->assertStringContainsString('</ul>', $formatted);
     }
@@ -238,7 +232,7 @@ class Zend_Controller_Action_Helper_AutoCompleteTest extends \PHPUnit\Framework\
     {
         $scriptaculous = new Zend_Controller_Action_Helper_AutoCompleteScriptaculous();
         $scriptaculous->suppressExit = true;
-        $data = array('foo', 'bar', 'baz');
+        $data = ['foo', 'bar', 'baz'];
         $encoded = $scriptaculous->direct($data);
         $body = $this->response->getBody();
         $this->assertSame($encoded, $body);
@@ -248,7 +242,7 @@ class Zend_Controller_Action_Helper_AutoCompleteTest extends \PHPUnit\Framework\
     {
         $scriptaculous = new Zend_Controller_Action_Helper_AutoCompleteScriptaculous();
         $scriptaculous->suppressExit = true;
-        $data = array('foo', 'bar', 'baz');
+        $data = ['foo', 'bar', 'baz'];
         $encoded = $scriptaculous->direct($data);
         $this->assertFalse($this->layout->isEnabled());
         $this->assertTrue($this->viewRenderer->getNoRender());
@@ -258,7 +252,7 @@ class Zend_Controller_Action_Helper_AutoCompleteTest extends \PHPUnit\Framework\
     {
         $scriptaculous = new Zend_Controller_Action_Helper_AutoCompleteScriptaculous();
         $scriptaculous->suppressExit = true;
-        $data = array('foo', 'bar', 'baz');
+        $data = ['foo', 'bar', 'baz'];
         $encoded = $scriptaculous->direct($data, false, true);
         $this->assertTrue($this->layout->isEnabled());
         $this->assertFalse($this->viewRenderer->getNoRender());
@@ -275,6 +269,6 @@ class Zend_Controller_Action_Helper_AutoCompleteTest_LayoutOverride extends Zend
 }
 
 // Call Zend_Controller_Action_Helper_AutoCompleteTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Controller_Action_Helper_AutoCompleteTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Controller_Action_Helper_AutoCompleteTest::main') {
     Zend_Controller_Action_Helper_AutoCompleteTest::main();
 }

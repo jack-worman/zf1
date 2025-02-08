@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,33 +14,28 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
-
-
 
 // require_once 'Zend/Controller/Action.php';
 
 /**
- * Mock file for testbed
+ * Mock file for testbed.
  *
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Admin_BazController extends Zend_Controller_Action
 {
-
     /**
-     * Test Function for PreDispatch
+     * Test Function for PreDispatch.
      *
      * @return void
      */
@@ -49,7 +45,7 @@ class Admin_BazController extends Zend_Controller_Action
     }
 
     /**
-     * Test Function for postDispatch
+     * Test Function for postDispatch.
      *
      * @return void
      */
@@ -59,7 +55,7 @@ class Admin_BazController extends Zend_Controller_Action
     }
 
     /**
-     * Test Function for barAction
+     * Test Function for barAction.
      *
      * @return void
      */
@@ -67,5 +63,4 @@ class Admin_BazController extends Zend_Controller_Action
     {
         $this->_response->appendBody("Admin's Baz::bar action called\n");
     }
-
 }

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_CodeGenerator
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -28,8 +29,7 @@ require_once '_files/TestSampleSingleClass.php';
 
 /**
  * @category   Zend
- * @package    Zend_CodeGenerator
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
@@ -37,13 +37,12 @@ require_once '_files/TestSampleSingleClass.php';
  * @group Zend_CodeGenerator_Php
  */
 #[AllowDynamicProperties]
-class Zend_CodeGenerator_Php_ParameterTest extends \PHPUnit\Framework\TestCase
+class Zend_CodeGenerator_Php_ParameterTest extends PHPUnit\Framework\TestCase
 {
-
     /**
      * @var Zend_CodeGenerator_Php_Parameter
      */
-    protected $_parameter = null;
+    protected $_parameter;
 
     public function setUp(): void
     {
@@ -90,7 +89,7 @@ class Zend_CodeGenerator_Php_ParameterTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('Foo $bar = \'foo\'', $this->_parameter->generate());
     }
 
-    public function testFromReflection_GetParameterName()
+    public function testFromReflectionGetParameterName()
     {
         $reflParam = $this->getFirstReflectionParameter('name');
         $codeGenParam = Zend_CodeGenerator_Php_Parameter::fromReflection($reflParam);
@@ -98,7 +97,7 @@ class Zend_CodeGenerator_Php_ParameterTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('param', $codeGenParam->getName());
     }
 
-    public function testFromReflection_GetParameterType()
+    public function testFromReflectionGetParameterType()
     {
         $reflParam = $this->getFirstReflectionParameter('type');
         $codeGenParam = Zend_CodeGenerator_Php_Parameter::fromReflection($reflParam);
@@ -106,7 +105,7 @@ class Zend_CodeGenerator_Php_ParameterTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('stdClass', $codeGenParam->getType());
     }
 
-    public function testFromReflection_GetReference()
+    public function testFromReflectionGetReference()
     {
         $reflParam = $this->getFirstReflectionParameter('reference');
         $codeGenParam = Zend_CodeGenerator_Php_Parameter::fromReflection($reflParam);
@@ -114,7 +113,7 @@ class Zend_CodeGenerator_Php_ParameterTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($codeGenParam->getPassedByReference());
     }
 
-    public function testFromReflection_GetDefaultValue()
+    public function testFromReflectionGetDefaultValue()
     {
         $reflParam = $this->getFirstReflectionParameter('defaultValue');
         $codeGenParam = Zend_CodeGenerator_Php_Parameter::fromReflection($reflParam);
@@ -122,7 +121,7 @@ class Zend_CodeGenerator_Php_ParameterTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('foo', $codeGenParam->getDefaultValue());
     }
 
-    public function testFromReflection_GetArrayHint()
+    public function testFromReflectionGetArrayHint()
     {
         $reflParam = $this->getFirstReflectionParameter('fromArray');
         $codeGenParam = Zend_CodeGenerator_Php_Parameter::fromReflection($reflParam);
@@ -130,7 +129,7 @@ class Zend_CodeGenerator_Php_ParameterTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('array', $codeGenParam->getType());
     }
 
-    public function testFromReflection_GetWithNativeType()
+    public function testFromReflectionGetWithNativeType()
     {
         $reflParam = $this->getFirstReflectionParameter('hasNativeDocTypes');
         $codeGenParam = Zend_CodeGenerator_Php_Parameter::fromReflection($reflParam);
@@ -145,31 +144,32 @@ class Zend_CodeGenerator_Php_ParameterTest extends \PHPUnit\Framework\TestCase
 
     public static function dataFromReflection_Generate()
     {
-        return array(
-            array('name', '$param'),
-            array('type', 'stdClass $bar'),
-            array('reference', '&$baz'),
-            array('defaultValue', '$value = \'foo\''),
-            array('defaultNull', '$value = null'),
-            array('fromArray', 'array $array'),
-            array('hasNativeDocTypes', PHP_VERSION_ID >= 80000 ? 'int $integer' : '$integer'),
-            array('defaultArray', '$array = array ()'),
-            array('defaultArrayWithValues', '$array = array (  0 => 1,  1 => 2,  2 => 3,)'),
-            array('defaultFalse', '$val = false'),
-            array('defaultTrue', '$val = true'),
-            array('defaultZero', '$number = 0'),
-            array('defaultNumber', '$number = 1234'),
-            array('defaultFloat', '$float = 1.34'),
-            array('defaultConstant', '$con = \'foo\'')
-        );
+        return [
+            ['name', '$param'],
+            ['type', 'stdClass $bar'],
+            ['reference', '&$baz'],
+            ['defaultValue', '$value = \'foo\''],
+            ['defaultNull', '$value = null'],
+            ['fromArray', 'array $array'],
+            ['hasNativeDocTypes', PHP_VERSION_ID >= 80000 ? 'int $integer' : '$integer'],
+            ['defaultArray', '$array = array ()'],
+            ['defaultArrayWithValues', '$array = array (  0 => 1,  1 => 2,  2 => 3,)'],
+            ['defaultFalse', '$val = false'],
+            ['defaultTrue', '$val = true'],
+            ['defaultZero', '$number = 0'],
+            ['defaultNumber', '$number = 1234'],
+            ['defaultFloat', '$float = 1.34'],
+            ['defaultConstant', '$con = \'foo\''],
+        ];
     }
 
     /**
      * @dataProvider dataFromReflection_Generate
+     *
      * @param string $methodName
      * @param string $expectedCode
      */
-    public function testFromReflection_Generate($methodName, $expectedCode)
+    public function testFromReflectionGenerate($methodName, $expectedCode)
     {
         $reflParam = $this->getFirstReflectionParameter($methodName);
         $codeGenParam = Zend_CodeGenerator_Php_Parameter::fromReflection($reflParam);
@@ -178,7 +178,8 @@ class Zend_CodeGenerator_Php_ParameterTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @param  string $method
+     * @param string $method
+     *
      * @return Zend_Reflection_Parameter
      */
     private function getFirstReflectionParameter($method)
@@ -187,6 +188,7 @@ class Zend_CodeGenerator_Php_ParameterTest extends \PHPUnit\Framework\TestCase
         $method = $reflClass->getMethod($method);
 
         $params = $method->getParameters();
+
         return array_shift($params);
     }
 }
@@ -196,73 +198,60 @@ class Zend_CodeGenerator_Php_ParameterExample
 {
     public function name($param)
     {
-
     }
 
     public function type(stdClass $bar)
     {
-
     }
 
     public function reference(&$baz)
     {
-
     }
 
-    public function defaultValue($value="foo")
+    public function defaultValue($value = 'foo')
     {
     }
 
-    public function defaultNull($value=null)
+    public function defaultNull($value = null)
     {
-
     }
 
     public function fromArray(array $array)
     {
-
     }
 
-    public function defaultArray($array = array())
+    public function defaultArray($array = [])
     {
-
     }
 
     public function defaultFalse($val = false)
     {
-
     }
 
     public function defaultTrue($val = true)
     {
-
     }
 
     public function defaultZero($number = 0)
     {
-
     }
 
     public function defaultNumber($number = 1234)
     {
-
     }
 
     public function defaultFloat($float = 1.34)
     {
-
     }
 
-    public function defaultArrayWithValues($array = array(0 => 1, 1 => 2, 2 => 3))
+    public function defaultArrayWithValues($array = [0 => 1, 1 => 2, 2 => 3])
     {
-
     }
 
-    const FOO = "foo";
+    public const FOO = 'foo';
 
     public function defaultConstant($con = self::FOO)
     {
-
     }
 
     /**
@@ -270,6 +259,5 @@ class Zend_CodeGenerator_Php_ParameterExample
      */
     public function hasNativeDocTypes($integer)
     {
-
     }
 }

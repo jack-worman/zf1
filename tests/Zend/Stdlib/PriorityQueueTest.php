@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,12 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Stdlib
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Stdlib_PriorityQueueTest::main');
 }
@@ -27,21 +26,21 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 /**
  * @category   Zend
- * @package    Zend_Stdlib
- * @subpackage UnitTests
+ *
  * @group      Zend_Stdlib
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
-class Zend_Stdlib_PriorityQueueTest extends \PHPUnit\Framework\TestCase
+class Zend_Stdlib_PriorityQueueTest extends PHPUnit\Framework\TestCase
 {
     public static function main()
     {
-        $suite  = \PHPUnit\Framework\TestSuite::empty(__CLASS__);
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty(__CLASS__);
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -60,73 +59,73 @@ class Zend_Stdlib_PriorityQueueTest extends \PHPUnit\Framework\TestCase
         $s = serialize($this->queue);
         $unserialized = unserialize($s);
         $count = count($this->queue);
-        $this->assertSame($count, count($unserialized), 'Expected count ' . $count . '; received ' . count($unserialized));
+        $this->assertSame($count, count($unserialized), 'Expected count '.$count.'; received '.count($unserialized));
 
-        $expected = array();
+        $expected = [];
         foreach ($this->queue as $item) {
             $expected[] = $item;
         }
-        $test = array();
+        $test = [];
         foreach ($unserialized as $item) {
             $test[] = $item;
         }
-        $this->assertSame($expected, $test, 'Expected: ' . var_export($expected, 1) . "\nReceived:" . var_export($test, 1));
+        $this->assertSame($expected, $test, 'Expected: '.var_export($expected, 1)."\nReceived:".var_export($test, 1));
     }
 
     public function testRetrievingQueueAsArrayReturnsDataOnlyByDefault()
     {
-        $expected = array(
+        $expected = [
             'foo',
             'bar',
             'baz',
             'bat',
-        );
-        $test     = $this->queue->toArray();
+        ];
+        $test = $this->queue->toArray();
         $this->assertSame($expected, $test, var_export($test, 1));
     }
 
     public function testCanCastToArrayOfPrioritiesOnly()
     {
-        $expected = array(
+        $expected = [
             3,
             4,
             2,
             1,
-        );
-        $test     = $this->queue->toArray(Zend_Stdlib_PriorityQueue::EXTR_PRIORITY);
+        ];
+        $test = $this->queue->toArray(Zend_Stdlib_PriorityQueue::EXTR_PRIORITY);
         $this->assertSame($expected, $test, var_export($test, 1));
     }
 
     public function testCanCastToArrayOfDataPriorityPairs()
     {
-        $expected = array(
-            array('data' => 'foo', 'priority' => 3),
-            array('data' => 'bar', 'priority' => 4),
-            array('data' => 'baz', 'priority' => 2),
-            array('data' => 'bat', 'priority' => 1),
-        );
-        $test     = $this->queue->toArray(Zend_Stdlib_PriorityQueue::EXTR_BOTH);
+        $expected = [
+            ['data' => 'foo', 'priority' => 3],
+            ['data' => 'bar', 'priority' => 4],
+            ['data' => 'baz', 'priority' => 2],
+            ['data' => 'bat', 'priority' => 1],
+        ];
+        $test = $this->queue->toArray(Zend_Stdlib_PriorityQueue::EXTR_BOTH);
         $this->assertSame($expected, $test, var_export($test, 1));
     }
 
     public function testCanIterateMultipleTimesAndReceiveSameResults()
     {
-        $expected = array('bar', 'foo', 'baz', 'bat');
+        $expected = ['bar', 'foo', 'baz', 'bat'];
 
-        for ($i = 1; $i < 3; $i++) {
-            $test = array();
+        for ($i = 1; $i < 3; ++$i) {
+            $test = [];
             foreach ($this->queue as $item) {
                 $test[] = $item;
             }
-            $this->assertEquals($expected, $test, 'Failed at iteration ' . $i);
+            $this->assertEquals($expected, $test, 'Failed at iteration '.$i);
         }
     }
 
     public function testCanRemoveItemFromQueue()
     {
         $this->queue->remove('baz');
-        $expected = array('bar', 'foo', 'bat');
-        $test = array();
+        $expected = ['bar', 'foo', 'bat'];
+        $test = [];
         foreach ($this->queue as $item) {
             $test[] = $item;
         }

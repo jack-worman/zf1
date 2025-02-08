@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,20 +26,19 @@
  */
 // require_once 'Zend/Validate/LessThan.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_Validate
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Validate
  */
 #[AllowDynamicProperties]
-class Zend_Validate_LessThanTest extends \PHPUnit\Framework\TestCase
+class Zend_Validate_LessThanTest extends PHPUnit\Framework\TestCase
 {
     /**
-     * Ensures that the validator follows expected behavior
+     * Ensures that the validator follows expected behavior.
      *
      * @return void
      */
@@ -50,12 +50,12 @@ class Zend_Validate_LessThanTest extends \PHPUnit\Framework\TestCase
          *      - expected validation result
          *      - array of test input values
          */
-        $valuesExpected = array(
-            array(100, true, array(-1, 0, 0.01, 1, 99.999)),
-            array(100, false, array(100, 100.0, 100.01)),
-            array('a', false, array('a', 'b', 'c', 'd')),
-            array('z', true, array('x', 'y'))
-            );
+        $valuesExpected = [
+            [100, true, [-1, 0, 0.01, 1, 99.999]],
+            [100, false, [100, 100.0, 100.01]],
+            ['a', false, ['a', 'b', 'c', 'd']],
+            ['z', true, ['x', 'y']],
+        ];
         foreach ($valuesExpected as $element) {
             $validator = new Zend_Validate_LessThan($element[0]);
             foreach ($element[2] as $input) {
@@ -65,18 +65,18 @@ class Zend_Validate_LessThanTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Ensures that getMessages() returns expected default value
+     * Ensures that getMessages() returns expected default value.
      *
      * @return void
      */
     public function testGetMessages()
     {
         $validator = new Zend_Validate_LessThan(10);
-        $this->assertEquals(array(), $validator->getMessages());
+        $this->assertEquals([], $validator->getMessages());
     }
 
     /**
-     * Ensures that getMax() returns expected value
+     * Ensures that getMax() returns expected value.
      *
      * @return void
      */

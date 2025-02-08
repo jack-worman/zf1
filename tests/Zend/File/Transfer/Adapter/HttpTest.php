@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_File
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_File_Transfer_Adapter_HttpTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_File_Transfer_Adapter_HttpTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_File_Transfer_Adapter_HttpTest::main');
 }
 
 // require_once 'Zend/File/Transfer/Adapter/Http.php';
@@ -34,17 +35,17 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 // require_once 'Zend/Validate/File/Upload.php';
 
 /**
- * Test class for Zend_File_Transfer_Adapter_Http
+ * Test class for Zend_File_Transfer_Adapter_Http.
  *
  * @category   Zend
- * @package    Zend_File
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_File
  */
 #[AllowDynamicProperties]
-class Zend_File_Transfer_Adapter_HttpTest extends \PHPUnit\Framework\TestCase
+class Zend_File_Transfer_Adapter_HttpTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -53,10 +54,10 @@ class Zend_File_Transfer_Adapter_HttpTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_File_Transfer_Adapter_HttpTest");
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_File_Transfer_Adapter_HttpTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -64,26 +65,22 @@ class Zend_File_Transfer_Adapter_HttpTest extends \PHPUnit\Framework\TestCase
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @return void
      */
     public function setUp(): void
     {
-        $_FILES = array(
-            'txt' => array(
-                'name' => __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'test.txt',
+        $_FILES = [
+            'txt' => [
+                'name' => __DIR__.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'test.txt',
                 'type' => 'plain/text',
                 'size' => 8,
-                'tmp_name' => __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'test.txt',
-                'error' => 0));
+                'tmp_name' => __DIR__.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'test.txt',
+                'error' => 0]];
         $this->adapter = new Zend_File_Transfer_Adapter_HttpTest_MockAdapter();
     }
 
     /**
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
-     *
-     * @return void
      */
     public function tearDown(): void
     {
@@ -97,10 +94,10 @@ class Zend_File_Transfer_Adapter_HttpTest extends \PHPUnit\Framework\TestCase
 
     public function testAutoSetUploadValidator()
     {
-        $validators = array(
+        $validators = [
             new Zend_Validate_File_Count(1),
             new Zend_Validate_File_Extension('jpg'),
-        );
+        ];
         $this->adapter->setValidators($validators);
         $test = $this->adapter->getValidator('Upload');
         $this->assertTrue($test instanceof Zend_Validate_File_Upload);
@@ -155,85 +152,86 @@ class Zend_File_Transfer_Adapter_HttpTest extends \PHPUnit\Framework\TestCase
     public function testReceiveEmptyArray()
     {
         $_SERVER['CONTENT_LENGTH'] = 10;
-        $_FILES = array();
+        $_FILES = [];
 
         $adapter = new Zend_File_Transfer_Adapter_Http();
-        $this->assertFalse($adapter->receive(array()));
+        $this->assertFalse($adapter->receive([]));
     }
 
     public function testReceiveValidatedFile()
     {
-        $_FILES = array(
-            'txt' => array(
+        $_FILES = [
+            'txt' => [
                 'name' => 'unknown.txt',
                 'type' => 'plain/text',
                 'size' => 8,
                 'tmp_name' => 'unknown.txt',
-                'error' => 0));
+                'error' => 0]];
         $adapter = new Zend_File_Transfer_Adapter_HttpTest_MockAdapter();
         $this->assertFalse($adapter->receive());
     }
 
     public function testReceiveIgnoredFile()
     {
-        $this->adapter->setOptions(array('ignoreNoFile' => true));
+        $this->adapter->setOptions(['ignoreNoFile' => true]);
         $this->assertTrue($this->adapter->receive());
     }
 
     public function testReceiveWithRenameFilter()
     {
-        $this->adapter->addFilter('Rename', array('target' => '/testdir'));
-        $this->adapter->setOptions(array('ignoreNoFile' => true));
+        $this->adapter->addFilter('Rename', ['target' => '/testdir']);
+        $this->adapter->setOptions(['ignoreNoFile' => true]);
         $this->assertTrue($this->adapter->receive());
     }
 
     public function testReceiveWithRenameFilterButWithoutDirectory()
     {
         $this->adapter->setDestination(__DIR__);
-        $this->adapter->addFilter('Rename', array('overwrite' => false));
-        $this->adapter->setOptions(array('ignoreNoFile' => true));
+        $this->adapter->addFilter('Rename', ['overwrite' => false]);
+        $this->adapter->setOptions(['ignoreNoFile' => true]);
         $this->assertTrue($this->adapter->receive());
     }
 
     public function testMultiFiles()
     {
-        $_FILES = array(
-            'txt' => array(
-                'name' => __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'test.txt',
+        $_FILES = [
+            'txt' => [
+                'name' => __DIR__.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'test.txt',
                 'type' => 'plain/text',
                 'size' => 8,
-                'tmp_name' => __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'test.txt',
-                'error' => 0),
-            'exe' => array(
-                'name' => array(
-                    0 => __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'file1.txt',
-                    1 => __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'file2.txt'),
-                'type' => array(
+                'tmp_name' => __DIR__.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'test.txt',
+                'error' => 0],
+            'exe' => [
+                'name' => [
+                    0 => __DIR__.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'file1.txt',
+                    1 => __DIR__.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'file2.txt'],
+                'type' => [
                     0 => 'plain/text',
-                    1 => 'plain/text'),
-                'size' => array(
+                    1 => 'plain/text'],
+                'size' => [
                     0 => 8,
-                    1 => 8),
-                'tmp_name' => array(
-                    0 => __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'file1.txt',
-                    1 => __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'file2.txt'),
-                'error' => array(
+                    1 => 8],
+                'tmp_name' => [
+                    0 => __DIR__.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'file1.txt',
+                    1 => __DIR__.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'file2.txt'],
+                'error' => [
                     0 => 0,
-                    1 => 0)));
+                    1 => 0]]];
         $adapter = new Zend_File_Transfer_Adapter_HttpTest_MockAdapter();
-        $adapter->setOptions(array('ignoreNoFile' => true));
+        $adapter->setOptions(['ignoreNoFile' => true]);
         $this->assertTrue($adapter->receive('exe'));
         $this->assertEquals(
-            array('exe_0_' => __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'file1.txt',
-                  'exe_1_' => __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'file2.txt'),
+            ['exe_0_' => __DIR__.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'file1.txt',
+                'exe_1_' => __DIR__.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'file2.txt'],
             $adapter->getFileName('exe', false));
     }
 
     public function testNoUploadInProgress()
     {
-        if (!(ini_get('apc.enabled') && (bool) ini_get('apc.rfc1867') && is_callable('apc_fetch')) &&
-            !is_callable('uploadprogress_get_info')) {
+        if (!(ini_get('apc.enabled') && (bool) ini_get('apc.rfc1867') && is_callable('apc_fetch'))
+            && !is_callable('uploadprogress_get_info')) {
             $this->markTestSkipped('Whether APC nor UploadExtension available');
+
             return;
         }
 
@@ -243,50 +241,51 @@ class Zend_File_Transfer_Adapter_HttpTest extends \PHPUnit\Framework\TestCase
 
     public function testUploadProgressFailure()
     {
-        if (!(ini_get('apc.enabled') && (bool) ini_get('apc.rfc1867') && is_callable('apc_fetch')) &&
-            !is_callable('uploadprogress_get_info')) {
+        if (!(ini_get('apc.enabled') && (bool) ini_get('apc.rfc1867') && is_callable('apc_fetch'))
+            && !is_callable('uploadprogress_get_info')) {
             $this->markTestSkipped('Whether APC nor UploadExtension available');
+
             return;
         }
 
         $_GET['progress_key'] = 'mykey';
         $status = Zend_File_Transfer_Adapter_HttpTest_MockAdapter::getProgress();
-        $this->assertEquals(array(
-            'total'   => 100,
+        $this->assertEquals([
+            'total' => 100,
             'current' => 100,
-            'rate'    => 10,
-            'id'      => 'mykey',
-            'done'    => false,
-            'message' => '100B - 100B'), $status);
+            'rate' => 10,
+            'id' => 'mykey',
+            'done' => false,
+            'message' => '100B - 100B'], $status);
 
         $this->adapter->switchApcToUP();
         $status = Zend_File_Transfer_Adapter_HttpTest_MockAdapter::getProgress($status);
-        $this->assertEquals(array(
-            'total'          => 100,
-            'bytes_total'    => 100,
-            'current'        => 100,
+        $this->assertEquals([
+            'total' => 100,
+            'bytes_total' => 100,
+            'current' => 100,
             'bytes_uploaded' => 100,
-            'rate'           => 10,
-            'speed_average'  => 10,
-            'cancel_upload'  => true,
-            'message'        => 'The upload has been canceled',
-            'done'           => true,
-            'id'      => 'mykey'), $status);
-
+            'rate' => 10,
+            'speed_average' => 10,
+            'cancel_upload' => true,
+            'message' => 'The upload has been canceled',
+            'done' => true,
+            'id' => 'mykey'], $status);
     }
 
     public function testUploadProgressAdapter()
     {
-        if (!(ini_get('apc.enabled') && (bool) ini_get('apc.rfc1867') && is_callable('apc_fetch')) &&
-            !is_callable('uploadprogress_get_info')) {
+        if (!(ini_get('apc.enabled') && (bool) ini_get('apc.rfc1867') && is_callable('apc_fetch'))
+            && !is_callable('uploadprogress_get_info')) {
             $this->markTestSkipped('Whether APC nor UploadExtension available');
+
             return;
         }
 
         $_GET['progress_key'] = 'mykey';
         // require_once 'Zend/ProgressBar/Adapter/Console.php';
         $adapter = new Zend_ProgressBar_Adapter_Console();
-        $status = array('progress' => $adapter, 'session' => 'upload');
+        $status = ['progress' => $adapter, 'session' => 'upload'];
         $status = Zend_File_Transfer_Adapter_HttpTest_MockAdapter::getProgress($status);
         $this->assertTrue(array_key_exists('total', $status));
         $this->assertTrue(array_key_exists('current', $status));
@@ -311,7 +310,7 @@ class Zend_File_Transfer_Adapter_HttpTest extends \PHPUnit\Framework\TestCase
     {
         $_SERVER['CONTENT_LENGTH'] = 10;
 
-        $_FILES = array();
+        $_FILES = [];
         $adapter = new Zend_File_Transfer_Adapter_HttpTest_MockAdapter();
         $this->assertFalse($adapter->isValidParent());
         $this->assertStringContainsString('exceeds the defined ini size', current($adapter->getMessages()));
@@ -323,7 +322,7 @@ class Zend_File_Transfer_Adapter_HttpTest_MockAdapter extends Zend_File_Transfer
 {
     public function __construct()
     {
-        self::$_callbackApc = array('Zend_File_Transfer_Adapter_HttpTest_MockAdapter', 'apcTest');
+        self::$_callbackApc = ['Zend_File_Transfer_Adapter_HttpTest_MockAdapter', 'apcTest'];
         parent::__construct();
     }
 
@@ -344,22 +343,22 @@ class Zend_File_Transfer_Adapter_HttpTest_MockAdapter extends Zend_File_Transfer
 
     public static function apcTest($id)
     {
-        return array('total' => 100, 'current' => 100, 'rate' => 10);
+        return ['total' => 100, 'current' => 100, 'rate' => 10];
     }
 
     public static function uPTest($id)
     {
-        return array('bytes_total' => 100, 'bytes_uploaded' => 100, 'speed_average' => 10, 'cancel_upload' => true);
+        return ['bytes_total' => 100, 'bytes_uploaded' => 100, 'speed_average' => 10, 'cancel_upload' => true];
     }
 
     public function switchApcToUP()
     {
         self::$_callbackApc = null;
-        self::$_callbackUploadProgress = array('Zend_File_Transfer_Adapter_HttpTest_MockAdapter', 'uPTest');
+        self::$_callbackUploadProgress = ['Zend_File_Transfer_Adapter_HttpTest_MockAdapter', 'uPTest'];
     }
 }
 
 // Call Zend_File_Transfer_Adapter_HttpTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_File_Transfer_Adapter_HttpTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_File_Transfer_Adapter_HttpTest::main') {
     Zend_File_Transfer_Adapter_HttpTest::main();
 }

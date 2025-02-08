@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,12 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Loader
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Loader_AutoloaderFactoryTest::main');
 }
@@ -32,21 +31,20 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 // require_once 'Zend/Loader/StandardAutoloader.php';
 
 /**
- * @package    Zend_Loader
- * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Loader
  */
 #[AllowDynamicProperties]
-class Zend_Loader_AutoloaderFactoryTest extends \PHPUnit\Framework\TestCase
+class Zend_Loader_AutoloaderFactoryTest extends PHPUnit\Framework\TestCase
 {
     public static function main()
     {
-        $suite  = \PHPUnit\Framework\TestSuite::empty(__CLASS__);
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty(__CLASS__);
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -58,14 +56,14 @@ class Zend_Loader_AutoloaderFactoryTest extends \PHPUnit\Framework\TestCase
         if (!is_array($this->loaders)) {
             // spl_autoload_functions does not return empty array when no
             // autoloaders registered...
-            $this->loaders = array();
+            $this->loaders = [];
         }
 
         // Clear out other autoloaders to ensure those being tested are at the
         // top of the stack
         foreach ($this->loaders as $loader) {
             // fix: do not unregister composer autoloader
-            //spl_autoload_unregister($loader);
+            // spl_autoload_unregister($loader);
         }
 
         // Store original include_path
@@ -93,11 +91,11 @@ class Zend_Loader_AutoloaderFactoryTest extends \PHPUnit\Framework\TestCase
 
     public function testRegisteringValidMapFilePopulatesAutoloader()
     {
-        Zend_Loader_AutoloaderFactory::factory(array(
-            'Zend_Loader_ClassMapAutoloader' => array(
-                __DIR__ . '/_files/goodmap.php',
-            ),
-        ));
+        Zend_Loader_AutoloaderFactory::factory([
+            'Zend_Loader_ClassMapAutoloader' => [
+                __DIR__.'/_files/goodmap.php',
+            ],
+        ]);
         $loader = Zend_Loader_AutoloaderFactory::getRegisteredAutoloader('Zend_Loader_ClassMapAutoloader');
         $map = $loader->getAutoloadMap();
         $this->assertTrue(is_array($map));
@@ -105,9 +103,7 @@ class Zend_Loader_AutoloaderFactoryTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * This tests checks if invalid autoloaders cause exceptions
-     *
-     *
+     * This tests checks if invalid autoloaders cause exceptions.
      */
     public function testFactoryCatchesInvalidClasses()
     {
@@ -115,29 +111,29 @@ class Zend_Loader_AutoloaderFactoryTest extends \PHPUnit\Framework\TestCase
         if (PHP_VERSION_ID < 50307) {
             $this->markTestSkipped('Cannot test invalid interface loader with versions less than 5.3.7');
         }
-        include __DIR__ . '/_files/InvalidInterfaceAutoloader.php';
-        Zend_Loader_AutoloaderFactory::factory(array(
-            'InvalidInterfaceAutoloader' => array()
-        ));
+        include __DIR__.'/_files/InvalidInterfaceAutoloader.php';
+        Zend_Loader_AutoloaderFactory::factory([
+            'InvalidInterfaceAutoloader' => [],
+        ]);
     }
 
     public function testFactoryDoesNotRegisterDuplicateAutoloaders()
     {
-        Zend_Loader_AutoloaderFactory::factory(array(
-            'Zend_Loader_StandardAutoloader' => array(
-                'prefixes' => array(
-                    'TestPrefix' => __DIR__ . '/TestAsset/TestPrefix',
-                ),
-            ),
-        ));
+        Zend_Loader_AutoloaderFactory::factory([
+            'Zend_Loader_StandardAutoloader' => [
+                'prefixes' => [
+                    'TestPrefix' => __DIR__.'/TestAsset/TestPrefix',
+                ],
+            ],
+        ]);
         $this->assertEquals(1, count(Zend_Loader_AutoloaderFactory::getRegisteredAutoloaders()));
-        Zend_Loader_AutoloaderFactory::factory(array(
-            'Zend_Loader_StandardAutoloader' => array(
-                'prefixes' => array(
-                    'ZendTest_Loader_TestAsset_TestPlugins' => __DIR__ . '/TestAsset/TestPlugins',
-                ),
-            ),
-        ));
+        Zend_Loader_AutoloaderFactory::factory([
+            'Zend_Loader_StandardAutoloader' => [
+                'prefixes' => [
+                    'ZendTest_Loader_TestAsset_TestPlugins' => __DIR__.'/TestAsset/TestPlugins',
+                ],
+            ],
+        ]);
         $this->assertEquals(1, count(Zend_Loader_AutoloaderFactory::getRegisteredAutoloaders()));
         $this->assertTrue(class_exists('TestPrefix_NoDuplicateAutoloadersCase'));
         $this->assertTrue(class_exists('ZendTest_Loader_TestAsset_TestPlugins_Foo'));
@@ -145,39 +141,39 @@ class Zend_Loader_AutoloaderFactoryTest extends \PHPUnit\Framework\TestCase
 
     public function testCanUnregisterAutoloaders()
     {
-        Zend_Loader_AutoloaderFactory::factory(array(
-            'Zend_Loader_StandardAutoloader' => array(
-                'prefixes' => array(
-                    'TestPrefix' => __DIR__ . '/TestAsset/TestPrefix',
-                ),
-            ),
-        ));
+        Zend_Loader_AutoloaderFactory::factory([
+            'Zend_Loader_StandardAutoloader' => [
+                'prefixes' => [
+                    'TestPrefix' => __DIR__.'/TestAsset/TestPrefix',
+                ],
+            ],
+        ]);
         Zend_Loader_AutoloaderFactory::unregisterAutoloaders();
         $this->assertEquals(0, count(Zend_Loader_AutoloaderFactory::getRegisteredAutoloaders()));
     }
 
     public function testCanUnregisterAutoloadersByClassName()
     {
-        Zend_Loader_AutoloaderFactory::factory(array(
-            'Zend_Loader_StandardAutoloader' => array(
-                'namespaces' => array(
-                    'TestPrefix' => __DIR__ . '/TestAsset/TestPrefix',
-                ),
-            ),
-        ));
+        Zend_Loader_AutoloaderFactory::factory([
+            'Zend_Loader_StandardAutoloader' => [
+                'namespaces' => [
+                    'TestPrefix' => __DIR__.'/TestAsset/TestPrefix',
+                ],
+            ],
+        ]);
         Zend_Loader_AutoloaderFactory::unregisterAutoloader('Zend_Loader_StandardAutoloader');
         $this->assertEquals(0, count(Zend_Loader_AutoloaderFactory::getRegisteredAutoloaders()));
     }
 
     public function testCanGetValidRegisteredAutoloader()
     {
-        Zend_Loader_AutoloaderFactory::factory(array(
-            'Zend_Loader_StandardAutoloader' => array(
-                'namespaces' => array(
-                    'TestPrefix' => __DIR__ . '/TestAsset/TestPrefix',
-                ),
-            ),
-        ));
+        Zend_Loader_AutoloaderFactory::factory([
+            'Zend_Loader_StandardAutoloader' => [
+                'namespaces' => [
+                    'TestPrefix' => __DIR__.'/TestAsset/TestPrefix',
+                ],
+            ],
+        ]);
         $autoloader = Zend_Loader_AutoloaderFactory::getRegisteredAutoloader('Zend_Loader_StandardAutoloader');
         $this->assertTrue($autoloader instanceof Zend_Loader_StandardAutoloader);
     }
@@ -205,7 +201,7 @@ class Zend_Loader_AutoloaderFactoryTest extends \PHPUnit\Framework\TestCase
     public function testFactoryWithInvalidAutoloaderClassThrowsException()
     {
         $this->expectException('Zend_Loader_Exception_InvalidArgumentException');
-        Zend_Loader_AutoloaderFactory::factory(array('InvalidAutoloader' => array()));
+        Zend_Loader_AutoloaderFactory::factory(['InvalidAutoloader' => []]);
     }
 
     public function testCannotBeInstantiatedViaConstructor()
@@ -223,7 +219,7 @@ class Zend_Loader_AutoloaderFactoryTest extends \PHPUnit\Framework\TestCase
         $loader = array_shift($loaders);
         $this->assertTrue($loader instanceof Zend_Loader_StandardAutoloader);
 
-        $test  = array($loader, 'autoload');
+        $test = [$loader, 'autoload'];
         $found = false;
         foreach (spl_autoload_functions() as $function) {
             if ($function === $test) {

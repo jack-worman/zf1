@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,33 +14,33 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Server
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Server_Method_PrototypeTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Server_Method_PrototypeTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Server_Method_PrototypeTest::main');
 }
 
 /** Zend_Server_Method_Prototype */
 // require_once 'Zend/Server/Method/Prototype.php';
 
 /**
- * Test class for Zend_Server_Method_Prototype
+ * Test class for Zend_Server_Method_Prototype.
  *
  * @category   Zend
- * @package    Zend_Server
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Server
  */
 #[AllowDynamicProperties]
-class Zend_Server_Method_PrototypeTest extends \PHPUnit\Framework\TestCase
+class Zend_Server_Method_PrototypeTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -48,10 +49,10 @@ class Zend_Server_Method_PrototypeTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Server_Method_PrototypeTest");
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_Server_Method_PrototypeTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -59,8 +60,6 @@ class Zend_Server_Method_PrototypeTest extends \PHPUnit\Framework\TestCase
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @return void
      */
     public function setUp(): void
     {
@@ -70,8 +69,6 @@ class Zend_Server_Method_PrototypeTest extends \PHPUnit\Framework\TestCase
     /**
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
-     *
-     * @return void
      */
     public function tearDown(): void
     {
@@ -114,20 +111,20 @@ class Zend_Server_Method_PrototypeTest extends \PHPUnit\Framework\TestCase
 
     public function testPrototypeShouldAllowAddingParameterObjects()
     {
-        $parameter = new Zend_Server_Method_Parameter(array(
+        $parameter = new Zend_Server_Method_Parameter([
             'type' => 'string',
             'name' => 'foo',
-        ));
+        ]);
         $this->prototype->addParameter($parameter);
         $this->assertSame($parameter, $this->prototype->getParameter('foo'));
     }
 
     public function testPrototypeShouldAllowFetchingParameterByNameOrIndex()
     {
-        $parameter = new Zend_Server_Method_Parameter(array(
+        $parameter = new Zend_Server_Method_Parameter([
             'type' => 'string',
             'name' => 'foo',
-        ));
+        ]);
         $this->prototype->addParameter($parameter);
         $test1 = $this->prototype->getParameter('foo');
         $test2 = $this->prototype->getParameter(0);
@@ -138,7 +135,7 @@ class Zend_Server_Method_PrototypeTest extends \PHPUnit\Framework\TestCase
 
     public function testPrototypeShouldAllowRetrievingParameterObjects()
     {
-        $this->prototype->addParameters(array('string', 'array'));
+        $this->prototype->addParameters(['string', 'array']);
         $parameters = $this->prototype->getParameterObjects();
         foreach ($parameters as $parameter) {
             $this->assertTrue($parameter instanceof Zend_Server_Method_Parameter);
@@ -148,10 +145,10 @@ class Zend_Server_Method_PrototypeTest extends \PHPUnit\Framework\TestCase
     public function testPrototypeShouldAllowAddingMultipleParameters()
     {
         $this->testParametersShouldBeEmptyArrayByDefault();
-        $params = array(
+        $params = [
             'string',
             'array',
-        );
+        ];
         $this->prototype->addParameters($params);
         $test = $this->prototype->getParameters();
         $this->assertSame($params, $test);
@@ -160,11 +157,11 @@ class Zend_Server_Method_PrototypeTest extends \PHPUnit\Framework\TestCase
     public function testSetParametersShouldOverwriteParameters()
     {
         $this->testPrototypeShouldAllowAddingMultipleParameters();
-        $params = array(
+        $params = [
             'bool',
             'base64',
             'struct',
-        );
+        ];
         $this->prototype->setParameters($params);
         $test = $this->prototype->getParameters();
         $this->assertSame($params, $test);
@@ -173,11 +170,11 @@ class Zend_Server_Method_PrototypeTest extends \PHPUnit\Framework\TestCase
     public function testPrototypeShouldSerializeToArray()
     {
         $return = 'string';
-        $params = array(
+        $params = [
             'bool',
             'base64',
             'struct',
-        );
+        ];
         $this->prototype->setReturnType($return)
                         ->setParameters($params);
         $test = $this->prototype->toArray();
@@ -187,14 +184,14 @@ class Zend_Server_Method_PrototypeTest extends \PHPUnit\Framework\TestCase
 
     public function testConstructorShouldSetObjectStateFromOptions()
     {
-        $options = array(
+        $options = [
             'returnType' => 'string',
-            'parameters' => array(
+            'parameters' => [
                 'bool',
                 'base64',
                 'struct',
-            ),
-        );
+            ],
+        ];
         $prototype = new Zend_Server_Method_Prototype($options);
         $test = $prototype->toArray();
         $this->assertSame($options, $test);
@@ -202,6 +199,6 @@ class Zend_Server_Method_PrototypeTest extends \PHPUnit\Framework\TestCase
 }
 
 // Call Zend_Server_Method_PrototypeTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Server_Method_PrototypeTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Server_Method_PrototypeTest::main') {
     Zend_Server_Method_PrototypeTest::main();
 }

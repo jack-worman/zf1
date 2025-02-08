@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,9 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -24,19 +26,17 @@
  */
 // require_once 'Zend/Validate/Isbn.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_Validate
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
-class Zend_Validate_IsbnTest extends \PHPUnit\Framework\TestCase
+class Zend_Validate_IsbnTest extends PHPUnit\Framework\TestCase
 {
     /**
-     * Ensures that the validator follows expected behavior
+     * Ensures that the validator follows expected behavior.
      *
      * @return void
      */
@@ -66,7 +66,7 @@ class Zend_Validate_IsbnTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Ensures that setSeparator() works as expected
+     * Ensures that setSeparator() works as expected.
      *
      * @return void
      */
@@ -76,35 +76,35 @@ class Zend_Validate_IsbnTest extends \PHPUnit\Framework\TestCase
 
         try {
             $validator->setType(Zend_Validate_Isbn::AUTO);
-            $this->assertTrue($validator->getType() == Zend_Validate_Isbn::AUTO);
-        } catch (\Throwable $e) {
+            $this->assertTrue(Zend_Validate_Isbn::AUTO == $validator->getType());
+        } catch (Throwable $e) {
             $this->fail("Should accept type 'auto'");
         }
 
         try {
             $validator->setType(Zend_Validate_Isbn::ISBN10);
-            $this->assertTrue($validator->getType() == Zend_Validate_Isbn::ISBN10);
-        } catch (\Throwable $e) {
+            $this->assertTrue(Zend_Validate_Isbn::ISBN10 == $validator->getType());
+        } catch (Throwable $e) {
             $this->fail("Should accept type 'ISBN-10'");
         }
 
         try {
             $validator->setType(Zend_Validate_Isbn::ISBN13);
-            $this->assertTrue($validator->getType() == Zend_Validate_Isbn::ISBN13);
-        } catch (\Throwable $e) {
+            $this->assertTrue(Zend_Validate_Isbn::ISBN13 == $validator->getType());
+        } catch (Throwable $e) {
             $this->fail("Should accept type 'ISBN-13'");
         }
 
         try {
             $validator->setType('X');
             $this->fail("Should not accept type 'X'");
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             // success
         }
     }
 
     /**
-     * Ensures that setSeparator() works as expected
+     * Ensures that setSeparator() works as expected.
      *
      * @return void
      */
@@ -114,61 +114,61 @@ class Zend_Validate_IsbnTest extends \PHPUnit\Framework\TestCase
 
         try {
             $validator->setSeparator('-');
-            $this->assertTrue($validator->getSeparator() == '-');
-        } catch (\Throwable $e) {
+            $this->assertTrue('-' == $validator->getSeparator());
+        } catch (Throwable $e) {
             $this->fail("Should accept separator '-'");
         }
 
         try {
             $validator->setSeparator(' ');
-            $this->assertTrue($validator->getSeparator() == ' ');
-        } catch (\Throwable $e) {
+            $this->assertTrue(' ' == $validator->getSeparator());
+        } catch (Throwable $e) {
             $this->fail("Should accept separator ' '");
         }
 
         try {
             $validator->setSeparator('');
-            $this->assertTrue($validator->getSeparator() == '');
-        } catch (\Throwable $e) {
-            $this->fail("Should accept empty separator");
+            $this->assertTrue('' == $validator->getSeparator());
+        } catch (Throwable $e) {
+            $this->fail('Should accept empty separator');
         }
 
         try {
             $validator->setSeparator('X');
             $this->fail("Should not accept separator 'X'");
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             // success
         }
     }
 
     /**
-     * Ensures that __construct() works as expected
+     * Ensures that __construct() works as expected.
      *
      * @return void
      */
     public function testInitialization()
     {
-        $options = array('type'      => Zend_Validate_Isbn::AUTO,
-                         'separator' => ' ');
+        $options = ['type' => Zend_Validate_Isbn::AUTO,
+            'separator' => ' '];
         $validator = new Zend_Validate_Isbn($options);
-        $this->assertTrue($validator->getType() == Zend_Validate_Isbn::AUTO);
-        $this->assertTrue($validator->getSeparator() == ' ');
+        $this->assertTrue(Zend_Validate_Isbn::AUTO == $validator->getType());
+        $this->assertTrue(' ' == $validator->getSeparator());
 
-        $options = array('type'      => Zend_Validate_Isbn::ISBN10,
-                         'separator' => '-');
+        $options = ['type' => Zend_Validate_Isbn::ISBN10,
+            'separator' => '-'];
         $validator = new Zend_Validate_Isbn($options);
-        $this->assertTrue($validator->getType() == Zend_Validate_Isbn::ISBN10);
-        $this->assertTrue($validator->getSeparator() == '-');
+        $this->assertTrue(Zend_Validate_Isbn::ISBN10 == $validator->getType());
+        $this->assertTrue('-' == $validator->getSeparator());
 
-        $options = array('type'      => Zend_Validate_Isbn::ISBN13,
-                         'separator' => '');
+        $options = ['type' => Zend_Validate_Isbn::ISBN13,
+            'separator' => ''];
         $validator = new Zend_Validate_Isbn($options);
-        $this->assertTrue($validator->getType() == Zend_Validate_Isbn::ISBN13);
-        $this->assertTrue($validator->getSeparator() == '');
+        $this->assertTrue(Zend_Validate_Isbn::ISBN13 == $validator->getType());
+        $this->assertTrue('' == $validator->getSeparator());
     }
 
     /**
-     * Ensures that the validator follows expected behavior
+     * Ensures that the validator follows expected behavior.
      *
      * @return void
      */
@@ -206,7 +206,7 @@ class Zend_Validate_IsbnTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Ensures that the validator follows expected behavior
+     * Ensures that the validator follows expected behavior.
      *
      * @return void
      */
@@ -230,7 +230,7 @@ class Zend_Validate_IsbnTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Ensures that the validator follows expected behavior
+     * Ensures that the validator follows expected behavior.
      *
      * @return void
      */

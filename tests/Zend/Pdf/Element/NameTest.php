@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,28 +14,28 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Pdf
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Pdf_Element_Name
+ * Zend_Pdf_Element_Name.
  */
 // require_once 'Zend/Pdf/Element/Name.php';
 
 /**
  * @category   Zend
- * @package    Zend_Pdf
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Pdf
  */
 #[AllowDynamicProperties]
-class Zend_Pdf_Element_NameTest extends \PHPUnit\Framework\TestCase
+class Zend_Pdf_Element_NameTest extends PHPUnit\Framework\TestCase
 {
     public function testPDFName()
     {
@@ -48,6 +49,7 @@ class Zend_Pdf_Element_NameTest extends \PHPUnit\Framework\TestCase
             $nameObj = new Zend_Pdf_Element_Name("MyName\x00");
         } catch (Zend_Pdf_Exception $e) {
             $this->assertMatchesRegularExpression('/Null character is not allowed/i', $e->getMessage());
+
             return;
         }
         $this->fail('Expected Zend_Pdf_Exception to be thrown');

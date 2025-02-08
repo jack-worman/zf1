@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +14,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Memory
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Memory_AccessControllerTest::main');
 }
@@ -29,35 +29,35 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 /**
  * @category   Zend
- * @package    Zend_Memory
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Memory
  */
 #[AllowDynamicProperties]
-class Zend_Memory_Container_AccessControllerTest extends \PHPUnit\Framework\TestCase
+class Zend_Memory_Container_AccessControllerTest extends PHPUnit\Framework\TestCase
 {
     /**
-     * Memory manager, used for tests
+     * Memory manager, used for tests.
      *
      * @var Zend_Memory_Manager
      */
-    private $_memoryManager = null;
+    private $_memoryManager;
 
     public static function main()
     {
-        $suite  = \PHPUnit\Framework\TestSuite::empty(__CLASS__);
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty(__CLASS__);
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
 
     public function setUp(): void
     {
-        $tmpDir = sys_get_temp_dir() . '/zend_memory';
+        $tmpDir = sys_get_temp_dir().'/zend_memory';
         $this->_removeCacheDir($tmpDir);
         mkdir($tmpDir);
         $this->cacheDir = $tmpDir;
@@ -74,50 +74,46 @@ class Zend_Memory_Container_AccessControllerTest extends \PHPUnit\Framework\Test
         }
 
         foreach (scandir($dir) as $item) {
-            if ($item == '.' || $item == '..') {
+            if ('.' == $item || '..' == $item) {
                 continue;
             }
-            $this->_removeCacheDir($dir . '/' . $item);
+            $this->_removeCacheDir($dir.'/'.$item);
         }
 
         return rmdir($dir);
     }
 
     /**
-     * Retrieve memory manager
-     *
+     * Retrieve memory manager.
      */
     private function _getMemoryManager()
     {
-        if ($this->_memoryManager === null) {
-            $backendOptions = array('cache_dir' => $this->cacheDir); // Directory where to put the cache files
+        if (null === $this->_memoryManager) {
+            $backendOptions = ['cache_dir' => $this->cacheDir]; // Directory where to put the cache files
             $this->_memoryManager = Zend_Memory::factory('File', $backendOptions);
         }
 
         return $this->_memoryManager;
     }
 
-
-
     /**
-     * tests the Movable memory container object creation
+     * tests the Movable memory container object creation.
      */
     public function testCreation()
     {
-        $memoryManager  = $this->_getMemoryManager();
-        $memObject      = $memoryManager->create('012345678');
+        $memoryManager = $this->_getMemoryManager();
+        $memObject = $memoryManager->create('012345678');
 
         $this->assertTrue($memObject instanceof Zend_Memory_AccessController);
     }
 
-
     /**
-     * tests the value access methods
+     * tests the value access methods.
      */
     public function testValueAccess()
     {
-        $memoryManager  = $this->_getMemoryManager();
-        $memObject      = $memoryManager->create('0123456789');
+        $memoryManager = $this->_getMemoryManager();
+        $memObject = $memoryManager->create('0123456789');
 
         // getRef() method
         $this->assertEquals($memObject->getRef(), '0123456789');
@@ -127,32 +123,31 @@ class Zend_Memory_Container_AccessControllerTest extends \PHPUnit\Framework\Test
         $this->assertEquals($memObject->getRef(), '012_456789');
 
         // value property
-        $this->assertEquals((string)$memObject->value, '012_456789');
+        $this->assertEquals((string) $memObject->value, '012_456789');
 
         $memObject->value[7] = '_';
-        $this->assertEquals((string)$memObject->value, '012_456_89');
+        $this->assertEquals((string) $memObject->value, '012_456_89');
 
         $memObject->value = 'another value';
         $this->assertTrue($memObject->value instanceof Zend_Memory_Value);
-        $this->assertEquals((string)$memObject->value, 'another value');
+        $this->assertEquals((string) $memObject->value, 'another value');
     }
 
-
     /**
-     * tests lock()/unlock()/isLocked() functions
+     * tests lock()/unlock()/isLocked() functions.
      */
     public function testLock()
     {
-        $memoryManager  = $this->_getMemoryManager();
-        $memObject      = $memoryManager->create('012345678');
+        $memoryManager = $this->_getMemoryManager();
+        $memObject = $memoryManager->create('012345678');
 
-        $this->assertFalse((boolean)$memObject->isLocked());
+        $this->assertFalse((bool) $memObject->isLocked());
 
         $memObject->lock();
-        $this->assertTrue((boolean)$memObject->isLocked());
+        $this->assertTrue((bool) $memObject->isLocked());
 
         $memObject->unlock();
-        $this->assertFalse((boolean)$memObject->isLocked());
+        $this->assertFalse((bool) $memObject->isLocked());
     }
 }
 

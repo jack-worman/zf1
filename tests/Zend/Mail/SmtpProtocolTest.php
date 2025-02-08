@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,33 +14,33 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Mail
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Mail
+ * Zend_Mail.
  */
 // require_once 'Zend/Mail.php';
 
 /**
- * Zend_Mail_Protocol_Smtp
+ * Zend_Mail_Protocol_Smtp.
  */
 // require_once 'Zend/Mail/Protocol/Smtp.php';
 
 /**
  * @category   Zend
- * @package    Zend_Mail
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Mail
  */
 #[AllowDynamicProperties]
-class Zend_Mail_SmtpProtocolTest extends \PHPUnit\Framework\TestCase
+class Zend_Mail_SmtpProtocolTest extends PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_Mail_Protocol_Smtp
@@ -55,16 +56,15 @@ class Zend_Mail_SmtpProtocolTest extends \PHPUnit\Framework\TestCase
     {
         $this->_connectAndEhlo(); // expects 250 response
 
-        $this->assertEquals(array(
+        $this->assertEquals([
             '220 example.com ESMTP welcome',
             'EHLO 127.0.0.1',
-            '250 Hello 127.0.0.1, go ahead'
-        ), $this->_protocol->dialog);
+            '250 Hello 127.0.0.1, go ahead',
+        ], $this->_protocol->dialog);
     }
 
     /**
      * @depends testEhlo
-     *
      */
     public function testHeloIsOnlyAllowedOncePerSession()
     {
@@ -78,22 +78,22 @@ class Zend_Mail_SmtpProtocolTest extends \PHPUnit\Framework\TestCase
      */
     public function testEhloFallsBackToHelo()
     {
-        $this->_protocol->responseBuffer = array(
+        $this->_protocol->responseBuffer = [
             '220 example.com ESMTP welcome',
             '500 Unrecognized', /* 500 or 502 error on unrecognized EHLO */
-            '250 Hello 127.0.0.1, go ahead'
-        );
+            '250 Hello 127.0.0.1, go ahead',
+        ];
 
         $this->_protocol->connect();
         $this->_protocol->helo();
 
-        $this->assertEquals(array(
+        $this->assertEquals([
             '220 example.com ESMTP welcome',
             'EHLO 127.0.0.1', // tries EHLO
             '500 Unrecognized', // .. which fails
             'HELO 127.0.0.1', // continues to HELO
-            '250 Hello 127.0.0.1, go ahead' // success
-        ), $this->_protocol->dialog);
+            '250 Hello 127.0.0.1, go ahead', // success
+        ], $this->_protocol->dialog);
     }
 
     /**
@@ -149,7 +149,6 @@ class Zend_Mail_SmtpProtocolTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expectedDialog, $this->_protocol->dialog);
     }
 
-
     /**
      * @depends testRcptExpects250
      */
@@ -183,7 +182,7 @@ class Zend_Mail_SmtpProtocolTest extends \PHPUnit\Framework\TestCase
     {
         $expectedDialog = $this->_connectAndEhlo();
 
-        $this->_protocol->responseBuffer = array('250 OK');
+        $this->_protocol->responseBuffer = ['250 OK'];
         $expectedDialog[] = 'RSET';
         $expectedDialog[] = '250 OK';
 
@@ -194,6 +193,7 @@ class Zend_Mail_SmtpProtocolTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @depends testEhlo
+     *
      * @group ZF-1377
      */
     public function testRsetExpects220()
@@ -201,7 +201,7 @@ class Zend_Mail_SmtpProtocolTest extends \PHPUnit\Framework\TestCase
         $expectedDialog = $this->_connectAndEhlo();
 
         // Microsoft ESMTP server responds to RSET with 220 rather than 250
-        $this->_protocol->responseBuffer = array('220 OK');
+        $this->_protocol->responseBuffer = ['220 OK'];
         $expectedDialog[] = 'RSET';
         $expectedDialog[] = '220 OK';
 
@@ -228,6 +228,7 @@ class Zend_Mail_SmtpProtocolTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @depends testMail
+     *
      * @group ZF-8511
      */
     public function testMultilineResponsesAreNotTruncated()
@@ -247,6 +248,7 @@ class Zend_Mail_SmtpProtocolTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @depends testMail
+     *
      * @group ZF-10249
      */
     public function testExceptionCodeIsSmtpStatusCode()
@@ -266,7 +268,6 @@ class Zend_Mail_SmtpProtocolTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @depends testMail
-     *
      */
     public function testRcptThrowsExceptionOnUnexpectedResponse()
     {
@@ -282,7 +283,6 @@ class Zend_Mail_SmtpProtocolTest extends \PHPUnit\Framework\TestCase
         $expectedDialog[] = $p->responseBuffer[] = '500 error';
         $this->_protocol->rcpt('to@example.com');
     }
-
 
     public function testMailBeforeHeloThrowsException()
     {
@@ -311,7 +311,6 @@ class Zend_Mail_SmtpProtocolTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @depends testEhlo
-     *
      */
     public function testDataBeforeRcptThrowsException()
     {
@@ -322,30 +321,30 @@ class Zend_Mail_SmtpProtocolTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Performs the initial EHLO dialog
+     * Performs the initial EHLO dialog.
      */
     protected function _connectAndEhlo()
     {
-        $this->_protocol->responseBuffer = array(
+        $this->_protocol->responseBuffer = [
             '220 example.com ESMTP welcome',
-            '250 Hello 127.0.0.1, go ahead'
-        );
+            '250 Hello 127.0.0.1, go ahead',
+        ];
 
         $this->_protocol->connect();
         $this->_protocol->helo();
+
         return $this->_protocol->dialog;
     }
 }
 
-
 #[AllowDynamicProperties]
 class ProtocolMock extends Zend_Mail_Protocol_Smtp
 {
-    public $dialog = array();
-    public $responseBuffer = array();
+    public $dialog = [];
+    public $responseBuffer = [];
 
     /**
-     * Override connect function to use local file for testing
+     * Override connect function to use local file for testing.
      *
      * @param string $remote
      */
@@ -363,6 +362,7 @@ class ProtocolMock extends Zend_Mail_Protocol_Smtp
     {
         $line = array_shift($this->responseBuffer);
         $this->dialog[] = $line;
+
         return $line;
     }
 }

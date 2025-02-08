@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,39 +14,39 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Search_Lucene_Storage_Directory_Filesystem
+ * Zend_Search_Lucene_Storage_Directory_Filesystem.
  */
 // require_once 'Zend/Search/Lucene/Storage/Directory/Filesystem.php';
 
 /**
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Search_Lucene
  */
 #[AllowDynamicProperties]
-class Zend_Search_Lucene_Storage_DirectoryTest extends \PHPUnit\Framework\TestCase
+class Zend_Search_Lucene_Storage_DirectoryTest extends PHPUnit\Framework\TestCase
 {
     public function testFilesystem()
     {
-        $tempPath = __DIR__ . '/_tempFiles/_files';
+        $tempPath = __DIR__.'/_tempFiles/_files';
 
         if (is_dir($tempPath)) {
             // remove files from temporary direcytory
             $dir = opendir($tempPath);
             while (($file = readdir($dir)) !== false) {
-                if (!is_dir($tempPath . '/' . $file)) {
-                    @unlink($tempPath . '/' . $file);
+                if (!is_dir($tempPath.'/'.$file)) {
+                    @unlink($tempPath.'/'.$file);
                 }
             }
             closedir($dir);
@@ -61,7 +62,7 @@ class Zend_Search_Lucene_Storage_DirectoryTest extends \PHPUnit\Framework\TestCa
         unset($fileObject);
         $this->assertEquals($directory->fileLength('file1'), 0);
 
-        $this->assertEquals(count(array_diff($directory->fileList(), array('file1'))), 0);
+        $this->assertEquals(count(array_diff($directory->fileList(), ['file1'])), 0);
 
         $directory->deleteFile('file1');
         $this->assertEquals(count($directory->fileList()), 0);
@@ -75,7 +76,7 @@ class Zend_Search_Lucene_Storage_DirectoryTest extends \PHPUnit\Framework\TestCa
         $this->assertEquals($directory->fileLength('file2'), 10);
 
         $directory->renameFile('file2', 'file3');
-        $this->assertEquals(count(array_diff($directory->fileList(), array('file3'))), 0);
+        $this->assertEquals(count(array_diff($directory->fileList(), ['file3'])), 0);
 
         $modifiedAt1 = $directory->fileModified('file3');
         clearstatcache();
@@ -87,7 +88,7 @@ class Zend_Search_Lucene_Storage_DirectoryTest extends \PHPUnit\Framework\TestCa
         $modifiedAt3 = $directory->fileModified('file3');
 
         $this->assertTrue($modifiedAt2 >= $modifiedAt1);
-        $this->assertTrue($modifiedAt3 >  $modifiedAt2);
+        $this->assertTrue($modifiedAt3 > $modifiedAt2);
 
         $fileObject = $directory->getFileObject('file3');
         $this->assertEquals($fileObject->readBytes($directory->fileLength('file3')), '0123456789');
@@ -105,13 +106,12 @@ class Zend_Search_Lucene_Storage_DirectoryTest extends \PHPUnit\Framework\TestCa
 
     public function testFilesystemSubfoldersAutoCreation()
     {
-        $directory = new Zend_Search_Lucene_Storage_Directory_Filesystem(__DIR__ . '/_tempFiles/_files/dir1/dir2/dir3');
+        $directory = new Zend_Search_Lucene_Storage_Directory_Filesystem(__DIR__.'/_tempFiles/_files/dir1/dir2/dir3');
         $this->assertTrue($directory instanceof Zend_Search_Lucene_Storage_Directory);
         $directory->close();
 
-        rmdir(__DIR__ . '/_tempFiles/_files/dir1/dir2/dir3');
-        rmdir(__DIR__ . '/_tempFiles/_files/dir1/dir2');
-        rmdir(__DIR__ . '/_tempFiles/_files/dir1');
+        rmdir(__DIR__.'/_tempFiles/_files/dir1/dir2/dir3');
+        rmdir(__DIR__.'/_tempFiles/_files/dir1/dir2');
+        rmdir(__DIR__.'/_tempFiles/_files/dir1');
     }
 }
-

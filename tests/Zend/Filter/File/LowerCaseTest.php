@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,52 +28,50 @@
 
 /**
  * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Filter
  */
 #[AllowDynamicProperties]
-class Zend_Filter_File_LowerCaseTest extends \PHPUnit\Framework\TestCase
+class Zend_Filter_File_LowerCaseTest extends PHPUnit\Framework\TestCase
 {
     /**
-     * Path to test files
+     * Path to test files.
      *
      * @var string
      */
     protected $_filesPath;
 
     /**
-     * Original testfile
+     * Original testfile.
      *
      * @var string
      */
     protected $_origFile;
 
     /**
-     * Testfile
+     * Testfile.
      *
      * @var string
      */
     protected $_newFile;
 
     /**
-     * Sets the path to test files
+     * Sets the path to test files.
      */
     public function __construct(string $name)
     {
         parent::__construct($name);
-        $this->_filesPath = __DIR__ . DIRECTORY_SEPARATOR
-                          . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR;
-        $this->_origFile  = $this->_filesPath . 'testfile2.txt';
-        $this->_newFile   = $this->_filesPath . 'newtestfile2.txt';
+        $this->_filesPath = __DIR__.DIRECTORY_SEPARATOR
+                          .'..'.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR;
+        $this->_origFile = $this->_filesPath.'testfile2.txt';
+        $this->_newFile = $this->_filesPath.'newtestfile2.txt';
     }
 
     /**
-     * Sets the path to test files
-     *
-     * @return void
+     * Sets the path to test files.
      */
     public function setUp(): void
     {
@@ -82,9 +81,7 @@ class Zend_Filter_File_LowerCaseTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Sets the path to test files
-     *
-     * @return void
+     * Sets the path to test files.
      */
     public function tearDown(): void
     {
@@ -111,7 +108,7 @@ class Zend_Filter_File_LowerCaseTest extends \PHPUnit\Framework\TestCase
     {
         try {
             $filter = new Zend_Filter_File_LowerCase();
-            $filter->filter($this->_newFile . 'unknown');
+            $filter->filter($this->_newFile.'unknown');
             $this->fail('Unknown file exception expected');
         } catch (Zend_Filter_Exception $e) {
             $this->assertStringContainsString('not found', $e->getMessage());

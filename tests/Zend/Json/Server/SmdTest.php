@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Json_Server
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Json_Server_SmdTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Json_Server_SmdTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Json_Server_SmdTest::main');
 }
 
 // require_once 'Zend/Json/Server/Smd.php';
@@ -30,18 +31,18 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 // require_once 'Zend/Json.php';
 
 /**
- * Test class for Zend_Json_Server_Smd
+ * Test class for Zend_Json_Server_Smd.
  *
  * @category   Zend
- * @package    Zend_Json_Server
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Json
  * @group      Zend_Json_Server
  */
 #[AllowDynamicProperties]
-class Zend_Json_Server_SmdTest extends \PHPUnit\Framework\TestCase
+class Zend_Json_Server_SmdTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -50,11 +51,10 @@ class Zend_Json_Server_SmdTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-
-        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Json_Server_SmdTest");
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_Json_Server_SmdTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -62,8 +62,6 @@ class Zend_Json_Server_SmdTest extends \PHPUnit\Framework\TestCase
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @return void
      */
     public function setUp(): void
     {
@@ -73,8 +71,6 @@ class Zend_Json_Server_SmdTest extends \PHPUnit\Framework\TestCase
     /**
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
-     *
-     * @return void
      */
     public function tearDown(): void
     {
@@ -93,7 +89,7 @@ class Zend_Json_Server_SmdTest extends \PHPUnit\Framework\TestCase
 
     public function testTransportShouldBeLimitedToPost()
     {
-        foreach (array('GET', 'REST') as $transport) {
+        foreach (['GET', 'REST'] as $transport) {
             try {
                 $this->smd->setTransport($transport);
                 $this->fail('Invalid transport should throw exception');
@@ -119,7 +115,7 @@ class Zend_Json_Server_SmdTest extends \PHPUnit\Framework\TestCase
 
     public function testEnvelopeShouldBeLimitedToJsonRpcVersions()
     {
-        foreach (array('URL', 'PATH', 'JSON') as $env) {
+        foreach (['URL', 'PATH', 'JSON'] as $env) {
             try {
                 $this->smd->setEnvelope($env);
                 $this->fail('Invalid envelope type should throw exception');
@@ -136,7 +132,7 @@ class Zend_Json_Server_SmdTest extends \PHPUnit\Framework\TestCase
 
     public function testContentTypeAccessorsShouldWorkUnderNormalInput()
     {
-        foreach (array('text/json', 'text/plain', 'application/x-json') as $type) {
+        foreach (['text/json', 'text/plain', 'application/x-json'] as $type) {
             $this->smd->setContentType($type);
             $this->assertEquals($type, $this->smd->getContentType());
         }
@@ -144,7 +140,7 @@ class Zend_Json_Server_SmdTest extends \PHPUnit\Framework\TestCase
 
     public function testContentTypeShouldBeLimitedToMimeFormatStrings()
     {
-        foreach (array('plain', 'json', 'foobar') as $type) {
+        foreach (['plain', 'json', 'foobar'] as $type) {
             try {
                 $this->smd->setContentType($type);
                 $this->fail('Invalid content type should raise exception');
@@ -220,9 +216,9 @@ class Zend_Json_Server_SmdTest extends \PHPUnit\Framework\TestCase
 
     public function testShouldBeAbleToUseArrayToAddService()
     {
-        $service = array(
+        $service = [
             'name' => 'foo',
-        );
+        ];
         $this->smd->addService($service);
         $foo = $this->smd->getService('foo');
         $this->assertTrue($foo instanceof Zend_Json_Server_Smd_Service);
@@ -233,7 +229,7 @@ class Zend_Json_Server_SmdTest extends \PHPUnit\Framework\TestCase
     {
         $service = new Zend_Json_Server_Smd_Service('foo');
         $this->smd->addService($service);
-        $test    = new Zend_Json_Server_Smd_Service('foo');
+        $test = new Zend_Json_Server_Smd_Service('foo');
         try {
             $this->smd->addService($test);
             $this->fail('Adding service with existing service name should throw exception');
@@ -244,7 +240,7 @@ class Zend_Json_Server_SmdTest extends \PHPUnit\Framework\TestCase
 
     public function testAttemptingToRegisterInvalidServiceShouldThrowException()
     {
-        foreach (array('foo', false, 1, 1.0) as $service) {
+        foreach (['foo', false, 1, 1.0] as $service) {
             try {
                 $this->smd->addService($service);
                 $this->fail('Attempt to register invalid service should throw exception');
@@ -256,10 +252,10 @@ class Zend_Json_Server_SmdTest extends \PHPUnit\Framework\TestCase
 
     public function testShouldBeAbleToAddManyServicesAtOnceWithArrayOfServiceObjects()
     {
-        $one   = new Zend_Json_Server_Smd_Service('one');
-        $two   = new Zend_Json_Server_Smd_Service('two');
+        $one = new Zend_Json_Server_Smd_Service('one');
+        $two = new Zend_Json_Server_Smd_Service('two');
         $three = new Zend_Json_Server_Smd_Service('three');
-        $services = array($one, $two, $three);
+        $services = [$one, $two, $three];
         $this->smd->addServices($services);
         $test = $this->smd->getServices();
         $this->assertSame($services, array_values($test));
@@ -267,27 +263,27 @@ class Zend_Json_Server_SmdTest extends \PHPUnit\Framework\TestCase
 
     public function testShouldBeAbleToAddManyServicesAtOnceWithArrayOfArrays()
     {
-        $services = array(
-            array('name' => 'one'),
-            array('name' => 'two'),
-            array('name' => 'three'),
-        );
+        $services = [
+            ['name' => 'one'],
+            ['name' => 'two'],
+            ['name' => 'three'],
+        ];
         $this->smd->addServices($services);
         $test = $this->smd->getServices();
-        $this->assertSame(array('one', 'two', 'three'), array_keys($test));
+        $this->assertSame(['one', 'two', 'three'], array_keys($test));
     }
 
     public function testShouldBeAbleToAddManyServicesAtOnceWithMixedArrayOfObjectsAndArrays()
     {
         $two = new Zend_Json_Server_Smd_Service('two');
-        $services = array(
-            array('name' => 'one'),
+        $services = [
+            ['name' => 'one'],
             $two,
-            array('name' => 'three'),
-        );
+            ['name' => 'three'],
+        ];
         $this->smd->addServices($services);
         $test = $this->smd->getServices();
-        $this->assertSame(array('one', 'two', 'three'), array_keys($test));
+        $this->assertSame(['one', 'two', 'three'], array_keys($test));
         $this->assertEquals($two, $test['two']);
     }
 
@@ -295,14 +291,14 @@ class Zend_Json_Server_SmdTest extends \PHPUnit\Framework\TestCase
     {
         $this->testShouldBeAbleToAddManyServicesAtOnceWithMixedArrayOfObjectsAndArrays();
         $five = new Zend_Json_Server_Smd_Service('five');
-        $services = array(
-            array('name' => 'four'),
+        $services = [
+            ['name' => 'four'],
             $five,
-            array('name' => 'six'),
-        );
+            ['name' => 'six'],
+        ];
         $this->smd->setServices($services);
         $test = $this->smd->getServices();
-        $this->assertSame(array('four', 'five', 'six'), array_keys($test));
+        $this->assertSame(['four', 'five', 'six'], array_keys($test));
         $this->assertEquals($five, $test['five']);
     }
 
@@ -367,7 +363,7 @@ class Zend_Json_Server_SmdTest extends \PHPUnit\Framework\TestCase
         $options = $this->getOptions();
         $this->smd->setOptions($options);
         $json = $this->smd->toJson();
-        $smd  = Zend_Json::decode($json);
+        $smd = Zend_Json::decode($json);
         $this->validateServiceArray($smd, $options);
     }
 
@@ -376,32 +372,32 @@ class Zend_Json_Server_SmdTest extends \PHPUnit\Framework\TestCase
         $options = $this->getOptions();
         $this->smd->setOptions($options);
         $json = $this->smd->__toString();
-        $smd  = Zend_Json::decode($json);
+        $smd = Zend_Json::decode($json);
         $this->validateServiceArray($smd, $options);
     }
 
     public function getOptions()
     {
-        return array(
-            'target'   => '/test/me',
-            'id'       => '/test/me',
-            'services' => array(
-                array(
-                    'name'   => 'foo',
-                    'params' => array(
-                        array('type' => 'boolean'),
-                    ),
+        return [
+            'target' => '/test/me',
+            'id' => '/test/me',
+            'services' => [
+                [
+                    'name' => 'foo',
+                    'params' => [
+                        ['type' => 'boolean'],
+                    ],
                     'return' => 'boolean',
-                ),
-                array(
-                    'name'   => 'bar',
-                    'params' => array(
-                        array('type' => 'integer'),
-                    ),
+                ],
+                [
+                    'name' => 'bar',
+                    'params' => [
+                        ['type' => 'integer'],
+                    ],
                     'return' => 'string',
-                ),
-            )
-        );
+                ],
+            ],
+        ];
     }
 
     public function validateServiceArray(array $smd, array $options)
@@ -430,6 +426,6 @@ class Zend_Json_Server_SmdTest extends \PHPUnit\Framework\TestCase
 }
 
 // Call Zend_Json_Server_SmdTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Json_Server_SmdTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Json_Server_SmdTest::main') {
     Zend_Json_Server_SmdTest::main();
 }

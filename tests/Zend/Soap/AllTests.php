@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +14,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Soap_AllTests::main');
 }
@@ -27,17 +27,17 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 require_once 'Zend/Soap/ClientTest.php';
 require_once 'Zend/Soap/ServerTest.php';
 require_once 'Zend/Soap/WsdlTest.php';
-require_once "Zend/Soap/Wsdl/ArrayOfTypeComplexStrategyTest.php";
-require_once "Zend/Soap/Wsdl/ArrayOfTypeSequenceStrategyTest.php";
+require_once 'Zend/Soap/Wsdl/ArrayOfTypeComplexStrategyTest.php';
+require_once 'Zend/Soap/Wsdl/ArrayOfTypeSequenceStrategyTest.php';
 require_once 'Zend/Soap/AutoDiscoverTest.php';
 require_once 'Zend/Soap/AutoDiscover/OnlineTest.php';
 
 /**
  * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Soap
  */
 #[AllowDynamicProperties]
@@ -45,15 +45,15 @@ class Zend_Soap_AllTests
 {
     public static function main()
     {
-        \PHPUnit\TextUI\TestRunner::run(self::suite());
+        PHPUnit\TextUI\TestRunner::run(self::suite());
     }
 
     public static function suite()
     {
-        $suite = \PHPUnit\Framework\TestSuite::empty('Zend Framework - Zend_Soap');
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend Framework - Zend_Soap');
 
-        //early exit because of segfault in this specific version
-        //https://github.com/zendframework/zf1/issues/650
+        // early exit because of segfault in this specific version
+        // https://github.com/zendframework/zf1/issues/650
         if (getenv('CI') && PHP_VERSION_ID >= 50437) {
             return $suite;
         }
@@ -66,7 +66,7 @@ class Zend_Soap_AllTests
         $suite->addTestSuite('Zend_Soap_AutoDiscoverTest');
 
         if (!defined('TESTS_ZEND_SOAP_AUTODISCOVER_ONLINE_SERVER_BASEURI')
-            || constant('TESTS_ZEND_SOAP_AUTODISCOVER_ONLINE_SERVER_BASEURI') == false) {
+            || false == constant('TESTS_ZEND_SOAP_AUTODISCOVER_ONLINE_SERVER_BASEURI')) {
             $suite->addTestSuite('Zend_Soap_AutoDiscover_OnlineTest');
         }
 

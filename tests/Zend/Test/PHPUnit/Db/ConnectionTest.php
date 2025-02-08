@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Test
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,14 +26,14 @@
 
 /**
  * @category   Zend
- * @package    Zend_Test
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Test
  */
 #[AllowDynamicProperties]
-class Zend_Test_PHPUnit_Db_ConnectionTest extends \PHPUnit\Framework\TestCase
+class Zend_Test_PHPUnit_Db_ConnectionTest extends PHPUnit\Framework\TestCase
 {
     protected $adapterMock;
 
@@ -46,7 +47,8 @@ class Zend_Test_PHPUnit_Db_ConnectionTest extends \PHPUnit\Framework\TestCase
      */
     public function createConnection()
     {
-        $connection = new Zend_Test_PHPUnit_Db_Connection($this->adapterMock, "schema");
+        $connection = new Zend_Test_PHPUnit_Db_Connection($this->adapterMock, 'schema');
+
         return $connection;
     }
 
@@ -62,14 +64,14 @@ class Zend_Test_PHPUnit_Db_ConnectionTest extends \PHPUnit\Framework\TestCase
     public function testCreateQueryTable()
     {
         $connection = $this->createConnection();
-        $ret = $connection->createQueryTable("foo", "foo");
+        $ret = $connection->createQueryTable('foo', 'foo');
 
         $this->assertTrue($ret instanceof Zend_Test_PHPUnit_Db_DataSet_QueryTable);
     }
 
     public function testGetSchema()
     {
-        $fixtureSchema = "schema";
+        $fixtureSchema = 'schema';
         $connection = new Zend_Test_PHPUnit_Db_Connection($this->adapterMock, $fixtureSchema);
 
         $this->assertEquals($fixtureSchema, $connection->getSchema());
@@ -87,6 +89,6 @@ class Zend_Test_PHPUnit_Db_ConnectionTest extends \PHPUnit\Framework\TestCase
     {
         $connection = $this->createConnection();
 
-        $this->assertEquals("DELETE", $connection->getTruncateCommand());
+        $this->assertEquals('DELETE', $connection->getTruncateCommand());
     }
 }

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +14,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Locale
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_LocaleTest::main');
 }
@@ -27,21 +27,21 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 // define('TESTS_ZEND_LOCALE_BCMATH_ENABLED', false); // uncomment to disable use of bcmath extension by Zend_Date
 
 /**
- * Zend_Locale
+ * Zend_Locale.
  */
 // require_once 'Zend/Locale.php';
 // require_once 'Zend/Cache.php';
 
 /**
  * @category   Zend
- * @package    Zend_Locale
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Locale
  */
 #[AllowDynamicProperties]
-class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
+class Zend_LocaleTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -50,16 +50,16 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_LocaleTest");
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_LocaleTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
 
-    private $_cache  = null;
-    private $_locale = null;
+    private $_cache;
+    private $_locale;
     private $_httpAcceptLanguage;
 
     public function setUp(): void
@@ -68,22 +68,22 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
         setlocale(LC_ALL, 'de');
         // require_once 'Zend/Cache.php';
         $this->_cache = Zend_Cache::factory('Core', 'File',
-                 array('lifetime' => 120, 'automatic_serialization' => true),
-                 array('cache_dir' => __DIR__ . '/_files/'));
+            ['lifetime' => 120, 'automatic_serialization' => true],
+            ['cache_dir' => __DIR__.'/_files/']);
         Zend_LocaleTestHelper::resetObject();
         Zend_LocaleTestHelper::setCache($this->_cache);
 
         // compatibilityMode is true until 1.8 therefor we have to change it
         Zend_LocaleTestHelper::$compatibilityMode = false;
         $this->_httpAcceptLanguage = getenv('HTTP_ACCEPT_LANGUAGE');
-        putenv("HTTP_ACCEPT_LANGUAGE=,de,en-UK-US;q=0.5,fr_FR;q=0.2");
+        putenv('HTTP_ACCEPT_LANGUAGE=,de,en-UK-US;q=0.5,fr_FR;q=0.2');
     }
 
     public function tearDown(): void
     {
         $this->_cache->clean(Zend_Cache::CLEANING_MODE_ALL);
         if (is_string($this->_locale) && strpos((string) $this->_locale, ';')) {
-            $locales = array();
+            $locales = [];
             foreach (explode(';', $this->_locale) as $l) {
                 $tmp = explode('=', $l);
                 $locales[$tmp[0]] = $tmp[1];
@@ -96,7 +96,7 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
         Zend_LocaleTestHelper::resetObject();
         Zend_LocaleTestHelper::removeCache();
         Zend_LocaleTestHelper::$compatibilityMode = false;
-        putenv('HTTP_ACCEPT_LANGUAGE' . ($this->_httpAcceptLanguage ? '='.$this->_httpAcceptLanguage : ''));
+        putenv('HTTP_ACCEPT_LANGUAGE'.($this->_httpAcceptLanguage ? '='.$this->_httpAcceptLanguage : ''));
     }
 
     /**
@@ -141,7 +141,7 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
 
     /**
      * test for object creation
-     * expected object instance
+     * expected object instance.
      */
     public function testObjectCreation()
     {
@@ -171,7 +171,7 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(new Zend_LocaleTestHelper($locale) instanceof Zend_Locale);
 
         // compatibility tests
-        set_error_handler(array($this, 'errorHandlerIgnore'));
+        set_error_handler([$this, 'errorHandlerIgnore']);
         Zend_LocaleTestHelper::$compatibilityMode = true;
         $this->assertEquals('de', Zend_LocaleTestHelper::isLocale('de_ABC'));
         restore_error_handler();
@@ -179,7 +179,7 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
 
     /**
      * test for serialization
-     * expected string
+     * expected string.
      */
     public function testSerialize()
     {
@@ -193,7 +193,7 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
 
     /**
      * test toString
-     * expected string
+     * expected string.
      */
     public function testToString()
     {
@@ -204,7 +204,7 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
 
     /**
      * test getOrder
-     * expected true
+     * expected true.
      */
     public function testgetOrder()
     {
@@ -225,7 +225,7 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
 
     /**
      * test getEnvironment
-     * expected true
+     * expected true.
      */
     public function testLocaleDetail()
     {
@@ -244,7 +244,7 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
 
     /**
      * test getEnvironment
-     * expected true
+     * expected true.
      */
     public function testEnvironment()
     {
@@ -255,7 +255,7 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
 
     /**
      * test getBrowser
-     * expected true
+     * expected true.
      */
     public function testBrowser()
     {
@@ -266,7 +266,7 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
 
     /**
      * test clone
-     * expected true
+     * expected true.
      */
     public function testCloning()
     {
@@ -277,7 +277,7 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
 
     /**
      * test setLocale
-     * expected true
+     * expected true.
      */
     public function testsetLocale()
     {
@@ -313,11 +313,11 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
 
     /**
      * test getLanguageTranslationList
-     * expected true
+     * expected true.
      */
     public function testgetLanguageTranslationList()
     {
-        set_error_handler(array($this, 'errorHandlerIgnore'));
+        set_error_handler([$this, 'errorHandlerIgnore']);
         $list = Zend_LocaleTestHelper::getLanguageTranslationList();
         $this->assertTrue(is_array($list));
         $list = Zend_LocaleTestHelper::getLanguageTranslationList('de');
@@ -327,13 +327,13 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
 
     /**
      * test getLanguageTranslation
-     * expected true
+     * expected true.
      */
     public function testgetLanguageTranslation()
     {
-        set_error_handler(array($this, 'errorHandlerIgnore'));
+        set_error_handler([$this, 'errorHandlerIgnore']);
         $this->assertEquals('Deutsch', Zend_LocaleTestHelper::getLanguageTranslation('de', 'de_AT'));
-        $this->assertEquals('German',  Zend_LocaleTestHelper::getLanguageTranslation('de', 'en'));
+        $this->assertEquals('German', Zend_LocaleTestHelper::getLanguageTranslation('de', 'en'));
         $this->assertFalse(Zend_LocaleTestHelper::getLanguageTranslation('xyz'));
         $this->assertTrue(is_string(Zend_LocaleTestHelper::getLanguageTranslation('de', 'auto')));
         restore_error_handler();
@@ -341,11 +341,11 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
 
     /**
      * test getScriptTranslationList
-     * expected true
+     * expected true.
      */
     public function testgetScriptTranslationList()
     {
-        set_error_handler(array($this, 'errorHandlerIgnore'));
+        set_error_handler([$this, 'errorHandlerIgnore']);
         $list = Zend_LocaleTestHelper::getScriptTranslationList();
         $this->assertTrue(is_array($list));
 
@@ -356,11 +356,11 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
 
     /**
      * test getScriptTranslationList
-     * expected true
+     * expected true.
      */
     public function testgetScriptTranslation()
     {
-        set_error_handler(array($this, 'errorHandlerIgnore'));
+        set_error_handler([$this, 'errorHandlerIgnore']);
         $this->assertEquals('Arabisch', Zend_LocaleTestHelper::getScriptTranslation('Arab', 'de_AT'));
         $this->assertEquals('Arabic', Zend_LocaleTestHelper::getScriptTranslation('Arab', 'en'));
         $this->assertFalse(Zend_LocaleTestHelper::getScriptTranslation('xyz'));
@@ -369,26 +369,26 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
 
     /**
      * test getCountryTranslationList
-     * expected true
+     * expected true.
      */
     public function testgetCountryTranslationList()
     {
-        set_error_handler(array($this, 'errorHandlerIgnore'));
+        set_error_handler([$this, 'errorHandlerIgnore']);
         $list = Zend_LocaleTestHelper::getCountryTranslationList();
         $this->assertTrue(is_array($list));
 
         $list = Zend_LocaleTestHelper::getCountryTranslationList('de');
-        $this->assertEquals("Vereinigte Staaten", $list['US']);
+        $this->assertEquals('Vereinigte Staaten', $list['US']);
         restore_error_handler();
     }
 
     /**
      * test getCountryTranslation
-     * expected true
+     * expected true.
      */
     public function testgetCountryTranslation()
     {
-        set_error_handler(array($this, 'errorHandlerIgnore'));
+        set_error_handler([$this, 'errorHandlerIgnore']);
         $this->assertEquals('Deutschland', Zend_LocaleTestHelper::getCountryTranslation('DE', 'de_DE'));
         $this->assertEquals('Germany', Zend_LocaleTestHelper::getCountryTranslation('DE', 'en'));
         $this->assertFalse(Zend_LocaleTestHelper::getCountryTranslation('xyz'));
@@ -397,11 +397,11 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
 
     /**
      * test getTerritoryTranslationList
-     * expected true
+     * expected true.
      */
     public function testgetTerritoryTranslationList()
     {
-        set_error_handler(array($this, 'errorHandlerIgnore'));
+        set_error_handler([$this, 'errorHandlerIgnore']);
         $list = Zend_LocaleTestHelper::getTerritoryTranslationList();
         $this->assertTrue(is_array($list));
 
@@ -412,11 +412,11 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
 
     /**
      * test getTerritoryTranslation
-     * expected true
+     * expected true.
      */
     public function testgetTerritoryTranslation()
     {
-        set_error_handler(array($this, 'errorHandlerIgnore'));
+        set_error_handler([$this, 'errorHandlerIgnore']);
         $this->assertEquals('Afrika', Zend_LocaleTestHelper::getTerritoryTranslation('002', 'de_AT'));
         $this->assertEquals('Africa', Zend_LocaleTestHelper::getTerritoryTranslation('002', 'en'));
         $this->assertFalse(Zend_LocaleTestHelper::getTerritoryTranslation('xyz'));
@@ -426,7 +426,7 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
 
     /**
      * test getTranslation
-     * expected true
+     * expected true.
      */
     public function testgetTranslation()
     {
@@ -457,36 +457,36 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('January', Zend_LocaleTestHelper::getTranslation('1', 'month', 'en'));
         $this->assertFalse(Zend_LocaleTestHelper::getTranslation('x', 'month'));
 
-        $this->assertEquals('Jan.', Zend_LocaleTestHelper::getTranslation(array('gregorian', 'format', 'abbreviated', '1'), 'month', 'de_DE'));
-        $this->assertEquals('Jan', Zend_LocaleTestHelper::getTranslation(array('gregorian', 'format', 'abbreviated', '1'), 'month', 'en'));
-        $this->assertFalse(Zend_LocaleTestHelper::getTranslation(array('gregorian', 'format', 'abbreviated', 'x'), 'month'));
+        $this->assertEquals('Jan.', Zend_LocaleTestHelper::getTranslation(['gregorian', 'format', 'abbreviated', '1'], 'month', 'de_DE'));
+        $this->assertEquals('Jan', Zend_LocaleTestHelper::getTranslation(['gregorian', 'format', 'abbreviated', '1'], 'month', 'en'));
+        $this->assertFalse(Zend_LocaleTestHelper::getTranslation(['gregorian', 'format', 'abbreviated', 'x'], 'month'));
 
-        $this->assertEquals('J', Zend_LocaleTestHelper::getTranslation(array('gregorian', 'stand-alone', 'narrow', '1'), 'month', 'de_DE'));
-        $this->assertEquals('J', Zend_LocaleTestHelper::getTranslation(array('gregorian', 'stand-alone', 'narrow', '1'), 'month', 'en'));
-        $this->assertFalse(Zend_LocaleTestHelper::getTranslation(array('gregorian', 'stand-alone', 'narrow', 'x'), 'month'));
+        $this->assertEquals('J', Zend_LocaleTestHelper::getTranslation(['gregorian', 'stand-alone', 'narrow', '1'], 'month', 'de_DE'));
+        $this->assertEquals('J', Zend_LocaleTestHelper::getTranslation(['gregorian', 'stand-alone', 'narrow', '1'], 'month', 'en'));
+        $this->assertFalse(Zend_LocaleTestHelper::getTranslation(['gregorian', 'stand-alone', 'narrow', 'x'], 'month'));
 
         $this->assertEquals('Sonntag', Zend_LocaleTestHelper::getTranslation('sun', 'day', 'de_DE'));
         $this->assertEquals('Sunday', Zend_LocaleTestHelper::getTranslation('sun', 'day', 'en'));
         $this->assertFalse(Zend_LocaleTestHelper::getTranslation('xxx', 'day'));
 
-        $this->assertEquals('So.', Zend_LocaleTestHelper::getTranslation(array('gregorian', 'format', 'abbreviated', 'sun'), 'day', 'de_DE'));
-        $this->assertEquals('Sun', Zend_LocaleTestHelper::getTranslation(array('gregorian', 'format', 'abbreviated', 'sun'), 'day', 'en'));
-        $this->assertFalse(Zend_LocaleTestHelper::getTranslation(array('gregorian', 'format', 'abbreviated', 'xxx'), 'day'));
+        $this->assertEquals('So.', Zend_LocaleTestHelper::getTranslation(['gregorian', 'format', 'abbreviated', 'sun'], 'day', 'de_DE'));
+        $this->assertEquals('Sun', Zend_LocaleTestHelper::getTranslation(['gregorian', 'format', 'abbreviated', 'sun'], 'day', 'en'));
+        $this->assertFalse(Zend_LocaleTestHelper::getTranslation(['gregorian', 'format', 'abbreviated', 'xxx'], 'day'));
 
-        $this->assertEquals('S', Zend_LocaleTestHelper::getTranslation(array('gregorian', 'stand-alone', 'narrow', 'sun'), 'day', 'de_DE'));
-        $this->assertEquals('S', Zend_LocaleTestHelper::getTranslation(array('gregorian', 'stand-alone', 'narrow', 'sun'), 'day', 'en'));
-        $this->assertFalse(Zend_LocaleTestHelper::getTranslation(array('gregorian', 'stand-alone', 'narrow', 'xxx'), 'day'));
+        $this->assertEquals('S', Zend_LocaleTestHelper::getTranslation(['gregorian', 'stand-alone', 'narrow', 'sun'], 'day', 'de_DE'));
+        $this->assertEquals('S', Zend_LocaleTestHelper::getTranslation(['gregorian', 'stand-alone', 'narrow', 'sun'], 'day', 'en'));
+        $this->assertFalse(Zend_LocaleTestHelper::getTranslation(['gregorian', 'stand-alone', 'narrow', 'xxx'], 'day'));
 
         $this->assertEquals('EEEE, d. MMMM y', Zend_LocaleTestHelper::getTranslation('full', 'date', 'de_DE'));
         $this->assertEquals('EEEE, MMMM d, y', Zend_LocaleTestHelper::getTranslation('full', 'date', 'en'));
         $this->assertFalse(Zend_LocaleTestHelper::getTranslation('xxxx', 'date'));
 
-        $this->assertEquals("HH:mm:ss zzzz", Zend_LocaleTestHelper::getTranslation('full', 'time', 'de_DE'));
+        $this->assertEquals('HH:mm:ss zzzz', Zend_LocaleTestHelper::getTranslation('full', 'time', 'de_DE'));
         $this->assertEquals('h:mm:ss a zzzz', Zend_LocaleTestHelper::getTranslation('full', 'time', 'en'));
         $this->assertFalse(Zend_LocaleTestHelper::getTranslation('xxxx', 'time'));
 
         $this->assertEquals('Wien', Zend_LocaleTestHelper::getTranslation('Europe/Vienna', 'citytotimezone', 'de_DE'));
-        $this->assertEquals("St. John’s", Zend_LocaleTestHelper::getTranslation('America/St_Johns', 'citytotimezone', 'en'));
+        $this->assertEquals('St. John’s', Zend_LocaleTestHelper::getTranslation('America/St_Johns', 'citytotimezone', 'en'));
         $this->assertFalse(Zend_LocaleTestHelper::getTranslation('xxxx', 'citytotimezone'));
 
         $this->assertEquals('Euro', Zend_LocaleTestHelper::getTranslation('EUR', 'nametocurrency', 'de_DE'));
@@ -519,7 +519,7 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
 
     /**
      * test getTranslationList
-     * expected true
+     * expected true.
      */
     public function testgetTranslationList()
     {
@@ -545,29 +545,29 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(in_array('Januar', Zend_LocaleTestHelper::getTranslationList('month', 'de_DE')));
         $this->assertTrue(in_array('January', Zend_LocaleTestHelper::getTranslationList('month', 'en')));
 
-        $this->assertTrue(in_array('Jan.', Zend_LocaleTestHelper::getTranslationList('month', 'de_DE', array('gregorian', 'format', 'abbreviated'))));
-        $this->assertTrue(in_array('Jan', Zend_LocaleTestHelper::getTranslationList('month', 'en', array('gregorian', 'format', 'abbreviated'))));
+        $this->assertTrue(in_array('Jan.', Zend_LocaleTestHelper::getTranslationList('month', 'de_DE', ['gregorian', 'format', 'abbreviated'])));
+        $this->assertTrue(in_array('Jan', Zend_LocaleTestHelper::getTranslationList('month', 'en', ['gregorian', 'format', 'abbreviated'])));
 
-        $this->assertTrue(in_array('J', Zend_LocaleTestHelper::getTranslationList('month', 'de_DE', array('gregorian', 'stand-alone', 'narrow'))));
-        $this->assertTrue(in_array('J', Zend_LocaleTestHelper::getTranslationList('month', 'en', array('gregorian', 'stand-alone', 'narrow'))));
+        $this->assertTrue(in_array('J', Zend_LocaleTestHelper::getTranslationList('month', 'de_DE', ['gregorian', 'stand-alone', 'narrow'])));
+        $this->assertTrue(in_array('J', Zend_LocaleTestHelper::getTranslationList('month', 'en', ['gregorian', 'stand-alone', 'narrow'])));
 
         $this->assertTrue(in_array('Sonntag', Zend_LocaleTestHelper::getTranslationList('day', 'de_DE')));
         $this->assertTrue(in_array('Sunday', Zend_LocaleTestHelper::getTranslationList('day', 'en')));
 
-        $this->assertTrue(in_array('So.', Zend_LocaleTestHelper::getTranslationList('day', 'de_DE', array('gregorian', 'format', 'abbreviated'))));
-        $this->assertTrue(in_array('Sun', Zend_LocaleTestHelper::getTranslationList('day', 'en', array('gregorian', 'format', 'abbreviated'))));
+        $this->assertTrue(in_array('So.', Zend_LocaleTestHelper::getTranslationList('day', 'de_DE', ['gregorian', 'format', 'abbreviated'])));
+        $this->assertTrue(in_array('Sun', Zend_LocaleTestHelper::getTranslationList('day', 'en', ['gregorian', 'format', 'abbreviated'])));
 
-        $this->assertTrue(in_array('S', Zend_LocaleTestHelper::getTranslationList('day', 'de_DE', array('gregorian', 'stand-alone', 'narrow'))));
-        $this->assertTrue(in_array('S', Zend_LocaleTestHelper::getTranslationList('day', 'en', array('gregorian', 'stand-alone', 'narrow'))));
+        $this->assertTrue(in_array('S', Zend_LocaleTestHelper::getTranslationList('day', 'de_DE', ['gregorian', 'stand-alone', 'narrow'])));
+        $this->assertTrue(in_array('S', Zend_LocaleTestHelper::getTranslationList('day', 'en', ['gregorian', 'stand-alone', 'narrow'])));
 
         $this->assertTrue(in_array('EEEE, d. MMMM y', Zend_LocaleTestHelper::getTranslationList('date', 'de_DE')));
         $this->assertTrue(in_array('EEEE, MMMM d, y', Zend_LocaleTestHelper::getTranslationList('date', 'en')));
 
-        $this->assertTrue(in_array("HH:mm:ss zzzz", Zend_LocaleTestHelper::getTranslationList('time', 'de_DE')));
-        $this->assertTrue(in_array("h:mm:ss a z", Zend_LocaleTestHelper::getTranslationList('time', 'en')));
+        $this->assertTrue(in_array('HH:mm:ss zzzz', Zend_LocaleTestHelper::getTranslationList('time', 'de_DE')));
+        $this->assertTrue(in_array('h:mm:ss a z', Zend_LocaleTestHelper::getTranslationList('time', 'en')));
 
         $this->assertTrue(in_array('Wien', Zend_LocaleTestHelper::getTranslationList('citytotimezone', 'de_DE')));
-        $this->assertTrue(in_array("St. John’s", Zend_LocaleTestHelper::getTranslationList('citytotimezone', 'en')));
+        $this->assertTrue(in_array('St. John’s', Zend_LocaleTestHelper::getTranslationList('citytotimezone', 'en')));
 
         $this->assertTrue(in_array('Euro', Zend_LocaleTestHelper::getTranslationList('nametocurrency', 'de_DE')));
         $this->assertTrue(in_array('Euro', Zend_LocaleTestHelper::getTranslationList('nametocurrency', 'en')));
@@ -591,21 +591,21 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(in_array('CZ', Zend_LocaleTestHelper::getTranslationList('territorytolanguage', 'en')));
 
         $char = Zend_LocaleTestHelper::getTranslationList('characters', 'de_DE');
-        $this->assertEquals("[a ä b c d e f g h i j k l m n o ö p q r s ß t u ü v w x y z]", $char['characters']);
-        $this->assertEquals("[á à ă â å ã ā æ ç é è ĕ ê ë ē ğ í ì ĭ î ï İ ī ı ñ ó ò ŏ ô ø ō œ ş ú ù ŭ û ū ÿ]", $char['auxiliary']);
+        $this->assertEquals('[a ä b c d e f g h i j k l m n o ö p q r s ß t u ü v w x y z]', $char['characters']);
+        $this->assertEquals('[á à ă â å ã ā æ ç é è ĕ ê ë ē ğ í ì ĭ î ï İ ī ı ñ ó ò ŏ ô ø ō œ ş ú ù ŭ û ū ÿ]', $char['auxiliary']);
         /* currencySymbol is deprecated in cdlr. */
         // $this->assertEquals("[a-z]", $char['currencySymbol']);
 
         $char = Zend_LocaleTestHelper::getTranslationList('characters', 'en');
-        $this->assertEquals("[a b c d e f g h i j k l m n o p q r s t u v w x y z]", $char['characters']);
-        $this->assertEquals("[á à ă â å ä ã ā æ ç é è ĕ ê ë ē í ì ĭ î ï ī ñ ó ò ŏ ô ö ø ō œ ú ù ŭ û ü ū ÿ]", $char['auxiliary']);
+        $this->assertEquals('[a b c d e f g h i j k l m n o p q r s t u v w x y z]', $char['characters']);
+        $this->assertEquals('[á à ă â å ä ã ā æ ç é è ĕ ê ë ē í ì ĭ î ï ī ñ ó ò ŏ ô ö ø ō œ ú ù ŭ û ü ū ÿ]', $char['auxiliary']);
         /* currencySymbol is deprecated in cdlr. */
         // $this->assertEquals("[a-c č d-l ł m-z]", $char['currencySymbol']);
     }
 
     /**
      * test for equality
-     * expected string
+     * expected string.
      */
     public function testEquals()
     {
@@ -618,7 +618,7 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
 
     /**
      * test getQuestion
-     * expected true
+     * expected true.
      */
     public function testgetQuestion()
     {
@@ -645,7 +645,7 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
 
     /**
      * test getBrowser
-     * expected true
+     * expected true.
      */
     public function testgetBrowser()
     {
@@ -656,31 +656,31 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
             $this->markTestSkipped('Browser autodetection not possible in current environment');
         }
         $this->assertTrue(isset($list['de']));
-        $this->assertEquals(array('de' => 1, 'en_UK' => 0.5, 'en_US' => 0.5,
-                                  'en' => 0.5, 'fr_FR' => 0.2, 'fr' => 0.2), $list);
+        $this->assertEquals(['de' => 1, 'en_UK' => 0.5, 'en_US' => 0.5,
+            'en' => 0.5, 'fr_FR' => 0.2, 'fr' => 0.2], $list);
 
         Zend_LocaleTestHelper::resetObject();
-        putenv("HTTP_ACCEPT_LANGUAGE=");
+        putenv('HTTP_ACCEPT_LANGUAGE=');
 
         $value = new Zend_LocaleTestHelper();
         $list = $value->getBrowser();
-        $this->assertEquals(array(), $list);
+        $this->assertEquals([], $list);
     }
 
     /**
      * test getHttpCharset
-     * expected true
+     * expected true.
      */
     public function testgetHttpCharset()
     {
         Zend_LocaleTestHelper::resetObject();
-        putenv("HTTP_ACCEPT_CHARSET=");
+        putenv('HTTP_ACCEPT_CHARSET=');
         $value = new Zend_LocaleTestHelper();
         $list = $value->getHttpCharset();
         $this->assertTrue(empty($list));
 
         Zend_LocaleTestHelper::resetObject();
-        putenv("HTTP_ACCEPT_CHARSET=,iso-8859-1, utf-8, utf-16, *;q=0.1");
+        putenv('HTTP_ACCEPT_CHARSET=,iso-8859-1, utf-8, utf-16, *;q=0.1');
         $value = new Zend_LocaleTestHelper();
         $list = $value->getHttpCharset();
         $this->assertTrue(isset($list['utf-8']));
@@ -688,7 +688,7 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
 
     /**
      * test isLocale
-     * expected boolean
+     * expected boolean.
      */
     public function testIsLocale()
     {
@@ -703,15 +703,15 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(Zend_LocaleTestHelper::isLocale('', false));
         $this->assertTrue(Zend_LocaleTestHelper::isLocale('auto'));
         $this->assertTrue(Zend_LocaleTestHelper::isLocale('browser'));
-        if (count(Zend_Locale::getEnvironment()) != 0) {
+        if (0 != count(Zend_Locale::getEnvironment())) {
             $this->assertTrue(Zend_LocaleTestHelper::isLocale('environment'));
         }
 
-        set_error_handler(array($this, 'errorHandlerIgnore'));
+        set_error_handler([$this, 'errorHandlerIgnore']);
         Zend_LocaleTestHelper::$compatibilityMode = true;
         $this->assertTrue(Zend_LocaleTestHelper::isLocale($locale)); // compatibilty makes no odds when testing a Zend_Locale instance
         $this->assertTrue(Zend_LocaleTestHelper::isLocale('de')); // compatibilty makes no odds when testing a known valid locale
-        $this->assertTrue(Zend_LocaleTestHelper::isLocale('de_AT'));// compatibilty makes no odds when testing a known valid locale
+        $this->assertTrue(Zend_LocaleTestHelper::isLocale('de_AT')); // compatibilty makes no odds when testing a known valid locale
         $this->assertEquals('de', Zend_LocaleTestHelper::isLocale('de_xx'));
         $this->assertFalse(Zend_LocaleTestHelper::isLocale('yy'));
         $this->assertFalse(Zend_LocaleTestHelper::isLocale(1234));
@@ -719,7 +719,7 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(Zend_LocaleTestHelper::isLocale('', false));
         $this->assertTrue(is_string(Zend_LocaleTestHelper::isLocale('auto')));
         $this->assertTrue(is_string(Zend_LocaleTestHelper::isLocale('browser')));
-        if (count(Zend_Locale::getEnvironment()) != 0) {
+        if (0 != count(Zend_Locale::getEnvironment())) {
             $this->assertTrue(is_string(Zend_LocaleTestHelper::isLocale('environment')));
         }
         restore_error_handler();
@@ -727,7 +727,7 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
 
     /**
      * test isLocale
-     * expected boolean
+     * expected boolean.
      */
     public function testGetLocaleList()
     {
@@ -736,7 +736,7 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
 
     /**
      * test setDefault
-     * expected true
+     * expected true.
      */
     public function testsetDefault()
     {
@@ -744,7 +744,7 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
             Zend_LocaleTestHelper::setDefault('auto');
             $this->fail();
         } catch (Zend_Locale_Exception $e) {
-            $this->assertStringContainsString("full qualified locale", $e->getMessage());
+            $this->assertStringContainsString('full qualified locale', $e->getMessage());
         }
 
         try {
@@ -759,14 +759,14 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
             Zend_LocaleTestHelper::setDefault('xy_ZZ');
             $this->fail();
         } catch (Zend_Locale_Exception $e) {
-            $this->assertStringContainsString("Unknown locale", $e->getMessage());
+            $this->assertStringContainsString('Unknown locale', $e->getMessage());
         }
 
         try {
             Zend_LocaleTestHelper::setDefault('de', 101);
             $this->fail();
         } catch (Zend_Locale_Exception $e) {
-            $this->assertStringContainsString("Quality must be between", $e->getMessage());
+            $this->assertStringContainsString('Quality must be between', $e->getMessage());
         }
 
         try {
@@ -787,21 +787,22 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Test getDefault
+     * Test getDefault.
      */
-    public function testgetDefault() {
+    public function testgetDefault()
+    {
         Zend_LocaleTestHelper::setDefault('de');
         $this->assertTrue(array_key_exists('de', Zend_LocaleTestHelper::getDefault()));
 
         // compatibility tests
-        set_error_handler(array($this, 'errorHandlerIgnore'));
+        set_error_handler([$this, 'errorHandlerIgnore']);
         Zend_LocaleTestHelper::$compatibilityMode = true;
         $this->assertTrue(array_key_exists('de', Zend_LocaleTestHelper::getDefault(Zend_Locale::BROWSER)));
         restore_error_handler();
     }
 
     /**
-     * Caching method tests
+     * Caching method tests.
      */
     public function testCaching()
     {
@@ -817,7 +818,7 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Caching method tests
+     * Caching method tests.
      */
     public function testFindingTheProperLocale()
     {
@@ -838,9 +839,10 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
 
     /**
      * test isLocale
-     * expected boolean
+     * expected boolean.
      */
-    public function testZF3617() {
+    public function testZF3617()
+    {
         $value = new Zend_LocaleTestHelper('en-US');
         $this->assertEquals('en_US', $value->toString());
     }
@@ -848,7 +850,8 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
     /**
      * @ZF4963
      */
-    public function testZF4963() {
+    public function testZF4963()
+    {
         $value = new Zend_LocaleTestHelper();
         $locale = $value->toString();
         $this->assertTrue(!empty($locale));
@@ -864,7 +867,7 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
 
     /**
      * test MultiPartLocales
-     * expected boolean
+     * expected boolean.
      */
     public function testLongLocale()
     {
@@ -880,7 +883,7 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
 
     /**
      * test SunLocales
-     * expected boolean
+     * expected boolean.
      */
     public function testSunLocale()
     {
@@ -899,7 +902,8 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
     /**
      * @ZF-9488
      */
-    public function testTerritoryToGetLocale() {
+    public function testTerritoryToGetLocale()
+    {
         $value = Zend_Locale::findLocale('US');
         $this->assertEquals('en_US', $value);
 
@@ -909,6 +913,7 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
         $value = new Zend_Locale('TR');
         $this->assertEquals('tr_TR', $value->toString());
     }
+
     /**
      * @group ZF-11072
      */
@@ -916,17 +921,17 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertFalse(Zend_Locale::getTranslation('USD', 'CurrencyFraction'));
         $this->assertEquals('0', Zend_Locale::getTranslation('JPY', 'CurrencyFraction'));
-		$this->assertEquals('2', Zend_Locale::getTranslation('CHF', 'CurrencyFraction'));
-		$this->assertEquals('3', Zend_Locale::getTranslation('BHD', 'CurrencyFraction'));
-		$this->assertEquals('2', Zend_Locale::getTranslation('DEFAULT', 'CurrencyFraction'));
+        $this->assertEquals('2', Zend_Locale::getTranslation('CHF', 'CurrencyFraction'));
+        $this->assertEquals('3', Zend_Locale::getTranslation('BHD', 'CurrencyFraction'));
+        $this->assertEquals('2', Zend_Locale::getTranslation('DEFAULT', 'CurrencyFraction'));
     }
 
     public function testEachDataFileShouldPresentAsLocaleData()
     {
         $dir = new DirectoryIterator(
-            __DIR__ . '/../../packages/zend-locale/library/Zend/Locale/Data'
+            __DIR__.'/../../packages/zend-locale/library/Zend/Locale/Data'
         );
-        $skip = array(
+        $skip = [
             'characters.xml',
             'coverageLevels.xml',
             'dayPeriods.xml',
@@ -941,9 +946,9 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
             'telephoneCodeData.xml',
             'Translation.php',
             'windowsZones.xml',
-        );
+        ];
 
-        $files = array('root');
+        $files = ['root'];
         /** @var SplFileInfo $fileinfo */
         foreach ($dir as $fileinfo) {
             if (!$fileinfo->isDot()
@@ -953,28 +958,28 @@ class Zend_LocaleTest extends \PHPUnit\Framework\TestCase
             }
         }
 
-        $class    = new ReflectionClass('Zend_Locale');
+        $class = new ReflectionClass('Zend_Locale');
         $property = $class->getProperty('_localeData');
         $property->setAccessible(true);
 
-        $locale     = new Zend_Locale();
+        $locale = new Zend_Locale();
         $localeData = $property->getValue($locale);
         $localeData = array_keys($localeData);
 
-        $this->assertEquals(array(), array_diff($files, $localeData));
+        $this->assertEquals([], array_diff($files, $localeData));
     }
 
     /**
-     * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred
+     * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred.
      *
-     * @param  integer $errno
-     * @param  string  $errstr
-     * @param  string  $errfile
-     * @param  integer $errline
-     * @param  array   $errcontext
+     * @param int    $errno
+     * @param string $errstr
+     * @param string $errfile
+     * @param int    $errline
+     *
      * @return void
      */
-    public function errorHandlerIgnore($errno, $errstr, $errfile, $errline, array $errcontext = array())
+    public function errorHandlerIgnore($errno, $errstr, $errfile, $errline, array $errcontext = [])
     {
         $this->_errorOccurred = true;
     }
@@ -985,13 +990,13 @@ class Zend_LocaleTestHelper extends Zend_Locale
 {
     public static function resetObject()
     {
-        self::$_auto        = null;
+        self::$_auto = null;
         self::$_environment = null;
-        self::$_browser     = null;
+        self::$_browser = null;
     }
 }
 
 // Call Zend_LocaleTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_LocaleTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_LocaleTest::main') {
     Zend_LocaleTest::main();
 }

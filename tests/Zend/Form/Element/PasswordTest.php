@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,33 +14,33 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Form_Element_PasswordTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Form_Element_PasswordTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Form_Element_PasswordTest::main');
 }
 
 // require_once 'Zend/Form/Element/Password.php';
 // require_once 'Zend/View.php';
 
 /**
- * Test class for Zend_Form_Element_Password
+ * Test class for Zend_Form_Element_Password.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Form
  */
 #[AllowDynamicProperties]
-class Zend_Form_Element_PasswordTest extends \PHPUnit\Framework\TestCase
+class Zend_Form_Element_PasswordTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -48,11 +49,10 @@ class Zend_Form_Element_PasswordTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-
-        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Form_Element_PasswordTest");
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_Form_Element_PasswordTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -60,20 +60,16 @@ class Zend_Form_Element_PasswordTest extends \PHPUnit\Framework\TestCase
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @return void
      */
     public function setUp(): void
     {
-        $this->errors = array();
+        $this->errors = [];
         $this->element = new Zend_Form_Element_Password('foo');
     }
 
     /**
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
-     *
-     * @return void
      */
     public function tearDown(): void
     {
@@ -105,11 +101,11 @@ class Zend_Form_Element_PasswordTest extends \PHPUnit\Framework\TestCase
 
     public function testPasswordValueMaskedByGetMessages()
     {
-        $this->element->addValidators(array(
+        $this->element->addValidators([
             'Alpha',
-            'Alnum'
-        ));
-        $value  = 'abc-123';
+            'Alnum',
+        ]);
+        $value = 'abc-123';
         $expect = '*******';
         $this->assertFalse($this->element->isValid($value));
         foreach ($this->element->getMessages() as $message) {
@@ -121,20 +117,20 @@ class Zend_Form_Element_PasswordTest extends \PHPUnit\Framework\TestCase
     public function handleErrors($errno, $errmsg, $errfile, $errline, $errcontext)
     {
         if (!isset($this->errors)) {
-            $this->errors = array();
+            $this->errors = [];
         }
         $this->errors[] = $errmsg;
     }
 
     /**
-     * ZF-2656
+     * ZF-2656.
      */
     public function testGetMessagesReturnsEmptyArrayWhenNoMessagesRegistered()
     {
-        set_error_handler(array($this, 'handleErrors'));
+        set_error_handler([$this, 'handleErrors']);
         $messages = $this->element->getMessages();
         restore_error_handler();
-        $this->assertSame(array(), $messages);
+        $this->assertSame([], $messages);
         $this->assertTrue(empty($this->errors));
     }
 
@@ -166,6 +162,6 @@ class Zend_Form_Element_PasswordTest extends \PHPUnit\Framework\TestCase
 }
 
 // Call Zend_Form_Element_PasswordTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Form_Element_PasswordTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Form_Element_PasswordTest::main') {
     Zend_Form_Element_PasswordTest::main();
 }

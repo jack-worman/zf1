@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,38 +14,38 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_ProgressBar
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Console_ProgressBarTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_ProgressBar_ProgressBarTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_ProgressBar_ProgressBarTest::main');
 }
 
 /**
- * Zend_ProgressBar
+ * Zend_ProgressBar.
  */
 // require_once 'Zend/ProgressBar.php';
 
 /**
- * Zend_ProgressBar_Adapter
+ * Zend_ProgressBar_Adapter.
  */
 // require_once 'Zend/ProgressBar/Adapter.php';
 
 /**
  * @category   Zend
- * @package    Zend_Console
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_ProgressBar
  */
 #[AllowDynamicProperties]
-class Zend_ProgressBar_ProgressBarTest extends \PHPUnit\Framework\TestCase
+class Zend_ProgressBar_ProgressBarTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -53,10 +54,10 @@ class Zend_ProgressBar_ProgressBarTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_ProgressBar_ProgressBarTest");
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_ProgressBar_ProgressBarTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -192,17 +193,16 @@ class Zend_ProgressBar_Adapter_MockUp extends Zend_ProgressBar_Adapter
 
     public function notify($current, $max, $percent, $timeTaken, $timeRemaining, $text)
     {
-        $this->_current       = $current;
-        $this->_max           = $max;
-        $this->_percent       = $percent;
-        $this->_timeTaken     = $timeTaken;
+        $this->_current = $current;
+        $this->_max = $max;
+        $this->_percent = $percent;
+        $this->_timeTaken = $timeTaken;
         $this->_timeRemaining = $timeRemaining;
-        $this->_text          = $text;
+        $this->_text = $text;
     }
 
     public function finish()
     {
-
     }
 
     public function getCurrent()
@@ -237,6 +237,6 @@ class Zend_ProgressBar_Adapter_MockUp extends Zend_ProgressBar_Adapter
 }
 
 // Call Zend_ProgressBar_ProgressBarTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_ProgressBar_ProgressBarTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_ProgressBar_ProgressBarTest::main') {
     Zend_ProgressBar_ProgressBarTest::main();
 }

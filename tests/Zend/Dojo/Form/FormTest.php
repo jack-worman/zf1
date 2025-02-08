@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Dojo_Form_FormTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_Form_FormTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Dojo_Form_FormTest::main');
 }
 
 /** Zend_Dojo_Form */
@@ -32,18 +33,18 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 // require_once 'Zend/View.php';
 
 /**
- * Test class for Zend_Dojo_Form and Zend_Dojo_Form_DisplayGroup
+ * Test class for Zend_Dojo_Form and Zend_Dojo_Form_DisplayGroup.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Dojo
  * @group      Zend_Dojo_Form
  */
 #[AllowDynamicProperties]
-class Zend_Dojo_Form_FormTest extends \PHPUnit\Framework\TestCase
+class Zend_Dojo_Form_FormTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -52,10 +53,10 @@ class Zend_Dojo_Form_FormTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Dojo_Form_FormTest");
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_Dojo_Form_FormTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -63,22 +64,18 @@ class Zend_Dojo_Form_FormTest extends \PHPUnit\Framework\TestCase
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @return void
      */
     public function setUp(): void
     {
         $this->form = new Zend_Dojo_Form();
         $this->form->addElement('TextBox', 'foo')
-                   ->addDisplayGroup(array('foo'), 'dg')
+                   ->addDisplayGroup(['foo'], 'dg')
                    ->setView(new Zend_View());
     }
 
     /**
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
-     *
-     * @return void
      */
     public function tearDown(): void
     {
@@ -120,18 +117,18 @@ class Zend_Dojo_Form_FormTest extends \PHPUnit\Framework\TestCase
 
     public function testShouldRegisterDojoViewHelperPath()
     {
-        $view   = $this->form->getView();
+        $view = $this->form->getView();
         $loader = $view->getPluginLoader('helper');
-        $paths  = $loader->getPaths('Zend_Dojo_View_Helper');
+        $paths = $loader->getPaths('Zend_Dojo_View_Helper');
         $this->assertTrue(is_array($paths));
     }
 
     public function testDisplayGroupShouldRegisterDojoViewHelperPath()
     {
         $this->form->dg->setView(new Zend_View());
-        $view   = $this->form->dg->getView();
+        $view = $this->form->dg->getView();
         $loader = $view->getPluginLoader('helper');
-        $paths  = $loader->getPaths('Zend_Dojo_View_Helper');
+        $paths = $loader->getPaths('Zend_Dojo_View_Helper');
         $this->assertTrue(is_array($paths));
     }
 
@@ -146,6 +143,6 @@ class Zend_Dojo_Form_FormTest extends \PHPUnit\Framework\TestCase
 }
 
 // Call Zend_Dojo_Form_FormTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dojo_Form_FormTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Dojo_Form_FormTest::main') {
     Zend_Dojo_Form_FormTest::main();
 }

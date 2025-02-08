@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,44 +14,45 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Cache
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Cache
+ * Zend_Cache.
  */
 // require_once 'Zend/Cache.php';
 // require_once 'Zend/Cache/Backend/ZendPlatform.php';
 
 /**
- * Common tests for backends
+ * Common tests for backends.
  */
 require_once 'CommonBackendTest.php';
 
 /**
  * @category   Zend
- * @package    Zend_Cache
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Cache
  */
 #[AllowDynamicProperties]
-class Zend_Cache_ZendPlatformBackendTest extends Zend_Cache_CommonBackendTest {
-
+class Zend_Cache_ZendPlatformBackendTest extends Zend_Cache_CommonBackendTest
+{
     protected $_instance;
 
     public function setUp($notag = false): void
     {
-        if(!function_exists('output_cache_get')) {
+        if (!function_exists('output_cache_get')) {
             $this->markTestSkipped('Zend Platform is not installed, skipping test');
+
             return;
         }
-        $this->_instance = new Zend_Cache_Backend_ZendPlatform(array());
+        $this->_instance = new Zend_Cache_Backend_ZendPlatform([]);
         parent::setUp($notag);
     }
 
@@ -75,18 +77,27 @@ class Zend_Cache_ZendPlatformBackendTest extends Zend_Cache_CommonBackendTest {
 
     public function testGetWithAnExpiredCacheId()
     {
-    sleep(2);
-        $this->_instance->setDirectives(array('lifetime' => 1));
+        sleep(2);
+        $this->_instance->setDirectives(['lifetime' => 1]);
         $this->assertEquals('bar : data to cache', $this->_instance->load('bar', true));
         $this->assertFalse($this->_instance->load('bar'));
-        $this->_instance->setDirectives(array('lifetime' => 3600));
+        $this->_instance->setDirectives(['lifetime' => 3600]);
     }
 
     // Because of limitations of this backend...
-    public function testCleanModeNotMatchingTags2() {}
-    public function testCleanModeNotMatchingTags3() {}
-    public function testCleanModeOld() {}
-    public function testCleanModeNotMatchingTags() {}
+    public function testCleanModeNotMatchingTags2()
+    {
+    }
+
+    public function testCleanModeNotMatchingTags3()
+    {
+    }
+
+    public function testCleanModeOld()
+    {
+    }
+
+    public function testCleanModeNotMatchingTags()
+    {
+    }
 }
-
-

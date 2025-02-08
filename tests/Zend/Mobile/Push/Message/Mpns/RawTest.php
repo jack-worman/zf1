@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Mobile
- * @subpackage Push
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -24,16 +25,16 @@
 
 /**
  * @category   Zend
- * @package    Zend_Mobile
- * @subpackage Push
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Mobile
  * @group      Zend_Mobile_Push
  * @group      Zend_Mobile_Push_Mpns
  */
 #[AllowDynamicProperties]
-class Zend_Mobile_Push_Message_Mpns_RawTest extends \PHPUnit\Framework\TestCase
+class Zend_Mobile_Push_Message_Mpns_RawTest extends PHPUnit\Framework\TestCase
 {
     private $_msg;
 
@@ -52,7 +53,7 @@ class Zend_Mobile_Push_Message_Mpns_RawTest extends \PHPUnit\Framework\TestCase
     public function testSetTokenNonStringThrowsException()
     {
         $this->expectException(Zend_Mobile_Push_Message_Exception::class);
-        $token = array('foo' => 'bar');
+        $token = ['foo' => 'bar'];
         $this->_msg->setToken($token);
     }
 
@@ -78,7 +79,7 @@ class Zend_Mobile_Push_Message_Mpns_RawTest extends \PHPUnit\Framework\TestCase
     public function testSetMessageThrowsExceptionOnNonString()
     {
         $this->expectException(Zend_Mobile_Push_Message_Exception::class);
-        $msg = array('foo' => 'bar');
+        $msg = ['foo' => 'bar'];
         $this->_msg->setMessage($msg);
     }
 

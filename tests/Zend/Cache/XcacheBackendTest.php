@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,43 +14,43 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Cache
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Cache
+ * Zend_Cache.
  */
 // require_once 'Zend/Cache.php';
 // require_once 'Zend/Cache/Backend/Xcache.php';
 
 /**
- * Common tests for backends
+ * Common tests for backends.
  */
 require_once 'CommonBackendTest.php';
 
 /**
  * @category   Zend
- * @package    Zend_Cache
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Cache
  */
 #[AllowDynamicProperties]
-class Zend_Cache_XcacheBackendTest extends Zend_Cache_CommonBackendTest {
-
+class Zend_Cache_XcacheBackendTest extends Zend_Cache_CommonBackendTest
+{
     protected $_instance;
 
     public function setUp($notag = true): void
     {
-        $this->_instance = new Zend_Cache_Backend_Xcache(array(
+        $this->_instance = new Zend_Cache_Backend_Xcache([
             'user' => TESTS_ZEND_CACHE_XCACHE_USER,
-            'password' => TESTS_ZEND_CACHE_XCACHE_PASSWORD
-        ));
+            'password' => TESTS_ZEND_CACHE_XCACHE_PASSWORD,
+        ]);
         parent::setUp($notag);
     }
 
@@ -64,54 +65,65 @@ class Zend_Cache_XcacheBackendTest extends Zend_Cache_CommonBackendTest {
         $test = new Zend_Cache_Backend_Xcache();
     }
 
-    public function testCleanModeOld() {
-        $this->_instance->setDirectives(array('logging' => false));
+    public function testCleanModeOld()
+    {
+        $this->_instance->setDirectives(['logging' => false]);
         $this->_instance->clean('old');
         // do nothing, just to see if an error occured
-        $this->_instance->setDirectives(array('logging' => true));
+        $this->_instance->setDirectives(['logging' => true]);
     }
 
-    public function testCleanModeMatchingTags() {
-        $this->_instance->setDirectives(array('logging' => false));
-        $this->_instance->clean('matchingTag', array('tag1'));
+    public function testCleanModeMatchingTags()
+    {
+        $this->_instance->setDirectives(['logging' => false]);
+        $this->_instance->clean('matchingTag', ['tag1']);
         // do nothing, just to see if an error occured
-        $this->_instance->setDirectives(array('logging' => true));
+        $this->_instance->setDirectives(['logging' => true]);
     }
 
-    public function testCleanModeNotMatchingTags() {
-        $this->_instance->setDirectives(array('logging' => false));
-        $this->_instance->clean('notMatchingTag', array('tag1'));
+    public function testCleanModeNotMatchingTags()
+    {
+        $this->_instance->setDirectives(['logging' => false]);
+        $this->_instance->clean('notMatchingTag', ['tag1']);
         // do nothing, just to see if an error occured
-        $this->_instance->setDirectives(array('logging' => true));
+        $this->_instance->setDirectives(['logging' => true]);
     }
 
     // Because of limitations of this backend...
-    public function testGetWithAnExpiredCacheId() {}
-    public function testCleanModeMatchingTags2() {}
-    public function testCleanModeNotMatchingTags2() {}
-    public function testCleanModeNotMatchingTags3() {}
+    public function testGetWithAnExpiredCacheId()
+    {
+    }
+
+    public function testCleanModeMatchingTags2()
+    {
+    }
+
+    public function testCleanModeNotMatchingTags2()
+    {
+    }
+
+    public function testCleanModeNotMatchingTags3()
+    {
+    }
+
     public function testSaveCorrectCall()
     {
-        $this->_instance->setDirectives(array('logging' => false));
+        $this->_instance->setDirectives(['logging' => false]);
         parent::testSaveCorrectCall();
-        $this->_instance->setDirectives(array('logging' => true));
+        $this->_instance->setDirectives(['logging' => true]);
     }
 
     public function testSaveWithNullLifeTime()
     {
-        $this->_instance->setDirectives(array('logging' => false));
+        $this->_instance->setDirectives(['logging' => false]);
         parent::testSaveWithNullLifeTime();
-        $this->_instance->setDirectives(array('logging' => true));
+        $this->_instance->setDirectives(['logging' => true]);
     }
 
     public function testSaveWithSpecificLifeTime()
     {
-
-        $this->_instance->setDirectives(array('logging' => false));
+        $this->_instance->setDirectives(['logging' => false]);
         parent::testSaveWithSpecificLifeTime();
-        $this->_instance->setDirectives(array('logging' => true));
+        $this->_instance->setDirectives(['logging' => true]);
     }
-
 }
-
-

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +14,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tag
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Tag_Cloud_CloudTest::main');
 }
@@ -28,27 +28,27 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 // require_once 'Zend/Loader/PluginLoader.php';
 // require_once 'Zend/Tag/Cloud.php';
 // require_once 'Zend/Tag/ItemList.php';
-require_once __DIR__ . '/_classes/CloudDummy.php';
-require_once __DIR__ . '/_classes/TagDummy.php';
+require_once __DIR__.'/_classes/CloudDummy.php';
+require_once __DIR__.'/_classes/TagDummy.php';
 
 /**
  * @category   Zend
- * @package    Zend_Tag
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Tag
  * @group      Zend_Tag_Cloud
  */
 #[AllowDynamicProperties]
-class Zend_Tag_Cloud_CloudTest extends \PHPUnit\Framework\TestCase
+class Zend_Tag_Cloud_CloudTest extends PHPUnit\Framework\TestCase
 {
     public static function main()
     {
-        $suite  = \PHPUnit\Framework\TestSuite::empty(__CLASS__);
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty(__CLASS__);
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -58,7 +58,7 @@ class Zend_Tag_Cloud_CloudTest extends \PHPUnit\Framework\TestCase
         $cloud = $this->_getCloud();
         $this->assertTrue($cloud->getItemList() instanceof Zend_Tag_ItemList);
 
-        $cloud->setItemList(new Zend_Tag_ItemListDummy);
+        $cloud->setItemList(new Zend_Tag_ItemListDummy());
         $this->assertTrue($cloud->getItemList() instanceof Zend_Tag_ItemListDummy);
     }
 
@@ -66,7 +66,7 @@ class Zend_Tag_Cloud_CloudTest extends \PHPUnit\Framework\TestCase
     {
         $cloud = $this->_getCloud();
 
-        $cloud->setCloudDecorator(array('decorator' => 'CloudDummy', 'options' => array('foo' => 'bar')));
+        $cloud->setCloudDecorator(['decorator' => 'CloudDummy', 'options' => ['foo' => 'bar']]);
         $this->assertTrue($cloud->getCloudDecorator() instanceof Zend_Tag_Cloud_Decorator_Dummy_CloudDummy);
         $this->assertEquals('bar', $cloud->getCloudDecorator()->getFoo());
     }
@@ -96,7 +96,7 @@ class Zend_Tag_Cloud_CloudTest extends \PHPUnit\Framework\TestCase
     {
         $cloud = $this->_getCloud();
 
-        $cloud->setTagDecorator(array('decorator' => 'TagDummy', 'options' => array('foo' => 'bar')));
+        $cloud->setTagDecorator(['decorator' => 'TagDummy', 'options' => ['foo' => 'bar']]);
         $this->assertTrue($cloud->getTagDecorator() instanceof Zend_Tag_Cloud_Decorator_Dummy_TagDummy);
         $this->assertEquals('bar', $cloud->getTagDecorator()->getFoo());
     }
@@ -124,18 +124,18 @@ class Zend_Tag_Cloud_CloudTest extends \PHPUnit\Framework\TestCase
 
     public function testSetPrefixPathViaOptions()
     {
-        $cloud = $this->_getCloud(array(
-            'prefixPath' => array(
+        $cloud = $this->_getCloud([
+            'prefixPath' => [
                 'prefix' => 'Zend_Tag_Cloud_Decorator_Dummy_',
-                'path' => __DIR__ . '/_classes'
-            ),
-            'cloudDecorator' => array(
+                'path' => __DIR__.'/_classes',
+            ],
+            'cloudDecorator' => [
                 'decorator' => 'CloudDummy1',
-                'options'   => array(
-                    'foo' => 'bar'
-                )
-            )
-        ), false);
+                'options' => [
+                    'foo' => 'bar',
+                ],
+            ],
+        ], false);
 
         $this->assertTrue($cloud->getCloudDecorator() instanceof Zend_Tag_Cloud_Decorator_Dummy_CloudDummy1);
         $this->assertEquals('bar', $cloud->getCloudDecorator()->getFoo());
@@ -143,20 +143,20 @@ class Zend_Tag_Cloud_CloudTest extends \PHPUnit\Framework\TestCase
 
     public function testSetPrefixPathsViaOptions()
     {
-        $cloud = $this->_getCloud(array(
-            'prefixPath' => array(
-                array(
+        $cloud = $this->_getCloud([
+            'prefixPath' => [
+                [
                     'prefix' => 'Zend_Tag_Cloud_Decorator_Dummy_',
-                    'path' => __DIR__ . '/_classes'
-                )
-            ),
-            'cloudDecorator' => array(
+                    'path' => __DIR__.'/_classes',
+                ],
+            ],
+            'cloudDecorator' => [
                 'decorator' => 'CloudDummy2',
-                'options'   => array(
-                    'foo' => 'bar'
-                )
-            )
-        ), false);
+                'options' => [
+                    'foo' => 'bar',
+                ],
+            ],
+        ], false);
 
         $this->assertTrue($cloud->getCloudDecorator() instanceof Zend_Tag_Cloud_Decorator_Dummy_CloudDummy2);
         $this->assertEquals('bar', $cloud->getCloudDecorator()->getFoo());
@@ -164,32 +164,32 @@ class Zend_Tag_Cloud_CloudTest extends \PHPUnit\Framework\TestCase
 
     public function testSetPrefixPathsSkip()
     {
-        $cloud = $this->_getCloud(array(
-            'prefixPath' => array(
-                array(
+        $cloud = $this->_getCloud([
+            'prefixPath' => [
+                [
                     'prefix' => 'foobar',
-                )
-            ),
-        ), false);
+                ],
+            ],
+        ], false);
 
         $this->assertEquals(1, count($cloud->getPluginLoader()->getPaths()));
     }
 
     public function testSetPluginLoader()
     {
-        $loader = new Zend_Loader_PluginLoader(array('foo_' => 'bar/'));
-        $cloud  = $this->_getCloud(array(), null);
+        $loader = new Zend_Loader_PluginLoader(['foo_' => 'bar/']);
+        $cloud = $this->_getCloud([], null);
         $cloud->setPluginLoader($loader);
-        $paths  = $cloud->getPluginLoader()->getPaths();
+        $paths = $cloud->getPluginLoader()->getPaths();
 
         $this->assertEquals('bar/', $paths['foo_'][0]);
     }
 
     public function testSetPluginLoaderViaOptions()
     {
-        $loader = new Zend_Loader_PluginLoader(array('foo_' => 'bar/'));
-        $cloud  = $this->_getCloud(array('pluginLoader' => $loader), null);
-        $paths  = $cloud->getPluginLoader()->getPaths();
+        $loader = new Zend_Loader_PluginLoader(['foo_' => 'bar/']);
+        $cloud = $this->_getCloud(['pluginLoader' => $loader], null);
+        $paths = $cloud->getPluginLoader()->getPaths();
 
         $this->assertEquals('bar/', $paths['foo_'][0]);
     }
@@ -197,9 +197,9 @@ class Zend_Tag_Cloud_CloudTest extends \PHPUnit\Framework\TestCase
     public function testAppendTagAsArray()
     {
         $cloud = $this->_getCloud();
-        $list  = $cloud->getItemList();
+        $list = $cloud->getItemList();
 
-        $cloud->appendTag(array('title' => 'foo', 'weight' => 1));
+        $cloud->appendTag(['title' => 'foo', 'weight' => 1]);
 
         $this->assertEquals('foo', $list[0]->getTitle());
     }
@@ -207,9 +207,9 @@ class Zend_Tag_Cloud_CloudTest extends \PHPUnit\Framework\TestCase
     public function testAppendTagAsItem()
     {
         $cloud = $this->_getCloud();
-        $list  = $cloud->getItemList();
+        $list = $cloud->getItemList();
 
-        $cloud->appendTag(new Zend_Tag_Item(array('title' => 'foo', 'weight' => 1)));
+        $cloud->appendTag(new Zend_Tag_Item(['title' => 'foo', 'weight' => 1]));
 
         $this->assertEquals('foo', $list[0]->getTitle());
     }
@@ -229,10 +229,10 @@ class Zend_Tag_Cloud_CloudTest extends \PHPUnit\Framework\TestCase
     public function testSetTagsAsArray()
     {
         $cloud = $this->_getCloud();
-        $list  = $cloud->getItemList();
+        $list = $cloud->getItemList();
 
-        $cloud->setTags(array(array('title' => 'foo', 'weight' => 1),
-                              array('title' => 'bar', 'weight' => 2)));
+        $cloud->setTags([['title' => 'foo', 'weight' => 1],
+            ['title' => 'bar', 'weight' => 2]]);
 
         $this->assertEquals('foo', $list[0]->getTitle());
         $this->assertEquals('bar', $list[1]->getTitle());
@@ -241,10 +241,10 @@ class Zend_Tag_Cloud_CloudTest extends \PHPUnit\Framework\TestCase
     public function testSetTagsAsItem()
     {
         $cloud = $this->_getCloud();
-        $list  = $cloud->getItemList();
+        $list = $cloud->getItemList();
 
-        $cloud->setTags(array(new Zend_Tag_Item(array('title' => 'foo', 'weight' => 1)),
-                              new Zend_Tag_Item(array('title' => 'bar', 'weight' => 2))));
+        $cloud->setTags([new Zend_Tag_Item(['title' => 'foo', 'weight' => 1]),
+            new Zend_Tag_Item(['title' => 'bar', 'weight' => 2])]);
 
         $this->assertEquals('foo', $list[0]->getTitle());
         $this->assertEquals('bar', $list[1]->getTitle());
@@ -253,10 +253,10 @@ class Zend_Tag_Cloud_CloudTest extends \PHPUnit\Framework\TestCase
     public function testSetTagsMixed()
     {
         $cloud = $this->_getCloud();
-        $list  = $cloud->getItemList();
+        $list = $cloud->getItemList();
 
-        $cloud->setTags(array(array('title' => 'foo', 'weight' => 1),
-                              new Zend_Tag_Item(array('title' => 'bar', 'weight' => 2))));
+        $cloud->setTags([['title' => 'foo', 'weight' => 1],
+            new Zend_Tag_Item(['title' => 'bar', 'weight' => 2])]);
 
         $this->assertEquals('foo', $list[0]->getTitle());
         $this->assertEquals('bar', $list[1]->getTitle());
@@ -267,7 +267,7 @@ class Zend_Tag_Cloud_CloudTest extends \PHPUnit\Framework\TestCase
         $cloud = $this->_getCloud();
 
         try {
-            $cloud->setTags(array('foo'));
+            $cloud->setTags(['foo']);
             $this->fail('An expected Zend_Tag_Cloud_Exception was not raised');
         } catch (Zend_Tag_Cloud_Exception $e) {
             $this->assertEquals('Tag must be an instance of Zend_Tag_Taggable or an array', $e->getMessage());
@@ -276,16 +276,16 @@ class Zend_Tag_Cloud_CloudTest extends \PHPUnit\Framework\TestCase
 
     public function testConstructorWithArray()
     {
-        $cloud = $this->_getCloud(array('tags' => array(array('title' => 'foo', 'weight' => 1))));
-        $list  = $cloud->getItemList();
+        $cloud = $this->_getCloud(['tags' => [['title' => 'foo', 'weight' => 1]]]);
+        $list = $cloud->getItemList();
 
         $this->assertEquals('foo', $list[0]->getTitle());
     }
 
     public function testConstructorWithConfig()
     {
-        $cloud = $this->_getCloud(new Zend_Config(array('tags' => array(array('title' => 'foo', 'weight' => 1)))));
-        $list  = $cloud->getItemList();
+        $cloud = $this->_getCloud(new Zend_Config(['tags' => [['title' => 'foo', 'weight' => 1]]]));
+        $list = $cloud->getItemList();
 
         $this->assertEquals('foo', $list[0]->getTitle());
     }
@@ -293,25 +293,25 @@ class Zend_Tag_Cloud_CloudTest extends \PHPUnit\Framework\TestCase
     public function testSetOptions()
     {
         $cloud = $this->_getCloud();
-        $cloud->setOptions(array('tags' => array(array('title' => 'foo', 'weight' => 1))));
-        $list  = $cloud->getItemList();
+        $cloud->setOptions(['tags' => [['title' => 'foo', 'weight' => 1]]]);
+        $list = $cloud->getItemList();
 
         $this->assertEquals('foo', $list[0]->getTitle());
     }
 
     public function testSkipOptions()
     {
-        $cloud = $this->_getCloud(array('options' => 'foobar'));
+        $cloud = $this->_getCloud(['options' => 'foobar']);
         // In case would fail due to an error
     }
 
     public function testRender()
     {
-        $cloud    = $this->_getCloud(array('tags' => array(array('title' => 'foo', 'weight' => 1), array('title' => 'bar', 'weight' => 3))));
+        $cloud = $this->_getCloud(['tags' => [['title' => 'foo', 'weight' => 1], ['title' => 'bar', 'weight' => 3]]]);
         $expected = '<ul class="Zend_Tag_Cloud">'
-                  . '<li><a href="" style="font-size: 10px;">foo</a></li> '
-                  . '<li><a href="" style="font-size: 20px;">bar</a></li>'
-                  . '</ul>';
+                  .'<li><a href="" style="font-size: 10px;">foo</a></li> '
+                  .'<li><a href="" style="font-size: 20px;">bar</a></li>'
+                  .'</ul>';
         $this->assertEquals($expected, $cloud->render());
     }
 
@@ -323,11 +323,11 @@ class Zend_Tag_Cloud_CloudTest extends \PHPUnit\Framework\TestCase
 
     public function testRenderViaToString()
     {
-        $cloud = $this->_getCloud(array('tags' => array(array('title' => 'foo', 'weight' => 1), array('title' => 'bar', 'weight' => 3))));
+        $cloud = $this->_getCloud(['tags' => [['title' => 'foo', 'weight' => 1], ['title' => 'bar', 'weight' => 3]]]);
         $expected = '<ul class="Zend_Tag_Cloud">'
-                  . '<li><a href="" style="font-size: 10px;">foo</a></li> '
-                  . '<li><a href="" style="font-size: 20px;">bar</a></li>'
-                  . '</ul>';
+                  .'<li><a href="" style="font-size: 10px;">foo</a></li> '
+                  .'<li><a href="" style="font-size: 20px;">bar</a></li>'
+                  .'</ul>';
         $this->assertEquals($expected, (string) $cloud);
     }
 
@@ -336,7 +336,7 @@ class Zend_Tag_Cloud_CloudTest extends \PHPUnit\Framework\TestCase
         $cloud = new Zend_Tag_Cloud($options);
 
         if ($setPluginLoader) {
-            $cloud->getPluginLoader()->addPrefixPath('Zend_Tag_Cloud_Decorator_Dummy_', __DIR__ . '/_classes');
+            $cloud->getPluginLoader()->addPrefixPath('Zend_Tag_Cloud_Decorator_Dummy_', __DIR__.'/_classes');
         }
 
         return $cloud;
@@ -344,7 +344,9 @@ class Zend_Tag_Cloud_CloudTest extends \PHPUnit\Framework\TestCase
 }
 
 #[AllowDynamicProperties]
-class Zend_Tag_ItemListDummy extends Zend_Tag_ItemList {}
+class Zend_Tag_ItemListDummy extends Zend_Tag_ItemList
+{
+}
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Tag_Cloud_CloudTest::main') {
     Zend_Tag_Cloud_CloudTest::main();

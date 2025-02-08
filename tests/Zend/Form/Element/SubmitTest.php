@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Form_Element_SubmitTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Form_Element_SubmitTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Form_Element_SubmitTest::main');
 }
 
 // require_once 'Zend/Form/Element/Submit.php';
@@ -32,17 +33,17 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 // require_once 'Zend/Translate/Adapter/Array.php';
 
 /**
- * Test class for Zend_Form_Element_Submit
+ * Test class for Zend_Form_Element_Submit.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Form
  */
 #[AllowDynamicProperties]
-class Zend_Form_Element_SubmitTest extends \PHPUnit\Framework\TestCase
+class Zend_Form_Element_SubmitTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -51,11 +52,10 @@ class Zend_Form_Element_SubmitTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-
-        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Form_Element_SubmitTest");
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_Form_Element_SubmitTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -63,8 +63,6 @@ class Zend_Form_Element_SubmitTest extends \PHPUnit\Framework\TestCase
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @return void
      */
     public function setUp(): void
     {
@@ -76,8 +74,6 @@ class Zend_Form_Element_SubmitTest extends \PHPUnit\Framework\TestCase
     /**
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
-     *
-     * @return void
      */
     public function tearDown(): void
     {
@@ -87,7 +83,8 @@ class Zend_Form_Element_SubmitTest extends \PHPUnit\Framework\TestCase
     {
         // require_once 'Zend/View.php';
         $view = new Zend_View();
-        $view->addHelperPath(__DIR__ . '/../../../../library/Zend/View/Helper/');
+        $view->addHelperPath(__DIR__.'/../../../../library/Zend/View/Helper/');
+
         return $view;
     }
 
@@ -119,7 +116,7 @@ class Zend_Form_Element_SubmitTest extends \PHPUnit\Framework\TestCase
 
     public function testGetLabelReturnsTranslatedLabelIfTranslatorIsRegistered()
     {
-        $translations = include __DIR__ . '/../_files/locale/array.php';
+        $translations = include __DIR__.'/../_files/locale/array.php';
         $translate = new Zend_Translate('array', $translations, 'en');
         $this->element->setTranslator($translate)
                       ->setLabel('submit');
@@ -153,7 +150,7 @@ class Zend_Form_Element_SubmitTest extends \PHPUnit\Framework\TestCase
     public function testLabelIsTranslatedWhenTranslationAvailable()
     {
         // require_once 'Zend/Translate.php';
-        $translations = array('Label' => 'This is the Submit Label');
+        $translations = ['Label' => 'This is the Submit Label'];
         $translate = new Zend_Translate('array', $translations);
         $submit = new Zend_Form_Element_Submit('foo', 'Label');
         $submit->setTranslator($translate);
@@ -163,7 +160,7 @@ class Zend_Form_Element_SubmitTest extends \PHPUnit\Framework\TestCase
     public function testLabelWhichIsSetToNameIsTranslatedWhenTranslationAvailable()
     {
         // require_once 'Zend/Translate.php';
-        $translations = array('foo' => 'This is the Submit Label');
+        $translations = ['foo' => 'This is the Submit Label'];
         $translate = new Zend_Translate('array', $translations);
         $submit = new Zend_Form_Element_Submit('foo');
         $submit->setTranslator($translate);
@@ -176,8 +173,8 @@ class Zend_Form_Element_SubmitTest extends \PHPUnit\Framework\TestCase
     public function testLabelIsNotTranslatedTwice()
     {
         // require_once 'Zend/Translate.php';
-        $translations = array('firstLabel' => 'secondLabel',
-                              'secondLabel' => 'thirdLabel');
+        $translations = ['firstLabel' => 'secondLabel',
+            'secondLabel' => 'thirdLabel'];
         $translate = new Zend_Translate('array', $translations);
         $submit = new Zend_Form_Element_Submit('foo', 'firstLabel');
         $submit->setTranslator($translate);
@@ -205,11 +202,12 @@ class Zend_Form_Element_SubmitTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Tests that the isChecked method works as expected when using a translator.
+     *
      * @group ZF-4073
      */
     public function testIsCheckedReturnsExpectedValueWhenUsingTranslator()
     {
-        $translations = array('label' => 'translation');
+        $translations = ['label' => 'translation'];
         $translate = new Zend_Translate('array', $translations);
 
         $submit = new Zend_Form_Element_Submit('foo', 'label');
@@ -230,7 +228,7 @@ class Zend_Form_Element_SubmitTest extends \PHPUnit\Framework\TestCase
     public function testTitleAttributeGetsTranslated()
     {
         $this->element->setAttrib('title', 'bar');
-        $translator = new Zend_Translate_Adapter_Array(array("bar" => "baz"), 'de');
+        $translator = new Zend_Translate_Adapter_Array(['bar' => 'baz'], 'de');
         $this->element->setTranslator($translator);
         $html = $this->element->render(new Zend_View());
         $this->assertStringContainsString('title', $html);
@@ -241,7 +239,7 @@ class Zend_Form_Element_SubmitTest extends \PHPUnit\Framework\TestCase
     public function testTitleAttributeDoesNotGetTranslatedIfTranslatorIsDisabled()
     {
         $this->element->setAttrib('title', 'bar');
-        $translator = new Zend_Translate_Adapter_Array(array("bar" => "baz"), 'de');
+        $translator = new Zend_Translate_Adapter_Array(['bar' => 'baz'], 'de');
         $this->element->setTranslator($translator);
         // now disable translator and see if that works
         $this->element->setDisableTranslator(true);
@@ -257,9 +255,10 @@ class Zend_Form_Element_SubmitTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Prove the fluent interface on Zend_Form_Element_Submit::loadDefaultDecorators
+     * Prove the fluent interface on Zend_Form_Element_Submit::loadDefaultDecorators.
      *
-     * @link http://framework.zend.com/issues/browse/ZF-9913
+     * @see http://framework.zend.com/issues/browse/ZF-9913
+     *
      * @return void
      */
     public function testFluentInterfaceOnLoadDefaultDecorators()
@@ -269,6 +268,6 @@ class Zend_Form_Element_SubmitTest extends \PHPUnit\Framework\TestCase
 }
 
 // Call Zend_Form_Element_SubmitTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Form_Element_SubmitTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Form_Element_SubmitTest::main') {
     Zend_Form_Element_SubmitTest::main();
 }

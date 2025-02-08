@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,29 +14,28 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Mail
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Mail_Storage_Mbox
+ * Zend_Mail_Storage_Mbox.
  */
 // require_once 'Zend/Mail/Storage/Mbox.php';
 
 /**
- * Zend_Config
+ * Zend_Config.
  */
 // require_once 'Zend/Config.php';
 
 /**
- * Maildir class, which uses old message class
+ * Maildir class, which uses old message class.
  *
  * @category   Zend
- * @package    Zend_Mail
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -43,7 +43,8 @@
 class Zend_Mail_Storage_Mbox_OldMessage extends Zend_Mail_Storage_Mbox
 {
     /**
-     * used message class
+     * used message class.
+     *
      * @var string
      */
     protected $_messageClass = 'Zend_Mail_Message';
@@ -51,14 +52,14 @@ class Zend_Mail_Storage_Mbox_OldMessage extends Zend_Mail_Storage_Mbox
 
 /**
  * @category   Zend
- * @package    Zend_Mail
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Mail
  */
 #[AllowDynamicProperties]
-class Zend_Mail_MboxMessageOldTest extends \PHPUnit\Framework\TestCase
+class Zend_Mail_MboxMessageOldTest extends PHPUnit\Framework\TestCase
 {
     protected $_mboxOriginalFile;
     protected $_mboxFile;
@@ -66,29 +67,30 @@ class Zend_Mail_MboxMessageOldTest extends \PHPUnit\Framework\TestCase
 
     public function setUp(): void
     {
-        if ($this->_tmpdir == null) {
+        if (null == $this->_tmpdir) {
             if (TESTS_ZEND_MAIL_TEMPDIR != null) {
                 $this->_tmpdir = TESTS_ZEND_MAIL_TEMPDIR;
             } else {
-                $this->_tmpdir = __DIR__ . '/_files/test.tmp/';
+                $this->_tmpdir = __DIR__.'/_files/test.tmp/';
             }
             if (!file_exists((string) $this->_tmpdir)) {
                 mkdir($this->_tmpdir);
             }
             $count = 0;
             $dh = opendir($this->_tmpdir);
-            while (readdir($dh) !== false) {
+            while (false !== readdir($dh)) {
                 ++$count;
             }
             closedir($dh);
-            if ($count != 2) {
+            if (2 != $count) {
                 $this->markTestSkipped('Are you sure your tmp dir is a valid empty dir?');
+
                 return;
             }
         }
 
-        $this->_mboxOriginalFile = __DIR__ . '/_files/test.mbox/INBOX';
-        $this->_mboxFile = $this->_tmpdir . 'INBOX';
+        $this->_mboxOriginalFile = __DIR__.'/_files/test.mbox/INBOX';
+        $this->_mboxFile = $this->_tmpdir.'INBOX';
 
         copy($this->_mboxOriginalFile, $this->_mboxFile);
     }
@@ -100,25 +102,25 @@ class Zend_Mail_MboxMessageOldTest extends \PHPUnit\Framework\TestCase
 
     public function testFetchHeader()
     {
-        $mail = new Zend_Mail_Storage_Mbox_OldMessage(array('filename' => $this->_mboxFile));
+        $mail = new Zend_Mail_Storage_Mbox_OldMessage(['filename' => $this->_mboxFile]);
 
         $subject = $mail->getMessage(1)->subject;
         $this->assertEquals('Simple Message', $subject);
     }
 
-/*
-    public function testFetchTopBody()
-    {
-        $mail = new Zend_Mail_Storage_Mbox_OldMessage(array('filename' => $this->_mboxFile));
+    /*
+        public function testFetchTopBody()
+        {
+            $mail = new Zend_Mail_Storage_Mbox_OldMessage(array('filename' => $this->_mboxFile));
 
-        $content = $mail->getHeader(3, 1)->getContent();
-        $this->assertEquals('Fair river! in thy bright, clear flow', \trim((string) $content));
-    }
-*/
+            $content = $mail->getHeader(3, 1)->getContent();
+            $this->assertEquals('Fair river! in thy bright, clear flow', \trim((string) $content));
+        }
+    */
 
     public function testFetchMessageHeader()
     {
-        $mail = new Zend_Mail_Storage_Mbox_OldMessage(array('filename' => $this->_mboxFile));
+        $mail = new Zend_Mail_Storage_Mbox_OldMessage(['filename' => $this->_mboxFile]);
 
         $subject = $mail->getMessage(1)->subject;
         $this->assertEquals('Simple Message', $subject);
@@ -126,25 +128,23 @@ class Zend_Mail_MboxMessageOldTest extends \PHPUnit\Framework\TestCase
 
     public function testFetchMessageBody()
     {
-        $mail = new Zend_Mail_Storage_Mbox_OldMessage(array('filename' => $this->_mboxFile));
+        $mail = new Zend_Mail_Storage_Mbox_OldMessage(['filename' => $this->_mboxFile]);
 
         $content = $mail->getMessage(3)->getContent();
-        list($content, ) = explode("\n", $content, 2);
+        list($content) = explode("\n", $content, 2);
         $this->assertEquals('Fair river! in thy bright, clear flow', \trim((string) $content));
     }
-
 
     public function testShortMbox()
     {
         $fh = fopen($this->_mboxFile, 'w');
         fputs($fh, "From \r\nSubject: test\r\nFrom \r\nSubject: test2\r\n");
         fclose($fh);
-        $mail = new Zend_Mail_Storage_Mbox_OldMessage(array('filename' => $this->_mboxFile));
+        $mail = new Zend_Mail_Storage_Mbox_OldMessage(['filename' => $this->_mboxFile]);
         $this->assertEquals($mail->countMessages(), 2);
         $this->assertEquals($mail->getMessage(1)->subject, 'test');
         $this->assertEquals($mail->getMessage(1)->getContent(), '');
         $this->assertEquals($mail->getMessage(2)->subject, 'test2');
         $this->assertEquals($mail->getMessage(2)->getContent(), '');
     }
-
 }

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,12 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_EventManager
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_EventManager_EventManagerTest::main');
 }
@@ -33,21 +32,21 @@ require_once 'Zend/EventManager/TestAsset/MockAggregate.php';
 
 /**
  * @category   Zend
- * @package    Zend_EventManager
- * @subpackage UnitTests
+ *
  * @group      Zend_EventManager
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
-class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
+class Zend_EventManager_EventManagerTest extends PHPUnit\Framework\TestCase
 {
     public static function main()
     {
-        $suite  = \PHPUnit\Framework\TestSuite::empty(__CLASS__);
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty(__CLASS__);
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -58,18 +57,18 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
             unset($this->message);
         }
         $this->default = '';
-        $this->events  = new Zend_EventManager_EventManager;
+        $this->events = new Zend_EventManager_EventManager();
     }
 
     public function testAttachShouldReturnCallbackHandler()
     {
-        $listener = $this->events->attach('test', array($this, 'testAttachShouldReturnCallbackHandler'));
+        $listener = $this->events->attach('test', [$this, 'testAttachShouldReturnCallbackHandler']);
         $this->assertTrue($listener instanceof Zend_Stdlib_CallbackHandler);
     }
 
     public function testAttachShouldAddListenerToEvent()
     {
-        $listener  = $this->events->attach('test', array($this, 'testAttachShouldAddListenerToEvent'));
+        $listener = $this->events->attach('test', [$this, 'testAttachShouldAddListenerToEvent']);
         $listeners = $this->events->getListeners('test');
         $this->assertEquals(1, count($listeners));
         $this->assertStringContainsString($listener, $listeners);
@@ -79,7 +78,7 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
     {
         $events = $this->events->getEvents();
         $this->assertTrue(empty($events), var_export($events, 1));
-        $listener = $this->events->attach('test', array($this, 'testAttachShouldAddEventIfItDoesNotExist'));
+        $listener = $this->events->attach('test', [$this, 'testAttachShouldAddEventIfItDoesNotExist']);
         $events = $this->events->getEvents();
         $this->assertFalse(empty($events));
         $this->assertStringContainsString('test', $events);
@@ -87,10 +86,10 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
 
     public function testAllowsPassingArrayOfEventNamesWhenAttaching()
     {
-        $callback = array($this, 'returnName');
-        $this->events->attach(array('foo', 'bar'), $callback);
+        $callback = [$this, 'returnName'];
+        $this->events->attach(['foo', 'bar'], $callback);
 
-        foreach (array('foo', 'bar') as $event) {
+        foreach (['foo', 'bar'] as $event) {
             $listeners = $this->events->getListeners($event);
             $this->assertTrue(count($listeners) > 0);
             foreach ($listeners as $listener) {
@@ -101,8 +100,8 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
 
     public function testPassingArrayOfEventNamesWhenAttachingReturnsArrayOfCallbackHandlers()
     {
-        $callback = array($this, 'returnName');
-        $listeners = $this->events->attach(array('foo', 'bar'), $callback);
+        $callback = [$this, 'returnName'];
+        $listeners = $this->events->attach(['foo', 'bar'], $callback);
 
         $this->assertTrue(is_array($listeners));
 
@@ -114,7 +113,7 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
 
     public function testDetachShouldRemoveListenerFromEvent()
     {
-        $listener  = $this->events->attach('test', array($this, 'testDetachShouldRemoveListenerFromEvent'));
+        $listener = $this->events->attach('test', [$this, 'testDetachShouldRemoveListenerFromEvent']);
         $listeners = $this->events->getListeners('test');
         $this->assertStringContainsString($listener, $listeners);
         $this->events->detach($listener);
@@ -124,16 +123,16 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
 
     public function testDetachShouldReturnFalseIfEventDoesNotExist()
     {
-        $listener = $this->events->attach('test', array($this, 'testDetachShouldReturnFalseIfEventDoesNotExist'));
+        $listener = $this->events->attach('test', [$this, 'testDetachShouldReturnFalseIfEventDoesNotExist']);
         $this->events->clearListeners('test');
         $this->assertFalse($this->events->detach($listener));
     }
 
     public function testDetachShouldReturnFalseIfListenerDoesNotExist()
     {
-        $listener1 = $this->events->attach('test', array($this, 'testDetachShouldReturnFalseIfListenerDoesNotExist'));
+        $listener1 = $this->events->attach('test', [$this, 'testDetachShouldReturnFalseIfListenerDoesNotExist']);
         $this->events->clearListeners('test');
-        $listener2 = $this->events->attach('test', array($this, 'handleTestEvent'));
+        $listener2 = $this->events->attach('test', [$this, 'handleTestEvent']);
         $this->assertFalse($this->events->detach($listener1));
     }
 
@@ -145,17 +144,17 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
 
     public function testTriggerShouldTriggerAttachedListeners()
     {
-        $listener = $this->events->attach('test', array($this, 'handleTestEvent'));
-        $this->events->trigger('test', $this, array('message' => 'test message'));
+        $listener = $this->events->attach('test', [$this, 'handleTestEvent']);
+        $this->events->trigger('test', $this, ['message' => 'test message']);
         $this->assertEquals('test message', $this->message);
     }
 
     public function testTriggerShouldReturnAllListenerReturnValues()
     {
         $this->default = '__NOT_FOUND__';
-        $this->events->attach('string.transform', array($this, 'trimString'));
-        $this->events->attach('string.transform', array($this, 'stringRot13'));
-        $responses = $this->events->trigger('string.transform', $this, array('string' => ' foo '));
+        $this->events->attach('string.transform', [$this, 'trimString']);
+        $this->events->attach('string.transform', [$this, 'stringRot13']);
+        $responses = $this->events->trigger('string.transform', $this, ['string' => ' foo ']);
         $this->assertTrue($responses instanceof Zend_EventManager_ResponseCollection);
         $this->assertEquals(2, $responses->count());
         $this->assertEquals('foo', $responses->first());
@@ -164,13 +163,13 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
 
     public function testTriggerUntilShouldReturnAsSoonAsCallbackReturnsTrue()
     {
-        $this->events->attach('foo.bar', array($this, 'stringPosition'));
-        $this->events->attach('foo.bar', array($this, 'stringInString'));
+        $this->events->attach('foo.bar', [$this, 'stringPosition']);
+        $this->events->attach('foo.bar', [$this, 'stringInString']);
         $responses = $this->events->triggerUntil(
             'foo.bar',
             $this,
-            array('string' => 'foo', 'search' => 'f'),
-            array($this, 'evaluateStringCallback')
+            ['string' => 'foo', 'search' => 'f'],
+            [$this, 'evaluateStringCallback']
         );
         $this->assertTrue($responses instanceof Zend_EventManager_ResponseCollection);
         $this->assertSame(0, $responses->last());
@@ -178,9 +177,9 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
 
     public function testTriggerResponseCollectionContains()
     {
-        $this->events->attach('string.transform', array($this, 'trimString'));
-        $this->events->attach('string.transform', array($this, 'stringRot13'));
-        $responses = $this->events->trigger('string.transform', $this, array('string' => ' foo '));
+        $this->events->attach('string.transform', [$this, 'trimString']);
+        $this->events->attach('string.transform', [$this, 'stringRot13']);
+        $responses = $this->events->trigger('string.transform', $this, ['string' => ' foo ']);
         $this->assertEquals(2, count($responses));
         $this->assertTrue($responses->contains('foo'));
         $this->assertTrue($responses->contains(str_rot13(' foo ')));
@@ -195,16 +194,16 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
 
     public function evaluateStringCallback($value)
     {
-        return (!$value);
+        return !$value;
     }
 
     public function testTriggerUntilShouldMarkResponseCollectionStoppedWhenConditionMet()
     {
-        $this->events->attach('foo.bar', array($this, 'returnBogus'), 4);
-        $this->events->attach('foo.bar', array($this, 'returnNada'), 3);
-        $this->events->attach('foo.bar', array($this, 'returnFound'), 2);
-        $this->events->attach('foo.bar', array($this, 'returnZero'), 1);
-        $responses = $this->events->triggerUntil('foo.bar', $this, array(), array($this, 'returnOnFound'));
+        $this->events->attach('foo.bar', [$this, 'returnBogus'], 4);
+        $this->events->attach('foo.bar', [$this, 'returnNada'], 3);
+        $this->events->attach('foo.bar', [$this, 'returnFound'], 2);
+        $this->events->attach('foo.bar', [$this, 'returnZero'], 1);
+        $responses = $this->events->triggerUntil('foo.bar', $this, [], [$this, 'returnOnFound']);
         $this->assertTrue($responses instanceof Zend_EventManager_ResponseCollection);
         $this->assertTrue($responses->stopped());
         $result = $responses->last();
@@ -214,11 +213,11 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
 
     public function testTriggerUntilShouldMarkResponseCollectionStoppedWhenConditionMetByLastListener()
     {
-        $this->events->attach('foo.bar', array($this, 'returnBogus'));
-        $this->events->attach('foo.bar', array($this, 'returnNada'));
-        $this->events->attach('foo.bar', array($this, 'returnZero'));
-        $this->events->attach('foo.bar', array($this, 'returnFound'));
-        $responses = $this->events->triggerUntil('foo.bar', $this, array(), array($this, 'returnOnFound'));
+        $this->events->attach('foo.bar', [$this, 'returnBogus']);
+        $this->events->attach('foo.bar', [$this, 'returnNada']);
+        $this->events->attach('foo.bar', [$this, 'returnZero']);
+        $this->events->attach('foo.bar', [$this, 'returnFound']);
+        $responses = $this->events->triggerUntil('foo.bar', $this, [], [$this, 'returnOnFound']);
         $this->assertTrue($responses instanceof Zend_EventManager_ResponseCollection);
         $this->assertTrue($responses->stopped());
         $this->assertEquals('found', $responses->last());
@@ -226,11 +225,11 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
 
     public function testResponseCollectionIsNotStoppedWhenNoCallbackMatchedByTriggerUntil()
     {
-        $this->events->attach('foo.bar', array($this, 'returnBogus'), 4);
-        $this->events->attach('foo.bar', array($this, 'returnNada'), 3);
-        $this->events->attach('foo.bar', array($this, 'returnZero'), 1);
-        $this->events->attach('foo.bar', array($this, 'returnFound'), 2);
-        $responses = $this->events->triggerUntil('foo.bar', $this, array(), array($this, 'returnOnNeverFound'));
+        $this->events->attach('foo.bar', [$this, 'returnBogus'], 4);
+        $this->events->attach('foo.bar', [$this, 'returnNada'], 3);
+        $this->events->attach('foo.bar', [$this, 'returnZero'], 1);
+        $this->events->attach('foo.bar', [$this, 'returnFound'], 2);
+        $responses = $this->events->triggerUntil('foo.bar', $this, [], [$this, 'returnOnNeverFound']);
         $this->assertTrue($responses instanceof Zend_EventManager_ResponseCollection);
         $this->assertFalse($responses->stopped());
         $this->assertEquals('zero', $responses->last());
@@ -241,7 +240,7 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
         $aggregate = new Zend_EventManager_TestAsset_MockAggregate();
         $this->events->attachAggregate($aggregate);
         $events = $this->events->getEvents();
-        foreach (array('foo.bar', 'foo.baz') as $event) {
+        foreach (['foo.bar', 'foo.baz'] as $event) {
             $this->assertStringContainsString($event, $events);
         }
     }
@@ -251,7 +250,7 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
         $aggregate = new Zend_EventManager_TestAsset_MockAggregate();
         $this->events->attach($aggregate);
         $events = $this->events->getEvents();
-        foreach (array('foo.bar', 'foo.baz') as $event) {
+        foreach (['foo.bar', 'foo.baz'] as $event) {
             $this->assertStringContainsString($event, $events);
         }
     }
@@ -259,23 +258,23 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
     public function testAttachAggregateReturnsAttachOfListenerAggregate()
     {
         $aggregate = new Zend_EventManager_TestAsset_MockAggregate();
-        $method    = $this->events->attachAggregate($aggregate);
+        $method = $this->events->attachAggregate($aggregate);
         $this->assertSame('Zend_EventManager_TestAsset_MockAggregate::attach', $method);
     }
 
     public function testCanDetachListenerAggregates()
     {
         // setup some other event listeners, to ensure appropriate items are detached
-        $listenerFooBar1 = $this->events->attach('foo.bar', array($this, 'returnTrue'));
-        $listenerFooBar2 = $this->events->attach('foo.bar', array($this, 'returnTrue'));
-        $listenerFooBaz1 = $this->events->attach('foo.baz', array($this, 'returnTrue'));
-        $listenerOther   = $this->events->attach('other', array($this, 'returnTrue'));
+        $listenerFooBar1 = $this->events->attach('foo.bar', [$this, 'returnTrue']);
+        $listenerFooBar2 = $this->events->attach('foo.bar', [$this, 'returnTrue']);
+        $listenerFooBaz1 = $this->events->attach('foo.baz', [$this, 'returnTrue']);
+        $listenerOther = $this->events->attach('other', [$this, 'returnTrue']);
 
         $aggregate = new Zend_EventManager_TestAsset_MockAggregate();
         $this->events->attachAggregate($aggregate);
         $this->events->detachAggregate($aggregate);
         $events = $this->events->getEvents();
-        foreach (array('foo.bar', 'foo.baz', 'other') as $event) {
+        foreach (['foo.bar', 'foo.baz', 'other'] as $event) {
             $this->assertStringContainsString($event, $events);
         }
 
@@ -296,16 +295,16 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
     public function testCanDetachListenerAggregatesViaDetach()
     {
         // setup some other event listeners, to ensure appropriate items are detached
-        $listenerFooBar1 = $this->events->attach('foo.bar', array($this, 'returnTrue'));
-        $listenerFooBar2 = $this->events->attach('foo.bar', array($this, 'returnTrue'));
-        $listenerFooBaz1 = $this->events->attach('foo.baz', array($this, 'returnTrue'));
-        $listenerOther   = $this->events->attach('other',   array($this, 'returnTrue'));
+        $listenerFooBar1 = $this->events->attach('foo.bar', [$this, 'returnTrue']);
+        $listenerFooBar2 = $this->events->attach('foo.bar', [$this, 'returnTrue']);
+        $listenerFooBaz1 = $this->events->attach('foo.baz', [$this, 'returnTrue']);
+        $listenerOther = $this->events->attach('other', [$this, 'returnTrue']);
 
         $aggregate = new Zend_EventManager_TestAsset_MockAggregate();
         $this->events->attach($aggregate);
         $this->events->detach($aggregate);
         $events = $this->events->getEvents();
-        foreach (array('foo.bar', 'foo.baz', 'other') as $event) {
+        foreach (['foo.bar', 'foo.baz', 'other'] as $event) {
             $this->assertStringContainsString($event, $events);
         }
 
@@ -347,11 +346,11 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
 
     public function testCallingEventsStopPropagationMethodHaltsEventEmission()
     {
-        $this->events->attach('foo.bar', array($this, 'returnBogus'), 4);
-        $this->events->attach('foo.bar', array($this, 'returnNadaAndStopPropagation'), 3);
-        $this->events->attach('foo.bar', array($this, 'returnFound'), 2);
-        $this->events->attach('foo.bar', array($this, 'returnZero'), 1);
-        $responses = $this->events->trigger('foo.bar', $this, array());
+        $this->events->attach('foo.bar', [$this, 'returnBogus'], 4);
+        $this->events->attach('foo.bar', [$this, 'returnNadaAndStopPropagation'], 3);
+        $this->events->attach('foo.bar', [$this, 'returnFound'], 2);
+        $this->events->attach('foo.bar', [$this, 'returnZero'], 1);
+        $responses = $this->events->trigger('foo.bar', $this, []);
         $this->assertTrue($responses instanceof Zend_EventManager_ResponseCollection);
         $this->assertTrue($responses->stopped());
         $this->assertEquals('nada', $responses->last());
@@ -364,10 +363,10 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
     {
         $this->foo = 'bar';
         $this->bar = 'baz';
-        $this->events->attach('foo.bar', array($this, 'setParamFoo'));
-        $this->events->attach('foo.bar', array($this, 'setParamBar'));
-        $this->events->attach('foo.bar', array($this, 'returnParamsFooAndBar'));
-        $responses = $this->events->trigger('foo.bar', $this, array());
+        $this->events->attach('foo.bar', [$this, 'setParamFoo']);
+        $this->events->attach('foo.bar', [$this, 'setParamBar']);
+        $this->events->attach('foo.bar', [$this, 'returnParamsFooAndBar']);
+        $responses = $this->events->trigger('foo.bar', $this, []);
         $this->assertEquals('bar:baz', $responses->last());
     }
 
@@ -375,10 +374,10 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
     {
         $this->foo = 'FOO';
         $this->bar = 'BAR';
-        $params = array( 'foo' => 'bar', 'bar' => 'baz');
-        $args   = $this->events->prepareArgs($params);
-        $this->events->attach('foo.bar', array($this, 'setParamFoo'));
-        $this->events->attach('foo.bar', array($this, 'setParamBar'));
+        $params = ['foo' => 'bar', 'bar' => 'baz'];
+        $args = $this->events->prepareArgs($params);
+        $this->events->attach('foo.bar', [$this, 'setParamFoo']);
+        $this->events->attach('foo.bar', [$this, 'setParamBar']);
         $responses = $this->events->trigger('foo.bar', $this, $args);
         $this->assertEquals('FOO', $args['foo']);
         $this->assertEquals('BAR', $args['bar']);
@@ -388,9 +387,9 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
     {
         $this->foo = 'FOO';
         $this->bar = 'BAR';
-        $params = (object) array( 'foo' => 'bar', 'bar' => 'baz');
-        $this->events->attach('foo.bar', array($this, 'setParamFoo'));
-        $this->events->attach('foo.bar', array($this, 'setParamBar'));
+        $params = (object) ['foo' => 'bar', 'bar' => 'baz'];
+        $this->events->attach('foo.bar', [$this, 'setParamFoo']);
+        $this->events->attach('foo.bar', [$this, 'setParamBar']);
         $responses = $this->events->trigger('foo.bar', $this, $params);
         $this->assertEquals('FOO', $params->foo);
         $this->assertEquals('BAR', $params->bar);
@@ -401,8 +400,8 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
         $event = new Zend_EventManager_Event();
         $event->setName(__FUNCTION__);
         $event->setTarget($this);
-        $event->setParams(array('foo' => 'bar'));
-        $this->events->attach(__FUNCTION__, array($this, 'returnEvent'));
+        $event->setParams(['foo' => 'bar']);
+        $this->events->attach(__FUNCTION__, [$this, 'returnEvent']);
         $responses = $this->events->trigger($event);
         $this->assertSame($event, $responses->last());
     }
@@ -411,8 +410,8 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
     {
         $event = new Zend_EventManager_Event();
         $event->setTarget($this);
-        $event->setParams(array('foo' => 'bar'));
-        $this->events->attach(__FUNCTION__, array($this, 'returnEvent'));
+        $event->setParams(['foo' => 'bar']);
+        $this->events->attach(__FUNCTION__, [$this, 'returnEvent']);
         $responses = $this->events->trigger(__FUNCTION__, $event);
         $this->assertSame($event, $responses->last());
         $this->assertEquals(__FUNCTION__, $event->getName());
@@ -421,8 +420,8 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
     public function testCanPassEventObjectAsArgvToTrigger()
     {
         $event = new Zend_EventManager_Event();
-        $event->setParams(array('foo' => 'bar'));
-        $this->events->attach(__FUNCTION__, array($this, 'returnEvent'));
+        $event->setParams(['foo' => 'bar']);
+        $this->events->attach(__FUNCTION__, [$this, 'returnEvent']);
         $responses = $this->events->trigger(__FUNCTION__, $this, $event);
         $this->assertSame($event, $responses->last());
         $this->assertEquals(__FUNCTION__, $event->getName());
@@ -434,9 +433,9 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
         $event = new Zend_EventManager_Event();
         $event->setName(__FUNCTION__);
         $event->setTarget($this);
-        $event->setParams(array('foo' => 'bar'));
-        $this->events->attach(__FUNCTION__, array($this, 'returnEvent'));
-        $responses = $this->events->triggerUntil($event, array($this, 'returnOnEvent'));
+        $event->setParams(['foo' => 'bar']);
+        $this->events->attach(__FUNCTION__, [$this, 'returnEvent']);
+        $responses = $this->events->triggerUntil($event, [$this, 'returnOnEvent']);
         $this->assertTrue($responses->stopped());
         $this->assertSame($event, $responses->last());
     }
@@ -445,9 +444,9 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
     {
         $event = new Zend_EventManager_Event();
         $event->setTarget($this);
-        $event->setParams(array('foo' => 'bar'));
-        $this->events->attach(__FUNCTION__, array($this, 'returnEvent'));
-        $responses = $this->events->triggerUntil(__FUNCTION__, $event, array($this, 'returnOnEvent'));
+        $event->setParams(['foo' => 'bar']);
+        $this->events->attach(__FUNCTION__, [$this, 'returnEvent']);
+        $responses = $this->events->triggerUntil(__FUNCTION__, $event, [$this, 'returnOnEvent']);
         $this->assertTrue($responses->stopped());
         $this->assertSame($event, $responses->last());
         $this->assertEquals(__FUNCTION__, $event->getName());
@@ -456,9 +455,9 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
     public function testCanPassEventObjectAsArgvToTriggerUntil()
     {
         $event = new Zend_EventManager_Event();
-        $event->setParams(array('foo' => 'bar'));
-        $this->events->attach(__FUNCTION__, array($this, 'returnEvent'));
-        $responses = $this->events->triggerUntil(__FUNCTION__, $this, $event, array($this, 'returnOnEvent'));
+        $event->setParams(['foo' => 'bar']);
+        $this->events->attach(__FUNCTION__, [$this, 'returnEvent']);
+        $responses = $this->events->triggerUntil(__FUNCTION__, $this, $event, [$this, 'returnOnEvent']);
         $this->assertTrue($responses->stopped());
         $this->assertSame($event, $responses->last());
         $this->assertEquals(__FUNCTION__, $event->getName());
@@ -467,29 +466,29 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
 
     public function testTriggerCanTakeAnOptionalCallbackArgumentToEmulateTriggerUntil()
     {
-        $this->events->attach(__FUNCTION__, array($this, 'returnEvent'));
+        $this->events->attach(__FUNCTION__, [$this, 'returnEvent']);
 
         // Four scenarios:
         // First: normal signature:
-        $responses = $this->events->trigger(__FUNCTION__, $this, array(), array($this, 'returnOnEvent'));
+        $responses = $this->events->trigger(__FUNCTION__, $this, [], [$this, 'returnOnEvent']);
         $this->assertTrue($responses->stopped());
 
         // Second: Event as $argv parameter:
         $event = new Zend_EventManager_Event();
-        $responses = $this->events->trigger(__FUNCTION__, $this, $event, array($this, 'returnOnEvent'));
+        $responses = $this->events->trigger(__FUNCTION__, $this, $event, [$this, 'returnOnEvent']);
         $this->assertTrue($responses->stopped());
 
         // Third: Event as $target parameter:
         $event = new Zend_EventManager_Event();
         $event->setTarget($this);
-        $responses = $this->events->trigger(__FUNCTION__, $event, array($this, 'returnOnEvent'));
+        $responses = $this->events->trigger(__FUNCTION__, $event, [$this, 'returnOnEvent']);
         $this->assertTrue($responses->stopped());
 
         // Fourth: Event as $event parameter:
         $event = new Zend_EventManager_Event();
         $event->setTarget($this);
         $event->setName(__FUNCTION__);
-        $responses = $this->events->trigger($event, array($this, 'returnOnEvent'));
+        $responses = $this->events->trigger($event, [$this, 'returnOnEvent']);
         $this->assertTrue($responses->stopped());
     }
 
@@ -499,19 +498,19 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
             $this->markTestSkipped('Requires pecl/weakref');
         }
 
-        $functor = new Zend_EventManager_TestAsset_Functor;
+        $functor = new Zend_EventManager_TestAsset_Functor();
         $this->events->attach('test', $functor);
 
         unset($functor);
 
-        $result = $this->events->trigger('test', $this, array());
+        $result = $this->events->trigger('test', $this, []);
         $message = $result->last();
         $this->assertNull($message);
     }
 
     public function testDuplicateIdentifiersAreNotRegistered()
     {
-        $events = new Zend_EventManager_EventManager(array(__CLASS__, get_class($this)));
+        $events = new Zend_EventManager_EventManager([__CLASS__, get_class($this)]);
         $identifiers = $events->getIdentifiers();
         $this->assertSame(count($identifiers), 1);
         $this->assertSame($identifiers[0], __CLASS__);
@@ -523,18 +522,18 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
     public function testIdentifierGetterSettersWorkWithStrings()
     {
         $identifier1 = 'foo';
-        $identifiers = array($identifier1);
+        $identifiers = [$identifier1];
         $this->assertTrue($this->events->setIdentifiers($identifier1) instanceof Zend_EventManager_EventManager);
         $this->assertSame($this->events->getIdentifiers(), $identifiers);
         $identifier2 = 'baz';
-        $identifiers = array($identifier1, $identifier2);
+        $identifiers = [$identifier1, $identifier2];
         $this->assertTrue($this->events->addIdentifiers($identifier2) instanceof Zend_EventManager_EventManager);
         $this->assertSame($this->events->getIdentifiers(), $identifiers);
     }
 
     public function testIdentifierGetterSettersWorkWithArrays()
     {
-        $identifiers = array('foo', 'bar');
+        $identifiers = ['foo', 'bar'];
         $this->assertTrue($this->events->setIdentifiers($identifiers) instanceof Zend_EventManager_EventManager);
         $this->assertSame($this->events->getIdentifiers(), $identifiers);
         $identifiers[] = 'baz';
@@ -544,22 +543,22 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
 
     public function testIdentifierGetterSettersWorkWithTraversables()
     {
-        $identifiers = new ArrayIterator(array('foo', 'bar'));
+        $identifiers = new ArrayIterator(['foo', 'bar']);
         $this->assertTrue($this->events->setIdentifiers($identifiers) instanceof Zend_EventManager_EventManager);
         $this->assertSame($this->events->getIdentifiers(), (array) $identifiers);
-        $identifiers = new ArrayIterator(array('foo', 'bar', 'baz'));
+        $identifiers = new ArrayIterator(['foo', 'bar', 'baz']);
         $this->assertTrue($this->events->addIdentifiers($identifiers) instanceof Zend_EventManager_EventManager);
         $this->assertSame($this->events->getIdentifiers(), (array) $identifiers);
     }
 
     public function testListenersAttachedWithWildcardAreTriggeredForAllEvents()
     {
-        $this->test         = new stdClass;
-        $this->test->events = array();
-        $callback           = array($this, 'setEventName');
+        $this->test = new stdClass();
+        $this->test->events = [];
+        $callback = [$this, 'setEventName'];
 
         $this->events->attach('*', $callback);
-        foreach (array('foo', 'bar', 'baz') as $event) {
+        foreach (['foo', 'bar', 'baz'] as $event) {
             $this->events->trigger($event);
             $this->assertStringContainsString($event, $this->test->events);
         }
@@ -567,7 +566,6 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @group ZF-12185
-     *
      */
     public function testInvalidArgumentExceptionCanBeThrown()
     {
@@ -588,12 +586,14 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
     public function trimString($e)
     {
         $string = $e->getParam('string', $this->default);
+
         return \trim((string) $string);
     }
 
     public function stringRot13($e)
     {
         $string = $e->getParam('string', $this->default);
+
         return str_rot13($string);
     }
 
@@ -601,6 +601,7 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
     {
         $string = $e->getParam('string', '');
         $search = $e->getParam('search', '?');
+
         return strpos((string) $string, $search);
     }
 
@@ -608,6 +609,7 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
     {
         $string = $e->getParam('string', '');
         $search = $e->getParam('search', '?');
+
         return strstr((string) $string, $search);
     }
 
@@ -639,6 +641,7 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
     public function returnNadaAndStopPropagation($e)
     {
         $e->stopPropagation(true);
+
         return 'nada';
     }
 
@@ -656,7 +659,8 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
     {
         $foo = $e->getParam('foo', '__NO_FOO__');
         $bar = $e->getParam('bar', '__NO_BAR__');
-        return $foo . ":" . $bar;
+
+        return $foo.':'.$bar;
     }
 
     public function returnEvent($e)
@@ -671,17 +675,17 @@ class Zend_EventManager_EventManagerTest extends \PHPUnit\Framework\TestCase
 
     public function returnOnFound($result)
     {
-        return ($result === 'found');
+        return 'found' === $result;
     }
 
     public function returnOnNeverFound($result)
     {
-        return ($result === 'never found');
+        return 'never found' === $result;
     }
 
     public function returnOnEvent($result)
     {
-        return ($result instanceof Zend_EventManager_EventDescription);
+        return $result instanceof Zend_EventManager_EventDescription;
     }
 }
 

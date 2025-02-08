@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -32,41 +33,40 @@ require_once 'Zend/Db/Adapter/TestCommon.php';
 
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
 {
-    protected $_numericDataTypes = array(
-        Zend_Db::INT_TYPE    => Zend_Db::INT_TYPE,
+    protected $_numericDataTypes = [
+        Zend_Db::INT_TYPE => Zend_Db::INT_TYPE,
         Zend_Db::BIGINT_TYPE => Zend_Db::BIGINT_TYPE,
-        Zend_Db::FLOAT_TYPE  => Zend_Db::FLOAT_TYPE,
-        'INT'                => Zend_Db::INT_TYPE,
-        'SMALLINT'           => Zend_Db::INT_TYPE,
-        'TINYINT'            => Zend_Db::INT_TYPE,
-        'BIGINT'             => Zend_Db::BIGINT_TYPE,
-        'DECIMAL'            => Zend_Db::FLOAT_TYPE,
-        'FLOAT'              => Zend_Db::FLOAT_TYPE,
-        'MONEY'              => Zend_Db::FLOAT_TYPE,
-        'NUMERIC'            => Zend_Db::FLOAT_TYPE,
-        'REAL'               => Zend_Db::FLOAT_TYPE,
-        'SMALLMONEY'         => Zend_Db::FLOAT_TYPE
-    );
+        Zend_Db::FLOAT_TYPE => Zend_Db::FLOAT_TYPE,
+        'INT' => Zend_Db::INT_TYPE,
+        'SMALLINT' => Zend_Db::INT_TYPE,
+        'TINYINT' => Zend_Db::INT_TYPE,
+        'BIGINT' => Zend_Db::BIGINT_TYPE,
+        'DECIMAL' => Zend_Db::FLOAT_TYPE,
+        'FLOAT' => Zend_Db::FLOAT_TYPE,
+        'MONEY' => Zend_Db::FLOAT_TYPE,
+        'NUMERIC' => Zend_Db::FLOAT_TYPE,
+        'REAL' => Zend_Db::FLOAT_TYPE,
+        'SMALLMONEY' => Zend_Db::FLOAT_TYPE,
+    ];
 
     /**
      * Test AUTO_QUOTE_IDENTIFIERS option
-     * Case: Zend_Db::AUTO_QUOTE_IDENTIFIERS = true
+     * Case: Zend_Db::AUTO_QUOTE_IDENTIFIERS = true.
      */
     public function testAdapterAutoQuoteIdentifiersTrue()
     {
         $params = $this->_util->getParams();
 
-        $params['options'] = array(
-            Zend_Db::AUTO_QUOTE_IDENTIFIERS => true
-        );
+        $params['options'] = [
+            Zend_Db::AUTO_QUOTE_IDENTIFIERS => true,
+        ];
         $db = Zend_Db::factory($this->getDriver(), $params);
         $db->getConnection();
 
@@ -85,15 +85,15 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
      */
     public function testAdapterInsert()
     {
-        $row = array (
+        $row = [
             'bug_description' => 'New bug',
-            'bug_status'      => 'NEW',
-            'created_on'      => '2007-04-02',
-            'updated_on'      => '2007-04-02',
-            'reported_by'     => 'micky',
-            'assigned_to'     => 'goofy',
-            'verified_by'     => 'dduck'
-        );
+            'bug_status' => 'NEW',
+            'created_on' => '2007-04-02',
+            'updated_on' => '2007-04-02',
+            'reported_by' => 'micky',
+            'assigned_to' => 'goofy',
+            'verified_by' => 'dduck',
+        ];
 
         $rowsAffected = $this->_db->insert('zfbugs', $row);
         $this->assertEquals(1, $rowsAffected);
@@ -111,29 +111,29 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
     /**
      * Test the Adapter's insert() method.
      * This requires providing an associative array of column=>value pairs.
-     * Multiple rows are insert in one query
+     * Multiple rows are insert in one query.
      */
     public function testAdapterMultipleInsert()
     {
-        $row = array (
+        $row = [
             'bug_description' => 'New bug',
-            'bug_status'      => 'NEW',
-            'created_on'      => '2007-04-02',
-            'updated_on'      => '2007-04-02',
-            'reported_by'     => 'micky',
-            'assigned_to'     => 'goofy',
-            'verified_by'     => 'dduck'
-        );
+            'bug_status' => 'NEW',
+            'created_on' => '2007-04-02',
+            'updated_on' => '2007-04-02',
+            'reported_by' => 'micky',
+            'assigned_to' => 'goofy',
+            'verified_by' => 'dduck',
+        ];
 
         $bugs = $this->_db->quoteIdentifier('zfbugs');
 
         $values = '(?, ?, ?, ?, ?, ?, ?)';
 
-        $query = 'INSERT INTO ' . $bugs . ' VALUES ' . implode(',', array($values, $values, $values));
+        $query = 'INSERT INTO '.$bugs.' VALUES '.implode(',', [$values, $values, $values]);
 
-        $data = array();
+        $data = [];
 
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 3; ++$i) {
             foreach ($row as $value) {
                 $data[] = $value;
             }
@@ -148,11 +148,11 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
     {
         $desc = $this->_db->describeTable('zfproducts');
 
-        $this->assertEquals('zfproducts',   $desc['product_name']['TABLE_NAME']);
+        $this->assertEquals('zfproducts', $desc['product_name']['TABLE_NAME']);
         $this->assertEquals('product_name', $desc['product_name']['COLUMN_NAME']);
-        $this->assertEquals(2,              $desc['product_name']['COLUMN_POSITION']);
-        $this->assertMatchesRegularExpression('/varchar/i',   $desc['product_name']['DATA_TYPE']);
-        $this->assertEquals('',             $desc['product_name']['DEFAULT']);
+        $this->assertEquals(2, $desc['product_name']['COLUMN_POSITION']);
+        $this->assertMatchesRegularExpression('/varchar/i', $desc['product_name']['DATA_TYPE']);
+        $this->assertEquals('', $desc['product_name']['DEFAULT']);
         $this->assertTrue($desc['product_name']['NULLABLE'], 'Expected product_name to be nullable');
         $this->assertNull($desc['product_name']['SCALE'], 'scale is not 0');
 
@@ -164,7 +164,8 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
     }
 
     /**
-     * test that describeTable() returns empty array on not existing table
+     * test that describeTable() returns empty array on not existing table.
+     *
      * @group ZF-9079
      */
     public function testAdapterDescribeTableNotExistingTable()
@@ -180,13 +181,13 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
 
         $this->assertEquals('zfproducts', $desc['product_id']['TABLE_NAME']);
         $this->assertEquals('product_id', $desc['product_id']['COLUMN_NAME']);
-        $this->assertEquals(1,            $desc['product_id']['COLUMN_POSITION']);
-        $this->assertEquals('',           $desc['product_id']['DEFAULT']);
+        $this->assertEquals(1, $desc['product_id']['COLUMN_POSITION']);
+        $this->assertEquals('', $desc['product_id']['DEFAULT']);
         $this->assertFalse($desc['product_id']['NULLABLE'], 'Expected product_id not to be nullable');
-        $this->assertEquals(0,            $desc['product_id']['SCALE'], 'scale is not 0');
-        $this->assertEquals(10,           $desc['product_id']['PRECISION'], 'precision is not 10');
+        $this->assertEquals(0, $desc['product_id']['SCALE'], 'scale is not 0');
+        $this->assertEquals(10, $desc['product_id']['PRECISION'], 'precision is not 10');
         $this->assertTrue($desc['product_id']['PRIMARY'], 'Expected product_id to be a primary key');
-        $this->assertEquals(1,            $desc['product_id']['PRIMARY_POSITION']);
+        $this->assertEquals(1, $desc['product_id']['PRIMARY_POSITION']);
     }
 
     /**
@@ -195,7 +196,7 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
      */
     public function testAdapterQuoteArray()
     {
-        $array = array("it's", 'all', 'right!');
+        $array = ["it's", 'all', 'right!'];
         $value = $this->_db->quote($array);
         $this->assertEquals("'it''s', 'all', 'right!'", $value);
     }
@@ -207,7 +208,7 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
     public function testAdapterQuoteDoubleQuote()
     {
         $string = 'St John"s Wort';
-        $value  = $this->_db->quote($string);
+        $value = $this->_db->quote($string);
         $this->assertEquals("'St John\"s Wort'", $value);
     }
 
@@ -218,7 +219,7 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
     public function testAdapterQuoteSingleQuote()
     {
         $string = "St John's Wort";
-        $value  = $this->_db->quote($string);
+        $value = $this->_db->quote($string);
         $this->assertEquals("'St John''s Wort'", $value);
     }
 
@@ -229,8 +230,8 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
     public function testAdapterQuoteIntoDoubleQuote()
     {
         $string = 'id=?';
-        $param  = 'St John"s Wort';
-        $value  = $this->_db->quoteInto($string, $param);
+        $param = 'St John"s Wort';
+        $value = $this->_db->quoteInto($string, $param);
         $this->assertEquals("id='St John\"s Wort'", $value);
     }
 
@@ -241,32 +242,32 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
     public function testAdapterQuoteIntoSingleQuote()
     {
         $string = 'id = ?';
-        $param  = 'St John\'s Wort';
-        $value  = $this->_db->quoteInto($string, $param);
+        $param = 'St John\'s Wort';
+        $value = $this->_db->quoteInto($string, $param);
         $this->assertEquals("id = 'St John''s Wort'", $value);
     }
 
     public function testAdapterInsertSequence()
     {
-        $this->markTestSkipped($this->getDriver() . ' does not support sequences.');
+        $this->markTestSkipped($this->getDriver().' does not support sequences.');
     }
 
     public function testAdapterInsertDbExpr()
     {
-        $bugs   = $this->_db->quoteIdentifier('zfbugs');
+        $bugs = $this->_db->quoteIdentifier('zfbugs');
         $bug_id = $this->_db->quoteIdentifier('bug_id');
-        $expr   = new Zend_Db_Expr('2+3');
+        $expr = new Zend_Db_Expr('2+3');
 
-        $row = array (
-            'bug_id'          => $expr,
+        $row = [
+            'bug_id' => $expr,
             'bug_description' => 'New bug',
-            'bug_status'      => 'NEW',
-            'created_on'      => '2007-04-02',
-            'updated_on'      => '2007-04-02',
-            'reported_by'     => 'micky',
-            'assigned_to'     => 'goofy',
-            'verified_by'     => 'dduck'
-        );
+            'bug_status' => 'NEW',
+            'created_on' => '2007-04-02',
+            'updated_on' => '2007-04-02',
+            'reported_by' => 'micky',
+            'assigned_to' => 'goofy',
+            'verified_by' => 'dduck',
+        ];
 
         $this->_db->query("SET IDENTITY_INSERT $bugs ON");
 
@@ -291,17 +292,17 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
 
         $db = Zend_Db::factory($this->getDriver(), $params);
 
-         // create a new util object, with the new db adapter
-        $driver    = $this->getDriver();
+        // create a new util object, with the new db adapter
+        $driver = $this->getDriver();
         $utilClass = "Zend_Db_TestUtil_{$driver}";
-        $util      = new $utilClass();
+        $util = new $utilClass();
         $util->setAdapter($db);
 
         // create test table using no identifier quoting
-        $util->createTable('charsetutf8', array(
-            'id'    => 'IDENTITY',
-            'stuff' => 'VARCHAR(32)'
-        ));
+        $util->createTable('charsetutf8', [
+            'id' => 'IDENTITY',
+            'stuff' => 'VARCHAR(32)',
+        ]);
         $tableName = $this->_util->getTableName('charsetutf8');
 
         $table = $db->quoteIdentifier('charsetutf8');
@@ -309,19 +310,19 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
         $db->query("SET IDENTITY_INSERT $table ON");
 
         // insert into the table
-        $numRows = $db->insert($tableName, array(
-            'id'    => 1,
-            'stuff' => 'äöüß'
-        ));
+        $numRows = $db->insert($tableName, [
+            'id' => 1,
+            'stuff' => 'äöüß',
+        ]);
 
         // check if the row was inserted as expected
-        $select = $db->select()->from($tableName, array('id', 'stuff'));
+        $select = $db->select()->from($tableName, ['id', 'stuff']);
 
         $stmt = $db->query($select);
         $fetched = $stmt->fetchAll(Zend_Db::FETCH_NUM);
-        $a = array(
-            0 => array(0 => 1, 1 => 'äöüß')
-        );
+        $a = [
+            0 => [0 => 1, 1 => 'äöüß'],
+        ];
         $this->assertEquals($a, $fetched,
             'result of query not as expected');
 
@@ -334,7 +335,7 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
 
     public function testAdapterTransactionCommit()
     {
-        $bugs   = $this->_db->quoteIdentifier('zfbugs');
+        $bugs = $this->_db->quoteIdentifier('zfbugs');
         $bug_id = $this->_db->quoteIdentifier('bug_id');
 
         // notice the number of rows in connection 2
@@ -378,7 +379,7 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
 
     public function testAdapterTransactionRollback()
     {
-        $bugs   = $this->_db->quoteIdentifier('zfbugs');
+        $bugs = $this->_db->quoteIdentifier('zfbugs');
         $bug_id = $this->_db->quoteIdentifier('bug_id');
 
         // notice the number of rows in connection 2
@@ -434,15 +435,16 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
 
         try {
             $db->setTransactionIsolationLevel('not existing isolation level');
-            $this->fail("Not existing isolation types are allowed to set");
+            $this->fail('Not existing isolation types are allowed to set');
         } catch (Zend_Db_Adapter_Sqlsrv_Exception $e) {
         }
 
-        $this->assertTrue($db->setTransactionIsolationLevel(), "Setting to default should work by passsing null or nothing");
+        $this->assertTrue($db->setTransactionIsolationLevel(), 'Setting to default should work by passsing null or nothing');
     }
 
     /**
      * @group ZF-9252
+     *
      * @see zf-trunk/tests/Zend/Db/Adapter/Zend_Db_Adapter_TestCommon#testAdapterLimit()
      */
     public function testAdapterLimit()
@@ -460,11 +462,11 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
             'Expecting row count to be 1');
         $this->assertEquals(1, $result[0]['product_id'],
             'Expecting to get product_id 1');
-
     }
 
     /**
      * @group ZF-9252
+     *
      * @see zf-trunk/tests/Zend/Db/Adapter/Zend_Db_Adapter_TestCommon#testAdapterLimitOffset()
      */
     public function testAdapterLimitOffset()
@@ -567,7 +569,7 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
     public function testAdapterQuoteNullByteCharacter()
     {
         $string = "1\0";
-        $value  = $this->_db->quote($string);
+        $value = $this->_db->quote($string);
         $this->assertEquals("'1\\000'", $value);
     }
 }

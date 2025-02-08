@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Xml_Security
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -35,21 +36,21 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 /**
  * @category   Zend
- * @package    Zend_Xml_Security
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Xml
  */
 #[AllowDynamicProperties]
-class Zend_Xml_SecurityTest extends \PHPUnit\Framework\TestCase
+class Zend_Xml_SecurityTest extends PHPUnit\Framework\TestCase
 {
     public static function main()
     {
-        $suite  = \PHPUnit\Framework\TestSuite::empty(__CLASS__);
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty(__CLASS__);
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -88,6 +89,7 @@ XML;
             $result = Zend_Xml_Security::scan($xml);
         } catch (Zend_Xml_Exception $e) {
             unlink($file);
+
             return;
         }
 
@@ -169,10 +171,9 @@ XML;
     <result>test</result>
 </results>
 XML;
-
     }
 }
 
-if (PHPUnit_MAIN_METHOD == "Zend_Xml_SecurityTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Xml_SecurityTest::main') {
     Zend_Xml_SecurityTest::main();
 }

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate_File
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Validate_File_Md5Test::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Validate_File_Md5Test::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Validate_File_Md5Test::main');
 }
 
 /**
@@ -31,17 +32,17 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 // require_once 'Zend/Validate/File/Md5.php';
 
 /**
- * Md5 testbed
+ * Md5 testbed.
  *
  * @category   Zend
- * @package    Zend_Validate_File
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Validate
  */
 #[AllowDynamicProperties]
-class Zend_Validate_File_Md5Test extends \PHPUnit\Framework\TestCase
+class Zend_Validate_File_Md5Test extends PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -50,104 +51,104 @@ class Zend_Validate_File_Md5Test extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Validate_File_Md5Test");
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_Validate_File_Md5Test');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
 
     /**
-     * Ensures that the validator follows expected behavior
+     * Ensures that the validator follows expected behavior.
      *
      * @return void
      */
     public function testBasic()
     {
-        $valuesExpected = array(
-            array('ed74c22109fe9f110579f77b053b8bc3', true),
-            array('4d74c22109fe9f110579f77b053b8bc3', false),
-            array(array('4d74c22109fe9f110579f77b053b8bc3', 'ed74c22109fe9f110579f77b053b8bc3'), true),
-            array(array('4d74c22109fe9f110579f77b053b8bc3', '7d74c22109fe9f110579f77b053b8bc3'), false),
-        );
+        $valuesExpected = [
+            ['ed74c22109fe9f110579f77b053b8bc3', true],
+            ['4d74c22109fe9f110579f77b053b8bc3', false],
+            [['4d74c22109fe9f110579f77b053b8bc3', 'ed74c22109fe9f110579f77b053b8bc3'], true],
+            [['4d74c22109fe9f110579f77b053b8bc3', '7d74c22109fe9f110579f77b053b8bc3'], false],
+        ];
 
         foreach ($valuesExpected as $element) {
             $validator = new Zend_Validate_File_Md5($element[0]);
             $this->assertEquals(
                 $element[1],
-                $validator->isValid(__DIR__ . '/_files/picture.jpg'),
-                "Tested with " . var_export($element, 1)
+                $validator->isValid(__DIR__.'/_files/picture.jpg'),
+                'Tested with '.var_export($element, 1)
             );
         }
 
         $validator = new Zend_Validate_File_Md5('ed74c22109fe9f110579f77b053b8bc3');
-        $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
+        $this->assertFalse($validator->isValid(__DIR__.'/_files/nofile.mo'));
         $this->assertTrue(array_key_exists('fileMd5NotFound', $validator->getMessages()));
 
-        $files = array(
-            'name'     => 'test1',
-            'type'     => 'text',
-            'size'     => 200,
+        $files = [
+            'name' => 'test1',
+            'type' => 'text',
+            'size' => 200,
             'tmp_name' => 'tmp_test1',
-            'error'    => 0
-        );
+            'error' => 0,
+        ];
         $validator = new Zend_Validate_File_Md5('ed74c22109fe9f110579f77b053b8bc3');
-        $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo', $files));
+        $this->assertFalse($validator->isValid(__DIR__.'/_files/nofile.mo', $files));
         $this->assertTrue(array_key_exists('fileMd5NotFound', $validator->getMessages()));
 
-        $files = array(
-            'name'     => 'testsize.mo',
-            'type'     => 'text',
-            'size'     => 200,
-            'tmp_name' => __DIR__ . '/_files/testsize.mo',
-            'error'    => 0
-        );
+        $files = [
+            'name' => 'testsize.mo',
+            'type' => 'text',
+            'size' => 200,
+            'tmp_name' => __DIR__.'/_files/testsize.mo',
+            'error' => 0,
+        ];
         $validator = new Zend_Validate_File_Md5('ed74c22109fe9f110579f77b053b8bc3');
-        $this->assertTrue($validator->isValid(__DIR__ . '/_files/picture.jpg', $files));
+        $this->assertTrue($validator->isValid(__DIR__.'/_files/picture.jpg', $files));
 
-        $files = array(
-            'name'     => 'testsize.mo',
-            'type'     => 'text',
-            'size'     => 200,
-            'tmp_name' => __DIR__ . '/_files/testsize.mo',
-            'error'    => 0
-        );
+        $files = [
+            'name' => 'testsize.mo',
+            'type' => 'text',
+            'size' => 200,
+            'tmp_name' => __DIR__.'/_files/testsize.mo',
+            'error' => 0,
+        ];
         $validator = new Zend_Validate_File_Md5('7d74c22109fe9f110579f77b053b8bc3');
-        $this->assertFalse($validator->isValid(__DIR__ . '/_files/picture.jpg', $files));
+        $this->assertFalse($validator->isValid(__DIR__.'/_files/picture.jpg', $files));
         $this->assertTrue(array_key_exists('fileMd5DoesNotMatch', $validator->getMessages()));
     }
 
     /**
-     * Ensures that getMd5() returns expected value
+     * Ensures that getMd5() returns expected value.
      *
      * @return void
      */
     public function testgetMd5()
     {
         $validator = new Zend_Validate_File_Md5('12345');
-        $this->assertEquals(array('12345' => 'md5'), $validator->getMd5());
+        $this->assertEquals(['12345' => 'md5'], $validator->getMd5());
 
-        $validator = new Zend_Validate_File_Md5(array('12345', '12333', '12344'));
-        $this->assertEquals(array('12345' => 'md5', '12333' => 'md5', '12344' => 'md5'), $validator->getMd5());
+        $validator = new Zend_Validate_File_Md5(['12345', '12333', '12344']);
+        $this->assertEquals(['12345' => 'md5', '12333' => 'md5', '12344' => 'md5'], $validator->getMd5());
     }
 
     /**
-     * Ensures that getHash() returns expected value
+     * Ensures that getHash() returns expected value.
      *
      * @return void
      */
     public function testgetHash()
     {
         $validator = new Zend_Validate_File_Md5('12345');
-        $this->assertEquals(array('12345' => 'md5'), $validator->getHash());
+        $this->assertEquals(['12345' => 'md5'], $validator->getHash());
 
-        $validator = new Zend_Validate_File_Md5(array('12345', '12333', '12344'));
-        $this->assertEquals(array('12345' => 'md5', '12333' => 'md5', '12344' => 'md5'), $validator->getHash());
+        $validator = new Zend_Validate_File_Md5(['12345', '12333', '12344']);
+        $this->assertEquals(['12345' => 'md5', '12333' => 'md5', '12344' => 'md5'], $validator->getHash());
     }
 
     /**
-     * Ensures that setMd5() returns expected value
+     * Ensures that setMd5() returns expected value.
      *
      * @return void
      */
@@ -155,14 +156,14 @@ class Zend_Validate_File_Md5Test extends \PHPUnit\Framework\TestCase
     {
         $validator = new Zend_Validate_File_Md5('12345');
         $validator->setMd5('12333');
-        $this->assertEquals(array('12333' => 'md5'), $validator->getMd5());
+        $this->assertEquals(['12333' => 'md5'], $validator->getMd5());
 
-        $validator->setMd5(array('12321', '12121'));
-        $this->assertEquals(array('12321' => 'md5', '12121' => 'md5'), $validator->getMd5());
+        $validator->setMd5(['12321', '12121']);
+        $this->assertEquals(['12321' => 'md5', '12121' => 'md5'], $validator->getMd5());
     }
 
     /**
-     * Ensures that setHash() returns expected value
+     * Ensures that setHash() returns expected value.
      *
      * @return void
      */
@@ -170,14 +171,14 @@ class Zend_Validate_File_Md5Test extends \PHPUnit\Framework\TestCase
     {
         $validator = new Zend_Validate_File_Md5('12345');
         $validator->setHash('12333');
-        $this->assertEquals(array('12333' => 'md5'), $validator->getMd5());
+        $this->assertEquals(['12333' => 'md5'], $validator->getMd5());
 
-        $validator->setHash(array('12321', '12121'));
-        $this->assertEquals(array('12321' => 'md5', '12121' => 'md5'), $validator->getMd5());
+        $validator->setHash(['12321', '12121']);
+        $this->assertEquals(['12321' => 'md5', '12121' => 'md5'], $validator->getMd5());
     }
 
     /**
-     * Ensures that addMd5() returns expected value
+     * Ensures that addMd5() returns expected value.
      *
      * @return void
      */
@@ -185,14 +186,14 @@ class Zend_Validate_File_Md5Test extends \PHPUnit\Framework\TestCase
     {
         $validator = new Zend_Validate_File_Md5('12345');
         $validator->addMd5('12344');
-        $this->assertEquals(array('12345' => 'md5', '12344' => 'md5'), $validator->getMd5());
+        $this->assertEquals(['12345' => 'md5', '12344' => 'md5'], $validator->getMd5());
 
-        $validator->addMd5(array('12321', '12121'));
-        $this->assertEquals(array('12345' => 'md5', '12344' => 'md5', '12321' => 'md5', '12121' => 'md5'), $validator->getMd5());
+        $validator->addMd5(['12321', '12121']);
+        $this->assertEquals(['12345' => 'md5', '12344' => 'md5', '12321' => 'md5', '12121' => 'md5'], $validator->getMd5());
     }
 
     /**
-     * Ensures that addHash() returns expected value
+     * Ensures that addHash() returns expected value.
      *
      * @return void
      */
@@ -200,14 +201,14 @@ class Zend_Validate_File_Md5Test extends \PHPUnit\Framework\TestCase
     {
         $validator = new Zend_Validate_File_Md5('12345');
         $validator->addHash('12344');
-        $this->assertEquals(array('12345' => 'md5', '12344' => 'md5'), $validator->getMd5());
+        $this->assertEquals(['12345' => 'md5', '12344' => 'md5'], $validator->getMd5());
 
-        $validator->addHash(array('12321', '12121'));
-        $this->assertEquals(array('12345' => 'md5', '12344' => 'md5', '12321' => 'md5', '12121' => 'md5'), $validator->getMd5());
+        $validator->addHash(['12321', '12121']);
+        $this->assertEquals(['12345' => 'md5', '12344' => 'md5', '12321' => 'md5', '12121' => 'md5'], $validator->getMd5());
     }
 }
 
 // Call Zend_Validate_File_Md5Test::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Validate_File_Md5Test::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Validate_File_Md5Test::main') {
     Zend_Validate_File_Md5Test::main();
 }

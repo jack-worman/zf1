@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Reflection
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,24 +26,22 @@
 
 /**
  * @category   Zend
- * @package    Zend_Reflection
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Reflection
  * @group      Zend_Reflection_Docblock
  */
 #[AllowDynamicProperties]
-class Zend_Reflection_DocblockTest extends \PHPUnit\Framework\TestCase
+class Zend_Reflection_DocblockTest extends PHPUnit\Framework\TestCase
 {
-
-
-    static protected $_sampleClassFileRequired = false;
+    protected static $_sampleClassFileRequired = false;
 
     public function setUp(): void
     {
-        if (self::$_sampleClassFileRequired === false) {
-            $fileToRequire = __DIR__ . '/_files/TestSampleClass.php';
+        if (false === self::$_sampleClassFileRequired) {
+            $fileToRequire = __DIR__.'/_files/TestSampleClass.php';
             require_once $fileToRequire;
             self::$_sampleClassFileRequired = true;
         }
@@ -57,7 +56,7 @@ class Zend_Reflection_DocblockTest extends \PHPUnit\Framework\TestCase
     public function testDocblockLongDescription()
     {
         $classReflection = new Zend_Reflection_Class('Zend_Reflection_TestSampleClass5');
-        $expectedOutput =<<<EOS
+        $expectedOutput = <<<EOS
 This is a long description for
 the docblock of this class, it
 should be longer than 3 lines.
@@ -66,7 +65,6 @@ now.
 EOS;
 
         $this->assertEquals($classReflection->getDocblock()->getLongDescription(), $expectedOutput);
-
     }
 
     public function testDocblockTags()
@@ -93,7 +91,6 @@ EOS;
 
         $this->assertEquals($classDocblock->getStartLine(), 77);
         $this->assertEquals($classDocblock->getEndLine(), 87);
-
     }
 
     public function testDocblockContents()
@@ -116,7 +113,6 @@ now.
 EOS;
 
         $this->assertEquals($classDocblock->getContents(), $expectedContents);
-
     }
 
     public function testToString()
@@ -125,14 +121,13 @@ EOS;
 
         $classDocblock = $classReflection->getDocblock();
 
-        $expectedString = 'Docblock [ /* Docblock */ ] {' . PHP_EOL
-                        . PHP_EOL
-                        . '  - Tags [1] {' . PHP_EOL
-                        . '    Docblock Tag [ * @author ]' . PHP_EOL
-                        . '  }' . PHP_EOL
-                        . '}' . PHP_EOL;
+        $expectedString = 'Docblock [ /* Docblock */ ] {'.PHP_EOL
+                        .PHP_EOL
+                        .'  - Tags [1] {'.PHP_EOL
+                        .'    Docblock Tag [ * @author ]'.PHP_EOL
+                        .'  }'.PHP_EOL
+                        .'}'.PHP_EOL;
 
-        $this->assertEquals($expectedString, (string)$classDocblock);
+        $this->assertEquals($expectedString, (string) $classDocblock);
     }
-
 }

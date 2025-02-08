@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Dojo_Form_Element_HorizontalSliderTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_Form_Element_HorizontalSliderTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Dojo_Form_Element_HorizontalSliderTest::main');
 }
 
 /** Zend_Dojo_Form_Element_HorizontalSlider */
@@ -41,15 +42,15 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * Test class for Zend_Dojo_Form_Element_HorizontalSlider.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Dojo
  * @group      Zend_Dojo_Form
  */
 #[AllowDynamicProperties]
-class Zend_Dojo_Form_Element_HorizontalSliderTest extends \PHPUnit\Framework\TestCase
+class Zend_Dojo_Form_Element_HorizontalSliderTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -58,10 +59,10 @@ class Zend_Dojo_Form_Element_HorizontalSliderTest extends \PHPUnit\Framework\Tes
      */
     public static function main()
     {
-        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Dojo_Form_Element_HorizontalSliderTest");
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_Dojo_Form_Element_HorizontalSliderTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -69,15 +70,13 @@ class Zend_Dojo_Form_Element_HorizontalSliderTest extends \PHPUnit\Framework\Tes
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @return void
      */
     public function setUp(): void
     {
         Zend_Registry::_unsetInstance();
         Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
 
-        $this->view    = $this->getView();
+        $this->view = $this->getView();
         $this->element = $this->getElement();
         $this->element->setView($this->view);
     }
@@ -85,8 +84,6 @@ class Zend_Dojo_Form_Element_HorizontalSliderTest extends \PHPUnit\Framework\Tes
     /**
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
-     *
-     * @return void
      */
     public function tearDown(): void
     {
@@ -97,6 +94,7 @@ class Zend_Dojo_Form_Element_HorizontalSliderTest extends \PHPUnit\Framework\Tes
         // require_once 'Zend/View.php';
         $view = new Zend_View();
         $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
+
         return $view;
     }
 
@@ -104,13 +102,14 @@ class Zend_Dojo_Form_Element_HorizontalSliderTest extends \PHPUnit\Framework\Tes
     {
         $element = new Zend_Dojo_Form_Element_HorizontalSlider(
             'foo',
-            array(
+            [
                 'value' => 'some text',
                 'label' => 'HorizontalSlider',
                 'class' => 'someclass',
                 'style' => 'width: 100px;',
-            )
+            ]
         );
+
         return $element;
     }
 
@@ -205,7 +204,7 @@ class Zend_Dojo_Form_Element_HorizontalSliderTest extends \PHPUnit\Framework\Tes
 
     public function testSettingTopDecorationLabelsShouldProxyToTopDecorationDijitParam()
     {
-        $labels = array('0%', '50%', '100%');
+        $labels = ['0%', '50%', '100%'];
         $this->element->setTopDecorationLabels($labels);
         $this->assertTrue($this->element->hasDijitParam('topDecoration'));
         $topDecoration = $this->element->getDijitParam('topDecoration');
@@ -219,14 +218,14 @@ class Zend_Dojo_Form_Element_HorizontalSliderTest extends \PHPUnit\Framework\Tes
 
     public function testSettingTopDecorationParamsShouldProxyToTopDecorationDijitParam()
     {
-        $params = array(
-            'container' => array(
+        $params = [
+            'container' => [
                 'style' => 'height:1.2em; font-size=75%;color:gray;',
-            ),
-            'list' => array(
+            ],
+            'list' => [
                 'style' => 'height:1em; font-size=75%;color:gray;',
-            ),
-        );
+            ],
+        ];
         $this->element->setTopDecorationParams($params);
         $this->assertTrue($this->element->hasDijitParam('topDecoration'));
         $topDecoration = $this->element->getDijitParam('topDecoration');
@@ -240,14 +239,14 @@ class Zend_Dojo_Form_Element_HorizontalSliderTest extends \PHPUnit\Framework\Tes
 
     public function testSettingTopDecorationAttribsShouldProxyToTopDecorationDijitParam()
     {
-        $attribs = array(
-            'container' => array(
+        $attribs = [
+            'container' => [
                 'style' => 'height:1.2em; font-size=75%;color:gray;',
-            ),
-            'list' => array(
+            ],
+            'list' => [
                 'style' => 'height:1em; font-size=75%;color:gray;',
-            ),
-        );
+            ],
+        ];
         $this->element->setTopDecorationAttribs($attribs);
         $this->assertTrue($this->element->hasDijitParam('topDecoration'));
         $topDecoration = $this->element->getDijitParam('topDecoration');
@@ -287,7 +286,7 @@ class Zend_Dojo_Form_Element_HorizontalSliderTest extends \PHPUnit\Framework\Tes
 
     public function testSettingBottomDecorationLabelsShouldProxyToBottomDecorationDijitParam()
     {
-        $labels = array('0%', '50%', '100%');
+        $labels = ['0%', '50%', '100%'];
         $this->element->setBottomDecorationLabels($labels);
         $this->assertTrue($this->element->hasDijitParam('bottomDecoration'));
         $bottomDecoration = $this->element->getDijitParam('bottomDecoration');
@@ -301,14 +300,14 @@ class Zend_Dojo_Form_Element_HorizontalSliderTest extends \PHPUnit\Framework\Tes
 
     public function testSettingBottomDecorationParamsShouldProxyToBottomDecorationDijitParam()
     {
-        $params = array(
-            'container' => array(
+        $params = [
+            'container' => [
                 'style' => 'height:1.2em; font-size=75%;color:gray;',
-            ),
-            'list' => array(
+            ],
+            'list' => [
                 'style' => 'height:1em; font-size=75%;color:gray;',
-            ),
-        );
+            ],
+        ];
         $this->element->setBottomDecorationParams($params);
         $this->assertTrue($this->element->hasDijitParam('bottomDecoration'));
         $bottomDecoration = $this->element->getDijitParam('bottomDecoration');
@@ -322,14 +321,14 @@ class Zend_Dojo_Form_Element_HorizontalSliderTest extends \PHPUnit\Framework\Tes
 
     public function testSettingBottomDecorationAttribsShouldProxyToBottomDecorationDijitParam()
     {
-        $attribs = array(
-            'container' => array(
+        $attribs = [
+            'container' => [
                 'style' => 'height:1.2em; font-size=75%;color:gray;',
-            ),
-            'list' => array(
+            ],
+            'list' => [
                 'style' => 'height:1em; font-size=75%;color:gray;',
-            ),
-        );
+            ],
+        ];
         $this->element->setBottomDecorationAttribs($attribs);
         $this->assertTrue($this->element->hasDijitParam('bottomDecoration'));
         $bottomDecoration = $this->element->getDijitParam('bottomDecoration');
@@ -352,6 +351,6 @@ class Zend_Dojo_Form_Element_HorizontalSliderTest extends \PHPUnit\Framework\Tes
 }
 
 // Call Zend_Dojo_Form_Element_HorizontalSliderTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dojo_Form_Element_HorizontalSliderTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Dojo_Form_Element_HorizontalSliderTest::main') {
     Zend_Dojo_Form_Element_HorizontalSliderTest::main();
 }

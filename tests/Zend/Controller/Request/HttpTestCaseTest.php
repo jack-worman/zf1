@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Controller_Request_HttpTestCaseTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Controller_Request_HttpTestCaseTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Controller_Request_HttpTestCaseTest::main');
 }
 
 /** Zend_Controller_Request_HttpTestCase */
@@ -32,15 +33,15 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * Test class for Zend_Controller_Request_HttpTestCase.
  *
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Controller
  * @group      Zend_Controller_Request
  */
 #[AllowDynamicProperties]
-class Zend_Controller_Request_HttpTestCaseTest extends \PHPUnit\Framework\TestCase
+class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -49,10 +50,10 @@ class Zend_Controller_Request_HttpTestCaseTest extends \PHPUnit\Framework\TestCa
      */
     public static function main()
     {
-        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Controller_Request_HttpTestCaseTest");
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_Controller_Request_HttpTestCaseTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -60,22 +61,18 @@ class Zend_Controller_Request_HttpTestCaseTest extends \PHPUnit\Framework\TestCa
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @return void
      */
     public function setUp(): void
     {
         $this->request = new Zend_Controller_Request_HttpTestCase();
-        $_GET    = array();
-        $_POST   = array();
-        $_COOKIE = array();
+        $_GET = [];
+        $_POST = [];
+        $_COOKIE = [];
     }
 
     /**
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
-     *
-     * @return void
      */
     public function tearDown(): void
     {
@@ -102,11 +99,11 @@ class Zend_Controller_Request_HttpTestCaseTest extends \PHPUnit\Framework\TestCa
     public function testShouldAllowSpecifyingGetParameters()
     {
         $this->testGetShouldBeEmptyByDefault();
-        $expected = array(
+        $expected = [
             'foo' => 'bar',
             'bar' => 'baz',
             'baz' => 'bat',
-        );
+        ];
         $this->request->setQuery($expected);
 
         $test = $this->request->getQuery();
@@ -124,12 +121,12 @@ class Zend_Controller_Request_HttpTestCaseTest extends \PHPUnit\Framework\TestCa
     public function testShouldPopulateGetSuperglobal()
     {
         $this->testShouldAllowSpecifyingGetParameters();
-        $expected = array(
+        $expected = [
             'foo' => 'bar',
             'bar' => 'baz',
             'baz' => 'bat',
             'bat' => 'bogus',
-        );
+        ];
         $this->assertEquals($expected, $_GET);
     }
 
@@ -152,11 +149,11 @@ class Zend_Controller_Request_HttpTestCaseTest extends \PHPUnit\Framework\TestCa
     public function testShouldAllowSpecifyingPostParameters()
     {
         $this->testPostShouldBeEmptyByDefault();
-        $expected = array(
+        $expected = [
             'foo' => 'bar',
             'bar' => 'baz',
             'baz' => 'bat',
-        );
+        ];
         $this->request->setPost($expected);
 
         $test = $this->request->getPost();
@@ -174,12 +171,12 @@ class Zend_Controller_Request_HttpTestCaseTest extends \PHPUnit\Framework\TestCa
     public function testShouldPopulatePostSuperglobal()
     {
         $this->testShouldAllowSpecifyingPostParameters();
-        $expected = array(
+        $expected = [
             'foo' => 'bar',
             'bar' => 'baz',
             'baz' => 'bat',
             'bat' => 'bogus',
-        );
+        ];
         $this->assertEquals($expected, $_POST);
     }
 
@@ -219,10 +216,10 @@ class Zend_Controller_Request_HttpTestCaseTest extends \PHPUnit\Framework\TestCa
 
     public function testShouldAllowSpecifyingRequestHeaders()
     {
-        $headers = array(
-            'Content-Type'     => 'text/html',
+        $headers = [
+            'Content-Type' => 'text/html',
             'Content-Encoding' => 'utf-8',
-        );
+        ];
         $this->request->setHeaders($headers);
         $test = $this->request->getHeaders();
         $this->assertTrue(is_array($test));
@@ -255,11 +252,11 @@ class Zend_Controller_Request_HttpTestCaseTest extends \PHPUnit\Framework\TestCa
 
     public function testShouldAllowSpecifyingCookies()
     {
-        $cookies = array(
+        $cookies = [
             'foo' => 'bar',
             'bar' => 'baz',
-            'baz' => 'bat'
-        );
+            'baz' => 'bat',
+        ];
         $this->request->setCookies($cookies);
         $test = $this->request->getCookie();
         $this->assertEquals($cookies, $test);
@@ -270,12 +267,12 @@ class Zend_Controller_Request_HttpTestCaseTest extends \PHPUnit\Framework\TestCa
 
     public function testShouldPopulateCookieSuperGlobal()
     {
-        $cookies = array(
+        $cookies = [
             'foo' => 'bar',
             'bar' => 'baz',
             'baz' => 'bat',
             'bat' => 'bogus',
-        );
+        ];
         $this->testShouldAllowSpecifyingCookies();
         $this->assertEquals($cookies, $_COOKIE);
     }
@@ -318,6 +315,6 @@ class Zend_Controller_Request_HttpTestCaseTest extends \PHPUnit\Framework\TestCa
 }
 
 // Call Zend_Controller_Request_HttpTestCaseTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Controller_Request_HttpTestCaseTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Controller_Request_HttpTestCaseTest::main') {
     Zend_Controller_Request_HttpTestCaseTest::main();
 }

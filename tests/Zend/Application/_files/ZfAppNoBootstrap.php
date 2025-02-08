@@ -1,5 +1,6 @@
 <?php
-/**
+
+/*
  * Zend Framework
  *
  * LICENSE

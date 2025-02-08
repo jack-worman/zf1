@@ -12,10 +12,10 @@ class Zend_Acl_MockAssertion implements Zend_Acl_Assert_Interface
 
     public function assert(
         Zend_Acl $acl,
-        Zend_Acl_Role_Interface|null $role = null,
-        Zend_Acl_Resource_Interface|null $resource = null,
+        ?Zend_Acl_Role_Interface $role = null,
+        ?Zend_Acl_Resource_Interface $resource = null,
         $privilege = null,
     ) {
-       return $this->_returnValue;
+        return $this->_returnValue;
     }
 }

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id: BaseUrlTest.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
 
@@ -37,15 +38,15 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 /**
  * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
 #[AllowDynamicProperties]
-class Zend_View_Helper_GravatarTest extends \PHPUnit\Framework\TestCase
+class Zend_View_Helper_GravatarTest extends PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_View_Helper_Gravatar
@@ -58,14 +59,14 @@ class Zend_View_Helper_GravatarTest extends \PHPUnit\Framework\TestCase
     protected $_view;
 
     /**
-     * Main
+     * Main.
      */
     public static function main()
     {
-        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_View_Helper_GravatarTest");
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_View_Helper_GravatarTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -76,12 +77,12 @@ class Zend_View_Helper_GravatarTest extends \PHPUnit\Framework\TestCase
     protected function setUp(): void
     {
         $this->_object = new Zend_View_Helper_Gravatar();
-        $this->_view   = new Zend_View();
-        $this->_view->doctype()->setDoctype(strtoupper((string) "XHTML1_STRICT"));
+        $this->_view = new Zend_View();
+        $this->_view->doctype()->setDoctype(strtoupper((string) 'XHTML1_STRICT'));
         $this->_object->setView($this->_view);
 
-        if( isset($_SERVER['HTTPS'])) {
-            unset ($_SERVER['HTTPS']);
+        if (isset($_SERVER['HTTPS'])) {
+            unset($_SERVER['HTTPS']);
         }
     }
 
@@ -103,13 +104,13 @@ class Zend_View_Helper_GravatarTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Test if doctype is HTML
+     * Test if doctype is HTML.
      */
     public function testGravatarHTMLDoctype()
     {
         $object = new Zend_View_Helper_Gravatar();
-        $view   = new Zend_View();
-        $view->doctype()->setDoctype(strtoupper((string) "HTML5"));
+        $view = new Zend_View();
+        $view->doctype()->setDoctype(strtoupper((string) 'HTML5'));
         $object->setView($view);
 
         $this->assertMatchesRegularExpression('/[^\/]>$/',
@@ -117,20 +118,20 @@ class Zend_View_Helper_GravatarTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Test get set methods
+     * Test get set methods.
      */
     public function testGetAndSetMethods()
     {
-        $attribs = array('class' => 'gravatar', 'title' => 'avatar', 'id' => 'gravatar-1');
+        $attribs = ['class' => 'gravatar', 'title' => 'avatar', 'id' => 'gravatar-1'];
         $this->_object->setDefaultImg('monsterid')
              ->setImgSize(150)
              ->setSecure(true)
-             ->setEmail("example@example.com")
+             ->setEmail('example@example.com')
              ->setAttribs($attribs)
              ->setRating('pg');
-        $this->assertEquals("monsterid", $this->_object->getDefaultImg());
-        $this->assertEquals("pg", $this->_object->getRating());
-        $this->assertEquals("example@example.com", $this->_object->getEmail());
+        $this->assertEquals('monsterid', $this->_object->getDefaultImg());
+        $this->assertEquals('pg', $this->_object->getRating());
+        $this->assertEquals('example@example.com', $this->_object->getEmail());
         $this->assertEquals($attribs, $this->_object->getAttribs());
         $this->assertEquals(150, $this->_object->getImgSize());
         $this->assertTrue($this->_object->getSecure());
@@ -138,13 +139,13 @@ class Zend_View_Helper_GravatarTest extends \PHPUnit\Framework\TestCase
 
     public function tesSetDefaultImg()
     {
-        $this->_object->gravatar("example@example.com");
+        $this->_object->gravatar('example@example.com');
 
-        $img = array(
-            "wavatar",
-            "http://www.example.com/images/avatar/example.png",
+        $img = [
+            'wavatar',
+            'http://www.example.com/images/avatar/example.png',
             Zend_View_Helper_Gravatar::DEFAULT_MONSTERID,
-        );
+        ];
 
         foreach ($img as $value) {
             $this->_object->setDefaultImg($value);
@@ -154,7 +155,7 @@ class Zend_View_Helper_GravatarTest extends \PHPUnit\Framework\TestCase
 
     public function testSetImgSize()
     {
-        $imgSizesRight = array(1, 500, "600");
+        $imgSizesRight = [1, 500, '600'];
         foreach ($imgSizesRight as $value) {
             $this->_object->setImgSize($value);
             $this->assertTrue(is_int($this->_object->getImgSize()));
@@ -163,7 +164,7 @@ class Zend_View_Helper_GravatarTest extends \PHPUnit\Framework\TestCase
 
     public function testInvalidRatingParametr()
     {
-        $ratingsWrong = array( 'a', 'cs', 456);
+        $ratingsWrong = ['a', 'cs', 456];
         $this->expectException('Zend_View_Exception');
         foreach ($ratingsWrong as $value) {
             $this->_object->setRating($value);
@@ -172,7 +173,7 @@ class Zend_View_Helper_GravatarTest extends \PHPUnit\Framework\TestCase
 
     public function testSetRating()
     {
-        $ratingsRight = array( 'g', 'pg', 'r', 'x', Zend_View_Helper_Gravatar::RATING_R);
+        $ratingsRight = ['g', 'pg', 'r', 'x', Zend_View_Helper_Gravatar::RATING_R];
         foreach ($ratingsRight as $value) {
             $this->_object->setRating($value);
             $this->assertEquals($value, $this->_object->getRating());
@@ -181,7 +182,7 @@ class Zend_View_Helper_GravatarTest extends \PHPUnit\Framework\TestCase
 
     public function testSetSecure()
     {
-        $values = array("true", "false", "text", $this->_view, 100, true, "", null, 0, false);
+        $values = ['true', 'false', 'text', $this->_view, 100, true, '', null, 0, false];
         foreach ($values as $value) {
             $this->_object->setSecure($value);
             $this->assertTrue(is_bool($this->_object->getSecure()));
@@ -189,36 +190,36 @@ class Zend_View_Helper_GravatarTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Test SSL location
+     * Test SSL location.
      */
     public function testHttpsSource()
     {
         $this->assertMatchesRegularExpression('/src="https:\/\/secure.gravatar.com\/avatar\/[a-z0-9]{32}.+"/',
-                $this->_object->gravatar("example@example.com", array('secure' => true))->__toString());
+            $this->_object->gravatar('example@example.com', ['secure' => true])->__toString());
     }
 
     /**
-     * Test HTML attribs
+     * Test HTML attribs.
      */
     public function testImgAttribs()
     {
         $this->assertMatchesRegularExpression('/class="gravatar" title="Gravatar"/',
-                $this->_object->gravatar("example@example.com", array(),
-                        array('class' => 'gravatar', 'title' => 'Gravatar'))
-                     ->__toString()
+            $this->_object->gravatar('example@example.com', [],
+                ['class' => 'gravatar', 'title' => 'Gravatar'])
+                 ->__toString()
         );
     }
 
     /**
-     * Test gravatar's options (rating, size, default image and secure)
+     * Test gravatar's options (rating, size, default image and secure).
      */
     public function testGravatarOptions()
     {
         $this->assertMatchesRegularExpression('/src="http:\/\/www.gravatar.com\/avatar\/[a-z0-9]{32}\?s=125&amp;d=wavatar&amp;r=pg"/',
-                $this->_object->gravatar("example@example.com",
-                        array('rating' => 'pg', 'imgSize' => 125, 'defaultImg' => 'wavatar',
-                            'secure' => false))
-                     ->__toString()
+            $this->_object->gravatar('example@example.com',
+                ['rating' => 'pg', 'imgSize' => 125, 'defaultImg' => 'wavatar',
+                    'secure' => false])
+                 ->__toString()
         );
     }
 
@@ -228,50 +229,50 @@ class Zend_View_Helper_GravatarTest extends \PHPUnit\Framework\TestCase
      */
     public function testAutoDetectLocation()
     {
-        $values = array("on", "", 1, true);
+        $values = ['on', '', 1, true];
 
         foreach ($values as $value) {
             $_SERVER['HTTPS'] = $value;
             $this->assertMatchesRegularExpression('/src="https:\/\/secure.gravatar.com\/avatar\/[a-z0-9]{32}.+"/',
-                    $this->_object->gravatar("example@example.com")->__toString());
+                $this->_object->gravatar('example@example.com')->__toString());
         }
     }
 
     /**
-     * @link http://php.net/manual/en/reserved.variables.server.php Section "HTTPS"
+     * @see http://php.net/manual/en/reserved.variables.server.php Section "HTTPS"
      */
     public function testAutoDetectLocationOnIis()
     {
-        $_SERVER['HTTPS'] = "off";
+        $_SERVER['HTTPS'] = 'off';
 
         $this->assertMatchesRegularExpression('/src="http:\/\/www.gravatar.com\/avatar\/[a-z0-9]{32}.+"/',
-                $this->_object->gravatar("example@example.com")->__toString());
+            $this->_object->gravatar('example@example.com')->__toString());
     }
 
     public function testSetAttribsWithSrcKey()
     {
         $email = 'example@example.com';
         $this->_object->setEmail($email);
-        $this->_object->setAttribs(array(
+        $this->_object->setAttribs([
             'class' => 'gravatar',
-            'src'   => 'http://example.com',
-            'id'    => 'gravatarID',
-        ));
+            'src' => 'http://example.com',
+            'id' => 'gravatarID',
+        ]);
 
         $this->assertMatchesRegularExpression('/src="http:\/\/www.gravatar.com\/avatar\/[a-z0-9]{32}.+"/',
-                            $this->_object->getImgTag());
+            $this->_object->getImgTag());
     }
 
     public function testForgottenEmailParameter()
     {
         $this->assertMatchesRegularExpression('/(src="http:\/\/www.gravatar.com\/avatar\/[a-z0-9]{32}.+")/',
-                            $this->_object->getImgTag());
+            $this->_object->getImgTag());
     }
 
     public function testReturnImgTag()
     {
         $this->assertMatchesRegularExpression("/^<img\s.+/",
-        $this->_object->gravatar("example@example.com")->__toString());
+            $this->_object->gravatar('example@example.com')->__toString());
     }
 
     public function testReturnThisObject()
@@ -283,9 +284,9 @@ class Zend_View_Helper_GravatarTest extends \PHPUnit\Framework\TestCase
 
     public function testInvalidKeyPassedToSetOptionsMethod()
     {
-        $options = array(
-            'unknown' => array('val' => 1)
-        );
+        $options = [
+            'unknown' => ['val' => 1],
+        ];
         $this->_object->gravatar()->setOptions($options);
     }
 }

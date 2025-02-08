@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,53 +14,52 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Uri
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_UriTest::main');
 }
 
 /**
- * Zend_Uri
+ * Zend_Uri.
  */
 // require_once 'Zend/Uri.php';
 
 /**
- * Zend_Config
+ * Zend_Config.
  */
 // require_once 'Zend/Config.php';
 
 /**
  * @category   Zend
- * @package    Zend_Uri
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Uri
  */
 #[AllowDynamicProperties]
-class Zend_UriTest extends \PHPUnit\Framework\TestCase
+class Zend_UriTest extends PHPUnit\Framework\TestCase
 {
     public static function main()
     {
-        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_UriTest");
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_UriTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
 
     public function setUp(): void
     {
-        $this->notices = array();
+        $this->notices = [];
         $this->errorReporting = error_reporting();
-        $this->displayErrors  = ini_get('display_errors');
+        $this->displayErrors = ini_get('display_errors');
     }
 
     public function tearDown(): void
@@ -102,31 +102,30 @@ class Zend_UriTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Tests that Zend_Uri::setConfig() allows Zend_Config
+     * Tests that Zend_Uri::setConfig() allows Zend_Config.
      *
      * @group ZF-5578
      */
     public function testSetConfigWithArray()
     {
-        Zend_Uri::setConfig(array('allow_unwise' => true));
+        Zend_Uri::setConfig(['allow_unwise' => true]);
     }
 
     /**
-     * Tests that Zend_Uri::setConfig() allows Array
+     * Tests that Zend_Uri::setConfig() allows Array.
      *
      * @group ZF-5578
      */
     public function testSetConfigWithZendConfig()
     {
-        Zend_Uri::setConfig(new Zend_Config(array('allow_unwise' => true)));
+        Zend_Uri::setConfig(new Zend_Config(['allow_unwise' => true]));
     }
 
     /**
      * Tests that Zend_Uri::setConfig() throws Zend_Uri_Exception if no array
-     * nor Zend_Config is given as first parameter
+     * nor Zend_Config is given as first parameter.
      *
      * @group ZF-5578
-     *
      */
     public function testSetConfigInvalid()
     {
@@ -145,7 +144,7 @@ class Zend_UriTest extends \PHPUnit\Framework\TestCase
     {
         $uri = Zend_Uri::factory('http://example.com', 'Zend_Uri_ExceptionCausing');
 
-        set_error_handler(array($this, 'handleErrors'), E_USER_WARNING);
+        set_error_handler([$this, 'handleErrors'], E_USER_WARNING);
 
         $text = sprintf('%s', $uri);
 
@@ -154,15 +153,14 @@ class Zend_UriTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(empty($text));
         $this->assertTrue(isset($this->error));
         $this->assertStringContainsString('Exception in getUri()', $this->error);
-
     }
 
     /**
-     * Error handler for testExceptionThrownInToString()
+     * Error handler for testExceptionThrownInToString().
      *
      * @group ZF-10405
      */
-    public function handleErrors($errno, $errstr, $errfile = '', $errline = 0, array $errcontext = array())
+    public function handleErrors($errno, $errstr, $errfile = '', $errline = 0, array $errcontext = [])
     {
         $this->error = $errstr;
     }
@@ -181,6 +179,7 @@ class Zend_UriTest extends \PHPUnit\Framework\TestCase
             $uri = Zend_Uri::factory($uri);
         } catch (Zend_Uri_Exception $e) {
             $this->assertMatchesRegularExpression($regex, $e->getMessage());
+
             return;
         }
         $this->fail('Zend_Uri_Exception was expected but not thrown');
@@ -195,6 +194,7 @@ class Zend_UriTest extends \PHPUnit\Framework\TestCase
     {
         $uri = Zend_Uri::factory($uri, $className);
         $this->assertTrue($uri instanceof Zend_Uri, 'Zend_Uri object not returned.');
+
         return $uri;
     }
 
@@ -215,22 +215,35 @@ class Zend_UriTest extends \PHPUnit\Framework\TestCase
         $uri = $this->_testValidUri('http://example.net', 'Zend_Uri_Mock');
         $this->assertTrue($uri instanceof Zend_Uri_Mock, 'Zend_Uri_Mock object not returned.');
     }
-
 }
 #[AllowDynamicProperties]
 class Zend_Uri_Mock extends Zend_Uri
 {
-    protected function __construct($scheme, $schemeSpecific = '') { }
-    public function getUri() { }
-    #[\ReturnTypeWillChange]
-    public function valid() { }
+    protected function __construct($scheme, $schemeSpecific = '')
+    {
+    }
+
+    public function getUri()
+    {
+    }
+
+    #[ReturnTypeWillChange]
+    public function valid()
+    {
+    }
 }
 #[AllowDynamicProperties]
 class Zend_Uri_ExceptionCausing extends Zend_Uri
 {
-    protected function __construct($scheme, $schemeSpecific = '') { }
-    #[\ReturnTypeWillChange]
-    public function valid() { }
+    protected function __construct($scheme, $schemeSpecific = '')
+    {
+    }
+
+    #[ReturnTypeWillChange]
+    public function valid()
+    {
+    }
+
     public function getUri()
     {
         throw new Exception('Exception in getUri()');
@@ -242,6 +255,6 @@ class Fake_Zend_Uri
 }
 
 // Call Zend_UriTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_UriTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_UriTest::main') {
     Zend_UriTest::main();
 }

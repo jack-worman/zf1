@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Server
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version $Id$
  */
 
@@ -25,20 +26,20 @@
 // require_once 'Zend/Server/Reflection.php';
 
 /**
- * Test case for Zend_Server_Reflection_Class
+ * Test case for Zend_Server_Reflection_Class.
  *
  * @category   Zend
- * @package    Zend_Server
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Server
  */
 #[AllowDynamicProperties]
-class Zend_Server_Reflection_ClassTest extends \PHPUnit\Framework\TestCase
+class Zend_Server_Reflection_ClassTest extends PHPUnit\Framework\TestCase
 {
     /**
-     * __construct() test
+     * __construct() test.
      *
      * Call as method call
      *
@@ -49,7 +50,7 @@ class Zend_Server_Reflection_ClassTest extends \PHPUnit\Framework\TestCase
      *
      * Returns: void
      */
-    public function test__construct()
+    public function testConstruct()
     {
         $r = new Zend_Server_Reflection_Class(new ReflectionClass('Zend_Server_Reflection'));
         $this->assertTrue($r instanceof Zend_Server_Reflection_Class);
@@ -66,7 +67,7 @@ class Zend_Server_Reflection_ClassTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * __call() test
+     * __call() test.
      *
      * Call as method call
      *
@@ -76,7 +77,7 @@ class Zend_Server_Reflection_ClassTest extends \PHPUnit\Framework\TestCase
      *
      * Returns: mixed
      */
-    public function test__call()
+    public function testCall()
     {
         $r = new Zend_Server_Reflection_Class(new ReflectionClass('Zend_Server_Reflection'));
         $this->assertInternalType('string', $r->getName());
@@ -84,7 +85,7 @@ class Zend_Server_Reflection_ClassTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * test __get/set
+     * test __get/set.
      */
     public function testGetSet()
     {
@@ -94,7 +95,7 @@ class Zend_Server_Reflection_ClassTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * getMethods() test
+     * getMethods() test.
      *
      * Call as method call
      *
@@ -112,7 +113,7 @@ class Zend_Server_Reflection_ClassTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * namespace test
+     * namespace test.
      */
     public function testGetNamespace()
     {
@@ -123,13 +124,13 @@ class Zend_Server_Reflection_ClassTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * __wakeup() test
+     * __wakeup() test.
      *
      * Call as method call
      *
      * Returns: void
      */
-    public function test__wakeup()
+    public function testWakeup()
     {
         $r = new Zend_Server_Reflection_Class(new ReflectionClass('Zend_Server_Reflection'));
         if (PHP_VERSION_ID >= 70400) {

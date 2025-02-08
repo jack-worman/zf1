@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Test
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -26,16 +27,16 @@
 
 /**
  * @category   Zend
- * @package    Zend_Test
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Test
  */
 #[AllowDynamicProperties]
-class Zend_Test_PHPUnit_Db_Operation_InsertTest extends \PHPUnit\Framework\TestCase
+class Zend_Test_PHPUnit_Db_Operation_InsertTest extends PHPUnit\Framework\TestCase
 {
-    private $operation = null;
+    private $operation;
     private $libxmlDisableEntityLoader;
 
     public function setUp(): void
@@ -55,20 +56,20 @@ class Zend_Test_PHPUnit_Db_Operation_InsertTest extends \PHPUnit\Framework\TestC
 
     public function testInsertDataSetUsingAdapterInsert()
     {
-        $dataSet = new PHPUnit_Extensions_Database_DataSet_FlatXmlDataSet(__DIR__."/_files/insertFixture.xml");
+        $dataSet = new PHPUnit_Extensions_Database_DataSet_FlatXmlDataSet(__DIR__.'/_files/insertFixture.xml');
 
         $testAdapter = $this->getMock('Zend_Test_DbAdapter');
         $testAdapter->expects($this->at(0))
                     ->method('insert')
-                    ->with('foo', array('foo' => 'foo', 'bar' => 'bar', 'baz' => 'baz'));
+                    ->with('foo', ['foo' => 'foo', 'bar' => 'bar', 'baz' => 'baz']);
         $testAdapter->expects($this->at(1))
                     ->method('insert')
-                    ->with('foo', array('foo' => 'bar', 'bar' => 'bar', 'baz' => 'bar'));
+                    ->with('foo', ['foo' => 'bar', 'bar' => 'bar', 'baz' => 'bar']);
         $testAdapter->expects($this->at(2))
                     ->method('insert')
-                    ->with('foo', array('foo' => 'baz', 'bar' => 'baz', 'baz' => 'baz'));
+                    ->with('foo', ['foo' => 'baz', 'bar' => 'baz', 'baz' => 'baz']);
 
-        $connection = new Zend_Test_PHPUnit_Db_Connection($testAdapter, "schema");
+        $connection = new Zend_Test_PHPUnit_Db_Connection($testAdapter, 'schema');
 
         $this->operation->execute($connection, $dataSet);
     }
@@ -77,18 +78,18 @@ class Zend_Test_PHPUnit_Db_Operation_InsertTest extends \PHPUnit\Framework\TestC
     {
         $this->expectException('PHPUnit_Extensions_Database_Operation_Exception');
 
-        $dataSet = new PHPUnit_Extensions_Database_DataSet_FlatXmlDataSet(__DIR__."/_files/insertFixture.xml");
+        $dataSet = new PHPUnit_Extensions_Database_DataSet_FlatXmlDataSet(__DIR__.'/_files/insertFixture.xml');
 
         $testAdapter = $this->getMock('Zend_Test_DbAdapter');
         $testAdapter->expects($this->any())->method('insert')->will($this->throwException(new Exception()));
 
-        $connection = new Zend_Test_PHPUnit_Db_Connection($testAdapter, "schema");
+        $connection = new Zend_Test_PHPUnit_Db_Connection($testAdapter, 'schema');
         $this->operation->execute($connection, $dataSet);
     }
 
     public function testInvalidConnectionGivenThrowsException()
     {
-        $this->expectException("Zend_Test_PHPUnit_Db_Exception");
+        $this->expectException('Zend_Test_PHPUnit_Db_Exception');
 
         $dataSet = $this->getMock('PHPUnit_Extensions_Database_DataSet_IDataSet');
         $connection = $this->getMock('PHPUnit_Extensions_Database_DB_IDatabaseConnection');

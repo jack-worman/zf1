@@ -5,7 +5,10 @@ declare(strict_types=1);
 use PhpCsFixer\Runner\Parallel\ParallelConfigFactory;
 
 $finder = (new PhpCsFixer\Finder())
-    ->in(__DIR__.'/packages');
+    ->in([
+        __DIR__.'/packages',
+        __DIR__.'/tests',
+    ]);
 
 return (new PhpCsFixer\Config())
     ->setParallelConfig(ParallelConfigFactory::detect())

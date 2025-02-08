@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +14,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Form_ElementTest::main');
 }
@@ -40,14 +40,14 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 /**
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Form
  */
 #[AllowDynamicProperties]
-class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
+class Zend_Form_ElementTest extends PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_Form_Element
@@ -56,10 +56,10 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
 
     public static function main()
     {
-        $suite  = \PHPUnit\Framework\TestSuite::empty('Zend_Form_ElementTest');
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_Form_ElementTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -84,8 +84,9 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
     public function getView()
     {
         $view = new Zend_View();
-        $libPath = __DIR__ . '/../../../library';
-        $view->addHelperPath($libPath . '/Zend/View/Helper');
+        $libPath = __DIR__.'/../../../library';
+        $view->addHelperPath($libPath.'/Zend/View/Helper');
+
         return $view;
     }
 
@@ -104,32 +105,32 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
 
         try {
             $element = new Zend_Form_Element('foo');
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->fail('Zend_Form_Element constructor should accept String values');
         }
 
-        $config = array('foo' => 'bar');
+        $config = ['foo' => 'bar'];
         try {
             $element = new Zend_Form_Element($config);
             $this->fail('Zend_Form_Element constructor requires array with name element');
         } catch (Zend_Form_Exception $e) {
         }
 
-        $config = array('name' => 'bar');
+        $config = ['name' => 'bar'];
         try {
             $element = new Zend_Form_Element($config);
         } catch (Zend_Form_Exception $e) {
             $this->fail('Zend_Form_Element constructor should accept array with name element');
         }
 
-        $config = new Zend_Config(array('foo' => 'bar'));
+        $config = new Zend_Config(['foo' => 'bar']);
         try {
             $element = new Zend_Form_Element($config);
             $this->fail('Zend_Form_Element constructor requires Zend_Config object with name element');
         } catch (Zend_Form_Exception $e) {
         }
 
-        $config = new Zend_Config(array('name' => 'bar'));
+        $config = new Zend_Config(['name' => 'bar']);
         try {
             $element = new Zend_Form_Element($config);
         } catch (Zend_Form_Exception $e) {
@@ -145,7 +146,7 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
     public function testGetTranslatorRetrievesGlobalDefaultWhenAvailable()
     {
         $this->testNoTranslatorByDefault();
-        $translator = new Zend_Translate('array', array('foo' => 'bar'));
+        $translator = new Zend_Translate('array', ['foo' => 'bar']);
         Zend_Form::setDefaultTranslator($translator);
         $received = $this->element->getTranslator();
         $this->assertSame($translator->getAdapter(), $received);
@@ -153,7 +154,7 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
 
     public function testTranslatorAccessorsWork()
     {
-        $translator = new Zend_Translate('array', array('foo' => 'bar'));
+        $translator = new Zend_Translate('array', ['foo' => 'bar']);
         $this->element->setTranslator($translator);
         $received = $this->element->getTranslator($translator);
         $this->assertSame($translator->getAdapter(), $received);
@@ -194,7 +195,7 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
      */
     public function testSetNameShouldNotAllowEmptyString()
     {
-        foreach (array('', ' ', '   ') as $name) {
+        foreach (['', ' ', '   '] as $name) {
             try {
                 $this->element->setName($name);
                 $this->fail('setName() should not allow empty string');
@@ -231,31 +232,31 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
 
     public function testRetrievingArrayValueFiltersAllArrayValues()
     {
-        $this->element->setValue(array(
-                    'foo',
-                    array(
-                        'bar',
-                        'baz'
-                    ),
-                    'bat'
-                ))
+        $this->element->setValue([
+            'foo',
+            [
+                'bar',
+                'baz',
+            ],
+            'bat',
+        ])
              ->setIsArray(true)
              ->addFilter('StringToUpper');
         $test = $this->element->getValue();
         $this->assertTrue(is_array($test));
-        array_walk_recursive($test, array($this, 'checkFilterValues'));
+        array_walk_recursive($test, [$this, 'checkFilterValues']);
     }
 
     public function testRetrievingArrayValueDoesNotFilterAllValuesWhenNotIsArray()
     {
-        $values = array(
+        $values = [
             'foo',
-            array(
+            [
                 'bar',
-                'baz'
-            ),
-            'bat'
-        );
+                'baz',
+            ],
+            'bat',
+        ];
         $this->element->setValue($values)
                       ->addFilter(new Zend_Form_ElementTest_ArrayFilter());
         $test = $this->element->getValue();
@@ -263,7 +264,7 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
         // require_once 'Zend/Json.php';
         $test = Zend_Json::encode($test);
         $this->assertStringNotContainsString('foo', $test);
-        foreach (array('bar', 'baz', 'bat') as $value) {
+        foreach (['bar', 'baz', 'bat'] as $value) {
             $this->assertStringContainsString($value, $test);
         }
     }
@@ -328,12 +329,12 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
         $this->_checkZf2794();
 
         $username = new Zend_Form_Element('username');
-        $username->addValidator('stringLength', true, array(5, 20))
-                 ->addValidator('regex', true, array('/^[a-zA-Z0-9_]*$/'))
+        $username->addValidator('stringLength', true, [5, 20])
+                 ->addValidator('regex', true, ['/^[a-zA-Z0-9_]*$/'])
                  ->addFilter('StringToLower')
                  ->setRequired(true);
-        $form = new Zend_Form(array('elements' => array($username)));
-        $form->isValid(array('username' => '#'));
+        $form = new Zend_Form(['elements' => [$username]]);
+        $form->isValid(['username' => '#']);
 
         $validator = $username->getValidator('stringLength');
         $this->assertTrue($validator->zfBreakChainOnFailure);
@@ -448,11 +449,11 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
 
     public function testSetAttribsSetsMultipleAttribs()
     {
-        $this->element->setAttribs(array(
+        $this->element->setAttribs([
             'foo' => 'bar',
             'bar' => 'baz',
-            'baz' => 'bat'
-        ));
+            'baz' => 'bat',
+        ]);
 
         $this->assertEquals('bar', $this->element->getAttrib('foo'));
         $this->assertEquals('baz', $this->element->getAttrib('bar'));
@@ -461,11 +462,11 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
 
     public function testGetAttribsRetrievesAllAttributes()
     {
-        $attribs = array(
+        $attribs = [
             'foo' => 'bar',
             'bar' => 'baz',
-            'baz' => 'bat'
-        );
+            'baz' => 'bat',
+        ];
         $this->element->setAttribs($attribs);
 
         $received = $this->element->getAttribs();
@@ -477,11 +478,11 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
      */
     public function testHelperDoesNotShowUpInAttribs()
     {
-        $attribs = array(
+        $attribs = [
             'foo' => 'bar',
             'bar' => 'baz',
-            'baz' => 'bat'
-        );
+            'baz' => 'bat',
+        ];
         $this->element->setAttribs($attribs);
 
         $this->assertFalse(array_key_exists('helper', $this->element->getAttribs()));
@@ -490,7 +491,7 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
     public function testPassingNullValuesToSetAttribsUnsetsAttribs()
     {
         $this->testSetAttribsSetsMultipleAttribs();
-        $this->element->setAttribs(array('foo' => null));
+        $this->element->setAttribs(['foo' => null]);
         $this->assertNull($this->element->foo);
     }
 
@@ -606,8 +607,8 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
 
     public function testAddingValidatorPluginLoaderPrefixPathDoesNotAffectOtherLoaders()
     {
-        $validateLoader  = $this->element->getPluginLoader('validate');
-        $filterLoader    = $this->element->getPluginLoader('filter');
+        $validateLoader = $this->element->getPluginLoader('validate');
+        $filterLoader = $this->element->getPluginLoader('filter');
         $decoratorLoader = $this->element->getPluginLoader('decorator');
         $this->element->addPrefixPath('Zend_Form', 'Zend/Form/', 'validate');
         $this->assertFalse($filterLoader->getPaths('Zend_Form'));
@@ -625,8 +626,8 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
 
     public function testAddingFilterPluginLoaderPrefixPathDoesNotAffectOtherLoaders()
     {
-        $filterLoader    = $this->element->getPluginLoader('filter');
-        $validateLoader  = $this->element->getPluginLoader('validate');
+        $filterLoader = $this->element->getPluginLoader('filter');
+        $validateLoader = $this->element->getPluginLoader('validate');
         $decoratorLoader = $this->element->getPluginLoader('decorator');
         $this->element->addPrefixPath('Zend_Form', 'Zend/Form/', 'filter');
         $this->assertFalse($validateLoader->getPaths('Zend_Form'));
@@ -645,8 +646,8 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
     public function testAddingDecoratorrPluginLoaderPrefixPathDoesNotAffectOtherLoaders()
     {
         $decoratorLoader = $this->element->getPluginLoader('decorator');
-        $filterLoader    = $this->element->getPluginLoader('filter');
-        $validateLoader  = $this->element->getPluginLoader('validate');
+        $filterLoader = $this->element->getPluginLoader('filter');
+        $validateLoader = $this->element->getPluginLoader('validate');
         $this->element->addPrefixPath('Zend_Foo', 'Zend/Foo/', 'decorator');
         $this->assertFalse($validateLoader->getPaths('Zend_Foo'));
         $this->assertFalse($filterLoader->getPaths('Zend_Foo'));
@@ -655,7 +656,7 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
     public function testCanAddAllPluginLoaderPrefixPathsSimultaneously()
     {
         $validatorLoader = new Zend_Loader_PluginLoader();
-        $filterLoader    = new Zend_Loader_PluginLoader();
+        $filterLoader = new Zend_Loader_PluginLoader();
         $decoratorLoader = new Zend_Loader_PluginLoader();
         $this->element->setPluginLoader($validatorLoader, 'validate')
                       ->setPluginLoader($filterLoader, 'filter')
@@ -723,7 +724,7 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
 
         try {
             $this->element->addValidator('Alnum', false, true);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->fail('Should be able to add non-array validator options');
         }
         $validator = $this->element->getValidator('Alnum');
@@ -747,16 +748,16 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
 
     public function testRetrievingNamedValidatorShouldNotReorderValidators()
     {
-        $this->element->addValidators(array(
+        $this->element->addValidators([
             'NotEmpty',
             'Alnum',
             'Digits',
-        ));
+        ]);
 
-        $validator  = $this->element->getValidator('Alnum');
+        $validator = $this->element->getValidator('Alnum');
         $validators = $this->element->getValidators();
-        $i          = 0;
-        $order      = array();
+        $i = 0;
+        $order = [];
 
         foreach (array_keys($validators) as $name) {
             $order[$name] = $i;
@@ -765,17 +766,16 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(1, $order['Zend_Validate_Alnum'], var_export($order, 1));
     }
 
-
     public function testCanAddMultipleValidators()
     {
         $this->_checkZf2794();
 
         $this->assertFalse($this->element->getValidator('Zend_Validate_Digits'));
         $this->assertFalse($this->element->getValidator('Zend_Validate_Alnum'));
-        $this->element->addValidators(array('digits', 'alnum'));
+        $this->element->addValidators(['digits', 'alnum']);
         $digits = $this->element->getValidator('digits');
         $this->assertTrue($digits instanceof Zend_Validate_Digits);
-        $alnum  = $this->element->getValidator('alnum');
+        $alnum = $this->element->getValidator('alnum');
         $this->assertTrue($alnum instanceof Zend_Validate_Alnum);
     }
 
@@ -786,30 +786,30 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
 
     public function testPassingMessagesOptionToAddValidatorSetsValidatorMessages()
     {
-        $messageTemplates = array(
-            Zend_Validate_Digits::NOT_DIGITS   => 'Value should only contain digits',
+        $messageTemplates = [
+            Zend_Validate_Digits::NOT_DIGITS => 'Value should only contain digits',
             Zend_Validate_Digits::STRING_EMPTY => 'Value needs some digits',
-        );
+        ];
         $this->element->setAllowEmpty(false)
-                      ->addValidator('digits', false, array('messages' => $messageTemplates));
+                      ->addValidator('digits', false, ['messages' => $messageTemplates]);
 
         $this->element->isValid('');
         $messages = $this->element->getMessages();
-        $found    = false;
+        $found = false;
         foreach ($messages as $key => $message) {
-            if ($key == Zend_Validate_Digits::STRING_EMPTY) {
+            if (Zend_Validate_Digits::STRING_EMPTY == $key) {
                 $found = true;
                 break;
             }
         }
-        $this->assertTrue($found, 'Empty string message not found: ' . var_export($messages, 1));
+        $this->assertTrue($found, 'Empty string message not found: '.var_export($messages, 1));
         $this->assertEquals($messageTemplates[Zend_Validate_Digits::STRING_EMPTY], $message);
 
         $this->element->isValid('abc');
         $messages = $this->element->getMessages();
-        $found    = false;
+        $found = false;
         foreach ($messages as $key => $message) {
-            if ($key == Zend_Validate_Digits::NOT_DIGITS) {
+            if (Zend_Validate_Digits::NOT_DIGITS == $key) {
                 $found = true;
                 break;
             }
@@ -823,7 +823,7 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
         $this->_checkZf2794();
 
         $message = 'My custom empty message';
-        $this->element->addValidator('notEmpty', false, array('messages' => $message))
+        $this->element->addValidator('notEmpty', false, ['messages' => $message])
                       ->setRequired(true);
 
         $this->element->isValid('');
@@ -834,9 +834,9 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
 
     public function testMessagesAreTranslatedForCurrentLocale()
     {
-        $localeFile   = __DIR__ . '/_files/locale/array.php';
-        $translations = include($localeFile);
-        $translator   = new Zend_Translate('array', $translations, 'en');
+        $localeFile = __DIR__.'/_files/locale/array.php';
+        $translations = include $localeFile;
+        $translator = new Zend_Translate('array', $translations, 'en');
         $translator->setLocale('en');
 
         $this->element->setAllowEmpty(false)
@@ -845,21 +845,21 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
 
         $this->element->isValid('');
         $messages = $this->element->getMessages();
-        $found    = false;
+        $found = false;
         foreach ($messages as $key => $message) {
-            if ($key == 'digitsStringEmpty') {
+            if ('digitsStringEmpty' == $key) {
                 $found = true;
                 break;
             }
         }
-        $this->assertTrue($found, 'String Empty message not found: ' . var_export($messages, 1));
+        $this->assertTrue($found, 'String Empty message not found: '.var_export($messages, 1));
         $this->assertEquals($translations['stringEmpty'], $message);
 
         $this->element->isValid('abc');
         $messages = $this->element->getMessages();
-        $found    = false;
+        $found = false;
         foreach ($messages as $key => $message) {
-            if ($key == 'notDigits') {
+            if ('notDigits' == $key) {
                 $found = true;
                 break;
             }
@@ -898,15 +898,15 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
 
     public function testShouldAllowSettingMultipleErrorMessagesAtOnce()
     {
-        $set1 = array('foo', 'bar', 'baz');
+        $set1 = ['foo', 'bar', 'baz'];
         $this->element->addErrorMessages($set1);
         $this->assertSame($set1, $this->element->getErrorMessages());
     }
 
     public function testSetErrorMessagesShouldOverwriteMessages()
     {
-        $set1 = array('foo', 'bar', 'baz');
-        $set2 = array('bat', 'cat');
+        $set1 = ['foo', 'bar', 'baz'];
+        $set2 = ['bat', 'cat'];
         $this->element->addErrorMessages($set1);
         $this->assertSame($set1, $this->element->getErrorMessages());
         $this->element->setErrorMessages($set2);
@@ -923,9 +923,9 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
 
     public function testCustomErrorMessagesShouldBeTranslated()
     {
-        $translations = array(
+        $translations = [
             'foo' => 'Foo message',
-        );
+        ];
         $translate = new Zend_Translate('array', $translations);
         $this->element->setTranslator($translate)
                       ->addErrorMessage('foo')
@@ -963,14 +963,14 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
     {
         $this->element->setValue('foo');
         $this->assertFalse($this->element->hasErrors());
-        $this->element->setErrors(array('Error 1', 'Error 2'))
+        $this->element->setErrors(['Error 1', 'Error 2'])
                       ->addError('Error 3')
-                      ->addErrors(array('Error 4', 'Error 5'));
+                      ->addErrors(['Error 4', 'Error 5']);
         $this->assertTrue($this->element->hasErrors());
         $messages = $this->element->getMessages();
         $this->assertEquals(5, count($messages));
         foreach (range(1, 5) as $id) {
-            $message = 'Error ' . $id;
+            $message = 'Error '.$id;
             $this->assertStringContainsString($message, $messages);
         }
     }
@@ -988,13 +988,13 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
     public function testAddingErrorToArrayElementShouldLoopOverAllValues()
     {
         $this->element->setIsArray(true)
-                      ->setValue(array('foo', 'bar', 'baz'))
+                      ->setValue(['foo', 'bar', 'baz'])
                       ->addError('error with value %value%');
         $errors = $this->element->getMessages();
         // require_once 'Zend/Json.php';
         $errors = Zend_Json::encode($errors);
-        foreach (array('foo', 'bar', 'baz') as $value) {
-            $message = 'error with value ' . $value;
+        foreach (['foo', 'bar', 'baz'] as $value) {
+            $message = 'error with value '.$value;
             $this->assertStringContainsString($message, $errors);
         }
     }
@@ -1002,10 +1002,10 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
     /** ZF-2568 */
     public function testTranslatedMessagesCanContainVariableSubstitution()
     {
-        $localeFile   = __DIR__ . '/_files/locale/array.php';
-        $translations = include($localeFile);
+        $localeFile = __DIR__.'/_files/locale/array.php';
+        $translations = include $localeFile;
         $translations['notDigits'] .= ' "%value%"';
-        $translator   = new Zend_Translate('array', $translations, 'en');
+        $translator = new Zend_Translate('array', $translations, 'en');
         $translator->setLocale('en');
 
         $this->element->setAllowEmpty(false)
@@ -1014,14 +1014,14 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
 
         $this->element->isValid('abc');
         $messages = $this->element->getMessages();
-        $found    = false;
+        $found = false;
         foreach ($messages as $key => $message) {
-            if ($key == 'notDigits') {
+            if ('notDigits' == $key) {
                 $found = true;
                 break;
             }
         }
-        $this->assertTrue($found, 'String Empty message not found: ' . var_export($messages, 1));
+        $this->assertTrue($found, 'String Empty message not found: '.var_export($messages, 1));
         $this->assertStringContainsString(' "abc"', $message);
         $this->assertStringContainsString('Translating the notDigits string', $message);
     }
@@ -1059,7 +1059,7 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
                       ->addValidator(new Zend_Validate_EmailAddress());
         try {
             $result = $this->element->isValid('matthew@zend.com');
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->fail('Validating an element should work');
         }
     }
@@ -1067,13 +1067,13 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
     public function testCanValidateArrayValue()
     {
         $this->element->setIsArray(true)
-             ->addValidator('InArray', false, array(array('foo', 'bar', 'baz', 'bat')));
-        $this->assertTrue($this->element->isValid(array('foo', 'bat')));
+             ->addValidator('InArray', false, [['foo', 'bar', 'baz', 'bat']]);
+        $this->assertTrue($this->element->isValid(['foo', 'bat']));
     }
 
     public function testShouldAllowZeroAsNonEmptyValue()
     {
-        $this->element->addValidator('between', false, array(1, 100));
+        $this->element->addValidator('between', false, [1, 100]);
         $this->assertFalse($this->element->isValid('0'));
     }
 
@@ -1194,16 +1194,16 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
 
     public function testRetrievingNamedFilterShouldNotReorderFilters()
     {
-        $this->element->addFilters(array(
+        $this->element->addFilters([
             'Alpha',
             'Alnum',
             'Digits',
-        ));
+        ]);
 
-        $filter  = $this->element->getFilter('Alnum');
+        $filter = $this->element->getFilter('Alnum');
         $filters = $this->element->getFilters();
-        $i          = 0;
-        $order      = array();
+        $i = 0;
+        $order = [];
 
         foreach (array_keys($filters) as $name) {
             $order[$name] = $i;
@@ -1218,7 +1218,7 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
 
         try {
             $this->element->addFilter('Alnum', true);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->fail('Should be able to add non-array filter options');
         }
         $filter = $this->element->getFilter('Alnum');
@@ -1228,7 +1228,7 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
 
     public function testShouldUseFilterConstructorOptionsAsPassedToAddFilter()
     {
-        $this->element->addFilter('HtmlEntities', array(array('quotestyle' => ENT_QUOTES, 'charset' => 'UTF-8')));
+        $this->element->addFilter('HtmlEntities', [['quotestyle' => ENT_QUOTES, 'charset' => 'UTF-8']]);
         $filter = $this->element->getFilter('HtmlEntities');
         $this->assertTrue($filter instanceof Zend_Filter_HtmlEntities);
         $this->assertEquals(ENT_QUOTES, $filter->getQuoteStyle());
@@ -1241,10 +1241,10 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
 
         $this->assertFalse($this->element->getFilter('Zend_Filter_Digits'));
         $this->assertFalse($this->element->getFilter('Zend_Filter_Alnum'));
-        $this->element->addFilters(array('digits', 'alnum'));
+        $this->element->addFilters(['digits', 'alnum']);
         $digits = $this->element->getFilter('digits');
         $this->assertTrue($digits instanceof Zend_Filter_Digits);
-        $alnum  = $this->element->getFilter('alnum');
+        $alnum = $this->element->getFilter('alnum');
         $this->assertTrue($alnum instanceof Zend_Filter_Alnum);
     }
 
@@ -1362,9 +1362,9 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
 
     public function testCanDisableRegisteringDefaultDecoratorsDuringInitialization()
     {
-        $element = new Zend_Form_Element('foo', array('disableLoadDefaultDecorators' => true));
+        $element = new Zend_Form_Element('foo', ['disableLoadDefaultDecorators' => true]);
         $decorators = $element->getDecorators();
-        $this->assertEquals(array(), $decorators);
+        $this->assertEquals([], $decorators);
     }
 
     public function testAddingInvalidDecoratorThrowsException()
@@ -1399,7 +1399,7 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
         $this->element->clearDecorators();
         $this->assertFalse($this->element->getDecorator('viewHelper'));
 
-        $decorator = new Zend_Form_Decorator_ViewHelper;
+        $decorator = new Zend_Form_Decorator_ViewHelper();
         $this->element->addDecorator($decorator);
         $test = $this->element->getDecorator('Zend_Form_Decorator_ViewHelper');
         $this->assertSame($decorator, $test);
@@ -1410,15 +1410,15 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
      */
     public function testAddingConcreteDecoratorShouldHonorOrder()
     {
-        require_once __DIR__ . '/_files/decorators/TableRow.php';
+        require_once __DIR__.'/_files/decorators/TableRow.php';
         $decorator = new My_Decorator_TableRow();
         $this->element->setLabel('Foo')
                       ->setDescription('sample description')
                       ->clearDecorators()
-                      ->addDecorators(array(
-            'ViewHelper',
-            $decorator,
-        ));
+                      ->addDecorators([
+                          'ViewHelper',
+                          $decorator,
+                      ]);
         $html = $this->element->render($this->getView());
         $this->assertMatchesRegularExpression('#<tr><td>Foo</td><td>.*?<input[^>]+>.*?</td><td>sample description</td></tr>#s', $html, $html);
     }
@@ -1430,7 +1430,7 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
         $this->element->clearDecorators();
         $this->assertFalse($this->element->getDecorator('viewHelper'));
 
-        $decorator = new Zend_Form_Decorator_ViewHelper;
+        $decorator = new Zend_Form_Decorator_ViewHelper();
         $this->element->addDecorator($decorator);
         $test = $this->element->getDecorator('viewHelper');
         $this->assertSame($decorator, $test);
@@ -1443,11 +1443,11 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
         $this->element->clearDecorators();
         $this->assertFalse($this->element->getDecorator('viewHelper'));
 
-        $testDecorator = new Zend_Form_ElementTest_Decorator;
-        $this->element->addDecorators(array(
+        $testDecorator = new Zend_Form_ElementTest_Decorator();
+        $this->element->addDecorators([
             'ViewHelper',
-            $testDecorator
-        ));
+            $testDecorator,
+        ]);
 
         $viewHelper = $this->element->getDecorator('viewHelper');
         $this->assertTrue($viewHelper instanceof Zend_Form_Decorator_ViewHelper);
@@ -1475,11 +1475,11 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
     public function testRemovingNamedDecoratorsShouldWork()
     {
         $this->_checkZf2794();
-        $this->element->setDecorators(array(
+        $this->element->setDecorators([
             'ViewHelper',
-            array(array('div' => 'HtmlTag'), array('tag' => 'div')),
-            array(array('div2' => 'HtmlTag'), array('tag' => 'div')),
-        ));
+            [['div' => 'HtmlTag'], ['tag' => 'div']],
+            [['div2' => 'HtmlTag'], ['tag' => 'div']],
+        ]);
         $decorators = $this->element->getDecorators();
         $this->assertTrue(array_key_exists('div', $decorators));
         $this->assertTrue(array_key_exists('div2', $decorators));
@@ -1501,10 +1501,10 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
     {
         $this->_checkZf2794();
 
-        $this->element->setDecorators(array(
-            array('HtmlTag', array('tag' => 'span')),
-            array('decorator' => array('FooBar' => 'HtmlTag'), 'options' => array('tag' => 'div')),
-        ));
+        $this->element->setDecorators([
+            ['HtmlTag', ['tag' => 'span']],
+            ['decorator' => ['FooBar' => 'HtmlTag'], 'options' => ['tag' => 'div']],
+        ]);
         $decorator = $this->element->getDecorator('FooBar');
         $this->assertTrue($decorator instanceof Zend_Form_Decorator_HtmlTag);
         $this->assertEquals('div', $decorator->getOption('tag'));
@@ -1516,18 +1516,18 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
 
     public function testRetrievingNamedDecoratorShouldNotReorderDecorators()
     {
-        $this->element->setDecorators(array(
+        $this->element->setDecorators([
             'ViewHelper',
             'Errors',
-            array(array('inner' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element')),
+            [['inner' => 'HtmlTag'], ['tag' => 'div', 'class' => 'element']],
             'Label',
-            array(array('outer' => 'HtmlTag'), array('tag' => 'div')),
-        ));
+            [['outer' => 'HtmlTag'], ['tag' => 'div']],
+        ]);
 
-        $decorator  = $this->element->getDecorator('inner');
+        $decorator = $this->element->getDecorator('inner');
         $decorators = $this->element->getDecorators();
-        $i          = 0;
-        $order      = array();
+        $i = 0;
+        $order = [];
 
         foreach (array_keys($decorators) as $name) {
             $order[$name] = $i;
@@ -1541,13 +1541,13 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
      */
     public function testSetDecoratorsShouldAcceptReturnOfGetDecorators()
     {
-        $this->element->setDecorators(array(
+        $this->element->setDecorators([
             'ViewHelper',
             'Errors',
-            array('input' => 'HtmlTag', array('tag' => 'div', 'class' => 'input')),
+            ['input' => 'HtmlTag', ['tag' => 'div', 'class' => 'input']],
             'Label',
-            array('element' => 'HtmlTag', array('tag' => 'div', 'class' => 'element')),
-        ));
+            ['element' => 'HtmlTag', ['tag' => 'div', 'class' => 'element']],
+        ]);
         $decorators = $this->element->getDecorators();
         $this->element->setDecorators($decorators);
         $this->assertSame($decorators, $this->element->getDecorators());
@@ -1622,20 +1622,20 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
         throw new Exception('Raising exception in decorator callback');
     }
 
-    public function handleDecoratorErrors($errno, $errstr, $errfile = '', $errline = 0, array $errcontext = array())
+    public function handleDecoratorErrors($errno, $errstr, $errfile = '', $errline = 0, array $errcontext = [])
     {
         $this->error = $errstr;
     }
 
     public function testToStringRaisesErrorWhenExceptionCaught()
     {
-        $this->element->setDecorators(array(
-            array(
+        $this->element->setDecorators([
+            [
                 'decorator' => 'Callback',
-                'options'   => array('callback' => array($this, 'raiseDecoratorException'))
-            ),
-        ));
-        $origErrorHandler = set_error_handler(array($this, 'handleDecoratorErrors'), E_USER_WARNING);
+                'options' => ['callback' => [$this, 'raiseDecoratorException']],
+            ],
+        ]);
+        $origErrorHandler = set_error_handler([$this, 'handleDecoratorErrors'], E_USER_WARNING);
 
         $text = $this->element->__toString();
 
@@ -1648,15 +1648,16 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
 
     public function getOptions()
     {
-        $options = array(
-            'name'     => 'changed',
-            'value'    => 'foo',
-            'label'    => 'bar',
-            'order'    => 50,
+        $options = [
+            'name' => 'changed',
+            'value' => 'foo',
+            'label' => 'bar',
+            'order' => 50,
             'required' => false,
-            'foo'      => 'bar',
-            'baz'      => 'bat'
-        );
+            'foo' => 'bar',
+            'baz' => 'bat',
+        ];
+
         return $options;
     }
 
@@ -1676,8 +1677,8 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
     public function testSetOptionsSkipsCallsToSetOptionsAndSetConfig()
     {
         $options = $this->getOptions();
-        $config  = new Zend_Config($options);
-        $options['config']  = $config;
+        $config = new Zend_Config($options);
+        $options['config'] = $config;
         $options['options'] = $config->toArray();
         $this->element->setOptions($options);
     }
@@ -1696,10 +1697,10 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
         $this->_checkZf2794();
 
         $options = $this->getOptions();
-        $options['validators'] = array(
+        $options['validators'] = [
             'notEmpty',
-            'digits'
-        );
+            'digits',
+        ];
         $this->element->setOptions($options);
         $validator = $this->element->getValidator('notEmpty');
         $this->assertTrue($validator instanceof Zend_Validate_NotEmpty);
@@ -1712,10 +1713,10 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
         $this->_checkZf2794();
 
         $options = $this->getOptions();
-        $options['validators'] = array(
-            array('notEmpty', true, array(Zend_Validate_NotEmpty::ALL)),
-            array('digits', true, array('bar')),
-        );
+        $options['validators'] = [
+            ['notEmpty', true, [Zend_Validate_NotEmpty::ALL]],
+            ['digits', true, ['bar']],
+        ];
         $this->element->setOptions($options);
         $validator = $this->element->getValidator('notEmpty');
         $this->assertTrue($validator instanceof Zend_Validate_NotEmpty);
@@ -1730,18 +1731,18 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
         $this->_checkZf2794();
 
         $options = $this->getOptions();
-        $options['validators'] = array(
-            array(
-                'options'             => array(Zend_Validate_NotEmpty::ALL),
+        $options['validators'] = [
+            [
+                'options' => [Zend_Validate_NotEmpty::ALL],
                 'breakChainOnFailure' => true,
-                'validator'           => 'notEmpty',
-            ),
-            array(
-                'options'             => array('bar'),
-                'validator'           => 'digits',
+                'validator' => 'notEmpty',
+            ],
+            [
+                'options' => ['bar'],
+                'validator' => 'digits',
                 'breakChainOnFailure' => true,
-            ),
-        );
+            ],
+        ];
         $this->element->setOptions($options);
         $validator = $this->element->getValidator('notEmpty');
         $this->assertTrue($validator instanceof Zend_Validate_NotEmpty);
@@ -1756,7 +1757,7 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
         $this->_checkZf2794();
 
         $options = $this->getOptions();
-        $options['filters'] = array('StringToUpper', 'Alpha');
+        $options['filters'] = ['StringToUpper', 'Alpha'];
         $this->element->setOptions($options);
         $filter = $this->element->getFilter('StringToUpper');
         $this->assertTrue($filter instanceof Zend_Filter_StringToUpper);
@@ -1769,10 +1770,10 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
         $this->_checkZf2794();
 
         $options = $this->getOptions();
-        $options['filters'] = array(
-            array('Alnum', array('allowWhiteSpace' => true)),
-            array('Alpha', array('foo')),
-        );
+        $options['filters'] = [
+            ['Alnum', ['allowWhiteSpace' => true]],
+            ['Alpha', ['foo']],
+        ];
         $this->element->setOptions($options);
         $filter = $this->element->getFilter('Alnum');
         $this->assertTrue($filter instanceof Zend_Filter_Alnum);
@@ -1785,16 +1786,16 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
         $this->_checkZf2794();
 
         $options = $this->getOptions();
-        $options['filters'] = array(
-            array(
-                'options' => array('baz'),
-                'filter'  => 'Digits'
-            ),
-            array(
-                'options' => array('foo'),
-                'filter'  => 'Alpha',
-            ),
-        );
+        $options['filters'] = [
+            [
+                'options' => ['baz'],
+                'filter' => 'Digits',
+            ],
+            [
+                'options' => ['foo'],
+                'filter' => 'Alpha',
+            ],
+        ];
         $this->element->setOptions($options);
         $filter = $this->element->getFilter('Digits');
         $this->assertTrue($filter instanceof Zend_Filter_Digits);
@@ -1807,7 +1808,7 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
         $this->_checkZf2794();
 
         $options = $this->getOptions();
-        $options['decorators'] = array('label', 'form');
+        $options['decorators'] = ['label', 'form'];
         $this->element->setOptions($options);
         $this->assertFalse($this->element->getDecorator('viewHelper'));
         $this->assertFalse($this->element->getDecorator('errors'));
@@ -1822,10 +1823,10 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
         $this->_checkZf2794();
 
         $options = $this->getOptions();
-        $options['decorators'] = array(
-            array('label', array('id' => 'mylabel')),
-            array('form', array('id' => 'form')),
-        );
+        $options['decorators'] = [
+            ['label', ['id' => 'mylabel']],
+            ['form', ['id' => 'form']],
+        ];
         $this->element->setOptions($options);
         $this->assertFalse($this->element->getDecorator('viewHelper'));
         $this->assertFalse($this->element->getDecorator('errors'));
@@ -1846,16 +1847,16 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
         $this->_checkZf2794();
 
         $options = $this->getOptions();
-        $options['decorators'] = array(
-            array(
-                'options'   => array('id' => 'mylabel'),
+        $options['decorators'] = [
+            [
+                'options' => ['id' => 'mylabel'],
                 'decorator' => 'label',
-            ),
-            array(
-                'options'   => array('id' => 'form'),
+            ],
+            [
+                'options' => ['id' => 'form'],
                 'decorator' => 'form',
-            ),
-        );
+            ],
+        ];
         $this->element->setOptions($options);
         $this->assertFalse($this->element->getDecorator('viewHelper'));
         $this->assertFalse($this->element->getDecorator('errors'));
@@ -1874,16 +1875,16 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
     public function testSetOptionsSetsGlobalPrefixPaths()
     {
         $options = $this->getOptions();
-        $options['prefixPath'] = array(
+        $options['prefixPath'] = [
             'prefix' => 'Zend_Foo',
-            'path'   => 'Zend/Foo/'
-        );
+            'path' => 'Zend/Foo/',
+        ];
         $this->element->setOptions($options);
 
-        foreach (array('validate', 'filter', 'decorator') as $type) {
+        foreach (['validate', 'filter', 'decorator'] as $type) {
             $loader = $this->element->getPluginLoader($type);
-            $paths = $loader->getPaths('Zend_Foo_' . ucfirst($type));
-            $this->assertTrue(is_array($paths), "Failed for type $type: " . var_export($paths, 1));
+            $paths = $loader->getPaths('Zend_Foo_'.ucfirst($type));
+            $this->assertTrue(is_array($paths), "Failed for type $type: ".var_export($paths, 1));
             $this->assertFalse(empty($paths));
             $this->assertStringContainsString('Foo', $paths[0]);
         }
@@ -1892,9 +1893,9 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
     public function testSetOptionsSetsIndividualPrefixPathsFromKeyedArrays()
     {
         $options = $this->getOptions();
-        $options['prefixPath'] = array(
-            'filter' => array('prefix' => 'Zend_Foo', 'path' => 'Zend/Foo/')
-        );
+        $options['prefixPath'] = [
+            'filter' => ['prefix' => 'Zend_Foo', 'path' => 'Zend/Foo/'],
+        ];
         $this->element->setOptions($options);
 
         $loader = $this->element->getPluginLoader('filter');
@@ -1907,9 +1908,9 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
     public function testSetOptionsSetsIndividualPrefixPathsFromUnKeyedArrays()
     {
         $options = $this->getOptions();
-        $options['prefixPath'] = array(
-            array('type' => 'decorator', 'prefix' => 'Zend_Foo', 'path' => 'Zend/Foo/')
-        );
+        $options['prefixPath'] = [
+            ['type' => 'decorator', 'prefix' => 'Zend_Foo', 'path' => 'Zend/Foo/'],
+        ];
         $this->element->setOptions($options);
 
         $loader = $this->element->getPluginLoader('decorator');
@@ -1950,20 +1951,20 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
         $this->_checkZf2794();
 
         $this->element->addFilter('StringTrim')
-                      ->addValidator('StringLength', false, array(3, 8));
+                      ->addValidator('StringLength', false, [3, 8]);
         $this->assertTrue($this->element->isValid('  foobar  '));
         $this->assertEquals('foobar', $this->element->getValue());
 
-        $this->element->setFilters(array('StringTrim'))
+        $this->element->setFilters(['StringTrim'])
                       ->setRequired(true)
-                      ->setValidators(array('NotEmpty'));
+                      ->setValidators(['NotEmpty']);
         $this->assertFalse($this->element->isValid('    '));
     }
 
     public function testTranslatedLabel()
     {
         $this->element->setLabel('FooBar');
-        $translator = new Zend_Translate('array', array('FooBar' => 'BazBar'));
+        $translator = new Zend_Translate('array', ['FooBar' => 'BazBar']);
         $this->element->setTranslator($translator);
         $this->assertEquals('BazBar', $this->element->getLabel());
     }
@@ -1986,19 +1987,18 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
                       ->setView($this->getView());
         $html = $this->element->renderViewHelper();
         $this->assertStringContainsString('<input', $html);
-        $this->assertStringContainsString('id="' . $this->element->getFullyQualifiedName() . '"', $html, 'Received: ' . $html);
+        $this->assertStringContainsString('id="'.$this->element->getFullyQualifiedName().'"', $html, 'Received: '.$html);
         $this->assertStringNotContainsString('<dd', $html);
         $this->assertStringNotContainsString('<label', $html);
 
         $html = $this->element->renderLabel('this is the content');
-        $this->assertMatchesRegularExpression('#<label[^>]*for="' . $this->element->getFullyQualifiedName() . '"[^>]*>Foo Label</label>#', $html);
+        $this->assertMatchesRegularExpression('#<label[^>]*for="'.$this->element->getFullyQualifiedName().'"[^>]*>Foo Label</label>#', $html);
         $this->assertStringContainsString('this is the content', $html);
         $this->assertStringNotContainsString('<input', $html);
     }
 
     /**
      * @group ZF-3217
-     *
      */
     public function testOverloadingToInvalidMethodsShouldThrowAnException()
     {
@@ -2034,9 +2034,10 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Used by test methods susceptible to ZF-2794, marks a test as incomplete
+     * Used by test methods susceptible to ZF-2794, marks a test as incomplete.
      *
-     * @link   http://framework.zend.com/issues/browse/ZF-2794
+     * @see   http://framework.zend.com/issues/browse/ZF-2794
+     *
      * @return void
      */
     protected function _checkZf2794()
@@ -2048,9 +2049,9 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
      */
     public function testErrorMessagesShouldNotBeTranslatedWhenTranslatorIsDisabled()
     {
-        $translations = array(
+        $translations = [
             'foo' => 'Foo message',
-        );
+        ];
         $translate = new Zend_Translate('array', $translations);
         $this->element->setTranslator($translate)
                       ->addErrorMessage('foo')
@@ -2072,15 +2073,15 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
      */
     public function testElementDoesntOverrideDefaultValidatorTranslatorWithDefaultRegistryTranslator()
     {
-        $registryTranslations = array('alphaInvalid' => 'Registry message');
+        $registryTranslations = ['alphaInvalid' => 'Registry message'];
         $registryTranslate = new Zend_Translate('array', $registryTranslations);
         Zend_Registry::set('Zend_Translate', $registryTranslate);
 
-        $validatorTranslations = array('alphaInvalid' => 'Validator message');
+        $validatorTranslations = ['alphaInvalid' => 'Validator message'];
         $validatorTranslate = new Zend_Translate('array', $validatorTranslations);
         Zend_Validate_Abstract::setDefaultTranslator($validatorTranslate);
 
-        $elementTranslations = array('alphaInvalid' => 'Element message');
+        $elementTranslations = ['alphaInvalid' => 'Element message'];
         $elementTranslate = new Zend_Translate('array', $elementTranslations);
 
         // the default validate translator should beat the registry one
@@ -2095,15 +2096,15 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
      */
     public function testDefaultTranslatorDoesntOverrideElementTranslatorOnValdiation()
     {
-        $registryTranslations = array('alphaInvalid' => 'Registry message');
+        $registryTranslations = ['alphaInvalid' => 'Registry message'];
         $registryTranslate = new Zend_Translate('array', $registryTranslations);
         Zend_Registry::set('Zend_Translate', $registryTranslate);
 
-        $validatorTranslations = array('alphaInvalid' => 'Validator message');
+        $validatorTranslations = ['alphaInvalid' => 'Validator message'];
         $validatorTranslate = new Zend_Translate('array', $validatorTranslations);
         Zend_Validate_Abstract::setDefaultTranslator($validatorTranslate);
 
-        $elementTranslations = array('alphaInvalid' => 'Element message');
+        $elementTranslations = ['alphaInvalid' => 'Element message'];
         $elementTranslate = new Zend_Translate('array', $elementTranslations);
 
         $this->element->addValidator('Alpha');
@@ -2118,11 +2119,11 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidatorsDefaultTranslatorDoesntOverrideFormsDefaultTranslator()
     {
-        $formTranslations = array('alphaInvalid' => 'Form message');
+        $formTranslations = ['alphaInvalid' => 'Form message'];
         $formTranslate = new Zend_Translate('array', $formTranslations);
         Zend_Form::setDefaultTranslator($formTranslate);
 
-        $validatorTranslations = array('alphaInvalid' => 'Validator message');
+        $validatorTranslations = ['alphaInvalid' => 'Validator message'];
         $validatorTranslate = new Zend_Translate('array', $validatorTranslations);
         Zend_Validate_Abstract::setDefaultTranslator($validatorTranslate);
 
@@ -2138,10 +2139,10 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
      */
     public function testElementsTranslatorDoesntOverrideValidatorsDirectlyAttachedTranslator()
     {
-        $elementTranslations = array('alphaInvalid' => 'Element message');
+        $elementTranslations = ['alphaInvalid' => 'Element message'];
         $elementTranslate = new Zend_Translate('array', $elementTranslations);
 
-        $validatorTranslations = array('alphaInvalid' => 'Direct validator message');
+        $validatorTranslations = ['alphaInvalid' => 'Direct validator message'];
         $validatorTranslate = new Zend_Translate('array', $validatorTranslations);
 
         $validator = new Zend_Validate_Alpha();
@@ -2153,9 +2154,10 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Prove the fluent interface on Zend_Form::loadDefaultDecorators
+     * Prove the fluent interface on Zend_Form::loadDefaultDecorators.
      *
-     * @link http://framework.zend.com/issues/browse/ZF-9913
+     * @see http://framework.zend.com/issues/browse/ZF-9913
+     *
      * @return void
      */
     public function testFluentInterfaceOnLoadDefaultDecorators()
@@ -2168,11 +2170,11 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
      */
     public function testAddDecoratorsKeepsNonNumericKeyNames()
     {
-        $this->element->addDecorators(array(array(array('td'  => 'HtmlTag'),
-                                               array('tag' => 'td')),
-                                         array(array('tr'  => 'HtmlTag'),
-                                               array('tag' => 'tr')),
-                                         array('HtmlTag', array('tag' => 'baz'))));
+        $this->element->addDecorators([[['td' => 'HtmlTag'],
+            ['tag' => 'td']],
+            [['tr' => 'HtmlTag'],
+                ['tag' => 'tr']],
+            ['HtmlTag', ['tag' => 'baz']]]);
         $t1 = $this->element->getDecorators();
         $this->element->setDecorators($t1);
         $t2 = $this->element->getDecorators();
@@ -2180,14 +2182,14 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Check array notation for validators
+     * Check array notation for validators.
      */
     public function testValidatorsGivenArrayKeysOnValidation()
     {
         $username = new Zend_Form_Element('username');
-        $username->addValidator('stringLength', true, array('min' => 5, 'max' => 20, 'ignore' => 'something'));
-        $form = new Zend_Form(array('elements' => array($username)));
-        $this->assertTrue($form->isValid(array('username' => 'abcde')));
+        $username->addValidator('stringLength', true, ['min' => 5, 'max' => 20, 'ignore' => 'something']);
+        $form = new Zend_Form(['elements' => [$username]]);
+        $this->assertTrue($form->isValid(['username' => 'abcde']));
     }
 
     /**
@@ -2198,12 +2200,12 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
         $this->_checkZf2794();
 
         $username = new Zend_Form_Element('username');
-        $username->addValidator('stringLength', true, array(5, 20))
+        $username->addValidator('stringLength', true, [5, 20])
                  ->addValidator('regex', true, '/^[a-zA-Z0-9_]*$/')
                  ->addFilter('StringToLower')
                  ->setRequired(true);
-        $form = new Zend_Form(array('elements' => array($username)));
-        $form->isValid(array('username' => '#'));
+        $form = new Zend_Form(['elements' => [$username]]);
+        $form->isValid(['username' => '#']);
 
         $validator = $username->getValidator('stringLength');
         $this->assertTrue($validator->zfBreakChainOnFailure);
@@ -2217,7 +2219,7 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
     public function testCanAddPluginLoaderPrefixPathsWithBackslashes()
     {
         $validatorLoader = new Zend_Loader_PluginLoader();
-        $filterLoader    = new Zend_Loader_PluginLoader();
+        $filterLoader = new Zend_Loader_PluginLoader();
         $decoratorLoader = new Zend_Loader_PluginLoader();
         $this->element->setPluginLoader($validatorLoader, 'validate')
                       ->setPluginLoader($filterLoader, 'filter')
@@ -2242,7 +2244,7 @@ class Zend_Form_ElementTest extends \PHPUnit\Framework\TestCase
      */
     public function testSettingAnEmptyArrayValueGeneratesAValidErrorMessage()
     {
-        $this->element->setValue(array());
+        $this->element->setValue([]);
         $this->element->addErrorMessage('Invalid value entered');
         $this->element->markAsError();
         $messages = $this->element->getMessages();
@@ -2269,16 +2271,18 @@ class Zend_Form_ElementTest_ArrayFilter implements Zend_Filter_Interface
 {
     public function filter($value)
     {
-        $value = array_filter($value, array($this, '_filter'));
+        $value = array_filter($value, [$this, '_filter']);
+
         return $value;
     }
 
     protected function _filter($value)
     {
         if (is_array($value)) {
-            return array_filter($value, array($this, '_filter'));
+            return array_filter($value, [$this, '_filter']);
         }
-        return (strstr((string) $value, 'ba'));
+
+        return strstr((string) $value, 'ba');
     }
 }
 

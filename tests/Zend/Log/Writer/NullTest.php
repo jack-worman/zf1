@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +14,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Log
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Log_Writer_NullTest::main');
 }
@@ -29,21 +29,21 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 /**
  * @category   Zend
- * @package    Zend_Log
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Log
  */
 #[AllowDynamicProperties]
-class Zend_Log_Writer_NullTest extends \PHPUnit\Framework\TestCase
+class Zend_Log_Writer_NullTest extends PHPUnit\Framework\TestCase
 {
     public static function main()
     {
-        $suite  = \PHPUnit\Framework\TestSuite::empty(__CLASS__);
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty(__CLASS__);
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
@@ -51,14 +51,14 @@ class Zend_Log_Writer_NullTest extends \PHPUnit\Framework\TestCase
     public function testWrite()
     {
         $writer = new Zend_Log_Writer_Null();
-        $writer->write(array('message' => 'foo', 'priority' => 42));
+        $writer->write(['message' => 'foo', 'priority' => 42]);
     }
 
     public function testFactory()
     {
-        $cfg = array('log' => array('memory' => array(
-            'writerName' => "Null"
-        )));
+        $cfg = ['log' => ['memory' => [
+            'writerName' => 'Null',
+        ]]];
 
         // require_once 'Zend/Log.php';
         $logger = Zend_Log::factory($cfg['log']);

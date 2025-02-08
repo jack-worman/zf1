@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,33 +14,28 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
-
-
 
 // require_once 'Zend/Controller/Action.php';
 
 /**
- * Mock file for testbed
+ * Mock file for testbed.
  *
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class IndexController extends Zend_Controller_Action
 {
-
     /**
-     * Test Function for indexAction
+     * Test Function for indexAction.
      *
      * @return void
      */
@@ -49,7 +45,7 @@ class IndexController extends Zend_Controller_Action
     }
 
     /**
-     * Test Function for prefixAction
+     * Test Function for prefixAction.
      *
      * @return void
      */
@@ -59,7 +55,7 @@ class IndexController extends Zend_Controller_Action
     }
 
     /**
-     * Test Function for argsAction
+     * Test Function for argsAction.
      *
      * @return void
      */
@@ -67,14 +63,14 @@ class IndexController extends Zend_Controller_Action
     {
         $args = '';
         foreach ($this->getInvokeArgs() as $key => $value) {
-            $args .= $key . ': ' . $value . '; ';
+            $args .= $key.': '.$value.'; ';
         }
 
-        $this->_response->appendBody('Args action called with params ' . $args . "\n");
+        $this->_response->appendBody('Args action called with params '.$args."\n");
     }
 
     /**
-     * Test Function for replaceAction
+     * Test Function for replaceAction.
      *
      * @return void
      */
@@ -85,13 +81,13 @@ class IndexController extends Zend_Controller_Action
                 ->setActionName('reset')
                 ->setDispatched(false);
         $response = new Zend_Controller_Response_Http();
-        $front    = Zend_Controller_Front::getInstance();
+        $front = Zend_Controller_Front::getInstance();
         $front->setRequest($request)
               ->setResponse($response);
     }
 
     /**
-     * Test Function for resetAction
+     * Test Function for resetAction.
      *
      * @return void
      */
@@ -99,5 +95,4 @@ class IndexController extends Zend_Controller_Action
     {
         $this->_response->appendBody('Reset action called');
     }
-
 }

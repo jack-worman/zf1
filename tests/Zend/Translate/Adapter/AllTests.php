@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +14,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Translate
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Translate_Adapter_AllTests::main');
 }
@@ -36,10 +36,10 @@ require_once 'Zend/Translate/Adapter/XmlTmTest.php';
 
 /**
  * @category   Zend
- * @package    Zend_Translate
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Translate
  */
 #[AllowDynamicProperties]
@@ -47,12 +47,12 @@ class Zend_Translate_Adapter_AllTests
 {
     public static function main()
     {
-        \PHPUnit\TextUI\TestRunner::run(self::suite());
+        PHPUnit\TextUI\TestRunner::run(self::suite());
     }
 
     public static function suite()
     {
-        $suite = \PHPUnit\Framework\TestSuite::empty('Zend Framework - Zend_Translate_Adapter');
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend Framework - Zend_Translate_Adapter');
 
         $suite->addTestSuite('Zend_Translate_Adapter_ArrayTest');
         $suite->addTestSuite('Zend_Translate_Adapter_CsvTest');

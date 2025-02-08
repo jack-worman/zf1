@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,28 +14,28 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Search_Lucene_Index_FieldInfo
+ * Zend_Search_Lucene_Index_FieldInfo.
  */
 // require_once 'Zend/Search/Lucene/Index/FieldInfo.php';
 
 /**
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Search_Lucene
  */
 #[AllowDynamicProperties]
-class Zend_Search_Lucene_Index_FieldInfoTest extends \PHPUnit\Framework\TestCase
+class Zend_Search_Lucene_Index_FieldInfoTest extends PHPUnit\Framework\TestCase
 {
     public function testCreate()
     {
@@ -47,4 +48,3 @@ class Zend_Search_Lucene_Index_FieldInfoTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($fieldInfo->storeTermVector, false);
     }
 }
-

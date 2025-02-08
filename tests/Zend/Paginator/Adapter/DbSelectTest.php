@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Paginator
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -33,21 +34,21 @@
 // require_once 'Zend/Db/Adapter/Abstract.php';
 
 /**
- * @see \PHPUnit\Framework\TestCase
+ * @see PHPUnit\Framework\TestCase
  */
 
-require_once __DIR__ . '/../_files/TestTable.php';
+require_once __DIR__.'/../_files/TestTable.php';
 
 /**
  * @category   Zend
- * @package    Zend_Paginator
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Paginator
  */
 #[AllowDynamicProperties]
-class Zend_Paginator_Adapter_DbSelectTest extends \PHPUnit\Framework\TestCase
+class Zend_Paginator_Adapter_DbSelectTest extends PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_Paginator_Adapter_DbSelect
@@ -75,23 +76,24 @@ class Zend_Paginator_Adapter_DbSelectTest extends \PHPUnit\Framework\TestCase
     protected function setUp(): void
     {
         if (!extension_loaded('pdo_sqlite')) {
-           $this->markTestSkipped('Pdo_Sqlite extension is not loaded');
+            $this->markTestSkipped('Pdo_Sqlite extension is not loaded');
         }
 
         parent::setUp();
 
-        $this->_db = new Zend_Db_Adapter_Pdo_Sqlite(array(
-            'dbname' => __DIR__ . '/../_files/test.sqlite'
-        ));
+        $this->_db = new Zend_Db_Adapter_Pdo_Sqlite([
+            'dbname' => __DIR__.'/../_files/test.sqlite',
+        ]);
 
         $this->_table = new TestTable($this->_db);
 
         $this->_query = $this->_db->select()->from('test')
                                             ->order('number ASC'); // ZF-3740
-                                            //->limit(1000, 0); // ZF-3727
+        // ->limit(1000, 0); // ZF-3727
 
         $this->_adapter = new Zend_Paginator_Adapter_DbSelect($this->_query);
     }
+
     /**
      * Cleans up the environment after running a test.
      */
@@ -106,14 +108,14 @@ class Zend_Paginator_Adapter_DbSelectTest extends \PHPUnit\Framework\TestCase
      */
     public function testCacheIdentifierIsHashOfAssembledSelect()
     {
-        $dbAdapter = $this->getMockForAbstractClass('Zend_Db_Adapter_Abstract', array(''), '', false);
-        $select    = new Zend_Db_Select($dbAdapter);
+        $dbAdapter = $this->getMockForAbstractClass('Zend_Db_Adapter_Abstract', [''], '', false);
+        $select = new Zend_Db_Select($dbAdapter);
         $select->from('ZF_6989');
 
         $paginatorAdapter = new Zend_Paginator_Adapter_DbSelect($select);
 
         $this->assertSame(md5((string) $select->assemble()), $paginatorAdapter->getCacheIdentifier(),
-                          'Cache identifier incorrect!');
+            'Cache identifier incorrect!');
     }
 
     public function testGetsItemsAtOffsetZero()
@@ -123,7 +125,7 @@ class Zend_Paginator_Adapter_DbSelectTest extends \PHPUnit\Framework\TestCase
         $i = 1;
         foreach ($actual as $item) {
             $this->assertEquals($i, $item['number']);
-            $i++;
+            ++$i;
         }
     }
 
@@ -134,7 +136,7 @@ class Zend_Paginator_Adapter_DbSelectTest extends \PHPUnit\Framework\TestCase
         $i = 11;
         foreach ($actual as $item) {
             $this->assertEquals($i, $item['number']);
-            $i++;
+            ++$i;
         }
     }
 
@@ -148,7 +150,7 @@ class Zend_Paginator_Adapter_DbSelectTest extends \PHPUnit\Framework\TestCase
     {
         try {
             $this->_adapter->setRowCount($this->_db->select()->from('test'));
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->assertTrue($e instanceof Zend_Paginator_Exception);
             $this->assertStringContainsString('Row count column not found', $e->getMessage());
         }
@@ -159,7 +161,7 @@ class Zend_Paginator_Adapter_DbSelectTest extends \PHPUnit\Framework\TestCase
             $query = $this->_db->select($expr)->from('test');
 
             $this->_adapter->setRowCount($query);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->assertTrue($e instanceof Zend_Paginator_Exception);
             $this->assertEquals('Row count column not found', $e->getMessage());
         }
@@ -186,7 +188,7 @@ class Zend_Paginator_Adapter_DbSelectTest extends \PHPUnit\Framework\TestCase
     {
         try {
             $this->_adapter->setRowCount('invalid');
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->assertTrue($e instanceof Zend_Paginator_Exception);
             $this->assertEquals('Invalid row count', $e->getMessage());
         }
@@ -227,9 +229,9 @@ class Zend_Paginator_Adapter_DbSelectTest extends \PHPUnit\Framework\TestCase
      */
     public function testGroupByQueryOnEmptyTableReturnsRowCountZero()
     {
-        $db = new Zend_Db_Adapter_Pdo_Sqlite(array(
-            'dbname' => __DIR__ . '/../_files/testempty.sqlite'
-        ));
+        $db = new Zend_Db_Adapter_Pdo_Sqlite([
+            'dbname' => __DIR__.'/../_files/testempty.sqlite',
+        ]);
 
         $query = $db->select()->from('test')
                               ->order('number ASC')
@@ -273,7 +275,7 @@ class Zend_Paginator_Adapter_DbSelectTest extends \PHPUnit\Framework\TestCase
     public function testSelectSpecificColumns()
     {
         $number = $this->_db->quoteIdentifier('number');
-        $query = $this->_db->select()->from('test', array('testgroup', 'number'))
+        $query = $this->_db->select()->from('test', ['testgroup', 'number'])
                                      ->where("$number >= ?", '1');
         $adapter = new Zend_Paginator_Adapter_DbSelect($query);
 
@@ -321,39 +323,39 @@ class Zend_Paginator_Adapter_DbSelectTest extends \PHPUnit\Framework\TestCase
 
         // Insert some data
         $db->insert('sandboxTransaction',
-            array(
+            [
                 'foreign_id' => 1,
                 'name' => 'transaction 1 with foreign_id 1',
-            )
+            ]
         );
 
         $db->insert('sandboxTransaction',
-            array(
+            [
                 'foreign_id' => 1,
                 'name' => 'transaction 2 with foreign_id 1',
-            )
+            ]
         );
 
         $db->insert('sandboxForeign',
-            array(
+            [
                 'name' => 'John Doe',
-            )
+            ]
         );
 
         $db->insert('sandboxForeign',
-            array(
+            [
                 'name' => 'Jane Smith',
-            )
+            ]
         );
 
-        $query = $db->select()->from(array('a'=>'sandboxTransaction'), array())
-                              ->join(array('b'=>'sandboxForeign'), 'a.foreign_id = b.id', array('name'))
+        $query = $db->select()->from(['a' => 'sandboxTransaction'], [])
+                              ->join(['b' => 'sandboxForeign'], 'a.foreign_id = b.id', ['name'])
                               ->distinct(true);
 
         try {
             $adapter = new Zend_Paginator_Adapter_DbSelect($query);
             $adapter->count();
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->fail($e->getMessage());
         }
     }
@@ -363,10 +365,10 @@ class Zend_Paginator_Adapter_DbSelectTest extends \PHPUnit\Framework\TestCase
      */
     public function testUnionSelect()
     {
-        $union = $this->_db->select()->union(array(
+        $union = $this->_db->select()->union([
             $this->_db->select()->from('test')->where('number <= 250'),
-            $this->_db->select()->from('test')->where('number > 250')
-        ));
+            $this->_db->select()->from('test')->where('number > 250'),
+        ]);
 
         $adapter = new Zend_Paginator_Adapter_DbSelect($union);
         $expected = 500;
@@ -380,10 +382,10 @@ class Zend_Paginator_Adapter_DbSelectTest extends \PHPUnit\Framework\TestCase
      */
     public function testGetCountSelect()
     {
-        $union = $this->_db->select()->union(array(
+        $union = $this->_db->select()->union([
             $this->_db->select()->from('test')->where('number <= 250'),
-            $this->_db->select()->from('test')->where('number > 250')
-        ));
+            $this->_db->select()->from('test')->where('number > 250'),
+        ]);
 
         $adapter = new Zend_Paginator_Adapter_DbSelect($union);
 
@@ -397,7 +399,7 @@ class Zend_Paginator_Adapter_DbSelectTest extends \PHPUnit\Framework\TestCase
      */
     public function testMultipleDistinctColumns()
     {
-        $select = $this->_db->select()->from('test', array('testgroup', 'number'))
+        $select = $this->_db->select()->from('test', ['testgroup', 'number'])
                                       ->distinct(true);
 
         $adapter = new Zend_Paginator_Adapter_DbSelect($select);
@@ -430,11 +432,11 @@ class Zend_Paginator_Adapter_DbSelectTest extends \PHPUnit\Framework\TestCase
     public function testGroupByMultipleColumns()
     {
         $select = $this->_db->select()->from('test', 'testgroup')
-                                      ->group(array('number', 'testgroup'));
+                                      ->group(['number', 'testgroup']);
 
         $adapter = new Zend_Paginator_Adapter_DbSelect($select);
 
-        $expected = 'SELECT COUNT(1) AS "zend_paginator_row_count" FROM (SELECT "test"."testgroup" FROM "test" GROUP BY "number"' . ",\n\t" . '"testgroup") AS "t"';
+        $expected = 'SELECT COUNT(1) AS "zend_paginator_row_count" FROM (SELECT "test"."testgroup" FROM "test" GROUP BY "number"'.",\n\t".'"testgroup") AS "t"';
 
         $this->assertEquals($expected, $adapter->getCountSelect()->__toString());
         $this->assertEquals(500, $adapter->count());
@@ -485,7 +487,7 @@ class Zend_Paginator_Adapter_DbSelectTest extends \PHPUnit\Framework\TestCase
 
         $adapter = new Zend_Paginator_Adapter_DbSelect($select);
 
-        $expected = 'SELECT COUNT(1) AS "zend_paginator_row_count" FROM (SELECT "test".* FROM "test" WHERE (number > 250) GROUP BY "testgroup"' . ",\n\t" . '"number") AS "t"';
+        $expected = 'SELECT COUNT(1) AS "zend_paginator_row_count" FROM (SELECT "test".* FROM "test" WHERE (number > 250) GROUP BY "testgroup"'.",\n\t".'"number") AS "t"';
 
         $this->assertEquals($expected, $adapter->getCountSelect()->__toString());
         $this->assertEquals(250, $adapter->count());
@@ -497,9 +499,9 @@ class Zend_Paginator_Adapter_DbSelectTest extends \PHPUnit\Framework\TestCase
     public function testSetRowCountWithAlias()
     {
         $select = $this->_db->select();
-        $select->from('test', array(
-            Zend_Paginator_Adapter_DbSelect::ROW_COUNT_COLUMN => new Zend_Db_Expr('COUNT(DISTINCT number)')
-        ));
+        $select->from('test', [
+            Zend_Paginator_Adapter_DbSelect::ROW_COUNT_COLUMN => new Zend_Db_Expr('COUNT(DISTINCT number)'),
+        ]);
 
         $this->_db->setProfiler(true);
         $adapter = new Zend_Paginator_Adapter_DbSelect($this->_db->select());
@@ -533,10 +535,10 @@ class Zend_Paginator_Adapter_DbSelectTest extends \PHPUnit\Framework\TestCase
     public function testObjectSelectWithBind()
     {
         $select = $this->_db->select();
-        $select->from('test', array('number'))
+        $select->from('test', ['number'])
                ->where('number = ?')
                ->distinct(true)
-               ->bind(array(250));
+               ->bind([250]);
 
         $adapter = new Zend_Paginator_Adapter_DbSelect($select);
         $this->assertEquals(1, $adapter->count());
@@ -548,9 +550,9 @@ class Zend_Paginator_Adapter_DbSelectTest extends \PHPUnit\Framework\TestCase
 
         $selectUnion = $this->_db
                            ->select()
-                           ->bind(array(250));
+                           ->bind([250]);
 
-        $selectUnion->union(array($select, $select2));
+        $selectUnion->union([$select, $select2]);
         $adapter = new Zend_Paginator_Adapter_DbSelect($selectUnion);
         $this->assertEquals(2, $adapter->count());
     }

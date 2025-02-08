@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate_File
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Validate_File_SizeTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Validate_File_SizeTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Validate_File_SizeTest::main');
 }
 
 /**
@@ -32,14 +33,14 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 
 /**
  * @category   Zend
- * @package    Zend_Validate_File
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Validate
  */
 #[AllowDynamicProperties]
-class Zend_Validate_File_SizeTest extends \PHPUnit\Framework\TestCase
+class Zend_Validate_File_SizeTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -48,107 +49,107 @@ class Zend_Validate_File_SizeTest extends \PHPUnit\Framework\TestCase
      */
     public static function main()
     {
-        $suite  = \PHPUnit\Framework\TestSuite::empty("Zend_Validate_File_SizeTest");
-        (new \PHPUnit\TextUI\TestRunner())->run(
-            \PHPUnit\TextUI\Configuration\Registry::get(),
-            new \PHPUnit\Runner\ResultCache\NullResultCache(),
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_Validate_File_SizeTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
             $suite,
         );
     }
 
     /**
-     * Ensures that the validator follows expected behavior
+     * Ensures that the validator follows expected behavior.
      *
      * @return void
      */
     public function testBasic()
     {
-        $valuesExpected = array(
-            array(array('min' => 0, 'max' => 10000), true),
-            array(array('min' => 0, 'max' => '10 MB'), true),
-            array(array('min' => '4B', 'max' => '10 MB'), true),
-            array(array('min' => 0, 'max' => '10MB'), true),
-            array(array('min' => 0, 'max' => '10  MB'), true),
-            array(794, true),
-            array(array('min' => 794), true),
-            array(array('min' => 0, 'max' => 500), false),
-            array(500, false),
-        );
+        $valuesExpected = [
+            [['min' => 0, 'max' => 10000], true],
+            [['min' => 0, 'max' => '10 MB'], true],
+            [['min' => '4B', 'max' => '10 MB'], true],
+            [['min' => 0, 'max' => '10MB'], true],
+            [['min' => 0, 'max' => '10  MB'], true],
+            [794, true],
+            [['min' => 794], true],
+            [['min' => 0, 'max' => 500], false],
+            [500, false],
+        ];
 
         foreach ($valuesExpected as $element) {
             $options = array_shift($element);
-            $value   = array_shift($element);
+            $value = array_shift($element);
             $validator = new Zend_Validate_File_Size($options);
             $this->assertEquals(
                 $value,
-                $validator->isValid(__DIR__ . '/_files/testsize.mo'),
-                "Tested " . var_export($value, 1) . " against options " . var_export($options, 1)
+                $validator->isValid(__DIR__.'/_files/testsize.mo'),
+                'Tested '.var_export($value, 1).' against options '.var_export($options, 1)
             );
         }
     }
 
     /**
-     * Ensures that getMin() returns expected value
+     * Ensures that getMin() returns expected value.
      *
      * @return void
      */
     public function testGetMin()
     {
-        $validator = new Zend_Validate_File_Size(array('min' => 1, 'max' => 100));
+        $validator = new Zend_Validate_File_Size(['min' => 1, 'max' => 100]);
         $this->assertEquals('1B', $validator->getMin());
 
         try {
-            $validator = new Zend_Validate_File_Size(array('min' => 100, 'max' => 1));
-            $this->fail("Missing exception");
+            $validator = new Zend_Validate_File_Size(['min' => 100, 'max' => 1]);
+            $this->fail('Missing exception');
         } catch (Zend_Validate_Exception $e) {
-            $this->assertStringContainsString("greater than or equal", $e->getMessage());
+            $this->assertStringContainsString('greater than or equal', $e->getMessage());
         }
 
-        $validator = new Zend_Validate_File_Size(array('min' => 1, 'max' => 100, 'bytestring' => false));
+        $validator = new Zend_Validate_File_Size(['min' => 1, 'max' => 100, 'bytestring' => false]);
         $this->assertEquals(1, $validator->getMin());
     }
 
     /**
-     * Ensures that setMin() returns expected value
+     * Ensures that setMin() returns expected value.
      *
      * @return void
      */
     public function testSetMin()
     {
-        $validator = new Zend_Validate_File_Size(array('min' => 1000, 'max' => 10000));
+        $validator = new Zend_Validate_File_Size(['min' => 1000, 'max' => 10000]);
         $validator->setMin(100);
         $this->assertEquals('100B', $validator->getMin());
 
         try {
             $validator->setMin(20000);
-            $this->fail("Missing exception");
+            $this->fail('Missing exception');
         } catch (Zend_Validate_Exception $e) {
-            $this->assertStringContainsString("less than or equal", $e->getMessage());
+            $this->assertStringContainsString('less than or equal', $e->getMessage());
         }
 
-        $validator = new Zend_Validate_File_Size(array('min' => 1000, 'max' => 10000, 'bytestring' => false));
+        $validator = new Zend_Validate_File_Size(['min' => 1000, 'max' => 10000, 'bytestring' => false]);
         $validator->setMin(100);
         $this->assertEquals(100, $validator->getMin());
     }
 
     /**
-     * Ensures that getMax() returns expected value
+     * Ensures that getMax() returns expected value.
      *
      * @return void
      */
     public function testGetMax()
     {
-        $validator = new Zend_Validate_File_Size(array('min' => 1, 'max' => 100, 'bytestring' => false));
+        $validator = new Zend_Validate_File_Size(['min' => 1, 'max' => 100, 'bytestring' => false]);
         $this->assertEquals(100, $validator->getMax());
 
         try {
-            $validator = new Zend_Validate_File_Size(array('min' => 100, 'max' => 1));
-            $this->fail("Missing exception");
+            $validator = new Zend_Validate_File_Size(['min' => 100, 'max' => 1]);
+            $this->fail('Missing exception');
         } catch (Zend_Validate_Exception $e) {
-            $this->assertStringContainsString("greater than or equal", $e->getMessage());
+            $this->assertStringContainsString('greater than or equal', $e->getMessage());
         }
 
-        $validator = new Zend_Validate_File_Size(array('min' => 1, 'max' => 100000));
+        $validator = new Zend_Validate_File_Size(['min' => 1, 'max' => 100000]);
         $this->assertEquals('97.66kB', $validator->getMax());
 
         $validator = new Zend_Validate_File_Size(2000);
@@ -156,13 +157,13 @@ class Zend_Validate_File_SizeTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Ensures that setMax() returns expected value
+     * Ensures that setMax() returns expected value.
      *
      * @return void
      */
     public function testSetMax()
     {
-        $validator = new Zend_Validate_File_Size(array('max' => 0, 'bytestring' => true));
+        $validator = new Zend_Validate_File_Size(['max' => 0, 'bytestring' => true]);
         $this->assertEquals('0B', $validator->getMax());
 
         $validator->setMax(1000000);
@@ -200,25 +201,25 @@ class Zend_Validate_File_SizeTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Ensures that the validator returns size infos
+     * Ensures that the validator returns size infos.
      *
      * @return void
      */
     public function testFailureMessage()
     {
-        $validator = new Zend_Validate_File_Size(array('min' => 9999, 'max' => 10000));
-        $this->assertFalse($validator->isValid(__DIR__ . '/_files/testsize.mo'));
+        $validator = new Zend_Validate_File_Size(['min' => 9999, 'max' => 10000]);
+        $this->assertFalse($validator->isValid(__DIR__.'/_files/testsize.mo'));
         $this->assertStringContainsString('9.76kB', current($validator->getMessages()));
         $this->assertStringContainsString('794B', current($validator->getMessages()));
 
-        $validator = new Zend_Validate_File_Size(array('min' => 9999, 'max' => 10000, 'bytestring' => false));
-        $this->assertFalse($validator->isValid(__DIR__ . '/_files/testsize.mo'));
+        $validator = new Zend_Validate_File_Size(['min' => 9999, 'max' => 10000, 'bytestring' => false]);
+        $this->assertFalse($validator->isValid(__DIR__.'/_files/testsize.mo'));
         $this->assertStringContainsString('9999', current($validator->getMessages()));
         $this->assertStringContainsString('794', current($validator->getMessages()));
     }
 }
 
 // Call Zend_Validate_File_SizeTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Validate_File_SizeTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Validate_File_SizeTest::main') {
     Zend_Validate_File_SizeTest::main();
 }

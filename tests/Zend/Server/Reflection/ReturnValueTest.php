@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,30 +14,30 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Server
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version $Id$
  */
 
 // require_once 'Zend/Server/Reflection/ReturnValue.php';
 
 /**
- * Test case for Zend_Server_Reflection_ReturnValue
+ * Test case for Zend_Server_Reflection_ReturnValue.
  *
  * @category   Zend
- * @package    Zend_Server
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Server
  */
 #[AllowDynamicProperties]
-class Zend_Server_Reflection_ReturnValueTest extends \PHPUnit\Framework\TestCase
+class Zend_Server_Reflection_ReturnValueTest extends PHPUnit\Framework\TestCase
 {
     /**
-     * __construct() test
+     * __construct() test.
      *
      * Call as method call
      *
@@ -46,14 +47,14 @@ class Zend_Server_Reflection_ReturnValueTest extends \PHPUnit\Framework\TestCase
      *
      * Returns: void
      */
-    public function test__construct()
+    public function testConstruct()
     {
         $obj = new Zend_Server_Reflection_ReturnValue();
         $this->assertTrue($obj instanceof Zend_Server_Reflection_ReturnValue);
     }
 
     /**
-     * getType() test
+     * getType() test.
      *
      * Call as method call
      *
@@ -69,7 +70,7 @@ class Zend_Server_Reflection_ReturnValueTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * setType() test
+     * setType() test.
      *
      * Call as method call
      *
@@ -87,7 +88,7 @@ class Zend_Server_Reflection_ReturnValueTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * getDescription() test
+     * getDescription() test.
      *
      * Call as method call
      *
@@ -103,7 +104,7 @@ class Zend_Server_Reflection_ReturnValueTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * setDescription() test
+     * setDescription() test.
      *
      * Call as method call
      *
