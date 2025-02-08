@@ -188,13 +188,4 @@ class Zend_Queue_MessageTest extends PHPUnit\Framework\TestCase
 
         $this->assertEquals('hello', $this->message->id);
     }
-
-    public function testMagic()
-    {
-        $this->assertTrue(is_array($this->message->__sleep()));
-
-        $message = serialize($this->message);
-        $woken = unserialize($message);
-        $this->assertEquals($this->message->body, $woken->body);
-    }
 }

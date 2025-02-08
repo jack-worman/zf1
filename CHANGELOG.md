@@ -192,8 +192,6 @@
   - iconv_substr php 7.0.11+ compatibility fixes - borrowed from [axot/zf1@4c6400](https://github.com/axot/zf1/commit/4c6400ad28f1f7a3448492f9d444aff1080c6) (thanks!)
 - zend-mail 
   - php 7.2 compatibility fixes
-- zend-measure
-  - php 7.3 compatibility fixes
 - zend-oauth
   - php 7.2 compatibility fixes
 - zend-openid
