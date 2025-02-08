@@ -90,7 +90,7 @@ jobs:
           composer lint.checkstyle | cs2pr
 
       - name: php-cs-fixer
-        run: vendor/bin/php-cs-fixer fix --dry-run
+        run: vendor/bin/php-cs-fixer fix --dry-run -vvv
         env:
           PHP_CS_FIXER_IGNORE_ENV: 1
 
