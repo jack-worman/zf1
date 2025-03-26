@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -41,14 +42,12 @@
 /** Zend_Pdf_ElementFactory */
 // require_once 'Zend/Pdf/ElementFactory.php';
 
-
-
 /**
  * @category   Zend
- * @package    Zend_Pdf
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Pdf
  */
 #[AllowDynamicProperties]
@@ -63,118 +62,116 @@ class Zend_Pdf_ActionTest extends PHPUnit_Framework_TestCase
     {
         $dictionary = new Zend_Pdf_Element_Dictionary();
         $dictionary->Type = new Zend_Pdf_Element_Name('Action');
-        $dictionary->S    = new Zend_Pdf_Element_Name('GoTo');
-        $dictionary->D    = new Zend_Pdf_Element_String('SomeNamedDestination');
+        $dictionary->S = new Zend_Pdf_Element_Name('GoTo');
+        $dictionary->D = new Zend_Pdf_Element_String('SomeNamedDestination');
 
         $action2Dictionary = new Zend_Pdf_Element_Dictionary();
         $action2Dictionary->Type = new Zend_Pdf_Element_Name('Action');
-        $action2Dictionary->S    = new Zend_Pdf_Element_Name('Thread');
-        $action2Dictionary->D    = new Zend_Pdf_Element_String('NamedDestination 2');
+        $action2Dictionary->S = new Zend_Pdf_Element_Name('Thread');
+        $action2Dictionary->D = new Zend_Pdf_Element_String('NamedDestination 2');
         $action2Dictionary->Next = new Zend_Pdf_Element_Array();
 
         $dictionary->Next = $action2Dictionary;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('GoTo');
-        $leafAction->D    = new Zend_Pdf_Element_String('NamedDestination 3');
-        $action2Dictionary->Next->items[] = $leafAction;
-
-
-        $leafAction = new Zend_Pdf_Element_Dictionary();
-        $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('GoToR');
-        $action2Dictionary->Next->items[] = $leafAction;
-
-
-        $leafAction = new Zend_Pdf_Element_Dictionary();
-        $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('GoToE');
+        $leafAction->S = new Zend_Pdf_Element_Name('GoTo');
+        $leafAction->D = new Zend_Pdf_Element_String('NamedDestination 3');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('Launch');
+        $leafAction->S = new Zend_Pdf_Element_Name('GoToR');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('Thread');
+        $leafAction->S = new Zend_Pdf_Element_Name('GoToE');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('URI');
-        $leafAction->URI  = new Zend_Pdf_Element_Name('http://some_host/');
+        $leafAction->S = new Zend_Pdf_Element_Name('Launch');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('Sound');
+        $leafAction->S = new Zend_Pdf_Element_Name('Thread');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('Movie');
+        $leafAction->S = new Zend_Pdf_Element_Name('URI');
+        $leafAction->URI = new Zend_Pdf_Element_Name('http://some_host/');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('Hide');
+        $leafAction->S = new Zend_Pdf_Element_Name('Sound');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('Named');
+        $leafAction->S = new Zend_Pdf_Element_Name('Movie');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('SubmitForm');
+        $leafAction->S = new Zend_Pdf_Element_Name('Hide');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('ResetForm');
+        $leafAction->S = new Zend_Pdf_Element_Name('Named');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('ImportData');
+        $leafAction->S = new Zend_Pdf_Element_Name('SubmitForm');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('JavaScript');
+        $leafAction->S = new Zend_Pdf_Element_Name('ResetForm');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('SetOCGState');
+        $leafAction->S = new Zend_Pdf_Element_Name('ImportData');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('Rendition');
+        $leafAction->S = new Zend_Pdf_Element_Name('JavaScript');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('Trans');
+        $leafAction->S = new Zend_Pdf_Element_Name('SetOCGState');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('GoTo3DView');
+        $leafAction->S = new Zend_Pdf_Element_Name('Rendition');
+        $action2Dictionary->Next->items[] = $leafAction;
+
+        $leafAction = new Zend_Pdf_Element_Dictionary();
+        $leafAction->Type = new Zend_Pdf_Element_Name('Action');
+        $leafAction->S = new Zend_Pdf_Element_Name('Trans');
+        $action2Dictionary->Next->items[] = $leafAction;
+
+        $leafAction = new Zend_Pdf_Element_Dictionary();
+        $leafAction->Type = new Zend_Pdf_Element_Name('Action');
+        $leafAction->S = new Zend_Pdf_Element_Name('GoTo3DView');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $action = Zend_Pdf_Action::load($dictionary);
 
         $actionsCount = 0;
-        $iterator = new RecursiveIteratorIterator(new Zend_Pdf_RecursivelyIteratableObjectsContainer(array($action)),
-                                                  RecursiveIteratorIterator::SELF_FIRST);
+        $iterator = new RecursiveIteratorIterator(new Zend_Pdf_RecursivelyIteratableObjectsContainer([$action]),
+            RecursiveIteratorIterator::SELF_FIRST);
         foreach ($iterator as $chainedAction) {
-            $actionsCount++;
+            ++$actionsCount;
         }
 
         $this->assertEquals(20, $actionsCount);
@@ -184,119 +181,117 @@ class Zend_Pdf_ActionTest extends PHPUnit_Framework_TestCase
     {
         $dictionary = new Zend_Pdf_Element_Dictionary();
         $dictionary->Type = new Zend_Pdf_Element_Name('Action');
-        $dictionary->S    = new Zend_Pdf_Element_Name('GoToR');
-        $dictionary->D    = new Zend_Pdf_Element_String('SomeNamedDestination');
+        $dictionary->S = new Zend_Pdf_Element_Name('GoToR');
+        $dictionary->D = new Zend_Pdf_Element_String('SomeNamedDestination');
 
         $action2Dictionary = new Zend_Pdf_Element_Dictionary();
         $action2Dictionary->Type = new Zend_Pdf_Element_Name('Action');
-        $action2Dictionary->S    = new Zend_Pdf_Element_Name('Thread');
-        $action2Dictionary->D    = new Zend_Pdf_Element_String('NamedDestination 2');
+        $action2Dictionary->S = new Zend_Pdf_Element_Name('Thread');
+        $action2Dictionary->D = new Zend_Pdf_Element_String('NamedDestination 2');
         $action2Dictionary->Next = new Zend_Pdf_Element_Array();
 
         $dictionary->Next = $action2Dictionary;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('GoTo');
-        $leafAction->D    = new Zend_Pdf_Element_String('NamedDestination 3');
-        $action2Dictionary->Next->items[] = $leafAction;
-
-
-        $leafAction = new Zend_Pdf_Element_Dictionary();
-        $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('GoToR');
-        $action2Dictionary->Next->items[] = $leafAction;
-
-
-        $leafAction = new Zend_Pdf_Element_Dictionary();
-        $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('GoToE');
+        $leafAction->S = new Zend_Pdf_Element_Name('GoTo');
+        $leafAction->D = new Zend_Pdf_Element_String('NamedDestination 3');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('Launch');
+        $leafAction->S = new Zend_Pdf_Element_Name('GoToR');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('Thread');
+        $leafAction->S = new Zend_Pdf_Element_Name('GoToE');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('URI');
-        $leafAction->URI  = new Zend_Pdf_Element_Name('http://some_host/');
+        $leafAction->S = new Zend_Pdf_Element_Name('Launch');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('Sound');
+        $leafAction->S = new Zend_Pdf_Element_Name('Thread');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('Movie');
+        $leafAction->S = new Zend_Pdf_Element_Name('URI');
+        $leafAction->URI = new Zend_Pdf_Element_Name('http://some_host/');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('Hide');
+        $leafAction->S = new Zend_Pdf_Element_Name('Sound');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('Named');
+        $leafAction->S = new Zend_Pdf_Element_Name('Movie');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('SubmitForm');
+        $leafAction->S = new Zend_Pdf_Element_Name('Hide');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('ResetForm');
+        $leafAction->S = new Zend_Pdf_Element_Name('Named');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('ImportData');
+        $leafAction->S = new Zend_Pdf_Element_Name('SubmitForm');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('JavaScript');
+        $leafAction->S = new Zend_Pdf_Element_Name('ResetForm');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('SetOCGState');
+        $leafAction->S = new Zend_Pdf_Element_Name('ImportData');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('Rendition');
+        $leafAction->S = new Zend_Pdf_Element_Name('JavaScript');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('Trans');
+        $leafAction->S = new Zend_Pdf_Element_Name('SetOCGState');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('GoTo3DView');
+        $leafAction->S = new Zend_Pdf_Element_Name('Rendition');
+        $action2Dictionary->Next->items[] = $leafAction;
+
+        $leafAction = new Zend_Pdf_Element_Dictionary();
+        $leafAction->Type = new Zend_Pdf_Element_Name('Action');
+        $leafAction->S = new Zend_Pdf_Element_Name('Trans');
+        $action2Dictionary->Next->items[] = $leafAction;
+
+        $leafAction = new Zend_Pdf_Element_Dictionary();
+        $leafAction->Type = new Zend_Pdf_Element_Name('Action');
+        $leafAction->S = new Zend_Pdf_Element_Name('GoTo3DView');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $action = Zend_Pdf_Action::load($dictionary);
 
-        $actionsToClean        = array();
-        $deletionCandidateKeys = array();
+        $actionsToClean = [];
+        $deletionCandidateKeys = [];
         $iterator = new RecursiveIteratorIterator($action, RecursiveIteratorIterator::SELF_FIRST);
         foreach ($iterator as $chainedAction) {
             if ($chainedAction instanceof Zend_Pdf_Action_GoTo) {
-                $actionsToClean[]        = $iterator->getSubIterator();
+                $actionsToClean[] = $iterator->getSubIterator();
                 $deletionCandidateKeys[] = $iterator->getSubIterator()->key();
             }
         }
@@ -304,10 +299,10 @@ class Zend_Pdf_ActionTest extends PHPUnit_Framework_TestCase
             unset($action->next[$deletionCandidateKeys[$id]]);
         }
         $actionsCount = 0;
-        $iterator = new RecursiveIteratorIterator(new Zend_Pdf_RecursivelyIteratableObjectsContainer(array($action)),
-                                                  RecursiveIteratorIterator::SELF_FIRST);
+        $iterator = new RecursiveIteratorIterator(new Zend_Pdf_RecursivelyIteratableObjectsContainer([$action]),
+            RecursiveIteratorIterator::SELF_FIRST);
         foreach ($iterator as $chainedAction) {
-            $actionsCount++;
+            ++$actionsCount;
         }
         $this->assertEquals(18, $actionsCount);
 
@@ -315,9 +310,9 @@ class Zend_Pdf_ActionTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(
             $action->getResource()->toString(),
             '<</Type /Action '
-            . '/S /Thread '
-            . '/D (NamedDestination 2) '
-            . '/Next [1 0 R 2 0 R 3 0 R 4 0 R 5 0 R 6 0 R 7 0 R 8 0 R 9 0 R 10 0 R 11 0 R 12 0 R 13 0 R 14 0 R 15 0 R 16 0 R 17 0 R ] >>');
+            .'/S /Thread '
+            .'/D (NamedDestination 2) '
+            .'/Next [1 0 R 2 0 R 3 0 R 4 0 R 5 0 R 6 0 R 7 0 R 8 0 R 9 0 R 10 0 R 11 0 R 12 0 R 13 0 R 14 0 R 15 0 R 16 0 R 17 0 R ] >>');
     }
 
     public function testCreate()
@@ -328,7 +323,7 @@ class Zend_Pdf_ActionTest extends PHPUnit_Framework_TestCase
         $action1->dumpAction(new Zend_Pdf_ElementFactory(1));
 
         $this->assertEquals($action1->getResource()->toString(),
-                            '<</Type /Action /S /GoTo /D (SomeNamedDestination) /Next 1 0 R >>');
+            '<</Type /Action /S /GoTo /D (SomeNamedDestination) /Next 1 0 R >>');
     }
 
     public function testCreate1()
@@ -345,15 +340,15 @@ class Zend_Pdf_ActionTest extends PHPUnit_Framework_TestCase
         $action->dumpAction(new Zend_Pdf_ElementFactory(1));
 
         $this->assertEquals($action->getResource()->toString(),
-                            '<</Type /Action /S /GoTo /D [4 0 R /Fit ] >>');
+            '<</Type /Action /S /GoTo /D [4 0 R /Fit ] >>');
     }
 
     public function testGetDestination()
     {
         $dictionary = new Zend_Pdf_Element_Dictionary();
         $dictionary->Type = new Zend_Pdf_Element_Name('Action');
-        $dictionary->S    = new Zend_Pdf_Element_Name('GoTo');
-        $dictionary->D    = new Zend_Pdf_Element_String('SomeNamedDestination');
+        $dictionary->S = new Zend_Pdf_Element_Name('GoTo');
+        $dictionary->D = new Zend_Pdf_Element_String('SomeNamedDestination');
 
         $action = Zend_Pdf_Action::load($dictionary);
 
@@ -375,15 +370,15 @@ class Zend_Pdf_ActionTest extends PHPUnit_Framework_TestCase
         $action2 = Zend_Pdf_Action_GoTo::create(Zend_Pdf_Destination_Fit::create($page3));
 
         $this->assertTrue($pdf->resolveDestination($action1->getDestination()) === $page2);
-        $this->assertTrue($pdf->resolveDestination($action2->getDestination()) === null);
+        $this->assertTrue(null === $pdf->resolveDestination($action2->getDestination()));
     }
 
     public function testActionURILoad1()
     {
         $dictionary = new Zend_Pdf_Element_Dictionary();
         $dictionary->Type = new Zend_Pdf_Element_Name('Action');
-        $dictionary->S    = new Zend_Pdf_Element_Name('URI');
-        $dictionary->URI  = new Zend_Pdf_Element_String('http://somehost/');
+        $dictionary->S = new Zend_Pdf_Element_Name('URI');
+        $dictionary->URI = new Zend_Pdf_Element_String('http://somehost/');
 
         $action = Zend_Pdf_Action::load($dictionary);
 
@@ -394,12 +389,11 @@ class Zend_Pdf_ActionTest extends PHPUnit_Framework_TestCase
     {
         $dictionary = new Zend_Pdf_Element_Dictionary();
         $dictionary->Type = new Zend_Pdf_Element_Name('Action');
-        $dictionary->S    = new Zend_Pdf_Element_Name('URI');
-
+        $dictionary->S = new Zend_Pdf_Element_Name('URI');
 
         try {
             $action = Zend_Pdf_Action::load($dictionary);
-            $this->fail("exception expected");
+            $this->fail('exception expected');
         } catch (Zend_Pdf_Exception $e) {
             $this->assertContains('URI action dictionary entry is required', $e->getMessage());
         }
@@ -412,7 +406,7 @@ class Zend_Pdf_ActionTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($action instanceof Zend_Pdf_Action_URI);
 
         $this->assertEquals($action->getResource()->toString(),
-                            '<</Type /Action /S /URI /URI (http://somehost/) >>');
+            '<</Type /Action /S /URI /URI (http://somehost/) >>');
     }
 
     public function testActionURIGettersSetters()
@@ -429,12 +423,12 @@ class Zend_Pdf_ActionTest extends PHPUnit_Framework_TestCase
         $action->setIsMap(true);
         $this->assertEquals($action->getIsMap(), true);
         $this->assertEquals($action->getResource()->toString(),
-                            '<</Type /Action /S /URI /URI (http://another_host/) /IsMap true >>');
+            '<</Type /Action /S /URI /URI (http://another_host/) /IsMap true >>');
 
         $action->setIsMap(false);
         $this->assertEquals($action->getIsMap(), false);
         $this->assertEquals($action->getResource()->toString(),
-                            '<</Type /Action /S /URI /URI (http://another_host/) >>');
+            '<</Type /Action /S /URI /URI (http://another_host/) >>');
     }
 
     /**
@@ -443,10 +437,10 @@ class Zend_Pdf_ActionTest extends PHPUnit_Framework_TestCase
     public function testPhpVersionBug()
     {
         try {
-            $file = __DIR__ . '/_files/ZF-8462.pdf';
+            $file = __DIR__.'/_files/ZF-8462.pdf';
             $pdf = Zend_Pdf::load($file);
         } catch (Zend_Pdf_Exception $e) {
-            if (strpos((string) $e->getMessage(), 'Cross-reference streams are not supported yet.') !== false) {
+            if (false !== strpos((string) $e->getMessage(), 'Cross-reference streams are not supported yet.')) {
                 // Skip expected exception
                 return;
             }

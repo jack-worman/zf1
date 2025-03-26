@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Dojo_View_Helper_AccordionContainerTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_View_Helper_AccordionContainerTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Dojo_View_Helper_AccordionContainerTest::main');
 }
 
 /** Zend_Dojo_View_Helper_AccordionContainer */
@@ -41,10 +42,10 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * Test class for Zend_Dojo_View_Helper_AccordionContainer.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Dojo
  * @group      Zend_Dojo_View
  */
@@ -58,7 +59,7 @@ class Zend_Dojo_View_Helper_AccordionContainerTest extends PHPUnit_Framework_Tes
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_View_Helper_AccordionContainerTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Dojo_View_Helper_AccordionContainerTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -73,7 +74,7 @@ class Zend_Dojo_View_Helper_AccordionContainerTest extends PHPUnit_Framework_Tes
         Zend_Registry::_unsetInstance();
         Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
 
-        $this->view   = $this->getView();
+        $this->view = $this->getView();
         $this->helper = new Zend_Dojo_View_Helper_AccordionContainer();
         $this->helper->setView($this->view);
     }
@@ -93,6 +94,7 @@ class Zend_Dojo_View_Helper_AccordionContainerTest extends PHPUnit_Framework_Tes
         // require_once 'Zend/View.php';
         $view = new Zend_View();
         $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
+
         return $view;
     }
 
@@ -100,12 +102,13 @@ class Zend_Dojo_View_Helper_AccordionContainerTest extends PHPUnit_Framework_Tes
     {
         $html = '';
         for ($i = 1; $i < 6; ++$i) {
-            $id      = 'pane' . $i;
-            $title   = 'Pane ' . $i;
-            $content = 'This is the content of pane ' . $i;
-            $html   .= $this->view->accordionPane($id, $content, array('title' => $title));
+            $id = 'pane'.$i;
+            $title = 'Pane '.$i;
+            $content = 'This is the content of pane '.$i;
+            $html .= $this->view->accordionPane($id, $content, ['title' => $title]);
         }
-        return $this->helper->accordionContainer('container', $html, array(), array('style' => 'height: 200px; width: 100px;'));
+
+        return $this->helper->accordionContainer('container', $html, [], ['style' => 'height: 200px; width: 100px;']);
     }
 
     public function testShouldAllowDeclarativeDijitCreation()
@@ -124,10 +127,10 @@ class Zend_Dojo_View_Helper_AccordionContainerTest extends PHPUnit_Framework_Tes
 
     public function testShouldAllowCapturingNestedContent()
     {
-        $this->helper->captureStart('foo', array(), array('style' => 'height: 200px; width: 100px;'));
-        $this->view->accordionPane()->captureStart('bar', array('title' => 'Captured Pane'));
+        $this->helper->captureStart('foo', [], ['style' => 'height: 200px; width: 100px;']);
+        $this->view->accordionPane()->captureStart('bar', ['title' => 'Captured Pane']);
         echo "Captured content started\n";
-        $this->view->accordionPane()->captureStart('baz', array('title' => 'Nested Pane'));
+        $this->view->accordionPane()->captureStart('baz', ['title' => 'Nested Pane']);
         echo 'Nested Content';
         echo $this->view->accordionPane()->captureEnd('baz');
         echo "Captured content ended\n";
@@ -144,13 +147,13 @@ class Zend_Dojo_View_Helper_AccordionContainerTest extends PHPUnit_Framework_Tes
     }
 
     /**
-     * @expectedException Zend_Dojo_View_Exception
+     * @expectedException \Zend_Dojo_View_Exception
      */
     public function testCapturingShouldRaiseErrorWhenDuplicateIdDiscovered()
     {
-        $this->helper->captureStart('foo', array(), array('style' => 'height: 200px; width: 100px;'));
-        $this->view->accordionPane()->captureStart('bar', array('title' => 'Captured Pane'));
-        $this->view->accordionPane()->captureStart('bar', array('title' => 'Captured Pane'));
+        $this->helper->captureStart('foo', [], ['style' => 'height: 200px; width: 100px;']);
+        $this->view->accordionPane()->captureStart('bar', ['title' => 'Captured Pane']);
+        $this->view->accordionPane()->captureStart('bar', ['title' => 'Captured Pane']);
         echo 'Captured Content';
         echo $this->view->accordionPane()->captureEnd('bar');
         echo $this->view->accordionPane()->captureEnd('bar');
@@ -158,16 +161,16 @@ class Zend_Dojo_View_Helper_AccordionContainerTest extends PHPUnit_Framework_Tes
     }
 
     /**
-     * @expectedException Zend_Dojo_View_Exception
+     * @expectedException \Zend_Dojo_View_Exception
      */
     public function testCapturingShouldRaiseErrorWhenNonexistentIdPassedToEnd()
     {
-        $this->helper->captureStart('foo', array(), array('style' => 'height: 200px; width: 100px;'));
+        $this->helper->captureStart('foo', [], ['style' => 'height: 200px; width: 100px;']);
         $html = $this->helper->captureEnd('bar');
     }
 }
 
 // Call Zend_Dojo_View_Helper_AccordionContainerTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dojo_View_Helper_AccordionContainerTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Dojo_View_Helper_AccordionContainerTest::main') {
     Zend_Dojo_View_Helper_AccordionContainerTest::main();
 }

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Dojo_Form_Element_ButtonTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_Form_Element_ButtonTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Dojo_Form_Element_ButtonTest::main');
 }
 
 /** Zend_Dojo_Form_Element_Button */
@@ -44,10 +45,10 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * Test class for Zend_Dojo_Form_Element_Button.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Dojo
  * @group      Zend_Dojo_Form
  */
@@ -61,7 +62,7 @@ class Zend_Dojo_Form_Element_ButtonTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_Form_Element_ButtonTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Dojo_Form_Element_ButtonTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -76,7 +77,7 @@ class Zend_Dojo_Form_Element_ButtonTest extends PHPUnit_Framework_TestCase
         Zend_Registry::_unsetInstance();
         Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
 
-        $this->view    = $this->getView();
+        $this->view = $this->getView();
         $this->element = $this->getElement();
         $this->element->setView($this->view);
     }
@@ -96,12 +97,14 @@ class Zend_Dojo_Form_Element_ButtonTest extends PHPUnit_Framework_TestCase
         // require_once 'Zend/View.php';
         $view = new Zend_View();
         $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
+
         return $view;
     }
 
     public function getElement()
     {
         $element = new Zend_Dojo_Form_Element_Button('foo');
+
         return $element;
     }
 
@@ -112,7 +115,7 @@ class Zend_Dojo_Form_Element_ButtonTest extends PHPUnit_Framework_TestCase
 
     public function testGetLabelReturnsTranslatedLabelIfTranslatorIsRegistered()
     {
-        $translations = include __DIR__ . '/_files/locale/array.php';
+        $translations = include __DIR__.'/_files/locale/array.php';
         $translate = new Zend_Translate('array', $translations, 'en');
         $this->element->setTranslator($translate)
                       ->setLabel('submit');
@@ -127,7 +130,7 @@ class Zend_Dojo_Form_Element_ButtonTest extends PHPUnit_Framework_TestCase
         $decorator = $this->element->getDecorator('DijitElement');
         $decorator->setElement($this->element);
         $html = $decorator->render('');
-        $this->assertRegexp('/<(input|button)[^>]*?>Submit Button/', $html, 'Label: ' . $this->element->getLabel() . "\nHTML: " . $html);
+        $this->assertRegexp('/<(input|button)[^>]*?>Submit Button/', $html, 'Label: '.$this->element->getLabel()."\nHTML: ".$html);
     }
 
     public function testConstructorSetsLabelToNameIfNoLabelProvided()
@@ -146,7 +149,7 @@ class Zend_Dojo_Form_Element_ButtonTest extends PHPUnit_Framework_TestCase
     public function testLabelIsTranslatedWhenTranslationAvailable()
     {
         // require_once 'Zend/Translate.php';
-        $translations = array('Label' => 'This is the Submit Label');
+        $translations = ['Label' => 'This is the Submit Label'];
         $translate = new Zend_Translate('array', $translations);
         $button = new Zend_Dojo_Form_Element_Button('foo', 'Label');
         $button->setTranslator($translate);
@@ -192,6 +195,6 @@ class Zend_Dojo_Form_Element_ButtonTest extends PHPUnit_Framework_TestCase
 }
 
 // Call Zend_Dojo_Form_Element_ButtonTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dojo_Form_Element_ButtonTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Dojo_Form_Element_ButtonTest::main') {
     Zend_Dojo_Form_Element_ButtonTest::main();
 }

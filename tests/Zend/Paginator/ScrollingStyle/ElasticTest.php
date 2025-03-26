@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Paginator
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -36,10 +37,10 @@
 
 /**
  * @category   Zend
- * @package    Zend_Paginator
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Paginator
  */
 #[AllowDynamicProperties]
@@ -65,6 +66,7 @@ class Zend_Paginator_ScrollingStyle_ElasticTest extends PHPUnit_Framework_TestCa
         $this->_paginator->setItemCountPerPage(5);
         $this->_paginator->setPageRange(5);
     }
+
     /**
      * Cleans up the environment after running a test.
      */

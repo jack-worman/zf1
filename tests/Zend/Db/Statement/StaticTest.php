@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,29 +14,25 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
-
-
-
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Db
  * @group      Zend_Db_Statement
  */
 #[AllowDynamicProperties]
 class Zend_Db_Statement_StaticTest extends PHPUnit_Framework_TestCase
 {
-
     public function testStatic()
     {
         $this->assertTrue(true);
@@ -45,5 +42,4 @@ class Zend_Db_Statement_StaticTest extends PHPUnit_Framework_TestCase
     {
         return 'Static';
     }
-
 }

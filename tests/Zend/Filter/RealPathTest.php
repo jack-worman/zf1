@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,39 +28,39 @@
 
 /**
  * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Filter
  */
 #[AllowDynamicProperties]
 class Zend_Filter_RealPathTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Path to test files
+     * Path to test files.
      *
      * @var string
      */
     protected $_filesPath;
 
     /**
-     * Sets the path to test files
+     * Sets the path to test files.
      */
     public function __construct()
     {
-        $this->_filesPath = __DIR__ . DIRECTORY_SEPARATOR . '_files';
+        $this->_filesPath = __DIR__.DIRECTORY_SEPARATOR.'_files';
     }
 
     /**
-     * Zend_Filter_Basename object
+     * Zend_Filter_Basename object.
      *
      * @var Zend_Filter_Basename
      */
     protected $_filter;
 
     /**
-     * Creates a new Zend_Filter_Basename object for each test method
+     * Creates a new Zend_Filter_Basename object for each test method.
      *
      * @return void
      */
@@ -69,18 +70,18 @@ class Zend_Filter_RealPathTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures expected behavior for existing file
+     * Ensures expected behavior for existing file.
      *
      * @return void
      */
     public function testFileExists()
     {
         $filename = 'file.1';
-        $this->assertContains($filename, $this->_filter->filter($this->_filesPath . DIRECTORY_SEPARATOR . $filename));
+        $this->assertContains($filename, $this->_filter->filter($this->_filesPath.DIRECTORY_SEPARATOR.$filename));
     }
 
     /**
-     * Ensures expected behavior for nonexistent file
+     * Ensures expected behavior for nonexistent file.
      *
      * @return void
      */
@@ -104,10 +105,10 @@ class Zend_Filter_RealPathTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->_filter->getExists());
 
         $this->_filter->setExists(true);
-        $this->_filter->setExists(array('exists' => false));
+        $this->_filter->setExists(['exists' => false]);
         $this->assertFalse($this->_filter->getExists());
 
-        $this->_filter->setExists(array('unknown'));
+        $this->_filter->setExists(['unknown']);
         $this->assertTrue($this->_filter->getExists());
     }
 
@@ -118,16 +119,16 @@ class Zend_Filter_RealPathTest extends PHPUnit_Framework_TestCase
     {
         $this->_filter->setExists(false);
 
-        $path = __DIR__ . DIRECTORY_SEPARATOR . '_files';
+        $path = __DIR__.DIRECTORY_SEPARATOR.'_files';
         $this->assertEquals($path, $this->_filter->filter($path));
 
-        $path2 = __DIR__ . DIRECTORY_SEPARATOR . '_files'
-               . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files';
+        $path2 = __DIR__.DIRECTORY_SEPARATOR.'_files'
+               .DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'_files';
         $this->assertEquals($path, $this->_filter->filter($path2));
 
-        $path3 = __DIR__ . DIRECTORY_SEPARATOR . '_files'
-               . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '.'
-               . DIRECTORY_SEPARATOR . '_files';
+        $path3 = __DIR__.DIRECTORY_SEPARATOR.'_files'
+               .DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'.'
+               .DIRECTORY_SEPARATOR.'_files';
         $this->assertEquals($path, $this->_filter->filter($path3));
     }
 }

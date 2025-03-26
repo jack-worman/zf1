@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Serializer
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,15 +28,13 @@
 
 /**
  * @category   Zend
- * @package    Zend_Serializer
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Zend_Serializer_Adapter_WddxTest extends PHPUnit_Framework_TestCase
 {
-
     private $_adapter;
 
     public function setUp()
@@ -50,9 +49,9 @@ class Zend_Serializer_Adapter_WddxTest extends PHPUnit_Framework_TestCase
 
     public function testSerializeString()
     {
-        $value    = 'test';
+        $value = 'test';
         $expected = '<wddxPacket version=\'1.0\'><header/>'
-                  . '<data><string>test</string></data></wddxPacket>';
+                  .'<data><string>test</string></data></wddxPacket>';
 
         $data = $this->_adapter->serialize($value);
         $this->assertEquals($expected, $data);
@@ -60,19 +59,19 @@ class Zend_Serializer_Adapter_WddxTest extends PHPUnit_Framework_TestCase
 
     public function testSerializeStringWithComment()
     {
-        $value    = 'test';
+        $value = 'test';
         $expected = '<wddxPacket version=\'1.0\'><header><comment>a test comment</comment></header>'
-                  . '<data><string>test</string></data></wddxPacket>';
+                  .'<data><string>test</string></data></wddxPacket>';
 
-        $data = $this->_adapter->serialize($value, array('comment' => 'a test comment'));
+        $data = $this->_adapter->serialize($value, ['comment' => 'a test comment']);
         $this->assertEquals($expected, $data);
     }
 
     public function testSerializeFalse()
     {
-        $value    = false;
+        $value = false;
         $expected = '<wddxPacket version=\'1.0\'><header/>'
-                  . '<data><boolean value=\'false\'/></data></wddxPacket>';
+                  .'<data><boolean value=\'false\'/></data></wddxPacket>';
 
         $data = $this->_adapter->serialize($value);
         $this->assertEquals($expected, $data);
@@ -80,9 +79,9 @@ class Zend_Serializer_Adapter_WddxTest extends PHPUnit_Framework_TestCase
 
     public function testSerializeTrue()
     {
-        $value    = true;
+        $value = true;
         $expected = '<wddxPacket version=\'1.0\'><header/>'
-                  . '<data><boolean value=\'true\'/></data></wddxPacket>';
+                  .'<data><boolean value=\'true\'/></data></wddxPacket>';
 
         $data = $this->_adapter->serialize($value);
         $this->assertEquals($expected, $data);
@@ -90,9 +89,9 @@ class Zend_Serializer_Adapter_WddxTest extends PHPUnit_Framework_TestCase
 
     public function testSerializeNull()
     {
-        $value    = null;
+        $value = null;
         $expected = '<wddxPacket version=\'1.0\'><header/>'
-                  . '<data><null/></data></wddxPacket>';
+                  .'<data><null/></data></wddxPacket>';
 
         $data = $this->_adapter->serialize($value);
         $this->assertEquals($expected, $data);
@@ -100,9 +99,9 @@ class Zend_Serializer_Adapter_WddxTest extends PHPUnit_Framework_TestCase
 
     public function testSerializeNumeric()
     {
-        $value    = 100;
+        $value = 100;
         $expected = '<wddxPacket version=\'1.0\'><header/>'
-                  . '<data><number>100</number></data></wddxPacket>';
+                  .'<data><number>100</number></data></wddxPacket>';
 
         $data = $this->_adapter->serialize($value);
         $this->assertEquals($expected, $data);
@@ -111,12 +110,12 @@ class Zend_Serializer_Adapter_WddxTest extends PHPUnit_Framework_TestCase
     public function testSerializeObject()
     {
         $value = new stdClass();
-        $value->test = "test";
+        $value->test = 'test';
         $expected = '<wddxPacket version=\'1.0\'><header/>'
-                  . '<data><struct>'
-                  . '<var name=\'php_class_name\'><string>stdClass</string></var>'
-                  . '<var name=\'test\'><string>test</string></var>'
-                  . '</struct></data></wddxPacket>';
+                  .'<data><struct>'
+                  .'<var name=\'php_class_name\'><string>stdClass</string></var>'
+                  .'<var name=\'test\'><string>test</string></var>'
+                  .'</struct></data></wddxPacket>';
 
         $data = $this->_adapter->serialize($value);
         $this->assertEquals($expected, $data);
@@ -124,8 +123,8 @@ class Zend_Serializer_Adapter_WddxTest extends PHPUnit_Framework_TestCase
 
     public function testUnserializeString()
     {
-        $value    = '<wddxPacket version=\'1.0\'><header/>'
-                  . '<data><string>test</string></data></wddxPacket>';
+        $value = '<wddxPacket version=\'1.0\'><header/>'
+                  .'<data><string>test</string></data></wddxPacket>';
         $expected = 'test';
 
         $data = $this->_adapter->unserialize($value);
@@ -134,8 +133,8 @@ class Zend_Serializer_Adapter_WddxTest extends PHPUnit_Framework_TestCase
 
     public function testUnserializeFalse()
     {
-        $value    = '<wddxPacket version=\'1.0\'><header/>'
-                  . '<data><boolean value=\'false\'/></data></wddxPacket>';
+        $value = '<wddxPacket version=\'1.0\'><header/>'
+                  .'<data><boolean value=\'false\'/></data></wddxPacket>';
         $expected = false;
 
         $data = $this->_adapter->unserialize($value);
@@ -144,8 +143,8 @@ class Zend_Serializer_Adapter_WddxTest extends PHPUnit_Framework_TestCase
 
     public function testUnserializeTrue()
     {
-        $value    = '<wddxPacket version=\'1.0\'><header/>'
-                  . '<data><boolean value=\'true\'/></data></wddxPacket>';
+        $value = '<wddxPacket version=\'1.0\'><header/>'
+                  .'<data><boolean value=\'true\'/></data></wddxPacket>';
         $expected = true;
 
         $data = $this->_adapter->unserialize($value);
@@ -154,8 +153,8 @@ class Zend_Serializer_Adapter_WddxTest extends PHPUnit_Framework_TestCase
 
     public function testUnserializeNull1()
     {
-        $value    = '<wddxPacket version=\'1.0\'><header/>'
-                  . '<data><null/></data></wddxPacket>';
+        $value = '<wddxPacket version=\'1.0\'><header/>'
+                  .'<data><null/></data></wddxPacket>';
         $expected = null;
 
         $data = $this->_adapter->unserialize($value);
@@ -165,12 +164,12 @@ class Zend_Serializer_Adapter_WddxTest extends PHPUnit_Framework_TestCase
     /**
      * test to unserialize a valid null value by an valid wddx
      * but with some differenzes to the null cenerated by php
-     * -> the invalid check have to success for all valid wddx null
+     * -> the invalid check have to success for all valid wddx null.
      */
     public function testUnserializeNull2()
     {
-        $value    = '<wddxPacket version=\'1.0\'><header/>' . "\n"
-                  . '<data><null/></data></wddxPacket>';
+        $value = '<wddxPacket version=\'1.0\'><header/>'."\n"
+                  .'<data><null/></data></wddxPacket>';
         $expected = null;
 
         $data = $this->_adapter->unserialize($value);
@@ -179,8 +178,8 @@ class Zend_Serializer_Adapter_WddxTest extends PHPUnit_Framework_TestCase
 
     public function testUnserializeNumeric()
     {
-        $value    = '<wddxPacket version=\'1.0\'><header/>'
-                  . '<data><number>100</number></data></wddxPacket>';
+        $value = '<wddxPacket version=\'1.0\'><header/>'
+                  .'<data><number>100</number></data></wddxPacket>';
         $expected = 100;
 
         $data = $this->_adapter->unserialize($value);
@@ -189,11 +188,11 @@ class Zend_Serializer_Adapter_WddxTest extends PHPUnit_Framework_TestCase
 
     public function testUnserializeObject()
     {
-        $value    = '<wddxPacket version=\'1.0\'><header/>'
-                  . '<data><struct>'
-                  . '<var name=\'php_class_name\'><string>stdClass</string></var>'
-                  . '<var name=\'test\'><string>test</string></var>'
-                  . '</struct></data></wddxPacket>';
+        $value = '<wddxPacket version=\'1.0\'><header/>'
+                  .'<data><struct>'
+                  .'<var name=\'php_class_name\'><string>stdClass</string></var>'
+                  .'<var name=\'test\'><string>test</string></var>'
+                  .'</struct></data></wddxPacket>';
         $expected = new stdClass();
         $expected->test = 'test';
 
@@ -210,14 +209,15 @@ class Zend_Serializer_Adapter_WddxTest extends PHPUnit_Framework_TestCase
 
     /**
      * ZF-8911 and PHP-Bug #46496
-     * This bug effects php < 5.2.7
+     * This bug effects php < 5.2.7.
      *
      * No workaround implemented !!! - This test failes on php < 5.2.7
      */
-    public function testSerializeStringUtf8() {
-        $value    = "\xc2\xbf"; // &Xi;
+    public function testSerializeStringUtf8()
+    {
+        $value = "\xc2\xbf"; // &Xi;
         $expected = '<wddxPacket version=\'1.0\'><header/>'
-                  . "<data><string>\xc2\xbf</string></data></wddxPacket>";
+                  ."<data><string>\xc2\xbf</string></data></wddxPacket>";
         $data = $this->_adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
@@ -238,32 +238,30 @@ class Zend_Serializer_Adapter_WddxTest extends PHPUnit_Framework_TestCase
 
     public function testShouldThrowExceptionIfXmlToUnserializeFromContainsADoctype()
     {
-        $value    = '<!DOCTYPE>'
-                  . '<wddxPacket version=\'1.0\'><header/>'
-                  . '<data><string>test</string></data></wddxPacket>';
-        $this->setExpectedException("Zend_Serializer_Exception");
+        $value = '<!DOCTYPE>'
+                  .'<wddxPacket version=\'1.0\'><header/>'
+                  .'<data><string>test</string></data></wddxPacket>';
+        $this->setExpectedException('Zend_Serializer_Exception');
         $data = $this->_adapter->unserialize($value);
     }
 }
 
-
 /**
  * @category   Zend
- * @package    Zend_Serializer
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Zend_Serializer_Adapter_WddxSkipTest extends PHPUnit_Framework_TestCase
 {
-    public $message = null;
+    public $message;
 
     public function setUp()
     {
         $message = 'Skipped Zend_Serializer_Adapter_WddxTest';
         if ($this->message) {
-            $message.= ': ' . $this->message;
+            $message .= ': '.$this->message;
         }
         $this->markTestSkipped($message);
     }
@@ -272,6 +270,4 @@ class Zend_Serializer_Adapter_WddxSkipTest extends PHPUnit_Framework_TestCase
     {
         // this is here only so we have at least one test
     }
-
 }
-

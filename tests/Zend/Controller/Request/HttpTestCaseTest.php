@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Controller_Request_HttpTestCaseTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Controller_Request_HttpTestCaseTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Controller_Request_HttpTestCaseTest::main');
 }
 
 /** Zend_Controller_Request_HttpTestCase */
@@ -32,10 +33,10 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * Test class for Zend_Controller_Request_HttpTestCase.
  *
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Controller
  * @group      Zend_Controller_Request
  */
@@ -49,7 +50,7 @@ class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit_Framework_TestCas
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Request_HttpTestCaseTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Controller_Request_HttpTestCaseTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -62,9 +63,9 @@ class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit_Framework_TestCas
     public function setUp()
     {
         $this->request = new Zend_Controller_Request_HttpTestCase();
-        $_GET    = array();
-        $_POST   = array();
-        $_COOKIE = array();
+        $_GET = [];
+        $_POST = [];
+        $_COOKIE = [];
     }
 
     /**
@@ -98,11 +99,11 @@ class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit_Framework_TestCas
     public function testShouldAllowSpecifyingGetParameters()
     {
         $this->testGetShouldBeEmptyByDefault();
-        $expected = array(
+        $expected = [
             'foo' => 'bar',
             'bar' => 'baz',
             'baz' => 'bat',
-        );
+        ];
         $this->request->setQuery($expected);
 
         $test = $this->request->getQuery();
@@ -120,12 +121,12 @@ class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit_Framework_TestCas
     public function testShouldPopulateGetSuperglobal()
     {
         $this->testShouldAllowSpecifyingGetParameters();
-        $expected = array(
+        $expected = [
             'foo' => 'bar',
             'bar' => 'baz',
             'baz' => 'bat',
             'bat' => 'bogus',
-        );
+        ];
         $this->assertEquals($expected, $_GET);
     }
 
@@ -148,11 +149,11 @@ class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit_Framework_TestCas
     public function testShouldAllowSpecifyingPostParameters()
     {
         $this->testPostShouldBeEmptyByDefault();
-        $expected = array(
+        $expected = [
             'foo' => 'bar',
             'bar' => 'baz',
             'baz' => 'bat',
-        );
+        ];
         $this->request->setPost($expected);
 
         $test = $this->request->getPost();
@@ -170,12 +171,12 @@ class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit_Framework_TestCas
     public function testShouldPopulatePostSuperglobal()
     {
         $this->testShouldAllowSpecifyingPostParameters();
-        $expected = array(
+        $expected = [
             'foo' => 'bar',
             'bar' => 'baz',
             'baz' => 'bat',
             'bat' => 'bogus',
-        );
+        ];
         $this->assertEquals($expected, $_POST);
     }
 
@@ -215,10 +216,10 @@ class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit_Framework_TestCas
 
     public function testShouldAllowSpecifyingRequestHeaders()
     {
-        $headers = array(
-            'Content-Type'     => 'text/html',
+        $headers = [
+            'Content-Type' => 'text/html',
             'Content-Encoding' => 'utf-8',
-        );
+        ];
         $this->request->setHeaders($headers);
         $test = $this->request->getHeaders();
         $this->assertTrue(is_array($test));
@@ -251,11 +252,11 @@ class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit_Framework_TestCas
 
     public function testShouldAllowSpecifyingCookies()
     {
-        $cookies = array(
+        $cookies = [
             'foo' => 'bar',
             'bar' => 'baz',
-            'baz' => 'bat'
-        );
+            'baz' => 'bat',
+        ];
         $this->request->setCookies($cookies);
         $test = $this->request->getCookie();
         $this->assertEquals($cookies, $test);
@@ -266,12 +267,12 @@ class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit_Framework_TestCas
 
     public function testShouldPopulateCookieSuperGlobal()
     {
-        $cookies = array(
+        $cookies = [
             'foo' => 'bar',
             'bar' => 'baz',
             'baz' => 'bat',
             'bat' => 'bogus',
-        );
+        ];
         $this->testShouldAllowSpecifyingCookies();
         $this->assertEquals($cookies, $_COOKIE);
     }
@@ -314,6 +315,6 @@ class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit_Framework_TestCas
 }
 
 // Call Zend_Controller_Request_HttpTestCaseTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Controller_Request_HttpTestCaseTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Controller_Request_HttpTestCaseTest::main') {
     Zend_Controller_Request_HttpTestCaseTest::main();
 }

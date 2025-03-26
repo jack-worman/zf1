@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Amf
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Amf_AuthTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Amf_ResourceTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Amf_ResourceTest::main');
 }
 
 // require_once 'Zend/Amf/Server.php';
@@ -32,16 +33,15 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 
 /**
  * @category   Zend
- * @package    Zend_Amf
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Amf
  */
 #[AllowDynamicProperties]
 class Zend_Amf_ResourceTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * Enter description here...
      *
@@ -51,7 +51,7 @@ class Zend_Amf_ResourceTest extends PHPUnit_Framework_TestCase
 
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Amf_ResourceTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Amf_ResourceTest');
         PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -72,94 +72,95 @@ class Zend_Amf_ResourceTest extends PHPUnit_Framework_TestCase
         $request = new Zend_Amf_Request();
         $request->setObjectEncoding(0x03);
         $this->_server->setClass($class);
-        $newBody = new Zend_Amf_Value_MessageBody("$class.$method","/1",array("test"));
+        $newBody = new Zend_Amf_Value_MessageBody("$class.$method", '/1', ['test']);
         $request->addAmfBody($newBody);
         $this->_server->handle($request);
         $response = $this->_server->getResponse();
+
         return $response;
     }
 
     public function testFile()
     {
-        $resp = $this->_callService("returnFile");
-        $this->assertContains("test data", $resp->getResponse());
+        $resp = $this->_callService('returnFile');
+        $this->assertContains('test data', $resp->getResponse());
     }
 
     /**
-     * Defining new unknown resource type
+     * Defining new unknown resource type.
      *
      * @expectException Zend_Amf_Server_Exception
-     *
      */
     public function testCtxNoResource()
     {
         try {
-            $this->_callService("returnCtx");
-        } catch(Zend_Amf_Server_Exception $e) {
-            $this->assertContains("serialize resource type", $e->getMessage());
+            $this->_callService('returnCtx');
+        } catch (Zend_Amf_Server_Exception $e) {
+            $this->assertContains('serialize resource type', $e->getMessage());
+
             return;
         }
-        $this->fail("Failed to throw exception on unknown resource");
+        $this->fail('Failed to throw exception on unknown resource');
     }
 
     /**
-     * Defining new unknown resource type via plugin loader and handling it
-     *
+     * Defining new unknown resource type via plugin loader and handling it.
      */
     public function testCtxLoader()
     {
-        Zend_Amf_Parse_TypeLoader::addResourceDirectory("Test_Resource", __DIR__."/Resources");
-        $resp = $this->_callService("returnCtx");
-        $this->assertContains("Accept-language:", $resp->getResponse());
-        $this->assertContains("foo=bar", $resp->getResponse());
+        Zend_Amf_Parse_TypeLoader::addResourceDirectory('Test_Resource', __DIR__.'/Resources');
+        $resp = $this->_callService('returnCtx');
+        $this->assertContains('Accept-language:', $resp->getResponse());
+        $this->assertContains('foo=bar', $resp->getResponse());
     }
 
     /**
-     * Defining new unknown resource type and handling it
-     *
+     * Defining new unknown resource type and handling it.
      */
     public function testCtx()
     {
-        Zend_Amf_Parse_TypeLoader::setResourceLoader(new Zend_Amf_TestResourceLoader("2"));
-        $resp = $this->_callService("returnCtx");
-        $this->assertContains("Accept-language:", $resp->getResponse());
-        $this->assertContains("foo=bar", $resp->getResponse());
+        Zend_Amf_Parse_TypeLoader::setResourceLoader(new Zend_Amf_TestResourceLoader('2'));
+        $resp = $this->_callService('returnCtx');
+        $this->assertContains('Accept-language:', $resp->getResponse());
+        $this->assertContains('foo=bar', $resp->getResponse());
     }
 
     /**
-     * Defining new unknown resource type, handler has no parse()
-     *
+     * Defining new unknown resource type, handler has no parse().
      */
     public function testCtxNoParse()
     {
-        Zend_Amf_Parse_TypeLoader::setResourceLoader(new Zend_Amf_TestResourceLoader("3"));
+        Zend_Amf_Parse_TypeLoader::setResourceLoader(new Zend_Amf_TestResourceLoader('3'));
         try {
-            $resp = $this->_callService("returnCtx");
-        } catch(Zend_Amf_Server_Exception $e) {
-            $this->assertContains("Could not call parse()", $e->getMessage());
+            $resp = $this->_callService('returnCtx');
+        } catch (Zend_Amf_Server_Exception $e) {
+            $this->assertContains('Could not call parse()', $e->getMessage());
+
             return;
         }
-        $this->fail("Failed to throw exception on unknown resource");
+        $this->fail('Failed to throw exception on unknown resource');
     }
-
 }
 
 #[AllowDynamicProperties]
-class Zend_Amf_Resource_testclass {
-    function returnFile()
+class Zend_Amf_Resource_testclass
+{
+    public function returnFile()
     {
-        return fopen(__DIR__."/_files/testdata", "r");
+        return fopen(__DIR__.'/_files/testdata', 'r');
     }
-    function returnCtx()
+
+    public function returnCtx()
     {
-        $opts = array(
-            'http'=>array(
-            'method'=>"GET",
-            'header'=>"Accept-language: en\r\n" .
-                "Cookie: foo=bar\r\n"
-            )
-        );
+        $opts = [
+            'http' => [
+                'method' => 'GET',
+                'header' => "Accept-language: en\r\n".
+                    "Cookie: foo=bar\r\n",
+            ],
+        ];
         $context = stream_context_create($opts);
+
         return $context;
     }
 }
@@ -181,21 +182,37 @@ class StreamContext3
     }
 }
 #[AllowDynamicProperties]
-class Zend_Amf_TestResourceLoader implements Zend_Loader_PluginLoader_Interface {
+class Zend_Amf_TestResourceLoader implements Zend_Loader_PluginLoader_Interface
+{
     public $suffix;
-    public function __construct($suffix) {
+
+    public function __construct($suffix)
+    {
         $this->suffix = $suffix;
     }
-    public function addPrefixPath($prefix, $path) {}
-    public function removePrefixPath($prefix, $path = null) {}
-    public function isLoaded($name) {}
-    public function getClassName($name) {}
-    public function load($name) {
+
+    public function addPrefixPath($prefix, $path)
+    {
+    }
+
+    public function removePrefixPath($prefix, $path = null)
+    {
+    }
+
+    public function isLoaded($name)
+    {
+    }
+
+    public function getClassName($name)
+    {
+    }
+
+    public function load($name)
+    {
         return $name.$this->suffix;
     }
 }
 
-if (PHPUnit_MAIN_METHOD == "Zend_Amf_ResourceTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Amf_ResourceTest::main') {
     Zend_Amf_ResourceTest::main();
 }
-

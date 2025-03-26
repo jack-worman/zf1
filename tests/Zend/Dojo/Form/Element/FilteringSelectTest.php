@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Dojo_Form_Element_FilteringSelectTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_Form_Element_FilteringSelectTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Dojo_Form_Element_FilteringSelectTest::main');
 }
 
 /** Zend_Dojo_Form_Element_FilteringSelect */
@@ -41,10 +42,10 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * Test class for Zend_Dojo_Form_Element_FilteringSelect.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Dojo
  * @group      Zend_Dojo_Form
  */
@@ -58,7 +59,7 @@ class Zend_Dojo_Form_Element_FilteringSelectTest extends PHPUnit_Framework_TestC
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_Form_Element_FilteringSelectTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Dojo_Form_Element_FilteringSelectTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -73,7 +74,7 @@ class Zend_Dojo_Form_Element_FilteringSelectTest extends PHPUnit_Framework_TestC
         Zend_Registry::_unsetInstance();
         Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
 
-        $this->view    = $this->getView();
+        $this->view = $this->getView();
         $this->element = $this->getElement();
         $this->element->setView($this->view);
     }
@@ -93,6 +94,7 @@ class Zend_Dojo_Form_Element_FilteringSelectTest extends PHPUnit_Framework_TestC
         // require_once 'Zend/View.php';
         $view = new Zend_View();
         $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
+
         return $view;
     }
 
@@ -100,13 +102,14 @@ class Zend_Dojo_Form_Element_FilteringSelectTest extends PHPUnit_Framework_TestC
     {
         $element = new Zend_Dojo_Form_Element_FilteringSelect(
             'foo',
-            array(
+            [
                 'value' => 'some text',
                 'label' => 'FilteringSelect',
                 'class' => 'someclass',
                 'style' => 'width: 100px;',
-            )
+            ]
         );
+
         return $element;
     }
 
@@ -121,11 +124,11 @@ class Zend_Dojo_Form_Element_FilteringSelectTest extends PHPUnit_Framework_TestC
      */
     public function testShouldRegisterInArrayValidatorWhenNoStoreProvided()
     {
-        $options = array(
+        $options = [
             'foo' => 'Foo Value',
             'bar' => 'Bar Value',
             'baz' => 'Baz Value',
-        );
+        ];
         $this->element->setMultiOptions($options);
         $this->assertFalse($this->element->getValidator('InArray'));
         $this->element->isValid('test');
@@ -135,15 +138,15 @@ class Zend_Dojo_Form_Element_FilteringSelectTest extends PHPUnit_Framework_TestC
 
     public function testShouldNotRegisterInArrayValidatorWhenStoreProvided()
     {
-        $options = array(
+        $options = [
             'foo' => 'Foo Value',
             'bar' => 'Bar Value',
             'baz' => 'Baz Value',
-        );
+        ];
         $this->element->setMultiOptions($options);
         $this->element->setStoreId('fooStore')
                       ->setStoreType('dojo.data.ItemFileReadStore')
-                      ->setStoreParams(array('url' => '/foo'));
+                      ->setStoreParams(['url' => '/foo']);
         $this->assertFalse($this->element->getValidator('InArray'));
         $this->element->isValid('test');
         $this->assertFalse($this->element->getValidator('InArray'));
@@ -152,6 +155,6 @@ class Zend_Dojo_Form_Element_FilteringSelectTest extends PHPUnit_Framework_TestC
 }
 
 // Call Zend_Dojo_Form_Element_FilteringSelectTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dojo_Form_Element_FilteringSelectTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Dojo_Form_Element_FilteringSelectTest::main') {
     Zend_Dojo_Form_Element_FilteringSelectTest::main();
 }

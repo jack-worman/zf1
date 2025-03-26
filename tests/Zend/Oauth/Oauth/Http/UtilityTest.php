@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Oauth
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -24,10 +25,10 @@
 
 /**
  * @category   Zend
- * @package    Zend_Oauth
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Oauth
  * @group      Zend_Oauth_Http
  */
@@ -95,5 +96,4 @@ class Zend_Oauth_Http_UtilityTest extends PHPUnit_Framework_TestCase
         $string = '、';
         $this->assertEquals('%E3%80%81', Zend_Oauth_Http_Utility::urlEncode($string));
     }
-
 }

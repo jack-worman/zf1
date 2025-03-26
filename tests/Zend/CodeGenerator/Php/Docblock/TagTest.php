@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_CodeGenerator
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -27,8 +28,7 @@
 
 /**
  * @category   Zend
- * @package    Zend_CodeGenerator
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
@@ -38,11 +38,10 @@
 #[AllowDynamicProperties]
 class Zend_CodeGenerator_Php_Docblock_TagTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * @var Zend_CodeGenerator_Php_Docblock_Tag
      */
-    protected $_tag = null;
+    protected $_tag;
 
     public function setup()
     {
@@ -65,5 +64,4 @@ class Zend_CodeGenerator_Php_Docblock_TagTest extends PHPUnit_Framework_TestCase
         $this->_tag->setDescription('Foo foo foo');
         $this->assertEquals('Foo foo foo', $this->_tag->getDescription());
     }
-
 }

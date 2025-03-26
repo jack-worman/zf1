@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,37 +14,35 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
 require_once 'Zend/Db/Adapter/Pdo/TestCommon.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Db
  * @group      Zend_Db_Adapter
  */
 #[AllowDynamicProperties]
 class Zend_Db_Adapter_Pdo_OciTest extends Zend_Db_Adapter_Pdo_TestCommon
 {
-
-    protected $_numericDataTypes = array(
-        Zend_Db::INT_TYPE    => Zend_Db::INT_TYPE,
+    protected $_numericDataTypes = [
+        Zend_Db::INT_TYPE => Zend_Db::INT_TYPE,
         Zend_Db::BIGINT_TYPE => Zend_Db::BIGINT_TYPE,
-        Zend_Db::FLOAT_TYPE  => Zend_Db::FLOAT_TYPE,
-        'BINARY_DOUBLE'      => Zend_Db::FLOAT_TYPE,
-        'BINARY_FLOAT'       => Zend_Db::FLOAT_TYPE,
-        'NUMBER'             => Zend_Db::FLOAT_TYPE
-    );
+        Zend_Db::FLOAT_TYPE => Zend_Db::FLOAT_TYPE,
+        'BINARY_DOUBLE' => Zend_Db::FLOAT_TYPE,
+        'BINARY_FLOAT' => Zend_Db::FLOAT_TYPE,
+        'NUMBER' => Zend_Db::FLOAT_TYPE,
+    ];
 
     public function testAdapterDescribeTablePrimaryAuto()
     {
@@ -54,25 +53,25 @@ class Zend_Db_Adapter_Pdo_OciTest extends Zend_Db_Adapter_Pdo_TestCommon
     {
         $desc = $this->_db->describeTable('zfproducts');
 
-        $this->assertEquals('zfproducts',        $desc['product_id']['TABLE_NAME']);
-        $this->assertEquals('product_id',        $desc['product_id']['COLUMN_NAME']);
-        $this->assertEquals(1,                   $desc['product_id']['COLUMN_POSITION']);
-        $this->assertEquals('',                  $desc['product_id']['DEFAULT']);
-        $this->assertFalse(                      $desc['product_id']['NULLABLE']);
-        $this->assertEquals(0,                   $desc['product_id']['SCALE']);
+        $this->assertEquals('zfproducts', $desc['product_id']['TABLE_NAME']);
+        $this->assertEquals('product_id', $desc['product_id']['COLUMN_NAME']);
+        $this->assertEquals(1, $desc['product_id']['COLUMN_POSITION']);
+        $this->assertEquals('', $desc['product_id']['DEFAULT']);
+        $this->assertFalse($desc['product_id']['NULLABLE']);
+        $this->assertEquals(0, $desc['product_id']['SCALE']);
         // Oracle reports precsion 11 for integers
-        $this->assertEquals(11,                  $desc['product_id']['PRECISION']);
-        $this->assertTrue(                       $desc['product_id']['PRIMARY'], 'Expected product_id to be a primary key');
-        $this->assertEquals(1,                   $desc['product_id']['PRIMARY_POSITION']);
-        $this->assertFalse(                      $desc['product_id']['IDENTITY']);
+        $this->assertEquals(11, $desc['product_id']['PRECISION']);
+        $this->assertTrue($desc['product_id']['PRIMARY'], 'Expected product_id to be a primary key');
+        $this->assertEquals(1, $desc['product_id']['PRIMARY_POSITION']);
+        $this->assertFalse($desc['product_id']['IDENTITY']);
     }
 
     public function testAdapterInsert()
     {
-        $row = array (
-            'product_id'   => new Zend_Db_Expr($this->_db->quoteIdentifier('zfproducts_seq').'.NEXTVAL'),
+        $row = [
+            'product_id' => new Zend_Db_Expr($this->_db->quoteIdentifier('zfproducts_seq').'.NEXTVAL'),
             'product_name' => 'Solaris',
-        );
+        ];
         $rowsAffected = $this->_db->insert('zfproducts', $row);
         $this->assertEquals(1, $rowsAffected);
         $lastInsertId = $this->_db->lastInsertId('zfproducts', null); // implies 'products_seq'
@@ -85,10 +84,10 @@ class Zend_Db_Adapter_Pdo_OciTest extends Zend_Db_Adapter_Pdo_TestCommon
 
     public function testAdapterInsertDbExpr()
     {
-        $row = array (
-            'product_id'   => new Zend_Db_Expr($this->_db->quoteIdentifier('zfproducts_seq').'.NEXTVAL'),
-            'product_name' => new Zend_Db_Expr('UPPER(\'Solaris\')')
-        );
+        $row = [
+            'product_id' => new Zend_Db_Expr($this->_db->quoteIdentifier('zfproducts_seq').'.NEXTVAL'),
+            'product_name' => new Zend_Db_Expr('UPPER(\'Solaris\')'),
+        ];
         $rowsAffected = $this->_db->insert('zfproducts', $row);
         $this->assertEquals(1, $rowsAffected);
         $product_id = $this->_db->quoteIdentifier('product_id', true);
@@ -116,7 +115,7 @@ class Zend_Db_Adapter_Pdo_OciTest extends Zend_Db_Adapter_Pdo_TestCommon
      */
     public function testAdapterQuoteArray()
     {
-        $array = array("it's", 'all', 'right!');
+        $array = ["it's", 'all', 'right!'];
         $value = $this->_db->quote($array);
         $this->assertEquals("'it''s', 'all', 'right!'", $value);
     }
@@ -174,8 +173,8 @@ class Zend_Db_Adapter_Pdo_OciTest extends Zend_Db_Adapter_Pdo_TestCommon
      */
     public function testAdapterQuoteTableAs()
     {
-        $string = "foo";
-        $alias = "bar";
+        $string = 'foo';
+        $alias = 'bar';
         $value = $this->_db->quoteTableAs($string, $alias);
         $this->assertEquals('"foo" "bar"', $value);
     }
@@ -257,7 +256,7 @@ class Zend_Db_Adapter_Pdo_OciTest extends Zend_Db_Adapter_Pdo_TestCommon
      */
     public function testLongQueryWithTextField()
     {
-        $this->markTestSkipped($this->getDriver() . ' does not have TEXT field type');
+        $this->markTestSkipped($this->getDriver().' does not have TEXT field type');
     }
 
     public function getDriver()

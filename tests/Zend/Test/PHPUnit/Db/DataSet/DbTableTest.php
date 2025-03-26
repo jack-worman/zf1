@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Test
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,10 +26,10 @@
 
 /**
  * @category   Zend
- * @package    Zend_Test
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Test
  */
 #[AllowDynamicProperties]
@@ -36,16 +37,16 @@ class Zend_Test_PHPUnit_Db_DataSet_DbTableTest extends PHPUnit_Framework_TestCas
 {
     public function testLoadDataSetDelegatesWhereLimitOrderBy()
     {
-        $fixtureWhere = "where";
-        $fixtureLimit = "limit";
-        $fixtureOffset = "offset";
-        $fixtureOrderBy = "order";
+        $fixtureWhere = 'where';
+        $fixtureLimit = 'limit';
+        $fixtureOffset = 'offset';
+        $fixtureOrderBy = 'order';
 
-        $table = $this->getMock('Zend_Db_Table', array(), array(), '', false);
+        $table = $this->getMock('Zend_Db_Table', [], [], '', false);
         $table->expects($this->once())
               ->method('fetchAll')
               ->with($fixtureWhere, $fixtureOrderBy, $fixtureLimit, $fixtureOffset)
-              ->will($this->returnValue(array()));
+              ->will($this->returnValue([]));
 
         $dataSet = new Zend_Test_PHPUnit_Db_DataSet_DbTable($table, $fixtureWhere, $fixtureOrderBy, $fixtureLimit, $fixtureOffset);
         $count = $dataSet->getRowCount();
@@ -53,9 +54,9 @@ class Zend_Test_PHPUnit_Db_DataSet_DbTableTest extends PHPUnit_Framework_TestCas
 
     public function testGetTableMetadata()
     {
-        $fixtureTableName = "foo";
+        $fixtureTableName = 'foo';
 
-        $table = $this->getMock('Zend_Db_Table', array(), array(), '', false);
+        $table = $this->getMock('Zend_Db_Table', [], [], '', false);
         $table->expects($this->at(0))
               ->method('info')
               ->with($this->equalTo('name'))
@@ -63,23 +64,23 @@ class Zend_Test_PHPUnit_Db_DataSet_DbTableTest extends PHPUnit_Framework_TestCas
         $table->expects($this->at(1))
               ->method('info')
               ->with($this->equalTo('cols'))
-              ->will($this->returnValue( array("foo", "bar") ));
+              ->will($this->returnValue(['foo', 'bar']));
         $table->expects($this->once())
               ->method('fetchAll')
-              ->will($this->returnValue(array( array("foo" => 1, "bar" => 2) )));
+              ->will($this->returnValue([['foo' => 1, 'bar' => 2]]));
 
         $dataSet = new Zend_Test_PHPUnit_Db_DataSet_DbTable($table);
 
         $this->assertEquals($fixtureTableName, $dataSet->getTableMetaData()->getTableName());
-        $this->assertEquals(array("foo", "bar"), $dataSet->getTableMetaData()->getColumns());
+        $this->assertEquals(['foo', 'bar'], $dataSet->getTableMetaData()->getColumns());
     }
 
     public function testLoadDataOnlyCalledOnce()
     {
-        $table = $this->getMock('Zend_Db_Table', array(), array(), '', false);
+        $table = $this->getMock('Zend_Db_Table', [], [], '', false);
         $table->expects($this->once())
               ->method('fetchAll')
-              ->will($this->returnValue(array( array("foo" => 1, "bar" => 2) )));
+              ->will($this->returnValue([['foo' => 1, 'bar' => 2]]));
 
         $dataSet = new Zend_Test_PHPUnit_Db_DataSet_DbTable($table);
         $dataSet->getRow(0);

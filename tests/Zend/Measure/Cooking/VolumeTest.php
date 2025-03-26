@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,24 +14,24 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Measure
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Measure_Cooking_Volume
+ * Zend_Measure_Cooking_Volume.
  */
 // require_once 'Zend/Measure/Cooking/Volume.php';
 
 /**
  * @category   Zend
- * @package    Zend_Measure
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Measure
  */
 #[AllowDynamicProperties]
@@ -38,313 +39,290 @@ class Zend_Measure_Cooking_VolumeTest extends PHPUnit_Framework_TestCase
 {
     /**
      * test for Mass initialisation
-     * expected instance
+     * expected instance.
      */
     public function testMassInit()
     {
-        $value = new Zend_Measure_Cooking_Volume('100',Zend_Measure_Cooking_Volume::STANDARD,'de');
-        $this->assertTrue($value instanceof Zend_Measure_Cooking_Volume,'Zend_Measure_Cooking_Volume Object not returned');
+        $value = new Zend_Measure_Cooking_Volume('100', Zend_Measure_Cooking_Volume::STANDARD, 'de');
+        $this->assertTrue($value instanceof Zend_Measure_Cooking_Volume, 'Zend_Measure_Cooking_Volume Object not returned');
     }
-
 
     /**
      * test for exception unknown type
-     * expected exception
+     * expected exception.
      */
-    public function testCooking_VolumeUnknownType()
+    public function testCookingVolumeUnknownType()
     {
         try {
-            $value = new Zend_Measure_Cooking_Volume('100','Cooking_Volume::UNKNOWN','de');
+            $value = new Zend_Measure_Cooking_Volume('100', 'Cooking_Volume::UNKNOWN', 'de');
             $this->fail('Exception expected because of unknown type');
         } catch (Zend_Measure_Exception $e) {
             // success
         }
     }
 
-
     /**
      * test for exception unknown value
-     * expected exception
+     * expected exception.
      */
-    public function testCooking_VolumeUnknownValue()
+    public function testCookingVolumeUnknownValue()
     {
         try {
-            $value = new Zend_Measure_Cooking_Volume('novalue',Zend_Measure_Cooking_Volume::STANDARD,'de');
+            $value = new Zend_Measure_Cooking_Volume('novalue', Zend_Measure_Cooking_Volume::STANDARD, 'de');
             $this->fail('Exception expected because of empty value');
         } catch (Zend_Measure_Exception $e) {
             // success
         }
     }
 
-
     /**
      * test for exception unknown locale
-     * expected root value
+     * expected root value.
      */
-    public function testCooking_VolumeUnknownLocale()
+    public function testCookingVolumeUnknownLocale()
     {
         try {
-            $value = new Zend_Measure_Cooking_Volume('100',Zend_Measure_Cooking_Volume::STANDARD,'nolocale');
+            $value = new Zend_Measure_Cooking_Volume('100', Zend_Measure_Cooking_Volume::STANDARD, 'nolocale');
             $this->fail('Exception expected because of unknown locale');
         } catch (Zend_Measure_Exception $e) {
             // success
         }
     }
-
 
     /**
      * test for standard locale
-     * expected integer
+     * expected integer.
      */
-    public function testCooking_VolumeNoLocale()
+    public function testCookingVolumeNoLocale()
     {
-        $value = new Zend_Measure_Cooking_Volume('100',Zend_Measure_Cooking_Volume::STANDARD);
-        $this->assertEquals(100, $value->getValue(),'Zend_Measure_Cooking_Volume value expected');
+        $value = new Zend_Measure_Cooking_Volume('100', Zend_Measure_Cooking_Volume::STANDARD);
+        $this->assertEquals(100, $value->getValue(), 'Zend_Measure_Cooking_Volume value expected');
     }
-
 
     /**
      * test for positive value
-     * expected integer
+     * expected integer.
      */
-    public function testCooking_VolumeValuePositive()
+    public function testCookingVolumeValuePositive()
     {
-        $value = new Zend_Measure_Cooking_Volume('100',Zend_Measure_Cooking_Volume::STANDARD,'de');
+        $value = new Zend_Measure_Cooking_Volume('100', Zend_Measure_Cooking_Volume::STANDARD, 'de');
         $this->assertEquals(100, $value->getValue(), 'Zend_Measure_Cooking_Volume value expected to be a positive integer');
     }
 
-
     /**
      * test for negative value
-     * expected integer
+     * expected integer.
      */
-    public function testCooking_VolumeValueNegative()
+    public function testCookingVolumeValueNegative()
     {
-        $value = new Zend_Measure_Cooking_Volume('-100',Zend_Measure_Cooking_Volume::STANDARD,'de');
+        $value = new Zend_Measure_Cooking_Volume('-100', Zend_Measure_Cooking_Volume::STANDARD, 'de');
         $this->assertEquals(-100, $value->getValue(), 'Zend_Measure_Cooking_Volume value expected to be a negative integer');
     }
 
-
     /**
      * test for decimal value
-     * expected float
+     * expected float.
      */
-    public function testCooking_VolumeValueDecimal()
+    public function testCookingVolumeValueDecimal()
     {
-        $value = new Zend_Measure_Cooking_Volume('-100,200',Zend_Measure_Cooking_Volume::STANDARD,'de');
+        $value = new Zend_Measure_Cooking_Volume('-100,200', Zend_Measure_Cooking_Volume::STANDARD, 'de');
         $this->assertEquals(-100.200, $value->getValue(), 'Zend_Measure_Cooking_Volume value expected to be a decimal value');
     }
 
-
     /**
      * test for decimal seperated value
-     * expected float
+     * expected float.
      */
-    public function testCooking_VolumeValueDecimalSeperated()
+    public function testCookingVolumeValueDecimalSeperated()
     {
-        $value = new Zend_Measure_Cooking_Volume('-100.100,200',Zend_Measure_Cooking_Volume::STANDARD,'de');
-        $this->assertEquals(-100100.200, $value->getValue(),'Zend_Measure_Cooking_Volume Object not returned');
+        $value = new Zend_Measure_Cooking_Volume('-100.100,200', Zend_Measure_Cooking_Volume::STANDARD, 'de');
+        $this->assertEquals(-100100.200, $value->getValue(), 'Zend_Measure_Cooking_Volume Object not returned');
     }
-
 
     /**
      * test for string with integrated value
-     * expected float
+     * expected float.
      */
-    public function testCooking_VolumeValueString()
+    public function testCookingVolumeValueString()
     {
-        $value = new Zend_Measure_Cooking_Volume('-100.100,200',Zend_Measure_Cooking_Volume::STANDARD,'de');
-        $this->assertEquals(-100100.200, $value->getValue(),'Zend_Measure_Cooking_Volume Object not returned');
+        $value = new Zend_Measure_Cooking_Volume('-100.100,200', Zend_Measure_Cooking_Volume::STANDARD, 'de');
+        $this->assertEquals(-100100.200, $value->getValue(), 'Zend_Measure_Cooking_Volume Object not returned');
     }
-
 
     /**
      * test for equality
-     * expected true
+     * expected true.
      */
-    public function testCooking_VolumeEquality()
+    public function testCookingVolumeEquality()
     {
-        $value = new Zend_Measure_Cooking_Volume('-100.100,200',Zend_Measure_Cooking_Volume::STANDARD,'de');
-        $newvalue = new Zend_Measure_Cooking_Volume('-100.100,200',Zend_Measure_Cooking_Volume::STANDARD,'de');
-        $this->assertTrue($value->equals($newvalue),'Zend_Measure_Cooking_Volume Object should be equal');
+        $value = new Zend_Measure_Cooking_Volume('-100.100,200', Zend_Measure_Cooking_Volume::STANDARD, 'de');
+        $newvalue = new Zend_Measure_Cooking_Volume('-100.100,200', Zend_Measure_Cooking_Volume::STANDARD, 'de');
+        $this->assertTrue($value->equals($newvalue), 'Zend_Measure_Cooking_Volume Object should be equal');
     }
-
 
     /**
      * test for no equality
-     * expected false
+     * expected false.
      */
-    public function testCooking_VolumeNoEquality()
+    public function testCookingVolumeNoEquality()
     {
-        $value = new Zend_Measure_Cooking_Volume('-100.100,200',Zend_Measure_Cooking_Volume::STANDARD,'de');
-        $newvalue = new Zend_Measure_Cooking_Volume('-100,200',Zend_Measure_Cooking_Volume::STANDARD,'de');
-        $this->assertFalse($value->equals($newvalue),'Zend_Measure_Cooking_Volume Object should be not equal');
+        $value = new Zend_Measure_Cooking_Volume('-100.100,200', Zend_Measure_Cooking_Volume::STANDARD, 'de');
+        $newvalue = new Zend_Measure_Cooking_Volume('-100,200', Zend_Measure_Cooking_Volume::STANDARD, 'de');
+        $this->assertFalse($value->equals($newvalue), 'Zend_Measure_Cooking_Volume Object should be not equal');
     }
-
 
     /**
      * test for set positive value
-     * expected integer
+     * expected integer.
      */
-    public function testCooking_VolumeSetPositive()
+    public function testCookingVolumeSetPositive()
     {
-        $value = new Zend_Measure_Cooking_Volume('100',Zend_Measure_Cooking_Volume::STANDARD,'de');
-        $value->setValue('200',Zend_Measure_Cooking_Volume::STANDARD,'de');
+        $value = new Zend_Measure_Cooking_Volume('100', Zend_Measure_Cooking_Volume::STANDARD, 'de');
+        $value->setValue('200', Zend_Measure_Cooking_Volume::STANDARD, 'de');
         $this->assertEquals(200, $value->getValue(), 'Zend_Measure_Cooking_Volume value expected to be a positive integer');
     }
 
-
     /**
      * test for set negative value
-     * expected integer
+     * expected integer.
      */
-    public function testCooking_VolumeSetNegative()
+    public function testCookingVolumeSetNegative()
     {
-        $value = new Zend_Measure_Cooking_Volume('-100',Zend_Measure_Cooking_Volume::STANDARD,'de');
-        $value->setValue('-200',Zend_Measure_Cooking_Volume::STANDARD,'de');
+        $value = new Zend_Measure_Cooking_Volume('-100', Zend_Measure_Cooking_Volume::STANDARD, 'de');
+        $value->setValue('-200', Zend_Measure_Cooking_Volume::STANDARD, 'de');
         $this->assertEquals(-200, $value->getValue(), 'Zend_Measure_Cooking_Volume value expected to be a negative integer');
     }
 
-
     /**
      * test for set decimal value
-     * expected float
+     * expected float.
      */
-    public function testCooking_VolumeSetDecimal()
+    public function testCookingVolumeSetDecimal()
     {
-        $value = new Zend_Measure_Cooking_Volume('-100,200',Zend_Measure_Cooking_Volume::STANDARD,'de');
-        $value->setValue('-200,200',Zend_Measure_Cooking_Volume::STANDARD,'de');
+        $value = new Zend_Measure_Cooking_Volume('-100,200', Zend_Measure_Cooking_Volume::STANDARD, 'de');
+        $value->setValue('-200,200', Zend_Measure_Cooking_Volume::STANDARD, 'de');
         $this->assertEquals(-200.200, $value->getValue(), 'Zend_Measure_Cooking_Volume value expected to be a decimal value');
     }
 
-
     /**
      * test for set decimal seperated value
-     * expected float
+     * expected float.
      */
-    public function testCooking_VolumeSetDecimalSeperated()
+    public function testCookingVolumeSetDecimalSeperated()
     {
-        $value = new Zend_Measure_Cooking_Volume('-100.100,200',Zend_Measure_Cooking_Volume::STANDARD,'de');
-        $value->setValue('-200.200,200',Zend_Measure_Cooking_Volume::STANDARD,'de');
-        $this->assertEquals(-200200.200, $value->getValue(),'Zend_Measure_Cooking_Volume Object not returned');
+        $value = new Zend_Measure_Cooking_Volume('-100.100,200', Zend_Measure_Cooking_Volume::STANDARD, 'de');
+        $value->setValue('-200.200,200', Zend_Measure_Cooking_Volume::STANDARD, 'de');
+        $this->assertEquals(-200200.200, $value->getValue(), 'Zend_Measure_Cooking_Volume Object not returned');
     }
-
 
     /**
      * test for set string with integrated value
-     * expected float
+     * expected float.
      */
-    public function testCooking_VolumeSetString()
+    public function testCookingVolumeSetString()
     {
-        $value = new Zend_Measure_Cooking_Volume('-100.100,200',Zend_Measure_Cooking_Volume::STANDARD,'de');
-        $value->setValue('-200.200,200',Zend_Measure_Cooking_Volume::STANDARD,'de');
-        $this->assertEquals(-200200.200, $value->getValue(),'Zend_Measure_Cooking_Volume Object not returned');
+        $value = new Zend_Measure_Cooking_Volume('-100.100,200', Zend_Measure_Cooking_Volume::STANDARD, 'de');
+        $value->setValue('-200.200,200', Zend_Measure_Cooking_Volume::STANDARD, 'de');
+        $this->assertEquals(-200200.200, $value->getValue(), 'Zend_Measure_Cooking_Volume Object not returned');
     }
-
 
     /**
      * test for exception unknown type
-     * expected exception
+     * expected exception.
      */
-    public function testCooking_VolumeSetUnknownType()
+    public function testCookingVolumeSetUnknownType()
     {
         try {
-            $value = new Zend_Measure_Cooking_Volume('100',Zend_Measure_Cooking_Volume::STANDARD,'de');
-            $value->setValue('-200.200,200','Cooking_Volume::UNKNOWN','de');
+            $value = new Zend_Measure_Cooking_Volume('100', Zend_Measure_Cooking_Volume::STANDARD, 'de');
+            $value->setValue('-200.200,200', 'Cooking_Volume::UNKNOWN', 'de');
             $this->fail('Exception expected because of unknown type');
         } catch (Zend_Measure_Exception $e) {
             // success
         }
     }
 
-
     /**
      * test for exception unknown value
-     * expected exception
+     * expected exception.
      */
-    public function testCooking_VolumeSetUnknownValue()
+    public function testCookingVolumeSetUnknownValue()
     {
         try {
-            $value = new Zend_Measure_Cooking_Volume('100',Zend_Measure_Cooking_Volume::STANDARD,'de');
-            $value->setValue('novalue',Zend_Measure_Cooking_Volume::STANDARD,'de');
+            $value = new Zend_Measure_Cooking_Volume('100', Zend_Measure_Cooking_Volume::STANDARD, 'de');
+            $value->setValue('novalue', Zend_Measure_Cooking_Volume::STANDARD, 'de');
             $this->fail('Exception expected because of empty value');
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             // success
         }
     }
 
-
     /**
      * test for exception unknown locale
-     * expected exception
+     * expected exception.
      */
-    public function testCooking_VolumeSetUnknownLocale()
+    public function testCookingVolumeSetUnknownLocale()
     {
         try {
-            $value = new Zend_Measure_Cooking_Volume('100',Zend_Measure_Cooking_Volume::STANDARD,'de');
-            $value->setValue('200',Zend_Measure_Cooking_Volume::STANDARD,'nolocale');
+            $value = new Zend_Measure_Cooking_Volume('100', Zend_Measure_Cooking_Volume::STANDARD, 'de');
+            $value->setValue('200', Zend_Measure_Cooking_Volume::STANDARD, 'nolocale');
             $this->fail('Exception expected because of unknown locale');
         } catch (Zend_Measure_Exception $e) {
             // success
         }
     }
 
-
     /**
      * test for exception unknown locale
-     * expected exception
+     * expected exception.
      */
-    public function testCooking_VolumeSetWithNoLocale()
+    public function testCookingVolumeSetWithNoLocale()
     {
         $value = new Zend_Measure_Cooking_Volume('100', Zend_Measure_Cooking_Volume::STANDARD, 'de');
         $value->setValue('200', Zend_Measure_Cooking_Volume::STANDARD);
         $this->assertEquals(200, $value->getValue(), 'Zend_Measure_Cooking_Volume value expected to be a positive integer');
     }
 
-
     /**
      * test setting type
-     * expected new type
+     * expected new type.
      */
-    public function testCooking_VolumeSetType()
+    public function testCookingVolumeSetType()
     {
-        $value = new Zend_Measure_Cooking_Volume('-100',Zend_Measure_Cooking_Volume::STANDARD,'de');
-        $value->setType(Zend_Measure_Cooking_Volume::DRAM);
-        $this->assertEquals(Zend_Measure_Cooking_Volume::DRAM, $value->getType(), 'Zend_Measure_Cooking_Volume type expected');    }
-
-
-    /**
-     * test setting computed type
-     * expected new type
-     */
-    public function testCooking_VolumeSetComputedType1()
-    {
-        $value = new Zend_Measure_Cooking_Volume('-100',Zend_Measure_Cooking_Volume::STANDARD,'de');
+        $value = new Zend_Measure_Cooking_Volume('-100', Zend_Measure_Cooking_Volume::STANDARD, 'de');
         $value->setType(Zend_Measure_Cooking_Volume::DRAM);
         $this->assertEquals(Zend_Measure_Cooking_Volume::DRAM, $value->getType(), 'Zend_Measure_Cooking_Volume type expected');
     }
 
+    /**
+     * test setting computed type
+     * expected new type.
+     */
+    public function testCookingVolumeSetComputedType1()
+    {
+        $value = new Zend_Measure_Cooking_Volume('-100', Zend_Measure_Cooking_Volume::STANDARD, 'de');
+        $value->setType(Zend_Measure_Cooking_Volume::DRAM);
+        $this->assertEquals(Zend_Measure_Cooking_Volume::DRAM, $value->getType(), 'Zend_Measure_Cooking_Volume type expected');
+    }
 
     /**
      * test setting computed type
-     * expected new type
+     * expected new type.
      */
-    public function testCooking_VolumeSetComputedType2()
+    public function testCookingVolumeSetComputedType2()
     {
-        $value = new Zend_Measure_Cooking_Volume('-100',Zend_Measure_Cooking_Volume::DRAM,'de');
+        $value = new Zend_Measure_Cooking_Volume('-100', Zend_Measure_Cooking_Volume::DRAM, 'de');
         $value->setType(Zend_Measure_Cooking_Volume::STANDARD);
         $this->assertEquals(Zend_Measure_Cooking_Volume::STANDARD, $value->getType(), 'Zend_Measure_Cooking_Volume type expected');
     }
 
-
     /**
      * test setting unknown type
-     * expected new type
+     * expected new type.
      */
-    public function testCooking_VolumeSetTypeFailed()
+    public function testCookingVolumeSetTypeFailed()
     {
         try {
-            $value = new Zend_Measure_Cooking_Volume('-100',Zend_Measure_Cooking_Volume::STANDARD,'de');
+            $value = new Zend_Measure_Cooking_Volume('-100', Zend_Measure_Cooking_Volume::STANDARD, 'de');
             $value->setType('Cooking_Volume::UNKNOWN');
             $this->fail('Exception expected because of unknown type');
         } catch (Zend_Measure_Exception $e) {
@@ -352,37 +330,34 @@ class Zend_Measure_Cooking_VolumeTest extends PHPUnit_Framework_TestCase
         }
     }
 
-
     /**
      * test toString
-     * expected string
+     * expected string.
      */
-    public function testCooking_VolumeToString()
+    public function testCookingVolumeToString()
     {
-        $value = new Zend_Measure_Cooking_Volume('-100',Zend_Measure_Cooking_Volume::STANDARD,'de');
+        $value = new Zend_Measure_Cooking_Volume('-100', Zend_Measure_Cooking_Volume::STANDARD, 'de');
         $this->assertEquals('-100 m³', $value->toString(), 'Value -100 m³ expected');
     }
 
-
     /**
      * test __toString
-     * expected string
+     * expected string.
      */
-    public function testCooking_Volume_ToString()
+    public function testCookingVolumeToString()
     {
-        $value = new Zend_Measure_Cooking_Volume('-100',Zend_Measure_Cooking_Volume::STANDARD,'de');
+        $value = new Zend_Measure_Cooking_Volume('-100', Zend_Measure_Cooking_Volume::STANDARD, 'de');
         $this->assertEquals('-100 m³', $value->__toString(), 'Value -100 m³ expected');
     }
 
-
     /**
      * test getConversionList
-     * expected array
+     * expected array.
      */
-    public function testCooking_VolumeConversionList()
+    public function testCookingVolumeConversionList()
     {
         $value = new Zend_Measure_Cooking_Volume('-100',Zend_Measure_Cooking_Volume::STANDARD,'de');
-        $unit  = $value->getConversionList();
+        $unit = $value->getConversionList();
         $this->assertTrue(is_array($unit), 'Array expected');
     }
 }

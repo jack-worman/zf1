@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Reflection
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -24,10 +25,10 @@
 
 /**
  * @category   Zend
- * @package    Zend_Reflection
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Reflection
  * @group      Zend_Reflection_Docblock
  * @group      Zend_Reflection_Docblock_Tag
@@ -36,13 +37,12 @@
 #[AllowDynamicProperties]
 class Zend_Reflection_Docblock_Tag_ReturnTest extends PHPUnit_Framework_TestCase
 {
-
-    static protected $_sampleClassFileRequired = false;
+    protected static $_sampleClassFileRequired = false;
 
     public function setup()
     {
-        if (self::$_sampleClassFileRequired === false) {
-            $fileToRequire = dirname(dirname(__DIR__)) . '/_files/TestSampleClass.php';
+        if (false === self::$_sampleClassFileRequired) {
+            $fileToRequire = dirname(dirname(__DIR__)).'/_files/TestSampleClass.php';
             require_once $fileToRequire;
             self::$_sampleClassFileRequired = true;
         }
@@ -63,7 +63,7 @@ class Zend_Reflection_Docblock_Tag_ReturnTest extends PHPUnit_Framework_TestCase
         $paramTag = $classReflection->getMethod('doSomething')->getDocblock()->getTag('return');
 
         $this->assertEquals($paramTag->getType(), 'string', 'Second Match Failed');
-        $this->assertEquals($paramTag->getDescription(),'Description of return value', 'Final Match Failed');
+        $this->assertEquals($paramTag->getDescription(), 'Description of return value', 'Final Match Failed');
     }
 
     /**

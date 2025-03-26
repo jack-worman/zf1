@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Test
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -32,10 +33,10 @@
 
 /**
  * @category   Zend
- * @package    Zend_Test
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Test
  */
 abstract class Zend_Test_PHPUnit_Db_Integration_AbstractTestCase extends PHPUnit_Framework_TestCase
@@ -67,27 +68,27 @@ abstract class Zend_Test_PHPUnit_Db_Integration_AbstractTestCase extends PHPUnit
         $dataSet->addTable($this->createBarTable());
 
         $this->assertEquals(
-            "foo", $dataSet->getTableMetaData('foo')->getTableName()
+            'foo', $dataSet->getTableMetaData('foo')->getTableName()
         );
         $this->assertEquals(
-            "bar", $dataSet->getTableMetaData("bar")->getTableName()
+            'bar', $dataSet->getTableMetaData('bar')->getTableName()
         );
 
-        $this->assertEquals(array("foo", "bar"), $dataSet->getTableNames());
+        $this->assertEquals(['foo', 'bar'], $dataSet->getTableNames());
     }
 
     public function testZendDbTableEqualsXmlDataSet()
     {
         $fooTable = $this->createFooTable();
-        $fooTable->insert(array("id" => null, "foo" => "foo", "bar" => "bar", "baz" => "baz"));
-        $fooTable->insert(array("id" => null, "foo" => "bar", "bar" => "bar", "baz" => "bar"));
-        $fooTable->insert(array("id" => null, "foo" => "baz", "bar" => "baz", "baz" => "baz"));
+        $fooTable->insert(['id' => null, 'foo' => 'foo', 'bar' => 'bar', 'baz' => 'baz']);
+        $fooTable->insert(['id' => null, 'foo' => 'bar', 'bar' => 'bar', 'baz' => 'bar']);
+        $fooTable->insert(['id' => null, 'foo' => 'baz', 'bar' => 'baz', 'baz' => 'baz']);
 
         $dataSet = new Zend_Test_PHPUnit_Db_DataSet_DbTableDataSet();
         $dataSet->addTable($fooTable);
 
         $xmlDataSet = new PHPUnit_Extensions_Database_DataSet_FlatXmlDataSet(
-            __DIR__."/_files/sqliteIntegrationFixture.xml"
+            __DIR__.'/_files/sqliteIntegrationFixture.xml'
         );
 
         if (method_exists($xmlDataSet, 'assertEquals')) {
@@ -108,9 +109,9 @@ abstract class Zend_Test_PHPUnit_Db_Integration_AbstractTestCase extends PHPUnit
     public function testSimpleTesterSetupAndRowsetEquals()
     {
         $dataSet = new PHPUnit_Extensions_Database_DataSet_FlatXmlDataSet(
-            __DIR__."/_files/sqliteIntegrationFixture.xml"
+            __DIR__.'/_files/sqliteIntegrationFixture.xml'
         );
-        $fooDataTable = $dataSet->getTable("foo");
+        $fooDataTable = $dataSet->getTable('foo');
 
         $tester = new Zend_Test_PHPUnit_Db_SimpleTester($this->getConnection());
         $tester->setUpDatabase($dataSet);
@@ -133,7 +134,8 @@ abstract class Zend_Test_PHPUnit_Db_Integration_AbstractTestCase extends PHPUnit
      */
     public function createFooTable()
     {
-        $table = new Zend_Test_PHPUnit_Db_TableFoo(array('db' => $this->dbAdapter));
+        $table = new Zend_Test_PHPUnit_Db_TableFoo(['db' => $this->dbAdapter]);
+
         return $table;
     }
 
@@ -142,7 +144,8 @@ abstract class Zend_Test_PHPUnit_Db_Integration_AbstractTestCase extends PHPUnit
      */
     public function createBarTable()
     {
-        $table = new Zend_Test_PHPUnit_Db_TableBar(array('db' => $this->dbAdapter));
+        $table = new Zend_Test_PHPUnit_Db_TableBar(['db' => $this->dbAdapter]);
+
         return $table;
     }
 }
@@ -150,15 +153,15 @@ abstract class Zend_Test_PHPUnit_Db_Integration_AbstractTestCase extends PHPUnit
 #[AllowDynamicProperties]
 class Zend_Test_PHPUnit_Db_TableFoo extends Zend_Db_Table_Abstract
 {
-    protected $_name = "foo";
+    protected $_name = 'foo';
 
-    protected $_primary = "id";
+    protected $_primary = 'id';
 }
 
 #[AllowDynamicProperties]
 class Zend_Test_PHPUnit_Db_TableBar extends Zend_Db_Table_Abstract
 {
-    protected $_name = "bar";
+    protected $_name = 'bar';
 
-    protected $_primary = "id";
+    protected $_primary = 'id';
 }

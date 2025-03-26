@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,27 +26,26 @@
  */
 // require_once 'Zend/Validate/Alpha.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_Validate
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Validate
  */
 #[AllowDynamicProperties]
 class Zend_Validate_AlphaTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_Validate_Alpha object
+     * Zend_Validate_Alpha object.
      *
      * @var Zend_Validate_Alpha
      */
     protected $_validator;
 
     /**
-     * Creates a new Zend_Validate_Alpha object for each test method
+     * Creates a new Zend_Validate_Alpha object for each test method.
      *
      * @return void
      */
@@ -55,40 +55,40 @@ class Zend_Validate_AlphaTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that the validator follows expected behavior
+     * Ensures that the validator follows expected behavior.
      *
      * @return void
      */
     public function testBasic()
     {
-        $valuesExpected = array(
-            'abc123'  => false,
+        $valuesExpected = [
+            'abc123' => false,
             'abc 123' => false,
-            'abcxyz'  => true,
+            'abcxyz' => true,
             'AZ@#4.3' => false,
-            'aBc123'  => false,
-            'aBcDeF'  => true,
-            ''        => false,
-            ' '       => false,
-            "\n"      => false
-            );
+            'aBc123' => false,
+            'aBcDeF' => true,
+            '' => false,
+            ' ' => false,
+            "\n" => false,
+        ];
         foreach ($valuesExpected as $input => $result) {
             $this->assertEquals($result, $this->_validator->isValid($input));
         }
     }
 
     /**
-     * Ensures that getMessages() returns expected default value
+     * Ensures that getMessages() returns expected default value.
      *
      * @return void
      */
     public function testGetMessages()
     {
-        $this->assertEquals(array(), $this->_validator->getMessages());
+        $this->assertEquals([], $this->_validator->getMessages());
     }
 
     /**
-     * Ensures that the allowWhiteSpace option works as expected
+     * Ensures that the allowWhiteSpace option works as expected.
      *
      * @return void
      */
@@ -96,25 +96,25 @@ class Zend_Validate_AlphaTest extends PHPUnit_Framework_TestCase
     {
         $this->_validator->setAllowWhiteSpace(true);
 
-        $valuesExpected = array(
-            'abc123'  => false,
+        $valuesExpected = [
+            'abc123' => false,
             'abc 123' => false,
-            'abcxyz'  => true,
+            'abcxyz' => true,
             'AZ@#4.3' => false,
-            'aBc123'  => false,
-            'aBcDeF'  => true,
-            ''        => false,
-            ' '       => true,
-            "\n"      => true,
-            " \t "    => true,
-            "a\tb c"  => true
-            );
+            'aBc123' => false,
+            'aBcDeF' => true,
+            '' => false,
+            ' ' => true,
+            "\n" => true,
+            " \t " => true,
+            "a\tb c" => true,
+        ];
         foreach ($valuesExpected as $input => $result) {
             $this->assertEquals(
                 $result,
                 $this->_validator->isValid($input),
-                "Expected '$input' to be considered " . ($result ? '' : 'in') . "valid"
-                );
+                "Expected '$input' to be considered ".($result ? '' : 'in').'valid'
+            );
         }
     }
 
@@ -123,6 +123,6 @@ class Zend_Validate_AlphaTest extends PHPUnit_Framework_TestCase
      */
     public function testNonStringValidation()
     {
-        $this->assertFalse($this->_validator->isValid(array(1 => 1)));
+        $this->assertFalse($this->_validator->isValid([1 => 1]));
     }
 }

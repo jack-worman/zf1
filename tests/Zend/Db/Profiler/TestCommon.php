@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,35 +14,29 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /**
  * @see Zend_Db_TestSetup
  */
 require_once 'Zend/Db/TestSetup.php';
 
-
-
-
-
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Db
  * @group      Zend_Db_Profiler
  */
 abstract class Zend_Db_Profiler_TestCommon extends Zend_Db_TestSetup
 {
-
     public function setUp()
     {
         parent::setUp();
@@ -50,7 +45,7 @@ abstract class Zend_Db_Profiler_TestCommon extends Zend_Db_TestSetup
 
     public function tearDown()
     {
-        if($this->_db instanceof Zend_Db_Adapter_Abstract) {
+        if ($this->_db instanceof Zend_Db_Adapter_Abstract) {
             $this->_db->getProfiler()->setEnabled(false);
         }
         parent::tearDown();
@@ -108,7 +103,7 @@ abstract class Zend_Db_Profiler_TestCommon extends Zend_Db_TestSetup
         $stmt = $this->_db->prepare($select->__toString());
 
         // execute query a first time
-        $stmt->execute(array(2, 'VERIFIED'));
+        $stmt->execute([2, 'VERIFIED']);
         $results = $stmt->fetchAll();
         $this->assertTrue(is_array($results));
         $this->assertEquals(2, $results[0]['bug_id']);
@@ -122,13 +117,13 @@ abstract class Zend_Db_Profiler_TestCommon extends Zend_Db_TestSetup
 
         // analyze query in the profile
         $sql = $qp->getQuery();
-        $this->assertContains(" = ?", $sql);
+        $this->assertContains(' = ?', $sql);
         $params = $qp->getQueryParams();
         $this->assertTrue(is_array($params));
-        $this->assertEquals(array(1 => 2, 2 => 'VERIFIED'), $params);
+        $this->assertEquals([1 => 2, 2 => 'VERIFIED'], $params);
 
         // execute query a second time
-        $stmt->execute(array(3, 'FIXED'));
+        $stmt->execute([3, 'FIXED']);
         $results = $stmt->fetchAll();
         $this->assertTrue(is_array($results));
         $this->assertEquals(3, $results[0]['bug_id']);
@@ -144,10 +139,10 @@ abstract class Zend_Db_Profiler_TestCommon extends Zend_Db_TestSetup
 
         // analyze query in the profile
         $sql = $qp->getQuery();
-        $this->assertContains(" = ?", $sql);
+        $this->assertContains(' = ?', $sql);
         $params = $qp->getQueryParams();
         $this->assertTrue(is_array($params));
-        $this->assertEquals(array(1 => 3, 2 => 'FIXED'), $params);
+        $this->assertEquals([1 => 3, 2 => 'FIXED'], $params);
 
         $this->assertNotSame($profiles[0], $profiles[1]);
         $this->assertEquals($profiles[0]->getQuery(), $profiles[1]->getQuery());
@@ -185,10 +180,10 @@ abstract class Zend_Db_Profiler_TestCommon extends Zend_Db_TestSetup
 
         // analyze query in the profile
         $sql = $qp->getQuery();
-        $this->assertContains(" = ?", $sql);
+        $this->assertContains(' = ?', $sql);
         $params = $qp->getQueryParams();
         $this->assertTrue(is_array($params));
-        $this->assertEquals(array(1 => 2, 2 => 'VERIFIED'), $params);
+        $this->assertEquals([1 => 2, 2 => 'VERIFIED'], $params);
 
         // execute query a second time
         $id = 3;
@@ -207,14 +202,14 @@ abstract class Zend_Db_Profiler_TestCommon extends Zend_Db_TestSetup
 
         // analyze query in the profile
         $sql = $qp->getQuery();
-        $this->assertContains(" = ?", $sql);
+        $this->assertContains(' = ?', $sql);
         $params = $qp->getQueryParams();
         $this->assertTrue(is_array($params));
-        $this->assertEquals(array(1 => 3, 2 => 'FIXED'), $params);
+        $this->assertEquals([1 => 3, 2 => 'FIXED'], $params);
     }
 
     /**
-     * Ensures that setFilterQueryType() actually filters
+     * Ensures that setFilterQueryType() actually filters.
      *
      * @return void
      */
@@ -230,9 +225,9 @@ abstract class Zend_Db_Profiler_TestCommon extends Zend_Db_TestSetup
         $this->assertEquals($queryType, $prof->getFilterQueryType());
 
         $this->_db->query("SELECT * FROM $bugs");
-        $this->_db->query("INSERT INTO $bugs ($bug_status) VALUES (?)", array('NEW'));
+        $this->_db->query("INSERT INTO $bugs ($bug_status) VALUES (?)", ['NEW']);
         $this->_db->query("DELETE FROM $bugs");
-        $this->_db->query("UPDATE $bugs SET $bug_status = ?", array('FIXED'));
+        $this->_db->query("UPDATE $bugs SET $bug_status = ?", ['FIXED']);
 
         $qps = $prof->getQueryProfiles();
         $this->assertTrue(is_array($qps), 'Expecting some query profiles, got none');
@@ -264,6 +259,4 @@ abstract class Zend_Db_Profiler_TestCommon extends Zend_Db_TestSetup
     {
         $this->_testProfilerSetFilterQueryTypeCommon(Zend_Db_Profiler::SELECT);
     }
-
-
 }

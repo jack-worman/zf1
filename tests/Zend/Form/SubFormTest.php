@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +14,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Form_SubFormTest::main');
 }
@@ -32,10 +32,10 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 /**
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Form
  */
 #[AllowDynamicProperties]
@@ -43,7 +43,7 @@ class Zend_Form_SubFormTest extends PHPUnit_Framework_TestCase
 {
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite('Zend_Form_SubFormTest');
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Form_SubFormTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -102,7 +102,7 @@ class Zend_Form_SubFormTest extends PHPUnit_Framework_TestCase
     {
         $this->form->addElement('text', 'foo')
                    ->addElement('text', 'bar')
-                   ->addDisplayGroup(array('foo', 'bar'), 'foobar');
+                   ->addDisplayGroup(['foo', 'bar'], 'foobar');
 
         $form = new Zend_Form();
         $form->addSubForm($this->form, 'attributes');
@@ -117,46 +117,48 @@ class Zend_Form_SubFormTest extends PHPUnit_Framework_TestCase
      */
     public function testRenderedSubFormDtShouldContainNoBreakSpace()
     {
-        $subForm = new Zend_Form_SubForm(array(
-            'elements' => array(
+        $subForm = new Zend_Form_SubForm([
+            'elements' => [
                 'foo' => 'text',
                 'bar' => 'text',
-            ),
-        ));
+            ],
+        ]);
         $form = new Zend_Form();
         $form->addSubForm($subForm, 'foobar')
-             ->setView(new Zend_View);
+             ->setView(new Zend_View());
         $html = $form->render();
-        $this->assertContains('>&#160;</dt>', $html  );
+        $this->assertContains('>&#160;</dt>', $html);
     }
 
     /**
-     * Prove the fluent interface on Zend_Form_Subform::loadDefaultDecorators
+     * Prove the fluent interface on Zend_Form_Subform::loadDefaultDecorators.
      *
-     * @link http://framework.zend.com/issues/browse/ZF-9913
+     * @see http://framework.zend.com/issues/browse/ZF-9913
+     *
      * @return void
      */
     public function testFluentInterfaceOnLoadDefaultDecorators()
     {
         $this->assertSame($this->form, $this->form->loadDefaultDecorators());
     }
+
     /**
      * @see ZF-11504
      */
     public function testSubFormWithNumericName()
     {
-        $subForm = new Zend_Form_SubForm(array(
-            'elements' => array(
+        $subForm = new Zend_Form_SubForm([
+            'elements' => [
                 'foo' => 'text',
                 'bar' => 'text',
-            ),
-        ));
+            ],
+        ]);
         $form = new Zend_Form();
         $form->addSubForm($subForm, 0);
         $form->addSubForm($subForm, 234);
         $form2 = clone $form;
-        $this->assertEquals($form2->getSubForm(234)->getName(),234);
-        $this->assertEquals($form2->getSubForm(0)->getName(),0);
+        $this->assertEquals($form2->getSubForm(234)->getName(), 234);
+        $this->assertEquals($form2->getSubForm(0)->getName(), 0);
     }
 }
 

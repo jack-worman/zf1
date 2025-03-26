@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,49 +14,49 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Pdf
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Pdf_Element_Array
+ * Zend_Pdf_Element_Array.
  */
 // require_once 'Zend/Pdf/Element/Array.php';
 
 /**
- * Zend_Pdf_Element_Boolean
+ * Zend_Pdf_Element_Boolean.
  */
 // require_once 'Zend/Pdf/Element/Boolean.php';
 
 /**
- * Zend_Pdf_Element_Numeric
+ * Zend_Pdf_Element_Numeric.
  */
 // require_once 'Zend/Pdf/Element/Numeric.php';
 
 /**
- * Zend_Pdf_Element_Name
+ * Zend_Pdf_Element_Name.
  */
 // require_once 'Zend/Pdf/Element/Name.php';
 
 /**
- * Zend_Pdf_Element_String
+ * Zend_Pdf_Element_String.
  */
 // require_once 'Zend/Pdf/Element/String.php';
 
 /**
- * Zend_Pdf_Element_String_Binary
+ * Zend_Pdf_Element_String_Binary.
  */
 // require_once 'Zend/Pdf/Element/String/Binary.php';
 
 /**
  * @category   Zend
- * @package    Zend_Pdf
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Pdf
  */
 #[AllowDynamicProperties]
@@ -69,7 +70,7 @@ class Zend_Pdf_Element_ArrayTest extends PHPUnit_Framework_TestCase
 
     public function testPDFArray2()
     {
-        $srcArray = array();
+        $srcArray = [];
         $srcArray[] = new Zend_Pdf_Element_Boolean(false);
         $srcArray[] = new Zend_Pdf_Element_Numeric(100.426);
         $srcArray[] = new Zend_Pdf_Element_Name('MyName');
@@ -86,6 +87,7 @@ class Zend_Pdf_Element_ArrayTest extends PHPUnit_Framework_TestCase
             $arrayObj = new Zend_Pdf_Element_Array(346);
         } catch (Zend_Pdf_Exception $e) {
             $this->assertRegExp('/must be an array/i', $e->getMessage());
+
             return;
         }
         $this->fail('Expected Zend_Pdf_Exception to be thrown');
@@ -94,7 +96,7 @@ class Zend_Pdf_Element_ArrayTest extends PHPUnit_Framework_TestCase
     public function testPDFArrayBadInput2()
     {
         try {
-            $srcArray = array();
+            $srcArray = [];
             $srcArray[] = new Zend_Pdf_Element_Boolean(false);
             $srcArray[] = new Zend_Pdf_Element_Numeric(100.426);
             $srcArray[] = new Zend_Pdf_Element_Name('MyName');
@@ -104,6 +106,7 @@ class Zend_Pdf_Element_ArrayTest extends PHPUnit_Framework_TestCase
             $arrayObj = new Zend_Pdf_Element_Array($srcArray);
         } catch (Zend_Pdf_Exception $e) {
             $this->assertRegExp('/must be Zend_Pdf_Element/i', $e->getMessage());
+
             return;
         }
         $this->fail('No exception thrown.');
@@ -117,7 +120,7 @@ class Zend_Pdf_Element_ArrayTest extends PHPUnit_Framework_TestCase
 
     public function testToString()
     {
-        $srcArray = array();
+        $srcArray = [];
         $srcArray[] = new Zend_Pdf_Element_Boolean(false);
         $srcArray[] = new Zend_Pdf_Element_Numeric(100.426);
         $srcArray[] = new Zend_Pdf_Element_Name('MyName');
@@ -126,7 +129,7 @@ class Zend_Pdf_Element_ArrayTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($arrayObj->toString(), '[false 100.426 /MyName (some text) ]');
     }
 
-    /**
+    /*
      * @todo Zend_Pdf_Element_Array::add() does not exist
      */
     /*
@@ -141,7 +144,7 @@ class Zend_Pdf_Element_ArrayTest extends PHPUnit_Framework_TestCase
     }
     //*/
 
-    /**
+    /*
      * @todo Zend_Pdf_Element_Array::add() does not exist
      */
     /*

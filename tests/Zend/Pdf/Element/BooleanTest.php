@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,24 +14,24 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Pdf
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Pdf_Element_Boolean
+ * Zend_Pdf_Element_Boolean.
  */
 // require_once 'Zend/Pdf/Element/Boolean.php';
 
 /**
  * @category   Zend
- * @package    Zend_Pdf
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Pdf
  */
 #[AllowDynamicProperties]
@@ -48,6 +49,7 @@ class Zend_Pdf_Element_BooleanTest extends PHPUnit_Framework_TestCase
             $boolObj = new Zend_Pdf_Element_Boolean('some input');
         } catch (Zend_Pdf_Exception $e) {
             $this->assertRegExp('/must be boolean/i', $e->getMessage());
+
             return;
         }
         $this->fail('Expected Zend_Pdf_Exception to be thrown');
@@ -55,7 +57,7 @@ class Zend_Pdf_Element_BooleanTest extends PHPUnit_Framework_TestCase
 
     public function testGetType()
     {
-        $boolObj = new Zend_Pdf_Element_Boolean((boolean) 100);
+        $boolObj = new Zend_Pdf_Element_Boolean((bool) 100);
         $this->assertEquals($boolObj->getType(), Zend_Pdf_Element::TYPE_BOOL);
     }
 

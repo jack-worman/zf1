@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_View_Helper_FormImageTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_FormImageTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_View_Helper_FormImageTest::main');
 }
 
 // require_once 'Zend/View.php';
@@ -32,10 +33,10 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * Test class for Zend_View_Helper_FormImage.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
@@ -45,20 +46,17 @@ class Zend_View_Helper_FormImageTest extends PHPUnit_Framework_TestCase
     /**
      * Runs the test methods of this class.
      *
-     * @access public
      * @static
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_FormImageTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_View_Helper_FormImageTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @access protected
      */
     protected function setUp()
     {
@@ -72,8 +70,6 @@ class Zend_View_Helper_FormImageTest extends PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
-     *
-     * @access protected
      */
     protected function tearDown()
     {
@@ -89,7 +85,7 @@ class Zend_View_Helper_FormImageTest extends PHPUnit_Framework_TestCase
 
     public function testDisablingFormImageRendersImageInputWithDisableAttribute()
     {
-        $button = $this->helper->formImage('foo', 'bar', array('disable' => true));
+        $button = $this->helper->formImage('foo', 'bar', ['disable' => true]);
         $this->assertRegexp('/<input[^>]*?disabled="disabled"/', $button);
         $this->assertRegexp('/<input[^>]*?src="bar"/', $button);
         $this->assertRegexp('/<input[^>]*?name="foo"/', $button);
@@ -101,9 +97,9 @@ class Zend_View_Helper_FormImageTest extends PHPUnit_Framework_TestCase
      */
     public function testRendersAsHtmlByDefault()
     {
-        $test = $this->helper->formImage(array(
+        $test = $this->helper->formImage([
             'name' => 'foo',
-        ));
+        ]);
         $this->assertNotContains(' />', $test);
     }
 
@@ -113,14 +109,14 @@ class Zend_View_Helper_FormImageTest extends PHPUnit_Framework_TestCase
     public function testCanRendersAsXHtml()
     {
         $this->view->doctype('XHTML1_STRICT');
-        $test = $this->helper->formImage(array(
+        $test = $this->helper->formImage([
             'name' => 'foo',
-        ));
+        ]);
         $this->assertContains(' />', $test);
     }
 }
 
 // Call Zend_View_Helper_FormImageTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_FormImageTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_View_Helper_FormImageTest::main') {
     Zend_View_Helper_FormImageTest::main();
 }

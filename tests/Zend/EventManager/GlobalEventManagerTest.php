@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,12 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_EventManager
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_EventManager_GlobalEventManagerTest::main');
 }
@@ -28,9 +27,9 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 /**
  * @category   Zend
- * @package    Zend_EventManager
- * @subpackage UnitTests
+ *
  * @group      Zend_EventManager
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -39,7 +38,7 @@ class Zend_EventManager_GlobalEventManagerTest extends PHPUnit_Framework_TestCas
 {
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
+        $suite = new PHPUnit_Framework_TestSuite(__CLASS__);
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -67,21 +66,21 @@ class Zend_EventManager_GlobalEventManagerTest extends PHPUnit_Framework_TestCas
     public function testProxiesAllStaticOperationsToEventCollectionInstance()
     {
         $this->test = new stdClass();
-        $listener = Zend_EventManager_GlobalEventManager::attach('foo.bar', array($this, 'aggregateEventMetadata'));
+        $listener = Zend_EventManager_GlobalEventManager::attach('foo.bar', [$this, 'aggregateEventMetadata']);
         $this->assertTrue($listener instanceof Zend_Stdlib_CallbackHandler);
 
-        Zend_EventManager_GlobalEventManager::trigger('foo.bar', $this, array('foo' => 'bar'));
+        Zend_EventManager_GlobalEventManager::trigger('foo.bar', $this, ['foo' => 'bar']);
         $this->assertSame($this, $this->test->target);
         $this->assertEquals('foo.bar', $this->test->event);
-        $this->assertEquals(array('foo' => 'bar'), $this->test->params);
+        $this->assertEquals(['foo' => 'bar'], $this->test->params);
 
-        $results = Zend_EventManager_GlobalEventManager::triggerUntil('foo.bar', $this, array('baz' => 'bat'), array($this, 'returnOnArray'));
+        $results = Zend_EventManager_GlobalEventManager::triggerUntil('foo.bar', $this, ['baz' => 'bat'], [$this, 'returnOnArray']);
         $this->assertTrue($results->stopped());
-        $this->assertEquals(array('baz' => 'bat'), $this->test->params);
-        $this->assertEquals(array('baz' => 'bat'), $results->last());
+        $this->assertEquals(['baz' => 'bat'], $this->test->params);
+        $this->assertEquals(['baz' => 'bat'], $results->last());
 
         $events = Zend_EventManager_GlobalEventManager::getEvents();
-        $this->assertEquals(array('foo.bar'), $events);
+        $this->assertEquals(['foo.bar'], $events);
 
         $listeners = Zend_EventManager_GlobalEventManager::getListeners('foo.bar');
         $this->assertEquals(1, count($listeners));
@@ -89,15 +88,15 @@ class Zend_EventManager_GlobalEventManagerTest extends PHPUnit_Framework_TestCas
 
         Zend_EventManager_GlobalEventManager::detach($listener);
         $events = Zend_EventManager_GlobalEventManager::getEvents();
-        $this->assertEquals(array(), $events);
+        $this->assertEquals([], $events);
 
-        $this->test = new stdClass;
-        $listener = Zend_EventManager_GlobalEventManager::attach('foo.bar', array($this, 'aggregateEventMetadata'));
+        $this->test = new stdClass();
+        $listener = Zend_EventManager_GlobalEventManager::attach('foo.bar', [$this, 'aggregateEventMetadata']);
         $events = Zend_EventManager_GlobalEventManager::getEvents();
-        $this->assertEquals(array('foo.bar'), $events);
+        $this->assertEquals(['foo.bar'], $events);
         Zend_EventManager_GlobalEventManager::clearListeners('foo.bar');
         $events = Zend_EventManager_GlobalEventManager::getEvents();
-        $this->assertEquals(array(), $events);
+        $this->assertEquals([], $events);
     }
 
     /*
@@ -106,9 +105,10 @@ class Zend_EventManager_GlobalEventManagerTest extends PHPUnit_Framework_TestCas
 
     public function aggregateEventMetadata($e)
     {
-        $this->test->event  = $e->getName();
+        $this->test->event = $e->getName();
         $this->test->target = $e->getTarget();
         $this->test->params = $e->getParams();
+
         return $this->test->params;
     }
 

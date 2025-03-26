@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Mobile
- * @subpackage Push
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -24,10 +25,10 @@
 
 /**
  * @category   Zend
- * @package    Zend_Mobile
- * @subpackage Push
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Mobile
  * @group      Zend_Mobile_Push
  * @group      Zend_Mobile_Push_Mpns
@@ -50,16 +51,16 @@ class Zend_Mobile_Push_Message_Mpns_TileTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Mobile_Push_Message_Exception
+     * @expectedException \Zend_Mobile_Push_Message_Exception
      */
     public function testSetTokenNonStringThrowsException()
     {
-        $token = array('foo' => 'bar');
+        $token = ['foo' => 'bar'];
         $this->_msg->setToken($token);
     }
 
     /**
-     * @expectedException Zend_Mobile_Push_Message_Exception
+     * @expectedException \Zend_Mobile_Push_Message_Exception
      */
     public function testSetTokenInvalidUrlThrowsException()
     {
@@ -85,11 +86,11 @@ class Zend_Mobile_Push_Message_Mpns_TileTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Mobile_Push_Message_Exception
+     * @expectedException \Zend_Mobile_Push_Message_Exception
      */
     public function testSetBackgroundImageThrowsExceptionOnNonString()
     {
-        $image = array('foo' => 'bar');
+        $image = ['foo' => 'bar'];
         $this->_msg->setBackgroundImage($image);
     }
 
@@ -104,7 +105,7 @@ class Zend_Mobile_Push_Message_Mpns_TileTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Mobile_Push_Message_Exception
+     * @expectedException \Zend_Mobile_Push_Message_Exception
      */
     public function testSetCountThrowsExceptionOnNonNumeric()
     {
@@ -120,11 +121,11 @@ class Zend_Mobile_Push_Message_Mpns_TileTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Mobile_Push_Message_Exception
+     * @expectedException \Zend_Mobile_Push_Message_Exception
      */
     public function testSetTitleThrowsExceptionOnNonString()
     {
-        $title = array('foo' => 'bar');
+        $title = ['foo' => 'bar'];
         $this->_msg->setTitle($title);
     }
 
@@ -136,11 +137,11 @@ class Zend_Mobile_Push_Message_Mpns_TileTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Mobile_Push_Message_Exception
+     * @expectedException \Zend_Mobile_Push_Message_Exception
      */
     public function testSetBackBackgroundImageThrowsExceptionOnNonString()
     {
-        $image = array('foo' => 'bar');
+        $image = ['foo' => 'bar'];
         $this->_msg->setBackBackgroundImage($image);
     }
 
@@ -152,11 +153,11 @@ class Zend_Mobile_Push_Message_Mpns_TileTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Mobile_Push_Message_Exception
+     * @expectedException \Zend_Mobile_Push_Message_Exception
      */
     public function testSetBackTitleThrowsExceptionOnNonString()
     {
-        $title = array('foo' => 'bar');
+        $title = ['foo' => 'bar'];
         $this->_msg->setBackTitle($title);
     }
 
@@ -168,11 +169,11 @@ class Zend_Mobile_Push_Message_Mpns_TileTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Mobile_Push_Message_Exception
+     * @expectedException \Zend_Mobile_Push_Message_Exception
      */
     public function testSetBackContentThrowsExceptionOnNonString()
     {
-        $content = array('foo' => 'bar');
+        $content = ['foo' => 'bar'];
         $this->_msg->setBackContent($content);
         $this->assertEquals($content, $this->_msg->getBackContent());
     }
@@ -185,14 +186,13 @@ class Zend_Mobile_Push_Message_Mpns_TileTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Mobile_Push_Message_Exception
+     * @expectedException \Zend_Mobile_Push_Message_Exception
      */
     public function testSetTileIdThrowsExceptionOnNonString()
     {
-        $id = array('foo' => 'bar');
+        $id = ['foo' => 'bar'];
         $this->_msg->setTileId($id);
     }
-
 
     public function testSetDelay()
     {
@@ -231,5 +231,4 @@ class Zend_Mobile_Push_Message_Mpns_TileTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($backgroundImage, (string) $xml->Tile->BackgroundImage);
         $this->assertEquals($count, (int) $xml->Tile->Count);
     }
-
 }

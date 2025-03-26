@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,24 +14,24 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Pdf
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Pdf_Element_String
+ * Zend_Pdf_Element_String.
  */
 // require_once 'Zend/Pdf/Element/String.php';
 
 /**
  * @category   Zend
- * @package    Zend_Pdf
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Pdf
  */
 #[AllowDynamicProperties]
@@ -51,18 +52,18 @@ class Zend_Pdf_Element_StringTest extends PHPUnit_Framework_TestCase
     public function testToString()
     {
         $stringObj = new Zend_Pdf_Element_String('some text ()');
-        $this->assertEquals($stringObj->toString(), '(some text \\(\\))' );
+        $this->assertEquals($stringObj->toString(), '(some text \\(\\))');
     }
 
     public function testEscape()
     {
-        $this->assertEquals(Zend_Pdf_Element_String::escape("\n\r\t\x08\x0C()\\"), "\\n\\r\\t\\b\\f\\(\\)\\\\");
+        $this->assertEquals(Zend_Pdf_Element_String::escape("\n\r\t\x08\x0C()\\"), '\\n\\r\\t\\b\\f\\(\\)\\\\');
     }
 
     public function testUnescape()
     {
         $this->assertEquals(Zend_Pdf_Element_String::unescape("\\n\\r\\t\\b\\f\\(\\)\\\\  \nsome \\\ntext"),
-                            "\n\r\t\x08\x0C()\\  \nsome text");
+            "\n\r\t\x08\x0C()\\  \nsome text");
     }
 
     /**
@@ -70,11 +71,11 @@ class Zend_Pdf_Element_StringTest extends PHPUnit_Framework_TestCase
      */
     public function testUnescapeOctal()
     {
-        $input = array(
+        $input = [
             0304 => '\\304',
             0326 => '\\326',
-            0334 => '\\334'
-        );
+            0334 => '\\334',
+        ];
         foreach ($input as $k => $v) {
             $this->assertEquals(Zend_Pdf_Element_String::unescape($v),
                 chr($k), 'expected German Umlaut');

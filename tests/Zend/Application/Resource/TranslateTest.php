@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,28 +14,27 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Application
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Application_Resource_TranslateTest::main');
 }
 
 /**
- * Zend_Loader_Autoloader
+ * Zend_Loader_Autoloader.
  */
 // require_once 'Zend/Loader/Autoloader.php';
 
 /**
  * @category   Zend
- * @package    Zend_Application
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Application
  */
 #[AllowDynamicProperties]
@@ -43,13 +43,13 @@ class Zend_Application_Resource_TranslateTest extends PHPUnit_Framework_TestCase
     /**
      * @var array
      */
-    protected $_translationOptions = array(
-        'data' => array(
+    protected $_translationOptions = [
+        'data' => [
             'message1' => 'message1',
             'message2' => 'message2',
-            'message3' => 'message3'
-        )
-    );
+            'message3' => 'message3',
+        ],
+    ];
 
     /**
      * @var Zend_Loader_Autoloader
@@ -68,7 +68,7 @@ class Zend_Application_Resource_TranslateTest extends PHPUnit_Framework_TestCase
 
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
+        $suite = new PHPUnit_Framework_TestSuite(__CLASS__);
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -79,7 +79,7 @@ class Zend_Application_Resource_TranslateTest extends PHPUnit_Framework_TestCase
         if (!is_array($this->loaders)) {
             // spl_autoload_functions does not return empty array when no
             // autoloaders registered...
-            $this->loaders = array();
+            $this->loaders = [];
         }
 
         Zend_Loader_Autoloader::resetInstance();
@@ -150,9 +150,9 @@ class Zend_Application_Resource_TranslateTest extends PHPUnit_Framework_TestCase
      */
     public function testTranslationIsAddedIfRegistryKeyExistsAlready()
     {
-        $options1 = array('foo' => 'bar');
+        $options1 = ['foo' => 'bar'];
         $options2 = array_merge_recursive($this->_translationOptions,
-                                          array('data' => array('message4' => 'bericht4')));
+            ['data' => ['message4' => 'bericht4']]);
 
         $translate = new Zend_Translate(Zend_Translate::AN_ARRAY, $options1);
         Zend_Registry::set('Zend_Translate', $translate);
@@ -170,20 +170,20 @@ class Zend_Application_Resource_TranslateTest extends PHPUnit_Framework_TestCase
      */
     public function testSetCacheFromCacheManager()
     {
-        $configCache = array(
-            'translate' => array(
-                'frontend' => array(
+        $configCache = [
+            'translate' => [
+                'frontend' => [
                     'name' => 'Core',
-                    'options' => array(
+                    'options' => [
                         'lifetime' => 120,
-                        'automatic_serialization' => true
-                    )
-                ),
-                'backend' => array(
-                    'name' => 'Black Hole'
-                )
-            )
-        );
+                        'automatic_serialization' => true,
+                    ],
+                ],
+                'backend' => [
+                    'name' => 'Black Hole',
+                ],
+            ],
+        ];
         $this->bootstrap->registerPluginResource('cachemanager', $configCache);
 
         $options = $this->_translationOptions;
@@ -201,14 +201,14 @@ class Zend_Application_Resource_TranslateTest extends PHPUnit_Framework_TestCase
      */
     public function testToUseTheSameKeyAsTheOptionsZendTranslate()
     {
-        $options = array(
+        $options = [
             'adapter' => 'array',
-            'content' => array(
+            'content' => [
                 'm1' => 'message1',
-                'm2' => 'message2'
-            ),
-            'locale' => 'auto'
-        );
+                'm2' => 'message2',
+            ],
+            'locale' => 'auto',
+        ];
 
         $resource = new Zend_Application_Resource_Translate($options);
         $translator = $resource->init();
@@ -219,22 +219,23 @@ class Zend_Application_Resource_TranslateTest extends PHPUnit_Framework_TestCase
 
     /**
      * @group ZF-10352
-     * @expectedException Zend_Application_Resource_Exception
+     *
+     * @expectedException \Zend_Application_Resource_Exception
      */
     public function testToUseTheTwoKeysContentAndDataShouldThrowsException()
     {
-        $options = array(
+        $options = [
             'adapter' => 'array',
-            'content' => array(
+            'content' => [
                 'm1' => 'message1',
-                'm2' => 'message2'
-            ),
-            'data' => array(
+                'm2' => 'message2',
+            ],
+            'data' => [
                 'm3' => 'message3',
-                'm4' => 'message4'
-            ),
-            'locale' => 'auto'
-        );
+                'm4' => 'message4',
+            ],
+            'locale' => 'auto',
+        ];
 
         $resource = new Zend_Application_Resource_Translate($options);
         $translator = $resource->init();
@@ -245,10 +246,10 @@ class Zend_Application_Resource_TranslateTest extends PHPUnit_Framework_TestCase
      */
     public function testLogFactory()
     {
-        $options                    = $this->_translationOptions;
-        $options['log'][0]          = new Zend_Log_Writer_Mock();
+        $options = $this->_translationOptions;
+        $options['log'][0] = new Zend_Log_Writer_Mock();
         $options['logUntranslated'] = true;
-        $options['locale']          = 'en';
+        $options['locale'] = 'en';
 
         $resource = new Zend_Application_Resource_Translate($options);
         $resource->setBootstrap($this->bootstrap);

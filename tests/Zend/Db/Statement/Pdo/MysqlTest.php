@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,29 +14,27 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
 require_once 'Zend/Db/Statement/Pdo/TestCommon.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Db
  * @group      Zend_Db_Statement
  */
 #[AllowDynamicProperties]
 class Zend_Db_Statement_Pdo_MysqlTest extends Zend_Db_Statement_Pdo_TestCommon
 {
-
     public function testStatementNextRowset()
     {
         $select = $this->_db->select()
@@ -52,9 +51,10 @@ class Zend_Db_Statement_Pdo_MysqlTest extends Zend_Db_Statement_Pdo_TestCommon
     }
 
     /**
-     * Ensures that the character sequence ":0'" is handled properly
+     * Ensures that the character sequence ":0'" is handled properly.
      *
-     * @link   http://framework.zend.com/issues/browse/ZF-2059
+     * @see   http://framework.zend.com/issues/browse/ZF-2059
+     *
      * @return void
      */
     public function testZF2059()
@@ -80,12 +80,13 @@ class Zend_Db_Statement_Pdo_MysqlTest extends Zend_Db_Statement_Pdo_TestCommon
 
     public function testStatementExceptionMessageContainsSqlQuery()
     {
-        $sql = "SELECT * FROM nonexistent";
+        $sql = 'SELECT * FROM nonexistent';
         try {
             $stmt = $this->_db->query($sql);
         } catch (Zend_Db_Statement_Exception $e) {
             $message = $e->getMessage();
             $this->assertContains($sql, $message);
+
             return;
         }
         $this->fail('Expected exception');
@@ -95,5 +96,4 @@ class Zend_Db_Statement_Pdo_MysqlTest extends Zend_Db_Statement_Pdo_TestCommon
     {
         return 'Pdo_Mysql';
     }
-
 }

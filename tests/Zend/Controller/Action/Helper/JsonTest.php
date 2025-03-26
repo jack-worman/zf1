@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Controller_Action_Helper_JsonTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Controller_Action_Helper_JsonTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Controller_Action_Helper_JsonTest::main');
 }
 
 // require_once 'Zend/Controller/Action/Helper/Json.php';
@@ -35,13 +36,13 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 // require_once 'Zend/Layout.php';
 
 /**
- * Test class for Zend_Controller_Action_Helper_Json
+ * Test class for Zend_Controller_Action_Helper_Json.
  *
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Controller
  * @group      Zend_Controller_Action
  * @group      Zend_Controller_Action_Helper
@@ -56,8 +57,7 @@ class Zend_Controller_Action_Helper_JsonTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Action_Helper_JsonTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Controller_Action_Helper_JsonTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -118,9 +118,9 @@ class Zend_Controller_Action_Helper_JsonTest extends PHPUnit_Framework_TestCase
 
     public function testJsonHelperReturnsJsonEncodedString()
     {
-        $data = $this->helper->encodeJson(array('foobar'));
+        $data = $this->helper->encodeJson(['foobar']);
         $this->assertTrue(is_string($data));
-        $this->assertEquals(array('foobar'), Zend_Json::decode($data));
+        $this->assertEquals(['foobar'], Zend_Json::decode($data));
     }
 
     public function testJsonHelperDisablesLayoutsAndViewRendererByDefault()
@@ -138,31 +138,31 @@ class Zend_Controller_Action_Helper_JsonTest extends PHPUnit_Framework_TestCase
         $layout = Zend_Layout::startMvc();
         $this->assertTrue($layout->isEnabled());
         $this->assertFalse($this->viewRenderer->getNoRender());
-        $data = $this->helper->encodeJson(array('foobar'), true);
+        $data = $this->helper->encodeJson(['foobar'], true);
         $this->assertTrue($layout->isEnabled());
         $this->assertFalse($this->viewRenderer->getNoRender());
     }
 
     public function testSendJsonSendsResponse()
     {
-        $this->helper->sendJson(array('foobar'));
+        $this->helper->sendJson(['foobar']);
         $this->verifyJsonHeader();
         $response = $this->response->getBody();
-        $this->assertSame(array('foobar'), Zend_Json::decode($response));
+        $this->assertSame(['foobar'], Zend_Json::decode($response));
     }
 
     public function testDirectProxiesToSendJsonByDefault()
     {
-        $this->helper->direct(array('foobar'));
+        $this->helper->direct(['foobar']);
         $this->verifyJsonHeader();
         $response = $this->response->getBody();
-        $this->assertSame(array('foobar'), Zend_Json::decode($response));
+        $this->assertSame(['foobar'], Zend_Json::decode($response));
     }
 
     public function testCanPreventDirectSendingResponse()
     {
-        $data = $this->helper->direct(array('foobar'), false);
-        $this->assertSame(array('foobar'), Zend_Json::decode($data));
+        $data = $this->helper->direct(['foobar'], false);
+        $this->assertSame(['foobar'], Zend_Json::decode($data));
         $this->verifyJsonHeader();
         $response = $this->response->getBody();
         $this->assertTrue(empty($response));
@@ -171,7 +171,7 @@ class Zend_Controller_Action_Helper_JsonTest extends PHPUnit_Framework_TestCase
     public function testCanKeepLayoutsWhenUsingDirect()
     {
         $layout = Zend_Layout::startMvc();
-        $data = $this->helper->direct(array('foobar'), false, true);
+        $data = $this->helper->direct(['foobar'], false, true);
         $this->assertTrue($layout->isEnabled());
         $this->assertFalse($this->viewRenderer->getNoRender());
     }
@@ -181,7 +181,7 @@ class Zend_Controller_Action_Helper_JsonTest extends PHPUnit_Framework_TestCase
      */
     public function testEncodeJsonWillAcceptPreencodedJson()
     {
-        $data = $this->helper->encodeJson(Zend_Json::encode(array('f')), false, false);
+        $data = $this->helper->encodeJson(Zend_Json::encode(['f']), false, false);
         $this->assertEquals('["f"]', $data);
     }
 
@@ -190,7 +190,7 @@ class Zend_Controller_Action_Helper_JsonTest extends PHPUnit_Framework_TestCase
      */
     public function testSendJsonWillAcceptPreencodedJson()
     {
-        $data = $this->helper->sendJson(Zend_Json::encode(array('f')), false, false);
+        $data = $this->helper->sendJson(Zend_Json::encode(['f']), false, false);
         $this->assertEquals('["f"]', $data);
     }
 
@@ -199,7 +199,7 @@ class Zend_Controller_Action_Helper_JsonTest extends PHPUnit_Framework_TestCase
      */
     public function testDirectWillAcceptPreencodedJson()
     {
-        $data = $this->helper->direct(Zend_Json::encode(array('f')), false, false, false);
+        $data = $this->helper->direct(Zend_Json::encode(['f']), false, false, false);
         $this->assertEquals('["f"]', $data);
     }
 
@@ -208,7 +208,7 @@ class Zend_Controller_Action_Helper_JsonTest extends PHPUnit_Framework_TestCase
      */
     public function testSendingPreencodedJsonViaDirectWillStillSendHeaders()
     {
-        $data = $this->helper->direct(Zend_Json::encode(array('f')), false, false, false);
+        $data = $this->helper->direct(Zend_Json::encode(['f']), false, false, false);
         $this->verifyJsonHeader();
     }
 
@@ -217,7 +217,7 @@ class Zend_Controller_Action_Helper_JsonTest extends PHPUnit_Framework_TestCase
      */
     public function testSendingPreencodedJsonViaSendJsonWillStillSendHeaders()
     {
-        $data = $this->helper->sendJson(Zend_Json::encode(array('f')), false, false);
+        $data = $this->helper->sendJson(Zend_Json::encode(['f']), false, false);
         $this->verifyJsonHeader();
     }
 
@@ -226,13 +226,13 @@ class Zend_Controller_Action_Helper_JsonTest extends PHPUnit_Framework_TestCase
      */
     public function testSendingPreencodedJsonViaEncodeJsonWillStillSendHeaders()
     {
-        $data = $this->helper->encodeJson(Zend_Json::encode(array('f')), false, false);
+        $data = $this->helper->encodeJson(Zend_Json::encode(['f']), false, false);
         $this->verifyJsonHeader();
     }
 }
 
 /**
- * Zend_Layout subclass to allow resetting MVC instance
+ * Zend_Layout subclass to allow resetting MVC instance.
  */
 #[AllowDynamicProperties]
 class Zend_Controller_Action_Helper_JsonTest_Layout extends Zend_Layout
@@ -244,6 +244,6 @@ class Zend_Controller_Action_Helper_JsonTest_Layout extends Zend_Layout
 }
 
 // Call Zend_Controller_Action_Helper_JsonTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Controller_Action_Helper_JsonTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Controller_Action_Helper_JsonTest::main') {
     Zend_Controller_Action_Helper_JsonTest::main();
 }

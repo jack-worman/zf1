@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Dom
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Dom_Query_Css2XpathTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dom_Query_Css2XpathTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Dom_Query_Css2XpathTest::main');
 }
 
 /** Zend_Dom_Query_Result */
@@ -30,10 +31,10 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 
 /**
  * @category   Zend
- * @package    Zend_Dom
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Dom
  */
 #[AllowDynamicProperties]
@@ -45,14 +46,14 @@ class Zend_Dom_Query_ResultTest extends PHPUnit_Framework_TestCase
     public function testEmptyResultDoesNotReturnIteratorValidTrue()
     {
         $dom = new DOMDocument();
-        $emptyNodeList = $dom->getElementsByTagName("a");
-        $result = new Zend_Dom_Query_Result("", "", $dom, $emptyNodeList);
+        $emptyNodeList = $dom->getElementsByTagName('a');
+        $result = new Zend_Dom_Query_Result('', '', $dom, $emptyNodeList);
 
         $this->assertFalse($result->valid());
     }
 }
 
 // Call Zend_Dom_Query_Css2XpathTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dom_Query_Css2XpathTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Dom_Query_Css2XpathTest::main') {
     Zend_Dom_Query_Css2XpathTest::main();
 }

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Serializer
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,15 +28,13 @@
 
 /**
  * @category   Zend
- * @package    Zend_Serializer
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Zend_Serializer_Adapter_Amf0Test extends PHPUnit_Framework_TestCase
 {
-
     private $_adapter;
 
     public function setUp()
@@ -50,11 +49,11 @@ class Zend_Serializer_Adapter_Amf0Test extends PHPUnit_Framework_TestCase
 
     /**
      * Simple test to serialize a value using Zend_Amf_Parser_Amf0_Serializer
-     * -> This only tests the usage of Zend_Amf @see Zend_Amf_AllTests
+     * -> This only tests the usage of Zend_Amf @see Zend_Amf_AllTests.
      */
     public function testSerialize()
     {
-        $value    = true;
+        $value = true;
         $expected = "\x01\x01"; // Amf0 -> true
 
         $data = $this->_adapter->serialize($value);
@@ -63,15 +62,14 @@ class Zend_Serializer_Adapter_Amf0Test extends PHPUnit_Framework_TestCase
 
     /**
      * Simple test to serialize a value using Zend_Amf_Parser_Amf0_Deserializer
-     * -> This only tests the usage of Zend_Amf @see Zend_Amf_AllTests
+     * -> This only tests the usage of Zend_Amf @see Zend_Amf_AllTests.
      */
     public function testUnserialize()
     {
-        $expected   = true;
-        $value      = "\x01\x01"; // Amf0 -> true
+        $expected = true;
+        $value = "\x01\x01"; // Amf0 -> true
 
         $data = $this->_adapter->unserialize($value);
         $this->assertEquals($expected, $data);
     }
-
 }

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -26,20 +27,15 @@
  */
 require_once 'Zend/Db/TestUtil/Pdo/Oci.php';
 
-
-
-
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Zend_Db_TestUtil_Oracle extends Zend_Db_TestUtil_Pdo_Oci
 {
-
     protected function _rawQuery($sql)
     {
         $conn = $this->_db->getConnection();
@@ -56,5 +52,4 @@ class Zend_Db_TestUtil_Oracle extends Zend_Db_TestUtil_Pdo_Oci
             throw new Zend_Db_Exception("SQL execute error for \"$sql\": ".$e['message']);
         }
     }
-
 }

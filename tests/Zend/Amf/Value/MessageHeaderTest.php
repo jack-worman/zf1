@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +14,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Amf
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Amf_Value_MessageHeaderTest::main');
 }
@@ -27,13 +27,13 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 // require_once 'Zend/Amf/Value/MessageHeader.php';
 
 /**
- * Test case for Zend_Amf_Value_MessageHeader
+ * Test case for Zend_Amf_Value_MessageHeader.
  *
  * @category   Zend
- * @package    Zend_Amf
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Amf
  */
 #[AllowDynamicProperties]
@@ -46,7 +46,7 @@ class Zend_Amf_Value_MessageHeaderTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Amf_Value_MessageHeaderTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Amf_Value_MessageHeaderTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -74,9 +74,9 @@ class Zend_Amf_Value_MessageHeaderTest extends PHPUnit_Framework_TestCase
 
     public function testConstructorShouldSetMessageHeaderDataUnmodified()
     {
-        $data = new stdClass;
+        $data = new stdClass();
         $data->foo = 'bar';
-        $data->bar = array('baz' => 'bat');
+        $data->bar = ['baz' => 'bat'];
         $messageHeader = new Zend_Amf_Value_MessageHeader('foo', true, $data);
         $this->assertSame($data, $messageHeader->data);
     }

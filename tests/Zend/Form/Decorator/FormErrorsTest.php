@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Form_Decorator_FormErrorsTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Form_Decorator_FormErrorsTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Form_Decorator_FormErrorsTest::main');
 }
 
 // require_once 'Zend/Form/Decorator/FormErrors.php';
@@ -32,13 +33,13 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 // require_once 'Zend/View.php';
 
 /**
- * Test class for Zend_Form_Decorator_FormErrors
+ * Test class for Zend_Form_Decorator_FormErrors.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Form
  */
 #[AllowDynamicProperties]
@@ -51,7 +52,7 @@ class Zend_Form_Decorator_FormErrorsTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Decorator_FormErrorsTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Form_Decorator_FormErrorsTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -79,56 +80,58 @@ class Zend_Form_Decorator_FormErrorsTest extends PHPUnit_Framework_TestCase
     public function getView()
     {
         $view = new Zend_View();
+
         return $view;
     }
 
     public function setupForm()
     {
-        $form1 = new Zend_Form_SubForm;
-        $form1->addElement('text', 'foo', array(
-                    'label' => 'Sub Foo: ',
-                    'required' => true,
-                    'validators' => array(
-                        'NotEmpty',
-                        'Alpha',
-                    ),
-                ))
-              ->addElement('text', 'bar', array(
-                    'label' => 'Sub Bar: ',
-                    'required' => true,
-                    'validators' => array(
-                        'Alpha',
-                        'Alnum',
-                    ),
-                ));
-        $form2 = new Zend_Form;
-        $form2->addElement('text', 'foo', array(
-                    'label' => 'Master Foo: ',
-                    'required' => true,
-                    'validators' => array(
-                        'NotEmpty',
-                        'Alpha',
-                    ),
-                ))
-              ->addElement('text', 'bar', array(
-                    'required' => true,
-                    'validators' => array(
-                        'Alpha',
-                        'Alnum',
-                    ),
-                ))
+        $form1 = new Zend_Form_SubForm();
+        $form1->addElement('text', 'foo', [
+            'label' => 'Sub Foo: ',
+            'required' => true,
+            'validators' => [
+                'NotEmpty',
+                'Alpha',
+            ],
+        ])
+              ->addElement('text', 'bar', [
+                  'label' => 'Sub Bar: ',
+                  'required' => true,
+                  'validators' => [
+                      'Alpha',
+                      'Alnum',
+                  ],
+              ]);
+        $form2 = new Zend_Form();
+        $form2->addElement('text', 'foo', [
+            'label' => 'Master Foo: ',
+            'required' => true,
+            'validators' => [
+                'NotEmpty',
+                'Alpha',
+            ],
+        ])
+              ->addElement('text', 'bar', [
+                  'required' => true,
+                  'validators' => [
+                      'Alpha',
+                      'Alnum',
+                  ],
+              ])
               ->addSubForm($form1, 'sub');
-        $form2->isValid(array(
+        $form2->isValid([
             'foo' => '',
             'bar' => 'foo 2 u 2',
-            'sub' => array(
+            'sub' => [
                 'foo' => '',
                 'bar' => 'foo 2 u 2',
-            ),
-        ));
+            ],
+        ]);
         $form2->setView($this->getView());
         $this->decorator->setElement($form2);
         $this->form = $form2;
+
         return $form2;
     }
 
@@ -176,16 +179,16 @@ class Zend_Form_Decorator_FormErrorsTest extends PHPUnit_Framework_TestCase
         $this->setupForm();
         $content = 'test content';
         $test = $this->decorator->render($content);
-        $this->assertRegexp('#' . $content . '.*?<ul#s', $test, $test);
+        $this->assertRegexp('#'.$content.'.*?<ul#s', $test, $test);
     }
 
     public function testRenderPrependsMessagesToContentWhenRequested()
     {
-        $this->decorator->setOptions(array('placement' => 'PREPEND'));
+        $this->decorator->setOptions(['placement' => 'PREPEND']);
         $this->setupForm();
         $content = 'test content';
         $test = $this->decorator->render($content);
-        $this->assertRegexp('#</ul>.*?' . $content . '#s', $test);
+        $this->assertRegexp('#</ul>.*?'.$content.'#s', $test);
     }
 
     public function testRenderSeparatesContentAndErrorsWithPhpEolByDefault()
@@ -193,16 +196,16 @@ class Zend_Form_Decorator_FormErrorsTest extends PHPUnit_Framework_TestCase
         $this->setupForm();
         $content = 'test content';
         $test = $this->decorator->render($content);
-        $this->assertContains($content . PHP_EOL . '<ul', $test);
+        $this->assertContains($content.PHP_EOL.'<ul', $test);
     }
 
     public function testRenderSeparatesContentAndErrorsWithCustomSeparatorWhenRequested()
     {
-        $this->decorator->setOptions(array('separator' => '<br />'));
+        $this->decorator->setOptions(['separator' => '<br />']);
         $this->setupForm();
         $content = 'test content';
         $test = $this->decorator->render($content);
-        $this->assertContains($content . $this->decorator->getSeparator() . '<ul', $test, $test);
+        $this->assertContains($content.$this->decorator->getSeparator().'<ul', $test, $test);
     }
 
     public function testIgnoreSubFormsFlagShouldBeFalseByDefault()
@@ -223,21 +226,21 @@ class Zend_Form_Decorator_FormErrorsTest extends PHPUnit_Framework_TestCase
 
     public function testMarkupOptionsMayBePassedViaSetOptions()
     {
-        $options = array(
-            'ignoreSubForms'          => true,
-            'markupElementLabelEnd'   => '</i>',
+        $options = [
+            'ignoreSubForms' => true,
+            'markupElementLabelEnd' => '</i>',
             'markupElementLabelStart' => '<i>',
-            'markupListEnd'           => '</dl>',
-            'markupListItemEnd'       => '</dd>',
-            'markupListItemStart'     => '<dd>',
-            'markupListStart'         => '<dl class="form-errors">',
-        );
+            'markupListEnd' => '</dl>',
+            'markupListItemEnd' => '</dd>',
+            'markupListItemStart' => '<dd>',
+            'markupListStart' => '<dl class="form-errors">',
+        ];
         $this->decorator->setOptions($options);
         foreach ($options as $key => $value) {
-            if ($key == 'ignoreSubForms') {
+            if ('ignoreSubForms' == $key) {
                 $this->assertTrue($this->decorator->ignoreSubForms());
             } else {
-                $method = 'get' . ucfirst($key);
+                $method = 'get'.ucfirst($key);
                 $this->assertEquals($value, $this->decorator->$method());
             }
         }
@@ -245,20 +248,20 @@ class Zend_Form_Decorator_FormErrorsTest extends PHPUnit_Framework_TestCase
 
     public function testMarkupOptionsShouldBeUsedWhenRendering()
     {
-        $options = array(
-            'ignoreSubForms'          => true,
-            'markupElementLabelEnd'   => '</i>',
+        $options = [
+            'ignoreSubForms' => true,
+            'markupElementLabelEnd' => '</i>',
             'markupElementLabelStart' => '<i>',
-            'markupListEnd'           => '</div>',
-            'markupListItemEnd'       => '</p>',
-            'markupListItemStart'     => '<p>',
-            'markupListStart'         => '<div class="form-errors">',
-        );
+            'markupListEnd' => '</div>',
+            'markupListItemEnd' => '</p>',
+            'markupListItemStart' => '<p>',
+            'markupListStart' => '<div class="form-errors">',
+        ];
         $this->setupForm();
         $this->decorator->setOptions($options);
         $markup = $this->decorator->render('');
         foreach ($options as $key => $value) {
-            if ($key == 'ignoreSubForms') {
+            if ('ignoreSubForms' == $key) {
                 $this->assertNotContains('Sub ', $markup);
             } else {
                 $this->assertContains($value, $markup);
@@ -275,7 +278,7 @@ class Zend_Form_Decorator_FormErrorsTest extends PHPUnit_Framework_TestCase
         $test = $this->decorator->render($content);
         $this->assertContains($content, $test);
         foreach ($this->form->getMessages() as $name => $messages) {
-            while (($message = current($messages))) {
+            while ($message = current($messages)) {
                 if (is_string($message)) {
                     $this->assertContains($message, $test, var_export($messages, 1));
                 }
@@ -303,17 +306,16 @@ class Zend_Form_Decorator_FormErrorsTest extends PHPUnit_Framework_TestCase
         $this->assertNotContains('form-badness', $html);
     }
 
-
     /**
      * @dataProvider markupOptionMethodsProvider
      */
     public function testMarkupOptionsMayBeMutated($property)
     {
-        $setter = 'set' . $property;
-        $getter = 'get' . $property;
+        $setter = 'set'.$property;
+        $getter = 'get'.$property;
 
         $this->decorator->$setter('foo');
-        if ($property == 'IgnoreSubForms') {
+        if ('IgnoreSubForms' == $property) {
             $this->assertTrue($this->decorator->ignoreSubForms());
         } else {
             $this->assertEquals('foo', $this->decorator->$getter());
@@ -372,15 +374,15 @@ class Zend_Form_Decorator_FormErrorsTest extends PHPUnit_Framework_TestCase
         // Translator
         $translator = new Zend_Translate(
             'array',
-            array(
-                 'Master Foo: ' => 'transleted label',
-                 'bar'          => 'translated name',
-            )
+            [
+                'Master Foo: ' => 'transleted label',
+                'bar' => 'translated name',
+            ]
         );
 
         // Form
         $this->setupForm();
-        $this->form->setDecorators(array($this->decorator));
+        $this->form->setDecorators([$this->decorator]);
         $this->form->foo->setTranslator($translator);
         $this->form->bar->setTranslator($translator);
 
@@ -398,19 +400,19 @@ class Zend_Form_Decorator_FormErrorsTest extends PHPUnit_Framework_TestCase
 
     public function markupOptionMethodsProvider()
     {
-        return array(
-            array('IgnoreSubForms'),
-            array('MarkupElementLabelEnd'),
-            array('MarkupElementLabelStart'),
-            array('MarkupListEnd'),
-            array('MarkupListItemEnd'),
-            array('MarkupListItemStart'),
-            array('MarkupListStart'),
-        );
+        return [
+            ['IgnoreSubForms'],
+            ['MarkupElementLabelEnd'],
+            ['MarkupElementLabelStart'],
+            ['MarkupListEnd'],
+            ['MarkupListItemEnd'],
+            ['MarkupListItemStart'],
+            ['MarkupListStart'],
+        ];
     }
 }
 
 // Call Zend_Form_Decorator_FormErrorsTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Form_Decorator_FormErrorsTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Form_Decorator_FormErrorsTest::main') {
     Zend_Form_Decorator_FormErrorsTest::main();
 }

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,34 +14,34 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Config
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Config
+ * Zend_Config.
  */
 // require_once 'Zend/Config.php';
 
 /**
- * Zend_Config_Ini
+ * Zend_Config_Ini.
  */
 // require_once 'Zend/Config/Ini.php';
 
 /**
- * Zend_Config_Writer_Ini
+ * Zend_Config_Writer_Ini.
  */
 // require_once 'Zend/Config/Writer/Ini.php';
 
 /**
  * @category   Zend
- * @package    Zend_Config
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Config
  */
 #[AllowDynamicProperties]
@@ -50,7 +51,7 @@ class Zend_Config_Writer_IniTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_tempName = @tempnam(__DIR__ . '/temp', 'tmp');
+        $this->_tempName = @tempnam(__DIR__.'/temp', 'tmp');
     }
 
     public function tearDown()
@@ -60,7 +61,7 @@ class Zend_Config_Writer_IniTest extends PHPUnit_Framework_TestCase
 
     public function testNoFilenameSet()
     {
-        $writer = new Zend_Config_Writer_Ini(array('config' => new Zend_Config(array())));
+        $writer = new Zend_Config_Writer_Ini(['config' => new Zend_Config([])]);
 
         try {
             $writer->write();
@@ -72,7 +73,7 @@ class Zend_Config_Writer_IniTest extends PHPUnit_Framework_TestCase
 
     public function testNoConfigSet()
     {
-        $writer = new Zend_Config_Writer_Ini(array('filename' => $this->_tempName));
+        $writer = new Zend_Config_Writer_Ini(['filename' => $this->_tempName]);
 
         try {
             $writer->write();
@@ -84,7 +85,7 @@ class Zend_Config_Writer_IniTest extends PHPUnit_Framework_TestCase
 
     public function testFileNotWritable()
     {
-        $writer = new Zend_Config_Writer_Ini(array('config' => new Zend_Config(array()), 'filename' => '/../../../'));
+        $writer = new Zend_Config_Writer_Ini(['config' => new Zend_Config([]), 'filename' => '/../../../']);
 
         try {
             $writer->write();
@@ -96,9 +97,9 @@ class Zend_Config_Writer_IniTest extends PHPUnit_Framework_TestCase
 
     public function testWriteAndRead()
     {
-        $config = new Zend_Config(array('default' => array('test' => 'foo')));
+        $config = new Zend_Config(['default' => ['test' => 'foo']]);
 
-        $writer = new Zend_Config_Writer_Ini(array('config' => $config, 'filename' => $this->_tempName));
+        $writer = new Zend_Config_Writer_Ini(['config' => $config, 'filename' => $this->_tempName]);
         $writer->write();
 
         $config = new Zend_Config_Ini($this->_tempName, null);
@@ -108,9 +109,9 @@ class Zend_Config_Writer_IniTest extends PHPUnit_Framework_TestCase
 
     public function testNoSection()
     {
-        $config = new Zend_Config(array('test' => 'foo', 'test2' => array('test3' => 'bar')));
+        $config = new Zend_Config(['test' => 'foo', 'test2' => ['test3' => 'bar']]);
 
-        $writer = new Zend_Config_Writer_Ini(array('config' => $config, 'filename' => $this->_tempName));
+        $writer = new Zend_Config_Writer_Ini(['config' => $config, 'filename' => $this->_tempName]);
         $writer->write();
 
         $config = new Zend_Config_Ini($this->_tempName, null);
@@ -121,24 +122,23 @@ class Zend_Config_Writer_IniTest extends PHPUnit_Framework_TestCase
 
     public function testWriteAndReadOriginalFile()
     {
-        $config = new Zend_Config_Ini(__DIR__ . '/files/allsections.ini', null, array('skipExtends' => true));
+        $config = new Zend_Config_Ini(__DIR__.'/files/allsections.ini', null, ['skipExtends' => true]);
 
-        $writer = new Zend_Config_Writer_Ini(array('config' => $config, 'filename' => $this->_tempName));
+        $writer = new Zend_Config_Writer_Ini(['config' => $config, 'filename' => $this->_tempName]);
         $writer->write();
 
         $config = new Zend_Config_Ini($this->_tempName, null);
         $this->assertEquals('multi', $config->staging->one->two->three);
 
-        $config = new Zend_Config_Ini($this->_tempName, null, array('skipExtends' => true));
+        $config = new Zend_Config_Ini($this->_tempName, null, ['skipExtends' => true]);
         $this->assertFalse(isset($config->staging->one));
     }
 
-
     public function testWriteAndReadSingleSection()
     {
-        $config = new Zend_Config_Ini(__DIR__ . '/files/allsections.ini', 'staging', array('skipExtends' => true));
+        $config = new Zend_Config_Ini(__DIR__.'/files/allsections.ini', 'staging', ['skipExtends' => true]);
 
-        $writer = new Zend_Config_Writer_Ini(array('config' => $config, 'filename' => $this->_tempName));
+        $writer = new Zend_Config_Writer_Ini(['config' => $config, 'filename' => $this->_tempName]);
         $writer->write();
 
         $config = new Zend_Config_Ini($this->_tempName, null);
@@ -150,7 +150,7 @@ class Zend_Config_Writer_IniTest extends PHPUnit_Framework_TestCase
 
     public function testArgumentOverride()
     {
-        $config = new Zend_Config(array('default' => array('test' => 'foo')));
+        $config = new Zend_Config(['default' => ['test' => 'foo']]);
 
         $writer = new Zend_Config_Writer_Ini();
         $writer->write($this->_tempName, $config);
@@ -165,7 +165,7 @@ class Zend_Config_Writer_IniTest extends PHPUnit_Framework_TestCase
      */
     public function testRender()
     {
-        $config = new Zend_Config(array('test' => 'foo', 'bar' => array(0 => 'baz', 1 => 'foo')));
+        $config = new Zend_Config(['test' => 'foo', 'bar' => [0 => 'baz', 1 => 'foo']]);
 
         $writer = new Zend_Config_Writer_Ini();
         $iniString = $writer->setConfig($config)->render();
@@ -183,7 +183,7 @@ ECS;
 
     public function testRenderWithoutSections()
     {
-        $config = new Zend_Config(array('test' => 'foo', 'test2' => array('test3' => 'bar')));
+        $config = new Zend_Config(['test' => 'foo', 'test2' => ['test3' => 'bar']]);
 
         $writer = new Zend_Config_Writer_Ini();
         $writer->setRenderWithoutSections();
@@ -199,7 +199,7 @@ ECS;
 
     public function testRenderWithoutSections2()
     {
-        $config = new Zend_Config_Ini(__DIR__ . '/files/allsections.ini', null, array('skipExtends' => true));
+        $config = new Zend_Config_Ini(__DIR__.'/files/allsections.ini', null, ['skipExtends' => true]);
 
         $writer = new Zend_Config_Writer_Ini();
         $writer->setRenderWithoutSections();
@@ -230,12 +230,12 @@ ECS;
         $this->assertEquals($expected, $iniString);
     }
 
-    public function testZF6521_NoDoubleQuoutesInValue()
+    public function testZF6521NoDoubleQuoutesInValue()
     {
-        $config = new Zend_Config(array('default' => array('test' => 'fo"o')));
+        $config = new Zend_Config(['default' => ['test' => 'fo"o']]);
 
         try {
-            $writer = new Zend_Config_Writer_Ini(array('config' => $config, 'filename' => $this->_tempName));
+            $writer = new Zend_Config_Writer_Ini(['config' => $config, 'filename' => $this->_tempName]);
             $writer->write();
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
@@ -246,17 +246,17 @@ ECS;
     /**
      * @group ZF-6289
      */
-    public function testZF6289_NonSectionElementsAndSectionJumbling()
+    public function testZF6289NonSectionElementsAndSectionJumbling()
     {
-        $config = new Zend_Config(array(
-            'one'   => 'element',
-            'two'   => array('type' => 'section'),
+        $config = new Zend_Config([
+            'one' => 'element',
+            'two' => ['type' => 'section'],
             'three' => 'element',
-            'four'  => array('type' => 'section'),
-            'five'  => 'element'
-        ));
+            'four' => ['type' => 'section'],
+            'five' => 'element',
+        ]);
 
-        $writer = new Zend_Config_Writer_Ini;
+        $writer = new Zend_Config_Writer_Ini();
         $iniString = $writer->setConfig($config)->render($config);
 
         $expected = <<<ECS

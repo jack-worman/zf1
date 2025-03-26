@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Session
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id:$
  */
 
@@ -29,17 +30,16 @@
  * Session validator for ZF-11186.
  *
  * @category   Zend
- * @package    Zend_Session
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Session
  */
 #[AllowDynamicProperties]
 class Zend_Session_Validator_NoticeValidator extends Zend_Session_Validator_Abstract
 {
     /**
-     * @access public
      * @return void
      */
     public function setup()
@@ -48,7 +48,6 @@ class Zend_Session_Validator_NoticeValidator extends Zend_Session_Validator_Abst
     }
 
     /**
-     * @access public
      * @return void
      */
     public function validate()

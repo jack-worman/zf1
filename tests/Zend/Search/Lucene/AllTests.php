@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +14,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Search_Lucene_AllTests::main');
 }
@@ -49,13 +49,12 @@ require_once 'Zend/Search/Lucene/SearchHighlightTest.php';
 require_once 'Zend/Search/Lucene/SearchTest.php';
 require_once 'Zend/Search/Lucene/Search23Test.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Search_Lucene
  */
 #[AllowDynamicProperties]
@@ -86,7 +85,7 @@ class Zend_Search_Lucene_AllTests
         $suite->addTestSuite('Zend_Search_Lucene_Index_SegmentMergerTest');
         $suite->addTestSuite('Zend_Search_Lucene_Index_TermInfoTest');
         $suite->addTestSuite('Zend_Search_Lucene_Index_TermTest');
-        /**
+        /*
          * SegmentWriter class, its subclasses and Writer class are completely tested within
          * Lucene::addDocument and Lucene::optimize testing
          */
@@ -98,7 +97,6 @@ class Zend_Search_Lucene_AllTests
 
         $suite->addTestSuite('Zend_Search_Lucene_SearchTest');
         $suite->addTestSuite('Zend_Search_Lucene_Search23Test');
-
 
         return $suite;
     }

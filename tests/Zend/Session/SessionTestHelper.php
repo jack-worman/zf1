@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Session
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -24,15 +25,14 @@
  * @see Zend_Session
  */
 // require_once 'Zend/Session.php';
-require dirname(dirname(dirname(__DIR__))) .'/vendor/autoload.php';
-
+require dirname(dirname(dirname(__DIR__))).'/vendor/autoload.php';
 
 /**
  * @category   Zend
- * @package    Zend_Session
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Session
  */
 #[AllowDynamicProperties]
@@ -41,20 +41,21 @@ class Zend_Session_TestHelper
     /**
      * Runs the test method specified via command line arguments.
      *
-     * @param  array $argv
-     * @return integer
+     * @return int
      */
     public function run(array $argv)
     {
         if (!isset($argv[0]) || !isset($argv[1])) {
             echo "Usage: {$argv[0]} <test name>\n";
+
             return 1;
         }
 
-        $testMethod = 'do' . ucfirst($argv[1]);
+        $testMethod = 'do'.ucfirst($argv[1]);
 
         if (!method_exists($this, $testMethod)) {
             echo "Invalid test: '{$argv[1]}'\n";
+
             return 2;
         }
 
@@ -65,20 +66,18 @@ class Zend_Session_TestHelper
     }
 
     /**
-     * @param  array $args
-     * @return integer Always returns zero.
+     * @return int always returns zero
      */
     public function doExpireAll(array $args)
     {
-        Zend_Session::setOptions(array('remember_me_seconds' => 15, 'gc_probability' => 2));
+        Zend_Session::setOptions(['remember_me_seconds' => 15, 'gc_probability' => 2]);
         session_id($args[0]);
         if (isset($args[1]) && !empty($args[1])) {
             $s = new Zend_Session_Namespace($args[1]);
-        }
-        else {
+        } else {
             $s = new Zend_Session_Namespace();
         }
-        if (isset($args[2]) && ($args[2] == 'ZF-7196')) {
+        if (isset($args[2]) && ('ZF-7196' == $args[2])) {
             unset($s->foo);
         }
         $result = '';
@@ -93,8 +92,7 @@ class Zend_Session_TestHelper
     }
 
     /**
-     * @param  array $args
-     * @return integer Always returns zero.
+     * @return int always returns zero
      */
     public function doSetArray(array $args)
     {
@@ -118,7 +116,7 @@ class Zend_Session_TestHelper
 
         $result = '';
         foreach ($s->getIterator() as $key => $val) {
-            $result .= "$key === ". (print_r($val,true)) .';';
+            $result .= "$key === ".print_r($val, true).';';
         }
 
         Zend_Session::writeClose();
@@ -127,8 +125,7 @@ class Zend_Session_TestHelper
     }
 
     /**
-     * @param  array $args
-     * @return integer Always returns zero.
+     * @return int always returns zero
      */
     public function doGetArray(array $args)
     {
@@ -136,13 +133,12 @@ class Zend_Session_TestHelper
         session_id($args[0]);
         if (isset($args[1]) && !empty($args[1])) {
             $s = new Zend_Session_Namespace($args[1]);
-        }
-        else {
+        } else {
             $s = new Zend_Session_Namespace();
         }
         $result = '';
         foreach ($s->getIterator() as $key => $val) {
-            $result .= "$key === ". (str_replace(array("\n", ' '),array(';',''), print_r($val, true))) .';';
+            $result .= "$key === ".str_replace(["\n", ' '], [';', ''], print_r($val, true)).';';
         }
         // file_put_contents('out.sesstiontest.get', print_r($s->someArray, true));
         Zend_Session::writeClose();
@@ -152,8 +148,6 @@ class Zend_Session_TestHelper
     }
 }
 
-
 $testHelper = new Zend_Session_TestHelper();
 
 exit($testHelper->run($argv));
-

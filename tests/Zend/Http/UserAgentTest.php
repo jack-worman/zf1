@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Http_UserAgent
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id: JsonTest.php 12081 2008-10-22 19:07:55Z norm2782 $
  */
 
@@ -25,49 +26,48 @@
 // require_once 'Zend/Http/UserAgent/Mobile.php';
 // require_once 'Zend/Http/UserAgent/Storage/NonPersistent.php';
 
-require_once __DIR__ . '/TestAsset/TestPluginLoader.php';
-require_once __DIR__ . '/TestAsset/DesktopDevice.php';
-require_once __DIR__ . '/TestAsset/InvalidDevice.php';
-require_once __DIR__ . '/TestAsset/PopulatedStorage.php';
+require_once __DIR__.'/TestAsset/TestPluginLoader.php';
+require_once __DIR__.'/TestAsset/DesktopDevice.php';
+require_once __DIR__.'/TestAsset/InvalidDevice.php';
+require_once __DIR__.'/TestAsset/PopulatedStorage.php';
 
 /**
  * @category   Zend
- * @package    Zend_Http_UserAgent
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Http
  * @group      Zend_Http_UserAgent
  */
 #[AllowDynamicProperties]
 class Zend_Http_UserAgentTest extends PHPUnit_Framework_TestCase
 {
-
     public function setUp()
     {
-        $this->server                         = array();
-        $this->server['os']                   = 'Windows_NT';
-        $this->server['http_accept']          = '*/*';
+        $this->server = [];
+        $this->server['os'] = 'Windows_NT';
+        $this->server['http_accept'] = '*/*';
         $this->server['http_accept_language'] = 'fr-FR';
         $this->server['http_accept_encoding'] = 'gzip, deflate';
-        $this->server['http_user_agent']      = 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)';
-        $this->server['http_host']            = 'zfmobile';
-        $this->server['http_connection']      = 'Keep-Alive';
-        $this->server['http_cookie']          = 'ZDEDebuggerPresent=php,phtml,php3';
-        $this->server['server_signature']     = '';
-        $this->server['server_software']      = 'Apache/2.2.12 (Win32) mod_ssl/2.2.12 OpenSSL/0.9.8k';
-        $this->server['server_name']          = 'zfmobile';
-        $this->server['server_addr']          = '127.0.0.1';
-        $this->server['server_port']          = '80';
-        $this->server['remote_addr']          = '127.0.0.1';
-        $this->server['server_protocol']      = 'HTTP/1.1';
+        $this->server['http_user_agent'] = 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)';
+        $this->server['http_host'] = 'zfmobile';
+        $this->server['http_connection'] = 'Keep-Alive';
+        $this->server['http_cookie'] = 'ZDEDebuggerPresent=php,phtml,php3';
+        $this->server['server_signature'] = '';
+        $this->server['server_software'] = 'Apache/2.2.12 (Win32) mod_ssl/2.2.12 OpenSSL/0.9.8k';
+        $this->server['server_name'] = 'zfmobile';
+        $this->server['server_addr'] = '127.0.0.1';
+        $this->server['server_port'] = '80';
+        $this->server['remote_addr'] = '127.0.0.1';
+        $this->server['server_protocol'] = 'HTTP/1.1';
 
-        $this->config                         = array(
+        $this->config = [
             'server' => &$this->server,
-            'storage'               => array(
-                'adapter'           => 'NonPersistent',
-            ),
-        );
+            'storage' => [
+                'adapter' => 'NonPersistent',
+            ],
+        ];
     }
 
     public function testMatchUserAgentSimple()
@@ -75,7 +75,7 @@ class Zend_Http_UserAgentTest extends PHPUnit_Framework_TestCase
         $config = $this->config;
         $config['server']['server_software'] = 'Apache/2';
         $userAgent = new Zend_Http_UserAgent($config);
-        $device    = $userAgent->getDevice();
+        $device = $userAgent->getDevice();
 
         $this->assertEquals('desktop', $userAgent->getBrowserType());
         $this->assertEquals('Internet Explorer', $device->getFeature('browser_name'));
@@ -91,13 +91,13 @@ class Zend_Http_UserAgentTest extends PHPUnit_Framework_TestCase
     public function testMatchUserAgentServer()
     {
         $config = $this->config;
-        $config['server']['os']              = 'Windows_NT';
-        $config['server']['http_accept']     = '*/*';
+        $config['server']['os'] = 'Windows_NT';
+        $config['server']['http_accept'] = '*/*';
         $config['server']['http_user_agent'] = 'Mozilla/4.0 (compatible; MSIE 9.0; Windows NT 5.1)';
         $config['server']['server_software'] = 'Apache/99';
-        $config['user_agent']                = $config['server']["http_user_agent"];
+        $config['user_agent'] = $config['server']['http_user_agent'];
         $userAgent = new Zend_Http_UserAgent($config);
-        $device    = $userAgent->getDevice();
+        $device = $userAgent->getDevice();
 
         $this->assertEquals('desktop', $userAgent->getBrowserType());
         $this->assertEquals('Internet Explorer', $device->getFeature('browser_name'));
@@ -120,7 +120,7 @@ class Zend_Http_UserAgentTest extends PHPUnit_Framework_TestCase
         $config['user_agent'] = 'Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420.1 (KHTML, like Gecko) Version/3.0 Mobile/4A102 Safari/419.3';
 
         $userAgent = new Zend_Http_UserAgent($config);
-        $device    = $userAgent->getDevice();
+        $device = $userAgent->getDevice();
         $this->assertTrue($device instanceof Zend_Http_UserAgent_Mobile);
         $this->assertEquals('mobile', $userAgent->getBrowserType());
         $this->assertEquals('iPhone', $device->getFeature('mobile_browser'));
@@ -129,12 +129,12 @@ class Zend_Http_UserAgentTest extends PHPUnit_Framework_TestCase
 
     public function testUserAgentDefineStorage()
     {
-        $config = array(
-            'storage' => array('adapter' => 'NonPersistent'),
-            'server'  => $this->server,
-        );
-        $oUserAgent      = new Zend_Http_UserAgent($config);
-        $browser         = $oUserAgent->getUserAgent();
+        $config = [
+            'storage' => ['adapter' => 'NonPersistent'],
+            'server' => $this->server,
+        ];
+        $oUserAgent = new Zend_Http_UserAgent($config);
+        $browser = $oUserAgent->getUserAgent();
         $this->assertTrue(
             $oUserAgent->getStorage($browser) instanceof Zend_Http_UserAgent_Storage_NonPersistent
         );
@@ -143,7 +143,7 @@ class Zend_Http_UserAgentTest extends PHPUnit_Framework_TestCase
     public function testUserAgentFeatureAdapter()
     {
         $config = $this->config;
-        $config['mobile']['features']['path']      = __DIR__ . '/TestAsset/Device/Browser/Features/Adapter.php';
+        $config['mobile']['features']['path'] = __DIR__.'/TestAsset/Device/Browser/Features/Adapter.php';
         $config['mobile']['features']['classname'] = 'Device_Browser_Features_Adapter';
         $config['user_agent'] = 'Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleW1ebKit/420.1 (KHTML, like Gecko) Version/3.0 Mobile/4A102 Safari/419.3';
 
@@ -164,7 +164,7 @@ class Zend_Http_UserAgentTest extends PHPUnit_Framework_TestCase
 
     public function testSetDefaultConfigStorage()
     {
-        $config     = array('identification_sequence' => 'Test');
+        $config = ['identification_sequence' => 'Test'];
         $oUserAgent = new Zend_Http_UserAgent($config);
 
         $test = $oUserAgent->getConfig();
@@ -174,12 +174,12 @@ class Zend_Http_UserAgentTest extends PHPUnit_Framework_TestCase
 
     public function testSetDefaultConfigBoth()
     {
-        $config = array(
-            'identification_sequence'    => 'Test',
-            'storage' => array('adapter' => 'NonPersistent'),
-        );
+        $config = [
+            'identification_sequence' => 'Test',
+            'storage' => ['adapter' => 'NonPersistent'],
+        ];
         $oUserAgent = new Zend_Http_UserAgent($config);
-        $test       = $oUserAgent->getConfig();
+        $test = $oUserAgent->getConfig();
         $this->assertEquals('Test', $test['identification_sequence']);
         $this->assertEquals('NonPersistent', $test['storage']['adapter']);
     }
@@ -191,7 +191,7 @@ class Zend_Http_UserAgentTest extends PHPUnit_Framework_TestCase
             $this->markTestSkipped('Depends on browscap support');
         }
         $this->config['browser_type'] = 'MoBiLe';
-        $this->config['user_agent']   = 'Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleW1ebKit/420.1 (KHTML, like Gecko) Version/3.0 Mobile/4A102 Safari/419.3';
+        $this->config['user_agent'] = 'Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleW1ebKit/420.1 (KHTML, like Gecko) Version/3.0 Mobile/4A102 Safari/419.3';
         $userAgent = new Zend_Http_UserAgent($this->config);
         $className = get_class($userAgent->getDevice());
         $this->assertEquals('Zend_Http_UserAgent_Mobile', $className);
@@ -199,9 +199,9 @@ class Zend_Http_UserAgentTest extends PHPUnit_Framework_TestCase
 
     public function testDeviceClassNameMatchesDesktopTypeIfUserAgentDoesNotMatch()
     {
-        $config = array(
+        $config = [
             'browser_type' => 'MoBiLe',
-        );
+        ];
         $userAgent = new Zend_Http_UserAgent($config);
         $className = get_class($userAgent->getDevice());
         $this->assertEquals('Zend_Http_UserAgent_Desktop', $className);
@@ -265,27 +265,27 @@ class Zend_Http_UserAgentTest extends PHPUnit_Framework_TestCase
     public function testCanSetConfigWithConfigObject()
     {
         $config = new Zend_Config($this->config);
-        $ua     = new Zend_Http_UserAgent($config);
-        $test   = $ua->getConfig();
+        $ua = new Zend_Http_UserAgent($config);
+        $test = $ua->getConfig();
         $this->assertEquals($config->storage->adapter, $test['storage']['adapter']);
     }
 
     public function testCanSetConfigWithTraversableObject()
     {
         $config = new ArrayObject($this->config);
-        $ua     = new Zend_Http_UserAgent($config);
-        $test   = $ua->getConfig();
+        $ua = new Zend_Http_UserAgent($config);
+        $test = $ua->getConfig();
         $this->assertEquals($config['storage'], $test['storage']);
     }
 
     public function invalidConfigs()
     {
-        return array(
-            array(true),
-            array(1),
-            array(1.0),
-            array(new stdClass),
-        );
+        return [
+            [true],
+            [1],
+            [1.0],
+            [new stdClass()],
+        ];
     }
 
     /**
@@ -300,14 +300,14 @@ class Zend_Http_UserAgentTest extends PHPUnit_Framework_TestCase
     public function testAllowsSettingServerWithArrayObject()
     {
         $server = new ArrayObject($this->server);
-        $ua = new Zend_Http_UserAgent(array('server' => $server));
+        $ua = new Zend_Http_UserAgent(['server' => $server]);
         $this->assertEquals($server['os'], $ua->getServerValue('os'));
     }
 
     public function testAllowsSettingServerWithTraversableObject()
     {
         $server = new ArrayIterator($this->server);
-        $ua = new Zend_Http_UserAgent(array('server' => $server));
+        $ua = new Zend_Http_UserAgent(['server' => $server]);
         $this->assertEquals($this->server['os'], $ua->getServerValue('os'));
     }
 
@@ -317,7 +317,7 @@ class Zend_Http_UserAgentTest extends PHPUnit_Framework_TestCase
     public function testSettingServerWithInvalidTypeRaisesException($arg)
     {
         $this->setExpectedException('Zend_Http_UserAgent_Exception', 'array or object implementing Traversable');
-        $ua = new Zend_Http_UserAgent(array('server' => $arg));
+        $ua = new Zend_Http_UserAgent(['server' => $arg]);
     }
 
     public function testAllowsSettingPluginLoaderUsingClassname()
@@ -339,12 +339,12 @@ class Zend_Http_UserAgentTest extends PHPUnit_Framework_TestCase
 
     public function invalidLoaders()
     {
-        return array(
-            array(true),
-            array(1),
-            array(1.0),
-            array(array()),
-        );
+        return [
+            [true],
+            [1],
+            [1.0],
+            [[]],
+        ];
     }
 
     /**
@@ -373,10 +373,10 @@ class Zend_Http_UserAgentTest extends PHPUnit_Framework_TestCase
 
     public function testAllowsSpecifyingPluginLoadersViaConfiguration()
     {
-        $this->config['plugin_loader'] = array(
-            'device'  => 'Zend_Http_TestAsset_TestPluginLoader',
+        $this->config['plugin_loader'] = [
+            'device' => 'Zend_Http_TestAsset_TestPluginLoader',
             'storage' => 'Zend_Http_TestAsset_TestPluginLoader',
-        );
+        ];
         $ua = new Zend_Http_UserAgent($this->config);
         $deviceLoader = $ua->getPluginLoader('device');
         $this->assertTrue(
@@ -391,68 +391,68 @@ class Zend_Http_UserAgentTest extends PHPUnit_Framework_TestCase
 
     public function testAllowsSpecifyingCustomDeviceClassesViaConfiguration()
     {
-        $this->config['desktop'] = array(
-            'device' => array(
+        $this->config['desktop'] = [
+            'device' => [
                 'classname' => 'Zend_Http_TestAsset_DesktopDevice',
-            ),
-        );
+            ],
+        ];
         $this->config['user_agent'] = 'desktop';
-        $ua     = new Zend_Http_UserAgent($this->config);
+        $ua = new Zend_Http_UserAgent($this->config);
         $device = $ua->getDevice();
         $this->assertTrue($device instanceof Zend_Http_TestAsset_DesktopDevice);
     }
 
     public function testAllowsSpecifyingCustomDeviceViaPrefixPath()
     {
-        $this->config['desktop'] = array(
-            'device' => array(
-                'path'   => __DIR__ . '/TestAsset/Device',
+        $this->config['desktop'] = [
+            'device' => [
+                'path' => __DIR__.'/TestAsset/Device',
                 'prefix' => 'Zend_Http_TestAsset_Device',
-            ),
-        );
+            ],
+        ];
         $this->config['user_agent'] = 'desktop';
-        $ua     = new Zend_Http_UserAgent($this->config);
+        $ua = new Zend_Http_UserAgent($this->config);
         $device = $ua->getDevice();
         $this->assertTrue($device instanceof Zend_Http_TestAsset_Device_Desktop);
     }
 
     public function testShouldRaiseExceptionOnInvalidDeviceClass()
     {
-        $this->config['desktop'] = array(
-            'device' => array(
+        $this->config['desktop'] = [
+            'device' => [
                 'classname' => 'Zend_Http_TestAsset_InvalidDevice',
-            ),
-        );
+            ],
+        ];
         $this->config['user_agent'] = 'desktop';
 
-        $ua     = new Zend_Http_UserAgent($this->config);
+        $ua = new Zend_Http_UserAgent($this->config);
         $this->setExpectedException('Zend_Http_UserAgent_Exception', 'Zend_Http_UserAgent_Device');
         $ua->getDevice();
     }
 
     public function testStorageContainsSerializedUserAgent()
     {
-        $this->config['desktop'] = array(
-            'device' => array(
+        $this->config['desktop'] = [
+            'device' => [
                 'classname' => 'Zend_Http_TestAsset_DesktopDevice',
-            ),
-        );
+            ],
+        ];
         $this->config['user_agent'] = 'desktop';
-        $ua         = new Zend_Http_UserAgent($this->config);
+        $ua = new Zend_Http_UserAgent($this->config);
 
         // prime storage by retrieving device
-        $device     = $ua->getDevice();
-        $storage    = $ua->getStorage();
+        $device = $ua->getDevice();
+        $storage = $ua->getStorage();
         $serialized = $storage->read();
 
-        $test       = unserialize($serialized);
+        $test = unserialize($serialized);
         $this->assertEquals($ua->getBrowserType(), $test['browser_type']);
         $this->assertEquals($ua->getConfig(), $test['config']);
         $this->assertEquals('Zend_Http_TestAsset_DesktopDevice', $test['device_class']);
         $this->assertEquals($ua->getUserAgent(), $test['user_agent']);
         $this->assertEquals($ua->getHttpAccept(), $test['http_accept']);
 
-        $test   = unserialize($test['device']);
+        $test = unserialize($test['device']);
         $this->assertEquals($device->getAllFeatures(), $test['_aFeatures']);
         $this->assertEquals($device->getBrowser(), $test['_browser']);
         $this->assertEquals($device->getBrowserVersion(), $test['_browserVersion']);
@@ -464,8 +464,8 @@ class Zend_Http_UserAgentTest extends PHPUnit_Framework_TestCase
     {
         $this->config['storage']['adapter'] = 'Zend_Http_TestAsset_PopulatedStorage';
         $this->config['user_agent'] = 'desktop';
-        $ua         = new Zend_Http_UserAgent($this->config);
-        $storage    = $ua->getStorage();
+        $ua = new Zend_Http_UserAgent($this->config);
+        $storage = $ua->getStorage();
         $this->assertTrue($storage instanceof Zend_Http_TestAsset_PopulatedStorage);
         $device = $ua->getDevice();
         $this->assertTrue($device instanceof Zend_Http_TestAsset_DesktopDevice);
@@ -473,17 +473,17 @@ class Zend_Http_UserAgentTest extends PHPUnit_Framework_TestCase
 
     public function testCanClearStorage()
     {
-        $this->config['desktop'] = array(
-            'device' => array(
+        $this->config['desktop'] = [
+            'device' => [
                 'classname' => 'Zend_Http_TestAsset_DesktopDevice',
-            ),
-        );
+            ],
+        ];
         $this->config['user_agent'] = 'desktop';
-        $ua         = new Zend_Http_UserAgent($this->config);
+        $ua = new Zend_Http_UserAgent($this->config);
 
         // Prime storage by retrieving device
-        $device     = $ua->getDevice();
-        $storage    = $ua->getStorage();
+        $device = $ua->getDevice();
+        $storage = $ua->getStorage();
         $this->assertTrue($storage instanceof Zend_Http_UserAgent_Storage);
         $this->assertFalse($storage->isEmpty());
         $ua->clearStorage();
@@ -494,7 +494,7 @@ class Zend_Http_UserAgentTest extends PHPUnit_Framework_TestCase
     {
         $config = $this->config;
         $userAgent = new Zend_Http_UserAgent($config);
-        $device    = $userAgent->getDevice();
+        $device = $userAgent->getDevice();
 
         $this->setExpectedException('Zend_Http_UserAgent_Exception', 'immutable');
         $userAgent->setServerValue('HTTP_ACCEPT', 'application/json');
@@ -504,7 +504,7 @@ class Zend_Http_UserAgentTest extends PHPUnit_Framework_TestCase
     {
         $config = $this->config;
         $userAgent = new Zend_Http_UserAgent($config);
-        $device    = $userAgent->getDevice();
+        $device = $userAgent->getDevice();
 
         $this->setExpectedException('Zend_Http_UserAgent_Exception', 'immutable');
         $userAgent->setBrowserType('mobile');
@@ -514,7 +514,7 @@ class Zend_Http_UserAgentTest extends PHPUnit_Framework_TestCase
     {
         $config = $this->config;
         $userAgent = new Zend_Http_UserAgent($config);
-        $device    = $userAgent->getDevice();
+        $device = $userAgent->getDevice();
 
         $this->setExpectedException('Zend_Http_UserAgent_Exception', 'immutable');
         $userAgent->setHttpAccept('application/json');
@@ -524,7 +524,7 @@ class Zend_Http_UserAgentTest extends PHPUnit_Framework_TestCase
     {
         $config = $this->config;
         $userAgent = new Zend_Http_UserAgent($config);
-        $device    = $userAgent->getDevice();
+        $device = $userAgent->getDevice();
 
         $this->setExpectedException('Zend_Http_UserAgent_Exception', 'immutable');
         $userAgent->setUserAgent('userAgentTest');
@@ -534,7 +534,7 @@ class Zend_Http_UserAgentTest extends PHPUnit_Framework_TestCase
     {
         $config = $this->config;
         $userAgent = new Zend_Http_UserAgent($config);
-        $device    = $userAgent->getDevice();
+        $device = $userAgent->getDevice();
 
         $this->setExpectedException('Zend_Http_UserAgent_Exception', 'immutable');
         $userAgent->setStorage(new Zend_Http_UserAgent_Storage_NonPersistent());
@@ -544,12 +544,12 @@ class Zend_Http_UserAgentTest extends PHPUnit_Framework_TestCase
     {
         $config = $this->config;
         $config['storage']['adapter'] = 'Session';
-        $config['storage']['options'] = array(
+        $config['storage']['options'] = [
             'browser_type' => 'foobar',
-            'member'       => 'data',
-        );
+            'member' => 'data',
+        ];
         $userAgent = new Zend_Http_UserAgent($config);
-        $storage   = $userAgent->getStorage();
+        $storage = $userAgent->getStorage();
         $this->assertEquals('.foobar', $storage->getNamespace());
         $this->assertEquals('data', $storage->getMember());
     }
@@ -559,12 +559,12 @@ class Zend_Http_UserAgentTest extends PHPUnit_Framework_TestCase
      */
     public function testAGroupDefinedAndSerialized()
     {
-        $config    = $this->config;
+        $config = $this->config;
         $userAgent = new Zend_Http_UserAgent($config);
-        $device    = $userAgent->getDevice();
+        $device = $userAgent->getDevice();
 
         $userAgent = unserialize(serialize($userAgent));
-        $device    = $userAgent->getDevice();
+        $device = $userAgent->getDevice();
         $groups = $device->getAllGroups();
     }
 
@@ -573,7 +573,7 @@ class Zend_Http_UserAgentTest extends PHPUnit_Framework_TestCase
      */
     public function testDontDieOnSerialization()
     {
-        $config    = $this->config;
+        $config = $this->config;
         $userAgent = new Zend_Http_UserAgent($config);
 
         // If this code doesn't throw a fatal error the test passed.
