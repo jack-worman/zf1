@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Form_Decorator_FieldsetTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Form_Decorator_FieldsetTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Form_Decorator_FieldsetTest::main');
 }
 
 // require_once 'Zend/Form/Decorator/Fieldset.php';
@@ -32,13 +33,13 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 // require_once 'Zend/View.php';
 // require_once 'Zend/Form/SubForm.php';
 /**
- * Test class for Zend_Form_Decorator_Fieldset
+ * Test class for Zend_Form_Decorator_Fieldset.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Form
  */
 #[AllowDynamicProperties]
@@ -51,8 +52,7 @@ class Zend_Form_Decorator_FieldsetTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Decorator_FieldsetTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Form_Decorator_FieldsetTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -80,7 +80,8 @@ class Zend_Form_Decorator_FieldsetTest extends PHPUnit_Framework_TestCase
     public function getView()
     {
         $view = new Zend_View();
-        $view->addHelperPath(__DIR__ . '/../../../../library/Zend/View/Helper');
+        $view->addHelperPath(__DIR__.'/../../../../library/Zend/View/Helper');
+
         return $view;
     }
 
@@ -261,6 +262,6 @@ class Zend_Form_Decorator_FieldsetTest extends PHPUnit_Framework_TestCase
 }
 
 // Call Zend_Form_Decorator_FieldsetTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Form_Decorator_FieldsetTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Form_Decorator_FieldsetTest::main') {
     Zend_Form_Decorator_FieldsetTest::main();
 }

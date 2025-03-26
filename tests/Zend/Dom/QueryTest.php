@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Dom_QueryTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dom_QueryTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Dom_QueryTest::main');
 }
 
 /** Zend_Dom_Query */
@@ -32,10 +33,10 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * Test class for Zend_Dom_Query.
  *
  * @category   Zend
- * @package    Zend_Dom
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Dom
  */
 #[AllowDynamicProperties]
@@ -50,7 +51,7 @@ class Zend_Dom_QueryTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dom_QueryTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Dom_QueryTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -78,8 +79,9 @@ class Zend_Dom_QueryTest extends PHPUnit_Framework_TestCase
     public function getHtml()
     {
         if (null === $this->html) {
-            $this->html  = file_get_contents(__DIR__ . '/_files/sample.xhtml');
+            $this->html = file_get_contents(__DIR__.'/_files/sample.xhtml');
         }
+
         return $this->html;
     }
 
@@ -100,7 +102,7 @@ class Zend_Dom_QueryTest extends PHPUnit_Framework_TestCase
 
     public function testConstructorShouldAcceptDocumentString()
     {
-        $html  = $this->getHtml();
+        $html = $this->getHtml();
         $query = new Zend_Dom_Query($html);
         $this->assertSame($html, $query->getDocument());
     }
@@ -112,14 +114,14 @@ class Zend_Dom_QueryTest extends PHPUnit_Framework_TestCase
 
     public function testDocShouldBeNullByEmptyStringConstructor()
     {
-        $emptyStr = "";
+        $emptyStr = '';
         $query = new Zend_Dom_Query($emptyStr);
         $this->assertNull($this->query->getDocument());
     }
 
     public function testDocShouldBeNullByEmptyStringSet()
     {
-        $emptyStr = "";
+        $emptyStr = '';
         $this->query->setDocument($emptyStr);
         $this->assertNull($this->query->getDocument());
     }
@@ -160,7 +162,7 @@ class Zend_Dom_QueryTest extends PHPUnit_Framework_TestCase
 
     public function testQueryingInvalidDocumentShouldThrowException()
     {
-        set_error_handler(array($this, 'handleError'));
+        set_error_handler([$this, 'handleError']);
         $this->query->setDocumentXml('some bogus string');
         try {
             $this->query->query('.foo');
@@ -182,8 +184,8 @@ class Zend_Dom_QueryTest extends PHPUnit_Framework_TestCase
     public function testResultShouldIndicateNumberOfFoundNodes()
     {
         $this->loadHtml();
-        $result  = $this->query->query('.foo');
-        $message = 'Xpath: ' . $result->getXpathQuery() . "\n";
+        $result = $this->query->query('.foo');
+        $message = 'Xpath: '.$result->getXpathQuery()."\n";
         $this->assertEquals(3, count($result), $message);
     }
 
@@ -255,7 +257,7 @@ EOF;
      */
     public function testLoadingDocumentWithErrorsShouldNotRaisePhpErrors()
     {
-        $file = file_get_contents(__DIR__ . '/_files/bad-sample.html');
+        $file = file_get_contents(__DIR__.'/_files/bad-sample.html');
         $this->query->setDocument($file);
         $this->query->query('p');
         $errors = $this->query->getDocumentErrors();
@@ -326,7 +328,7 @@ EOF;
         $this->query->setDocument($this->getHtml(), 'utf-8');
         $test = $this->query->query('.foo');
         $this->assertTrue($test instanceof Zend_Dom_Query_Result);
-        $doc  = $test->getDocument();
+        $doc = $test->getDocument();
         $this->assertTrue($doc instanceof DOMDocument);
         $this->assertEquals('utf-8', $doc->encoding);
     }
@@ -380,12 +382,12 @@ EOB;
 </results>
 XML;
         $this->query->setDocumentXml($xml);
-        $this->setExpectedException("Zend_Dom_Exception");
+        $this->setExpectedException('Zend_Dom_Exception');
         $this->query->queryXpath('/');
     }
 }
 
 // Call Zend_Dom_QueryTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dom_QueryTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Dom_QueryTest::main') {
     Zend_Dom_QueryTest::main();
 }

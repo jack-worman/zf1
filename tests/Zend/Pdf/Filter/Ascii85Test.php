@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,23 +14,22 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Pdf
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
- * Zend_Pdf_Filter_Ascii85
+ * Zend_Pdf_Filter_Ascii85.
  */
 // require_once 'Zend/Pdf/Filter/Ascii85.php';
 
 /**
  * @category   Zend
- * @package    Zend_Pdf
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Pdf
  */
 #[AllowDynamicProperties]
@@ -37,7 +37,7 @@ class Zend_Pdf_Filter_Ascii85Test extends PHPUnit_Framework_TestCase
 {
     public function testStringDivisibleBy4Encode()
     {
-        $decodedContents = "Lorem ipsum dolor sit amet orci aliquam.";
+        $decodedContents = 'Lorem ipsum dolor sit amet orci aliquam.';
         $encodedContents = Zend_Pdf_Filter_Ascii85::encode($decodedContents);
         $testString = "9Q+r_D'3P3F*2=BA8c:&EZfF;F<G\"/ATT&5Earf+@;KXtF^],>~>";
         $this->assertEquals($encodedContents, $testString);
@@ -55,15 +55,15 @@ class Zend_Pdf_Filter_Ascii85Test extends PHPUnit_Framework_TestCase
     {
         $decodedContents = 'Lorem ipsum dolor sit amet, consectetur cras amet.';
         $encodedContents = Zend_Pdf_Filter_Ascii85::encode($decodedContents);
-        $testString  = "9Q+r_D'3P3F*2=BA8c:&EZfF;F<G\"/ATTIG@rH7+ARfgn"
-                     . "FEMUH@rc\"!+CT+uF=m~>";
+        $testString = "9Q+r_D'3P3F*2=BA8c:&EZfF;F<G\"/ATTIG@rH7+ARfgn"
+                     .'FEMUH@rc"!+CT+uF=m~>';
         $this->assertEquals($encodedContents, $testString);
     }
 
     public function testStringNotDivisibleBy4Decode()
     {
         $encodedContents = "9Q+r_D'3P3F*2=BA8c:&EZfF;F<G\"/ATTIG@rH7+ARfgn"
-                         . "FEMUH@rc\"!+CT+uF=m~>";
+                         .'FEMUH@rc"!+CT+uF=m~>';
         $decodedContents = Zend_Pdf_Filter_Ascii85::decode($encodedContents);
         $testString = 'Lorem ipsum dolor sit amet, consectetur cras amet.';
         $this->assertEquals($decodedContents, $testString);

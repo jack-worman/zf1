@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Oauth
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -24,17 +25,16 @@
 
 /**
  * @category   Zend
- * @package    Zend_Oauth
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Oauth
  * @group      Zend_Oauth_Signature
  */
 #[AllowDynamicProperties]
 class Zend_Oauth_Signature_AbstractTest extends PHPUnit_Framework_TestCase
 {
-
     public function testNormaliseHttpBaseSignatureUrl()
     {
         $sign = new Zend_Oauth_Signature_Plaintext('foo');
@@ -76,5 +76,4 @@ class Zend_Oauth_Signature_AbstractTest extends PHPUnit_Framework_TestCase
         $url = 'https://www.example.com/request?foo=bar';
         $this->assertEquals('https://www.example.com/request', $sign->normaliseBaseSignatureUrl($url));
     }
-
 }

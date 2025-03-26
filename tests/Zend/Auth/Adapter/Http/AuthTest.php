@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,120 +14,114 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Auth
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
-
 /**
- * PHPUnit_Framework_TestCase
+ * PHPUnit_Framework_TestCase.
  */
-
 
 /**
  * @see Zend_Auth_Adapter_Http
  */
 // require_once 'Zend/Auth/Adapter/Http.php';
 
-
 /**
  * @see Zend_Auth_Adapter_Http_Resolver_File
  */
 // require_once 'Zend/Auth/Adapter/Http/Resolver/File.php';
-
 
 /**
  * @see Zend_Controller_Request_Http
  */
 // require_once 'Zend/Controller/Request/Http.php';
 
-
 /**
  * @see Zend_Controller_Response_Http
  */
 // require_once 'Zend/Controller/Response/Http.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_Auth
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Auth
  */
 #[AllowDynamicProperties]
 class Zend_Auth_Adapter_Http_AuthTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Path to test files
+     * Path to test files.
      *
      * @var string
      */
     protected $_filesPath;
 
     /**
-     * HTTP Basic configuration
+     * HTTP Basic configuration.
      *
      * @var array
      */
     protected $_basicConfig;
 
     /**
-     * HTTP Digest configuration
+     * HTTP Digest configuration.
      *
      * @var array
      */
     protected $_digestConfig;
 
     /**
-     * HTTP Basic Digest configuration
+     * HTTP Basic Digest configuration.
      *
      * @var array
      */
     protected $_bothConfig;
 
     /**
-     * File resolver setup against with HTTP Basic auth file
+     * File resolver setup against with HTTP Basic auth file.
      *
      * @var Zend_Auth_Adapter_Http_Resolver_File
      */
     protected $_basicResolver;
 
     /**
-     * File resolver setup against with HTTP Digest auth file
+     * File resolver setup against with HTTP Digest auth file.
      *
      * @var Zend_Auth_Adapter_Http_Resolver_File
      */
     protected $_digestResolver;
 
     /**
-     * Set up test configuration
+     * Set up test configuration.
      */
     public function __construct()
     {
-        $this->_filesPath      = __DIR__ . '/_files';
-        $this->_basicResolver  = new Zend_Auth_Adapter_Http_Resolver_File("{$this->_filesPath}/htbasic.1");
+        $this->_filesPath = __DIR__.'/_files';
+        $this->_basicResolver = new Zend_Auth_Adapter_Http_Resolver_File("{$this->_filesPath}/htbasic.1");
         $this->_digestResolver = new Zend_Auth_Adapter_Http_Resolver_File("{$this->_filesPath}/htdigest.3");
-        $this->_basicConfig    = array(
+        $this->_basicConfig = [
             'accept_schemes' => 'basic',
-            'realm'          => 'Test Realm'
-        );
-        $this->_digestConfig   = array(
+            'realm' => 'Test Realm',
+        ];
+        $this->_digestConfig = [
             'accept_schemes' => 'digest',
-            'realm'          => 'Test Realm',
+            'realm' => 'Test Realm',
             'digest_domains' => '/ http://localhost/',
-            'nonce_timeout'  => 300
-        );
-        $this->_bothConfig     = array(
+            'nonce_timeout' => 300,
+        ];
+        $this->_bothConfig = [
             'accept_schemes' => 'basic digest',
-            'realm'          => 'Test Realm',
+            'realm' => 'Test Realm',
             'digest_domains' => '/ http://localhost/',
-            'nonce_timeout'  => 300
-        );
+            'nonce_timeout' => 300,
+        ];
     }
 
     public function testBasicChallenge()
@@ -136,7 +131,7 @@ class Zend_Auth_Adapter_Http_AuthTest extends PHPUnit_Framework_TestCase
         // false result.
 
         // The expected Basic Www-Authenticate header value
-        $basic = 'Basic realm="' . $this->_bothConfig['realm'] . '"';
+        $basic = 'Basic realm="'.$this->_bothConfig['realm'].'"';
 
         $data = $this->_doAuth('', 'basic');
         $this->_checkUnauthorized($data, $basic);
@@ -165,7 +160,7 @@ class Zend_Auth_Adapter_Http_AuthTest extends PHPUnit_Framework_TestCase
         extract($data); // $result, $status, $headers
 
         // The expected Www-Authenticate header values
-        $basic  = 'Basic realm="' . $this->_bothConfig['realm'] . '"';
+        $basic = 'Basic realm="'.$this->_bothConfig['realm'].'"';
         $digest = $this->_digestChallenge();
 
         // Make sure the result is false
@@ -178,7 +173,7 @@ class Zend_Auth_Adapter_Http_AuthTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Www-Authenticate', $headers[1]['name']);
 
         // Check to see if the expected challenges match the actual
-        $this->assertEquals($basic,  $headers[0]['value']);
+        $this->assertEquals($basic, $headers[0]['value']);
         $this->assertEquals($digest, $headers[1]['value']);
     }
 
@@ -186,7 +181,7 @@ class Zend_Auth_Adapter_Http_AuthTest extends PHPUnit_Framework_TestCase
     {
         // Attempt Basic Authentication with a valid username and password
 
-        $data = $this->_doAuth('Basic ' . base64_encode('Bryce:ThisIsNotMyPassword'), 'basic');
+        $data = $this->_doAuth('Basic '.base64_encode('Bryce:ThisIsNotMyPassword'), 'basic');
         $this->_checkOK($data);
     }
 
@@ -196,9 +191,9 @@ class Zend_Auth_Adapter_Http_AuthTest extends PHPUnit_Framework_TestCase
         // a bad username or password.
 
         // The expected Basic Www-Authenticate header value
-        $basic = 'Basic realm="' . $this->_basicConfig['realm'] . '"';
+        $basic = 'Basic realm="'.$this->_basicConfig['realm'].'"';
 
-        $data = $this->_doAuth('Basic ' . base64_encode("Bad\tChars:In:Creds"), 'basic');
+        $data = $this->_doAuth('Basic '.base64_encode("Bad\tChars:In:Creds"), 'basic');
         $this->_checkUnauthorized($data, $basic);
     }
 
@@ -208,9 +203,9 @@ class Zend_Auth_Adapter_Http_AuthTest extends PHPUnit_Framework_TestCase
         // password
 
         // The expected Basic Www-Authenticate header value
-        $basic = 'Basic realm="' . $this->_basicConfig['realm'] . '"';
+        $basic = 'Basic realm="'.$this->_basicConfig['realm'].'"';
 
-        $data = $this->_doAuth('Basic ' . base64_encode('Nobody:NotValid'), 'basic');
+        $data = $this->_doAuth('Basic '.base64_encode('Nobody:NotValid'), 'basic');
         $this->_checkUnauthorized($data, $basic);
     }
 
@@ -220,9 +215,9 @@ class Zend_Auth_Adapter_Http_AuthTest extends PHPUnit_Framework_TestCase
         // password
 
         // The expected Basic Www-Authenticate header value
-        $basic = 'Basic realm="' . $this->_basicConfig['realm'] . '"';
+        $basic = 'Basic realm="'.$this->_basicConfig['realm'].'"';
 
-        $data = $this->_doAuth('Basic ' . base64_encode('Bryce:Invalid'), 'basic');
+        $data = $this->_doAuth('Basic '.base64_encode('Bryce:Invalid'), 'basic');
         $this->_checkUnauthorized($data, $basic);
     }
 
@@ -303,7 +298,7 @@ class Zend_Auth_Adapter_Http_AuthTest extends PHPUnit_Framework_TestCase
         // Sending a request for an invalid authentication scheme should result
         // in a 400 Bad Request response.
 
-        $data = $this->_doAuth('Invalid ' . base64_encode('Nobody:NotValid'), 'basic');
+        $data = $this->_doAuth('Invalid '.base64_encode('Nobody:NotValid'), 'basic');
         $this->_checkBadRequest($data);
     }
 
@@ -325,15 +320,16 @@ class Zend_Auth_Adapter_Http_AuthTest extends PHPUnit_Framework_TestCase
     /**
      * Acts like a client sending the given Authenticate header value.
      *
-     * @param  string $clientHeader Authenticate header value
-     * @param  string $scheme       Which authentication scheme to use
+     * @param string $clientHeader Authenticate header value
+     * @param string $scheme       Which authentication scheme to use
+     *
      * @return array Containing the result, response headers, and the status
      */
     protected function _doAuth($clientHeader, $scheme)
     {
         // Set up stub request and response objects
-        $request  = $this->getMock('Zend_Controller_Request_Http');
-        $response = new Zend_Controller_Response_Http;
+        $request = $this->getMock('Zend_Controller_Request_Http');
+        $response = new Zend_Controller_Response_Http();
         $response->setHttpResponseCode(200);
         $response->headersSentThrowsException = false;
 
@@ -374,69 +370,71 @@ class Zend_Auth_Adapter_Http_AuthTest extends PHPUnit_Framework_TestCase
         $a->setResponse($response);
         $result = $a->authenticate();
 
-        $return = array(
-            'result'  => $result,
-            'status'  => $response->getHttpResponseCode(),
-            'headers' => $response->getHeaders()
-        );
+        $return = [
+            'result' => $result,
+            'status' => $response->getHttpResponseCode(),
+            'headers' => $response->getHeaders(),
+        ];
+
         return $return;
     }
 
     /**
-     * Constructs a local version of the digest challenge we expect to receive
+     * Constructs a local version of the digest challenge we expect to receive.
      *
      * @return string
      */
     protected function _digestChallenge()
     {
         $timeout = ceil(time() / 300) * 300;
-        $nonce   = md5((string) $timeout . ':PHPUnit:Zend_Auth_Adapter_Http');
-        $opaque  = md5((string) 'Opaque Data:Zend_Auth_Adapter_Http');
+        $nonce = md5((string) $timeout.':PHPUnit:Zend_Auth_Adapter_Http');
+        $opaque = md5((string) 'Opaque Data:Zend_Auth_Adapter_Http');
         $wwwauth = 'Digest '
-                 . 'realm="' . $this->_digestConfig['realm'] . '", '
-                 . 'domain="' . $this->_digestConfig['digest_domains'] . '", '
-                 . 'nonce="' . $nonce . '", '
-                 . 'opaque="' . $opaque . '", '
-                 . 'algorithm="MD5", '
-                 . 'qop="auth"';
+                 .'realm="'.$this->_digestConfig['realm'].'", '
+                 .'domain="'.$this->_digestConfig['digest_domains'].'", '
+                 .'nonce="'.$nonce.'", '
+                 .'opaque="'.$opaque.'", '
+                 .'algorithm="MD5", '
+                 .'qop="auth"';
 
         return $wwwauth;
     }
 
     /**
-     * Constructs a client digest Authorization header
+     * Constructs a client digest Authorization header.
      *
      * @return string
      */
     protected function _digestReply($user, $pass)
     {
-        $nc       = '00000001';
-        $timeout  = ceil(time() / 300) * 300;
-        $nonce    = md5((string) $timeout . ':PHPUnit:Zend_Auth_Adapter_Http');
-        $opaque   = md5((string) 'Opaque Data:Zend_Auth_Adapter_Http');
-        $cnonce   = md5((string) 'cnonce');
-        $response = md5((string) md5((string) $user . ':' . $this->_digestConfig['realm'] . ':' . $pass) . ":$nonce:$nc:$cnonce:auth:"
-                  . md5((string) 'GET:/'));
+        $nc = '00000001';
+        $timeout = ceil(time() / 300) * 300;
+        $nonce = md5((string) $timeout.':PHPUnit:Zend_Auth_Adapter_Http');
+        $opaque = md5((string) 'Opaque Data:Zend_Auth_Adapter_Http');
+        $cnonce = md5((string) 'cnonce');
+        $response = md5((string) md5((string) $user.':'.$this->_digestConfig['realm'].':'.$pass).":$nonce:$nc:$cnonce:auth:"
+                  .md5((string) 'GET:/'));
         $cauth = 'Digest '
-               . 'username="Bryce", '
-               . 'realm="' . $this->_digestConfig['realm'] . '", '
-               . 'nonce="' . $nonce . '", '
-               . 'uri="/", '
-               . 'response="' . $response . '", '
-               . 'algorithm="MD5", '
-               . 'cnonce="' . $cnonce . '", '
-               . 'opaque="' . $opaque . '", '
-               . 'qop="auth", '
-               . 'nc=' . $nc;
+               .'username="Bryce", '
+               .'realm="'.$this->_digestConfig['realm'].'", '
+               .'nonce="'.$nonce.'", '
+               .'uri="/", '
+               .'response="'.$response.'", '
+               .'algorithm="MD5", '
+               .'cnonce="'.$cnonce.'", '
+               .'opaque="'.$opaque.'", '
+               .'qop="auth", '
+               .'nc='.$nc;
 
         return $cauth;
     }
 
     /**
-     * Checks for an expected 401 Unauthorized response
+     * Checks for an expected 401 Unauthorized response.
      *
-     * @param  array  $data     Authentication results
-     * @param  string $expected Expected Www-Authenticate header value
+     * @param array  $data     Authentication results
+     * @param string $expected Expected Www-Authenticate header value
+     *
      * @return void
      */
     protected function _checkUnauthorized($data, $expected)
@@ -456,9 +454,10 @@ class Zend_Auth_Adapter_Http_AuthTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Checks for an expected 200 OK response
+     * Checks for an expected 200 OK response.
      *
-     * @param  array $data Authentication results
+     * @param array $data Authentication results
+     *
      * @return void
      */
     protected function _checkOK($data)
@@ -474,9 +473,10 @@ class Zend_Auth_Adapter_Http_AuthTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Checks for an expected 400 Bad Request response
+     * Checks for an expected 400 Bad Request response.
      *
-     * @param  array $data Authentication results
+     * @param array $data Authentication results
+     *
      * @return void
      */
     protected function _checkBadRequest($data)

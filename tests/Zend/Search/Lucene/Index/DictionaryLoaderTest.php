@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,35 +14,34 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Search_Lucene_Storage_Directory_Filesystem
+ * Zend_Search_Lucene_Storage_Directory_Filesystem.
  */
 // require_once 'Zend/Search/Lucene/Storage/Directory/Filesystem.php';
 
 /**
- * Zend_Search_Lucene_Index_SegmentInfo
+ * Zend_Search_Lucene_Index_SegmentInfo.
  */
 // require_once 'Zend/Search/Lucene/Index/SegmentInfo.php';
 
 /**
- * Zend_Search_Lucene_Index_DictionaryLoader
+ * Zend_Search_Lucene_Index_DictionaryLoader.
  */
 // require_once 'Zend/Search/Lucene/Index/DictionaryLoader.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Search_Lucene
  */
 #[AllowDynamicProperties]
@@ -49,14 +49,13 @@ class Zend_Search_Lucene_Index_DictionaryLoaderTest extends PHPUnit_Framework_Te
 {
     public function testCreate()
     {
-        $directory = new Zend_Search_Lucene_Storage_Directory_Filesystem(__DIR__ . '/_source/_files');
+        $directory = new Zend_Search_Lucene_Storage_Directory_Filesystem(__DIR__.'/_source/_files');
 
         $stiFile = $directory->getFileObject('_1.sti');
         $stiFileData = $stiFile->readBytes($directory->fileLength('_1.sti'));
 
         // Load dictionary index data
         list($termDictionary, $termDictionaryInfos) = unserialize($stiFileData);
-
 
         $segmentInfo = new Zend_Search_Lucene_Index_SegmentInfo($directory, '_1', 2);
         $tiiFile = $segmentInfo->openCompoundFile('.tii');
@@ -70,4 +69,3 @@ class Zend_Search_Lucene_Index_DictionaryLoaderTest extends PHPUnit_Framework_Te
         $this->assertTrue($termDictionaryInfos == $loadedTermDictionaryInfos);
     }
 }
-

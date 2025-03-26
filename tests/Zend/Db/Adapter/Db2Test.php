@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -32,27 +33,26 @@ require_once 'Zend/Db/Adapter/TestCommon.php';
 
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Db
  * @group      Zend_Db_Adapter
  */
 #[AllowDynamicProperties]
 class Zend_Db_Adapter_Db2Test extends Zend_Db_Adapter_TestCommon
 {
-
-    protected $_numericDataTypes = array(
-        Zend_Db::INT_TYPE    => Zend_Db::INT_TYPE,
+    protected $_numericDataTypes = [
+        Zend_Db::INT_TYPE => Zend_Db::INT_TYPE,
         Zend_Db::BIGINT_TYPE => Zend_Db::BIGINT_TYPE,
-        Zend_Db::FLOAT_TYPE  => Zend_Db::FLOAT_TYPE,
-        'INTEGER'            => Zend_Db::INT_TYPE,
-        'SMALLINT'           => Zend_Db::INT_TYPE,
-        'BIGINT'             => Zend_Db::BIGINT_TYPE,
-        'DECIMAL'            => Zend_Db::FLOAT_TYPE,
-        'NUMERIC'            => Zend_Db::FLOAT_TYPE
-    );
+        Zend_Db::FLOAT_TYPE => Zend_Db::FLOAT_TYPE,
+        'INTEGER' => Zend_Db::INT_TYPE,
+        'SMALLINT' => Zend_Db::INT_TYPE,
+        'BIGINT' => Zend_Db::BIGINT_TYPE,
+        'DECIMAL' => Zend_Db::FLOAT_TYPE,
+        'NUMERIC' => Zend_Db::FLOAT_TYPE,
+    ];
 
     public function testAdapterDescribeTablePrimaryAuto()
     {
@@ -67,36 +67,36 @@ class Zend_Db_Adapter_Db2Test extends Zend_Db_Adapter_TestCommon
     {
         $desc = $this->_db->describeTable('zfproducts');
 
-        $this->assertEquals('zfproducts',        $desc['product_name']['TABLE_NAME'], 'Expected table name to be zfproducts');
-        $this->assertEquals('product_name',      $desc['product_name']['COLUMN_NAME'], 'Expected column name to be product_name');
-        $this->assertEquals(2,                   $desc['product_name']['COLUMN_POSITION'], 'Expected column position to be 2');
-        $this->assertRegExp('/varchar/i',        $desc['product_name']['DATA_TYPE'], 'Expected data type to be VARCHAR');
-        $this->assertEquals('',                  $desc['product_name']['DEFAULT'], 'Expected default to be empty string');
-        $this->assertTrue(                       $desc['product_name']['NULLABLE'], 'Expected product_name to be nullable');
+        $this->assertEquals('zfproducts', $desc['product_name']['TABLE_NAME'], 'Expected table name to be zfproducts');
+        $this->assertEquals('product_name', $desc['product_name']['COLUMN_NAME'], 'Expected column name to be product_name');
+        $this->assertEquals(2, $desc['product_name']['COLUMN_POSITION'], 'Expected column position to be 2');
+        $this->assertRegExp('/varchar/i', $desc['product_name']['DATA_TYPE'], 'Expected data type to be VARCHAR');
+        $this->assertEquals('', $desc['product_name']['DEFAULT'], 'Expected default to be empty string');
+        $this->assertTrue($desc['product_name']['NULLABLE'], 'Expected product_name to be nullable');
         if (!$this->_db->isI5()) {
-            $this->assertEquals(0,                   $desc['product_name']['SCALE'], 'Expected scale to be 0');
+            $this->assertEquals(0, $desc['product_name']['SCALE'], 'Expected scale to be 0');
         } else {
-            $this->assertNull(                   $desc['product_name']['SCALE'], 'Expected scale to be 0');
+            $this->assertNull($desc['product_name']['SCALE'], 'Expected scale to be 0');
         }
-        $this->assertEquals(0,                   $desc['product_name']['PRECISION'], 'Expected precision to be 0');
-        $this->assertFalse(                      $desc['product_name']['PRIMARY'], 'Expected product_name not to be a primary key');
-        $this->assertNull(                       $desc['product_name']['PRIMARY_POSITION'], 'Expected product_name to return null for PRIMARY_POSITION');
-        $this->assertFalse(                      $desc['product_name']['IDENTITY'], 'Expected product_name to return false for IDENTITY');
+        $this->assertEquals(0, $desc['product_name']['PRECISION'], 'Expected precision to be 0');
+        $this->assertFalse($desc['product_name']['PRIMARY'], 'Expected product_name not to be a primary key');
+        $this->assertNull($desc['product_name']['PRIMARY_POSITION'], 'Expected product_name to return null for PRIMARY_POSITION');
+        $this->assertFalse($desc['product_name']['IDENTITY'], 'Expected product_name to return false for IDENTITY');
     }
 
     public function testAdapterDescribeTablePrimaryKeyColumn()
     {
         $desc = $this->_db->describeTable('zfproducts');
 
-        $this->assertEquals('zfproducts',        $desc['product_id']['TABLE_NAME'], 'Expected table name to be zfproducts');
-        $this->assertEquals('product_id',        $desc['product_id']['COLUMN_NAME'], 'Expected column name to be product_id');
-        $this->assertEquals(1,                   $desc['product_id']['COLUMN_POSITION'], 'Expected column position to be 1');
-        $this->assertEquals('',                  $desc['product_id']['DEFAULT'], 'Expected default to be empty string');
-        $this->assertFalse(                      $desc['product_id']['NULLABLE'], 'Expected product_id not to be nullable');
-        $this->assertEquals(0,                   $desc['product_id']['SCALE'], 'Expected scale to be 0');
-        $this->assertEquals(0,                   $desc['product_id']['PRECISION'], 'Expected precision to be 0');
-        $this->assertTrue(                       $desc['product_id']['PRIMARY'], 'Expected product_id to be a primary key');
-        $this->assertEquals(1,                   $desc['product_id']['PRIMARY_POSITION']);
+        $this->assertEquals('zfproducts', $desc['product_id']['TABLE_NAME'], 'Expected table name to be zfproducts');
+        $this->assertEquals('product_id', $desc['product_id']['COLUMN_NAME'], 'Expected column name to be product_id');
+        $this->assertEquals(1, $desc['product_id']['COLUMN_POSITION'], 'Expected column position to be 1');
+        $this->assertEquals('', $desc['product_id']['DEFAULT'], 'Expected default to be empty string');
+        $this->assertFalse($desc['product_id']['NULLABLE'], 'Expected product_id not to be nullable');
+        $this->assertEquals(0, $desc['product_id']['SCALE'], 'Expected scale to be 0');
+        $this->assertEquals(0, $desc['product_id']['PRECISION'], 'Expected precision to be 0');
+        $this->assertTrue($desc['product_id']['PRIMARY'], 'Expected product_id to be a primary key');
+        $this->assertEquals(1, $desc['product_id']['PRIMARY_POSITION']);
     }
 
     /**
@@ -228,7 +228,7 @@ class Zend_Db_Adapter_Db2Test extends Zend_Db_Adapter_TestCommon
     }
 
     /**
-     * OVERRIDDEN COMMON TEST CASE
+     * OVERRIDDEN COMMON TEST CASE.
      *
      * This test case will produce a value with two internally set values,
      * autocommit = 1
@@ -246,28 +246,28 @@ class Zend_Db_Adapter_Db2Test extends Zend_Db_Adapter_TestCommon
 
         $config = $db->getConfig();
 
-        $expectedValue = array(
+        $expectedValue = [
             'autocommit' => 1,
-            'DB2_ATTR_CASE' => 0
-            );
+            'DB2_ATTR_CASE' => 0,
+        ];
         $this->assertEquals($expectedValue, $config['driver_options']);
     }
 
     /**
-     * OVERRIDDEN COMMON TEST CASE
+     * OVERRIDDEN COMMON TEST CASE.
      *
      * Test that quote() takes an array and returns
      * an imploded string of comma-separated, quoted elements.
      */
     public function testAdapterQuoteArray()
     {
-        $array = array("it's", 'all', 'right!');
+        $array = ["it's", 'all', 'right!'];
         $value = $this->_db->quote($array);
         $this->assertEquals("'it''s', 'all', 'right!'", $value);
     }
 
     /**
-     * OVERRRIDEEN COMMON TEST CASE
+     * OVERRRIDEEN COMMON TEST CASE.
      *
      * test that quote() escapes a double-quote
      * character in a string.
@@ -280,7 +280,7 @@ class Zend_Db_Adapter_Db2Test extends Zend_Db_Adapter_TestCommon
     }
 
     /**
-     * OVERRIDDEN FROM COMMON TEST CASE
+     * OVERRIDDEN FROM COMMON TEST CASE.
      *
      * test that quote() escapes a single-quote
      * character in a string.
@@ -293,7 +293,7 @@ class Zend_Db_Adapter_Db2Test extends Zend_Db_Adapter_TestCommon
     }
 
     /**
-     * OVERRIDDEN FROM COMMON TEST CASE
+     * OVERRIDDEN FROM COMMON TEST CASE.
      *
      * test that quoteInto() escapes a double-quote
      * character in a string.
@@ -307,7 +307,7 @@ class Zend_Db_Adapter_Db2Test extends Zend_Db_Adapter_TestCommon
     }
 
     /**
-     * OVERRIDDEN FROM COMMON TEST CASE
+     * OVERRIDDEN FROM COMMON TEST CASE.
      *
      * test that quoteInto() escapes a single-quote
      * character in a string.
@@ -344,6 +344,7 @@ class Zend_Db_Adapter_Db2Test extends Zend_Db_Adapter_TestCommon
             $schema = $this->_util->getSchema();
         } else {
             $this->markTestSkipped('No valid schema to test against.');
+
             return;
         }
 
@@ -355,7 +356,7 @@ class Zend_Db_Adapter_Db2Test extends Zend_Db_Adapter_TestCommon
         $this->assertGreaterThan(0, $tableCountNoSchema, 'Adapter without schema should produce large result');
         $this->assertGreaterThan(0, $tableCountSchema, 'Adapter with schema should produce large result');
 
-        $this->assertTrue(($tableCountNoSchema > $tableCountSchema), 'Table count with schema provided should be less than without.');
+        $this->assertTrue($tableCountNoSchema > $tableCountSchema, 'Table count with schema provided should be less than without.');
     }
 
     /**
@@ -363,12 +364,11 @@ class Zend_Db_Adapter_Db2Test extends Zend_Db_Adapter_TestCommon
      */
     public function testLongQueryWithTextField()
     {
-        $this->markTestSkipped($this->getDriver() . ' does not have TEXT field type');
+        $this->markTestSkipped($this->getDriver().' does not have TEXT field type');
     }
 
     public function getDriver()
     {
         return 'Db2';
     }
-
 }

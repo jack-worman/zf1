@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Dojo_Form_FormTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_Form_FormTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Dojo_Form_FormTest::main');
 }
 
 /** Zend_Dojo_Form */
@@ -32,13 +33,13 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 // require_once 'Zend/View.php';
 
 /**
- * Test class for Zend_Dojo_Form and Zend_Dojo_Form_DisplayGroup
+ * Test class for Zend_Dojo_Form and Zend_Dojo_Form_DisplayGroup.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Dojo
  * @group      Zend_Dojo_Form
  */
@@ -52,7 +53,7 @@ class Zend_Dojo_Form_FormTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_Form_FormTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Dojo_Form_FormTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -66,7 +67,7 @@ class Zend_Dojo_Form_FormTest extends PHPUnit_Framework_TestCase
     {
         $this->form = new Zend_Dojo_Form();
         $this->form->addElement('TextBox', 'foo')
-                   ->addDisplayGroup(array('foo'), 'dg')
+                   ->addDisplayGroup(['foo'], 'dg')
                    ->setView(new Zend_View());
     }
 
@@ -116,18 +117,18 @@ class Zend_Dojo_Form_FormTest extends PHPUnit_Framework_TestCase
 
     public function testShouldRegisterDojoViewHelperPath()
     {
-        $view   = $this->form->getView();
+        $view = $this->form->getView();
         $loader = $view->getPluginLoader('helper');
-        $paths  = $loader->getPaths('Zend_Dojo_View_Helper');
+        $paths = $loader->getPaths('Zend_Dojo_View_Helper');
         $this->assertTrue(is_array($paths));
     }
 
     public function testDisplayGroupShouldRegisterDojoViewHelperPath()
     {
         $this->form->dg->setView(new Zend_View());
-        $view   = $this->form->dg->getView();
+        $view = $this->form->dg->getView();
         $loader = $view->getPluginLoader('helper');
-        $paths  = $loader->getPaths('Zend_Dojo_View_Helper');
+        $paths = $loader->getPaths('Zend_Dojo_View_Helper');
         $this->assertTrue(is_array($paths));
     }
 
@@ -142,6 +143,6 @@ class Zend_Dojo_Form_FormTest extends PHPUnit_Framework_TestCase
 }
 
 // Call Zend_Dojo_Form_FormTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dojo_Form_FormTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Dojo_Form_FormTest::main') {
     Zend_Dojo_Form_FormTest::main();
 }

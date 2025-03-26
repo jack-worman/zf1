@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Config
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -24,7 +25,6 @@
  * @see Zend_Auth
  */
 // require_once 'Zend/Auth.php';
-
 
 /**
  * @see Zend_Auth_Adapter_Interface
@@ -41,20 +41,19 @@
  */
 // Zend_Session::start();
 
-
 /**
  * @category   Zend
- * @package    Zend_Auth
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Auth
  */
 #[AllowDynamicProperties]
 class Zend_AuthTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Ensures that the Singleton pattern is implemented properly
+     * Ensures that the Singleton pattern is implemented properly.
      *
      * @return void
      */
@@ -65,7 +64,7 @@ class Zend_AuthTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that getStorage() returns Zend_Auth_Storage_Session
+     * Ensures that getStorage() returns Zend_Auth_Storage_Session.
      *
      * @return void
      */
@@ -75,7 +74,7 @@ class Zend_AuthTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures expected behavior for successful authentication
+     * Ensures expected behavior for successful authentication.
      *
      * @return void
      */
@@ -89,15 +88,15 @@ class Zend_AuthTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures expected behavior for clearIdentity()
+     * Ensures expected behavior for clearIdentity().
      *
      * @return void
      */
     public function testClearIdentity()
     {
         // workaround for Undefined variable: _SESSION at Zend\Session\Abstract.php:122
-        if(!isset($_SESSION)) {
-            $_SESSION = array();
+        if (!isset($_SESSION)) {
+            $_SESSION = [];
         }
 
         $auth = Zend_Auth::getInstance();
@@ -106,7 +105,6 @@ class Zend_AuthTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $auth->getIdentity());
     }
 }
-
 
 #[AllowDynamicProperties]
 class Zend_AuthTest_Success_Adapter implements Zend_Auth_Adapter_Interface

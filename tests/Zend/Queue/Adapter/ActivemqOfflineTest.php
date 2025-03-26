@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Queue
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id: ActivemqTest.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
 
@@ -26,10 +27,10 @@
 
 /**
  * @category   Zend
- * @package    Zend_Queue
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Queue
  */
 #[AllowDynamicProperties]
@@ -40,19 +41,19 @@ class Zend_Queue_Adapter_ActivemqOfflineTest extends PHPUnit_Framework_TestCase
      */
     public function testSubscribesOncePerQueue()
     {
-        $stompClient = new StompClientMock;
+        $stompClient = new StompClientMock();
         $options['driverOptions']['stompClient'] = $stompClient;
         $adapter = new Zend_Queue_Adapter_Activemq($options);
 
-        $queue = new Zend_Queue('array', array('name' => 'foo'));
+        $queue = new Zend_Queue('array', ['name' => 'foo']);
         $adapter->receive(null, null, $queue);
         $adapter->receive(null, null, $queue);
 
         // iterate through mock StompClient and ensure SUBSCRIBE is only sent once per queue
         $subscribes = 0;
         foreach ($stompClient->frameStack as $frame) {
-            if ($frame->getCommand() === 'SUBSCRIBE') {
-                $subscribes++;
+            if ('SUBSCRIBE' === $frame->getCommand()) {
+                ++$subscribes;
             }
         }
 
@@ -63,20 +64,25 @@ class Zend_Queue_Adapter_ActivemqOfflineTest extends PHPUnit_Framework_TestCase
 #[AllowDynamicProperties]
 class StompClientMock extends Zend_Queue_Stomp_Client
 {
-    public $frameStack = array();
-    public $responseStack = array();
+    public $frameStack = [];
+    public $responseStack = [];
 
-    public function __construct() {
+    public function __construct()
+    {
         // spoof a successful connection in the response stack
-        $frame = new Zend_Queue_Stomp_Frame;
+        $frame = new Zend_Queue_Stomp_Frame();
         $frame->setCommand('CONNECTED');
         $this->responseStack[] = $frame;
     }
-    public function __destruct() {}
+
+    public function __destruct()
+    {
+    }
 
     public function send(Zend_Queue_Stomp_FrameInterface $frame)
     {
         $this->frameStack[] = $frame;
+
         return $this;
     }
 
@@ -92,6 +98,6 @@ class StompClientMock extends Zend_Queue_Stomp_Client
 
     public function createFrame()
     {
-        return new Zend_Queue_Stomp_Frame;
+        return new Zend_Queue_Stomp_Frame();
     }
 }

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,61 +14,57 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /**
  * @see Zend_Db_Adapter_Pdo_TestCommon
  */
 require_once 'Zend/Db/Adapter/Pdo/TestCommon.php';
 
-
 /**
  * @see Zend_Db_Adapter_Pdo_Mysql
  */
 // require_once 'Zend/Db/Adapter/Pdo/Mysql.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Db
  * @group      Zend_Db_Adapter
  */
 #[AllowDynamicProperties]
 class Zend_Db_Adapter_Pdo_MysqlTest extends Zend_Db_Adapter_Pdo_TestCommon
 {
-
-    protected $_numericDataTypes = array(
-        Zend_Db::INT_TYPE    => Zend_Db::INT_TYPE,
+    protected $_numericDataTypes = [
+        Zend_Db::INT_TYPE => Zend_Db::INT_TYPE,
         Zend_Db::BIGINT_TYPE => Zend_Db::BIGINT_TYPE,
-        Zend_Db::FLOAT_TYPE  => Zend_Db::FLOAT_TYPE,
-        'INT'                => Zend_Db::INT_TYPE,
-        'INTEGER'            => Zend_Db::INT_TYPE,
-        'MEDIUMINT'          => Zend_Db::INT_TYPE,
-        'SMALLINT'           => Zend_Db::INT_TYPE,
-        'TINYINT'            => Zend_Db::INT_TYPE,
-        'BIGINT'             => Zend_Db::BIGINT_TYPE,
-        'SERIAL'             => Zend_Db::BIGINT_TYPE,
-        'DEC'                => Zend_Db::FLOAT_TYPE,
-        'DECIMAL'            => Zend_Db::FLOAT_TYPE,
-        'DOUBLE'             => Zend_Db::FLOAT_TYPE,
-        'DOUBLE PRECISION'   => Zend_Db::FLOAT_TYPE,
-        'FIXED'              => Zend_Db::FLOAT_TYPE,
-        'FLOAT'              => Zend_Db::FLOAT_TYPE
-    );
+        Zend_Db::FLOAT_TYPE => Zend_Db::FLOAT_TYPE,
+        'INT' => Zend_Db::INT_TYPE,
+        'INTEGER' => Zend_Db::INT_TYPE,
+        'MEDIUMINT' => Zend_Db::INT_TYPE,
+        'SMALLINT' => Zend_Db::INT_TYPE,
+        'TINYINT' => Zend_Db::INT_TYPE,
+        'BIGINT' => Zend_Db::BIGINT_TYPE,
+        'SERIAL' => Zend_Db::BIGINT_TYPE,
+        'DEC' => Zend_Db::FLOAT_TYPE,
+        'DECIMAL' => Zend_Db::FLOAT_TYPE,
+        'DOUBLE' => Zend_Db::FLOAT_TYPE,
+        'DOUBLE PRECISION' => Zend_Db::FLOAT_TYPE,
+        'FIXED' => Zend_Db::FLOAT_TYPE,
+        'FLOAT' => Zend_Db::FLOAT_TYPE,
+    ];
 
     /**
      * Test AUTO_QUOTE_IDENTIFIERS option
-     * Case: Zend_Db::AUTO_QUOTE_IDENTIFIERS = true
+     * Case: Zend_Db::AUTO_QUOTE_IDENTIFIERS = true.
      *
      * MySQL actually allows delimited identifiers to remain
      * case-insensitive, so this test overrides its parent.
@@ -76,9 +73,9 @@ class Zend_Db_Adapter_Pdo_MysqlTest extends Zend_Db_Adapter_Pdo_TestCommon
     {
         $params = $this->_util->getParams();
 
-        $params['options'] = array(
-            Zend_Db::AUTO_QUOTE_IDENTIFIERS => true
-        );
+        $params['options'] = [
+            Zend_Db::AUTO_QUOTE_IDENTIFIERS => true,
+        ];
         $db = Zend_Db::factory($this->getDriver(), $params);
         $db->getConnection();
 
@@ -104,31 +101,32 @@ class Zend_Db_Adapter_Pdo_MysqlTest extends Zend_Db_Adapter_Pdo_TestCommon
     }
 
     /**
-     * Ensures that driver_options are properly passed along to PDO
+     * Ensures that driver_options are properly passed along to PDO.
      *
      * @group ZF-285
+     *
      * @return void
      */
     public function testAdapterDriverOptions()
     {
         $params = $this->_util->getParams();
 
-        $params['driver_options'] = array(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true);
+        $params['driver_options'] = [PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true];
 
         $db = Zend_Db::factory($this->getDriver(), $params);
 
-        $this->assertTrue((boolean) $db->getConnection()->getAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY));
+        $this->assertTrue((bool) $db->getConnection()->getAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY));
 
-        $params['driver_options'] = array(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => false);
+        $params['driver_options'] = [PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => false];
 
         $db = Zend_Db::factory($this->getDriver(), $params);
 
-        $this->assertFalse((boolean) $db->getConnection()->getAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY));
+        $this->assertFalse((bool) $db->getConnection()->getAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY));
     }
 
     public function testAdapterInsertSequence()
     {
-        $this->markTestSkipped($this->getDriver() . ' does not support sequences');
+        $this->markTestSkipped($this->getDriver().' does not support sequences');
     }
 
     /**
@@ -138,8 +136,8 @@ class Zend_Db_Adapter_Pdo_MysqlTest extends Zend_Db_Adapter_Pdo_TestCommon
      */
     public function testAdapterQuoteColumnAs()
     {
-        $string = "foo";
-        $alias = "bar";
+        $string = 'foo';
+        $alias = 'bar';
         $value = $this->_db->quoteColumnAs($string, $alias);
         $this->assertEquals('`foo` AS `bar`', $value);
     }
@@ -173,7 +171,7 @@ class Zend_Db_Adapter_Pdo_MysqlTest extends Zend_Db_Adapter_Pdo_TestCommon
      */
     public function testAdapterQuoteIdentifierArray()
     {
-        $array = array('foo', 'bar');
+        $array = ['foo', 'bar'];
         $value = $this->_db->quoteIdentifier($array);
         $this->assertEquals('`foo`.`bar`', $value);
     }
@@ -186,7 +184,7 @@ class Zend_Db_Adapter_Pdo_MysqlTest extends Zend_Db_Adapter_Pdo_TestCommon
     public function testAdapterQuoteIdentifierArrayDbExpr()
     {
         $expr = new Zend_Db_Expr('*');
-        $array = array('foo', $expr);
+        $array = ['foo', $expr];
         $value = $this->_db->quoteIdentifier($array);
         $this->assertEquals('`foo`.*', $value);
     }
@@ -239,14 +237,14 @@ class Zend_Db_Adapter_Pdo_MysqlTest extends Zend_Db_Adapter_Pdo_TestCommon
     }
 
     /**
-     * test that describeTable() returns correct types
-     * @group ZF-3624
+     * test that describeTable() returns correct types.
      *
+     * @group ZF-3624
      */
     public function testAdapterDescribeTableAttributeColumnFloat()
     {
         $desc = $this->_db->describeTable('zfprice');
-        $this->assertEquals('zfprice',  $desc['price']['TABLE_NAME']);
+        $this->assertEquals('zfprice', $desc['price']['TABLE_NAME']);
         $this->assertRegExp('/float/i', $desc['price']['DATA_TYPE']);
     }
 
@@ -257,16 +255,17 @@ class Zend_Db_Adapter_Pdo_MysqlTest extends Zend_Db_Adapter_Pdo_TestCommon
      */
     public function testAdapterQuoteTableAs()
     {
-        $string = "foo";
-        $alias = "bar";
+        $string = 'foo';
+        $alias = 'bar';
         $value = $this->_db->quoteTableAs($string, $alias);
         $this->assertEquals('`foo` AS `bar`', $value);
     }
 
     /**
-     * Ensures that the character sequence ":0'" is handled properly
+     * Ensures that the character sequence ":0'" is handled properly.
      *
-     * @link   http://framework.zend.com/issues/browse/ZF-2059
+     * @see   http://framework.zend.com/issues/browse/ZF-2059
+     *
      * @return void
      */
     public function testZF2059()
@@ -276,15 +275,16 @@ class Zend_Db_Adapter_Pdo_MysqlTest extends Zend_Db_Adapter_Pdo_TestCommon
 
     /**
      * Ensures that the PDO Buffered Query does not throw the error
-     * 2014 General error
+     * 2014 General error.
      *
-     * @link   http://framework.zend.com/issues/browse/ZF-2101
+     * @see   http://framework.zend.com/issues/browse/ZF-2101
+     *
      * @return void
      */
     public function testZF2101()
     {
         $params = $this->_util->getParams();
-        $params['driver_options'] = array(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true);
+        $params['driver_options'] = [PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true];
         $db = Zend_Db::factory($this->getDriver(), $params);
 
         // Set default bound value
@@ -313,17 +313,17 @@ class Zend_Db_Adapter_Pdo_MysqlTest extends Zend_Db_Adapter_Pdo_TestCommon
      */
     public function testAdapterIncludesCharsetInsideGeneratedPdoDsn()
     {
-        $adapter = new ZendTest_Db_Adapter_Pdo_Mysql(array('dbname' => 'foo', 'charset' => 'XYZ', 'username' => 'bar', 'password' => 'foo'));
+        $adapter = new ZendTest_Db_Adapter_Pdo_Mysql(['dbname' => 'foo', 'charset' => 'XYZ', 'username' => 'bar', 'password' => 'foo']);
         $this->assertEquals('mysql:dbname=foo;charset=XYZ', $adapter->_dsn());
     }
 
     /**
-     * Test that quote() does not alter binary data
+     * Test that quote() does not alter binary data.
      */
     public function testBinaryQuoteWithNulls()
     {
-        $binary = pack("xxx");
-        $value  = $this->_db->quote($binary);
+        $binary = pack('xxx');
+        $value = $this->_db->quote($binary);
         $this->assertEquals('\'\0\0\0\'', $value);
     }
 
@@ -331,7 +331,6 @@ class Zend_Db_Adapter_Pdo_MysqlTest extends Zend_Db_Adapter_Pdo_TestCommon
     {
         return 'Pdo_Mysql';
     }
-
 }
 
 #[AllowDynamicProperties]

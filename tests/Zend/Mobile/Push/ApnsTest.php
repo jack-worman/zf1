@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Mobile
- * @subpackage Push
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -25,10 +26,10 @@
 
 /**
  * @category   Zend
- * @package    Zend_Mobile
- * @subpackage Push
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Mobile
  * @group      Zend_Mobile_Push
  * @group      Zend_Mobile_Push_Apns
@@ -36,7 +37,6 @@
 #[AllowDynamicProperties]
 class Zend_Mobile_Push_ApnsTest extends PHPUnit_Framework_TestCase
 {
-
     public function setUp()
     {
         $this->apns = new Zend_Mobile_Push_Test_ApnsProxy();
@@ -48,11 +48,11 @@ class Zend_Mobile_Push_ApnsTest extends PHPUnit_Framework_TestCase
         $this->message->setToken('AF0123DE');
         $this->message->setId(time());
         $this->message->setAlert('bar');
-        $this->apns->setCertificate(__DIR__ . '/certificate.pem');
+        $this->apns->setCertificate(__DIR__.'/certificate.pem');
     }
 
     /**
-     * @expectedException Zend_Mobile_Push_Exception
+     * @expectedException \Zend_Mobile_Push_Exception
      */
     public function testConnectThrowsExceptionOnInvalidEnvironment()
     {
@@ -60,7 +60,7 @@ class Zend_Mobile_Push_ApnsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Mobile_Push_Exception
+     * @expectedException \Zend_Mobile_Push_Exception
      */
     public function testConnectThrowsExceptionOnMissingCertificate()
     {
@@ -68,15 +68,15 @@ class Zend_Mobile_Push_ApnsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Mobile_Push_Exception
+     * @expectedException \Zend_Mobile_Push_Exception
      */
     public function testSetCertificateThrowsExceptionOnNonString()
     {
-        $this->apns->setCertificate(array('foo'));
+        $this->apns->setCertificate(['foo']);
     }
 
     /**
-     * @expectedException Zend_Mobile_Push_Exception
+     * @expectedException \Zend_Mobile_Push_Exception
      */
     public function testSetCertificateThrowsExceptionOnMissingFile()
     {
@@ -85,16 +85,16 @@ class Zend_Mobile_Push_ApnsTest extends PHPUnit_Framework_TestCase
 
     public function testSetCertificateReturnsInstance()
     {
-        $ret = $this->apns->setCertificate(__DIR__ . '/certificate.pem');
+        $ret = $this->apns->setCertificate(__DIR__.'/certificate.pem');
         $this->assertEquals($this->apns, $ret);
     }
 
     /**
-     * @expectedException Zend_Mobile_Push_Exception
+     * @expectedException \Zend_Mobile_Push_Exception
      */
     public function testSetCertificatePassphraseThrowsExceptionOnNonString()
     {
-        $this->apns->setCertificatePassphrase(array('foo'));
+        $this->apns->setCertificatePassphrase(['foo']);
     }
 
     public function testSetCertificatePassphraseReturnsInstance()
@@ -111,22 +111,22 @@ class Zend_Mobile_Push_ApnsTest extends PHPUnit_Framework_TestCase
 
     public function testConnectReturnsThis()
     {
-        $this->apns->setCertificate(__DIR__ . '/certificate.pem');
+        $this->apns->setCertificate(__DIR__.'/certificate.pem');
         $ret = $this->apns->connect();
         $this->assertEquals($this->apns, $ret);
     }
 
     /**
-     * @expectedException Zend_Mobile_Push_Exception
+     * @expectedException \Zend_Mobile_Push_Exception
      */
     public function testSendThrowsExceptionOnInvalidMessage()
     {
-        $this->apns->setCertificate(__DIR__ . '/certificate.pem');
+        $this->apns->setCertificate(__DIR__.'/certificate.pem');
         $this->apns->send($this->message);
     }
 
     /**
-     * @expectedException Zend_Mobile_Push_Exception_ServerUnavailable
+     * @expectedException \Zend_Mobile_Push_Exception_ServerUnavailable
      */
     public function testSendThrowsServerUnavailableExceptionOnFalseReturn()
     {
@@ -148,7 +148,7 @@ class Zend_Mobile_Push_ApnsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Mobile_Push_Exception
+     * @expectedException \Zend_Mobile_Push_Exception
      */
     public function testSendThrowsExceptionOnProcessingError()
     {
@@ -158,7 +158,7 @@ class Zend_Mobile_Push_ApnsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Mobile_Push_Exception_InvalidToken
+     * @expectedException \Zend_Mobile_Push_Exception_InvalidToken
      */
     public function testSendThrowsExceptionOnInvalidToken()
     {
@@ -168,7 +168,7 @@ class Zend_Mobile_Push_ApnsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Mobile_Push_Exception_InvalidTopic
+     * @expectedException \Zend_Mobile_Push_Exception_InvalidTopic
      */
     public function testSendThrowsExceptionOnInvalidTopic()
     {
@@ -178,7 +178,7 @@ class Zend_Mobile_Push_ApnsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Mobile_Push_Exception_InvalidPayload
+     * @expectedException \Zend_Mobile_Push_Exception_InvalidPayload
      */
     public function testSendThrowsExceptionOnInvalidPayload()
     {
@@ -188,7 +188,7 @@ class Zend_Mobile_Push_ApnsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Mobile_Push_Exception_InvalidToken
+     * @expectedException \Zend_Mobile_Push_Exception_InvalidToken
      */
     public function testSendThrowsExceptionOnInvalidToken2()
     {
@@ -198,7 +198,7 @@ class Zend_Mobile_Push_ApnsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Mobile_Push_Exception_InvalidTopic
+     * @expectedException \Zend_Mobile_Push_Exception_InvalidTopic
      */
     public function testSendThrowsExceptionOnInvalidTopic2()
     {
@@ -208,7 +208,7 @@ class Zend_Mobile_Push_ApnsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Mobile_Push_Exception_InvalidPayload
+     * @expectedException \Zend_Mobile_Push_Exception_InvalidPayload
      */
     public function testSendThrowsExceptionOnMessageTooBig()
     {
@@ -218,7 +218,7 @@ class Zend_Mobile_Push_ApnsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Mobile_Push_Exception_InvalidToken
+     * @expectedException \Zend_Mobile_Push_Exception_InvalidToken
      */
     public function testSendThrowsExceptionOnInvalidToken3()
     {

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,34 +26,32 @@
  */
 // require_once 'Zend/Filter/Digits.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Filter
  */
 #[AllowDynamicProperties]
 class Zend_Filter_DigitsTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_Filter_Digits object extended for checking whether Unicode PCRE is enabled
+     * Zend_Filter_Digits object extended for checking whether Unicode PCRE is enabled.
      *
      * @var Zend_Filter_Digits
      */
     protected $_filter;
 
     /**
-     * Is PCRE is compiled with UTF-8 and Unicode support
+     * Is PCRE is compiled with UTF-8 and Unicode support.
      *
-     * @var mixed
      **/
     protected static $_unicodeEnabled;
 
     /**
-     * Creates a new Zend_Filter_Digits object for each test method
+     * Creates a new Zend_Filter_Digits object for each test method.
      *
      * @return void
      */
@@ -65,7 +64,7 @@ class Zend_Filter_DigitsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that the filter follows expected behavior
+     * Ensures that the filter follows expected behavior.
      *
      * @return void
      */
@@ -81,23 +80,23 @@ class Zend_Filter_DigitsTest extends PHPUnit_Framework_TestCase
              * The third  contains various multibyte characters.
              * The last contains only singlebyte digits.
              */
-            $valuesExpected = array(
-                '1９2八3四８'     => '123',
-                'Ｃ 4.5B　6'      => '456',
+            $valuesExpected = [
+                '1９2八3四８' => '123',
+                'Ｃ 4.5B　6' => '456',
                 '9壱8＠7．6，5＃4' => '987654',
-                '789'              => '789'
-                );
+                '789' => '789',
+            ];
         } else {
             // POSIX named classes are not supported, use alternative 0-9 match
             // Or filter for the value without mbstring
-            $valuesExpected = array(
-                'abc123'  => '123',
+            $valuesExpected = [
+                'abc123' => '123',
                 'abc 123' => '123',
-                'abcxyz'  => '',
+                'abcxyz' => '',
                 'AZ@#4.3' => '43',
-                '1.23'    => '123',
-                '0x9f'    => '09'
-                );
+                '1.23' => '123',
+                '0x9f' => '09',
+            ];
         }
 
         foreach ($valuesExpected as $input => $output) {
@@ -105,7 +104,7 @@ class Zend_Filter_DigitsTest extends PHPUnit_Framework_TestCase
                 $output,
                 $result = $this->_filter->filter($input),
                 "Expected '$input' to filter to '$output', but received '$result' instead"
-                );
+            );
         }
     }
 }

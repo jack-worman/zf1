@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +14,14 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
-/**
+/*
  * This file defines configuration for running the unit tests for the Zend
  * Framework.  Some tests have dependencies to PHP extensions or databases
  * which may not necessary installed on the target system.  For these cases,
@@ -32,7 +34,7 @@
  * code repository.
  */
 
-/**
+/*
  * GENERAL SETTINGS
  *
  * OB_ENABLED should be enabled for some tests to check if all functionality
@@ -41,19 +43,19 @@
  */
 defined('TESTS_ZEND_OB_ENABLED') || define('TESTS_ZEND_OB_ENABLED', false);
 
-/**
+/*
  * Zend_Auth_Adapter_DbTable tests
  */
 defined('TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_ENABLED') || define('TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_ENABLED', false);
 defined('TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_DATABASE') || define('TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_DATABASE', ':memory:');
 
-/**
+/*
  * Zend_Auth_Adapter_Ldap online tests
  * (See also TESTS_ZEND_LDAP_* configuration constants below)
  */
 defined('TESTS_ZEND_AUTH_ADAPTER_LDAP_ONLINE_ENABLED') || define('TESTS_ZEND_AUTH_ADAPTER_LDAP_ONLINE_ENABLED', false);
 
-/**
+/*
  * Zend_Cache
  *
  * TESTS_ZEND_CACHE_SQLITE_ENABLED     => sqlite extension has to be enabled
@@ -81,7 +83,7 @@ defined('TESTS_ZEND_CACHE_LIBMEMCACHED_HOST') || define('TESTS_ZEND_CACHE_LIBMEM
 defined('TESTS_ZEND_CACHE_LIBMEMCACHED_PORT') || define('TESTS_ZEND_CACHE_LIBMEMCACHED_PORT', 11211);
 defined('TESTS_ZEND_CACHE_LIBMEMCACHED_WEIGHT') || define('TESTS_ZEND_CACHE_LIBMEMCACHED_WEIGHT', 1);
 
-/**
+/*
  * Zend_Controller
  *
  * TESTS_ZEND_CONTROLLER_DISPATCHER_OB => test disabling output buffering in
@@ -89,93 +91,93 @@ defined('TESTS_ZEND_CACHE_LIBMEMCACHED_WEIGHT') || define('TESTS_ZEND_CACHE_LIBM
  */
 defined('TESTS_ZEND_CONTROLLER_DISPATCHER_OB') || define('TESTS_ZEND_CONTROLLER_DISPATCHER_OB', false);
 
-/**
+/*
  * Zend_Db_Adapter_Pdo_Mysql and Zend_Db_Adapter_Mysqli
  *
  * There are separate properties to enable tests for the PDO_MYSQL adapter and
  * the native Mysqli adapters, but the other properties are shared between the
  * two MySQL-related Zend_Db adapters.
  */
-defined('TESTS_ZEND_DB_ADAPTER_PDO_MYSQL_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_PDO_MYSQL_ENABLED',  false);
-defined('TESTS_ZEND_DB_ADAPTER_MYSQLI_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_MYSQLI_ENABLED',  false);
+defined('TESTS_ZEND_DB_ADAPTER_PDO_MYSQL_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_PDO_MYSQL_ENABLED', false);
+defined('TESTS_ZEND_DB_ADAPTER_MYSQLI_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_MYSQLI_ENABLED', false);
 defined('TESTS_ZEND_DB_ADAPTER_MYSQL_HOSTNAME') || define('TESTS_ZEND_DB_ADAPTER_MYSQL_HOSTNAME', '127.0.0.1');
 defined('TESTS_ZEND_DB_ADAPTER_MYSQL_USERNAME') || define('TESTS_ZEND_DB_ADAPTER_MYSQL_USERNAME', null);
 defined('TESTS_ZEND_DB_ADAPTER_MYSQL_PASSWORD') || define('TESTS_ZEND_DB_ADAPTER_MYSQL_PASSWORD', null);
 defined('TESTS_ZEND_DB_ADAPTER_MYSQL_DATABASE') || define('TESTS_ZEND_DB_ADAPTER_MYSQL_DATABASE', 'test');
 defined('TESTS_ZEND_DB_ADAPTER_MYSQL_PORT') || define('TESTS_ZEND_DB_ADAPTER_MYSQL_PORT', 3306);
 
-/**
+/*
  * Zend_Db_Adapter_Pdo_Sqlite
  *
  * Username and password are irrelevant for SQLite.
  */
-defined('TESTS_ZEND_DB_ADAPTER_PDO_SQLITE_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_PDO_SQLITE_ENABLED',  false);
+defined('TESTS_ZEND_DB_ADAPTER_PDO_SQLITE_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_PDO_SQLITE_ENABLED', false);
 defined('TESTS_ZEND_DB_ADAPTER_PDO_SQLITE_DATABASE') || define('TESTS_ZEND_DB_ADAPTER_PDO_SQLITE_DATABASE', ':memory:');
 
-/**
+/*
  * Zend_Db_Adapter_Pdo_Mssql
  *
  * Note that you need to patch your ntwdblib.dll, the one that
  * comes with PHP does not work.  See user comments at
  * http://us2.php.net/manual/en/ref.mssql.php
  */
-defined('TESTS_ZEND_DB_ADAPTER_PDO_MSSQL_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_PDO_MSSQL_ENABLED',  false);
+defined('TESTS_ZEND_DB_ADAPTER_PDO_MSSQL_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_PDO_MSSQL_ENABLED', false);
 defined('TESTS_ZEND_DB_ADAPTER_PDO_MSSQL_HOSTNAME') || define('TESTS_ZEND_DB_ADAPTER_PDO_MSSQL_HOSTNAME', '127.0.0.1');
 defined('TESTS_ZEND_DB_ADAPTER_PDO_MSSQL_USERNAME') || define('TESTS_ZEND_DB_ADAPTER_PDO_MSSQL_USERNAME', null);
 defined('TESTS_ZEND_DB_ADAPTER_PDO_MSSQL_PASSWORD') || define('TESTS_ZEND_DB_ADAPTER_PDO_MSSQL_PASSWORD', null);
 defined('TESTS_ZEND_DB_ADAPTER_PDO_MSSQL_DATABASE') || define('TESTS_ZEND_DB_ADAPTER_PDO_MSSQL_DATABASE', 'test');
 defined('TESTS_ZEND_DB_ADAPTER_PDO_MSSQL_PDOTYPE') || define('TESTS_ZEND_DB_ADAPTER_PDO_MSSQL_PDOTYPE', 'dblib');
 
-/**
+/*
  * Zend_Db_Adapter_Pdo_Pgsql
  */
-defined('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_ENABLED',  false);
+defined('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_ENABLED', false);
 defined('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_HOSTNAME') || define('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_HOSTNAME', '127.0.0.1');
 defined('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_USERNAME') || define('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_USERNAME', null);
 defined('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_PASSWORD') || define('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_PASSWORD', null);
 defined('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_DATABASE') || define('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_DATABASE', 'postgres');
 
-/**
+/*
  * Zend_Db_Adapter_Oracle and Zend_Db_Adapter_Pdo_Oci
  *
  * There are separate properties to enable tests for the PDO_OCI adapter and
  * the native Oracle adapter, but the other properties are shared between the
  * two Oracle-related Zend_Db adapters.
  */
-defined('TESTS_ZEND_DB_ADAPTER_PDO_OCI_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_PDO_OCI_ENABLED',  false);
-defined('TESTS_ZEND_DB_ADAPTER_ORACLE_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_ORACLE_ENABLED',  false);
+defined('TESTS_ZEND_DB_ADAPTER_PDO_OCI_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_PDO_OCI_ENABLED', false);
+defined('TESTS_ZEND_DB_ADAPTER_ORACLE_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_ORACLE_ENABLED', false);
 defined('TESTS_ZEND_DB_ADAPTER_ORACLE_HOSTNAME') || define('TESTS_ZEND_DB_ADAPTER_ORACLE_HOSTNAME', '127.0.0.1');
 defined('TESTS_ZEND_DB_ADAPTER_ORACLE_USERNAME') || define('TESTS_ZEND_DB_ADAPTER_ORACLE_USERNAME', null);
 defined('TESTS_ZEND_DB_ADAPTER_ORACLE_PASSWORD') || define('TESTS_ZEND_DB_ADAPTER_ORACLE_PASSWORD', null);
-defined('TESTS_ZEND_DB_ADAPTER_ORACLE_SID') || define('TESTS_ZEND_DB_ADAPTER_ORACLE_SID',      'xe');
+defined('TESTS_ZEND_DB_ADAPTER_ORACLE_SID') || define('TESTS_ZEND_DB_ADAPTER_ORACLE_SID', 'xe');
 
-/**
+/*
  * Zend_Db_Adapter_Db2 and Zend_Db_Adapter_Pdo_Ibm
  * There are separate properties to enable tests for the PDO_IBM adapter and
  * the native DB2 adapter, but the other properties are shared between the
  * two related Zend_Db adapters.
  */
-defined('TESTS_ZEND_DB_ADAPTER_PDO_IBM_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_PDO_IBM_ENABLED',  false);
-defined('TESTS_ZEND_DB_ADAPTER_DB2_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_DB2_ENABLED',  false);
+defined('TESTS_ZEND_DB_ADAPTER_PDO_IBM_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_PDO_IBM_ENABLED', false);
+defined('TESTS_ZEND_DB_ADAPTER_DB2_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_DB2_ENABLED', false);
 defined('TESTS_ZEND_DB_ADAPTER_DB2_HOSTNAME') || define('TESTS_ZEND_DB_ADAPTER_DB2_HOSTNAME', '127.0.0.1');
 defined('TESTS_ZEND_DB_ADAPTER_DB2_PORT') || define('TESTS_ZEND_DB_ADAPTER_DB2_PORT', 50000);
 defined('TESTS_ZEND_DB_ADAPTER_DB2_USERNAME') || define('TESTS_ZEND_DB_ADAPTER_DB2_USERNAME', null);
 defined('TESTS_ZEND_DB_ADAPTER_DB2_PASSWORD') || define('TESTS_ZEND_DB_ADAPTER_DB2_PASSWORD', null);
 defined('TESTS_ZEND_DB_ADAPTER_DB2_DATABASE') || define('TESTS_ZEND_DB_ADAPTER_DB2_DATABASE', 'sample');
 
-/**
+/*
  * Zend_Db_Adapter_Sqlsrv
  * Note: Make sure that you create the "test" database and set a
  * username and password
  *
  */
-defined('TESTS_ZEND_DB_ADAPTER_SQLSRV_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_SQLSRV_ENABLED',  false);
+defined('TESTS_ZEND_DB_ADAPTER_SQLSRV_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_SQLSRV_ENABLED', false);
 defined('TESTS_ZEND_DB_ADAPTER_SQLSRV_HOSTNAME') || define('TESTS_ZEND_DB_ADAPTER_SQLSRV_HOSTNAME', 'localhost\SQLEXPRESS');
 defined('TESTS_ZEND_DB_ADAPTER_SQLSRV_USERNAME') || define('TESTS_ZEND_DB_ADAPTER_SQLSRV_USERNAME', null);
 defined('TESTS_ZEND_DB_ADAPTER_SQLSRV_PASSWORD') || define('TESTS_ZEND_DB_ADAPTER_SQLSRV_PASSWORD', null);
 defined('TESTS_ZEND_DB_ADAPTER_SQLSRV_DATABASE') || define('TESTS_ZEND_DB_ADAPTER_SQLSRV_DATABASE', 'test');
 
-/**
+/*
  * Zend_Http_Client tests
  *
  * To enable the dynamic Zend_Http_Client tests, you will need to symbolically
@@ -185,7 +187,7 @@ defined('TESTS_ZEND_DB_ADAPTER_SQLSRV_DATABASE') || define('TESTS_ZEND_DB_ADAPTE
  */
 defined('TESTS_ZEND_HTTP_CLIENT_BASEURI') || define('TESTS_ZEND_HTTP_CLIENT_BASEURI', false);
 
-/**
+/*
  * Zend_Http_Client_Proxy tests
  *
  * HTTP proxy to be used for testing the Proxy adapter. Set to a string of
@@ -195,7 +197,7 @@ defined('TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY') || define('TESTS_ZEND_HTTP_CLIENT_H
 defined('TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY_USER') || define('TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY_USER', '');
 defined('TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY_PASS') || define('TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY_PASS', '');
 
-/**
+/*
  * Zend_Http_UserAgent tests
  *
  * Location of WURFL library and config file, for testing mobile device
@@ -204,20 +206,20 @@ defined('TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY_PASS') || define('TESTS_ZEND_HTTP_CLI
 defined('TESTS_ZEND_HTTP_USERAGENT_WURFL_LIB_DIR') || define('TESTS_ZEND_HTTP_USERAGENT_WURFL_LIB_DIR', false);
 defined('TESTS_ZEND_HTTP_USERAGENT_WURFL_CONFIG_FILE') || define('TESTS_ZEND_HTTP_USERAGENT_WURFL_CONFIG_FILE', false);
 
-/**
+/*
  * Location of DeviceAtlas library and data file, for testing mobile device
  * detection against DeviceAtlas
  */
 defined('TESTS_ZEND_HTTP_USERAGENT_DEVICEATLAS_LIB_DIR') || define('TESTS_ZEND_HTTP_USERAGENT_DEVICEATLAS_LIB_DIR', false);
 defined('TESTS_ZEND_HTTP_USERAGENT_DEVICEATLAS_DATA_FILE') || define('TESTS_ZEND_HTTP_USERAGENT_DEVICEATLAS_DATA_FILE', false);
 
-/**
+/*
  * Location of TeraWurfl library and data file, for testing mobile device
  * detection against TeraWurfl
  */
 defined('TESTS_ZEND_HTTP_USERAGENT_TERAWURFL_LIB_DIR') || define('TESTS_ZEND_HTTP_USERAGENT_TERAWURFL_LIB_DIR', false);
 
-/**
+/*
  * Zend_Loader_Autoloader multi-version support tests
  *
  * ENABLED:      whether or not to run the multi-version tests
@@ -252,7 +254,7 @@ defined('TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_LATEST_MAJOR') || define('TES
 defined('TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_LATEST_MINOR') || define('TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_LATEST_MINOR', false);
 defined('TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_SPECIFIC') || define('TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_SPECIFIC', false);
 
-/**
+/*
  * Zend_Ldap online tests
  */
 defined('TESTS_ZEND_LDAP_ONLINE_ENABLED') || define('TESTS_ZEND_LDAP_ONLINE_ENABLED', false);
@@ -288,22 +290,22 @@ defined('TESTS_ZEND_LDAP_ONLINE_ENABLED') || define('TESTS_ZEND_LDAP_ONLINE_ENAB
  *              ALT_PASSWORD: apass
  */
 defined('TESTS_ZEND_LDAP_HOST') || define('TESTS_ZEND_LDAP_HOST', 'localhost');
-//defined('TESTS_ZEND_LDAP_PORT') || define('TESTS_ZEND_LDAP_PORT', 389);
+// defined('TESTS_ZEND_LDAP_PORT') || define('TESTS_ZEND_LDAP_PORT', 389);
 defined('TESTS_ZEND_LDAP_USE_START_TLS') || define('TESTS_ZEND_LDAP_USE_START_TLS', true);
-//defined('TESTS_ZEND_LDAP_USE_SSL') || define('TESTS_ZEND_LDAP_USE_SSL', false);
+// defined('TESTS_ZEND_LDAP_USE_SSL') || define('TESTS_ZEND_LDAP_USE_SSL', false);
 defined('TESTS_ZEND_LDAP_USERNAME') || define('TESTS_ZEND_LDAP_USERNAME', 'CN=someUser,DC=example,DC=com');
 defined('TESTS_ZEND_LDAP_PRINCIPAL_NAME') || define('TESTS_ZEND_LDAP_PRINCIPAL_NAME', 'someUser@example.com');
 defined('TESTS_ZEND_LDAP_PASSWORD') || define('TESTS_ZEND_LDAP_PASSWORD', null);
 defined('TESTS_ZEND_LDAP_BIND_REQUIRES_DN') || define('TESTS_ZEND_LDAP_BIND_REQUIRES_DN', true);
 defined('TESTS_ZEND_LDAP_BASE_DN') || define('TESTS_ZEND_LDAP_BASE_DN', 'OU=Sales,DC=example,DC=com');
-//defined('TESTS_ZEND_LDAP_ACCOUNT_FILTER_FORMAT') || define('TESTS_ZEND_LDAP_ACCOUNT_FILTER_FORMAT', '(&(objectClass=posixAccount)(uid=%s))');
+// defined('TESTS_ZEND_LDAP_ACCOUNT_FILTER_FORMAT') || define('TESTS_ZEND_LDAP_ACCOUNT_FILTER_FORMAT', '(&(objectClass=posixAccount)(uid=%s))');
 defined('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME') || define('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME', 'example.com');
 defined('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT') || define('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT', 'EXAMPLE');
 defined('TESTS_ZEND_LDAP_ALT_USERNAME') || define('TESTS_ZEND_LDAP_ALT_USERNAME', 'anotherUser');
 defined('TESTS_ZEND_LDAP_ALT_DN') || define('TESTS_ZEND_LDAP_ALT_DN', 'CN=Another User,OU=Sales,DC=example,DC=com');
 defined('TESTS_ZEND_LDAP_ALT_PASSWORD') || define('TESTS_ZEND_LDAP_ALT_PASSWORD', null);
 
-/**
+/*
  * Zend_Locale tests
  *
  * If the TESTS_ZEND_LOCALE_FORMAT_SETLOCALE property below is a valid,
@@ -316,11 +318,11 @@ defined('TESTS_ZEND_LDAP_ALT_PASSWORD') || define('TESTS_ZEND_LDAP_ALT_PASSWORD'
  * localized form with the decimal place separator chosen via:
  *    setlocale(LC_ALL, 'fr_FR@euro');
  */
-//defined('TESTS_ZEND_LOCALE_FORMAT_SETLOCALE') || define('TESTS_ZEND_LOCALE_FORMAT_SETLOCALE', 'fr');
-//defined('TESTS_ZEND_LOCALE_FORMAT_SETLOCALE') || define('TESTS_ZEND_LOCALE_FORMAT_SETLOCALE', 'fr_FR@euro');
+// defined('TESTS_ZEND_LOCALE_FORMAT_SETLOCALE') || define('TESTS_ZEND_LOCALE_FORMAT_SETLOCALE', 'fr');
+// defined('TESTS_ZEND_LOCALE_FORMAT_SETLOCALE') || define('TESTS_ZEND_LOCALE_FORMAT_SETLOCALE', 'fr_FR@euro');
 defined('TESTS_ZEND_LOCALE_FORMAT_SETLOCALE') || define('TESTS_ZEND_LOCALE_FORMAT_SETLOCALE', false);
 
-/**
+/*
  * Zend_Date tests
  *
  * If the BCMATH_ENABLED property below is false, all arithmetic
@@ -335,7 +337,7 @@ defined('TESTS_ZEND_LOCALE_FORMAT_SETLOCALE') || define('TESTS_ZEND_LOCALE_FORMA
 defined('TESTS_ZEND_LOCALE_BCMATH_ENABLED') || define('TESTS_ZEND_LOCALE_BCMATH_ENABLED', true);
 defined('TESTS_ZEND_I18N_EXTENDED_COVERAGE') || define('TESTS_ZEND_I18N_EXTENDED_COVERAGE', true);
 
-/**
+/*
  * Zend_Mail_Storage tests
  *
  * TESTS_ZEND_MAIL_SERVER_TESTDIR and TESTS_ZEND_MAIL_SERVER_FORMAT are used for POP3 and IMAP tests.
@@ -351,7 +353,7 @@ defined('TESTS_ZEND_MAIL_SERVER_TESTDIR') || define('TESTS_ZEND_MAIL_SERVER_TEST
 defined('TESTS_ZEND_MAIL_SERVER_FORMAT') || define('TESTS_ZEND_MAIL_SERVER_FORMAT', 'mbox');
 defined('TESTS_ZEND_MAIL_TEMPDIR') || define('TESTS_ZEND_MAIL_TEMPDIR', null);
 
-/**
+/*
  * Zend_Mail_Storage_Pop3 / Zend_Mail_Transport_Pop3
  *
  * IMPORTANT: you need to copy tests/Zend/Mail/_files/test.mbox to your mail
@@ -369,7 +371,7 @@ defined('TESTS_ZEND_MAIL_POP3_TLS') || define('TESTS_ZEND_MAIL_POP3_TLS', true);
 defined('TESTS_ZEND_MAIL_POP3_WRONG_PORT') || define('TESTS_ZEND_MAIL_POP3_WRONG_PORT', 80);
 defined('TESTS_ZEND_MAIL_POP3_INVALID_PORT') || define('TESTS_ZEND_MAIL_POP3_INVALID_PORT', 3141);
 
-/**
+/*
  * Zend_Mail_Storage_Imap / Zend_Mail_Transport_Imap
  *
  * IMPORTANT: you need to copy tests/Zend/Mail/_files/test.mbox to your mail
@@ -387,8 +389,7 @@ defined('TESTS_ZEND_MAIL_IMAP_TLS') || define('TESTS_ZEND_MAIL_IMAP_TLS', true);
 defined('TESTS_ZEND_MAIL_IMAP_WRONG_PORT') || define('TESTS_ZEND_MAIL_IMAP_WRONG_PORT', 80);
 defined('TESTS_ZEND_MAIL_IMAP_INVALID_PORT') || define('TESTS_ZEND_MAIL_IMAP_INVALID_PORT', 3141);
 
-
-/**
+/*
  * Zend_Mail_Storage_Maildir test
  *
  * Before enabling this test you have to unpack messages.tar in
@@ -398,7 +399,7 @@ defined('TESTS_ZEND_MAIL_IMAP_INVALID_PORT') || define('TESTS_ZEND_MAIL_IMAP_INV
  */
 defined('TESTS_ZEND_MAIL_MAILDIR_ENABLED') || define('TESTS_ZEND_MAIL_MAILDIR_ENABLED', false);
 
-/**
+/*
  * Zend_Mail_Transport_Smtp
  *
  * @todo TO be implemented
@@ -411,7 +412,7 @@ defined('TESTS_ZEND_MAIL_SMTP_PASSWORD') || define('TESTS_ZEND_MAIL_SMTP_PASSWOR
 defined('TESTS_ZEND_MAIL_SMTP_AUTH') || define('TESTS_ZEND_MAIL_SMTP_AUTH', false);
 // AUTH can be set to false or a string of AUTH method (e.g. LOGIN, PLAIN, CRAMMD5 or DIGESTMD5)
 
-/**
+/*
  * Zend_Queue Test Configuration constants
  *
  * The Zend_Queue_Adapter_Db constant should be a JSON-encoded string
@@ -447,7 +448,7 @@ defined('TESTS_ZEND_QUEUE_PLATFORMJQ_ENABLED') || define('TESTS_ZEND_QUEUE_PLATF
 defined('TESTS_ZEND_QUEUE_PLATFORMJQ_HOST') || define('TESTS_ZEND_QUEUE_PLATFORMJQ_HOST', false);
 defined('TESTS_ZEND_QUEUE_PLATFORMJQ_PASS') || define('TESTS_ZEND_QUEUE_PLATFORMJQ_PASS', false);
 
-/**
+/*
  * Zend_Serializer adapter tests
  *
  * TESTS_ZEND_SERIALIZER_ADAPTER_WDDX_ENABLED:
@@ -461,7 +462,7 @@ defined('TESTS_ZEND_QUEUE_PLATFORMJQ_PASS') || define('TESTS_ZEND_QUEUE_PLATFORM
 defined('TESTS_ZEND_SERIALIZER_ADAPTER_WDDX_ENABLED') || define('TESTS_ZEND_SERIALIZER_ADAPTER_WDDX_ENABLED', false);
 defined('TESTS_ZEND_SERIALIZER_ADAPTER_IGBINARY_ENABLED') || define('TESTS_ZEND_SERIALIZER_ADAPTER_IGBINARY_ENABLED', false);
 
-/**
+/*
  * Zend_Soap_AutoDiscover scenario tests for complex objects and wsdl generation
  *
  * Copy all the files of zf/tests/Zend/Soap/_files/fulltests into a directory
@@ -474,7 +475,7 @@ defined('TESTS_ZEND_SERIALIZER_ADAPTER_IGBINARY_ENABLED') || define('TESTS_ZEND_
  */
 defined('TESTS_ZEND_SOAP_AUTODISCOVER_ONLINE_SERVER_BASEURI') || define('TESTS_ZEND_SOAP_AUTODISCOVER_ONLINE_SERVER_BASEURI', false);
 
-/**
+/*
  * Zend_Uri tests
  *
  * Setting CRASH_TEST_ENABLED to true will enable some tests that may
@@ -485,7 +486,7 @@ defined('TESTS_ZEND_SOAP_AUTODISCOVER_ONLINE_SERVER_BASEURI') || define('TESTS_Z
  */
 defined('TESTS_ZEND_URI_CRASH_TEST_ENABLED') || define('TESTS_ZEND_URI_CRASH_TEST_ENABLED', false);
 
-/**
+/*
  * Zend_Version tests
  *
  * Set ONLINE_ENABLED if you wish to run validators that require network
@@ -493,8 +494,7 @@ defined('TESTS_ZEND_URI_CRASH_TEST_ENABLED') || define('TESTS_ZEND_URI_CRASH_TES
  */
 defined('TESTS_ZEND_VERSION_ONLINE_ENABLED') || define('TESTS_ZEND_VERSION_ONLINE_ENABLED', false);
 
-
-/**
+/*
  * Zend_Validate tests
  *
  * Set ONLINE_ENABLED if you wish to run validators that require network
@@ -502,12 +502,12 @@ defined('TESTS_ZEND_VERSION_ONLINE_ENABLED') || define('TESTS_ZEND_VERSION_ONLIN
  */
 defined('TESTS_ZEND_VALIDATE_ONLINE_ENABLED') || define('TESTS_ZEND_VALIDATE_ONLINE_ENABLED', false);
 
-/**
+/*
  * Resources translations ('all' for all translations or 'fr', 'de', ...)
  */
 defined('TESTS_ZEND_RESOURCES_TRANSLATIONS') || define('TESTS_ZEND_RESOURCES_TRANSLATIONS', 'all');
 
-/**
+/*
  * PHPUnit Code Coverage / Test Report
  */
 defined('TESTS_GENERATE_REPORT') || define('TESTS_GENERATE_REPORT', false);

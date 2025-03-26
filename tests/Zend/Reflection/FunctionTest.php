@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Reflection
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,23 +28,22 @@
 
 /**
  * @category   Zend
- * @package    Zend_Reflection
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Reflection
  * @group      Zend_Reflection_Function
  */
 #[AllowDynamicProperties]
 class Zend_Reflection_FunctionTest extends PHPUnit_Framework_TestCase
 {
-
-    static protected $_sampleClassFileRequired = false;
+    protected static $_sampleClassFileRequired = false;
 
     public function setup()
     {
-        if (self::$_sampleClassFileRequired === false) {
-            $fileToRequire = __DIR__ . '/_files/TestSampleClass.php';
+        if (false === self::$_sampleClassFileRequired) {
+            $fileToRequire = __DIR__.'/_files/TestSampleClass.php';
             require_once $fileToRequire;
             self::$_sampleClassFileRequired = true;
         }
@@ -62,6 +62,4 @@ class Zend_Reflection_FunctionTest extends PHPUnit_Framework_TestCase
         $function = new Zend_Reflection_Function('zend_reflection_test_sample_function6');
         $this->assertEquals(get_class($function->getDocblock()), 'Zend_Reflection_Docblock');
     }
-
 }
-

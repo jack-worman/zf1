@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +14,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Amf
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Amf_TypeloaderTest::main');
 }
@@ -28,10 +28,10 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 /**
  * @category   Zend
- * @package    Zend_Amf
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Amf
  */
 #[AllowDynamicProperties]
@@ -39,13 +39,12 @@ class Zend_Amf_TypeloaderTest extends PHPUnit_Framework_TestCase
 {
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Amf_ResponseTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Amf_ResponseTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     /**
      * test that we can get the server name from the client name for deserialization.
-     *
      */
     public function testGetMappedClassNameForClient()
     {
@@ -54,8 +53,7 @@ class Zend_Amf_TypeloaderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test that we can get the return name from the server name for serialization
-     *
+     * Test that we can get the return name from the server name for serialization.
      */
     public function testGetMappedClassNameForServer()
     {
@@ -64,26 +62,26 @@ class Zend_Amf_TypeloaderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test that we can find and load the remote matching class name
-     *
+     * Test that we can find and load the remote matching class name.
      */
-    public function testLoadTypeSuccess(){
+    public function testLoadTypeSuccess()
+    {
         $class = Zend_Amf_Parse_TypeLoader::loadType('flex.messaging.messages.RemotingMessage');
         $this->assertEquals('Zend_Amf_Value_Messaging_RemotingMessage', $class);
     }
 
     /**
-     * Test that adding our own mappping will result in it being added to the classMap
-     *
+     * Test that adding our own mappping will result in it being added to the classMap.
      */
     public function testSetMappingClass()
     {
-        Zend_Amf_Parse_TypeLoader::setMapping('com.example.vo.Contact','Contact');
+        Zend_Amf_Parse_TypeLoader::setMapping('com.example.vo.Contact', 'Contact');
         $class = Zend_Amf_Parse_TypeLoader::getMappedClassName('com.example.vo.Contact');
         $this->assertEquals('Contact', $class);
     }
 
-    public function testUnknownClassMap() {
+    public function testUnknownClassMap()
+    {
         $class = Zend_Amf_Parse_TypeLoader::loadType('com.example.vo.Bogus');
         $this->assertEquals('stdClass', $class);
     }
@@ -92,4 +90,3 @@ class Zend_Amf_TypeloaderTest extends PHPUnit_Framework_TestCase
 if (PHPUnit_MAIN_METHOD == 'Zend_Amf_TypeloaderTest::main') {
     Zend_Amf_ResponseTest::main();
 }
-

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +14,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tag
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Tag_Cloud_Decorator_HtmlCloudTest::main');
 }
@@ -29,10 +29,10 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 /**
  * @category   Zend
- * @package    Zend_Tag
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Tag
  * @group      Zend_Tag_Cloud
  */
@@ -41,7 +41,7 @@ class Zend_Tag_Cloud_Decorator_HtmlCloudTest extends PHPUnit_Framework_TestCase
 {
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
+        $suite = new PHPUnit_Framework_TestSuite(__CLASS__);
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -49,15 +49,15 @@ class Zend_Tag_Cloud_Decorator_HtmlCloudTest extends PHPUnit_Framework_TestCase
     {
         $decorator = new Zend_Tag_Cloud_Decorator_HtmlCloud();
 
-        $this->assertEquals('<ul class="Zend_Tag_Cloud">foo bar</ul>', $decorator->render(array('foo', 'bar')));
+        $this->assertEquals('<ul class="Zend_Tag_Cloud">foo bar</ul>', $decorator->render(['foo', 'bar']));
     }
 
     public function testNestedTags()
     {
         $decorator = new Zend_Tag_Cloud_Decorator_HtmlCloud();
-        $decorator->setHtmlTags(array('span', 'div' => array('id' => 'tag-cloud')));
+        $decorator->setHtmlTags(['span', 'div' => ['id' => 'tag-cloud']]);
 
-        $this->assertEquals('<div id="tag-cloud"><span>foo bar</span></div>', $decorator->render(array('foo', 'bar')));
+        $this->assertEquals('<div id="tag-cloud"><span>foo bar</span></div>', $decorator->render(['foo', 'bar']));
     }
 
     public function testSeparator()
@@ -65,34 +65,34 @@ class Zend_Tag_Cloud_Decorator_HtmlCloudTest extends PHPUnit_Framework_TestCase
         $decorator = new Zend_Tag_Cloud_Decorator_HtmlCloud();
         $decorator->setSeparator('-');
 
-        $this->assertEquals('<ul class="Zend_Tag_Cloud">foo-bar</ul>', $decorator->render(array('foo', 'bar')));
+        $this->assertEquals('<ul class="Zend_Tag_Cloud">foo-bar</ul>', $decorator->render(['foo', 'bar']));
     }
 
     public function testConstructorWithArray()
     {
-        $decorator = new Zend_Tag_Cloud_Decorator_HtmlCloud(array('htmlTags' => array('div'), 'separator' => ' '));
+        $decorator = new Zend_Tag_Cloud_Decorator_HtmlCloud(['htmlTags' => ['div'], 'separator' => ' ']);
 
-        $this->assertEquals('<div>foo bar</div>', $decorator->render(array('foo', 'bar')));
+        $this->assertEquals('<div>foo bar</div>', $decorator->render(['foo', 'bar']));
     }
 
     public function testConstructorWithConfig()
     {
-        $decorator = new Zend_Tag_Cloud_Decorator_HtmlCloud(new Zend_Config(array('htmlTags' => array('div'), 'separator' => ' ')));
+        $decorator = new Zend_Tag_Cloud_Decorator_HtmlCloud(new Zend_Config(['htmlTags' => ['div'], 'separator' => ' ']));
 
-        $this->assertEquals('<div>foo bar</div>', $decorator->render(array('foo', 'bar')));
+        $this->assertEquals('<div>foo bar</div>', $decorator->render(['foo', 'bar']));
     }
 
     public function testSetOptions()
     {
         $decorator = new Zend_Tag_Cloud_Decorator_HtmlCloud();
-        $decorator->setOptions(array('htmlTags' => array('div'), 'separator' => ' '));
+        $decorator->setOptions(['htmlTags' => ['div'], 'separator' => ' ']);
 
-        $this->assertEquals('<div>foo bar</div>', $decorator->render(array('foo', 'bar')));
+        $this->assertEquals('<div>foo bar</div>', $decorator->render(['foo', 'bar']));
     }
 
     public function testSkipOptions()
     {
-        $decorator = new Zend_Tag_Cloud_Decorator_HtmlCloud(array('options' => 'foobar'));
+        $decorator = new Zend_Tag_Cloud_Decorator_HtmlCloud(['options' => 'foobar']);
         // In case would fail due to an error
     }
 }
@@ -100,6 +100,3 @@ class Zend_Tag_Cloud_Decorator_HtmlCloudTest extends PHPUnit_Framework_TestCase
 if (PHPUnit_MAIN_METHOD == 'Zend_Tag_Cloud_Decorator_HtmlCloudTest::main') {
     Zend_Tag_Cloud_Decorator_HtmlCloudTest::main();
 }
-/**
- *
- */

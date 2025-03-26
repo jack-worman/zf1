@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,25 +14,21 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 require_once 'Zend/Db/Table/TestCommon.php';
 
-
-
-
-
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Db
  * @group      Zend_Db_Table
  */
@@ -45,7 +42,7 @@ class Zend_Db_Table_SqlsrvTest extends Zend_Db_Table_TestCommon
 
     public function testTableCascadeUpdate()
     {
-        $this->markTestSkipped($this->getDriver() . ' cannot update identity columns.');
+        $this->markTestSkipped($this->getDriver().' cannot update identity columns.');
     }
 
     public function getDriver()

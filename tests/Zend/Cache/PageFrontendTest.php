@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,15 +14,15 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Cache
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Cache
+ * Zend_Cache.
  */
 // require_once 'Zend/Cache.php';
 // require_once 'Zend/Cache/Frontend/Page.php';
@@ -29,21 +30,21 @@
 
 /**
  * @category   Zend
- * @package    Zend_Cache
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Cache
  */
 #[AllowDynamicProperties]
-class Zend_Cache_PageFrontendTest extends PHPUnit_Framework_TestCase {
-
+class Zend_Cache_PageFrontendTest extends PHPUnit_Framework_TestCase
+{
     private $_instance;
 
     public function setUp()
     {
         if (!$this->_instance) {
-            $this->_instance = new Zend_Cache_Frontend_Page(array());
+            $this->_instance = new Zend_Cache_Frontend_Page([]);
             $this->_backend = new Zend_Cache_Backend_Test();
             $this->_instance->setBackend($this->_backend);
         }
@@ -56,14 +57,14 @@ class Zend_Cache_PageFrontendTest extends PHPUnit_Framework_TestCase {
 
     public function testConstructorCorrectCall()
     {
-        $test = new Zend_Cache_Frontend_Page(array('lifetime' => 3600, 'caching' => true));
+        $test = new Zend_Cache_Frontend_Page(['lifetime' => 3600, 'caching' => true]);
     }
 
     public function testConstructorUnimplementedOption()
     {
         try {
-            $test = new Zend_Cache_Frontend_Page(array('http_conditional' => true));
-        } catch (\Throwable $e) {
+            $test = new Zend_Cache_Frontend_Page(['http_conditional' => true]);
+        } catch (Throwable $e) {
             return;
         }
         $this->fail('Zend_Cache_Exception was expected but not thrown');
@@ -72,22 +73,23 @@ class Zend_Cache_PageFrontendTest extends PHPUnit_Framework_TestCase {
     public function testConstructorWithBadDefaultOptions()
     {
         try {
-            $test = new Zend_Cache_Frontend_Page(array('default_options' => 'foo'));
-        } catch (\Throwable $e) {
+            $test = new Zend_Cache_Frontend_Page(['default_options' => 'foo']);
+        } catch (Throwable $e) {
             return;
         }
         $this->fail('Zend_Cache_Exception was expected but not thrown');
     }
 
     /**
-     * The only bad default options are non-string keys
+     * The only bad default options are non-string keys.
+     *
      * @group ZF-5034
      */
     public function testConstructorWithBadDefaultOptions2()
     {
         try {
-            $test = new Zend_Cache_Frontend_Page(array('default_options' => array('cache' => true, 1 => 'bar')));
-        } catch (\Throwable $e) {
+            $test = new Zend_Cache_Frontend_Page(['default_options' => ['cache' => true, 1 => 'bar']]);
+        } catch (Throwable $e) {
             return;
         }
         $this->fail('Zend_Cache_Exception was expected but not thrown');
@@ -96,8 +98,8 @@ class Zend_Cache_PageFrontendTest extends PHPUnit_Framework_TestCase {
     public function testConstructorWithBadRegexps()
     {
         try {
-            $test = new Zend_Cache_Frontend_Page(array('regexps' => 'foo'));
-        } catch (\Throwable $e) {
+            $test = new Zend_Cache_Frontend_Page(['regexps' => 'foo']);
+        } catch (Throwable $e) {
             return;
         }
         $this->fail('Zend_Cache_Exception was expected but not thrown');
@@ -106,32 +108,33 @@ class Zend_Cache_PageFrontendTest extends PHPUnit_Framework_TestCase {
     public function testConstructorWithBadRegexps2()
     {
         try {
-            $test = new Zend_Cache_Frontend_Page(array('regexps' => array('foo', 'bar')));
-        } catch (\Throwable $e) {
+            $test = new Zend_Cache_Frontend_Page(['regexps' => ['foo', 'bar']]);
+        } catch (Throwable $e) {
             return;
         }
         $this->fail('Zend_Cache_Exception was expected but not thrown');
     }
 
     /**
-     * Only non-string keys should raise exceptions
+     * Only non-string keys should raise exceptions.
+     *
      * @group ZF-5034
      */
     public function testConstructorWithBadRegexps3()
     {
-        $array = array(
-           '^/$' => array('cache' => true),
-           '^/index/' => array('cache' => true),
-           '^/article/' => array('cache' => false),
-           '^/article/view/' => array(
-               1 => true,
-               'cache_with_post_variables' => true,
-               'make_id_with_post_variables' => true,
-           )
-        );
+        $array = [
+            '^/$' => ['cache' => true],
+            '^/index/' => ['cache' => true],
+            '^/article/' => ['cache' => false],
+            '^/article/view/' => [
+                1 => true,
+                'cache_with_post_variables' => true,
+                'make_id_with_post_variables' => true,
+            ],
+        ];
         try {
-            $test = new Zend_Cache_Frontend_Page(array('regexps' => $array));
-        } catch (\Throwable $e) {
+            $test = new Zend_Cache_Frontend_Page(['regexps' => $array]);
+        } catch (Throwable $e) {
             return;
         }
         $this->fail('Zend_Cache_Exception was expected but not thrown');
@@ -139,30 +142,30 @@ class Zend_Cache_PageFrontendTest extends PHPUnit_Framework_TestCase {
 
     public function testConstructorWithGoodRegexps()
     {
-        $array = array(
-           '^/$' => array('cache' => true),
-           '^/index/' => array('cache' => true),
-           '^/article/' => array('cache' => false),
-           '^/article/view/' => array(
-               'cache' => true,
-               'cache_with_post_variables' => true,
-               'make_id_with_post_variables' => true,
-           )
-        );
-        $test = new Zend_Cache_Frontend_Page(array('regexps' => $array));
+        $array = [
+            '^/$' => ['cache' => true],
+            '^/index/' => ['cache' => true],
+            '^/article/' => ['cache' => false],
+            '^/article/view/' => [
+                'cache' => true,
+                'cache_with_post_variables' => true,
+                'make_id_with_post_variables' => true,
+            ],
+        ];
+        $test = new Zend_Cache_Frontend_Page(['regexps' => $array]);
     }
 
     public function testConstructorWithGoodDefaultOptions()
     {
-        $test = new Zend_Cache_Frontend_Page(array('default_options' => array('cache' => true)));
+        $test = new Zend_Cache_Frontend_Page(['default_options' => ['cache' => true]]);
     }
 
     public function testStartEndCorrectCall1()
     {
         ob_start();
         ob_implicit_flush(false);
-        if (!($this->_instance->start('serialized2', true))) {
-            echo('foobar');
+        if (!$this->_instance->start('serialized2', true)) {
+            echo 'foobar';
             ob_end_flush();
         }
         $data = ob_get_clean();
@@ -174,8 +177,8 @@ class Zend_Cache_PageFrontendTest extends PHPUnit_Framework_TestCase {
     {
         ob_start();
         ob_implicit_flush(false);
-        if (!($this->_instance->start('false', true))) {
-            echo('foobar');
+        if (!$this->_instance->start('false', true)) {
+            echo 'foobar';
             ob_end_flush();
         }
         $data = ob_get_clean();
@@ -188,8 +191,8 @@ class Zend_Cache_PageFrontendTest extends PHPUnit_Framework_TestCase {
         $this->_instance->setOption('debug_header', true);
         ob_start();
         ob_implicit_flush(false);
-        if (!($this->_instance->start('serialized2', true))) {
-            echo('foobar');
+        if (!$this->_instance->start('serialized2', true)) {
+            echo 'foobar';
             ob_end_flush();
         }
         $data = ob_get_clean();
@@ -202,11 +205,10 @@ class Zend_Cache_PageFrontendTest extends PHPUnit_Framework_TestCase {
      */
     public function testNootice()
     {
-        $regex = array('^/article/' => array('cache' => false));
+        $regex = ['^/article/' => ['cache' => false]];
         $this->_instance->setOption('regexps', $regex);
         $this->_instance->setOption('caching', false);
         $this->_instance->start('zf10952');
         ob_get_clean();
     }
 }
-

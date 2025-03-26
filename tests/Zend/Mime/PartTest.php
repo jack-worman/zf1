@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,44 +14,44 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Mime
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Mime_Part
+ * Zend_Mime_Part.
  */
 // require_once 'Zend/Mime/Part.php';
 
 /**
  * @category   Zend
- * @package    Zend_Mime
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Mime
  */
 #[AllowDynamicProperties]
 class Zend_Mime_PartTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * MIME part test object
+     * MIME part test object.
      *
      * @var Zend_Mime_Part
      */
-    protected $part = null;
+    protected $part;
     protected $testText;
 
     protected function setUp()
     {
         $this->testText = 'safdsafsa�lg ��gd�� sd�jg�sdjg�ld�gksd�gj�sdfg�dsj�gjsd�gj�dfsjg�dsfj�djs�g kjhdkj '
-                       . 'fgaskjfdh gksjhgjkdh gjhfsdghdhgksdjhg';
+                       .'fgaskjfdh gksjhgjkdh gjhfsdghdhgksdjhg';
         $this->part = new Zend_Mime_Part($this->testText);
         $this->part->encoding = Zend_Mime::ENCODING_BASE64;
-        $this->part->type = "text/plain";
+        $this->part->type = 'text/plain';
         $this->part->filename = 'test.txt';
         $this->part->disposition = 'attachment';
         $this->part->charset = 'iso8859-1';
@@ -59,12 +60,12 @@ class Zend_Mime_PartTest extends PHPUnit_Framework_TestCase
 
     public function testHeaders()
     {
-        $expectedHeaders = array('Content-Type: text/plain',
-                                 'Content-Transfer-Encoding: ' . Zend_Mime::ENCODING_BASE64,
-                                 'Content-Disposition: attachment',
-                                 'filename="test.txt"',
-                                 'charset=iso8859-1',
-                                 'Content-ID: <4711>');
+        $expectedHeaders = ['Content-Type: text/plain',
+            'Content-Transfer-Encoding: '.Zend_Mime::ENCODING_BASE64,
+            'Content-Disposition: attachment',
+            'filename="test.txt"',
+            'charset=iso8859-1',
+            'Content-ID: <4711>'];
 
         $actual = $this->part->getHeaders();
 
@@ -94,7 +95,7 @@ class Zend_Mime_PartTest extends PHPUnit_Framework_TestCase
         $original = file_get_contents($testfile);
 
         // Test Base64
-        $fp = fopen($testfile,'rb');
+        $fp = fopen($testfile, 'rb');
         $this->assertTrue(is_resource($fp));
         $part = new Zend_Mime_Part($fp);
         $part->encoding = Zend_Mime::ENCODING_BASE64;
@@ -102,10 +103,10 @@ class Zend_Mime_PartTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(is_resource($fp2));
         $encoded = stream_get_contents($fp2);
         fclose($fp);
-        $this->assertEquals(base64_decode($encoded),$original);
+        $this->assertEquals(base64_decode($encoded), $original);
 
         // test QuotedPrintable
-        $fp = fopen($testfile,'rb');
+        $fp = fopen($testfile, 'rb');
         $this->assertTrue(is_resource($fp));
         $part = new Zend_Mime_Part($fp);
         $part->encoding = Zend_Mime::ENCODING_QUOTEDPRINTABLE;
@@ -113,7 +114,7 @@ class Zend_Mime_PartTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(is_resource($fp2));
         $encoded = stream_get_contents($fp2);
         fclose($fp);
-        $this->assertEquals(quoted_printable_decode($encoded),$original);
+        $this->assertEquals(quoted_printable_decode($encoded), $original);
     }
 
     /**
@@ -123,5 +124,4 @@ class Zend_Mime_PartTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals($this->testText, $this->part->getRawContent());
     }
-
 }

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Dojo_View_Helper_SplitContainerTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_View_Helper_SplitContainerTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Dojo_View_Helper_SplitContainerTest::main');
 }
 
 /** Zend_Dojo_View_Helper_SplitContainer */
@@ -41,10 +42,10 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * Test class for Zend_Dojo_View_Helper_SplitContainer.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Dojo
  * @group      Zend_Dojo_View
  */
@@ -58,7 +59,7 @@ class Zend_Dojo_View_Helper_SplitContainerTest extends PHPUnit_Framework_TestCas
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_View_Helper_SplitContainerTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Dojo_View_Helper_SplitContainerTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -73,7 +74,7 @@ class Zend_Dojo_View_Helper_SplitContainerTest extends PHPUnit_Framework_TestCas
         Zend_Registry::_unsetInstance();
         Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
 
-        $this->view   = $this->getView();
+        $this->view = $this->getView();
         $this->helper = new Zend_Dojo_View_Helper_SplitContainer();
         $this->helper->setView($this->view);
     }
@@ -93,18 +94,20 @@ class Zend_Dojo_View_Helper_SplitContainerTest extends PHPUnit_Framework_TestCas
         // require_once 'Zend/View.php';
         $view = new Zend_View();
         $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
+
         return $view;
     }
 
     public function getContainer()
     {
         $html = '';
-        foreach (array('top', 'bottom', 'center', 'left', 'right') as $pane) {
-            $id      = $pane . 'Pane';
-            $content = 'This is the content of pane ' . $pane;
-            $html   .= $this->view->contentPane($id, $content, array('region' => $pane));
+        foreach (['top', 'bottom', 'center', 'left', 'right'] as $pane) {
+            $id = $pane.'Pane';
+            $content = 'This is the content of pane '.$pane;
+            $html .= $this->view->contentPane($id, $content, ['region' => $pane]);
         }
-        return $this->helper->splitContainer('container', $html, array('design' => 'headline'));
+
+        return $this->helper->splitContainer('container', $html, ['design' => 'headline']);
     }
 
     public function testShouldAllowDeclarativeDijitCreation()
@@ -123,6 +126,6 @@ class Zend_Dojo_View_Helper_SplitContainerTest extends PHPUnit_Framework_TestCas
 }
 
 // Call Zend_Dojo_View_Helper_SplitContainerTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dojo_View_Helper_SplitContainerTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Dojo_View_Helper_SplitContainerTest::main') {
     Zend_Dojo_View_Helper_SplitContainerTest::main();
 }

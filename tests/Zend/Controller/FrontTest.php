@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,26 +14,25 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Controller_FrontTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Controller_FrontTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Controller_FrontTest::main');
 
-    $basePath = realpath(__DIR__ . str_repeat(DIRECTORY_SEPARATOR . '..', 3));
+    $basePath = realpath(__DIR__.str_repeat(DIRECTORY_SEPARATOR.'..', 3));
 
     set_include_path(
-        $basePath . DIRECTORY_SEPARATOR . 'tests'
-        . PATH_SEPARATOR . $basePath . DIRECTORY_SEPARATOR . 'library'
-        . PATH_SEPARATOR . get_include_path()
+        $basePath.DIRECTORY_SEPARATOR.'tests'
+        .PATH_SEPARATOR.$basePath.DIRECTORY_SEPARATOR.'library'
+        .PATH_SEPARATOR.get_include_path()
     );
 }
-
 
 // require_once 'Zend/Controller/Front.php';
 // require_once 'Zend/Controller/Request/Http.php';
@@ -45,28 +45,26 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 
 /**
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Controller
  * @group      Zend_Controller_Front
  */
 #[AllowDynamicProperties]
 class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
 {
-    protected $_controller = null;
+    protected $_controller;
 
     /**
      * Runs the test methods of this class.
      *
-     * @access public
      * @static
      */
     public static function main()
     {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_FrontTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Controller_FrontTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -74,7 +72,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
     {
         $this->_controller = Zend_Controller_Front::getInstance();
         $this->_controller->resetInstance();
-        $this->_controller->setControllerDirectory(__DIR__ . DIRECTORY_SEPARATOR . '_files')
+        $this->_controller->setControllerDirectory(__DIR__.DIRECTORY_SEPARATOR.'_files')
                           ->setParam('noErrorHandler', true)
                           ->setParam('noViewRenderer', true)
                           ->returnResponse(true)
@@ -94,8 +92,8 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
 
         $this->_controller->resetInstance();
         $this->assertNull($this->_controller->getParam('bar'));
-        $this->assertSame(array(), $this->_controller->getParams());
-        $this->assertSame(array(), $this->_controller->getControllerDirectory());
+        $this->assertSame([], $this->_controller->getParams());
+        $this->assertSame([], $this->_controller->getControllerDirectory());
     }
 
     /**
@@ -132,7 +130,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
         try {
             $this->_controller->setRequest('Zend_Controller_Response_Cli');
             $this->fail('Should not be able to set invalid request class');
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             // success
         }
     }
@@ -154,7 +152,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
         try {
             $this->_controller->setResponse('Zend_Controller_Request_Http');
             $this->fail('Should not be able to set invalid response class');
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             // success
         }
     }
@@ -176,7 +174,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
         try {
             $this->_controller->setRouter('Zend_Controller_Request_Http');
             $this->fail('Should not be able to set invalid router class');
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             // success
         }
     }
@@ -192,7 +190,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
     public function testSetGetControllerDirectory()
     {
         $test = $this->_controller->getControllerDirectory();
-        $expected = array('default' => __DIR__ . DIRECTORY_SEPARATOR . '_files');
+        $expected = ['default' => __DIR__.DIRECTORY_SEPARATOR.'_files'];
         $this->assertSame($expected, $test);
     }
 
@@ -207,7 +205,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
 
     public function testGetSetParams()
     {
-        $this->_controller->setParams(array('foo' => 'bar'));
+        $this->_controller->setParams(['foo' => 'bar']);
         $params = $this->_controller->getParams();
         $this->assertTrue(isset($params['foo']));
         $this->assertEquals('bar', $params['foo']);
@@ -219,7 +217,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(isset($params['baz']));
         $this->assertEquals('bat', $params['baz']);
 
-        $this->_controller->setParams(array('foo' => 'bug'));
+        $this->_controller->setParams(['foo' => 'bug']);
         $params = $this->_controller->getParams();
         $this->assertTrue(isset($params['foo']));
         $this->assertEquals('bug', $params['foo']);
@@ -229,7 +227,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
 
     public function testClearParams()
     {
-        $this->_controller->setParams(array('foo' => 'bar', 'baz' => 'bat'));
+        $this->_controller->setParams(['foo' => 'bar', 'baz' => 'bat']);
         $params = $this->_controller->getParams();
         $this->assertTrue(isset($params['foo']));
         $this->assertTrue(isset($params['baz']));
@@ -240,12 +238,12 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(isset($params['baz']));
 
         $this->_controller->clearParams();
-        $this->assertSame(array(), $this->_controller->getParams());
+        $this->assertSame([], $this->_controller->getParams());
 
-        $this->_controller->setParams(array('foo' => 'bar', 'bar' => 'baz', 'baz' => 'bat'));
-        $this->assertSame(array('foo' => 'bar', 'bar' => 'baz', 'baz' => 'bat'), $this->_controller->getParams());
-        $this->_controller->clearParams(array('foo', 'baz'));
-        $this->assertSame(array('bar' => 'baz'), $this->_controller->getParams());
+        $this->_controller->setParams(['foo' => 'bar', 'bar' => 'baz', 'baz' => 'bat']);
+        $this->assertSame(['foo' => 'bar', 'bar' => 'baz', 'baz' => 'bat'], $this->_controller->getParams());
+        $this->_controller->clearParams(['foo', 'baz']);
+        $this->assertSame(['bar' => 'baz'], $this->_controller->getParams());
     }
 
     public function testSetGetDefaultControllerName()
@@ -265,7 +263,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test default action on valid controller
+     * Test default action on valid controller.
      */
     public function testDispatch()
     {
@@ -277,7 +275,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test valid action on valid controller
+     * Test valid action on valid controller.
      */
     public function testDispatch1()
     {
@@ -289,7 +287,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test invalid action on valid controller
+     * Test invalid action on valid controller.
      */
     /*
     public function testDispatch2()
@@ -306,7 +304,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
      */
 
     /**
-     * Test invalid controller
+     * Test invalid controller.
      */
     /*
     public function testDispatch3()
@@ -323,7 +321,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
      */
 
     /**
-     * Test valid action on valid controller; test pre/postDispatch
+     * Test valid action on valid controller; test pre/postDispatch.
      */
     public function testDispatch4()
     {
@@ -338,7 +336,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test that extra arguments get passed
+     * Test that extra arguments get passed.
      */
     public function testDispatch5()
     {
@@ -354,7 +352,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test using router
+     * Test using router.
      */
     public function testDispatch6()
     {
@@ -371,7 +369,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test without router, using GET params
+     * Test without router, using GET params.
      */
     public function testDispatch7()
     {
@@ -388,20 +386,20 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test that run() throws exception when called from object instance
+     * Test that run() throws exception when called from object instance.
      */
     public function _testRunThrowsException()
     {
         try {
-            $this->_controller->run(__DIR__ . DIRECTORY_SEPARATOR . '_files');
+            $this->_controller->run(__DIR__.DIRECTORY_SEPARATOR.'_files');
             $this->fail('Should not be able to call run() from object instance');
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             // success
         }
     }
 
     /**
-     * Test that set/getBaseUrl() functionality works
+     * Test that set/getBaseUrl() functionality works.
      */
     public function testSetGetBaseUrl()
     {
@@ -423,21 +421,21 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
     public function testSetBaseUrlThrowsExceptionOnNonString()
     {
         try {
-            $this->_controller->setBaseUrl(array());
+            $this->_controller->setBaseUrl([]);
             $this->fail('Should not be able to set non-string base URL');
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             // success
         }
     }
 
     /**
      * Test that a set base URL is pushed to the request during the dispatch
-     * process
+     * process.
      */
     public function testBaseUrlPushedToRequest()
     {
         $this->_controller->setBaseUrl('/index.php');
-        $request  = new Zend_Controller_Request_Http('http://example.com/index');
+        $request = new Zend_Controller_Request_Http('http://example.com/index');
         $response = new Zend_Controller_Response_Cli();
         $response = $this->_controller->dispatch($request, $response);
 
@@ -445,7 +443,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test that throwExceptions() sets and returns value properly
+     * Test that throwExceptions() sets and returns value properly.
      */
     public function testThrowExceptions()
     {
@@ -462,7 +460,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test that with throwExceptions() set, an exception is thrown
+     * Test that with throwExceptions() set, an exception is thrown.
      */
     public function testThrowExceptionsThrows()
     {
@@ -475,13 +473,13 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
         try {
             $response = $this->_controller->dispatch($request);
             $this->fail('Invalid controller should throw exception');
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             // success
         }
     }
 
     /**
-     * Test that returnResponse() sets and returns value properly
+     * Test that returnResponse() sets and returns value properly.
      */
     public function testReturnResponse()
     {
@@ -498,7 +496,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test that with returnResponse set to false, output is echoed and equals that in the response
+     * Test that with returnResponse set to false, output is echoed and equals that in the response.
      */
     public function testReturnResponseReturnsResponse()
     {
@@ -519,19 +517,19 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
     {
         $request = new Zend_Controller_Request_Http('http://example.com/index/index');
         $this->_controller->setRequest($request);
-        Zend_Controller_Front::run(__DIR__ . DIRECTORY_SEPARATOR . '_files');
+        Zend_Controller_Front::run(__DIR__.DIRECTORY_SEPARATOR.'_files');
     }
 
     public function testRunDynamically()
     {
         $request = new Zend_Controller_Request_Http('http://example.com/index/index');
         $this->_controller->setRequest($request);
-        $this->_controller->run(__DIR__ . DIRECTORY_SEPARATOR . '_files');
+        $this->_controller->run(__DIR__.DIRECTORY_SEPARATOR.'_files');
     }
 
     public function testModulePathDispatched()
     {
-        $this->_controller->addControllerDirectory(__DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . '/Admin', 'admin');
+        $this->_controller->addControllerDirectory(__DIR__.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'/Admin', 'admin');
         $request = new Zend_Controller_Request_Http('http://example.com/admin/foo/bar');
         $this->_controller->setResponse(new Zend_Controller_Response_Cli());
         $response = $this->_controller->dispatch($request);
@@ -549,7 +547,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
 
     public function testAddModuleDirectory()
     {
-        $moduleDir = __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'modules';
+        $moduleDir = __DIR__.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'modules';
         $this->_controller->addModuleDirectory($moduleDir);
         $controllerDirs = $this->_controller->getControllerDirectory();
         $this->assertTrue(isset($controllerDirs['foo']));
@@ -557,9 +555,9 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(isset($controllerDirs['default']));
         $this->assertFalse(isset($controllerDirs['.svn']));
 
-        $this->assertContains('modules' . DIRECTORY_SEPARATOR . 'foo', $controllerDirs['foo']);
-        $this->assertContains('modules' . DIRECTORY_SEPARATOR . 'bar', $controllerDirs['bar']);
-        $this->assertContains('modules' . DIRECTORY_SEPARATOR . 'default', $controllerDirs['default']);
+        $this->assertContains('modules'.DIRECTORY_SEPARATOR.'foo', $controllerDirs['foo']);
+        $this->assertContains('modules'.DIRECTORY_SEPARATOR.'bar', $controllerDirs['bar']);
+        $this->assertContains('modules'.DIRECTORY_SEPARATOR.'default', $controllerDirs['default']);
     }
 
     /**#@+
@@ -572,7 +570,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
         $request->setModuleName('bar');
         $this->_controller->setRequest($request);
         $dir = $this->_controller->getModuleDirectory();
-        $this->assertContains('modules' . DIRECTORY_SEPARATOR . 'bar', $dir);
+        $this->assertContains('modules'.DIRECTORY_SEPARATOR.'bar', $dir);
         $this->assertNotContains('controllers', $dir);
     }
 
@@ -580,7 +578,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
     {
         $this->testAddModuleDirectory();
         $dir = $this->_controller->getModuleDirectory('foo');
-        $this->assertContains('modules' . DIRECTORY_SEPARATOR . 'foo', $dir);
+        $this->assertContains('modules'.DIRECTORY_SEPARATOR.'foo', $dir);
         $this->assertNotContains('controllers', $dir);
     }
 
@@ -592,11 +590,11 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
     /**#@-*/
 
     /**
-     * ZF-2435
+     * ZF-2435.
      */
     public function testCanRemoveIndividualModuleDirectory()
     {
-        $moduleDir = __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'modules';
+        $moduleDir = __DIR__.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'modules';
         $this->_controller->addModuleDirectory($moduleDir);
         $controllerDirs = $this->_controller->getControllerDirectory();
         $this->_controller->removeControllerDirectory('foo');
@@ -611,7 +609,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
         try {
             $this->_controller->addModuleDirectory($moduleDir);
             $this->fail('Exception expected but not thrown');
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->assertTrue($e instanceof Zend_Exception);
             $this->assertRegExp(
                 '/Directory \w+ not readable/', $e->getMessage()
@@ -621,16 +619,16 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
 
     public function testGetControllerDirectoryByModuleName()
     {
-        $moduleDir = __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'modules';
+        $moduleDir = __DIR__.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'modules';
         $this->_controller->addModuleDirectory($moduleDir);
         $barDir = $this->_controller->getControllerDirectory('bar');
         $this->assertNotNull($barDir);
-        $this->assertContains('modules' . DIRECTORY_SEPARATOR . 'bar', $barDir);
+        $this->assertContains('modules'.DIRECTORY_SEPARATOR.'bar', $barDir);
     }
 
     public function testGetControllerDirectoryByModuleNameReturnsNullOnBadModule()
     {
-        $moduleDir = __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'modules';
+        $moduleDir = __DIR__.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'modules';
         $this->_controller->addModuleDirectory($moduleDir);
         $dir = $this->_controller->getControllerDirectory('_bazbat');
         $this->assertNull($dir);
@@ -674,7 +672,7 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
         $response = new Zend_Controller_Response_Http();
         $responsePost = $this->_controller->dispatch($request, $response);
 
-        $requestPost  = $this->_controller->getRequest();
+        $requestPost = $this->_controller->getRequest();
 
         $this->assertNotSame($request, $requestPost);
         $this->assertNotSame($response, $responsePost);
@@ -709,6 +707,6 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
 }
 
 // Call Zend_Controller_FrontTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Controller_FrontTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Controller_FrontTest::main') {
     Zend_Controller_FrontTest::main();
 }

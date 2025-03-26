@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Dojo_View_Helper_SimpleTextareaTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_View_Helper_SimpleTextareaTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Dojo_View_Helper_SimpleTextareaTest::main');
 }
 
 /** Zend_Dojo_View_Helper_SimpleTextarea */
@@ -44,10 +45,10 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * Test class for Zend_Dojo_View_Helper_SimpleTextarea.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Dojo
  * @group      Zend_Dojo_View
  */
@@ -61,7 +62,7 @@ class Zend_Dojo_View_Helper_SimpleTextareaTest extends PHPUnit_Framework_TestCas
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_View_Helper_SimpleTextareaTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Dojo_View_Helper_SimpleTextareaTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -76,7 +77,7 @@ class Zend_Dojo_View_Helper_SimpleTextareaTest extends PHPUnit_Framework_TestCas
         Zend_Registry::_unsetInstance();
         Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
 
-        $this->view   = $this->getView();
+        $this->view = $this->getView();
         $this->helper = new Zend_Dojo_View_Helper_SimpleTextarea();
         $this->helper->setView($this->view);
     }
@@ -96,6 +97,7 @@ class Zend_Dojo_View_Helper_SimpleTextareaTest extends PHPUnit_Framework_TestCas
         // require_once 'Zend/View.php';
         $view = new Zend_View();
         Zend_Dojo::enableView($view);
+
         return $view;
     }
 
@@ -104,8 +106,8 @@ class Zend_Dojo_View_Helper_SimpleTextareaTest extends PHPUnit_Framework_TestCas
         return $this->helper->simpleTextarea(
             'elementId',
             'some content',
-            array(),
-            array()
+            [],
+            []
         );
     }
 
@@ -125,12 +127,12 @@ class Zend_Dojo_View_Helper_SimpleTextareaTest extends PHPUnit_Framework_TestCas
 
     public function testPassingIdAsAttributeShouldOverrideUsingNameAsId()
     {
-        $html = $this->helper->simpleTextarea('foo[bar]', '', array(), array('id' => 'foo-bar'));
+        $html = $this->helper->simpleTextarea('foo[bar]', '', [], ['id' => 'foo-bar']);
         $this->assertContains('id="foo-bar"', $html);
     }
 }
 
 // Call Zend_Dojo_View_Helper_SimpleTextareaTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dojo_View_Helper_SimpleTextareaTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Dojo_View_Helper_SimpleTextareaTest::main') {
     Zend_Dojo_View_Helper_SimpleTextareaTest::main();
 }

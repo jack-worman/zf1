@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Memory
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,8 +26,7 @@
 
 /**
  * @category   Zend
- * @package    Zend_Memory
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -34,7 +34,7 @@
 class Zend_Memory_Container_Movable_Dummy extends Zend_Memory_Container_Movable
 {
     /**
-     * Dummy object constructor
+     * Dummy object constructor.
      */
     public function __construct()
     {
@@ -42,7 +42,7 @@ class Zend_Memory_Container_Movable_Dummy extends Zend_Memory_Container_Movable
     }
 
     /**
-     * Dummy value update callback method
+     * Dummy value update callback method.
      */
     public function processUpdate()
     {
@@ -50,20 +50,19 @@ class Zend_Memory_Container_Movable_Dummy extends Zend_Memory_Container_Movable
     }
 }
 
-
 /**
  * @category   Zend
- * @package    Zend_Memory
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Memory
  */
 #[AllowDynamicProperties]
 class Zend_Memory_ValueTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * tests the Value object creation
+     * tests the Value object creation.
      */
     public function testCreation()
     {
@@ -72,9 +71,8 @@ class Zend_Memory_ValueTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($valueObject->getRef(), 'data data data ...');
     }
 
-
     /**
-     * tests the value reference retrieval
+     * tests the value reference retrieval.
      */
     public function testGetRef()
     {
@@ -85,9 +83,8 @@ class Zend_Memory_ValueTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($valueObject->getRef(), '012_456789');
     }
 
-
     /**
-     * tests the __toString() functionality
+     * tests the __toString() functionality.
      */
     public function testToString()
     {
@@ -95,11 +92,11 @@ class Zend_Memory_ValueTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($valueObject->__toString(), '0123456789');
 
         $this->assertEquals(strlen((string) $valueObject), 10);
-        $this->assertEquals((string)$valueObject, '0123456789');
+        $this->assertEquals((string) $valueObject, '0123456789');
     }
 
     /**
-     * tests the access through ArrayAccess methods
+     * tests the access through ArrayAccess methods.
      */
     public function testArrayAccess()
     {
@@ -107,13 +104,12 @@ class Zend_Memory_ValueTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($valueObject[8], '8');
 
         $valueObject[2] = '_';
-        $this->assertEquals((string)$valueObject, '01_3456789');
-
+        $this->assertEquals((string) $valueObject, '01_3456789');
 
         $error_level = error_reporting();
         error_reporting($error_level & ~E_NOTICE);
         $valueObject[10] = '_';
-        $this->assertEquals((string)$valueObject, '01_3456789_');
+        $this->assertEquals((string) $valueObject, '01_3456789_');
         error_reporting($error_level);
     }
 }

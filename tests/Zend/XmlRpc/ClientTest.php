@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version $Id$
  */
 
@@ -33,13 +34,13 @@
 // require_once 'Zend/Http/Client.php';
 
 /**
- * Test case for Zend_XmlRpc_Value
+ * Test case for Zend_XmlRpc_Value.
  *
  * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_XmlRpc
  */
 #[AllowDynamicProperties]
@@ -64,7 +65,7 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
     {
         $this->httpAdapter = new Zend_Http_Client_Adapter_Test();
         $this->httpClient = new Zend_Http_Client('http://foo',
-                                    array('adapter' => $this->httpAdapter));
+            ['adapter' => $this->httpAdapter]);
 
         $this->xmlrpcClient = new Zend_XmlRpc_Client('http://foo');
         $this->xmlrpcClient->setHttpClient($this->httpClient);
@@ -93,7 +94,7 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
     public function testSettingHttpClientViaContructor()
     {
         $xmlrpcClient = new Zend_XmlRpc_Client('http://foo', $this->httpClient);
-        $httpClient   = $xmlrpcClient->getHttpClient();
+        $httpClient = $xmlrpcClient->getHttpClient();
         $this->assertSame($this->httpClient, $httpClient);
     }
 
@@ -122,11 +123,11 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
         $this->setServerResponseTo($expectedReturn);
         $this->assertSame($expectedReturn, $this->xmlrpcClient->call($expectedMethod));
 
-        $request  = $this->xmlrpcClient->getLastRequest();
+        $request = $this->xmlrpcClient->getLastRequest();
         $response = $this->xmlrpcClient->getLastResponse();
 
         $this->assertSame($expectedMethod, $request->getMethod());
-        $this->assertSame(array(), $request->getParams());
+        $this->assertSame([], $request->getParams());
         $this->assertSame($expectedReturn, $response->getReturnValue());
         $this->assertFalse($response->isFault());
     }
@@ -134,15 +135,15 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
     public function testSuccessfulRpcMethodCallWithParameters()
     {
         $expectedMethod = 'foo.bar';
-        $expectedParams = array(1, 'foo' => 'bar', 1.1, true);
-        $expectedReturn = array(7, false, 'foo' => 'bar');
+        $expectedParams = [1, 'foo' => 'bar', 1.1, true];
+        $expectedReturn = [7, false, 'foo' => 'bar'];
 
         $this->setServerResponseTo($expectedReturn);
 
         $actualReturn = $this->xmlrpcClient->call($expectedMethod, $expectedParams);
         $this->assertSame($expectedReturn, $actualReturn);
 
-        $request  = $this->xmlrpcClient->getLastRequest();
+        $request = $this->xmlrpcClient->getLastRequest();
         $response = $this->xmlrpcClient->getLastResponse();
 
         $this->assertSame($expectedMethod, $request->getMethod());
@@ -163,15 +164,15 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
     public function testSuccessfullyDetectsEmptyArrayParameterAsArray()
     {
         $expectedMethod = 'foo.bar';
-        $expectedParams = array(array());
-        $expectedReturn = array(true);
+        $expectedParams = [[]];
+        $expectedReturn = [true];
 
         $this->setServerResponseTo($expectedReturn);
 
         $actualReturn = $this->xmlrpcClient->call($expectedMethod, $expectedParams);
         $this->assertSame($expectedReturn, $actualReturn);
 
-        $request  = $this->xmlrpcClient->getLastRequest();
+        $request = $this->xmlrpcClient->getLastRequest();
 
         $params = $request->getParams();
         $this->assertSame(count($expectedParams), count($params));
@@ -187,18 +188,18 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
     {
         $time = time();
         $expectedMethod = 'foo.bar';
-        $expectedParams = array(
+        $expectedParams = [
             'username',
-            new Zend_XmlRpc_Value_DateTime($time)
-        );
-        $expectedReturn = array('username', $time);
+            new Zend_XmlRpc_Value_DateTime($time),
+        ];
+        $expectedReturn = ['username', $time];
 
         $this->setServerResponseTo($expectedReturn);
 
         $actualReturn = $this->xmlrpcClient->call($expectedMethod, $expectedParams);
         $this->assertSame($expectedReturn, $actualReturn);
 
-        $request  = $this->xmlrpcClient->getLastRequest();
+        $request = $this->xmlrpcClient->getLastRequest();
         $response = $this->xmlrpcClient->getLastResponse();
 
         $this->assertSame($expectedMethod, $request->getMethod());
@@ -215,20 +216,20 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
      */
     public function testSuccesfulRpcMethodCallWithXmlRpcValueParameters()
     {
-        $time   = time();
-        $params = array(
+        $time = time();
+        $params = [
             new Zend_XmlRpc_Value_Boolean(true),
             new Zend_XmlRpc_Value_Integer(4),
-            new Zend_XmlRpc_Value_String('foo')
-        );
-        $expect = array(true, 4, 'foo');
+            new Zend_XmlRpc_Value_String('foo'),
+        ];
+        $expect = [true, 4, 'foo'];
 
         $this->setServerResponseTo($expect);
 
         $result = $this->xmlrpcClient->call('foo.bar', $params);
         $this->assertSame($expect, $result);
 
-        $request  = $this->xmlrpcClient->getLastRequest();
+        $request = $this->xmlrpcClient->getLastRequest();
         $response = $this->xmlrpcClient->getLastResponse();
 
         $this->assertSame('foo.bar', $request->getMethod());
@@ -255,12 +256,12 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
              ->expects($this->exactly(2))
              ->method('getMethodSignature')
              ->with('test.method')
-             ->will($this->returnValue(array(array('parameters' => array('int')))));
+             ->will($this->returnValue([['parameters' => ['int']]]));
 
         $expect = 'test.method response';
         $this->setServerResponseTo($expect);
 
-        $this->assertSame($expect, $this->xmlrpcClient->call('test.method', array('1')));
+        $this->assertSame($expect, $this->xmlrpcClient->call('test.method', ['1']));
         $params = $this->xmlrpcClient->getLastRequest()->getParams();
         $this->assertSame(1, $params[0]->getValue());
 
@@ -280,11 +281,11 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
              ->expects($this->exactly(1))
              ->method('getMethodSignature')
              ->with('date.method')
-             ->will($this->returnValue(array(array('parameters' => array('dateTime.iso8601', 'string')))));
+             ->will($this->returnValue([['parameters' => ['dateTime.iso8601', 'string']]]));
 
         $expects = 'date.method response';
         $this->setServerResponseTo($expects);
-        $this->assertSame($expects, $this->xmlrpcClient->call('date.method', array(Zend_XmlRpc_Value::getXmlRpcValue(time(), Zend_XmlRpc_Value::XMLRPC_TYPE_DATETIME), 'foo')));
+        $this->assertSame($expects, $this->xmlrpcClient->call('date.method', [Zend_XmlRpc_Value::getXmlRpcValue(time(), Zend_XmlRpc_Value::XMLRPC_TYPE_DATETIME), 'foo']));
     }
 
     public function testAllowsSkippingSystemCallForArrayStructLookup()
@@ -311,9 +312,9 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
 
     public function testRpcMethodCallThrowsOnHttpFailure()
     {
-        $status  = 404;
+        $status = 404;
         $message = 'Not Found';
-        $body    = 'oops';
+        $body = 'oops';
 
         $response = $this->makeHttpResponseFrom($body, $status, $message);
         $this->httpAdapter->setResponse($response);
@@ -321,7 +322,7 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
         try {
             $this->xmlrpcClient->call('foo');
             $this->fail();
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->assertTrue($e instanceof Zend_XmlRpc_Client_HttpException);
             $this->assertEquals($message, $e->getMessage());
             $this->assertEquals($status, $e->getCode());
@@ -342,7 +343,7 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
         try {
             $this->xmlrpcClient->call('foo');
             $this->fail();
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->assertTrue($e instanceof Zend_XmlRpc_Client_FaultException);
             $this->assertEquals($message, $e->getMessage());
             $this->assertEquals($code, $e->getCode());
@@ -359,7 +360,7 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
 
     public function testRpcMethodCallsThroughServerProxy()
     {
-        $expectedReturn = array(7, false, 'foo' => 'bar');
+        $expectedReturn = [7, false, 'foo' => 'bar'];
         $this->setServerResponseTo($expectedReturn);
 
         $server = $this->xmlrpcClient->getProxy();
@@ -371,7 +372,7 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
 
     public function testRpcMethodCallsThroughNestedServerProxies()
     {
-        $expectedReturn = array(7, false, 'foo' => 'bar');
+        $expectedReturn = [7, false, 'foo' => 'bar'];
         $this->setServerResponseTo($expectedReturn);
 
         $server = $this->xmlrpcClient->getProxy('foo');
@@ -424,7 +425,7 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
     public function testGettingMethodSignature()
     {
         $method = 'foo';
-        $signatures = array(array('int', 'int', 'int'));
+        $signatures = [['int', 'int', 'int']];
         $this->setServerResponseTo($signatures);
 
         $i = $this->xmlrpcClient->getIntrospector();
@@ -432,12 +433,12 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
 
         $request = $this->xmlrpcClient->getLastRequest();
         $this->assertEquals('system.methodSignature', $request->getMethod());
-        $this->assertEquals(array($method), $request->getParams());
+        $this->assertEquals([$method], $request->getParams());
     }
 
     public function testListingMethods()
     {
-        $methods = array('foo', 'bar', 'baz');
+        $methods = ['foo', 'bar', 'baz'];
         $this->setServerResponseTo($methods);
 
         $i = $this->xmlrpcClient->getIntrospector();
@@ -445,78 +446,78 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
 
         $request = $this->xmlrpcClient->getLastRequest();
         $this->assertEquals('system.listMethods', $request->getMethod());
-        $this->assertEquals(array(), $request->getParams());
+        $this->assertEquals([], $request->getParams());
     }
 
     public function testGettingAllMethodSignaturesByLooping()
     {
         // system.listMethods() will return ['foo', 'bar']
-        $methods = array('foo', 'bar');
+        $methods = ['foo', 'bar'];
         $response = $this->getServerResponseFor($methods);
         $this->httpAdapter->setResponse($response);
 
         // system.methodSignature('foo') will return [['int'], ['int', 'string']]
-        $fooSignatures = array(array('int'), array('int', 'string'));
+        $fooSignatures = [['int'], ['int', 'string']];
         $response = $this->getServerResponseFor($fooSignatures);
         $this->httpAdapter->addResponse($response);
 
         // system.methodSignature('bar') will return [['boolean']]
-        $barSignatures = array(array('boolean'));
+        $barSignatures = [['boolean']];
         $response = $this->getServerResponseFor($barSignatures);
         $this->httpAdapter->addResponse($response);
 
-        $expected = array('foo' => $fooSignatures,
-                          'bar' => $barSignatures);
+        $expected = ['foo' => $fooSignatures,
+            'bar' => $barSignatures];
 
         $i = $this->xmlrpcClient->getIntrospector();
         $this->assertEquals($expected, $i->getSignatureForEachMethodByLooping());
 
         $request = $this->xmlrpcClient->getLastRequest();
         $this->assertEquals('system.methodSignature', $request->getMethod());
-        $this->assertEquals(array('bar'), $request->getParams());
+        $this->assertEquals(['bar'], $request->getParams());
     }
 
     public function testGettingAllMethodSignaturesByMulticall()
     {
         // system.listMethods() will return ['foo', 'bar']
-        $whatListMethodsReturns = array('foo', 'bar');
+        $whatListMethodsReturns = ['foo', 'bar'];
         $response = $this->getServerResponseFor($whatListMethodsReturns);
         $this->httpAdapter->setResponse($response);
 
         // after system.listMethods(), these system.multicall() params are expected
-        $multicallParams = array(array('methodName' => 'system.methodSignature',
-                                       'params'     => array('foo')),
-                                 array('methodName' => 'system.methodSignature',
-                                       'params'     => array('bar')));
+        $multicallParams = [['methodName' => 'system.methodSignature',
+            'params' => ['foo']],
+            ['methodName' => 'system.methodSignature',
+                'params' => ['bar']]];
 
         // system.multicall() will then return [fooSignatures, barSignatures]
-        $fooSignatures = array(array('int'), array('int', 'string'));
-        $barSignatures = array(array('boolean'));
-        $whatMulticallReturns = array($fooSignatures, $barSignatures);
+        $fooSignatures = [['int'], ['int', 'string']];
+        $barSignatures = [['boolean']];
+        $whatMulticallReturns = [$fooSignatures, $barSignatures];
         $response = $this->getServerResponseFor($whatMulticallReturns);
         $this->httpAdapter->addResponse($response);
 
         $i = $this->xmlrpcClient->getIntrospector();
 
-        $expected = array('foo' => $fooSignatures,
-                          'bar' => $barSignatures);
+        $expected = ['foo' => $fooSignatures,
+            'bar' => $barSignatures];
         $this->assertEquals($expected, $i->getSignatureForEachMethodByMulticall());
 
         $request = $this->xmlrpcClient->getLastRequest();
         $this->assertEquals('system.multicall', $request->getMethod());
-        $this->assertEquals(array($multicallParams), $request->getParams());
+        $this->assertEquals([$multicallParams], $request->getParams());
     }
 
     public function testGettingAllMethodSignaturesByMulticallThrowsOnBadCount()
     {
         // system.listMethods() will return ['foo', 'bar']
-        $whatListMethodsReturns = array('foo', 'bar');
+        $whatListMethodsReturns = ['foo', 'bar'];
         $response = $this->getServerResponseFor($whatListMethodsReturns);
         $this->httpAdapter->setResponse($response);
 
         // system.multicall() will then return only [fooSignatures]
-        $fooSignatures = array(array('int'), array('int', 'string'));
-        $whatMulticallReturns = array($fooSignatures);  // error! no bar signatures!
+        $fooSignatures = [['int'], ['int', 'string']];
+        $whatMulticallReturns = [$fooSignatures];  // error! no bar signatures!
 
         $response = $this->getServerResponseFor($whatMulticallReturns);
         $this->httpAdapter->addResponse($response);
@@ -533,7 +534,7 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
     public function testGettingAllMethodSignaturesByMulticallThrowsOnBadType()
     {
         // system.listMethods() will return ['foo', 'bar']
-        $whatListMethodsReturns = array('foo', 'bar');
+        $whatListMethodsReturns = ['foo', 'bar'];
         $response = $this->getServerResponseFor($whatListMethodsReturns);
         $this->httpAdapter->setResponse($response);
 
@@ -555,21 +556,21 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
     public function testGettingAllMethodSignaturesDefaultsToMulticall()
     {
         // system.listMethods() will return ['foo', 'bar']
-        $whatListMethodsReturns = array('foo', 'bar');
+        $whatListMethodsReturns = ['foo', 'bar'];
         $response = $this->getServerResponseFor($whatListMethodsReturns);
         $this->httpAdapter->setResponse($response);
 
         // system.multicall() will then return [fooSignatures, barSignatures]
-        $fooSignatures = array(array('int'), array('int', 'string'));
-        $barSignatures = array(array('boolean'));
-        $whatMulticallReturns = array($fooSignatures, $barSignatures);
+        $fooSignatures = [['int'], ['int', 'string']];
+        $barSignatures = [['boolean']];
+        $whatMulticallReturns = [$fooSignatures, $barSignatures];
         $response = $this->getServerResponseFor($whatMulticallReturns);
         $this->httpAdapter->addResponse($response);
 
         $i = $this->xmlrpcClient->getIntrospector();
 
-        $expected = array('foo' => $fooSignatures,
-                          'bar' => $barSignatures);
+        $expected = ['foo' => $fooSignatures,
+            'bar' => $barSignatures];
         $this->assertEquals($expected, $i->getSignatureForEachMethod());
 
         $request = $this->xmlrpcClient->getLastRequest();
@@ -579,7 +580,7 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
     public function testGettingAllMethodSignaturesDegradesToLooping()
     {
         // system.listMethods() will return ['foo', 'bar']
-        $whatListMethodsReturns = array('foo', 'bar');
+        $whatListMethodsReturns = ['foo', 'bar'];
         $response = $this->getServerResponseFor($whatListMethodsReturns);
         $this->httpAdapter->setResponse($response);
 
@@ -590,19 +591,19 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
         $this->httpAdapter->addResponse($response);
 
         // system.methodSignature('foo') will return [['int'], ['int', 'string']]
-        $fooSignatures = array(array('int'), array('int', 'string'));
+        $fooSignatures = [['int'], ['int', 'string']];
         $response = $this->getServerResponseFor($fooSignatures);
         $this->httpAdapter->addResponse($response);
 
         // system.methodSignature('bar') will return [['boolean']]
-        $barSignatures = array(array('boolean'));
+        $barSignatures = [['boolean']];
         $response = $this->getServerResponseFor($barSignatures);
         $this->httpAdapter->addResponse($response);
 
         $i = $this->xmlrpcClient->getIntrospector();
 
-        $expected = array('foo' => $fooSignatures,
-                          'bar' => $barSignatures);
+        $expected = ['foo' => $fooSignatures,
+            'bar' => $barSignatures];
         $this->assertEquals($expected, $i->getSignatureForEachMethod());
 
         $request = $this->xmlrpcClient->getLastRequest();
@@ -614,11 +615,11 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
      */
     public function testSettingUriOnHttpClientIsNotOverwrittenByXmlRpcClient()
     {
-        $changedUri = "http://bar:80";
+        $changedUri = 'http://bar:80';
         // Overwrite: http://foo:80
-        $this->setServerResponseTo(array());
+        $this->setServerResponseTo([]);
         $this->xmlrpcClient->getHttpClient()->setUri($changedUri);
-        $this->xmlrpcClient->call("foo");
+        $this->xmlrpcClient->call('foo');
         $uri = $this->xmlrpcClient->getHttpClient()->getUri(true);
 
         $this->assertEquals($changedUri, $uri);
@@ -629,16 +630,16 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
      */
     public function testSettingNoHttpClientUriForcesClientToSetUri()
     {
-        $baseUri = "http://foo:80";
+        $baseUri = 'http://foo:80';
         $this->httpAdapter = new Zend_Http_Client_Adapter_Test();
-        $this->httpClient = new Zend_Http_Client(null, array('adapter' => $this->httpAdapter));
+        $this->httpClient = new Zend_Http_Client(null, ['adapter' => $this->httpAdapter]);
 
         $this->xmlrpcClient = new Zend_XmlRpc_Client($baseUri);
         $this->xmlrpcClient->setHttpClient($this->httpClient);
 
-        $this->setServerResponseTo(array());
+        $this->setServerResponseTo([]);
         $this->assertNull($this->xmlrpcClient->getHttpClient()->getUri());
-        $this->xmlrpcClient->call("foo");
+        $this->xmlrpcClient->call('foo');
         $uri = $this->xmlrpcClient->getHttpClient()->getUri(true);
 
         $this->assertEquals($baseUri, $uri);
@@ -662,7 +663,7 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
         );
 
         $expectedUserAgent = 'Zend_XmlRpc_Client (custom)';
-        $this->httpClient->setHeaders(array('user-agent' => $expectedUserAgent));
+        $this->httpClient->setHeaders(['user-agent' => $expectedUserAgent]);
 
         $this->setServerResponseTo(true);
         $this->assertTrue($this->xmlrpcClient->call('method'));
@@ -674,9 +675,8 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
      */
     public function testPythonSimpleXMLRPCServerWithUnsupportedMethodSignatures()
     {
-        try
-        {
-        	$introspector = new Zend_XmlRpc_Client_ServerIntrospection(
+        try {
+            $introspector = new Zend_XmlRpc_Client_ServerIntrospection(
                 new Test_XmlRpc_Client('http://localhost/')
             );
 
@@ -684,8 +684,7 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
             if (!is_array($signature)) {
                 $this->fail('Expected exception has not been thrown');
             }
-        }
-        catch (Zend_XmlRpc_Client_IntrospectException $e) {
+        } catch (Zend_XmlRpc_Client_IntrospectException $e) {
             $this->assertEquals('Invalid signature for method "add"', $e->getMessage());
         }
     }
@@ -701,26 +700,26 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
              ->expects($this->exactly(2))
              ->method('getMethodSignature')
              ->with('get')
-             ->will($this->returnValue(array(
-                 array('parameters' => array('int')),
-                 array('parameters' => array('array'))
-             )));
+             ->will($this->returnValue([
+                 ['parameters' => ['int']],
+                 ['parameters' => ['array']],
+             ]));
 
-          $expectedResult = 'array';
-          $this->setServerResponseTo($expectedResult);
+        $expectedResult = 'array';
+        $this->setServerResponseTo($expectedResult);
 
-          $this->assertSame(
-              $expectedResult,
-              $this->xmlrpcClient->call('get', array(array(1)))
-          );
+        $this->assertSame(
+            $expectedResult,
+            $this->xmlrpcClient->call('get', [[1]])
+        );
 
-          $expectedResult = 'integer';
-          $this->setServerResponseTo($expectedResult);
+        $expectedResult = 'integer';
+        $this->setServerResponseTo($expectedResult);
 
-          $this->assertSame(
-              $expectedResult,
-              $this->xmlrpcClient->call('get', array(1))
-          );
+        $this->assertSame(
+            $expectedResult,
+            $this->xmlrpcClient->call('get', [1])
+        );
     }
 
     /**
@@ -728,11 +727,11 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
      */
     public function testHandlesLeadingOrTrailingWhitespaceInChunkedResponseProperly()
     {
-        $baseUri = "http://foo:80";
+        $baseUri = 'http://foo:80';
         $this->httpAdapter = new Zend_Http_Client_Adapter_Test();
-        $this->httpClient = new Zend_Http_Client(null, array('adapter' => $this->httpAdapter));
+        $this->httpClient = new Zend_Http_Client(null, ['adapter' => $this->httpAdapter]);
 
-        $respBody = file_get_contents(__DIR__ . "/_files/ZF1897-response-chunked.txt");
+        $respBody = file_get_contents(__DIR__.'/_files/ZF1897-response-chunked.txt');
         $this->httpAdapter->setResponse($respBody);
 
         $this->xmlrpcClient = new Zend_XmlRpc_Client($baseUri);
@@ -755,22 +754,25 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
         $xml = $response->saveXml();
 
         $response = $this->makeHttpResponseFrom($xml);
+
         return $response;
     }
 
-    public function makeHttpResponseFrom($data, $status=200, $message='OK')
+    public function makeHttpResponseFrom($data, $status = 200, $message = 'OK')
     {
-        $headers = array("HTTP/1.1 $status $message",
-                         "Status: $status",
-                         'Content_Type: text/xml; charset=utf-8',
-                         'Content-Length: ' . strlen((string) $data)
-                         );
-        return implode("\r\n", $headers) . "\r\n\r\n$data\r\n\r\n";
+        $headers = ["HTTP/1.1 $status $message",
+            "Status: $status",
+            'Content_Type: text/xml; charset=utf-8',
+            'Content-Length: '.strlen((string) $data),
+        ];
+
+        return implode("\r\n", $headers)."\r\n\r\n$data\r\n\r\n";
     }
 
     public function makeHttpResponseFor($nativeVars)
     {
         $response = $this->getServerResponseFor($nativeVars);
+
         return Zend_Http_Response::fromString($response);
     }
 
@@ -778,8 +780,8 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
     {
         $this->mockedIntrospector = $this->getMock(
             'Zend_XmlRpc_Client_ServerIntrospection',
-            array(),
-            array(),
+            [],
+            [],
             '',
             false,
             false
@@ -797,11 +799,14 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
 /** related to ZF-8478 */
 // require_once 'Zend/XmlRpc/Client/ServerProxy.php';
 #[AllowDynamicProperties]
-class Python_SimpleXMLRPCServerWithUnsupportedIntrospection extends Zend_XmlRpc_Client_ServerProxy {
-    public function __call($method, $args) {
-        if ($method == 'methodSignature') {
+class Python_SimpleXMLRPCServerWithUnsupportedIntrospection extends Zend_XmlRpc_Client_ServerProxy
+{
+    public function __call($method, $args)
+    {
+        if ('methodSignature' == $method) {
             return 'signatures not supported';
         }
+
         return parent::__call($method, $args);
     }
 }
@@ -809,16 +814,19 @@ class Python_SimpleXMLRPCServerWithUnsupportedIntrospection extends Zend_XmlRpc_
 /** related to ZF-8478 */
 // require_once 'Zend/XmlRpc/Client.php';
 #[AllowDynamicProperties]
-class Test_XmlRpc_Client extends Zend_XmlRpc_Client {
-    public function getProxy($namespace = '') {
-    	if (empty($this->_proxyCache[$namespace])) {
-    	    $this->_proxyCache[$namespace] = new Python_SimpleXMLRPCServerWithUnsupportedIntrospection($this, $namespace);
-    	}
+class Test_XmlRpc_Client extends Zend_XmlRpc_Client
+{
+    public function getProxy($namespace = '')
+    {
+        if (empty($this->_proxyCache[$namespace])) {
+            $this->_proxyCache[$namespace] = new Python_SimpleXMLRPCServerWithUnsupportedIntrospection($this, $namespace);
+        }
+
         return parent::getProxy($namespace);
     }
 }
 
 // Call Zend_XmlRpc_ClientTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_XmlRpc_ClientTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_XmlRpc_ClientTest::main') {
     Zend_XmlRpc_ClientTest::main();
 }

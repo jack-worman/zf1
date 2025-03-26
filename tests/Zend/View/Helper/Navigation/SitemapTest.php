@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,47 +14,46 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
-require_once __DIR__ . '/TestAbstract.php';
+require_once __DIR__.'/TestAbstract.php';
 // require_once 'Zend/Controller/Front.php';
 // require_once 'Zend/Controller/Request/Http.php';
 // require_once 'Zend/View/Helper/Navigation/Sitemap.php';
 
 /**
- * Tests Zend_View_Helper_Navigation_Sitemap
+ * Tests Zend_View_Helper_Navigation_Sitemap.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
 #[AllowDynamicProperties]
-class Zend_View_Helper_Navigation_SitemapTest
-    extends Zend_View_Helper_Navigation_TestAbstract
+class Zend_View_Helper_Navigation_SitemapTest extends Zend_View_Helper_Navigation_TestAbstract
 {
     protected $_front;
     protected $_oldRequest;
     protected $_oldRouter;
-    protected $_oldServer = array();
+    protected $_oldServer = [];
 
     /**
-     * Class name for view helper to test
+     * Class name for view helper to test.
      *
      * @var string
      */
     protected $_helperName = 'Zend_View_Helper_Navigation_Sitemap';
 
     /**
-     * View helper
+     * View helper.
      *
      * @var Zend_View_Helper_Navigation_Sitemap
      */
@@ -149,16 +149,16 @@ class Zend_View_Helper_Navigation_SitemapTest
         $rendered1 = $this->_getExpected('sitemap/default1.xml');
         $rendered2 = $this->_getExpected('sitemap/default2.xml');
 
-        $expected = array(
-            'registered'       => $rendered1,
-            'supplied'         => $rendered2,
-            'registered_again' => $rendered1
-        );
-        $actual = array(
-            'registered'       => $this->_helper->render(),
-            'supplied'         => $this->_helper->render($this->_nav2),
-            'registered_again' => $this->_helper->render()
-        );
+        $expected = [
+            'registered' => $rendered1,
+            'supplied' => $rendered2,
+            'registered_again' => $rendered1,
+        ];
+        $actual = [
+            'registered' => $this->_helper->render(),
+            'supplied' => $this->_helper->render($this->_nav2),
+            'registered_again' => $this->_helper->render(),
+        ];
 
         $this->assertEquals($expected, $actual);
     }
@@ -218,16 +218,17 @@ class Zend_View_Helper_Navigation_SitemapTest
     public function testThrowExceptionOnInvalidLoc()
     {
         $nav = clone $this->_nav2;
-        $nav->addPage(array('label' => 'Invalid', 'uri' => 'http://w..'));
+        $nav->addPage(['label' => 'Invalid', 'uri' => 'http://w..']);
 
         try {
             $this->_helper->render($nav);
         } catch (Zend_View_Exception $e) {
             $expected = sprintf(
-                    'Encountered an invalid URL for Sitemap XML: "%s"',
-                    'http://w..');
+                'Encountered an invalid URL for Sitemap XML: "%s"',
+                'http://w..');
             $actual = $e->getMessage();
             $this->assertEquals($expected, $actual);
+
             return;
         }
 
@@ -237,7 +238,7 @@ class Zend_View_Helper_Navigation_SitemapTest
     public function testDisablingValidators()
     {
         $nav = clone $this->_nav2;
-        $nav->addPage(array('label' => 'Invalid', 'uri' => 'http://w.'));
+        $nav->addPage(['label' => 'Invalid', 'uri' => 'http://w.']);
         $this->_helper->setUseSitemapValidators(false);
 
         $expected = $this->_getExpected('sitemap/invalid.xml');
@@ -248,7 +249,7 @@ class Zend_View_Helper_Navigation_SitemapTest
     {
         try {
             $this->_helper->setServerUrl('site.example.org');
-            $this->fail('An invalid server URL was given, but a ' .
+            $this->fail('An invalid server URL was given, but a '.
                         'Zend_Uri_Exception was not thrown');
         } catch (Zend_Uri_Exception $e) {
             $this->assertContains('Illegal scheme', $e->getMessage());
@@ -282,20 +283,22 @@ class Zend_View_Helper_Navigation_SitemapTest
     public function testUseSchemaValidation()
     {
         $this->markTestSkipped('Skipped because it fetches XSD from web');
+
         return;
         $nav = clone $this->_nav2;
         $this->_helper->setUseSitemapValidators(false);
         $this->_helper->setUseSchemaValidation(true);
-        $nav->addPage(array('label' => 'Invalid', 'uri' => 'http://w.'));
+        $nav->addPage(['label' => 'Invalid', 'uri' => 'http://w.']);
 
         try {
             $this->_helper->render($nav);
         } catch (Zend_View_Exception $e) {
             $expected = sprintf(
-                    'Sitemap is invalid according to XML Schema at "%s"',
-                    Zend_View_Helper_Navigation_Sitemap::SITEMAP_XSD);
+                'Sitemap is invalid according to XML Schema at "%s"',
+                Zend_View_Helper_Navigation_Sitemap::SITEMAP_XSD);
             $actual = $e->getMessage();
             $this->assertEquals($expected, $actual);
+
             return;
         }
 
@@ -311,7 +314,7 @@ class Zend_View_Helper_Navigation_SitemapTest
         $this->_helper->setFormatOutput(false);
 
         $expected = $this->_helper->render();
-        $actual   = $this->_getExpected('sitemap/without_whitespace.xml');
+        $actual = $this->_getExpected('sitemap/without_whitespace.xml');
 
         $this->assertEquals($expected, $actual);
     }

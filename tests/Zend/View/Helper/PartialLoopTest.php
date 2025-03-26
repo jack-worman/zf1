@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_View_Helper_PartialLoopTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_PartialLoopTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_View_Helper_PartialLoopTest::main');
 }
 
 /** Zend_View_Helper_PartialLoop */
@@ -38,10 +39,10 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * Test class for Zend_View_Helper_PartialLoop.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
@@ -65,8 +66,7 @@ class Zend_View_Helper_PartialLoopTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_PartialLoopTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_View_Helper_PartialLoopTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -78,7 +78,7 @@ class Zend_View_Helper_PartialLoopTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->basePath = __DIR__ . '/_files/modules';
+        $this->basePath = __DIR__.'/_files/modules';
         $this->helper = new Zend_View_Helper_PartialLoop();
         Zend_Controller_Front::getInstance()->resetInstance();
     }
@@ -99,21 +99,21 @@ class Zend_View_Helper_PartialLoopTest extends PHPUnit_Framework_TestCase
      */
     public function testPartialLoopIteratesOverArray()
     {
-        $data = array(
-            array('message' => 'foo'),
-            array('message' => 'bar'),
-            array('message' => 'baz'),
-            array('message' => 'bat')
-        );
+        $data = [
+            ['message' => 'foo'],
+            ['message' => 'bar'],
+            ['message' => 'baz'],
+            ['message' => 'bat'],
+        ];
 
-        $view = new Zend_View(array(
-            'scriptPath' => $this->basePath . '/default/views/scripts'
-        ));
+        $view = new Zend_View([
+            'scriptPath' => $this->basePath.'/default/views/scripts',
+        ]);
         $this->helper->setView($view);
 
         $result = $this->helper->partialLoop('partialLoop.phtml', $data);
         foreach ($data as $item) {
-            $string = 'This is an iteration: ' . $item['message'];
+            $string = 'This is an iteration: '.$item['message'];
             $this->assertContains($string, $result);
         }
     }
@@ -123,22 +123,22 @@ class Zend_View_Helper_PartialLoopTest extends PHPUnit_Framework_TestCase
      */
     public function testPartialLoopIteratesOverIterator()
     {
-        $data = array(
-            array('message' => 'foo'),
-            array('message' => 'bar'),
-            array('message' => 'baz'),
-            array('message' => 'bat')
-        );
+        $data = [
+            ['message' => 'foo'],
+            ['message' => 'bar'],
+            ['message' => 'baz'],
+            ['message' => 'bat'],
+        ];
         $o = new Zend_View_Helper_PartialLoop_IteratorTest($data);
 
-        $view = new Zend_View(array(
-            'scriptPath' => $this->basePath . '/default/views/scripts'
-        ));
+        $view = new Zend_View([
+            'scriptPath' => $this->basePath.'/default/views/scripts',
+        ]);
         $this->helper->setView($view);
 
         $result = $this->helper->partialLoop('partialLoop.phtml', $o);
         foreach ($data as $item) {
-            $string = 'This is an iteration: ' . $item['message'];
+            $string = 'This is an iteration: '.$item['message'];
             $this->assertContains($string, $result);
         }
     }
@@ -150,15 +150,15 @@ class Zend_View_Helper_PartialLoopTest extends PHPUnit_Framework_TestCase
     {
         $rIterator = new Zend_View_Helper_PartialLoop_RecursiveIteratorTest();
         for ($i = 0; $i < 5; ++$i) {
-            $data = array(
-                'message' => 'foo' . $i,
-            );
+            $data = [
+                'message' => 'foo'.$i,
+            ];
             $rIterator->addItem(new Zend_View_Helper_PartialLoop_IteratorTest($data));
         }
 
-        $view = new Zend_View(array(
-            'scriptPath' => $this->basePath . '/default/views/scripts'
-        ));
+        $view = new Zend_View([
+            'scriptPath' => $this->basePath.'/default/views/scripts',
+        ]);
         $this->helper->setView($view);
 
         $result = $this->helper->partialLoop('partialLoop.phtml', $rIterator);
@@ -174,23 +174,23 @@ class Zend_View_Helper_PartialLoopTest extends PHPUnit_Framework_TestCase
      */
     public function testPartialLoopThrowsExceptionWithBadIterator()
     {
-        $data = array(
-            array('message' => 'foo'),
-            array('message' => 'bar'),
-            array('message' => 'baz'),
-            array('message' => 'bat')
-        );
+        $data = [
+            ['message' => 'foo'],
+            ['message' => 'bar'],
+            ['message' => 'baz'],
+            ['message' => 'bat'],
+        ];
         $o = new Zend_View_Helper_PartialLoop_BogusIteratorTest($data);
 
-        $view = new Zend_View(array(
-            'scriptPath' => $this->basePath . '/default/views/scripts'
-        ));
+        $view = new Zend_View([
+            'scriptPath' => $this->basePath.'/default/views/scripts',
+        ]);
         $this->helper->setView($view);
 
         try {
             $result = $this->helper->partialLoop('partialLoop.phtml', $o);
             $this->fail('PartialLoop should only work with arrays and iterators');
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
         }
     }
 
@@ -200,21 +200,21 @@ class Zend_View_Helper_PartialLoopTest extends PHPUnit_Framework_TestCase
     public function testPartialLoopFindsModule()
     {
         Zend_Controller_Front::getInstance()->addModuleDirectory($this->basePath);
-        $data = array(
-            array('message' => 'foo'),
-            array('message' => 'bar'),
-            array('message' => 'baz'),
-            array('message' => 'bat')
-        );
+        $data = [
+            ['message' => 'foo'],
+            ['message' => 'bar'],
+            ['message' => 'baz'],
+            ['message' => 'bat'],
+        ];
 
-        $view = new Zend_View(array(
-            'scriptPath' => $this->basePath . '/default/views/scripts'
-        ));
+        $view = new Zend_View([
+            'scriptPath' => $this->basePath.'/default/views/scripts',
+        ]);
         $this->helper->setView($view);
 
         $result = $this->helper->partialLoop('partialLoop.phtml', 'foo', $data);
         foreach ($data as $item) {
-            $string = 'This is an iteration in the foo module: ' . $item['message'];
+            $string = 'This is an iteration in the foo module: '.$item['message'];
             $this->assertContains($string, $result);
         }
     }
@@ -227,44 +227,44 @@ class Zend_View_Helper_PartialLoopTest extends PHPUnit_Framework_TestCase
 
     public function testShouldAllowIteratingOverTraversableObjects()
     {
-        $data = array(
-            array('message' => 'foo'),
-            array('message' => 'bar'),
-            array('message' => 'baz'),
-            array('message' => 'bat')
-        );
+        $data = [
+            ['message' => 'foo'],
+            ['message' => 'bar'],
+            ['message' => 'baz'],
+            ['message' => 'bat'],
+        ];
         $o = new ArrayObject($data);
 
-        $view = new Zend_View(array(
-            'scriptPath' => $this->basePath . '/default/views/scripts'
-        ));
+        $view = new Zend_View([
+            'scriptPath' => $this->basePath.'/default/views/scripts',
+        ]);
         $this->helper->setView($view);
 
         $result = $this->helper->partialLoop('partialLoop.phtml', $o);
         foreach ($data as $item) {
-            $string = 'This is an iteration: ' . $item['message'];
+            $string = 'This is an iteration: '.$item['message'];
             $this->assertContains($string, $result);
         }
     }
 
     public function testShouldAllowIteratingOverObjectsImplementingToArray()
     {
-        $data = array(
-            array('message' => 'foo'),
-            array('message' => 'bar'),
-            array('message' => 'baz'),
-            array('message' => 'bat')
-        );
+        $data = [
+            ['message' => 'foo'],
+            ['message' => 'bar'],
+            ['message' => 'baz'],
+            ['message' => 'bat'],
+        ];
         $o = new Zend_View_Helper_PartialLoop_ToArrayTest($data);
 
-        $view = new Zend_View(array(
-            'scriptPath' => $this->basePath . '/default/views/scripts'
-        ));
+        $view = new Zend_View([
+            'scriptPath' => $this->basePath.'/default/views/scripts',
+        ]);
         $this->helper->setView($view);
 
         $result = $this->helper->partialLoop('partialLoop.phtml', $o);
         foreach ($data as $item) {
-            $string = 'This is an iteration: ' . $item['message'];
+            $string = 'This is an iteration: '.$item['message'];
             $this->assertContains($string, $result, $result);
         }
     }
@@ -275,23 +275,23 @@ class Zend_View_Helper_PartialLoopTest extends PHPUnit_Framework_TestCase
      */
     public function testShouldNotCastToArrayIfObjectIsTraversable()
     {
-        $data = array(
-            new Zend_View_Helper_PartialLoop_IteratorWithToArrayTestContainer(array('message' => 'foo')),
-            new Zend_View_Helper_PartialLoop_IteratorWithToArrayTestContainer(array('message' => 'bar')),
-            new Zend_View_Helper_PartialLoop_IteratorWithToArrayTestContainer(array('message' => 'baz')),
-            new Zend_View_Helper_PartialLoop_IteratorWithToArrayTestContainer(array('message' => 'bat')),
-        );
+        $data = [
+            new Zend_View_Helper_PartialLoop_IteratorWithToArrayTestContainer(['message' => 'foo']),
+            new Zend_View_Helper_PartialLoop_IteratorWithToArrayTestContainer(['message' => 'bar']),
+            new Zend_View_Helper_PartialLoop_IteratorWithToArrayTestContainer(['message' => 'baz']),
+            new Zend_View_Helper_PartialLoop_IteratorWithToArrayTestContainer(['message' => 'bat']),
+        ];
         $o = new Zend_View_Helper_PartialLoop_IteratorWithToArrayTest($data);
 
-        $view = new Zend_View(array(
-            'scriptPath' => $this->basePath . '/default/views/scripts'
-        ));
+        $view = new Zend_View([
+            'scriptPath' => $this->basePath.'/default/views/scripts',
+        ]);
         $this->helper->setView($view);
         $this->helper->setObjectKey('obj');
 
         $result = $this->helper->partialLoop('partialLoopObject.phtml', $o);
         foreach ($data as $item) {
-            $string = 'This is an iteration: ' . $item->message;
+            $string = 'This is an iteration: '.$item->message;
             $this->assertContains($string, $result, $result);
         }
     }
@@ -301,76 +301,78 @@ class Zend_View_Helper_PartialLoopTest extends PHPUnit_Framework_TestCase
      */
     public function testEmptyArrayPassedToPartialLoopShouldNotThrowException()
     {
-        $view = new Zend_View(array(
-            'scriptPath' => $this->basePath . '/default/views/scripts'
-        ));
+        $view = new Zend_View([
+            'scriptPath' => $this->basePath.'/default/views/scripts',
+        ]);
         $this->helper->setView($view);
 
         try {
-            $result = $this->helper->partialLoop('partialLoop.phtml', array());
-        } catch (\Throwable $e) {
+            $result = $this->helper->partialLoop('partialLoop.phtml', []);
+        } catch (Throwable $e) {
             $this->fail('Empty array should not cause partialLoop to throw exception');
         }
 
         try {
-            $result = $this->helper->partialLoop('partialLoop.phtml', null, array());
-        } catch (\Throwable $e) {
+            $result = $this->helper->partialLoop('partialLoop.phtml', null, []);
+        } catch (Throwable $e) {
             $this->fail('Empty array should not cause partialLoop to throw exception');
         }
     }
 
     /**
      * @group ZF-2737
-     * @link http://framework.zend.com/issues/browse/ZF-2737
+     *
+     * @see http://framework.zend.com/issues/browse/ZF-2737
      */
     public function testPartialLoopIncramentsPartialCounter()
     {
-        $data = array(
-            array('message' => 'foo'),
-            array('message' => 'bar'),
-            array('message' => 'baz'),
-            array('message' => 'bat')
-        );
+        $data = [
+            ['message' => 'foo'],
+            ['message' => 'bar'],
+            ['message' => 'baz'],
+            ['message' => 'bat'],
+        ];
 
-        $view = new Zend_View(array(
-            'scriptPath' => $this->basePath . '/default/views/scripts'
-        ));
+        $view = new Zend_View([
+            'scriptPath' => $this->basePath.'/default/views/scripts',
+        ]);
         $this->helper->setView($view);
 
         $result = $this->helper->partialLoop('partialLoopCouter.phtml', $data);
-        foreach ($data as $key=>$item) {
-            $string = 'This is an iteration: ' . $item['message'] . ', pointer at ' . ($key+1);
+        foreach ($data as $key => $item) {
+            $string = 'This is an iteration: '.$item['message'].', pointer at '.($key + 1);
             $this->assertContains($string, $result);
         }
     }
 
     /**
      * @group ZF-5174
-     * @link http://framework.zend.com/issues/browse/ZF-5174
+     *
+     * @see http://framework.zend.com/issues/browse/ZF-5174
      */
     public function testPartialLoopPartialCounterResets()
     {
-        $data = array(
-            array('message' => 'foo'),
-            array('message' => 'bar'),
-            array('message' => 'baz'),
-            array('message' => 'bat')
-        );
+        $data = [
+            ['message' => 'foo'],
+            ['message' => 'bar'],
+            ['message' => 'baz'],
+            ['message' => 'bat'],
+        ];
 
-        $view = new Zend_View(array(
-            'scriptPath' => $this->basePath . '/default/views/scripts'
-        ));
+        $view = new Zend_View([
+            'scriptPath' => $this->basePath.'/default/views/scripts',
+        ]);
         $this->helper->setView($view);
 
         $result = $this->helper->partialLoop('partialLoopCouter.phtml', $data);
-        foreach ($data as $key=>$item) {
-            $string = 'This is an iteration: ' . $item['message'] . ', pointer at ' . ($key+1);
+        foreach ($data as $key => $item) {
+            $string = 'This is an iteration: '.$item['message'].', pointer at '.($key + 1);
             $this->assertContains($string, $result);
         }
 
         $result = $this->helper->partialLoop('partialLoopCouter.phtml', $data);
-        foreach ($data as $key=>$item) {
-            $string = 'This is an iteration: ' . $item['message'] . ', pointer at ' . ($key+1);
+        foreach ($data as $key => $item) {
+            $string = 'This is an iteration: '.$item['message'].', pointer at '.($key + 1);
             $this->assertContains($string, $result);
         }
     }
@@ -380,24 +382,23 @@ class Zend_View_Helper_PartialLoopTest extends PHPUnit_Framework_TestCase
      */
     public function testPartialLoopSetsTotalCount()
     {
-        $data = array(
-            array('message' => 'foo'),
-            array('message' => 'bar'),
-            array('message' => 'baz'),
-            array('message' => 'bat')
-        );
+        $data = [
+            ['message' => 'foo'],
+            ['message' => 'bar'],
+            ['message' => 'baz'],
+            ['message' => 'bat'],
+        ];
 
         $view = new Zend_View(
-            array(
-                 'scriptPath' =>
-                 $this->basePath . '/default/views/scripts'
-            )
+            [
+                'scriptPath' => $this->basePath.'/default/views/scripts',
+            ]
         );
         $this->helper->setView($view);
 
         $result = $this->helper->partialLoop('partialLoopCouter.phtml', $data);
         foreach ($data as $key => $item) {
-            $string = 'Total count: ' . count($data);
+            $string = 'Total count: '.count($data);
             $this->assertContains($string, $result);
         }
     }
@@ -413,34 +414,34 @@ class Zend_View_Helper_PartialLoop_IteratorTest implements Iterator
         $this->items = $array;
     }
 
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function current()
     {
         return current($this->items);
     }
 
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function key()
     {
         return key($this->items);
     }
 
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function next()
     {
         return next($this->items);
     }
 
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function rewind()
     {
         return reset($this->items);
     }
 
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function valid()
     {
-        return (current($this->items) !== false);
+        return false !== current($this->items);
     }
 
     public function toArray()
@@ -456,43 +457,44 @@ class Zend_View_Helper_PartialLoop_RecursiveIteratorTest implements Iterator
 
     public function __construct()
     {
-        $this->items = array();
+        $this->items = [];
     }
 
     public function addItem(Iterator $iterator)
     {
         $this->items[] = $iterator;
+
         return $this;
     }
 
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function current()
     {
         return current($this->items);
     }
 
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function key()
     {
         return key($this->items);
     }
 
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function next()
     {
         return next($this->items);
     }
 
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function rewind()
     {
         return reset($this->items);
     }
 
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function valid()
     {
-        return (current($this->items) !== false);
+        return false !== current($this->items);
     }
 }
 
@@ -530,34 +532,34 @@ class Zend_View_Helper_PartialLoop_IteratorWithToArrayTest implements Iterator
         return $this->items;
     }
 
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function current()
     {
         return current($this->items);
     }
 
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function key()
     {
         return key($this->items);
     }
 
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function next()
     {
         return next($this->items);
     }
 
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function rewind()
     {
         return reset($this->items);
     }
 
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function valid()
     {
-        return (current($this->items) !== false);
+        return false !== current($this->items);
     }
 }
 
@@ -581,6 +583,6 @@ class Zend_View_Helper_PartialLoop_IteratorWithToArrayTestContainer
 }
 
 // Call Zend_View_Helper_PartialLoopTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_PartialLoopTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_View_Helper_PartialLoopTest::main') {
     Zend_View_Helper_PartialLoopTest::main();
 }

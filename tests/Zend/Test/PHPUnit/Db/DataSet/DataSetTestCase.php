@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Test
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -24,10 +25,10 @@
 
 /**
  * @category   Zend
- * @package    Zend_Test
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Test
  */
 abstract class Zend_Test_PHPUnit_Db_DataSet_DataSetTestCase extends PHPUnit_Framework_TestCase
@@ -35,11 +36,11 @@ abstract class Zend_Test_PHPUnit_Db_DataSet_DataSetTestCase extends PHPUnit_Fram
     /**
      * @var PHPUnit_Extensions_Database_DB_IDatabaseConnection
      */
-    protected $connectionMock = null;
+    protected $connectionMock;
 
     public function setUp()
     {
-        $this->connectionMock = $this->getMock('Zend_Test_PHPUnit_Db_Connection', array(), array(), '', false);
+        $this->connectionMock = $this->getMock('Zend_Test_PHPUnit_Db_Connection', [], [], '', false);
     }
 
     public function decorateConnectionMockWithZendAdapter()

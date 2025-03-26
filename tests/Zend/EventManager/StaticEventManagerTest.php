@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,12 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_EventManager
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_EventManager_StaticEventManagerTest::main');
 }
@@ -28,9 +27,9 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 /**
  * @category   Zend
- * @package    Zend_EventManager
- * @subpackage UnitTests
+ *
  * @group      Zend_EventManager
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -39,7 +38,7 @@ class Zend_EventManager_StaticEventManagerTest extends PHPUnit_Framework_TestCas
 {
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
+        $suite = new PHPUnit_Framework_TestSuite(__CLASS__);
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -56,7 +55,7 @@ class Zend_EventManager_StaticEventManagerTest extends PHPUnit_Framework_TestCas
     public function testOperatesAsASingleton()
     {
         $expected = Zend_EventManager_StaticEventManager::getInstance();
-        $test     = Zend_EventManager_StaticEventManager::getInstance();
+        $test = Zend_EventManager_StaticEventManager::getInstance();
         $this->assertSame($expected, $test);
     }
 
@@ -78,10 +77,10 @@ class Zend_EventManager_StaticEventManagerTest extends PHPUnit_Framework_TestCas
     public function testCanAttachCallbackToEvent()
     {
         $events = Zend_EventManager_StaticEventManager::getInstance();
-        $events->attach('foo', 'bar', array($this, __FUNCTION__));
+        $events->attach('foo', 'bar', [$this, __FUNCTION__]);
         $this->assertContains('bar', $events->getEvents('foo'));
-        $expected  = array($this, __FUNCTION__);
-        $found     = false;
+        $expected = [$this, __FUNCTION__];
+        $found = false;
         $listeners = $events->getListeners('foo', 'bar');
         $this->assertTrue($listeners instanceof Zend_Stdlib_PriorityQueue);
         $this->assertTrue(0 < count($listeners), 'Empty listeners!');
@@ -97,12 +96,12 @@ class Zend_EventManager_StaticEventManagerTest extends PHPUnit_Framework_TestCas
     public function testCanAttachCallbackToMultipleEventsAtOnce()
     {
         $events = Zend_EventManager_StaticEventManager::getInstance();
-        $events->attach('bar', array('foo', 'test'), array($this, __FUNCTION__));
+        $events->attach('bar', ['foo', 'test'], [$this, __FUNCTION__]);
         $this->assertContains('foo', $events->getEvents('bar'));
         $this->assertContains('test', $events->getEvents('bar'));
-        $expected = array($this, __FUNCTION__);
-        foreach (array('foo', 'test') as $event) {
-            $found     = false;
+        $expected = [$this, __FUNCTION__];
+        foreach (['foo', 'test'] as $event) {
+            $found = false;
             $listeners = $events->getListeners('bar', $event);
             $this->assertTrue($listeners instanceof Zend_Stdlib_PriorityQueue);
             $this->assertTrue(0 < count($listeners), 'Empty listeners!');
@@ -119,12 +118,12 @@ class Zend_EventManager_StaticEventManagerTest extends PHPUnit_Framework_TestCas
     public function testCanAttachSameEventToMultipleResourcesAtOnce()
     {
         $events = Zend_EventManager_StaticEventManager::getInstance();
-        $events->attach(array('foo', 'test'), 'bar', array($this, __FUNCTION__));
+        $events->attach(['foo', 'test'], 'bar', [$this, __FUNCTION__]);
         $this->assertContains('bar', $events->getEvents('foo'));
         $this->assertContains('bar', $events->getEvents('test'));
-        $expected = array($this, __FUNCTION__);
-        foreach (array('foo', 'test') as $id) {
-            $found     = false;
+        $expected = [$this, __FUNCTION__];
+        foreach (['foo', 'test'] as $id) {
+            $found = false;
             $listeners = $events->getListeners($id, 'bar');
             $this->assertTrue($listeners instanceof Zend_Stdlib_PriorityQueue);
             $this->assertTrue(0 < count($listeners), 'Empty listeners!');
@@ -141,13 +140,13 @@ class Zend_EventManager_StaticEventManagerTest extends PHPUnit_Framework_TestCas
     public function testCanAttachCallbackToMultipleEventsOnMultipleResourcesAtOnce()
     {
         $events = Zend_EventManager_StaticEventManager::getInstance();
-        $events->attach(array('bar', 'baz'), array('foo', 'test'), array($this, __FUNCTION__));
+        $events->attach(['bar', 'baz'], ['foo', 'test'], [$this, __FUNCTION__]);
         $this->assertContains('foo', $events->getEvents('bar'));
         $this->assertContains('test', $events->getEvents('bar'));
-        $expected = array($this, __FUNCTION__);
-        foreach (array('bar', 'baz') as $resource) {
-            foreach (array('foo', 'test') as $event) {
-                $found     = false;
+        $expected = [$this, __FUNCTION__];
+        foreach (['bar', 'baz'] as $resource) {
+            foreach (['foo', 'test'] as $event) {
+                $found = false;
                 $listeners = $events->getListeners($resource, $event);
                 $this->assertTrue($listeners instanceof Zend_Stdlib_PriorityQueue);
                 $this->assertTrue(0 < count($listeners), 'Empty listeners!');
@@ -164,16 +163,16 @@ class Zend_EventManager_StaticEventManagerTest extends PHPUnit_Framework_TestCas
 
     public function testListenersAttachedUsingWildcardEventWillBeTriggeredByResource()
     {
-        $this->test         = new stdClass;
-        $this->test->events = array();
-        $callback           = array($this, 'setEventName');
+        $this->test = new stdClass();
+        $this->test->events = [];
+        $callback = [$this, 'setEventName'];
 
         $staticEvents = Zend_EventManager_StaticEventManager::getInstance();
         $staticEvents->attach('bar', '*', $callback);
 
         $events = new Zend_EventManager_EventManager('bar');
 
-        foreach (array('foo', 'bar', 'baz') as $event) {
+        foreach (['foo', 'bar', 'baz'] as $event) {
             $events->trigger($event);
             $this->assertContains($event, $this->test->events);
         }
@@ -182,7 +181,7 @@ class Zend_EventManager_StaticEventManagerTest extends PHPUnit_Framework_TestCas
     public function testCanDetachListenerFromResource()
     {
         $events = Zend_EventManager_StaticEventManager::getInstance();
-        $events->attach('foo', 'bar', array($this, __FUNCTION__));
+        $events->attach('foo', 'bar', [$this, __FUNCTION__]);
         foreach ($events->getListeners('foo', 'bar') as $listener) {
             // only one; retrieving it so we can detach
         }
@@ -194,14 +193,14 @@ class Zend_EventManager_StaticEventManagerTest extends PHPUnit_Framework_TestCas
     public function testCanGetEventsByResource()
     {
         $events = Zend_EventManager_StaticEventManager::getInstance();
-        $events->attach('foo', 'bar', array($this, __FUNCTION__));
-        $this->assertEquals(array('bar'), $events->getEvents('foo'));
+        $events->attach('foo', 'bar', [$this, __FUNCTION__]);
+        $this->assertEquals(['bar'], $events->getEvents('foo'));
     }
 
     public function testCanGetListenersByResourceAndEvent()
     {
         $events = Zend_EventManager_StaticEventManager::getInstance();
-        $events->attach('foo', 'bar', array($this, __FUNCTION__));
+        $events->attach('foo', 'bar', [$this, __FUNCTION__]);
         $listeners = $events->getListeners('foo', 'bar');
         $this->assertTrue($listeners instanceof Zend_Stdlib_PriorityQueue);
         $this->assertEquals(1, count($listeners));
@@ -210,8 +209,8 @@ class Zend_EventManager_StaticEventManagerTest extends PHPUnit_Framework_TestCas
     public function testCanClearListenersByResource()
     {
         $events = Zend_EventManager_StaticEventManager::getInstance();
-        $events->attach('foo', 'bar', array($this, __FUNCTION__));
-        $events->attach('foo', 'baz', array($this, __FUNCTION__));
+        $events->attach('foo', 'bar', [$this, __FUNCTION__]);
+        $events->attach('foo', 'baz', [$this, __FUNCTION__]);
         $events->clearListeners('foo');
         $this->assertFalse($events->getListeners('foo', 'bar'));
         $this->assertFalse($events->getListeners('foo', 'baz'));
@@ -220,9 +219,9 @@ class Zend_EventManager_StaticEventManagerTest extends PHPUnit_Framework_TestCas
     public function testCanClearListenersByResourceAndEvent()
     {
         $events = Zend_EventManager_StaticEventManager::getInstance();
-        $events->attach('foo', 'bar', array($this, __FUNCTION__));
-        $events->attach('foo', 'baz', array($this, __FUNCTION__));
-        $events->attach('foo', 'bat', array($this, __FUNCTION__));
+        $events->attach('foo', 'bar', [$this, __FUNCTION__]);
+        $events->attach('foo', 'baz', [$this, __FUNCTION__]);
+        $events->attach('foo', 'bat', [$this, __FUNCTION__]);
         $events->clearListeners('foo', 'baz');
         $this->assertTrue($events->getListeners('foo', 'baz') instanceof Zend_Stdlib_PriorityQueue);
         $this->assertEquals(0, count($events->getListeners('foo', 'baz')));
@@ -234,20 +233,20 @@ class Zend_EventManager_StaticEventManagerTest extends PHPUnit_Framework_TestCas
 
     public function testCanPassArrayOfIdentifiersToConstructor()
     {
-        $identifiers = array('foo', 'bar');
+        $identifiers = ['foo', 'bar'];
         $manager = new Zend_EventManager_EventManager($identifiers);
     }
 
     public function testListenersAttachedToAnyIdentifierProvidedToEventManagerWillBeTriggered()
     {
-        $identifiers           = array('foo', 'bar');
-        $manager               = new Zend_EventManager_EventManager($identifiers);
-        $events                = Zend_EventManager_StaticEventManager::getInstance();
-        $this->test            = new stdClass;
+        $identifiers = ['foo', 'bar'];
+        $manager = new Zend_EventManager_EventManager($identifiers);
+        $events = Zend_EventManager_StaticEventManager::getInstance();
+        $this->test = new stdClass();
         $this->test->triggered = 0;
-        $events->attach('foo', 'bar', array($this, 'advanceTriggered'));
-        $events->attach('foo', 'bar', array($this, 'advanceTriggered'));
-        $manager->trigger('bar', $this, array());
+        $events->attach('foo', 'bar', [$this, 'advanceTriggered']);
+        $events->attach('foo', 'bar', [$this, 'advanceTriggered']);
+        $manager->trigger('bar', $this, []);
         $this->assertEquals(2, $this->test->triggered);
     }
 
@@ -262,7 +261,7 @@ class Zend_EventManager_StaticEventManagerTest extends PHPUnit_Framework_TestCas
 
     public function advanceTriggered($e)
     {
-        $this->test->triggered++;
+        ++$this->test->triggered;
     }
 }
 

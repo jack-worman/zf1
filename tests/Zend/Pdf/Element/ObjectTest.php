@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Pdf
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -28,10 +29,10 @@
 
 /**
  * @category   Zend
- * @package    Zend_Pdf
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Pdf
  */
 #[AllowDynamicProperties]
@@ -40,7 +41,7 @@ class Zend_Pdf_Element_ObjectTest extends PHPUnit_Framework_TestCase
     public function testPDFObject()
     {
         $intObj = new Zend_Pdf_Element_Numeric(100);
-        $obj    = new Zend_Pdf_Element_Object($intObj, 1, 0, new Zend_Pdf_ElementFactory(1));
+        $obj = new Zend_Pdf_Element_Object($intObj, 1, 0, new Zend_Pdf_ElementFactory(1));
 
         $this->assertTrue($obj instanceof Zend_Pdf_Element_Object);
     }
@@ -48,12 +49,13 @@ class Zend_Pdf_Element_ObjectTest extends PHPUnit_Framework_TestCase
     public function testPDFObjectBadObjectType1()
     {
         $intObj = new Zend_Pdf_Element_Numeric(100);
-        $obj1   = new Zend_Pdf_Element_Object($intObj, 1, 0, new Zend_Pdf_ElementFactory(1));
+        $obj1 = new Zend_Pdf_Element_Object($intObj, 1, 0, new Zend_Pdf_ElementFactory(1));
 
         try {
             $obj2 = new Zend_Pdf_Element_Object($obj1, 1, 0, new Zend_Pdf_ElementFactory(1));
         } catch (Zend_Pdf_Exception $e) {
             $this->assertRegExp('/must not be an instance of Zend_Pdf_Element_Object/i', $e->getMessage());
+
             return;
         }
         $this->fail('Expected Zend_Pdf_Exception to be thrown');
@@ -63,9 +65,10 @@ class Zend_Pdf_Element_ObjectTest extends PHPUnit_Framework_TestCase
     {
         try {
             $intObj = new Zend_Pdf_Element_Numeric(100);
-            $obj    = new Zend_Pdf_Element_Object($intObj, 1, -1, new Zend_Pdf_ElementFactory(1));
+            $obj = new Zend_Pdf_Element_Object($intObj, 1, -1, new Zend_Pdf_ElementFactory(1));
         } catch (Zend_Pdf_Exception $e) {
             $this->assertRegExp('/non-negative integer/i', $e->getMessage());
+
             return;
         }
         $this->fail('Expected Zend_Pdf_Exception to be thrown');
@@ -75,9 +78,10 @@ class Zend_Pdf_Element_ObjectTest extends PHPUnit_Framework_TestCase
     {
         try {
             $intObj = new Zend_Pdf_Element_Numeric(100);
-            $obj    = new Zend_Pdf_Element_Object($intObj, 1, 1.2, new Zend_Pdf_ElementFactory(1));
+            $obj = new Zend_Pdf_Element_Object($intObj, 1, 1.2, new Zend_Pdf_ElementFactory(1));
         } catch (Zend_Pdf_Exception $e) {
             $this->assertRegExp('/non-negative integer/i', $e->getMessage());
+
             return;
         }
         $this->fail('Expected Zend_Pdf_Exception to be thrown');
@@ -87,9 +91,10 @@ class Zend_Pdf_Element_ObjectTest extends PHPUnit_Framework_TestCase
     {
         try {
             $intObj = new Zend_Pdf_Element_Numeric(100);
-            $obj    = new Zend_Pdf_Element_Object($intObj, 0, 0, new Zend_Pdf_ElementFactory(1));
+            $obj = new Zend_Pdf_Element_Object($intObj, 0, 0, new Zend_Pdf_ElementFactory(1));
         } catch (Zend_Pdf_Exception $e) {
             $this->assertRegExp('/positive integer/i', $e->getMessage());
+
             return;
         }
         $this->fail('Expected Zend_Pdf_Exception to be thrown');
@@ -99,9 +104,10 @@ class Zend_Pdf_Element_ObjectTest extends PHPUnit_Framework_TestCase
     {
         try {
             $intObj = new Zend_Pdf_Element_Numeric(100);
-            $obj    = new Zend_Pdf_Element_Object($intObj, -1, 0, new Zend_Pdf_ElementFactory(1));
+            $obj = new Zend_Pdf_Element_Object($intObj, -1, 0, new Zend_Pdf_ElementFactory(1));
         } catch (Zend_Pdf_Exception $e) {
             $this->assertRegExp('/positive integer/i', $e->getMessage());
+
             return;
         }
         $this->fail('Expected Zend_Pdf_Exception to be thrown');
@@ -111,9 +117,10 @@ class Zend_Pdf_Element_ObjectTest extends PHPUnit_Framework_TestCase
     {
         try {
             $intObj = new Zend_Pdf_Element_Numeric(100);
-            $obj    = new Zend_Pdf_Element_Object($intObj, 1.2, 0, new Zend_Pdf_ElementFactory(1));
+            $obj = new Zend_Pdf_Element_Object($intObj, 1.2, 0, new Zend_Pdf_ElementFactory(1));
         } catch (Zend_Pdf_Exception $e) {
             $this->assertRegExp('/positive integer/i', $e->getMessage());
+
             return;
         }
         $this->fail('Expected Zend_Pdf_Exception to be thrown');
@@ -122,7 +129,7 @@ class Zend_Pdf_Element_ObjectTest extends PHPUnit_Framework_TestCase
     public function testGetType()
     {
         $intObj = new Zend_Pdf_Element_Numeric(100);
-        $obj    = new Zend_Pdf_Element_Object($intObj, 1, 0, new Zend_Pdf_ElementFactory(1));
+        $obj = new Zend_Pdf_Element_Object($intObj, 1, 0, new Zend_Pdf_ElementFactory(1));
 
         $this->assertEquals($obj->getType(), $intObj->getType());
     }
@@ -130,7 +137,7 @@ class Zend_Pdf_Element_ObjectTest extends PHPUnit_Framework_TestCase
     public function testToString()
     {
         $intObj = new Zend_Pdf_Element_Numeric(100);
-        $obj    = new Zend_Pdf_Element_Object($intObj, 55, 3, new Zend_Pdf_ElementFactory(1));
+        $obj = new Zend_Pdf_Element_Object($intObj, 55, 3, new Zend_Pdf_ElementFactory(1));
 
         $this->assertEquals($obj->toString(), '55 3 R');
     }
@@ -139,8 +146,8 @@ class Zend_Pdf_Element_ObjectTest extends PHPUnit_Framework_TestCase
     {
         $factory = new Zend_Pdf_ElementFactory(1);
 
-        $intObj  = new Zend_Pdf_Element_Numeric(100);
-        $obj     = new Zend_Pdf_Element_Object($intObj, 55, 3, $factory);
+        $intObj = new Zend_Pdf_Element_Numeric(100);
+        $obj = new Zend_Pdf_Element_Object($intObj, 55, 3, $factory);
 
         $this->assertEquals($obj->dump($factory), "55 3 obj \n100\nendobj\n");
     }

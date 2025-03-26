@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Reflection
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,17 +26,16 @@
 
 /**
  * @category   Zend
- * @package    Zend_Reflection
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Reflection
  * @group      Zend_Reflection_Extension
  */
 #[AllowDynamicProperties]
 class Zend_Reflection_ExtensionTest extends PHPUnit_Framework_TestCase
 {
-
     public function testClassReturn()
     {
         $extension = new Zend_Reflection_Extension('Reflection');
@@ -50,4 +50,3 @@ class Zend_Reflection_ExtensionTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(get_class(array_shift($extensionFunctions)), 'Zend_Reflection_Function');
     }
 }
-

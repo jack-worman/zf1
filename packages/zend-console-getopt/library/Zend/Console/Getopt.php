@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend_Console_Getopt is a class to parse options for command-line
  * applications.

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,59 +14,56 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Auth
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
-
 /**
- * PHPUnit_Framework_TestCase
+ * PHPUnit_Framework_TestCase.
  */
-
 
 /**
  * @see Zend_Auth_Adapter_Http_Resolver_File
  */
 // require_once 'Zend/Auth/Adapter/Http/Resolver/File.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_Auth
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Auth
  */
 #[AllowDynamicProperties]
 class Zend_Auth_Adapter_Http_Resolver_FileTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Path to test files
+     * Path to test files.
      *
      * @var string
      */
     protected $_filesPath;
 
     /**
-     * Path to a valid file
+     * Path to a valid file.
      *
      * @var string
      */
     protected $_validPath;
 
     /**
-     * Invalid path; does not exist
+     * Invalid path; does not exist.
      *
      * @var string
      */
     protected $_badPath;
 
     /**
-     * Resolver instance
+     * Resolver instance.
      *
      * @var Zend_Auth_Adapter_Http_Resolver_File
      */
@@ -77,14 +75,14 @@ class Zend_Auth_Adapter_Http_Resolver_FileTest extends PHPUnit_Framework_TestCas
      */
     public function __construct()
     {
-        $this->_filesPath = dirname(__DIR__) . '/_files';
+        $this->_filesPath = dirname(__DIR__).'/_files';
         $this->_validPath = "$this->_filesPath/htdigest.3";
-        $this->_badPath   = 'doesnotexist';
-        $this->_resolver  = new Zend_Auth_Adapter_Http_Resolver_File($this->_validPath);
+        $this->_badPath = 'doesnotexist';
+        $this->_resolver = new Zend_Auth_Adapter_Http_Resolver_File($this->_validPath);
     }
 
     /**
-     * Ensures that setFile() works as expected for valid input
+     * Ensures that setFile() works as expected for valid input.
      *
      * @return void
      */
@@ -99,7 +97,7 @@ class Zend_Auth_Adapter_Http_Resolver_FileTest extends PHPUnit_Framework_TestCas
     }
 
     /**
-     * Ensures that setFile() works as expected for invalid input
+     * Ensures that setFile() works as expected for invalid input.
      *
      * @return void
      */
@@ -114,7 +112,7 @@ class Zend_Auth_Adapter_Http_Resolver_FileTest extends PHPUnit_Framework_TestCas
     }
 
     /**
-     * Ensures that __construct() works as expected for valid input
+     * Ensures that __construct() works as expected for valid input.
      *
      * @return void
      */
@@ -129,7 +127,7 @@ class Zend_Auth_Adapter_Http_Resolver_FileTest extends PHPUnit_Framework_TestCas
     }
 
     /**
-     * Ensures that __construct() works as expected for invalid input
+     * Ensures that __construct() works as expected for invalid input.
      *
      * @return void
      */
@@ -138,13 +136,13 @@ class Zend_Auth_Adapter_Http_Resolver_FileTest extends PHPUnit_Framework_TestCas
         try {
             $v = new Zend_Auth_Adapter_Http_Resolver_File($this->_badPath);
             $this->fail('Constructor accepted bad path');
-        } catch(Zend_Auth_Adapter_Http_Resolver_Exception $e) {
+        } catch (Zend_Auth_Adapter_Http_Resolver_Exception $e) {
             $this->assertContains('Path not readable', $e->getMessage());
         }
     }
 
     /**
-     * Ensures that resolve() works as expected for empty username
+     * Ensures that resolve() works as expected for empty username.
      *
      * @return void
      */
@@ -159,7 +157,7 @@ class Zend_Auth_Adapter_Http_Resolver_FileTest extends PHPUnit_Framework_TestCas
     }
 
     /**
-     * Ensures that resolve() works as expected for empty realm
+     * Ensures that resolve() works as expected for empty realm.
      *
      * @return void
      */
@@ -174,7 +172,7 @@ class Zend_Auth_Adapter_Http_Resolver_FileTest extends PHPUnit_Framework_TestCas
     }
 
     /**
-     * Ensures that resolve() works as expected for invalid username
+     * Ensures that resolve() works as expected for invalid username.
      *
      * @return void
      */
@@ -195,7 +193,7 @@ class Zend_Auth_Adapter_Http_Resolver_FileTest extends PHPUnit_Framework_TestCas
     }
 
     /**
-     * Ensures that resolve() works as expected for invalid realm
+     * Ensures that resolve() works as expected for invalid realm.
      *
      * @return void
      */
@@ -216,7 +214,7 @@ class Zend_Auth_Adapter_Http_Resolver_FileTest extends PHPUnit_Framework_TestCas
     }
 
     /**
-     * Ensures that resolve() works as expected when a previously readable file becomes unreadable
+     * Ensures that resolve() works as expected when a previously readable file becomes unreadable.
      *
      * @return void
      */
@@ -234,7 +232,7 @@ class Zend_Auth_Adapter_Http_Resolver_FileTest extends PHPUnit_Framework_TestCas
     }
 
     /**
-     * Ensures that resolve() works as expected when provided valid credentials
+     * Ensures that resolve() works as expected when provided valid credentials.
      *
      * @return void
      */
@@ -248,7 +246,7 @@ class Zend_Auth_Adapter_Http_Resolver_FileTest extends PHPUnit_Framework_TestCas
     }
 
     /**
-     * Ensures that resolve() works as expected when provided nonexistent realm
+     * Ensures that resolve() works as expected when provided nonexistent realm.
      *
      * @return void
      */
@@ -261,7 +259,7 @@ class Zend_Auth_Adapter_Http_Resolver_FileTest extends PHPUnit_Framework_TestCas
     }
 
     /**
-     * Ensures that resolve() works as expected when provided nonexistent user
+     * Ensures that resolve() works as expected when provided nonexistent user.
      *
      * @return void
      */

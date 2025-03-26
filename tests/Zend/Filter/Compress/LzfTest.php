@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +14,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id: $
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Filter_Compress_LzfTest::main');
 }
@@ -31,9 +31,9 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 /**
  * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
+ *
  * @group      Zend_Filter
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -41,13 +41,13 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 class Zend_Filter_Compress_LzfTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Runs this test suite
+     * Runs this test suite.
      *
      * @return void
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite('Zend_Filter_Compress_LzfTest');
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Filter_Compress_LzfTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -59,15 +59,15 @@ class Zend_Filter_Compress_LzfTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Basic usage
+     * Basic usage.
      *
      * @return void
      */
     public function testBasicUsage()
     {
-        $filter  = new Zend_Filter_Compress_Lzf();
+        $filter = new Zend_Filter_Compress_Lzf();
 
-        $text       = 'compress me';
+        $text = 'compress me';
         $compressed = $filter->compress($text);
         $this->assertNotEquals($text, $compressed);
 
@@ -76,7 +76,7 @@ class Zend_Filter_Compress_LzfTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * testing toString
+     * testing toString.
      *
      * @return void
      */

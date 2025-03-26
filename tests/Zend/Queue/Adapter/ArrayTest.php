@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Queue
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -38,14 +39,14 @@
 require_once 'MessageTestClass.php';
 
 /** Base Adapter test class */
-require_once __DIR__ . '/AdapterTest.php';
+require_once __DIR__.'/AdapterTest.php';
 
 /**
  * @category   Zend
- * @package    Zend_Queue
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Queue
  */
 #[AllowDynamicProperties]
@@ -53,7 +54,7 @@ class Zend_Queue_Adapter_ArrayTest extends Zend_Queue_Adapter_AdapterTest
 {
     /**
      * getAdapterName() is an method to help make AdapterTest work with any
-     * new adapters
+     * new adapters.
      *
      * You must overload this method
      *
@@ -66,7 +67,7 @@ class Zend_Queue_Adapter_ArrayTest extends Zend_Queue_Adapter_AdapterTest
 
     /**
      * getAdapterName() is an method to help make AdapterTest work with any
-     * new adapters
+     * new adapters.
      *
      * You may overload this method.  The default return is
      * 'Zend_Queue_Adapter_' . $this->getAdapterName()
@@ -75,12 +76,12 @@ class Zend_Queue_Adapter_ArrayTest extends Zend_Queue_Adapter_AdapterTest
      */
     public function getAdapterFullName()
     {
-        return 'Zend_Queue_Adapter_' . $this->getAdapterName();
+        return 'Zend_Queue_Adapter_'.$this->getAdapterName();
     }
 
     public function getTestConfig()
     {
-        return array('driverOptions' => array());
+        return ['driverOptions' => []];
     }
 
     // test the constants
@@ -90,7 +91,7 @@ class Zend_Queue_Adapter_ArrayTest extends Zend_Queue_Adapter_AdapterTest
     }
 
     // extra non standard tests
-    public function test_magic()
+    public function testMagic()
     {
         $queue = $this->createQueue(__FUNCTION__);
         $adapter = $queue->getAdapter();
@@ -101,12 +102,12 @@ class Zend_Queue_Adapter_ArrayTest extends Zend_Queue_Adapter_AdapterTest
         $this->assertEquals($new->getData(), $adapter->getData());
     }
 
-    public function test_get_setData()
+    public function testGetSetData()
     {
         $queue = $this->createQueue(__FUNCTION__);
         $adapter = $queue->getAdapter();
 
-        $data = array('test' => 1);
+        $data = ['test' => 1];
         $adapter->setData($data);
         $got = $adapter->getData();
         $this->assertEquals($data['test'], $got['test']);
