@@ -21,6 +21,8 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
+
 require_once __DIR__.'/TestAbstract.php';
 // require_once 'Zend/View/Helper/Navigation/Menu.php';
 
@@ -334,6 +336,7 @@ class Zend_View_Helper_Navigation_MenuTest extends Zend_View_Helper_Navigation_T
         $this->assertEquals($expected, $actual);
     }
 
+    #[DoesNotPerformAssertions]
     public function testRenderingPartialShouldFailOnInvalidPartialArray()
     {
         $this->_helper->setPartial(['menu.phtml']);

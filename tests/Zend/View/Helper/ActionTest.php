@@ -22,6 +22,8 @@
  */
 
 // Call Zend_View_Helper_ActionTest::main() if this source file is executed directly.
+use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_View_Helper_ActionTest::main');
 }
@@ -230,6 +232,7 @@ class Zend_View_Helper_ActionTest extends PHPUnit\Framework\TestCase
     /**
      * @return void
      */
+    #[DoesNotPerformAssertions]
     public function testConstructorThrowsExceptionWithNoRequestInFrontController()
     {
         $front = Zend_Controller_Front::getInstance();

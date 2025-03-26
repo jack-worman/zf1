@@ -22,6 +22,8 @@
  */
 
 // Call Zend_View_Helper_PartialLoopTest::main() if this source file is executed directly.
+use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_View_Helper_PartialLoopTest::main');
 }
@@ -172,6 +174,7 @@ class Zend_View_Helper_PartialLoopTest extends PHPUnit\Framework\TestCase
     /**
      * @return void
      */
+    #[DoesNotPerformAssertions]
     public function testPartialLoopThrowsExceptionWithBadIterator()
     {
         $data = [

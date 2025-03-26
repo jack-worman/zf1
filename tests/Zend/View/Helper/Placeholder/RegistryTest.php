@@ -22,6 +22,8 @@
  */
 
 // Call Zend_View_Helper_Placeholder_RegistryTest::main() if this source file is executed directly.
+use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_View_Helper_Placeholder_RegistryTest::main');
 }
@@ -152,6 +154,7 @@ class Zend_View_Helper_Placeholder_RegistryTest extends PHPUnit\Framework\TestCa
     /**
      * @return void
      */
+    #[DoesNotPerformAssertions]
     public function testSetContainerClassThrowsExceptionWithInvalidContainerClass()
     {
         try {

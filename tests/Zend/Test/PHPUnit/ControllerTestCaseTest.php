@@ -74,7 +74,6 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit\Framework\TestCas
     public function setUp(): void
     {
         $_SESSION = [];
-        $this->expectException(null);
         $this->testCase = new Zend_Test_PHPUnit_ControllerTestCaseTest_Concrete();
         $this->testCase->reset();
         $this->testCase->bootstrap = [$this, 'bootstrap'];

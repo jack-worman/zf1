@@ -28,6 +28,8 @@
 
 // require_once "Zend/Config.php";
 
+use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
+
 require_once __DIR__.'/TestAsset/commontypes.php';
 
 /**
@@ -339,6 +341,7 @@ class Zend_Soap_ServerTest extends PHPUnit\Framework\TestCase
         }
     }
 
+    #[DoesNotPerformAssertions]
     public function testAddBogusFunctionsAsArray()
     {
         $server = new Zend_Soap_Server();

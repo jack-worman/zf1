@@ -22,6 +22,8 @@
  */
 
 // Call Zend_View_Helper_PartialTest::main() if this source file is executed directly.
+use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_View_Helper_PartialTest::main');
 }
@@ -139,6 +141,7 @@ class Zend_View_Helper_PartialTest extends PHPUnit\Framework\TestCase
     /**
      * @return void
      */
+    #[DoesNotPerformAssertions]
     public function testPartialThrowsExceptionWithInvalidModule()
     {
         Zend_Controller_Front::getInstance()->addModuleDirectory($this->basePath);
