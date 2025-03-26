@@ -929,7 +929,7 @@ abstract class Zend_Db_Adapter_Abstract
             return $quotedValue;
         }
 
-        return $this->_quote($value);
+        return (string) $this->_quote($value);
     }
 
     /**
