@@ -57,9 +57,7 @@ class Zend_Filter_Null implements Zend_Filter_Interface
     protected $_type = self::ALL;
 
     /**
-     * Constructor.
-     *
-     * @param string|array|Zend_Config $options OPTIONAL
+     * @param Zend_Filter_Null::*|string|array{type: Zend_Filter_Null::*|string}|null $options
      */
     public function __construct($options = null)
     {

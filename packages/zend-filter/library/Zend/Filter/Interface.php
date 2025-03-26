@@ -32,6 +32,10 @@ interface Zend_Filter_Interface
     /**
      * Returns the result of filtering $value.
      *
+     * @param mixed $value ~
+     *
+     * @return mixed ~
+     *
      * @throws Zend_Filter_Exception If filtering $value is impossible
      */
     public function filter($value);
