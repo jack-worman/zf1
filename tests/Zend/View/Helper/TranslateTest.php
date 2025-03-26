@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_View_Helper_TranslateTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_TranslateTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_View_Helper_TranslateTest::main');
 }
 
 /** Zend_View_Helper_Translate */
@@ -39,15 +40,15 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * Test class for Zend_View_Helper_Translate.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
 #[AllowDynamicProperties]
-class Zend_View_Helper_TranslateTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_TranslateTest extends PHPUnit\Framework\TestCase
 {
     /**
      * @var Zend_View_Helper_Translate
@@ -66,9 +67,12 @@ class Zend_View_Helper_TranslateTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_TranslateTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_View_Helper_TranslateTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
+            $suite,
+        );
     }
 
     public function clearRegistry()
@@ -83,10 +87,8 @@ class Zend_View_Helper_TranslateTest extends PHPUnit_Framework_TestCase
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->clearRegistry();
         $this->helper = new Zend_View_Helper_Translate();
@@ -95,10 +97,8 @@ class Zend_View_Helper_TranslateTest extends PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
-     *
-     * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->helper);
         $this->clearRegistry();
@@ -106,7 +106,7 @@ class Zend_View_Helper_TranslateTest extends PHPUnit_Framework_TestCase
 
     public function testTranslationObjectPassedToConstructorUsedForTranslation()
     {
-        $trans = new Zend_Translate('array', array('one' => 'eins', 'two %1\$s' => 'zwei %1\$s'), 'de');
+        $trans = new Zend_Translate('array', ['one' => 'eins', 'two %1\$s' => 'zwei %1\$s'], 'de');
 
         $helper = new Zend_View_Helper_Translate($trans);
         $this->assertEquals('eins', $helper->translate('one'));
@@ -115,7 +115,7 @@ class Zend_View_Helper_TranslateTest extends PHPUnit_Framework_TestCase
 
     public function testLocalTranslationObjectUsedForTranslationsWhenPresent()
     {
-        $trans = new Zend_Translate('array', array('one' => 'eins', 'two %1\$s' => 'zwei %1\$s'), 'de');
+        $trans = new Zend_Translate('array', ['one' => 'eins', 'two %1\$s' => 'zwei %1\$s'], 'de');
 
         $this->helper->setTranslator($trans);
         $this->assertEquals('eins', $this->helper->translate('one'));
@@ -124,7 +124,7 @@ class Zend_View_Helper_TranslateTest extends PHPUnit_Framework_TestCase
 
     public function testTranslationObjectInRegistryUsedForTranslationsInAbsenceOfLocalTranslationObject()
     {
-        $trans = new Zend_Translate('array', array('one' => 'eins', 'two %1\$s' => 'zwei %1\$s'), 'de');
+        $trans = new Zend_Translate('array', ['one' => 'eins', 'two %1\$s' => 'zwei %1\$s'], 'de');
         Zend_Registry::set('Zend_Translate', $trans);
         $this->assertEquals('eins', $this->helper->translate('one'));
     }
@@ -140,7 +140,7 @@ class Zend_View_Helper_TranslateTest extends PHPUnit_Framework_TestCase
         try {
             $helper = new Zend_View_Helper_Translate('something');
         } catch (Zend_View_Exception $e) {
-            $this->assertContains('must set an instance of Zend_Translate', $e->getMessage());
+            $this->assertStringContainsString('must set an instance of Zend_Translate', $e->getMessage());
         }
     }
 
@@ -149,7 +149,7 @@ class Zend_View_Helper_TranslateTest extends PHPUnit_Framework_TestCase
         try {
             $this->helper->setTranslator('something');
         } catch (Zend_View_Exception $e) {
-            $this->assertContains('must set an instance of Zend_Translate', $e->getMessage());
+            $this->assertStringContainsString('must set an instance of Zend_Translate', $e->getMessage());
         }
     }
 
@@ -158,7 +158,7 @@ class Zend_View_Helper_TranslateTest extends PHPUnit_Framework_TestCase
         try {
             $this->helper->getLocale();
         } catch (Zend_View_Exception $e) {
-            $this->assertContains('must set an instance of Zend_Translate', $e->getMessage());
+            $this->assertStringContainsString('must set an instance of Zend_Translate', $e->getMessage());
         }
     }
 
@@ -167,14 +167,14 @@ class Zend_View_Helper_TranslateTest extends PHPUnit_Framework_TestCase
         try {
             $this->helper->setLocale('de');
         } catch (Zend_View_Exception $e) {
-            $this->assertContains('must set an instance of Zend_Translate', $e->getMessage());
+            $this->assertStringContainsString('must set an instance of Zend_Translate', $e->getMessage());
         }
     }
 
     public function testCanSetLocale()
     {
-        $trans = new Zend_Translate('array', array('one' => 'eins', 'two %1\$s' => 'zwei %1\$s'), 'de');
-        $trans->addTranslation(array('one' => 'uno', 'two %1\$s' => 'duo %2\$s'), 'it');
+        $trans = new Zend_Translate('array', ['one' => 'eins', 'two %1\$s' => 'zwei %1\$s'], 'de');
+        $trans->addTranslation(['one' => 'uno', 'two %1\$s' => 'duo %2\$s'], 'it');
         $trans->setLocale('de');
 
         $this->helper->setTranslator($trans);
@@ -187,8 +187,8 @@ class Zend_View_Helper_TranslateTest extends PHPUnit_Framework_TestCase
 
     public function testHelperImplementsFluentInterface()
     {
-        $trans = new Zend_Translate('array', array('one' => 'eins', 'two %1\$s' => 'zwei %1\$s'), 'de');
-        $trans->addTranslation(array('one' => 'uno', 'two %1\$s' => 'duo %2\$s'), 'it');
+        $trans = new Zend_Translate('array', ['one' => 'eins', 'two %1\$s' => 'zwei %1\$s'], 'de');
+        $trans->addTranslation(['one' => 'uno', 'two %1\$s' => 'duo %2\$s'], 'it');
         $trans->setLocale('de');
 
         $locale = $this->helper->translate()->setTranslator($trans)->getLocale();
@@ -198,17 +198,17 @@ class Zend_View_Helper_TranslateTest extends PHPUnit_Framework_TestCase
 
     public function testCanTranslateWithOptions()
     {
-        $trans = new Zend_Translate('array', array('one' => 'eins', "two %1\$s" => "zwei %1\$s",
-            "three %1\$s %2\$s" => "drei %1\$s %2\$s"), 'de');
-        $trans->addTranslation(array('one' => 'uno', "two %1\$s" => "duo %2\$s",
-            "three %1\$s %2\$s" => "tre %1\$s %2\$s"), 'it');
+        $trans = new Zend_Translate('array', ['one' => 'eins', 'two %1$s' => 'zwei %1$s',
+            'three %1$s %2$s' => 'drei %1$s %2$s'], 'de');
+        $trans->addTranslation(['one' => 'uno', 'two %1$s' => 'duo %2$s',
+            'three %1$s %2$s' => 'tre %1$s %2$s'], 'it');
         $trans->setLocale('de');
 
         $this->helper->setTranslator($trans);
-        $this->assertEquals("drei 100 200", $this->helper->translate("three %1\$s %2\$s", "100", "200"));
-        $this->assertEquals("tre 100 200", $this->helper->translate("three %1\$s %2\$s", "100", "200", 'it'));
-        $this->assertEquals("drei 100 200", $this->helper->translate("three %1\$s %2\$s", array("100", "200")));
-        $this->assertEquals("tre 100 200", $this->helper->translate("three %1\$s %2\$s", array("100", "200"), 'it'));
+        $this->assertEquals('drei 100 200', $this->helper->translate('three %1$s %2$s', '100', '200'));
+        $this->assertEquals('tre 100 200', $this->helper->translate('three %1$s %2$s', '100', '200', 'it'));
+        $this->assertEquals('drei 100 200', $this->helper->translate('three %1$s %2$s', ['100', '200']));
+        $this->assertEquals('tre 100 200', $this->helper->translate('three %1$s %2$s', ['100', '200'], 'it'));
     }
 
     public function testTranslationObjectNullByDefault()
@@ -218,12 +218,12 @@ class Zend_View_Helper_TranslateTest extends PHPUnit_Framework_TestCase
 
     public function testLocalTranslationObjectIsPreferredOverRegistry()
     {
-        $transReg = new Zend_Translate('array', array('one' => 'eins'));
+        $transReg = new Zend_Translate('array', ['one' => 'eins']);
         Zend_Registry::set('Zend_Translate', $transReg);
 
         $this->assertSame($transReg->getAdapter(), $this->helper->getTranslator());
 
-        $transLoc = new Zend_Translate('array', array('one' => 'uno'));
+        $transLoc = new Zend_Translate('array', ['one' => 'uno']);
         $this->helper->setTranslator($transLoc);
         $this->assertSame($transLoc->getAdapter(), $this->helper->getTranslator());
         $this->assertNotSame($transLoc->getAdapter(), $transReg->getAdapter());
@@ -234,37 +234,37 @@ class Zend_View_Helper_TranslateTest extends PHPUnit_Framework_TestCase
         $helper = $this->helper->translate();
         $this->assertSame($this->helper, $helper);
 
-        $transLoc = new Zend_Translate('array', array('one' => 'eins'));
+        $transLoc = new Zend_Translate('array', ['one' => 'eins']);
         $this->helper->setTranslator($transLoc);
         $helper = $this->helper->translate();
         $this->assertSame($this->helper, $helper);
     }
 
     /**
-     * ZF-6724
+     * ZF-6724.
      */
     public function testTranslationWithPercent()
     {
-        $trans = new Zend_Translate('array', array('one' => 'eins', "two %1\$s" => "zwei %1\$s",
-            "three %1\$s %2\$s" => "drei %1\$s %2\$s", 'vier%ig' => 'four%'), 'de');
+        $trans = new Zend_Translate('array', ['one' => 'eins', 'two %1$s' => 'zwei %1$s',
+            'three %1$s %2$s' => 'drei %1$s %2$s', 'vier%ig' => 'four%'], 'de');
         $trans->setLocale('de');
 
         $this->helper->setTranslator($trans);
-        $this->assertEquals("four%", $this->helper->translate("vier%ig"));
-        $this->assertEquals("zwei 100", $this->helper->translate("two %1\$s", "100"));
+        $this->assertEquals('four%', $this->helper->translate('vier%ig'));
+        $this->assertEquals('zwei 100', $this->helper->translate('two %1$s', '100'));
     }
 
     /**
-     * ZF-7937
+     * ZF-7937.
      */
     public function testTranslationWithoutTranslator()
     {
-        $result = $this->helper->translate("test %1\$s", "100");
+        $result = $this->helper->translate('test %1$s', '100');
         $this->assertEquals('test 100', $result);
     }
 }
 
 // Call Zend_View_Helper_TranslateTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_TranslateTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_View_Helper_TranslateTest::main') {
     Zend_View_Helper_TranslateTest::main();
 }

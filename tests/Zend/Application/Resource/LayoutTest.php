@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,47 +14,50 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Application
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Application_Resource_LayoutTest::main');
 }
 
 /**
- * Zend_Loader_Autoloader
+ * Zend_Loader_Autoloader.
  */
 // require_once 'Zend/Loader/Autoloader.php';
 
 /**
  * @category   Zend
- * @package    Zend_Application
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Application
  */
 #[AllowDynamicProperties]
-class Zend_Application_Resource_LayoutTest extends PHPUnit_Framework_TestCase
+class Zend_Application_Resource_LayoutTest extends PHPUnit\Framework\TestCase
 {
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite = PHPUnit\Framework\TestSuite::empty(__CLASS__);
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
+            $suite,
+        );
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         // Store original autoloaders
         $this->loaders = spl_autoload_functions();
         if (!is_array($this->loaders)) {
             // spl_autoload_functions does not return empty array when no
             // autoloaders registered...
-            $this->loaders = array();
+            $this->loaders = [];
         }
 
         Zend_Loader_Autoloader::resetInstance();
@@ -66,7 +70,7 @@ class Zend_Application_Resource_LayoutTest extends PHPUnit_Framework_TestCase
         Zend_Controller_Front::getInstance()->resetInstance();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         // Restore original autoloaders
         $loaders = spl_autoload_functions();
@@ -84,7 +88,7 @@ class Zend_Application_Resource_LayoutTest extends PHPUnit_Framework_TestCase
 
     public function testInitializationInitializesLayoutObject()
     {
-        $resource = new Zend_Application_Resource_Layout(array());
+        $resource = new Zend_Application_Resource_Layout([]);
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
         $this->assertTrue($resource->getLayout() instanceof Zend_Layout);
@@ -92,7 +96,7 @@ class Zend_Application_Resource_LayoutTest extends PHPUnit_Framework_TestCase
 
     public function testInitializationReturnsLayoutObject()
     {
-        $resource = new Zend_Application_Resource_Layout(array());
+        $resource = new Zend_Application_Resource_Layout([]);
         $resource->setBootstrap($this->bootstrap);
         $test = $resource->init();
         $this->assertTrue($test instanceof Zend_Layout);
@@ -100,19 +104,19 @@ class Zend_Application_Resource_LayoutTest extends PHPUnit_Framework_TestCase
 
     public function testOptionsPassedToResourceAreUsedToSetLayoutState()
     {
-        $options = array(
-            'layout'     => 'foo.phtml',
+        $options = [
+            'layout' => 'foo.phtml',
             'layoutPath' => __DIR__,
-        );
+        ];
 
         $resource = new Zend_Application_Resource_Layout($options);
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
-        $layout   = $resource->getLayout();
-        $test     = array(
-            'layout'     => $layout->getLayout(),
+        $layout = $resource->getLayout();
+        $test = [
+            'layout' => $layout->getLayout(),
             'layoutPath' => $layout->getLayoutPath(),
-        );
+        ];
         $this->assertEquals($options, $test);
     }
 }

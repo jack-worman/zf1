@@ -1,10 +1,8 @@
 <?php
+
 namespace Zfns\Foo;
 
-use AllowDynamicProperties;
-
-#[AllowDynamicProperties]
+#[\AllowDynamicProperties]
 class Bar
 {
 }
-

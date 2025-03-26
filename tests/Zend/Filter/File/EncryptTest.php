@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -28,16 +29,16 @@
 
 /**
  * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Filter
  */
 #[AllowDynamicProperties]
-class Zend_Filter_File_EncryptTest extends PHPUnit_Framework_TestCase
+class Zend_Filter_File_EncryptTest extends PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         if (!extension_loaded('mcrypt')) {
             $this->markTestSkipped('This filter needs the mcrypt extension');
@@ -52,7 +53,7 @@ class Zend_Filter_File_EncryptTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         if (file_exists((string) __DIR__.'/../_files/newencryption.txt')) {
             unlink(__DIR__.'/../_files/newencryption.txt');
@@ -60,7 +61,7 @@ class Zend_Filter_File_EncryptTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that the filter follows expected behavior
+     * Ensures that the filter follows expected behavior.
      *
      * @return void
      */
@@ -120,7 +121,7 @@ class Zend_Filter_File_EncryptTest extends PHPUnit_Framework_TestCase
             $filter->filter(__DIR__.'/../_files/nofile.txt');
             $this->fail();
         } catch (Zend_Filter_Exception $e) {
-            $this->assertContains('not found', $e->getMessage());
+            $this->assertStringContainsString('not found', $e->getMessage());
         }
     }
 

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version $Id: ValueTest.php 23550 2010-12-18 13:18:38Z ramon $
  */
 
@@ -34,23 +35,25 @@
 // require_once 'Zend/XmlRpc/Value/Nil.php';
 // require_once 'Zend/XmlRpc/Value/Struct.php';
 // require_once 'Zend/Crypt/Math/BigInteger.php';
+use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
+
 require_once 'Zend/XmlRpc/TestProvider.php';
 // require_once 'Zend/Date.php';
 
 /**
- * Test case for Zend_XmlRpc_Value
+ * Test case for Zend_XmlRpc_Value.
  *
  * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_XmlRpc
  */
 #[AllowDynamicProperties]
-class Zend_XmlRpc_BigIntegerValueTest extends PHPUnit_Framework_TestCase
+class Zend_XmlRpc_BigIntegerValueTest extends PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         try {
             $XmlRpcBigInteger = new Zend_XmlRpc_Value_BigInteger(0);
@@ -67,7 +70,7 @@ class Zend_XmlRpc_BigIntegerValueTest extends PHPUnit_Framework_TestCase
      */
     public function testBigIntegerGetValue()
     {
-        $bigIntegerValue = (string)(PHP_INT_MAX + 42);
+        $bigIntegerValue = (string) (PHP_INT_MAX + 42);
         $bigInteger = new Zend_XmlRpc_Value_BigInteger($bigIntegerValue);
         $this->assertSame($bigIntegerValue, $bigInteger->getValue());
     }
@@ -77,7 +80,7 @@ class Zend_XmlRpc_BigIntegerValueTest extends PHPUnit_Framework_TestCase
      */
     public function testBigIntegerGetType()
     {
-        $bigIntegerValue = (string)(PHP_INT_MAX + 42);
+        $bigIntegerValue = (string) (PHP_INT_MAX + 42);
         $bigInteger = new Zend_XmlRpc_Value_BigInteger($bigIntegerValue);
         $this->assertSame(Zend_XmlRpc_Value::XMLRPC_TYPE_I8, $bigInteger->getType());
     }
@@ -87,26 +90,27 @@ class Zend_XmlRpc_BigIntegerValueTest extends PHPUnit_Framework_TestCase
      */
     public function testBigIntegerGeneratedXml()
     {
-        $bigIntegerValue = (string)(PHP_INT_MAX + 42);
+        $bigIntegerValue = (string) (PHP_INT_MAX + 42);
         $bigInteger = new Zend_XmlRpc_Value_BigInteger($bigIntegerValue);
 
         $this->assertEquals(
-            '<value><i8>' . $bigIntegerValue . '</i8></value>',
+            '<value><i8>'.$bigIntegerValue.'</i8></value>',
             $bigInteger->saveXml()
         );
     }
 
     /**
      * @group ZF-6445
+     *
      * @dataProvider Zend_XmlRpc_TestProvider::provideGenerators
      */
     public function testMarschalBigIntegerFromXmlRpc(Zend_XmlRpc_Generator_GeneratorAbstract $generator)
     {
         Zend_XmlRpc_Value::setGenerator($generator);
 
-        $bigIntegerValue = (string)(PHP_INT_MAX + 42);
+        $bigIntegerValue = (string) (PHP_INT_MAX + 42);
         $bigInteger = new Zend_XmlRpc_Value_BigInteger($bigIntegerValue);
-        $bigIntegerXml = '<value><i8>' . $bigIntegerValue . '</i8></value>';
+        $bigIntegerXml = '<value><i8>'.$bigIntegerValue.'</i8></value>';
 
         $value = Zend_XmlRpc_Value::getXmlRpcValue(
             $bigIntegerXml,
@@ -120,15 +124,16 @@ class Zend_XmlRpc_BigIntegerValueTest extends PHPUnit_Framework_TestCase
 
     /**
      * @group ZF-6445
+     *
      * @dataProvider Zend_XmlRpc_TestProvider::provideGenerators
      */
     public function testMarschalBigIntegerFromApacheXmlRpc(Zend_XmlRpc_Generator_GeneratorAbstract $generator)
     {
         Zend_XmlRpc_Value::setGenerator($generator);
 
-        $bigIntegerValue = (string)(PHP_INT_MAX + 42);
+        $bigIntegerValue = (string) (PHP_INT_MAX + 42);
         $bigInteger = new Zend_XmlRpc_Value_BigInteger($bigIntegerValue);
-        $bigIntegerXml = '<value><ex:i8 xmlns:ex="http://ws.apache.org/xmlrpc/namespaces/extensions">' . $bigIntegerValue . '</ex:i8></value>';
+        $bigIntegerXml = '<value><ex:i8 xmlns:ex="http://ws.apache.org/xmlrpc/namespaces/extensions">'.$bigIntegerValue.'</ex:i8></value>';
 
         $value = Zend_XmlRpc_Value::getXmlRpcValue(
             $bigIntegerXml,
@@ -145,7 +150,7 @@ class Zend_XmlRpc_BigIntegerValueTest extends PHPUnit_Framework_TestCase
      */
     public function testMarshalBigIntegerFromNative()
     {
-        $bigIntegerValue = (string)(PHP_INT_MAX + 42);
+        $bigIntegerValue = (string) (PHP_INT_MAX + 42);
 
         $value = Zend_XmlRpc_Value::getXmlRpcValue(
             $bigIntegerValue,
@@ -159,13 +164,14 @@ class Zend_XmlRpc_BigIntegerValueTest extends PHPUnit_Framework_TestCase
     /**
      * @group ZF-6445
      */
+    #[DoesNotPerformAssertions]
     public function testMarschalBigIntegerFromCryptObjectThrowsException()
     {
         try {
-            Zend_XmlRpc_Value::getXmlRpcValue(new Zend_Crypt_Math_BigInteger);
+            Zend_XmlRpc_Value::getXmlRpcValue(new Zend_Crypt_Math_BigInteger());
             $this->fail('expected Zend_XmlRpc_Value_Exception has not been thrown');
         } catch (Zend_XmlRpc_Value_Exception $exception) {
-            if (strpos((string) $exception->getMessage(), 'Zend_Crypt_Math_BigInteger') === false) {
+            if (false === strpos((string) $exception->getMessage(), 'Zend_Crypt_Math_BigInteger')) {
                 $this->fail('caught Zend_XmlRpc_Value_Exception does not contain expected text');
             }
         }
@@ -175,11 +181,11 @@ class Zend_XmlRpc_BigIntegerValueTest extends PHPUnit_Framework_TestCase
 
     public function wrapXml($xml)
     {
-        return $xml . "\n";
+        return $xml."\n";
     }
 }
 
 // Call Zend_XmlRpc_ValueTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_XmlRpc_BigIntegerValueTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_XmlRpc_BigIntegerValueTest::main') {
     Zend_XmlRpc_ValueTest::main();
 }

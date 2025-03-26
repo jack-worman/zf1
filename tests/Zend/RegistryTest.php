@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Registry
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,21 +28,21 @@
 
 /**
  * @category   Zend
- * @package    Zend_Registry
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Registry
  */
 #[AllowDynamicProperties]
-class Zend_RegistryTest extends PHPUnit_Framework_TestCase
+class Zend_RegistryTest extends PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         Zend_Registry::_unsetInstance();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         Zend_Registry::_unsetInstance();
     }
@@ -77,7 +78,7 @@ class Zend_RegistryTest extends PHPUnit_Framework_TestCase
             Zend_Registry::get('foo');
             $this->fail('Expected exception when trying to fetch a non-existent key.');
         } catch (Zend_Exception $e) {
-            $this->assertContains('No entry is registered for key', $e->getMessage());
+            $this->assertStringContainsString('No entry is registered for key', $e->getMessage());
         }
         $registry = Zend_Registry::getInstance();
         $this->assertTrue($registry instanceof Zend_Registry);
@@ -97,7 +98,7 @@ class Zend_RegistryTest extends PHPUnit_Framework_TestCase
     {
         Zend_Registry::set('foo', 'bar');
         $registry1 = Zend_Registry::getInstance();
-        $registry2 = new Zend_Registry(array('foo' => 'bar'));
+        $registry2 = new Zend_Registry(['foo' => 'bar']);
         $this->assertEquals($registry1, $registry2);
         $this->assertNotSame($registry1, $registry2);
     }
@@ -105,7 +106,7 @@ class Zend_RegistryTest extends PHPUnit_Framework_TestCase
     public function testRegistryUnequalContents()
     {
         $registry1 = Zend_Registry::getInstance();
-        $registry2 = new Zend_Registry(array('foo' => 'bar'));
+        $registry2 = new Zend_Registry(['foo' => 'bar']);
         $this->assertNotEquals($registry1, $registry2);
         $this->assertNotSame($registry1, $registry2);
     }
@@ -131,7 +132,7 @@ class Zend_RegistryTest extends PHPUnit_Framework_TestCase
 
     public function testRegistryArrayAsProps()
     {
-        $registry = new Zend_Registry(array(), ArrayObject::ARRAY_AS_PROPS);
+        $registry = new Zend_Registry([], ArrayObject::ARRAY_AS_PROPS);
         $registry->foo = 'bar';
         $this->assertTrue(isset($registry->foo));
         $this->assertEquals('bar', $registry->foo);
@@ -140,10 +141,10 @@ class Zend_RegistryTest extends PHPUnit_Framework_TestCase
     public function testRegistryExceptionInvalidClassname()
     {
         try {
-            $registry = Zend_Registry::setClassName(new StdClass());
+            $registry = Zend_Registry::setClassName(new stdClass());
             $this->fail('Expected exception, because setClassName() wants a string');
         } catch (Zend_Exception $e) {
-            $this->assertContains('Argument is not a class name', $e->getMessage());
+            $this->assertStringContainsString('Argument is not a class name', $e->getMessage());
         }
     }
 
@@ -153,14 +154,13 @@ class Zend_RegistryTest extends PHPUnit_Framework_TestCase
      * Zend_Registry::setInstance() method. Type-hinting violations throw
      * an error, not an exception, so it cannot be caught in a unit test.
      */
-
     public function testRegistryExceptionNoEntry()
     {
         try {
             $foo = Zend_Registry::get('foo');
             $this->fail('Expected exception when trying to fetch a non-existent key.');
         } catch (Zend_Exception $e) {
-            $this->assertContains('No entry is registered for key', $e->getMessage());
+            $this->assertStringContainsString('No entry is registered for key', $e->getMessage());
         }
     }
 
@@ -172,13 +172,13 @@ class Zend_RegistryTest extends PHPUnit_Framework_TestCase
             Zend_Registry::setClassName('anyclass');
             $this->fail('Expected exception, because we cannot initialize the registry if it is already initialized.');
         } catch (Zend_Exception $e) {
-            $this->assertContains('Registry is already initialized', $e->getMessage());
+            $this->assertStringContainsString('Registry is already initialized', $e->getMessage());
         }
         try {
             Zend_Registry::setInstance(new Zend_Registry());
             $this->fail('Expected exception, because we cannot initialize the registry if it is already initialized.');
         } catch (Zend_Exception $e) {
-            $this->assertContains('Registry is already initialized', $e->getMessage());
+            $this->assertStringContainsString('Registry is already initialized', $e->getMessage());
         }
     }
 
@@ -188,14 +188,14 @@ class Zend_RegistryTest extends PHPUnit_Framework_TestCase
             $registry = @Zend_Registry::setClassName('classdoesnotexist');
             $this->fail('Expected exception, because we cannot initialize the registry using a non-existent class.');
         } catch (Zend_Exception $e) {
-            $this->assertRegExp('/file .* does not exist or .*/i', $e->getMessage());
+            $this->assertMatchesRegularExpression('/file .* does not exist or .*/i', $e->getMessage());
         }
     }
 
     public function testDefaultRegistryArrayAsPropsZF4654()
     {
         $registry = Zend_Registry::getInstance();
-        $registry->bar = "baz";
+        $registry->bar = 'baz';
         $this->assertEquals('baz', Zend_Registry::get('bar'));
     }
 }

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Mobile
- * @subpackage Push
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -24,20 +25,20 @@
 
 /**
  * @category   Zend
- * @package    Zend_Mobile
- * @subpackage Push
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Mobile
  * @group      Zend_Mobile_Push
  * @group      Zend_Mobile_Push_Mpns
  */
 #[AllowDynamicProperties]
-class Zend_Mobile_Push_Message_Mpns_ToastTest extends PHPUnit_Framework_TestCase
+class Zend_Mobile_Push_Message_Mpns_ToastTest extends PHPUnit\Framework\TestCase
 {
     private $_msg;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->_msg = new Zend_Mobile_Push_Message_Mpns_Toast();
     }
@@ -49,20 +50,16 @@ class Zend_Mobile_Push_Message_Mpns_ToastTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($token, $this->_msg->getToken());
     }
 
-    /**
-     * @expectedException Zend_Mobile_Push_Message_Exception
-     */
     public function testSetTokenNonStringThrowsException()
     {
-        $token = array('foo' => 'bar');
+        $this->expectException(Zend_Mobile_Push_Message_Exception::class);
+        $token = ['foo' => 'bar'];
         $this->_msg->setToken($token);
     }
 
-    /**
-     * @expectedException Zend_Mobile_Push_Message_Exception
-     */
     public function testSetTokenInvalidUrlThrowsException()
     {
+        $this->expectException(Zend_Mobile_Push_Message_Exception::class);
         $token = 'notaurl';
         $this->_msg->setToken($token);
     }
@@ -79,12 +76,10 @@ class Zend_Mobile_Push_Message_Mpns_ToastTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($title, $this->_msg->getTitle());
     }
 
-    /**
-     * @expectedException Zend_Mobile_Push_Message_Exception
-     */
     public function testSetTitleThrowsExceptionOnNonString()
     {
-        $title = array('foo' => 'bar');
+        $this->expectException(Zend_Mobile_Push_Message_Exception::class);
+        $title = ['foo' => 'bar'];
         $this->_msg->setTitle($title);
     }
 
@@ -95,12 +90,10 @@ class Zend_Mobile_Push_Message_Mpns_ToastTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($msg, $this->_msg->getMessage());
     }
 
-    /**
-     * @expectedException Zend_Mobile_Push_Message_Exception
-     */
     public function testSetMessageThrowsExceptionOnNonString()
     {
-        $msg = array('foo' => 'bar');
+        $this->expectException(Zend_Mobile_Push_Message_Exception::class);
+        $msg = ['foo' => 'bar'];
         $this->_msg->setMessage($msg);
     }
 
@@ -111,12 +104,10 @@ class Zend_Mobile_Push_Message_Mpns_ToastTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($params, $this->_msg->getParams());
     }
 
-    /**
-     * @expectedException Zend_Mobile_Push_Message_Exception
-     */
     public function testSetParamsThrowsExceptionOnNonString()
     {
-        $params = array('foo' => 'bar');
+        $this->expectException(Zend_Mobile_Push_Message_Exception::class);
+        $params = ['foo' => 'bar'];
         $this->_msg->setParams($params);
     }
 

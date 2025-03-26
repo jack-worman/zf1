@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,44 +14,42 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Ldap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Ldap
+ * Zend_Ldap.
  */
 // require_once 'Zend/Ldap.php';
 
 /**
  * @category   Zend
- * @package    Zend_Ldap
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Ldap
  */
 #[AllowDynamicProperties]
-class Zend_Ldap_OriginalOfflineTest extends PHPUnit_Framework_TestCase
+class Zend_Ldap_OriginalOfflineTest extends PHPUnit\Framework\TestCase
 {
     /**
-     * Zend_Ldap instance
+     * Zend_Ldap instance.
      *
      * @var Zend_Ldap
      */
-    protected $_ldap = null;
+    protected $_ldap;
 
     /**
      * Setup operations run prior to each test method:
      *
      * * Creates an instance of Zend_Ldap
-     *
-     * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->_ldap = new Zend_Ldap();
     }
@@ -72,7 +71,7 @@ class Zend_Ldap_OriginalOfflineTest extends PHPUnit_Framework_TestCase
     {
         $optionName = 'invalid';
         try {
-            $this->_ldap->setOptions(array($optionName => 'irrelevant'));
+            $this->_ldap->setOptions([$optionName => 'irrelevant']);
             $this->fail('Expected Zend_Ldap_Exception not thrown');
         } catch (Zend_Ldap_Exception $e) {
             $this->assertEquals("Unknown Zend_Ldap option: $optionName", $e->getMessage());
@@ -84,7 +83,7 @@ class Zend_Ldap_OriginalOfflineTest extends PHPUnit_Framework_TestCase
      */
     public function testExplodeDnOperation()
     {
-        $inputs = array(
+        $inputs = [
             'CN=Alice Baker,CN=Users,DC=example,DC=com' => true,
             'CN=Baker\\, Alice,CN=Users,DC=example,DC=com' => true,
             'OU=Sales,DC=local' => true,
@@ -104,7 +103,7 @@ class Zend_Ldap_OriginalOfflineTest extends PHPUnit_Framework_TestCase
             'O=ACME' => true,
             '' => false,
             '   ' => false,
-        );
+        ];
 
         foreach ($inputs as $dn => $expected) {
             $ret = Zend_Ldap::explodeDn($dn);

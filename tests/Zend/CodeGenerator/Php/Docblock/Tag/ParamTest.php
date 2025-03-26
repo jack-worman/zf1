@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_CodeGenerator
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -27,8 +28,7 @@
 
 /**
  * @category   Zend
- * @package    Zend_CodeGenerator
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
@@ -36,20 +36,19 @@
  * @group Zend_CodeGenerator_Php
  */
 #[AllowDynamicProperties]
-class Zend_CodeGenerator_Php_Docblock_Tag_ParamTest extends PHPUnit_Framework_TestCase
+class Zend_CodeGenerator_Php_Docblock_Tag_ParamTest extends PHPUnit\Framework\TestCase
 {
-
     /**
      * @var Zend_CodeGenerator_Php_Docblock_Tag_Param
      */
-    protected $_tag = null;
+    protected $_tag;
 
-    public function setup()
+    public function setUp(): void
     {
         $this->_tag = new Zend_CodeGenerator_Php_Docblock_Tag_Param();
     }
 
-    public function teardown()
+    public function tearDown(): void
     {
         $this->_tag = null;
     }
@@ -73,5 +72,4 @@ class Zend_CodeGenerator_Php_Docblock_Tag_ParamTest extends PHPUnit_Framework_Te
         $this->_tag->setDescription('bar bar bar');
         $this->assertEquals('@param string $foo bar bar bar', $this->_tag->generate());
     }
-
 }

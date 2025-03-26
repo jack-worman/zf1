@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,29 +14,24 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 
 /**
  * @see Zend_Db_Table_Relationships_TestCommon
  */
 require_once 'Zend/Db/Table/Relationships/TestCommon.php';
 
-
-
-
-
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Db
  * @group      Zend_Db_Table
  * @group      Zend_Db_Table_Relationships
@@ -43,17 +39,16 @@ require_once 'Zend/Db/Table/Relationships/TestCommon.php';
 #[AllowDynamicProperties]
 class Zend_Db_Table_Relationships_Pdo_IbmTest extends Zend_Db_Table_Relationships_TestCommon
 {
-
     public function getDriver()
     {
         return 'Pdo_Ibm';
     }
 
-     public function testTableRelationshipCascadingUpdateUsageBasicString()
+    public function testTableRelationshipCascadingUpdateUsageBasicString()
     {
         $server = $this->_util->getServer();
 
-        if ($server == 'IDS') {
+        if ('IDS' == $server) {
             $this->markTestSkipped('IDS serial columns cannot be updated');
         } else {
             parent::testTableRelationshipCascadingUpdateUsageBasicString();

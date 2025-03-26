@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Dojo_Form_Element_CurrencyTextBoxTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_Form_Element_CurrencyTextBoxTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Dojo_Form_Element_CurrencyTextBoxTest::main');
 }
 
 /** Zend_Dojo_Form_Element_CurrencyTextBox */
@@ -41,15 +42,15 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * Test class for Zend_Dojo_Form_Element_CurrencyTextBox.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Dojo
  * @group      Zend_Dojo_Form
  */
 #[AllowDynamicProperties]
-class Zend_Dojo_Form_Element_CurrencyTextBoxTest extends PHPUnit_Framework_TestCase
+class Zend_Dojo_Form_Element_CurrencyTextBoxTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -58,22 +59,24 @@ class Zend_Dojo_Form_Element_CurrencyTextBoxTest extends PHPUnit_Framework_TestC
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_Form_Element_CurrencyTextBoxTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_Dojo_Form_Element_CurrencyTextBoxTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
+            $suite,
+        );
     }
 
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         Zend_Registry::_unsetInstance();
         Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
 
-        $this->view    = $this->getView();
+        $this->view = $this->getView();
         $this->element = $this->getElement();
         $this->element->setView($this->view);
     }
@@ -81,10 +84,8 @@ class Zend_Dojo_Form_Element_CurrencyTextBoxTest extends PHPUnit_Framework_TestC
     /**
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
-     *
-     * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
     }
 
@@ -93,6 +94,7 @@ class Zend_Dojo_Form_Element_CurrencyTextBoxTest extends PHPUnit_Framework_TestC
         // require_once 'Zend/View.php';
         $view = new Zend_View();
         $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
+
         return $view;
     }
 
@@ -100,13 +102,14 @@ class Zend_Dojo_Form_Element_CurrencyTextBoxTest extends PHPUnit_Framework_TestC
     {
         $element = new Zend_Dojo_Form_Element_CurrencyTextBox(
             'foo',
-            array(
+            [
                 'value' => 'some text',
                 'label' => 'CurrencyTextBox',
                 'class' => 'someclass',
                 'style' => 'width: 100px;',
-            )
+            ]
         );
+
         return $element;
     }
 
@@ -149,22 +152,20 @@ class Zend_Dojo_Form_Element_CurrencyTextBoxTest extends PHPUnit_Framework_TestC
         $this->assertEquals('USD', $this->element->getConstraint('symbol'));
     }
 
-    /**
-     * @expectedException Zend_Form_Element_Exception
-     */
     public function testSymbolMutatorShouldRaiseExceptionWhenFewerThan3CharsProvided()
     {
+        $this->expectException(Zend_Form_Element_Exception::class);
         $this->element->setSymbol('$');
     }
 
     public function testShouldRenderCurrencyTextBoxDijit()
     {
         $html = $this->element->render();
-        $this->assertContains('dojoType="dijit.form.CurrencyTextBox"', $html);
+        $this->assertStringContainsString('dojoType="dijit.form.CurrencyTextBox"', $html);
     }
 }
 
 // Call Zend_Dojo_Form_Element_CurrencyTextBoxTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dojo_Form_Element_CurrencyTextBoxTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Dojo_Form_Element_CurrencyTextBoxTest::main') {
     Zend_Dojo_Form_Element_CurrencyTextBoxTest::main();
 }

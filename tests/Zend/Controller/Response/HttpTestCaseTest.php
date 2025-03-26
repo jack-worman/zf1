@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Controller_Response_HttpTestCaseTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Controller_Response_HttpTestCaseTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Controller_Response_HttpTestCaseTest::main');
 }
 
 /** Zend_Controller_Response_HttpTestCase */
@@ -32,15 +33,15 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * Test class for Zend_Controller_Response_HttpTestCase.
  *
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Controller
  * @group      Zend_Controller_Response
  */
 #[AllowDynamicProperties]
-class Zend_Controller_Response_HttpTestCaseTest extends PHPUnit_Framework_TestCase
+class Zend_Controller_Response_HttpTestCaseTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -49,17 +50,19 @@ class Zend_Controller_Response_HttpTestCaseTest extends PHPUnit_Framework_TestCa
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Response_HttpTestCaseTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_Controller_Response_HttpTestCaseTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
+            $suite,
+        );
     }
 
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->response = new Zend_Controller_Response_HttpTestCase();
     }
@@ -67,10 +70,8 @@ class Zend_Controller_Response_HttpTestCaseTest extends PHPUnit_Framework_TestCa
     /**
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
-     *
-     * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
     }
 
@@ -89,7 +90,7 @@ class Zend_Controller_Response_HttpTestCaseTest extends PHPUnit_Framework_TestCa
         $this->response->setHeader('X-Foo-Bar', 'baz')
                        ->setBody('Body to emit');
         $test = $this->response->sendResponse();
-        $this->assertContains("X-Foo-Bar: baz\n\nBody to emit", $test);
+        $this->assertStringContainsString("X-Foo-Bar: baz\n\nBody to emit", $test);
     }
 
     public function testOutputBodyShouldReturnStringInsteadOfEchoingOutput()
@@ -102,7 +103,7 @@ class Zend_Controller_Response_HttpTestCaseTest extends PHPUnit_Framework_TestCa
         $test = ob_get_clean();
         $this->assertTrue(empty($test));
         $this->assertFalse(empty($content));
-        $this->assertContains("Baz Content\nFoo Content\nBar Content\n", $content, $content);
+        $this->assertStringContainsString("Baz Content\nFoo Content\nBar Content\n", $content, $content);
     }
 
     public function testSendHeadersShouldReturnArrayOfHeadersInsteadOfSendingHeaders()
@@ -114,10 +115,10 @@ class Zend_Controller_Response_HttpTestCaseTest extends PHPUnit_Framework_TestCa
         $test = $this->response->sendHeaders();
         $this->assertTrue(is_array($test));
         $this->assertEquals(3, count($test));
-        $this->assertNotContains('Content-Type: text/xml', $test);
-        $this->assertContains('Content-Type: text/html', $test);
-        $this->assertContains('X-Foo-Bar: baz', $test);
-        $this->assertContains('200 OK', $test);
+        $this->assertStringNotContainsString('Content-Type: text/xml', $test);
+        $this->assertStringContainsString('Content-Type: text/html', $test);
+        $this->assertStringContainsString('X-Foo-Bar: baz', $test);
+        $this->assertStringContainsString('200 OK', $test);
     }
 
     public function testCanSendHeadersShouldAlwaysReturnTrue()
@@ -127,6 +128,6 @@ class Zend_Controller_Response_HttpTestCaseTest extends PHPUnit_Framework_TestCa
 }
 
 // Call Zend_Controller_Response_HttpTestCaseTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Controller_Response_HttpTestCaseTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Controller_Response_HttpTestCaseTest::main') {
     Zend_Controller_Response_HttpTestCaseTest::main();
 }

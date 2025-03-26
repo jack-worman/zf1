@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,62 +14,61 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Translate
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // require_once 'Zend/Validate/Sitemap/Priority.php';
 
 /**
- * Tests Zend_Validate_Sitemap_Priority
+ * Tests Zend_Validate_Sitemap_Priority.
  *
  * @category   Zend
- * @package    Zend_Validate
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Validate
  */
 #[AllowDynamicProperties]
-class Zend_Validate_Sitemap_PriorityTest extends PHPUnit_Framework_TestCase
+class Zend_Validate_Sitemap_PriorityTest extends PHPUnit\Framework\TestCase
 {
     /**
-     * Validator
+     * Validator.
      *
      * @var Zend_Validate_Sitemap_Priority
      */
     protected $_validator;
 
     /**
-     * Prepares the environment before running a test
+     * Prepares the environment before running a test.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->_validator = new Zend_Validate_Sitemap_Priority();
     }
 
     /**
-     * Cleans up the environment after running a test
+     * Cleans up the environment after running a test.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->_validator = null;
     }
 
     /**
-     * Tests valid priorities
-     *
+     * Tests valid priorities.
      */
     public function testValidPriorities()
     {
-        $values = array(
+        $values = [
             '0.0', '0.1', '0.2', '0.3', '0.4', '0.5',
             '0.6', '0.7', '0.8', '0.9', '1.0', '0.99',
-            0.1, 0.6667, 0.0001, 0.4, 0, 1, .35
-        );
+            0.1, 0.6667, 0.0001, 0.4, 0, 1, .35,
+        ];
 
         foreach ($values as $value) {
             $this->assertSame(true, $this->_validator->isValid($value));
@@ -76,36 +76,34 @@ class Zend_Validate_Sitemap_PriorityTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests invalid priorities
-     *
+     * Tests invalid priorities.
      */
     public function testInvalidPriorities()
     {
-        $values = array(
+        $values = [
             -1, -0.1, 1.1, 100, 10, 2, '3', '-4',
-        );
+        ];
 
         foreach ($values as $value) {
             $this->assertSame(false, $this->_validator->isValid($value));
             $messages = $this->_validator->getMessages();
-            $this->assertContains('is not a valid', current($messages));
+            $this->assertStringContainsString('is not a valid', current($messages));
         }
     }
 
     /**
-     * Tests values that are no numbers
-     *
+     * Tests values that are no numbers.
      */
     public function testNotNumbers()
     {
-        $values = array(
+        $values = [
             null, new stdClass(), true, false, 'abcd',
-        );
+        ];
 
         foreach ($values as $value) {
             $this->assertSame(false, $this->_validator->isValid($value));
             $messages = $this->_validator->getMessages();
-            $this->assertContains('integer or float expected', current($messages));
+            $this->assertStringContainsString('integer or float expected', current($messages));
         }
     }
 }

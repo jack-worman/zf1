@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Form_Decorator_ImageTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Form_Decorator_ImageTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Form_Decorator_ImageTest::main');
 }
 
 // require_once 'Zend/Form/Decorator/Image.php';
@@ -33,17 +34,17 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 // require_once 'Zend/View.php';
 
 /**
- * Test class for Zend_Form_Decorator_Image
+ * Test class for Zend_Form_Decorator_Image.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Form
  */
 #[AllowDynamicProperties]
-class Zend_Form_Decorator_ImageTest extends PHPUnit_Framework_TestCase
+class Zend_Form_Decorator_ImageTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -52,18 +53,19 @@ class Zend_Form_Decorator_ImageTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Decorator_ImageTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_Form_Decorator_ImageTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
+            $suite,
+        );
     }
 
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->decorator = new Zend_Form_Decorator_Image();
     }
@@ -71,17 +73,16 @@ class Zend_Form_Decorator_ImageTest extends PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
-     *
-     * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
     }
 
     public function getView()
     {
         $view = new Zend_View();
-        $view->addHelperPath(__DIR__ . '/../../../../library/Zend/View/Helper');
+        $view->addHelperPath(__DIR__.'/../../../../library/Zend/View/Helper');
+
         return $view;
     }
 
@@ -125,10 +126,10 @@ class Zend_Form_Decorator_ImageTest extends PHPUnit_Framework_TestCase
         $this->decorator->setElement($element);
 
         $image = $this->decorator->render('');
-        $this->assertContains('<input', $image, $image);
-        $this->assertContains('src="foobar"', $image);
-        $this->assertContains('name="foo"', $image);
-        $this->assertContains('type="image"', $image);
+        $this->assertStringContainsString('<input', $image, $image);
+        $this->assertStringContainsString('src="foobar"', $image);
+        $this->assertStringContainsString('name="foo"', $image);
+        $this->assertStringContainsString('type="image"', $image);
     }
 
     public function testCanRenderImageWithinAdditionalTag()
@@ -140,7 +141,7 @@ class Zend_Form_Decorator_ImageTest extends PHPUnit_Framework_TestCase
                         ->setOption('tag', 'div');
 
         $image = $this->decorator->render('');
-        $this->assertRegexp('#<div>.*?<input[^>]*>.*?</div>#s', $image, $image);
+        $this->assertMatchesRegularExpression('#<div>.*?<input[^>]*>.*?</div>#s', $image, $image);
     }
 
     public function testCanPrependImageToContent()
@@ -152,7 +153,7 @@ class Zend_Form_Decorator_ImageTest extends PHPUnit_Framework_TestCase
                         ->setOption('placement', 'prepend');
 
         $image = $this->decorator->render('content');
-        $this->assertRegexp('#<input[^>]*>.*?(content)#s', $image, $image);
+        $this->assertMatchesRegularExpression('#<input[^>]*>.*?(content)#s', $image, $image);
     }
 
     /**
@@ -169,13 +170,13 @@ class Zend_Form_Decorator_ImageTest extends PHPUnit_Framework_TestCase
                         ->setOption('class', 'imageclass');
 
         $image = $this->decorator->render('');
-        $this->assertContains('class="imageclass"', $image);
-        $this->assertContains('onClick="foo()"', $image);
-        $this->assertContains('id="foo-element"', $image);
+        $this->assertStringContainsString('class="imageclass"', $image);
+        $this->assertStringContainsString('onClick="foo()"', $image);
+        $this->assertStringContainsString('id="foo-element"', $image);
     }
 }
 
 // Call Zend_Form_Decorator_ImageTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Form_Decorator_ImageTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Form_Decorator_ImageTest::main') {
     Zend_Form_Decorator_ImageTest::main();
 }

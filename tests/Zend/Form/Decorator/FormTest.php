@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,34 +14,33 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Form_Decorator_FormTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Form_Decorator_FormTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Form_Decorator_FormTest::main');
 }
 
 // require_once 'Zend/Form/Decorator/Form.php';
 // require_once 'Zend/Form.php';
 
-
 /**
- * Test class for Zend_Form_Decorator_Form
+ * Test class for Zend_Form_Decorator_Form.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Form
  */
 #[AllowDynamicProperties]
-class Zend_Form_Decorator_FormTest extends PHPUnit_Framework_TestCase
+class Zend_Form_Decorator_FormTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -49,17 +49,19 @@ class Zend_Form_Decorator_FormTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Decorator_FormTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_Form_Decorator_FormTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
+            $suite,
+        );
     }
 
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->decorator = new Zend_Form_Decorator_Form();
     }
@@ -67,10 +69,8 @@ class Zend_Form_Decorator_FormTest extends PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
-     *
-     * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
     }
 
@@ -78,7 +78,8 @@ class Zend_Form_Decorator_FormTest extends PHPUnit_Framework_TestCase
     {
         // require_once 'Zend/View.php';
         $view = new Zend_View();
-        $view->addHelperPath(__DIR__ . '/../../../../library/Zend/View/Helper');
+        $view->addHelperPath(__DIR__.'/../../../../library/Zend/View/Helper');
+
         return $view;
     }
 
@@ -95,12 +96,12 @@ class Zend_Form_Decorator_FormTest extends PHPUnit_Framework_TestCase
 
         // require_once 'Zend/Form/DisplayGroup.php';
         // require_once 'Zend/Loader/PluginLoader.php';
-        $attribs = array(
+        $attribs = [
             'enctype' => 'ascii',
-            'charset' => 'us-ascii'
-        );
-        $loader = new Zend_Loader_PluginLoader(array('Zend_Form_Decorator' => 'Zend/Form/Decorator/'));
-        $displayGroup = new Zend_Form_DisplayGroup('foo', $loader, array('attribs' => $attribs));
+            'charset' => 'us-ascii',
+        ];
+        $loader = new Zend_Loader_PluginLoader(['Zend_Form_Decorator' => 'Zend/Form/Decorator/']);
+        $displayGroup = new Zend_Form_DisplayGroup('foo', $loader, ['attribs' => $attribs]);
         $this->decorator->setElement($displayGroup);
         $options = $this->decorator->getOptions();
         $this->assertTrue(isset($options['enctype']));
@@ -121,7 +122,7 @@ class Zend_Form_Decorator_FormTest extends PHPUnit_Framework_TestCase
              ->setAttrib('id', 'bazbat')
              ->setView($this->getView());
         $html = $form->render();
-        $this->assertContains('id="bazbat"', $html, $html);
+        $this->assertStringContainsString('id="bazbat"', $html, $html);
     }
 
     public function testEmptyFormNameShouldNotRenderEmptyFormId()
@@ -131,11 +132,11 @@ class Zend_Form_Decorator_FormTest extends PHPUnit_Framework_TestCase
              ->setAction('/foo/bar')
              ->setView($this->getView());
         $html = $form->render();
-        $this->assertNotContains('id=""', $html, $html);
+        $this->assertStringNotContainsString('id=""', $html, $html);
     }
 }
 
 // Call Zend_Form_Decorator_FormTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Form_Decorator_FormTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Form_Decorator_FormTest::main') {
     Zend_Form_Decorator_FormTest::main();
 }

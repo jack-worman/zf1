@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,58 +14,57 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Translate
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // require_once 'Zend/Validate/Sitemap/Lastmod.php';
 
 /**
- * Tests Zym_Validate_Sitemap_Lastmod
+ * Tests Zym_Validate_Sitemap_Lastmod.
  *
  * @category   Zend
- * @package    Zend_Validate
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Validate
  */
 #[AllowDynamicProperties]
-class Zend_Validate_Sitemap_LastmodTest extends PHPUnit_Framework_TestCase
+class Zend_Validate_Sitemap_LastmodTest extends PHPUnit\Framework\TestCase
 {
     /**
-     * Validator
+     * Validator.
      *
      * @var Zend_Validate_Sitemap_Lastmod
      */
     protected $_validator;
 
     /**
-     * Prepares the environment before running a test
+     * Prepares the environment before running a test.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->_validator = new Zend_Validate_Sitemap_Lastmod();
     }
 
     /**
-     * Cleans up the environment after running a test
+     * Cleans up the environment after running a test.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->_validator = null;
     }
 
     /**
-     * Tests valid change frequencies
-     *
+     * Tests valid change frequencies.
      */
     public function testValidChangefreqs()
     {
-        $values = array(
+        $values = [
             '1994-05-11T18:00:09-08:45',
             '1997-05-11T18:50:09+00:00',
             '1998-06-11T01:00:09-02:00',
@@ -76,8 +76,8 @@ class Zend_Validate_Sitemap_LastmodTest extends PHPUnit_Framework_TestCase
             '2005-01-01',
             '2006-03-19',
             '2007-08-31',
-            '2007-08-25'
-        );
+            '2007-08-25',
+        ];
 
         foreach ($values as $value) {
             $this->assertSame(true, $this->_validator->isValid($value));
@@ -85,40 +85,38 @@ class Zend_Validate_Sitemap_LastmodTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests strings that should be invalid
-     *
+     * Tests strings that should be invalid.
      */
     public function testInvalidStrings()
     {
-        $values = array(
+        $values = [
             '1995-05-11T18:60:09-08:45',
             '1996-05-11T18:50:09+25:00',
             '2002-13-11',
             '2004-00-01',
-            '2006-01-01\n'
-        );
+            '2006-01-01\n',
+        ];
 
         foreach ($values as $value) {
             $this->assertSame(false, $this->_validator->isValid($value));
             $messages = $this->_validator->getMessages();
-            $this->assertContains('is not a valid', current($messages));
+            $this->assertStringContainsString('is not a valid', current($messages));
         }
     }
 
     /**
-     * Tests values that are not strings
-     *
+     * Tests values that are not strings.
      */
     public function testNotString()
     {
-        $values = array(
-            1, 1.4, null, new stdClass(), true, false
-        );
+        $values = [
+            1, 1.4, null, new stdClass(), true, false,
+        ];
 
         foreach ($values as $value) {
             $this->assertSame(false, $this->_validator->isValid($value));
             $messages = $this->_validator->getMessages();
-            $this->assertContains('String expected', current($messages));
+            $this->assertStringContainsString('String expected', current($messages));
         }
     }
 }

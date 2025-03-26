@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,53 +28,52 @@
 
 /**
  * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Filter
  */
 #[AllowDynamicProperties]
-class Zend_Filter_File_UpperCaseTest extends PHPUnit_Framework_TestCase
+class Zend_Filter_File_UpperCaseTest extends PHPUnit\Framework\TestCase
 {
     /**
-     * Path to test files
+     * Path to test files.
      *
      * @var string
      */
     protected $_filesPath;
 
     /**
-     * Original testfile
+     * Original testfile.
      *
      * @var string
      */
     protected $_origFile;
 
     /**
-     * Testfile
+     * Testfile.
      *
      * @var string
      */
     protected $_newFile;
 
     /**
-     * Sets the path to test files
+     * Sets the path to test files.
      */
-    public function __construct()
+    public function __construct(string $name)
     {
-        $this->_filesPath = __DIR__ . DIRECTORY_SEPARATOR
-                          . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR;
-        $this->_origFile  = $this->_filesPath . 'testfile2.txt';
-        $this->_newFile   = $this->_filesPath . 'newtestfile2.txt';
+        parent::__construct($name);
+        $this->_filesPath = __DIR__.DIRECTORY_SEPARATOR
+                          .'..'.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR;
+        $this->_origFile = $this->_filesPath.'testfile2.txt';
+        $this->_newFile = $this->_filesPath.'newtestfile2.txt';
     }
 
     /**
-     * Sets the path to test files
-     *
-     * @return void
+     * Sets the path to test files.
      */
-    public function setUp()
+    public function setUp(): void
     {
         if (!file_exists((string) $this->_newFile)) {
             copy($this->_origFile, $this->_newFile);
@@ -81,11 +81,9 @@ class Zend_Filter_File_UpperCaseTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Sets the path to test files
-     *
-     * @return void
+     * Sets the path to test files.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         if (file_exists((string) $this->_newFile)) {
             unlink($this->_newFile);
@@ -97,10 +95,10 @@ class Zend_Filter_File_UpperCaseTest extends PHPUnit_Framework_TestCase
      */
     public function testInstanceCreationAndNormalWorkflow()
     {
-        $this->assertContains('This is a File', file_get_contents($this->_newFile));
+        $this->assertStringContainsString('This is a File', file_get_contents($this->_newFile));
         $filter = new Zend_Filter_File_UpperCase();
         $filter->filter($this->_newFile);
-        $this->assertContains('THIS IS A FILE', file_get_contents($this->_newFile));
+        $this->assertStringContainsString('THIS IS A FILE', file_get_contents($this->_newFile));
     }
 
     /**
@@ -110,10 +108,10 @@ class Zend_Filter_File_UpperCaseTest extends PHPUnit_Framework_TestCase
     {
         try {
             $filter = new Zend_Filter_File_UpperCase();
-            $filter->filter($this->_newFile . 'unknown');
+            $filter->filter($this->_newFile.'unknown');
             $this->fail('Unknown file exception expected');
         } catch (Zend_Filter_Exception $e) {
-            $this->assertContains('not found', $e->getMessage());
+            $this->assertStringContainsString('not found', $e->getMessage());
         }
     }
 
@@ -122,13 +120,13 @@ class Zend_Filter_File_UpperCaseTest extends PHPUnit_Framework_TestCase
      */
     public function testCheckSettingOfEncodingInIstance()
     {
-        $this->assertContains('This is a File', file_get_contents($this->_newFile));
+        $this->assertStringContainsString('This is a File', file_get_contents($this->_newFile));
         try {
             $filter = new Zend_Filter_File_UpperCase('ISO-8859-1');
             $filter->filter($this->_newFile);
-            $this->assertContains('THIS IS A FILE', file_get_contents($this->_newFile));
+            $this->assertStringContainsString('THIS IS A FILE', file_get_contents($this->_newFile));
         } catch (Zend_Filter_Exception $e) {
-            $this->assertContains('mbstring is required', $e->getMessage());
+            $this->assertStringContainsString('mbstring is required', $e->getMessage());
         }
     }
 
@@ -137,14 +135,14 @@ class Zend_Filter_File_UpperCaseTest extends PHPUnit_Framework_TestCase
      */
     public function testCheckSettingOfEncodingWithMethod()
     {
-        $this->assertContains('This is a File', file_get_contents($this->_newFile));
+        $this->assertStringContainsString('This is a File', file_get_contents($this->_newFile));
         try {
             $filter = new Zend_Filter_File_UpperCase();
             $filter->setEncoding('ISO-8859-1');
             $filter->filter($this->_newFile);
-            $this->assertContains('THIS IS A FILE', file_get_contents($this->_newFile));
+            $this->assertStringContainsString('THIS IS A FILE', file_get_contents($this->_newFile));
         } catch (Zend_Filter_Exception $e) {
-            $this->assertContains('mbstring is required', $e->getMessage());
+            $this->assertStringContainsString('mbstring is required', $e->getMessage());
         }
     }
 }

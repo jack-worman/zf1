@@ -1,10 +1,9 @@
 <?php
 
-
 #[AllowDynamicProperties]
-class Zend_Pdf_Filter_Compression_FlateTest extends PHPUnit_Framework_TestCase
+class Zend_Pdf_Filter_Compression_FlateTest extends PHPUnit\Framework\TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         if (!extension_loaded('zlib')) {
             self::markTestSkipped('This test requires zlib');
@@ -15,7 +14,7 @@ class Zend_Pdf_Filter_Compression_FlateTest extends PHPUnit_Framework_TestCase
     {
         try {
             Zend_Pdf_Filter_Compression_Flate::encode(null, str_repeat('foo', 1000));
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             self::assertInstanceOf('Zend_Pdf_Exception', $e);
             self::assertNotContains('Not implemented yet', $e->getMessage());
 
@@ -29,7 +28,7 @@ class Zend_Pdf_Filter_Compression_FlateTest extends PHPUnit_Framework_TestCase
     {
         try {
             Zend_Pdf_Filter_Compression_Flate::decode(null);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             self::assertInstanceOf('Zend_Pdf_Exception', $e);
             self::assertNotContains('Not implemented yet', $e->getMessage());
         }

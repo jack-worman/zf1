@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version $Id$
  */
 
 // Call Zend_View_Helper_FormTextTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_FormTextTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_View_Helper_FormTextTest::main');
 }
 
 // require_once 'Zend/View.php';
@@ -30,39 +31,41 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 // require_once 'Zend/Registry.php';
 
 /**
- * Zend_View_Helper_FormTextTest
+ * Zend_View_Helper_FormTextTest.
  *
  * Tests formText helper, including some common functionality of all form helpers
+ *
  * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
 #[AllowDynamicProperties]
-class Zend_View_Helper_FormTextTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_FormTextTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
      *
-     * @access public
      * @static
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_FormTextTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_View_Helper_FormTextTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
+            $suite,
+        );
     }
 
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @access protected
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         if (Zend_Registry::isRegistered('Zend_View_Helper_Doctype')) {
             $registry = Zend_Registry::getInstance();
@@ -76,54 +79,54 @@ class Zend_View_Helper_FormTextTest extends PHPUnit_Framework_TestCase
     public function testIdSetFromName()
     {
         $element = $this->helper->formText('foo');
-        $this->assertContains('name="foo"', $element);
-        $this->assertContains('id="foo"', $element);
+        $this->assertStringContainsString('name="foo"', $element);
+        $this->assertStringContainsString('id="foo"', $element);
     }
 
     public function testSetIdFromAttribs()
     {
-        $element = $this->helper->formText('foo', null, array('id' => 'bar'));
-        $this->assertContains('name="foo"', $element);
-        $this->assertContains('id="bar"', $element);
+        $element = $this->helper->formText('foo', null, ['id' => 'bar']);
+        $this->assertStringContainsString('name="foo"', $element);
+        $this->assertStringContainsString('id="bar"', $element);
     }
 
     public function testSetValue()
     {
         $element = $this->helper->formText('foo', 'bar');
-        $this->assertContains('name="foo"', $element);
-        $this->assertContains('value="bar"', $element);
+        $this->assertStringContainsString('name="foo"', $element);
+        $this->assertStringContainsString('value="bar"', $element);
     }
 
     public function testReadOnlyAttribute()
     {
-        $element = $this->helper->formText('foo', null, array('readonly' => 'readonly'));
-        $this->assertContains('readonly="readonly"', $element);
+        $element = $this->helper->formText('foo', null, ['readonly' => 'readonly']);
+        $this->assertStringContainsString('readonly="readonly"', $element);
     }
 
     /**
-     * ZF-1666
+     * ZF-1666.
      */
     public function testCanDisableElement()
     {
-        $html = $this->helper->formText(array(
-            'name'    => 'foo',
-            'value'   => 'bar',
-            'attribs' => array('disable' => true)
-        ));
+        $html = $this->helper->formText([
+            'name' => 'foo',
+            'value' => 'bar',
+            'attribs' => ['disable' => true],
+        ]);
 
-        $this->assertRegexp('/<input[^>]*?(disabled="disabled")/', $html);
+        $this->assertMatchesRegularExpression('/<input[^>]*?(disabled="disabled")/', $html);
     }
 
     /**
-     * ZF-1666
+     * ZF-1666.
      */
     public function testDisablingElementDoesNotRenderHiddenElements()
     {
-        $html = $this->helper->formText(array(
-            'name'    => 'foo',
-            'value'   => 'bar',
-            'attribs' => array('disable' => true)
-        ));
+        $html = $this->helper->formText([
+            'name' => 'foo',
+            'value' => 'bar',
+            'attribs' => ['disable' => true],
+        ]);
 
         $this->assertNotRegexp('/<input[^>]*?(type="hidden")/', $html);
     }
@@ -131,18 +134,18 @@ class Zend_View_Helper_FormTextTest extends PHPUnit_Framework_TestCase
     public function testRendersAsHtmlByDefault()
     {
         $test = $this->helper->formText('foo', 'bar');
-        $this->assertNotContains(' />', $test);
+        $this->assertStringNotContainsString(' />', $test);
     }
 
     public function testCanRendersAsXHtml()
     {
         $this->view->doctype('XHTML1_STRICT');
         $test = $this->helper->formText('foo', 'bar');
-        $this->assertContains(' />', $test);
+        $this->assertStringContainsString(' />', $test);
     }
 }
 
 // Call Zend_View_Helper_FormTextTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_FormTextTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_View_Helper_FormTextTest::main') {
     Zend_View_Helper_FormTextTest::main();
 }

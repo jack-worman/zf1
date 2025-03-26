@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,34 +14,34 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_FormErrorsTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_FormErrorsTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_View_Helper_FormErrorsTest::main');
 }
 
 // require_once 'Zend/View/Helper/FormErrors.php';
 // require_once 'Zend/View.php';
 
 /**
- * Test class for Zend_View_Helper_FormErrors
+ * Test class for Zend_View_Helper_FormErrors.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
 #[AllowDynamicProperties]
-class Zend_View_Helper_FormErrorsTest extends PHPUnit_Framework_TestCase
+class Zend_View_Helper_FormErrorsTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -49,20 +50,21 @@ class Zend_View_Helper_FormErrorsTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_FormErrorsTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_View_Helper_FormErrorsTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
+            $suite,
+        );
     }
 
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
-        $this->view   = new Zend_View();
+        $this->view = new Zend_View();
         $this->helper = new Zend_View_Helper_FormErrors();
         $this->helper->setView($this->view);
         ob_start();
@@ -71,10 +73,8 @@ class Zend_View_Helper_FormErrorsTest extends PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
-     *
-     * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         ob_end_clean();
     }
@@ -117,13 +117,13 @@ class Zend_View_Helper_FormErrorsTest extends PHPUnit_Framework_TestCase
 
     public function testFormErrorsRendersUnorderedListByDefault()
     {
-        $errors = array('foo', 'bar', 'baz');
+        $errors = ['foo', 'bar', 'baz'];
         $html = $this->helper->formErrors($errors);
-        $this->assertContains('<ul', $html);
+        $this->assertStringContainsString('<ul', $html);
         foreach ($errors as $error) {
-            $this->assertContains('<li>' . $error . '</li>', $html);
+            $this->assertStringContainsString('<li>'.$error.'</li>', $html);
         }
-        $this->assertContains('</ul>', $html);
+        $this->assertStringContainsString('</ul>', $html);
     }
 
     public function testFormErrorsRendersWithSpecifiedStrings()
@@ -131,44 +131,45 @@ class Zend_View_Helper_FormErrorsTest extends PHPUnit_Framework_TestCase
         $this->helper->setElementStart('<dl><dt>')
                      ->setElementSeparator('</dt><dt>')
                      ->setElementEnd('</dt></dl>');
-        $errors = array('foo', 'bar', 'baz');
+        $errors = ['foo', 'bar', 'baz'];
         $html = $this->helper->formErrors($errors);
-        $this->assertContains('<dl>', $html);
+        $this->assertStringContainsString('<dl>', $html);
         foreach ($errors as $error) {
-            $this->assertContains('<dt>' . $error . '</dt>', $html);
+            $this->assertStringContainsString('<dt>'.$error.'</dt>', $html);
         }
-        $this->assertContains('</dl>', $html);
+        $this->assertStringContainsString('</dl>', $html);
     }
 
     public function testFormErrorsPreventsXssAttacks()
     {
-        $errors = array(
+        $errors = [
             'bad' => '\"><script>alert("xss");</script>',
-        );
+        ];
         $html = $this->helper->formErrors($errors);
-        $this->assertNotContains($errors['bad'], $html);
-        $this->assertContains('&', $html);
+        $this->assertStringNotContainsString($errors['bad'], $html);
+        $this->assertStringContainsString('&', $html);
     }
 
     public function testCanDisableEscapingErrorMessages()
     {
-        $errors = array(
+        $errors = [
             'foo' => '<b>Field is required</b>',
-            'bar' => '<a href="/help">Please click here for more information</a>'
-        );
-        $html = $this->helper->formErrors($errors, array('escape' => false));
-        $this->assertContains($errors['foo'], $html);
-        $this->assertContains($errors['bar'], $html);
+            'bar' => '<a href="/help">Please click here for more information</a>',
+        ];
+        $html = $this->helper->formErrors($errors, ['escape' => false]);
+        $this->assertStringContainsString($errors['foo'], $html);
+        $this->assertStringContainsString($errors['bar'], $html);
     }
 
     /**
      * @group ZF-3477
-     * @link http://framework.zend.com/issues/browse/ZF-3477
+     *
+     * @see http://framework.zend.com/issues/browse/ZF-3477
      */
     public function testCanSetClassAttribute()
     {
-        $options    = array('class' => 'custom-class');
-        $actualHtml = $this->helper->formErrors(array(), $options);
+        $options = ['class' => 'custom-class'];
+        $actualHtml = $this->helper->formErrors([], $options);
         $this->assertEquals(
             '<ul class="custom-class"><li></li></ul>',
             $actualHtml
@@ -181,12 +182,12 @@ class Zend_View_Helper_FormErrorsTest extends PHPUnit_Framework_TestCase
     public function testCanSetElementStringsPerOptions()
     {
         $actual = $this->helper->formErrors(
-            array('foo', 'bar', 'baz'),
-            array(
-                 'elementStart'     => '<p>',
-                 'elementEnd'       => '</p>',
-                 'elementSeparator' => '<br>',
-            )
+            ['foo', 'bar', 'baz'],
+            [
+                'elementStart' => '<p>',
+                'elementEnd' => '</p>',
+                'elementSeparator' => '<br>',
+            ]
         );
 
         $this->assertEquals('<p>foo<br>bar<br>baz</p>', $actual);
@@ -194,6 +195,6 @@ class Zend_View_Helper_FormErrorsTest extends PHPUnit_Framework_TestCase
 }
 
 // Call Zend_View_Helper_FormErrorsTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_FormErrorsTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_View_Helper_FormErrorsTest::main') {
     Zend_View_Helper_FormErrorsTest::main();
 }

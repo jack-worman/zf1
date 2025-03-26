@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,27 +14,26 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Config
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Config_Json
+ * Zend_Config_Json.
  */
 // require_once 'Zend/Config/Json.php';
 
 /**
  * @category   Zend
- * @package    Zend_Config
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
-class Zend_Config_JsonTest extends PHPUnit_Framework_TestCase
+class Zend_Config_JsonTest extends PHPUnit\Framework\TestCase
 {
     protected $_iniFileConfig;
     protected $_iniFileAllSectionsConfig;
@@ -55,15 +55,15 @@ class Zend_Config_JsonTest extends PHPUnit_Framework_TestCase
      */
     private $_iniFileInvalid;
 
-    public function setUp()
+    public function setUp(): void
     {
-        $this->_iniFileConfig = __DIR__ . '/_files/config.json';
-        $this->_iniFileAllSectionsConfig = __DIR__ . '/_files/allsections.json';
-        $this->_iniFileCircularConfig = __DIR__ . '/_files/circular.json';
-        $this->_iniFileMultipleInheritanceConfig = __DIR__ . '/_files/multipleinheritance.json';
-        $this->_nonReadableConfig = __DIR__ . '/_files/nonreadable.json';
-        $this->_iniFileNoSectionsConfig = __DIR__ . '/_files/nosections.json';
-        $this->_iniFileInvalid = __DIR__ . '/_files/invalid.json';
+        $this->_iniFileConfig = __DIR__.'/_files/config.json';
+        $this->_iniFileAllSectionsConfig = __DIR__.'/_files/allsections.json';
+        $this->_iniFileCircularConfig = __DIR__.'/_files/circular.json';
+        $this->_iniFileMultipleInheritanceConfig = __DIR__.'/_files/multipleinheritance.json';
+        $this->_nonReadableConfig = __DIR__.'/_files/nonreadable.json';
+        $this->_iniFileNoSectionsConfig = __DIR__.'/_files/nosections.json';
+        $this->_iniFileInvalid = __DIR__.'/_files/invalid.json';
     }
 
     public function testLoadSingleSection()
@@ -122,17 +122,16 @@ class Zend_Config_JsonTest extends PHPUnit_Framework_TestCase
 
     public function testRaisesExceptionWhenSectionNotFound()
     {
-        $this->setExpectedException('Zend_Config_Exception', 'cannot be found');
+        $this->expectException('Zend_Config_Exception', 'cannot be found');
         $config = new Zend_Config_Json($this->_iniFileConfig, 'extendserror');
     }
 
     public function testRetrievesAndMergesMultipleSections()
     {
-        $config = new Zend_Config_Json($this->_iniFileAllSectionsConfig, array('staging','other_staging'));
+        $config = new Zend_Config_Json($this->_iniFileAllSectionsConfig, ['staging', 'other_staging']);
 
         $this->assertEquals('otherStaging', $config->only_in);
         $this->assertEquals('dbstaging', $config->db->name);
-
     }
 
     public function testCanRetrieveAllSections()
@@ -152,46 +151,45 @@ class Zend_Config_JsonTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('all', $config->getSectionName());
         $this->assertEquals(false, $config->areAllSectionsLoaded());
 
-        $config = new Zend_Config_Json($this->_iniFileAllSectionsConfig, array('staging','other_staging'));
-        $this->assertEquals(array('staging','other_staging'), $config->getSectionName());
+        $config = new Zend_Config_Json($this->_iniFileAllSectionsConfig, ['staging', 'other_staging']);
+        $this->assertEquals(['staging', 'other_staging'], $config->getSectionName());
         $this->assertEquals(false, $config->areAllSectionsLoaded());
     }
 
     public function testDetectsCircularInheritance()
     {
-        $this->setExpectedException('Zend_Config_Exception', 'circular inheritance');
+        $this->expectException('Zend_Config_Exception', 'circular inheritance');
         $config = new Zend_Config_Json($this->_iniFileCircularConfig, null);
     }
 
     public function testRaisesErrorWhenNoFileProvided()
     {
-        $this->setExpectedException('Zend_Config_Exception', 'not set');
-        $config = new Zend_Config_Json('','');
+        $this->expectException('Zend_Config_Exception', 'not set');
+        $config = new Zend_Config_Json('', '');
     }
 
     public function testRaisesErrorOnAttemptsToExtendMultipleSectionsAtOnce()
     {
-        $this->setExpectedException('Zend_Config_Exception', 'Invalid');
+        $this->expectException('Zend_Config_Exception', 'Invalid');
         $config = new Zend_Config_Json($this->_iniFileMultipleInheritanceConfig, 'multiinherit');
     }
 
     public function testRaisesErrorWhenSectionNotFound()
     {
         try {
-            $config = new Zend_Config_Json($this->_iniFileConfig,array('all', 'notthere'));
+            $config = new Zend_Config_Json($this->_iniFileConfig, ['all', 'notthere']);
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('cannot be found', $expected->getMessage());
+            $this->assertStringContainsString('cannot be found', $expected->getMessage());
         }
 
         try {
-            $config = new Zend_Config_Json($this->_iniFileConfig,'notthere');
+            $config = new Zend_Config_Json($this->_iniFileConfig, 'notthere');
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('cannot be found', $expected->getMessage());
+            $this->assertStringContainsString('cannot be found', $expected->getMessage());
         }
     }
-
 
     public function testCanLoadConfigWithNoSections()
     {
@@ -205,17 +203,17 @@ class Zend_Config_JsonTest extends PHPUnit_Framework_TestCase
 
     public function testRaisesExceptionOnInvalidJsonMarkup()
     {
-        $this->setExpectedException('Zend_Config_Exception', 'Error parsing JSON data');
+        $this->expectException('Zend_Config_Exception', 'Error parsing JSON data');
         $config = new Zend_Config_Json($this->_iniFileInvalid);
     }
 
     public function testOptionsPassedAreHonored()
     {
-        $config = new Zend_Config_Json($this->_iniFileConfig, 'staging', array(
-            'skipExtends'        => true,
+        $config = new Zend_Config_Json($this->_iniFileConfig, 'staging', [
+            'skipExtends' => true,
             'allowModifications' => true,
-            'bar'                => 'foo', // ignored
-        ));
+            'bar' => 'foo', // ignored
+        ]);
         $this->assertNull($config->name); // demonstrates extends were skipped
         $config->foo = 'bar';
         $this->assertEquals('bar', $config->foo); // demonstrates modifications were made
@@ -223,11 +221,11 @@ class Zend_Config_JsonTest extends PHPUnit_Framework_TestCase
 
     public function testZf2StyleOptionsAreHonored()
     {
-        $config = new Zend_Config_Json($this->_iniFileConfig, 'staging', array(
-            'skip_extends'        => true,
+        $config = new Zend_Config_Json($this->_iniFileConfig, 'staging', [
+            'skip_extends' => true,
             'allow_modifications' => true,
-            'bar'                 => 'foo', // ignored
-        ));
+            'bar' => 'foo', // ignored
+        ]);
         $this->assertNull($config->name); // demonstrates extends were skipped
         $config->foo = 'bar';
         $this->assertEquals('bar', $config->foo); // demonstrates modifications were made
@@ -235,7 +233,7 @@ class Zend_Config_JsonTest extends PHPUnit_Framework_TestCase
 
     public function testAllowsPassingJsonStringsToConstructor()
     {
-        $json =<<<EOJ
+        $json = <<<EOJ
 {"all":{"foo":"bar"},"staging":{"_extends":"all","bar":"baz"},"debug":{"_extends":"all","debug":true}}
 EOJ;
         $config = new Zend_Config_Json($json, 'debug');
@@ -265,7 +263,7 @@ EOJ;
         $json = '{"env":"ZEND_CONFIG_JSON_ENV","path":"ZEND_CONFIG_JSON_ENV_PATH/tests","int":ZEND_CONFIG_JSON_ENV_INT}';
         $config = new Zend_Config_Json($json);
         $this->assertEquals(ZEND_CONFIG_JSON_ENV, $config->env);
-        $this->assertEquals(ZEND_CONFIG_JSON_ENV_PATH . '/tests', $config->path);
+        $this->assertEquals(ZEND_CONFIG_JSON_ENV_PATH.'/tests', $config->path);
         $this->assertEquals(ZEND_CONFIG_JSON_ENV_INT, $config->int);
     }
 
@@ -275,7 +273,7 @@ EOJ;
             define('ZEND_CONFIG_JSON_ENV', 'testing');
         }
         $json = '{"env":"ZEND_CONFIG_JSON_ENV"}';
-        $config = new Zend_Config_Json($json, null, array('ignore_constants' => true));
+        $config = new Zend_Config_Json($json, null, ['ignore_constants' => true]);
         $this->assertEquals('ZEND_CONFIG_JSON_ENV', $config->env);
     }
 
@@ -292,7 +290,7 @@ EOJ;
         }
         $json = '{"env":"ZEND_CONFIG_JSON_ENV","path":"ZEND_CONFIG_JSON_ENV_PATH/tests","int":ZEND_CONFIG_JSON_ENV_INT}';
 
-        $this->setExpectedException('Zend_Config_Exception', 'Error parsing JSON data');
-        $config = new Zend_Config_Json($json, null, array('ignore_constants' => true));
+        $this->expectException('Zend_Config_Exception', 'Error parsing JSON data');
+        $config = new Zend_Config_Json($json, null, ['ignore_constants' => true]);
     }
 }

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,46 +14,46 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Config
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 /**
- * Zend_Config_Xml
+ * Zend_Config_Xml.
  */
 // require_once 'Zend/Config/Xml.php';
 
 /**
  * @category   Zend
- * @package    Zend_Config
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Config
  */
 #[AllowDynamicProperties]
-class Zend_Config_XmlTest extends PHPUnit_Framework_TestCase
+class Zend_Config_XmlTest extends PHPUnit\Framework\TestCase
 {
     protected $_xmlFileConfig;
     protected $_xmlFileAllSectionsConfig;
     protected $_xmlFileCircularConfig;
     protected $_xmlFileInvalid;
 
-    public function setUp()
+    public function setUp(): void
     {
-        $this->_xmlFileConfig = __DIR__ . '/_files/config.xml';
-        $this->_xmlFileAllSectionsConfig = __DIR__ . '/_files/allsections.xml';
-        $this->_xmlFileCircularConfig = __DIR__ . '/_files/circular.xml';
-        $this->_xmlFileTopLevelStringConfig = __DIR__ . '/_files/toplevelstring.xml';
-        $this->_xmlFileOneTopLevelStringConfig = __DIR__ . '/_files/onetoplevelstring.xml';
-        $this->_nonReadableConfig = __DIR__ . '/_files/nonreadable.xml';
-        $this->_xmlFileSameNameKeysConfig = __DIR__ . '/_files/array.xml';
-        $this->_xmlFileShortParamsOneConfig = __DIR__ . '/_files/shortparamsone.xml';
-        $this->_xmlFileShortParamsTwoConfig = __DIR__ . '/_files/shortparamstwo.xml';
-        $this->_xmlFileInvalid = __DIR__ . '/_files/invalid.xml';
+        $this->_xmlFileConfig = __DIR__.'/_files/config.xml';
+        $this->_xmlFileAllSectionsConfig = __DIR__.'/_files/allsections.xml';
+        $this->_xmlFileCircularConfig = __DIR__.'/_files/circular.xml';
+        $this->_xmlFileTopLevelStringConfig = __DIR__.'/_files/toplevelstring.xml';
+        $this->_xmlFileOneTopLevelStringConfig = __DIR__.'/_files/onetoplevelstring.xml';
+        $this->_nonReadableConfig = __DIR__.'/_files/nonreadable.xml';
+        $this->_xmlFileSameNameKeysConfig = __DIR__.'/_files/array.xml';
+        $this->_xmlFileShortParamsOneConfig = __DIR__.'/_files/shortparamsone.xml';
+        $this->_xmlFileShortParamsTwoConfig = __DIR__.'/_files/shortparamstwo.xml';
+        $this->_xmlFileInvalid = __DIR__.'/_files/invalid.xml';
     }
 
     public function testLoadSingleSection()
@@ -93,14 +94,14 @@ class Zend_Config_XmlTest extends PHPUnit_Framework_TestCase
             $config = @new Zend_Config_Xml($this->_xmlFileConfig, 'notthere');
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('cannot be found in', $expected->getMessage());
+            $this->assertStringContainsString('cannot be found in', $expected->getMessage());
         }
 
         try {
-            $config = @new Zend_Config_Xml($this->_xmlFileConfig, array('notthere', 'all'));
+            $config = @new Zend_Config_Xml($this->_xmlFileConfig, ['notthere', 'all']);
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('cannot be found in', $expected->getMessage());
+            $this->assertStringContainsString('cannot be found in', $expected->getMessage());
         }
     }
 
@@ -110,19 +111,19 @@ class Zend_Config_XmlTest extends PHPUnit_Framework_TestCase
             $config = new Zend_Config_Xml($this->_xmlFileConfig, 'extendserror');
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('cannot be found', $expected->getMessage());
+            $this->assertStringContainsString('cannot be found', $expected->getMessage());
         }
     }
 
-    public function testZF413_MultiSections()
+    public function testZF413MultiSections()
     {
-        $config = new Zend_Config_Xml($this->_xmlFileAllSectionsConfig, array('staging','other_staging'));
+        $config = new Zend_Config_Xml($this->_xmlFileAllSectionsConfig, ['staging', 'other_staging']);
 
         $this->assertEquals('otherStaging', $config->only_in);
         $this->assertEquals('staging', $config->hostname);
     }
 
-    public function testZF413_AllSections()
+    public function testZF413AllSections()
     {
         $config = new Zend_Config_Xml($this->_xmlFileAllSectionsConfig, null);
         $this->assertEquals('otherStaging', $config->other_staging->only_in);
@@ -139,8 +140,8 @@ class Zend_Config_XmlTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('all', $config->getSectionName());
         $this->assertEquals(false, $config->areAllSectionsLoaded());
 
-        $config = new Zend_Config_Xml($this->_xmlFileAllSectionsConfig, array('staging','other_staging'));
-        $this->assertEquals(array('staging','other_staging'), $config->getSectionName());
+        $config = new Zend_Config_Xml($this->_xmlFileAllSectionsConfig, ['staging', 'other_staging']);
+        $this->assertEquals(['staging', 'other_staging'], $config->getSectionName());
         $this->assertEquals(false, $config->areAllSectionsLoaded());
     }
 
@@ -150,21 +151,21 @@ class Zend_Config_XmlTest extends PHPUnit_Framework_TestCase
             $config = new Zend_Config_Xml($this->_xmlFileCircularConfig, null);
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('circular inheritance', $expected->getMessage());
+            $this->assertStringContainsString('circular inheritance', $expected->getMessage());
         }
     }
 
     public function testErrorNoFile()
     {
         try {
-            $config = new Zend_Config_Xml('',null);
+            $config = new Zend_Config_Xml('', null);
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('Filename is not set', $expected->getMessage());
+            $this->assertStringContainsString('Filename is not set', $expected->getMessage());
         }
     }
 
-    public function testZF2162_TopLevelString()
+    public function testZF2162TopLevelString()
     {
         $config = new Zend_Config_Xml($this->_xmlFileTopLevelStringConfig, null);
         $this->assertEquals('one', $config->one);
@@ -176,10 +177,9 @@ class Zend_Config_XmlTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('one', $config->one);
         $config = new Zend_Config_Xml($this->_xmlFileOneTopLevelStringConfig, 'one');
         $this->assertEquals('one', $config->one);
-
     }
 
-    public function testZF2285_MultipleKeysOfTheSameName()
+    public function testZF2285MultipleKeysOfTheSameName()
     {
         $config = new Zend_Config_Xml($this->_xmlFileSameNameKeysConfig, null);
         $this->assertEquals('2a', $config->one->two->{0});
@@ -188,7 +188,7 @@ class Zend_Config_XmlTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('5', $config->three->four->{0}->five);
     }
 
-    public function testZF2437_ArraysWithMultipleChildren()
+    public function testZF2437ArraysWithMultipleChildren()
     {
         $config = new Zend_Config_Xml($this->_xmlFileSameNameKeysConfig, null);
         $this->assertEquals('1', $config->six->seven->{0}->eight);
@@ -199,19 +199,19 @@ class Zend_Config_XmlTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('3', $config->six->seven->{2}->nine);
     }
 
-    public function testZF3578_InvalidOrMissingfXmlFile()
+    public function testZF3578InvalidOrMissingfXmlFile()
     {
         try {
             $config = new Zend_Config_Xml($this->_xmlFileInvalid);
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('failed to load', $expected->getMessage());
+            $this->assertStringContainsString('failed to load', $expected->getMessage());
         }
         try {
             $config = new Zend_Config_Xml('I/dont/exist');
             $this->fail('An expected Zend_Config_Exception has not been raised');
         } catch (Zend_Config_Exception $expected) {
-            $this->assertContains('doesn\'t exist', $expected->getMessage());
+            $this->assertStringContainsString('doesn\'t exist', $expected->getMessage());
         }
     }
 
@@ -324,7 +324,6 @@ EOT;
 
         $config = new Zend_Config_Xml($string, 'staging');
         $this->assertEquals('staging', $config->hostname);
-
     }
 
     /*

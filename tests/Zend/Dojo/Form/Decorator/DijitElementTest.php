@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Dojo_Form_Decorator_DijitElementTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_Form_Decorator_DijitElementTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Dojo_Form_Decorator_DijitElementTest::main');
 }
 
 /** Zend_Dojo_Form_Decorator_DijitElement */
@@ -44,15 +45,15 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * Test class for Zend_Dojo_Form_Decorator_DijitElement.
  *
  * @category   Zend
- * @package    Zend_Dojo
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Dojo
  * @group      Zend_Dojo_Form
  */
 #[AllowDynamicProperties]
-class Zend_Dojo_Form_Decorator_DijitElementTest extends PHPUnit_Framework_TestCase
+class Zend_Dojo_Form_Decorator_DijitElementTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -61,25 +62,27 @@ class Zend_Dojo_Form_Decorator_DijitElementTest extends PHPUnit_Framework_TestCa
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_Form_Decorator_DijitElementTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_Dojo_Form_Decorator_DijitElementTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
+            $suite,
+        );
     }
 
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         Zend_Registry::_unsetInstance();
         Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
 
-        $this->errors = array();
-        $this->view   = $this->getView();
+        $this->errors = [];
+        $this->view = $this->getView();
         $this->decorator = new Zend_Dojo_Form_Decorator_DijitElement();
-        $this->element   = $this->getElement();
+        $this->element = $this->getElement();
         $this->element->setView($this->view);
         $this->decorator->setElement($this->element);
     }
@@ -87,10 +90,8 @@ class Zend_Dojo_Form_Decorator_DijitElementTest extends PHPUnit_Framework_TestCa
     /**
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
-     *
-     * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
     }
 
@@ -99,6 +100,7 @@ class Zend_Dojo_Form_Decorator_DijitElementTest extends PHPUnit_Framework_TestCa
         // require_once 'Zend/View.php';
         $view = new Zend_View();
         $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
+
         return $view;
     }
 
@@ -106,23 +108,25 @@ class Zend_Dojo_Form_Decorator_DijitElementTest extends PHPUnit_Framework_TestCa
     {
         $element = new Zend_Dojo_Form_Element_TextBox(
             'foo',
-            array(
+            [
                 'value' => 'some text',
                 'label' => 'TextBox',
-                'trim'  => true,
+                'trim' => true,
                 'propercase' => true,
                 'class' => 'someclass',
                 'style' => 'width: 100px;',
-            )
+            ]
         );
+
         return $element;
     }
 
     /**
-     * Handle an error (for testing notices)
+     * Handle an error (for testing notices).
      *
-     * @param  int $errno
-     * @param  string $errstr
+     * @param int    $errno
+     * @param string $errstr
+     *
      * @return void
      */
     public function handleError($errno, $errstr)
@@ -157,9 +161,9 @@ class Zend_Dojo_Form_Decorator_DijitElementTest extends PHPUnit_Framework_TestCa
 
     public function testRenderingShouldTriggerErrorWhenDuplicateDijitDetected()
     {
-        $this->view->dojo()->addDijit('foo', array('dojoType' => 'dijit.form.TextBox'));
+        $this->view->dojo()->addDijit('foo', ['dojoType' => 'dijit.form.TextBox']);
 
-        $handler = set_error_handler(array($this, 'handleError'));
+        $handler = set_error_handler([$this, 'handleError']);
         $html = $this->decorator->render('');
         restore_error_handler();
         $this->assertFalse(empty($this->errors), var_export($this->errors, 1));
@@ -180,21 +184,19 @@ class Zend_Dojo_Form_Decorator_DijitElementTest extends PHPUnit_Framework_TestCa
         $this->assertEquals('value', $this->decorator->getDijitParam('bogus'));
     }
 
-    /**
-     * @expectedException Zend_Form_Decorator_Exception
-     */
     public function testRenderingShouldThrowExceptionWhenNoViewObjectRegistered()
     {
+        $this->expectException(Zend_Form_Decorator_Exception::class);
         $element = new Zend_Dojo_Form_Element_TextBox(
             'foo',
-            array(
+            [
                 'value' => 'some text',
                 'label' => 'TextBox',
-                'trim'  => true,
+                'trim' => true,
                 'propercase' => true,
                 'class' => 'someclass',
                 'style' => 'width: 100px;',
-            )
+            ]
         );
         $this->decorator->setElement($element);
         $html = $this->decorator->render('');
@@ -203,14 +205,14 @@ class Zend_Dojo_Form_Decorator_DijitElementTest extends PHPUnit_Framework_TestCa
     public function testRenderingShouldCreateDijit()
     {
         $html = $this->decorator->render('');
-        $this->assertContains('dojoType="dijit.form.TextBox"', $html);
+        $this->assertStringContainsString('dojoType="dijit.form.TextBox"', $html);
     }
 
     public function testRenderingShouldSetRequiredDijitParamWhenElementIsRequired()
     {
         $this->element->setRequired(true);
         $html = $this->decorator->render('');
-        $this->assertContains('required="', $html);
+        $this->assertStringContainsString('required="', $html);
     }
 
     /**
@@ -220,11 +222,11 @@ class Zend_Dojo_Form_Decorator_DijitElementTest extends PHPUnit_Framework_TestCa
     {
         $this->element->setRequired(false);
         $html = $this->decorator->render('');
-        $this->assertContains('required="false"', $html, $html);
+        $this->assertStringContainsString('required="false"', $html, $html);
     }
 }
 
 // Call Zend_Dojo_Form_Decorator_DijitElementTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dojo_Form_Decorator_DijitElementTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Dojo_Form_Decorator_DijitElementTest::main') {
     Zend_Dojo_Form_Decorator_DijitElementTest::main();
 }

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,27 +14,25 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage UnitTests
+ *
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
-
 /**
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage UnitTests
+ *
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Search_Lucene
  */
-
 #[AllowDynamicProperties]
-class FilesystemTest extends PHPUnit_Framework_TestCase
+class FilesystemTest extends PHPUnit\Framework\TestCase
 {
     private $testFile;
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         if (is_file($this->testFile)) {
             unlink($this->testFile);
@@ -44,7 +43,7 @@ class FilesystemTest extends PHPUnit_Framework_TestCase
     {
         try {
             new Zend_Search_Lucene_Storage_File_Filesystem('/foo');
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             self::assertInstanceOf('Zend_Search_Lucene_Exception', $e);
 
             return;
@@ -62,9 +61,9 @@ class FilesystemTest extends PHPUnit_Framework_TestCase
 
             $newFilename = '/../../foo';
             if ($fs->renameFile($this->testFile, $newFilename)) {
-                $this->testFile = sys_get_temp_dir() . "/$newFilename";
+                $this->testFile = sys_get_temp_dir()."/$newFilename";
             }
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             self::assertInstanceOf('Zend_Search_Lucene_Exception', $e);
 
             return;

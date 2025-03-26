@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Json_Server
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Json_Server_ResponseTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Json_Server_ResponseTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Json_Server_ResponseTest::main');
 }
 
 // require_once 'Zend/Json/Server/Response.php';
@@ -30,18 +31,18 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 // require_once 'Zend/Json.php';
 
 /**
- * Test class for Zend_Json_Server_Response
+ * Test class for Zend_Json_Server_Response.
  *
  * @category   Zend
- * @package    Zend_Json_Server
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Json
  * @group      Zend_Json_Server
  */
 #[AllowDynamicProperties]
-class Zend_Json_Server_ResponseTest extends PHPUnit_Framework_TestCase
+class Zend_Json_Server_ResponseTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -50,18 +51,19 @@ class Zend_Json_Server_ResponseTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Json_Server_ResponseTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_Json_Server_ResponseTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
+            $suite,
+        );
     }
 
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->response = new Zend_Json_Server_Response();
     }
@@ -69,10 +71,8 @@ class Zend_Json_Server_ResponseTest extends PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
-     *
-     * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
     }
 
@@ -83,7 +83,7 @@ class Zend_Json_Server_ResponseTest extends PHPUnit_Framework_TestCase
 
     public function testResultAccessorsShouldWorkWithNormalInput()
     {
-        foreach (array(true, 'foo', 2, 2.0, array(), array('foo' => 'bar')) as $result) {
+        foreach ([true, 'foo', 2, 2.0, [], ['foo' => 'bar']] as $result) {
             $this->response->setResult($result);
             $this->assertEquals($result, $this->response->getResult());
         }
@@ -128,7 +128,7 @@ class Zend_Json_Server_ResponseTest extends PHPUnit_Framework_TestCase
     {
         $this->response->setVersion('2.0');
         $this->assertEquals('2.0', $this->response->getVersion());
-        foreach (array('a', 1, '1.0', array(), true) as $version) {
+        foreach (['a', 1, '1.0', [], true] as $version) {
             $this->response->setVersion($version);
             $this->assertNull($this->response->getVersion());
         }
@@ -194,6 +194,6 @@ class Zend_Json_Server_ResponseTest extends PHPUnit_Framework_TestCase
 }
 
 // Call Zend_Json_Server_ResponseTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Json_Server_ResponseTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Json_Server_ResponseTest::main') {
     Zend_Json_Server_ResponseTest::main();
 }

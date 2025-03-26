@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Queue
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -38,23 +39,23 @@
 require_once 'MessageTestClass.php';
 
 /** Base Adapter test class */
-require_once __DIR__ . '/AdapterTest.php';
+require_once __DIR__.'/AdapterTest.php';
 
 /**
  * @category   Zend
- * @package    Zend_Queue
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Queue
  */
 #[AllowDynamicProperties]
 class Zend_Queue_Adapter_MemcacheqTest extends Zend_Queue_Adapter_AdapterTest
 {
     /**
-     * Test setup
+     * Test setup.
      */
-    public function setUp()
+    public function setUp(): void
     {
         if (!TESTS_ZEND_QUEUE_MEMCACHEQ_ENABLED) {
             $this->markTestSkipped('TESTS_ZEND_QUEUE_MEMCACHEQ_ENABLED is not enabled in TestConfiguration.php');
@@ -68,7 +69,7 @@ class Zend_Queue_Adapter_MemcacheqTest extends Zend_Queue_Adapter_AdapterTest
 
     /**
      * getAdapterName() is an method to help make AdapterTest work with any
-     * new adapters
+     * new adapters.
      *
      * You must overload this method
      *
@@ -81,7 +82,7 @@ class Zend_Queue_Adapter_MemcacheqTest extends Zend_Queue_Adapter_AdapterTest
 
     /**
      * getAdapterName() is an method to help make AdapterTest work with any
-     * new adapters
+     * new adapters.
      *
      * You may overload this method.  The default return is
      * 'Zend_Queue_Adapter_' . $this->getAdapterName()
@@ -90,25 +91,26 @@ class Zend_Queue_Adapter_MemcacheqTest extends Zend_Queue_Adapter_AdapterTest
      */
     public function getAdapterFullName()
     {
-        return 'Zend_Queue_Adapter_' . $this->getAdapterName();
+        return 'Zend_Queue_Adapter_'.$this->getAdapterName();
     }
 
     public function getTestConfig()
     {
-        $driverOptions = array();
+        $driverOptions = [];
         if (defined('TESTS_ZEND_QUEUE_MEMCACHEQ_HOST')) {
             $driverOptions['host'] = TESTS_ZEND_QUEUE_MEMCACHEQ_HOST;
         }
         if (defined('TESTS_ZEND_QUEUE_MEMCACHEQ_PORT')) {
             $driverOptions['port'] = TESTS_ZEND_QUEUE_MEMCACHEQ_PORT;
         }
-        return array('driverOptions' => $driverOptions);
+
+        return ['driverOptions' => $driverOptions];
     }
 
     // test the constants
     public function testConst()
     {
-        /**
+        /*
          * @see Zend_Queue_Adapter_Memcacheq
          */
         // require_once 'Zend/Queue/Adapter/Memcacheq.php';
@@ -122,7 +124,7 @@ class Zend_Queue_Adapter_MemcacheqTest extends Zend_Queue_Adapter_AdapterTest
      */
     public function testReceiveWillRetrieveZeroItems()
     {
-        $options = array('name' => 'ZF7650', 'driverOptions' => $this->getTestConfig());
+        $options = ['name' => 'ZF7650', 'driverOptions' => $this->getTestConfig()];
 
         $queue = new Zend_Queue('Memcacheq', $options);
         $queue2 = $queue->createQueue('queue');

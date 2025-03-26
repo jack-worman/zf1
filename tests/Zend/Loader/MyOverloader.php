@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Loader
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id $
  */
 
@@ -25,19 +26,14 @@
  */
 // require_once 'Zend/Loader.php';
 
-
-
-
 /**
  * Static methods for loading classes and files.
  *
  * @category   Zend
- * @package    Zend_Loader
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
 #[AllowDynamicProperties]
 class Zend_Loader_MyOverloader extends Zend_Loader
 {
@@ -50,8 +46,9 @@ class Zend_Loader_MyOverloader extends Zend_Loader
     {
         try {
             self::loadClass($class);
+
             return $class;
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return false;
         }
     }

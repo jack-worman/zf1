@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,8 +14,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_EventManager
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -24,9 +24,9 @@
 
 /**
  * @category   Zend
- * @package    Zend_EventManager
- * @subpackage UnitTests
+ *
  * @group      Zend_EventManager
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -35,7 +35,7 @@ class Zend_EventManager_TestAsset_ClassWithEvents
 {
     protected $events;
 
-    public function events(Zend_EventManager_EventCollection $events = null)
+    public function events(?Zend_EventManager_EventCollection $events = null)
     {
         if (null !== $events) {
             $this->events = $events;
@@ -43,11 +43,12 @@ class Zend_EventManager_TestAsset_ClassWithEvents
         if (null === $this->events) {
             $this->events = new Zend_EventManager_EventManager(__CLASS__);
         }
+
         return $this->events;
     }
 
     public function foo()
     {
-        $this->events()->trigger(__FUNCTION__, $this, array());
+        $this->events()->trigger(__FUNCTION__, $this, []);
     }
 }

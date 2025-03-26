@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,16 +14,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Form_Decorator_HtmlTagTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Form_Decorator_HtmlTagTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Form_Decorator_HtmlTagTest::main');
 }
 
 // require_once 'Zend/Form/Decorator/HtmlTag.php';
@@ -31,17 +32,17 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 // require_once 'Zend/View.php';
 
 /**
- * Test class for Zend_Form_Decorator_HtmlTag
+ * Test class for Zend_Form_Decorator_HtmlTag.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Form
  */
 #[AllowDynamicProperties]
-class Zend_Form_Decorator_HtmlTagTest extends PHPUnit_Framework_TestCase
+class Zend_Form_Decorator_HtmlTagTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -50,18 +51,19 @@ class Zend_Form_Decorator_HtmlTagTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Decorator_HtmlTagTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite = PHPUnit\Framework\TestSuite::empty('Zend_Form_Decorator_HtmlTagTest');
+        (new PHPUnit\TextUI\TestRunner())->run(
+            PHPUnit\TextUI\Configuration\Registry::get(),
+            new PHPUnit\Runner\ResultCache\NullResultCache(),
+            $suite,
+        );
     }
 
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->decorator = new Zend_Form_Decorator_HtmlTag();
     }
@@ -69,17 +71,16 @@ class Zend_Form_Decorator_HtmlTagTest extends PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
-     *
-     * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
     }
 
     public function getView()
     {
         $view = new Zend_View();
-        $view->addHelperPath(__DIR__ . '/../../../../library/Zend/View/Helper');
+        $view->addHelperPath(__DIR__.'/../../../../library/Zend/View/Helper');
+
         return $view;
     }
 
@@ -93,16 +94,16 @@ class Zend_Form_Decorator_HtmlTagTest extends PHPUnit_Framework_TestCase
     public function testRendersOptionsAsHtmlAttribsByDefault()
     {
         $element = new Zend_Form_Element('foo');
-        $options = array('tag' => 'div', 'class' => 'foobar', 'id' => 'foo');
+        $options = ['tag' => 'div', 'class' => 'foobar', 'id' => 'foo'];
         $this->decorator->setElement($element)
                         ->setOptions($options);
         $html = $this->decorator->render('');
         foreach ($options as $key => $value) {
             if ('tag' == $key) {
-                $this->assertContains('<' . $value, $html);
-                $this->assertContains('</' . $value . '>', $html);
+                $this->assertStringContainsString('<'.$value, $html);
+                $this->assertStringContainsString('</'.$value.'>', $html);
             } else {
-                $this->assertContains($key . '="' . $value . '"', $html);
+                $this->assertStringContainsString($key.'="'.$value.'"', $html);
             }
         }
     }
@@ -110,16 +111,16 @@ class Zend_Form_Decorator_HtmlTagTest extends PHPUnit_Framework_TestCase
     public function testDoesNotRenderAttribsWhenNoAttribsOptionSet()
     {
         $element = new Zend_Form_Element('foo');
-        $options = array('tag' => 'div', 'class' => 'foobar', 'id' => 'foo', 'noAttribs' => true);
+        $options = ['tag' => 'div', 'class' => 'foobar', 'id' => 'foo', 'noAttribs' => true];
         $this->decorator->setElement($element)
                         ->setOptions($options);
         $html = $this->decorator->render('');
         foreach ($options as $key => $value) {
             if ('tag' == $key) {
-                $this->assertContains('<' . $value, $html);
-                $this->assertContains('</' . $value . '>', $html);
+                $this->assertStringContainsString('<'.$value, $html);
+                $this->assertStringContainsString('</'.$value.'>', $html);
             } else {
-                $this->assertNotContains($key . '="' . (string) $value . '"', $html);
+                $this->assertStringNotContainsString($key.'="'.(string) $value.'"', $html);
             }
         }
     }
@@ -127,18 +128,18 @@ class Zend_Form_Decorator_HtmlTagTest extends PHPUnit_Framework_TestCase
     public function testCanRenderOnlyOpeningTag()
     {
         $element = new Zend_Form_Element('foo');
-        $options = array('tag' => 'div', 'class' => 'foobar', 'id' => 'foo', 'openOnly' => true);
+        $options = ['tag' => 'div', 'class' => 'foobar', 'id' => 'foo', 'openOnly' => true];
         $this->decorator->setElement($element)
                         ->setOptions($options);
         $html = $this->decorator->render('');
         foreach ($options as $key => $value) {
             if ('tag' == $key) {
-                $this->assertContains('<' . $value, $html);
-                $this->assertNotContains('</' . $value . '>', $html);
+                $this->assertStringContainsString('<'.$value, $html);
+                $this->assertStringNotContainsString('</'.$value.'>', $html);
             } elseif ('openOnly' == $key) {
-                $this->assertNotContains($key, $html);
+                $this->assertStringNotContainsString($key, $html);
             } else {
-                $this->assertContains($key . '="' . (string) $value . '"', $html);
+                $this->assertStringContainsString($key.'="'.(string) $value.'"', $html);
             }
         }
     }
@@ -146,16 +147,16 @@ class Zend_Form_Decorator_HtmlTagTest extends PHPUnit_Framework_TestCase
     public function testCanRenderOnlyClosingTag()
     {
         $element = new Zend_Form_Element('foo');
-        $options = array('tag' => 'div', 'class' => 'foobar', 'id' => 'foo', 'closeOnly' => true);
+        $options = ['tag' => 'div', 'class' => 'foobar', 'id' => 'foo', 'closeOnly' => true];
         $this->decorator->setElement($element)
                         ->setOptions($options);
         $html = $this->decorator->render('');
         foreach ($options as $key => $value) {
             if ('tag' == $key) {
-                $this->assertNotContains('<' . $value, $html);
-                $this->assertContains('</' . $value . '>', $html);
+                $this->assertStringNotContainsString('<'.$value, $html);
+                $this->assertStringContainsString('</'.$value.'>', $html);
             } else {
-                $this->assertNotContains($key . '="' . (string) $value . '"', $html);
+                $this->assertStringNotContainsString($key.'="'.(string) $value.'"', $html);
             }
         }
     }
@@ -163,59 +164,59 @@ class Zend_Form_Decorator_HtmlTagTest extends PHPUnit_Framework_TestCase
     public function testArrayAttributesAreRenderedAsSpaceSeparatedLists()
     {
         $element = new Zend_Form_Element('foo');
-        $options = array('tag' => 'div', 'class' => array('foobar', 'bazbat'), 'id' => 'foo');
+        $options = ['tag' => 'div', 'class' => ['foobar', 'bazbat'], 'id' => 'foo'];
         $this->decorator->setElement($element)
                         ->setOptions($options);
         $html = $this->decorator->render('');
-        $this->assertContains('class="foobar bazbat"', $html);
+        $this->assertStringContainsString('class="foobar bazbat"', $html);
     }
 
     public function testAppendPlacementWithCloseOnlyRendersClosingTagFollowingContent()
     {
-        $options = array(
+        $options = [
             'closeOnly' => true,
-            'tag'       => 'div',
-            'placement' => 'append'
-        );
+            'tag' => 'div',
+            'placement' => 'append',
+        ];
         $this->decorator->setOptions($options);
         $html = $this->decorator->render('content');
-        $this->assertRegexp('#(content).*?(</div>)#', $html, $html);
+        $this->assertMatchesRegularExpression('#(content).*?(</div>)#', $html, $html);
     }
 
     public function testAppendPlacementWithOpenOnlyRendersOpeningTagFollowingContent()
     {
-        $options = array(
-            'openOnly'  => true,
-            'tag'       => 'div',
-            'placement' => 'append'
-        );
+        $options = [
+            'openOnly' => true,
+            'tag' => 'div',
+            'placement' => 'append',
+        ];
         $this->decorator->setOptions($options);
         $html = $this->decorator->render('content');
-        $this->assertRegexp('#(content).*?(<div>)#', $html, $html);
+        $this->assertMatchesRegularExpression('#(content).*?(<div>)#', $html, $html);
     }
 
     public function testPrependPlacementWithCloseOnlyRendersClosingTagBeforeContent()
     {
-        $options = array(
+        $options = [
             'closeOnly' => true,
-            'tag'       => 'div',
-            'placement' => 'prepend'
-        );
+            'tag' => 'div',
+            'placement' => 'prepend',
+        ];
         $this->decorator->setOptions($options);
         $html = $this->decorator->render('content');
-        $this->assertRegexp('#(</div>).*?(content)#', $html, $html);
+        $this->assertMatchesRegularExpression('#(</div>).*?(content)#', $html, $html);
     }
 
     public function testPrependPlacementWithOpenOnlyRendersOpeningTagBeforeContent()
     {
-        $options = array(
-            'openOnly'  => true,
-            'tag'       => 'div',
-            'placement' => 'prepend'
-        );
+        $options = [
+            'openOnly' => true,
+            'tag' => 'div',
+            'placement' => 'prepend',
+        ];
         $this->decorator->setOptions($options);
         $html = $this->decorator->render('content');
-        $this->assertRegexp('#(<div>).*?(content)#', $html, $html);
+        $this->assertMatchesRegularExpression('#(<div>).*?(content)#', $html, $html);
     }
 
     public function testTagIsInitiallyDiv()
@@ -238,6 +239,6 @@ class Zend_Form_Decorator_HtmlTagTest extends PHPUnit_Framework_TestCase
 }
 
 // Call Zend_Form_Decorator_HtmlTagTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Form_Decorator_HtmlTagTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Form_Decorator_HtmlTagTest::main') {
     Zend_Form_Decorator_HtmlTagTest::main();
 }
