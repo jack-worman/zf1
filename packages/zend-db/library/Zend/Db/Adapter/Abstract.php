@@ -874,13 +874,8 @@ abstract class Zend_Db_Adapter_Abstract
      *
      * If an array is passed as the value, the array values are quoted
      * and then returned as a comma-separated string.
-     *
-     * @param mixed $value the value to quote
-     * @param mixed $type  OPTIONAL the SQL datatype name, or constant, or null
-     *
-     * @return mixed an SQL-safe quoted value (or string of separated values)
      */
-    public function quote($value, $type = null)
+    public function quote(mixed $value, mixed $type = null): string
     {
         $this->_connect();
 
@@ -929,7 +924,7 @@ abstract class Zend_Db_Adapter_Abstract
             return $quotedValue;
         }
 
-        return $this->_quote($value);
+        return (string) $this->_quote($value);
     }
 
     /**
