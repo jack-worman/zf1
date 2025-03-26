@@ -856,7 +856,7 @@ abstract class Zend_Db_Adapter_Abstract
      *
      * @param string $value Raw string
      *
-     * @return string Quoted string
+     * @return string|int|float Quoted string
      */
     protected function _quote($value)
     {
@@ -878,7 +878,7 @@ abstract class Zend_Db_Adapter_Abstract
      * @param mixed $value the value to quote
      * @param mixed $type  OPTIONAL the SQL datatype name, or constant, or null
      *
-     * @return string an SQL-safe quoted value (or string of separated values)
+     * @return string|int|float an SQL-safe quoted value (or string of separated values)
      */
     public function quote($value, $type = null)
     {
@@ -929,7 +929,7 @@ abstract class Zend_Db_Adapter_Abstract
             return $quotedValue;
         }
 
-        return (string) $this->_quote($value);
+        return $this->_quote($value);
     }
 
     /**
