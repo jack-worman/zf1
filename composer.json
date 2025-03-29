@@ -58,7 +58,7 @@
             "Zend_Validate": "packages/zend-validate/library/",
             "Zend_View": "packages/zend-view/library/",
             "Zend_Wildfire": "packages/zend-wildfire/library/",
-            "Zend_Xml": "packages/zend-xml/library/",
+            "Zend_Xml": "packages/zend-xml/library/"
         }
     },
     "replace": {
