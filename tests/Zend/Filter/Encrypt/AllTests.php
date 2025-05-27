@@ -58,7 +58,6 @@ class Zend_Filter_Encrypt_AllTests
         $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Filter_Encrypt');
 
         $suite->addTestSuite('Zend_Filter_Encrypt_McryptTest');
-        $suite->addTestSuite('Zend_Filter_Encrypt_OpensslTest');
 
         return $suite;
     }

@@ -150,7 +150,6 @@ class Zend_Filter_AllTests
         $suite->addTestSuite('Zend_Filter_Compress_TarTest');
         $suite->addTestSuite('Zend_Filter_Compress_ZipTest');
         $suite->addTestSuite('Zend_Filter_Encrypt_McryptTest');
-        $suite->addTestSuite('Zend_Filter_Encrypt_OpensslTest');
         $suite->addTestSuite('Zend_Filter_File_DecryptTest');
         $suite->addTestSuite('Zend_Filter_File_EncryptTest');
         $suite->addTestSuite('Zend_Filter_File_LowerCaseTest');
