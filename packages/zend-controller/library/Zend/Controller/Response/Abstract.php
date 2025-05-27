@@ -47,7 +47,7 @@ abstract class Zend_Controller_Response_Abstract
     /**
      * @var list<array{name: string, value: string, replace: bool}>
      */
-    protected array $_headers = [];
+    protected $_headers = [];
 
     /**
      * Array of raw headers. Each header is a single string, the entire header to emit.
