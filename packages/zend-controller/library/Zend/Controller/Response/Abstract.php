@@ -174,7 +174,7 @@ abstract class Zend_Controller_Response_Abstract
     /**
      * @return list<array{name: string, value: string, replace: bool}>
      */
-    public function getHeaders(): array
+    public function getHeaders()
     {
         return $this->_headers;
     }
