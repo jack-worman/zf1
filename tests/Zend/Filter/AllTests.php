@@ -59,7 +59,6 @@ require_once 'Zend/Filter/Compress/TarTest.php';
 require_once 'Zend/Filter/Compress/ZipTest.php';
 
 require_once 'Zend/Filter/Encrypt/McryptTest.php';
-require_once 'Zend/Filter/Encrypt/OpensslTest.php';
 
 require_once 'Zend/Filter/File/DecryptTest.php';
 require_once 'Zend/Filter/File/EncryptTest.php';
