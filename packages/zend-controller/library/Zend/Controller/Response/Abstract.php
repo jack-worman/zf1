@@ -45,11 +45,9 @@ abstract class Zend_Controller_Response_Abstract
     protected $_exceptions = [];
 
     /**
-     * Array of headers. Each header is an array with keys 'name' and 'value'.
-     *
-     * @var array
+     * @var list<array{name: string, value: string, replace: bool}>
      */
-    protected $_headers = [];
+    protected array $_headers = [];
 
     /**
      * Array of raw headers. Each header is a single string, the entire header to emit.
@@ -174,11 +172,9 @@ abstract class Zend_Controller_Response_Abstract
     }
 
     /**
-     * Return array of headers; see {@link $_headers} for format.
-     *
-     * @return array
+     * @return list<array{name: string, value: string, replace: bool}>
      */
-    public function getHeaders()
+    public function getHeaders(): array
     {
         return $this->_headers;
     }
