@@ -42,18 +42,6 @@
 defined('TESTS_ZEND_OB_ENABLED') || define('TESTS_ZEND_OB_ENABLED', false);
 
 /**
- * Zend_Auth_Adapter_DbTable tests
- */
-defined('TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_ENABLED') || define('TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_ENABLED', false);
-defined('TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_DATABASE') || define('TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_DATABASE', ':memory:');
-
-/**
- * Zend_Auth_Adapter_Ldap online tests
- * (See also TESTS_ZEND_LDAP_* configuration constants below)
- */
-defined('TESTS_ZEND_AUTH_ADAPTER_LDAP_ONLINE_ENABLED') || define('TESTS_ZEND_AUTH_ADAPTER_LDAP_ONLINE_ENABLED', false);
-
-/**
  * Zend_Cache
  *
  * TESTS_ZEND_CACHE_SQLITE_ENABLED     => sqlite extension has to be enabled
@@ -257,8 +245,7 @@ defined('TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_SPECIFIC') || define('TESTS_Z
  */
 defined('TESTS_ZEND_LDAP_ONLINE_ENABLED') || define('TESTS_ZEND_LDAP_ONLINE_ENABLED', false);
 
-/* These largely map to the options described in the Zend_Ldap and
- * Zend_Auth_Adapter_Ldap documentation.
+/* These largely map to the options described in the Zend_Ldap.
  *
  * Example Configuration for Active Directory:
  *                      HOST: dc1.w.net

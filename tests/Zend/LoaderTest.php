@@ -304,19 +304,10 @@ class Zend_LoaderTest extends PHPUnit_Framework_TestCase
                 'zend-db',
                 'library',
             )),
-            implode(DIRECTORY_SEPARATOR, array(
-                dirname(dirname(__DIR__)),
-                'packages',
-                'zend-auth',
-                'library',
-            )),
         )));
 
         $this->setErrorHandler();
         $this->assertEquals('Zend_Db_Profiler_Exception', Zend_Loader::autoload('Zend_Db_Profiler_Exception'));
-        $this->assertContains('deprecated', $this->error);
-        $this->error = null;
-        $this->assertEquals('Zend_Auth_Storage_Interface', Zend_Loader::autoload('Zend_Auth_Storage_Interface'));
         $this->assertContains('deprecated', $this->error);
     }
 
