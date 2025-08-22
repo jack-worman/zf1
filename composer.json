@@ -28,7 +28,6 @@
         "psr-0": {
             "Zend_Acl": "packages/zend-acl/library/",
             "Zend_Cache": "packages/zend-cache/library/",
-            "Zend_CodeGenerator": "packages/zend-codegenerator/library/",
             "Zend_Config": "packages/zend-config/library/",
             "Zend_Console_Getopt": "packages/zend-console-getopt/library/",
             "Zend_Controller": "packages/zend-controller/library/",
@@ -89,7 +88,6 @@
     "replace": {
         "zf1s/zend-acl": "self.version",
         "zf1s/zend-cache": "self.version",
-        "zf1s/zend-codegenerator": "self.version",
         "zf1s/zend-config": "self.version",
         "zf1s/zend-console-getopt": "self.version",
         "zf1s/zend-controller": "self.version",
