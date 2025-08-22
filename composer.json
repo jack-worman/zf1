@@ -27,7 +27,6 @@
     "autoload": {
         "psr-0": {
             "Zend_Acl": "packages/zend-acl/library/",
-            "Zend_Amf": "packages/zend-amf/library/",
             "Zend_Application": "packages/zend-application/library/",
             "Zend_Auth": "packages/zend-auth/library/",
             "Zend_Cache": "packages/zend-cache/library/",
@@ -91,7 +90,6 @@
     },
     "replace": {
         "zf1s/zend-acl": "self.version",
-        "zf1s/zend-amf": "self.version",
         "zf1s/zend-application": "self.version",
         "zf1s/zend-auth": "self.version",
         "zf1s/zend-cache": "self.version",
