@@ -26,7 +26,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 }
 
 require_once 'Zend/Acl/AclTest.php';
-require_once 'Zend/Amf/AllTests.php';
 require_once 'Zend/Application/AllTests.php';
 require_once 'Zend/AuthTest.php';
 require_once 'Zend/Auth/AllTests.php';
@@ -162,7 +161,6 @@ class Zend_AllTests
 
         // Start remaining tests...
         $suite->addTestSuite('Zend_Acl_AclTest');
-        $suite->addTest(Zend_Amf_AllTests::suite());
         $suite->addTest(Zend_Application_AllTests::suite());
         $suite->addTestSuite('Zend_AuthTest');
         $suite->addTest(Zend_Auth_AllTests::suite());

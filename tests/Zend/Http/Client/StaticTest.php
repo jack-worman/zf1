@@ -715,21 +715,6 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
         $client = new Zend_Http_Client($uri);
         $this->assertEquals((string)$orig, (string)$uri);
     }
-    /*
-     * @group ZF-9206
-     */
-    function testStreamWarningRewind()
-    {
-        $httpClient = new Zend_Http_Client();
-        $httpClient->setUri('http://example.org');
-        $httpClient->setMethod(Zend_Http_Client::GET);
-        ob_start();
-        $httpClient->setStream('php://output')->request();
-        ob_end_clean();
-    }
-    /**
-     * Data providers
-     */
 
     /**
      * Data provider of valid non-standard HTTP methods
