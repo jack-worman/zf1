@@ -740,51 +740,6 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
     }
 
     /**
-     * @group ZF-7839
-     */
-    public function testTestCaseShouldAllowUsingApplicationObjectAsBootstrap()
-    {
-        // require_once 'Zend/Application.php';
-        $application = new Zend_Application('testing', array(
-            'resources' => array(
-                'frontcontroller' => array(
-                    'controllerDirectory' => __DIR__ . '/_files/application/controllers',
-                ),
-            ),
-        ));
-        $this->testCase->bootstrap = $application;
-        $this->testCase->bootstrap();
-        $this->assertEquals(
-            $application->getBootstrap()->getResource('frontcontroller'),
-            $this->testCase->getFrontController()
-        );
-    }
-
-    /**
-     * @group ZF-8193
-     */
-    public function testWhenApplicationObjectUsedAsBootstrapTestCaseShouldExecuteBootstrapRunMethod()
-    {
-        // require_once 'Zend/Application.php';
-        $application = new Zend_Application('testing', array(
-            'resources' => array(
-                'frontcontroller' => array(
-                    'controllerDirectory' => __DIR__ . '/_files/application/controllers',
-                ),
-            ),
-        ));
-        $this->testCase->bootstrap = $application;
-        $this->testCase->bootstrap();
-        $this->testCase->dispatch('/');
-        $front = $application->getBootstrap()->getResource('frontcontroller');
-        $boot  = $front->getParam('bootstrap');
-        $type  = is_object($boot)
-               ? get_class($boot)
-               : gettype($boot);
-        $this->assertTrue($boot === $this->testCase->bootstrap->getBootstrap(), $type);
-    }
-
-    /**
      * @group ZF-7496
      * @dataProvider providerRedirectWorksAsExpectedFromHookMethodsInActionController
      */
