@@ -24,8 +24,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Db_Profiler_AllTests::main');
 }
 
-require_once 'Zend/Db/Profiler/FirebugTest.php';
-
 /**
  * @category   Zend
  * @package    Zend_Db
@@ -45,11 +43,7 @@ class Zend_Db_Profiler_AllTests
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Db_Profiler');
-
-        $suite->addTestSuite('Zend_Db_Profiler_FirebugTest');
-
-        return $suite;
+        return new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Db_Profiler');
     }
 }
 

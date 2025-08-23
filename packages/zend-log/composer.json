@@ -16,8 +16,7 @@
         }
     },
     "suggest": {
-        "ext-dom": "Used in special situations or with special adapters (Zend_Log_Formatter_Xml)",
-        "zf1s/zend-wildfire": "Used in special situations or with special adapters"
+        "ext-dom": "Used in special situations or with special adapters (Zend_Log_Formatter_Xml)"
     },
     "replace": {
         "zf1/zend-log": "^1.12"

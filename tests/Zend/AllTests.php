@@ -1,28 +1,7 @@
 <?php
 
-/**
- * Zend Framework
- *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
- */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', \Zend_AllTests::main::class);
+    define('PHPUnit_MAIN_METHOD', \Zend_AllTests::class);
 }
 
 require_once 'Zend/Acl/AclTest.php';
@@ -88,11 +67,7 @@ require_once 'Zend/Validate/AllTests.php';
 require_once 'Zend/VersionTest.php';
 require_once 'Zend/ViewTest.php';
 require_once 'Zend/View/AllTests.php';
-if (PHP_OS != 'AIX') {
-    require_once 'Zend/Wildfire/AllTests.php';
-}
 require_once 'Zend/Xml/AllTests.php';
-require_once 'Zend/XmlRpc/AllTests.php';
 
 /**
  * @category   Zend
@@ -213,11 +188,7 @@ class Zend_AllTests
         $suite->addTestSuite(\Zend_ViewTest::class);
         $suite->addTest(Zend_View_AllTests::suite());
         $suite->addTestSuite(\Zend_VersionTest::class);
-        if (PHP_OS != 'AIX') {
-            $suite->addTest(Zend_Wildfire_AllTests::suite());
-        }
         $suite->addTest(Zend_Xml_AllTests::suite());
-        $suite->addTest(Zend_XmlRpc_AllTests::suite());
 
         return $suite;
     }
