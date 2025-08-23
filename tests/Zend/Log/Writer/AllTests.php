@@ -26,9 +26,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 require_once 'Zend/Log/Writer/AbstractTest.php';
 require_once 'Zend/Log/Writer/DbTest.php';
-if (PHP_OS != 'AIX') {
-    require_once 'Zend/Log/Writer/FirebugTest.php';
-}
 require_once 'Zend/Log/Writer/MailTest.php';
 require_once 'Zend/Log/Writer/MockTest.php';
 require_once 'Zend/Log/Writer/NullTest.php';
@@ -59,9 +56,6 @@ class Zend_Log_Writer_AllTests
 
         $suite->addTestSuite('Zend_Log_Writer_AbstractTest');
         $suite->addTestSuite('Zend_Log_Writer_DbTest');
-        if (PHP_OS != 'AIX') {
-            $suite->addTestSuite('Zend_Log_Writer_FirebugTest');
-        }
         $suite->addTestSuite('Zend_Log_Writer_MailTest');
         $suite->addTestSuite('Zend_Log_Writer_MockTest');
         $suite->addTestSuite('Zend_Log_Writer_NullTest');

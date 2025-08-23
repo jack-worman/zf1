@@ -26,12 +26,6 @@
 /** Zend_Db_Profiler_Firebug */
 // require_once 'Zend/Db/Profiler/Firebug.php';
 
-/** Zend_Wildfire_Plugin_FirePhp */
-// require_once 'Zend/Wildfire/Plugin/FirePhp.php';
-
-/** Zend_Wildfire_Channel_HttpHeaders */
-// require_once 'Zend/Wildfire/Channel/HttpHeaders.php';
-
 /** Zend_Controller_Request_Http */
 // require_once 'Zend/Controller/Request/Http.php';
 
