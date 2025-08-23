@@ -37,7 +37,6 @@ $oUserAgent = new Zend_Http_UserAgent($config);
 function printBrowserDetails($browser)
 {
     $device = $browser->getDevice();
-    //Zend_Debug::dump($device->getAllFeatures());
     if (isset($device)) {
         print "<fieldset><legend><b>General informations</b></legend>";
         print "<ul>";
@@ -75,7 +74,6 @@ function printBrowserDetails($browser)
         }
 
         print "<fieldset><legend><b>Full</b></legend>";
-        Zend_Debug::dump($device->getAllFeatures());
         print '</fieldset>';
     }
 

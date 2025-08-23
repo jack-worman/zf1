@@ -14,7 +14,6 @@ require_once 'Zend/Controller/AllTests.php';
 require_once 'Zend/Crypt/AllTests.php';
 require_once 'Zend/DateTest.php';
 require_once 'Zend/Date/AllTests.php';
-require_once 'Zend/DebugTest.php';
 require_once 'Zend/EventManager/AllTests.php';
 require_once 'Zend/ExceptionTest.php';
 require_once 'Zend/File/AllTests.php';
@@ -131,7 +130,6 @@ class Zend_AllTests
         $suite->addTestSuite(\Zend_DateTest::class);
         $suite->addTest(Zend_Date_AllTests::suite());
         $suite->addTest(Zend_Db_AllTests::suite());
-        $suite->addTestSuite(\Zend_DebugTest::class);
         $suite->addTest(Zend_Dom_AllTests::suite());
         $suite->addTest(Zend_EventManager_AllTests::suite());
         $suite->addTestSuite(\Zend_ExceptionTest::class);

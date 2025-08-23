@@ -29,7 +29,6 @@
  * @see Zend_Db_Adapter_Pdo_Sqlite
  */
 // require_once 'Zend/Db/Adapter/Pdo/Sqlite.php';
-// require_once 'Zend/Debug.php';
 // require_once 'Zend/Db/Adapter/Abstract.php';
 
 /**
