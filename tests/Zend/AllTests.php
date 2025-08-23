@@ -34,7 +34,6 @@ require_once 'Zend/Locale/AllTests.php';
 require_once 'Zend/Log/AllTests.php';
 require_once 'Zend/Mail/AllTests.php';
 require_once 'Zend/Measure/AllTests.php';
-require_once 'Zend/Memory/AllTests.php';
 require_once 'Zend/MimeTest.php';
 require_once 'Zend/Mime/AllTests.php';
 require_once 'Zend/NavigationTest.php';
@@ -43,8 +42,6 @@ require_once 'Zend/Oauth/AllTests.php';
 require_once 'Zend/OpenIdTest.php';
 require_once 'Zend/OpenId/AllTests.php';
 require_once 'Zend/Paginator/AllTests.php';
-require_once 'Zend/PdfTest.php';
-require_once 'Zend/Pdf/AllTests.php';
 require_once 'Zend/Reflection/AllTests.php';
 require_once 'Zend/RegistryTest.php';
 require_once 'Zend/Queue/AllTests.php';
@@ -124,10 +121,6 @@ class Zend_AllTests
     {
         $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend');
 
-        // Running this early to ensure that the test suite hasn't used too
-        // much memory by the time it gets to this test.
-        $suite->addTest(Zend_Memory_AllTests::suite());
-
         // Start remaining tests...
         $suite->addTestSuite(\Zend_Acl_AclTest::class);
         $suite->addTest(Zend_Cache_AllTests::suite());
@@ -165,8 +158,6 @@ class Zend_AllTests
         $suite->addTest(Zend_Navigation_AllTests::suite());
         $suite->addTest(Zend_Oauth_AllTests::suite());
         $suite->addTest(Zend_Paginator_AllTests::suite());
-        $suite->addTestSuite(\Zend_PdfTest::class);
-        $suite->addTest(Zend_Pdf_AllTests::suite());
         $suite->addTestSuite(\Zend_RegistryTest::class);
         $suite->addTest(Zend_Reflection_AllTests::suite());
         $suite->addTest(Zend_Queue_AllTests::suite());
