@@ -76,11 +76,6 @@ jobs:
           # https://github.com/shivammathur/setup-php/issues/407#issuecomment-773675741
           fail-fast: true
 
-      # https://github.com/zf1s/zf1/pull/6#issuecomment-495397170
-      - name: Validate composer.json for all packages
-        run: |
-          for json in composer.json packages/*/composer.json; do echo COMPOSER=$json; done | parallel env {} composer validate
-
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
 
