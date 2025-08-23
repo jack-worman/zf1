@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 class Zend_HealthCall_HealthCallTest extends PHPUnit_Framework_TestCase
 {
-    public function testClassesExist(): void
+    public function testClasslikesExists(): void
     {
         $classlikes = [
             \Zend_Acl::class,

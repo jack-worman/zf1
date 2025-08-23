@@ -170,17 +170,6 @@ abstract class Zend_File_Transfer_Adapter_Abstract
     abstract public function isFiltered($files = null);
 
     /**
-     * Retrieve progress of transfer.
-     *
-     * @return float
-     */
-    public static function getProgress()
-    {
-        // require_once 'Zend/File/Transfer/Exception.php';
-        throw new Zend_File_Transfer_Exception('Method must be implemented within the adapter');
-    }
-
-    /**
      * Set plugin loader to use for validator or filter chain.
      *
      * @param string $type 'filter', or 'validate'
