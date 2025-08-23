@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework.
  *
@@ -39,7 +40,7 @@ class Zend_Stdlib_SplPriorityQueue extends SplPriorityQueue implements Serializa
     /**
      * Insert a value with a given priority.
      *
-     * Utilizes {@var $serial} to ensure that values of equal priority are
+     * Utilizes {@var to $serial} ensure that values of equal priority are
      * emitted in the same order in which they are inserted.
      *
      * @return void
