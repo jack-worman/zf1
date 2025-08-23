@@ -435,20 +435,6 @@ defined('TESTS_ZEND_QUEUE_PLATFORMJQ_HOST') || define('TESTS_ZEND_QUEUE_PLATFORM
 defined('TESTS_ZEND_QUEUE_PLATFORMJQ_PASS') || define('TESTS_ZEND_QUEUE_PLATFORMJQ_PASS', false);
 
 /**
- * Zend_Serializer adapter tests
- *
- * TESTS_ZEND_SERIALIZER_ADAPTER_WDDX_ENABLED:
- *   - enable wddx adapter tests
- *   - needs wddx and SimpleXml php extension installed
- *
- * TESTS_ZEND_SERIALIZER_ADAPTER_IGBINARY_ENABLED:
- *   - enable igbinary adapter tests
- *   - needs igbinary php extension installed
- */
-defined('TESTS_ZEND_SERIALIZER_ADAPTER_WDDX_ENABLED') || define('TESTS_ZEND_SERIALIZER_ADAPTER_WDDX_ENABLED', false);
-defined('TESTS_ZEND_SERIALIZER_ADAPTER_IGBINARY_ENABLED') || define('TESTS_ZEND_SERIALIZER_ADAPTER_IGBINARY_ENABLED', false);
-
-/**
  * Zend_Soap_AutoDiscover scenario tests for complex objects and wsdl generation
  *
  * Copy all the files of zf/tests/Zend/Soap/_files/fulltests into a directory
