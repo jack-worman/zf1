@@ -33,7 +33,6 @@
             "Zend_Crypt": "packages/zend-crypt/library/",
             "Zend_Date": "packages/zend-date/library/",
             "Zend_Db": "packages/zend-db/library/",
-            "Zend_Dojo": "packages/zend-dojo/library/",
             "Zend_Dom": "packages/zend-dom/library/",
             "Zend_Exception": "packages/zend-exception/library/",
             "Zend_File": "packages/zend-file/library/",
