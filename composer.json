@@ -57,8 +57,6 @@
             "Zend_Queue": "packages/zend-queue/library/",
             "Zend_Reflection": "packages/zend-reflection/library/",
             "Zend_Registry": "packages/zend-registry/library/",
-            "Zend_Search": "packages/zend-search/library/",
-            "Zend_Search_Lucene": "packages/zend-search-lucene/library/",
             "Zend_Server": "packages/zend-server/library/",
             "Zend_Session": "packages/zend-session/library/",
             "Zend_Soap": "packages/zend-soap/library/",
