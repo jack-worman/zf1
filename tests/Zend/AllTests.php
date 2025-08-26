@@ -24,7 +24,6 @@ require_once 'Zend/Http/AllTests.php';
 require_once 'Zend/JsonTest.php';
 require_once 'Zend/Json/AllTests.php';
 require_once 'Zend/Layout/AllTests.php';
-require_once 'Zend/Ldap/AllTests.php';
 require_once 'Zend/LoaderTest.php';
 require_once 'Zend/Loader/AllTests.php';
 require_once 'Zend/LocaleTest.php';
@@ -138,7 +137,6 @@ class Zend_AllTests
         $suite->addTestSuite(\Zend_JsonTest::class);
         $suite->addTest(Zend_Json_AllTests::suite());
         $suite->addTest(Zend_Layout_AllTests::suite());
-        $suite->addTest(Zend_Ldap_AllTests::suite());
         $suite->addTestSuite(\Zend_LoaderTest::class);
         $suite->addTest(Zend_Loader_AllTests::suite());
         $suite->addTestSuite(\Zend_LocaleTest::class);

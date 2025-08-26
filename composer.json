@@ -42,7 +42,6 @@
             "Zend_Http": "packages/zend-http/library/",
             "Zend_Json": "packages/zend-json/library/",
             "Zend_Layout": "packages/zend-layout/library/",
-            "Zend_Ldap": "packages/zend-ldap/library/",
             "Zend_Loader": "packages/zend-loader/library/",
             "Zend_Locale": "packages/zend-locale/library/",
             "Zend_Log": "packages/zend-log/library/",

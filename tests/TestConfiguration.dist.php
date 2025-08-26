@@ -241,56 +241,6 @@ defined('TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_LATEST_MINOR') || define('TES
 defined('TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_SPECIFIC') || define('TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_SPECIFIC', false);
 
 /**
- * Zend_Ldap online tests
- */
-defined('TESTS_ZEND_LDAP_ONLINE_ENABLED') || define('TESTS_ZEND_LDAP_ONLINE_ENABLED', false);
-
-/* These largely map to the options described in the Zend_Ldap.
- *
- * Example Configuration for Active Directory:
- *                      HOST: dc1.w.net
- *             USE_START_TLS: true
- *                   USE_SSL: false
- *                  USERNAME: CN=User 1,CN=Users,DC=w,DC=net
- *            PRINCIPAL_NAME: user1@w.net
- *             LDAP_PASSWORD: pass1
- *                   BASE_DN: CN=Users,DC=w,DC=net
- *               DOMAIN_NAME: w.net
- * ACCOUNT_DOMAIN_NAME_SHORT: W
- *              ALT_USERNAME: user2
- *                    ALT_DN: CN=User 2,CN=Users,DC=w,DC=net
- *              ALT_PASSWORD: pass2
- *
- * Example Configuration for OpenLDAP
- *                      HOST: s0.foo.net
- *                  USERNAME: CN=user1,DC=foo,DC=net
- *            PRINCIPAL_NAME: user1@foo.net
- *             LDAP_PASSWORD: pass1
- *          BIND_REQUIRES_DN: true
- *                   BASE_DN: OU=Sales,DC=w,DC=net
- *               DOMAIN_NAME: foo.net
- * ACCOUNT_DOMAIN_NAME_SHORT: FOO
- *              ALT_USERNAME: abaker
- *                    ALT_DN: CN=Alice Baker,OU=Sales,DC=foo,DC=net
- *              ALT_PASSWORD: apass
- */
-defined('TESTS_ZEND_LDAP_HOST') || define('TESTS_ZEND_LDAP_HOST', 'localhost');
-//defined('TESTS_ZEND_LDAP_PORT') || define('TESTS_ZEND_LDAP_PORT', 389);
-defined('TESTS_ZEND_LDAP_USE_START_TLS') || define('TESTS_ZEND_LDAP_USE_START_TLS', true);
-//defined('TESTS_ZEND_LDAP_USE_SSL') || define('TESTS_ZEND_LDAP_USE_SSL', false);
-defined('TESTS_ZEND_LDAP_USERNAME') || define('TESTS_ZEND_LDAP_USERNAME', 'CN=someUser,DC=example,DC=com');
-defined('TESTS_ZEND_LDAP_PRINCIPAL_NAME') || define('TESTS_ZEND_LDAP_PRINCIPAL_NAME', 'someUser@example.com');
-defined('TESTS_ZEND_LDAP_PASSWORD') || define('TESTS_ZEND_LDAP_PASSWORD', null);
-defined('TESTS_ZEND_LDAP_BIND_REQUIRES_DN') || define('TESTS_ZEND_LDAP_BIND_REQUIRES_DN', true);
-defined('TESTS_ZEND_LDAP_BASE_DN') || define('TESTS_ZEND_LDAP_BASE_DN', 'OU=Sales,DC=example,DC=com');
-//defined('TESTS_ZEND_LDAP_ACCOUNT_FILTER_FORMAT') || define('TESTS_ZEND_LDAP_ACCOUNT_FILTER_FORMAT', '(&(objectClass=posixAccount)(uid=%s))');
-defined('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME') || define('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME', 'example.com');
-defined('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT') || define('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT', 'EXAMPLE');
-defined('TESTS_ZEND_LDAP_ALT_USERNAME') || define('TESTS_ZEND_LDAP_ALT_USERNAME', 'anotherUser');
-defined('TESTS_ZEND_LDAP_ALT_DN') || define('TESTS_ZEND_LDAP_ALT_DN', 'CN=Another User,OU=Sales,DC=example,DC=com');
-defined('TESTS_ZEND_LDAP_ALT_PASSWORD') || define('TESTS_ZEND_LDAP_ALT_PASSWORD', null);
-
-/**
  * Zend_Locale tests
  *
  * If the TESTS_ZEND_LOCALE_FORMAT_SETLOCALE property below is a valid,
