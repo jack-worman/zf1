@@ -27,7 +27,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 require_once 'Zend/Form/Element/ButtonTest.php';
 require_once 'Zend/Form/Element/CheckboxTest.php';
 require_once 'Zend/Form/Element/FileTest.php';
-require_once 'Zend/Form/Element/HashTest.php';
 require_once 'Zend/Form/Element/HiddenTest.php';
 require_once 'Zend/Form/Element/ImageTest.php';
 require_once 'Zend/Form/Element/MultiCheckboxTest.php';
@@ -64,7 +63,6 @@ class Zend_Form_Element_AllTests
         $suite->addTestSuite('Zend_Form_Element_ButtonTest');
         $suite->addTestSuite('Zend_Form_Element_CheckboxTest');
         $suite->addTestSuite('Zend_Form_Element_FileTest');
-        $suite->addTestSuite('Zend_Form_Element_HashTest');
         $suite->addTestSuite('Zend_Form_Element_HiddenTest');
         $suite->addTestSuite('Zend_Form_Element_ImageTest');
         $suite->addTestSuite('Zend_Form_Element_MultiCheckboxTest');

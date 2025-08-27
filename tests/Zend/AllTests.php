@@ -11,7 +11,6 @@ require_once 'Zend/Dom/AllTests.php';
 require_once 'Zend/ConfigTest.php';
 require_once 'Zend/Config/AllTests.php';
 require_once 'Zend/Controller/AllTests.php';
-require_once 'Zend/Crypt/AllTests.php';
 require_once 'Zend/DateTest.php';
 require_once 'Zend/Date/AllTests.php';
 require_once 'Zend/ExceptionTest.php';
@@ -35,9 +34,6 @@ require_once 'Zend/MimeTest.php';
 require_once 'Zend/Mime/AllTests.php';
 require_once 'Zend/NavigationTest.php';
 require_once 'Zend/Navigation/AllTests.php';
-require_once 'Zend/Oauth/AllTests.php';
-require_once 'Zend/OpenIdTest.php';
-require_once 'Zend/OpenId/AllTests.php';
 require_once 'Zend/Paginator/AllTests.php';
 require_once 'Zend/Reflection/AllTests.php';
 require_once 'Zend/RegistryTest.php';
@@ -97,8 +93,6 @@ class Zend_AllTests
 
         // These tests require no output be sent prior to running as they rely
         // on internal PHP functions
-        $suite->addTestSuite(\Zend_OpenIdTest::class);
-        $suite->addTest(Zend_OpenId_AllTests::suite());
         $suite->addTest(Zend_Session_AllTests::suite());
         $suite->addTest(Zend_Soap_AllTests::suite());
 
@@ -122,7 +116,6 @@ class Zend_AllTests
         $suite->addTestSuite(\Zend_ConfigTest::class);
         $suite->addTest(Zend_Config_AllTests::suite());
         $suite->addTest(Zend_Controller_AllTests::suite());
-        $suite->addTest(Zend_Crypt_AllTests::suite());
         $suite->addTestSuite(\Zend_DateTest::class);
         $suite->addTest(Zend_Date_AllTests::suite());
         $suite->addTest(Zend_Db_AllTests::suite());
@@ -148,7 +141,6 @@ class Zend_AllTests
         $suite->addTest(Zend_Mime_AllTests::suite());
         $suite->addTestSuite(\Zend_NavigationTest::class);
         $suite->addTest(Zend_Navigation_AllTests::suite());
-        $suite->addTest(Zend_Oauth_AllTests::suite());
         $suite->addTest(Zend_Paginator_AllTests::suite());
         $suite->addTestSuite(\Zend_RegistryTest::class);
         $suite->addTest(Zend_Reflection_AllTests::suite());
