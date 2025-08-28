@@ -48,7 +48,6 @@ class Zend_Date extends Zend_Date_DateObject
         'fix_dst' => true,       // fix dst on summer/winter time change
         'extend_month' => false,      // false - addMonth like SQL, true like excel
         'cache' => null,       // cache to set
-        'timesync' => null,        // timesync server to set
     ];
 
     // Class wide Date Constants
@@ -140,7 +139,7 @@ class Zend_Date extends Zend_Date_DateObject
      */
     public function __construct($date = null, $part = null, $locale = null)
     {
-        if (is_object($date) and !($date instanceof Zend_TimeSync_Protocol)
+        if (is_object($date)
             and !($date instanceof Zend_Date)) {
             if ($locale instanceof Zend_Locale) {
                 $locale = $date;
@@ -151,7 +150,7 @@ class Zend_Date extends Zend_Date_DateObject
             }
         }
 
-        if ((null !== $date) and !is_array($date) and !($date instanceof Zend_TimeSync_Protocol)
+        if ((null !== $date) and !is_array($date)
             and !($date instanceof Zend_Date) and !defined($date) and Zend_Locale::isLocale($date, true, false)) {
             $locale = $date;
             $date = null;
@@ -176,11 +175,7 @@ class Zend_Date extends Zend_Date_DateObject
             }
         }
 
-        if ($date instanceof Zend_TimeSync_Protocol) {
-            $date = $date->getInfo();
-            $date = $this->_getTime($date['offset']);
-            $part = null;
-        } elseif (0 != parent::$_defaultOffset) {
+        if (0 != parent::$_defaultOffset) {
             $date = $this->_getTime(parent::$_defaultOffset);
         }
 
@@ -282,19 +277,6 @@ class Zend_Date extends Zend_Date_DateObject
                             parent::$_cache = $value;
                             parent::$_cacheTags = Zend_Date_DateObject::_getTagSupportForCache();
                             Zend_Locale_Data::setCache($value);
-                        }
-                        break;
-                    case 'timesync':
-                        if (null === $value) {
-                            parent::$_defaultOffset = 0;
-                        } else {
-                            if (!$value instanceof Zend_TimeSync_Protocol) {
-                                // require_once 'Zend/Date/Exception.php';
-                                throw new Zend_Date_Exception('Instance of Zend_TimeSync expected');
-                            }
-
-                            $date = $value->getInfo();
-                            parent::$_defaultOffset = $date['offset'];
                         }
                         break;
                 }

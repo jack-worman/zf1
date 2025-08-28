@@ -41,7 +41,6 @@ if (!defined('TESTS_ZEND_I18N_EXTENDED_COVERAGE')) {
 // require_once 'Zend/Date.php';
 // require_once 'Zend/Locale.php';
 // require_once 'Zend/Date/Cities.php';
-// require_once 'Zend/TimeSync.php';
 
 // echo "BCMATH is ", Zend_Locale_Math::isBcmathDisabled() ? 'disabled':'not disabled', "\n";
 
@@ -4997,26 +4996,6 @@ class Zend_DateTest extends PHPUnit_Framework_TestCase
             $this->fail();
         } catch (Zend_Date_Exception $e) {
             // success
-        }
-    }
-
-    public function testTimesync()
-    {
-        try {
-            $server = new Zend_TimeSync('ntp://pool.ntp.org', 'alias');
-            $date1 = $server->getDate();
-            // need to use the proxy class to simulate time() returning wrong value
-            $date2 = new Zend_Date_TestHelper(time());
-
-            $info = $server->getInfo();
-
-            if (($info['offset'] >= 0.5) || ($info['offset'] <= -0.52)) {
-                $this->assertFalse($date1->getTimestamp() == $date2->getTimestamp());
-            } else {
-                $this->assertEquals($date1->getTimestamp(), $date2->getTimestamp());
-            }
-        } catch (Zend_TimeSync_Exception $e) {
-            $this->markTestIncomplete('NTP timeserver not available.');
         }
     }
 
