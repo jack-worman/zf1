@@ -35,12 +35,10 @@ require_once 'Zend/Mime/AllTests.php';
 require_once 'Zend/NavigationTest.php';
 require_once 'Zend/Navigation/AllTests.php';
 require_once 'Zend/Paginator/AllTests.php';
-require_once 'Zend/Reflection/AllTests.php';
 require_once 'Zend/RegistryTest.php';
 require_once 'Zend/Queue/AllTests.php';
 require_once 'Zend/Server/AllTests.php';
 require_once 'Zend/Session/AllTests.php';
-require_once 'Zend/Soap/AllTests.php';
 require_once 'Zend/Tag/AllTests.php';
 require_once 'Zend/Test/AllTests.php';
 require_once 'Zend/Text/AllTests.php';
@@ -94,7 +92,6 @@ class Zend_AllTests
         // These tests require no output be sent prior to running as they rely
         // on internal PHP functions
         $suite->addTest(Zend_Session_AllTests::suite());
-        $suite->addTest(Zend_Soap_AllTests::suite());
 
         return $suite;
     }
@@ -143,7 +140,6 @@ class Zend_AllTests
         $suite->addTest(Zend_Navigation_AllTests::suite());
         $suite->addTest(Zend_Paginator_AllTests::suite());
         $suite->addTestSuite(\Zend_RegistryTest::class);
-        $suite->addTest(Zend_Reflection_AllTests::suite());
         $suite->addTest(Zend_Queue_AllTests::suite());
         $suite->addTest(Zend_Server_AllTests::suite());
         $suite->addTest(Zend_Tag_AllTests::suite());
