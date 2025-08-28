@@ -50,7 +50,6 @@
             "Zend_Mobile": "packages/zend-mobile/library/",
             "Zend_Navigation": "packages/zend-navigation/library/",
             "Zend_Paginator": "packages/zend-paginator/library/",
-            "Zend_Queue": "packages/zend-queue/library/",
             "Zend_Registry": "packages/zend-registry/library/",
             "Zend_Server": "packages/zend-server/library/",
             "Zend_Session": "packages/zend-session/library/",
