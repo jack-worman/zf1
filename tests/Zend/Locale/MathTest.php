@@ -63,7 +63,7 @@ class Zend_Locale_MathTest extends PHPUnit_Framework_TestCase
 
     /*
      * Note: All other aspects of Zend_Locale_Math receive extensive testing
-     * via unit tests in Zend_Date and Zend_Measure*.
+     * via unit tests in Zend_Date*.
      */
 
     /**
