@@ -36,7 +36,7 @@
  * GENERAL SETTINGS
  *
  * OB_ENABLED should be enabled for some tests to check if all functionality
- * works as expected. Such tests include those for Zend_Soap and Zend_Session,
+ * works as expected. Such tests include those for Zend_Session,
  * which require that headers not be sent in order to work.
  */
 defined('TESTS_ZEND_OB_ENABLED') || define('TESTS_ZEND_OB_ENABLED', false);
@@ -383,19 +383,6 @@ defined('TESTS_ZEND_QUEUE_MEMCACHEQ_PORT') || define('TESTS_ZEND_QUEUE_MEMCACHEQ
 defined('TESTS_ZEND_QUEUE_PLATFORMJQ_ENABLED') || define('TESTS_ZEND_QUEUE_PLATFORMJQ_ENABLED', false);
 defined('TESTS_ZEND_QUEUE_PLATFORMJQ_HOST') || define('TESTS_ZEND_QUEUE_PLATFORMJQ_HOST', false);
 defined('TESTS_ZEND_QUEUE_PLATFORMJQ_PASS') || define('TESTS_ZEND_QUEUE_PLATFORMJQ_PASS', false);
-
-/**
- * Zend_Soap_AutoDiscover scenario tests for complex objects and wsdl generation
- *
- * Copy all the files of zf/tests/Zend/Soap/_files/fulltests into a directory
- * that can be reached by webserver and enter the base uri to this directory
- * into the variable. The test "Zend_Soap_AutoDiscover_OnlineTest" makes use
- * of the servers and AutoDiscover feature.
- *
- * NOTE: Make sure the servers are using the correct Zend Framework copy,
- * when having more than one version installed and include paths are changing.
- */
-defined('TESTS_ZEND_SOAP_AUTODISCOVER_ONLINE_SERVER_BASEURI') || define('TESTS_ZEND_SOAP_AUTODISCOVER_ONLINE_SERVER_BASEURI', false);
 
 /**
  * Zend_Uri tests
