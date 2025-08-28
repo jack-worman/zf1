@@ -51,7 +51,6 @@
             "Zend_Registry": "packages/zend-registry/library/",
             "Zend_Server": "packages/zend-server/library/",
             "Zend_Session": "packages/zend-session/library/",
-            "Zend_Tag": "packages/zend-tag/library/",
             "Zend_Test": "packages/zend-test/library/",
             "Zend_Translate": "packages/zend-translate/library/",
             "Zend_Uri": "packages/zend-uri/library/",
