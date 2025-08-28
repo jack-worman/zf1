@@ -37,7 +37,6 @@ require_once 'Zend/Paginator/AllTests.php';
 require_once 'Zend/RegistryTest.php';
 require_once 'Zend/Server/AllTests.php';
 require_once 'Zend/Session/AllTests.php';
-require_once 'Zend/Tag/AllTests.php';
 require_once 'Zend/Test/AllTests.php';
 require_once 'Zend/TranslateTest.php';
 require_once 'Zend/Translate/Adapter/AllTests.php';
@@ -136,7 +135,6 @@ class Zend_AllTests
         $suite->addTest(Zend_Paginator_AllTests::suite());
         $suite->addTestSuite(\Zend_RegistryTest::class);
         $suite->addTest(Zend_Server_AllTests::suite());
-        $suite->addTest(Zend_Tag_AllTests::suite());
         $suite->addTest(Zend_Test_AllTests::suite());
         $suite->addTestSuite(\Zend_TranslateTest::class);
         $suite->addTest(Zend_Translate_Adapter_AllTests::suite());
