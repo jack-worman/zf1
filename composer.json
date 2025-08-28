@@ -53,7 +53,6 @@
             "Zend_Session": "packages/zend-session/library/",
             "Zend_Tag": "packages/zend-tag/library/",
             "Zend_Test": "packages/zend-test/library/",
-            "Zend_Text": "packages/zend-text/library/",
             "Zend_Translate": "packages/zend-translate/library/",
             "Zend_Uri": "packages/zend-uri/library/",
             "Zend_Validate": "packages/zend-validate/library/",
