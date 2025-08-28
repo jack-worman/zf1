@@ -46,7 +46,6 @@
             "Zend_Log": "packages/zend-log/library/",
             "Zend_Mail": "packages/zend-mail/library/",
             "Zend_Mime": "packages/zend-mime/library/",
-            "Zend_Mobile": "packages/zend-mobile/library/",
             "Zend_Navigation": "packages/zend-navigation/library/",
             "Zend_Paginator": "packages/zend-paginator/library/",
             "Zend_Registry": "packages/zend-registry/library/",
