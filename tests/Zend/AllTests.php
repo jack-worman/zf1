@@ -44,7 +44,6 @@ require_once 'Zend/UriTest.php';
 require_once 'Zend/Uri/AllTests.php';
 require_once 'Zend/ValidateTest.php';
 require_once 'Zend/Validate/AllTests.php';
-require_once 'Zend/VersionTest.php';
 require_once 'Zend/ViewTest.php';
 require_once 'Zend/View/AllTests.php';
 require_once 'Zend/Xml/AllTests.php';
@@ -144,7 +143,6 @@ class Zend_AllTests
         $suite->addTest(Zend_Validate_AllTests::suite());
         $suite->addTestSuite(\Zend_ViewTest::class);
         $suite->addTest(Zend_View_AllTests::suite());
-        $suite->addTestSuite(\Zend_VersionTest::class);
         $suite->addTest(Zend_Xml_AllTests::suite());
 
         return $suite;

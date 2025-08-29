@@ -28,7 +28,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 // require_once 'Zend/Form/SubForm.php';
 // require_once 'Zend/View.php';
-// require_once 'Zend/Version.php';
 
 /**
  * @category   Zend

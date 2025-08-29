@@ -360,15 +360,6 @@ defined('TESTS_ZEND_MAIL_SMTP_AUTH') || define('TESTS_ZEND_MAIL_SMTP_AUTH', fals
 defined('TESTS_ZEND_URI_CRASH_TEST_ENABLED') || define('TESTS_ZEND_URI_CRASH_TEST_ENABLED', false);
 
 /**
- * Zend_Version tests
- *
- * Set ONLINE_ENABLED if you wish to run validators that require network
- * connectivity.
- */
-defined('TESTS_ZEND_VERSION_ONLINE_ENABLED') || define('TESTS_ZEND_VERSION_ONLINE_ENABLED', false);
-
-
-/**
  * Zend_Validate tests
  *
  * Set ONLINE_ENABLED if you wish to run validators that require network
