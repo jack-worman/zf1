@@ -6,6 +6,8 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 require_once 'Zend/Acl/AclTest.php';
 require_once 'Zend/Cache/AllTests.php';
+require_once 'Zend/ConfigTest.php';
+require_once 'Zend/Config/AllTests.php';
 require_once 'Zend/Db/AllTests.php';
 require_once 'Zend/Controller/AllTests.php';
 require_once 'Zend/DateTest.php';
@@ -89,6 +91,8 @@ class Zend_AllTests
         // Start remaining tests...
         $suite->addTestSuite(\Zend_Acl_AclTest::class);
         $suite->addTest(Zend_Cache_AllTests::suite());
+        $suite->addTestSuite(\Zend_ConfigTest::class);
+        $suite->addTest(Zend_Config_AllTests::suite());
         $suite->addTest(Zend_Controller_AllTests::suite());
         $suite->addTestSuite(\Zend_DateTest::class);
         $suite->addTest(Zend_Date_AllTests::suite());

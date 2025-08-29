@@ -63,7 +63,6 @@
  * @method Zend_View_Helper_HeadMeta                       headMeta($content = null, $keyValue = null, $keyType = 'name', $modifiers = array(), $placement = Zend_View_Helper_Placeholder_Container_Abstract::APPEND)
  * @method Zend_View_Helper_HeadScript                     headScript($mode = Zend_View_Helper_HeadScript::FILE, $spec = null, $placement = 'APPEND', array $attrs = array(), $type = 'text/javascript')
  * @method Zend_View_Helper_HeadStyle                      headStyle($content = null, $placement = 'APPEND', $attributes = array())
- * @method Zend_View_Helper_HeadTitle                      headTitle($title = null, $setType = null)
  * @method string                                          htmlFlash($data, array $attribs = array(), array $params = array(), $content = null)
  * @method string                                          htmlList(array $items, $ordered = false, $attribs = false, $escape = true)
  * @method string                                          htmlObject($data, $type, array $attribs = array(), array $params = array(), $content = null)

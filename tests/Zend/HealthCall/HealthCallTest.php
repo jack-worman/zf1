@@ -19,6 +19,7 @@ class Zend_HealthCall_HealthCallTest extends PHPUnit_Framework_TestCase
             \Zend_Cache_Backend_File::class,
             \Zend_Cache_Backend_Interface::class,
             \Zend_Cache_Core::class,
+            \Zend_Config::class,
             \Zend_Controller_Action::class,
             \Zend_Controller_Action_HelperBroker::class,
             \Zend_Controller_Action_HelperBroker_PriorityStack::class,
