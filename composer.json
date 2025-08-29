@@ -55,7 +55,6 @@
             "Zend_Translate": "packages/zend-translate/library/",
             "Zend_Uri": "packages/zend-uri/library/",
             "Zend_Validate": "packages/zend-validate/library/",
-            "Zend_Version": "packages/zend-version/library/",
             "Zend_View": "packages/zend-view/library/",
             "Zend_Xml": "packages/zend-xml/library/"
         }

@@ -123,14 +123,14 @@ class Zend_Db_Adapter_StaticTest extends PHPUnit_Framework_TestCase
         set_include_path($newIp);
 
         try {
-            $db = Zend_Db::factory('Version', array('dbname' => 'dummy', 'adapterNamespace' => 'Zend'));
+            $db = Zend_Db::factory('Db', array('dbname' => 'dummy', 'adapterNamespace' => 'Zend'));
             set_include_path($ip);
             $this->fail('Expected to catch Zend_Db_Exception');
         } catch (Zend_Exception $e) {
             set_include_path($ip);
             $this->assertTrue($e instanceof Zend_Db_Exception,
                 'Expected exception of type Zend_Db_Exception, got '.get_class($e));
-            $this->assertEquals("Adapter class 'Zend_Version' does not extend Zend_Db_Adapter_Abstract", $e->getMessage());
+            $this->assertEquals("Adapter class 'Zend_Db' does not extend Zend_Db_Adapter_Abstract", $e->getMessage());
         }
     }
 
