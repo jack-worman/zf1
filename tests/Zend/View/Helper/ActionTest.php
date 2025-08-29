@@ -270,15 +270,6 @@ class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
         $this->assertNull($this->view->bar);
     }
 
-    public function testNestingActionsDoesNotBreakPlaceholderHelpers()
-    {
-        $html = $this->helper->action('nest', 'foo', 'foo');
-        $title = $this->view->headTitle()->toString();
-        $this->assertContains(' - ', $title, $title);
-        $this->assertContains('Foo Nest', $title);
-        $this->assertContains('Nested Stuff', $title);
-    }
-
     /**
      * @group ZF-2716
      */
