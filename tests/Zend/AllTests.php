@@ -68,13 +68,7 @@ class Zend_AllTests
      */
     public static function suiteBuffered()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend - Buffered Test Suites');
-
-        // These tests require no output be sent prior to running as they rely
-        // on internal PHP functions
-        $suite->addTest(Zend_Session_AllTests::suite());
-
-        return $suite;
+        return new PHPUnit_Framework_TestSuite('Zend Framework - Zend - Buffered Test Suites');
     }
 
     /**

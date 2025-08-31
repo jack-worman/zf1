@@ -12,12 +12,6 @@ $config['wurflapi']['wurfl_config_file'] = __DIR__.'/_files/Wurfl/resources/wurf
 $config['terawurfl']['terawurfl_lib_dir'] = __DIR__.'/_files/TeraWurfl_2.1.3/tera-WURFL/';
 $config['deviceatlas']['deviceatlas_lib_dir'] = __DIR__.'/_files/DA_php_1.4.1/';
 $config['deviceatlas']['deviceatlas_data'] = __DIR__.'/_files/DA_php_1.4.1/sample/json/20101014.json';
-/*
-$config['mobile']['features']['path']      = 'Zend/Http/UserAgent/Features/Adapter/TeraWurfl.php';
-$config['mobile']['features']['classname'] = 'Zend_Http_UserAgent_Features_Adapter_TeraWurfl';
-$config['mobile']['features']['path']      = 'Zend/Http/UserAgent/Features/Adapter/DeviceAtlas.php';
-$config['mobile']['features']['classname'] = 'Zend_Http_UserAgent_Features_Adapter_DeviceAtlas';
-*/
 $config['server'] = $_SERVER;
 
 if (!empty($_GET['userAgent'])) {
@@ -28,53 +22,6 @@ if (!empty($_GET['userAgent'])) {
 
 if (!empty($_GET['sequence'])) {
     $config['identification_sequence'] = $_GET['sequence'];
-}
-$oUserAgent = new Zend_Http_UserAgent($config);
-
-// $oUserAgent = Zend_Http_UserAgent::getInstance ();
-
-function printBrowserDetails($browser)
-{
-    $device = $browser->getDevice();
-    if (isset($device)) {
-        echo '<fieldset><legend><b>General informations</b></legend>';
-        echo '<ul>';
-        echo '<li>Browser Type: '.$browser->getBrowserType().'</li>';
-        echo '<li>Browser Name: '.$device->getFeature('browser_name').'</li>';
-        echo '<li>Browser Version: '.$device->getFeature('browser_version').'</li>';
-        echo '<li>Browser Compatibility: '.$device->getFeature('browser_compatibility').'</li>';
-        echo '<li>Browser Engine: '.$device->getFeature('browser_engine').'</li>';
-        echo '<li>Device OS Name: '.$device->getFeature('device_os_name').'</li>';
-        echo '<li>Device OS token: '.$device->getFeature('device_os_token').'</li>';
-        echo '<li>Server OS: '.$device->getFeature('server_os').'</li>';
-        echo '<li>Server Platform: '.$device->getFeature('server_platfom').'</li>';
-        echo '<li>Server Platform Version: '.$device->getFeature('server_platfom_version').'</li>';
-        echo '</ul>';
-        echo '</fieldset>';
-
-        $wurfl = $device->getFeature('brand_name');
-        if (!$wurfl) {
-            echo '<fieldset><legend><b>no WURFL identification</b></legend>';
-            echo '</fieldset>';
-        } else {
-            echo '<fieldset><legend><b>WURFL capabilities</b></legend>';
-            echo '<ul>';
-            echo '<li>Mobile browser: '.$device->getFeature('mobile_browser').'</li>';
-            echo '<li>Mobile browser version: '.$device->getFeature('mobile_browser_version').'</li>';
-            echo '<li>Device Brand Name: '.$device->getFeature('brand_name').'</li>';
-            echo '<li>Device Model Name: '.$device->getFeature('model_name').'</li>';
-            echo '<li>Device OS: '.$device->getFeature('device_os').'</li>';
-            echo '<li>Xhtml Preferred Markup:'.$device->getFeature('preferred_markup').'</li>';
-            echo '<li>Resolution Width:'.$device->getFeature('resolution_width').'</li>';
-            echo '<li>Resolution Height:'.$device->getFeature('resolution_height').'</li>';
-            echo '<li>MP3:'.$device->getFeature('mp3').'</li>';
-            echo '</ul>';
-            echo '</fieldset>';
-        }
-
-        echo '<fieldset><legend><b>Full</b></legend>';
-        echo '</fieldset>';
-    }
 }
 
 $options = [
@@ -109,11 +56,4 @@ User Agent : <input type="text" name="userAgent" style="width: 700"
 <input type="submit" /></div>
 </form>
 </fieldset>
-
-<?php
-if ($oUserAgent) {
-    printBrowserDetails($oUserAgent);
-}
-?>
-
 </div>
