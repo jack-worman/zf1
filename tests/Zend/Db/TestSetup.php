@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -30,13 +31,12 @@
  */
 // require_once 'Zend/Db.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Db
  */
 abstract class Zend_Db_TestSetup extends PHPUnit_Framework_TestCase
@@ -44,14 +44,14 @@ abstract class Zend_Db_TestSetup extends PHPUnit_Framework_TestCase
     /**
      * @var Zend_Db_TestUtil_Common
      */
-    protected $_util = null;
+    protected $_util;
 
     /**
      * @var Zend_Db_Adapter_Abstract
      */
-    protected $_db = null;
+    protected $_db;
 
-    public abstract function getDriver();
+    abstract public function getDriver();
 
     /**
      * Subclasses should call parent::setUp() before
@@ -76,7 +76,7 @@ abstract class Zend_Db_TestSetup extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Open a new database connection
+     * Open a new database connection.
      */
     protected function _setUpAdapter()
     {
@@ -86,7 +86,7 @@ abstract class Zend_Db_TestSetup extends PHPUnit_Framework_TestCase
         } catch (Zend_Exception $e) {
             $this->_db = null;
             $this->assertTrue($e instanceof Zend_Db_Adapter_Exception,
-                'Expecting Zend_Db_Adapter_Exception, got ' . get_class($e));
+                'Expecting Zend_Db_Adapter_Exception, got '.get_class($e));
             $this->markTestSkipped($e->getMessage());
         }
     }
@@ -101,5 +101,4 @@ abstract class Zend_Db_TestSetup extends PHPUnit_Framework_TestCase
         $this->_db->closeConnection();
         $this->_db = null;
     }
-
 }

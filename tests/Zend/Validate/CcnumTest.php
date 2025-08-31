@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,50 +26,49 @@
  */
 // require_once 'Zend/Validate/Ccnum.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_Validate
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Validate
  */
 #[AllowDynamicProperties]
 class Zend_Validate_CcnumTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_Validate_Ccnum object
+     * Zend_Validate_Ccnum object.
      *
      * @var Zend_Validate_Ccnum
      */
     protected $_validator;
 
     /**
-     * Creates a new Zend_Validate_Ccnum object for each test method
+     * Creates a new Zend_Validate_Ccnum object for each test method.
      *
      * @return void
      */
     public function setUp()
     {
-        set_error_handler(array($this, 'errorHandlerIgnore'));
+        set_error_handler([$this, 'errorHandlerIgnore']);
         $this->_validator = new Zend_Validate_Ccnum();
     }
 
     /**
-     * Ensures that the validator follows expected behavior
+     * Ensures that the validator follows expected behavior.
      *
      * @return void
      */
     public function testBasic()
     {
-        $valuesExpected = array(
-            '4929000000006'    => true,
+        $valuesExpected = [
+            '4929000000006' => true,
             '5404000000000001' => true,
-            '374200000000004'  => true,
+            '374200000000004' => true,
             '4444555566667777' => false,
-            'ABCDEF'           => false
-            );
+            'ABCDEF' => false,
+        ];
         foreach ($valuesExpected as $input => $result) {
             $this->assertEquals($result, $this->_validator->isValid($input));
         }
@@ -76,27 +76,27 @@ class Zend_Validate_CcnumTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that getMessages() returns expected default value
+     * Ensures that getMessages() returns expected default value.
      *
      * @return void
      */
     public function testGetMessages()
     {
-        $this->assertEquals(array(), $this->_validator->getMessages());
+        $this->assertEquals([], $this->_validator->getMessages());
         restore_error_handler();
     }
 
     /**
-     * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred
+     * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred.
      *
-     * @param  integer $errno
-     * @param  string  $errstr
-     * @param  string  $errfile
-     * @param  integer $errline
-     * @param  array   $errcontext
+     * @param int    $errno
+     * @param string $errstr
+     * @param string $errfile
+     * @param int    $errline
+     *
      * @return void
      */
-    public function errorHandlerIgnore($errno, $errstr, $errfile, $errline, array $errcontext = array())
+    public function errorHandlerIgnore($errno, $errstr, $errfile, $errline, array $errcontext = [])
     {
         $this->_errorOccured = true;
     }

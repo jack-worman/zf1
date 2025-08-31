@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,13 +14,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'AllTests::main');
 }
@@ -28,8 +28,7 @@ require_once 'Zend/AllTests.php';
 
 /**
  * @category   Zend
- * @package    Zend
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -38,7 +37,7 @@ class AllTests
 {
     public static function main()
     {
-        $parameters = array();
+        $parameters = [];
 
         if (TESTS_GENERATE_REPORT && extension_loaded('xdebug')) {
             $parameters['reportDirectory'] = TESTS_GENERATE_REPORT_TARGET;
@@ -60,7 +59,7 @@ class AllTests
     }
 
     /**
-     * Buffered test suites
+     * Buffered test suites.
      *
      * These tests require no output be sent prior to running as they rely
      * on internal PHP functions.
@@ -77,7 +76,7 @@ class AllTests
     }
 
     /**
-     * Regular suite
+     * Regular suite.
      *
      * All tests except those that require output buffering.
      *

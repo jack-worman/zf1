@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,24 +28,24 @@
 
 /**
  * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Filter
  */
 #[AllowDynamicProperties]
 class Zend_Filter_StringTrimTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_Filter_StringTrim object
+     * Zend_Filter_StringTrim object.
      *
      * @var Zend_Filter_StringTrim
      */
     protected $_filter;
 
     /**
-     * Creates a new Zend_Filter_StringTrim object for each test method
+     * Creates a new Zend_Filter_StringTrim object for each test method.
      *
      * @return void
      */
@@ -54,24 +55,24 @@ class Zend_Filter_StringTrimTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that the filter follows expected behavior
+     * Ensures that the filter follows expected behavior.
      *
      * @return void
      */
     public function testBasic()
     {
-        $valuesExpected = array(
+        $valuesExpected = [
             'string' => 'string',
-            ' str '  => 'str',
-            "\ns\t"  => 's'
-            );
+            ' str ' => 'str',
+            "\ns\t" => 's',
+        ];
         foreach ($valuesExpected as $input => $output) {
             $this->assertEquals($output, $this->_filter->filter($input));
         }
     }
 
     /**
-     * Ensures that getCharList() returns expected default value
+     * Ensures that getCharList() returns expected default value.
      *
      * @return void
      */
@@ -81,7 +82,7 @@ class Zend_Filter_StringTrimTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that setCharList() follows expected behavior
+     * Ensures that setCharList() follows expected behavior.
      *
      * @return void
      */
@@ -92,7 +93,7 @@ class Zend_Filter_StringTrimTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures expected behavior under custom character list
+     * Ensures expected behavior under custom character list.
      *
      * @return void
      */
@@ -124,11 +125,11 @@ class Zend_Filter_StringTrimTest extends PHPUnit_Framework_TestCase
     public function testSetParamCharListToConstructor()
     {
         // require_once 'Zend/Config.php';
-        $config = new Zend_Config(array('charlist' => '&'));
+        $config = new Zend_Config(['charlist' => '&']);
         $filter = new Zend_Filter_StringTrim($config);
         $this->assertEquals('&', $filter->getCharList());
 
-        $filter = new Zend_Filter_StringTrim(array('charlist' => '&'));
+        $filter = new Zend_Filter_StringTrim(['charlist' => '&']);
         $this->assertEquals('&', $filter->getCharList());
 
         $filter = new Zend_Filter_StringTrim('&');
