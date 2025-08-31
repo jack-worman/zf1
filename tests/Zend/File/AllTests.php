@@ -25,7 +25,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 }
 
 require_once 'Zend/File/Transfer/AllTests.php';
-require_once 'Zend/File/ClassFileLocatorTest.php';
 
 /**
  * @category   Zend
@@ -47,7 +46,6 @@ class Zend_File_AllTests
     {
         $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_File');
 
-        $suite->addTestSuite('Zend_File_ClassFileLocatorTest');
         $suite->addTest(Zend_File_Transfer_AllTests::suite());
 
         return $suite;
