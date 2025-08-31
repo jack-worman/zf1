@@ -71,7 +71,6 @@
  * @method Zend_View_Helper_InlineScript                   inlineScript($mode = Zend_View_Helper_HeadScript::FILE, $spec = null, $placement = 'APPEND', array $attrs = array(), $type = 'text/javascript')
  * @method string|void                                     json($data, $keepLayouts = false, $encodeData = true)
  * @method Zend_Layout                                     layout()
- * @method string                                          paginationControl(Zend_Paginator $paginator = null, $scrollingStyle = null, $partial = null, $params = null)
  * @method string                                          partial($name = null, $module = null, $model = null)
  * @method string                                          partialLoop($name = null, $module = null, $model = null)
  * @method Zend_View_Helper_Placeholder_Container_Abstract placeholder($name)
@@ -79,7 +78,6 @@
  * @method string                                          serverUrl($requestUri = null)
  * @method string                                          translate($messageid = null)
  * @method string                                          url(array $urlOptions = array(), $name = null, $reset = false, $encode = true)
- * @method Zend_Http_UserAgent                             userAgent(Zend_Http_UserAgent $userAgent = null)
  */
 class Zend_View extends Zend_View_Abstract
 {

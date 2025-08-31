@@ -24,13 +24,6 @@ $path = [
 set_include_path(implode(PATH_SEPARATOR, $path));
 
 /*
- * Initial configuration
- */
-if (class_exists('Zend_Session')) {
-    Zend_Session::$_unitTestEnabled = true;
-}
-
-/*
  * Workarounds
  */
 if (PHP_VERSION_ID >= 70300 && PCRE_VERSION_MAJOR === 10 && PCRE_VERSION_MINOR < 32) {

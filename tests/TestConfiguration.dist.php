@@ -38,8 +38,7 @@
  * GENERAL SETTINGS
  *
  * OB_ENABLED should be enabled for some tests to check if all functionality
- * works as expected. Such tests include those for Zend_Session,
- * which require that headers not be sent in order to work.
+ * works as expected.
  */
 defined('TESTS_ZEND_OB_ENABLED') || define('TESTS_ZEND_OB_ENABLED', false);
 
@@ -184,28 +183,6 @@ defined('TESTS_ZEND_HTTP_CLIENT_BASEURI') || define('TESTS_ZEND_HTTP_CLIENT_BASE
 defined('TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY') || define('TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY', false);
 defined('TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY_USER') || define('TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY_USER', '');
 defined('TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY_PASS') || define('TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY_PASS', '');
-
-/*
- * Zend_Http_UserAgent tests
- *
- * Location of WURFL library and config file, for testing mobile device
- * detection.
- */
-defined('TESTS_ZEND_HTTP_USERAGENT_WURFL_LIB_DIR') || define('TESTS_ZEND_HTTP_USERAGENT_WURFL_LIB_DIR', false);
-defined('TESTS_ZEND_HTTP_USERAGENT_WURFL_CONFIG_FILE') || define('TESTS_ZEND_HTTP_USERAGENT_WURFL_CONFIG_FILE', false);
-
-/*
- * Location of DeviceAtlas library and data file, for testing mobile device
- * detection against DeviceAtlas
- */
-defined('TESTS_ZEND_HTTP_USERAGENT_DEVICEATLAS_LIB_DIR') || define('TESTS_ZEND_HTTP_USERAGENT_DEVICEATLAS_LIB_DIR', false);
-defined('TESTS_ZEND_HTTP_USERAGENT_DEVICEATLAS_DATA_FILE') || define('TESTS_ZEND_HTTP_USERAGENT_DEVICEATLAS_DATA_FILE', false);
-
-/*
- * Location of TeraWurfl library and data file, for testing mobile device
- * detection against TeraWurfl
- */
-defined('TESTS_ZEND_HTTP_USERAGENT_TERAWURFL_LIB_DIR') || define('TESTS_ZEND_HTTP_USERAGENT_TERAWURFL_LIB_DIR', false);
 
 /*
  * Zend_Loader_Autoloader multi-version support tests
