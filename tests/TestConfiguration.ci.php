@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,12 +14,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
+/*
  * This file defines configuration for running the unit tests for the Zend
  * Framework.  Some tests have dependencies to PHP extensions or databases
  * which may not necessary installed on the target system.  For these cases,
@@ -31,7 +32,7 @@
  * code repository.
  */
 
-/**
+/*
  * Zend_Cache
  *
  * TESTS_ZEND_CACHE_MEMCACHED_ENABLED  => memcache extension has to be enabled and
@@ -42,7 +43,7 @@
 defined('TESTS_ZEND_CACHE_MEMCACHED_ENABLED') || define('TESTS_ZEND_CACHE_MEMCACHED_ENABLED', true);
 defined('TESTS_ZEND_CACHE_LIBMEMCACHED_ENABLED') || define('TESTS_ZEND_CACHE_LIBMEMCACHED_ENABLED', true);
 
-/**
+/*
  * Zend_Db_Adapter_Pdo_Mysql and Zend_Db_Adapter_Mysqli
  *
  * There are separate properties to enable tests for the PDO_MYSQL adapter and
@@ -58,13 +59,13 @@ defined('TESTS_ZEND_DB_ADAPTER_MYSQL_USERNAME') || define('TESTS_ZEND_DB_ADAPTER
 defined('TESTS_ZEND_DB_ADAPTER_MYSQL_PASSWORD') || define('TESTS_ZEND_DB_ADAPTER_MYSQL_PASSWORD', getenv('MYSQL_PASSWORD'));
 defined('TESTS_ZEND_DB_ADAPTER_MYSQL_DATABASE') || define('TESTS_ZEND_DB_ADAPTER_MYSQL_DATABASE', getenv('MYSQL_DATABASE'));
 
-/**
+/*
  * Zend_Db_Adapter_Pdo_Pgsql
  */
-defined('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_ENABLED',  true);
+defined('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_ENABLED', true);
 defined('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_HOSTNAME') || define('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_HOSTNAME', getenv('POSTGRES_HOST'));
 defined('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_USERNAME') || define('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_USERNAME', getenv('POSTGRES_USER'));
 defined('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_PASSWORD') || define('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_PASSWORD', getenv('POSTGRES_PASSWORD'));
 defined('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_DATABASE') || define('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_DATABASE', getenv('POSTGRES_DB'));
 
-require_once __DIR__ . '/TestConfiguration.dist.php';
+require_once __DIR__.'/TestConfiguration.dist.php';

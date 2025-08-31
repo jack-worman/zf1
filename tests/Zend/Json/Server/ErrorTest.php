@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,29 +14,29 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Json_Server
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
 // Call Zend_Json_Server_ErrorTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Json_Server_ErrorTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Json_Server_ErrorTest::main');
 }
 
 // require_once 'Zend/Json/Server/Error.php';
 // require_once 'Zend/Json.php';
 
 /**
- * Test class for Zend_Json_Server_Error
+ * Test class for Zend_Json_Server_Error.
  *
  * @category   Zend
- * @package    Zend_Json_Server
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Json
  * @group      Zend_Json_Server
  */
@@ -49,8 +50,7 @@ class Zend_Json_Server_ErrorTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Json_Server_ErrorTest");
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Json_Server_ErrorTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -88,7 +88,7 @@ class Zend_Json_Server_ErrorTest extends PHPUnit_Framework_TestCase
 
     public function testCodeShouldBeLimitedToStandardIntegers()
     {
-        foreach (array(true, 'foo', array(), new stdClass, 2.0, 25) as $code) {
+        foreach ([true, 'foo', [], new stdClass(), 2.0, 25] as $code) {
             $this->error->setCode($code);
             $this->assertEquals(Zend_Json_Server_Error::ERROR_OTHER, $this->error->getCode());
         }
@@ -109,7 +109,7 @@ class Zend_Json_Server_ErrorTest extends PHPUnit_Framework_TestCase
 
     public function testSetMessageShouldCastToString()
     {
-        foreach (array(true, 2.0, 25) as $message) {
+        foreach ([true, 2.0, 25] as $message) {
             $this->error->setMessage($message);
             $this->assertEquals((string) $message, $this->error->getMessage());
         }
@@ -117,7 +117,7 @@ class Zend_Json_Server_ErrorTest extends PHPUnit_Framework_TestCase
 
     public function testSetMessageToNonScalarShouldSilentlyFail()
     {
-        foreach (array(array(), new stdClass) as $message) {
+        foreach ([[], new stdClass()] as $message) {
             $this->error->setMessage($message);
             $this->assertNull($this->error->getMessage());
         }
@@ -130,7 +130,7 @@ class Zend_Json_Server_ErrorTest extends PHPUnit_Framework_TestCase
 
     public function testShouldAllowArbitraryData()
     {
-        foreach (array(true, 'foo', 2, 2.0, array(), new stdClass) as $datum) {
+        foreach ([true, 'foo', 2, 2.0, [], new stdClass()] as $datum) {
             $this->error->setData($datum);
             $this->assertEquals($datum, $this->error->getData());
         }
@@ -161,7 +161,7 @@ class Zend_Json_Server_ErrorTest extends PHPUnit_Framework_TestCase
     {
         $this->error->setCode(Zend_Json_Server_Error::ERROR_OTHER)
                     ->setMessage('Unknown Error')
-                    ->setData(array('foo' => 'bar'));
+                    ->setData(['foo' => 'bar']);
     }
 
     public function validateArray($error)
@@ -182,6 +182,6 @@ class Zend_Json_Server_ErrorTest extends PHPUnit_Framework_TestCase
 }
 
 // Call Zend_Json_Server_ErrorTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Json_Server_ErrorTest::main") {
+if (PHPUnit_MAIN_METHOD == 'Zend_Json_Server_ErrorTest::main') {
     Zend_Json_Server_ErrorTest::main();
 }

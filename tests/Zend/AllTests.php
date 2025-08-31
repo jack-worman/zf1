@@ -1,7 +1,7 @@
 <?php
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', \Zend_AllTests::class);
+    define('PHPUnit_MAIN_METHOD', Zend_AllTests::class);
 }
 
 require_once 'Zend/Acl/AclTest.php';
@@ -37,9 +37,9 @@ require_once 'Zend/Xml/AllTests.php';
 
 /**
  * @category   Zend
- * @package    Zend
- * @subpackage UnitTests
+ *
  * @group      Zend
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -59,7 +59,7 @@ class Zend_AllTests
     }
 
     /**
-     * Buffered test suites
+     * Buffered test suites.
      *
      * These tests require no output be sent prior to running as they rely
      * on internal PHP functions.
@@ -78,7 +78,7 @@ class Zend_AllTests
     }
 
     /**
-     * Regular suite
+     * Regular suite.
      *
      * All tests except those that require output buffering.
      *
@@ -89,34 +89,34 @@ class Zend_AllTests
         $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend');
 
         // Start remaining tests...
-        $suite->addTestSuite(\Zend_Acl_AclTest::class);
+        $suite->addTestSuite(Zend_Acl_AclTest::class);
         $suite->addTest(Zend_Cache_AllTests::suite());
-        $suite->addTestSuite(\Zend_ConfigTest::class);
+        $suite->addTestSuite(Zend_ConfigTest::class);
         $suite->addTest(Zend_Config_AllTests::suite());
         $suite->addTest(Zend_Controller_AllTests::suite());
-        $suite->addTestSuite(\Zend_DateTest::class);
+        $suite->addTestSuite(Zend_DateTest::class);
         $suite->addTest(Zend_Date_AllTests::suite());
         $suite->addTest(Zend_Db_AllTests::suite());
-        $suite->addTestSuite(\Zend_ExceptionTest::class);
+        $suite->addTestSuite(Zend_ExceptionTest::class);
         $suite->addTest(Zend_File_AllTests::suite());
-        $suite->addTestSuite(\Zend_FilterTest::class);
+        $suite->addTestSuite(Zend_FilterTest::class);
         $suite->addTest(Zend_Filter_AllTests::suite());
         $suite->addTest(Zend_Form_AllTests::suite());
-        $suite->addTestSuite(\Zend_HealthCall_HealthCallTest::class);
+        $suite->addTestSuite(Zend_HealthCall_HealthCallTest::class);
         $suite->addTest(Zend_Http_AllTests::suite());
-        $suite->addTestSuite(\Zend_JsonTest::class);
+        $suite->addTestSuite(Zend_JsonTest::class);
         $suite->addTest(Zend_Json_AllTests::suite());
         $suite->addTest(Zend_Layout_AllTests::suite());
-        $suite->addTestSuite(\Zend_LoaderTest::class);
+        $suite->addTestSuite(Zend_LoaderTest::class);
         $suite->addTest(Zend_Loader_AllTests::suite());
-        $suite->addTestSuite(\Zend_LocaleTest::class);
+        $suite->addTestSuite(Zend_LocaleTest::class);
         $suite->addTest(Zend_Locale_AllTests::suite());
-        $suite->addTestSuite(\Zend_RegistryTest::class);
-        $suite->addTestSuite(\Zend_UriTest::class);
+        $suite->addTestSuite(Zend_RegistryTest::class);
+        $suite->addTestSuite(Zend_UriTest::class);
         $suite->addTest(Zend_Uri_AllTests::suite());
-        $suite->addTestSuite(\Zend_ValidateTest::class);
+        $suite->addTestSuite(Zend_ValidateTest::class);
         $suite->addTest(Zend_Validate_AllTests::suite());
-        $suite->addTestSuite(\Zend_ViewTest::class);
+        $suite->addTestSuite(Zend_ViewTest::class);
         $suite->addTest(Zend_View_AllTests::suite());
         $suite->addTest(Zend_Xml_AllTests::suite());
 

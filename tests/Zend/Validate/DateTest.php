@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -27,31 +28,31 @@
 
 /**
  * @category   Zend
- * @package    Zend_Validate
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Validate
  */
 #[AllowDynamicProperties]
 class Zend_Validate_DateTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_Validate_Date object
+     * Zend_Validate_Date object.
      *
      * @var Zend_Validate_Date
      */
     protected $_validator;
 
     /**
-     * Whether an error occurred
+     * Whether an error occurred.
      *
-     * @var boolean
+     * @var bool
      */
     protected $_errorOccurred = false;
 
     /**
-     * Creates a new Zend_Validate_Date object for each test method
+     * Creates a new Zend_Validate_Date object for each test method.
      *
      * @return void
      */
@@ -61,13 +62,13 @@ class Zend_Validate_DateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that the validator follows expected behavior
+     * Ensures that the validator follows expected behavior.
      *
      * @return void
      */
     public function testBasic()
     {
-        $valuesExpected = array(
+        $valuesExpected = [
             '2007-01-01' => true,
             '2007-02-28' => true,
             '2007-02-29' => false,
@@ -75,22 +76,23 @@ class Zend_Validate_DateTest extends PHPUnit_Framework_TestCase
             '2007-02-30' => false,
             '2007-02-99' => false,
             '9999-99-99' => false,
-            0            => false,
+            0 => false,
             999999999999 => false,
             'Jan 1 2007' => false,
-            'asdasda'    => false,
-            'sdgsdg'     => false
-            );
+            'asdasda' => false,
+            'sdgsdg' => false,
+        ];
         foreach ($valuesExpected as $input => $result) {
             $this->assertEquals($result, $this->_validator->isValid($input),
-                                "'$input' expected to be " . ($result ? '' : 'in') . 'valid');
+                "'$input' expected to be ".($result ? '' : 'in').'valid');
         }
     }
 
     /**
-     * Ensures that characters trailing an otherwise valid date cause the input to be invalid
+     * Ensures that characters trailing an otherwise valid date cause the input to be invalid.
      *
      * @group ZF-1804
+     *
      * @return void
      */
     public function testCharactersTrailingInvalid()
@@ -98,13 +100,14 @@ class Zend_Validate_DateTest extends PHPUnit_Framework_TestCase
         $dateValid = '2007-08-02';
         $charactersTrailing = 'something';
         $this->assertTrue($this->_validator->isValid($dateValid));
-        $this->assertFalse($this->_validator->isValid($dateValid . $charactersTrailing));
+        $this->assertFalse($this->_validator->isValid($dateValid.$charactersTrailing));
     }
 
     /**
-     * Ensures that characters leading an otherwise valid date cause the input to be invalid
+     * Ensures that characters leading an otherwise valid date cause the input to be invalid.
      *
      * @group ZF-1804
+     *
      * @return void
      */
     public function testCharactersLeadingInvalid()
@@ -112,23 +115,24 @@ class Zend_Validate_DateTest extends PHPUnit_Framework_TestCase
         $dateValid = '2007-08-02';
         $charactersLeading = 'something';
         $this->assertTrue($this->_validator->isValid($dateValid));
-        $this->assertFalse($this->_validator->isValid($charactersLeading . $dateValid));
+        $this->assertFalse($this->_validator->isValid($charactersLeading.$dateValid));
     }
 
     /**
-     * Ensures that getMessages() returns expected default value
+     * Ensures that getMessages() returns expected default value.
      *
      * @return void
      */
     public function testGetMessages()
     {
-        $this->assertEquals(array(), $this->_validator->getMessages());
+        $this->assertEquals([], $this->_validator->getMessages());
     }
 
     /**
-     * Ensures that the validator can handle different manual dateformats
+     * Ensures that the validator can handle different manual dateformats.
      *
      * @group ZF-2003
+     *
      * @return void
      */
     public function testUseManualFormat()
@@ -140,7 +144,7 @@ class Zend_Validate_DateTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->_validator->setFormat('dd/MM/yyyy')->isValid('2008/10/22'));
         $this->assertTrue($this->_validator->setFormat('dd/MM/yy')->isValid('22/10/08'));
         $this->assertFalse($this->_validator->setFormat('dd/MM/yy')->isValid('22/10'));
-        set_error_handler(array($this, 'errorHandlerIgnore'));
+        set_error_handler([$this, 'errorHandlerIgnore']);
         $result = $this->_validator->setFormat('s')->isValid(0);
         restore_error_handler();
         if (!$this->_errorOccurred) {
@@ -152,31 +156,32 @@ class Zend_Validate_DateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that the validator can handle different dateformats from locale
+     * Ensures that the validator can handle different dateformats from locale.
      *
      * @group ZF-2003
+     *
      * @return void
      */
     public function testUseLocaleFormat()
     {
         $errorOccurredLocal = false;
-        set_error_handler(array($this, 'errorHandlerIgnore'));
-        $valuesExpected = array(
+        set_error_handler([$this, 'errorHandlerIgnore']);
+        $valuesExpected = [
             '10.01.2008' => true,
             '32.02.2008' => false,
             '20 April 2008' => true,
             '1.Juli.2008' => true,
             '2008/20/03' => false,
             '99/99/2000' => false,
-            0            => false,
+            0 => false,
             999999999999 => false,
-            'Jan 1 2007' => false
-            );
+            'Jan 1 2007' => false,
+        ];
         foreach ($valuesExpected as $input => $resultExpected) {
             $resultActual = $this->_validator->setLocale('de_AT')->isValid($input);
             if (!$this->_errorOccurred) {
                 $this->assertEquals($resultExpected, $resultActual, "'$input' expected to be "
-                    . ($resultExpected ? '' : 'in') . 'valid');
+                    .($resultExpected ? '' : 'in').'valid');
             } else {
                 $errorOccurredLocal = true;
             }
@@ -190,14 +195,15 @@ class Zend_Validate_DateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that the validator can handle different dateformats from locale
+     * Ensures that the validator can handle different dateformats from locale.
      *
      * @group ZF-2003
+     *
      * @return void
      */
     public function testLocaleContructor()
     {
-        set_error_handler(array($this, 'errorHandlerIgnore'));
+        set_error_handler([$this, 'errorHandlerIgnore']);
         $valid = new Zend_Validate_Date('dd.MM.YYYY', 'de');
         $this->assertTrue($valid->isValid('10.April.2008'));
 
@@ -210,7 +216,7 @@ class Zend_Validate_DateTest extends PHPUnit_Framework_TestCase
     public function testNonStringValidation()
     {
         try {
-            $this->assertFalse($this->_validator->isValid(array(1 => 1)));
+            $this->assertFalse($this->_validator->isValid([1 => 1]));
         } catch (Error $e) {
             $this->assertTrue($e instanceof TypeError);
         }
@@ -227,7 +233,7 @@ class Zend_Validate_DateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * ZF-7630
+     * ZF-7630.
      */
     public function testDateObjectVerification()
     {
@@ -236,27 +242,28 @@ class Zend_Validate_DateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * ZF-6457
+     * ZF-6457.
      */
     public function testArrayVerification()
     {
-        $date  = new Zend_Date();
+        $date = new Zend_Date();
         $array = $date->toArray();
-        $this->assertTrue($this->_validator->isValid($array), "array expected to be valid");
+        $this->assertTrue($this->_validator->isValid($array), 'array expected to be valid');
     }
 
     /**
-     * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred
+     * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred.
      *
-     * @param  integer $errno
-     * @param  string  $errstr
-     * @param  string  $errfile
-     * @param  integer $errline
-     * @param  array   $errcontext
+     * @param int    $errno
+     * @param string $errstr
+     * @param string $errfile
+     * @param int    $errline
+     *
      * @return void
+     *
      * @group ZF-2789
      */
-    public function errorHandlerIgnore($errno, $errstr, $errfile, $errline, array $errcontext = array())
+    public function errorHandlerIgnore($errno, $errstr, $errfile, $errline, array $errcontext = [])
     {
         $this->_errorOccurred = true;
     }

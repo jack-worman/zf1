@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Zend Framework
+ * Zend Framework.
  *
  * LICENSE
  *
@@ -13,10 +14,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @version    $Id$
  */
 
@@ -25,20 +26,19 @@
  */
 // require_once 'Zend/Validate/GreaterThan.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_Validate
- * @subpackage UnitTests
+ *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @group      Zend_Validate
  */
 #[AllowDynamicProperties]
 class Zend_Validate_GreaterThanTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Ensures that the validator follows expected behavior
+     * Ensures that the validator follows expected behavior.
      *
      * @return void
      */
@@ -50,12 +50,12 @@ class Zend_Validate_GreaterThanTest extends PHPUnit_Framework_TestCase
          *      - expected validation result
          *      - array of test input values
          */
-        $valuesExpected = array(
-            array(0, true, array(0.01, 1, 100)),
-            array(0, false, array(0, 0.00, -0.01, -1, -100)),
-            array('a', true, array('b', 'c', 'd')),
-            array('z', false, array('x', 'y', 'z'))
-            );
+        $valuesExpected = [
+            [0, true, [0.01, 1, 100]],
+            [0, false, [0, 0.00, -0.01, -1, -100]],
+            ['a', true, ['b', 'c', 'd']],
+            ['z', false, ['x', 'y', 'z']],
+        ];
         foreach ($valuesExpected as $element) {
             $validator = new Zend_Validate_GreaterThan($element[0]);
             foreach ($element[2] as $input) {
@@ -65,18 +65,18 @@ class Zend_Validate_GreaterThanTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that getMessages() returns expected default value
+     * Ensures that getMessages() returns expected default value.
      *
      * @return void
      */
     public function testGetMessages()
     {
         $validator = new Zend_Validate_GreaterThan(10);
-        $this->assertEquals(array(), $validator->getMessages());
+        $this->assertEquals([], $validator->getMessages());
     }
 
     /**
-     * Ensures that getMin() returns expected value
+     * Ensures that getMin() returns expected value.
      *
      * @return void
      */
