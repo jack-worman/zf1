@@ -1,6 +1,6 @@
 <?php
 
-require_once 'Zend/Acl/_files/UseCase1/UserIsBlogPostOwnerAssertion.php';
+require_once __DIR__ . '/UserIsBlogPostOwnerAssertion.php';
 
 #[AllowDynamicProperties]
 class Zend_Acl_UseCase1_Acl extends Zend_Acl
@@ -10,6 +10,7 @@ class Zend_Acl_UseCase1_Acl extends Zend_Acl
 
     public function __construct()
     {
+        require_once __DIR__ . '/UserIsBlogPostOwnerAssertion.php';
         $this->customAssertion = new Zend_Acl_UseCase1_UserIsBlogPostOwnerAssertion();
 
         $this->addRole(new Zend_Acl_Role('guest'));                    // $acl->addRole('guest');
