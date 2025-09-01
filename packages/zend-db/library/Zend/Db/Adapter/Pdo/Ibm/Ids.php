@@ -246,7 +246,6 @@ class Zend_Db_Adapter_Pdo_Ibm_Ids
     {
         $count = intval($count);
         if ($count < 0) {
-            /* @see Zend_Db_Adapter_Exception */
             throw new Zend_Db_Adapter_Exception("LIMIT argument count=$count is not valid");
         } elseif (0 == $count) {
             $limit_sql = str_ireplace('SELECT', 'SELECT * FROM (SELECT', $sql);
@@ -254,7 +253,6 @@ class Zend_Db_Adapter_Pdo_Ibm_Ids
         } else {
             $offset = intval($offset);
             if ($offset < 0) {
-                /* @see Zend_Db_Adapter_Exception */
                 throw new Zend_Db_Adapter_Exception("LIMIT argument offset=$offset is not valid");
             }
             if (0 == $offset) {

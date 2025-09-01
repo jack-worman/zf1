@@ -57,9 +57,6 @@ class Zend_Db_Statement_Db2 extends Zend_Db_Statement
         $this->_stmt = @db2_prepare($connection, $sql);
 
         if (!$this->_stmt) {
-            /*
-             * @see Zend_Db_Statement_Db2_Exception
-             */
             throw new Zend_Db_Statement_Db2_Exception(db2_stmt_errormsg(), db2_stmt_error());
         }
     }
@@ -90,9 +87,6 @@ class Zend_Db_Statement_Db2 extends Zend_Db_Statement
         }
 
         if (!db2_bind_param($this->_stmt, $parameter, 'variable', $type, $datatype)) {
-            /*
-             * @see Zend_Db_Statement_Db2_Exception
-             */
             throw new Zend_Db_Statement_Db2_Exception(db2_stmt_errormsg(), db2_stmt_error());
         }
 
@@ -197,9 +191,6 @@ class Zend_Db_Statement_Db2 extends Zend_Db_Statement
         }
 
         if (false === $retval) {
-            /*
-             * @see Zend_Db_Statement_Db2_Exception
-             */
             throw new Zend_Db_Statement_Db2_Exception(db2_stmt_errormsg(), db2_stmt_error());
         }
 
@@ -260,9 +251,6 @@ class Zend_Db_Statement_Db2 extends Zend_Db_Statement
                 }
                 break;
             default:
-                /*
-                 * @see Zend_Db_Statement_Db2_Exception
-                 */
                 throw new Zend_Db_Statement_Db2_Exception("Invalid fetch mode '$style' specified");
                 break;
         }

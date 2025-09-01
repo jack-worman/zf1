@@ -242,9 +242,6 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
         $module = $this->getModule();
         $moduleDir = $this->getFrontController()->getControllerDirectory($module);
         if ((null === $moduleDir) || is_array($moduleDir)) {
-            /*
-             * @see Zend_Controller_Action_Exception
-             */
             throw new Zend_Controller_Action_Exception('ViewRenderer cannot locate module directory for module "'.$module.'"');
         }
         $this->_moduleDir = dirname($moduleDir);
@@ -260,15 +257,6 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
     public function getInflector()
     {
         if (null === $this->_inflector) {
-            /*
-             * @see Zend_Filter_Inflector
-             */
-            /*
-             * @see Zend_Filter_PregReplace
-             */
-            /*
-             * @see Zend_Filter_Word_UnderscoreToSeparator
-             */
             $this->_inflector = new Zend_Filter_Inflector();
             $this->_inflector->setStaticRuleReference('moduleDir', $this->_moduleDir) // moduleDir must be specified before the less specific 'module'
                  ->addRules([
@@ -468,9 +456,6 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
         if (empty($path)) {
             $path = $this->_getBasePath();
             if (empty($path)) {
-                /*
-                 * @see Zend_Controller_Action_Exception
-                 */
                 throw new Zend_Controller_Action_Exception('ViewRenderer initialization failed: retrieved view base path is empty');
             }
         }

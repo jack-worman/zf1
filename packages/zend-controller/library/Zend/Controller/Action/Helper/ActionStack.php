@@ -47,9 +47,6 @@ class Zend_Controller_Action_Helper_ActionStack extends Zend_Controller_Action_H
     {
         $front = Zend_Controller_Front::getInstance();
         if (!$front->hasPlugin('Zend_Controller_Plugin_ActionStack')) {
-            /*
-             * @see Zend_Controller_Plugin_ActionStack
-             */
             $this->_actionStack = new Zend_Controller_Plugin_ActionStack();
             $front->registerPlugin($this->_actionStack, 97);
         } else {
@@ -85,18 +82,12 @@ class Zend_Controller_Action_Helper_ActionStack extends Zend_Controller_Action_H
         if ($action instanceof Zend_Controller_Request_Abstract) {
             return $this->pushStack($action);
         } elseif (!is_string($action)) {
-            /*
-             * @see Zend_Controller_Action_Exception
-             */
             throw new Zend_Controller_Action_Exception('ActionStack requires either a request object or minimally a string action');
         }
 
         $request = $this->getRequest();
 
         if (false === $request instanceof Zend_Controller_Request_Abstract) {
-            /*
-             * @see Zend_Controller_Action_Exception
-             */
             throw new Zend_Controller_Action_Exception('Request object not set yet');
         }
 

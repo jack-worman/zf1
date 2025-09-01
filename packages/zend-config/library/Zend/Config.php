@@ -175,7 +175,6 @@ class Zend_Config implements Countable, Iterator
             }
             $this->_count = count($this->_data);
         } else {
-            /* @see Zend_Config_Exception */
             throw new Zend_Config_Exception('Zend_Config is read only');
         }
     }
@@ -247,7 +246,6 @@ class Zend_Config implements Countable, Iterator
             $this->_count = count($this->_data);
             $this->_skipNextIteration = true;
         } else {
-            /* @see Zend_Config_Exception */
             throw new Zend_Config_Exception('Zend_Config is read only');
         }
     }
@@ -440,7 +438,6 @@ class Zend_Config implements Countable, Iterator
         $extendedSectionCurrent = $extendedSection;
         while (array_key_exists($extendedSectionCurrent, $this->_extends)) {
             if ($this->_extends[$extendedSectionCurrent] == $extendingSection) {
-                /* @see Zend_Config_Exception */
                 throw new Zend_Config_Exception('Illegal circular inheritance detected');
             }
             $extendedSectionCurrent = $this->_extends[$extendedSectionCurrent];

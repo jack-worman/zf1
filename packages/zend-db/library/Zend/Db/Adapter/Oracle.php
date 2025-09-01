@@ -104,9 +104,6 @@ class Zend_Db_Adapter_Oracle extends Zend_Db_Adapter_Abstract
         }
 
         if (!extension_loaded('oci8')) {
-            /*
-             * @see Zend_Db_Adapter_Oracle_Exception
-             */
             throw new Zend_Db_Adapter_Oracle_Exception('The OCI8 extension is required for this adapter but the extension is not loaded');
         }
 
@@ -122,9 +119,6 @@ class Zend_Db_Adapter_Oracle extends Zend_Db_Adapter_Abstract
 
         // check the connection
         if (!$this->_connection) {
-            /*
-             * @see Zend_Db_Adapter_Oracle_Exception
-             */
             throw new Zend_Db_Adapter_Oracle_Exception(oci_error());
         }
     }
@@ -470,9 +464,6 @@ class Zend_Db_Adapter_Oracle extends Zend_Db_Adapter_Abstract
     protected function _commit()
     {
         if (!oci_commit($this->_connection)) {
-            /*
-             * @see Zend_Db_Adapter_Oracle_Exception
-             */
             throw new Zend_Db_Adapter_Oracle_Exception(oci_error($this->_connection));
         }
         $this->_setExecuteMode(OCI_COMMIT_ON_SUCCESS);
@@ -488,9 +479,6 @@ class Zend_Db_Adapter_Oracle extends Zend_Db_Adapter_Abstract
     protected function _rollBack()
     {
         if (!oci_rollback($this->_connection)) {
-            /*
-             * @see Zend_Db_Adapter_Oracle_Exception
-             */
             throw new Zend_Db_Adapter_Oracle_Exception(oci_error($this->_connection));
         }
         $this->_setExecuteMode(OCI_COMMIT_ON_SUCCESS);
@@ -517,15 +505,9 @@ class Zend_Db_Adapter_Oracle extends Zend_Db_Adapter_Abstract
                 $this->_fetchMode = $mode;
                 break;
             case Zend_Db::FETCH_BOUND: // bound to PHP variable
-                /*
-                 * @see Zend_Db_Adapter_Oracle_Exception
-                 */
                 throw new Zend_Db_Adapter_Oracle_Exception('FETCH_BOUND is not supported yet');
                 break;
             default:
-                /*
-                 * @see Zend_Db_Adapter_Oracle_Exception
-                 */
                 throw new Zend_Db_Adapter_Oracle_Exception("Invalid fetch mode '$mode' specified");
                 break;
         }
@@ -546,17 +528,11 @@ class Zend_Db_Adapter_Oracle extends Zend_Db_Adapter_Abstract
     {
         $count = intval($count);
         if ($count <= 0) {
-            /*
-             * @see Zend_Db_Adapter_Oracle_Exception
-             */
             throw new Zend_Db_Adapter_Oracle_Exception("LIMIT argument count=$count is not valid");
         }
 
         $offset = intval($offset);
         if ($offset < 0) {
-            /*
-             * @see Zend_Db_Adapter_Oracle_Exception
-             */
             throw new Zend_Db_Adapter_Oracle_Exception("LIMIT argument offset=$offset is not valid");
         }
 
@@ -592,9 +568,6 @@ class Zend_Db_Adapter_Oracle extends Zend_Db_Adapter_Abstract
                 $this->_execute_mode = $mode;
                 break;
             default:
-                /*
-                 * @see Zend_Db_Adapter_Oracle_Exception
-                 */
                 throw new Zend_Db_Adapter_Oracle_Exception("Invalid execution mode '$mode' specified");
                 break;
         }

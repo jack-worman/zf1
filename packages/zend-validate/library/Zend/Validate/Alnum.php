@@ -132,9 +132,6 @@ class Zend_Validate_Alnum extends Zend_Validate_Abstract
         }
 
         if (null === self::$_filter) {
-            /*
-             * @see Zend_Filter_Alnum
-             */
             self::$_filter = new Zend_Filter_Alnum();
         }
 

@@ -73,9 +73,6 @@ class Zend_Validate_Isbn extends Zend_Validate_Abstract
             $options = $options->toArray();
         }
         if (!is_array($options)) {
-            /*
-             * @see Zend_Validate_Exception
-             */
             throw new Zend_Validate_Exception('Invalid options provided.');
         }
 
@@ -227,9 +224,6 @@ class Zend_Validate_Isbn extends Zend_Validate_Abstract
     {
         // check separator
         if (!in_array($separator, ['-', ' ', ''])) {
-            /*
-             * @see Zend_Validate_Exception
-             */
             throw new Zend_Validate_Exception('Invalid ISBN separator.');
         }
 
@@ -261,9 +255,6 @@ class Zend_Validate_Isbn extends Zend_Validate_Abstract
     {
         // check type
         if (!in_array($type, [self::AUTO, self::ISBN10, self::ISBN13])) {
-            /*
-             * @see Zend_Validate_Exception
-             */
             throw new Zend_Validate_Exception('Invalid ISBN type');
         }
 

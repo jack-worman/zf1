@@ -64,9 +64,6 @@ class Zend_Db_Statement_Mysqli extends Zend_Db_Statement
         $this->_stmt = $mysqli->prepare($sql);
 
         if (false === $this->_stmt || $mysqli->errno) {
-            /*
-             * @see Zend_Db_Statement_Mysqli_Exception
-             */
             throw new Zend_Db_Statement_Mysqli_Exception('Mysqli prepare error: '.$mysqli->error, $mysqli->errno);
         }
     }
@@ -211,9 +208,6 @@ class Zend_Db_Statement_Mysqli extends Zend_Db_Statement
         // execute the statement
         $retval = $this->_stmt->execute();
         if (false === $retval) {
-            /*
-             * @see Zend_Db_Statement_Mysqli_Exception
-             */
             throw new Zend_Db_Statement_Mysqli_Exception('Mysqli statement execute error : '.$this->_stmt->error, $this->_stmt->errno);
         }
 
@@ -221,9 +215,6 @@ class Zend_Db_Statement_Mysqli extends Zend_Db_Statement
         if (null === $this->_meta) {
             $this->_meta = $this->_stmt->result_metadata();
             if ($this->_stmt->errno) {
-                /*
-                 * @see Zend_Db_Statement_Mysqli_Exception
-                 */
                 throw new Zend_Db_Statement_Mysqli_Exception('Mysqli statement metadata error: '.$this->_stmt->error, $this->_stmt->errno);
             }
         }
@@ -320,9 +311,6 @@ class Zend_Db_Statement_Mysqli extends Zend_Db_Statement
                 return $this->_fetchBound($row);
                 break;
             default:
-                /*
-                 * @see Zend_Db_Statement_Mysqli_Exception
-                 */
                 throw new Zend_Db_Statement_Mysqli_Exception("Invalid fetch mode '$style' specified");
                 break;
         }

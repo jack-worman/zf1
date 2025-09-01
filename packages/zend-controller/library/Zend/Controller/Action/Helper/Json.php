@@ -70,9 +70,6 @@ class Zend_Controller_Action_Helper_Json extends Zend_Controller_Action_Helper_A
         $data = $jsonHelper->json($data, $keepLayouts, $encodeData);
 
         if (!$keepLayouts) {
-            /*
-             * @see Zend_Controller_Action_HelperBroker
-             */
             Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->setNoRender(true);
         }
 

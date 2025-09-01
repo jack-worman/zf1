@@ -303,9 +303,6 @@ class Zend_Db_Profiler
 
         // Check for a valid query handle.
         if (!isset($this->_queryProfiles[$queryId])) {
-            /*
-             * @see Zend_Db_Profiler_Exception
-             */
             throw new Zend_Db_Profiler_Exception("Profiler has no query with handle '$queryId'.");
         }
 
@@ -313,9 +310,6 @@ class Zend_Db_Profiler
 
         // Ensure that the query profile has not already ended
         if ($qp->hasEnded()) {
-            /*
-             * @see Zend_Db_Profiler_Exception
-             */
             throw new Zend_Db_Profiler_Exception("Query with profiler handle '$queryId' has already ended.");
         }
 
@@ -358,9 +352,6 @@ class Zend_Db_Profiler
     public function getQueryProfile($queryId)
     {
         if (!array_key_exists($queryId, $this->_queryProfiles)) {
-            /*
-             * @see Zend_Db_Profiler_Exception
-             */
             throw new Zend_Db_Profiler_Exception("Query handle '$queryId' not found in profiler log.");
         }
 

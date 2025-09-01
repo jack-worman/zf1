@@ -257,9 +257,6 @@ class Zend_Db_Select
         }
 
         if (!array_key_exists($correlationName, $this->_parts[self::FROM])) {
-            /*
-             * @see Zend_Db_Select_Exception
-             */
             throw new Zend_Db_Select_Exception('No table has been specified for the FROM clause');
         }
 
@@ -789,9 +786,6 @@ class Zend_Db_Select
     protected function _join($type, $name, $cond, $cols, $schema = null)
     {
         if (!in_array($type, self::$_joinTypes) && self::FROM != $type) {
-            /*
-             * @see Zend_Db_Select_Exception
-             */
             throw new Zend_Db_Select_Exception("Invalid join type '$type'");
         }
 
@@ -834,9 +828,6 @@ class Zend_Db_Select
         $lastFromCorrelationName = null;
         if (!empty($correlationName)) {
             if (array_key_exists($correlationName, $this->_parts[self::FROM])) {
-                /*
-                 * @see Zend_Db_Select_Exception
-                 */
                 throw new Zend_Db_Select_Exception("You cannot define a correlation name '$correlationName' more than once");
             }
 

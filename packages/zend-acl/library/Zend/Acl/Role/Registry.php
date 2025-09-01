@@ -61,9 +61,6 @@ class Zend_Acl_Role_Registry
         $roleId = $role->getRoleId();
 
         if ($this->has($roleId)) {
-            /*
-             * @see Zend_Acl_Role_Registry_Exception
-             */
             throw new Zend_Acl_Role_Registry_Exception("Role id '$roleId' already exists in the registry");
         }
 
@@ -73,9 +70,6 @@ class Zend_Acl_Role_Registry
             if (!is_array($parents)) {
                 $parents = [$parents];
             }
-            /*
-             * @see Zend_Acl_Role_Registry_Exception
-             */
             foreach ($parents as $parent) {
                 try {
                     if ($parent instanceof Zend_Acl_Role_Interface) {
@@ -121,9 +115,6 @@ class Zend_Acl_Role_Registry
         }
 
         if (!$this->has($role)) {
-            /*
-             * @see Zend_Acl_Role_Registry_Exception
-             */
             throw new Zend_Acl_Role_Registry_Exception("Role '$roleId' not found");
         }
 

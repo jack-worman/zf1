@@ -109,9 +109,6 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
         }
 
         if (!extension_loaded('sqlsrv')) {
-            /*
-             * @see Zend_Db_Adapter_Sqlsrv_Exception
-             */
             throw new Zend_Db_Adapter_Sqlsrv_Exception('The Sqlsrv extension is required for this adapter but the extension is not loaded');
         }
 
@@ -150,9 +147,6 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
         $this->_connection = sqlsrv_connect($serverName, $connectionInfo);
 
         if (!$this->_connection) {
-            /*
-             * @see Zend_Db_Adapter_Sqlsrv_Exception
-             */
             throw new Zend_Db_Adapter_Sqlsrv_Exception(sqlsrv_errors());
         }
     }
@@ -167,22 +161,15 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
     {
         // we need at least a dbname
         if (!array_key_exists('dbname', $config)) {
-            /* @see Zend_Db_Adapter_Exception */
             throw new Zend_Db_Adapter_Exception("Configuration array must have a key for 'dbname' that names the database instance");
         }
 
         if (!array_key_exists('password', $config) && array_key_exists('username', $config)) {
-            /*
-             * @see Zend_Db_Adapter_Exception
-             */
             throw new Zend_Db_Adapter_Exception("Configuration array must have a key for 'password' for login credentials.
                                                 If Windows Authentication is desired, both keys 'username' and 'password' should be ommited from config.");
         }
 
         if (array_key_exists('password', $config) && !array_key_exists('username', $config)) {
-            /*
-             * @see Zend_Db_Adapter_Exception
-             */
             throw new Zend_Db_Adapter_Exception("Configuration array must have a key for 'username' for login credentials.
                                                 If Windows Authentication is desired, both keys 'username' and 'password' should be ommited from config.");
         }
@@ -272,9 +259,6 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
         $stmtClass = $this->_defaultStmtClass;
 
         if (!class_exists($stmtClass)) {
-            /*
-             * @see Zend_Loader
-             */
             Zend_Loader::loadClass($stmtClass);
         }
 
@@ -601,7 +585,6 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
 
         $offset = intval($offset);
         if ($offset < 0) {
-            /* @see Zend_Db_Adapter_Exception */
             throw new Zend_Db_Adapter_Exception("LIMIT argument offset=$offset is not valid");
         }
 

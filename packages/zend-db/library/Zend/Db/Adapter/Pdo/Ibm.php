@@ -165,7 +165,6 @@ class Zend_Db_Adapter_Pdo_Ibm extends Zend_Db_Adapter_Pdo_Abstract
 
         if (array_key_exists('host', $this->_config)
         && !array_key_exists('port', $config)) {
-            /* @see Zend_Db_Adapter_Exception */
             throw new Zend_Db_Adapter_Exception("Configuration must have a key for 'port' when 'host' is specified");
         }
     }

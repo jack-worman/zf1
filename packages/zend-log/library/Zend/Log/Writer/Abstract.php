@@ -60,7 +60,6 @@ abstract class Zend_Log_Writer_Abstract implements Zend_Log_FactoryInterface
         }
 
         if (!$filter instanceof Zend_Log_Filter_Interface) {
-            /* @see Zend_Log_Exception */
             throw new Zend_Log_Exception('Invalid filter provided');
         }
 

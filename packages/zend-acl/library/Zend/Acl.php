@@ -934,9 +934,6 @@ class Zend_Acl
         &$dfs = null)
     {
         if (null === $dfs) {
-            /*
-             * @see Zend_Acl_Exception
-             */
             throw new Zend_Acl_Exception('$dfs parameter may not be null');
         }
 
@@ -976,9 +973,6 @@ class Zend_Acl
         $privilege = null)
     {
         if (null === $privilege) {
-            /*
-             * @see Zend_Acl_Exception
-             */
             throw new Zend_Acl_Exception('$privilege parameter may not be null');
         }
 
@@ -1021,16 +1015,10 @@ class Zend_Acl
         $privilege = null, &$dfs = null)
     {
         if (null === $privilege) {
-            /*
-             * @see Zend_Acl_Exception
-             */
             throw new Zend_Acl_Exception('$privilege parameter may not be null');
         }
 
         if (null === $dfs) {
-            /*
-             * @see Zend_Acl_Exception
-             */
             throw new Zend_Acl_Exception('$dfs parameter may not be null');
         }
 

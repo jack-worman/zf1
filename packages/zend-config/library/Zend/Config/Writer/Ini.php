@@ -153,7 +153,6 @@ class Zend_Config_Writer_Ini extends Zend_Config_Writer_FileAbstract
         } elseif (false === strpos((string) $value, '"')) {
             return '"'.$value.'"';
         } else {
-            /* @see Zend_Config_Exception */
             throw new Zend_Config_Exception('Value can not contain double quotes "');
         }
     }

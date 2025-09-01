@@ -75,9 +75,6 @@ class Zend_Validate_Ccnum extends Zend_Validate_Abstract
         $this->_setValue($value);
 
         if (null === self::$_filter) {
-            /*
-             * @see Zend_Filter_Digits
-             */
             self::$_filter = new Zend_Filter_Digits();
         }
 

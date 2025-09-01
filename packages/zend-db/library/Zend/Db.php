@@ -222,9 +222,6 @@ class Zend_Db
          * Verify that adapter parameters are in an array.
          */
         if (!is_array($config)) {
-            /*
-             * @see Zend_Db_Exception
-             */
             throw new Zend_Db_Exception('Adapter parameters must be in an array or a Zend_Config object');
         }
 
@@ -232,9 +229,6 @@ class Zend_Db
          * Verify that an adapter name has been specified.
          */
         if (!is_string($adapter) || empty($adapter)) {
-            /*
-             * @see Zend_Db_Exception
-             */
             throw new Zend_Db_Exception('Adapter name must be specified in a string');
         }
 
@@ -271,9 +265,6 @@ class Zend_Db
          * Verify that the object created is a descendent of the abstract adapter type.
          */
         if (!$dbAdapter instanceof Zend_Db_Adapter_Abstract) {
-            /*
-             * @see Zend_Db_Exception
-             */
             throw new Zend_Db_Exception("Adapter class '$adapterName' does not extend Zend_Db_Adapter_Abstract");
         }
 
