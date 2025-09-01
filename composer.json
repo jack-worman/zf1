@@ -43,7 +43,6 @@
             "Zend_Loader": "packages/zend-loader/library/",
             "Zend_Locale": "packages/zend-locale/library/",
             "Zend_Log": "packages/zend-log/library/",
-            "Zend_Navigation": "packages/zend-navigation/library/",
             "Zend_Registry": "packages/zend-registry/library/",
             "Zend_Server": "packages/zend-server/library/",
             "Zend_Test": "packages/zend-test/library/",
