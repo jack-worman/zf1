@@ -1,5 +1,7 @@
 <?php
 
+require_once 'Zend/Acl/_files/UseCase1/UserIsBlogPostOwnerAssertion.php';
+
 #[AllowDynamicProperties]
 class Zend_Acl_UseCase1_Acl extends Zend_Acl
 {
