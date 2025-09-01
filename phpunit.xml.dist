@@ -1,5 +1,12 @@
-<phpunit bootstrap="tests/bootstrap.php"
-         colors="true">
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="vendor/jworman/phpunit/phpunit.xsd"
+    bootstrap="tests/bootstrap.php"
+    colors="true"
+    convertErrorsToExceptions="false"
+    convertWarningsToExceptions="false"
+    convertNoticesToExceptions="false"
+>
     <testsuite name="Zend Framework - Testsuite">
         <directory>./tests/AllTests.php</directory>
     </testsuite>
