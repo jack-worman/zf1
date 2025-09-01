@@ -22,11 +22,6 @@
  */
 
 /**
- * @see Zend_Db_Expr
- */
-// require_once 'Zend/Db/Expr.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
@@ -522,7 +517,6 @@ abstract class Zend_Db_TestUtil_Common
     protected function getAdapter()
     {
         if (null == $this->_db) {
-            // require_once "Zend/Db/Exception.php";
             throw new Zend_Db_Exception('No adapter was set in TestUtils.');
         }
 
@@ -540,7 +534,6 @@ abstract class Zend_Db_TestUtil_Common
     protected function _tryRawQuery($sql)
     {
         if (null == $this->_db) {
-            // require_once "Zend/Db/Exception.php";
             throw new Zend_Db_Exception('No database adapter set.');
         }
         $this->_rawQuery($sql);

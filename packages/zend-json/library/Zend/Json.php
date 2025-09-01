@@ -26,10 +26,6 @@
  *
  * @see Zend_Json_Expr
  */
-// require_once 'Zend/Json/Expr.php';
-
-/** @see Zend_Xml_Security */
-// require_once 'Zend/Xml/Security.php';
 
 /**
  * Class for encoding to and decoding from JSON.
@@ -87,12 +83,10 @@ class Zend_Json
                 if ('null' === strtolower((string) $encodedValue)) {
                     return null;
                 } elseif (null === $decode) {
-                    // require_once 'Zend/Json/Exception.php';
                     throw new Zend_Json_Exception('Decoding failed');
                 }
             // php >= 5.3
             } elseif (($jsonLastErr = json_last_error()) != JSON_ERROR_NONE) {
-                // require_once 'Zend/Json/Exception.php';
                 switch ($jsonLastErr) {
                     case JSON_ERROR_DEPTH:
                         throw new Zend_Json_Exception('Decoding failed: Maximum stack depth exceeded');
@@ -108,7 +102,6 @@ class Zend_Json
             return $decode;
         }
 
-        // require_once 'Zend/Json/Decoder.php';
         return Zend_Json_Decoder::decode($encodedValue, $objectDecodeType);
     }
 
@@ -150,7 +143,6 @@ class Zend_Json
             /**
              * @see Zend_Json_Encoder
              */
-            // require_once "Zend/Json/Encoder.php";
             $valueToEncode = self::_recursiveJsonExprFinder($valueToEncode, $javascriptExpressions);
         }
 
@@ -158,7 +150,6 @@ class Zend_Json
         if (function_exists('json_encode') && true !== self::$useBuiltinEncoderDecoder) {
             $encodedResult = json_encode($valueToEncode);
         } else {
-            // require_once 'Zend/Json/Encoder.php';
             $encodedResult = Zend_Json_Encoder::encode($valueToEncode, $cycleCheck, $options);
         }
 
@@ -275,7 +266,6 @@ class Zend_Json
         // Keep an eye on how deeply we are involved in recursion.
         if ($recursionDepth > self::$maxRecursionDepthAllowed) {
             // XML tree is too deep. Exit now by throwing an exception.
-            // require_once 'Zend/Json/Exception.php';
             throw new Zend_Json_Exception('Function _processXml exceeded the allowed recursion depth of '.self::$maxRecursionDepthAllowed);
         } // End of if ($recursionDepth > self::$maxRecursionDepthAllowed)
 
@@ -361,7 +351,6 @@ class Zend_Json
 
         // If it is not a valid XML content, throw an exception.
         if (null == $simpleXmlElementObject) {
-            // require_once 'Zend/Json/Exception.php';
             throw new Zend_Json_Exception('Function fromXml was called with an invalid XML formatted string.');
         } // End of if ($simpleXmlElementObject == null)
 

@@ -26,9 +26,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_View_Helper_FormRadioTest::main');
 }
 
-// require_once 'Zend/View/Helper/FormRadio.php';
-// require_once 'Zend/View.php';
-
 /**
  * Zend_View_Helper_FormRadioTest.
  *
@@ -336,7 +333,6 @@ class Zend_View_Helper_FormRadioTest extends PHPUnit_Framework_TestCase
             'options' => $options,
         ]);
 
-        // require_once 'Zend/Filter/Alnum.php';
         $filter = new Zend_Filter_Alnum();
         foreach ($options as $key => $value) {
             $id = 'foo-'.$filter->filter($key);
@@ -358,7 +354,6 @@ class Zend_View_Helper_FormRadioTest extends PHPUnit_Framework_TestCase
             'options' => $options,
         ]);
 
-        // require_once 'Zend/Filter/Alnum.php';
         $filter = new Zend_Filter_Alnum();
         foreach ($options as $key => $value) {
             $id = 'foo-bar-'.$filter->filter($key);

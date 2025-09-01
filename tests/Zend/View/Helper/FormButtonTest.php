@@ -26,9 +26,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_View_Helper_FormButtonTest::main');
 }
 
-// require_once 'Zend/View.php';
-// require_once 'Zend/View/Helper/FormButton.php';
-
 /**
  * Test class for Zend_View_Helper_FormButton.
  *

@@ -22,11 +22,6 @@
  */
 
 /**
- * @see Zend_Db_Table_Row_Abstract
- */
-// require_once 'Zend/Db/Table/Row/Abstract.php';
-
-/**
  * Reference concrete class that extends Zend_Db_Table_Row_Abstract.
  * Developers may also create their own classes that extend the abstract class.
  *

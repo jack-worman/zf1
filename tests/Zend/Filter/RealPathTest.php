@@ -22,11 +22,6 @@
  */
 
 /**
- * @see Zend_Filter_RealPath
- */
-// require_once 'Zend/Filter/RealPath.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)

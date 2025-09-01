@@ -22,11 +22,6 @@
  */
 
 /**
- * @see Zend_Filter_LocalizedToNormalized
- */
-// require_once 'Zend/Filter/LocalizedToNormalized.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)

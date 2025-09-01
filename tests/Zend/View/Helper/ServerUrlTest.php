@@ -21,9 +21,6 @@
  * @version    $Id$
  */
 
-// require_once 'Zend/Controller/Front.php';
-// require_once 'Zend/View/Helper/ServerUrl.php';
-
 /**
  * Tests Zend_View_Helper_ServerUrl.
  *

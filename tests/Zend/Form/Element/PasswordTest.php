@@ -26,9 +26,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Form_Element_PasswordTest::main');
 }
 
-// require_once 'Zend/Form/Element/Password.php';
-// require_once 'Zend/View.php';
-
 /**
  * Test class for Zend_Form_Element_Password.
  *

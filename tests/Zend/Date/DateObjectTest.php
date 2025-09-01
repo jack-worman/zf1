@@ -22,11 +22,6 @@
  */
 
 /**
- * Zend_Date.
- */
-// require_once 'Zend/Date.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
@@ -41,7 +36,6 @@ class Zend_Date_DateObjectTest extends PHPUnit_Framework_TestCase
     {
         $this->originalTimezone = date_default_timezone_get();
         date_default_timezone_set('Europe/Paris');
-        // require_once 'Zend/Cache.php';
         $this->_cache = Zend_Cache::factory('Core', 'File',
             ['lifetime' => 120, 'automatic_serialization' => true],
             ['cache_dir' => __DIR__.'/../_files/']);

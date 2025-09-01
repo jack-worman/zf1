@@ -22,19 +22,6 @@
  */
 
 /**
- * @see Zend_Uri_Http
- */
-// require_once 'Zend/Uri/Http.php';
-/**
- * @see Zend_Http_Client_Adapter_Interface
- */
-// require_once 'Zend/Http/Client/Adapter/Interface.php';
-/**
- * @see Zend_Http_Client_Adapter_Stream
- */
-// require_once 'Zend/Http/Client/Adapter/Stream.php';
-
-/**
  * A sockets based (stream_socket_client) adapter class for Zend_Http_Client. Can be used
  * on almost every PHP environment, and does not require any special extensions.
  *
@@ -110,7 +97,6 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
         if ($config instanceof Zend_Config) {
             $config = $config->toArray();
         } elseif (!is_array($config)) {
-            // require_once 'Zend/Http/Client/Adapter/Exception.php';
             throw new Zend_Http_Client_Adapter_Exception('Array or Zend_Config object expected, got '.gettype($config));
         }
 
@@ -151,7 +137,6 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
             $this->_context = stream_context_create($context);
         } else {
             // Invalid parameter
-            // require_once 'Zend/Http/Client/Adapter/Exception.php';
             throw new Zend_Http_Client_Adapter_Exception('Expecting either a stream context resource or array, got '.gettype($context));
         }
 
@@ -200,14 +185,12 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
                 if (null !== $this->config['sslcert']) {
                     if (!stream_context_set_option($context, 'ssl', 'local_cert',
                         $this->config['sslcert'])) {
-                        // require_once 'Zend/Http/Client/Adapter/Exception.php';
                         throw new Zend_Http_Client_Adapter_Exception('Unable to set sslcert option');
                     }
                 }
                 if (null !== $this->config['sslpassphrase']) {
                     if (!stream_context_set_option($context, 'ssl', 'passphrase',
                         $this->config['sslpassphrase'])) {
-                        // require_once 'Zend/Http/Client/Adapter/Exception.php';
                         throw new Zend_Http_Client_Adapter_Exception('Unable to set sslpassphrase option');
                     }
                 }
@@ -227,13 +210,11 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
 
             if (!$this->socket) {
                 $this->close();
-                // require_once 'Zend/Http/Client/Adapter/Exception.php';
                 throw new Zend_Http_Client_Adapter_Exception('Unable to Connect to '.$host.':'.$port.'. Error #'.$errno.': '.$errstr);
             }
 
             // Set the stream timeout
             if (!stream_set_timeout($this->socket, (int) $this->config['timeout'])) {
-                // require_once 'Zend/Http/Client/Adapter/Exception.php';
                 throw new Zend_Http_Client_Adapter_Exception('Unable to set the connection timeout');
             }
 
@@ -257,14 +238,12 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
     {
         // Make sure we're properly connected
         if (!$this->socket) {
-            // require_once 'Zend/Http/Client/Adapter/Exception.php';
             throw new Zend_Http_Client_Adapter_Exception('Trying to write but we are not connected');
         }
 
         $host = $uri->getHost();
         $host = ('https' == strtolower((string) $uri->getScheme()) ? $this->config['ssltransport'] : 'tcp').'://'.$host;
         if ($this->connected_to[0] != $host || $this->connected_to[1] != $uri->getPort()) {
-            // require_once 'Zend/Http/Client/Adapter/Exception.php';
             throw new Zend_Http_Client_Adapter_Exception('Trying to write but we are connected to the wrong host');
         }
 
@@ -293,13 +272,11 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
 
         // Send the request
         if (!@fwrite($this->socket, $request)) {
-            // require_once 'Zend/Http/Client/Adapter/Exception.php';
             throw new Zend_Http_Client_Adapter_Exception('Error writing request to server');
         }
 
         if (is_resource($body)) {
             if (0 == stream_copy_to_stream($body, $this->socket)) {
-                // require_once 'Zend/Http/Client/Adapter/Exception.php';
                 throw new Zend_Http_Client_Adapter_Exception('Error writing request to server');
             }
         }
@@ -367,7 +344,6 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
                     $chunksize = \trim((string) $line);
                     if (!ctype_xdigit($chunksize)) {
                         $this->close();
-                        // require_once 'Zend/Http/Client/Adapter/Exception.php';
                         throw new Zend_Http_Client_Adapter_Exception('Invalid chunk size "'.$chunksize.'" unable to read chunked body');
                     }
 
@@ -407,7 +383,6 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
                 } while ($chunksize > 0);
             } else {
                 $this->close();
-                // require_once 'Zend/Http/Client/Adapter/Exception.php';
                 throw new Zend_Http_Client_Adapter_Exception('Cannot handle "'.$headers['transfer-encoding'].'" transfer encoding');
             }
 
@@ -508,7 +483,6 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
             $timedout = $info['timed_out'];
             if ($timedout) {
                 $this->close();
-                // require_once 'Zend/Http/Client/Adapter/Exception.php';
                 throw new Zend_Http_Client_Adapter_Exception("Read timed out after {$this->config['timeout']} seconds", Zend_Http_Client_Adapter_Exception::READ_TIMEOUT);
             }
         }

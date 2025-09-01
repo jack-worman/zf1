@@ -21,8 +21,6 @@
  * @version    $Id$
  */
 
-// require_once 'Zend/Http/CookieJar.php';
-
 /**
  * Zend_Http_CookieJar unit tests.
  *

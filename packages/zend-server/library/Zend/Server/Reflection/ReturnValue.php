@@ -79,7 +79,6 @@ class Zend_Server_Reflection_ReturnValue
     public function setType($type)
     {
         if (!is_string($type) && (null !== $type)) {
-            // require_once 'Zend/Server/Reflection/Exception.php';
             throw new Zend_Server_Reflection_Exception('Invalid parameter type');
         }
 
@@ -106,7 +105,6 @@ class Zend_Server_Reflection_ReturnValue
     public function setDescription($description)
     {
         if (!is_string($description) && (null !== $description)) {
-            // require_once 'Zend/Server/Reflection/Exception.php';
             throw new Zend_Server_Reflection_Exception('Invalid parameter description');
         }
 

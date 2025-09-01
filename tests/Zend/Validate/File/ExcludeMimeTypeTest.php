@@ -27,11 +27,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 }
 
 /**
- * @see Zend_Validate_File_ExcludeMimeType
- */
-// require_once 'Zend/Validate/File/ExcludeMimeType.php';
-
-/**
  * ExcludeMimeType testbed.
  *
  * @category   Zend

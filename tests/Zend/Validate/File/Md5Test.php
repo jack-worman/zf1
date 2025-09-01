@@ -27,11 +27,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 }
 
 /**
- * @see Zend_Validate_File_Md5
- */
-// require_once 'Zend/Validate/File/Md5.php';
-
-/**
  * Md5 testbed.
  *
  * @category   Zend

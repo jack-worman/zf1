@@ -26,15 +26,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_View_Helper_HeadStyleTest::main');
 }
 
-/** Zend_View_Helper_HeadStyle */
-// require_once 'Zend/View/Helper/HeadStyle.php';
-
-/** Zend_View_Helper_Placeholder_Registry */
-// require_once 'Zend/View/Helper/Placeholder/Registry.php';
-
-/** Zend_Registry */
-// require_once 'Zend/Registry.php';
-
 /**
  * Test class for Zend_View_Helper_HeadStyle.
  *

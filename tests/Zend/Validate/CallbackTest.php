@@ -25,11 +25,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 }
 
 /**
- * @see Zend_Validate_Callback
- */
-// require_once 'Zend/Validate/Callback.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)

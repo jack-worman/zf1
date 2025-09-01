@@ -22,11 +22,6 @@
  */
 
 /**
- * @see Zend_Filter_File_LowerCase
- */
-// require_once 'Zend/Filter/File/LowerCase.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)

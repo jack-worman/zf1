@@ -22,11 +22,6 @@
  */
 
 /**
- * @see Zend_Filter_SeperatorToSeparator
- */
-// require_once 'Zend/Filter/Word/SeparatorToSeparator.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)

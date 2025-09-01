@@ -26,8 +26,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Form_Element_TextareaTest::main');
 }
 
-// require_once 'Zend/Form/Element/Textarea.php';
-
 /**
  * Test class for Zend_Form_Element_Textarea.
  *

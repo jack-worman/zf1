@@ -27,11 +27,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 }
 
 /**
- * @see Zend_Validate_File_Size
- */
-// require_once 'Zend/Validate/File/NotExists.php';
-
-/**
  * NotExists testbed.
  *
  * @category   Zend

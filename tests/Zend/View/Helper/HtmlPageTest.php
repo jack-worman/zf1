@@ -26,9 +26,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_View_Helper_HtmlPageTest::main');
 }
 
-// require_once 'Zend/View.php';
-// require_once 'Zend/View/Helper/HtmlPage.php';
-
 /**
  * @category   Zend
  *

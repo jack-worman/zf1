@@ -23,8 +23,6 @@
 
 require_once __DIR__.'/SocketTest.php';
 
-// require_once 'Zend/Http/Client/Adapter/Proxy.php';
-
 /**
  * Zend_Http_Client_Adapter_Proxy test suite.
  *

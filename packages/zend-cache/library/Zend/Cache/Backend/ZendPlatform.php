@@ -22,16 +22,6 @@
  */
 
 /**
- * @see Zend_Cache_Backend_Interface
- */
-// require_once 'Zend/Cache/Backend.php';
-
-/**
- * @see Zend_Cache_Backend_Interface
- */
-// require_once 'Zend/Cache/Backend/Interface.php';
-
-/**
  * Impementation of Zend Cache Backend using the Zend Platform (Output Content Caching).
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)

@@ -22,12 +22,6 @@
  */
 
 /**
- * @see Zend_Filter_Encrypt
- */
-// require_once 'Zend/Filter/Encrypt.php';
-// require_once 'Zend/Filter/Decrypt.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)

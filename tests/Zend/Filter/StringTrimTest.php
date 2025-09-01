@@ -22,11 +22,6 @@
  */
 
 /**
- * @see Zend_Filter_StringTrim
- */
-// require_once 'Zend/Filter/StringTrim.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
@@ -124,7 +119,6 @@ class Zend_Filter_StringTrimTest extends PHPUnit_Framework_TestCase
      */
     public function testSetParamCharListToConstructor()
     {
-        // require_once 'Zend/Config.php';
         $config = new Zend_Config(['charlist' => '&']);
         $filter = new Zend_Filter_StringTrim($config);
         $this->assertEquals('&', $filter->getCharList());

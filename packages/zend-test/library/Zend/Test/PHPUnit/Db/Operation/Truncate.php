@@ -22,11 +22,6 @@
  */
 
 /**
- * @see Zend_Test_PHPUnit_Db_Connection
- */
-// require_once "Zend/Test/PHPUnit/Db/Connection.php";
-
-/**
  * Operation for Truncating on setup or teardown of a database tester.
  *
  * @uses       PHPUnit_Extensions_Database_Operation_IDatabaseOperation
@@ -44,7 +39,6 @@ class Zend_Test_PHPUnit_Db_Operation_Truncate implements PHPUnit_Extensions_Data
     public function execute(PHPUnit_Extensions_Database_DB_IDatabaseConnection $connection, PHPUnit_Extensions_Database_DataSet_IDataSet $dataSet)
     {
         if (!($connection instanceof Zend_Test_PHPUnit_Db_Connection)) {
-            // require_once "Zend/Test/PHPUnit/Db/Exception.php";
             throw new Zend_Test_PHPUnit_Db_Exception('Not a valid Zend_Test_PHPUnit_Db_Connection instance, '.get_class($connection).' given!');
         }
 
@@ -79,7 +73,6 @@ class Zend_Test_PHPUnit_Db_Operation_Truncate implements PHPUnit_Extensions_Data
             } else {
                 $db->query('IMPORT FROM /dev/null OF DEL REPLACE INTO '.$tableName);
             }*/
-            // require_once "Zend/Exception.php";
             throw Zend_Exception('IBM Db2 TRUNCATE not supported.');
         } elseif ($this->_isMssqlOrOracle($db)) {
             $db->query('TRUNCATE TABLE '.$tableName);

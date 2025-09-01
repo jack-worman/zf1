@@ -22,9 +22,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_View_Helper_HtmlElement */
-// require_once 'Zend/View/Helper/HtmlElement.php';
-
 /**
  * Helper for retrieving avatars from gravatar.com.
  *
@@ -204,7 +201,6 @@ class Zend_View_Helper_Gravatar extends Zend_View_Helper_HtmlElement
                 $this->_options['rating'] = $rating;
                 break;
             default:
-                // require_once 'Zend/View/Exception.php';
                 throw new Zend_View_Exception(sprintf('The rating value "%s" is not allowed', $rating));
         }
 

@@ -22,11 +22,6 @@
  */
 
 /**
- * @see Zend_Controller_Action
- */
-// require_once 'Zend/Controller/Action.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)

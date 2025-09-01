@@ -26,8 +26,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Form_Element_ResetTest::main');
 }
 
-// require_once 'Zend/Form/Element/Reset.php';
-
 /**
  * Test class for Zend_Form_Element_Reset.
  *

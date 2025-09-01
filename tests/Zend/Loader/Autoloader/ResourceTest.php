@@ -25,24 +25,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 }
 
 /**
- * @see Zend_Loader_Autoloader
- */
-// require_once 'Zend/Loader/Autoloader.php';
-
-/**
- * @see Zend_Loader_Autoloader_Resource
- */
-// require_once 'Zend/Loader/Autoloader/Resource.php';
-
-/**
- * @see Zend_Loader_Autoloader_Interface
- */
-// require_once 'Zend/Loader/Autoloader/Interface.php';
-
-/** Zend_Config */
-// require_once 'Zend/Config.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)

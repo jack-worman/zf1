@@ -26,8 +26,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Filter_Word_DashToUnderscoreTest::main');
 }
 
-// require_once 'Zend/Filter/Word/DashToUnderscore.php';
-
 /**
  * Test class for Zend_Filter_Word_DashToUnderscore.
  *

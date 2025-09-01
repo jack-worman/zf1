@@ -26,11 +26,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_View_Helper_LayoutTest::main');
 }
 
-// require_once 'Zend/View/Helper/Layout.php';
-// require_once 'Zend/Layout.php';
-// require_once 'Zend/Controller/Front.php';
-// require_once 'Zend/Controller/Action/HelperBroker.php';
-
 /**
  * Test class for Zend_View_Helper_Layout.
  *
@@ -122,9 +117,6 @@ class Zend_View_Helper_LayoutTest extends PHPUnit_Framework_TestCase
     }
 }
 
-/**
- * Zend_Layout extension to allow resetting MVC instance.
- */
 #[AllowDynamicProperties]
 class Zend_View_Helper_LayoutTest_Layout extends Zend_Layout
 {

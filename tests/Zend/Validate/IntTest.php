@@ -22,11 +22,6 @@
  */
 
 /**
- * @see Zend_Validate_Int
- */
-// require_once 'Zend/Validate/Int.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)

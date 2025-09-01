@@ -21,9 +21,6 @@
  * @version    $Id$
  */
 
-/** Zend_Controller_Router_Route */
-// require_once 'Zend/Controller/Router/Route/Static.php';
-
 /**
  * @category   Zend
  *
@@ -110,8 +107,6 @@ class Zend_Controller_Router_Route_StaticTest extends PHPUnit_Framework_TestCase
 
     public function testGetInstance()
     {
-        // require_once 'Zend/Config.php';
-
         $routeConf = [
             'route' => 'users/all',
             'defaults' => [

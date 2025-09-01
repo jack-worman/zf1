@@ -22,11 +22,6 @@
  */
 
 /**
- * @see Zend_Db_Statement_Pdo
- */
-// require_once 'Zend/Db/Statement/Pdo.php';
-
-/**
  * Proxy class to wrap a PDOStatement object for IBM Databases.
  * Matches the interface of PDOStatement.  All methods simply proxy to the
  * matching method in PDOStatement.  PDOExceptions thrown by PDOStatement

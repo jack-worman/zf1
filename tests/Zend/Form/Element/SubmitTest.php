@@ -26,12 +26,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Form_Element_SubmitTest::main');
 }
 
-// require_once 'Zend/Form/Element/Submit.php';
-// require_once 'Zend/Form.php';
-// require_once 'Zend/Registry.php';
-// require_once 'Zend/Translate.php';
-// require_once 'Zend/Translate/Adapter/Array.php';
-
 /**
  * Test class for Zend_Form_Element_Submit.
  *
@@ -81,7 +75,6 @@ class Zend_Form_Element_SubmitTest extends PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        // require_once 'Zend/View.php';
         $view = new Zend_View();
         $view->addHelperPath(__DIR__.'/../../../../library/Zend/View/Helper/');
 
@@ -149,7 +142,6 @@ class Zend_Form_Element_SubmitTest extends PHPUnit_Framework_TestCase
 
     public function testLabelIsTranslatedWhenTranslationAvailable()
     {
-        // require_once 'Zend/Translate.php';
         $translations = ['Label' => 'This is the Submit Label'];
         $translate = new Zend_Translate('array', $translations);
         $submit = new Zend_Form_Element_Submit('foo', 'Label');
@@ -159,7 +151,6 @@ class Zend_Form_Element_SubmitTest extends PHPUnit_Framework_TestCase
 
     public function testLabelWhichIsSetToNameIsTranslatedWhenTranslationAvailable()
     {
-        // require_once 'Zend/Translate.php';
         $translations = ['foo' => 'This is the Submit Label'];
         $translate = new Zend_Translate('array', $translations);
         $submit = new Zend_Form_Element_Submit('foo');
@@ -172,7 +163,6 @@ class Zend_Form_Element_SubmitTest extends PHPUnit_Framework_TestCase
      */
     public function testLabelIsNotTranslatedTwice()
     {
-        // require_once 'Zend/Translate.php';
         $translations = ['firstLabel' => 'secondLabel',
             'secondLabel' => 'thirdLabel'];
         $translate = new Zend_Translate('array', $translations);

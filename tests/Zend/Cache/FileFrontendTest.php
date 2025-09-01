@@ -22,13 +22,6 @@
  */
 
 /**
- * Zend_Cache.
- */
-// require_once 'Zend/Cache.php';
-// require_once 'Zend/Cache/Frontend/File.php';
-// require_once 'Zend/Cache/Backend/Test.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)

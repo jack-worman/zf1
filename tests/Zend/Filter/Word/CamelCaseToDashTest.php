@@ -26,8 +26,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Filter_Word_CamelCaseToDashTest::main');
 }
 
-// require_once 'Zend/Filter/Word/CamelCaseToDash.php';
-
 /**
  * Test class for Zend_Filter_Word_CamelCaseToDash.
  *

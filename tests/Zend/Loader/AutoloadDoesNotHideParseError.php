@@ -24,7 +24,6 @@
 /*
  * @see Zend_Loader
  */
-// require_once 'Zend/Loader.php';
 
 Zend_Loader::registerAutoload();
 

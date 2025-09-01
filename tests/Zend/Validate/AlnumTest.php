@@ -22,11 +22,6 @@
  */
 
 /**
- * @see Zend_Validate_Alnum
- */
-// require_once 'Zend/Validate/Alnum.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)

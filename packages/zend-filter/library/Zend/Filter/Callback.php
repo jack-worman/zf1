@@ -22,11 +22,6 @@
  */
 
 /**
- * @see Zend_Filter_Interface
- */
-// require_once 'Zend/Filter/Interface.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
@@ -66,7 +61,6 @@ class Zend_Filter_Callback implements Zend_Filter_Interface
         }
 
         if (!array_key_exists('callback', $options)) {
-            // require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('Missing callback to use');
         }
 
@@ -96,7 +90,6 @@ class Zend_Filter_Callback implements Zend_Filter_Interface
     public function setCallback($callback, $options = null)
     {
         if (!is_callable($callback)) {
-            // require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('Callback can not be accessed');
         }
 

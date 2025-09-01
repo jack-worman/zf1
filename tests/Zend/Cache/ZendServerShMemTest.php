@@ -22,12 +22,6 @@
  */
 
 /**
- * Zend_Cache.
- */
-// require_once 'Zend/Cache.php';
-// require_once 'Zend/Cache/Backend/ZendServer/ShMem.php';
-
-/**
  * Common tests for backends.
  */
 require_once 'CommonBackendTest.php';

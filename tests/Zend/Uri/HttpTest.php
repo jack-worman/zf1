@@ -22,16 +22,6 @@
  */
 
 /**
- * @see Zend_Uri
- */
-// require_once 'Zend/Uri.php';
-
-/**
- * @see Zend_Uri_Http
- */
-// require_once 'Zend/Uri/Http.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)

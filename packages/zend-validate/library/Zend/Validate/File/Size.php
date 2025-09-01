@@ -22,11 +22,6 @@
  */
 
 /**
- * @see Zend_Validate_Abstract
- */
-// require_once 'Zend/Validate/Abstract.php';
-
-/**
  * Validator for the maximum size of a file up to a max of 2GB.
  *
  * @category  Zend
@@ -112,7 +107,6 @@ class Zend_Validate_File_Size extends Zend_Validate_Abstract
         } elseif (is_string($options) || is_numeric($options)) {
             $options = ['max' => $options];
         } elseif (!is_array($options)) {
-            // require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception('Invalid options to validator provided');
         }
 
@@ -191,14 +185,12 @@ class Zend_Validate_File_Size extends Zend_Validate_Abstract
     public function setMin($min)
     {
         if (!is_string($min) and !is_numeric($min)) {
-            // require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception('Invalid options to validator provided');
         }
 
         $min = (int) $this->_fromByteString($min);
         $max = $this->getMax(true);
         if ((null !== $max) && ($min > $max)) {
-            // require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception("The minimum must be less than or equal to the maximum filesize, but $min > $max");
         }
 
@@ -236,14 +228,12 @@ class Zend_Validate_File_Size extends Zend_Validate_Abstract
     public function setMax($max)
     {
         if (!is_string($max) && !is_numeric($max)) {
-            // require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception('Invalid options to validator provided');
         }
 
         $max = (int) $this->_fromByteString($max);
         $min = $this->getMin(true);
         if ((null !== $min) && ($max < $min)) {
-            // require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception('The maximum must be greater than or equal to the minimum filesize, but '."$max < $min");
         }
 
@@ -290,7 +280,6 @@ class Zend_Validate_File_Size extends Zend_Validate_Abstract
     public function isValid($value, $file = null)
     {
         // Is file readable ?
-        // require_once 'Zend/Loader.php';
         if (!Zend_Loader::isReadable($value)) {
             return $this->_throw($file, self::NOT_FOUND);
         }

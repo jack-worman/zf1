@@ -22,11 +22,6 @@
  */
 
 /**
- * Zend_Db_Adapter_Exception.
- */
-// require_once 'Zend/Db/Adapter/Exception.php';
-
-/**
  * Zend_Db_Adapter_Db2_Exception.
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)

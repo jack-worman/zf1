@@ -24,8 +24,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Loader_ClassMapAutoloaderTest::main');
 }
 
-// require_once 'Zend/Loader/ClassMapAutoloader.php';
-
 /**
  * @category   Zend
  *

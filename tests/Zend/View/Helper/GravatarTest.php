@@ -27,16 +27,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 }
 
 /**
- * @see Zend_View_Helper_Gravatar
- */
-// require_once 'Zend/View/Helper/Gravatar.php';
-
-/**
- * @see Zend_View
- */
-// require_once 'Zend/View.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)

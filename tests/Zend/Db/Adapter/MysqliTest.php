@@ -27,11 +27,6 @@
 require_once 'Zend/Db/Adapter/TestCommon.php';
 
 /**
- * @see Zend_Db_Adapter_Mysqli
- */
-// require_once 'Zend/Db/Adapter/Mysqli.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)

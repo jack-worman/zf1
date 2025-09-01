@@ -26,8 +26,6 @@
  */
 require_once 'Zend/Db/Table/TestSetup.php';
 
-// require_once 'Zend/Db/Table/Row.php';
-
 /**
  * @category   Zend
  *

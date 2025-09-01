@@ -26,8 +26,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Controller_Request_HttpTest::main');
 }
 
-// require_once 'Zend/Controller/Request/Http.php';
-
 /**
  * @category   Zend
  *

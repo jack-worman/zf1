@@ -22,11 +22,6 @@
  */
 
 /**
- * @see Zend_Controller_Action_Helper_AutoComplete_Abstract
- */
-// require_once 'Zend/Controller/Action/Helper/AutoComplete/Abstract.php';
-
-/**
  * Create and send Scriptaculous-compatible autocompletion lists.
  *
  * @uses       Zend_Controller_Action_Helper_AutoComplete_Abstract
@@ -67,7 +62,6 @@ class Zend_Controller_Action_Helper_AutoCompleteScriptaculous extends Zend_Contr
             /*
              * @see Zend_Controller_Action_Exception
              */
-            // require_once 'Zend/Controller/Action/Exception.php';
             throw new Zend_Controller_Action_Exception('Invalid data passed for autocompletion');
         }
 

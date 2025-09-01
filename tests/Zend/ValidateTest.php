@@ -22,21 +22,6 @@
  */
 
 /**
- * @see Zend_Validate
- */
-// require_once 'Zend/Validate.php';
-
-/**
- * @see Zend_Validate_Abstract
- */
-// require_once 'Zend/Validate/Abstract.php';
-
-/**
- * @see Zend_Translate
- */
-// require_once 'Zend/Translate.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)

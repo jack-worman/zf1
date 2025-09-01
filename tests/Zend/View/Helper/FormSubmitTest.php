@@ -26,10 +26,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_View_Helper_FormSubmitTest::main');
 }
 
-// require_once 'Zend/View/Helper/FormSubmit.php';
-// require_once 'Zend/View.php';
-// require_once 'Zend/Registry.php';
-
 /**
  * Test class for Zend_View_Helper_FormSubmit.
  *

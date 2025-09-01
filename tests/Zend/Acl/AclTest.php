@@ -21,9 +21,6 @@
  * @version    $Id$
  */
 
-// require_once 'Zend/Acl.php';
-// require_once 'Zend/Acl/Resource.php';
-// require_once 'Zend/Acl/Role.php';
 require_once __DIR__.'/_files/MockAssertion.php';
 
 /**

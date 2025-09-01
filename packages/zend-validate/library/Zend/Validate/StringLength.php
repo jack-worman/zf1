@@ -22,11 +22,6 @@
  */
 
 /**
- * @see Zend_Validate_Abstract
- */
-// require_once 'Zend/Validate/Abstract.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
@@ -140,7 +135,6 @@ class Zend_Validate_StringLength extends Zend_Validate_Abstract
             /*
              * @see Zend_Validate_Exception
              */
-            // require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception("The minimum must be less than or equal to the maximum length, but $min > $this->_max");
         }
         $this->_min = max(0, (int) $min);
@@ -175,7 +169,6 @@ class Zend_Validate_StringLength extends Zend_Validate_Abstract
             /*
              * @see Zend_Validate_Exception
              */
-            // require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception('The maximum must be greater than or equal to the minimum length, but '."$max < $this->_min");
         } else {
             $this->_max = (int) $max;
@@ -220,7 +213,6 @@ class Zend_Validate_StringLength extends Zend_Validate_Abstract
                 $result = ini_get('default_charset');
             }
             if (!$result) {
-                // require_once 'Zend/Validate/Exception.php';
                 throw new Zend_Validate_Exception('Given encoding not supported on this OS!');
             }
 

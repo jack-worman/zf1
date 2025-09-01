@@ -22,9 +22,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Loader */
-// require_once 'Zend/Loader.php';
-
 /**
  * Autoloader stack and namespace autoloader.
  *

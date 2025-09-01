@@ -22,11 +22,6 @@
  */
 
 /**
- * @see Zend_Db_Statement
- */
-// require_once 'Zend/Db/Statement.php';
-
-/**
  * Extends for Oracle.
  *
  * @category   Zend
@@ -95,7 +90,6 @@ class Zend_Db_Statement_Oracle extends Zend_Db_Statement
             /*
              * @see Zend_Db_Statement_Oracle_Exception
              */
-            // require_once 'Zend/Db/Statement/Oracle/Exception.php';
             throw new Zend_Db_Statement_Oracle_Exception(oci_error($connection));
         }
     }
@@ -130,7 +124,6 @@ class Zend_Db_Statement_Oracle extends Zend_Db_Statement
             /*
              * @see Zend_Db_Adapter_Oracle_Exception
              */
-            // require_once 'Zend/Db/Statement/Oracle/Exception.php';
             throw new Zend_Db_Statement_Oracle_Exception(oci_error($this->_stmt));
         }
 
@@ -254,7 +247,6 @@ class Zend_Db_Statement_Oracle extends Zend_Db_Statement
                 /*
                  * @see Zend_Db_Adapter_Oracle_Exception
                  */
-                // require_once 'Zend/Db/Statement/Oracle/Exception.php';
                 throw new Zend_Db_Statement_Oracle_Exception(oci_error($this->_stmt));
             }
         }
@@ -264,7 +256,6 @@ class Zend_Db_Statement_Oracle extends Zend_Db_Statement
             /*
              * @see Zend_Db_Adapter_Oracle_Exception
              */
-            // require_once 'Zend/Db/Statement/Oracle/Exception.php';
             throw new Zend_Db_Statement_Oracle_Exception(oci_error($this->_stmt));
         }
 
@@ -330,7 +321,6 @@ class Zend_Db_Statement_Oracle extends Zend_Db_Statement
                 /*
                  * @see Zend_Db_Adapter_Oracle_Exception
                  */
-                // require_once 'Zend/Db/Statement/Oracle/Exception.php';
                 throw new Zend_Db_Statement_Oracle_Exception(['code' => 'HYC00', 'message' => "Invalid fetch mode '$style' specified"]);
                 break;
         }
@@ -339,7 +329,6 @@ class Zend_Db_Statement_Oracle extends Zend_Db_Statement
             /*
              * @see Zend_Db_Adapter_Oracle_Exception
              */
-            // require_once 'Zend/Db/Statement/Oracle/Exception.php';
             throw new Zend_Db_Statement_Oracle_Exception($error);
         }
 
@@ -378,7 +367,6 @@ class Zend_Db_Statement_Oracle extends Zend_Db_Statement
                 /*
                  * @see Zend_Db_Adapter_Oracle_Exception
                  */
-                // require_once 'Zend/Db/Statement/Oracle/Exception.php';
                 throw new Zend_Db_Statement_Oracle_Exception(['code' => 'HYC00', 'message' => 'OCI8 driver does not support fetchAll(FETCH_BOTH), use fetch() in a loop instead']);
                 // notreached
                 $flags |= OCI_NUM;
@@ -401,7 +389,6 @@ class Zend_Db_Statement_Oracle extends Zend_Db_Statement
                 /*
                  * @see Zend_Db_Adapter_Oracle_Exception
                  */
-                // require_once 'Zend/Db/Statement/Oracle/Exception.php';
                 throw new Zend_Db_Statement_Oracle_Exception(['code' => 'HYC00', 'message' => "Invalid fetch mode '$style' specified"]);
                 break;
         }
@@ -413,7 +400,6 @@ class Zend_Db_Statement_Oracle extends Zend_Db_Statement
                     /*
                      * @see Zend_Db_Adapter_Oracle_Exception
                      */
-                    // require_once 'Zend/Db/Statement/Oracle/Exception.php';
                     throw new Zend_Db_Statement_Oracle_Exception($error);
                 }
                 if (!$rows) {
@@ -436,7 +422,6 @@ class Zend_Db_Statement_Oracle extends Zend_Db_Statement
                 /*
                  * @see Zend_Db_Adapter_Oracle_Exception
                  */
-                // require_once 'Zend/Db/Statement/Oracle/Exception.php';
                 throw new Zend_Db_Statement_Oracle_Exception($error);
             }
         }
@@ -467,7 +452,6 @@ class Zend_Db_Statement_Oracle extends Zend_Db_Statement
             /*
              * @see Zend_Db_Adapter_Oracle_Exception
              */
-            // require_once 'Zend/Db/Statement/Oracle/Exception.php';
             throw new Zend_Db_Statement_Oracle_Exception($error);
         }
 
@@ -476,7 +460,6 @@ class Zend_Db_Statement_Oracle extends Zend_Db_Statement
             /*
              * @see Zend_Db_Adapter_Oracle_Exception
              */
-            // require_once 'Zend/Db/Statement/Oracle/Exception.php';
             throw new Zend_Db_Statement_Oracle_Exception(oci_error($this->_stmt));
         }
 
@@ -513,7 +496,6 @@ class Zend_Db_Statement_Oracle extends Zend_Db_Statement
             /*
              * @see Zend_Db_Adapter_Oracle_Exception
              */
-            // require_once 'Zend/Db/Statement/Oracle/Exception.php';
             throw new Zend_Db_Statement_Oracle_Exception($error);
         }
 
@@ -533,10 +515,6 @@ class Zend_Db_Statement_Oracle extends Zend_Db_Statement
      */
     public function nextRowset()
     {
-        /*
-         * @see Zend_Db_Statement_Oracle_Exception
-         */
-        // require_once 'Zend/Db/Statement/Oracle/Exception.php';
         throw new Zend_Db_Statement_Oracle_Exception(['code' => 'HYC00', 'message' => 'Optional feature not implemented']);
     }
 
@@ -561,7 +539,6 @@ class Zend_Db_Statement_Oracle extends Zend_Db_Statement
             /*
              * @see Zend_Db_Adapter_Oracle_Exception
              */
-            // require_once 'Zend/Db/Statement/Oracle/Exception.php';
             throw new Zend_Db_Statement_Oracle_Exception(oci_error($this->_stmt));
         }
 

@@ -22,11 +22,6 @@
  */
 
 /**
- * @see Zend_Filter_Digits
- */
-// require_once 'Zend/Filter/Digits.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)

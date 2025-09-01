@@ -203,7 +203,6 @@ class Zend_Db_Profiler_StaticTest extends Zend_Db_TestSetup
      */
     public function testProfilerFactoryConfig()
     {
-        // require_once 'Zend/Config.php';
         $config = new Zend_Config([
             'class' => 'Zend_Db_Profiler_ProfilerCustom',
         ]);
@@ -274,10 +273,8 @@ class Zend_Db_Profiler_StaticTest extends Zend_Db_TestSetup
      */
     public function testProfilerFactoryConfigInstance()
     {
-        // require_once 'Zend/Db/Profiler/ProfilerCustom.php';
         $profiler = new Zend_Db_Profiler_ProfilerCustom();
 
-        // require_once 'Zend/Config.php';
         $config = new Zend_Config(['instance' => $profiler]);
 
         $db = Zend_Db::factory('Static',
@@ -300,7 +297,6 @@ class Zend_Db_Profiler_StaticTest extends Zend_Db_TestSetup
      */
     public function testProfilerFactoryInstanceOverridesClass()
     {
-        // require_once 'Zend/Db/Profiler/ProfilerCustom.php';
         $profiler = new Zend_Db_Profiler_ProfilerCustom();
         $db = Zend_Db::factory('Static',
             [

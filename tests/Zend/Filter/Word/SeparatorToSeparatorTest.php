@@ -26,8 +26,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Filter_Word_SeparatorToSeparatorTest::main');
 }
 
-// require_once 'Zend/Filter/Word/SeparatorToSeparator.php';
-
 /**
  * Test class for Zend_Filter_Word_SeparatorToSeparator.
  *

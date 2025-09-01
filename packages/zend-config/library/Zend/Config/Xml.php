@@ -22,17 +22,6 @@
  */
 
 /**
- * @see Zend_Config
- */
-// require_once 'Zend/Config.php';
-
-/** @see Zend_Xml_Security */
-// require_once 'Zend/Xml/Security.php';
-
-/** @see Zend_Xml_Exception */
-// require_once 'Zend/Xml/Exception.php';
-
-/**
  * XML Adapter for Zend_Config.
  *
  * @category  Zend
@@ -87,7 +76,6 @@ class Zend_Config_Xml extends Zend_Config
     public function __construct($xml, $section = null, $options = false)
     {
         if (empty($xml)) {
-            // require_once 'Zend/Config/Exception.php';
             throw new Zend_Config_Exception('Filename is not set');
         }
 
@@ -109,12 +97,10 @@ class Zend_Config_Xml extends Zend_Config
         } else {
             try {
                 if (!$config = Zend_Xml_Security::scanFile($xml)) {
-                    // require_once 'Zend/Config/Exception.php';
                     throw new Zend_Config_Exception("Error failed to load $xml file");
                 }
             } catch (Zend_Xml_Exception $e) {
                 restore_error_handler();
-                // require_once 'Zend/Config/Exception.php';
                 throw new Zend_Config_Exception($e->getMessage());
             }
         }
@@ -122,7 +108,6 @@ class Zend_Config_Xml extends Zend_Config
         restore_error_handler();
         // Check if there was a error while loading file
         if (null !== $this->_loadFileErrorStr) {
-            // require_once 'Zend/Config/Exception.php';
             throw new Zend_Config_Exception($this->_loadFileErrorStr);
         }
 
@@ -137,7 +122,6 @@ class Zend_Config_Xml extends Zend_Config
             $dataArray = [];
             foreach ($section as $sectionName) {
                 if (!isset($config->$sectionName)) {
-                    // require_once 'Zend/Config/Exception.php';
                     throw new Zend_Config_Exception("Section '$sectionName' cannot be found in $xml");
                 }
 
@@ -147,7 +131,6 @@ class Zend_Config_Xml extends Zend_Config
             parent::__construct($dataArray, $allowModifications);
         } else {
             if (!isset($config->$section)) {
-                // require_once 'Zend/Config/Exception.php';
                 throw new Zend_Config_Exception("Section '$section' cannot be found in $xml");
             }
 
@@ -178,7 +161,6 @@ class Zend_Config_Xml extends Zend_Config
     protected function _processExtends(SimpleXMLElement $element, $section, array $config = [])
     {
         if (!isset($element->$section)) {
-            // require_once 'Zend/Config/Exception.php';
             throw new Zend_Config_Exception("Section '$section' cannot be found");
         }
 
@@ -236,7 +218,6 @@ class Zend_Config_Xml extends Zend_Config
         // Search for local 'const' nodes and replace them
         if (count($xmlObject->children(self::XML_NAMESPACE)) > 0) {
             if (count($xmlObject->children()) > 0) {
-                // require_once 'Zend/Config/Exception.php';
                 throw new Zend_Config_Exception("A node with a 'const' childnode may not have any other children");
             }
 
@@ -255,14 +236,12 @@ class Zend_Config_Xml extends Zend_Config
                 switch ($node->localName) {
                     case 'const':
                         if (!$node->hasAttributeNS(self::XML_NAMESPACE, 'name')) {
-                            // require_once 'Zend/Config/Exception.php';
                             throw new Zend_Config_Exception("Misssing 'name' attribute in 'const' node");
                         }
 
                         $constantName = $node->getAttributeNS(self::XML_NAMESPACE, 'name');
 
                         if (!defined($constantName)) {
-                            // require_once 'Zend/Config/Exception.php';
                             throw new Zend_Config_Exception("Constant with name '$constantName' was not defined");
                         }
 
@@ -272,7 +251,6 @@ class Zend_Config_Xml extends Zend_Config
                         break;
 
                     default:
-                        // require_once 'Zend/Config/Exception.php';
                         throw new Zend_Config_Exception("Unknown node with name '$node->localName' found");
                 }
             }

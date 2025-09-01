@@ -22,11 +22,6 @@
  */
 
 /**
- * @see Zend_Validate_Abstract
- */
-// require_once 'Zend/Validate/Abstract.php';
-
-/**
  * Validator for the file extension of a file.
  *
  * @category  Zend
@@ -193,7 +188,6 @@ class Zend_Validate_File_Extension extends Zend_Validate_Abstract
     public function isValid($value, $file = null)
     {
         // Is file readable ?
-        // require_once 'Zend/Loader.php';
         if (!Zend_Loader::isReadable($value)) {
             return $this->_throw($file, self::NOT_FOUND);
         }

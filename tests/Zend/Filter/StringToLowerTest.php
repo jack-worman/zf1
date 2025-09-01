@@ -22,11 +22,6 @@
  */
 
 /**
- * @see Zend_Filter_StringToLower
- */
-// require_once 'Zend/Filter/StringToLower.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)

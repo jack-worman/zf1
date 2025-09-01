@@ -20,11 +20,6 @@
  */
 
 /**
- * Zend_Exception.
- */
-// require_once 'Zend/Exception.php';
-
-/**
  * Zend_Server_Reflection exceptions.
  *
  * @version $Id$

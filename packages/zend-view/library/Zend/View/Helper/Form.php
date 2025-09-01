@@ -22,9 +22,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_View_Helper_FormElement */
-// require_once 'Zend/View/Helper/FormElement.php';
-
 /**
  * Helper for rendering HTML forms.
  *

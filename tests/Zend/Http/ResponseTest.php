@@ -23,11 +23,6 @@
 
 use Zend\Http\StreamObject;
 
-/**
- * Zend_Http_Response.
- */
-// require_once 'Zend/Http/Response.php';
-
 require_once __DIR__.'/StreamObject.php';
 
 /**

@@ -197,7 +197,6 @@ class Zend_Db_TestUtil_Db2 extends Zend_Db_TestUtil_Common
 
         if (!$result) {
             $e = db2_stmt_errormsg();
-            // require_once 'Zend/Db/Exception.php';
             throw new Zend_Db_Exception("SQL error for \"$sql\": $e");
         }
     }

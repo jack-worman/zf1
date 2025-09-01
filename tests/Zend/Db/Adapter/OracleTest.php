@@ -27,11 +27,6 @@
 require_once 'Zend/Db/Adapter/TestCommon.php';
 
 /**
- * @see Zend_Db_Adapter_Oracle
- */
-// require_once 'Zend/Db/Adapter/Oracle.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)

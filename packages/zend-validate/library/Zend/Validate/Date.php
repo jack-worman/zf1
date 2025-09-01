@@ -22,11 +22,6 @@
  */
 
 /**
- * @see Zend_Validate_Abstract
- */
-// require_once 'Zend/Validate/Abstract.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
@@ -94,7 +89,6 @@ class Zend_Validate_Date extends Zend_Validate_Abstract
         }
 
         if (!array_key_exists('locale', $options)) {
-            // require_once 'Zend/Registry.php';
             if (Zend_Registry::isRegistered('Zend_Locale')) {
                 $options['locale'] = Zend_Registry::get('Zend_Locale');
             }
@@ -124,7 +118,6 @@ class Zend_Validate_Date extends Zend_Validate_Abstract
      */
     public function setLocale($locale = null)
     {
-        // require_once 'Zend/Locale.php';
         $this->_locale = Zend_Locale::findLocale($locale);
 
         return $this;
@@ -178,7 +171,6 @@ class Zend_Validate_Date extends Zend_Validate_Abstract
 
         if ((null !== $this->_format) || (null !== $this->_locale) || is_array($value)
              || $value instanceof Zend_Date) {
-            // require_once 'Zend/Date.php';
             if (!Zend_Date::isDate($value, $this->_format, $this->_locale)) {
                 if (false === $this->_checkFormat($value)) {
                     $this->_error(self::FALSEFORMAT);
@@ -219,7 +211,6 @@ class Zend_Validate_Date extends Zend_Validate_Abstract
     private function _checkFormat($value)
     {
         try {
-            // require_once 'Zend/Locale/Format.php';
             $parsed = Zend_Locale_Format::getDate($value, [
                 'date_format' => $this->_format, 'format_type' => 'iso',
                 'fix_date' => false]);

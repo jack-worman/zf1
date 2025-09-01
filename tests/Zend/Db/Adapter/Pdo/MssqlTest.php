@@ -27,11 +27,6 @@
 require_once 'Zend/Db/Adapter/Pdo/TestCommon.php';
 
 /**
- * @see Zend_Db_Adapter_Pdo_Mysql
- */
-// require_once 'Zend/Db/Adapter/Pdo/Mysql.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)

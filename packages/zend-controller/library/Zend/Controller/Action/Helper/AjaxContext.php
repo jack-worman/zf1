@@ -22,11 +22,6 @@
  */
 
 /**
- * @see Zend_Controller_Action_Helper_ContextSwitch
- */
-// require_once 'Zend/Controller/Action/Helper/ContextSwitch.php';
-
-/**
  * Simplify AJAX context switching based on requested format.
  *
  * @uses       Zend_Controller_Action_Helper_Abstract

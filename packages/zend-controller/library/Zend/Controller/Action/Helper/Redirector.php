@@ -22,11 +22,6 @@
  */
 
 /**
- * @see Zend_Controller_Action_Helper_Abstract
- */
-// require_once 'Zend/Controller/Action/Helper/Abstract.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
@@ -100,7 +95,6 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
     {
         $code = (int) $code;
         if ((300 > $code) || (307 < $code) || (304 == $code) || (306 == $code)) {
-            // require_once 'Zend/Controller/Action/Exception.php';
             throw new Zend_Controller_Action_Exception('Invalid redirect HTTP status code ('.$code.')');
         }
 
@@ -542,7 +536,6 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
             return call_user_func_array([$this, 'gotoSimpleAndExit'], $args);
         }
 
-        // require_once 'Zend/Controller/Action/Exception.php';
         throw new Zend_Controller_Action_Exception(sprintf('Invalid method "%s" called on redirector', $method));
     }
 }

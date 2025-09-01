@@ -22,11 +22,6 @@
  */
 
 /**
- * @see Zend_Validate_Interface
- */
-// require_once 'Zend/Validate/Interface.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
@@ -206,7 +201,6 @@ class Zend_Validate implements Zend_Validate_Interface
         $className = ucfirst($classBaseName);
         try {
             if (!class_exists($className)) {
-                // require_once 'Zend/Loader.php';
                 foreach ($namespaces as $namespace) {
                     $nsSeparator = (false !== strpos((string) $namespace, '\\')) ? '\\' : '_';
                     $class = rtrim((string) $namespace, $nsSeparator).$nsSeparator.$className;
@@ -253,7 +247,6 @@ class Zend_Validate implements Zend_Validate_Interface
             // fallthrough and continue for missing validation classes
         }
 
-        // require_once 'Zend/Validate/Exception.php';
         throw new Zend_Validate_Exception("Validate class not found from basename '$classBaseName'");
     }
 
@@ -264,7 +257,6 @@ class Zend_Validate implements Zend_Validate_Interface
      */
     public static function getMessageLength()
     {
-        // require_once 'Zend/Validate/Abstract.php';
         return Zend_Validate_Abstract::getMessageLength();
     }
 
@@ -275,7 +267,6 @@ class Zend_Validate implements Zend_Validate_Interface
      */
     public static function setMessageLength($length = -1)
     {
-        // require_once 'Zend/Validate/Abstract.php';
         Zend_Validate_Abstract::setMessageLength($length);
     }
 
@@ -286,7 +277,6 @@ class Zend_Validate implements Zend_Validate_Interface
      */
     public static function getDefaultTranslator($translator = null)
     {
-        // require_once 'Zend/Validate/Abstract.php';
         return Zend_Validate_Abstract::getDefaultTranslator();
     }
 
@@ -297,7 +287,6 @@ class Zend_Validate implements Zend_Validate_Interface
      */
     public static function setDefaultTranslator($translator = null)
     {
-        // require_once 'Zend/Validate/Abstract.php';
         Zend_Validate_Abstract::setDefaultTranslator($translator);
     }
 }

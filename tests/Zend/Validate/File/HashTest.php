@@ -27,11 +27,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 }
 
 /**
- * @see Zend_Validate_File_Hash
- */
-// require_once 'Zend/Validate/File/Hash.php';
-
-/**
  * Hash testbed.
  *
  * @category   Zend

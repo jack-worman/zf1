@@ -26,8 +26,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Loader_PluginLoaderTest::main');
 }
 
-// require_once 'Zend/Loader/PluginLoader.php';
-
 /**
  * Test class for Zend_Loader_PluginLoader.
  *
@@ -460,7 +458,6 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
      */
     public function testClassFilesGrabCorrectPathForLoadedClasses()
     {
-        // require_once 'Zend/View/Helper/DeclareVars.php';
         $reflection = new ReflectionClass('Zend_View_Helper_DeclareVars');
         $expected = $reflection->getFileName();
 

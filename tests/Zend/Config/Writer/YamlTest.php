@@ -22,21 +22,6 @@
  */
 
 /**
- * Zend_Config.
- */
-// require_once 'Zend/Config.php';
-
-/**
- * Zend_Config_Yaml.
- */
-// require_once 'Zend/Config/Yaml.php';
-
-/**
- * Zend_Config_Writer_Yaml.
- */
-// require_once 'Zend/Config/Writer/Yaml.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)

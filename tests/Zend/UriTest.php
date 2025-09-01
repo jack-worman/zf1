@@ -25,16 +25,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 }
 
 /**
- * Zend_Uri.
- */
-// require_once 'Zend/Uri.php';
-
-/**
- * Zend_Config.
- */
-// require_once 'Zend/Config.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)

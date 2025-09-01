@@ -22,11 +22,6 @@
  */
 
 /**
- * @see Zend_Db_Profiler
- */
-// require_once 'Zend/Db/Profiler.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)

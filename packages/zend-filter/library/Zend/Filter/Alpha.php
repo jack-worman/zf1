@@ -22,15 +22,6 @@
  */
 
 /**
- * @see Zend_Filter_Interface
- */
-// require_once 'Zend/Filter/Interface.php';
-/**
- * @see Zend_Locale
- */
-// require_once 'Zend/Locale.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)

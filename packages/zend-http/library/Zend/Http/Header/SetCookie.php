@@ -22,21 +22,6 @@
  */
 
 /**
- * @see Zend_Http_Header_Exception_InvalidArgumentException
- */
-// require_once "Zend/Http/Header/Exception/InvalidArgumentException.php";
-
-/**
- * @see Zend_Http_Header_Exception_RuntimeException
- */
-// require_once "Zend/Http/Header/Exception/RuntimeException.php";
-
-/**
- * @see Zend_Http_Header_HeaderValue
- */
-// require_once "Zend/Http/Header/HeaderValue.php";
-
-/**
  * Zend_Http_Client is an implementation of an HTTP client in PHP. The client
  * supports basic features like sending different HTTP requests and handling
  * redirections, as well as more advanced features like proxy settings, HTTP

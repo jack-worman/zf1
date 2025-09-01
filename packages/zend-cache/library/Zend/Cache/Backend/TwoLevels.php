@@ -22,16 +22,6 @@
  */
 
 /**
- * @see Zend_Cache_Backend_ExtendedInterface
- */
-// require_once 'Zend/Cache/Backend/ExtendedInterface.php';
-
-/**
- * @see Zend_Cache_Backend
- */
-// require_once 'Zend/Cache/Backend.php';
-
-/**
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */

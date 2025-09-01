@@ -22,21 +22,6 @@
  */
 
 /**
- * @see Zend_Acl
- */
-// require_once 'Zend/Acl.php';
-
-/**
- * @see Zend_Acl_Role_Interface
- */
-// require_once 'Zend/Acl/Role/Interface.php';
-
-/**
- * @see Zend_Acl_Resource_Interface
- */
-// require_once 'Zend/Acl/Resource/Interface.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)

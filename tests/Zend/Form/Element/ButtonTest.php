@@ -26,9 +26,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Form_Element_ButtonTest::main');
 }
 
-// require_once 'Zend/Form/Element/Button.php';
-// require_once 'Zend/Translate.php';
-
 /**
  * Test class for Zend_Form_Element_Button.
  *
@@ -81,7 +78,6 @@ class Zend_Form_Element_ButtonTest extends PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        // require_once 'Zend/View.php';
         $view = new Zend_View();
 
         return $view;

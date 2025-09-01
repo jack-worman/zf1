@@ -27,16 +27,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 }
 
 /**
- * @see Zend_View_Helper_BaseUrl
- */
-// require_once 'Zend/View/Helper/BaseUrl.php';
-
-/**
- * @see Zend_Controller_Front
- */
-// require_once 'Zend/Controller/Front.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)

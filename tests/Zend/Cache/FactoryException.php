@@ -21,8 +21,6 @@
  * @version    $Id$
  */
 
-// require_once 'Zend/Cache.php';
-
 /**
  * @category   Zend
  *

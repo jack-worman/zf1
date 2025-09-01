@@ -22,11 +22,6 @@
  */
 
 /**
- * @see Zend_Validate_File_MimeType
- */
-// require_once 'Zend/Validate/File/MimeType.php';
-
-/**
  * Validator for the mime type of a file.
  *
  * @category  Zend
@@ -71,7 +66,6 @@ class Zend_Validate_File_ExcludeMimeType extends Zend_Validate_File_MimeType
         }
 
         // Is file readable ?
-        // require_once 'Zend/Loader.php';
         if (!Zend_Loader::isReadable($value)) {
             return $this->_throw($file, self::NOT_READABLE);
         }

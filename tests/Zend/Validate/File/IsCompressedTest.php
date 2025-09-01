@@ -27,11 +27,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 }
 
 /**
- * @see Zend_Validate_File_IsCompressed
- */
-// require_once 'Zend/Validate/File/IsCompressed.php';
-
-/**
  * IsCompressed testbed.
  *
  * @category   Zend

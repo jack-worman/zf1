@@ -22,22 +22,6 @@
  */
 
 /**
- * @see Zend_Dom_Query_Css2Xpath
- */
-// require_once 'Zend/Dom/Query/Css2Xpath.php';
-
-/**
- * @see Zend_Dom_Query_Result
- */
-// require_once 'Zend/Dom/Query/Result.php';
-
-/** @see Zend_Xml_Security */
-// require_once 'Zend/Xml/Security.php';
-
-/** @see Zend_Xml_Exception */
-// require_once 'Zend/Xml/Exception.php';
-
-/**
  * Query DOM structures based on CSS selectors and/or XPath.
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
@@ -286,7 +270,6 @@ class Zend_Dom_Query
     public function queryXpath($xpathQuery, $query = null)
     {
         if (null === ($document = $this->getDocument())) {
-            // require_once 'Zend/Dom/Exception.php';
             throw new Zend_Dom_Exception('Cannot query; no document registered');
         }
 
@@ -308,7 +291,6 @@ class Zend_Dom_Query
                     $domDoc = Zend_Xml_Security::scan($document, $domDoc);
                     $success = (false !== $domDoc);
                 } catch (Zend_Xml_Exception $e) {
-                    // require_once 'Zend/Dom/Exception.php';
                     throw new Zend_Dom_Exception($e->getMessage());
                 }
                 break;
@@ -326,7 +308,6 @@ class Zend_Dom_Query
         libxml_use_internal_errors(false);
 
         if (!$success) {
-            // require_once 'Zend/Dom/Exception.php';
             throw new Zend_Dom_Exception(sprintf('Error parsing document (type == %s)', $type));
         }
 

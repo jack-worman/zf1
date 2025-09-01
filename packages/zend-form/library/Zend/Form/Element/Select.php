@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Form_Element_Multi */
-// require_once 'Zend/Form/Element/Multi.php';
-
 /**
  * Select.php form element.
  *

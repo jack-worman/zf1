@@ -21,8 +21,6 @@
  * @version    $Id$
  */
 
-// require_once 'Zend/Exception.php';
-
 /**
  * @category   Zend
  *

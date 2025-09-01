@@ -22,11 +22,6 @@
  */
 
 /**
- * @see Zend_Controller_Action_Helper_Abstract
- */
-// require_once 'Zend/Controller/Action/Helper/Abstract.php';
-
-/**
  * Add to action stack.
  *
  * @uses       Zend_Controller_Action_Helper_Abstract
@@ -55,7 +50,6 @@ class Zend_Controller_Action_Helper_ActionStack extends Zend_Controller_Action_H
             /*
              * @see Zend_Controller_Plugin_ActionStack
              */
-            // require_once 'Zend/Controller/Plugin/ActionStack.php';
             $this->_actionStack = new Zend_Controller_Plugin_ActionStack();
             $front->registerPlugin($this->_actionStack, 97);
         } else {
@@ -94,7 +88,6 @@ class Zend_Controller_Action_Helper_ActionStack extends Zend_Controller_Action_H
             /*
              * @see Zend_Controller_Action_Exception
              */
-            // require_once 'Zend/Controller/Action/Exception.php';
             throw new Zend_Controller_Action_Exception('ActionStack requires either a request object or minimally a string action');
         }
 
@@ -104,7 +97,6 @@ class Zend_Controller_Action_Helper_ActionStack extends Zend_Controller_Action_H
             /*
              * @see Zend_Controller_Action_Exception
              */
-            // require_once 'Zend/Controller/Action/Exception.php';
             throw new Zend_Controller_Action_Exception('Request object not set yet');
         }
 
@@ -114,7 +106,6 @@ class Zend_Controller_Action_Helper_ActionStack extends Zend_Controller_Action_H
         /**
          * @see Zend_Controller_Request_Simple
          */
-        // require_once 'Zend/Controller/Request/Simple.php';
         $newRequest = new Zend_Controller_Request_Simple($action, $controller, $module, $params);
 
         return $this->pushStack($newRequest);

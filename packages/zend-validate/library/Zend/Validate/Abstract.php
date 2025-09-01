@@ -22,11 +22,6 @@
  */
 
 /**
- * @see Zend_Validate_Interface
- */
-// require_once 'Zend/Validate/Interface.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
@@ -158,7 +153,6 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
         }
 
         if (!isset($this->_messageTemplates[$messageKey])) {
-            // require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception("No message template exists for key '$messageKey'");
         }
 
@@ -198,10 +192,6 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
         if (array_key_exists($property, $this->_messageVariables)) {
             return $this->{$this->_messageVariables[$property]};
         }
-        /*
-         * @see Zend_Validate_Exception
-         */
-        // require_once 'Zend/Validate/Exception.php';
         throw new Zend_Validate_Exception("No property exists by the name '$property'");
     }
 
@@ -370,7 +360,6 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
         } elseif ($translator instanceof Zend_Translate) {
             $this->_translator = $translator->getAdapter();
         } else {
-            // require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception('Invalid translator specified');
         }
 
@@ -419,7 +408,6 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
         } elseif ($translator instanceof Zend_Translate) {
             self::$_defaultTranslator = $translator->getAdapter();
         } else {
-            // require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception('Invalid translator specified');
         }
     }
@@ -432,7 +420,6 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
     public static function getDefaultTranslator()
     {
         if (null === self::$_defaultTranslator) {
-            // require_once 'Zend/Registry.php';
             if (Zend_Registry::isRegistered('Zend_Translate')) {
                 $translator = Zend_Registry::get('Zend_Translate');
                 if ($translator instanceof Zend_Translate_Adapter) {

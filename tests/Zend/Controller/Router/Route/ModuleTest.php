@@ -22,10 +22,8 @@
  */
 
 /* Zend_Controller_Router_Route_Module */
-// require_once 'Zend/Controller/Router/Route/Module.php';
 
 /* Zend_Controller_Front */
-// require_once 'Zend/Controller/Front.php';
 
 // Call Zend_Controller_Router_Route_ModuleTest::main() if this source file is executed directly.
 if (!defined('PHPUnit_MAIN_METHOD')) {
@@ -79,7 +77,6 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit_Framework_TestCase
             'module' => 'default',
         ];
 
-        // require_once 'Zend/Controller/Request/Http.php';
         $this->_request = new Zend_Controller_Request_Http();
         $front->setRequest($this->_request);
 
@@ -410,8 +407,6 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit_Framework_TestCase
 
     public function testGetInstance()
     {
-        // require_once 'Zend/Config.php';
-
         $routeConf = [
             'defaults' => [
                 'controller' => 'ctrl',

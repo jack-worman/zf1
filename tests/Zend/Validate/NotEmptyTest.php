@@ -27,11 +27,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 }
 
 /**
- * @see Zend_Validate_NotEmpty
- */
-// require_once 'Zend/Validate/NotEmpty.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
@@ -483,7 +478,6 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
      */
     public function testConfigObject()
     {
-        // require_once 'Zend/Config.php';
         $options = ['type' => 'all'];
         $config = new Zend_Config($options);
 

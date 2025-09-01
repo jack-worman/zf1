@@ -21,10 +21,6 @@
  * @version    $Id$
  */
 
-// require_once 'Zend/Http/Client.php';
-
-// require_once 'Zend/Http/Client/Adapter/Test.php';
-
 /**
  * This Testsuite includes all Zend_Http_Client tests that do not rely
  * on performing actual requests to an HTTP server. These tests can be
@@ -354,8 +350,6 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
      */
     public function testConfigSetAsZendConfig()
     {
-        // require_once 'Zend/Config.php';
-
         $config = new Zend_Config([
             'timeout' => 400,
             'nested' => [

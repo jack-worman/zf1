@@ -26,13 +26,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Layout_PluginTest::main');
 }
 
-// require_once 'Zend/Layout/Controller/Plugin/Layout.php';
-// require_once 'Zend/Layout.php';
-// require_once 'Zend/Controller/Front.php';
-// require_once 'Zend/Controller/Action/HelperBroker.php';
-// require_once 'Zend/Controller/Request/Simple.php';
-// require_once 'Zend/Controller/Response/Cli.php';
-
 /**
  * Test class for Zend_Layout_Controller_Plugin_Layout.
  *
@@ -230,9 +223,6 @@ class Zend_Layout_PluginTest extends PHPUnit_Framework_TestCase
     }
 }
 
-/**
- * Zend_Layout extension to allow resetting MVC instance.
- */
 #[AllowDynamicProperties]
 class Zend_Layout_PluginTest_Layout extends Zend_Layout
 {

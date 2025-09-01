@@ -21,8 +21,6 @@
  * @version    $Id$
  */
 
-// require_once 'Zend/Validate/Sitemap/Loc.php';
-
 /**
  * Tests Zend_Validate_Sitemap_Loc.
  *

@@ -125,7 +125,6 @@ final class Zend_Http_Header_HeaderValue
     public static function assertValid($value)
     {
         if (!self::isValid($value)) {
-            // require_once 'Zend/Http/Header/Exception/InvalidArgumentException.php';
             throw new Zend_Http_Header_Exception_InvalidArgumentException('Invalid header value');
         }
     }

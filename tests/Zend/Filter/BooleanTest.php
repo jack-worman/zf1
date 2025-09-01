@@ -22,11 +22,6 @@
  */
 
 /**
- * @see Zend_Filter_Boolean
- */
-// require_once 'Zend/Filter/Boolean.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
@@ -612,7 +607,6 @@ class Zend_Filter_BooleanTest extends PHPUnit_Framework_TestCase
      */
     public function testConfigObject()
     {
-        // require_once 'Zend/Config.php';
         $options = ['type' => 'all', 'locale' => 'de'];
         $config = new Zend_Config($options);
 

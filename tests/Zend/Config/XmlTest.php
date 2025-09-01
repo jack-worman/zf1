@@ -22,11 +22,6 @@
  */
 
 /**
- * Zend_Config_Xml.
- */
-// require_once 'Zend/Config/Xml.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)

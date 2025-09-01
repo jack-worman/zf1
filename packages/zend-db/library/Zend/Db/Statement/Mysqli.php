@@ -22,11 +22,6 @@
  */
 
 /**
- * @see Zend_Db_Statement
- */
-// require_once 'Zend/Db/Statement.php';
-
-/**
  * Extends for Mysqli.
  *
  * @category   Zend
@@ -72,7 +67,6 @@ class Zend_Db_Statement_Mysqli extends Zend_Db_Statement
             /*
              * @see Zend_Db_Statement_Mysqli_Exception
              */
-            // require_once 'Zend/Db/Statement/Mysqli/Exception.php';
             throw new Zend_Db_Statement_Mysqli_Exception('Mysqli prepare error: '.$mysqli->error, $mysqli->errno);
         }
     }
@@ -220,7 +214,6 @@ class Zend_Db_Statement_Mysqli extends Zend_Db_Statement
             /*
              * @see Zend_Db_Statement_Mysqli_Exception
              */
-            // require_once 'Zend/Db/Statement/Mysqli/Exception.php';
             throw new Zend_Db_Statement_Mysqli_Exception('Mysqli statement execute error : '.$this->_stmt->error, $this->_stmt->errno);
         }
 
@@ -231,7 +224,6 @@ class Zend_Db_Statement_Mysqli extends Zend_Db_Statement
                 /*
                  * @see Zend_Db_Statement_Mysqli_Exception
                  */
-                // require_once 'Zend/Db/Statement/Mysqli/Exception.php';
                 throw new Zend_Db_Statement_Mysqli_Exception('Mysqli statement metadata error: '.$this->_stmt->error, $this->_stmt->errno);
             }
         }
@@ -331,7 +323,6 @@ class Zend_Db_Statement_Mysqli extends Zend_Db_Statement
                 /*
                  * @see Zend_Db_Statement_Mysqli_Exception
                  */
-                // require_once 'Zend/Db/Statement/Mysqli/Exception.php';
                 throw new Zend_Db_Statement_Mysqli_Exception("Invalid fetch mode '$style' specified");
                 break;
         }
@@ -350,10 +341,6 @@ class Zend_Db_Statement_Mysqli extends Zend_Db_Statement
      */
     public function nextRowset()
     {
-        /*
-         * @see Zend_Db_Statement_Mysqli_Exception
-         */
-        // require_once 'Zend/Db/Statement/Mysqli/Exception.php';
         throw new Zend_Db_Statement_Mysqli_Exception(__FUNCTION__.'() is not implemented');
     }
 

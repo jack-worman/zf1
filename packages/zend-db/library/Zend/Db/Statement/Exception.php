@@ -22,11 +22,6 @@
  */
 
 /**
- * @see Zend_Db_Exception
- */
-// require_once 'Zend/Db/Exception.php';
-
-/**
  * Zend_Db_Statement_Exception.
  *
  * @category   Zend

@@ -22,9 +22,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Controller_Router_Route_Abstract */
-// require_once 'Zend/Controller/Router/Route/Abstract.php';
-
 /**
  * Regex Route.
  *
@@ -218,7 +215,6 @@ class Zend_Controller_Router_Route_Regex extends Zend_Controller_Router_Route_Ab
     public function assemble($data = [], $reset = false, $encode = false, $partial = false)
     {
         if (null === $this->_reverse) {
-            // require_once 'Zend/Controller/Router/Exception.php';
             throw new Zend_Controller_Router_Exception('Cannot assemble. Reversed route is not specified.');
         }
 
@@ -252,7 +248,6 @@ class Zend_Controller_Router_Route_Regex extends Zend_Controller_Router_Route_Ab
         $return = !empty($mergedData) ? @vsprintf($this->_reverse, $mergedData) : false;
 
         if (false === $return) {
-            // require_once 'Zend/Controller/Router/Exception.php';
             throw new Zend_Controller_Router_Exception('Cannot assemble. Too few arguments?');
         }
 

@@ -127,7 +127,6 @@ class Zend_Json_Encoder
                     && true === $this->_options['silenceCyclicalExceptions']) {
                     return '"* RECURSION ('.get_class($value).') *"';
                 } else {
-                    // require_once 'Zend/Json/Exception.php';
                     throw new Zend_Json_Exception('Cycles not supported in JSON encoding, cycle introduced by class "'.get_class($value).'"');
                 }
             }
@@ -402,7 +401,6 @@ class Zend_Json_Encoder
     {
         $cls = new ReflectionClass($className);
         if (!$cls->isInstantiable()) {
-            // require_once 'Zend/Json/Exception.php';
             throw new Zend_Json_Exception("$className must be instantiable");
         }
 

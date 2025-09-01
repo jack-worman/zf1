@@ -22,11 +22,6 @@
  */
 
 /**
- * @see Zend_Db_Adapter_Abstract
- */
-// require_once "Zend/Db/Adapter/Abstract.php";
-
-/**
  * Generic Metadata accessor for the Zend_Db adapters.
  *
  * @uses       PHPUnit_Extensions_Database_DB_IMetaData

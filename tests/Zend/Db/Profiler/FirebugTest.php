@@ -21,18 +21,6 @@
  * @version    $Id$
  */
 
-/** Zend_Db */
-// require_once 'Zend/Db.php';
-
-/** Zend_Db_Profiler_Firebug */
-// require_once 'Zend/Db/Profiler/Firebug.php';
-
-/** Zend_Controller_Request_Http */
-// require_once 'Zend/Controller/Request/Http.php';
-
-/** Zend_Controller_Response_Http */
-// require_once 'Zend/Controller/Response/Http.php';
-
 /**
  * @category   Zend
  *

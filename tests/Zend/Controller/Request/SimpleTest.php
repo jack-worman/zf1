@@ -26,8 +26,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Controller_Request_SimpleTest::main');
 }
 
-// require_once 'Zend/Controller/Request/Simple.php';
-
 /**
  * Test class for Zend_Controller_Request_Simple.
  *

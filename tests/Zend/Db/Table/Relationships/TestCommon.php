@@ -27,11 +27,6 @@
 require_once 'Zend/Db/Table/TestSetup.php';
 
 /**
- * @see Zend_Loader
- */
-// require_once 'Zend/Loader.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)

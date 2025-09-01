@@ -23,11 +23,6 @@
 error_reporting(E_ALL | E_STRICT); // now required for each test suite
 
 /**
- * Zend_Json.
- */
-// require_once 'Zend/Json.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)

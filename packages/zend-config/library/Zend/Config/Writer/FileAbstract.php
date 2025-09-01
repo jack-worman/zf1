@@ -19,8 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-// require_once "Zend/Config/Writer.php";
-
 /**
  * Abstract File Writer.
  *
@@ -98,12 +96,10 @@ class Zend_Config_Writer_FileAbstract extends Zend_Config_Writer
         }
 
         if (null === $this->_filename) {
-            // require_once 'Zend/Config/Exception.php';
             throw new Zend_Config_Exception('No filename was set');
         }
 
         if (null === $this->_config) {
-            // require_once 'Zend/Config/Exception.php';
             throw new Zend_Config_Exception('No config was set');
         }
 
@@ -118,7 +114,6 @@ class Zend_Config_Writer_FileAbstract extends Zend_Config_Writer
         $result = @file_put_contents($this->_filename, $configString, $flags);
 
         if (false === $result) {
-            // require_once 'Zend/Config/Exception.php';
             throw new Zend_Config_Exception('Could not write to file "'.$this->_filename.'"');
         }
     }

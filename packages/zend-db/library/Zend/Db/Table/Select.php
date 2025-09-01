@@ -22,16 +22,6 @@
  */
 
 /**
- * @see Zend_Db_Select
- */
-// require_once 'Zend/Db/Select.php';
-
-/**
- * @see Zend_Db_Table_Abstract
- */
-// require_once 'Zend/Db/Table/Abstract.php';
-
-/**
  * Class for SQL SELECT query manipulation for the Zend_Db_Table component.
  *
  * @category   Zend
@@ -203,7 +193,6 @@ class Zend_Db_Table_Select extends Zend_Db_Select
                     // Check each column to ensure it only references the primary table
                     if ($column) {
                         if (!isset($from[$table]) || $from[$table]['tableName'] != $primary) {
-                            // require_once 'Zend/Db/Table/Select/Exception.php';
                             throw new Zend_Db_Table_Select_Exception('Select query cannot join with another table');
                         }
                     }

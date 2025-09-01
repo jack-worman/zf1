@@ -22,21 +22,6 @@
  */
 
 /**
- * Zend_Config.
- */
-// require_once 'Zend/Config.php';
-
-/**
- * Zend_Config_Ini.
- */
-// require_once 'Zend/Config/Ini.php';
-
-/**
- * Zend_Config_Writer_Ini.
- */
-// require_once 'Zend/Config/Writer/Ini.php';
-
-/**
  * @category   Zend
  *
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)

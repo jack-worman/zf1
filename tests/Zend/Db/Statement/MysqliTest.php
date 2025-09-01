@@ -22,7 +22,6 @@
  */
 
 require_once 'Zend/Db/Statement/TestCommon.php';
-// require_once 'Zend/Db/Statement/Mysqli.php';
 
 /**
  * Wrapper class for test protected function _stripQuoted.

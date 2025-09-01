@@ -26,10 +26,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Layout_FunctionalTest::main');
 }
 
-// require_once 'Zend/Test/PHPUnit/ControllerTestCase.php';
-
-// require_once 'Zend/Controller/Plugin/ErrorHandler.php';
-
 /**
  * @category   Zend
  *

@@ -24,42 +24,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Controller_Router_Route_ChainTest::main');
 }
 
-/** Zend_Config */
-// require_once 'Zend/Config.php';
-
-/** Zend_Controller_Router_Rewrite */
-// require_once 'Zend/Controller/Router/Rewrite.php';
-
-/** Zend_Controller_Dispatcher_Standard */
-// require_once 'Zend/Controller/Dispatcher/Standard.php';
-
-/** Zend_Controller_Router_Route_Chain */
-// require_once 'Zend/Controller/Router/Route/Chain.php';
-
-/** Zend_Controller_Router_Route */
-// require_once 'Zend/Controller/Router/Route.php';
-
-/** Zend_Controller_Router_Route_Module */
-// require_once 'Zend/Controller/Router/Route/Module.php';
-
-/** Zend_Controller_Router_Route_Static */
-// require_once 'Zend/Controller/Router/Route/Static.php';
-
-/** Zend_Controller_Router_Route_Regex */
-// require_once 'Zend/Controller/Router/Route/Regex.php';
-
-/** Zend_Controller_Router_Route_Hostname */
-// require_once 'Zend/Controller/Router/Route/Hostname.php';
-
-/** Zend_Controller_Request_Http */
-// require_once 'Zend/Controller/Request/Http.php';
-
-/** Zend_Uri_Http */
-// require_once 'Zend/Uri/Http.php';
-
-/** Zend_Config */
-// require_once 'Zend/Config.php';
-
 /**
  * @category   Zend
  *
@@ -1082,9 +1046,6 @@ class Zend_Controller_Router_ChainTest_Request extends Zend_Controller_Request_H
     }
 }
 
-/**
- * Zend_Controller_Router_ChainTest_Dispatcher - dispatcher object for router testing.
- */
 #[AllowDynamicProperties]
 class Zend_Controller_Router_ChainTest_Dispatcher extends Zend_Controller_Dispatcher_Standard
 {

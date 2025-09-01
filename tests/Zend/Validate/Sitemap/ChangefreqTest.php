@@ -21,8 +21,6 @@
  * @version    $Id$
  */
 
-// require_once 'Zend/Validate/Sitemap/Changefreq.php';
-
 /**
  * Tests Zym_Validate_Sitemap_Changefreq.
  *
