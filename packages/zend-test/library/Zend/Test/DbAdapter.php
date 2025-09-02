@@ -12,37 +12,10 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
-
-/**
- * @see Zend_Db_Adapter_Abstract
- */
-// require_once "Zend/Db/Adapter/Abstract.php";
-
-/**
- * @see Zend_Test_DbStatement
- */
-// require_once "Zend/Test/DbStatement.php";
-
-/**
- * @see Zend_Db_Profiler
- */
-// require_once 'Zend/Db/Profiler.php';
 
 /**
  * Testing Database Adapter which acts as a stack for SQL Results.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Test_DbAdapter extends Zend_Db_Adapter_Abstract
 {

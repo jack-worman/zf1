@@ -12,13 +12,6 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version $Id$
  */
 
 // Call Zend_View_Helper_UrlTest::main() if this source file is executed directly.
@@ -26,23 +19,12 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_View_Helper_UrlTest::main');
 }
 
-// require_once 'Zend/View.php';
-// require_once 'Zend/View/Helper/Url.php';
-
 /* Test dependency on Front Controller because there is no way to get the Controller out of View instance dynamically */
-// require_once 'Zend/Controller/Front.php';
-
-// require_once 'Zend/Controller/Request/Http.php';
 
 /**
  * Zend_View_Helper_UrlTest.
  *
  * Tests formText helper, including some common functionality of all form helpers
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
  * @group      Zend_View
  * @group      Zend_View_Helper

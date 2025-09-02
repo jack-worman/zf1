@@ -12,24 +12,10 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- *
- * @version    $Id$
- *
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
-/** Zend_Controller_Router_Route_Abstract */
-// require_once 'Zend/Controller/Router/Route/Abstract.php';
 
 /**
  * Hostname Route.
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
@@ -132,7 +118,6 @@ class Zend_Controller_Router_Route_Hostname extends Zend_Controller_Router_Route
     public function getRequest()
     {
         if (null === $this->_request) {
-            // require_once 'Zend/Controller/Front.php';
             $this->_request = Zend_Controller_Front::getInstance()->getRequest();
         }
 
@@ -305,7 +290,6 @@ class Zend_Controller_Router_Route_Hostname extends Zend_Controller_Router_Route
                 } elseif (isset($this->_defaults[$name])) {
                     $host[$key] = $this->_defaults[$name];
                 } else {
-                    // require_once 'Zend/Controller/Router/Exception.php';
                     throw new Zend_Controller_Router_Exception($name.' is not specified');
                 }
             } else {

@@ -12,38 +12,11 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
 
 /**
  * PHPUnit_Framework_TestCase.
  */
-
-/**
- * @see Zend_Db_Adapter_Pdo_Sqlite
- */
-// require_once 'Zend/Db/Adapter/Pdo/Sqlite.php';
-
-/**
- * @see Zend_Db_Table_Abstract
- */
-// require_once 'Zend/Db/Table/Abstract.php';
-
-/**
- * @see Zend_Validate_Db_Abstract.php
- */
-// require_once 'Zend/Validate/Db/Abstract.php';
-
-/**
- * @see Zend_Validate_Db_RecordExists.php
- */
-// require_once 'Zend/Validate/Db/RecordExists.php';
 
 /**
  * Mock No Result Adapter.
@@ -56,11 +29,6 @@ require_once __DIR__.'/_files/Db/MockNoResult.php';
 require_once __DIR__.'/_files/Db/MockHasResult.php';
 
 /**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Validate
  */
 #[AllowDynamicProperties]

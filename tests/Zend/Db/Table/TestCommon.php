@@ -12,13 +12,6 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
 
 /**
@@ -26,27 +19,6 @@
  */
 require_once 'Zend/Db/Table/TestSetup.php';
 
-/**
- * @see Zend_Registry
- */
-// require_once 'Zend/Registry.php';
-
-/**
- * @see Zend_Db_Table
- */
-// require_once 'Zend/Db/Table.php';
-
-/**
- * @see Zend_Cache_Backend_BlackHole
- */
-// require_once 'Zend/Cache/Backend/BlackHole.php';
-
-/**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
 abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
 {
     public function testTableConstructor()
@@ -1724,8 +1696,6 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
         /**
          * @see Zend_Cache
          */
-        // require_once 'Zend/Cache.php';
-
         $folder = __DIR__.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'cachefiles';
 
         $frontendOptions = [
@@ -1754,8 +1724,6 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
         /**
          * @see Zend_Cache
          */
-        // require_once 'Zend/Cache.php';
-
         $folder = __DIR__.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'nofiles';
         if (!file_exists((string) $folder)) {
             mkdir($folder, 0777);
@@ -1810,16 +1778,6 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
      */
     public function testCacheIdGeneratedToMetadata()
     {
-        /*
-         * @see Zend_Cache
-         */
-        // require_once 'Zend/Cache.php';
-
-        /*
-         * @see Zend_Cache_Backend_BlackHole
-         */
-        // require_once 'Zend/Cache/Backend/BlackHole.php';
-
         Zend_Db_Table::setDefaultAdapter($this->_db);
         $dbConfig = $this->_db->getConfig();
         $cacheId = md5((string)

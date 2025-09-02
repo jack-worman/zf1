@@ -12,13 +12,6 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
 
 // Call Zend_Validate_File_MimeTypeTest::main() if this source file is executed directly.
@@ -27,17 +20,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 }
 
 /**
- * @see Zend_Validate_File_MimeType
- */
-// require_once 'Zend/Validate/File/MimeType.php';
-
-/**
  * MimeType testbed.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
  * @group      Zend_Validate
  */
@@ -178,7 +161,6 @@ class Zend_Validate_File_MimeTypeTest extends PHPUnit_Framework_TestCase
 
     public function testSetMagicFileWithinConstructor()
     {
-        // require_once 'Zend/Validate/Exception.php';
         try {
             $validator = new Zend_Validate_File_MimeType(['image/gif', 'magicfile' => __FILE__]);
             $this->fail('Zend_Validate_File_MimeType should not accept invalid magic file.');

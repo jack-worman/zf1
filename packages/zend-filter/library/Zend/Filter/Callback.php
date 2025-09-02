@@ -12,25 +12,6 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
- */
-
-/**
- * @see Zend_Filter_Interface
- */
-// require_once 'Zend/Filter/Interface.php';
-
-/**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Filter_Callback implements Zend_Filter_Interface
 {
@@ -66,7 +47,6 @@ class Zend_Filter_Callback implements Zend_Filter_Interface
         }
 
         if (!array_key_exists('callback', $options)) {
-            // require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('Missing callback to use');
         }
 
@@ -96,7 +76,6 @@ class Zend_Filter_Callback implements Zend_Filter_Interface
     public function setCallback($callback, $options = null)
     {
         if (!is_callable($callback)) {
-            // require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('Callback can not be accessed');
         }
 

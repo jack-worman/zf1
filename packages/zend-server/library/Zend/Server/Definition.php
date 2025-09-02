@@ -12,24 +12,12 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
 
 /**
  * Server methods metadata.
  *
  * @todo       Implement iterator
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Server_Definition implements Countable, Iterator
 {
@@ -80,10 +68,8 @@ class Zend_Server_Definition implements Countable, Iterator
     public function addMethod($method, $name = null)
     {
         if (is_array($method)) {
-            // require_once 'Zend/Server/Method/Definition.php';
             $method = new Zend_Server_Method_Definition($method);
         } elseif (!$method instanceof Zend_Server_Method_Definition) {
-            // require_once 'Zend/Server/Exception.php';
             throw new Zend_Server_Exception('Invalid method provided');
         }
 
@@ -96,12 +82,10 @@ class Zend_Server_Definition implements Countable, Iterator
             $name = $method->getName();
         }
         if (null === $name) {
-            // require_once 'Zend/Server/Exception.php';
             throw new Zend_Server_Exception('No method name provided');
         }
 
         if (!$this->_overwriteExistingMethods && array_key_exists($name, $this->_methods)) {
-            // require_once 'Zend/Server/Exception.php';
             throw new Zend_Server_Exception(sprintf('Method by name of "%s" already exists', $name));
         }
         $this->_methods[$name] = $method;

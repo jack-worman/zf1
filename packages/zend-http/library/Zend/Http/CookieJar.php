@@ -12,27 +12,7 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @version    $Id$
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
-/**
- * @see Zend_Uri
- */
-// require_once "Zend/Uri.php";
-/**
- * @see Zend_Http_Cookie
- */
-// require_once "Zend/Http/Cookie.php";
-/**
- * @see Zend_Http_Response
- */
-// require_once "Zend/Http/Response.php";
 
 /**
  * A Zend_Http_CookieJar object is designed to contain and maintain HTTP cookies, and should
@@ -51,11 +31,6 @@
  * (by passing Zend_Http_CookieJar::COOKIE_STRING_CONCAT).
  *
  * @see       http://wp.netscape.com/newsref/std/cookie_spec.html for some specs.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Http_CookieJar implements Countable, IteratorAggregate
 {
@@ -140,7 +115,6 @@ class Zend_Http_CookieJar implements Countable, IteratorAggregate
             $this->cookies[$domain][$path][$cookie->getName()] = $cookie;
             $this->_rawCookies[] = $cookie;
         } else {
-            // require_once 'Zend/Http/Exception.php';
             throw new Zend_Http_Exception('Supplient argument is not a valid cookie string or object');
         }
     }
@@ -156,7 +130,6 @@ class Zend_Http_CookieJar implements Countable, IteratorAggregate
     public function addCookiesFromResponse($response, $ref_uri, $encodeValue = true)
     {
         if (!$response instanceof Zend_Http_Response) {
-            // require_once 'Zend/Http/Exception.php';
             throw new Zend_Http_Exception('$response is expected to be a Response object, '.gettype($response).' was passed');
         }
 
@@ -207,7 +180,6 @@ class Zend_Http_CookieJar implements Countable, IteratorAggregate
             $uri = Zend_Uri::factory($uri);
         }
         if (!$uri instanceof Zend_Uri_Http) {
-            // require_once 'Zend/Http/Exception.php';
             throw new Zend_Http_Exception('Invalid URI string or object passed');
         }
 
@@ -249,7 +221,6 @@ class Zend_Http_CookieJar implements Countable, IteratorAggregate
         }
 
         if (!$uri instanceof Zend_Uri_Http) {
-            // require_once 'Zend/Http/Exception.php';
             throw new Zend_Http_Exception('Invalid URI specified');
         }
 
@@ -278,7 +249,6 @@ class Zend_Http_CookieJar implements Countable, IteratorAggregate
                     break;
 
                 default:
-                    // require_once 'Zend/Http/Exception.php';
                     throw new Zend_Http_Exception("Invalid value passed for \$ret_as: {$ret_as}");
                     break;
             }

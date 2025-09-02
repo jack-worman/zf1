@@ -12,27 +12,10 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
-
-/**
- * @see Zend_Filter_Compress_CompressInterface
- */
-// require_once 'Zend/Filter/Compress/CompressInterface.php';
 
 /**
  * Compression adapter for Lzf.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Filter_Compress_Lzf implements Zend_Filter_Compress_CompressInterface
 {
@@ -42,7 +25,6 @@ class Zend_Filter_Compress_Lzf implements Zend_Filter_Compress_CompressInterface
     public function __construct()
     {
         if (!extension_loaded('lzf')) {
-            // require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('This filter needs the lzf extension');
         }
     }
@@ -58,7 +40,6 @@ class Zend_Filter_Compress_Lzf implements Zend_Filter_Compress_CompressInterface
     {
         $compressed = lzf_compress($content);
         if (!$compressed) {
-            // require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('Error during compression');
         }
 
@@ -76,7 +57,6 @@ class Zend_Filter_Compress_Lzf implements Zend_Filter_Compress_CompressInterface
     {
         $compressed = lzf_decompress($content);
         if (!$compressed) {
-            // require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('Error during compression');
         }
 

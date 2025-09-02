@@ -12,13 +12,6 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id $
  */
 
 /**
@@ -26,12 +19,6 @@
  */
 require_once 'Zend/Db/TestUtil/Db2.php';
 
-/**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
 #[AllowDynamicProperties]
 class Zend_Db_TestUtil_Pdo_Ibm extends Zend_Db_TestUtil_Db2
 {
@@ -182,7 +169,6 @@ class Zend_Db_TestUtil_Pdo_Ibm extends Zend_Db_TestUtil_Db2
         $retval = $conn->query($sql);
         if (!$retval) {
             $e = $conn->error;
-            // require_once 'Zend/Db/Exception.php';
             throw new Zend_Db_Exception("SQL error for \"$sql\": $e");
         }
     }

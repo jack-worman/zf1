@@ -12,30 +12,13 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
-/**
- * Zend_Server_Reflection_Method.
- */
-// require_once 'Zend/Server/Reflection/Method.php';
 
 /**
  * Class/Object reflection.
  *
  * Proxies calls to a ReflectionClass object, and decorates getMethods() by
  * creating its own list of {@link Zend_Server_Reflection_Method}s.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version $Id$
  */
 class Zend_Server_Reflection_Class
 {
@@ -106,7 +89,6 @@ class Zend_Server_Reflection_Class
             return call_user_func_array([$this->_reflection, $method], $args);
         }
 
-        // require_once 'Zend/Server/Reflection/Exception.php';
         throw new Zend_Server_Reflection_Exception('Invalid reflection method');
     }
 
@@ -177,7 +159,6 @@ class Zend_Server_Reflection_Class
         }
 
         if (!is_string($namespace) || !preg_match('/[a-z0-9_\.]+/i', $namespace)) {
-            // require_once 'Zend/Server/Reflection/Exception.php';
             throw new Zend_Server_Reflection_Exception('Invalid namespace');
         }
 

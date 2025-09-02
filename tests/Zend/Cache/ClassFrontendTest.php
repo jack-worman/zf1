@@ -12,29 +12,10 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
-
-/**
- * Zend_Cache.
- */
-// require_once 'Zend/Cache.php';
-// require_once 'Zend/Cache/Frontend/Class.php';
-// require_once 'Zend/Cache/Backend/Test.php';
 
 /**
  * @todo: Should this class be named Zend_Cache_Something?
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
  * @group      Zend_Cache
  */
@@ -76,11 +57,6 @@ class test
 }
 
 /**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Cache
  */
 #[AllowDynamicProperties]

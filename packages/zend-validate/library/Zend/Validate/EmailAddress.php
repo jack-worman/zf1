@@ -12,30 +12,6 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
- */
-
-/**
- * @see Zend_Validate_Abstract
- */
-// require_once 'Zend/Validate/Abstract.php';
-
-/**
- * @see Zend_Validate_Hostname
- */
-// require_once 'Zend/Validate/Hostname.php';
-
-/**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Validate_EmailAddress extends Zend_Validate_Abstract
 {
@@ -298,7 +274,6 @@ class Zend_Validate_EmailAddress extends Zend_Validate_Abstract
     public function setValidateMx($mx)
     {
         if ((bool) $mx && !$this->validateMxSupported()) {
-            // require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception('MX checking not available on this system');
         }
 

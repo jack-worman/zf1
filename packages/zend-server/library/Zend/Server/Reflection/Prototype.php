@@ -12,34 +12,12 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
-/**
- * Zend_Server_Reflection_ReturnValue.
- */
-// require_once 'Zend/Server/Reflection/ReturnValue.php';
-
-/**
- * Zend_Server_Reflection_Parameter.
- */
-// require_once 'Zend/Server/Reflection/Parameter.php';
 
 /**
  * Method/Function prototypes.
  *
  * Contains accessors for the return value and all method arguments.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version $Id$
  */
 #[AllowDynamicProperties]
 class Zend_Server_Reflection_Prototype
@@ -54,14 +32,12 @@ class Zend_Server_Reflection_Prototype
         $this->_return = $return;
 
         if (!is_array($params) && (null !== $params)) {
-            // require_once 'Zend/Server/Reflection/Exception.php';
             throw new Zend_Server_Reflection_Exception('Invalid parameters');
         }
 
         if (is_array($params)) {
             foreach ($params as $param) {
                 if (!$param instanceof Zend_Server_Reflection_Parameter) {
-                    // require_once 'Zend/Server/Reflection/Exception.php';
                     throw new Zend_Server_Reflection_Exception('One or more params are invalid');
                 }
             }

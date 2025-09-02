@@ -12,41 +12,9 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
 
 /**
- * @see Zend_Json
- */
-// require_once 'Zend/Json.php';
-
-/**
- * @see Zend_Json_Expr
- */
-// require_once 'Zend/Json/Expr.php';
-
-/**
- * @see Zend_Json_Encoder
- */
-// require_once 'Zend/Json/Encoder.php';
-
-/**
- * @see Zend_Json_Decoder
- */
-// require_once 'Zend/Json/Decoder.php';
-
-/**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Json
  */
 #[AllowDynamicProperties]
@@ -927,17 +895,11 @@ EOB;
     }
 }
 
-/**
- * Zend_JsonTest_Item: test item for use with testZf461().
- */
 #[AllowDynamicProperties]
 class Zend_JsonTest_Item
 {
 }
 
-/**
- * Zend_JsonTest_Object: test class for encoding classes.
- */
 #[AllowDynamicProperties]
 class Zend_JsonTest_Object
 {

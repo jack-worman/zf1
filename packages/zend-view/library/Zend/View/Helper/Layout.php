@@ -12,24 +12,10 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- *
- * @version    $Id$
- *
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
-/** Zend_View_Helper_Abstract.php */
-// require_once 'Zend/View/Helper/Abstract.php';
 
 /**
  * View helper for retrieving layout object.
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_View_Helper_Layout extends Zend_View_Helper_Abstract
 {
@@ -39,7 +25,6 @@ class Zend_View_Helper_Layout extends Zend_View_Helper_Abstract
     public function getLayout(): Zend_Layout
     {
         if (null === $this->_layout) {
-            // require_once 'Zend/Layout.php';
             $this->_layout = Zend_Layout::getMvcInstance();
             if (null === $this->_layout) {
                 // Implicitly creates layout object

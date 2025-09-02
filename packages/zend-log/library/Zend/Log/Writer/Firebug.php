@@ -12,34 +12,10 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
-
-/** Zend_Log */
-// require_once 'Zend/Log.php';
-
-/** Zend_Log_Writer_Abstract */
-// require_once 'Zend/Log/Writer/Abstract.php';
-
-/** Zend_Log_Formatter_Firebug */
-// require_once 'Zend/Log/Formatter/Firebug.php';
-
-/** Zend_Wildfire_Plugin_FirePhp */
-// require_once 'Zend/Wildfire/Plugin/FirePhp.php';
 
 /**
  * Writes log messages to the Firebug Console via FirePHP.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Log_Writer_Firebug extends Zend_Log_Writer_Abstract
 {

@@ -12,27 +12,14 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
 
 /**
  * Abstract class for extension.
  */
-// require_once 'Zend/View/Helper/FormElement.php';
 
 /**
  * Helper to generate a set of radio button elements.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_View_Helper_FormRadio extends Zend_View_Helper_FormElement
 {
@@ -118,7 +105,6 @@ class Zend_View_Helper_FormRadio extends Zend_View_Helper_FormElement
         $value = (array) $value;
 
         // Set up the filter - Alnum + hyphen + underscore
-        // require_once 'Zend/Filter/PregReplace.php';
         $pattern = @preg_match('/\pL/u', 'a')
             ? '/[^\p{L}\p{N}\-\_]/u'    // Unicode
             : '/[^a-zA-Z0-9\-\_]/';     // No Unicode

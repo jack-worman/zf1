@@ -12,27 +12,10 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
-
-/**
- * @see Zend_Filter_Compress_CompressAbstract
- */
-// require_once 'Zend/Filter/Compress/CompressAbstract.php';
 
 /**
  * Compression adapter for zip.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Filter_Compress_Zip extends Zend_Filter_Compress_CompressAbstract
 {
@@ -61,7 +44,6 @@ class Zend_Filter_Compress_Zip extends Zend_Filter_Compress_CompressAbstract
     public function __construct($options = null)
     {
         if (!extension_loaded('zip')) {
-            // require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('This filter needs the zip extension');
         }
         parent::__construct($options);
@@ -114,7 +96,6 @@ class Zend_Filter_Compress_Zip extends Zend_Filter_Compress_CompressAbstract
     public function setTarget($target)
     {
         if (!file_exists((string) dirname($target))) {
-            // require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception("The directory '$target' does not exist");
         }
 
@@ -139,7 +120,6 @@ class Zend_Filter_Compress_Zip extends Zend_Filter_Compress_CompressAbstract
         $res = $zip->open($this->getArchive(), ZipArchive::CREATE | ZipArchive::OVERWRITE);
 
         if (true !== $res) {
-            // require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception($this->_errorString($res));
         }
 
@@ -175,7 +155,6 @@ class Zend_Filter_Compress_Zip extends Zend_Filter_Compress_CompressAbstract
                     foreach ($files as $file) {
                         $zip->addFile($current.$file, $local.$file);
                         if (true !== $res) {
-                            // require_once 'Zend/Filter/Exception.php';
                             throw new Zend_Filter_Exception($this->_errorString($res));
                         }
                     }
@@ -183,7 +162,6 @@ class Zend_Filter_Compress_Zip extends Zend_Filter_Compress_CompressAbstract
             } else {
                 $res = $zip->addFile($content, $basename);
                 if (true !== $res) {
-                    // require_once 'Zend/Filter/Exception.php';
                     throw new Zend_Filter_Exception($this->_errorString($res));
                 }
             }
@@ -197,7 +175,6 @@ class Zend_Filter_Compress_Zip extends Zend_Filter_Compress_CompressAbstract
 
             $res = $zip->addFromString($file, $content);
             if (true !== $res) {
-                // require_once 'Zend/Filter/Exception.php';
                 throw new Zend_Filter_Exception($this->_errorString($res));
             }
         }
@@ -222,7 +199,6 @@ class Zend_Filter_Compress_Zip extends Zend_Filter_Compress_CompressAbstract
         if (file_exists((string) $content)) {
             $archive = str_replace(['/', '\\'], DIRECTORY_SEPARATOR, realpath($content));
         } elseif (empty($archive) || !file_exists((string) $archive)) {
-            // require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('ZIP Archive not found');
         }
 
@@ -240,18 +216,15 @@ class Zend_Filter_Compress_Zip extends Zend_Filter_Compress_CompressAbstract
         }
 
         if (empty($target) || !is_dir($target)) {
-            // require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('No target for ZIP decompression set');
         }
 
         if (true !== $res) {
-            // require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception($this->_errorString($res));
         }
 
         $res = @$zip->extractTo($target);
         if (true !== $res) {
-            // require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception($this->_errorString($res));
         }
 

@@ -12,13 +12,6 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
 
 /**
@@ -27,11 +20,6 @@
 require_once 'Zend/Db/TestSetup.php';
 
 /**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Db
  * @group      Zend_Db_Profiler
  */
@@ -203,7 +191,6 @@ class Zend_Db_Profiler_StaticTest extends Zend_Db_TestSetup
      */
     public function testProfilerFactoryConfig()
     {
-        // require_once 'Zend/Config.php';
         $config = new Zend_Config([
             'class' => 'Zend_Db_Profiler_ProfilerCustom',
         ]);
@@ -274,10 +261,8 @@ class Zend_Db_Profiler_StaticTest extends Zend_Db_TestSetup
      */
     public function testProfilerFactoryConfigInstance()
     {
-        // require_once 'Zend/Db/Profiler/ProfilerCustom.php';
         $profiler = new Zend_Db_Profiler_ProfilerCustom();
 
-        // require_once 'Zend/Config.php';
         $config = new Zend_Config(['instance' => $profiler]);
 
         $db = Zend_Db::factory('Static',
@@ -300,7 +285,6 @@ class Zend_Db_Profiler_StaticTest extends Zend_Db_TestSetup
      */
     public function testProfilerFactoryInstanceOverridesClass()
     {
-        // require_once 'Zend/Db/Profiler/ProfilerCustom.php';
         $profiler = new Zend_Db_Profiler_ProfilerCustom();
         $db = Zend_Db::factory('Static',
             [

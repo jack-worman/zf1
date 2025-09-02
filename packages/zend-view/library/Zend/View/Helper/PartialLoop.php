@@ -12,25 +12,11 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- *
- * @version    $Id$
- *
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
-/** Zend_View_Helper_Partial */
-// require_once 'Zend/View/Helper/Partial.php';
 
 /**
  * Helper for rendering a template fragment in its own variable scope; iterates
  * over data provided and renders for each iteration.
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_View_Helper_PartialLoop extends Zend_View_Helper_Partial
 {
@@ -71,7 +57,6 @@ class Zend_View_Helper_PartialLoop extends Zend_View_Helper_Partial
             && (!$model instanceof Traversable)
             && (is_object($model) && !method_exists($model, 'toArray'))
         ) {
-            // require_once 'Zend/View/Helper/Partial/Exception.php';
             $e = new Zend_View_Helper_Partial_Exception('PartialLoop helper requires iterable data');
             $e->setView($this->view);
             throw $e;

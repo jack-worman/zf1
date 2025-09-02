@@ -12,29 +12,12 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
-
-/**
- * @see Zend_Validate_Db_Abstract
- */
-// require_once 'Zend/Validate/Db/Abstract.php';
 
 /**
  * Confirms a record does not exist in a table.
  *
- * @category   Zend
- *
  * @uses       Zend_Validate_Db_Abstract
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Validate_Db_NoRecordExists extends Zend_Validate_Db_Abstract
 {

@@ -12,25 +12,6 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
- */
-
-/**
- * @see Zend_Filter_Interface
- */
-// require_once 'Zend/Filter/Interface.php';
-
-/**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Filter_File_Rename implements Zend_Filter_Interface
 {
@@ -57,7 +38,6 @@ class Zend_Filter_File_Rename implements Zend_Filter_Interface
         } elseif (is_string($options)) {
             $options = ['target' => $options];
         } elseif (!is_array($options)) {
-            // require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('Invalid options argument provided to filter');
         }
 
@@ -123,7 +103,6 @@ class Zend_Filter_File_Rename implements Zend_Filter_Interface
         if (is_string($options)) {
             $options = ['target' => $options];
         } elseif (!is_array($options)) {
-            // require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('Invalid options to rename filter provided');
         }
 
@@ -162,7 +141,6 @@ class Zend_Filter_File_Rename implements Zend_Filter_Interface
         }
 
         if (file_exists((string) $file['target'])) {
-            // require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception(sprintf("File '%s' could not be renamed. It already exists.", $value));
         }
 
@@ -198,7 +176,6 @@ class Zend_Filter_File_Rename implements Zend_Filter_Interface
             return $file['target'];
         }
 
-        // require_once 'Zend/Filter/Exception.php';
         throw new Zend_Filter_Exception(sprintf("File '%s' could not be renamed. An error occured while processing the file.", $value));
     }
 

@@ -12,35 +12,13 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
-
-/**
- * @see Zend_Test_PHPUnit_Db_DataSet_QueryTable
- */
-// require_once "Zend/Test/PHPUnit/Db/DataSet/QueryTable.php";
-
-/**
- * @see Zend_Test_PHPUnit_Db_Metadata_Generic
- */
-// require_once "Zend/Test/PHPUnit/Db/Metadata/Generic.php";
 
 /**
  * Generic Abstraction of Zend_Db Connections in the PHPUnit Database Extension context.
  *
  * @uses       Zend_Db_Adapter_Abstract
  * @uses       PHPUnit_Extensions_Database_DB_DefaultDatabaseConnection
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Test_PHPUnit_Db_Connection extends PHPUnit_Extensions_Database_DB_DefaultDatabaseConnection
 {

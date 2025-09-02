@@ -12,19 +12,7 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
-
-/**
- * @see Zend_Db_Adapter_Abstract
- */
-// require_once 'Zend/Db/Adapter/Abstract.php';
 
 /**
  * @see Zend_Db_Statement_Static
@@ -33,11 +21,6 @@ require_once 'Zend/Db/Statement/Static.php';
 
 /**
  * Class for connecting to SQL databases and performing common operations.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Zend_Db_Adapter_Static extends Zend_Db_Adapter_Abstract
@@ -85,7 +68,6 @@ class Zend_Db_Adapter_Static extends Zend_Db_Adapter_Abstract
     {
         // we need at least a dbname
         if (!array_key_exists('dbname', $config)) {
-            // require_once 'Zend/Db/Adapter/Exception.php';
             throw new Zend_Db_Adapter_Exception("Configuration must have a key for 'dbname' that names the database instance");
         }
         $this->config = $config;

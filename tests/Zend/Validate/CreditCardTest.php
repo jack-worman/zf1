@@ -12,26 +12,9 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id:$
  */
 
 /**
- * @see Zend_Validate_CreditCard
- */
-// require_once 'Zend/Validate/CreditCard.php';
-
-/**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Validate
  */
 #[AllowDynamicProperties]
@@ -215,7 +198,6 @@ class Zend_Validate_CreditCardTest extends PHPUnit_Framework_TestCase
      */
     public function testConfigObject()
     {
-        // require_once 'Zend/Config.php';
         $options = ['type' => 'Visa'];
         $config = new Zend_Config($options, false);
 
@@ -230,7 +212,6 @@ class Zend_Validate_CreditCardTest extends PHPUnit_Framework_TestCase
      */
     public function testOptionalConstructorParameterByConfigObject()
     {
-        // require_once 'Zend/Config.php';
         $config = new Zend_Config(['type' => 'Visa', 'service' => ['Zend_Validate_CreditCardTest', 'staticCallback']]);
 
         $validator = new Zend_Validate_CreditCard($config);

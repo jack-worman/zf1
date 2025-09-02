@@ -12,13 +12,6 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
 
 // Call Zend_Layout_LayoutTest::main() if this source file is executed directly.
@@ -26,22 +19,8 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Layout_LayoutTest::main');
 }
 
-// require_once 'Zend/Layout.php';
-// require_once 'Zend/Layout/Controller/Plugin/Layout.php';
-// require_once 'Zend/Layout/Controller/Action/Helper/Layout.php';
-// require_once 'Zend/Controller/Front.php';
-// require_once 'Zend/Controller/Action/HelperBroker.php';
-// require_once 'Zend/Filter/Inflector.php';
-// require_once 'Zend/View/Interface.php';
-// require_once 'Zend/View.php';
-
 /**
  * Test class for Zend_Layout.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
  * @group      Zend_Layout
  */
@@ -118,7 +97,6 @@ class Zend_Layout_LayoutTest extends PHPUnit_Framework_TestCase
     {
         $layout = new Zend_Layout();
 
-        // require_once 'Zend/Config.php';
         $config = new Zend_Config([
             'layout' => 'foo',
             'contentKey' => 'foo',
@@ -139,7 +117,6 @@ class Zend_Layout_LayoutTest extends PHPUnit_Framework_TestCase
     {
         $layout = new Zend_Layout();
 
-        // require_once 'Zend/Config.php';
         $config = new Zend_Config([
             'layout' => 'foo',
             'contentKey' => 'foo',
@@ -558,9 +535,6 @@ class Zend_Layout_LayoutTest extends PHPUnit_Framework_TestCase
     }
 }
 
-/**
- * Zend_Layout extension to allow resetting mvcInstance static member.
- */
 #[AllowDynamicProperties]
 class Zend_Layout_LayoutTest_Override extends Zend_Layout
 {

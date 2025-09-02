@@ -12,21 +12,9 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id $
  */
 
 /**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Db
  * @group      Zend_Db_Adapter
  */
@@ -47,11 +35,6 @@ abstract class Zend_Db_Adapter_Skip_CommonTest extends PHPUnit_Framework_TestCas
 }
 
 /**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Db
  */
 #[AllowDynamicProperties]
@@ -64,11 +47,6 @@ class Zend_Db_Adapter_Skip_Db2Test extends Zend_Db_Adapter_Skip_CommonTest
 }
 
 /**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Db
  */
 #[AllowDynamicProperties]
@@ -81,11 +59,6 @@ class Zend_Db_Adapter_Skip_OracleTest extends Zend_Db_Adapter_Skip_CommonTest
 }
 
 /**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Db
  */
 #[AllowDynamicProperties]
@@ -98,11 +71,6 @@ class Zend_Db_Adapter_Skip_FirebirdTest extends Zend_Db_Adapter_Skip_CommonTest
 }
 
 /**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Db
  */
 #[AllowDynamicProperties]
@@ -115,11 +83,6 @@ class Zend_Db_Adapter_Skip_MysqliTest extends Zend_Db_Adapter_Skip_CommonTest
 }
 
 /**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Db
  */
 #[AllowDynamicProperties]
@@ -132,11 +95,6 @@ class Zend_Db_Adapter_Skip_Pdo_MssqlTest extends Zend_Db_Adapter_Skip_CommonTest
 }
 
 /**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Db
  */
 #[AllowDynamicProperties]
@@ -149,11 +107,6 @@ class Zend_Db_Adapter_Skip_Pdo_MysqlTest extends Zend_Db_Adapter_Skip_CommonTest
 }
 
 /**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Db
  */
 #[AllowDynamicProperties]
@@ -166,11 +119,6 @@ class Zend_Db_Adapter_Skip_Pdo_OciTest extends Zend_Db_Adapter_Skip_CommonTest
 }
 
 /**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Db
  */
 #[AllowDynamicProperties]
@@ -183,11 +131,6 @@ class Zend_Db_Adapter_Skip_Pdo_FirebirdTest extends Zend_Db_Adapter_Skip_CommonT
 }
 
 /**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Db
  */
 #[AllowDynamicProperties]
@@ -200,11 +143,6 @@ class Zend_Db_Adapter_Skip_Pdo_PgsqlTest extends Zend_Db_Adapter_Skip_CommonTest
 }
 
 /**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Db
  */
 #[AllowDynamicProperties]

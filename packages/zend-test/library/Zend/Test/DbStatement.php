@@ -12,27 +12,10 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
-
-/**
- * @see Zend_Db_Statement_Interface
- */
-// require_once "Zend/Db/Statement/Interface.php";
 
 /**
  * Testing Database Statement that acts as a stack to SQL resultsets.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
 {
@@ -328,7 +311,6 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
             return false;
         } else {
             if (count($row) < $col) {
-                // require_once "Zend/Db/Statement/Exception.php";
                 throw new Zend_Db_Statement_Exception("Column Position '".$col."' is out of bounds.");
             }
 

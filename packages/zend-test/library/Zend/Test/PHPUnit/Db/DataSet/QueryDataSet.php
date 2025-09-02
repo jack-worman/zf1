@@ -12,34 +12,12 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
-
-/**
- * @see Zend_Test_PHPUnit_Db_DataSet_QueryTable
- */
-// require_once "Zend/Test/PHPUnit/Db/DataSet/QueryTable.php";
-
-/**
- * @see Zend_Db_Select
- */
-// require_once "Zend/Db/Select.php";
 
 /**
  * Uses several query strings or Zend_Db_Select objects to form a dataset of tables for assertion with other datasets.
  *
  * @uses       PHPUnit_Extensions_Database_DataSet_QueryDataSet
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Test_PHPUnit_Db_DataSet_QueryDataSet extends PHPUnit_Extensions_Database_DataSet_QueryDataSet
 {
@@ -49,7 +27,6 @@ class Zend_Test_PHPUnit_Db_DataSet_QueryDataSet extends PHPUnit_Extensions_Datab
     public function __construct(PHPUnit_Extensions_Database_DB_IDatabaseConnection $databaseConnection)
     {
         if (!($databaseConnection instanceof Zend_Test_PHPUnit_Db_Connection)) {
-            // require_once "Zend/Test/PHPUnit/Db/Exception.php";
             throw new Zend_Test_PHPUnit_Db_Exception('Zend_Test_PHPUnit_Db_DataSet_QueryDataSet only works with Zend_Test_PHPUnit_Db_Connection connections-');
         }
         $this->databaseConnection = $databaseConnection;

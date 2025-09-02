@@ -12,12 +12,6 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 
@@ -33,11 +27,6 @@ require_once 'Zend/Db/Adapter/Static.php';
 /**
  * Class for connecting to SQL databases and performing common operations.
  *
- * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Testnamespace_Static extends Zend_Db_Adapter_Static

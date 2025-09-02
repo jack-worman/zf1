@@ -12,25 +12,6 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
- */
-
-/**
- * @see Zend_Validate_Abstract
- */
-// require_once 'Zend/Validate/Abstract.php';
-
-/**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Validate_Isbn extends Zend_Validate_Abstract
 {
@@ -78,10 +59,6 @@ class Zend_Validate_Isbn extends Zend_Validate_Abstract
             $options = $options->toArray();
         }
         if (!is_array($options)) {
-            /*
-             * @see Zend_Validate_Exception
-             */
-            // require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception('Invalid options provided.');
         }
 
@@ -233,10 +210,6 @@ class Zend_Validate_Isbn extends Zend_Validate_Abstract
     {
         // check separator
         if (!in_array($separator, ['-', ' ', ''])) {
-            /*
-             * @see Zend_Validate_Exception
-             */
-            // require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception('Invalid ISBN separator.');
         }
 
@@ -268,10 +241,6 @@ class Zend_Validate_Isbn extends Zend_Validate_Abstract
     {
         // check type
         if (!in_array($type, [self::AUTO, self::ISBN10, self::ISBN13])) {
-            /*
-             * @see Zend_Validate_Exception
-             */
-            // require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception('Invalid ISBN type');
         }
 

@@ -12,35 +12,6 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
- */
-
-/**
- * @see Zend_Acl
- */
-// require_once 'Zend/Acl.php';
-
-/**
- * @see Zend_Acl_Role_Interface
- */
-// require_once 'Zend/Acl/Role/Interface.php';
-
-/**
- * @see Zend_Acl_Resource_Interface
- */
-// require_once 'Zend/Acl/Resource/Interface.php';
-
-/**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface Zend_Acl_Assert_Interface
 {

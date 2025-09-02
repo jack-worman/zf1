@@ -12,32 +12,10 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category  Zend
- *
- * @copyright Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version   $Id$
  */
-
-/**
- * @see Zend_Config
- */
-// require_once 'Zend/Config.php';
-
-/**
- * @see Zend_Json
- */
-// require_once 'Zend/Json.php';
 
 /**
  * JSON Adapter for Zend_Config.
- *
- * @category  Zend
- *
- * @copyright Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Config_Json extends Zend_Config
 {
@@ -85,7 +63,6 @@ class Zend_Config_Json extends Zend_Config
     public function __construct($json, $section = null, $options = false)
     {
         if (empty($json)) {
-            // require_once 'Zend/Config/Exception.php';
             throw new Zend_Config_Exception('Filename is not set');
         }
 
@@ -121,7 +98,6 @@ class Zend_Config_Json extends Zend_Config
 
         // Check if there was a error while loading file
         if (null !== $this->_loadFileErrorStr) {
-            // require_once 'Zend/Config/Exception.php';
             throw new Zend_Config_Exception($this->_loadFileErrorStr);
         }
 
@@ -135,7 +111,6 @@ class Zend_Config_Json extends Zend_Config
             $config = Zend_Json::decode($json);
         } catch (Zend_Json_Exception $e) {
             // decode failed
-            // require_once 'Zend/Config/Exception.php';
             throw new Zend_Config_Exception('Error parsing JSON data');
         }
 
@@ -150,7 +125,6 @@ class Zend_Config_Json extends Zend_Config
             $dataArray = [];
             foreach ($section as $sectionName) {
                 if (!isset($config[$sectionName])) {
-                    // require_once 'Zend/Config/Exception.php';
                     throw new Zend_Config_Exception(sprintf('Section "%s" cannot be found', $sectionName));
                 }
 
@@ -160,7 +134,6 @@ class Zend_Config_Json extends Zend_Config
             parent::__construct($dataArray, $allowModifications);
         } else {
             if (!isset($config[$section])) {
-                // require_once 'Zend/Config/Exception.php';
                 throw new Zend_Config_Exception(sprintf('Section "%s" cannot be found', $section));
             }
 
@@ -191,7 +164,6 @@ class Zend_Config_Json extends Zend_Config
     protected function _processExtends(array $data, $section, array $config = [])
     {
         if (!isset($data[$section])) {
-            // require_once 'Zend/Config/Exception.php';
             throw new Zend_Config_Exception(sprintf('Section "%s" cannot be found', $section));
         }
 
@@ -199,7 +171,6 @@ class Zend_Config_Json extends Zend_Config
 
         if (is_array($thisSection) && isset($thisSection[self::EXTENDS_NAME])) {
             if (is_array($thisSection[self::EXTENDS_NAME])) {
-                // require_once 'Zend/Config/Exception.php';
                 throw new Zend_Config_Exception('Invalid extends clause: must be a string; array received');
             }
             $this->_assertValidExtend($section, $thisSection[self::EXTENDS_NAME]);

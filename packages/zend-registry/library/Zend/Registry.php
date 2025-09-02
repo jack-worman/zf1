@@ -12,22 +12,10 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
 
 /**
  * Generic storage class helps to manage global data.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Registry extends ArrayObject
 {
@@ -72,7 +60,6 @@ class Zend_Registry extends ArrayObject
     public static function setInstance(Zend_Registry $registry)
     {
         if (null !== self::$_registry) {
-            // require_once 'Zend/Exception.php';
             throw new Zend_Exception('Registry is already initialized');
         }
 
@@ -105,20 +92,14 @@ class Zend_Registry extends ArrayObject
     public static function setClassName($registryClassName = 'Zend_Registry')
     {
         if (null !== self::$_registry) {
-            // require_once 'Zend/Exception.php';
             throw new Zend_Exception('Registry is already initialized');
         }
 
         if (!is_string($registryClassName)) {
-            // require_once 'Zend/Exception.php';
             throw new Zend_Exception('Argument is not a class name');
         }
 
-        /*
-         * @see Zend_Loader
-         */
         if (!class_exists($registryClassName)) {
-            // require_once 'Zend/Loader.php';
             Zend_Loader::loadClass($registryClassName);
         }
 
@@ -152,7 +133,6 @@ class Zend_Registry extends ArrayObject
         $instance = self::getInstance();
 
         if (!$instance->offsetExists($index)) {
-            // require_once 'Zend/Exception.php';
             throw new Zend_Exception("No entry is registered for key '$index'");
         }
 

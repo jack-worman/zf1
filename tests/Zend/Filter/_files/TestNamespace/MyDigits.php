@@ -12,19 +12,8 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
-
-/**
- * @see Zend_Validate_Digits
- */
-// require_once 'Zend/Validate/Digits.php';
 
 
 
@@ -32,11 +21,6 @@
 /**
  * Mock file for testbed
  *
- * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class TestNamespace_MyDigits extends Zend_Validate_Digits

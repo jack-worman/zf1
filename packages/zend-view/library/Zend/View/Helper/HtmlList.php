@@ -12,29 +12,12 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
-
-/**
- * Zend_View_Helper_FormELement.
- */
-// require_once 'Zend/View/Helper/FormElement.php';
 
 /**
  * Helper for ordered and unordered lists.
  *
  * @uses Zend_View_Helper_FormElement
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_View_Helper_HtmlList extends Zend_View_Helper_FormElement
 {
@@ -50,7 +33,6 @@ class Zend_View_Helper_HtmlList extends Zend_View_Helper_FormElement
     public function htmlList(array $items, $ordered = false, $attribs = false, $escape = true)
     {
         if (!is_array($items)) {
-            // require_once 'Zend/View/Exception.php';
             $e = new Zend_View_Exception('First param must be an array');
             $e->setView($this->view);
             throw $e;

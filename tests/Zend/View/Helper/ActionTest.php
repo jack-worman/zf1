@@ -12,13 +12,6 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
 
 // Call Zend_View_Helper_ActionTest::main() if this source file is executed directly.
@@ -26,28 +19,8 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_View_Helper_ActionTest::main');
 }
 
-/** Zend_View_Helper_Action */
-// require_once 'Zend/View/Helper/Action.php';
-
-/** Zend_Controller_Front */
-// require_once 'Zend/Controller/Front.php';
-
-/** Zend_Controller_Request_Http */
-// require_once 'Zend/Controller/Request/Http.php';
-
-/** Zend_Controller_Response_Http */
-// require_once 'Zend/Controller/Response/Http.php';
-
-/** Zend_View */
-// require_once 'Zend/View.php';
-
 /**
  * Test class for Zend_View_Helper_Action.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
  * @group      Zend_View
  * @group      Zend_View_Helper
@@ -276,7 +249,6 @@ class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
      */
     public function testActionWithPartialsUseOfViewRendererReturnsToOriginatingViewState()
     {
-        // require_once 'Zend/View/Helper/Partial.php';
         $partial = new Zend_View_Helper_Partial();
         $this->view->setScriptPath(__DIR__.'/_files/modules/default/views/scripts/');
         $partial->setView($this->view);

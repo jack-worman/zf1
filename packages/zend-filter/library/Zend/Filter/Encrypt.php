@@ -12,32 +12,10 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
-
-/**
- * @see Zend_Filter_Interface
- */
-// require_once 'Zend/Filter/Interface.php';
-
-/**
- * @see Zend_Loader
- */
-// require_once 'Zend/Loader.php';
 
 /**
  * Encrypts a given string.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Filter_Encrypt implements Zend_Filter_Interface
 {
@@ -100,7 +78,6 @@ class Zend_Filter_Encrypt implements Zend_Filter_Interface
 
         $this->_adapter = new $adapter($options);
         if (!$this->_adapter instanceof Zend_Filter_Encrypt_Interface) {
-            // require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception("Encoding adapter '".$adapter."' does not implement Zend_Filter_Encrypt_Interface");
         }
 
@@ -117,7 +94,6 @@ class Zend_Filter_Encrypt implements Zend_Filter_Interface
     {
         $part = substr((string) $method, 0, 3);
         if ((('get' != $part) and ('set' != $part)) or !method_exists($this->_adapter, $method)) {
-            // require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception("Unknown method '{$method}'");
         }
 

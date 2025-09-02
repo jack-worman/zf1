@@ -12,49 +12,12 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
-
-/**
- * @see Zend_Test_PHPUnit_Db_Operation_Truncate
- */
-// require_once "Zend/Test/PHPUnit/Db/Operation/Truncate.php";
-
-/**
- * @see Zend_Test_PHPUnit_Db_Operation_Insert
- */
-// require_once "Zend/Test/PHPUnit/Db/Operation/Insert.php";
-
-/**
- * @see Zend_Test_PHPUnit_Db_DataSet_DbTableDataSet
- */
-// require_once "Zend/Test/PHPUnit/Db/DataSet/DbTableDataSet.php";
-
-/**
- * @see Zend_Test_PHPUnit_Db_DataSet_DbTable
- */
-// require_once "Zend/Test/PHPUnit/Db/DataSet/DbTable.php";
-
-/**
- * @see Zend_Test_PHPUnit_Db_DataSet_DbRowset
- */
-// require_once "Zend/Test/PHPUnit/Db/DataSet/DbRowset.php";
 
 /**
  * Generic Testcase for Zend Framework related DbUnit Testing with PHPUnit.
  *
  * @uses       \PHPUnit_Extensions_Database_TestCase
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Test_PHPUnit_DatabaseTestCase extends PHPUnit_Extensions_Database_TestCase
 {

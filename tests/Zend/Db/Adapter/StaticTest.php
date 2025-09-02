@@ -12,24 +12,7 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
-
-/**
- * @see Zend_Db
- */
-// require_once 'Zend/Db.php';
-
-/**
- * @see Zend_Config
- */
-// require_once 'Zend/Config.php';
 
 /**
  * @see Zend_Db_Adapter_Static
@@ -37,11 +20,6 @@
 require_once 'Zend/Db/Adapter/Static.php';
 
 /**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Db
  * @group      Zend_Db_Adapter
  */

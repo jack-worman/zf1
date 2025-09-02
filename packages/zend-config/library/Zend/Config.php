@@ -12,20 +12,6 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
- */
-
-/**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Config implements Countable, Iterator
 {
@@ -175,8 +161,6 @@ class Zend_Config implements Countable, Iterator
             }
             $this->_count = count($this->_data);
         } else {
-            /* @see Zend_Config_Exception */
-            // require_once 'Zend/Config/Exception.php';
             throw new Zend_Config_Exception('Zend_Config is read only');
         }
     }
@@ -248,8 +232,6 @@ class Zend_Config implements Countable, Iterator
             $this->_count = count($this->_data);
             $this->_skipNextIteration = true;
         } else {
-            /* @see Zend_Config_Exception */
-            // require_once 'Zend/Config/Exception.php';
             throw new Zend_Config_Exception('Zend_Config is read only');
         }
     }
@@ -442,8 +424,6 @@ class Zend_Config implements Countable, Iterator
         $extendedSectionCurrent = $extendedSection;
         while (array_key_exists($extendedSectionCurrent, $this->_extends)) {
             if ($this->_extends[$extendedSectionCurrent] == $extendingSection) {
-                /* @see Zend_Config_Exception */
-                // require_once 'Zend/Config/Exception.php';
                 throw new Zend_Config_Exception('Illegal circular inheritance detected');
             }
             $extendedSectionCurrent = $this->_extends[$extendedSectionCurrent];

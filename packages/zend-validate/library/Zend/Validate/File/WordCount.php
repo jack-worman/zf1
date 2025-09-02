@@ -12,27 +12,10 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category  Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version   $Id$
  */
-
-/**
- * @see Zend_Validate_File_Count
- */
-// require_once 'Zend/Validate/File/Count.php';
 
 /**
  * Validator for counting all words in a file.
- *
- * @category  Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Validate_File_WordCount extends Zend_Validate_File_Count
 {
@@ -67,7 +50,6 @@ class Zend_Validate_File_WordCount extends Zend_Validate_File_Count
     public function isValid($value, $file = null)
     {
         // Is file readable ?
-        // require_once 'Zend/Loader.php';
         if (!Zend_Loader::isReadable($value)) {
             return $this->_throw($file, self::NOT_FOUND);
         }

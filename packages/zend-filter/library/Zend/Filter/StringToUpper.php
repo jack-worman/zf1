@@ -12,25 +12,6 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
- */
-
-/**
- * @see Zend_Filter_Interface
- */
-// require_once 'Zend/Filter/Interface.php';
-
-/**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Filter_StringToUpper implements Zend_Filter_Interface
 {
@@ -91,13 +72,11 @@ class Zend_Filter_StringToUpper implements Zend_Filter_Interface
     {
         if (null !== $encoding) {
             if (!function_exists('mb_strtoupper')) {
-                // require_once 'Zend/Filter/Exception.php';
                 throw new Zend_Filter_Exception('mbstring is required for this feature');
             }
 
             $encoding = (string) $encoding;
             if (!in_array(strtolower((string) $encoding), array_map('strtolower', mb_list_encodings()))) {
-                // require_once 'Zend/Filter/Exception.php';
                 throw new Zend_Filter_Exception("The given encoding '$encoding' is not supported by mbstring");
             }
         }

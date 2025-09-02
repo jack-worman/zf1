@@ -12,33 +12,9 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
 
-/** Zend_Db */
-// require_once 'Zend/Db.php';
-
-/** Zend_Db_Profiler_Firebug */
-// require_once 'Zend/Db/Profiler/Firebug.php';
-
-/** Zend_Controller_Request_Http */
-// require_once 'Zend/Controller/Request/Http.php';
-
-/** Zend_Controller_Response_Http */
-// require_once 'Zend/Controller/Response/Http.php';
-
 /**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Db
  * @group      Zend_Db_Profiler
  */

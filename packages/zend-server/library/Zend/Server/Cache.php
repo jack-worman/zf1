@@ -12,22 +12,10 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
 
 /**
  * Zend_Server_Cache: cache server definitions.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Server_Cache
 {
@@ -87,9 +75,7 @@ class Zend_Server_Cache
      *
      * <code>
      * if (!Zend_Server_Cache::get($filename, $server)) {
-     *     // require_once 'Some/Service/Class.php';
-     *     // require_once 'Another/Service/Class.php';
-     *
+     *          *          *
      *     // Attach Some_Service_Class with namespace 'some'
      *     $server->attach('Some_Service_Class', 'some');
      *

@@ -12,24 +12,9 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
 
-/** Zend_Controller_Router_Route_Regex */
-// require_once 'Zend/Controller/Router/Route/Regex.php';
-
 /**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Controller
  * @group      Zend_Controller_Router
  */
@@ -381,8 +366,6 @@ class Zend_Controller_Router_Route_RegexTest extends PHPUnit_Framework_TestCase
 
     public function testGetInstance()
     {
-        // require_once 'Zend/Config.php';
-
         $routeConf = [
             'route' => 'forum/(\d+)',
             'reverse' => 'forum/%d',

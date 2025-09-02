@@ -12,13 +12,6 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
 
 /**
@@ -26,11 +19,6 @@
  */
 
 /**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Cache
  */
 abstract class Zend_Cache_BackendTest_SkipTests extends PHPUnit_Framework_TestCase
@@ -49,11 +37,6 @@ abstract class Zend_Cache_BackendTest_SkipTests extends PHPUnit_Framework_TestCa
 }
 
 /**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Cache
  */
 #[AllowDynamicProperties]
@@ -62,11 +45,6 @@ class Zend_Cache_ApcBackendTest_SkipTests extends Zend_Cache_BackendTest_SkipTes
 }
 
 /**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Cache
  */
 #[AllowDynamicProperties]
@@ -74,11 +52,6 @@ class Zend_Cache_WinCacheBackendTest_SkipTests extends Zend_Cache_BackendTest_Sk
 {
 }
 /**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Cache
  */
 #[AllowDynamicProperties]
@@ -87,11 +60,6 @@ class Zend_Cache_XcacheBackendTest_SkipTests extends Zend_Cache_BackendTest_Skip
 }
 
 /**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Cache
  */
 #[AllowDynamicProperties]
@@ -100,11 +68,6 @@ class Zend_Cache_MemcachedBackendTest_SkipTests extends Zend_Cache_BackendTest_S
 }
 
 /**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Cache
  */
 #[AllowDynamicProperties]
@@ -113,11 +76,6 @@ class Zend_Cache_LibmemcachedBackendTest_SkipTests extends Zend_Cache_BackendTes
 }
 
 /**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Cache
  */
 #[AllowDynamicProperties]
@@ -126,11 +84,6 @@ class Zend_Cache_SqliteBackendTest_SkipTests extends Zend_Cache_BackendTest_Skip
 }
 
 /**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Cache
  */
 #[AllowDynamicProperties]
@@ -139,11 +92,6 @@ class Zend_Cache_ZendPlatformBackendTest_SkipTests extends Zend_Cache_BackendTes
 }
 
 /**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Cache
  */
 #[AllowDynamicProperties]
@@ -152,11 +100,6 @@ class Zend_Cache_TwoLevelsBackendTest_SkipTests extends Zend_Cache_BackendTest_S
 }
 
 /**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Cache
  */
 #[AllowDynamicProperties]

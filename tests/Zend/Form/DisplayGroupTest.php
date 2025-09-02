@@ -12,38 +12,12 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Form_DisplayGroupTest::main');
 }
 
-// require_once 'Zend/Form/DisplayGroup.php';
-
-// require_once 'Zend/Config.php';
-// require_once 'Zend/Controller/Action/HelperBroker.php';
-// require_once 'Zend/Form.php';
-// require_once 'Zend/Form/Decorator/Form.php';
-// require_once 'Zend/Form/Decorator/HtmlTag.php';
-// require_once 'Zend/Form/Element.php';
-// require_once 'Zend/Form/Element/Text.php';
-// require_once 'Zend/Loader/PluginLoader.php';
-// require_once 'Zend/Registry.php';
-// require_once 'Zend/Translate.php';
-// require_once 'Zend/View.php';
-
 /**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Form
  */
 #[AllowDynamicProperties]
@@ -350,7 +324,6 @@ class Zend_Form_DisplayGroupTest extends PHPUnit_Framework_TestCase
      */
     public function testGetViewShouldNotReturnNullWhenViewRendererIsActive()
     {
-        // require_once 'Zend/Controller/Action/HelperBroker.php';
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer');
         $viewRenderer->initView();
         $view = $this->group->getView();

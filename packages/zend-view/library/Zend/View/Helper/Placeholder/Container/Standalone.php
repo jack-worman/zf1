@@ -12,27 +12,10 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- *
- * @version    $Id$
- *
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
-/** Zend_View_Helper_Placeholder_Registry */
-// require_once 'Zend/View/Helper/Placeholder/Registry.php';
-
-/** Zend_View_Helper_Abstract.php */
-// require_once 'Zend/View/Helper/Abstract.php';
 
 /**
  * Base class for targetted placeholder helpers.
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_View_Helper_Placeholder_Container_Standalone extends Zend_View_Helper_Abstract implements IteratorAggregate, Countable, ArrayAccess
 {
@@ -232,7 +215,6 @@ abstract class Zend_View_Helper_Placeholder_Container_Standalone extends Zend_Vi
             return $return;
         }
 
-        // require_once 'Zend/View/Exception.php';
         $e = new Zend_View_Exception('Method "'.$method.'" does not exist');
         $e->setView($this->view);
         throw $e;

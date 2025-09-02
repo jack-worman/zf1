@@ -12,26 +12,9 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
 
 /**
- * Zend_Locale_Data.
- */
-// require_once 'Zend/Locale/Data.php';
-
-/**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Locale
  */
 #[AllowDynamicProperties]
@@ -41,7 +24,6 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        // require_once 'Zend/Cache.php';
         $this->_cache = Zend_Cache::factory('Core', 'File',
             ['lifetime' => 1, 'automatic_serialization' => true],
             ['cache_dir' => __DIR__.'/../_files/']);

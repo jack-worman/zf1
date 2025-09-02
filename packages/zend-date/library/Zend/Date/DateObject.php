@@ -12,21 +12,6 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- *
- * @version    $Id$
- *
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-
-/**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Date_DateObject
 {
@@ -89,7 +74,6 @@ abstract class Zend_Date_DateObject
         } elseif (null === $timestamp) {
             $this->_unixTimestamp = time();
         } else {
-            // require_once 'Zend/Date/Exception.php';
             throw new Zend_Date_Exception('\''.$timestamp.'\' is not a valid UNIX timestamp', 0, null, $timestamp);
         }
 
@@ -1017,7 +1001,6 @@ abstract class Zend_Date_DateObject
         // throw an error on false input, but only if the new date extension is available
         if (function_exists('timezone_open')) {
             if (!@timezone_open($zone)) {
-                // require_once 'Zend/Date/Exception.php';
                 throw new Zend_Date_Exception("timezone ($zone) is not a known timezone", 0, null, $zone);
             }
         }

@@ -12,29 +12,12 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Validate_EmailAddressTest::main');
 }
 
 /**
- * @see Zend_Validate_EmailAddress
- */
-// require_once 'Zend/Validate/EmailAddress.php';
-
-/**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Validate
  */
 #[AllowDynamicProperties]
@@ -423,9 +406,7 @@ class Zend_Validate_EmailAddressTest extends PHPUnit_Framework_TestCase
      */
     public function testHostnameValidatorMessagesShouldBeTranslated()
     {
-        // require_once 'Zend/Validate/Hostname.php';
         $hostnameValidator = new Zend_Validate_Hostname();
-        // require_once 'Zend/Translate.php';
         $translations = [
             'hostnameIpAddressNotAllowed' => 'hostnameIpAddressNotAllowed translation',
             'hostnameUnknownTld' => 'hostnameUnknownTld translation',

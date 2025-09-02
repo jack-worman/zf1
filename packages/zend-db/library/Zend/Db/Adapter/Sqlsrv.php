@@ -12,30 +12,6 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
- */
-
-/**
- * @see Zend_Db_Adapter_Abstract
- */
-// require_once 'Zend/Db/Adapter/Abstract.php';
-
-/**
- * @see Zend_Db_Statement_Sqlsrv
- */
-// require_once 'Zend/Db/Statement/Sqlsrv.php';
-
-/**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
 {
@@ -119,10 +95,6 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
         }
 
         if (!extension_loaded('sqlsrv')) {
-            /*
-             * @see Zend_Db_Adapter_Sqlsrv_Exception
-             */
-            // require_once 'Zend/Db/Adapter/Sqlsrv/Exception.php';
             throw new Zend_Db_Adapter_Sqlsrv_Exception('The Sqlsrv extension is required for this adapter but the extension is not loaded');
         }
 
@@ -161,10 +133,6 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
         $this->_connection = sqlsrv_connect($serverName, $connectionInfo);
 
         if (!$this->_connection) {
-            /*
-             * @see Zend_Db_Adapter_Sqlsrv_Exception
-             */
-            // require_once 'Zend/Db/Adapter/Sqlsrv/Exception.php';
             throw new Zend_Db_Adapter_Sqlsrv_Exception(sqlsrv_errors());
         }
     }
@@ -179,25 +147,15 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
     {
         // we need at least a dbname
         if (!array_key_exists('dbname', $config)) {
-            /* @see Zend_Db_Adapter_Exception */
-            // require_once 'Zend/Db/Adapter/Exception.php';
             throw new Zend_Db_Adapter_Exception("Configuration array must have a key for 'dbname' that names the database instance");
         }
 
         if (!array_key_exists('password', $config) && array_key_exists('username', $config)) {
-            /*
-             * @see Zend_Db_Adapter_Exception
-             */
-            // require_once 'Zend/Db/Adapter/Exception.php';
             throw new Zend_Db_Adapter_Exception("Configuration array must have a key for 'password' for login credentials.
                                                 If Windows Authentication is desired, both keys 'username' and 'password' should be ommited from config.");
         }
 
         if (array_key_exists('password', $config) && !array_key_exists('username', $config)) {
-            /*
-             * @see Zend_Db_Adapter_Exception
-             */
-            // require_once 'Zend/Db/Adapter/Exception.php';
             throw new Zend_Db_Adapter_Exception("Configuration array must have a key for 'username' for login credentials.
                                                 If Windows Authentication is desired, both keys 'username' and 'password' should be ommited from config.");
         }
@@ -239,12 +197,10 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
                 $sql = 'SERIALIZABLE';
                 break;
             default:
-                // require_once 'Zend/Db/Adapter/Sqlsrv/Exception.php';
                 throw new Zend_Db_Adapter_Sqlsrv_Exception("Invalid transaction isolation level mode '$level' specified");
         }
 
         if (!sqlsrv_query($this->_connection, "SET TRANSACTION ISOLATION LEVEL $sql;")) {
-            // require_once 'Zend/Db/Adapter/Sqlsrv/Exception.php';
             throw new Zend_Db_Adapter_Sqlsrv_Exception("Transaction cannot be changed to '$level'");
         }
 
@@ -289,10 +245,6 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
         $stmtClass = $this->_defaultStmtClass;
 
         if (!class_exists($stmtClass)) {
-            /*
-             * @see Zend_Loader
-             */
-            // require_once 'Zend/Loader.php';
             Zend_Loader::loadClass($stmtClass);
         }
 
@@ -538,7 +490,6 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
     protected function _beginTransaction()
     {
         if (!sqlsrv_begin_transaction($this->_connection)) {
-            // require_once 'Zend/Db/Adapter/Sqlsrv/Exception.php';
             throw new Zend_Db_Adapter_Sqlsrv_Exception(sqlsrv_errors());
         }
     }
@@ -553,7 +504,6 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
     protected function _commit()
     {
         if (!sqlsrv_commit($this->_connection)) {
-            // require_once 'Zend/Db/Adapter/Sqlsrv/Exception.php';
             throw new Zend_Db_Adapter_Sqlsrv_Exception(sqlsrv_errors());
         }
     }
@@ -568,7 +518,6 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
     protected function _rollBack()
     {
         if (!sqlsrv_rollback($this->_connection)) {
-            // require_once 'Zend/Db/Adapter/Sqlsrv/Exception.php';
             throw new Zend_Db_Adapter_Sqlsrv_Exception(sqlsrv_errors());
         }
     }
@@ -594,11 +543,9 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
                 $this->_fetchMode = $mode;
                 break;
             case Zend_Db::FETCH_BOUND: // bound to PHP variable
-                // require_once 'Zend/Db/Adapter/Sqlsrv/Exception.php';
                 throw new Zend_Db_Adapter_Sqlsrv_Exception('FETCH_BOUND is not supported yet');
                 break;
             default:
-                // require_once 'Zend/Db/Adapter/Sqlsrv/Exception.php';
                 throw new Zend_Db_Adapter_Sqlsrv_Exception("Invalid fetch mode '$mode' specified");
                 break;
         }
@@ -619,14 +566,11 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
     {
         $count = intval($count);
         if ($count <= 0) {
-            // require_once 'Zend/Db/Adapter/Exception.php';
             throw new Zend_Db_Adapter_Exception("LIMIT argument count=$count is not valid");
         }
 
         $offset = intval($offset);
         if ($offset < 0) {
-            /* @see Zend_Db_Adapter_Exception */
-            // require_once 'Zend/Db/Adapter/Exception.php';
             throw new Zend_Db_Adapter_Exception("LIMIT argument offset=$offset is not valid");
         }
 

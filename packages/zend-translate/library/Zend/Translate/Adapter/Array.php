@@ -12,27 +12,6 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- *
- * @version    $Id$
- *
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-
-/** Zend_Locale */
-// require_once 'Zend/Locale.php';
-
-/** Zend_Translate_Adapter */
-// require_once 'Zend/Translate/Adapter.php';
-
-/**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Translate_Adapter_Array extends Zend_Translate_Adapter
 {
@@ -59,7 +38,6 @@ class Zend_Translate_Adapter_Array extends Zend_Translate_Adapter
             }
         }
         if (!is_array($data)) {
-            // require_once 'Zend/Translate/Exception.php';
             throw new Zend_Translate_Exception("Error including array or file '".$data."'");
         }
 

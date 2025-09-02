@@ -12,24 +12,10 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- *
- * @version    $Id$
- *
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
-/** @see Zend_View_Helper_Abstract */
-// require_once 'Zend/View/Helper/Abstract.php';
 
 /**
  * Helper for retrieving the BaseUrl.
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_View_Helper_BaseUrl extends Zend_View_Helper_Abstract
 {
@@ -85,7 +71,6 @@ class Zend_View_Helper_BaseUrl extends Zend_View_Helper_Abstract
     {
         if (null === $this->_baseUrl) {
             /** @see Zend_Controller_Front */
-            // require_once 'Zend/Controller/Front.php';
             $baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
 
             // Remove scriptname, eg. index.php from baseUrl

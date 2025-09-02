@@ -12,25 +12,6 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
- */
-
-/**
- * @see Zend_Filter_Interface
- */
-// require_once 'Zend/Filter/Interface.php';
-
-/**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Filter implements Zend_Filter_Interface
 {
@@ -204,7 +185,6 @@ class Zend_Filter implements Zend_Filter_Interface
      */
     public static function filterStatic($value, $classBaseName, array $args = [], $namespaces = [])
     {
-        // require_once 'Zend/Loader.php';
         $namespaces = array_merge((array) $namespaces, self::$_defaultNamespaces, ['Zend_Filter']);
         foreach ($namespaces as $namespace) {
             $nsSeparator = (false !== strpos((string) $namespace, '\\')) ? '\\' : '_';
@@ -234,7 +214,6 @@ class Zend_Filter implements Zend_Filter_Interface
                 return $object->filter($value);
             }
         }
-        // require_once 'Zend/Filter/Exception.php';
         throw new Zend_Filter_Exception("Filter class not found from basename '$classBaseName'");
     }
 }

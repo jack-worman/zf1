@@ -12,25 +12,6 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
- */
-
-/** Zend_Log_Filter_Priority */
-// require_once 'Zend/Log/Filter/Priority.php';
-
-/**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
 abstract class Zend_Log_Writer_Abstract implements Zend_Log_FactoryInterface
 {
@@ -63,8 +44,6 @@ abstract class Zend_Log_Writer_Abstract implements Zend_Log_FactoryInterface
         }
 
         if (!$filter instanceof Zend_Log_Filter_Interface) {
-            /* @see Zend_Log_Exception */
-            // require_once 'Zend/Log/Exception.php';
             throw new Zend_Log_Exception('Invalid filter provided');
         }
 
@@ -139,7 +118,6 @@ abstract class Zend_Log_Writer_Abstract implements Zend_Log_FactoryInterface
         }
 
         if (!is_array($config)) {
-            // require_once 'Zend/Log/Exception.php';
             throw new Zend_Log_Exception('Configuration must be an array or instance of Zend_Config');
         }
 

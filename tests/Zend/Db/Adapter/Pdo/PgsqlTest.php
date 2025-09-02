@@ -12,23 +12,11 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id $
  */
 
 require_once 'Zend/Db/Adapter/Pdo/TestCommon.php';
 
 /**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Db
  * @group      Zend_Db_Adapter
  */
@@ -221,7 +209,6 @@ class Zend_Db_Adapter_Pdo_PgsqlTest extends Zend_Db_Adapter_Pdo_TestCommon
         $this->_db->lastSequenceId('camelCase_id_seq');
         $this->_db->lastSequenceId($this->_db->quoteIdentifier('camelCase_id_seq', true));
 
-        // require_once 'Zend/Db/Expr.php';
         $this->_db->lastSequenceId(new Zend_Db_Expr('camelCase_id_seq'));
         $lastId = $this->_db->lastSequenceId(new Zend_Db_Expr('camelCase_id_seq'));
         $this->assertEquals(2, $lastId);

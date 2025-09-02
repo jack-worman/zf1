@@ -12,27 +12,10 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category  Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version   $Id$
  */
-
-/**
- * @see Zend_Loader
- */
-// require_once 'Zend/Loader.php';
 
 /**
  * Base class for all protocols supporting file transfers.
- *
- * @category  Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_File_Transfer
 {
@@ -77,7 +60,6 @@ class Zend_File_Transfer
         $direction = (int) $direction;
         $this->_adapter[$direction] = new $adapter($options);
         if (!$this->_adapter[$direction] instanceof Zend_File_Transfer_Adapter_Abstract) {
-            // require_once 'Zend/File/Transfer/Exception.php';
             throw new Zend_File_Transfer_Exception('Adapter '.$adapter.' does not extend Zend_File_Transfer_Adapter_Abstract');
         }
 
@@ -122,7 +104,6 @@ class Zend_File_Transfer
             return call_user_func_array([$this->_adapter[$direction], $method], $options);
         }
 
-        // require_once 'Zend/File/Transfer/Exception.php';
         throw new Zend_File_Transfer_Exception("Unknown method '".$method."' called!");
     }
 }

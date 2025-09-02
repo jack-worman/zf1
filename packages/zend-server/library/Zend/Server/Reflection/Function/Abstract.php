@@ -12,27 +12,7 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
-/**
- * Zend_Server_Reflection_Node.
- */
-// require_once 'Zend/Server/Reflection/Node.php';
-
-/**
- * Zend_Server_Reflection_Parameter.
- */
-// require_once 'Zend/Server/Reflection/Parameter.php';
-
-/**
- * Zend_Server_Reflection_Prototype.
- */
-// require_once 'Zend/Server/Reflection/Prototype.php';
 
 /**
  * Function/Method Reflection.
@@ -43,13 +23,6 @@
  * contents), retrieving the callback and callback type, retrieving additional
  * method invocation arguments, and retrieving the
  * method {@link Zend_Server_Reflection_Prototype prototypes}.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version $Id$
  */
 abstract class Zend_Server_Reflection_Function_Abstract
 {
@@ -122,7 +95,6 @@ abstract class Zend_Server_Reflection_Function_Abstract
         // testing here.
         if ((!$r instanceof ReflectionFunction)
             && (!$r instanceof ReflectionMethod)) {
-            // require_once 'Zend/Server/Reflection/Exception.php';
             throw new Zend_Server_Reflection_Exception('Invalid reflection class');
         }
         $this->_reflection = $r;
@@ -353,7 +325,6 @@ abstract class Zend_Server_Reflection_Function_Abstract
         }
 
         if (count($paramTypesTmp) != $paramCount) {
-            // require_once 'Zend/Server/Reflection/Exception.php';
             throw new Zend_Server_Reflection_Exception('Variable number of arguments is not supported for services (except optional parameters). Number of function arguments in '.$function->getDeclaringClass()->getName().'::'.$function->getName().'() must correspond to actual number of arguments described in the docblock.');
         }
 
@@ -381,7 +352,6 @@ abstract class Zend_Server_Reflection_Function_Abstract
             return call_user_func_array([$this->_reflection, $method], $args);
         }
 
-        // require_once 'Zend/Server/Reflection/Exception.php';
         throw new Zend_Server_Reflection_Exception('Invalid reflection method ("'.$method.'")');
     }
 
@@ -432,7 +402,6 @@ abstract class Zend_Server_Reflection_Function_Abstract
         }
 
         if (!is_string($namespace) || !preg_match('/[a-z0-9_\.]+/i', $namespace)) {
-            // require_once 'Zend/Server/Reflection/Exception.php';
             throw new Zend_Server_Reflection_Exception('Invalid namespace');
         }
 
@@ -459,7 +428,6 @@ abstract class Zend_Server_Reflection_Function_Abstract
     public function setDescription($string)
     {
         if (!is_string($string)) {
-            // require_once 'Zend/Server/Reflection/Exception.php';
             throw new Zend_Server_Reflection_Exception('Invalid description');
         }
 

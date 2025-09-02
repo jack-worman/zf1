@@ -12,24 +12,12 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
  * Parameter Reflection.
  *
  * Decorates a ReflectionParameter to allow setting the parameter type
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version $Id$
  */
 class Zend_Server_Reflection_Parameter
 {
@@ -84,7 +72,6 @@ class Zend_Server_Reflection_Parameter
             return call_user_func_array([$this->_reflection, $method], $args);
         }
 
-        // require_once 'Zend/Server/Reflection/Exception.php';
         throw new Zend_Server_Reflection_Exception('Invalid reflection method');
     }
 
@@ -108,7 +95,6 @@ class Zend_Server_Reflection_Parameter
     public function setType($type)
     {
         if (!is_string($type) && (null !== $type)) {
-            // require_once 'Zend/Server/Reflection/Exception.php';
             throw new Zend_Server_Reflection_Exception('Invalid parameter type');
         }
 
@@ -135,7 +121,6 @@ class Zend_Server_Reflection_Parameter
     public function setDescription($description)
     {
         if (!is_string($description) && (null !== $description)) {
-            // require_once 'Zend/Server/Reflection/Exception.php';
             throw new Zend_Server_Reflection_Exception('Invalid parameter description');
         }
 

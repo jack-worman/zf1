@@ -12,13 +12,6 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id $
  */
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_LocaleTest::main');
@@ -27,17 +20,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 // define('TESTS_ZEND_LOCALE_BCMATH_ENABLED', false); // uncomment to disable use of bcmath extension by Zend_Date
 
 /**
- * Zend_Locale.
- */
-// require_once 'Zend/Locale.php';
-// require_once 'Zend/Cache.php';
-
-/**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Locale
  */
 #[AllowDynamicProperties]
@@ -62,7 +44,6 @@ class Zend_LocaleTest extends PHPUnit_Framework_TestCase
     {
         $this->_locale = setlocale(LC_ALL, 0);
         setlocale(LC_ALL, 'de');
-        // require_once 'Zend/Cache.php';
         $this->_cache = Zend_Cache::factory('Core', 'File',
             ['lifetime' => 120, 'automatic_serialization' => true],
             ['cache_dir' => __DIR__.'/_files/']);

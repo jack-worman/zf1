@@ -12,30 +12,10 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
-
-/**
- * @see Zend_Controller_Plugin_Abstract
- */
-// require_once 'Zend/Controller/Plugin/Abstract.php';
-
-/**
- * @see Zend_Controller_Request_Http
- */
-// require_once 'Zend/Controller/Request/Http.php';
 
 /**
  * Plugin to digest PUT request body and make params available just like POST.
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Controller_Plugin_PutHandler extends Zend_Controller_Plugin_Abstract
 {

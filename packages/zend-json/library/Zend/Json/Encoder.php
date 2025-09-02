@@ -12,22 +12,10 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
 
 /**
  * Encode PHP constructs to JSON.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Json_Encoder
 {
@@ -127,7 +115,6 @@ class Zend_Json_Encoder
                     && true === $this->_options['silenceCyclicalExceptions']) {
                     return '"* RECURSION ('.get_class($value).') *"';
                 } else {
-                    // require_once 'Zend/Json/Exception.php';
                     throw new Zend_Json_Exception('Cycles not supported in JSON encoding, cycle introduced by class "'.get_class($value).'"');
                 }
             }
@@ -402,7 +389,6 @@ class Zend_Json_Encoder
     {
         $cls = new ReflectionClass($className);
         if (!$cls->isInstantiable()) {
-            // require_once 'Zend/Json/Exception.php';
             throw new Zend_Json_Exception("$className must be instantiable");
         }
 

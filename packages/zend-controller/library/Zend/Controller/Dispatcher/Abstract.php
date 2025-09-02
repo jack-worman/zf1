@@ -12,23 +12,6 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
- */
-
-/** Zend_Controller_Dispatcher_Interface */
-// require_once 'Zend/Controller/Dispatcher/Interface.php';
-
-/**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Dispatcher_Interface
 {
@@ -152,14 +135,12 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
             }
 
             if (!$allStrings) {
-                // require_once 'Zend/Controller/Dispatcher/Exception.php';
                 throw new Zend_Controller_Dispatcher_Exception('Word delimiter array must contain only strings');
             }
 
             return $spec;
         }
 
-        // require_once 'Zend/Controller/Dispatcher/Exception.php';
         throw new Zend_Controller_Dispatcher_Exception('Invalid word delimiter');
     }
 
@@ -216,7 +197,6 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
     public function setPathDelimiter($spec)
     {
         if (!is_string($spec)) {
-            // require_once 'Zend/Controller/Dispatcher/Exception.php';
             throw new Zend_Controller_Dispatcher_Exception('Invalid path delimiter');
         }
         $this->_pathDelimiter = $spec;
@@ -264,7 +244,6 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
     public function getFrontController()
     {
         if (null === $this->_frontController) {
-            // require_once 'Zend/Controller/Front.php';
             $this->_frontController = Zend_Controller_Front::getInstance();
         }
 

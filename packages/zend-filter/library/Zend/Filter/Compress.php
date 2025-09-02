@@ -12,27 +12,10 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
-
-/**
- * @see Zend_Filter_Interface
- */
-// require_once 'Zend/Filter/Interface.php';
 
 /**
  * Compresses a given string.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Filter_Compress implements Zend_Filter_Interface
 {
@@ -101,7 +84,6 @@ class Zend_Filter_Compress implements Zend_Filter_Interface
         if (class_exists('Zend_Filter_Compress_'.ucfirst($adapter))) {
             $adapter = 'Zend_Filter_Compress_'.ucfirst($adapter);
         } elseif (!class_exists($adapter)) {
-            // require_once 'Zend/Loader.php';
             if (Zend_Loader::isReadable('Zend/Filter/Compress/'.ucfirst($adapter).'.php')) {
                 $adapter = 'Zend_Filter_Compress_'.ucfirst($adapter);
             }
@@ -110,7 +92,6 @@ class Zend_Filter_Compress implements Zend_Filter_Interface
 
         $this->_adapter = new $adapter($options);
         if (!$this->_adapter instanceof Zend_Filter_Compress_CompressInterface) {
-            // require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception("Compression adapter '".$adapter."' does not implement Zend_Filter_Compress_CompressInterface");
         }
 
@@ -142,7 +123,6 @@ class Zend_Filter_Compress implements Zend_Filter_Interface
             return $this;
         }
         if (!is_string($adapter)) {
-            // require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('Invalid adapter provided; must be string or instance of Zend_Filter_Compress_CompressInterface');
         }
         $this->_adapter = $adapter;
@@ -182,7 +162,6 @@ class Zend_Filter_Compress implements Zend_Filter_Interface
     {
         $adapter = $this->getAdapter();
         if (!method_exists($adapter, $method)) {
-            // require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception("Unknown method '{$method}'");
         }
 

@@ -12,50 +12,10 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
-/** Zend_Server_Interface */
-// require_once 'Zend/Server/Interface.php';
-
-/**
- * Zend_Server_Definition.
- */
-// require_once 'Zend/Server/Definition.php';
-
-/**
- * Zend_Server_Method_Definition.
- */
-// require_once 'Zend/Server/Method/Definition.php';
-
-/**
- * Zend_Server_Method_Callback.
- */
-// require_once 'Zend/Server/Method/Callback.php';
-
-/**
- * Zend_Server_Method_Prototype.
- */
-// require_once 'Zend/Server/Method/Prototype.php';
-
-/**
- * Zend_Server_Method_Parameter.
- */
-// require_once 'Zend/Server/Method/Parameter.php';
 
 /**
  * Zend_Server_Abstract.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
 abstract class Zend_Server_Abstract implements Zend_Server_Interface
 {
@@ -166,7 +126,6 @@ abstract class Zend_Server_Abstract implements Zend_Server_Interface
         $method = empty($ns) ? $name : $ns.'.'.$name;
 
         if (!$this->_overwriteExistingMethods && $this->_table->hasMethod($method)) {
-            // require_once 'Zend/Server/Exception.php';
             throw new Zend_Server_Exception('Duplicate method registered: '.$method);
         }
 

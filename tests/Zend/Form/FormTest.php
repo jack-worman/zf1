@@ -12,39 +12,12 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Form_FormTest::main');
 }
 
-// require_once 'Zend/Form.php';
-
-// require_once 'Zend/Config.php';
-// require_once 'Zend/Controller/Action/HelperBroker.php';
-// require_once 'Zend/Form/Decorator/Form.php';
-// require_once 'Zend/Form/DisplayGroup.php';
-// require_once 'Zend/Form/Element.php';
-// require_once 'Zend/Form/Element/Text.php';
-// require_once 'Zend/Form/Element/File.php';
-// require_once 'Zend/Form/SubForm.php';
-// require_once 'Zend/Loader/PluginLoader.php';
-// require_once 'Zend/Registry.php';
-// require_once 'Zend/Translate.php';
-// require_once 'Zend/View.php';
-
 /**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Form
  */
 #[AllowDynamicProperties]
@@ -388,7 +361,6 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
      */
     public function testDisplayGroupOrderInConfigShouldNotMatter()
     {
-        // require_once 'Zend/Config/Xml.php';
         $config = new Zend_Config_Xml(__DIR__.'/_files/config/zf3250.xml', 'sitearea', true);
         $form = new Zend_Form($config->test);
         // no assertions needed; throws error if order matters
@@ -3296,7 +3268,6 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
     public function testCanSetTranslator()
     {
-        // require_once 'Zend/Translate/Adapter/Array.php';
         $translator = new Zend_Translate('array', ['foo' => 'bar']);
         $this->form->setTranslator($translator);
         $received = $this->form->getTranslator($translator);
@@ -3844,7 +3815,6 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
      */
     public function testShouldAllowSettingDisplayGroupPrefixPathViaConfigOptions()
     {
-        // require_once 'Zend/Config/Ini.php';
         $config = new Zend_Config_Ini(__DIR__.'/_files/config/zf3213.ini', 'form');
         $form = new Zend_Form($config);
         $dg = $form->foofoo;
@@ -4137,8 +4107,6 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     {
         $data = ['valid' => 1234, 'invalid' => 'invalid', 'noElement' => 'noElement'];
 
-        // require_once "Zend/Validate/Int.php";
-
         $validElement = new Zend_Form_Element('valid');
         $validElement->addValidator(new Zend_Validate_Int());
         $this->form->addElement($validElement);
@@ -4156,8 +4124,6 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     public function testGetValidSubFormValues()
     {
         $data = ['sub' => ['valid' => 1234, 'invalid' => 'invalid', 'noElement' => 'noElement']];
-
-        // require_once "Zend/Validate/Int.php";
 
         $subForm = new Zend_Form_SubForm();
         $validElement = new Zend_Form_Element('valid');

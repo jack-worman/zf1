@@ -12,22 +12,10 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
 
 /**
  * Method definition metadata.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Server_Method_Definition
 {
@@ -124,10 +112,8 @@ class Zend_Server_Method_Definition
     public function setCallback($callback)
     {
         if (is_array($callback)) {
-            // require_once 'Zend/Server/Method/Callback.php';
             $callback = new Zend_Server_Method_Callback($callback);
         } elseif (!$callback instanceof Zend_Server_Method_Callback) {
-            // require_once 'Zend/Server/Exception.php';
             throw new Zend_Server_Exception('Invalid method callback provided');
         }
         $this->_callback = $callback;
@@ -155,10 +141,8 @@ class Zend_Server_Method_Definition
     public function addPrototype($prototype)
     {
         if (is_array($prototype)) {
-            // require_once 'Zend/Server/Method/Prototype.php';
             $prototype = new Zend_Server_Method_Prototype($prototype);
         } elseif (!$prototype instanceof Zend_Server_Method_Prototype) {
-            // require_once 'Zend/Server/Exception.php';
             throw new Zend_Server_Exception('Invalid method prototype provided');
         }
         $this->_prototypes[] = $prototype;
@@ -241,7 +225,6 @@ class Zend_Server_Method_Definition
     public function setObject($object)
     {
         if (!is_object($object) && (null !== $object)) {
-            // require_once 'Zend/Server/Exception.php';
             throw new Zend_Server_Exception('Invalid object passed to '.__CLASS__.'::'.__METHOD__);
         }
         $this->_object = $object;

@@ -12,24 +12,12 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
-// require_once 'Zend/Filter/File/LowerCase.php';
 
 /**
  * custom filter for use with file element tests
  *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Zend_Form_Element_Test_Filter_Foo extends Zend_Filter_File_LowerCase

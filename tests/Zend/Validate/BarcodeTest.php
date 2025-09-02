@@ -12,27 +12,12 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
-
-/** Zend_Validate_Barcode */
-// require_once 'Zend/Validate/Barcode.php';
 
 /**
  * Zend_Validate_Barcode.
  *
- * @category   Zend
- *
  * @uses       \Zend_Validate_Barcode
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
  * @group      Zend_Validate
  */
@@ -175,7 +160,6 @@ class Zend_Validate_BarcodeTest extends PHPUnit_Framework_TestCase
     public function testConfigConstructAdapter()
     {
         $array = ['adapter' => 'Ean13', 'options' => 'unknown', 'checksum' => false];
-        // require_once 'Zend/Config.php';
         $config = new Zend_Config($array);
 
         $barcode = new Zend_Validate_Barcode($config);

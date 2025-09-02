@@ -12,18 +12,6 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
- */
-
-/**
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Cache
 {
@@ -135,7 +123,6 @@ abstract class Zend_Cache
             // we use a standard backend
             $backendClass = 'Zend_Cache_Backend_'.$backend;
         // security controls are explicit
-        // require_once str_replace((string) '_', DIRECTORY_SEPARATOR, $backendClass) . '.php';
         } else {
             // we use a custom backend
             if (!preg_match('~^[\w\\\\]+$~D', $backend)) {
@@ -179,7 +166,6 @@ abstract class Zend_Cache
             // For perfs reasons, with frontend == 'Core', we can interact with the Core itself
             $frontendClass = 'Zend_Cache_'.('Core' != $frontend ? 'Frontend_' : '').$frontend;
         // security controls are explicit
-        // require_once str_replace((string) '_', DIRECTORY_SEPARATOR, $frontendClass) . '.php';
         } else {
             // we use a custom frontend
             if (!preg_match('~^[\w\\\\]+$~D', $frontend)) {
@@ -196,7 +182,6 @@ abstract class Zend_Cache
                 if (!self::_isReadable($file)) {
                     self::throwException("file $file not found in include_path");
                 }
-                // require_once $file;
             }
         }
 
@@ -215,7 +200,6 @@ abstract class Zend_Cache
     public static function throwException($msg, ?Throwable $e = null)
     {
         // For perfs reasons, we use this dynamic inclusion
-        // require_once 'Zend/Cache/Exception.php';
         throw new Zend_Cache_Exception($msg, 0, $e);
     }
 

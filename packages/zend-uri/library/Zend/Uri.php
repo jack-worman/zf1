@@ -12,22 +12,10 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category  Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version   $Id$
  */
 
 /**
  * Abstract class for all Zend_Uri handlers.
- *
- * @category  Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Uri
 {
@@ -109,13 +97,11 @@ abstract class Zend_Uri
         $schemeSpecific = true === isset($uri[1]) ? $uri[1] : '';
 
         if (0 === strlen((string) $scheme)) {
-            // require_once 'Zend/Uri/Exception.php';
             throw new Zend_Uri_Exception('An empty string was supplied for the scheme');
         }
 
         // Security check: $scheme is used to load a class file, so only alphanumerics are allowed.
         if (false === ctype_alnum($scheme)) {
-            // require_once 'Zend/Uri/Exception.php';
             throw new Zend_Uri_Exception('Illegal scheme supplied, only alphanumeric characters are permitted');
         }
 
@@ -134,26 +120,22 @@ abstract class Zend_Uri
                 case 'mailto':
                     // TODO
                 default:
-                    // require_once 'Zend/Uri/Exception.php';
                     throw new Zend_Uri_Exception("Scheme \"$scheme\" is not supported");
                     break;
             }
         }
 
-        // require_once 'Zend/Loader.php';
         try {
             if (!class_exists($className)) {
                 Zend_Loader::loadClass($className);
             }
         } catch (Throwable $e) {
-            // require_once 'Zend/Uri/Exception.php';
             throw new Zend_Uri_Exception("\"$className\" not found");
         }
 
         $schemeHandler = new $className($scheme, $schemeSpecific);
 
         if (!$schemeHandler instanceof Zend_Uri) {
-            // require_once 'Zend/Uri/Exception.php';
             throw new Zend_Uri_Exception("\"$className\" is not an instance of Zend_Uri");
         }
 

@@ -12,25 +12,6 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
- */
-
-/**
- * @see Zend_Db_Expr
- */
-// require_once 'Zend/Db/Expr.php';
-
-/**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Db_TestUtil_Common
 {
@@ -522,7 +503,6 @@ abstract class Zend_Db_TestUtil_Common
     protected function getAdapter()
     {
         if (null == $this->_db) {
-            // require_once "Zend/Db/Exception.php";
             throw new Zend_Db_Exception('No adapter was set in TestUtils.');
         }
 
@@ -540,7 +520,6 @@ abstract class Zend_Db_TestUtil_Common
     protected function _tryRawQuery($sql)
     {
         if (null == $this->_db) {
-            // require_once "Zend/Db/Exception.php";
             throw new Zend_Db_Exception('No database adapter set.');
         }
         $this->_rawQuery($sql);

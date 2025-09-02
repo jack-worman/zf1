@@ -12,37 +12,11 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @version    $Id$
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
-/**
- * @see Zend_Uri_Http
- */
-// require_once 'Zend/Uri/Http.php';
-
-/**
- * @see Zend_Http_Client_Adapter_Interface
- */
-// require_once 'Zend/Http/Client/Adapter/Interface.php';
-/**
- * @see Zend_Http_Client_Adapter_Stream
- */
-// require_once 'Zend/Http/Client/Adapter/Stream.php';
 
 /**
  * An adapter class for Zend_Http_Client based on the curl extension.
  * Curl requires libcurl. See for full requirements the PHP manual: http://php.net/curl.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interface, Zend_Http_Client_Adapter_Stream
 {
@@ -100,7 +74,6 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
     public function __construct()
     {
         if (!extension_loaded('curl')) {
-            // require_once 'Zend/Http/Client/Adapter/Exception.php';
             throw new Zend_Http_Client_Adapter_Exception('cURL extension has to be loaded to use this Zend_Http_Client adapter.');
         }
         $this->_invalidOverwritableCurlOptions = [
@@ -136,7 +109,6 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
         if ($config instanceof Zend_Config) {
             $config = $config->toArray();
         } elseif (!is_array($config)) {
-            // require_once 'Zend/Http/Client/Adapter/Exception.php';
             throw new Zend_Http_Client_Adapter_Exception('Array or Zend_Config object expected, got '.gettype($config));
         }
 
@@ -249,7 +221,6 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
         if (!$this->_curl) {
             $this->close();
 
-            // require_once 'Zend/Http/Client/Adapter/Exception.php';
             throw new Zend_Http_Client_Adapter_Exception('Unable to Connect to '.$host.':'.$port);
         }
 
@@ -283,12 +254,10 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
     {
         // Make sure we're properly connected
         if (!$this->_curl) {
-            // require_once 'Zend/Http/Client/Adapter/Exception.php';
             throw new Zend_Http_Client_Adapter_Exception('Trying to write but we are not connected');
         }
 
         if ($this->_connected_to[0] != $uri->getHost() || $this->_connected_to[1] != $uri->getPort()) {
-            // require_once 'Zend/Http/Client/Adapter/Exception.php';
             throw new Zend_Http_Client_Adapter_Exception('Trying to write but we are connected to the wrong host');
         }
 
@@ -325,7 +294,6 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
                     }
 
                     if (!isset($this->_config['curloptions'][CURLOPT_INFILESIZE])) {
-                        // require_once 'Zend/Http/Client/Adapter/Exception.php';
                         throw new Zend_Http_Client_Adapter_Exception('Cannot set a file-handle for cURL option CURLOPT_INFILE without also setting its size in CURLOPT_INFILESIZE.');
                     }
 
@@ -367,12 +335,10 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
 
             default:
                 // For now, through an exception for unsupported request methods
-                // require_once 'Zend/Http/Client/Adapter/Exception.php';
                 throw new Zend_Http_Client_Adapter_Exception('Method currently not supported');
         }
 
         if (is_resource($body) && CURLOPT_PUT != $curlMethod) {
-            // require_once 'Zend/Http/Client/Adapter/Exception.php';
             throw new Zend_Http_Client_Adapter_Exception('Streaming requests are allowed only with PUT');
         }
 
@@ -435,7 +401,6 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
             foreach ((array) $this->_config['curloptions'] as $k => $v) {
                 if (!in_array($k, $this->_invalidOverwritableCurlOptions)) {
                     if (false == curl_setopt($this->_curl, $k, $v)) {
-                        // require_once 'Zend/Http/Client/Exception.php';
                         throw new Zend_Http_Client_Exception(sprintf("Unknown or erroreous cURL option '%s' set", $k));
                     }
                 }
@@ -454,7 +419,6 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
         $request .= $body;
 
         if (empty($this->_response)) {
-            // require_once 'Zend/Http/Client/Exception.php';
             throw new Zend_Http_Client_Exception('Error in cURL request: '.curl_error($this->_curl));
         }
 

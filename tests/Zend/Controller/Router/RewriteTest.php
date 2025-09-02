@@ -12,48 +12,12 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Controller_Router_RewriteTest::main');
 }
 
-/** Zend_Controller_Router_Rewrite */
-// require_once 'Zend/Controller/Router/Rewrite.php';
-
-/** Zend_Controller_Dispatcher_Standard */
-// require_once 'Zend/Controller/Dispatcher/Standard.php';
-
-/** Zend_Controller_Front */
-// require_once 'Zend/Controller/Front.php';
-
-/** Zend_Controller_Request_Http */
-// require_once 'Zend/Controller/Request/Http.php';
-
-/** Zend_Controller_Router_Route */
-// require_once 'Zend/Controller/Router/Route.php';
-
-/** Zend_Controller_Router_Route_Chain */
-// require_once 'Zend/Controller/Router/Route/Chain.php';
-
-/** Zend_Controller_Router_Route_Hostname */
-// require_once 'Zend/Controller/Router/Route/Hostname.php';
-
-/** Zend_Uri_Http */
-// require_once 'Zend/Uri/Http.php';
-
 /**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group      Zend_Controller
  * @group      Zend_Controller_Router
  */
@@ -335,7 +299,6 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit_Framework_TestCase
 
     public function testAddConfig()
     {
-        // require_once 'Zend/Config/Ini.php';
         $file = __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'routes.ini';
         $config = new Zend_Config_Ini($file, 'testing');
 
@@ -355,7 +318,6 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit_Framework_TestCase
 
     public function testAddConfigWithoutSection()
     {
-        // require_once 'Zend/Config/Ini.php';
         $file = __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'routes.ini';
         $config = new Zend_Config_Ini($file, 'testing');
 
@@ -367,7 +329,6 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit_Framework_TestCase
 
     public function testAddConfigWithRootNode()
     {
-        // require_once 'Zend/Config/Ini.php';
         $file = __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'routes-root.ini';
         $config = new Zend_Config_Ini($file, 'routes');
 
@@ -808,9 +769,6 @@ class Zend_Controller_Router_RewriteTest_Request extends Zend_Controller_Request
     }
 }
 
-/**
- * Zend_Controller_RouterTest_Dispatcher.
- */
 #[AllowDynamicProperties]
 class Zend_Controller_Router_RewriteTest_Dispatcher extends Zend_Controller_Dispatcher_Standard
 {

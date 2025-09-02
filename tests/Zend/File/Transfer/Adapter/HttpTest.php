@@ -12,13 +12,6 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
 
 // Call Zend_File_Transfer_Adapter_HttpTest::main() if this source file is executed directly.
@@ -26,21 +19,8 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_File_Transfer_Adapter_HttpTest::main');
 }
 
-// require_once 'Zend/File/Transfer/Adapter/Http.php';
-// require_once 'Zend/Filter/BaseName.php';
-// require_once 'Zend/Filter/StringToLower.php';
-// require_once 'Zend/Loader/PluginLoader.php';
-// require_once 'Zend/Validate/File/Count.php';
-// require_once 'Zend/Validate/File/Extension.php';
-// require_once 'Zend/Validate/File/Upload.php';
-
 /**
  * Test class for Zend_File_Transfer_Adapter_Http.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Zend_File_Transfer_Adapter_HttpTest extends PHPUnit_Framework_TestCase

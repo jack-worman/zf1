@@ -12,32 +12,10 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
-/**
- * Zend_Server_Reflection_Function.
- */
-// require_once 'Zend/Server/Reflection/Function.php';
-
-/**
- * Zend_Server_Reflection_Class.
- */
-// require_once 'Zend/Server/Reflection/Class.php';
 
 /**
  * Reflection for determining method signatures to use with server classes.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version $Id$
  */
 class Zend_Server_Reflection
 {
@@ -67,12 +45,10 @@ class Zend_Server_Reflection
         } elseif (class_exists($class)) {
             $reflection = new ReflectionClass($class);
         } else {
-            // require_once 'Zend/Server/Reflection/Exception.php';
             throw new Zend_Server_Reflection_Exception('Invalid class or object passed to attachClass()');
         }
 
         if ($argv && !is_array($argv)) {
-            // require_once 'Zend/Server/Reflection/Exception.php';
             throw new Zend_Server_Reflection_Exception('Invalid argv argument passed to reflectClass');
         }
 
@@ -101,12 +77,10 @@ class Zend_Server_Reflection
     public static function reflectFunction($function, $argv = false, $namespace = '')
     {
         if (!is_string($function) || !function_exists($function)) {
-            // require_once 'Zend/Server/Reflection/Exception.php';
             throw new Zend_Server_Reflection_Exception('Invalid function "'.$function.'" passed to reflectFunction');
         }
 
         if ($argv && !is_array($argv)) {
-            // require_once 'Zend/Server/Reflection/Exception.php';
             throw new Zend_Server_Reflection_Exception('Invalid argv argument passed to reflectClass');
         }
 

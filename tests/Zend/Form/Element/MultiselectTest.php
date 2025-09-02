@@ -12,13 +12,6 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
 
 // Call Zend_Form_Element_MultiselectTest::main() if this source file is executed directly.
@@ -26,16 +19,8 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Form_Element_MultiselectTest::main');
 }
 
-// require_once 'Zend/Form/Element/Multiselect.php';
-// require_once 'Zend/Translate.php';
-
 /**
  * Test class for Zend_Form_Element_Multiselect.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
  * @group      Zend_Form
  */
@@ -81,7 +66,6 @@ class Zend_Form_Element_MultiselectTest extends PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        // require_once 'Zend/View.php';
         $view = new Zend_View();
         $view->addHelperPath(__DIR__.'/../../../../library/Zend/View/Helper/');
 
@@ -185,14 +169,12 @@ class Zend_Form_Element_MultiselectTest extends PHPUnit_Framework_TestCase
      */
     public function testCanSetMultiOptionsUsingConfigWithKeyValueKeys()
     {
-        // require_once 'Zend/Config/Xml.php';
         $config = new Zend_Config_Xml(__DIR__.'/../_files/config/multiOptions.xml', 'testing');
         $this->element->setMultiOptions($config->options->toArray());
         $this->assertEquals($config->options->first->value, $this->element->getMultiOption('aa'));
         $this->assertEquals($config->options->second->value, $this->element->getMultiOption(2));
         $this->assertEquals($config->options->third->value, $this->element->getMultiOption('ssss'));
 
-        // require_once 'Zend/Config/Ini.php';
         $config = new Zend_Config_Ini(__DIR__.'/../_files/config/multiOptions.ini', 'testing');
         $this->element->setMultiOptions($config->options->toArray());
         $this->assertEquals($config->options->first->value, $this->element->getMultiOption('aa'));
@@ -228,7 +210,6 @@ class Zend_Form_Element_MultiselectTest extends PHPUnit_Framework_TestCase
             'ThisShouldNotShow' => 'Foo Value',
             'ThisShouldNeverShow' => 'Bar Value',
         ];
-        // require_once 'Zend/Translate.php';
         $translate = new Zend_Translate('array', $translations, 'en');
         $translate->setLocale('en');
 
@@ -300,7 +281,6 @@ class Zend_Form_Element_MultiselectTest extends PHPUnit_Framework_TestCase
             'ThisShouldNotShow' => 'Foo Value',
             'ThisShouldNeverShow' => 'Bar Value',
         ];
-        // require_once 'Zend/Translate.php';
         $translate = new Zend_Translate('array', $translations, 'en');
         $translate->setLocale('en');
 

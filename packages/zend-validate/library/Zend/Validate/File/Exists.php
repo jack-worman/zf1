@@ -12,27 +12,10 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category  Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version   $Id$
  */
-
-/**
- * @see Zend_Validate_Abstract
- */
-// require_once 'Zend/Validate/Abstract.php';
 
 /**
  * Validator which checks if the file already exists in the directory.
- *
- * @category  Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Validate_File_Exists extends Zend_Validate_Abstract
 {
@@ -76,7 +59,6 @@ class Zend_Validate_File_Exists extends Zend_Validate_Abstract
         } elseif (is_string($directory)) {
             $directory = explode(',', $directory);
         } elseif (!is_array($directory)) {
-            // require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception('Invalid options to validator provided');
         }
 
@@ -132,7 +114,6 @@ class Zend_Validate_File_Exists extends Zend_Validate_Abstract
         if (is_string($directory)) {
             $directory = explode(',', $directory);
         } elseif (!is_array($directory)) {
-            // require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception('Invalid options to validator provided');
         }
 

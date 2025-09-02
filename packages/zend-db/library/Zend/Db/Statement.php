@@ -12,32 +12,10 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
-
-/**
- * @see Zend_Db
- */
-// require_once 'Zend/Db.php';
-
-/**
- * @see Zend_Db_Statement_Interface
- */
-// require_once 'Zend/Db/Statement/Interface.php';
 
 /**
  * Abstract class to emulate a PDOStatement for native database adapters.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Db_Statement implements Zend_Db_Statement_Interface
 {
@@ -145,18 +123,10 @@ abstract class Zend_Db_Statement implements Zend_Db_Statement_Interface
         foreach ($this->_sqlSplit as $key => $val) {
             if ('?' == $val) {
                 if (false === $this->_adapter->supportsParameters('positional')) {
-                    /*
-                     * @see Zend_Db_Statement_Exception
-                     */
-                    // require_once 'Zend/Db/Statement/Exception.php';
                     throw new Zend_Db_Statement_Exception("Invalid bind-variable position '$val'");
                 }
             } elseif (':' == $val[0]) {
                 if (false === $this->_adapter->supportsParameters('named')) {
-                    /*
-                     * @see Zend_Db_Statement_Exception
-                     */
-                    // require_once 'Zend/Db/Statement/Exception.php';
                     throw new Zend_Db_Statement_Exception("Invalid bind-variable name '$val'");
                 }
             }
@@ -245,10 +215,6 @@ abstract class Zend_Db_Statement implements Zend_Db_Statement_Interface
     public function bindParam($parameter, &$variable, $type = null, $length = null, $options = null)
     {
         if (!is_int($parameter) && !is_string($parameter)) {
-            /*
-             * @see Zend_Db_Statement_Exception
-             */
-            // require_once 'Zend/Db/Statement/Exception.php';
             throw new Zend_Db_Statement_Exception('Invalid bind-variable position');
         }
 
@@ -267,10 +233,6 @@ abstract class Zend_Db_Statement implements Zend_Db_Statement_Interface
         }
 
         if (null === $position) {
-            /*
-             * @see Zend_Db_Statement_Exception
-             */
-            // require_once 'Zend/Db/Statement/Exception.php';
             throw new Zend_Db_Statement_Exception("Invalid bind-variable position '$parameter'");
         }
 
@@ -450,10 +412,6 @@ abstract class Zend_Db_Statement implements Zend_Db_Statement_Interface
             case Zend_Db::FETCH_BOUND:
             default:
                 $this->closeCursor();
-                /*
-                 * @see Zend_Db_Statement_Exception
-                 */
-                // require_once 'Zend/Db/Statement/Exception.php';
                 throw new Zend_Db_Statement_Exception('invalid fetch mode');
                 break;
         }

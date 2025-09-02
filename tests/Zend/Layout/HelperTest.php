@@ -12,13 +12,6 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
 
 // Call Zend_LayoutTest::main() if this source file is executed directly.
@@ -26,18 +19,8 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Layout_HelperTest::main');
 }
 
-// require_once 'Zend/Layout/Controller/Action/Helper/Layout.php';
-// require_once 'Zend/Layout.php';
-// require_once 'Zend/Controller/Front.php';
-// require_once 'Zend/Controller/Action/HelperBroker.php';
-
 /**
  * Test class for Zend_Layout_Controller_Action_Helper_Layout.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
  * @group      Zend_Layout
  */
@@ -142,9 +125,6 @@ class Zend_Layout_HelperTest extends PHPUnit_Framework_TestCase
     }
 }
 
-/**
- * Zend_Layout extension to allow resetting MVC instance.
- */
 #[AllowDynamicProperties]
 class Zend_Layout_HelperTest_Layout extends Zend_Layout
 {

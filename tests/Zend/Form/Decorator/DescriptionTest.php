@@ -12,13 +12,6 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
 
 // Call Zend_Form_Decorator_DescriptionTest::main() if this source file is executed directly.
@@ -26,18 +19,8 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Form_Decorator_DescriptionTest::main');
 }
 
-// require_once 'Zend/Form/Decorator/Description.php';
-
-// require_once 'Zend/Form/Element.php';
-// require_once 'Zend/View.php';
-
 /**
  * Test class for Zend_Form_Decorator_Description.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
  * @group      Zend_Form
  */
@@ -175,7 +158,6 @@ class Zend_Form_Decorator_DescriptionTest extends PHPUnit_Framework_TestCase
 
     public function testDescriptionIsTranslatedWhenTranslationAvailable()
     {
-        // require_once 'Zend/Translate.php';
         $translations = ['description' => 'This is the description'];
         $translate = new Zend_Translate('array', $translations);
         $this->element->setDescription('description')
@@ -190,7 +172,6 @@ class Zend_Form_Decorator_DescriptionTest extends PHPUnit_Framework_TestCase
     public function testDescriptionIsNotTranslatedTwice()
     {
         // Init translator
-        // require_once 'Zend/Translate.php';
         $translate = new Zend_Translate(
             [
                 'adapter' => 'array',

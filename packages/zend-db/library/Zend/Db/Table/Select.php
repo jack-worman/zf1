@@ -12,32 +12,10 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
-
-/**
- * @see Zend_Db_Select
- */
-// require_once 'Zend/Db/Select.php';
-
-/**
- * @see Zend_Db_Table_Abstract
- */
-// require_once 'Zend/Db/Table/Abstract.php';
 
 /**
  * Class for SQL SELECT query manipulation for the Zend_Db_Table component.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Db_Table_Select extends Zend_Db_Select
 {
@@ -203,7 +181,6 @@ class Zend_Db_Table_Select extends Zend_Db_Select
                     // Check each column to ensure it only references the primary table
                     if ($column) {
                         if (!isset($from[$table]) || $from[$table]['tableName'] != $primary) {
-                            // require_once 'Zend/Db/Table/Select/Exception.php';
                             throw new Zend_Db_Table_Select_Exception('Select query cannot join with another table');
                         }
                     }

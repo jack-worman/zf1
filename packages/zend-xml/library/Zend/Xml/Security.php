@@ -12,20 +12,6 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
- */
-
-/**
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Xml_Security
 {
@@ -129,7 +115,6 @@ class Zend_Xml_Security
             foreach ($dom->childNodes as $child) {
                 if (XML_DOCUMENT_TYPE_NODE === $child->nodeType) {
                     if ($child->entities->length > 0) {
-                        // require_once 'Exception.php';
                         throw new Zend_Xml_Exception(self::ENTITY_DETECT);
                     }
                 }
@@ -166,7 +151,6 @@ class Zend_Xml_Security
     public static function scanFile($file, ?DOMDocument $dom = null)
     {
         if (!file_exists((string) $file)) {
-            // require_once 'Exception.php';
             throw new Zend_Xml_Exception("The file $file specified doesn't exist");
         }
 
