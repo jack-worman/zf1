@@ -311,8 +311,8 @@ class Zend_Form_Element_File extends Zend_Form_Element_Xhtml
     /**
      * Add Filter; proxy to adapter.
      *
-     * @param string|array $filter  Type of filter to add
-     * @param string|array $options Options to set for the filter
+     * @param Zend_Filter_Interface|string|array $filter  Type of filter to add
+     * @param string|array                       $options Options to set for the filter
      *
      * @return Zend_Form_Element_File
      */
