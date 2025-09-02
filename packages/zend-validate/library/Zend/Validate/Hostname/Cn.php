@@ -12,22 +12,11 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
 
 /*
  * Ressource file for chinese idn validation
  *
- * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 return [
     1 => '/^[\x{002d}0-9a-z\x{3447}\x{3473}\x{359E}\x{360E}\x{361A}\x{3918}\x{396E}\x{39CF}\x{39D0}'.

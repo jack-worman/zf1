@@ -12,23 +12,12 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 namespace Zend\Form\Element\FileTest\Adapter;
 
 use AllowDynamicProperties;
 
 /**
- * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class Bar extends \Zend_File_Transfer_Adapter_Abstract

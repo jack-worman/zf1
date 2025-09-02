@@ -12,13 +12,6 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @version    $Id$
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
@@ -28,11 +21,6 @@
  * without actually performing an HTTP request. You should instantiate this
  * object manually, and then set it as the client's adapter. Then, you can
  * set the expected response using the setResponse() method.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Http_Client_Adapter_Test implements Zend_Http_Client_Adapter_Interface
 {

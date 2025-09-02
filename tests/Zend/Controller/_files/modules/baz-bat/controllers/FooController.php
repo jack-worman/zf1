@@ -12,12 +12,6 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Controller
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: IndexController.php 24593 2012-01-05 20:35:02Z matthew $
  */
 
 
@@ -27,11 +21,6 @@
 /**
  * Mock file for testbed
  *
- * @category   Zend
- * @package    Zend_Controller
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class BazBat_FooController extends Zend_Controller_Action

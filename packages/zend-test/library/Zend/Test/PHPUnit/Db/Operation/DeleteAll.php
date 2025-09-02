@@ -12,24 +12,12 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
 
 /**
  * Delete All Operation that can be executed on set up or tear down of a database tester.
  *
  * @uses       PHPUnit_Extensions_Database_Operation_IDatabaseOperation
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Test_PHPUnit_Db_Operation_DeleteAll implements PHPUnit_Extensions_Database_Operation_IDatabaseOperation
 {

@@ -12,11 +12,6 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 // Grab SplAutoloader interface
@@ -26,7 +21,6 @@
  *
  * Utilizes class-map files to lookup classfile locations.
  *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    New BSD {@link http://framework.zend.com/license/new-bsd}
  */
 class Zend_Loader_ClassMapAutoloader implements Zend_Loader_SplAutoloader

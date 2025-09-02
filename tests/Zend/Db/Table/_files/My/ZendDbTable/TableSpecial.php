@@ -12,12 +12,6 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 
@@ -25,11 +19,6 @@
 
 
 /**
- * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class My_ZendDbTable_TableSpecial extends Zend_Db_Table_Abstract
@@ -38,11 +27,6 @@ class My_ZendDbTable_TableSpecial extends Zend_Db_Table_Abstract
 }
 
 /**
- * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 #[AllowDynamicProperties]
 class zfbugs_products extends Zend_Db_Table_Abstract

@@ -12,24 +12,12 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @version    $Id$
  */
 
 /**
  * Represent a PHPUnit Database Extension table with Queries using a Zend_Db adapter for assertion against other tables.
  *
  * @uses       PHPUnit_Extensions_Database_DataSet_QueryTable
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Test_PHPUnit_Db_DataSet_QueryTable extends PHPUnit_Extensions_Database_DataSet_QueryTable
 {

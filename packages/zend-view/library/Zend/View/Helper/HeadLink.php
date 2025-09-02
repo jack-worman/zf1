@@ -12,14 +12,6 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- *
- * @version    $Id$
- *
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
@@ -28,9 +20,6 @@
  * @see        http://www.w3.org/TR/xhtml1/dtds.html
  *
  * @uses       Zend_View_Helper_Placeholder_Container_Standalone
- *
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
  * @method $this appendAlternate($href, $type, $title, $extras)
  * @method $this appendStylesheet($href, $media = 'screen', $conditionalStylesheet = false, array $extras = array())
