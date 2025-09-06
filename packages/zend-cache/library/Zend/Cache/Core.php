@@ -136,7 +136,6 @@ class Zend_Cache_Core
         foreach ($options as $name => $value) {
             $this->setOption($name, $value);
         }
-        $this->_loggerSanity();
     }
 
     /**
@@ -724,49 +723,10 @@ class Zend_Cache_Core
     }
 
     /**
-     * Make sure if we enable logging that the Zend_Log class
-     * is available.
-     * Create a default log object if none is set.
-     *
      * @return void
-     *
-     * @throws Zend_Cache_Exception
-     */
-    protected function _loggerSanity()
-    {
-        if (!isset($this->_options['logging']) || !$this->_options['logging']) {
-            return;
-        }
-
-        if (isset($this->_options['logger']) && $this->_options['logger'] instanceof Zend_Log) {
-            return;
-        }
-
-        // Create a default logger to the standard output stream
-        $logger = new Zend_Log(new Zend_Log_Writer_Stream('php://output'));
-        $logger->addFilter(new Zend_Log_Filter_Priority(Zend_Log::WARN, '<='));
-        $this->_options['logger'] = $logger;
-    }
-
-    /**
-     * Log a message at the WARN (4) priority.
-     *
-     * @param string $message
-     *
-     * @return void
-     *
-     * @throws Zend_Cache_Exception
      */
     protected function _log($message, $priority = 4)
     {
-        if (!$this->_options['logging']) {
-            return;
-        }
-        if (!(isset($this->_options['logger']) || $this->_options['logger'] instanceof Zend_Log)) {
-            Zend_Cache::throwException('Logging is enabled but logger is not set');
-        }
-        $logger = $this->_options['logger'];
-        $logger->log($message, $priority);
     }
 
     /**

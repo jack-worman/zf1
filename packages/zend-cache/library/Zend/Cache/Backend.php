@@ -22,15 +22,10 @@ class Zend_Cache_Backend
      * - Cache lifetime (in seconds)
      * - If null, the cache is valid forever
      *
-     * =====> (int) logging :
-     * - if set to true, a logging is activated throw Zend_Log
-     *
      * @var array directives
      */
     protected $_directives = [
         'lifetime' => 3600,
-        'logging' => false,
-        'logger' => null,
     ];
 
     /**
@@ -75,8 +70,6 @@ class Zend_Cache_Backend
                 $this->_directives[$name] = $value;
             }
         }
-
-        $this->_loggerSanity();
     }
 
     /**
@@ -230,34 +223,6 @@ class Zend_Cache_Backend
     }
 
     /**
-     * Make sure if we enable logging that the Zend_Log class
-     * is available.
-     * Create a default log object if none is set.
-     *
-     * @return void
-     *
-     * @throws Zend_Cache_Exception
-     */
-    protected function _loggerSanity()
-    {
-        if (!isset($this->_directives['logging']) || !$this->_directives['logging']) {
-            return;
-        }
-
-        if (isset($this->_directives['logger'])) {
-            if ($this->_directives['logger'] instanceof Zend_Log) {
-                return;
-            }
-            Zend_Cache::throwException('Logger object is not an instance of Zend_Log class.');
-        }
-
-        // Create a default logger to the standard output stream
-        $logger = new Zend_Log(new Zend_Log_Writer_Stream('php://output'));
-        $logger->addFilter(new Zend_Log_Filter_Priority(Zend_Log::WARN, '<='));
-        $this->_directives['logger'] = $logger;
-    }
-
-    /**
      * Log a message at the WARN (4) priority.
      *
      * @param string $message
@@ -267,17 +232,5 @@ class Zend_Cache_Backend
      */
     protected function _log($message, $priority = 4)
     {
-        if (!$this->_directives['logging']) {
-            return;
-        }
-
-        if (!isset($this->_directives['logger'])) {
-            Zend_Cache::throwException('Logging is enabled but logger is not set.');
-        }
-        $logger = $this->_directives['logger'];
-        if (!$logger instanceof Zend_Log) {
-            Zend_Cache::throwException('Logger object is not an instance of Zend_Log class.');
-        }
-        $logger->log($message, $priority);
     }
 }

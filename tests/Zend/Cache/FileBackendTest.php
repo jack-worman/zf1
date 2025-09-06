@@ -42,9 +42,6 @@ class Zend_Cache_FileBackendTest extends Zend_Cache_CommonExtendedBackendTest
             'cache_dir' => $this->_cache_dir,
         ]);
 
-        $logger = new Zend_Log(new Zend_Log_Writer_Null());
-        $this->_instance->setDirectives(['logger' => $logger]);
-
         parent::setUp($notag);
     }
 

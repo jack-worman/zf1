@@ -33,14 +33,9 @@ class Zend_Cache_StaticBackendTest extends Zend_Cache_CommonBackendTest
             'tag_cache' => $this->_innerCache,
         ]);
 
-        $logger = new Zend_Log(new Zend_Log_Writer_Null());
-        $this->_instance->setDirectives(['logger' => $logger]);
-
         $this->_requestUriOld =
             isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : null;
         $_SERVER['REQUEST_URI'] = '/foo';
-
-        $this->_instance->setDirectives(['logging' => true]);
 
         $this->_instance->save('bar : data to cache', bin2hex('/bar'), ['tag3', 'tag4']);
         $this->_instance->save('bar2 : data to cache', bin2hex('/bar2'), ['tag3', 'tag1']);
