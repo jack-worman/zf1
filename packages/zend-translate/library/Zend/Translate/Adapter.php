@@ -69,7 +69,6 @@ abstract class Zend_Translate_Adapter
      *   'disableNotices'  => when true, omits notices from being displayed
      *   'ignore'          => a prefix for files and directories which are not being added
      *   'locale'          => the actual set locale to use
-     *   'log'             => a instance of Zend_Log where logs are written to
      *   'logMessage'      => message to be logged
      *   'logPriority'     => priority which is used to write the log message
      *   'logUntranslated' => when true, untranslated messages are not logged
@@ -85,7 +84,6 @@ abstract class Zend_Translate_Adapter
         'disableNotices' => false,
         'ignore' => '.',
         'locale' => 'auto',
-        'log' => null,
         'logMessage' => "Untranslated message within '%locale%': %message%",
         'logPriority' => 5,
         'logUntranslated' => false,
@@ -214,10 +212,6 @@ abstract class Zend_Translate_Adapter
             $originate = (string) $options['locale'];
         }
 
-        if (array_key_exists('log', $options) && !($options['log'] instanceof Zend_Log)) {
-            throw new Zend_Translate_Exception('Instance of Zend_Log expected for option log');
-        }
-
         try {
             if (!($options['content'] instanceof Zend_Translate) && !($options['content'] instanceof Zend_Translate_Adapter)) {
                 if (empty($options['locale'])) {
@@ -341,10 +335,6 @@ abstract class Zend_Translate_Adapter
                 $locale = $option;
             } elseif ((isset($this->_options[$key]) and ($this->_options[$key] != $option))
                     or !isset($this->_options[$key])) {
-                if (('log' == $key) && !($option instanceof Zend_Log)) {
-                    throw new Zend_Translate_Exception('Instance of Zend_Log expected for option log');
-                }
-
                 if ('cache' == $key) {
                     self::setCache($option);
                     continue;
@@ -429,11 +419,7 @@ abstract class Zend_Translate_Adapter
             $temp = explode('_', $locale);
             if (!isset($this->_translate[$temp[0]]) and !isset($this->_translate[$locale])) {
                 if (!$this->_options['disableNotices']) {
-                    if ($this->_options['log']) {
-                        $this->_options['log']->log("The language '{$locale}' has to be added before it can be used.", $this->_options['logPriority']);
-                    } else {
-                        trigger_error("The language '{$locale}' has to be added before it can be used.", E_USER_NOTICE);
-                    }
+                    trigger_error("The language '{$locale}' has to be added before it can be used.", E_USER_NOTICE);
                 }
             }
 
@@ -442,11 +428,7 @@ abstract class Zend_Translate_Adapter
 
         if (empty($this->_translate[$locale])) {
             if (!$this->_options['disableNotices']) {
-                if ($this->_options['log']) {
-                    $this->_options['log']->log("No translation for the language '{$locale}' available.", $this->_options['logPriority']);
-                } else {
-                    trigger_error("No translation for the language '{$locale}' available.", E_USER_NOTICE);
-                }
+                trigger_error("No translation for the language '{$locale}' available.", E_USER_NOTICE);
             }
         }
 
@@ -842,11 +824,7 @@ abstract class Zend_Translate_Adapter
         if ($this->_options['logUntranslated']) {
             $message = str_replace((string) '%message%', $message ?: '', $this->_options['logMessage']);
             $message = str_replace((string) '%locale%', $locale ?: '', $message);
-            if ($this->_options['log']) {
-                $this->_options['log']->log($message, $this->_options['logPriority']);
-            } else {
-                trigger_error($message, E_USER_NOTICE);
-            }
+            trigger_error($message, E_USER_NOTICE);
         }
     }
 

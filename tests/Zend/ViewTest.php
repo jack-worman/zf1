@@ -286,25 +286,6 @@ class Zend_ViewTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests that render() works when called within a template, and that
-     * protected members are not available.
-     */
-    public function testRenderSubTemplates()
-    {
-        $view = new Zend_View();
-        $view->setScriptPath(__DIR__.'/View/_templates');
-        $view->content = 'testSubTemplate.phtml';
-        $this->assertEquals('', $view->render('testParent.phtml'));
-
-        $logFile = __DIR__.'/View/_templates/view.log';
-        $this->assertTrue(file_exists((string) $logFile));
-        $log = file_get_contents($logFile);
-        unlink($logFile); // clean up...
-        $this->assertContains('This text should not be displayed', $log);
-        $this->assertNotContains('testSubTemplate.phtml', $log);
-    }
-
-    /**
      * Tests that array properties may be modified after being set (see [ZF-460]
      * and [ZF-268] for symptoms leading to this test).
      */

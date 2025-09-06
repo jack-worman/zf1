@@ -507,23 +507,5 @@ class Zend_Cache_CoreTest extends PHPUnit_Framework_TestCase
             'logging' => true,
         ]);
         $this->_instance->setBackend($this->_backend);
-
-        $logger = $this->_instance->getOption('logger');
-        $this->assertTrue($logger instanceof Zend_Log);
-    }
-
-    /**
-     * @group ZF-10189
-     */
-    public function testIfFileZendLogWasIncluded()
-    {
-        if (class_exists('Zend_Log', false)) {
-            $this->markTestSkipped('File Zend/Log.php already included');
-        }
-
-        $cacheCore = new Zend_Cache_Core(
-            ['logging' => true]
-        );
-        $this->assertTrue($cacheCore->getOption('logger') instanceof Zend_Log);
     }
 }
