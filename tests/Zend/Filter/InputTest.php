@@ -2252,7 +2252,7 @@ class Zend_Filter_InputTest extends PHPUnit_Framework_TestCase
 #[AllowDynamicProperties]
 class MyZend_Filter_Date implements Zend_Filter_Interface
 {
-    public function filter($value)
+    public function filter(mixed $value): mixed
     {
         return '2000-01-01';
     }

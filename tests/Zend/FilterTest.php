@@ -210,7 +210,7 @@ class Zend_FilterTest extends PHPUnit_Framework_TestCase
 #[AllowDynamicProperties]
 class Zend_FilterTest_LowerCase implements Zend_Filter_Interface
 {
-    public function filter($value)
+    public function filter(mixed $value): mixed
     {
         return strtolower((string) $value);
     }
@@ -219,7 +219,7 @@ class Zend_FilterTest_LowerCase implements Zend_Filter_Interface
 #[AllowDynamicProperties]
 class Zend_FilterTest_StripUpperCase implements Zend_Filter_Interface
 {
-    public function filter($value)
+    public function filter(mixed $value): mixed
     {
         return preg_replace('/[A-Z]/', '', $value);
     }

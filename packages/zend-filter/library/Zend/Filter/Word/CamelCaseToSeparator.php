@@ -20,7 +20,7 @@ class Zend_Filter_Word_CamelCaseToSeparator extends Zend_Filter_Word_Separator_A
      *
      * @return string
      */
-    public function filter($value)
+    public function filter(mixed $value): mixed
     {
         if (self::isUnicodeSupportEnabled()) {
             parent::setMatchPattern(['#(?<=(?:\p{Lu}))(\p{Lu}\p{Ll})#', '#(?<=(?:\p{Ll}|\p{Nd}))(\p{Lu})#']);

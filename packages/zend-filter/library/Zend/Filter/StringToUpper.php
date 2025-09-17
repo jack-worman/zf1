@@ -95,7 +95,7 @@ class Zend_Filter_StringToUpper implements Zend_Filter_Interface
      *
      * @return string
      */
-    public function filter($value)
+    public function filter(mixed $value): mixed
     {
         if ($this->_encoding) {
             return mb_strtoupper((string) (string) $value, $this->_encoding);

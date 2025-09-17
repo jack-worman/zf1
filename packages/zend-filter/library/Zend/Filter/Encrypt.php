@@ -109,7 +109,7 @@ class Zend_Filter_Encrypt implements Zend_Filter_Interface
      *
      * @return string The encrypted content
      */
-    public function filter($value)
+    public function filter(mixed $value): mixed
     {
         return $this->_adapter->encrypt($value);
     }

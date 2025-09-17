@@ -38,7 +38,7 @@ class Zend_Filter_File_UpperCase extends Zend_Filter_StringToUpper
      *
      * @throws Zend_Filter_Exception
      */
-    public function filter($value)
+    public function filter(mixed $value): mixed
     {
         if (!file_exists((string) $value)) {
             throw new Zend_Filter_Exception("File '$value' not found");

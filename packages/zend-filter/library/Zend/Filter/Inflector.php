@@ -455,7 +455,7 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
      *
      * @return string
      */
-    public function filter($source)
+    public function filter(mixed $source): mixed
     {
         // clean source
         foreach ((array) $source as $sourceName => $sourceValue) {

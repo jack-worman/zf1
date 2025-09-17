@@ -75,7 +75,7 @@ class Zend_Filter_NormalizedToLocalized implements Zend_Filter_Interface
      *
      * @return string The normalized value
      */
-    public function filter($value)
+    public function filter(mixed $value): mixed
     {
         if (is_array($value)) {
             $date = new Zend_Date($value, $this->_options['locale']);

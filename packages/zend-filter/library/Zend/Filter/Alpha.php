@@ -107,7 +107,7 @@ class Zend_Filter_Alpha implements Zend_Filter_Interface
      *
      * @return string
      */
-    public function filter($value)
+    public function filter(mixed $value): mixed
     {
         $whiteSpace = $this->allowWhiteSpace ? '\s' : '';
         if (!self::$_unicodeEnabled) {

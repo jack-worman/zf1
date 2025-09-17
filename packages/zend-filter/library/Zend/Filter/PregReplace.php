@@ -146,7 +146,7 @@ class Zend_Filter_PregReplace implements Zend_Filter_Interface
      *
      * @return string
      */
-    public function filter($value)
+    public function filter(mixed $value): mixed
     {
         if (null == $this->_matchPattern) {
             throw new Zend_Filter_Exception(get_class($this).' does not have a valid MatchPattern set.');

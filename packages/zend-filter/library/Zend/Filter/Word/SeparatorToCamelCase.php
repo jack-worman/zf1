@@ -15,7 +15,7 @@
  */
 class Zend_Filter_Word_SeparatorToCamelCase extends Zend_Filter_Word_Separator_Abstract
 {
-    public function filter($value)
+    public function filter(mixed $value): mixed
     {
         // a unicode safe way of converting characters to \x00\x00 notation
         $pregQuotedSeparator = preg_quote($this->_separator, '#');

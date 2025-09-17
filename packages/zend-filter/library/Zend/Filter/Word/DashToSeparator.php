@@ -15,7 +15,7 @@
  */
 class Zend_Filter_Word_DashToSeparator extends Zend_Filter_Word_Separator_Abstract
 {
-    public function filter($value)
+    public function filter(mixed $value): mixed
     {
         $this->setMatchPattern('#-#');
         $this->setReplacement($this->_separator);

@@ -75,7 +75,7 @@ class Zend_Filter_RealPath implements Zend_Filter_Interface
      *
      * @return string
      */
-    public function filter($value)
+    public function filter(mixed $value): mixed
     {
         $path = (string) $value;
         if ($this->_exists) {
