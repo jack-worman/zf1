@@ -28,7 +28,7 @@ class Zend_Filter_Decompress extends Zend_Filter_Compress
      *
      * @return string The decompressed content
      */
-    public function filter($value)
+    public function filter(mixed $value): mixed
     {
         return $this->getAdapter()->decompress($value);
     }

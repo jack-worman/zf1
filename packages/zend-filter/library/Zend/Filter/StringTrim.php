@@ -78,7 +78,7 @@ class Zend_Filter_StringTrim implements Zend_Filter_Interface
      *
      * @return string
      */
-    public function filter($value)
+    public function filter(mixed $value): mixed
     {
         if (null === $this->_charList) {
             return $this->_unicodeTrim((string) $value);

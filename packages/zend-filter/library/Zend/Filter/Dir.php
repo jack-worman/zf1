@@ -24,7 +24,7 @@ class Zend_Filter_Dir implements Zend_Filter_Interface
      *
      * @return string
      */
-    public function filter($value)
+    public function filter(mixed $value): mixed
     {
         return dirname((string) $value);
     }

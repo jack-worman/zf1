@@ -77,7 +77,7 @@ class Zend_Filter_LocalizedToNormalized implements Zend_Filter_Interface
      *
      * @return string|array The normalized value
      */
-    public function filter($value)
+    public function filter(mixed $value): mixed
     {
         if (Zend_Locale_Format::isNumber($value, $this->_options)) {
             return Zend_Locale_Format::getNumber($value, $this->_options);

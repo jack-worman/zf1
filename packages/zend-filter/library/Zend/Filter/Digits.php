@@ -42,7 +42,7 @@ class Zend_Filter_Digits implements Zend_Filter_Interface
      *
      * @return string
      */
-    public function filter($value)
+    public function filter(mixed $value): mixed
     {
         if (!self::$_unicodeEnabled) {
             // POSIX named classes are not supported, use alternative 0-9 match

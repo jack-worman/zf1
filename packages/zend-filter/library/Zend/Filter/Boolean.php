@@ -220,7 +220,7 @@ class Zend_Filter_Boolean implements Zend_Filter_Interface
      *
      * @return string
      */
-    public function filter($value)
+    public function filter(mixed $value): mixed
     {
         $type = $this->getType();
         $casting = $this->getCasting();

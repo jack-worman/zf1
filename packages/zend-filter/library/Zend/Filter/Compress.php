@@ -177,7 +177,7 @@ class Zend_Filter_Compress implements Zend_Filter_Interface
      *
      * @return string The compressed content
      */
-    public function filter($value)
+    public function filter(mixed $value): mixed
     {
         return $this->getAdapter()->compress($value);
     }

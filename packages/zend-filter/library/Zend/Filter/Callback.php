@@ -114,7 +114,7 @@ class Zend_Filter_Callback implements Zend_Filter_Interface
      *
      * @return mixed Result from the filter which was callbacked
      */
-    public function filter($value)
+    public function filter(mixed $value): mixed
     {
         $options = [];
 

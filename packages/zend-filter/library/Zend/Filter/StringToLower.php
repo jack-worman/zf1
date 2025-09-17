@@ -95,7 +95,7 @@ class Zend_Filter_StringToLower implements Zend_Filter_Interface
      *
      * @return string
      */
-    public function filter($value)
+    public function filter(mixed $value): mixed
     {
         if (null !== $this->_encoding) {
             return mb_strtolower((string) $value, $this->_encoding);

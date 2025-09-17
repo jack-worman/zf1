@@ -24,7 +24,7 @@ class Zend_Filter_StripNewlines implements Zend_Filter_Interface
      *
      * @return string
      */
-    public function filter($value)
+    public function filter(mixed $value): mixed
     {
         return str_replace(["\n", "\r"], '', $value);
     }

@@ -59,7 +59,7 @@ class Zend_Filter_File_Decrypt extends Zend_Filter_Decrypt
      *
      * @return string The filename which has been set, or false when there were errors
      */
-    public function filter($value)
+    public function filter(mixed $value): mixed
     {
         if (!file_exists((string) $value)) {
             throw new Zend_Filter_Exception("File '$value' not found");

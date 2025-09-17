@@ -24,7 +24,7 @@ class Zend_Filter_Int implements Zend_Filter_Interface
      *
      * @return int
      */
-    public function filter($value)
+    public function filter(mixed $value): mixed
     {
         return (int) ((string) $value);
     }

@@ -223,7 +223,7 @@ class Zend_Filter_StripTags implements Zend_Filter_Interface
      *
      * @return string
      */
-    public function filter($value)
+    public function filter(mixed $value): mixed
     {
         $value = (string) $value;
 

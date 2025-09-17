@@ -163,7 +163,7 @@ class Zend_Filter_File_Rename implements Zend_Filter_Interface
      *
      * @throws Zend_Filter_Exception
      */
-    public function filter($value)
+    public function filter(mixed $value): mixed
     {
         $file = $this->getNewName($value, true);
         if (is_string($file)) {

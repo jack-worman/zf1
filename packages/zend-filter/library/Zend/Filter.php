@@ -85,7 +85,7 @@ class Zend_Filter implements Zend_Filter_Interface
      *
      * Filters are run in the order in which they were added to the chain (FIFO)
      */
-    public function filter($value)
+    public function filter(mixed $value): mixed
     {
         $valueFiltered = $value;
         foreach ($this->_filters as $filter) {

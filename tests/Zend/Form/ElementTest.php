@@ -2232,7 +2232,7 @@ class Zend_Form_ElementTest_Element extends Zend_Form_Element
 #[AllowDynamicProperties]
 class Zend_Form_ElementTest_ArrayFilter implements Zend_Filter_Interface
 {
-    public function filter($value)
+    public function filter(mixed $value): mixed
     {
         $value = array_filter($value, [$this, '_filter']);
 

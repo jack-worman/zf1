@@ -86,7 +86,7 @@ class Zend_Filter_Word_SeparatorToSeparator extends Zend_Filter_PregReplace
      *
      * @return string
      */
-    public function filter($value)
+    public function filter(mixed $value): mixed
     {
         return $this->_separatorToSeparatorFilter($value);
     }
