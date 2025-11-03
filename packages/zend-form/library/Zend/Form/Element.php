@@ -1385,10 +1385,8 @@ class Zend_Form_Element implements Zend_Validate_Interface
      * utilized.
      *
      * Note: The *filtered* value is validated.
-     *
-     * @return bool
      */
-    public function isValid($value, $context = null)
+    public function isValid($value, $context = null): bool
     {
         $this->setValue($value);
         $value = $this->getValue();

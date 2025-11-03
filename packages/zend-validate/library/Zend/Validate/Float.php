@@ -84,10 +84,8 @@ class Zend_Validate_Float extends Zend_Validate_Abstract
      * Returns true if and only if $value is a floating-point value
      *
      * @param string $value
-     *
-     * @return bool
      */
-    public function isValid($value)
+    public function isValid($value): bool
     {
         if (!is_string($value) && !is_int($value) && !is_float($value)) {
             $this->_error(self::INVALID);

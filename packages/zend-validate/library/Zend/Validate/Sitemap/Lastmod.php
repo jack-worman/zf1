@@ -48,10 +48,8 @@ class Zend_Validate_Sitemap_Lastmod extends Zend_Validate_Abstract
      * @see http://www.sitemaps.org/protocol.php#lastmoddef <lastmod>
      *
      * @param string $value value to validate
-     *
-     * @return bool
      */
-    public function isValid($value)
+    public function isValid($value): bool
     {
         if (!is_string($value)) {
             $this->_error(self::INVALID);

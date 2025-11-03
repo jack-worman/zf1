@@ -234,10 +234,8 @@ abstract class Zend_Form_Element_Multi extends Zend_Form_Element_Xhtml
      * Autoregisters InArray validator if necessary.
      *
      * @param string $value
-     *
-     * @return bool
      */
-    public function isValid($value, $context = null)
+    public function isValid($value, $context = null): bool
     {
         if ($this->registerInArrayValidator()) {
             if (!$this->getValidator('InArray')) {

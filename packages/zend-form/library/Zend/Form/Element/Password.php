@@ -63,10 +63,8 @@ class Zend_Form_Element_Password extends Zend_Form_Element_Xhtml
      * Ensure that validation error messages mask password value.
      *
      * @param string $value
-     *
-     * @return bool
      */
-    public function isValid($value, $context = null)
+    public function isValid($value, $context = null): bool
     {
         foreach ($this->getValidators() as $validator) {
             if ($validator instanceof Zend_Validate_Abstract) {

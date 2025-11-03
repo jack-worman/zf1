@@ -20,7 +20,7 @@
 class Zend_Validate_File_NotExists extends Zend_Validate_File_Exists
 {
     /**
-     * @const string Error constants
+     * @var string Error constants
      */
     public const DOES_EXIST = 'fileNotExistsDoesExist';
 
@@ -38,10 +38,8 @@ class Zend_Validate_File_NotExists extends Zend_Validate_File_Exists
      *
      * @param string $value Real file to check for
      * @param array  $file  File data from Zend_File_Transfer
-     *
-     * @return bool
      */
-    public function isValid($value, $file = null)
+    public function isValid($value, $file = null): bool
     {
         $directories = $this->getDirectory(true);
         if ((null !== $file) and (!empty($file['destination']))) {

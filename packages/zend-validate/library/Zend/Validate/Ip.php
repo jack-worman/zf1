@@ -99,10 +99,8 @@ class Zend_Validate_Ip extends Zend_Validate_Abstract
      * Defined by Zend_Validate_Interface.
      *
      * Returns true if and only if $value is a valid IP address
-     *
-     * @return bool
      */
-    public function isValid($value)
+    public function isValid($value): bool
     {
         if (!is_string($value)) {
             $this->_error(self::INVALID);

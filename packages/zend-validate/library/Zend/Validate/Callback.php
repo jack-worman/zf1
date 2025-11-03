@@ -124,10 +124,8 @@ class Zend_Validate_Callback extends Zend_Validate_Abstract
      *
      * Returns true if and only if the set callback returns
      * for the provided $value
-     *
-     * @return bool
      */
-    public function isValid($value)
+    public function isValid($value): bool
     {
         $this->_setValue($value);
 

@@ -86,10 +86,8 @@ class Zend_Validate_Int extends Zend_Validate_Abstract
      * Returns true if and only if $value is a valid integer
      *
      * @param string|int $value
-     *
-     * @return bool
      */
-    public function isValid($value)
+    public function isValid($value): bool
     {
         if (!is_string($value) && !is_int($value) && !is_float($value)) {
             $this->_error(self::INVALID);

@@ -138,10 +138,8 @@ class Zend_Validate_NotEmpty extends Zend_Validate_Abstract
      * Returns true if and only if $value is not an empty value.
      *
      * @param string $value
-     *
-     * @return bool
      */
-    public function isValid($value)
+    public function isValid($value): bool
     {
         if (null !== $value && !is_string($value) && !is_int($value) && !is_float($value)
             && !is_bool($value) && !is_array($value) && !is_object($value)) {

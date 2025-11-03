@@ -184,10 +184,8 @@ class Zend_Validate_Iban extends Zend_Validate_Abstract
      * Returns true if $value is a valid IBAN
      *
      * @param string $value
-     *
-     * @return bool
      */
-    public function isValid($value)
+    public function isValid($value): bool
     {
         $value = strtoupper((string) $value);
         $this->_setValue($value);

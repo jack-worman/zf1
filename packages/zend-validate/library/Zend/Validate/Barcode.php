@@ -155,10 +155,8 @@ class Zend_Validate_Barcode extends Zend_Validate_Abstract
      * Returns true if and only if $value contains a valid barcode
      *
      * @param string $value
-     *
-     * @return bool
      */
-    public function isValid($value)
+    public function isValid($value): bool
     {
         if (!is_string($value)) {
             $this->_error(self::INVALID);

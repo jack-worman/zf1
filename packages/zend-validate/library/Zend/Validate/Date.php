@@ -141,10 +141,8 @@ class Zend_Validate_Date extends Zend_Validate_Abstract
      * according to Zend_Date, see Zend_Date::isDate()
      *
      * @param string|array|Zend_Date $value
-     *
-     * @return bool
      */
-    public function isValid($value)
+    public function isValid($value): bool
     {
         if (!is_string($value) && !is_int($value) && !is_float($value)
             && !is_array($value) && !($value instanceof Zend_Date)) {

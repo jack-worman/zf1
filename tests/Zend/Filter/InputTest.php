@@ -2261,7 +2261,7 @@ class MyZend_Filter_Date implements Zend_Filter_Interface
 #[AllowDynamicProperties]
 class MyZend_Validate_Date implements Zend_Validate_Interface
 {
-    public function isValid($value)
+    public function isValid($value): true
     {
         return true;
     }

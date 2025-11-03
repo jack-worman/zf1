@@ -40,10 +40,8 @@ class Zend_Form_Element_Note extends Zend_Form_Element_Xhtml
      *
      * @param mixed $value   Is always ignored
      * @param mixed $context Is always ignored
-     *
-     * @return bool Returns always TRUE
      */
-    public function isValid($value, $context = null)
+    public function isValid($value, $context = null): true
     {
         return true;
     }

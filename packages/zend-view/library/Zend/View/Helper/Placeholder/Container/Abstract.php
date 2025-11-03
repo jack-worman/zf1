@@ -22,21 +22,21 @@ abstract class Zend_View_Helper_Placeholder_Container_Abstract extends ArrayObje
     /**
      * Whether or not to override all contents of placeholder.
      *
-     * @const string
+     * @var string
      */
     public const SET = 'SET';
 
     /**
      * Whether or not to append contents to placeholder.
      *
-     * @const string
+     * @var string
      */
     public const APPEND = 'APPEND';
 
     /**
      * Whether or not to prepend contents to placeholder.
      *
-     * @const string
+     * @var string
      */
     public const PREPEND = 'PREPEND';
 

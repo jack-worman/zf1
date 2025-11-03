@@ -98,10 +98,8 @@ class Zend_Validate_Alpha extends Zend_Validate_Abstract
      * Returns true if and only if $value contains only alphabetic characters
      *
      * @param string $value
-     *
-     * @return bool
      */
-    public function isValid($value)
+    public function isValid($value): bool
     {
         if (!is_string($value)) {
             $this->_error(self::INVALID);
