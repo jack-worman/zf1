@@ -20,7 +20,7 @@
 class Zend_Validate_File_ExcludeExtension extends Zend_Validate_File_Extension
 {
     /**
-     * @const string Error constants
+     * @var string Error constants
      */
     public const FALSE_EXTENSION = 'fileExcludeExtensionFalse';
     public const NOT_FOUND = 'fileExcludeExtensionNotFound';

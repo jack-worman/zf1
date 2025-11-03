@@ -20,7 +20,7 @@
 class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
 {
     /**
-     * @const Error type constants
+     * @var Error type constants
      */
     public const FALSE_TYPE = 'fileMimeTypeFalse';
     public const NOT_DETECTED = 'fileMimeTypeNotDetected';

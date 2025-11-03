@@ -20,7 +20,7 @@
 class Zend_Validate_File_NotExists extends Zend_Validate_File_Exists
 {
     /**
-     * @const string Error constants
+     * @var string Error constants
      */
     public const DOES_EXIST = 'fileNotExistsDoesExist';
 

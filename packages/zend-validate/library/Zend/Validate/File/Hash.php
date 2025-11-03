@@ -20,7 +20,7 @@
 class Zend_Validate_File_Hash extends Zend_Validate_Abstract
 {
     /**
-     * @const string Error constants
+     * @var string Error constants
      */
     public const DOES_NOT_MATCH = 'fileHashDoesNotMatch';
     public const NOT_DETECTED = 'fileHashHashNotDetected';

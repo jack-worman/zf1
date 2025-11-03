@@ -51,14 +51,14 @@ abstract class Zend_Translate_Adapter
     /**
      * Scans for the locale within the name of the directory.
      *
-     * @constant integer
+     * @varant integer
      */
     public const LOCALE_DIRECTORY = 'directory';
 
     /**
      * Scans for the locale within the name of the file.
      *
-     * @constant integer
+     * @varant integer
      */
     public const LOCALE_FILENAME = 'filename';
 

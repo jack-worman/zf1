@@ -22,7 +22,7 @@ class Zend_View_Helper_Placeholder_Registry
     /**
      * Zend_Registry key under which placeholder registry exists.
      *
-     * @const string
+     * @var string
      */
     public const REGISTRY_KEY = 'Zend_View_Helper_Placeholder_Registry';
 

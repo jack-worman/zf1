@@ -20,7 +20,7 @@
 class Zend_Validate_File_Md5 extends Zend_Validate_File_Hash
 {
     /**
-     * @const string Error constants
+     * @var string Error constants
      */
     public const DOES_NOT_MATCH = 'fileMd5DoesNotMatch';
     public const NOT_DETECTED = 'fileMd5NotDetected';

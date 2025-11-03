@@ -20,7 +20,7 @@
 class Zend_Validate_File_ImageSize extends Zend_Validate_Abstract
 {
     /**
-     * @const string Error constants
+     * @var string Error constants
      */
     public const WIDTH_TOO_BIG = 'fileImageSizeWidthTooBig';
     public const WIDTH_TOO_SMALL = 'fileImageSizeWidthTooSmall';

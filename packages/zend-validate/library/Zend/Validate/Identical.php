@@ -18,7 +18,7 @@ class Zend_Validate_Identical extends Zend_Validate_Abstract
     /**
      * Error codes.
      *
-     * @const string
+     * @var string
      */
     public const NOT_SAME = 'notSame';
     public const MISSING_TOKEN = 'missingToken';

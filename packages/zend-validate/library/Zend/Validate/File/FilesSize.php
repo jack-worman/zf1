@@ -20,7 +20,7 @@
 class Zend_Validate_File_FilesSize extends Zend_Validate_File_Size
 {
     /**
-     * @const string Error constants
+     * @var string Error constants
      */
     public const TOO_BIG = 'fileFilesSizeTooBig';
     public const TOO_SMALL = 'fileFilesSizeTooSmall';
