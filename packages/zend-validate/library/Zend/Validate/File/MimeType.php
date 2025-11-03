@@ -325,10 +325,8 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
      *
      * @param string $value Real file to check for mimetype
      * @param array  $file  File data from Zend_File_Transfer
-     *
-     * @return bool
      */
-    public function isValid($value, $file = null)
+    public function isValid($value, $file = null): bool
     {
         if (null === $file) {
             $file = [

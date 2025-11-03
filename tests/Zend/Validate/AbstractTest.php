@@ -280,7 +280,7 @@ class Zend_Validate_AbstractTest_Concrete extends Zend_Validate_Abstract
         'fooMessage' => '%value% was passed',
     ];
 
-    public function isValid($value)
+    public function isValid($value): false
     {
         $this->_setValue($value);
         $this->_error(self::FOO_MESSAGE);

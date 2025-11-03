@@ -149,10 +149,8 @@ class Zend_Validate_File_Sha1 extends Zend_Validate_File_Hash
      *
      * @param string $value Filename to check for hash
      * @param array  $file  File data from Zend_File_Transfer
-     *
-     * @return bool
      */
-    public function isValid($value, $file = null)
+    public function isValid($value, $file = null): bool
     {
         // Is file readable ?
         if (!Zend_Loader::isReadable($value)) {

@@ -22,11 +22,9 @@ interface Zend_Validate_Interface
      * getMessages() will return an array of messages that explain why the
      * validation failed.
      *
-     * @return bool
-     *
      * @throws Zend_Validate_Exception If validation of $value is impossible
      */
-    public function isValid($value);
+    public function isValid($value): bool;
 
     /**
      * Returns an array of messages that explain why the most recent isValid()

@@ -85,10 +85,8 @@ class Zend_Validate_File_FilesSize extends Zend_Validate_File_Size
      *
      * @param string|array $value Real file to check for size
      * @param array        $file  File data from Zend_File_Transfer
-     *
-     * @return bool
      */
-    public function isValid($value, $file = null)
+    public function isValid($value, $file = null): bool
     {
         if (is_string($value)) {
             $value = [$value];

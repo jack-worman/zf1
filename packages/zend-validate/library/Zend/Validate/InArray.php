@@ -163,10 +163,8 @@ class Zend_Validate_InArray extends Zend_Validate_Abstract
      *
      * Returns true if and only if $value is contained in the haystack option. If the strict
      * option is true, then the type of $value is also checked.
-     *
-     * @return bool
      */
-    public function isValid($value)
+    public function isValid($value): bool
     {
         $this->_setValue($value);
         if ($this->getRecursive()) {

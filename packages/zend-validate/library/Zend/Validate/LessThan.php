@@ -84,10 +84,8 @@ class Zend_Validate_LessThan extends Zend_Validate_Abstract
      * Defined by Zend_Validate_Interface.
      *
      * Returns true if and only if $value is less than max option
-     *
-     * @return bool
      */
-    public function isValid($value)
+    public function isValid($value): bool
     {
         $this->_setValue($value);
         if ($this->_max <= $value) {

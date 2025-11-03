@@ -43,10 +43,8 @@ class Zend_Validate_Sitemap_Priority extends Zend_Validate_Abstract
      * @see http://www.sitemaps.org/protocol.php#prioritydef <priority>
      *
      * @param string $value value to validate
-     *
-     * @return bool
      */
-    public function isValid($value)
+    public function isValid($value): bool
     {
         if (!is_numeric($value)) {
             $this->_error(self::INVALID);

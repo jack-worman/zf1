@@ -69,10 +69,8 @@ class Zend_Validate implements Zend_Validate_Interface
      * Returns true if and only if $value passes all validations in the chain.
      *
      * Validators are run in the order in which they were added to the chain (FIFO).
-     *
-     * @return bool
      */
-    public function isValid($value)
+    public function isValid($value): bool
     {
         $this->_messages = [];
         $this->_errors = [];

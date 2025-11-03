@@ -233,7 +233,7 @@ class Zend_ValidateTest extends PHPUnit_Framework_TestCase
 #[AllowDynamicProperties]
 class Zend_ValidateTest_True extends Zend_Validate_Abstract
 {
-    public function isValid($value)
+    public function isValid($value): true
     {
         return true;
     }
@@ -245,7 +245,7 @@ class Zend_ValidateTest_True extends Zend_Validate_Abstract
 #[AllowDynamicProperties]
 class Zend_ValidateTest_False extends Zend_Validate_Abstract
 {
-    public function isValid($value)
+    public function isValid($value): false
     {
         $this->_messages = ['error' => 'validation failed'];
 

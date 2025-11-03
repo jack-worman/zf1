@@ -176,10 +176,8 @@ class Zend_Validate_Between extends Zend_Validate_Abstract
      *
      * Returns true if and only if $value is between min and max options, inclusively
      * if inclusive option is true.
-     *
-     * @return bool
      */
-    public function isValid($value)
+    public function isValid($value): bool
     {
         $this->_setValue($value);
 

@@ -41,10 +41,8 @@ class Zend_Validate_File_ExcludeExtension extends Zend_Validate_File_Extension
      *
      * @param string $value Real file to check for extension
      * @param array  $file  File data from Zend_File_Transfer
-     *
-     * @return bool
      */
-    public function isValid($value, $file = null)
+    public function isValid($value, $file = null): bool
     {
         // Is file readable ?
         if (!Zend_Loader::isReadable($value)) {

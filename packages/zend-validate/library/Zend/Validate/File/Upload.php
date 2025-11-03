@@ -145,10 +145,8 @@ class Zend_Validate_File_Upload extends Zend_Validate_Abstract
      * @param string      $value Single file to check for upload errors, when giving null the $_FILES array
      *                           from initialization will be used
      * @param string|null $file
-     *
-     * @return bool
      */
-    public function isValid($value, $file = null)
+    public function isValid($value, $file = null): bool
     {
         $this->_messages = [];
         if (array_key_exists($value, $this->_files)) {

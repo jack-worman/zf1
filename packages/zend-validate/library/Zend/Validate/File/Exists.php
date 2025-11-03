@@ -145,10 +145,8 @@ class Zend_Validate_File_Exists extends Zend_Validate_Abstract
      *
      * @param string $value Real file to check for existance
      * @param array  $file  File data from Zend_File_Transfer
-     *
-     * @return bool
      */
-    public function isValid($value, $file = null)
+    public function isValid($value, $file = null): bool
     {
         $directories = $this->getDirectory(true);
         if ((null !== $file) and (!empty($file['destination']))) {

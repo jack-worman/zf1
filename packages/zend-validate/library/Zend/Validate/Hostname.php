@@ -1673,11 +1673,9 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
      *
      * @param string $value
      *
-     * @return bool
-     *
      * @throws Zend_Validate_Exception if a fatal error occurs for validation process
      */
-    public function isValid($value)
+    public function isValid($value): bool
     {
         if (!is_string($value)) {
             $this->_error(self::INVALID);

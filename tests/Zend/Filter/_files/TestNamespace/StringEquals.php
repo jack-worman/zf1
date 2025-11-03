@@ -44,9 +44,8 @@ class TestNamespace_StringEquals extends Zend_Validate_Abstract
      * are equal to one another with string comparison.
      *
      * @param  array $value Value to validate
-     * @return boolean
      */
-    public function isValid($value)
+    public function isValid($value): bool
     {
         $this->_setValue($value);
 

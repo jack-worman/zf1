@@ -21,7 +21,7 @@
  */
 class Zend_Validate_Db_RecordExists extends Zend_Validate_Db_Abstract
 {
-    public function isValid($value)
+    public function isValid($value): bool
     {
         $valid = true;
         $this->_setValue($value);
