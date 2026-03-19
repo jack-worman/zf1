@@ -114,9 +114,8 @@ class Zend_Json_Encoder
                 if (isset($this->_options['silenceCyclicalExceptions'])
                     && true === $this->_options['silenceCyclicalExceptions']) {
                     return '"* RECURSION ('.get_class($value).') *"';
-                } else {
-                    throw new Zend_Json_Exception('Cycles not supported in JSON encoding, cycle introduced by class "'.get_class($value).'"');
                 }
+                throw new Zend_Json_Exception('Cycles not supported in JSON encoding, cycle introduced by class "'.get_class($value).'"');
             }
 
             $this->_visited[] = $value;

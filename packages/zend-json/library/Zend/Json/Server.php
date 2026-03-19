@@ -308,9 +308,9 @@ class Zend_Json_Server extends Zend_Server_Abstract
                     $this->getServiceMap()->$method($value);
 
                     return $this;
-                } else {
-                    return $this->getServiceMap()->$method();
                 }
+
+                return $this->getServiceMap()->$method();
             }
         }
 

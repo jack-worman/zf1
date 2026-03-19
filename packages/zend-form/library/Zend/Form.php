@@ -3378,9 +3378,8 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
             return $this->getSubForm($key);
         } elseif (isset($this->_displayGroups[$key])) {
             return $this->getDisplayGroup($key);
-        } else {
-            throw new Zend_Form_Exception(sprintf('Corruption detected in form; invalid key ("%s") found in internal iterator', (string) $key));
         }
+        throw new Zend_Form_Exception(sprintf('Corruption detected in form; invalid key ("%s") found in internal iterator', (string) $key));
     }
 
     /**

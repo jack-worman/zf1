@@ -166,9 +166,9 @@ class Zend_Test_DbAdapter extends Zend_Db_Adapter_Abstract
     {
         if (isset($this->_describeTables[$tableName])) {
             return $this->_describeTables[$tableName];
-        } else {
-            return [];
         }
+
+        return [];
     }
 
     /**
@@ -245,9 +245,9 @@ class Zend_Test_DbAdapter extends Zend_Db_Adapter_Abstract
     {
         if (count($this->_lastInsertIdStack)) {
             return array_pop($this->_lastInsertIdStack);
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -255,7 +255,6 @@ class Zend_Test_DbAdapter extends Zend_Db_Adapter_Abstract
      */
     protected function _beginTransaction()
     {
-        return;
     }
 
     /**
@@ -263,7 +262,6 @@ class Zend_Test_DbAdapter extends Zend_Db_Adapter_Abstract
      */
     protected function _commit()
     {
-        return;
     }
 
     /**
@@ -284,7 +282,6 @@ class Zend_Test_DbAdapter extends Zend_Db_Adapter_Abstract
      */
     public function setFetchMode($mode)
     {
-        return;
     }
 
     /**

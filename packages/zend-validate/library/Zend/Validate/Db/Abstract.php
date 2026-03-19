@@ -167,7 +167,7 @@ abstract class Zend_Validate_Db_Abstract extends Zend_Validate_Abstract
      */
     public function setAdapter($adapter)
     {
-        if (!($adapter instanceof Zend_Db_Adapter_Abstract)) {
+        if (!$adapter instanceof Zend_Db_Adapter_Abstract) {
             throw new Zend_Validate_Exception('Adapter option must be a database adapter!');
         }
 

@@ -1305,9 +1305,9 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
             $action = (string) $action;
             if (isset($controller->{$contextKey}[$action])) {
                 return $controller->{$contextKey}[$action];
-            } else {
-                return [];
             }
+
+            return [];
         }
 
         return $controller->$contextKey;

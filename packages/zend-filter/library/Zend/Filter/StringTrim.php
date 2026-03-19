@@ -82,9 +82,9 @@ class Zend_Filter_StringTrim implements Zend_Filter_Interface
     {
         if (null === $this->_charList) {
             return $this->_unicodeTrim((string) $value);
-        } else {
-            return $this->_unicodeTrim((string) $value, $this->_charList);
         }
+
+        return $this->_unicodeTrim((string) $value, $this->_charList);
     }
 
     /**

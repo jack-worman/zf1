@@ -215,9 +215,8 @@ class Zend_Controller_Plugin_Broker extends Zend_Controller_Plugin_Abstract
             } catch (Throwable $e) {
                 if (Zend_Controller_Front::getInstance()->throwExceptions()) {
                     throw new Zend_Controller_Exception($e->getMessage().$e->getTraceAsString(), $e->getCode(), $e);
-                } else {
-                    $this->getResponse()->setException($e);
                 }
+                $this->getResponse()->setException($e);
             }
         }
     }
@@ -236,9 +235,8 @@ class Zend_Controller_Plugin_Broker extends Zend_Controller_Plugin_Abstract
             } catch (Throwable $e) {
                 if (Zend_Controller_Front::getInstance()->throwExceptions()) {
                     throw new Zend_Controller_Exception($e->getMessage().$e->getTraceAsString(), $e->getCode(), $e);
-                } else {
-                    $this->getResponse()->setException($e);
                 }
+                $this->getResponse()->setException($e);
             }
         }
     }
@@ -261,9 +259,8 @@ class Zend_Controller_Plugin_Broker extends Zend_Controller_Plugin_Abstract
             } catch (Throwable $e) {
                 if (Zend_Controller_Front::getInstance()->throwExceptions()) {
                     throw new Zend_Controller_Exception($e->getMessage().$e->getTraceAsString(), $e->getCode(), $e);
-                } else {
-                    $this->getResponse()->setException($e);
                 }
+                $this->getResponse()->setException($e);
             }
         }
     }
@@ -281,11 +278,10 @@ class Zend_Controller_Plugin_Broker extends Zend_Controller_Plugin_Abstract
             } catch (Throwable $e) {
                 if (Zend_Controller_Front::getInstance()->throwExceptions()) {
                     throw new Zend_Controller_Exception($e->getMessage().$e->getTraceAsString(), $e->getCode(), $e);
-                } else {
-                    $this->getResponse()->setException($e);
-                    // skip rendering of normal dispatch give the error handler a try
-                    $this->getRequest()->setDispatched(false);
                 }
+                $this->getResponse()->setException($e);
+                // skip rendering of normal dispatch give the error handler a try
+                $this->getRequest()->setDispatched(false);
             }
         }
     }
@@ -303,9 +299,8 @@ class Zend_Controller_Plugin_Broker extends Zend_Controller_Plugin_Abstract
             } catch (Throwable $e) {
                 if (Zend_Controller_Front::getInstance()->throwExceptions()) {
                     throw new Zend_Controller_Exception($e->getMessage().$e->getTraceAsString(), $e->getCode(), $e);
-                } else {
-                    $this->getResponse()->setException($e);
                 }
+                $this->getResponse()->setException($e);
             }
         }
     }
@@ -323,9 +318,8 @@ class Zend_Controller_Plugin_Broker extends Zend_Controller_Plugin_Abstract
             } catch (Throwable $e) {
                 if (Zend_Controller_Front::getInstance()->throwExceptions()) {
                     throw new Zend_Controller_Exception($e->getMessage().$e->getTraceAsString(), $e->getCode(), $e);
-                } else {
-                    $this->getResponse()->setException($e);
                 }
+                $this->getResponse()->setException($e);
             }
         }
     }

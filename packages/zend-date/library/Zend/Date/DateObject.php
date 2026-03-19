@@ -91,9 +91,9 @@ abstract class Zend_Date_DateObject
     {
         if ($this->_unixTimestamp === intval($this->_unixTimestamp)) {
             return (int) $this->_unixTimestamp;
-        } else {
-            return (string) $this->_unixTimestamp;
         }
+
+        return (string) $this->_unixTimestamp;
     }
 
     /**

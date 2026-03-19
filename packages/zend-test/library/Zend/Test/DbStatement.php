@@ -271,9 +271,9 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
             $row = array_shift($this->_fetchStack);
 
             return $row;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -309,15 +309,14 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
 
         if (false == $row) {
             return false;
-        } else {
-            if (count($row) < $col) {
-                throw new Zend_Db_Statement_Exception("Column Position '".$col."' is out of bounds.");
-            }
-
-            $keys = array_keys($row);
-
-            return $row[$keys[$col]];
         }
+        if (count($row) < $col) {
+            throw new Zend_Db_Statement_Exception("Column Position '".$col."' is out of bounds.");
+        }
+
+        $keys = array_keys($row);
+
+        return $row[$keys[$col]];
     }
 
     /**

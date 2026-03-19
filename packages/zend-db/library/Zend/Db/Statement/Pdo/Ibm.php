@@ -70,9 +70,9 @@ class Zend_Db_Statement_Pdo_Ibm extends Zend_Db_Statement_Pdo
         try {
             if ((null === $type) && (null === $length) && (null === $options)) {
                 return $this->_stmt->bindParam($parameter, $variable);
-            } else {
-                return $this->_stmt->bindParam($parameter, $variable, $type, $length, $options);
             }
+
+            return $this->_stmt->bindParam($parameter, $variable, $type, $length, $options);
         } catch (PDOException $e) {
             throw new Zend_Db_Statement_Exception($e->getMessage(), $e->getCode(), $e);
         }

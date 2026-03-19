@@ -207,9 +207,9 @@ abstract class Zend_Db_TestUtil_Common
         }
         if (array_key_exists($tableId, $this->_tableName)) {
             return $this->_tableName[$tableId];
-        } else {
-            return $tableId;
         }
+
+        return $tableId;
     }
 
     protected function _getColumnsBugs()

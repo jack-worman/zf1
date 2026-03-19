@@ -188,9 +188,9 @@ class Zend_View_Helper_Cycle implements Iterator
     {
         if ($this->_pointers[$this->_name] < 0) {
             return 0;
-        } else {
-            return $this->_pointers[$this->_name];
         }
+
+        return $this->_pointers[$this->_name];
     }
 
     /**

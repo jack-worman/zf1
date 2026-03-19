@@ -499,15 +499,14 @@ class Zend_Cache_Backend_File extends Zend_Cache_Backend implements Zend_Cache_B
     {
         if (isset($this->_metadatasArray[$id])) {
             return $this->_metadatasArray[$id];
-        } else {
-            $metadatas = $this->_loadMetadatas($id);
-            if (!$metadatas) {
-                return false;
-            }
-            $this->_setMetadatas($id, $metadatas, false);
-
-            return $metadatas;
         }
+        $metadatas = $this->_loadMetadatas($id);
+        if (!$metadatas) {
+            return false;
+        }
+        $this->_setMetadatas($id, $metadatas, false);
+
+        return $metadatas;
     }
 
     /**
@@ -628,9 +627,9 @@ class Zend_Cache_Backend_File extends Zend_Cache_Backend implements Zend_Cache_B
         $id = $this->_fileNameToId($fileName);
         if ('internal-metadatas---' == substr((string) $id, 0, 21)) {
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -957,9 +956,9 @@ class Zend_Cache_Backend_File extends Zend_Cache_Backend implements Zend_Cache_B
         }
         if ($parts) {
             return $partsArray;
-        } else {
-            return $root;
         }
+
+        return $root;
     }
 
     /**

@@ -80,7 +80,7 @@ class Zend_Config_Writer_Ini extends Zend_Config_Writer_FileAbstract
         } else {
             $config = $this->_sortRootElements($this->_config);
             foreach ($config as $sectionName => $data) {
-                if (!($data instanceof Zend_Config)) {
+                if (!$data instanceof Zend_Config) {
                     $iniString .= $sectionName
                                .' = '
                                .$this->_prepareValue($data)
@@ -138,9 +138,8 @@ class Zend_Config_Writer_Ini extends Zend_Config_Writer_FileAbstract
             return $value ? 'true' : 'false';
         } elseif (false === strpos((string) $value, '"')) {
             return '"'.$value.'"';
-        } else {
-            throw new Zend_Config_Exception('Value can not contain double quotes "');
         }
+        throw new Zend_Config_Exception('Value can not contain double quotes "');
     }
 
     /**

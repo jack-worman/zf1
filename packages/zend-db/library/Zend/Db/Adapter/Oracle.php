@@ -598,11 +598,11 @@ class Zend_Db_Adapter_Oracle extends Zend_Db_Adapter_Abstract
             $matches = null;
             if (preg_match('/((?:[0-9]{1,2}\.){1,3}[0-9]{1,2})/', $version, $matches)) {
                 return $matches[1];
-            } else {
-                return null;
             }
-        } else {
+
             return null;
         }
+
+        return null;
     }
 }

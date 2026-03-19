@@ -488,9 +488,9 @@ class Zend_Http_Header_SetCookie
 
         if (is_int($this->expires) && $this->expires < $now) {
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**

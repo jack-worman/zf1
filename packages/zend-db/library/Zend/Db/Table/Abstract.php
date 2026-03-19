@@ -1340,7 +1340,7 @@ abstract class Zend_Db_Table_Abstract
      */
     public function fetchAll($where = null, $order = null, $count = null, $offset = null)
     {
-        if (!($where instanceof Zend_Db_Table_Select)) {
+        if (!$where instanceof Zend_Db_Table_Select) {
             $select = $this->select();
 
             if (null !== $where) {
@@ -1389,7 +1389,7 @@ abstract class Zend_Db_Table_Abstract
      */
     public function fetchRow($where = null, $order = null, $offset = null)
     {
-        if (!($where instanceof Zend_Db_Table_Select)) {
+        if (!$where instanceof Zend_Db_Table_Select) {
             $select = $this->select();
 
             if (null !== $where) {

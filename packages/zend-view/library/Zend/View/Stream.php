@@ -142,9 +142,10 @@ class Zend_View_Stream
                     $this->_pos = $offset;
 
                     return true;
-                } else {
-                    return false;
                 }
+
+                return false;
+
                 break;
 
             case SEEK_CUR:
@@ -152,9 +153,10 @@ class Zend_View_Stream
                     $this->_pos += $offset;
 
                     return true;
-                } else {
-                    return false;
                 }
+
+                return false;
+
                 break;
 
             case SEEK_END:
@@ -162,9 +164,10 @@ class Zend_View_Stream
                     $this->_pos = strlen((string) $this->_data) + $offset;
 
                     return true;
-                } else {
-                    return false;
                 }
+
+                return false;
+
                 break;
 
             default:

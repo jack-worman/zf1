@@ -178,9 +178,8 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
             if (empty($this->_finfo)) {
                 $this->_finfo = null;
                 throw new Zend_Validate_Exception(sprintf('The given magicfile ("%s") is not accepted by finfo', $file), null, $this->_finfoError);
-            } else {
-                $this->_magicfile = $file;
             }
+            $this->_magicfile = $file;
         }
 
         return $this;

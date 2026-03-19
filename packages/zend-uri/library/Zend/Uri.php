@@ -151,9 +151,9 @@ abstract class Zend_Uri
     {
         if (false === empty($this->_scheme)) {
             return $this->_scheme;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**

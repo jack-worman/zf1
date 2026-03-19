@@ -189,9 +189,9 @@ class Zend_Test_PHPUnit_Constraint_DomQuery34 extends PHPUnit_Framework_Constrai
             default:
                 if ($this->_negate) {
                     return 0 == count($result);
-                } else {
-                    return 0 != count($result);
                 }
+
+                return 0 != count($result);
         }
     }
 
@@ -413,13 +413,12 @@ class Zend_Test_PHPUnit_Constraint_DomQuery34 extends PHPUnit_Framework_Constrai
     {
         if ($node instanceof DOMAttr) {
             return $node->value;
-        } else {
-            $doc = $node->ownerDocument;
-            $content = $doc->saveXML($node);
-            $tag = $node->nodeName;
-            $regex = '|</?'.$tag.'[^>]*>|';
-
-            return preg_replace($regex, '', $content);
         }
+        $doc = $node->ownerDocument;
+        $content = $doc->saveXML($node);
+        $tag = $node->nodeName;
+        $regex = '|</?'.$tag.'[^>]*>|';
+
+        return preg_replace($regex, '', $content);
     }
 }

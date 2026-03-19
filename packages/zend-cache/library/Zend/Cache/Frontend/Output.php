@@ -45,9 +45,9 @@ class Zend_Cache_Frontend_Output extends Zend_Cache_Core
                 echo $data;
 
                 return true;
-            } else {
-                return $data;
             }
+
+            return $data;
         }
         ob_start();
         ob_implicit_flush(false);

@@ -98,8 +98,6 @@ class Zend_Controller_Action_HelperBroker
     public static function addHelper(Zend_Controller_Action_Helper_Abstract $helper)
     {
         self::getStack()->push($helper);
-
-        return;
     }
 
     /**
@@ -110,8 +108,6 @@ class Zend_Controller_Action_HelperBroker
     public static function resetHelpers()
     {
         self::$_stack = null;
-
-        return;
     }
 
     /**

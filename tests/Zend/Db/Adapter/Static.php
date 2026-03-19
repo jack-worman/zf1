@@ -178,8 +178,6 @@ class Zend_Db_Adapter_Static extends Zend_Db_Adapter_Abstract
     protected function _connect()
     {
         $this->_connection = $this;
-
-        return;
     }
 
     /**

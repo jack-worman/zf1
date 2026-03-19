@@ -313,9 +313,9 @@ class Zend_Loader
     {
         if ($once) {
             return include_once $filespec;
-        } else {
-            return include $filespec;
         }
+
+        return include $filespec;
     }
 
     /**

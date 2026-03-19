@@ -908,9 +908,9 @@ abstract class Zend_Db_Adapter_Abstract
     {
         if (null === $count) {
             return str_replace((string) '?', $this->quote($value, $type), $text);
-        } else {
-            return implode($this->quote($value, $type), explode('?', $text, $count + 1));
         }
+
+        return implode($this->quote($value, $type), explode('?', $text, $count + 1));
     }
 
     /**

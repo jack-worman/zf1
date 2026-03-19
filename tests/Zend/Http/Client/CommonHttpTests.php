@@ -1094,7 +1094,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
 
     public function testStreamResponse()
     {
-        if (!($this->client->getAdapter() instanceof Zend_Http_Client_Adapter_Stream)) {
+        if (!$this->client->getAdapter() instanceof Zend_Http_Client_Adapter_Stream) {
             $this->markTestSkipped('Current adapter does not support streaming');
 
             return;
@@ -1120,7 +1120,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
 
     public function testStreamResponseBody()
     {
-        if (!($this->client->getAdapter() instanceof Zend_Http_Client_Adapter_Stream)) {
+        if (!$this->client->getAdapter() instanceof Zend_Http_Client_Adapter_Stream) {
             $this->markTestSkipped('Current adapter does not support streaming');
 
             return;
@@ -1141,7 +1141,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
 
     public function testStreamResponseNamed()
     {
-        if (!($this->client->getAdapter() instanceof Zend_Http_Client_Adapter_Stream)) {
+        if (!$this->client->getAdapter() instanceof Zend_Http_Client_Adapter_Stream) {
             $this->markTestSkipped('Current adapter does not support streaming');
 
             return;
@@ -1168,7 +1168,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
 
     public function testStreamRequest()
     {
-        if (!($this->client->getAdapter() instanceof Zend_Http_Client_Adapter_Stream)) {
+        if (!$this->client->getAdapter() instanceof Zend_Http_Client_Adapter_Stream) {
             $this->markTestSkipped('Current adapter does not support streaming');
 
             return;

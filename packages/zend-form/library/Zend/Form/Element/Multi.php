@@ -304,12 +304,11 @@ abstract class Zend_Form_Element_Multi extends Zend_Form_Element_Xhtml
             }
 
             return $value;
-        } else {
-            if (null !== ($translator = $this->getTranslator())) {
-                return $translator->translate($value);
-            }
-
-            return $value;
         }
+        if (null !== ($translator = $this->getTranslator())) {
+            return $translator->translate($value);
+        }
+
+        return $value;
     }
 }

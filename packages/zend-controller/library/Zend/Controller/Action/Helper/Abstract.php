@@ -129,8 +129,8 @@ abstract class Zend_Controller_Action_Helper_Abstract
             $helperName = strrchr($fullClassName, '\\');
 
             return ltrim((string) $helperName, '\\');
-        } else {
-            return $fullClassName;
         }
+
+        return $fullClassName;
     }
 }

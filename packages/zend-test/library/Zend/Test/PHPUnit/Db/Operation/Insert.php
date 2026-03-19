@@ -23,7 +23,7 @@ class Zend_Test_PHPUnit_Db_Operation_Insert implements PHPUnit_Extensions_Databa
 {
     public function execute(PHPUnit_Extensions_Database_DB_IDatabaseConnection $connection, PHPUnit_Extensions_Database_DataSet_IDataSet $dataSet)
     {
-        if (!($connection instanceof Zend_Test_PHPUnit_Db_Connection)) {
+        if (!$connection instanceof Zend_Test_PHPUnit_Db_Connection) {
             throw new Zend_Test_PHPUnit_Db_Exception('Not a valid Zend_Test_PHPUnit_Db_Connection instance, '.get_class($connection).' given!');
         }
 
