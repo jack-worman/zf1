@@ -2332,10 +2332,8 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
 
     /**
      * Validate the form.
-     *
-     * @param array $value
      */
-    public function isValid($value): bool
+    public function isValid(mixed $value): bool
     {
         if (!is_array($value)) {
             throw new Zend_Form_Exception(__METHOD__.' expects an array');
@@ -3380,9 +3378,8 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
             return $this->getSubForm($key);
         } elseif (isset($this->_displayGroups[$key])) {
             return $this->getDisplayGroup($key);
-        } else {
-            throw new Zend_Form_Exception(sprintf('Corruption detected in form; invalid key ("%s") found in internal iterator', (string) $key));
         }
+        throw new Zend_Form_Exception(sprintf('Corruption detected in form; invalid key ("%s") found in internal iterator', (string) $key));
     }
 
     /**

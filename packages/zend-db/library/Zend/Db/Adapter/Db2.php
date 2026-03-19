@@ -680,9 +680,9 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
             }
 
             return $version;
-        } else {
-            return null;
         }
+
+        return null;
     }
 
     /**

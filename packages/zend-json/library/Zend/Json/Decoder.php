@@ -428,11 +428,10 @@ class Zend_Json_Decoder
                 if (is_numeric($datum)) {
                     if (preg_match('/^0\d+$/', $datum)) {
                         throw new Zend_Json_Exception("Octal notation not supported by JSON (value: $datum)");
-                    } else {
-                        $val = (int) $datum;
-                        $fVal = (float) $datum;
-                        $this->_tokenValue = ($val == $fVal ? $val : $fVal);
                     }
+                    $val = (int) $datum;
+                    $fVal = (float) $datum;
+                    $this->_tokenValue = ($val == $fVal ? $val : $fVal);
                 } else {
                     throw new Zend_Json_Exception("Illegal number format: $datum");
                 }

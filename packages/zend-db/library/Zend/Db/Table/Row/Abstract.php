@@ -433,9 +433,9 @@ abstract class Zend_Db_Table_Row_Abstract implements ArrayAccess, IteratorAggreg
          */
         if (empty($this->_cleanData)) {
             return $this->_doInsert();
-        } else {
-            return $this->_doUpdate();
         }
+
+        return $this->_doUpdate();
     }
 
     /**

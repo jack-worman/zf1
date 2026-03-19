@@ -34,7 +34,7 @@ class Zend_Config_Writer_Xml extends Zend_Config_Writer_FileAbstract
             $this->_addBranch($this->_config, $child, $xml);
         } else {
             foreach ($this->_config as $sectionName => $data) {
-                if (!($data instanceof Zend_Config)) {
+                if (!$data instanceof Zend_Config) {
                     $xml->addChild($sectionName, (string) $data);
                 } else {
                     $child = $xml->addChild($sectionName);

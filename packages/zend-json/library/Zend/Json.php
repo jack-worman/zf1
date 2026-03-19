@@ -222,9 +222,9 @@ class Zend_Json
         $match = preg_match($pattern, $simpleXmlElementObject, $matchings);
         if ($match) {
             return new Zend_Json_Expr($matchings[1]);
-        } else {
-            return \trim((string) strval($simpleXmlElementObject));
         }
+
+        return \trim((string) strval($simpleXmlElementObject));
     }
 
     /**
@@ -272,36 +272,35 @@ class Zend_Json
                 }
 
                 return [$name => $attributes];
-            } else {
-                return [$name => $value];
-            }
-        } else {
-            $childArray = [];
-            foreach ($children as $child) {
-                $childname = $child->getName();
-                $element = self::_processXml($child, $ignoreXmlAttributes, $recursionDepth + 1);
-                if (array_key_exists($childname, $childArray)) {
-                    if (empty($subChild[$childname])) {
-                        $childArray[$childname] = [$childArray[$childname]];
-                        $subChild[$childname] = true;
-                    }
-                    $childArray[$childname][] = $element[$childname];
-                } else {
-                    $childArray[$childname] = $element[$childname];
-                }
-            }
-            if (!empty($attributes) && !$ignoreXmlAttributes) {
-                foreach ($attributes['@attributes'] as $k => $v) {
-                    $attributes['@attributes'][$k] = self::_getXmlValue($v);
-                }
-                $childArray['@attributes'] = $attributes['@attributes'];
-            }
-            if (!empty($value)) {
-                $childArray['@text'] = $value;
             }
 
-            return [$name => $childArray];
+            return [$name => $value];
         }
+        $childArray = [];
+        foreach ($children as $child) {
+            $childname = $child->getName();
+            $element = self::_processXml($child, $ignoreXmlAttributes, $recursionDepth + 1);
+            if (array_key_exists($childname, $childArray)) {
+                if (empty($subChild[$childname])) {
+                    $childArray[$childname] = [$childArray[$childname]];
+                    $subChild[$childname] = true;
+                }
+                $childArray[$childname][] = $element[$childname];
+            } else {
+                $childArray[$childname] = $element[$childname];
+            }
+        }
+        if (!empty($attributes) && !$ignoreXmlAttributes) {
+            foreach ($attributes['@attributes'] as $k => $v) {
+                $attributes['@attributes'][$k] = self::_getXmlValue($v);
+            }
+            $childArray['@attributes'] = $attributes['@attributes'];
+        }
+        if (!empty($value)) {
+            $childArray['@text'] = $value;
+        }
+
+        return [$name => $childArray];
     }
 
     /**

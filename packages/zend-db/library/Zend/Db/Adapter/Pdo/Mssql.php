@@ -341,9 +341,8 @@ class Zend_Db_Adapter_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Abstract
                     if ($pregReplaceCount) {
                         $orderbyInverseParts[] = $inv;
                         continue;
-                    } else {
-                        $orderbyInverseParts[] = $orderPart.' DESC';
                     }
+                    $orderbyInverseParts[] = $orderPart.' DESC';
                 }
 
                 $orderbyInverse = 'ORDER BY '.implode(', ', $orderbyInverseParts);

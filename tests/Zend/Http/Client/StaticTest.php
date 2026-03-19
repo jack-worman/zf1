@@ -621,7 +621,6 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
 
         // we can safely return until we can verify link is still active
         // @todo verify link is still active
-        return;
     }
 
     /**

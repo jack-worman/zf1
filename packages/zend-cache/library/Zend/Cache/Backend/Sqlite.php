@@ -435,9 +435,9 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
         $res = $this->_query('UPDATE cache SET lastModified='.time().", expire=$newExpire WHERE id='$id'");
         if ($res) {
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -492,14 +492,13 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
     {
         if (is_resource($this->_db)) {
             return $this->_db;
-        } else {
-            $this->_db = @sqlite_open($this->_options['cache_db_complete_path']);
-            if (!is_resource($this->_db)) {
-                Zend_Cache::throwException('Impossible to open '.$this->_options['cache_db_complete_path'].' cache DB file');
-            }
-
-            return $this->_db;
         }
+        $this->_db = @sqlite_open($this->_options['cache_db_complete_path']);
+        if (!is_resource($this->_db)) {
+            Zend_Cache::throwException('Impossible to open '.$this->_options['cache_db_complete_path'].' cache DB file');
+        }
+
+        return $this->_db;
     }
 
     /**
@@ -516,9 +515,9 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
             $res = @sqlite_query($db, $query);
             if (false === $res) {
                 return false;
-            } else {
-                return $res;
             }
+
+            return $res;
         }
 
         return false;

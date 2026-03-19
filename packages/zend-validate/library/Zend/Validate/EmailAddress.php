@@ -377,9 +377,9 @@ class Zend_Validate_EmailAddress extends Zend_Validate_Abstract
             }
 
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**

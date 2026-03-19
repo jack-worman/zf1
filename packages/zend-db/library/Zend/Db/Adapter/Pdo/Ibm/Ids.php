@@ -211,9 +211,8 @@ class Zend_Db_Adapter_Pdo_Ibm_Ids
             ++$position;
             if (0 == $colno) {
                 return $cols;
-            } else {
-                $cols[$colno] = $position;
             }
+            $cols[$colno] = $position;
         }
     }
 

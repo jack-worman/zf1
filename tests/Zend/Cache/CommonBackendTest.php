@@ -67,13 +67,11 @@ abstract class Zend_Cache_CommonBackendTest extends PHPUnit_Framework_TestCase
         }
         if (is_writable($this->_root)) {
             return $this->_root.DIRECTORY_SEPARATOR.'zend_cache_tmp_dir_'.$suffix;
-        } else {
-            if (getenv('TMPDIR')) {
-                return getenv('TMPDIR').DIRECTORY_SEPARATOR.'zend_cache_tmp_dir_'.$suffix;
-            } else {
-                exit('no writable tmpdir found');
-            }
         }
+        if (getenv('TMPDIR')) {
+            return getenv('TMPDIR').DIRECTORY_SEPARATOR.'zend_cache_tmp_dir_'.$suffix;
+        }
+        exit('no writable tmpdir found');
     }
 
     public function tearDown()
@@ -169,8 +167,6 @@ abstract class Zend_Cache_CommonBackendTest extends PHPUnit_Framework_TestCase
         if (!($res > 999999)) {
             $this->fail('test() return an incorrect integer');
         }
-
-        return;
     }
 
     public function testTestWithANonExistingCacheId()
@@ -188,8 +184,6 @@ abstract class Zend_Cache_CommonBackendTest extends PHPUnit_Framework_TestCase
         if (!($res > 999999)) {
             $this->fail('test() return an incorrect integer');
         }
-
-        return;
     }
 
     public function testGetWithANonExistingCacheId()

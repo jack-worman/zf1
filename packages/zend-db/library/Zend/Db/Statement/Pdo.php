@@ -62,9 +62,9 @@ class Zend_Db_Statement_Pdo extends Zend_Db_Statement implements IteratorAggrega
         try {
             if (null === $type) {
                 return $this->_stmt->bindColumn($column, $param);
-            } else {
-                return $this->_stmt->bindColumn($column, $param, $type);
             }
+
+            return $this->_stmt->bindColumn($column, $param, $type);
         } catch (PDOException $e) {
             throw new Zend_Db_Statement_Exception($e->getMessage(), $e->getCode(), $e);
         }
@@ -126,9 +126,9 @@ class Zend_Db_Statement_Pdo extends Zend_Db_Statement implements IteratorAggrega
         try {
             if (null === $type) {
                 return $this->_stmt->bindValue($parameter, $value);
-            } else {
-                return $this->_stmt->bindValue($parameter, $value, $type);
             }
+
+            return $this->_stmt->bindValue($parameter, $value, $type);
         } catch (PDOException $e) {
             throw new Zend_Db_Statement_Exception($e->getMessage(), $e->getCode(), $e);
         }
@@ -215,9 +215,9 @@ class Zend_Db_Statement_Pdo extends Zend_Db_Statement implements IteratorAggrega
         try {
             if (null !== $params) {
                 return $this->_stmt->execute($params);
-            } else {
-                return $this->_stmt->execute();
             }
+
+            return $this->_stmt->execute();
         } catch (PDOException $e) {
             $message = sprintf('%s, query was: %s', $e->getMessage(), $this->_stmt->queryString);
             throw new Zend_Db_Statement_Exception($message, (int) $e->getCode(), $e);
@@ -283,9 +283,9 @@ class Zend_Db_Statement_Pdo extends Zend_Db_Statement implements IteratorAggrega
                 }
 
                 return $this->_stmt->fetchAll($style, $col);
-            } else {
-                return $this->_stmt->fetchAll($style);
             }
+
+            return $this->_stmt->fetchAll($style);
         } catch (ValueError $e) {
             // PHP 8.0+ throws ValueError on invalid arguments
             throw new Zend_Db_Statement_Exception($e->getMessage(), $e->getCode(), $e);

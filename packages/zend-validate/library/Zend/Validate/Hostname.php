@@ -1691,9 +1691,9 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
                 $this->_error(self::IP_ADDRESS_NOT_ALLOWED);
 
                 return false;
-            } else {
-                return true;
             }
+
+            return true;
         }
 
         // RFC3986 3.2.2 states:
@@ -1861,9 +1861,8 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
         if ($this->_options['allow'] & self::ALLOW_URI) {
             if (preg_match("/^([a-zA-Z0-9-._~!$&\'()*+,;=]|%[[:xdigit:]]{2}){1,254}$/i", $value)) {
                 return true;
-            } else {
-                $this->_error(self::INVALID_URI);
             }
+            $this->_error(self::INVALID_URI);
         }
 
         // Check input against local network name schema; last chance to pass validation

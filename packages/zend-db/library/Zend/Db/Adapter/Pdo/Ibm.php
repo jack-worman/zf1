@@ -108,9 +108,8 @@ class Zend_Db_Adapter_Pdo_Ibm extends Zend_Db_Adapter_Pdo_Abstract
             $error = strpos((string) $e->getMessage(), 'driver does not support that attribute');
             if ($error) {
                 throw new Zend_Db_Adapter_Exception('PDO_IBM driver extension is downlevel.  Please use driver release version 1.2.1 or later', 0, $e);
-            } else {
-                throw new Zend_Db_Adapter_Exception($e->getMessage(), $e->getCode(), $e);
             }
+            throw new Zend_Db_Adapter_Exception($e->getMessage(), $e->getCode(), $e);
         }
     }
 
@@ -334,9 +333,9 @@ class Zend_Db_Adapter_Pdo_Ibm extends Zend_Db_Adapter_Pdo_Abstract
                 $matches = null;
                 if (preg_match('/((?:[0-9]{1,2}\.){1,3}[0-9]{1,2})/', $result[0][0], $matches)) {
                     return $matches[1];
-                } else {
-                    return null;
                 }
+
+                return null;
             }
 
             return null;

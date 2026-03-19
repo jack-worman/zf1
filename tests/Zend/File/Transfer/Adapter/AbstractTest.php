@@ -944,14 +944,11 @@ class Zend_File_Transfer_Adapter_AbstractTest_MockAdapter extends Zend_File_Tran
 
     public function send($options = null)
     {
-        return;
     }
 
     public function receive($options = null)
     {
         $this->received = true;
-
-        return;
     }
 
     public function isSent($file = null)
@@ -976,7 +973,6 @@ class Zend_File_Transfer_Adapter_AbstractTest_MockAdapter extends Zend_File_Tran
 
     public static function getProgress()
     {
-        return;
     }
 
     public function getTmpDir()

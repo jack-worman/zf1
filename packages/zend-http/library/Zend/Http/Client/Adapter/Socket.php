@@ -429,9 +429,8 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
                     if (false === $buff || 0 === strlen((string) $buff)) {
                         $this->_checkSocketReadTimeout();
                         break;
-                    } else {
-                        $response .= $buff;
                     }
+                    $response .= $buff;
                 }
             } while (false === feof($this->socket));
 

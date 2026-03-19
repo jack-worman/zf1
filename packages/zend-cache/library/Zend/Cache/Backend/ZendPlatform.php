@@ -75,9 +75,9 @@ class Zend_Cache_Backend_ZendPlatform extends Zend_Cache_Backend implements Zend
         $res = output_cache_get($id, $lifetime);
         if ($res) {
             return $res[0];
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**

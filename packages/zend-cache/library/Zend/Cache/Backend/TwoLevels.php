@@ -152,9 +152,9 @@ class Zend_Cache_Backend_TwoLevels extends Zend_Cache_Backend implements Zend_Ca
         $fastTest = $this->_fastBackend->test($id);
         if ($fastTest) {
             return $fastTest;
-        } else {
-            return $this->_slowBackend->test($id);
         }
+
+        return $this->_slowBackend->test($id);
     }
 
     /**

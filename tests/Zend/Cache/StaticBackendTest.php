@@ -182,8 +182,6 @@ class Zend_Cache_StaticBackendTest extends Zend_Cache_CommonBackendTest
         if (!$res) {
             $this->fail('test() return false');
         }
-
-        return;
     }
 
     public function testTestWithANonExistingCacheId()
@@ -198,8 +196,6 @@ class Zend_Cache_StaticBackendTest extends Zend_Cache_CommonBackendTest
         if (!$res) {
             $this->fail('test() return false');
         }
-
-        return;
     }
 
     public function testGetWithANonExistingCacheId()
@@ -316,8 +312,7 @@ class Zend_Cache_StaticBackendTest extends Zend_Cache_CommonBackendTest
         }
         if (is_writeable($tmp)) {
             return $tmp.DIRECTORY_SEPARATOR.'zend_cache_tmp_dir_'.$suffix;
-        } else {
-            throw new Exception('no writable tmpdir found');
         }
+        throw new Exception('no writable tmpdir found');
     }
 }

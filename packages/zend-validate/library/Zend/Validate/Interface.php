@@ -24,7 +24,7 @@ interface Zend_Validate_Interface
      *
      * @throws Zend_Validate_Exception If validation of $value is impossible
      */
-    public function isValid($value): bool;
+    public function isValid(mixed $value): bool;
 
     /**
      * Returns an array of messages that explain why the most recent isValid()

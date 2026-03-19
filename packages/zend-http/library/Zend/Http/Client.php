@@ -291,9 +291,9 @@ class Zend_Http_Client
     {
         if ($as_string && $this->uri instanceof Zend_Uri_Http) {
             return $this->uri->__toString();
-        } else {
-            return $this->uri;
         }
+
+        return $this->uri;
     }
 
     /**
@@ -441,9 +441,9 @@ class Zend_Http_Client
         $key = strtolower((string) $key);
         if (isset($this->headers[$key])) {
             return $this->headers[$key][1];
-        } else {
-            return null;
         }
+
+        return null;
     }
 
     /**

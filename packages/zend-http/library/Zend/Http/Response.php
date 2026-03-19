@@ -420,9 +420,9 @@ class Zend_Http_Response
             return $messages;
         } elseif (isset($messages[$code])) {
             return $messages[$code];
-        } else {
-            return 'Unknown';
         }
+
+        return 'Unknown';
     }
 
     /**
@@ -438,9 +438,9 @@ class Zend_Http_Response
 
         if (isset($m[1])) {
             return (int) $m[1];
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -456,9 +456,9 @@ class Zend_Http_Response
 
         if (isset($m[1])) {
             return $m[1];
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -474,9 +474,9 @@ class Zend_Http_Response
 
         if (isset($m[1])) {
             return $m[1];
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -664,9 +664,9 @@ class Zend_Http_Response
         $zlibHeader = unpack('n', substr((string) $body, 0, 2));
         if ($zlibHeader[1] % 31 == 0 && 0x78 == ord((string) $body[0]) && in_array(ord((string) $body[1]), [0x01, 0x5E, 0x9C, 0xDA])) {
             return gzuncompress($body);
-        } else {
-            return gzinflate($body);
         }
+
+        return gzinflate($body);
     }
 
     /**

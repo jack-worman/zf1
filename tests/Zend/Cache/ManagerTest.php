@@ -270,8 +270,7 @@ class Zend_Cache_ManagerTest extends PHPUnit_Framework_TestCase
         }
         if (is_writeable($tmp)) {
             return $tmp.DIRECTORY_SEPARATOR.'zend_cache_tmp_dir_'.$suffix;
-        } else {
-            throw new Exception('no writable tmpdir found');
         }
+        throw new Exception('no writable tmpdir found');
     }
 }

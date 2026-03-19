@@ -189,12 +189,12 @@ class Zend_Db_Statement_Oracle extends Zend_Db_Statement
                 $error['offset'],
                 $error['sqltext'],
             ];
-        } else {
-            return [
-                $error['code'],
-                $error['message'],
-            ];
         }
+
+        return [
+            $error['code'],
+            $error['message'],
+        ];
     }
 
     /**

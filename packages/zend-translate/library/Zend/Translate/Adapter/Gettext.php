@@ -30,9 +30,9 @@ class Zend_Translate_Adapter_Gettext extends Zend_Translate_Adapter
     {
         if (false === $this->_bigEndian) {
             return unpack('V'.$bytes, fread($this->_file, 4 * $bytes));
-        } else {
-            return unpack('N'.$bytes, fread($this->_file, 4 * $bytes));
         }
+
+        return unpack('N'.$bytes, fread($this->_file, 4 * $bytes));
     }
 
     /**

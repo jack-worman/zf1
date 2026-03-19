@@ -464,9 +464,9 @@ class Zend_Date extends Zend_Date_DateObject
         $result = $this->get($part);
         if (is_numeric($result)) {
             return intval("$result");
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**

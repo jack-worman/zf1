@@ -26,7 +26,7 @@ class Zend_Test_PHPUnit_Db_DataSet_QueryDataSet extends PHPUnit_Extensions_Datab
      */
     public function __construct(PHPUnit_Extensions_Database_DB_IDatabaseConnection $databaseConnection)
     {
-        if (!($databaseConnection instanceof Zend_Test_PHPUnit_Db_Connection)) {
+        if (!$databaseConnection instanceof Zend_Test_PHPUnit_Db_Connection) {
             throw new Zend_Test_PHPUnit_Db_Exception('Zend_Test_PHPUnit_Db_DataSet_QueryDataSet only works with Zend_Test_PHPUnit_Db_Connection connections-');
         }
         $this->databaseConnection = $databaseConnection;

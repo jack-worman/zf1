@@ -185,9 +185,9 @@ class Zend_Http_Cookie
         }
         if (is_int($this->expires) && $this->expires < $now) {
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -350,9 +350,9 @@ class Zend_Http_Cookie
             $ret->encodeValue = ($encodeValue) ? true : false;
 
             return $ret;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**

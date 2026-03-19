@@ -94,9 +94,9 @@ class Zend_Controller_Action_HelperBroker_PriorityStack implements IteratorAggre
     {
         if (is_string($priorityOrHelperName)) {
             return array_key_exists($priorityOrHelperName, $this->_helpersByNameRef);
-        } else {
-            return array_key_exists($priorityOrHelperName, $this->_helpersByPriority);
         }
+
+        return array_key_exists($priorityOrHelperName, $this->_helpersByPriority);
     }
 
     /**
@@ -115,9 +115,9 @@ class Zend_Controller_Action_HelperBroker_PriorityStack implements IteratorAggre
 
         if (is_string($priorityOrHelperName)) {
             return $this->_helpersByNameRef[$priorityOrHelperName];
-        } else {
-            return $this->_helpersByPriority[$priorityOrHelperName];
         }
+
+        return $this->_helpersByPriority[$priorityOrHelperName];
     }
 
     /**

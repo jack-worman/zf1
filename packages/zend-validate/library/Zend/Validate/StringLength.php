@@ -240,8 +240,8 @@ class Zend_Validate_StringLength extends Zend_Validate_Abstract
 
         if (count($this->_messages)) {
             return false;
-        } else {
-            return true;
         }
+
+        return true;
     }
 }

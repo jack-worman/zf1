@@ -115,13 +115,12 @@ class Zend_Locale_Math
                 }
 
                 return self::Add($op1, $roundUp, $precision);
-            } else {
-                if (self::$_bcmathDisabled) {
-                    return Zend_Locale_Math_PhpMath::Sub($op1, $roundUp, $precision);
-                }
-
-                return self::Sub($op1, $roundUp, $precision);
             }
+            if (self::$_bcmathDisabled) {
+                return Zend_Locale_Math_PhpMath::Sub($op1, $roundUp, $precision);
+            }
+
+            return self::Sub($op1, $roundUp, $precision);
         } elseif ($precision >= 0) {
             return substr((string) $op1, 0, $decPos + ($precision ? $precision + 1 : 0));
         }

@@ -1086,9 +1086,9 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
             return '';
         } elseif ((self::SCHEME_HTTP == $scheme && 80 == $port) || (self::SCHEME_HTTPS == $scheme && 443 == $port)) {
             return $name;
-        } else {
-            return $name.':'.$port;
         }
+
+        return $name.':'.$port;
     }
 
     /**
